@@ -1,0 +1,96 @@
+X 1 -> R edge ( 0.010000  0.050000  ) R z ( 0.100000  0.100000  ) R* xlen ( 4  10  ) R* ylen ( 3  8  ) R WindowGapSides ( 0.200000  0.300000  ) R WindowGapTop ( 0.100000  0.200000  ) R WindowGapBottom ( 0.350000  0.500000  ) R* GroundTex ( 2  2  ) R* WallTex ( 0  2  ) R* WindowTex ( 6  12  ) R* WindowEdgeTex ( 7  13  ) R* WindowDoorTex ( 5  14  ) R* WindowDoorEdgeTex ( 7  13  ) R* FenceTex ( 11  12  ) R* VerandahFloorTex ( 8  9  ) R* FloorTex ( 11  16  ) R* Floor ( 6  10  ) R* fencen ( 6  9  ) R fenceratio ( 0.100000  0.150000  ) R fenceh ( 0.500000  0.650000  ) R* brickn ( 10  15  ) R* brickm ( 10  15  ) R brickt ( 3  5  ) R* LandX ( 8  15  ) R* LandY ( 8  15  ) R* xlen ( 6  7  ) R* ylen ( 9  12 ) R BrickThickness ( 0.2 0.35 ) Y 
+Y 1 -> [ NorthEstate ] 
+NorthEstate 1 -> [ ABlock ] [ BBlock ] [ CBlock ] [ DBlock ] 
+ABlock 1 LandX LandY -> [ T ( LandX/2 0  LandY/2 ) TheBuilding ] 
+BBlock 1 LandX LandY -> [ T ( -LandX/2 0  LandY/2 ) TheBuilding ] 
+CBlock 1 LandX LandY -> [ T ( -LandX/2 0  -LandY/2 ) TheBuilding ] 
+DBlock 1 LandX LandY -> [ T ( LandX/2 0  -LandY/2 ) TheBuilding ] 
+TheBuilding 1 Floor xlen ylen WindowGapSides WindowGapTop WindowGapBottom edge z fencen fenceratio fenceh -> [ Building ] 
+
+Building 1 ; 0.54 -> [ BuildingA ] -> [ BuildingB ]
+
+
+BuildingA Floor GroundTex WindowEdgeTex WindowTex FenceTex WallTex brickn brickm brickt -> T ( 0  -3  0  ) [ T ( 0  -0.100000  0  ) S ( 3.5*xlen 0.100000  3.5*ylen ) I ( Cube 2  0  0.500000  ) ] | [ T ( -xlen/2 0  ylen/2 ) Gen ] [ T ( xlen/2 0  -ylen/2 ) GenY ] [ T ( -xlen/2 0  -ylen/2 ) S ( 1  1  -1  ) Gen ] [ T ( -xlen/2 0  -ylen/2 ) S ( -1  1  1  ) GenY ] [ S ( xlen 0.010000  ylen ) I ( Cube FloorTex 0  ) ] T ( 0  1  0  ) | [ S ( xlen+0.3 0.200000  ylen+0.3 ) I ( Cube FloorTex 0  ) ] T ( 0  1  0  ) 
+
+BuildingB Floor*2 GroundTex WindowEdgeTex WindowTex FenceTex WallTex brickn brickm brickt -> T ( 0  -3  0  ) [ T ( 0  -0.100000  0  ) S ( 3.5*xlenA 0.100000  3.5*ylenA ) I ( Cube 2  0  0.500000  ) ] | [ T ( -xlenA/2 0  ylenA/2 ) Gen ] [ T ( xlenA/2 0  -ylenA/2 ) GenY ] [ T ( -xlenA/2 0  -ylenA/2 ) S ( 1  1  -1  ) Gen ] [ T ( -xlenA/2 0  -ylenA/2 ) S ( -1  1  1  ) GenY ] [ S ( xlenA 0.010000  ylenA ) I ( Cube FloorTex 0  ) ] T ( 0  1  0  ) | [ S ( xlenA+0.3 0.200000  ylenA+0.3 ) I ( Cube FloorTex 0  ) ] T ( 0  1  0  ) 
+
+
+
+
+Gen xlen -> choose1 T ( 1  0  0  ) 
+GenY ylen -> chooseY T ( 0  0  1  ) 
+choose1 1 ; 0.68 -> choose3 -> choose2 
+choose2 1 ; 0.6 -> WindowSectionX1 -> WindowSectionX 
+choose3 1 ; 0.3 -> Wall -> [ S ( 0.500000  1  1  ) WindowSectionX ] [ T ( 0.500000  0  0  ) S ( 0.500000  1  1  ) WindowSectionX ] 
+chooseY 1 ; 0.68 -> WindowSectionY -> WallY 
+
+Wall ; 0.15001 -> BoardWall -> BrickWall
+WallY ; 0.16 -> BoardWallY -> BrickWallY
+
+BoardWall -> [ BoardWallA ] [ Wallbacking ]
+BoardWallA brickm brickt -> [ S ( 1/(brickm+2*brickt)  1  0.100000  ) I ( CubeX WallTex+2  ) ] T (  1/brickm 0 0 ) 
+
+BoardWallY -> [ BoardWallAY ] [ WallbackingY ]
+BoardWallA brickm brickt -> [ S ( 0.1  1  1/(brickm+2*brickt)  ) I ( CubeX WallTex+2  ) ] T (  0 0 1/brickm ) 
+
+BrickWall 1 -> [ Wall1 ] [ Wallbacking ] 
+Wallbacking 1 -> T ( 0  0  -0.06  ) [ S ( 1  1  0.100000  ) I ( CubeX WallTex+1 ) ] 
+Wall1 brickm/2 brickt BrickThickness -> [ layer1 ] T ( 0  1/(brickm+brickt/2) 0  ) [ layer2 ] T ( 0  1/(brickm+brickt/2) 0  ) 
+layer2 brickn-1 brickt -> HalfBrick T ( 0.5/brickn 0  0  ) | FullBrick T ( 1/brickn 0  0  ) | HalfBrick 
+layer1 brickn brickt -> FullBrick T ( 1/brickn 0  0  ) 
+HalfBrick 1 -> HB 
+FullBrick 1 -> FB 
+HB 1 -> [ S ( 0.5/(brickn+brickt) 1/(brickm+brickt) BrickThickness/(brickm+brickt) ) I ( CubeX WallTex 0  ) ] 
+FB 1 -> [ S ( 1/(brickn+brickt) 1/(brickm+brickt) BrickThickness/(brickm+brickt) ) I ( CubeX WallTex 0  ) ] 
+
+BrickWallY 1 -> [ WallYA ] [ WallbackingY ] 
+WallbackingY 1 -> T ( -0.060000  0  0  ) [ S ( 0.100000  1  1  ) I ( CubeY WindowEdgeTex 0  ) ] 
+WallYA brickm/2 -> [ layer3 ] T ( 0  1/(brickm) 0  ) [ layer4 ] T ( 0  1/(brickm) 0  ) 
+layer4 brickn-1 -> HalfBrickY | FullBrickY | HalfBrickY 
+layer3 brickn -> FullBrickY 
+HalfBrickY 1 -> [ S ( 0.2/(brickm+brickt) 1/(brickm+brickt) 0.5/(brickn+brickt) ) I ( CubeY WallTex 0  ) ] T ( 0  0  0.5/brickn ) 
+FullBrickY 1 -> [ S ( 0.2/(brickm+brickt) 1/(brickm+brickt) 1/(brickn+brickt) ) I ( CubeY WallTex 0  ) ] T ( 0  0  1/brickn ) 
+WindowSectionX 1 -> WindowPane WindowTop WindowBottom WindowLeftSide WindowRightSide WindowEdgeRightSide WindowEdgeLeftSide WindowEdgeBottom WindowEdgeTop 
+WindowPane 1 -> [ T ( WindowGapSides WindowGapBottom 0  ) S ( 1-2*WindowGapSides-0.01 1-WindowGapTop-WindowGapBottom-0.01 0.010000  ) I ( CubeX 18  0  ) ] 
+WindowBottom 1 -> [ T ( WindowGapSides 0  0  ) S ( 1-2*WindowGapSides WindowGapBottom z ) I ( CubeX WindowTex 0  ) ] 
+WindowTop 1 -> [ T ( WindowGapSides 1-WindowGapTop 0  ) S ( 1-2*WindowGapSides WindowGapTop z ) I ( CubeX WindowTex 0  ) ] 
+WindowLeftSide 1 -> [ T ( 0  0  0  ) S ( WindowGapSides 1  z ) I ( CubeX WindowTex 0  ) ] 
+WindowRightSide 1 -> [ T ( 1-WindowGapSides 0  0  ) S ( WindowGapSides 1  z ) I ( CubeX WindowTex 0  ) ] 
+WindowEdgeLeftSide 1 -> [ T ( WindowGapSides-edge WindowGapBottom-edge z/2+z/5 ) S ( edge 1-WindowGapTop-WindowGapBottom+2*edge z/5 ) I ( CubeX WindowEdgeTex 0  ) ] 
+WindowEdgeRightSide 1 -> [ T ( 1-WindowGapSides WindowGapBottom-edge z/2+z/5 ) S ( edge 1-WindowGapTop-WindowGapBottom+2*edge z/5 ) I ( CubeX WindowEdgeTex 0  ) ] 
+WindowEdgeBottom 1 -> [ T ( WindowGapSides WindowGapBottom-edge z/2+z/5 ) S ( 1-WindowGapSides*2 edge z/5 ) I ( CubeX WindowEdgeTex 0  ) ] 
+WindowEdgeTop 1 -> [ T ( WindowGapSides 1-WindowGapTop z/2+z/5 ) S ( 1-WindowGapSides*2 edge z/5 ) I ( CubeX WindowEdgeTex 0  ) ] 
+WindowSectionX1 1 -> Verandah WindowTop1 WindowBottom1 WindowLeftSide1 WindowRightSide1 WindowEdgeRightSide1 WindowEdgeLeftSide1 WindowEdgeBottom1 WindowEdgeTop1 
+WindowBottom1 1 -> [ T ( WindowGapSides 0  0  ) S ( 1-2*WindowGapSides WindowGapBottom/3 z ) I ( CubeX WindowDoorTex 0  ) ] 
+WindowTop1 1 -> [ T ( WindowGapSides 1-WindowGapTop 0  ) S ( 1-2*WindowGapSides WindowGapTop z ) I ( CubeX WindowDoorTex 0  ) ] 
+WindowLeftSide1 1 -> [ T ( 0  0  0  ) S ( WindowGapSides 1  z ) I ( CubeX WindowDoorTex 0  ) ] 
+WindowRightSide1 1 -> [ T ( 1-WindowGapSides 0  0  ) S ( WindowGapSides 1  z ) I ( CubeX WindowDoorTex 0  ) ] 
+WindowEdgeLeftSide1 1 -> [ T ( WindowGapSides-edge WindowGapBottom/3-edge z/2+z/5 ) S ( edge 1-WindowGapTop-WindowGapBottom/3+2*edge z/5 ) I ( CubeX WindowDoorEdgeTex 0  ) ] 
+WindowEdgeRightSide1 1 -> [ T ( 1-WindowGapSides WindowGapBottom/3-edge z/2+z/5 ) S ( edge 1-WindowGapTop-WindowGapBottom/3+2*edge z/5 ) I ( CubeX WindowDoorEdgeTex 0  ) ] 
+WindowEdgeBottom1 1 -> [ T ( WindowGapSides WindowGapBottom/3-edge z/2+z/5 ) S ( 1-WindowGapSides*2 edge z/5 ) I ( CubeX WindowDoorEdgeTex 0  ) ] 
+WindowEdgeTop1 1 -> [ T ( WindowGapSides 1-WindowGapTop z/2+z/5 ) S ( 1-WindowGapSides*2 edge z/5 ) I ( CubeX WindowDoorEdgeTex 0  ) ] 
+Verandah 1 -> [ T ( 0  0  0.300000  ) S ( 1  0.030000  0.500000  ) I ( CubeX 8  0  ) ] [ T ( 0  0  0.500000  ) fence ] 
+fence fencen -> [ T ( 0  fenceh 0  ) S ( 1  (1/(fenceratio+fencen-1))*fenceratio (1/(fenceratio+fencen-1))*fenceratio ) I ( CubeX FenceTex 0  ) ] | [ S ( (1/(fenceratio+fencen-1))*fenceratio fenceh (1/(fenceratio+fencen-1))*fenceratio ) I ( CubeX FenceTex 0  ) ] T ( 1/(fenceratio+fencen-1) 0  0  ) 
+WindowSectionY 1 WindowTex WindowEdgeTex -> WindowTopY WindowBottomY WindowLeftSideY WindowRightSideY WindowEdgeRightSideY WindowEdgeLeftSideY WindowEdgeBottomY WindowEdgeTopY 
+WindowBottomY 1 -> [ T ( 0  0  WindowGapSides ) S ( z WindowGapBottom 1-2*WindowGapSides ) I ( CubeY WindowTex 0  ) ] 
+WindowTopY 1 -> [ T ( 0  1-WindowGapTop WindowGapSides ) S ( z WindowGapTop 1-2*WindowGapSides ) I ( CubeY WindowTex 0  ) ] 
+WindowLeftSideY 1 -> [ T ( 0  0  0  ) S ( z 1  WindowGapSides ) I ( CubeY WindowTex 0  ) ] 
+WindowRightSideY 1 -> [ T ( 0  0  1-WindowGapSides ) S ( z 1  WindowGapSides ) I ( CubeY WindowTex 0  ) ] 
+WindowEdgeLeftSideY 1 -> [ T ( z/2+z/5 WindowGapBottom-edge WindowGapSides-edge ) S ( z/5 1-WindowGapTop-WindowGapBottom+2*edge edge ) I ( CubeY WindowEdgeTex 0  ) ] 
+WindowEdgeRightSideY 1 -> [ T ( z/2+z/5 WindowGapBottom-edge 1-WindowGapSides ) S ( z/5 1-WindowGapTop-WindowGapBottom+2*edge edge ) I ( CubeY WindowEdgeTex 0  ) ] 
+WindowEdgeBottomY 1 -> [ T ( z/2+z/5 WindowGapBottom-edge WindowGapSides ) S ( z/5 edge 1-WindowGapSides*2 ) I ( CubeY WindowEdgeTex 0  ) ] 
+WindowEdgeTopY 1 -> [ T ( z/2+z/5 1-WindowGapTop WindowGapSides ) S ( z/5 edge 1-WindowGapSides*2 ) I ( CubeY WindowEdgeTex 0  ) ] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

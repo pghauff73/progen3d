@@ -1,0 +1,134 @@
+name: progen3d
+version: "0.96c-2"
+summary: Grammar based 3d Procedural Generator
+description: 
+  ProGen3d is a grammar based procedural generator with textures and can export to PLY format.
+confinement: strict
+base: core20
+architectures:
+  - build-on: [amd64]
+
+parts:
+  progen3d:
+    plugin: make
+    source-type: git
+    source: https://github.com/pghauff55/ProGen3d.git
+    build-packages:
+      - g++
+      - make
+      - build-essential
+      - libgtk-3-dev
+      - libgtk-3-0
+      - libgl1-mesa-glx
+      - libglu1-mesa-dev
+      - libepoxy-dev
+      - libglm-dev
+      - libopencv-dev
+      - libssl-dev
+      - libopenblas-dev
+      - liblapack-dev
+      - gnome-common
+      - hicolor-icon-theme
+      - yaru-theme-gnome-shell
+      - libgdk-pixbuf2.0-0
+      - libgdk-pixbuf2.0-dev
+      - mime-support
+      - shared-mime-info
+      - adwaita-icon-theme
+    stage-packages:
+      - libatk-bridge2.0-0
+      - libatk1.0-0
+      - libatspi2.0-0
+      - libcairo-gobject2
+      - libcairo2
+      - libdatrie1
+      - libepoxy0
+      - libfontconfig1
+      - libfreetype6
+      - libfribidi0
+      - libgdk-pixbuf2.0-0
+      - libgl1
+      - libglvnd0
+      - libglx0
+      - libgraphite2-3
+      - libgtk-3-0
+      - libharfbuzz0b
+      - libpango-1.0-0
+      - libpangocairo-1.0-0
+      - libpangoft2-1.0-0
+      - libpixman-1-0
+      - libpng16-16
+      - libthai0
+      - libwayland-client0
+      - libwayland-cursor0
+      - libwayland-egl1
+      - libx11-6
+      - libxau6
+      - libxcb-render0
+      - libxcb-shm0
+      - libxcb1
+      - libxcomposite1
+      - libxcursor1
+      - libxdamage1
+      - libxdmcp6
+      - libxext6
+      - libxfixes3
+      - libxi6
+      - libxinerama1
+      - libxkbcommon0
+      - libxrandr2
+      - libxrender1
+      - libssl-dev
+      - libopencv-dev
+      - libopencv-contrib-dev
+      - libopencv-core-dev
+      - libpsm-infinipath1
+      - libblas3
+      - libopenblas0-pthread
+      - locales-all
+
+    organize:
+        usr/lib/*-linux-gnu/openblas-pthread/*: usr/lib/
+
+ 
+slots:
+  dbus-progen3d:
+    interface: dbus
+    bus: session
+    name: snap.progen3d.progen3d
+plugs:
+  gtk-2-engines:
+    interface: content
+    target: $SNAP/lib/gtk-2.0
+    default-provider: gtk2-common-themes
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes:gtk-3-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes:sound-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes:icon-themes
+  gnome-3-38-2004:
+    interface: content
+    target: $SNAP/data-dir/gnome-platform
+    default-provider: gnome-3-38-2004:gnome-3-38-2004
+    
+apps:
+  progen3d:
+    command: progen3d
+    desktop: progen3d.desktop
+    plugs: [ desktop, desktop-legacy, gsettings, wayland, x11 ]
+    slots:
+      - dbus-progen3d
+    common-id: com.github.pghauff55.ProGen3d
+  
+environment:
+  LIBGL_DRIVERS_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri
+
+
+  

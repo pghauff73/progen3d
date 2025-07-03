@@ -1,0 +1,43 @@
+X -> R CenterHeight ( 4 10 ) R Xlength ( 6 8 ) R Ylength ( 4 6 ) R TowerHeight ( 6 14 ) R BaseHeight ( 2 3 )   R Roads ( 16 28 ) Y
+
+
+Y ->  T ( -10 0 -20 ) [ FloorN ] T ( 0 0.45 0 ) [  City ]
+City ->  Street Street Street Street Street Street
+Street ->  T ( 0 0 15 ) StreetBlocks 
+FloorN 8 -> T ( 10 0 0 ) [ FloorE ]
+FloorE 6 ->  T ( 0 0 15 ) [ S ( 10 0.1 15 ) I ( Cube 1 ) ]
+
+GroundX 10 Roads ->  S( 1 1 1) T ( 1 0 0 ) | T ( 1 0 0 ) [ S ( 1 1 1 ) GroundY ]
+GroundY 8 -> T ( 0 0 1 ) [ S ( 1 0.1 1 ) I ( Cube Roads 1 ) ] |  T ( 0 0 1 ) [ S ( 1 0.1 1 ) I ( Cube 1 ) ] | T ( 0 0 1 )  [ S ( 1 0.1 1 ) I ( Cube Roads 1 ) ]
+
+
+StreetBlocks ->  [ AddBuilding ] [ MoreBlocks ] 
+MoreBlocks 8 ->    T ( 10 0 0 )  [ AddBuilding ]  
+
+
+
+AddBuilding ; 0.6 -> T ( 0 0 3 ) [ Center ]  T ( 0 0 -2 )  [ T ( -5 0 -4 ) BaseGround ] [ Base ] [  SectionX  ] [  SectionY ]
+
+Center 1 TowerHeight ->   S ( 2 TowerHeight 2 ) I ( Cube 15 )  Top 
+Top ->  T ( 0 1 0 ) [ S ( 1 0.1 1 ) I ( Sphere 3 ) ] T ( 0 -1 0 )  
+
+
+
+
+BaseGround 1 -> T ( 0 0.1 0 ) [ S ( 1 1 1 ) GroundX ]
+Base 1 BaseHeight ->   S ( Xlength  BaseHeight  Ylength )  I ( Cube 0 )
+
+BodyX ->  T ( 0 BaseHeight 0 ) S ( Xlength  CenterHeight  2 )  I ( Cube 15 )  
+BodyY ->  T ( 0 BaseHeight 0 ) S ( 2  CenterHeight  Ylength )  I ( Cube 15 )  
+
+Xend ->   S (  2  CenterHeight 2 ) T ( 1.75 0 0 ) I ( Cylinder ) 
+Yend ->   S (  2  CenterHeight 2 ) T ( 0 0 1.75 ) I ( Cylinder ) 
+
+SectionX CenterHeight CenterHeight Xlength ->    [ BodyX ] [ Xend ] | [ WindowsXN ] [ WindowsXS ] T ( 0 1 0 )  
+WindowsXN Xlength ->  T ( Xlength/2.0-0.8 BaseHeight -1 )   | T ( -0.9 0 0 ) [  S ( 0.8 0.95 0.01 ) T ( 0.9 0 0 ) I ( Cube 3 ) ]   
+WindowsXS Xlength ->  T ( Xlength/2.0-0.8 BaseHeight 1 )   | T ( -0.9 0 0 ) [  S ( 0.8 0.95 0.01 ) T ( 0.9 0 0 ) I ( Cube 3 ) ]   
+
+SectionY CenterHeight CenterHeight Ylength ->    [ BodyY ] [ Yend ] | [ WindowsYE ] [ WindowsYW ]  T ( 0 1 0 ) 
+WindowsYE Ylength ->  T ( -1 BaseHeight Ylength/2.0-0.8 )   | T ( 0 0 -0.9 ) [  S ( 0.01 0.95 0.8 ) T ( 0 0 0.9 ) I ( Cube 3 ) ]  
+WindowsYW Ylength ->  T ( 1 BaseHeight Ylength/2.0-0.8 )   | T ( 0 0 -0.9 ) [  S ( 0.01 0.95 0.8 ) T ( 0 0 0.9 ) I ( Cube 3 ) ]  
+
