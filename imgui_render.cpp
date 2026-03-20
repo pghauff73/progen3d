@@ -20,6 +20,12 @@ void debugout(const std::string &message);
 
 namespace {
 
+struct CameraMatrices {
+	mat4 view{1.0f};
+	mat4 projection{1.0f};
+	vec3 position{0.0f, 0.0f, 0.0f};
+};
+
 const GLchar *VERTEX_SOURCE =
 "#version 330\n"
 "in vec3 position;\n"
@@ -89,6 +95,23 @@ const GLchar *FRAGMENT_SOURCE =
 "    fragColor = vec4(color, texel.a * alpha);\n"
 "}\n";
 
+const GLchar *GRID_VERTEX_SOURCE =
+"#version 330\n"
+"layout (location = 0) in vec3 position;\n"
+"uniform mat4 projection;\n"
+"uniform mat4 view;\n"
+"void main(){\n"
+"    gl_Position = projection * view * vec4(position, 1.0);\n"
+"}\n";
+
+const GLchar *GRID_FRAGMENT_SOURCE =
+"#version 330\n"
+"uniform vec4 grid_color;\n"
+"out vec4 fragColor;\n"
+"void main(){\n"
+"    fragColor = grid_color;\n"
+"}\n";
+
 const GLfloat kVertexData[] = {
   1.0, -1.0, -1.0, 0.0, -1.0, 0.0, 1.0,-1.0,
   1.0, -1.0, 1.0, 0.0, -1.0, 0.0, 1.0, 1.0,
@@ -134,12 +157,62 @@ GLuint g_base_buffer = 0;
 std::vector<GLuint> g_geometry_vaos;
 std::vector<GLuint> g_geometry_buffers;
 std::vector<int> g_render_counts;
+GLuint g_grid_program = 0;
+GLuint g_grid_vao = 0;
+GLuint g_grid_buffer = 0;
+GLsizei g_grid_vertex_count = 0;
 
 GLuint g_preview_fbo = 0;
 GLuint g_preview_color = 0;
 GLuint g_preview_depth = 0;
 int g_preview_width = 0;
 int g_preview_height = 0;
+
+CameraMatrices build_camera_matrices(int width,
+                                     int height,
+                                     float angle_view,
+                                     float elevation_view)
+{
+	const float angle_radians = angle_view * static_cast<float>(M_PI) / 180.0f;
+	const float elevation_radians = elevation_view * static_cast<float>(M_PI) / 180.0f;
+	const float radius = 5.0f;
+
+	CameraMatrices camera;
+	camera.position =
+		vec3(radius * std::cos(elevation_radians) * std::cos(angle_radians),
+		     radius * std::sin(elevation_radians),
+		     radius * std::cos(elevation_radians) * std::sin(angle_radians));
+	camera.view = lookAt(camera.position, vec3(0.0f, 0.0f, 0.0f), vec3(0, 1, 0));
+	camera.projection = perspective(43.0,
+	                                static_cast<double>(width) / static_cast<double>(height),
+	                                0.01,
+	                                100.0);
+	return camera;
+}
+
+std::vector<GLfloat> build_grid_vertices()
+{
+	constexpr int grid_extent = 20;
+	constexpr float y = -0.001f;
+	std::vector<GLfloat> vertices;
+	vertices.reserve(static_cast<std::size_t>((grid_extent * 2 + 1) * 4 * 3));
+	for (int coordinate = -grid_extent; coordinate <= grid_extent; ++coordinate) {
+		vertices.push_back(static_cast<float>(coordinate));
+		vertices.push_back(y);
+		vertices.push_back(static_cast<float>(-grid_extent));
+		vertices.push_back(static_cast<float>(coordinate));
+		vertices.push_back(y);
+		vertices.push_back(static_cast<float>(grid_extent));
+
+		vertices.push_back(static_cast<float>(-grid_extent));
+		vertices.push_back(y);
+		vertices.push_back(static_cast<float>(coordinate));
+		vertices.push_back(static_cast<float>(grid_extent));
+		vertices.push_back(y);
+		vertices.push_back(static_cast<float>(coordinate));
+	}
+	return vertices;
+}
 
 void log_gl_errors(const char *phase)
 {
@@ -283,21 +356,9 @@ void set_common_uniforms(GLuint program,
 	model = scale(model, vec3(scale_global, scale_global, scale_global));
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, &model[0][0]);
 
-	const float angle_radians = angle_view * static_cast<float>(M_PI) / 180.0f;
-	const float elevation_radians = elevation_view * static_cast<float>(M_PI) / 180.0f;
-	const float radius = 5.0f;
-	const vec3 position = vec3(radius * std::cos(elevation_radians) * std::cos(angle_radians),
-	                           radius * std::sin(elevation_radians),
-	                           radius * std::cos(elevation_radians) * std::sin(angle_radians));
-
-	const mat4 view = lookAt(position, vec3(0.0f, 0.0f, 0.0f), vec3(0, 1, 0));
-	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, &view[0][0]);
-
-	const mat4 projection = perspective(43.0,
-	                                    static_cast<double>(width) / static_cast<double>(height),
-	                                    0.01,
-	                                    100.0);
-	glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, &projection[0][0]);
+	const CameraMatrices camera = build_camera_matrices(width, height, angle_view, elevation_view);
+	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, &camera.view[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, &camera.projection[0][0]);
 
 	const vec3 lightposition = vec3(1.1f * scale_global, -60.7f * scale_global, -1.3f * scale_global);
 	glUniform3fv(glGetUniformLocation(program, "lightposition"), 1, &lightposition[0]);
@@ -309,6 +370,21 @@ void set_common_uniforms(GLuint program,
 	glUniform4fv(glGetUniformLocation(program, "diffuseproduct"), 1, &diffuseproduct[0]);
 	glUniform4fv(glGetUniformLocation(program, "specularproduct"), 1, &specularproduct[0]);
 	glUniform1f(glGetUniformLocation(program, "shinyness"), 16.0f);
+}
+
+void draw_grid(int width, int height, float angle_view, float elevation_view)
+{
+	if (g_grid_program == 0 || g_grid_vao == 0 || g_grid_vertex_count <= 0) {
+		return;
+	}
+
+	const CameraMatrices camera = build_camera_matrices(width, height, angle_view, elevation_view);
+	glUseProgram(g_grid_program);
+	glUniformMatrix4fv(glGetUniformLocation(g_grid_program, "view"), 1, GL_FALSE, &camera.view[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(g_grid_program, "projection"), 1, GL_FALSE, &camera.projection[0][0]);
+	glUniform4f(glGetUniformLocation(g_grid_program, "grid_color"), 0.36f, 0.39f, 0.46f, 1.0f);
+	glBindVertexArray(g_grid_vao);
+	glDrawArrays(GL_LINES, 0, g_grid_vertex_count);
 }
 
 void draw_buffer(std::size_t index,
@@ -402,6 +478,49 @@ bool initialize_renderer()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 	log_gl_errors("initialize_renderer");
+
+	const GLuint grid_vertex = create_shader(GL_VERTEX_SHADER, GRID_VERTEX_SOURCE);
+	if (grid_vertex == 0) {
+		return false;
+	}
+	const GLuint grid_fragment = create_shader(GL_FRAGMENT_SHADER, GRID_FRAGMENT_SOURCE);
+	if (grid_fragment == 0) {
+		glDeleteShader(grid_vertex);
+		return false;
+	}
+
+	g_grid_program = glCreateProgram();
+	glAttachShader(g_grid_program, grid_vertex);
+	glAttachShader(g_grid_program, grid_fragment);
+	glLinkProgram(g_grid_program);
+	glDeleteShader(grid_vertex);
+	glDeleteShader(grid_fragment);
+
+	glGetProgramiv(g_grid_program, GL_LINK_STATUS, &status);
+	if (status != GL_TRUE) {
+		GLint log_len = 0;
+		glGetProgramiv(g_grid_program, GL_INFO_LOG_LENGTH, &log_len);
+		std::vector<char> buffer(static_cast<std::size_t>(std::max(log_len, 1)));
+		glGetProgramInfoLog(g_grid_program, log_len, NULL, buffer.data());
+		debugout(std::string("Grid program link failure: ") + buffer.data());
+		glDeleteProgram(g_grid_program);
+		g_grid_program = 0;
+		return false;
+	}
+
+	const std::vector<GLfloat> grid_vertices = build_grid_vertices();
+	g_grid_vertex_count = static_cast<GLsizei>(grid_vertices.size() / 3);
+	glGenVertexArrays(1, &g_grid_vao);
+	glGenBuffers(1, &g_grid_buffer);
+	glBindVertexArray(g_grid_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, g_grid_buffer);
+	glBufferData(GL_ARRAY_BUFFER,
+	             sizeof(GLfloat) * grid_vertices.size(),
+	             grid_vertices.data(),
+	             GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+	glEnableVertexAttribArray(0);
+
 	return true;
 }
 
@@ -432,6 +551,19 @@ void shutdown_renderer()
 		glDeleteProgram(g_program);
 		g_program = 0;
 	}
+	if (g_grid_buffer != 0) {
+		glDeleteBuffers(1, &g_grid_buffer);
+		g_grid_buffer = 0;
+	}
+	if (g_grid_vao != 0) {
+		glDeleteVertexArrays(1, &g_grid_vao);
+		g_grid_vao = 0;
+	}
+	if (g_grid_program != 0) {
+		glDeleteProgram(g_grid_program);
+		g_grid_program = 0;
+	}
+	g_grid_vertex_count = 0;
 }
 
 void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
@@ -479,6 +611,10 @@ void render_scene_to_preview(int width,
 	glDisable(GL_CULL_FACE);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glDepthMask(GL_TRUE);
+	glDisable(GL_BLEND);
+	draw_grid(g_preview_width, g_preview_height, angle_view, elevation_view);
 
 	glUseProgram(g_program);
 	set_common_uniforms(g_program, g_preview_width, g_preview_height, scale_global, angle_view, elevation_view);

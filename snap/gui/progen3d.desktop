@@ -19,7 +19,7 @@ Comment=Procedural Generator for 3d Modeling
 Exec=progen3d
 
 # The name of the icon that will be used to display this entry
-Icon=progen3d.png
+Icon=${SNAP}/meta/gui/progen3d.png
 
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false

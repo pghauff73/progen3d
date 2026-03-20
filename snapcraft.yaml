@@ -1,133 +1,90 @@
 name: progen3d
-version: "0.96c-2"
-summary: Grammar based 3d Procedural Generator
-description: 
-  ProGen3d is a grammar based procedural generator with textures and can export to PLY format.
+version: "0.96d-4"
+summary: Grammar-based 3D procedural generator
+description: |
+  Progen3d is a grammar-driven procedural modeling tool with a Dear ImGui
+  editor, live OpenGL preview, texture management, and PLY export.
+base: core22
+grade: stable
 confinement: strict
-base: core20
+
 architectures:
   - build-on: [amd64]
 
 parts:
-  progen3d:
-    plugin: make
+  imgui-source:
+    plugin: dump
+    source: https://github.com/ocornut/imgui.git
     source-type: git
-    source: https://github.com/pghauff55/ProGen3d.git
+    source-tag: v1.90.1
+    organize:
+      "*": imgui/
+    prime:
+      - -*
+
+  progen3d:
+    plugin: nil
+    source: .
+    after:
+      - imgui-source
     build-packages:
+      - build-essential
       - g++
       - make
-      - build-essential
-      - libgtk-3-dev
-      - libgtksourceview-3.0-dev
-      - libgtk-3-0
-      - libgtksourceview-3.0-1
-      - libgl1-mesa-glx
-      - libglu1-mesa-dev
       - libepoxy-dev
+      - libgl1-mesa-dev
+      - libglu1-mesa-dev
       - libglm-dev
-      - libssl-dev
-      - libopenblas-dev
-      - liblapack-dev
-      - gnome-common
-      - hicolor-icon-theme
-      - yaru-theme-gnome-shell
-      - libgdk-pixbuf2.0-0
-      - libgdk-pixbuf2.0-dev
-      - mime-support
-      - shared-mime-info
-      - adwaita-icon-theme
     stage-packages:
-      - libatk-bridge2.0-0
-      - libatk1.0-0
-      - libatspi2.0-0
-      - libcairo-gobject2
-      - libcairo2
-      - libdatrie1
+      - fonts-dejavu-core
       - libepoxy0
       - libfontconfig1
       - libfreetype6
-      - libfribidi0
-      - libgdk-pixbuf2.0-0
       - libgl1
-      - libglvnd0
-      - libglx0
-      - libgraphite2-3
-      - libgtk-3-0
-      - libharfbuzz0b
-      - libpango-1.0-0
-      - libpangocairo-1.0-0
-      - libpangoft2-1.0-0
-      - libpixman-1-0
-      - libpng16-16
-      - libthai0
+      - libglu1-mesa
       - libwayland-client0
       - libwayland-cursor0
       - libwayland-egl1
       - libx11-6
-      - libxau6
-      - libxcb-render0
-      - libxcb-shm0
-      - libxcb1
-      - libxcomposite1
       - libxcursor1
-      - libxdamage1
-      - libxdmcp6
       - libxext6
       - libxfixes3
       - libxi6
       - libxinerama1
       - libxkbcommon0
       - libxrandr2
-      - libxrender1
-      - libgtksourceview-3.0-1
-      - libssl-dev
-      - libpsm-infinipath1
-      - libblas3
-      - libopenblas0-pthread
-      - locales-all
+    override-build: |
+      set -eu
+      make clean
+      make \
+        IMGUI_CORE_DIR="$CRAFT_STAGE/imgui" \
+        IMGUI_BACKEND_DIR="$CRAFT_STAGE/imgui/backends" \
+        IMGUI_INCLUDE_DIR="$CRAFT_STAGE/imgui" \
+        IMGUI_BACKEND_INCLUDE_DIR="$CRAFT_STAGE/imgui/backends"
 
-    organize:
-        usr/lib/*-linux-gnu/openblas-pthread/*: usr/lib/
+      mkdir -p "$CRAFT_PART_INSTALL/snap/local"
+      mkdir -p "$CRAFT_PART_INSTALL/snap/gui"
+      mkdir -p "$CRAFT_PART_INSTALL/third_party/debs"
 
- 
-slots:
-  dbus-progen3d:
-    interface: dbus
-    bus: session
-    name: snap.progen3d.progen3d
-plugs:
-  gtk-2-engines:
-    interface: content
-    target: $SNAP/lib/gtk-2.0
-    default-provider: gtk2-common-themes
-  gtk-3-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes:gtk-3-themes
-  sound-themes:
-    interface: content
-    target: $SNAP/data-dir/sounds
-    default-provider: gtk-common-themes:sound-themes
-  icon-themes:
-    interface: content
-    target: $SNAP/data-dir/icons
-    default-provider: gtk-common-themes:icon-themes
-  gnome-3-38-2004:
-    interface: content
-    target: $SNAP/data-dir/gnome-platform
-    default-provider: gnome-3-38-2004:gnome-3-38-2004
-    
+      cp progen3d "$CRAFT_PART_INSTALL/progen3d"
+      cp -r snap/gui "$CRAFT_PART_INSTALL/snap/"
+      cp p3dicon.png "$CRAFT_PART_INSTALL/snap/gui/progen3d.png"
+      cp snap/local/launcher.sh "$CRAFT_PART_INSTALL/snap/local/launcher.sh"
+      chmod +x "$CRAFT_PART_INSTALL/snap/local/launcher.sh"
+
+      cp -r textures "$CRAFT_PART_INSTALL/textures"
+      cp ./*.grammar "$CRAFT_PART_INSTALL/"
+      cp -r third_party/debs/glfw "$CRAFT_PART_INSTALL/third_party/debs/"
+
 apps:
   progen3d:
-    command: progen3d
-    desktop: progen3d.desktop
-    plugs: [ desktop, desktop-legacy, gsettings, wayland, x11 ]
-    slots:
-      - dbus-progen3d
+    command: snap/local/launcher.sh
+    desktop: snap/gui/progen3d.desktop
     common-id: com.github.pghauff55.ProGen3d
-  
-environment:
-  LIBGL_DRIVERS_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri
-
-
-  
+    plugs:
+      - desktop
+      - desktop-legacy
+      - home
+      - opengl
+      - wayland
+      - x11
