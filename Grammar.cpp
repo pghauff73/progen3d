@@ -643,13 +643,13 @@ void Token::performAction(Context *context){
 		int texindex=0;
 		
 		if(var_names[0]!=""){
-			texindex=(int)atof(MathS2(var_name).c_str());
+			texindex=(int)atof(MathS2(var_names[0]).c_str());
 			////std::cout<<<<"MathS2: "<<texindex<<" "<<std::endl;
 			}
 			else texindex=(int)arguments[0];
-		int arg=0;
+		float arg=0.0;
 		float val=0.125f;
-		if(arguments.size()>1)arg=(int)arguments[1];
+		if(arguments.size()>1)arg=arguments[1];
 		if(arguments.size()>2)val=arguments[2];
 		context->addPrimitive(instance_type,context->getCurrentScope(),texindex,arg,val);
 		context->getScene().add(instance);
@@ -760,14 +760,20 @@ void Grammar::ReadTokens2(Rule *rule,std::string rule_str,int index_k){
 					}					
 					else if(c=='I'){
 						int pos1=-1,pos2=-1;
-						Token *token;
+						Token *token=new Token("I");
 						if((pos1 = rule_str.find("("))!=-1){
 								if((pos2 = rule_str.find(")"))!=-1){
 									std::vector<std::string> var_list=breakup(rule_str.substr(pos1+1,pos2-1)," ");
 									if(!(var_list.size()>=2 && var_list.size()<=3))return;
 									token->addInstanceType(removeSpaces(var_list[0]));
 									for(int i=1;i<var_list.size();i++){
-											value=atof(var_list[i].c_str());
+											if(!isnumber(var_list[i])){
+												token->var_names[i-1]=removeSpaces(var_list[i]);
+												value=0.0f;
+											}
+											else {
+												value=atof(var_list[i].c_str());
+											}
 											token->addArgument(value);
 									}
 									rule->addToken(token,index_k);
@@ -917,16 +923,28 @@ void Grammar::ReadTokens(Rule *rule,std::string rule_str,int index_k){
 				
 						if(token_str!=")"){
 							//std::cout<<<<"token_str: "<<token_str<<" ";
-							//token->var_name=token_str;
-							     value=atof(token_str.c_str());
+							if(!isnumber(token_str)){
+								token->var_names[1]=token_str;
+								value=0.0f;
+							}
+							else {
+								token->var_names[1]="";
+								value=atof(token_str.c_str());
+							}
 							     token->addArgument(value);
 							     lin>>token_str;
 						}
 						
 						if(token_str!=")"){
 							//std::cout<<<<"token_str: "<<token_str<<" ";
-							//token->var_name=token_str;
-							     value=atof(token_str.c_str());
+							if(!isnumber(token_str)){
+								token->var_names[2]=token_str;
+								value=0.0f;
+							}
+							else {
+								token->var_names[2]="";
+								value=atof(token_str.c_str());
+							}
 							     token->addArgument(value);
 							     lin>>token_str;
 						}	
@@ -1263,12 +1281,12 @@ void Grammar::update_token(Token *check_token){
 						}
 						}
 						if(check_token->token_name=="I" ){
-							if(check_token->var_names[0]!=""){
-													
-										check_token->arguments[0]=atof(MathS(check_token->var_names[0]).c_str());
-													
-										check_token->var_names[0]="";
-									}
+							for(int i=0;i<3;i++){
+								if(check_token->var_names[i]!=""){
+									check_token->arguments[i]=atof(MathS(check_token->var_names[i]).c_str());
+									check_token->var_names[i]="";
+								}
+							}
 							
 						}
 
@@ -1502,9 +1520,11 @@ int Grammar::findRule(std::string rule_name){
 
 
 void Grammar::addContext(){
-//std::cout<<<<"Adding Context..."<<std::endl;
-//if(context!=NULL)delete context;
-    this->context=new Context();
+	if(context!=NULL){
+		delete context;
+		context=NULL;
+	}
+	this->context=new Context();
 }
 
 
@@ -1533,34 +1553,25 @@ void Grammar::generateGeometry()
 
 
 Grammar::~Grammar(){
-	
-	
-	
-    for(int k=0;k<tokens_new.size();k++){
+	for(int k=0;k<tokens_new.size();k++){
 		//tokens_new[k]->print();
 			
 			////std::cout<<<<k<<",";
 			delete tokens_new[k];
 			
-	}		
-	
-	
-	//for(int i=0;i<rule_list.size();i++){
-	//	//std::cout<<<<i<<",";
-	 //delete rule_list[i];	
-	//}
-	
-	//delete context;
-	
-	
-	
+	}
+	tokens_new.clear();
+
+	for(int i=0;i<rule_list.size();i++){
+		delete rule_list[i];
+	}
+	rule_list.clear();
+
+	if(context!=NULL){
+		delete context;
+		context=NULL;
+	}
 }
-
-
-
-
-
-
 
 
 

@@ -12,8 +12,8 @@ public:
     void Rx(float angle);
     void Ry(float angle);
     void Rz(float angle);
-    glm::mat4 getTransform();
-	glm::mat4 getTransform2();
+    glm::mat4 getTransform() const;
+	glm::mat4 getTransform2() const;
 	
     glm::vec3 getPosition() const;
     glm::vec3 getSize() const;

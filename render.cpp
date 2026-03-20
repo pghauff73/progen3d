@@ -34,15 +34,10 @@ extern double mousey;
 extern bool mouse_dragging;
 extern bool play;
 extern std::atomic<bool> regeneration_in_progress;
-
-int tex_count[50] = {};
+void debugout(const std::string &message);
+void debugstate(const std::string &key, const std::string &message);
 
 void setup();
-void txt_inserted(GtkTextBuffer *textbuffer,
-                  GtkTextIter *location,
-                  gchar *text,
-                  gint len,
-                  gpointer user_data);
 void start_async_regeneration(bool save_current_file);
 
 namespace {
@@ -61,8 +56,9 @@ const GLchar *VERTEX_SOURCE =
 "uniform mat4 view;\n"
 "uniform mat4 model;\n"
 "uniform vec3 lightposition;\n"
+"uniform float texscale;\n"
 "void main(){\n"
-"    v_tex_coord = texture;\n"
+"    v_tex_coord = texture*texscale;\n"
 "    vec4 world_pos = model * vec4(position, 1.0);\n"
 "    vec4 view_pos = view * world_pos;\n"
 "    mat3 normal_matrix = transpose(inverse(mat3(view * model)));\n"
@@ -161,14 +157,81 @@ long current_frame = 0.0;
 long delta_time = 0.0;
 GDateTime *last_frame = nullptr;
 GLuint position_buffer = 0;
-GLuint position_buffer1[50] = {};
+std::vector<GLuint> position_buffer1;
 GLuint program = 0;
 GLuint vao = 0;
-GLuint vao1[50] = {};
+std::vector<GLuint> vao1;
+std::vector<int> render_counts;
 int glarea_width = 1;
 int glarea_height = 1;
-int render_texture_capacity = 0;
 mat4 model = mat4(1.0f);
+
+bool gl_area_has_error(GtkGLArea *area, const char *phase)
+{
+  GError *error = gtk_gl_area_get_error(area);
+  if (error == NULL) {
+    return false;
+  }
+  debugstate(std::string("render:glarea:") + phase,
+             std::string("GtkGLArea error at ") + phase + ": " + error->message);
+  return true;
+}
+
+void queue_parent_redraws(GtkWidget *widget)
+{
+  if (widget == NULL) {
+    return;
+  }
+  gtk_widget_queue_draw(widget);
+  GtkWidget *parent = gtk_widget_get_parent(widget);
+  if (parent == NULL) {
+    return;
+  }
+  gtk_widget_queue_draw(parent);
+  if (GTK_IS_CONTAINER(parent)) {
+    GList *children = gtk_container_get_children(GTK_CONTAINER(parent));
+    for (GList *iter = children; iter != NULL; iter = g_list_next(iter)) {
+      gtk_widget_queue_draw(GTK_WIDGET(iter->data));
+    }
+    g_list_free(children);
+  }
+}
+
+void log_gl_errors(const char *phase)
+{
+  GLenum error_code = glGetError();
+  if (error_code == GL_NO_ERROR) {
+    return;
+  }
+  std::ostringstream ss;
+  ss << "OpenGL error at " << phase;
+  while (error_code != GL_NO_ERROR) {
+    ss << " 0x" << std::hex << error_code;
+    error_code = glGetError();
+  }
+  debugout(ss.str());
+}
+
+size_t renderable_texture_count()
+{
+  size_t count = texture_list.size();
+  count = std::min(count, texture_list_alpha.size());
+  count = std::min(count, render_counts.size());
+  count = std::min(count, vao1.size());
+  count = std::min(count, position_buffer1.size());
+  if (count != texture_list.size() ||
+      count != texture_list_alpha.size() ||
+      count != render_counts.size()) {
+    std::ostringstream ss;
+    ss << "render state mismatch: textures=" << texture_list.size()
+       << ", alpha=" << texture_list_alpha.size()
+       << ", counts=" << render_counts.size()
+       << ", vaos=" << vao1.size()
+       << ", buffers=" << position_buffer1.size();
+    debugstate("render:state-mismatch", ss.str());
+  }
+  return count;
+}
 
 GLuint create_shader(int type)
 {
@@ -198,13 +261,16 @@ GLuint create_shader(int type)
   return shader;
 }
 
-void draw_box_internal(float angle_cube,
-                       vec3 scale_vec,
+void draw_box_internal(vec3 scale_vec,
                        vec3 position_vec,
                        vec3,
                        int tex_index,
-                       float texscale)
+                       float texscale,float alpha)
 {
+  if (tex_index < 0 || static_cast<size_t>(tex_index) >= texture_list.size()) {
+    debugout("draw_box_internal: texture index out of range");
+    return;
+  }
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, texture_list[tex_index]);
   glUseProgram(program);
@@ -215,7 +281,7 @@ void draw_box_internal(float angle_cube,
                       position_vec.z * scale_global);
 
   model = glm::mat4(1.0f);
-  model = rotate(model, angle_cube, vec3(0, 1, 0));
+  
   model = translate(model, position_vec);
   vec3 scale_vec2 = vec3(scale_vec.x * scale_global,
                          scale_vec.y * scale_global,
@@ -250,7 +316,8 @@ void draw_box_internal(float angle_cube,
   glUniform4fv(glGetUniformLocation(program, "diffuseproduct"), 1, &diffuseproduct[0]);
   glUniform4fv(glGetUniformLocation(program, "specularproduct"), 1, &specularproduct[0]);
   glUniform1f(glGetUniformLocation(program, "shinyness"), 128.0f);
-  glUniform1f(glGetUniformLocation(program, "alpha"), texscale);
+  glUniform1f(glGetUniformLocation(program, "alpha"), alpha);
+  glUniform1f(glGetUniformLocation(program, "texscale"), texscale);
 
   glBindVertexArray(vao);
   glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -261,8 +328,16 @@ void draw_box_internal(float angle_cube,
 
 void draw_buffer(int tex_index)
 {
+  if (tex_index < 0) {
+    return;
+  }
+  size_t index = static_cast<size_t>(tex_index);
+  if (index >= renderable_texture_count()) {
+    debugout("draw_buffer: texture index out of range for current render state");
+    return;
+  }
   glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D, texture_list[tex_index]);
+  glBindTexture(GL_TEXTURE_2D, texture_list[index]);
   glUseProgram(program);
   glUniform1i(glGetUniformLocation(program, "texture1"), 0);
   glDepthFunc(GL_LESS);
@@ -298,10 +373,10 @@ void draw_buffer(int tex_index)
   glUniform4fv(glGetUniformLocation(program, "diffuseproduct"), 1, &diffuseproduct[0]);
   glUniform4fv(glGetUniformLocation(program, "specularproduct"), 1, &specularproduct[0]);
   glUniform1f(glGetUniformLocation(program, "shinyness"), 16.0f);
-  glUniform1f(glGetUniformLocation(program, "alpha"), texture_list_alpha[tex_index]);
+  glUniform1f(glGetUniformLocation(program, "alpha"), texture_list_alpha[index]);
 
-  glBindVertexArray(vao1[tex_index]);
-  glDrawArrays(GL_TRIANGLES, 0, 36 * tex_count[tex_index]);
+  glBindVertexArray(vao1[index]);
+  glDrawArrays(GL_TRIANGLES, 0, 36 * render_counts[index]);
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glUseProgram(0);
@@ -309,15 +384,14 @@ void draw_buffer(int tex_index)
 
 }
 
-void draw_box(float angle_cube,
-              glm::vec3 scale_vec,
+void draw_box(glm::vec3 scale_vec,
               glm::vec3 position_vec,
               glm::vec3 pos,
               int tex_index,
-              float texscale)
+              float texscale,float alpha)
 {
   (void)pos;
-  draw_box_internal(angle_cube, scale_vec, position_vec, glm::vec3(0.0f), tex_index, texscale);
+  draw_box_internal( scale_vec, position_vec, glm::vec3(0.0f), tex_index, texscale,alpha);
 }
 
 std::array<GLfloat, 36 * 8> build_base_vertex_data()
@@ -339,9 +413,21 @@ void initialize_render_texture_buffers()
 {
   if (gl_area == NULL) return;
   gtk_gl_area_make_current(GTK_GL_AREA(gl_area));
-  if (gtk_gl_area_get_error(GTK_GL_AREA(gl_area)) != NULL) return;
-  int target_capacity = std::min<int>(texture_list.size(), 50);
-  for (int i = render_texture_capacity; i < target_capacity; ++i) {
+  if (gl_area_has_error(GTK_GL_AREA(gl_area), "initialize_render_texture_buffers")) return;
+  size_t target_capacity = texture_list.size();
+  size_t current_capacity = vao1.size();
+  if (current_capacity >= target_capacity) {
+    if (render_counts.size() < target_capacity) {
+      render_counts.resize(target_capacity, 0);
+    }
+    return;
+  }
+  vao1.resize(target_capacity, 0);
+  position_buffer1.resize(target_capacity, 0);
+  if (render_counts.size() < target_capacity) {
+    render_counts.resize(target_capacity, 0);
+  }
+  for (size_t i = current_capacity; i < target_capacity; ++i) {
     glGenVertexArrays(1, &vao1[i]);
     glBindVertexArray(vao1[i]);
     glGenBuffers(1, &position_buffer1[i]);
@@ -356,7 +442,7 @@ void initialize_render_texture_buffers()
   }
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
-  render_texture_capacity = target_capacity;
+  log_gl_errors("initialize_render_texture_buffers");
 }
 
 void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
@@ -364,14 +450,12 @@ void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
 {
   if (gl_area == NULL) return;
   gtk_gl_area_make_current(GTK_GL_AREA(gl_area));
-  if (gtk_gl_area_get_error(GTK_GL_AREA(gl_area)) != NULL) return;
+  if (gl_area_has_error(GTK_GL_AREA(gl_area), "upload_render_buffers")) return;
   initialize_render_texture_buffers();
-  for (int i = 0; i < 50; i++) {
-    tex_count[i] = 0;
-  }
-  for (int i = 0; i < texture_list.size() && i < 50; i++) {
-    if (i < counts.size()) tex_count[i] = counts[i];
-    if (tex_count[i] > 0 && i < buffers.size() && !buffers[i].empty()) {
+  render_counts.assign(texture_list.size(), 0);
+  for (size_t i = 0; i < texture_list.size(); i++) {
+    if (i < counts.size()) render_counts[i] = counts[i];
+    if (render_counts[i] > 0 && i < buffers.size() && !buffers[i].empty()) {
       glBindVertexArray(vao1[i]);
       glBindBuffer(GL_ARRAY_BUFFER, position_buffer1[i]);
       glBufferData(GL_ARRAY_BUFFER,
@@ -382,6 +466,12 @@ void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
   }
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
+  log_gl_errors("upload_render_buffers");
+  std::ostringstream ss;
+  ss << "upload_render_buffers: textures=" << texture_list.size()
+     << ", buffers=" << buffers.size()
+     << ", counts=" << counts.size();
+  debugstate("render:upload", ss.str());
   gtk_gl_area_queue_render(GTK_GL_AREA(gl_area));
 }
 
@@ -427,9 +517,10 @@ gboolean on_motion_notify(GtkWidget *widget, GdkEventMotion *event, gpointer)
 void realize(GtkWidget *widget)
 {
   gtk_gl_area_make_current(GTK_GL_AREA(widget));
-  if (gtk_gl_area_get_error(GTK_GL_AREA(widget)) != NULL) return;
+  if (gl_area_has_error(GTK_GL_AREA(widget), "realize-begin")) return;
   gtk_gl_area_attach_buffers(GTK_GL_AREA(widget));
   gtk_gl_area_set_auto_render(GTK_GL_AREA(widget), FALSE);
+  debugout("render: realize begin");
 
   setup();
   initialize_render_texture_buffers();
@@ -443,9 +534,7 @@ void realize(GtkWidget *widget)
     }
     fin.close();
   }
-  g_signal_handlers_block_by_func(mybuffer, (gpointer)txt_inserted, NULL);
   gtk_text_buffer_set_text(mybuffer, text.c_str(), text.length());
-  g_signal_handlers_unblock_by_func(mybuffer, (gpointer)txt_inserted, NULL);
 
   auto mydata = build_base_vertex_data();
   glGenVertexArrays(1, &vao);
@@ -503,9 +592,16 @@ void realize(GtkWidget *widget)
   glViewport(0, 0,
              gtk_widget_get_allocated_width(widget),
              gtk_widget_get_allocated_height(widget));
+  log_gl_errors("realize");
 
   last_frame = g_date_time_new_now_local();
   current_frame = g_date_time_get_microsecond(last_frame);
+  std::ostringstream ss;
+  ss << "render: realize complete width=" << gtk_widget_get_allocated_width(widget)
+     << ", height=" << gtk_widget_get_allocated_height(widget)
+     << ", textures=" << texture_list.size();
+  debugstate("render:realize", ss.str());
+  gtk_gl_area_queue_render(GTK_GL_AREA(widget));
   if (!text.empty()) {
     start_async_regeneration(false);
   }
@@ -514,30 +610,35 @@ void realize(GtkWidget *widget)
 void unrealize(GtkWidget *widget)
 {
   gtk_gl_area_make_current(GTK_GL_AREA(widget));
-  if (gtk_gl_area_get_error(GTK_GL_AREA(widget)) != NULL) return;
-  for (int i = 0; i < render_texture_capacity; i++) {
+  if (gl_area_has_error(GTK_GL_AREA(widget), "unrealize")) return;
+  for (size_t i = 0; i < vao1.size(); i++) {
     if (position_buffer1[i] != 0) glDeleteBuffers(1, &position_buffer1[i]);
     if (vao1[i] != 0) glDeleteVertexArrays(1, &vao1[i]);
     position_buffer1[i] = 0;
     vao1[i] = 0;
   }
-  render_texture_capacity = 0;
+  position_buffer1.clear();
+  vao1.clear();
+  render_counts.clear();
   if (position_buffer != 0) glDeleteBuffers(1, &position_buffer);
   if (vao != 0) glDeleteVertexArrays(1, &vao);
   if (program != 0) glDeleteProgram(program);
   position_buffer = 0;
   vao = 0;
   program = 0;
+  log_gl_errors("unrealize");
+  debugout("render: unrealize complete");
 }
 
 void resize_glarea(GtkGLArea *area, int width, int height, gpointer)
 {
   glarea_width = std::max(width, 1);
   glarea_height = std::max(height, 1);
-  gtk_gl_area_make_current(area);
-  if (gtk_gl_area_get_error(area) == NULL) {
-    glViewport(0, 0, glarea_width, glarea_height);
-  }
+  std::ostringstream ss;
+  ss << "render: resize " << glarea_width << "x" << glarea_height;
+  debugstate("render:resize", ss.str());
+  gtk_gl_area_queue_render(area);
+  queue_parent_redraws(GTK_WIDGET(area));
 }
 
 gboolean render(GtkGLArea *area, GdkGLContext *context)
@@ -552,34 +653,43 @@ gboolean render(GtkGLArea *area, GdkGLContext *context)
   g_date_time_unref(last_frame);
   last_frame = date_time;
 
-  if (gtk_gl_area_get_error(area) != NULL) return FALSE;
-  if (regeneration_in_progress.load()) return TRUE;
+  if (gl_area_has_error(area, "render")) return FALSE;
+  if (regeneration_in_progress.load()) {
+    glViewport(0, 0, glarea_width, glarea_height);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    debugstate("render:busy", "render skipped because regeneration is in progress");
+    return TRUE;
+  }
   if (play) angle_view += (float)delta_time / 1000.0f;
   if (angle_view > 360.0f) angle_view = 0.0f;
 
   glDisable(GL_CULL_FACE);
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
+  glViewport(0, 0, glarea_width, glarea_height);
   glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  size_t render_count = renderable_texture_count();
   glDepthMask(GL_TRUE);
   glDisable(GL_BLEND);
-  for (int i = 0; i < texture_list.size(); i++) {
-    if (tex_count[i] > 0 && texture_list_alpha[i] >= 0.999f) {
-      draw_buffer(i);
+  for (size_t i = 0; i < render_count; i++) {
+    if (render_counts[i] > 0 && texture_list_alpha[i] >= 0.999f) {
+      draw_buffer(static_cast<int>(i));
     }
   }
 
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glDepthMask(GL_FALSE);
-  for (int i = 0; i < texture_list.size(); i++) {
-    if (tex_count[i] > 0 && texture_list_alpha[i] < 0.999f) {
-      draw_buffer(i);
+  for (size_t i = 0; i < render_count; i++) {
+    if (render_counts[i] > 0 && texture_list_alpha[i] < 0.999f) {
+      draw_buffer(static_cast<int>(i));
     }
   }
   glDepthMask(GL_TRUE);
+  log_gl_errors("render");
 
   if (play) {
     gtk_gl_area_queue_render(area);

@@ -8,8 +8,8 @@ Developer setup (Debian/Ubuntu)
 sudo apt update
 sudo apt install -y \
   build-essential g++ make pkg-config cmake git \
-  libgtk-3-dev libglu1-mesa-dev libgl1-mesa-dev libepoxy-dev libglm-dev \
-  libopencv-dev libssl-dev libpng-dev libfreetype-dev libpango1.0-dev libatk1.0-dev \
+  libgtk-3-dev libgtksourceview-3.0-dev libglu1-mesa-dev libgl1-mesa-dev libepoxy-dev libglm-dev \
+  libssl-dev libpng-dev libfreetype-dev libpango1.0-dev libatk1.0-dev \
   libatkmm-1.6-dev libpangomm-1.4-dev libsigc++-2.0-dev libglib2.0-dev libgdk-pixbuf2.0-dev libdbus-1-dev \
   libx11-dev libxi-dev libxrandr-dev libxext-dev libxrender-dev
 ```
@@ -81,8 +81,8 @@ Install system dependencies (Debian/Ubuntu example):
 sudo apt update
 sudo apt install -y \
   build-essential g++ make pkg-config cmake git \
-  libgtk-3-dev libglu1-mesa-dev libgl1-mesa-dev libepoxy-dev libglm-dev \
-  libopencv-dev libssl-dev libpng-dev libfreetype-dev libpango1.0-dev libatk1.0-dev \
+  libgtk-3-dev libgtksourceview-3.0-dev libglu1-mesa-dev libgl1-mesa-dev libepoxy-dev libglm-dev \
+  libssl-dev libpng-dev libfreetype-dev libpango1.0-dev libatk1.0-dev \
   libatkmm-1.6-dev libpangomm-1.4-dev libsigc++-2.0-dev libglib2.0-dev libgdk-pixbuf2.0-dev libdbus-1-dev \
   libx11-dev libxi-dev libxrandr-dev libxext-dev libxrender-dev xvfb
 ```

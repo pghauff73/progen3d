@@ -71,10 +71,9 @@ static void apply_regex_matches(GtkTextBuffer *buffer,
 // - numbers (orange)
 // - operators / single-letter tokens (bold)
 // - comments (gray, lines starting with # or //)
-static void update_syntax_highlighting(GtkTextBuffer *buffer) {
+static void ensure_highlight_tags(GtkTextBuffer *buffer) {
     if (!buffer) return;
 
-    // Ensure tags exist (create minimal tags if caller didn't)
     GtkTextTagTable *table = gtk_text_buffer_get_tag_table(buffer);
     if (!table) return;
 
@@ -90,13 +89,35 @@ static void update_syntax_highlighting(GtkTextBuffer *buffer) {
         gtk_text_buffer_create_tag(buffer, "comment", "foreground", "#808080", NULL);
     if (!gtk_text_tag_table_lookup(table, "operator"))
         gtk_text_buffer_create_tag(buffer, "operator", "foreground", "#7F3FBF", "weight", PANGO_WEIGHT_BOLD, NULL);
+}
 
-    // Get full buffer bounds
+static void update_syntax_highlighting_range(GtkTextBuffer *buffer,
+                                             int start_line,
+                                             int end_line) {
+    if (!buffer) return;
+
+    ensure_highlight_tags(buffer);
+
     GtkTextIter start, end;
-    gtk_text_buffer_get_start_iter(buffer, &start);
-    gtk_text_buffer_get_end_iter(buffer, &end);
+    const int line_count = gtk_text_buffer_get_line_count(buffer);
+    if (line_count <= 0) {
+        gtk_text_buffer_get_start_iter(buffer, &start);
+        gtk_text_buffer_get_end_iter(buffer, &end);
+        gtk_text_buffer_remove_all_tags(buffer, &start, &end);
+        return;
+    }
 
-    // Remove all tags first
+    start_line = std::max(0, start_line);
+    end_line = std::min(end_line, line_count - 1);
+    if (start_line > end_line) return;
+
+    gtk_text_buffer_get_iter_at_line(buffer, &start, start_line);
+    if (end_line + 1 < line_count) {
+        gtk_text_buffer_get_iter_at_line(buffer, &end, end_line + 1);
+    } else {
+        gtk_text_buffer_get_end_iter(buffer, &end);
+    }
+
     gtk_text_buffer_remove_all_tags(buffer, &start, &end);
 
     const std::regex rule_re("^\\s*([A-Za-z_][A-Za-z0-9_]*)\\b.*->");
@@ -106,9 +127,12 @@ static void update_syntax_highlighting(GtkTextBuffer *buffer) {
 
     // Text-driven pass by line so highlighting stays correct even before regeneration.
     GtkTextIter iter = start;
-    while (!gtk_text_iter_is_end(&iter)) {
+    while (gtk_text_iter_compare(&iter, &end) < 0) {
         GtkTextIter line_end = iter;
         gtk_text_iter_forward_to_line_end(&line_end);
+        if (gtk_text_iter_compare(&line_end, &end) > 0) {
+            line_end = end;
+        }
 
         gchar *line_text = gtk_text_buffer_get_text(buffer, &iter, &line_end, FALSE);
         if (line_text) {
@@ -135,9 +159,14 @@ static void update_syntax_highlighting(GtkTextBuffer *buffer) {
             g_free(line_text);
         }
 
-        if (gtk_text_iter_equal(&line_end, &end)) break;
-        gtk_text_iter_forward_line(&iter);
+        if (gtk_text_iter_compare(&line_end, &end) >= 0) break;
+        if (!gtk_text_iter_forward_line(&iter)) break;
     }
+}
+
+static void update_syntax_highlighting(GtkTextBuffer *buffer) {
+    if (!buffer) return;
+    update_syntax_highlighting_range(buffer, 0, gtk_text_buffer_get_line_count(buffer));
 }
 
 #endif // SYNTAX_HIGHLIGHT_H

@@ -14,6 +14,8 @@
 #include <atomic>
 #include <array>
 #include <memory>
+#include <mutex>
+#include <streambuf>
 
 
 #include <stdio.h>
@@ -54,16 +56,20 @@ std::string hostname="xxx.xxx.xxx.xxx";
 std::string portnum="pppp";
 
 #include <gtk/gtk.h>
+#if __has_include(<gtksourceview/gtksource.h>)
+#include <gtksourceview/gtksource.h>
+#define HAVE_GTKSOURCEVIEW 1
+#else
+#define HAVE_GTKSOURCEVIEW 0
+#endif
 // Project headers required by main.cpp
 #include "grammar.h" // defines Grammar, Rule, Token, Variable
-#include <opencv2/opencv.hpp>
 #include "Context.h" // ensure Context is fully defined for grammar->context uses
 #include "Solution.h" // declares Noise2d
 // Make sure GLM and stb_image types are available before using them
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "stbimage/stb_image.h"
-#include "syntax_highlight.h"
 #include "render.h"
 
 // Forward / global state used across the UI and other translation units.
@@ -79,11 +85,12 @@ GtkWidget *view = nullptr;
 GtkWidget *view2 = nullptr;
 GtkWidget *viewerror = nullptr;
 GtkWidget *gl_area = nullptr;
+GtkWidget *root_shell = nullptr;
+GtkWidget *top_toolbar_box = nullptr;
 GtkWidget *layout3 = nullptr;
 GtkWidget *layout4 = nullptr;
 GtkWidget *layout = nullptr;
 GtkWidget *texture_scrollwin = nullptr;
-GtkWidget *drawing_area2 = nullptr;
 GtkWidget *file_label = nullptr;
 GtkWidget *rulescombo = nullptr;
 GtkWidget *openbutton = nullptr;
@@ -105,11 +112,6 @@ std::mt19937_64 rng;
 extern std::vector<Variable *> variable_list;
 extern std::vector<Variable *> full_variable_list;
 
-// Make common OpenCV types available unqualified in this file (code uses Point, Point2f, Size, Scalar)
-using namespace cv;
-using cv::Point;
-using cv::Point2f;
-using cv::Mat;
 std::vector<int> texture_list;
 std::vector<float> texture_list_alpha;
 std::vector<std::string> texture_filenames;
@@ -124,8 +126,6 @@ std::string password;
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 900;
 std::string appname = "Progen3d";
-GtkWidget *notebook = nullptr;
-GtkWidget *colorchooser1 = nullptr;
 // View is now controlled by mouse
 
 // Simple aliases for the GTK text tag variables used by the highlighter code
@@ -137,7 +137,6 @@ GtkTextTag *boldtag = nullptr;
 float scale_global = 1.0f;
 float angle_view = 0.0f;
 float elevation_view = 0.0f;
-int mouse_index = 0;
 double mousex = 0;
 double mousey = 0;
 bool mouse_dragging = false;
@@ -192,8 +191,6 @@ GtkActionBar *actionbar,*actionbar3,*actionbar7,*actionbar5,*actionbar6;
 
 char *rulenames[1000];
 
-GtkTextBuffer *buffer2;
-
 //GtkWidget *images[30];
 
 std::vector<GtkWidget *> images;
@@ -217,6 +214,7 @@ void activate(GtkButton *item);
 void save_to_file(const char *filename);
 void errorout(std::string error_str);
 void debugout(const std::string &message);
+void debugstate(const std::string &key, const std::string &message);
 void upload_fulltext(std::string fulltext);
 std::vector<std::string> breakup_into_lines(std::string input,std::string delimiter);
 void start_async_regeneration(bool save_current_file);
@@ -225,33 +223,207 @@ void txt_inserted (GtkTextBuffer *textbuffer,
                gchar         *text,
                gint           len,
                gpointer       user_data);
+void txt_changed (GtkTextBuffer *textbuffer,gpointer       user_data);
 void update_texture_layout_size();
+static void on_texture_scrollwin_size_allocate(GtkWidget *widget, GdkRectangle *allocation, gpointer user_data);
+static void add_css_class(GtkWidget *widget, const char *css_class);
+static void install_app_css();
+
+static void show_main_workspace(){
+	if(box6!=NULL && gtk_widget_get_parent(box6)!=NULL){
+		gtk_widget_hide(box6);
+	}
+	if(root_shell!=NULL && paned!=NULL && gtk_widget_get_parent(paned)==NULL){
+		gtk_box_pack_start(GTK_BOX(root_shell), (GtkWidget *)paned, 1, 1, 0);
+	}
+	if(window!=NULL){
+		gtk_widget_show_all(GTK_WIDGET(window));
+		gtk_window_present(GTK_WINDOW(window));
+	}
+}
+
+static void add_css_class(GtkWidget *widget, const char *css_class){
+	if(widget==NULL || css_class==NULL)return;
+	gtk_style_context_add_class(gtk_widget_get_style_context(widget), css_class);
+}
+
+static void install_app_css(){
+	static bool installed = false;
+	if(installed)return;
+
+	GtkCssProvider *provider = gtk_css_provider_new();
+	const char *css = R"CSS(
+.progen-window {
+  background: #ddd0bc;
+  color: #241c16;
+}
+
+.shell-header {
+  background: #1f1a17;
+  border: 1px solid #322922;
+  border-radius: 22px;
+  padding: 18px 22px;
+}
+
+.brand-kicker {
+  color: #cab49a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.brand-title {
+  color: #fff6ea;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.brand-note {
+  color: rgba(255, 246, 234, 0.76);
+}
+
+.header-actions button,
+.preview-actions button {
+  background-image: none;
+  background: #f6eadb;
+  border: 1px solid #cfb99b;
+  border-radius: 10px;
+  box-shadow: none;
+  color: #33271d;
+  min-height: 34px;
+  padding: 7px 14px;
+}
+
+.header-actions button:hover,
+.preview-actions button:hover {
+  background: #efdfca;
+}
+
+.header-actions button:active,
+.preview-actions button:active {
+  background: #e4d0b8;
+}
+
+.primary-action {
+  background: #2e8752;
+  border-color: #23663d;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.primary-action:hover {
+  background: #379860;
+}
+
+.primary-action:active {
+  background: #276f45;
+}
+
+.status-pill {
+  background: #efe1cb;
+  border: 1px solid #c8b294;
+  border-radius: 999px;
+  color: #433427;
+  font-weight: 600;
+  padding: 8px 14px;
+}
+
+.preview-pane,
+.workspace-pane {
+  background: transparent;
+}
+
+.column-kicker {
+  color: #7a6754;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.column-title {
+  color: #2d2219;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.column-subtitle {
+  color: #7f6d5a;
+}
+
+.surface-frame > border,
+.viewport-frame > border {
+  background: #fff9f0;
+  border: 1px solid #d1bea7;
+  border-radius: 18px;
+}
+
+.viewport-frame > border {
+  background: #f4ecde;
+  border-radius: 14px;
+}
+
+.panel-body {
+  background: transparent;
+  padding: 0;
+}
+
+.panel-label {
+  color: #5d4b39;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.control-label {
+  color: #6a5643;
+  font-weight: 700;
+}
+
+.editor-view,
+.console-view {
+  background: #fffdf8;
+  color: #2f241b;
+}
+
+.console-view {
+  background: #f4ecdf;
+}
+)CSS";
+
+	GError *error = NULL;
+	gtk_css_provider_load_from_data(provider, css, -1, &error);
+	if(error!=NULL){
+		debugout(std::string("install_app_css: ") + error->message);
+		g_error_free(error);
+		g_object_unref(provider);
+		return;
+	}
+
+	GdkScreen *screen = gdk_screen_get_default();
+	if(screen!=NULL){
+		gtk_style_context_add_provider_for_screen(
+			screen,
+			GTK_STYLE_PROVIDER(provider),
+			GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		installed = true;
+	}
+	g_object_unref(provider);
+}
 
 struct RegenerationResult {
 	Grammar *grammar = nullptr;
 	std::vector<std::vector<GLfloat>> vertex_buffers;
 	std::vector<int> counts;
+	unsigned long long texture_binding_version = 0;
 	std::string error;
 	std::string temp_filename;
 	bool save_current_file = false;
 	std::string save_filename;
 };
 
-GdkPixbuf *pix=NULL;
 std::vector<GdkPixbuf *> pixbuf;
-std::vector<unsigned char *> pixsbuffer;
-
-
-cv::Mat image;		
 GtkWidget *drawing_area;
 int last_mouse_x = 0;
 int last_mouse_y = 0;
-bool mouse_pressed = false;
-double mouse_sensitivity = 0.5;
-Point p1,p2;
-std::vector<std::vector<Point>> squares;
-std::vector<Point2f> perspective_points;
-int draw2width,draw2height;
 void txt_changed (GtkTextBuffer *textbuffer,gpointer       user_data);
 
 using glm::mat4;
@@ -262,23 +434,125 @@ using glm::rotate;
 using glm::translate;
 using glm::scale;
 
+static std::mutex console_mutex;
+static std::vector<std::string> pending_console_messages;
+static bool console_flush_scheduled = false;
+static std::mutex debug_state_mutex;
+static std::unordered_map<std::string, std::string> debug_state_messages;
+static std::mutex texture_binding_mutex;
+static unsigned long long texture_binding_version = 0;
+static void queue_console_message(std::string message);
+static void flush_pending_console_messages();
+static std::vector<int> snapshot_texture_bindings(unsigned long long *version_out = nullptr);
+static unsigned long long current_texture_binding_version();
+static void note_texture_binding_changed(const std::string &reason);
+
+class GuiConsoleStreamBuf : public std::streambuf {
+public:
+	explicit GuiConsoleStreamBuf(std::string prefix = "")
+		: prefix_(std::move(prefix)) {}
+
+	~GuiConsoleStreamBuf() override {
+		sync();
+	}
+
+protected:
+	int overflow(int ch) override {
+		if(ch == traits_type::eof()){
+			return traits_type::not_eof(ch);
+		}
+		if(ch == '\r'){
+			return ch;
+		}
+		if(ch == '\n'){
+			flush_buffer(false);
+			return ch;
+		}
+		buffer_.push_back(static_cast<char>(ch));
+		return ch;
+	}
+
+	int sync() override {
+		flush_buffer(true);
+		return 0;
+	}
+
+private:
+	void flush_buffer(bool flush_partial) {
+		if(buffer_.empty() && !flush_partial){
+			queue_console_message(prefix_);
+			return;
+		}
+		if(buffer_.empty()){
+			return;
+		}
+		queue_console_message(prefix_ + buffer_);
+		buffer_.clear();
+	}
+
+	std::string prefix_;
+	std::string buffer_;
+};
+
+static GuiConsoleStreamBuf gui_stdout_stream;
+static GuiConsoleStreamBuf gui_stderr_stream;
+
+static void install_console_stream_redirects(){
+	static bool installed = false;
+	if(installed){
+		return;
+	}
+	std::cout.rdbuf(&gui_stdout_stream);
+	std::cerr.rdbuf(&gui_stderr_stream);
+	std::clog.rdbuf(&gui_stderr_stream);
+	installed = true;
+}
+
 static void append_text_to_console(const std::string &text){
 	if(errorbuffer==NULL)return;
+	bool should_follow = true;
+	if(viewerror!=NULL){
+		GtkAdjustment *vadj = gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(viewerror));
+		if(vadj!=NULL){
+			double value = gtk_adjustment_get_value(vadj);
+			double page_size = gtk_adjustment_get_page_size(vadj);
+			double upper = gtk_adjustment_get_upper(vadj);
+			should_follow = value + page_size >= upper - 8.0;
+		}
+	}
 	GtkTextIter end;
 	gtk_text_buffer_get_end_iter(errorbuffer,&end);
 	gtk_text_buffer_insert(errorbuffer,&end,text.c_str(),text.length());
-	if(viewerror!=NULL){
+	if(viewerror!=NULL && should_follow){
+		gtk_text_buffer_get_end_iter(errorbuffer,&end);
 		GtkTextMark* mark = gtk_text_buffer_create_mark(errorbuffer, NULL, &end, 1);
 		gtk_text_view_scroll_to_mark((GtkTextView *)viewerror, mark, 0.0, 0, 0.0, 1.0);
 		gtk_text_buffer_delete_mark (errorbuffer, mark);
 	}
 }
 
-static gboolean console_append_idle(gpointer data){
-	std::string *message = static_cast<std::string *>(data);
-	append_text_to_console(*message);
-	delete message;
+static gboolean console_append_idle(gpointer){
+	flush_pending_console_messages();
 	return G_SOURCE_REMOVE;
+}
+
+static void flush_pending_console_messages(){
+	if(errorbuffer==NULL){
+		return;
+	}
+	std::vector<std::string> pending_messages;
+	{
+		std::lock_guard<std::mutex> lock(console_mutex);
+		if(pending_console_messages.empty()){
+			console_flush_scheduled = false;
+			return;
+		}
+		pending_messages.swap(pending_console_messages);
+		console_flush_scheduled = false;
+	}
+	for(const std::string &message : pending_messages){
+		append_text_to_console(message);
+	}
 }
 
 static void queue_console_message(std::string message){
@@ -286,11 +560,26 @@ static void queue_console_message(std::string message){
 		message.push_back('\n');
 	}
 	auto current = std::this_thread::get_id();
-	if(main_thread_id == std::thread::id() || current == main_thread_id){
-		append_text_to_console(message);
+	bool on_main_thread = (main_thread_id == std::thread::id() || current == main_thread_id);
+	bool schedule_idle = false;
+	{
+		std::lock_guard<std::mutex> lock(console_mutex);
+		pending_console_messages.push_back(std::move(message));
+		if(errorbuffer!=NULL && !on_main_thread && !console_flush_scheduled){
+			console_flush_scheduled = true;
+			schedule_idle = true;
+		}
+	}
+	if(errorbuffer==NULL){
 		return;
 	}
-	g_idle_add(console_append_idle, new std::string(message));
+	if(on_main_thread){
+		flush_pending_console_messages();
+		return;
+	}
+	if(schedule_idle){
+		g_idle_add(console_append_idle, NULL);
+	}
 }
 
 static void set_regeneration_ui_state(bool busy){
@@ -300,6 +589,8 @@ static void set_regeneration_ui_state(bool busy){
 	if(savebutton!=NULL)gtk_widget_set_sensitive(savebutton, !busy);
 	if(plybutton!=NULL)gtk_widget_set_sensitive(plybutton, !busy);
 	if(resetviewbutton!=NULL)gtk_widget_set_sensitive(resetviewbutton, !busy);
+	if(texture_filechooser!=NULL)gtk_widget_set_sensitive(texture_filechooser, !busy);
+	if(texture_scrollwin!=NULL)gtk_widget_set_sensitive(texture_scrollwin, !busy);
 	if(file_label!=NULL && busy){
 		gtk_label_set_text(GTK_LABEL(file_label), "Regenerating...");
 	}
@@ -325,11 +616,18 @@ static gboolean finalize_regeneration_idle(gpointer data){
 		return G_SOURCE_REMOVE;
 	}
 
+	if(current_texture_binding_version() != result->texture_binding_version){
+		debugout("finalize_regeneration_idle: discarding stale regeneration result because texture bindings changed");
+		if(result->grammar!=NULL){
+			delete result->grammar;
+			result->grammar = NULL;
+		}
+		start_async_regeneration(result->save_current_file);
+		return G_SOURCE_REMOVE;
+	}
+
 	Grammar *old_grammar = grammar;
 	grammar = result->grammar;
-	setup_vars = true;
-	setup_rules = true;
-	generate_widgets();
 	update_file_label();
 	upload_render_buffers(result->vertex_buffers, result->counts);
 	if(result->save_current_file){
@@ -343,6 +641,26 @@ static gboolean finalize_regeneration_idle(gpointer data){
 		delete old_grammar;
 	}
 	return G_SOURCE_REMOVE;
+}
+
+static std::vector<int> snapshot_texture_bindings(unsigned long long *version_out){
+	std::lock_guard<std::mutex> lock(texture_binding_mutex);
+	if(version_out!=NULL)*version_out = texture_binding_version;
+	return texture_list;
+}
+
+static unsigned long long current_texture_binding_version(){
+	std::lock_guard<std::mutex> lock(texture_binding_mutex);
+	return texture_binding_version;
+}
+
+static void note_texture_binding_changed(const std::string &reason){
+	unsigned long long version = 0;
+	{
+		std::lock_guard<std::mutex> lock(texture_binding_mutex);
+		version = ++texture_binding_version;
+	}
+	debugout("texture bindings updated: " + reason + ", version=" + std::to_string(version));
 }
 
 void start_async_regeneration(bool save_current_file){
@@ -365,12 +683,19 @@ void start_async_regeneration(bool save_current_file){
 	         <<", text_len="<<fulltext.size();
 	debugout(debug_msg.str());
 	std::string save_filename_snapshot = grammar_filename;
+	unsigned long long texture_binding_version_snapshot = 0;
+	std::vector<int> texture_list_snapshot = snapshot_texture_bindings(&texture_binding_version_snapshot);
 	set_regeneration_ui_state(true);
 
-	std::thread([fulltext, save_current_file, save_filename_snapshot]() {
+	std::thread([fulltext,
+	            save_current_file,
+	            save_filename_snapshot,
+	            texture_list_snapshot,
+	            texture_binding_version_snapshot]() {
 		std::unique_ptr<RegenerationResult> result(new RegenerationResult());
 		result->save_current_file = save_current_file;
 		result->save_filename = save_filename_snapshot;
+		result->texture_binding_version = texture_binding_version_snapshot;
 		try{
 			auto temp_path = std::filesystem::temp_directory_path() /
 				("progen3d-regeneration-" +
@@ -391,24 +716,17 @@ void start_async_regeneration(bool save_current_file){
 				new_grammar->Reread();
 			}
 			new_grammar->addContext();
-			for(int i=0;i<texture_list.size();i++){
-				new_grammar->context->loadTexture(texture_list[i]);
+			for(size_t i=0;i<texture_list_snapshot.size();i++){
+				new_grammar->context->loadTexture(texture_list_snapshot[i]);
 			}
 			new_grammar->context->genPrimitives();
 			new_grammar->generateGeometry();
 
 			auto mydata = build_base_vertex_data();
-			result->vertex_buffers.resize(texture_list.size());
-			result->counts.resize(texture_list.size(), 0);
-			for(int i=0;i<texture_list.size();i++){
-				GLfloat *my_vertex_data = new_grammar->context->calc(mydata.data(), i);
-				result->counts[i] = tex_count[i];
-				if(result->counts[i] > 0 && my_vertex_data != NULL){
-					result->vertex_buffers[i].assign(my_vertex_data,
-					                                my_vertex_data + (36 * 8 * result->counts[i]));
-					delete[] my_vertex_data;
-				}
-			}
+			new_grammar->context->buildTextureBuffers(mydata.data(),
+			                                         texture_list_snapshot.size(),
+			                                         &result->vertex_buffers,
+			                                         &result->counts);
 			result->grammar = new_grammar;
 		}
 		catch(...){
@@ -431,6 +749,270 @@ void debugout(const std::string &message){
 	queue_console_message(std::string("[DEBUG] ") + message);
 }
 
+void debugstate(const std::string &key, const std::string &message){
+	std::lock_guard<std::mutex> lock(debug_state_mutex);
+	auto it = debug_state_messages.find(key);
+	if(it != debug_state_messages.end() && it->second == message){
+		return;
+	}
+	debug_state_messages[key] = message;
+	debugout(message);
+}
+
+static void log_widget_allocation_state(GtkWidget *widget, GdkRectangle *allocation, gpointer user_data){
+	const char *name = static_cast<const char *>(user_data);
+	std::stringstream ss;
+	ss<<"gui: "<<name
+	  <<" size="<<allocation->width<<"x"<<allocation->height
+	  <<" visible="<<(gtk_widget_get_visible(widget) ? "true" : "false")
+	  <<" realized="<<(gtk_widget_get_realized(widget) ? "true" : "false")
+	  <<" mapped="<<(gtk_widget_get_mapped(widget) ? "true" : "false");
+	debugstate(std::string("widget:") + name, ss.str());
+}
+
+namespace {
+const char *kGuiDebugInstalledKey = "progen3d-gui-debug-installed";
+thread_local bool gui_event_log_in_progress = false;
+}
+
+static bool begin_gui_event_log(){
+	if(gui_event_log_in_progress){
+		return false;
+	}
+	gui_event_log_in_progress = true;
+	return true;
+}
+
+static void end_gui_event_log(){
+	gui_event_log_in_progress = false;
+}
+
+static std::string widget_debug_name(GtkWidget *widget){
+	if(widget == NULL){
+		return "null";
+	}
+
+	std::stringstream ss;
+	ss << G_OBJECT_TYPE_NAME(widget);
+	const char *widget_name = gtk_widget_get_name(widget);
+	if(widget_name != NULL && widget_name[0] != '\0'){
+		ss << "[" << widget_name << "]";
+	}
+	ss << "@" << widget;
+	return ss.str();
+}
+
+static const char *gdk_event_type_name(GdkEventType type){
+	switch(type){
+		case GDK_NOTHING: return "nothing";
+		case GDK_DELETE: return "delete";
+		case GDK_DESTROY: return "destroy";
+		case GDK_EXPOSE: return "expose";
+		case GDK_MOTION_NOTIFY: return "motion-notify";
+		case GDK_BUTTON_PRESS: return "button-press";
+		case GDK_2BUTTON_PRESS: return "double-button-press";
+		case GDK_3BUTTON_PRESS: return "triple-button-press";
+		case GDK_BUTTON_RELEASE: return "button-release";
+		case GDK_KEY_PRESS: return "key-press";
+		case GDK_KEY_RELEASE: return "key-release";
+		case GDK_ENTER_NOTIFY: return "enter-notify";
+		case GDK_LEAVE_NOTIFY: return "leave-notify";
+		case GDK_FOCUS_CHANGE: return "focus-change";
+		case GDK_CONFIGURE: return "configure";
+		case GDK_MAP: return "map";
+		case GDK_UNMAP: return "unmap";
+		case GDK_PROPERTY_NOTIFY: return "property-notify";
+		case GDK_SELECTION_CLEAR: return "selection-clear";
+		case GDK_SELECTION_REQUEST: return "selection-request";
+		case GDK_SELECTION_NOTIFY: return "selection-notify";
+		case GDK_PROXIMITY_IN: return "proximity-in";
+		case GDK_PROXIMITY_OUT: return "proximity-out";
+		case GDK_DRAG_ENTER: return "drag-enter";
+		case GDK_DRAG_LEAVE: return "drag-leave";
+		case GDK_DRAG_MOTION: return "drag-motion";
+		case GDK_DRAG_STATUS: return "drag-status";
+		case GDK_DROP_START: return "drop-start";
+		case GDK_DROP_FINISHED: return "drop-finished";
+		case GDK_CLIENT_EVENT: return "client-event";
+		case GDK_VISIBILITY_NOTIFY: return "visibility-notify";
+		case GDK_SCROLL: return "scroll";
+		case GDK_WINDOW_STATE: return "window-state";
+		case GDK_SETTING: return "setting";
+		case GDK_OWNER_CHANGE: return "owner-change";
+		case GDK_GRAB_BROKEN: return "grab-broken";
+		case GDK_DAMAGE: return "damage";
+		case GDK_TOUCH_BEGIN: return "touch-begin";
+		case GDK_TOUCH_UPDATE: return "touch-update";
+		case GDK_TOUCH_END: return "touch-end";
+		case GDK_TOUCH_CANCEL: return "touch-cancel";
+		case GDK_TOUCHPAD_SWIPE: return "touchpad-swipe";
+		case GDK_TOUCHPAD_PINCH: return "touchpad-pinch";
+		case GDK_PAD_BUTTON_PRESS: return "pad-button-press";
+		case GDK_PAD_BUTTON_RELEASE: return "pad-button-release";
+		case GDK_PAD_RING: return "pad-ring";
+		case GDK_PAD_STRIP: return "pad-strip";
+		case GDK_PAD_GROUP_MODE: return "pad-group-mode";
+		default: return "other";
+	}
+}
+
+static void emit_gui_debug_message(const std::string &message){
+	if(!begin_gui_event_log()){
+		return;
+	}
+	debugout(message);
+	end_gui_event_log();
+}
+
+static void log_widget_signal_event(GtkWidget *widget, const char *signal_name){
+	std::stringstream ss;
+	ss << "gui-signal: " << signal_name
+	   << " widget=" << widget_debug_name(widget);
+	emit_gui_debug_message(ss.str());
+}
+
+static void log_widget_signal(GtkWidget *widget, gpointer user_data){
+	log_widget_signal_event(widget, static_cast<const char *>(user_data));
+}
+
+static gboolean log_widget_gdk_event(GtkWidget *widget, GdkEvent *event, gpointer user_data){
+	std::stringstream ss;
+	ss << "gui-event: phase=" << static_cast<const char *>(user_data)
+	   << " type=" << gdk_event_type_name(event->type)
+	   << " widget=" << widget_debug_name(widget);
+
+	GtkWidget *event_widget = gtk_get_event_widget(event);
+	if(event_widget != NULL && event_widget != widget){
+		ss << " event_widget=" << widget_debug_name(event_widget);
+	}
+
+	switch(event->type){
+		case GDK_BUTTON_PRESS:
+		case GDK_2BUTTON_PRESS:
+		case GDK_3BUTTON_PRESS:
+		case GDK_BUTTON_RELEASE:
+			ss << " button=" << event->button.button
+			   << " x=" << event->button.x
+			   << " y=" << event->button.y;
+			break;
+		case GDK_MOTION_NOTIFY:
+			ss << " x=" << event->motion.x
+			   << " y=" << event->motion.y;
+			break;
+		case GDK_SCROLL:
+			ss << " x=" << event->scroll.x
+			   << " y=" << event->scroll.y
+			   << " delta_x=" << event->scroll.delta_x
+			   << " delta_y=" << event->scroll.delta_y
+			   << " direction=" << event->scroll.direction;
+			break;
+		case GDK_KEY_PRESS:
+		case GDK_KEY_RELEASE:
+			ss << " keyval=" << event->key.keyval
+			   << " hardware_keycode=" << event->key.hardware_keycode
+			   << " state=" << event->key.state;
+			break;
+		case GDK_FOCUS_CHANGE:
+			ss << " in=" << (event->focus_change.in ? "true" : "false");
+			break;
+		case GDK_CONFIGURE:
+			ss << " x=" << event->configure.x
+			   << " y=" << event->configure.y
+			   << " width=" << event->configure.width
+			   << " height=" << event->configure.height;
+			break;
+		case GDK_ENTER_NOTIFY:
+		case GDK_LEAVE_NOTIFY:
+			ss << " x=" << event->crossing.x
+			   << " y=" << event->crossing.y
+			   << " mode=" << event->crossing.mode
+			   << " detail=" << event->crossing.detail;
+			break;
+		case GDK_WINDOW_STATE:
+			ss << " changed_mask=" << event->window_state.changed_mask
+			   << " new_state=" << event->window_state.new_window_state;
+			break;
+		default:
+			break;
+	}
+
+	emit_gui_debug_message(ss.str());
+	return FALSE;
+}
+
+static void log_widget_gdk_event_after(GtkWidget *widget, GdkEvent *event, gpointer user_data){
+	log_widget_gdk_event(widget, event, user_data);
+}
+
+static void log_widget_size_allocate(GtkWidget *widget, GdkRectangle *allocation, gpointer){
+	std::stringstream ss;
+	ss << "gui-signal: size-allocate"
+	   << " widget=" << widget_debug_name(widget)
+	   << " width=" << allocation->width
+	   << " height=" << allocation->height;
+	emit_gui_debug_message(ss.str());
+}
+
+static void instrument_widget_tree(GtkWidget *widget);
+
+static void on_debug_container_add(GtkContainer *container, GtkWidget *child, gpointer){
+	std::stringstream ss;
+	ss << "gui-signal: add"
+	   << " container=" << widget_debug_name(GTK_WIDGET(container))
+	   << " child=" << widget_debug_name(child);
+	emit_gui_debug_message(ss.str());
+	instrument_widget_tree(child);
+}
+
+static void on_debug_container_remove(GtkContainer *container, GtkWidget *child, gpointer){
+	std::stringstream ss;
+	ss << "gui-signal: remove"
+	   << " container=" << widget_debug_name(GTK_WIDGET(container))
+	   << " child=" << widget_debug_name(child);
+	emit_gui_debug_message(ss.str());
+}
+
+static void instrument_widget_tree(GtkWidget *widget){
+	if(widget == NULL){
+		return;
+	}
+	if(g_object_get_data(G_OBJECT(widget), kGuiDebugInstalledKey) != NULL){
+		return;
+	}
+
+	g_object_set_data(G_OBJECT(widget), kGuiDebugInstalledKey, GINT_TO_POINTER(1));
+	g_signal_connect(widget, "event", G_CALLBACK(log_widget_gdk_event), (gpointer)"before");
+	g_signal_connect(widget, "event-after", G_CALLBACK(log_widget_gdk_event_after), (gpointer)"after");
+	g_signal_connect(widget, "show", G_CALLBACK(log_widget_signal), (gpointer)"show");
+	g_signal_connect(widget, "hide", G_CALLBACK(log_widget_signal), (gpointer)"hide");
+	g_signal_connect(widget, "map", G_CALLBACK(log_widget_signal), (gpointer)"map");
+	g_signal_connect(widget, "unmap", G_CALLBACK(log_widget_signal), (gpointer)"unmap");
+	g_signal_connect(widget, "realize", G_CALLBACK(log_widget_signal), (gpointer)"realize");
+	g_signal_connect(widget, "unrealize", G_CALLBACK(log_widget_signal), (gpointer)"unrealize");
+	g_signal_connect(widget, "destroy", G_CALLBACK(log_widget_signal), (gpointer)"destroy");
+	g_signal_connect(widget, "size-allocate", G_CALLBACK(log_widget_size_allocate), NULL);
+
+	if(GTK_IS_CONTAINER(widget)){
+		g_signal_connect(widget, "add", G_CALLBACK(on_debug_container_add), NULL);
+		g_signal_connect(widget, "remove", G_CALLBACK(on_debug_container_remove), NULL);
+		gtk_container_forall(GTK_CONTAINER(widget),
+		                     [](GtkWidget *child, gpointer){
+			                     instrument_widget_tree(child);
+		                     },
+		                     NULL);
+	}
+}
+
+static void install_gui_event_logging(GtkWidget *root_widget){
+	if(root_widget == NULL){
+		return;
+	}
+
+	gtk_widget_add_events(root_widget, GDK_ALL_EVENTS_MASK);
+	instrument_widget_tree(root_widget);
+	debugout("gui-event logging installed");
+}
+
 std::vector<std::string> breakup_into_lines(std::string input,std::string delimiter){
 		std::vector<std::string> output;
 	
@@ -451,6 +1033,36 @@ std::vector<std::string> breakup_into_lines(std::string input,std::string delimi
 		return output;
 }
 
+static GdkPixbuf *load_texture_preview_pixbuf(const std::string &filename, int width = 128, int height = 128){
+	GError *error = NULL;
+	GdkPixbuf *loaded = gdk_pixbuf_new_from_file(filename.c_str(), &error);
+	if(loaded == NULL){
+		if(error != NULL){
+			errorout(std::string("Failed to load texture preview: ") + error->message);
+			g_error_free(error);
+		}
+		else{
+			errorout(std::string("Failed to load texture preview: ") + filename);
+		}
+		return NULL;
+	}
+
+	GdkPixbuf *scaled = gdk_pixbuf_scale_simple(loaded, width, height, GDK_INTERP_BILINEAR);
+	g_object_unref(loaded);
+	if(scaled == NULL){
+		errorout(std::string("Failed to scale texture preview: ") + filename);
+	}
+	return scaled;
+}
+
+static bool append_texture_preview_image(const std::string &filename){
+	GdkPixbuf *preview = load_texture_preview_pixbuf(filename);
+	if(preview == NULL)return false;
+	pixbuf.push_back(preview);
+	images.push_back(gtk_image_new_from_pixbuf(preview));
+	return true;
+}
+
 
 // The project previously contained a JavaScript-style tokenizer class here
 // (EnhancedTokenizer). That accidental JS code was removed because the
@@ -461,12 +1073,71 @@ std::vector<std::string> breakup_into_lines(std::string input,std::string delimi
 
 mat4 model = mat4(1.0);
 
+namespace {
+constexpr int kTextureGridMargin = 16;
+constexpr int kTextureGridGap = 16;
+constexpr int kTextureCardWidth = 208;
+constexpr int kTextureCardHeight = 144;
+constexpr int kTextureButtonOffsetX = 168;
+}
+
+static int texture_grid_available_width(){
+	int available_width = 0;
+	if(texture_scrollwin != NULL){
+		available_width = gtk_widget_get_allocated_width(texture_scrollwin);
+	}
+	if(available_width <= 0){
+		available_width = 720;
+	}
+	return available_width;
+}
+
+static int texture_grid_column_count(){
+	int inner_width = std::max(kTextureCardWidth + kTextureGridMargin * 2,
+	                           texture_grid_available_width() - 24);
+	int usable_width = std::max(kTextureCardWidth,
+	                            inner_width - kTextureGridMargin * 2 + kTextureGridGap);
+	return std::max(1, usable_width / (kTextureCardWidth + kTextureGridGap));
+}
+
+static void relayout_texture_items(){
+	if(layout2 == NULL)return;
+	int columns = texture_grid_column_count();
+	for(int i=0;i<img_counter;i++){
+		int row = i / columns;
+		int column = i % columns;
+		int base_x = kTextureGridMargin + column * (kTextureCardWidth + kTextureGridGap);
+		int base_y = kTextureGridMargin + row * (kTextureCardHeight + kTextureGridGap);
+		if(i < images.size() && images[i] != NULL && gtk_widget_get_parent(images[i]) != NULL){
+			gtk_layout_move(GTK_LAYOUT(layout2), images[i], base_x, base_y);
+		}
+		if(button_remove_img[i] != NULL && gtk_widget_get_parent(button_remove_img[i]) != NULL){
+			gtk_layout_move(GTK_LAYOUT(layout2), button_remove_img[i], base_x + kTextureButtonOffsetX, base_y);
+		}
+		if(button_moveup_img[i] != NULL && gtk_widget_get_parent(button_moveup_img[i]) != NULL){
+			gtk_layout_move(GTK_LAYOUT(layout2), button_moveup_img[i], base_x + kTextureButtonOffsetX, base_y + 30);
+		}
+		if(button_movedown_img[i] != NULL && gtk_widget_get_parent(button_movedown_img[i]) != NULL){
+			gtk_layout_move(GTK_LAYOUT(layout2), button_movedown_img[i], base_x + kTextureButtonOffsetX, base_y + 60);
+		}
+	}
+}
+
 void update_texture_layout_size(){
 	if(layout2==NULL)return;
-	int column_count = std::max(1, (img_counter + 6) / 7);
-	int layout_width = std::max(420, 80 + column_count * 230 + 80);
-	int layout_height = 130 + 7 * 135 + 40;
+	int column_count = texture_grid_column_count();
+	int row_count = std::max(1, (img_counter + column_count - 1) / column_count);
+	int layout_width = std::max(texture_grid_available_width(),
+	                            kTextureGridMargin * 2 + column_count * kTextureCardWidth +
+	                            std::max(0, column_count - 1) * kTextureGridGap);
+	int layout_height = kTextureGridMargin * 2 + row_count * kTextureCardHeight +
+		std::max(0, row_count - 1) * kTextureGridGap;
 	gtk_layout_set_size(GTK_LAYOUT(layout2), layout_width, layout_height);
+	relayout_texture_items();
+}
+
+static void on_texture_scrollwin_size_allocate(GtkWidget *widget, GdkRectangle *allocation, gpointer user_data){
+	update_texture_layout_size();
 }
 
 
@@ -750,20 +1421,11 @@ LoadCertificates(ctx, "mycert.pem", "mycertkey.pem");
 					if(strdata.size()>=128*128*3-15 && strdata.size()<=128*128*3+1 ){
 						texid=generateTextureFromBuf((unsigned char *)ubuf);
 						texture_list.push_back(texid);
-						
-						//cv::Mat newtexture(128,128, CV_8UC4);
-						
-						cv::Mat newtexture2(128,128,CV_8UC3);
-						memcpy(newtexture2.data,ubuf,128*128*3);
-						cv::cvtColor(newtexture2, newtexture2, cv::COLOR_BGR2RGB);
-						
-						
-						//cv::imwrite(("texture"+std::to_string(img_counter)+".png").c_str(),newtexture);
-						//images[img_counter]=gtk_image_new_from_file(("texture"+std::to_string(img_counter)+".png").c_str());
+
 						pixsbuffer[img_counter]=(unsigned char *)malloc(128*128*3);
 						memcpy(pixsbuffer[img_counter],ubuf,128*128*3);
 						
-						pixbufs[img_counter]=gdk_pixbuf_new_from_data((const guchar*)pixsbuffer[img_counter],GDK_COLORSPACE_RGB,FALSE,8,newtexture2.cols,newtexture2.rows,newtexture2.step ,NULL,NULL);
+						pixbufs[img_counter]=gdk_pixbuf_new_from_data((const guchar*)pixsbuffer[img_counter],GDK_COLORSPACE_RGB,FALSE,8,128,128,128 * 3,NULL,NULL);
 						img_counter++;
 						gtk_widget_queue_draw_area(drawing_area2,0,0, draw2width,draw2height);
 					}
@@ -813,20 +1475,14 @@ else{
 		texid=generateTexture(files[i].c_str());
 		texture_list.push_back(texid);
 		texture_list_alpha.push_back(1.0);
-		 GError* err = NULL;
-		 cv::Mat newtexture = cv::imread(files[i].c_str(), cv::IMREAD_COLOR);
-		 cv::resize(newtexture, newtexture,cv::Size(128, 128),0,0, cv::INTER_LINEAR);
-			
-		
-			cv::cvtColor(newtexture, newtexture, cv::COLOR_BGR2RGB);
-		pixsbuffer.push_back((unsigned char *)malloc(128*128*3));
-		memcpy(pixsbuffer[pixsbuffer.size()-1],newtexture.data,128*128*3);
-		pixbuf.push_back(gdk_pixbuf_new_from_data((const guchar*)pixsbuffer[pixsbuffer.size()-1],GDK_COLORSPACE_RGB,FALSE,8,newtexture.rows,newtexture.cols,newtexture.step,NULL,NULL));
-		images.push_back(gtk_image_new_from_pixbuf(pixbuf[pixbuf.size()-1]));
+		append_texture_preview_image(files[i]);
 		
 	//pixbufs[img_counter] = gdk_pixbuf_new_from_file(files[i].c_str(), &err);
 	img_counter++;
 	    
+	}
+	if(!texture_list.empty()){
+		note_texture_binding_changed("initial texture load");
 	}
 }
 	/*std::vector<std::string> files2 = globVector("./*.jpg");
@@ -919,24 +1575,28 @@ static void remove_from_layout_if_present(GtkWidget *container, GtkWidget *widge
 	}
 }
 
+static void rule_editor_attach(GtkWidget *widget, int column, int row, int width = 1, bool hexpand = false) {
+	if(widget==NULL || layout==NULL)return;
+	gtk_grid_attach(GTK_GRID(layout), widget, column, row, width, 1);
+	gtk_widget_set_halign(widget, GTK_ALIGN_FILL);
+	gtk_widget_set_valign(widget, GTK_ALIGN_CENTER);
+	gtk_widget_set_hexpand(widget, hexpand);
+}
+
 void activate_show_grammar(GtkButton *item) {
-	if(notebook!=NULL)gtk_notebook_set_current_page((GtkNotebook *)notebook, 0);
+	if(view!=NULL)gtk_widget_grab_focus(view);
 }
 
 void activate_show_rules(GtkButton *item) {
-	if(notebook!=NULL)gtk_notebook_set_current_page((GtkNotebook *)notebook, 1);
-	if(rulescombo!=NULL && gtk_combo_box_get_active((GtkComboBox *)rulescombo)==-1){
-		gtk_combo_box_set_active((GtkComboBox *)rulescombo,0);
-	}
-	activate_add(NULL);
+	activate_show_grammar(item);
 }
 
 void activate_show_inspector(GtkButton *item) {
-	if(notebook!=NULL)gtk_notebook_set_current_page((GtkNotebook *)notebook, 3);
+	activate_show_grammar(item);
 }
 
 void activate_show_sketch(GtkButton *item) {
-	if(notebook!=NULL)gtk_notebook_set_current_page((GtkNotebook *)notebook, 2);
+	activate_show_grammar(item);
 }
 
 
@@ -1003,15 +1663,6 @@ void new_activate(GtkButton *item) {
 	
 	
 
-   GList *children, *iter;
-
-children = gtk_container_get_children(GTK_CONTAINER(layout3));
-for(iter = children; iter != NULL; iter = g_list_next(iter))
- gtk_widget_destroy(GTK_WIDGET(iter->data));
-g_list_free(children);
-
-
-	
 	gtk_text_buffer_set_text(mybuffer,"",0);
 	
 	 grammar->lines.clear();
@@ -1024,10 +1675,8 @@ g_list_free(children);
 	
 	
 
-setup_vars=true;
-setup_rules=true;
-	
-	generate_widgets();
+setup_vars=false;
+setup_rules=false;
 	
 }
 
@@ -1844,7 +2493,6 @@ void activate_add(GtkWidget *item) {
 	
 	//std::cout<<"frames"<<std::endl;
 		int token_counter=1;
-		bool section_label=false;
 		int *mypointer;
 		int K=3;
 		vars_framecounter=0;
@@ -1855,7 +2503,7 @@ void activate_add(GtkWidget *item) {
 			 "    Probability: "+std::to_string(active_rule->probability)).c_str()
 		);
 		gtk_label_set_xalign((GtkLabel *)rule_summary_label, 0.0f);
-		gtk_layout_put((GtkLayout *)layout, rule_summary_label, 20, 0);
+		rule_editor_attach(rule_summary_label, 0, 0, 8, true);
 		gtk_widget_show(rule_summary_label);
 		
 		//std::cout<<active_rule->var_counter<<std::endl;
@@ -1875,12 +2523,12 @@ void activate_add(GtkWidget *item) {
 		
 		
 		gtk_combo_box_set_active((GtkComboBox *)varslabel[i],0);
-		gtk_widget_set_size_request(varslabel[i],60,20);
-		gtk_layout_put ((GtkLayout *)layout,varslabel[i],20,30*token_counter);
-		gtk_widget_set_size_request(varscombo[i],60,20);
-		gtk_layout_put ((GtkLayout *)layout,varscombo[i],150,30*token_counter);
-		gtk_widget_set_size_request(vars_remove_button[i],20,20);
-		gtk_layout_put ((GtkLayout *)layout,vars_remove_button[i],350,30*token_counter);
+		gtk_widget_set_size_request(varslabel[i],110,20);
+		rule_editor_attach(varslabel[i],0,token_counter,1,false);
+		gtk_widget_set_size_request(varscombo[i],220,20);
+		rule_editor_attach(varscombo[i],1,token_counter,2,true);
+		gtk_widget_set_size_request(vars_remove_button[i],32,20);
+		rule_editor_attach(vars_remove_button[i],3,token_counter,1,false);
 		
 		gtk_widget_show(varslabel[i]);
 		gtk_widget_show(varscombo[i]);
@@ -1904,18 +2552,18 @@ void activate_add(GtkWidget *item) {
 	
 	gtk_combo_box_set_active((GtkComboBox *)probcombo,0);
 	gtk_combo_box_set_active((GtkComboBox *)problabel,0);
-	gtk_widget_set_size_request(problabel,60,20);
-	gtk_layout_put ((GtkLayout *)layout,problabel,20,30*token_counter);
-	gtk_widget_set_size_request(probcombo,60,20);
-	gtk_layout_put ((GtkLayout *)layout,probcombo,200,30*token_counter);
+	gtk_widget_set_size_request(problabel,110,20);
+	rule_editor_attach(problabel,0,token_counter,1,false);
+	gtk_widget_set_size_request(probcombo,180,20);
+	rule_editor_attach(probcombo,1,token_counter,2,true);
 		gtk_widget_show(problabel);
 		gtk_widget_show(probcombo);
 		g_signal_connect (probcombo,"changed", G_CALLBACK (activate_probcombo_changed), mypointer); 
 		token_counter++;
 
-		rule_columns_label=gtk_label_new("Type / Section                     Primary Value               Secondary Value            Tertiary Value              Edit");
+		rule_columns_label=gtk_label_new("Type / Section    Primary Value    Secondary Value    Tertiary Value    Actions");
 		gtk_label_set_xalign((GtkLabel *)rule_columns_label, 0.0f);
-		gtk_layout_put((GtkLayout *)layout, rule_columns_label, 20, 30*token_counter);
+		rule_editor_attach(rule_columns_label, 0, token_counter, 8, true);
 		gtk_widget_show(rule_columns_label);
 		token_counter++;
 		
@@ -1935,10 +2583,10 @@ void activate_add(GtkWidget *item) {
 			section_banner_labels[section_banner_count]=gtk_label_new(NULL);
 			gtk_label_set_markup(
 				(GtkLabel *)section_banner_labels[section_banner_count],
-				("<b>"+section_title+"</b>  ----------------------------------------------").c_str()
+				("<b>"+section_title+"</b>").c_str()
 			);
 			gtk_label_set_xalign((GtkLabel *)section_banner_labels[section_banner_count], 0.0f);
-			gtk_layout_put((GtkLayout *)layout, section_banner_labels[section_banner_count], 20, 30*token_counter);
+			rule_editor_attach(section_banner_labels[section_banner_count], 0, token_counter, 8, true);
 			gtk_widget_show(section_banner_labels[section_banner_count]);
 			section_banner_count++;
 			token_counter++;
@@ -1948,15 +2596,15 @@ void activate_add(GtkWidget *item) {
 			else if(k==1){token_label[frame_counter]=(GtkComboBoxText *)gtk_combo_box_text_new();gtk_combo_box_text_append_text(token_label[frame_counter],"Repeat Section");gtk_combo_box_set_active((GtkComboBox *)token_label[frame_counter],0);}
 			else if(k==2){token_label[frame_counter]=(GtkComboBoxText *)gtk_combo_box_text_new();gtk_combo_box_text_append_text(token_label[frame_counter],"End Section");gtk_combo_box_set_active((GtkComboBox *)token_label[frame_counter],0);}
 			else if(k==3){token_label[frame_counter]=(GtkComboBoxText *)gtk_combo_box_text_new();gtk_combo_box_text_append_text(token_label[frame_counter],"Alt Rule");gtk_combo_box_set_active((GtkComboBox *)token_label[frame_counter],0);}
-			gtk_widget_set_size_request((GtkWidget *)token_label[frame_counter],140,20);
-			gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_label[frame_counter],20,30*token_counter);
+			gtk_widget_set_size_request((GtkWidget *)token_label[frame_counter],180,20);
+			rule_editor_attach((GtkWidget *)token_label[frame_counter],0,token_counter,1,false);
 		
 		if(k==1){
 			combo1[frame_counter]=(GtkComboBoxText *)gtk_combo_box_text_new_with_entry ();
 			if(active_rule->var_name=="")gtk_combo_box_text_append_text(combo1[frame_counter],std::to_string(active_rule->repeat).c_str());
 			else gtk_combo_box_text_append_text(combo1[frame_counter],active_rule->var_name.c_str());
-			gtk_widget_set_size_request((GtkWidget *)combo1[frame_counter],60,20);
-			gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)combo1[frame_counter],200,30*token_counter);
+			gtk_widget_set_size_request((GtkWidget *)combo1[frame_counter],180,20);
+			rule_editor_attach((GtkWidget *)combo1[frame_counter],1,token_counter,2,true);
 			gtk_combo_box_set_active((GtkComboBox *)combo1[frame_counter],0);
 		gtk_widget_show((GtkWidget *)combo1[frame_counter]);	
 		}
@@ -1967,8 +2615,8 @@ void activate_add(GtkWidget *item) {
 			token_button_add[frame_counter]=gtk_button_new_with_label("Add Token");
 			token_button_add_moveup[frame_counter]=gtk_button_new_with_label("");
 			token_button_add_movedown[frame_counter]=gtk_button_new_with_label("");
-			gtk_widget_set_size_request((GtkWidget *)token_button_add[frame_counter],90,20);
-			gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_button_add[frame_counter],400,30*token_counter);
+			gtk_widget_set_size_request((GtkWidget *)token_button_add[frame_counter],120,20);
+			rule_editor_attach((GtkWidget *)token_button_add[frame_counter],5,token_counter,3,true);
 		
 		if(k!=3){mypointer=new int(frame_counter);g_signal_connect (token_button_add[frame_counter] ,"clicked", G_CALLBACK (activate_add_token), mypointer); }
 		else {mypointer=new int(0);g_signal_connect (token_button_add[frame_counter] ,"clicked", G_CALLBACK (activate_add_alt_token), mypointer); }
@@ -2088,34 +2736,34 @@ void activate_add(GtkWidget *item) {
 					else if(strn=="I"){
 						show_combo3 = (section_tokens[i]->var_names[1]!="") || (section_tokens[i]->arguments.size()>1);
 					}
-					gtk_widget_set_size_request((GtkWidget *)token_label[frame_counter],60,20);
-					gtk_widget_set_size_request((GtkWidget *)combo1[frame_counter],60,20);
-					gtk_widget_set_size_request((GtkWidget *)combo2[frame_counter],60,20);
-					gtk_widget_set_size_request((GtkWidget *)combo3[frame_counter],60,20);		
+					gtk_widget_set_size_request((GtkWidget *)token_label[frame_counter],140,20);
+					gtk_widget_set_size_request((GtkWidget *)combo1[frame_counter],160,20);
+					gtk_widget_set_size_request((GtkWidget *)combo2[frame_counter],160,20);
+					gtk_widget_set_size_request((GtkWidget *)combo3[frame_counter],160,20);		
 					token_button[frame_counter]=gtk_button_new_with_label("Remove");
-					gtk_widget_set_size_request((GtkWidget *)token_button[frame_counter],70,20);
+					gtk_widget_set_size_request((GtkWidget *)token_button[frame_counter],84,20);
 				
 				gtk_combo_box_set_active((GtkComboBox *)combo1[frame_counter],0);
 				gtk_combo_box_set_active((GtkComboBox *)combo2[frame_counter],0);
 				gtk_combo_box_set_active((GtkComboBox *)combo3[frame_counter],0);
 				
-				gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_label[frame_counter],20,30*token_counter);
-				gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)combo1[frame_counter],100,30*token_counter);
-				gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)combo2[frame_counter],300,30*token_counter);
-				gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)combo3[frame_counter],500,30*token_counter);
-					gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_button[frame_counter],690,30*token_counter);
+				rule_editor_attach((GtkWidget *)token_label[frame_counter],0,token_counter,1,false);
+				rule_editor_attach((GtkWidget *)combo1[frame_counter],1,token_counter,1,true);
+				rule_editor_attach((GtkWidget *)combo2[frame_counter],2,token_counter,1,true);
+				rule_editor_attach((GtkWidget *)combo3[frame_counter],3,token_counter,1,true);
+				rule_editor_attach((GtkWidget *)token_button[frame_counter],4,token_counter,1,false);
 				
 				
 					token_button_add[frame_counter]=gtk_button_new_with_label("Insert");
-					gtk_widget_set_size_request((GtkWidget *)token_button_add[frame_counter],60,20);
+					gtk_widget_set_size_request((GtkWidget *)token_button_add[frame_counter],76,20);
 					token_button_add_moveup[frame_counter]=gtk_button_new_with_label("Up");
-					gtk_widget_set_size_request((GtkWidget *)token_button_add_moveup[frame_counter],40,20);
+					gtk_widget_set_size_request((GtkWidget *)token_button_add_moveup[frame_counter],56,20);
 					token_button_add_movedown[frame_counter]=gtk_button_new_with_label("Down");
-					gtk_widget_set_size_request((GtkWidget *)token_button_add_movedown[frame_counter],50,20);
+					gtk_widget_set_size_request((GtkWidget *)token_button_add_movedown[frame_counter],64,20);
 					
-					gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_button_add[frame_counter],770,30*token_counter);
-					gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_button_add_moveup[frame_counter],840,30*token_counter);
-					gtk_layout_put ((GtkLayout *)layout,(GtkWidget *)token_button_add_movedown[frame_counter],890,30*token_counter);
+					rule_editor_attach((GtkWidget *)token_button_add[frame_counter],5,token_counter,1,false);
+					rule_editor_attach((GtkWidget *)token_button_add_moveup[frame_counter],6,token_counter,1,false);
+					rule_editor_attach((GtkWidget *)token_button_add_movedown[frame_counter],7,token_counter,1,false);
 				
 				gtk_widget_show(token_button_add[frame_counter]);
 				gtk_widget_show(token_button_add_moveup[frame_counter]);
@@ -2162,9 +2810,6 @@ void activate_add(GtkWidget *item) {
 		
 	}
 		
-	guint layout_width,layout_height;
-	gtk_layout_get_size ((GtkLayout *)layout,&layout_width,&layout_height);
-	gtk_layout_set_size ((GtkLayout *)layout,layout_width,(token_counter+1)*30);
 	//gtk_entry_set_text(entry1,std::string(active_rule->repeat).c_str())
 	
 	
@@ -2214,6 +2859,7 @@ void activate_scale_slider_alpha(GtkRange *range,int *data){
 	int index=(*data);
 	
 	texture_list_alpha[index]=gtk_range_get_value (range);
+	if(gl_area!=NULL)gtk_gl_area_queue_render(GTK_GL_AREA(gl_area));
 	
 	
 }
@@ -2224,25 +2870,21 @@ activate_button_movedown_img (GtkComboBox *widget,
                int *     user_data){
 int img_index=(*user_data);
 if(img_index==images.size()-1)return;
-	GtkWidget *img=images[img_index];
-	images.erase(images.begin()+img_index);
-	images.insert(images.begin()+img_index+1,img);
-	int tex=texture_list[img_index];
-	texture_list.erase(texture_list.begin()+img_index);
-	texture_list.insert(texture_list.begin()+img_index+1,tex);
-	int *mypointer;
-	for(int i=0;i<img_counter;i++){
-		
-		int j=i%7;
-		int k=i/7;
-		gtk_layout_move ((GtkLayout *)layout2,images[i],80+k*230,130+j*135);
-		
-		gtk_range_set_value((GtkRange *)scale_slider_alpha[i],texture_list_alpha[i]);
-		
-	
-	}	
+		GtkWidget *img=images[img_index];
+		images.erase(images.begin()+img_index);
+		images.insert(images.begin()+img_index+1,img);
+		std::swap(texture_list[img_index], texture_list[img_index+1]);
+		std::swap(texture_list_alpha[img_index], texture_list_alpha[img_index+1]);
+		if(img_index < texture_filenames.size() && img_index + 1 < texture_filenames.size()){
+			std::swap(texture_filenames[img_index], texture_filenames[img_index+1]);
+		}
+		if(img_index < pixbuf.size() && img_index + 1 < pixbuf.size()){
+			std::swap(pixbuf[img_index], pixbuf[img_index+1]);
+		}
+		note_texture_binding_changed("move texture down");
 	update_texture_layout_size();
-	
+	if(gl_area!=NULL)gtk_gl_area_queue_render(GTK_GL_AREA(gl_area));
+		
 }
 
 
@@ -2251,23 +2893,20 @@ activate_button_moveup_img (GtkComboBox *widget,
                int *     user_data){
 int img_index=(*user_data);
 if(img_index==0)return;
-	GtkWidget *img=images[img_index];
-	images.erase(images.begin()+img_index);
-	images.insert(images.begin()+img_index-1,img);
-	int tex=texture_list[img_index];
-	texture_list.erase(texture_list.begin()+img_index);
-	texture_list.insert(texture_list.begin()+img_index-1,tex);
-	int *mypointer;
-	for(int i=0;i<img_counter;i++){
-		
-		int j=i%7;
-		int k=i/7;
-		gtk_layout_move ((GtkLayout *)layout2,images[i],80+k*230,130+j*135);
-		
-		gtk_range_set_value((GtkRange *)scale_slider_alpha[i],texture_list_alpha[i]);
-		
-	}
+		GtkWidget *img=images[img_index];
+		images.erase(images.begin()+img_index);
+		images.insert(images.begin()+img_index-1,img);
+		std::swap(texture_list[img_index], texture_list[img_index-1]);
+		std::swap(texture_list_alpha[img_index], texture_list_alpha[img_index-1]);
+		if(img_index < texture_filenames.size() && img_index - 1 < texture_filenames.size()){
+			std::swap(texture_filenames[img_index], texture_filenames[img_index-1]);
+		}
+		if(img_index < pixbuf.size() && img_index - 1 < pixbuf.size()){
+			std::swap(pixbuf[img_index], pixbuf[img_index-1]);
+		}
+		note_texture_binding_changed("move texture up");
 	update_texture_layout_size();
+	if(gl_area!=NULL)gtk_gl_area_queue_render(GTK_GL_AREA(gl_area));
 }
 
  void
@@ -2281,27 +2920,23 @@ int img_index=(*user_data);
 	gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)button_remove_img[img_counter-1]);
 	gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)button_movedown_img[img_counter-1]);
 	gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)button_moveup_img[img_counter-1]);
-	gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)scale_slider_alpha[img_counter-1]);
 	gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)images[img_index]);
 	
 	//std::cout<<img_index<<std::endl;
 	images.erase(images.begin()+img_index);
 	texture_list.erase(texture_list.begin()+img_index);
 	texture_list_alpha.erase(texture_list_alpha.begin()+img_index);
-	int *mypointer;
-	img_counter--;
-	
-	
-	for(int i=0;i<img_counter;i++){
-		
-		int j=i%7;
-		int k=i/7;
-		gtk_layout_move ((GtkLayout *)layout2,images[i],80+k*230,130+j*135);
-		
-		gtk_range_set_value((GtkRange *)scale_slider_alpha[i],texture_list_alpha[i]);
-		
+	if(img_index < texture_filenames.size()){
+		texture_filenames.erase(texture_filenames.begin()+img_index);
 	}
+	if(img_index < pixbuf.size()){
+		g_object_unref(pixbuf[img_index]);
+		pixbuf.erase(pixbuf.begin()+img_index);
+	}
+	img_counter--;
+	note_texture_binding_changed("remove texture");
 	update_texture_layout_size();
+	start_async_regeneration(false);
 }
 
 
@@ -2309,103 +2944,9 @@ int img_index=(*user_data);
 
 
 void generate_widgets(){
-	try{
-if(setup_textures && loggedin==false){				 
-	int *mypointer;
-	
-	for(int i=0;i<img_counter;i++){
-		//images[i]=gtk_image_new_from_file(texture_filenames[i].c_str());
-		int j=i%7;
-		int k=i/7;
-		button_remove_img[i]=gtk_button_new_with_label("X");
-		button_moveup_img[i]=gtk_button_new_with_label("\u25b2");
-		button_movedown_img[i]=gtk_button_new_with_label("\u25bc");
-		scale_slider_alpha[i]=gtk_scale_new_with_range (GTK_ORIENTATION_VERTICAL,0.025,1.0,0.025);
-        gtk_widget_set_size_request(scale_slider_alpha[i],20,120);
-		gtk_widget_set_size_request((GtkWidget *)button_remove_img[i],20,20);
-		gtk_widget_set_size_request((GtkWidget *)button_moveup_img[i],20,20);
-		gtk_widget_set_size_request((GtkWidget *)button_movedown_img[i],20,20);
-		gtk_layout_put ((GtkLayout *)layout2,images[i],80+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,scale_slider_alpha[i],210+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,button_remove_img[i],250+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,button_moveup_img[i],250+k*230,130+j*135+30);
-		gtk_layout_put ((GtkLayout *)layout2,button_movedown_img[i],250+k*230,130+j*135+60);
-		gtk_widget_show (images[i]);
-		gtk_widget_show (scale_slider_alpha[i]);
-		gtk_widget_show (button_remove_img[i]);
-		gtk_widget_show (button_movedown_img[i]);
-		gtk_widget_show (button_moveup_img[i]);
-		gtk_range_set_value((GtkRange *)scale_slider_alpha[i],texture_list_alpha[i]);
-		mypointer=new int(i);
-		g_signal_connect (button_remove_img[i] ,"clicked", G_CALLBACK (activate_button_remove_img), mypointer); 
-		g_signal_connect (button_movedown_img[i] ,"clicked", G_CALLBACK (activate_button_movedown_img), mypointer); 
-		g_signal_connect (button_moveup_img[i] ,"clicked", G_CALLBACK (activate_button_moveup_img), mypointer); 
-		g_signal_connect (scale_slider_alpha[i] ,"value-changed", G_CALLBACK (activate_scale_slider_alpha), mypointer); 
-	
-	}
-	update_texture_layout_size();
-	setup_textures=false;  
-		
-}
-else if(setup_textures && loggedin==true){				 
-	
-	setup_textures=false;  
-}
-if(setup_vars){				   
-	GList *children = gtk_container_get_children(GTK_CONTAINER(layout3));
-	for(GList *iter = children; iter != NULL; iter = g_list_next(iter)){
-		gtk_widget_destroy(GTK_WIDGET(iter->data));
-	}
-	g_list_free(children);
-for(int i=0;i<full_variable_list.size();i++){
-		labels[i]=gtk_label_new ((full_variable_list[i]->var_name+":="+std::to_string(full_variable_list[i]->value)).c_str());
-		gtk_layout_put ((GtkLayout *)layout3,(GtkWidget *)labels[i],80,i*20);
-		gtk_widget_show ((GtkWidget *)labels[i]);
-	
-	}
-	guint layout_width,layout_height;
-	gtk_layout_get_size ((GtkLayout *)layout3,&layout_width,&layout_height);
-	gtk_layout_set_size ((GtkLayout *)layout3,layout_width,full_variable_list.size()*20);
-	gtk_adjustment_configure (vadj,0,0,full_variable_list.size()*20,20,layout_height,layout_height);
+	setup_textures=false;
 	setup_vars=false;
-}
- if(setup_rules){				
-	std::string selected_rule_name;
-	gchar *active_text = gtk_combo_box_text_get_active_text((GtkComboBoxText *)rulescombo);
-	if(active_text != NULL){
-		selected_rule_name = active_text;
-		g_free(active_text);
-	}
-	gtk_combo_box_text_remove_all((GtkComboBoxText *)rulescombo);
-for(int i=0;i<grammar->rule_list.size();i++){
-	
-	std::string rule_str=grammar->rule_list[i]->rule_name;
-	
-	strcpy(rulenames[i],rule_str.c_str());
-	gtk_combo_box_text_append_text((GtkComboBoxText *)rulescombo,rulenames[i]);
-	
-	
-	}
-	if(grammar->rule_list.size()>0){
-		int selected_index=0;
-		for(int i=0;i<grammar->rule_list.size();i++){
-			if(grammar->rule_list[i]->rule_name==selected_rule_name){
-				selected_index=i;
-				break;
-			}
-		}
-		gtk_combo_box_set_active((GtkComboBox *)rulescombo,selected_index);
-	}
 	setup_rules=false;
-	if(grammar->rule_list.size()>0){
-		activate_add(NULL);
-	}
-}
-}catch(...){
-	
-	std::string error_str="Setup Error "+std::to_string(22);
-	errorout(error_str);
-}
 }
 
 
@@ -2571,58 +3112,7 @@ activate(NULL);
 
 	   
 void activate_choose_image_button(GtkButton *item) {
-	
- 
-    GtkFileChooserNative *native;
-    GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
-    gint res;
-     GtkFileFilter *filter;
-
-    native = gtk_file_chooser_native_new("Open Image File",
-                                         (GtkWindow *)window,
-                                         action,
-                                         "_Open",
-                                         "_Cancel");
-
-    // Filters
-    filter = gtk_file_filter_new(); // filter 1
-    gtk_file_filter_set_name(filter, "Image file");
-    gtk_file_filter_add_pattern(filter, "*.jpg");
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(native), filter);
-    filter = gtk_file_filter_new(); // filter 2
-    gtk_file_filter_set_name(filter, "All files");
-    gtk_file_filter_add_pattern(filter, "*");
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(native), filter);
-
-    // default file name
-    //gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(native), "test.grammar");
-
-    res = gtk_native_dialog_run(GTK_NATIVE_DIALOG(native));
-    if (res == GTK_RESPONSE_ACCEPT)
-    {
-        GtkFileChooser *chooser = GTK_FILE_CHOOSER(native);
-        std::string image_filename = std::string(gtk_file_chooser_get_filename(chooser));
-
-        
-		GError *err = NULL;
-			/* Create pixbuf */
-			if(pix!=NULL)g_object_unref(pix);
-			
-			image = cv::imread(image_filename.c_str(), cv::IMREAD_COLOR);
-			
-			//pix = gdk_pixbuf_new_from_file(image_filename.c_str(), &err);
-			if(err)
-			{
-				printf("Error : %s\n", err->message);
-				g_error_free(err);
-			pix=NULL;
-			}
-	
-        //g_free(grammar_filename);
-    }
-
-    g_object_unref(native);
-
+	errorout("Sketch image import has been removed.");
 }
 // Text tags for syntax highlighting
 GtkTextTag *tag_rule = NULL;     // blue for rule names
@@ -2642,20 +3132,14 @@ txt_inserted (GtkTextBuffer *textbuffer,
                gint           len,
                gpointer       user_data){
 	init_buffer=false;
-	txt_changed(textbuffer,NULL);
 }
 
 
 void
 txt_changed (GtkTextBuffer *textbuffer,
                gpointer       user_data){
-GtkTextIter start, end;
-
-
-
-// Use grammar-driven syntax highlighting
-update_syntax_highlighting(textbuffer);
-
+	(void)textbuffer;
+	(void)user_data;
 }
 
 
@@ -2811,83 +3295,12 @@ static gboolean view_key_press_handler(GtkWidget *widget, GdkEventKey *event, gp
 	return FALSE; // let GTK handle other keys
 }
 
-bool perspective_transform=false;
 void activate_perspective_transform_button(GtkButton *button){
-	if(perspective_transform==false){
-	perspective_transform=true;
-	mouse_index=0;
-
-	}
+	errorout("Perspective transform has been removed.");
 }
 
 void activateeval(GtkButton *item) {
-	
-squares.clear();
-GtkTextIter start;
-GtkTextIter end;
-gtk_text_buffer_get_start_iter (buffer2,&start);
-	gtk_text_buffer_get_iter_at_offset (buffer2, &end, 0);
-
-std::string buffer2_text_str=gtk_text_buffer_get_text ((GtkTextBuffer *)buffer2,&start,&end,FALSE);
-
-
-std::vector<std::string> rectangle_lines=breakup_into_lines(buffer2_text_str,"\n");
-std::string input_str;
-for(int i=0;i<rectangle_lines.size();i++){
-	std::istringstream lin(rectangle_lines[i]);
-	lin>>input_str;
-	while( input_str!="]"){
-		std::vector<Point> points;
-		float x1,x2,y1,y2;
-		lin>>input_str;
-		if(input_str=="T"){
-			lin>>input_str;
-			if(input_str=="("){
-				lin >>input_str;
-				x1=atof(input_str.c_str());
-				lin >>input_str;
-				y1=atof(input_str.c_str());
-				lin>>input_str;
-				lin>>input_str;
-			}
-		}
-		lin>>input_str;
-		if(input_str== "S"){
-			lin>>input_str;
-			if(input_str=="("){
-				lin >>input_str;
-				x2=x1+atof(input_str.c_str());
-				lin >>input_str;
-				y2=y1+atof(input_str.c_str());
-				lin>>input_str;
-				lin>>input_str;
-			}
-		}
-		lin>>input_str;
-		if(input_str== "I"){
-			lin>>input_str;
-			if(input_str=="("){
-				do{
-					lin>>input_str;
-				}
-				while(input_str!=")");
-				
-			}
-			
-		}
-		lin>>input_str;
-		points.push_back(Point(x1,y1));
-		points.push_back(Point(x2,y1));
-		points.push_back(Point(x2,y2));
-		points.push_back(Point(x1,y2));
-		
-		squares.push_back(points);
-
-
-
-	}
-}
-
+	errorout("Sketch evaluation has been removed.");
 }
 
 
@@ -2937,6 +3350,11 @@ GtkFileChooserNative *native;
    
         GtkFileChooser *chooser = GTK_FILE_CHOOSER(native);
         filename = gtk_file_chooser_get_filename(chooser);
+		if(img_counter >= 50){
+			errorout("Texture limit reached for inspector controls");
+			g_object_unref(native);
+			return;
+		}
 		
 	
 		
@@ -2952,20 +3370,19 @@ GtkFileChooserNative *native;
 		
 			 //int picwidth,picheight,n;
 			// unsigned char* texture_data = stbi_load(filename.c_str(), &picwidth, &picheight, &n,STBI_rgb_alpha);
-			cv::Mat newtexture = cv::imread(filename.c_str(), cv::IMREAD_COLOR);
-			//if(newtexture.cols!=newtexture.rows){ g_object_unref(native);
-			//					return;}
-			//if(newtexture.channels()!=3){ g_object_unref(native);
-			//		return;}
+			if(!append_texture_preview_image(filename)){
+				g_object_unref(native);
+				return;
+			}
+			if(gl_area!=NULL){
+				gtk_gl_area_make_current(GTK_GL_AREA(gl_area));
+			}
+			int texid = generateTexture(filename.c_str());
+			texture_list.push_back(texid);
+			texture_list_alpha.push_back(1.0f);
+			texture_filenames.push_back(filename);
+			note_texture_binding_changed("add texture");
 			
-			cv::resize(newtexture, newtexture,cv::Size(128, 128),0,0, cv::INTER_LINEAR);
-			
-			cv::Mat newtexture2;
-			cv::cvtColor(newtexture, newtexture, cv::COLOR_BGR2RGB);
-			cv::cvtColor(newtexture, newtexture2, cv::COLOR_BGR2RGB);
-			
-			//int texid=generateTextureFromBuf(texture_data);
-			//texture_list.push_back(texid);
 			/*if(){
 					SSL_CTX *ctx;
 					int client;
@@ -3045,13 +3462,8 @@ GtkFileChooserNative *native;
 					
 				}
 				else {
-				//cv::Mat newtexture2 = cv::imread(filename.c_str(), cv::IMREAD_RGB);
-				//cv::resize(newtexture2, (128, 128),interpolation = cv::INTER_LINEAR)
-				//cv::imwrite(("texture"+std::to_string(texture_filenames.size())+".png").c_str(),newtexture);
-				
 				}
 		*/
-		//cv::imwrite(("texture"+std::to_string(img_counter)+".png").c_str(),newtexture);
 		//images[img_counter]=gtk_image_new_from_file(("texture"+std::to_string(img_counter)+".png").c_str());
 		
 		
@@ -3060,37 +3472,10 @@ GtkFileChooserNative *native;
 	//			gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)images[i]);
 	//		}
 		
-		pixsbuffer.push_back((unsigned char *)malloc(128*128*3));
-		memcpy(pixsbuffer[pixsbuffer.size()-1],newtexture.data,128*128*3);
-		pixbuf.push_back(gdk_pixbuf_new_from_data((const guchar*)pixsbuffer[pixsbuffer.size()-1],GDK_COLORSPACE_RGB,FALSE,8,newtexture.rows,newtexture.cols,newtexture.step,NULL,NULL));
-		images.push_back(gtk_image_new_from_pixbuf(pixbuf[pixbuf.size()-1]));
 		img_counter++;
 		//gtk_widget_queue_draw_area(drawing_area2,0,0, draw2width,draw2height);
-    
-		int i=img_counter-1;
-		int j=i%7;
-		int k=i/7;
-		button_remove_img[i]=gtk_button_new_with_label("X");
-		button_moveup_img[i]=gtk_button_new_with_label("\u25b2");
-		button_movedown_img[i]=gtk_button_new_with_label("\u25bc");
-		gtk_widget_set_size_request((GtkWidget *)button_remove_img[i],20,20);
-		gtk_widget_set_size_request((GtkWidget *)button_moveup_img[i],20,20);
-		gtk_widget_set_size_request((GtkWidget *)button_movedown_img[i],20,20);
-		gtk_layout_put ((GtkLayout *)layout2,images[i],80+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,button_remove_img[i],220+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,button_moveup_img[i],220+k*230,130+j*135+30);
-		gtk_layout_put ((GtkLayout *)layout2,button_movedown_img[i],220+k*230,130+j*135+60);
-		gtk_widget_show (images[i]);
-		gtk_widget_show (button_remove_img[i]);
-		gtk_widget_show (button_movedown_img[i]);
-		gtk_widget_show (button_moveup_img[i]);
-		
-		int *mypointer=new int(i);
-		g_signal_connect (button_remove_img[i] ,"clicked", G_CALLBACK (activate_button_remove_img), mypointer); 
-		g_signal_connect (button_movedown_img[i] ,"clicked", G_CALLBACK (activate_button_movedown_img), mypointer); 
-		g_signal_connect (button_moveup_img[i] ,"clicked", G_CALLBACK (activate_button_moveup_img), mypointer); 
-		
-		update_texture_layout_size();
+
+		initialize_render_texture_buffers();
 		
 		start_async_regeneration(false);
         
@@ -3106,84 +3491,7 @@ GtkFileChooserNative *native;
 			  
 }	
 void activate_generate_image_button(GtkButton *item, gpointer userdata){
-	try
-	{
-	int octaves=17;//atoi(gtk_combo_box_text_get_active_text((GtkComboBoxText *)gencombo1));
-	float persistence=4.0f;//atof(gtk_combo_box_text_get_active_text((GtkComboBoxText *)gencombo2));
-	Noise2d n2d(octaves,persistence);
-	int imgbyte_counter=0;
-	GdkRGBA color;
-	gtk_color_chooser_get_rgba ((GtkColorChooser *)colorchooser1,&color);
-	unsigned char colorRGB[3];
-	std::cout<<128*color.red<<std::endl;
-	colorRGB[0]=(unsigned char)(color.red*255);
-	colorRGB[1]=(unsigned char)(color.green*255);
-	colorRGB[2]=(unsigned char)(color.blue*255);
-	double rawdata[128*128];
-	cv::Mat newtexture=cv::Mat::zeros(128,128,CV_8UC3);
-	double max=0.0,min=999999.0;
-	int rawdata_counter=0;
-	for (int y = 0; y < n2d.numY; ++y) {
-		for (int x = 0; x < n2d.numX; ++x) {
-			rawdata[rawdata_counter]=n2d.ValueNoise_2D(x, y);
-			if(rawdata[rawdata_counter]<min)min=rawdata[rawdata_counter];
-			if(rawdata[rawdata_counter]>max)max=rawdata[rawdata_counter];
-			
-			rawdata_counter++;
-		}
-	}
-	imgbyte_counter=0;
-	rawdata_counter=0;
-	for (int y = 0; y < n2d.numY; y++) {
-		for (int x = 0; x < n2d.numX; x++) {
-			for(int c=0;c<3;c++){
-				newtexture.data[imgbyte_counter]=(unsigned char)(double(colorRGB[c])*(rawdata[rawdata_counter]-min)/(max-min));
-				imgbyte_counter++;
-			}
-			rawdata_counter++;
-		}
-	}
-	
-	//for(int i=0;i<images.size();i++){
-				//gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)button_remove_img[i]);
-				//gtk_container_remove((GtkContainer *)layout2,(GtkWidget *)images[i]);
-		//	}
-	
-	pixsbuffer.push_back((unsigned char *)malloc(128*128*3));
-		memcpy(pixsbuffer[pixsbuffer.size()-1],newtexture.data,128*128*3);
-		pixbuf.push_back(gdk_pixbuf_new_from_data((const guchar*)pixsbuffer[pixsbuffer.size()-1],GDK_COLORSPACE_RGB,FALSE,8,newtexture.rows,newtexture.cols,newtexture.step,NULL,NULL));
-		images.push_back(gtk_image_new_from_pixbuf(pixbuf[pixbuf.size()-1]));
-		img_counter++;
-		int i=img_counter-1;
-		int j=i%7;
-		int k=i/7;
-		button_remove_img[i]=gtk_button_new_with_label("X");
-		button_moveup_img[i]=gtk_button_new_with_label("\u25b2");
-		button_movedown_img[i]=gtk_button_new_with_label("\u25bc");
-		gtk_widget_set_size_request((GtkWidget *)button_remove_img[i],20,20);
-		gtk_widget_set_size_request((GtkWidget *)button_moveup_img[i],20,20);
-		gtk_widget_set_size_request((GtkWidget *)button_movedown_img[i],20,20);
-		gtk_layout_put ((GtkLayout *)layout2,images[i],80+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,button_remove_img[i],220+k*230,130+j*135);
-		gtk_layout_put ((GtkLayout *)layout2,button_moveup_img[i],220+k*230,130+j*135+30);
-		gtk_layout_put ((GtkLayout *)layout2,button_movedown_img[i],220+k*230,130+j*135+60);
-		gtk_widget_show (images[i]);
-		gtk_widget_show (button_remove_img[i]);
-		gtk_widget_show (button_movedown_img[i]);
-		gtk_widget_show (button_moveup_img[i]);
-		
-		int *mypointer=new int(i);
-		g_signal_connect (button_remove_img[i] ,"clicked", G_CALLBACK (activate_button_remove_img), mypointer); 
-		g_signal_connect (button_movedown_img[i] ,"clicked", G_CALLBACK (activate_button_movedown_img), mypointer); 
-		g_signal_connect (button_moveup_img[i] ,"clicked", G_CALLBACK (activate_button_moveup_img), mypointer); 
-			//		setup_textures=true;
-			//generate_widgets();
-}
-catch(...){
-	
-	std::string error_str="Error "+std::to_string(22);
-	errorout(error_str);
-}
+	errorout("Procedural texture generation has been removed.");
 }
 			   
 void activateply(GtkButton *item) {
@@ -3240,53 +3548,7 @@ catch(...){
 
 gboolean mouse_press_callback(GtkWidget *da, GdkEventButton *event, gpointer userdata)
 {
- int w = gtk_widget_get_allocated_width (da);
-  int h = gtk_widget_get_allocated_height (da);
-		//std::cout<<"mouse pressed"<<event->x<<event->y<<std::endl;
-        if(mouse_pressed==false){
-			if(perspective_transform){
-				mouse_index++;
-				perspective_points.push_back(Point2f(event->x*image.cols/w,event->y*image.rows/h));
-				if(mouse_index==4){
-						 int w = gtk_widget_get_allocated_width (da);
-						int h = gtk_widget_get_allocated_height (da);
-						std::vector<Point2f> screen_points;
-						screen_points.push_back(Point2f(0,0));
-						screen_points.push_back(Point2f(w,0));
-						screen_points.push_back(Point2f(w,h));
-						screen_points.push_back(Point2f(0,h));
-						
-						
-						Mat M = getPerspectiveTransform(perspective_points,screen_points);
-						 warpPerspective(image,image,M,Size(w,h),INTER_LINEAR,BORDER_CONSTANT,Scalar(1.0));
-						perspective_transform=false;
-								mouse_index=0;
-				}
-			}
-			else {
-			p1=Point(event->x,event->y);
-			mouse_pressed=true;
-			}
-		}
-		else {
-			p2=Point(event->x,event->y);
-			std::vector<Point> points;
-			points.push_back(Point(p1.x*image.cols/w,p1.y*image.rows/h));
-			points.push_back(Point(p1.x*image.cols/w,p2.y*image.rows/h));
-			points.push_back(Point(p2.x*image.cols/w,p2.y*image.rows/h));
-			points.push_back(Point(p2.x*image.cols/w,p1.y*image.rows/h));
-			std::string grammar_snippet="Rule ->  [ T ( "+std::to_string((float)(w-p1.x*image.cols/w)/(float)h)+" "+std::to_string((float)(p2.y*image.rows/h-h)/(float)h-1.0f)+" z ) S ( "+std::to_string((float)(p2.x*image.cols/w-p1.x*image.cols/w)/(float)(h*4.0f))+" "+std::to_string((float)(p2.y*image.rows/h-p1.y*image.rows/h)/(float)(h*4.0f))+" Z ) I ( CubeX TextureIndex ) ] \n";
-			
-			GtkTextIter end;
-			gtk_text_buffer_get_iter_at_offset (buffer2, &end, 0);
-			gtk_text_buffer_insert (buffer2,&end,grammar_snippet.c_str(),grammar_snippet.size());
-			
-			squares.push_back(points);
-			mouse_pressed=false;
-		}
-		gtk_widget_queue_draw(da);
-
-    return TRUE;
+	return TRUE;
 }
 static gboolean
 handle_mouse (GtkWidget *da, GdkEventButton *event, gpointer t){
@@ -3309,117 +3571,13 @@ handle_mouse2 (GtkWidget *da, GdkEventButton *event, gpointer t){
 	return TRUE;
 }
 		
-gboolean
-draw_callback2 (GtkWidget *widget, cairo_t *cr, gpointer data)
-{
-  guint width, height;
-  GdkRGBA color;
-  GtkStyleContext *context;
-
-  context = gtk_widget_get_style_context (widget);
-
-  draw2width = gtk_widget_get_allocated_width (widget);
-  draw2height = gtk_widget_get_allocated_height (widget);
-
-  gtk_render_background (context, cr, 0, 0, width, height);
-  
-  
-  cairo_select_font_face(cr, "Courier",
-      CAIRO_FONT_SLANT_NORMAL,
-      CAIRO_FONT_WEIGHT_BOLD);
-
-  cairo_set_font_size(cr, 30);
-  
-	for(int i=0;i<img_counter;i++){
-			int j=i%10;
-			int k=i/10;
-			//gtk_layout_put ((GtkLayout *)layout2,(GtkWidget *)images[i],80+k*130,j*135);
-			//gtk_widget_show ((GtkWidget *)images[i]);
-		
-    
-		//gdk_cairo_set_source_pixbuf(cr, pixbufs[i], 80+220*k,j*70);
-	
-
-  
-
-  
-		
-   cairo_paint(cr);
-	}
-	 cairo_set_source_rgb(cr, 0.0, 0.0, 0.0);
-	for(int i=0;i<img_counter;i++){
-					int j=i%10;
-			int k=i/10;
-		  std::string indexstr=std::to_string(i);
-	cairo_move_to(cr, 200+220*k, j*70+35);
-  cairo_show_text(cr, indexstr.c_str());
-  cairo_stroke(cr);
-	}
-	    
-  
-  
-   
-  //cairo_fill (cr);
-
- return FALSE;
-}	   
-gboolean
-draw_callback (GtkWidget *widget, cairo_t *cr, gpointer data)
-{
-  guint width, height;
-  GdkRGBA color;
-  GtkStyleContext *context;
-
-  context = gtk_widget_get_style_context (widget);
-
-  width = gtk_widget_get_allocated_width (widget);
-  height = gtk_widget_get_allocated_height (widget);
-
-  gtk_render_background (context, cr, 0, 0, width, height);
-  
-  if(perspective_transform==true){
-	  for(int i=0;i<perspective_points.size();i++){
-			cv::circle(image,perspective_points[i],3,Scalar(0,255,0),1);
-	  }
-  }
-  else cv::polylines(image, squares, true, Scalar(0, 255, 0), 3, LINE_AA);
-  
-  if(image.data!=NULL)pix = gdk_pixbuf_new_from_data((const guchar*)image.data,GDK_COLORSPACE_RGB,FALSE,8,image.cols,image.rows,image.cols * 3,NULL,NULL);
-  else pix=NULL;
-  
-	 if(pix!=NULL)pix = gdk_pixbuf_scale_simple((GdkPixbuf *)pix,width,height,GDK_INTERP_BILINEAR); 
-    if(pix!=NULL){
-		gdk_cairo_set_source_pixbuf(cr, pix, 0, 0);
-		cairo_paint(cr);
-	}
-	
-	    
-  
-  
-   
-  //cairo_fill (cr);
-
- return FALSE;
-}
 
 
 
 
 
 void activate_skip(GtkButton *item) {
-	gtk_container_remove(GTK_CONTAINER (window),(GtkWidget *) box6);
-  gtk_container_add (GTK_CONTAINER (window), (GtkWidget *)paned);
-  gtk_widget_show(drawing_area);
-   gtk_widget_show(view2);
-    gtk_widget_show((GtkWidget *)actionbar);
-  gtk_widget_show(runbutton);
-  gtk_widget_show(newbutton);
-  gtk_widget_show((GtkWidget *)actionbar);
-  gtk_widget_show((GtkWidget *)actionbar3);
-  gtk_widget_show(playbutton3);
-  gtk_widget_show(stopbutton3);
-  gtk_widget_show(rulescombo);
-  gtk_widget_show_all(GTK_WIDGET(window));
+	show_main_workspace();
 }
   
 void activate_login(GtkButton *item) {
@@ -3506,25 +3664,13 @@ LoadCertificates(ctx, "mycert.pem", "mycertkey.pem");
 	close(client);         /* close socket */
 	SSL_CTX_free(ctx);        /* release */
 	
-gtk_container_remove(GTK_CONTAINER (window), (GtkWidget *)box6);
-  gtk_container_add (GTK_CONTAINER (window), (GtkWidget *)paned);
-  gtk_widget_show(drawing_area);
-   gtk_widget_show(view2);
-    gtk_widget_show((GtkWidget *)actionbar);
-  gtk_widget_show(runbutton);
-  gtk_widget_show(newbutton);
-  
-  gtk_widget_show((GtkWidget *)actionbar);
-  gtk_widget_show((GtkWidget *)actionbar3);
-  gtk_widget_show(playbutton3);
-  gtk_widget_show(stopbutton3);
-  gtk_widget_show(rulescombo);
-  gtk_widget_show_all(GTK_WIDGET(window));
+show_main_workspace();
 }
 std::string text1,text2;
 			   
 void activate_app(GtkApplication *app){
 	main_thread_id = std::this_thread::get_id();
+	debugout("activate_app: building interface");
 		
 		
 	
@@ -3539,51 +3685,49 @@ void activate_app(GtkApplication *app){
   gtk_window_maximize(GTK_WINDOW(window));
   gtk_window_set_title(GTK_WINDOW(window), appname.c_str());
   gtk_container_set_border_width(GTK_CONTAINER(window), 0);
+  install_app_css();
+  add_css_class(window, "progen-window");
  
   
   
   
   
-  GtkWidget *root_shell = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
-  GtkWidget *top_toolbar_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
-  GtkActionBar *file_actionbar = (GtkActionBar *)gtk_action_bar_new ();
+  root_shell = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
+  top_toolbar_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
   GtkActionBar *viewer_zoom_bar = (GtkActionBar *)gtk_action_bar_new ();
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
   gtk_widget_set_hexpand(root_shell, TRUE);
   gtk_widget_set_vexpand(root_shell, TRUE);
-  gtk_box_set_spacing(GTK_BOX(root_shell), 6);
+  gtk_box_set_spacing(GTK_BOX(root_shell), 18);
+  gtk_widget_set_margin_start(root_shell, 16);
+  gtk_widget_set_margin_end(root_shell, 16);
+  gtk_widget_set_margin_top(root_shell, 16);
+  gtk_widget_set_margin_bottom(root_shell, 16);
   gtk_widget_set_hexpand(top_toolbar_box, TRUE);
-  gtk_box_set_spacing(GTK_BOX(top_toolbar_box), 4);
+  gtk_box_set_spacing(GTK_BOX(top_toolbar_box), 0);
   gtk_widget_set_hexpand(box, TRUE);
   gtk_widget_set_vexpand(box, TRUE);
+  gtk_box_set_spacing(GTK_BOX(box), 16);
   //box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, FALSE);
   paned=gtk_paned_new(GTK_ORIENTATION_HORIZONTAL);
-  vpaned=gtk_paned_new(GTK_ORIENTATION_VERTICAL);
   box3=gtk_box_new(GTK_ORIENTATION_VERTICAL, FALSE);
-  box4=gtk_box_new(GTK_ORIENTATION_VERTICAL, FALSE);
-  box5=gtk_box_new(GTK_ORIENTATION_VERTICAL, FALSE);
-  box9=gtk_box_new(GTK_ORIENTATION_VERTICAL, FALSE);
-  gtk_box_set_spacing(GTK_BOX(box3), 8);
-  gtk_box_set_spacing(GTK_BOX(box4), 8);
-  gtk_box_set_spacing(GTK_BOX(box5), 8);
-  gtk_box_set_spacing(GTK_BOX(box9), 8);
+  gtk_box_set_spacing(GTK_BOX(box3), 16);
+  gtk_widget_set_hexpand(box3, TRUE);
+  gtk_widget_set_vexpand(box3, TRUE);
   //box10 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, FALSE);
-  box10=gtk_paned_new(GTK_ORIENTATION_HORIZONTAL);
-  box11=gtk_paned_new(GTK_ORIENTATION_VERTICAL);
+  box10=gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 12);
+  gtk_paned_set_wide_handle(GTK_PANED(paned), TRUE);
   //g_object_set (box, "margin", 12, NULL);
   //gtk_box_set_spacing (GTK_BOX (box), 6);
 //  g_object_set (paned, "margin", 12, NULL);
  // gtk_box_set_spacing (GTK_BOX (paned), 6);
   
- actionbar2=(GtkActionBar *)gtk_action_bar_new ();
- actionbar3=(GtkActionBar *)gtk_action_bar_new ();
- actionbar4=(GtkActionBar *)gtk_action_bar_new ();
- actionbar5=(GtkActionBar *)gtk_action_bar_new ();
- actionbar6=(GtkActionBar *)gtk_action_bar_new ();
- actionbar7=(GtkActionBar *)gtk_action_bar_new ();
-
-  gtk_box_pack_start (GTK_BOX(box4), (GtkWidget *)actionbar2,0,0, 0);
-    gtk_box_pack_start (GTK_BOX(box9), (GtkWidget *)actionbar6,0,0, 0);
+ actionbar3=NULL;
+ actionbar6=NULL;
+ actionbar7=NULL;
+ add_css_class(top_toolbar_box, "shell-header");
+ add_css_class(box3, "preview-pane");
+ add_css_class(box, "workspace-pane");
 
   
   
@@ -3603,356 +3747,278 @@ void activate_app(GtkApplication *app){
   g_signal_connect(gl_area, "resize", G_CALLBACK(resize_glarea), NULL);
   g_signal_connect(gl_area, "render", G_CALLBACK(render), NULL);
   GtkWidget *scrollwin=gtk_scrolled_window_new (NULL,NULL);
+#if HAVE_GTKSOURCEVIEW
+  GtkSourceBuffer *source_buffer = gtk_source_buffer_new(NULL);
+  view = gtk_source_view_new_with_buffer(source_buffer);
+#else
   view = gtk_text_view_new();
-  view2 = gtk_text_view_new();
+#endif
   viewerror = gtk_text_view_new();
+  gtk_widget_set_margin_top(scrollwin, 4);
+  gtk_text_view_set_top_margin(GTK_TEXT_VIEW(view), 10);
+  gtk_text_view_set_bottom_margin(GTK_TEXT_VIEW(view), 10);
+  gtk_text_view_set_border_window_size(GTK_TEXT_VIEW(view), GTK_TEXT_WINDOW_TOP, 8);
   gtk_text_view_set_left_margin(GTK_TEXT_VIEW(view), 10);
   gtk_text_view_set_right_margin(GTK_TEXT_VIEW(view), 10);
-
-	// Enable tooltips on the main editor view and multiline/indent behavior
-	gtk_widget_set_has_tooltip(view, TRUE);
-
-
-  // Setup syntax highlighting
-  mybuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-  GtkTextTagTable *tag_table = gtk_text_buffer_get_tag_table(mybuffer);
-
-  // Create syntax highlighting tags
-  gtk_text_buffer_create_tag(mybuffer, "keyword", 
-      "foreground", "#0000FF",
-      "weight", PANGO_WEIGHT_BOLD,
-      NULL);
-
-  gtk_text_buffer_create_tag(mybuffer, "variable", 
-      "foreground", "#007F00",
-      NULL);
-
-  gtk_text_buffer_create_tag(mybuffer, "number", 
-      "foreground", "#7F0000",
-      NULL);
-
-  gtk_text_buffer_create_tag(mybuffer, "string", 
-      "foreground", "#7F007F",
-      NULL);
-
-  // Connect the changed signal to update syntax highlighting
-  g_signal_connect(mybuffer, "changed", G_CALLBACK(update_syntax_highlighting), NULL);
-  // Connect tooltip query and keypress handler for editor behavior (use static functions below)
-  g_signal_connect(view, "query-tooltip", G_CALLBACK(view_query_tooltip_handler), NULL);
-  g_signal_connect(view, "key-press-event", G_CALLBACK(view_key_press_handler), NULL);
-  gtk_container_add (GTK_CONTAINER (scrollwin), view);
-  gtk_text_view_set_wrap_mode((GtkTextView *)view,GTK_WRAP_WORD);
+#if HAVE_GTKSOURCEVIEW
+  gtk_source_buffer_set_highlight_syntax(source_buffer, FALSE);
+  gtk_source_buffer_set_highlight_matching_brackets(source_buffer, TRUE);
+  gtk_source_view_set_show_line_numbers(GTK_SOURCE_VIEW(view), TRUE);
+  gtk_source_view_set_tab_width(GTK_SOURCE_VIEW(view), 4);
+  gtk_source_view_set_indent_width(GTK_SOURCE_VIEW(view), 4);
+  gtk_source_view_set_insert_spaces_instead_of_tabs(GTK_SOURCE_VIEW(view), TRUE);
+  gtk_source_view_set_auto_indent(GTK_SOURCE_VIEW(view), TRUE);
+  gtk_source_view_set_highlight_current_line(GTK_SOURCE_VIEW(view), TRUE);
+  gtk_source_view_set_show_right_margin(GTK_SOURCE_VIEW(view), TRUE);
+  gtk_source_view_set_right_margin_position(GTK_SOURCE_VIEW(view), 100);
+#endif
+  gtk_text_view_set_wrap_mode((GtkTextView *)view,GTK_WRAP_NONE);
   gtk_text_view_set_monospace ((GtkTextView *)view,TRUE);
-  gtk_text_view_set_monospace ((GtkTextView *)view2,TRUE);
+  gtk_text_view_set_editable((GtkTextView *)viewerror,FALSE);
+  gtk_text_view_set_cursor_visible((GtkTextView *)viewerror,FALSE);
+  gtk_text_view_set_wrap_mode((GtkTextView *)viewerror,GTK_WRAP_NONE);
+  gtk_text_view_set_monospace ((GtkTextView *)viewerror,TRUE);
+  add_css_class(view, "editor-view");
+  add_css_class(viewerror, "console-view");
+
+	// Disable hover tooltips in the editor to avoid query churn while typing.
+	gtk_widget_set_has_tooltip(view, FALSE);
+
+  // Bind the editor buffer.
+#if HAVE_GTKSOURCEVIEW
+  mybuffer = GTK_TEXT_BUFFER(source_buffer);
+#else
+  mybuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
+#endif
+  // Keep the editor interaction path lightweight while typing.
+  gtk_container_add (GTK_CONTAINER (scrollwin), view);
   
   
   
-  GtkWidget *scrollwin2 = gtk_scrolled_window_new(NULL, NULL);
-  GtkWidget *scrollwin3 = gtk_scrolled_window_new(NULL, NULL);
   GtkWidget *scrollwin4 = gtk_scrolled_window_new(NULL, NULL);
-  texture_scrollwin = gtk_scrolled_window_new(NULL, NULL);
   GtkWidget *right_panel_paned = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
-  GtkWidget *inspector_paned = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
-  GtkWidget *texture_section = gtk_box_new(GTK_ORIENTATION_VERTICAL, FALSE);
-  GtkWidget *variables_section = gtk_box_new(GTK_ORIENTATION_VERTICAL, FALSE);
-  GtkWidget *texture_header = gtk_label_new("Textures");
-  GtkWidget *variables_header = gtk_label_new("Variables");
-  
-  
-	  gtk_container_add (GTK_CONTAINER (scrollwin4), viewerror);
-	  gtk_widget_set_hexpand(scrollwin, TRUE);
-	  gtk_widget_set_vexpand(scrollwin, TRUE);
-	  gtk_widget_set_hexpand(scrollwin2, TRUE);
-	  gtk_widget_set_vexpand(scrollwin2, TRUE);
-	  gtk_widget_set_hexpand(scrollwin3, TRUE);
-	  gtk_widget_set_vexpand(scrollwin3, TRUE);
-	  gtk_widget_set_hexpand(scrollwin4, TRUE);
-	  gtk_widget_set_vexpand(scrollwin4, FALSE);
-	  gtk_widget_set_hexpand(texture_scrollwin, TRUE);
-	  gtk_widget_set_vexpand(texture_scrollwin, TRUE);
-	  gtk_widget_set_hexpand(inspector_paned, TRUE);
-	  gtk_widget_set_vexpand(inspector_paned, TRUE);
-	  gtk_widget_set_hexpand(right_panel_paned, TRUE);
-	  gtk_widget_set_vexpand(right_panel_paned, TRUE);
-	  gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(scrollwin4), 140);
-	  gtk_scrolled_window_set_propagate_natural_height(GTK_SCROLLED_WINDOW(scrollwin4), FALSE);
-	  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(texture_scrollwin),
-	                                 GTK_POLICY_AUTOMATIC,
-	                                 GTK_POLICY_AUTOMATIC);
-	  gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(texture_scrollwin), 220);
-	  gtk_scrolled_window_set_propagate_natural_height(GTK_SCROLLED_WINDOW(texture_scrollwin), FALSE);
-  
-    
-    gtk_widget_set_hexpand((GtkWidget *)actionbar2, TRUE);
-		notebook=gtk_notebook_new ();
-		gtk_notebook_set_show_tabs((GtkNotebook *)notebook, FALSE);
-		//notebooktextview=gtk_notebook_new();
+  GtkWidget *header_shell = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 18);
+  GtkWidget *header_brand = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
+  GtkWidget *header_actions = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+  GtkWidget *header_status = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+  GtkWidget *preview_intro = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
+  GtkWidget *workspace_intro = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
+  GtkWidget *preview_frame = gtk_frame_new(NULL);
+  GtkWidget *preview_shell = gtk_box_new(GTK_ORIENTATION_VERTICAL, 14);
+  GtkWidget *stage_frame = gtk_frame_new(NULL);
+  GtkWidget *preview_controls_frame = gtk_frame_new(NULL);
+  GtkWidget *preview_controls = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+  GtkWidget *preview_action_row = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+  GtkWidget *editor_frame = gtk_frame_new(NULL);
+  GtkWidget *console_frame = gtk_frame_new(NULL);
+  GtkWidget *editor_shell = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+  GtkWidget *console_shell = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+  GtkWidget *brand_kicker = gtk_label_new("PROCEDURAL MODEL STUDIO");
+  GtkWidget *brand_title = gtk_label_new("Progen3d");
+  GtkWidget *brand_note = gtk_label_new("Design grammars, regenerate meshes, and inspect the live result.");
+  GtkWidget *preview_kicker = gtk_label_new("RENDER");
+  GtkWidget *preview_title = gtk_label_new("Preview Stage");
+  GtkWidget *preview_subtitle = gtk_label_new("Use the camera rail and transport controls to inspect the generated model.");
+  GtkWidget *workspace_kicker = gtk_label_new("WORKSPACE");
+  GtkWidget *workspace_title = gtk_label_new("Grammar Editor");
+  GtkWidget *workspace_subtitle = gtk_label_new("Edit the active grammar and monitor regeneration output in one place.");
+  GtkWidget *editor_label = gtk_label_new("Editor");
+  GtkWidget *console_label = gtk_label_new("Console");
+  add_css_class(header_actions, "header-actions");
+  add_css_class(preview_action_row, "preview-actions");
+  add_css_class(brand_kicker, "brand-kicker");
+  add_css_class(brand_title, "brand-title");
+  add_css_class(brand_note, "brand-note");
+  add_css_class(preview_kicker, "column-kicker");
+  add_css_class(preview_title, "column-title");
+  add_css_class(preview_subtitle, "column-subtitle");
+  add_css_class(workspace_kicker, "column-kicker");
+  add_css_class(workspace_title, "column-title");
+  add_css_class(workspace_subtitle, "column-subtitle");
+  add_css_class(editor_label, "panel-label");
+  add_css_class(console_label, "panel-label");
+  add_css_class(preview_frame, "surface-frame");
+  add_css_class(stage_frame, "viewport-frame");
+  add_css_class(preview_controls_frame, "surface-frame");
+  add_css_class(editor_frame, "surface-frame");
+  add_css_class(console_frame, "surface-frame");
+  add_css_class(editor_shell, "panel-body");
+  add_css_class(console_shell, "panel-body");
+  add_css_class(header_status, "status-pill");
 
-    file_label=gtk_label_new("");
-    update_file_label();
-    gtk_widget_set_hexpand((GtkWidget *)actionbar3, TRUE);
-    gtk_widget_set_hexpand(file_label, TRUE);
-    gtk_box_pack_start(GTK_BOX(box),right_panel_paned, 1, 1, 0);
-    gtk_paned_pack1(GTK_PANED(right_panel_paned), notebook, TRUE, TRUE);
-    gtk_paned_pack2(GTK_PANED(right_panel_paned), scrollwin4, FALSE, FALSE);
-    gtk_paned_set_position(GTK_PANED(right_panel_paned), 520);
-    gtk_notebook_append_page ((GtkNotebook *)notebook,
-                          scrollwin,
-                          gtk_label_new ("Grammar Editor"));
-    layout=gtk_layout_new (NULL,NULL);
-layout2=gtk_layout_new (NULL,NULL);
+  gtk_label_set_xalign(GTK_LABEL(brand_kicker), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(brand_title), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(brand_note), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(preview_kicker), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(preview_title), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(preview_subtitle), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(workspace_kicker), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(workspace_title), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(workspace_subtitle), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(editor_label), 0.0f);
+  gtk_label_set_xalign(GTK_LABEL(console_label), 0.0f);
 
-gtk_widget_set_hexpand(notebook, TRUE);
-gtk_widget_set_vexpand(notebook, TRUE);
+  gtk_container_add(GTK_CONTAINER(scrollwin4), viewerror);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollwin), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollwin4), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(scrollwin4), 180);
+  gtk_scrolled_window_set_propagate_natural_height(GTK_SCROLLED_WINDOW(scrollwin4), FALSE);
 
-vadj=gtk_adjustment_new (0,0,2000,1,100,100);
-                    
-layout3=gtk_layout_new (NULL,NULL);
-layout4=gtk_layout_new (NULL,NULL);
+  gtk_widget_set_hexpand(scrollwin, TRUE);
+  gtk_widget_set_vexpand(scrollwin, TRUE);
+  gtk_widget_set_hexpand(scrollwin4, TRUE);
+  gtk_widget_set_vexpand(scrollwin4, TRUE);
+  gtk_widget_set_hexpand(right_panel_paned, TRUE);
+  gtk_widget_set_vexpand(right_panel_paned, TRUE);
+  gtk_widget_set_hexpand(editor_frame, TRUE);
+  gtk_widget_set_vexpand(editor_frame, TRUE);
+  gtk_widget_set_hexpand(console_frame, TRUE);
+  gtk_widget_set_vexpand(console_frame, FALSE);
+  gtk_widget_set_hexpand(editor_shell, TRUE);
+  gtk_widget_set_vexpand(editor_shell, TRUE);
+  gtk_widget_set_hexpand(console_shell, TRUE);
+  gtk_widget_set_vexpand(console_shell, TRUE);
+  gtk_widget_set_hexpand(header_brand, TRUE);
+  gtk_widget_set_hexpand(header_actions, FALSE);
+  gtk_widget_set_halign(header_actions, GTK_ALIGN_END);
+  gtk_widget_set_valign(header_actions, GTK_ALIGN_CENTER);
+  gtk_widget_set_halign(header_status, GTK_ALIGN_END);
+  gtk_widget_set_hexpand(gl_area, TRUE);
+  gtk_widget_set_vexpand(gl_area, TRUE);
+  gtk_widget_set_hexpand(box3, TRUE);
+  gtk_widget_set_vexpand(box3, TRUE);
+  gtk_widget_set_hexpand(box, TRUE);
+  gtk_widget_set_vexpand(box, TRUE);
+  gtk_widget_set_hexpand(preview_frame, TRUE);
+  gtk_widget_set_vexpand(preview_frame, TRUE);
+  gtk_widget_set_hexpand(stage_frame, TRUE);
+  gtk_widget_set_vexpand(stage_frame, TRUE);
+  gtk_widget_set_hexpand(preview_controls_frame, TRUE);
+  gtk_widget_set_vexpand(preview_controls_frame, FALSE);
+  gtk_widget_set_hexpand(preview_controls, TRUE);
+  gtk_widget_set_size_request(gl_area, 360, 360);
 
-drawing_area2 = gtk_drawing_area_new ();
-gtk_widget_set_hexpand(layout2, TRUE);
-gtk_widget_set_vexpand(layout2, TRUE);
-	update_texture_layout_size();
-	gtk_container_add (GTK_CONTAINER (scrollwin2), layout3);
-	gtk_container_add (GTK_CONTAINER (scrollwin3), layout);
-	gtk_container_add (GTK_CONTAINER (texture_scrollwin), layout2);
+  gtk_widget_set_margin_start(preview_shell, 16);
+  gtk_widget_set_margin_end(preview_shell, 16);
+  gtk_widget_set_margin_top(preview_shell, 16);
+  gtk_widget_set_margin_bottom(preview_shell, 16);
+  gtk_widget_set_margin_start(preview_controls, 16);
+  gtk_widget_set_margin_end(preview_controls, 16);
+  gtk_widget_set_margin_top(preview_controls, 16);
+  gtk_widget_set_margin_bottom(preview_controls, 16);
+  gtk_widget_set_margin_start(editor_shell, 14);
+  gtk_widget_set_margin_end(editor_shell, 14);
+  gtk_widget_set_margin_top(editor_shell, 14);
+  gtk_widget_set_margin_bottom(editor_shell, 14);
+  gtk_widget_set_margin_start(console_shell, 14);
+  gtk_widget_set_margin_end(console_shell, 14);
+  gtk_widget_set_margin_top(console_shell, 14);
+  gtk_widget_set_margin_bottom(console_shell, 14);
 
-	gtk_box_pack_start (GTK_BOX(box4),scrollwin3,1,1, 0);
-	gtk_box_pack_start (GTK_BOX(box9),texture_scrollwin,1,1, 0);
-	gtk_box_pack_start (GTK_BOX(texture_section), texture_header, FALSE, FALSE, 6);
-	gtk_box_pack_start (GTK_BOX(texture_section), box9, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX(variables_section), variables_header, FALSE, FALSE, 6);
-	gtk_box_pack_start (GTK_BOX(variables_section), scrollwin2, TRUE, TRUE, 0);
-	gtk_paned_pack1(GTK_PANED(inspector_paned), texture_section, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(inspector_paned), variables_section, TRUE, FALSE);
-	gtk_paned_set_position(GTK_PANED(inspector_paned), 260);
+  file_label = gtk_label_new("");
+  update_file_label();
+  gtk_widget_set_hexpand(file_label, FALSE);
+  gtk_widget_set_halign(file_label, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start(file_label, 10);
+  gtk_widget_set_margin_end(file_label, 10);
+  gtk_widget_set_margin_top(file_label, 8);
+  gtk_widget_set_margin_bottom(file_label, 8);
+  gtk_label_set_xalign(GTK_LABEL(file_label), 0.5f);
 
-gtk_notebook_append_page ((GtkNotebook *)notebook,
-                          box4,
-                          gtk_label_new ("Rule Editor"));
-    
-    
-     drawing_area = gtk_drawing_area_new ();
-     
-  gtk_widget_set_hexpand(drawing_area, TRUE);
-  gtk_widget_set_vexpand(drawing_area, TRUE);
-                            
- gtk_paned_pack1(GTK_PANED(vpaned), drawing_area, TRUE, FALSE);
-  gtk_paned_pack2 (GTK_PANED(vpaned), view2, TRUE, FALSE);
-   
-   
-   
-   
-   GtkWidget *choose_image_button=gtk_button_new_with_label("Open Image");
-   GtkWidget *perspective_transform_button=gtk_button_new_with_label("Perspective Transform");
-   
-   gtk_action_bar_pack_start (actionbar4,choose_image_button);  
-   gtk_action_bar_pack_start (actionbar4,perspective_transform_button);  
-   
-  gtk_box_pack_start(GTK_BOX(box5),(GtkWidget *)actionbar4, 0, 0, 0);
-  gtk_box_pack_start(GTK_BOX(box5),vpaned, 1, 1, 1);
-  gtk_box_pack_start(GTK_BOX(box5),(GtkWidget *)actionbar5, 0, 0, 0);
-  
-gtk_notebook_append_page ((GtkNotebook *)notebook,
-                          box5,
-                          gtk_label_new ("Sketch Import"));
-  
-  
-  
-  g_signal_connect (G_OBJECT (drawing_area), "draw",
-                    G_CALLBACK (draw_callback), NULL);
-   //g_signal_connect (G_OBJECT (drawing_area2), "draw",
-     //               G_CALLBACK (draw_callback2), NULL);
-    
-	  GtkWidget *addbutton=gtk_button_new_with_label("Add");
-	  GtkWidget *buildbutton=gtk_button_new_with_label("Sync To Grammar");
-	  GtkWidget *rule_editor_hint=gtk_label_new("Select a rule, then edit variables and tokens below.");
-	  gtk_label_set_xalign((GtkLabel *)rule_editor_hint, 0.0f);
-  
-  GtkWidget *evalbutton=gtk_button_new_with_label("Evaluate");
-  
-  //GtkWidget *generate_image_button=gtk_button_new_with_label("Generate");
-  texture_filechooser=gtk_button_new_with_label("Open Texture");
-rulescombo=gtk_combo_box_text_new_with_entry();
+  layout = gtk_grid_new();
+  gtk_grid_set_row_spacing(GTK_GRID(layout), 8);
+  gtk_grid_set_column_spacing(GTK_GRID(layout), 12);
+  gtk_grid_set_column_homogeneous(GTK_GRID(layout), FALSE);
+  gtk_widget_set_margin_start(layout, 8);
+  gtk_widget_set_margin_end(layout, 8);
+  gtk_widget_set_margin_top(layout, 8);
+  gtk_widget_set_margin_bottom(layout, 8);
+  layout2 = NULL;
+  layout3 = NULL;
+  layout4 = NULL;
+  texture_scrollwin = NULL;
+  vadj = NULL;
 
+  texture_filechooser = gtk_button_new_with_label("Add Texture");
+  grammar_mode_button = gtk_button_new_with_label("Focus Editor");
+  inspector_mode_button = NULL;
+  openbutton = gtk_button_new_with_label("Open");
+  runbutton = gtk_button_new_with_label("Run");
+  newbutton = gtk_button_new_with_label("New");
+  savebutton = gtk_button_new_with_label("Save As");
+  plybutton = gtk_button_new_with_label("Export PLY");
+  resetviewbutton = gtk_button_new_with_label("Reset View");
+  playbutton3 = gtk_button_new_with_label("Play");
+  stopbutton3 = gtk_button_new_with_label("Stop");
+  scale_slider_main = NULL;
+  scale_slider3 = NULL;
+  scale_slider4 = NULL;
 
-/*
-GtkWidget *genlabel1=gtk_label_new("Octaves");
-GtkWidget *genlabel2=gtk_label_new("Persistence");
-GtkWidget *gencombo1=gtk_combo_box_text_new_with_entry();
-GtkWidget *gencombo2=gtk_combo_box_text_new_with_entry();
-gtk_combo_box_text_append((GtkComboBoxText *)gencombo1,NULL,"7");
-gtk_combo_box_text_append((GtkComboBoxText *)gencombo2,NULL,"0.5");
-gtk_combo_box_set_active((GtkComboBox *)gencombo1,0);
-gtk_combo_box_set_active((GtkComboBox *)gencombo2,0);
+  add_css_class(runbutton, "primary-action");
 
-gtk_widget_set_size_request((GtkWidget *)genlabel1,20,20);
-gtk_widget_set_size_request((GtkWidget *)genlabel2,20,20);
-gtk_widget_set_size_request((GtkWidget *)gencombo1,20,20);
-gtk_widget_set_size_request((GtkWidget *)gencombo2,20,20);
+  gtk_widget_set_size_request(grammar_mode_button, 118, 34);
+  gtk_widget_set_size_request(openbutton, 84, 34);
+  gtk_widget_set_size_request(runbutton, 84, 34);
+  gtk_widget_set_size_request(newbutton, 84, 34);
+  gtk_widget_set_size_request(savebutton, 92, 34);
+  gtk_widget_set_size_request(texture_filechooser, 112, 34);
+  gtk_widget_set_size_request(plybutton, 102, 34);
+  gtk_widget_set_size_request(resetviewbutton, 110, 34);
+  gtk_widget_set_size_request(playbutton3, 78, 34);
+  gtk_widget_set_size_request(stopbutton3, 78, 34);
 
+  gtk_box_pack_start(GTK_BOX(header_brand), brand_kicker, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_brand), brand_title, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_brand), brand_note, FALSE, FALSE, 0);
+  gtk_container_add(GTK_CONTAINER(header_status), file_label);
+  gtk_box_pack_start(GTK_BOX(header_actions), grammar_mode_button, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), runbutton, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), openbutton, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), newbutton, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), savebutton, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), texture_filechooser, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), plybutton, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(header_actions), header_status, FALSE, FALSE, 8);
+  gtk_box_pack_start(GTK_BOX(header_shell), header_brand, TRUE, TRUE, 0);
+  gtk_box_pack_end(GTK_BOX(header_shell), header_actions, FALSE, FALSE, 0);
 
+  gtk_box_pack_start(GTK_BOX(preview_intro), preview_kicker, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(preview_intro), preview_title, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(preview_intro), preview_subtitle, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(workspace_intro), workspace_kicker, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(workspace_intro), workspace_title, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(workspace_intro), workspace_subtitle, FALSE, FALSE, 0);
 
+  gtk_container_add(GTK_CONTAINER(stage_frame), gl_area);
+  gtk_container_add(GTK_CONTAINER(preview_frame), preview_shell);
+  gtk_box_pack_start(GTK_BOX(preview_shell), stage_frame, TRUE, TRUE, 0);
 
+  gtk_box_pack_start(GTK_BOX(preview_action_row), resetviewbutton, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(preview_action_row), playbutton3, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(preview_action_row), stopbutton3, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(preview_controls), preview_action_row, FALSE, FALSE, 0);
+  gtk_container_add(GTK_CONTAINER(preview_controls_frame), preview_controls);
 
-gtk_layout_put ((GtkLayout *)layout2,genlabel1,80,10);
-gtk_layout_put ((GtkLayout *)layout2,genlabel2,80,60);
-gtk_layout_put ((GtkLayout *)layout2,gencombo1,180,10);
-gtk_layout_put ((GtkLayout *)layout2,gencombo2,180,60);
-colorchooser1=gtk_color_chooser_widget_new();
-gtk_widget_set_size_request((GtkWidget *)colorchooser1,120,50);
-gtk_layout_put ((GtkLayout *)layout2,colorchooser1,400,0);
-*/
+  gtk_box_pack_start(GTK_BOX(box3), preview_intro, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(box3), preview_frame, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(box3), preview_controls_frame, FALSE, FALSE, 0);
 
-	 gtk_box_pack_start (GTK_BOX(box4), rule_editor_hint, 0, 0, 6);
-	 gtk_box_reorder_child(GTK_BOX(box4), rule_editor_hint, 1);
-	 gtk_action_bar_pack_start (actionbar2,buildbutton);  
-	 gtk_action_bar_pack_start (actionbar2,addbutton);    
- 
- gtk_action_bar_pack_start (actionbar6,texture_filechooser);  
- //gtk_action_bar_pack_start (actionbar6,generate_image_button);  
- 
-   
-	   gtk_button_set_label((GtkButton *)addbutton,"New Rule");
-	   gtk_action_bar_pack_start (actionbar2,rulescombo);
-   gtk_action_bar_pack_start (actionbar5,evalbutton);
-       
-                  //gtk_widget_set_size_request((GtkWidget *)actionbar2, 950,50);
-                      gtk_widget_set_hexpand((GtkWidget *)scrollwin3,TRUE);
-                      gtk_widget_set_vexpand((GtkWidget *)scrollwin3,TRUE);
-  gtk_widget_set_size_request(addbutton,10, 30);
-  
-gtk_widget_add_events (drawing_area,GDK_POINTER_MOTION_MASK|GDK_BUTTON_PRESS_MASK);
+  gtk_box_pack_start(GTK_BOX(editor_shell), editor_label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(editor_shell), scrollwin, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(console_shell), console_label, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(console_shell), scrollwin4, TRUE, TRUE, 0);
+  gtk_container_add(GTK_CONTAINER(editor_frame), editor_shell);
+  gtk_container_add(GTK_CONTAINER(console_frame), console_shell);
+  gtk_paned_pack1(GTK_PANED(right_panel_paned), editor_frame, TRUE, FALSE);
+  gtk_paned_pack2(GTK_PANED(right_panel_paned), console_frame, FALSE, FALSE);
+  gtk_paned_set_position(GTK_PANED(right_panel_paned), 540);
 
-	gtk_notebook_append_page ((GtkNotebook *)notebook,
-	                          inspector_paned,
-	                          gtk_label_new ("Inspector"));
+  gtk_box_pack_start(GTK_BOX(box), workspace_intro, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(box), right_panel_paned, TRUE, TRUE, 0);
 
-//gtk_notebook_append_page ((GtkNotebook *)notebook,
-  //                        layout4,
-    //                      gtk_label_new ("Rules"));
-                          
-                          
-	 gtk_paned_pack1(GTK_PANED(paned), box3, TRUE, FALSE);
-	  gtk_paned_pack2 (GTK_PANED(paned), box, TRUE, FALSE);
-	  gtk_widget_set_hexpand(box3, TRUE);
-	  gtk_widget_set_vexpand(box3, TRUE);
-  
-  
-  actionbar=(GtkActionBar *)gtk_action_bar_new ();
-  grammar_mode_button=gtk_button_new_with_label("Grammar");
-  rules_mode_button=gtk_button_new_with_label("Rules");
-  inspector_mode_button=gtk_button_new_with_label("Inspector");
-  sketch_mode_button=gtk_button_new_with_label("Sketch");
-  openbutton=gtk_button_new_with_label("Open");
-  runbutton=gtk_button_new_with_label("Run");
-  newbutton=gtk_button_new_with_label("New");
-  savebutton=gtk_button_new_with_label("Save As");
-  plybutton=gtk_button_new_with_label("Export PLY");
-  resetviewbutton=gtk_button_new_with_label("Reset View");
-  scale_slider_main=gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL,0.3,3.0,0.05);
-   gtk_widget_set_hexpand (scale_slider_main, TRUE);
-  gtk_range_set_value((GtkRange *)scale_slider_main, scale_global);
-  gtk_action_bar_pack_start (actionbar,grammar_mode_button);
-  gtk_action_bar_pack_start (actionbar,rules_mode_button);
-  gtk_action_bar_pack_start (actionbar,inspector_mode_button);
-  gtk_action_bar_pack_start (actionbar,sketch_mode_button);
-  gtk_action_bar_pack_start (file_actionbar,runbutton);
-  gtk_action_bar_pack_start (file_actionbar,openbutton);
-  gtk_action_bar_pack_start (file_actionbar,newbutton);
-  gtk_action_bar_pack_start (file_actionbar,savebutton);
-  gtk_action_bar_pack_start (file_actionbar,plybutton);
-  gtk_action_bar_pack_end (file_actionbar,file_label);
-  
-  gtk_widget_set_hexpand((GtkWidget *)actionbar, TRUE);
-  gtk_widget_set_vexpand((GtkWidget *)actionbar, FALSE);
-  gtk_widget_set_valign((GtkWidget *)actionbar, GTK_ALIGN_START);
-  gtk_widget_set_margin_start((GtkWidget *)actionbar, 8);
-  gtk_widget_set_margin_end((GtkWidget *)actionbar, 8);
-  gtk_widget_set_margin_top((GtkWidget *)actionbar, 8);
-  gtk_widget_set_margin_bottom((GtkWidget *)actionbar, 0);
-  gtk_widget_set_hexpand((GtkWidget *)file_actionbar, TRUE);
-  gtk_widget_set_vexpand((GtkWidget *)file_actionbar, FALSE);
-  gtk_widget_set_valign((GtkWidget *)file_actionbar, GTK_ALIGN_START);
-  gtk_widget_set_margin_start((GtkWidget *)file_actionbar, 8);
-  gtk_widget_set_margin_end((GtkWidget *)file_actionbar, 8);
-  gtk_widget_set_margin_bottom((GtkWidget *)file_actionbar, 4);
-  gtk_label_set_xalign((GtkLabel *)file_label, 1.0f);
-  gtk_widget_set_halign(file_label, GTK_ALIGN_END);
-  gtk_widget_set_hexpand((GtkWidget *)gl_area, TRUE);
-  gtk_widget_set_vexpand((GtkWidget *)gl_area, TRUE);
-  gtk_widget_set_size_request(grammar_mode_button,84, 34);
-  gtk_widget_set_size_request(rules_mode_button,84, 34);
-  gtk_widget_set_size_request(inspector_mode_button,92, 34);
-  gtk_widget_set_size_request(sketch_mode_button,84, 34);
-  gtk_widget_set_size_request(openbutton,76, 34);
-  gtk_widget_set_size_request(runbutton,76, 34);
-  gtk_widget_set_size_request(newbutton,76, 34);
-  gtk_widget_set_size_request(savebutton,88, 34);
-  gtk_widget_set_size_request(plybutton,98, 34);
-  gtk_widget_set_size_request(resetviewbutton,104, 34);
-  gtk_widget_set_size_request(scale_slider_main,220, 20);
-  gtk_widget_set_size_request(texture_filechooser,110, 34);
-  gtk_widget_set_name(runbutton, "run-primary");
-  GtkCssProvider *run_button_css = gtk_css_provider_new();
-  gtk_css_provider_load_from_data(run_button_css,
-                                  "#run-primary { background: #2f9e44; color: #ffffff; }\n"
-                                  "#run-primary:hover { background: #37b24d; }\n"
-                                  "#run-primary:active { background: #2b8a3e; }\n",
-                                  -1,
-                                  NULL);
-  gtk_style_context_add_provider(gtk_widget_get_style_context(runbutton),
-                                 GTK_STYLE_PROVIDER(run_button_css),
-                                 GTK_STYLE_PROVIDER_PRIORITY_USER);
-  g_object_unref(run_button_css);
-  
-  
-  
-  scale_slider4=gtk_scale_new_with_range (GTK_ORIENTATION_VERTICAL,0.0,90.0,2.0);
-  gtk_range_set_value((GtkRange *)scale_slider4, elevation_view);
-  gtk_widget_set_vexpand(scale_slider4, TRUE);
-  gtk_action_bar_pack_start(viewer_zoom_bar, scale_slider_main);
-  gtk_widget_set_hexpand((GtkWidget *)viewer_zoom_bar, TRUE);
-  gtk_widget_set_vexpand((GtkWidget *)viewer_zoom_bar, FALSE);
-  gtk_widget_set_margin_start((GtkWidget *)viewer_zoom_bar, 8);
-  gtk_widget_set_margin_end((GtkWidget *)viewer_zoom_bar, 8);
-  gtk_widget_set_margin_top((GtkWidget *)viewer_zoom_bar, 4);
-  gtk_widget_set_margin_bottom((GtkWidget *)viewer_zoom_bar, 0);
-  gtk_box_pack_start (GTK_BOX(box3), (GtkWidget *)viewer_zoom_bar,0,0, 0);
-  gtk_box_pack_start (GTK_BOX(box3), (GtkWidget *)box10,1,1, 0);
-  gtk_paned_pack1(GTK_PANED(box10),(GtkWidget *) actionbar7, FALSE, FALSE);
-  gtk_paned_pack2(GTK_PANED(box10), gl_area, TRUE, FALSE);
-  gtk_action_bar_pack_start (actionbar7,scale_slider4);
-  gtk_paned_set_position(GTK_PANED(box10),60);
-   
-  
-
-
-
-  
-   playbutton3=gtk_button_new_with_label("Play");
-  stopbutton3=gtk_button_new_with_label("Stop");
-  
-  scale_slider3=gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL,0.0,360.0,2.0);
-  gtk_range_set_value((GtkRange *)scale_slider3, angle_view);
-  
-   gtk_widget_set_hexpand (scale_slider3, TRUE);
-  gtk_action_bar_pack_start (actionbar3,resetviewbutton);
-  gtk_action_bar_pack_start (actionbar3,playbutton3);
-  gtk_action_bar_pack_start (actionbar3,stopbutton3);
-  gtk_action_bar_pack_start (actionbar3,scale_slider3);
-gtk_widget_set_hexpand((GtkWidget *)actionbar3, TRUE);
-gtk_widget_set_vexpand((GtkWidget *)actionbar3, FALSE);
-gtk_widget_set_valign((GtkWidget *)actionbar3, GTK_ALIGN_START);
-gtk_widget_set_margin_start((GtkWidget *)actionbar3, 8);
-gtk_widget_set_margin_end((GtkWidget *)actionbar3, 8);
-gtk_widget_set_margin_top((GtkWidget *)actionbar3, 0);
-gtk_widget_set_margin_bottom((GtkWidget *)actionbar3, 8);
-    
-  gtk_widget_set_size_request(playbutton3,74, 34);
-  gtk_widget_set_size_request(stopbutton3,74, 34);
-    gtk_box_pack_start (GTK_BOX(box3), (GtkWidget *)actionbar3,0,0, 0);
+  gtk_paned_pack1(GTK_PANED(paned), box3, TRUE, FALSE);
+  gtk_paned_pack2(GTK_PANED(paned), box, TRUE, FALSE);
+  gtk_paned_set_position(GTK_PANED(paned), 470);
   
   
   
@@ -3963,31 +4029,14 @@ gtk_widget_set_margin_bottom((GtkWidget *)actionbar3, 8);
 
  
    
-    buffer2 = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view2));
     errorbuffer= gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewerror));
+    flush_pending_console_messages();
     
     mybuffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
     debugout("activate_app: GUI ready");
-    //g_signal_connect(drawing_area2,"motion_notify_event",G_CALLBACK(handle_mouse2),   NULL);
-   // g_signal_connect(generate_image_button,"clicked",G_CALLBACK(activate_generate_image_button),   NULL);
-    g_signal_connect(addbutton,"clicked",G_CALLBACK(activate_addrule),   NULL);
-    g_signal_connect(buildbutton,"clicked",G_CALLBACK(activate_buildrule),   NULL);
-   // g_signal_connect(drawing_area,"motion_notify_event",G_CALLBACK(handle_mouse),   NULL);
-   // g_signal_connect(drawing_area,"button_press_event",G_CALLBACK(mouse_press_callback),   NULL);
     
-    g_signal_connect (mybuffer ,"changed", G_CALLBACK (txt_changed), NULL);  
     g_signal_connect (mybuffer ,"insert-text", G_CALLBACK (txt_inserted), NULL);  
-    g_signal_connect (layout4 ,"focus", G_CALLBACK (rule_focus), NULL);  
-    g_signal_connect (box9 ,"focus", G_CALLBACK (texture_focus), NULL);  
-    g_signal_connect (layout3 ,"focus", G_CALLBACK (vars_focus), NULL); 
-    g_signal_connect (box4 ,"focus", G_CALLBACK (layout_focus), NULL);   
-    
-    g_signal_connect (perspective_transform_button,"clicked",G_CALLBACK (activate_perspective_transform_button), NULL);    
-    g_signal_connect (rulescombo ,"changed", G_CALLBACK (activate_add), NULL);    
     g_signal_connect (grammar_mode_button ,"clicked", G_CALLBACK (activate_show_grammar), NULL);
-    g_signal_connect (rules_mode_button ,"clicked", G_CALLBACK (activate_show_rules), NULL);
-    g_signal_connect (inspector_mode_button ,"clicked", G_CALLBACK (activate_show_inspector), NULL);
-    g_signal_connect (sketch_mode_button ,"clicked", G_CALLBACK (activate_show_sketch), NULL);
     g_signal_connect (openbutton ,"clicked", G_CALLBACK (activate_open), NULL);
     g_signal_connect (runbutton ,"clicked", G_CALLBACK (activate), NULL);
     g_signal_connect (newbutton ,"clicked", G_CALLBACK (new_activate), NULL);
@@ -3995,30 +4044,20 @@ gtk_widget_set_margin_bottom((GtkWidget *)actionbar3, 8);
     g_signal_connect (resetviewbutton ,"clicked", G_CALLBACK (activate_reset_view), NULL);
     g_signal_connect (texture_filechooser,"clicked", G_CALLBACK (activate_texture_filechooser), NULL); 
     
-    g_signal_connect (choose_image_button ,"clicked", G_CALLBACK (activate_choose_image_button), NULL); 
     g_signal_connect (plybutton ,"clicked", G_CALLBACK (activateply), NULL); 
-    g_signal_connect (evalbutton ,"clicked", G_CALLBACK (activateeval), NULL); 
     
     g_signal_connect (playbutton3 ,"clicked", G_CALLBACK (activate_play), NULL);
     g_signal_connect (stopbutton3 ,"clicked", G_CALLBACK (activate_stop), NULL); 
-    
-    
-    g_signal_connect (scale_slider_main ,"value-changed", G_CALLBACK (scalesliderupdate), NULL); 
-    g_signal_connect (scale_slider3 ,"value-changed", G_CALLBACK (scalesliderupdate3), NULL); 
-    g_signal_connect (scale_slider4 ,"value-changed", G_CALLBACK (scalesliderupdate4), NULL); 
-  
   /* Quit form main if got delete event */
   g_signal_connect(G_OBJECT(window), "delete-event",
                  G_CALLBACK(gtk_main_quit), NULL);
                  
                  
-  g_signal_connect(view,"leave-notify-event",G_CALLBACK(keypressed_textview), NULL);
-                 
-  gtk_box_pack_start(GTK_BOX(top_toolbar_box), (GtkWidget *)actionbar, 0, 0, 0);
-  gtk_box_pack_start(GTK_BOX(top_toolbar_box), (GtkWidget *)file_actionbar, 0, 0, 0);
+  gtk_box_pack_start(GTK_BOX(top_toolbar_box), header_shell, 0, 0, 0);
   gtk_box_pack_start(GTK_BOX(root_shell), top_toolbar_box, 0, 0, 0);
   gtk_box_pack_start(GTK_BOX(root_shell), (GtkWidget *)paned, 1, 1, 0);
   gtk_container_add(GTK_CONTAINER(window), root_shell);
+  install_gui_event_logging(window);
   gtk_widget_show_all(GTK_WIDGET(window));
     gtk_window_present (GTK_WINDOW (window));
    
@@ -4028,6 +4067,8 @@ gtk_widget_set_margin_bottom((GtkWidget *)actionbar3, 8);
 int main( int argc, char* argv[] ){
 
 GtkApplication *app;
+install_console_stream_redirects();
+debugout("main: starting application");
 
 for(int i=0;i<100;i++)rulenames[i]=new char(40);//due to GTK combobox error
 
@@ -4035,10 +4076,11 @@ for(int i=0;i<100;i++)rulenames[i]=new char(40);//due to GTK combobox error
 	
 	
 	
-
 	
-
+	
+	
 	SSL_library_init();   /*load encryption and hash algo's in ssl*/
+	debugout("main: SSL initialized");
 	
 	
 	
@@ -4046,6 +4088,7 @@ for(int i=0;i<100;i++)rulenames[i]=new char(40);//due to GTK combobox error
 	
     app= gtk_application_new ("snap.progen3d.progen3d", G_APPLICATION_DEFAULT_FLAGS);	
        g_signal_connect (app ,"activate", G_CALLBACK (activate_app), NULL);
+	debugout("main: entering GTK application loop");
    
   
   

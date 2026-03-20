@@ -3,8 +3,10 @@
 #include "Scope.h"
 #include "Mesh.h"
 
+#include <cstddef>
 #include <fstream>
 #include <stack>
+#include <vector>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -25,7 +27,7 @@ class Primitive{
 	Primitive(std::string type,GLuint texId_name,bool,bool,bool);
 	
 	
-	void draw(Scope *scope,int texindex,int rotate,float texscale);
+	void draw(Scope *scope,int texindex,float alpha,float texscale);
 	
 	
 	std::string type;
@@ -56,9 +58,13 @@ public:
     Mesh &getScene();
     GLuint loadTexture(GLuint texid);
     void draw();
-    GLfloat *calc(const GLfloat *,int texindex);
+    GLfloat *calc(const GLfloat *,int texindex,int *out_count = nullptr);
+    void buildTextureBuffers(const GLfloat *vertex_data,
+                             std::size_t texture_count,
+                             std::vector<std::vector<GLfloat>> *buffers,
+                             std::vector<int> *counts) const;
     void PLY(const GLfloat *,const std::string &filename);
-    void addPrimitive(std::string type,Scope *scope,int texindex,int rotate,float texscale);
+    void addPrimitive(std::string type,Scope *scope,int texindex,float alpha,float texscale);
     void genPrimitives();
 
     Scope *current_scope=NULL;
@@ -73,7 +79,7 @@ public:
     std::vector<Primitive *> primitives;
     std::vector<Scope *> primitive_scopes;
     std::vector<int> texindexes;
-    std::vector<int> rotates;
+    std::vector<float> alphas;
     std::vector<float> texscales;
     
     

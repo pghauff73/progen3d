@@ -112,13 +112,13 @@ void Scope::Rz(float angle)
     Transform2=Transform2*rotation2;
 }
 
-glm::mat4 Scope::getTransform()
+glm::mat4 Scope::getTransform() const
 {
    
 
     return Transform;
 }
-glm::mat4 Scope::getTransform2()
+glm::mat4 Scope::getTransform2() const
 {
     
     return Transform2;

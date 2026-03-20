@@ -5,7 +5,110 @@
 #include <GL/glu.h>
 //#include <GL/glut.h>
 
-extern void draw_box(float angle_cube,glm::vec3 scale_vec,glm::vec3 position_vec,glm::vec3 pos,int tex_index,float texscale);
+#include <algorithm>
+
+extern void draw_box(glm::vec3 scale_vec,
+                     glm::vec3 position_vec,
+                     glm::vec3 pos,
+                     int tex_index,
+                     float texscale,
+                     float alpha);
+
+namespace {
+
+constexpr int kPrimitiveVertexCount = 36;
+constexpr int kVertexStride = 8;
+
+enum class PrimitiveTransformMode {
+	Default,
+	CubeX,
+	CubeY
+};
+
+struct PrimitiveTransformCache {
+	PrimitiveTransformMode mode = PrimitiveTransformMode::Default;
+	glm::mat4 primary_transform{1.0f};
+	glm::mat4 secondary_transform{1.0f};
+	glm::mat3 primary_normal_transform{1.0f};
+	glm::mat3 secondary_normal_transform{1.0f};
+};
+
+PrimitiveTransformCache build_transform_cache(const Primitive *primitive, const Scope *scope)
+{
+	PrimitiveTransformCache cache;
+	cache.primary_transform = scope->getTransform();
+	cache.secondary_transform = scope->getTransform2();
+	cache.primary_normal_transform =
+		glm::transpose(glm::inverse(glm::mat3(cache.primary_transform)));
+	cache.secondary_normal_transform =
+		glm::transpose(glm::inverse(glm::mat3(cache.secondary_transform)));
+
+	if (primitive->type == "CubeX") {
+		cache.mode = PrimitiveTransformMode::CubeX;
+	} else if (primitive->type == "CubeY") {
+		cache.mode = PrimitiveTransformMode::CubeY;
+	}
+
+	return cache;
+}
+
+void append_primitive_vertices(const PrimitiveTransformCache &cache,
+	                           float texscale,
+	                           const GLfloat *vertex_data,
+	                           std::vector<GLfloat> *buffer)
+{
+	const std::size_t base_offset = buffer->size();
+	buffer->resize(base_offset + (kPrimitiveVertexCount * kVertexStride));
+
+	for (int vertex_index = 0; vertex_index < kPrimitiveVertexCount; ++vertex_index) {
+		const int source_offset = vertex_index * kVertexStride;
+		const std::size_t destination_offset =
+			base_offset + static_cast<std::size_t>(source_offset);
+
+		glm::vec4 vertex(vertex_data[source_offset],
+		                vertex_data[source_offset + 1],
+		                vertex_data[source_offset + 2],
+		                1.0f);
+
+		const glm::mat4 *transform = &cache.primary_transform;
+		const glm::mat3 *normal_transform = &cache.primary_normal_transform;
+
+		if (cache.mode == PrimitiveTransformMode::CubeX) {
+			vertex.x += 0.5f;
+			if (vertex.x > 0.5f) {
+				transform = &cache.secondary_transform;
+				normal_transform = &cache.secondary_normal_transform;
+			}
+		} else if (cache.mode == PrimitiveTransformMode::CubeY) {
+			vertex.z += 0.5f;
+			if (vertex.z > 0.5f) {
+				transform = &cache.secondary_transform;
+				normal_transform = &cache.secondary_normal_transform;
+			}
+		} else if (vertex.y > 0.0f) {
+			transform = &cache.secondary_transform;
+			normal_transform = &cache.secondary_normal_transform;
+		}
+
+		vertex = (*transform) * vertex;
+		(*buffer)[destination_offset] = vertex.x;
+		(*buffer)[destination_offset + 1] = vertex.y;
+		(*buffer)[destination_offset + 2] = vertex.z;
+
+		const glm::vec3 normal = glm::normalize(
+			(*normal_transform) *
+			glm::vec3(vertex_data[source_offset + 3],
+			          vertex_data[source_offset + 4],
+			          vertex_data[source_offset + 5]));
+		(*buffer)[destination_offset + 3] = normal.x;
+		(*buffer)[destination_offset + 4] = normal.y;
+		(*buffer)[destination_offset + 5] = normal.z;
+		(*buffer)[destination_offset + 6] = (vertex_data[source_offset + 6] + 1.0f) * texscale;
+		(*buffer)[destination_offset + 7] = (vertex_data[source_offset + 7] + 1.0f) * texscale;
+	}
+}
+
+}
 
 Primitive::Primitive(std::string type,GLuint texId, bool x,bool y,bool z){
 this->texId=texId;
@@ -18,7 +121,7 @@ this->z=z;
 
 }
 
-void Primitive::draw(Scope *scope,int tex,int rotate,float scaletex){
+void Primitive::draw(Scope *scope,int tex,float alpha,float scaletex){
 	
 	
 
@@ -32,7 +135,7 @@ glBindTexture(GL_TEXTURE_2D,tex);
 
 	
 	glTranslatef(scope->position[0],scope->position[1],scope->position[2]);
-	glRotatef(90.0f*float(rotate),0,1,0);
+	
 	glScalef(scope->size.x,scope->size.y,scope->size.z);
 	
 	*/
@@ -82,11 +185,11 @@ glBindTexture(GL_TEXTURE_2D,tex);
 	float Y=scope->position.y;
 	
 	if(type=="Cube")
-	draw_box(90.0f*float(rotate),glm::vec3(x,y,z),glm::vec3(X,Y,Z),glm::vec3(0,0,0),tex,scaletex);
+	draw_box(glm::vec3(x,y,z),glm::vec3(X,Y,Z),glm::vec3(0,0,0),tex,scaletex,alpha);
 	else if(type=="CubeX")
-	draw_box(90.0f*float(rotate),glm::vec3(x,y,z),glm::vec3(X,Y,Z),glm::vec3(0.5,0,0),tex,scaletex);
+	draw_box(glm::vec3(x,y,z),glm::vec3(X,Y,Z),glm::vec3(0.5,0,0),tex,scaletex,alpha);
 	else if(type=="CubeY")
-	draw_box(90.0f*float(rotate),glm::vec3(x,y,z),glm::vec3(X,Y,Z),glm::vec3(0,0,0.5),tex,scaletex);
+	draw_box(glm::vec3(x,y,z),glm::vec3(X,Y,Z),glm::vec3(0,0,0.5),tex,scaletex,alpha);
 	
 	/*
 	
@@ -194,7 +297,7 @@ glBindTexture(GL_TEXTURE_2D,tex);
 
 
 
-void Context::addPrimitive(std::string type,Scope *scope,int texindex, int rotate, float texscale){
+void Context::addPrimitive(std::string type,Scope *scope,int texindex, float alpha, float texscale){
 	
 	
 	
@@ -233,129 +336,79 @@ void Context::addPrimitive(std::string type,Scope *scope,int texindex, int rotat
 	//std::cout<<texindex<<std::endl;
 	primitive_scopes.push_back(new Scope(scope));
 	texindexes.push_back(texindex);
-	rotates.push_back(rotate);
+	alphas.push_back(alpha);
 	texscales.push_back(texscale);
 	
 	
 }
 
-extern int tex_count[50];
+GLfloat *Context::calc(const GLfloat *vertex_data,int tex_index,int *out_count){
+	if(out_count!=NULL)*out_count=0;
+	if(tex_index<0)return NULL;
 
-GLfloat *Context::calc(const GLfloat *vertex_data,int tex_index){
-	GLfloat SCALE=1.0f;
-	int NUM=36;
-	
-	int texcount=0;
-	for(int i=0;i<primitives.size();i++){
-		if(texindexes[i]==tex_index)texcount++;
+	std::vector<std::vector<GLfloat>> buffers;
+	std::vector<int> counts;
+	buildTextureBuffers(vertex_data,
+	                   static_cast<std::size_t>(tex_index + 1),
+	                   &buffers,
+	                   &counts);
+	if(static_cast<std::size_t>(tex_index) >= buffers.size() ||
+	   static_cast<std::size_t>(tex_index) >= counts.size()){
+		return NULL;
 	}
-	
-	//std::cout<<"size:"<<primitives.size()<<"texindex:"<<tex_index<<" texcount:"<<texcount<<std::endl;
-	tex_count[tex_index]=texcount;
-	if(texcount==0)return NULL;
-	GLfloat *vertex_buffer=new GLfloat[NUM*8*texcount];
-	
-	
-	
-	int k=0;
-	for(int i=0;i<primitives.size();i++){
-		//std::cout<<"texindexes:"<<texindexes[i];
-		if(texindexes[i]==tex_index){
-			float x=primitive_scopes[i]->size.x*SCALE;
-			float y=primitive_scopes[i]->size.y*SCALE;
-			float z=primitive_scopes[i]->size.z*SCALE;
-			float X=primitive_scopes[i]->position.x*SCALE;
-			float Y=primitive_scopes[i]->position.y*SCALE;
-			float Z=primitive_scopes[i]->position.z*SCALE;
-			
-			for (int j=0;j<NUM;j++){
-				glm::vec4 v1(0,0,0,1.0);
-				
-				
-				v1.x=vertex_data[j*8];
-				v1.y=vertex_data[j*8+1];
-				v1.z=vertex_data[j*8+2];
-				
-				
-				glm::mat4 transform;
-				if(primitives[i]->type=="CubeX"){
-					
-					if(v1.x>0.0){
-						v1.x=v1.x+0.5;
-						transform=primitive_scopes[i]->getTransform2();
-						x=primitive_scopes[i]->size2.x*SCALE;
-						y=primitive_scopes[i]->size2.y*SCALE;
-						z=primitive_scopes[i]->size2.z*SCALE;
-			
-					}
-					else {
-						v1.x=v1.x+0.5;
-						transform=primitive_scopes[i]->getTransform();
-					}
-				}
-				else if(primitives[i]->type=="CubeY"){
-					
-					if(v1.z>0.0){
-						v1.z=v1.z+0.5;
-						transform=primitive_scopes[i]->getTransform2();
-						x=primitive_scopes[i]->size2.x*SCALE;
-						y=primitive_scopes[i]->size2.y*SCALE;
-						z=primitive_scopes[i]->size2.z*SCALE;
-			
-					}
-					else {
-						v1.z=v1.z+0.5;
-						transform=primitive_scopes[i]->getTransform();
-					}
-				}
-				else {
-					if(v1.y>0.0){
-						transform=primitive_scopes[i]->getTransform2();
-						x=primitive_scopes[i]->size2.x*SCALE;
-						y=primitive_scopes[i]->size2.y*SCALE;
-						z=primitive_scopes[i]->size2.z*SCALE;
-			
-					}
-					else {
-						transform=primitive_scopes[i]->getTransform();
-					}
-				}
-				
-				
-				v1=transform*v1;
-				vertex_buffer[k*NUM*8+j*8]=v1.x;
-				vertex_buffer[k*NUM*8+j*8+1]=v1.y;
-				vertex_buffer[k*NUM*8+j*8+2]=v1.z;
-				
-				glm::mat3 normal_transform = glm::transpose(glm::inverse(glm::mat3(transform)));
-				glm::vec3 normal = glm::normalize(
-					normal_transform *
-					glm::vec3(vertex_data[j*8+3], vertex_data[j*8+4], vertex_data[j*8+5]));
-				vertex_buffer[k*NUM*8+j*8+3]=normal.x;
-				vertex_buffer[k*NUM*8+j*8+4]=normal.y;
-				vertex_buffer[k*NUM*8+j*8+5]=normal.z;
-					
-					
-				//if(vertex_data[j*8+3]==1.0f || vertex_data[j*8+3]==-1.0f ){
-					vertex_buffer[k*NUM*8+j*8+6]=(vertex_data[j*8+6]+1.0)*texscales[i];//*z;
-					vertex_buffer[k*NUM*8+j*8+7]=(vertex_data[j*8+7]+1.0)*texscales[i];//*y;
-				//}
-				//else if(vertex_data[j*8+4]==1.0f || vertex_data[j*8+4]==-1.0f){
-				//	vertex_buffer[k*NUM*8+j*8+6]=vertex_data[j*8+6]*texscales[i];//*x;
-				//	vertex_buffer[k*NUM*8+j*8+7]=vertex_data[j*8+7]*texscales[i];//*z;
-					
-				//}
-				//else {
-				//	vertex_buffer[k*NUM*8+j*8+6]=vertex_data[j*8+6]*texscales[i];//*x;
-				//	vertex_buffer[k*NUM*8+j*8+7]=vertex_data[j*8+7]*texscales[i];//*y;
-				//}
-				
-			}
-			k++;
-			//std::cout<<":"<<k;
+	if(out_count!=NULL)*out_count=counts[tex_index];
+	if(buffers[tex_index].empty()){
+		return NULL;
+	}
+
+	GLfloat *vertex_buffer = new GLfloat[buffers[tex_index].size()];
+	std::copy(buffers[tex_index].begin(), buffers[tex_index].end(), vertex_buffer);
+	return vertex_buffer;	
+}
+
+void Context::buildTextureBuffers(const GLfloat *vertex_data,
+	                              std::size_t texture_count,
+	                              std::vector<std::vector<GLfloat>> *buffers,
+	                              std::vector<int> *counts) const
+{
+	if (buffers == NULL || counts == NULL) {
+		return;
+	}
+
+	buffers->assign(texture_count, {});
+	counts->assign(texture_count, 0);
+
+	for (std::size_t primitive_index = 0; primitive_index < texindexes.size(); ++primitive_index) {
+		const int tex_index = texindexes[primitive_index];
+		if (tex_index < 0 || static_cast<std::size_t>(tex_index) >= texture_count) {
+			continue;
 		}
+		++(*counts)[tex_index];
 	}
- return vertex_buffer;	
+
+	for (std::size_t texture_index = 0; texture_index < texture_count; ++texture_index) {
+		(*buffers)[texture_index].reserve(
+			static_cast<std::size_t>((*counts)[texture_index]) *
+			kPrimitiveVertexCount *
+			kVertexStride);
+	}
+
+	const std::size_t primitive_count = std::min(
+		std::min(primitives.size(), primitive_scopes.size()),
+		std::min(texindexes.size(), texscales.size()));
+	for (std::size_t primitive_index = 0; primitive_index < primitive_count; ++primitive_index) {
+		const int tex_index = texindexes[primitive_index];
+		if (tex_index < 0 || static_cast<std::size_t>(tex_index) >= texture_count) {
+			continue;
+		}
+
+		const PrimitiveTransformCache cache =
+			build_transform_cache(primitives[primitive_index], primitive_scopes[primitive_index]);
+		append_primitive_vertices(cache,
+		                         texscales[primitive_index],
+		                         vertex_data,
+		                         &(*buffers)[tex_index]);
+	}
 }
 
 
@@ -459,7 +512,7 @@ void Context::draw(){
 	for(int i=0;i<primitives.size();i++){
 		
 		
-		primitives[i]->draw(primitive_scopes[i],texindexes[i],rotates[i],texscales[i]);
+		primitives[i]->draw(primitive_scopes[i],texindexes[i],alphas[i],texscales[i]);
 	}
 	
 }
