@@ -12,7 +12,7 @@ parts:
   progen3d:
     plugin: make
     source-type: git
-    source: https://github.com/pghauff55/ProGen3d.git
+    source: https://github.com/pghauff73/progen3d.git
     build-packages:
       - g++
       - make
