@@ -1,0 +1,2402 @@
+{
+  "reference": {
+    "key": "reference",
+    "label": "Research Median AWD Hot Hatch",
+    "description": "Median package of Golf R, S3 Sportback and GRMN Corolla with a balanced fastback hatch envelope.",
+    "package_basis": "median of three official hot-hatch packages",
+    "package": {
+      "length": 4.353,
+      "width": 1.816,
+      "height": 1.4681199999999999,
+      "wheelbase": 2.6289,
+      "track_front": 1.56825,
+      "track_rear": 1.56799,
+      "ground_clearance": 0.13,
+      "front_overhang": 0.86205,
+      "rear_overhang": 0.86205
+    },
+    "platform": {
+      "floor_height": 0.26,
+      "front_hpoint_x": 0.15773399999999999,
+      "rear_hpoint_x": -0.7623809999999999,
+      "hpoint_z": 0.56,
+      "eye_z": 1.1800000000000002,
+      "head_clearance": 0.085,
+      "seat_lateral": 0.25424
+    },
+    "style": {
+      "roof_scale": 1.0,
+      "greenhouse_front_factor": 1.0,
+      "greenhouse_rear_factor": 1.0,
+      "nose_taper": 1.0,
+      "tail_taper": 1.0,
+      "hood_wedge": 0.52,
+      "roof_crown": 0.5,
+      "tumblehome": 0.3,
+      "belt_rise": 0.045,
+      "shoulder_strength": 0.032,
+      "front_fender_amplitude": 0.03,
+      "rear_haunch_amplitude": 0.04,
+      "rocker_tuck": 0.05,
+      "door_scallop": 0.024,
+      "spoiler_scale": 1.0,
+      "splitter_scale": 1.0,
+      "grille_scale": 1.0
+    },
+    "wheel_suspension": {
+      "wheel_radius": 0.34,
+      "wheel_width": 0.235,
+      "steer_min_deg": -32.0,
+      "steer_max_deg": 32.0,
+      "travel_min": -0.07,
+      "travel_max": 0.06,
+      "wheelhouse_clearance": 0.028
+    },
+    "powertrain": {
+      "architecture": "ICE_AWD",
+      "drive_layout": "AWD",
+      "battery_pack": false,
+      "battery_thickness": 0.0,
+      "engine_envelope_length": 0.78,
+      "engine_envelope_width": 1.18,
+      "engine_envelope_height": 0.56,
+      "exhaust_count": 4
+    },
+    "closures": {
+      "front_door_max_deg": 68.0,
+      "rear_door_max_deg": 68.0,
+      "bonnet_max_deg": 62.0,
+      "hatch_max_deg": 72.0,
+      "side_glass_travel": 0.55,
+      "nominal_panel_gap": 0.004
+    },
+    "body_rgb": [
+      190,
+      12,
+      8
+    ],
+    "reference_frame": {
+      "schema": "MCSMv2.0.1.VehicleReferenceFrame.v1",
+      "name": "MCSMv2VehicleFrame",
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axes": {
+        "x": {
+          "semantic": "front",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "y": {
+          "semantic": "right",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "z": {
+          "semantic": "up",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "handedness": "right",
+      "length_unit": "m",
+      "angle_unit": "deg",
+      "to_progen3d_matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "validation": {
+        "valid": true,
+        "axis_norms": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gram_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "handedness_scalar": 1.0,
+        "tolerance": 1e-10
+      }
+    },
+    "parameter_provenance": {
+      "architecture": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_pack": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_thickness": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "belt_rise": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "bonnet_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "crossover_cladding": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "door_scallop": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "drive_layout": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_height": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_length": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_width": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "exhaust_count": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "eye_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "floor_height": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "front_fender_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "front_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "greenhouse_front_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "greenhouse_rear_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "grille_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "ground_clearance": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hatch_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "head_clearance": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "height": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hood_wedge": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "hpoint_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "length": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "nominal_panel_gap": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "nose_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "rear_haunch_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "rear_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "rocker_tuck": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_crown": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "seat_lateral": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "shoulder_strength": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "side_glass_travel": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "splitter_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "spoiler_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_max_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_min_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tail_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "track_front": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "track_rear": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "travel_max": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "travel_min": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tumblehome": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_radius": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheel_width": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheelbase": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "wheelhouse_clearance": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "width": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "crossover_cladding": false,
+    "provenance": {
+      "package": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "platform": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "style": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_suspension": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "powertrain": {
+        "status": "ArchitectureReference",
+        "source": "median of three official hot-hatch packages",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "closures": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    }
+  },
+  "track": {
+    "key": "track",
+    "label": "Track Widebody AWD",
+    "description": "GRMN-proportioned wide-track package with stronger fender volumes, splitter and rear wing.",
+    "package_basis": "GRMN Corolla dimensional envelope with original body-surface parameters",
+    "package": {
+      "length": 4.40944,
+      "width": 1.8491199999999999,
+      "height": 1.4731999999999998,
+      "wheelbase": 2.6390599999999997,
+      "track_front": 1.5875,
+      "track_rear": 1.61798,
+      "ground_clearance": 0.105,
+      "front_overhang": 0.8851899999999998,
+      "rear_overhang": 0.8851899999999998
+    },
+    "platform": {
+      "floor_height": 0.24,
+      "front_hpoint_x": 0.15834359999999997,
+      "rear_hpoint_x": -0.7653273999999999,
+      "hpoint_z": 0.54,
+      "eye_z": 1.1600000000000001,
+      "head_clearance": 0.085,
+      "seat_lateral": 0.2588768
+    },
+    "style": {
+      "roof_scale": 0.98,
+      "greenhouse_front_factor": 1.0,
+      "greenhouse_rear_factor": 1.0,
+      "nose_taper": 1.0,
+      "tail_taper": 0.98,
+      "hood_wedge": 0.58,
+      "roof_crown": 0.44,
+      "tumblehome": 0.27,
+      "belt_rise": 0.055,
+      "shoulder_strength": 0.055,
+      "front_fender_amplitude": 0.06,
+      "rear_haunch_amplitude": 0.075,
+      "rocker_tuck": 0.055,
+      "door_scallop": 0.03,
+      "spoiler_scale": 1.45,
+      "splitter_scale": 1.35,
+      "grille_scale": 1.12
+    },
+    "wheel_suspension": {
+      "wheel_radius": 0.342,
+      "wheel_width": 0.245,
+      "steer_min_deg": -32.0,
+      "steer_max_deg": 32.0,
+      "travel_min": -0.07,
+      "travel_max": 0.06,
+      "wheelhouse_clearance": 0.024
+    },
+    "powertrain": {
+      "architecture": "ICE_AWD",
+      "drive_layout": "AWD",
+      "battery_pack": false,
+      "battery_thickness": 0.0,
+      "engine_envelope_length": 0.78,
+      "engine_envelope_width": 1.18,
+      "engine_envelope_height": 0.56,
+      "exhaust_count": 4
+    },
+    "closures": {
+      "front_door_max_deg": 68.0,
+      "rear_door_max_deg": 68.0,
+      "bonnet_max_deg": 62.0,
+      "hatch_max_deg": 72.0,
+      "side_glass_travel": 0.55,
+      "nominal_panel_gap": 0.004
+    },
+    "body_rgb": [
+      170,
+      5,
+      4
+    ],
+    "reference_frame": {
+      "schema": "MCSMv2.0.1.VehicleReferenceFrame.v1",
+      "name": "MCSMv2VehicleFrame",
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axes": {
+        "x": {
+          "semantic": "front",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "y": {
+          "semantic": "right",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "z": {
+          "semantic": "up",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "handedness": "right",
+      "length_unit": "m",
+      "angle_unit": "deg",
+      "to_progen3d_matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "validation": {
+        "valid": true,
+        "axis_norms": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gram_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "handedness_scalar": 1.0,
+        "tolerance": 1e-10
+      }
+    },
+    "parameter_provenance": {
+      "architecture": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_pack": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_thickness": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "belt_rise": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "bonnet_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "crossover_cladding": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "door_scallop": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "drive_layout": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_height": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_length": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_width": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "exhaust_count": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "eye_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "floor_height": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "front_fender_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "front_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "greenhouse_front_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "greenhouse_rear_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "grille_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "ground_clearance": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hatch_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "head_clearance": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "height": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hood_wedge": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "hpoint_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "length": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "nominal_panel_gap": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "nose_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "rear_haunch_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "rear_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "rocker_tuck": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_crown": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "seat_lateral": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "shoulder_strength": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "side_glass_travel": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "splitter_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "spoiler_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_max_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_min_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tail_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "track_front": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "track_rear": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "travel_max": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "travel_min": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tumblehome": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_radius": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheel_width": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheelbase": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "wheelhouse_clearance": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "width": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "crossover_cladding": false,
+    "provenance": {
+      "package": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "platform": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "style": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_suspension": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "powertrain": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "closures": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    }
+  },
+  "aero": {
+    "key": "aero",
+    "label": "Aero Fastback AWD",
+    "description": "S3-sized low-drag-oriented variation with a lower greenhouse, longer taper and reduced frontal openings.",
+    "package_basis": "Audi S3 Sportback package, original aerodynamic variation",
+    "package": {
+      "length": 4.353,
+      "width": 1.816,
+      "height": 1.4405,
+      "wheelbase": 2.624,
+      "track_front": 1.549,
+      "track_rear": 1.518,
+      "ground_clearance": 0.12,
+      "front_overhang": 0.8645,
+      "rear_overhang": 0.8645
+    },
+    "platform": {
+      "floor_height": 0.25,
+      "front_hpoint_x": 0.15744,
+      "rear_hpoint_x": -0.76096,
+      "hpoint_z": 0.55,
+      "eye_z": 1.17,
+      "head_clearance": 0.085,
+      "seat_lateral": 0.25424
+    },
+    "style": {
+      "roof_scale": 0.955,
+      "greenhouse_front_factor": 1.04,
+      "greenhouse_rear_factor": 1.16,
+      "nose_taper": 1.0,
+      "tail_taper": 0.84,
+      "hood_wedge": 0.46,
+      "roof_crown": 0.4,
+      "tumblehome": 0.35,
+      "belt_rise": 0.038,
+      "shoulder_strength": 0.024,
+      "front_fender_amplitude": 0.02,
+      "rear_haunch_amplitude": 0.028,
+      "rocker_tuck": 0.06,
+      "door_scallop": 0.018,
+      "spoiler_scale": 0.72,
+      "splitter_scale": 0.88,
+      "grille_scale": 0.72
+    },
+    "wheel_suspension": {
+      "wheel_radius": 0.333,
+      "wheel_width": 0.225,
+      "steer_min_deg": -32.0,
+      "steer_max_deg": 32.0,
+      "travel_min": -0.07,
+      "travel_max": 0.06,
+      "wheelhouse_clearance": 0.028
+    },
+    "powertrain": {
+      "architecture": "ICE_AWD",
+      "drive_layout": "AWD",
+      "battery_pack": false,
+      "battery_thickness": 0.0,
+      "engine_envelope_length": 0.78,
+      "engine_envelope_width": 1.18,
+      "engine_envelope_height": 0.56,
+      "exhaust_count": 4
+    },
+    "closures": {
+      "front_door_max_deg": 68.0,
+      "rear_door_max_deg": 68.0,
+      "bonnet_max_deg": 62.0,
+      "hatch_max_deg": 72.0,
+      "side_glass_travel": 0.55,
+      "nominal_panel_gap": 0.004
+    },
+    "body_rgb": [
+      154,
+      14,
+      12
+    ],
+    "reference_frame": {
+      "schema": "MCSMv2.0.1.VehicleReferenceFrame.v1",
+      "name": "MCSMv2VehicleFrame",
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axes": {
+        "x": {
+          "semantic": "front",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "y": {
+          "semantic": "right",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "z": {
+          "semantic": "up",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "handedness": "right",
+      "length_unit": "m",
+      "angle_unit": "deg",
+      "to_progen3d_matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "validation": {
+        "valid": true,
+        "axis_norms": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gram_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "handedness_scalar": 1.0,
+        "tolerance": 1e-10
+      }
+    },
+    "parameter_provenance": {
+      "architecture": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_pack": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_thickness": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "belt_rise": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "bonnet_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "crossover_cladding": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "door_scallop": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "drive_layout": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_height": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_length": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_width": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "exhaust_count": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "eye_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "floor_height": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "front_fender_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "front_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "greenhouse_front_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "greenhouse_rear_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "grille_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "ground_clearance": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hatch_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "head_clearance": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "height": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hood_wedge": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "hpoint_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "length": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "nominal_panel_gap": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "nose_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "rear_haunch_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "rear_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "rocker_tuck": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_crown": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "seat_lateral": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "shoulder_strength": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "side_glass_travel": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "splitter_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "spoiler_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_max_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_min_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tail_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "track_front": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "track_rear": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "travel_max": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "travel_min": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tumblehome": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_radius": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheel_width": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheelbase": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "wheelhouse_clearance": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "width": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "crossover_cladding": false,
+    "provenance": {
+      "package": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "platform": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "style": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_suspension": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "powertrain": {
+        "status": "ArchitectureReference",
+        "source": "Audi S3 Sportback package, original aerodynamic variation",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "closures": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    }
+  },
+  "crossover": {
+    "key": "crossover",
+    "label": "Urban Crossover EV AWD",
+    "description": "C-HR-sized battery-electric variation with a long wheelbase, tall cabin, raised ride height and underfloor battery.",
+    "package_basis": "2026 Toyota C-HR BEV dimensions, original surface construction",
+    "package": {
+      "length": 4.51866,
+      "width": 1.8694399999999998,
+      "height": 1.6205199999999997,
+      "wheelbase": 2.7508199999999996,
+      "track_front": 1.6,
+      "track_rear": 1.6,
+      "ground_clearance": 0.185,
+      "front_overhang": 0.8485632000000001,
+      "rear_overhang": 0.9192768000000001
+    },
+    "platform": {
+      "floor_height": 0.315,
+      "front_hpoint_x": 0.16504919999999998,
+      "rear_hpoint_x": -0.7977377999999998,
+      "hpoint_z": 0.665,
+      "eye_z": 1.2850000000000001,
+      "head_clearance": 0.085,
+      "seat_lateral": 0.2617216
+    },
+    "style": {
+      "roof_scale": 1.12,
+      "greenhouse_front_factor": 1.02,
+      "greenhouse_rear_factor": 1.08,
+      "nose_taper": 1.0,
+      "tail_taper": 0.93,
+      "hood_wedge": 0.48,
+      "roof_crown": 0.56,
+      "tumblehome": 0.26,
+      "belt_rise": 0.06,
+      "shoulder_strength": 0.06,
+      "front_fender_amplitude": 0.065,
+      "rear_haunch_amplitude": 0.07,
+      "rocker_tuck": 0.035,
+      "door_scallop": 0.02,
+      "spoiler_scale": 0.9,
+      "splitter_scale": 0.72,
+      "grille_scale": 0.45
+    },
+    "wheel_suspension": {
+      "wheel_radius": 0.365,
+      "wheel_width": 0.245,
+      "steer_min_deg": -32.0,
+      "steer_max_deg": 32.0,
+      "travel_min": -0.085,
+      "travel_max": 0.075,
+      "wheelhouse_clearance": 0.028
+    },
+    "powertrain": {
+      "architecture": "BEV",
+      "drive_layout": "AWD",
+      "battery_pack": true,
+      "battery_thickness": 0.145,
+      "engine_envelope_length": 0.48,
+      "engine_envelope_width": 1.18,
+      "engine_envelope_height": 0.34,
+      "exhaust_count": 0
+    },
+    "closures": {
+      "front_door_max_deg": 68.0,
+      "rear_door_max_deg": 68.0,
+      "bonnet_max_deg": 62.0,
+      "hatch_max_deg": 72.0,
+      "side_glass_travel": 0.55,
+      "nominal_panel_gap": 0.004
+    },
+    "body_rgb": [
+      176,
+      35,
+      18
+    ],
+    "reference_frame": {
+      "schema": "MCSMv2.0.1.VehicleReferenceFrame.v1",
+      "name": "MCSMv2VehicleFrame",
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axes": {
+        "x": {
+          "semantic": "front",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "y": {
+          "semantic": "right",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "z": {
+          "semantic": "up",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "handedness": "right",
+      "length_unit": "m",
+      "angle_unit": "deg",
+      "to_progen3d_matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "validation": {
+        "valid": true,
+        "axis_norms": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gram_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "handedness_scalar": 1.0,
+        "tolerance": 1e-10
+      }
+    },
+    "parameter_provenance": {
+      "architecture": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_pack": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "battery_thickness": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "belt_rise": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "bonnet_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "crossover_cladding": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "door_scallop": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "drive_layout": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_height": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_length": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "engine_envelope_width": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "exhaust_count": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "eye_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "floor_height": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "front_fender_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "front_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "front_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "greenhouse_front_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "greenhouse_rear_factor": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "grille_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "ground_clearance": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hatch_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "head_clearance": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "height": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "hood_wedge": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "hpoint_z": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "length": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "nominal_panel_gap": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "nose_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_door_max_deg": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "rear_haunch_amplitude": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "rear_hpoint_x": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "rear_overhang": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "rocker_tuck": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_crown": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "roof_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "seat_lateral": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "shoulder_strength": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "side_glass_travel": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      },
+      "splitter_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "spoiler_scale": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_max_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "steer_min_deg": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tail_taper": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "track_front": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "track_rear": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "travel_max": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "travel_min": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "tumblehome": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_radius": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheel_width": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      },
+      "wheelbase": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "wheelhouse_clearance": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "width": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "crossover_cladding": true,
+    "provenance": {
+      "package": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      },
+      "platform": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      },
+      "style": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "wheel_suspension": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      },
+      "powertrain": {
+        "status": "ArchitectureReference",
+        "source": "2026 Toyota C-HR BEV dimensions, original surface construction",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      },
+      "closures": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    }
+  }
+}

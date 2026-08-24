@@ -1,0 +1,436 @@
+{
+  "schema": "MCSMv2.2.ReleaseVerification.v1",
+  "version": "2.2.0",
+  "release_root": "/mnt/data/MCSMv2_2_0_RELEASE",
+  "file_count": 109,
+  "total_size_bytes": 103068031,
+  "checks": {
+    "python_compile": {
+      "pass": true,
+      "file_count": 5,
+      "failures": []
+    },
+    "json_parse": {
+      "pass": true,
+      "file_count": 39
+    },
+    "csv_load": {
+      "pass": true,
+      "file_count": 4
+    },
+    "preview_load": {
+      "pass": true,
+      "file_count": 5,
+      "files": [
+        {
+          "path": "previews/mcsmv2_2_kinematics_dashboard.png",
+          "size": [
+            2400,
+            1600
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "previews/mcsmv2_2_reference_closed.png",
+          "size": [
+            1100,
+            700
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "previews/mcsmv2_2_reference_open.png",
+          "size": [
+            1100,
+            700
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "previews/mcsmv2_2_reference_partition.png",
+          "size": [
+            1100,
+            700
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "previews/mcsmv2_2_reference_suspension.png",
+          "size": [
+            1100,
+            700
+          ],
+          "mode": "RGBA"
+        }
+      ]
+    },
+    "model_load": {
+      "pass": true,
+      "file_count": 39,
+      "files": [
+        {
+          "path": "models/modern_car_v2_aero.glb",
+          "kind": "scene",
+          "geometry_count": 46,
+          "vertices": 101950,
+          "faces": 198359
+        },
+        {
+          "path": "models/modern_car_v2_aero_body.stl",
+          "kind": "mesh",
+          "vertices": 52302,
+          "faces": 104600,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_aero_closures_closed.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_aero_closures_open.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_aero_engineering.glb",
+          "kind": "scene",
+          "geometry_count": 70,
+          "vertices": 91644,
+          "faces": 176024
+        },
+        {
+          "path": "models/modern_car_v2_aero_implicit_scaffold.stl",
+          "kind": "mesh",
+          "vertices": 49786,
+          "faces": 99568,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_aero_semantic_uv_surface.stl",
+          "kind": "mesh",
+          "vertices": 7488,
+          "faces": 14820,
+          "watertight": false,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_aero_surface_partition.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 8863,
+          "faces": 14820
+        },
+        {
+          "path": "models/modern_car_v2_aero_suspension_kinematics.glb",
+          "kind": "scene",
+          "geometry_count": 54,
+          "vertices": 7722,
+          "faces": 15228
+        },
+        {
+          "path": "models/modern_car_v2_crossover.glb",
+          "kind": "scene",
+          "geometry_count": 43,
+          "vertices": 101298,
+          "faces": 196494
+        },
+        {
+          "path": "models/modern_car_v2_crossover_body.stl",
+          "kind": "mesh",
+          "vertices": 52044,
+          "faces": 104092,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_crossover_closures_closed.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_crossover_closures_open.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_crossover_engineering.glb",
+          "kind": "scene",
+          "geometry_count": 71,
+          "vertices": 91430,
+          "faces": 175600
+        },
+        {
+          "path": "models/modern_car_v2_crossover_implicit_scaffold.stl",
+          "kind": "mesh",
+          "vertices": 49006,
+          "faces": 98008,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_crossover_semantic_uv_surface.stl",
+          "kind": "mesh",
+          "vertices": 7488,
+          "faces": 14820,
+          "watertight": false,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_crossover_surface_partition.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 8863,
+          "faces": 14820
+        },
+        {
+          "path": "models/modern_car_v2_crossover_suspension_kinematics.glb",
+          "kind": "scene",
+          "geometry_count": 54,
+          "vertices": 7758,
+          "faces": 15300
+        },
+        {
+          "path": "models/modern_car_v2_reference.glb",
+          "kind": "scene",
+          "geometry_count": 46,
+          "vertices": 102785,
+          "faces": 199604
+        },
+        {
+          "path": "models/modern_car_v2_reference_body.stl",
+          "kind": "mesh",
+          "vertices": 52658,
+          "faces": 105312,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_reference_closures_closed.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_reference_closures_open.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_reference_engineering.glb",
+          "kind": "scene",
+          "geometry_count": 70,
+          "vertices": 92004,
+          "faces": 176744
+        },
+        {
+          "path": "models/modern_car_v2_reference_implicit_scaffold.glb",
+          "kind": "scene",
+          "geometry_count": 1,
+          "vertices": 50094,
+          "faces": 100184
+        },
+        {
+          "path": "models/modern_car_v2_reference_implicit_scaffold.stl",
+          "kind": "mesh",
+          "vertices": 50094,
+          "faces": 100184,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_reference_semantic_uv_surface.glb",
+          "kind": "scene",
+          "geometry_count": 1,
+          "vertices": 7488,
+          "faces": 14820
+        },
+        {
+          "path": "models/modern_car_v2_reference_semantic_uv_surface.stl",
+          "kind": "mesh",
+          "vertices": 7488,
+          "faces": 14820,
+          "watertight": false,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_reference_surface_partition.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 8863,
+          "faces": 14820
+        },
+        {
+          "path": "models/modern_car_v2_reference_suspension_kinematics.glb",
+          "kind": "scene",
+          "geometry_count": 54,
+          "vertices": 7726,
+          "faces": 15236
+        },
+        {
+          "path": "models/modern_car_v2_track.glb",
+          "kind": "scene",
+          "geometry_count": 46,
+          "vertices": 102275,
+          "faces": 198538
+        },
+        {
+          "path": "models/modern_car_v2_track_body.stl",
+          "kind": "mesh",
+          "vertices": 52308,
+          "faces": 104612,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_track_closures_closed.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_track_closures_open.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 12849,
+          "faces": 22308
+        },
+        {
+          "path": "models/modern_car_v2_track_engineering.glb",
+          "kind": "scene",
+          "geometry_count": 70,
+          "vertices": 91782,
+          "faces": 176300
+        },
+        {
+          "path": "models/modern_car_v2_track_implicit_scaffold.stl",
+          "kind": "mesh",
+          "vertices": 49798,
+          "faces": 99592,
+          "watertight": true,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_track_semantic_uv_surface.stl",
+          "kind": "mesh",
+          "vertices": 7488,
+          "faces": 14820,
+          "watertight": false,
+          "winding_consistent": true
+        },
+        {
+          "path": "models/modern_car_v2_track_surface_partition.glb",
+          "kind": "scene",
+          "geometry_count": 23,
+          "vertices": 8863,
+          "faces": 14820
+        },
+        {
+          "path": "models/modern_car_v2_track_suspension_kinematics.glb",
+          "kind": "scene",
+          "geometry_count": 54,
+          "vertices": 7854,
+          "faces": 15492
+        },
+        {
+          "path": "models/modern_car_v2_variations_comparison.glb",
+          "kind": "scene",
+          "geometry_count": 4,
+          "vertices": 1255848,
+          "faces": 418616
+        }
+      ]
+    },
+    "validation_gate": {
+      "pass": true,
+      "variants": {
+        "reference": {
+          "assurance": "V3",
+          "release_gate_pass": true,
+          "surface_partition_pass": true,
+          "hardpoint_pass": true,
+          "actual_tyre_sweep_pass": true,
+          "closure_pass": true,
+          "glass_pass": true,
+          "package_pass": true,
+          "body_integrity_pass": true
+        },
+        "track": {
+          "assurance": "V3",
+          "release_gate_pass": true,
+          "surface_partition_pass": true,
+          "hardpoint_pass": true,
+          "actual_tyre_sweep_pass": true,
+          "closure_pass": true,
+          "glass_pass": true,
+          "package_pass": true,
+          "body_integrity_pass": true
+        },
+        "aero": {
+          "assurance": "V3",
+          "release_gate_pass": true,
+          "surface_partition_pass": true,
+          "hardpoint_pass": true,
+          "actual_tyre_sweep_pass": true,
+          "closure_pass": true,
+          "glass_pass": true,
+          "package_pass": true,
+          "body_integrity_pass": true
+        },
+        "crossover": {
+          "assurance": "V3",
+          "release_gate_pass": true,
+          "surface_partition_pass": true,
+          "hardpoint_pass": true,
+          "actual_tyre_sweep_pass": true,
+          "closure_pass": true,
+          "glass_pass": true,
+          "package_pass": true,
+          "body_integrity_pass": true
+        }
+      }
+    },
+    "grammar_validation": {
+      "schema": "MCSMv2.2.GrammarValidation.v1",
+      "file": "/mnt/data/MCSMv2_2_0_RELEASE/MCSMv2_Modern_Car_Family.p3d",
+      "line_count": 213,
+      "rule_definitions": 7,
+      "unique_rule_definitions": 7,
+      "duplicate_rule_names": [],
+      "delimiter_errors": [],
+      "uses_Object_call": false,
+      "current_parser_compatible": false,
+      "target": "FGKv1/MVPv2.5",
+      "pass": true
+    },
+    "automated_tests": {
+      "pass": true,
+      "test_count": 34
+    },
+    "required_files": {
+      "pass": true,
+      "missing": []
+    },
+    "filesystem_sanity": {
+      "pass": true,
+      "empty_files": [],
+      "symlinks": []
+    }
+  },
+  "issues": [],
+  "pass": true
+}

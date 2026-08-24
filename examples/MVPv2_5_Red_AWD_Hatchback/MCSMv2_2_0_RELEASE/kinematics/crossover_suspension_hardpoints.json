@@ -1,0 +1,431 @@
+{
+  "schema": "MCSMv2.2.SuspensionHardpoints.v1",
+  "hardpoints": [
+    {
+      "name": "front_left_hub_centre",
+      "axle": "front",
+      "side": "left",
+      "role": "hub_centre",
+      "position": [
+        1.3754099999999998,
+        -0.8,
+        0.365
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_left_strut_top",
+      "axle": "front",
+      "side": "left",
+      "role": "strut_top",
+      "position": [
+        1.3404099999999999,
+        -0.635,
+        1.035
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_left_lower_arm_front_inner",
+      "axle": "front",
+      "side": "left",
+      "role": "lower_arm_front_inner",
+      "position": [
+        1.5754099999999998,
+        -0.36,
+        0.35
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_left_lower_arm_rear_inner",
+      "axle": "front",
+      "side": "left",
+      "role": "lower_arm_rear_inner",
+      "position": [
+        1.1754099999999998,
+        -0.38,
+        0.34
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_left_ball_joint",
+      "axle": "front",
+      "side": "left",
+      "role": "ball_joint",
+      "position": [
+        1.3904099999999997,
+        -0.765,
+        0.32
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_left_tie_rod_inner",
+      "axle": "front",
+      "side": "left",
+      "role": "tie_rod_inner",
+      "position": [
+        1.2904099999999998,
+        -0.31,
+        0.375
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_left_tie_rod_outer",
+      "axle": "front",
+      "side": "left",
+      "role": "tie_rod_outer",
+      "position": [
+        1.3504099999999999,
+        -0.775,
+        0.37
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_hub_centre",
+      "axle": "front",
+      "side": "right",
+      "role": "hub_centre",
+      "position": [
+        1.3754099999999998,
+        0.8,
+        0.365
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_strut_top",
+      "axle": "front",
+      "side": "right",
+      "role": "strut_top",
+      "position": [
+        1.3404099999999999,
+        0.635,
+        1.035
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_lower_arm_front_inner",
+      "axle": "front",
+      "side": "right",
+      "role": "lower_arm_front_inner",
+      "position": [
+        1.5754099999999998,
+        0.36,
+        0.35
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_lower_arm_rear_inner",
+      "axle": "front",
+      "side": "right",
+      "role": "lower_arm_rear_inner",
+      "position": [
+        1.1754099999999998,
+        0.38,
+        0.34
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_ball_joint",
+      "axle": "front",
+      "side": "right",
+      "role": "ball_joint",
+      "position": [
+        1.3904099999999997,
+        0.765,
+        0.32
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_tie_rod_inner",
+      "axle": "front",
+      "side": "right",
+      "role": "tie_rod_inner",
+      "position": [
+        1.2904099999999998,
+        0.31,
+        0.375
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "front_right_tie_rod_outer",
+      "axle": "front",
+      "side": "right",
+      "role": "tie_rod_outer",
+      "position": [
+        1.3504099999999999,
+        0.775,
+        0.37
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_hub_centre",
+      "axle": "rear",
+      "side": "left",
+      "role": "hub_centre",
+      "position": [
+        -1.3754099999999998,
+        -0.8,
+        0.365
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_upper_link_inner",
+      "axle": "rear",
+      "side": "left",
+      "role": "upper_link_inner",
+      "position": [
+        -1.3354099999999998,
+        -0.43,
+        0.585
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_upper_link_outer",
+      "axle": "rear",
+      "side": "left",
+      "role": "upper_link_outer",
+      "position": [
+        -1.3554099999999998,
+        -0.76,
+        0.5449999999999999
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_lower_link_front_inner",
+      "axle": "rear",
+      "side": "left",
+      "role": "lower_link_front_inner",
+      "position": [
+        -1.2054099999999999,
+        -0.38,
+        0.335
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_lower_link_rear_inner",
+      "axle": "rear",
+      "side": "left",
+      "role": "lower_link_rear_inner",
+      "position": [
+        -1.5454099999999997,
+        -0.4,
+        0.33
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_lower_link_outer",
+      "axle": "rear",
+      "side": "left",
+      "role": "lower_link_outer",
+      "position": [
+        -1.3754099999999998,
+        -0.765,
+        0.315
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_toe_link_inner",
+      "axle": "rear",
+      "side": "left",
+      "role": "toe_link_inner",
+      "position": [
+        -1.4954099999999997,
+        -0.34,
+        0.38
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_toe_link_outer",
+      "axle": "rear",
+      "side": "left",
+      "role": "toe_link_outer",
+      "position": [
+        -1.4254099999999998,
+        -0.775,
+        0.37
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_left_damper_top",
+      "axle": "rear",
+      "side": "left",
+      "role": "damper_top",
+      "position": [
+        -1.3454099999999998,
+        -0.64,
+        0.9650000000000001
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_hub_centre",
+      "axle": "rear",
+      "side": "right",
+      "role": "hub_centre",
+      "position": [
+        -1.3754099999999998,
+        0.8,
+        0.365
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_upper_link_inner",
+      "axle": "rear",
+      "side": "right",
+      "role": "upper_link_inner",
+      "position": [
+        -1.3354099999999998,
+        0.43,
+        0.585
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_upper_link_outer",
+      "axle": "rear",
+      "side": "right",
+      "role": "upper_link_outer",
+      "position": [
+        -1.3554099999999998,
+        0.76,
+        0.5449999999999999
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_lower_link_front_inner",
+      "axle": "rear",
+      "side": "right",
+      "role": "lower_link_front_inner",
+      "position": [
+        -1.2054099999999999,
+        0.38,
+        0.335
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_lower_link_rear_inner",
+      "axle": "rear",
+      "side": "right",
+      "role": "lower_link_rear_inner",
+      "position": [
+        -1.5454099999999997,
+        0.4,
+        0.33
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_lower_link_outer",
+      "axle": "rear",
+      "side": "right",
+      "role": "lower_link_outer",
+      "position": [
+        -1.3754099999999998,
+        0.765,
+        0.315
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_toe_link_inner",
+      "axle": "rear",
+      "side": "right",
+      "role": "toe_link_inner",
+      "position": [
+        -1.4954099999999997,
+        0.34,
+        0.38
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_toe_link_outer",
+      "axle": "rear",
+      "side": "right",
+      "role": "toe_link_outer",
+      "position": [
+        -1.4254099999999998,
+        0.775,
+        0.37
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    },
+    {
+      "name": "rear_right_damper_top",
+      "axle": "rear",
+      "side": "right",
+      "role": "damper_top",
+      "position": [
+        -1.3454099999999998,
+        0.64,
+        0.9650000000000001
+      ],
+      "evidence_status": "ConceptDerived",
+      "confidence": 0.55
+    }
+  ],
+  "validation": {
+    "schema": "MCSMv2.2.SuspensionHardpointValidation.v1",
+    "hardpoint_count": 32,
+    "finite": true,
+    "maximum_mirror_residual_m": 0.0,
+    "minimum_pose_rotation_determinant": 0.9999999999999998,
+    "maximum_pose_rotation_determinant": 1.0000000000000002,
+    "pass": true,
+    "assurance_note": "Concept hardpoints and gain-based pose solver; not measured production suspension geometry."
+  }
+}

@@ -1,0 +1,5 @@
+Native File Dialog Extended
+Version: 1.3.0
+Upstream commit: fc168e8605bfa51aaec22ab0c4e46b9de665a437
+Upstream repository: https://github.com/btzy/nativefiledialog-extended
+Backend: XDG Desktop Portal

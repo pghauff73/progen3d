@@ -1,0 +1,1178 @@
+{
+  "schema": "MCSMv2.0.1.ParameterGraph.v2",
+  "evaluation_order": [
+    "battery_pack",
+    "battery_thickness",
+    "belt_rise",
+    "bonnet_max_deg",
+    "crossover_cladding",
+    "door_scallop",
+    "drive_layout",
+    "engine_envelope_height",
+    "engine_envelope_length",
+    "engine_envelope_width",
+    "exhaust_count",
+    "eye_z",
+    "floor_height",
+    "wheelbase",
+    "front_axle_x",
+    "front_door_max_deg",
+    "front_overhang",
+    "front_extent_x",
+    "front_fender_amplitude",
+    "front_hpoint_x",
+    "width",
+    "track_front",
+    "front_track_body_margin",
+    "wheel_radius",
+    "wheel_width",
+    "steer_min_deg",
+    "steer_max_deg",
+    "steer_max_abs_deg",
+    "wheelhouse_clearance",
+    "front_wheelhouse_rx",
+    "front_wheelhouse_ry",
+    "travel_min",
+    "travel_down",
+    "travel_max",
+    "travel_up",
+    "front_wheelhouse_rz",
+    "greenhouse_front_factor",
+    "greenhouse_rear_factor",
+    "grille_scale",
+    "ground_clearance",
+    "hatch_max_deg",
+    "head_clearance",
+    "height",
+    "hood_wedge",
+    "hpoint_z",
+    "length",
+    "minimum_roof_from_occupant",
+    "nominal_panel_gap",
+    "nose_taper",
+    "occupant_roof_margin",
+    "rear_axle_x",
+    "rear_overhang",
+    "rear_extent_x",
+    "resolved_length",
+    "package_length_residual",
+    "powertrain_architecture",
+    "rear_door_max_deg",
+    "rear_haunch_amplitude",
+    "rear_hpoint_x",
+    "track_rear",
+    "rear_track_body_margin",
+    "rear_wheelhouse_rx",
+    "rear_wheelhouse_ry",
+    "rear_wheelhouse_rz",
+    "rocker_tuck",
+    "roof_crown",
+    "roof_scale",
+    "seat_lateral",
+    "shoulder_strength",
+    "side_glass_travel",
+    "splitter_scale",
+    "spoiler_scale",
+    "tail_taper",
+    "tumblehome"
+  ],
+  "nodes": {
+    "battery_pack": {
+      "value": false,
+      "unit": "bool",
+      "value_type": "bool",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "battery_thickness": {
+      "value": 0.0,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "belt_rise": {
+      "value": 0.055,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "bonnet_max_deg": {
+      "value": 62.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    },
+    "crossover_cladding": {
+      "value": false,
+      "unit": "bool",
+      "value_type": "bool",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "door_scallop": {
+      "value": 0.03,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "drive_layout": {
+      "value": "AWD",
+      "unit": "enum",
+      "value_type": "enum",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "engine_envelope_height": {
+      "value": 0.56,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "engine_envelope_length": {
+      "value": 0.78,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "engine_envelope_width": {
+      "value": 1.18,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "exhaust_count": {
+      "value": 4,
+      "unit": "count",
+      "value_type": "int",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "eye_z": {
+      "value": 1.1600000000000001,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "floor_height": {
+      "value": 0.24,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "front_axle_x": {
+      "value": 1.3195299999999999,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheelbase"
+      ],
+      "formula": "wheelbase / 2",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "front_door_max_deg": {
+      "value": 68.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    },
+    "front_extent_x": {
+      "value": 2.2047199999999996,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "front_axle_x",
+        "front_overhang"
+      ],
+      "formula": "front_axle_x + front_overhang",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "front_fender_amplitude": {
+      "value": 0.06,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "front_hpoint_x": {
+      "value": 0.15834359999999997,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "front_overhang": {
+      "value": 0.8851899999999998,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "front_track_body_margin": {
+      "value": 0.26161999999999996,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "width",
+        "track_front"
+      ],
+      "formula": "width - track_front",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "front_wheelhouse_rx": {
+      "value": 0.4309151098685676,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheel_radius",
+        "wheel_width",
+        "steer_max_abs_deg",
+        "wheelhouse_clearance"
+      ],
+      "formula": "r + 0.5*w*sin(delta_max) + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "front_wheelhouse_ry": {
+      "value": 0.3277323883677561,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheel_radius",
+        "wheel_width",
+        "steer_max_abs_deg",
+        "wheelhouse_clearance"
+      ],
+      "formula": "0.5*w + r*sin(delta_max) + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "front_wheelhouse_rz": {
+      "value": 0.43600000000000005,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheel_radius",
+        "travel_down",
+        "travel_up",
+        "wheelhouse_clearance"
+      ],
+      "formula": "r + max(jounce,rebound) + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "greenhouse_front_factor": {
+      "value": 1.0,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "greenhouse_rear_factor": {
+      "value": 1.0,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "grille_scale": {
+      "value": 1.12,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "ground_clearance": {
+      "value": 0.105,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "hatch_max_deg": {
+      "value": 72.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    },
+    "head_clearance": {
+      "value": 0.085,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "height": {
+      "value": 1.4731999999999998,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "hood_wedge": {
+      "value": 0.58,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "hpoint_z": {
+      "value": 0.54,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "length": {
+      "value": 4.40944,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "minimum_roof_from_occupant": {
+      "value": 1.345,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "hpoint_z",
+        "head_clearance"
+      ],
+      "formula": "H-point + seated-head envelope + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "nominal_panel_gap": {
+      "value": 0.004,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    },
+    "nose_taper": {
+      "value": 1.0,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "occupant_roof_margin": {
+      "value": 0.12819999999999987,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "height",
+        "minimum_roof_from_occupant"
+      ],
+      "formula": "height - minimum_roof_from_occupant",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "package_length_residual": {
+      "value": -8.881784197001252e-16,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "resolved_length",
+        "length"
+      ],
+      "formula": "resolved_length - length",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "powertrain_architecture": {
+      "value": "ICE_AWD",
+      "unit": "enum",
+      "value_type": "enum",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "ArchitectureReference",
+        "source": "GRMN Corolla dimensional envelope with original body-surface parameters",
+        "confidence": 0.72,
+        "uncertainty": null,
+        "note": ""
+      }
+    },
+    "rear_axle_x": {
+      "value": -1.3195299999999999,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheelbase"
+      ],
+      "formula": "-wheelbase / 2",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "rear_door_max_deg": {
+      "value": 68.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    },
+    "rear_extent_x": {
+      "value": -2.2047199999999996,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "rear_axle_x",
+        "rear_overhang"
+      ],
+      "formula": "rear_axle_x - rear_overhang",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "rear_haunch_amplitude": {
+      "value": 0.075,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "rear_hpoint_x": {
+      "value": -0.7653273999999999,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "rear_overhang": {
+      "value": 0.8851899999999998,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "rear_track_body_margin": {
+      "value": 0.2311399999999999,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "width",
+        "track_rear"
+      ],
+      "formula": "width - track_rear",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "rear_wheelhouse_rx": {
+      "value": 0.36600000000000005,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheel_radius",
+        "wheelhouse_clearance"
+      ],
+      "formula": "r + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "rear_wheelhouse_ry": {
+      "value": 0.1465,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheel_width",
+        "wheelhouse_clearance"
+      ],
+      "formula": "0.5*w + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "rear_wheelhouse_rz": {
+      "value": 0.43600000000000005,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "wheel_radius",
+        "travel_down",
+        "travel_up",
+        "wheelhouse_clearance"
+      ],
+      "formula": "r + max(jounce,rebound) + clearance",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "resolved_length": {
+      "value": 4.409439999999999,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "front_extent_x",
+        "rear_extent_x"
+      ],
+      "formula": "front_extent_x - rear_extent_x",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "rocker_tuck": {
+      "value": 0.055,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "roof_crown": {
+      "value": 0.44,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "roof_scale": {
+      "value": 0.98,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "seat_lateral": {
+      "value": 0.2588768,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2 platform derivation",
+        "confidence": 0.82,
+        "uncertainty": 0.01,
+        "note": ""
+      }
+    },
+    "shoulder_strength": {
+      "value": 0.055,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "side_glass_travel": {
+      "value": 0.55,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MVPv2.5 closure design ranges",
+        "confidence": 0.55,
+        "uncertainty": 2.0,
+        "note": "Angle uncertainty is expressed in degrees."
+      }
+    },
+    "splitter_scale": {
+      "value": 1.35,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "spoiler_scale": {
+      "value": 1.45,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "steer_max_abs_deg": {
+      "value": 32.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [
+        "steer_min_deg",
+        "steer_max_deg"
+      ],
+      "formula": "max(abs(steer_min_deg), abs(steer_max_deg))",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "steer_max_deg": {
+      "value": 32.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "steer_min_deg": {
+      "value": -32.0,
+      "unit": "deg",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "tail_taper": {
+      "value": 0.98,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "track_front": {
+      "value": 1.5875,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "track_rear": {
+      "value": 1.61798,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "travel_down": {
+      "value": 0.07,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "travel_min"
+      ],
+      "formula": "abs(travel_min)",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "travel_max": {
+      "value": 0.06,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "travel_min": {
+      "value": -0.07,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "travel_up": {
+      "value": 0.06,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [
+        "travel_max"
+      ],
+      "formula": "abs(travel_max)",
+      "evidence": {
+        "status": "Derived",
+        "source": "MCSMv2.0.1 dependency graph",
+        "confidence": 0.88,
+        "uncertainty": 0.005,
+        "note": ""
+      }
+    },
+    "tumblehome": {
+      "value": 0.27,
+      "unit": "1",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "DesignChoice",
+        "source": "MCSMv2 style field",
+        "confidence": 0.6,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "wheel_radius": {
+      "value": 0.342,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      }
+    },
+    "wheel_width": {
+      "value": 0.245,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PackageReference",
+        "source": "MCSMv1 tyre and wheel package research",
+        "confidence": 0.82,
+        "uncertainty": 0.006,
+        "note": ""
+      }
+    },
+    "wheelbase": {
+      "value": 2.6390599999999997,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    },
+    "wheelhouse_clearance": {
+      "value": 0.024,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "EngineeringAssumption",
+        "source": "MCSMv2 concept-level envelope policy",
+        "confidence": 0.58,
+        "uncertainty": 0.015,
+        "note": ""
+      }
+    },
+    "width": {
+      "value": 1.8491199999999999,
+      "unit": "m",
+      "value_type": "float",
+      "dependencies": [],
+      "formula": "explicit",
+      "evidence": {
+        "status": "PublishedPackage",
+        "source": "MCSMv1 official manufacturer package research",
+        "confidence": 0.95,
+        "uncertainty": 0.002,
+        "note": "Manufacturer-derived package reference; not proprietary CAD."
+      }
+    }
+  }
+}

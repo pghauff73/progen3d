@@ -1,0 +1,558 @@
+{
+  "schema": "MCSMv2.2.ReleaseManifest.v1",
+  "version": "2.2.0",
+  "created_at": "2026-08-24T18:17:36.787323+00:00",
+  "root_name": "MCSMv2_2_0_RELEASE",
+  "manifest_excludes": [
+    "RELEASE_MANIFEST.json"
+  ],
+  "file_count": 109,
+  "total_size_bytes": 103068076,
+  "files": [
+    {
+      "path": "AUDIT_CLOSURE.md",
+      "size_bytes": 2127,
+      "sha256": "dbec3887daaa97dd1b074060c3b54677f301a1fdfd584f05be2b5c1c1667df3a"
+    },
+    {
+      "path": "CHANGELOG_MCSMv2_1_TO_2_2.md",
+      "size_bytes": 2023,
+      "sha256": "c8b38ab59c7f3ee2847c7fb6773f5cff7c80c8b2a96b7ee7d145793aac60111f"
+    },
+    {
+      "path": "GENERATION_NOTES.md",
+      "size_bytes": 632,
+      "sha256": "14d2c7fc420cf2e011fee97c65a01dca31a07c7ab65e9c589ebc1afdf0bee37d"
+    },
+    {
+      "path": "GRAMMAR_VALIDATION.json",
+      "size_bytes": 364,
+      "sha256": "03b4eb749b156a30786b41758c2dfd2512f9d8279a5e12fdd51d3a68157e53ed"
+    },
+    {
+      "path": "IMPLEMENTATION_CHECKLIST.json",
+      "size_bytes": 1183,
+      "sha256": "9b7c8ed7541e7e42e3eb44fa81197418446e44f8407c4606fa7d36b412db2224"
+    },
+    {
+      "path": "KNOWN_LIMITATIONS.md",
+      "size_bytes": 1895,
+      "sha256": "281ddb96d6bfab3edbefd2551d04e523735625f2a249303ec6346f983c3977a9"
+    },
+    {
+      "path": "MCSMv2_IMPLEMENTATION_REPORT.md",
+      "size_bytes": 1361,
+      "sha256": "469bea48c8973d1de558e46e724354302beca7502be4e40a08645f8e5c23872f"
+    },
+    {
+      "path": "MCSMv2_MATHEMATICAL_MODEL.md",
+      "size_bytes": 2037,
+      "sha256": "de56f8ed4fb16f40d8f73edd055bff927a4e0df8bced02bea42f5f5fc8ea080d"
+    },
+    {
+      "path": "MCSMv2_Modern_Car_Family.p3d",
+      "size_bytes": 5945,
+      "sha256": "b233d0338c03bbb45c78753d9aaa0026e2ae40055689b2a1e1ccc1defc6a4103"
+    },
+    {
+      "path": "QUICKSTART.md",
+      "size_bytes": 1685,
+      "sha256": "2ca3fa5e1232de64f52b76f82de26c9f42fd59926046657d5c3c2ab47f8e358f"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1496,
+      "sha256": "662498633f15f7c182610570fe510a7893a4df56b5fc0f04687ebe322e9685f0"
+    },
+    {
+      "path": "RELEASE_VERIFICATION.json",
+      "size_bytes": 11986,
+      "sha256": "12e9ed5eb81411d95f5d547bf6e893b5fdf555d263c1eb0d8c8a5d769fca8174"
+    },
+    {
+      "path": "RELEASE_VERIFICATION.md",
+      "size_bytes": 644,
+      "sha256": "b5e850a615641c809550321bc37cf18d7057b2912943a103b12e88ace2924628"
+    },
+    {
+      "path": "TEST_REPORT.md",
+      "size_bytes": 1578,
+      "sha256": "4a1e00b57b9f11c596e8b630701a1380e5d74ff347393f7c4f60615abd05b29f"
+    },
+    {
+      "path": "TEST_RESULTS.txt",
+      "size_bytes": 4230,
+      "sha256": "229a9a03e0778c78ee66df52bbeac294378671723401d9e14b77871e3de636b4"
+    },
+    {
+      "path": "VALIDATION_SUMMARY.md",
+      "size_bytes": 499,
+      "sha256": "29c2299942731cc1b8936a019417685aa3238c1a1520b197feebef9f2ce82de6"
+    },
+    {
+      "path": "VERSION.json",
+      "size_bytes": 1485,
+      "sha256": "7a61ed79eec80e2824216931f8b3986ba3bc9857a550009b343b311e06adda8b"
+    },
+    {
+      "path": "curves/aero_curve_network.json",
+      "size_bytes": 239530,
+      "sha256": "93376ff9d514d8b05fd0fe5e0039e581d91338c678484a249fd0494e5d0a79fe"
+    },
+    {
+      "path": "curves/crossover_curve_network.json",
+      "size_bytes": 241712,
+      "sha256": "6b84353782e9b6b394ecf155727dd1769cd43279319e9d12544dcb837d59555b"
+    },
+    {
+      "path": "curves/reference_curve_network.json",
+      "size_bytes": 239525,
+      "sha256": "3a84f7e1686a3cfb205ee201aa81a970303b4d55fc3c423c2326ffa21d7e789f"
+    },
+    {
+      "path": "curves/track_curve_network.json",
+      "size_bytes": 241384,
+      "sha256": "5e74bc1a0f2eccb8d670039892a8ff9887dff74ac342fa1cba97eed6945f341b"
+    },
+    {
+      "path": "data/aero_biw_graph.json",
+      "size_bytes": 4505,
+      "sha256": "fda8ba060be2d47765504dfee60d1ad19e2413e84845891664497b8249d0a901"
+    },
+    {
+      "path": "data/aero_engineering_manifest.json",
+      "size_bytes": 2065,
+      "sha256": "2344d3f47256cc24a3e08e673000515799c49331526b19efb012dae2f6c24512"
+    },
+    {
+      "path": "data/crossover_biw_graph.json",
+      "size_bytes": 4505,
+      "sha256": "fda8ba060be2d47765504dfee60d1ad19e2413e84845891664497b8249d0a901"
+    },
+    {
+      "path": "data/crossover_engineering_manifest.json",
+      "size_bytes": 2111,
+      "sha256": "d6f33aa29b96c1e671d2b095f08f09d2b88791dac776a822be4aaf8b1e41fb57"
+    },
+    {
+      "path": "data/reference_biw_graph.json",
+      "size_bytes": 4505,
+      "sha256": "fda8ba060be2d47765504dfee60d1ad19e2413e84845891664497b8249d0a901"
+    },
+    {
+      "path": "data/reference_engineering_manifest.json",
+      "size_bytes": 2079,
+      "sha256": "9a9caae7d142fe3654951f8b1f72f737b49ca54abdb8118692a3218d4ee6548d"
+    },
+    {
+      "path": "data/research_data.json",
+      "size_bytes": 4209,
+      "sha256": "81aff10d937bea33f30fa78798d79c3c2f87b1ce40b59e9258c6fb16e9656e47"
+    },
+    {
+      "path": "data/track_biw_graph.json",
+      "size_bytes": 4505,
+      "sha256": "fda8ba060be2d47765504dfee60d1ad19e2413e84845891664497b8249d0a901"
+    },
+    {
+      "path": "data/track_engineering_manifest.json",
+      "size_bytes": 2123,
+      "sha256": "2cbe51cdf60ba805bd48f23b201429a23d4f6458a17668dda2e536f808791754"
+    },
+    {
+      "path": "dependency_graphs/aero_parameter_graph.json",
+      "size_bytes": 29954,
+      "sha256": "051a52ed338f4868787622aa154ee8c592f2aa1c75755309e594469b7bf5597b"
+    },
+    {
+      "path": "dependency_graphs/crossover_parameter_graph.json",
+      "size_bytes": 30121,
+      "sha256": "0ce72fa803e42c79c264dc69ede14838dc894fc4f93074454c3897f13da6058e"
+    },
+    {
+      "path": "dependency_graphs/reference_parameter_graph.json",
+      "size_bytes": 29892,
+      "sha256": "bb206443945b5e4f1acd079b291373cbc38bf0e045bd46062efe09724e7ab314"
+    },
+    {
+      "path": "dependency_graphs/track_parameter_graph.json",
+      "size_bytes": 30252,
+      "sha256": "90a4ab30551832a66fb5d96ccb52dc66a9ce33fdd04c2c7a807b45aca47db565"
+    },
+    {
+      "path": "kinematics/aero_closure_system.json",
+      "size_bytes": 39239,
+      "sha256": "3d0de4fb9de1e81ab1dab46c3ee5af02ba4af495265a14afc1b3446faa077a9e"
+    },
+    {
+      "path": "kinematics/aero_suspension_hardpoints.json",
+      "size_bytes": 9583,
+      "sha256": "6b340d5ba657613d5073428e0eecc0cfffa5655094e2319f4a97730c85f3e7b5"
+    },
+    {
+      "path": "kinematics/aero_wheel_pose_sweeps.json",
+      "size_bytes": 29141,
+      "sha256": "3a96f14042ba85aa3efae8f859010662bae00b2821cb0c88c97308da4eeba92a"
+    },
+    {
+      "path": "kinematics/crossover_closure_system.json",
+      "size_bytes": 39229,
+      "sha256": "0ebecce1c13ace654855abfa18df86bc68276f09fdd0c50e7261977f77fc8b5c"
+    },
+    {
+      "path": "kinematics/crossover_suspension_hardpoints.json",
+      "size_bytes": 9763,
+      "sha256": "b6e8cfd9d28178d23045ef16289677e3abeef2a5f4f24913616c3f324fe99a19"
+    },
+    {
+      "path": "kinematics/crossover_wheel_pose_sweeps.json",
+      "size_bytes": 29522,
+      "sha256": "0f61ebf5e5b0c8d02c4dacb6bd2ecb6a758ed2e1d6b86447105457ea38006af8"
+    },
+    {
+      "path": "kinematics/reference_closure_system.json",
+      "size_bytes": 39260,
+      "sha256": "50cf4a92582ff9ad170129a95b2762ab17fa87fe6c66fa7a7dc93f4d78de93a7"
+    },
+    {
+      "path": "kinematics/reference_suspension_hardpoints.json",
+      "size_bytes": 9841,
+      "sha256": "9595fbf708b5179468192ce52458429bd36c8fb2032c0d4d40bcbc118aaae3f3"
+    },
+    {
+      "path": "kinematics/reference_wheel_pose_sweeps.json",
+      "size_bytes": 29694,
+      "sha256": "31f2a23c4e026905f9fc9fdc4ff090115ad1a390d18eb4fa202802a61fa6c2b7"
+    },
+    {
+      "path": "kinematics/track_closure_system.json",
+      "size_bytes": 39233,
+      "sha256": "90284aff25e627449b318e71aed3540b876736eb8f1c89f20613e5ce4517e719"
+    },
+    {
+      "path": "kinematics/track_suspension_hardpoints.json",
+      "size_bytes": 9847,
+      "sha256": "a0086afcf7d7b328349b01379f1607129d72bce387e305c170bd581082ff6889"
+    },
+    {
+      "path": "kinematics/track_wheel_pose_sweeps.json",
+      "size_bytes": 29756,
+      "sha256": "f7a6f18ab54b1ccadadde010aa4e0754d5756ff62e2584517570d562e0e2a717"
+    },
+    {
+      "path": "model_parameters.json",
+      "size_bytes": 67933,
+      "sha256": "19416fcbe30b510a87b1d620d279ca1b869f0e5eb7a022dd120b7cc840750f03"
+    },
+    {
+      "path": "models/modern_car_v2_aero.glb",
+      "size_bytes": 4080976,
+      "sha256": "6920130ce83dc36430ec899b4d1e1a23110c5c315184bc3aad4e1dd50ffb8739"
+    },
+    {
+      "path": "models/modern_car_v2_aero_body.stl",
+      "size_bytes": 5230084,
+      "sha256": "8501e7f7eb5076123e4cad224e4faac4bc6fdd34e2462768b138c2b933bcdb55"
+    },
+    {
+      "path": "models/modern_car_v2_aero_closures_closed.glb",
+      "size_bytes": 437828,
+      "sha256": "0c6b6e610bc817daccf0b74772a793b8ded5f5d6746b834476c21d86294c0556"
+    },
+    {
+      "path": "models/modern_car_v2_aero_closures_open.glb",
+      "size_bytes": 440004,
+      "sha256": "09ad461eb1856f1059d4c236ad6a51f7c90e1a9e1e1d8b6cf284356dcec59bca"
+    },
+    {
+      "path": "models/modern_car_v2_aero_engineering.glb",
+      "size_bytes": 2774660,
+      "sha256": "46accda973b1c362e98fccc4cb900d934ed6853013f909b0a14e368fce2746a8"
+    },
+    {
+      "path": "models/modern_car_v2_aero_implicit_scaffold.stl",
+      "size_bytes": 4978484,
+      "sha256": "8c74a4bd0b056df0eff17834a8c68f61db318478c459c884c2beb00479419003"
+    },
+    {
+      "path": "models/modern_car_v2_aero_semantic_uv_surface.stl",
+      "size_bytes": 741084,
+      "sha256": "5de97a13b379ef31e367080171edd481919ba57bf2ac9e0234c6914fd8c9ef4c"
+    },
+    {
+      "path": "models/modern_car_v2_aero_surface_partition.glb",
+      "size_bytes": 303056,
+      "sha256": "34fa69dad77a4da4918c4545cb2e7f4fc555f6b315708ed75c6de2824b2373c6"
+    },
+    {
+      "path": "models/modern_car_v2_aero_suspension_kinematics.glb",
+      "size_bytes": 184648,
+      "sha256": "e861b06d4b76ff2eddede15c750290558f2d3b89e2a9bd7a4d1d93f9d288e714"
+    },
+    {
+      "path": "models/modern_car_v2_crossover.glb",
+      "size_bytes": 4049008,
+      "sha256": "3fc29fda531b167b2573e910a8e2667c8801e6df5fa283392654792df1082fc2"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_body.stl",
+      "size_bytes": 5204684,
+      "sha256": "a66a30a8e3c86a1983d4d83c2cdf3e6705b50fdacd5f24d53a50d021f9509398"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_closures_closed.glb",
+      "size_bytes": 437824,
+      "sha256": "5f86e84370312c7cfe576ce936cf358924fd6ad3bb35c033f926f345a204eb4b"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_closures_open.glb",
+      "size_bytes": 440000,
+      "sha256": "917fa38fec18f508bd01c89e4214aea085b9ba84563d71c17044bf5275ce49fe"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_engineering.glb",
+      "size_bytes": 2767364,
+      "sha256": "f789322bd1a6eade6a0182f5452a84a296fc60c690fb1c3526c936242576596b"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_implicit_scaffold.stl",
+      "size_bytes": 4900484,
+      "sha256": "c45f336e9fe7d740f0f985181025fc0b677b25bac752399130d8b498b629972a"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_semantic_uv_surface.stl",
+      "size_bytes": 741084,
+      "sha256": "f8b700b00c257ef54c2a11d654fb7f1ce4121d603baaae0cdc92fb7747eb8d3d"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_surface_partition.glb",
+      "size_bytes": 303056,
+      "sha256": "74620bdb52aeed9a919a8ca7a869d7946a6282bbb8bde7d31ead60ab4f582d09"
+    },
+    {
+      "path": "models/modern_car_v2_crossover_suspension_kinematics.glb",
+      "size_bytes": 185940,
+      "sha256": "e54359c21ab840b5c2e3e97b5f1981c879d062e9a0fdf023a994ae2d9bf365ae"
+    },
+    {
+      "path": "models/modern_car_v2_reference.glb",
+      "size_bytes": 4111676,
+      "sha256": "d68365277c36f16291995dafb02e34d082cd5e8e40be27addcd98e20fecab33d"
+    },
+    {
+      "path": "models/modern_car_v2_reference_body.stl",
+      "size_bytes": 5265684,
+      "sha256": "c0055916b4e73966ba0fac7eef4187c1e23a5a6f0b5b49410057078f796638d0"
+    },
+    {
+      "path": "models/modern_car_v2_reference_closures_closed.glb",
+      "size_bytes": 437824,
+      "sha256": "c0123fe4ea66d16d20d4fc980b6464bfdac09f35031eafa3ff511acfa7752f07"
+    },
+    {
+      "path": "models/modern_car_v2_reference_closures_open.glb",
+      "size_bytes": 440004,
+      "sha256": "d8ad744fb24b92667033b33beccfd6eb655bbe1e85706b55d23b641faaf4a92e"
+    },
+    {
+      "path": "models/modern_car_v2_reference_engineering.glb",
+      "size_bytes": 2787620,
+      "sha256": "184a819a8de8778124e5cefb41e05d6338485eab6dbcdafb6cc5384e28d15330"
+    },
+    {
+      "path": "models/modern_car_v2_reference_implicit_scaffold.glb",
+      "size_bytes": 2405940,
+      "sha256": "b98def2ed705648a8e32b61bf16994118f5c32b7e80b9276151dff7ce0b173e4"
+    },
+    {
+      "path": "models/modern_car_v2_reference_implicit_scaffold.stl",
+      "size_bytes": 5009284,
+      "sha256": "179682d971782c8dbeb8966bb12e3ee19bb399d7819d7adc622036a961d8f9af"
+    },
+    {
+      "path": "models/modern_car_v2_reference_semantic_uv_surface.glb",
+      "size_bytes": 359020,
+      "sha256": "6d1126f055491f8a31c985608f698ad5b7f97f67fc4594baea17c4deba0d8a35"
+    },
+    {
+      "path": "models/modern_car_v2_reference_semantic_uv_surface.stl",
+      "size_bytes": 741084,
+      "sha256": "e4dc0600ea92f38861917840309366a311220717c72b555524dc412dd59da531"
+    },
+    {
+      "path": "models/modern_car_v2_reference_surface_partition.glb",
+      "size_bytes": 303056,
+      "sha256": "c085ee7df37f2229c54fefbff4b2d2d917eb78e18133551fe05b4a3483af878c"
+    },
+    {
+      "path": "models/modern_car_v2_reference_suspension_kinematics.glb",
+      "size_bytes": 184800,
+      "sha256": "fe8833c39a7214d13e09bc220fb907163ff66c2bf14a867568fe728e4fc774b2"
+    },
+    {
+      "path": "models/modern_car_v2_track.glb",
+      "size_bytes": 4090920,
+      "sha256": "dbde78429af1f00735c153b42e654c39ab00bbe16217d87c45039304b76783ce"
+    },
+    {
+      "path": "models/modern_car_v2_track_body.stl",
+      "size_bytes": 5230684,
+      "sha256": "8db8da0676c126710ba789840b2f366fb1a25877491e307139dea2098085a185"
+    },
+    {
+      "path": "models/modern_car_v2_track_closures_closed.glb",
+      "size_bytes": 437844,
+      "sha256": "7f7017418738323ac86962dc139a41db998a17eca6ac6e2ba10181ad4c2340f0"
+    },
+    {
+      "path": "models/modern_car_v2_track_closures_open.glb",
+      "size_bytes": 440024,
+      "sha256": "c4cba37b965b826f6b5779ee9fcc4cc8f3a80f2666e7e13ac63524ce79b61867"
+    },
+    {
+      "path": "models/modern_car_v2_track_engineering.glb",
+      "size_bytes": 2779616,
+      "sha256": "6a5dd7eff3219cfa1f2745af8199b108ed59716263e3cad15ab321e743c6837a"
+    },
+    {
+      "path": "models/modern_car_v2_track_implicit_scaffold.stl",
+      "size_bytes": 4979684,
+      "sha256": "246d5623542b569302c4b3f26378fd2cfc32dba55a534a62efe1482e1a26a1bf"
+    },
+    {
+      "path": "models/modern_car_v2_track_semantic_uv_surface.stl",
+      "size_bytes": 741084,
+      "sha256": "97304b8bada73742248fb21b9b9ba9cdcc6d3a78f357ca75d89bc8162ba20c87"
+    },
+    {
+      "path": "models/modern_car_v2_track_surface_partition.glb",
+      "size_bytes": 303072,
+      "sha256": "cd6c9beb3a960dd295739ca1b41209da4612a5fe48006311db551b875e139079"
+    },
+    {
+      "path": "models/modern_car_v2_track_suspension_kinematics.glb",
+      "size_bytes": 189396,
+      "sha256": "698f27fa3918a17d28606cbeb9e8a9f6d68eeaecacb1248ff43f79ed35dbaf15"
+    },
+    {
+      "path": "models/modern_car_v2_variations_comparison.glb",
+      "size_bytes": 20098620,
+      "sha256": "b7064734cec139125286f7fbdc06314cf57ad2881eca15108f16312c222f4f99"
+    },
+    {
+      "path": "partitions/aero_surface_partition.json",
+      "size_bytes": 5641,
+      "sha256": "9ff9521e04a5437818fd6d18693dfa33f19b6fcf1717d832319e8d4e6a3d0031"
+    },
+    {
+      "path": "partitions/crossover_surface_partition.json",
+      "size_bytes": 5641,
+      "sha256": "9ff9521e04a5437818fd6d18693dfa33f19b6fcf1717d832319e8d4e6a3d0031"
+    },
+    {
+      "path": "partitions/reference_surface_partition.json",
+      "size_bytes": 5641,
+      "sha256": "9ff9521e04a5437818fd6d18693dfa33f19b6fcf1717d832319e8d4e6a3d0031"
+    },
+    {
+      "path": "partitions/track_surface_partition.json",
+      "size_bytes": 5641,
+      "sha256": "9ff9521e04a5437818fd6d18693dfa33f19b6fcf1717d832319e8d4e6a3d0031"
+    },
+    {
+      "path": "previews/mcsmv2_2_kinematics_dashboard.png",
+      "size_bytes": 485335,
+      "sha256": "15f3c6f85d83e6b5d149cdeb82577a88b5953ce54b48a147d491ef7a7f2f36a4"
+    },
+    {
+      "path": "previews/mcsmv2_2_reference_closed.png",
+      "size_bytes": 170389,
+      "sha256": "04735e29a832d6c375ebdf8d1160961028e9c086eaf30c064379797658692530"
+    },
+    {
+      "path": "previews/mcsmv2_2_reference_open.png",
+      "size_bytes": 204842,
+      "sha256": "6d18dc4f740d97e37d065b632926e751477b459964e8e9b299e298523a70df97"
+    },
+    {
+      "path": "previews/mcsmv2_2_reference_partition.png",
+      "size_bytes": 170033,
+      "sha256": "0c18ef691616db7d0b66e853ba2c5b57f11ace37cc847caf4af5284aa4d1de38"
+    },
+    {
+      "path": "previews/mcsmv2_2_reference_suspension.png",
+      "size_bytes": 81693,
+      "sha256": "a71985f0cb056edbd3d0300254e2dc730f476b41b5805690a3dc19f3d61d22bb"
+    },
+    {
+      "path": "semantic_stations/aero_semantic_stations.csv",
+      "size_bytes": 3824,
+      "sha256": "e9cf32834bd504b25ea77bf437a43f96260f1183bfdacbd85a49ec876a9b2a50"
+    },
+    {
+      "path": "semantic_stations/crossover_semantic_stations.csv",
+      "size_bytes": 3875,
+      "sha256": "939c05053c440836af9bf3c82856055e129f29fdf242a2ad602d9f990a1b310a"
+    },
+    {
+      "path": "semantic_stations/reference_semantic_stations.csv",
+      "size_bytes": 3817,
+      "sha256": "b1a27afe6fc2acd44978c980a62ce486cf93b8753206d1b81edd3ddae3bd84c9"
+    },
+    {
+      "path": "semantic_stations/track_semantic_stations.csv",
+      "size_bytes": 3904,
+      "sha256": "bef1d1b3f515a662ea57ac7236ae7d224bbbbd58f89e19f52bde53409313e66b"
+    },
+    {
+      "path": "source/MCSMv2_0_1_to_2_2.patch",
+      "size_bytes": 256364,
+      "sha256": "2127210e168c373a7dd2d687c8a164538a929667ae12bebb8587631ac9aac006"
+    },
+    {
+      "path": "source/PATCH_NOTE.md",
+      "size_bytes": 272,
+      "sha256": "7acc84fa1af4eb387d869217aa9348b221cf23a0f495e1badb73efeaef880c16"
+    },
+    {
+      "path": "source/generate_release.py",
+      "size_bytes": 2534,
+      "sha256": "577a1672b23117f5a579f4b36d9561cf2b6b1d840f0331049f6f1f73a9a26e80"
+    },
+    {
+      "path": "source/mcsmv1_legacy.py",
+      "size_bytes": 64509,
+      "sha256": "f28776f2868bece39eba9fd02eeef72651237dfac9bcc485dffb5d1c48dab3c1"
+    },
+    {
+      "path": "source/mcsmv201_base.py",
+      "size_bytes": 156000,
+      "sha256": "f4c7938532d0d7051dbec16408d8ad47c9f929bf8b3bd5b2399c6d7ff4fd9e8d"
+    },
+    {
+      "path": "source/modern_car_mcsmv2.py",
+      "size_bytes": 102489,
+      "sha256": "6112f7e66c8703997b3940c0bf39ca1c68ff441aba1d7b5ffa0f47686e4aeade"
+    },
+    {
+      "path": "source/pyproject.toml",
+      "size_bytes": 376,
+      "sha256": "0fd68e2cba216b6209f327a7fb97f50d8da81312cebaa07ce00a012d8ee3f3b8"
+    },
+    {
+      "path": "source/requirements.txt",
+      "size_bytes": 69,
+      "sha256": "91e661cd38783dc5230bb494197ecc1b1bb03c88e931d051f769ca305c8c53e5"
+    },
+    {
+      "path": "source/tests/test_mcsmv22.py",
+      "size_bytes": 11562,
+      "sha256": "3c3fec1f4200314c60015ac7b7b84b9917384a8ce77fd533a1a20222a8460f73"
+    },
+    {
+      "path": "validation.json",
+      "size_bytes": 250233,
+      "sha256": "7e6e7e97c35d078205fca1eb993f97848a43cdfd83afb082c6a6e2d556858403"
+    }
+  ]
+}

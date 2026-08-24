@@ -1,0 +1,220 @@
+{
+  "schema": "MCSMv2.BodyInWhiteGraph.v1",
+  "nodes": [
+    {
+      "name": "floor_pan",
+      "role": "floor_pan"
+    },
+    {
+      "name": "rocker_left",
+      "role": "rocker_left"
+    },
+    {
+      "name": "rocker_right",
+      "role": "rocker_right"
+    },
+    {
+      "name": "front_rail_left",
+      "role": "front_rail_left"
+    },
+    {
+      "name": "rear_rail_left",
+      "role": "rear_rail_left"
+    },
+    {
+      "name": "front_rail_right",
+      "role": "front_rail_right"
+    },
+    {
+      "name": "rear_rail_right",
+      "role": "rear_rail_right"
+    },
+    {
+      "name": "front_crossmember",
+      "role": "front_crossmember"
+    },
+    {
+      "name": "centre_crossmember",
+      "role": "centre_crossmember"
+    },
+    {
+      "name": "rear_crossmember",
+      "role": "rear_crossmember"
+    },
+    {
+      "name": "a_pillar_left",
+      "role": "a_pillar_left"
+    },
+    {
+      "name": "b_pillar_left",
+      "role": "b_pillar_left"
+    },
+    {
+      "name": "c_pillar_left",
+      "role": "c_pillar_left"
+    },
+    {
+      "name": "roof_rail_left",
+      "role": "roof_rail_left"
+    },
+    {
+      "name": "a_pillar_right",
+      "role": "a_pillar_right"
+    },
+    {
+      "name": "b_pillar_right",
+      "role": "b_pillar_right"
+    },
+    {
+      "name": "c_pillar_right",
+      "role": "c_pillar_right"
+    },
+    {
+      "name": "roof_rail_right",
+      "role": "roof_rail_right"
+    },
+    {
+      "name": "front_tower_left",
+      "role": "front_tower_left"
+    },
+    {
+      "name": "front_tower_right",
+      "role": "front_tower_right"
+    },
+    {
+      "name": "rear_tower_left",
+      "role": "rear_tower_left"
+    },
+    {
+      "name": "rear_tower_right",
+      "role": "rear_tower_right"
+    }
+  ],
+  "edges": [
+    {
+      "a": "front_rail_left",
+      "b": "front_crossmember",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "front_rail_right",
+      "b": "front_crossmember",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rear_rail_left",
+      "b": "rear_crossmember",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rear_rail_right",
+      "b": "rear_crossmember",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rocker_left",
+      "b": "floor_pan",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rocker_right",
+      "b": "floor_pan",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "front_crossmember",
+      "b": "floor_pan",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "centre_crossmember",
+      "b": "floor_pan",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rear_crossmember",
+      "b": "floor_pan",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "a_pillar_left",
+      "b": "rocker_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "b_pillar_left",
+      "b": "rocker_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "c_pillar_left",
+      "b": "rocker_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "a_pillar_left",
+      "b": "roof_rail_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "b_pillar_left",
+      "b": "roof_rail_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "c_pillar_left",
+      "b": "roof_rail_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "front_tower_left",
+      "b": "front_rail_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rear_tower_left",
+      "b": "rear_rail_left",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "a_pillar_right",
+      "b": "rocker_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "b_pillar_right",
+      "b": "rocker_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "c_pillar_right",
+      "b": "rocker_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "a_pillar_right",
+      "b": "roof_rail_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "b_pillar_right",
+      "b": "roof_rail_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "c_pillar_right",
+      "b": "roof_rail_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "front_tower_right",
+      "b": "front_rail_right",
+      "join": "spot_weld_and_adhesive"
+    },
+    {
+      "a": "rear_tower_right",
+      "b": "rear_rail_right",
+      "join": "spot_weld_and_adhesive"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "occupants": [
+    "occupant_front_left_head",
+    "occupant_front_left_torso",
+    "occupant_front_right_head",
+    "occupant_front_right_torso",
+    "occupant_rear_left_head",
+    "occupant_rear_left_torso",
+    "occupant_rear_right_head",
+    "occupant_rear_right_torso"
+  ],
+  "functional_envelopes": [
+    "engine_envelope",
+    "rear_differential_envelope"
+  ],
+  "wheel_envelopes": [
+    {
+      "name": "front_left",
+      "axle": "front",
+      "side": "left",
+      "centre": [
+        1.3195299999999999,
+        -0.79375,
+        0.342
+      ],
+      "radius_x": 0.4309151098685676,
+      "radius_y": 0.3277323883677561,
+      "radius_z": 0.43600000000000005,
+      "steer_range_deg": [
+        -32.0,
+        32.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.024
+    },
+    {
+      "name": "front_right",
+      "axle": "front",
+      "side": "right",
+      "centre": [
+        1.3195299999999999,
+        0.79375,
+        0.342
+      ],
+      "radius_x": 0.4309151098685676,
+      "radius_y": 0.3277323883677561,
+      "radius_z": 0.43600000000000005,
+      "steer_range_deg": [
+        -32.0,
+        32.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.024
+    },
+    {
+      "name": "rear_left",
+      "axle": "rear",
+      "side": "left",
+      "centre": [
+        -1.3195299999999999,
+        -0.80899,
+        0.342
+      ],
+      "radius_x": 0.36600000000000005,
+      "radius_y": 0.1465,
+      "radius_z": 0.43600000000000005,
+      "steer_range_deg": [
+        0.0,
+        0.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.024
+    },
+    {
+      "name": "rear_right",
+      "axle": "rear",
+      "side": "right",
+      "centre": [
+        -1.3195299999999999,
+        0.80899,
+        0.342
+      ],
+      "radius_x": 0.36600000000000005,
+      "radius_y": 0.1465,
+      "radius_z": 0.43600000000000005,
+      "steer_range_deg": [
+        0.0,
+        0.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.024
+    }
+  ]
+}

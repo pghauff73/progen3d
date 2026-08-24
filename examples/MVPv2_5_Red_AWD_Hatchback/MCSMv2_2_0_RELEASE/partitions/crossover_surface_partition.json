@@ -1,0 +1,228 @@
+{
+  "schema": "MCSMv2.2.SurfacePartition.v2",
+  "surface_face_count": 14820,
+  "coverage_fraction": 1.0,
+  "unassigned_face_count": 0,
+  "resolved_multiple_owner_face_count": 0,
+  "exclusive_owner_count": 23,
+  "owner_face_counts": {
+    "fixed_body": 424,
+    "front_bumper": 936,
+    "front_door_left": 1089,
+    "front_door_right": 1089,
+    "front_fender_left": 1083,
+    "front_fender_right": 1083,
+    "front_side_glass_left": 221,
+    "front_side_glass_right": 221,
+    "hood": 620,
+    "rear_bumper": 816,
+    "rear_door_left": 740,
+    "rear_door_right": 740,
+    "rear_glass": 768,
+    "rear_hatch": 720,
+    "rear_quarter_left": 681,
+    "rear_quarter_right": 681,
+    "rear_side_glass_left": 130,
+    "rear_side_glass_right": 130,
+    "rocker_left": 267,
+    "rocker_right": 267,
+    "roof": 534,
+    "underbody": 1140,
+    "windshield": 440
+  },
+  "panels": [
+    {
+      "name": "fixed_body",
+      "face_count": 424,
+      "connected_component_count": 6,
+      "boundary_loop_count": 6,
+      "boundary_chain_count": 6,
+      "closure": false
+    },
+    {
+      "name": "front_bumper",
+      "face_count": 936,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "front_door_left",
+      "face_count": 1089,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": true
+    },
+    {
+      "name": "front_door_right",
+      "face_count": 1089,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": true
+    },
+    {
+      "name": "front_fender_left",
+      "face_count": 1083,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "front_fender_right",
+      "face_count": 1083,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "hood",
+      "face_count": 620,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": true
+    },
+    {
+      "name": "rear_bumper",
+      "face_count": 816,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "rear_door_left",
+      "face_count": 740,
+      "connected_component_count": 1,
+      "boundary_loop_count": 2,
+      "boundary_chain_count": 2,
+      "closure": true
+    },
+    {
+      "name": "rear_door_right",
+      "face_count": 740,
+      "connected_component_count": 1,
+      "boundary_loop_count": 2,
+      "boundary_chain_count": 2,
+      "closure": true
+    },
+    {
+      "name": "rear_hatch",
+      "face_count": 720,
+      "connected_component_count": 2,
+      "boundary_loop_count": 2,
+      "boundary_chain_count": 2,
+      "closure": true
+    },
+    {
+      "name": "rear_quarter_left",
+      "face_count": 681,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "rear_quarter_right",
+      "face_count": 681,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "rocker_left",
+      "face_count": 267,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "rocker_right",
+      "face_count": 267,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "roof",
+      "face_count": 534,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    },
+    {
+      "name": "underbody",
+      "face_count": 1140,
+      "connected_component_count": 1,
+      "boundary_loop_count": 1,
+      "boundary_chain_count": 1,
+      "closure": false
+    }
+  ],
+  "apertures": [
+    {
+      "name": "front_side_glass_left",
+      "face_count": 221,
+      "connected_component_count": 1,
+      "boundary_chain_count": 1,
+      "closed_boundary_loop_count": 1
+    },
+    {
+      "name": "front_side_glass_right",
+      "face_count": 221,
+      "connected_component_count": 1,
+      "boundary_chain_count": 1,
+      "closed_boundary_loop_count": 1
+    },
+    {
+      "name": "rear_glass",
+      "face_count": 768,
+      "connected_component_count": 1,
+      "boundary_chain_count": 1,
+      "closed_boundary_loop_count": 1
+    },
+    {
+      "name": "rear_side_glass_left",
+      "face_count": 130,
+      "connected_component_count": 1,
+      "boundary_chain_count": 1,
+      "closed_boundary_loop_count": 1
+    },
+    {
+      "name": "rear_side_glass_right",
+      "face_count": 130,
+      "connected_component_count": 1,
+      "boundary_chain_count": 1,
+      "closed_boundary_loop_count": 1
+    },
+    {
+      "name": "windshield",
+      "face_count": 440,
+      "connected_component_count": 1,
+      "boundary_chain_count": 1,
+      "closed_boundary_loop_count": 1
+    }
+  ],
+  "closure_names": [
+    "front_door_left",
+    "front_door_right",
+    "hood",
+    "rear_door_left",
+    "rear_door_right",
+    "rear_hatch"
+  ],
+  "fixed_body_face_count": 7912,
+  "compound_closure_notes": {
+    "rear_hatch": "outer semantic skin may contain left/right components; a production inner frame is deferred"
+  },
+  "pass": true
+}

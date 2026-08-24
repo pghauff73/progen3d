@@ -1,0 +1,100 @@
+{
+  "vehicle_sources": [
+    {
+      "id": "vw_golf_r_2025",
+      "name": "2025 Volkswagen Golf R",
+      "source_title": "2025 Golf R Press Kit",
+      "source_url": "https://media.vw.com/press-kits/298",
+      "source_type": "official manufacturer press kit",
+      "length_mm": 4295.139999999999,
+      "width_mm": 1788.16,
+      "height_mm": 1468.12,
+      "wheelbase_mm": 2628.8999999999996,
+      "front_track_mm": null,
+      "rear_track_mm": null,
+      "tire": "235/35 R19",
+      "drag_coefficient": 0.33,
+      "frontal_area_m2": null,
+      "architecture": "MQB, unitary construction, AWD hot hatch"
+    },
+    {
+      "id": "audi_s3_sportback_2025",
+      "name": "2025 Audi S3 Sportback",
+      "source_title": "Audi S3 Sportback TFSI technical data, 29 Sep 2025",
+      "source_url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1380/file_en/e1d0cf6e340f19f870b1a87fb551d6882fc51db7/eTD-Audi-S3-Sportback-TFSI_250929.pdf",
+      "source_type": "official manufacturer technical data PDF",
+      "length_mm": 4353.0,
+      "width_mm": 1816,
+      "height_mm": 1440.5,
+      "wheelbase_mm": 2624.0,
+      "front_track_mm": 1549,
+      "rear_track_mm": 1518,
+      "tire": "225/40 R18",
+      "drag_coefficient": 0.34,
+      "frontal_area_m2": 2.17,
+      "architecture": "unitary steel, five-door, quattro AWD, McPherson front / 4-link rear"
+    },
+    {
+      "id": "toyota_grmn_corolla_2026",
+      "name": "2026 Toyota GRMN Corolla",
+      "source_title": "2026 Toyota GRMN Corolla: Built for Drivers, Inspired by Motorsports",
+      "source_url": "https://pressroom.toyota.com/2026-toyota-grmn-corolla-built-for-drivers-inspired-by-motorsports/",
+      "source_type": "official manufacturer press release",
+      "length_mm": 4409.44,
+      "width_mm": 1849.12,
+      "height_mm": 1473.1999999999998,
+      "wheelbase_mm": 2639.06,
+      "front_track_mm": 1587.5,
+      "rear_track_mm": 1617.98,
+      "tire": "245/40 ZR18",
+      "drag_coefficient": null,
+      "frontal_area_m2": null,
+      "architecture": "GR-FOUR AWD, McPherson front / double-wishbone-type multilink rear"
+    },
+    {
+      "id": "toyota_chr_bev_2026",
+      "name": "2026 Toyota C-HR BEV",
+      "source_title": "Toyota Debuts Stylish, Powerful 2026 C-HR Battery Electric Vehicle",
+      "source_url": "https://pressroom.toyota.com/toyota-debuts-stylish-powerful-2026-c-hr-battery-electric-vehicle/",
+      "source_type": "official manufacturer press release",
+      "length_mm": 4518.66,
+      "width_mm": 1869.4399999999998,
+      "height_mm": 1620.5199999999998,
+      "wheelbase_mm": 2750.8199999999997,
+      "front_track_mm": null,
+      "rear_track_mm": null,
+      "tire": null,
+      "drag_coefficient": null,
+      "frontal_area_m2": null,
+      "architecture": "dedicated BEV platform, AWD front/rear eAxles, underfloor battery"
+    }
+  ],
+  "method_sources": [
+    {
+      "title": "SAE J1100 Motor Vehicle Dimensions",
+      "url": "https://saemobilus.sae.org/standards/j1100_200509-motor-vehicle-dimensions",
+      "use": "dimension conventions tied to the SAE three-dimensional reference system"
+    },
+    {
+      "title": "SAE J182 Motor Vehicle Fiducial Marks and Three-Dimensional Reference System",
+      "url": "https://saemobilus.sae.org/standards/j182_202011-motor-vehicle-fiducial-marks-three-dimensional-reference-system",
+      "use": "vehicle reference frame and fiducials"
+    },
+    {
+      "title": "Autodesk Alias NURBS / Class-A continuity documentation",
+      "url": "https://help.autodesk.com/view/ALIAS/2024/ENU/?guid=GUID-366304CB-16FF-46F9-9F64-D7385358D855",
+      "use": "G0/G1/G2/G3 continuity framing for future Class-A patch conversion"
+    },
+    {
+      "title": "TUM DrivAer open automotive model",
+      "url": "https://www.epc.ed.tum.de/en/aer/research-groups/automotive/drivaer/",
+      "use": "open, modular automotive geometry and validation precedent"
+    },
+    {
+      "title": "ApolloCar3D",
+      "url": "https://arxiv.org/abs/1811.12222",
+      "use": "semantic keypoints and deformable CAD-model fitting precedent"
+    }
+  ],
+  "source_note": "Carried from MCSMv1/MCSMv2.0.1; v2.2 introduces no new external dimensional claims."
+}

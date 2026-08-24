@@ -1,0 +1,1321 @@
+{
+  "schema": "MCSMv2.2.ClosureKinematicGraph.v1",
+  "hinges": {
+    "front_door_left": {
+      "name": "hinge_front_door_left",
+      "closure": "front_door_left",
+      "point": [
+        0.8445736842105265,
+        -0.7764937402916559,
+        0.4686117136227049
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "maximum_angle_deg": 68.0,
+      "direction": 1.0,
+      "rise_m": 0.0,
+      "translation_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "joint_type": "paired_vertical_revolute"
+    },
+    "front_door_right": {
+      "name": "hinge_front_door_right",
+      "closure": "front_door_right",
+      "point": [
+        0.8445736842105265,
+        0.7764937402916559,
+        0.4669320985655453
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "maximum_angle_deg": 68.0,
+      "direction": -1.0,
+      "rise_m": 0.0,
+      "translation_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "joint_type": "paired_vertical_revolute"
+    },
+    "rear_door_left": {
+      "name": "hinge_rear_door_left",
+      "closure": "rear_door_left",
+      "point": [
+        -0.20543684210526303,
+        -0.5764352822501285,
+        0.7819702133605657
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "maximum_angle_deg": 68.0,
+      "direction": 1.0,
+      "rise_m": 0.0,
+      "translation_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "joint_type": "paired_vertical_revolute"
+    },
+    "rear_door_right": {
+      "name": "hinge_rear_door_right",
+      "closure": "rear_door_right",
+      "point": [
+        -0.20543684210526303,
+        0.5764352822501285,
+        0.7819702133605657
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "maximum_angle_deg": 68.0,
+      "direction": -1.0,
+      "rise_m": 0.0,
+      "translation_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "joint_type": "paired_vertical_revolute"
+    },
+    "hood": {
+      "name": "hinge_hood",
+      "closure": "hood",
+      "point": [
+        1.1641421052631582,
+        0.0,
+        0.8866369761792748
+      ],
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "maximum_angle_deg": 62.0,
+      "direction": -1.0,
+      "rise_m": 0.035,
+      "translation_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "joint_type": "rising_revolute_fourbar_approximation"
+    },
+    "rear_hatch": {
+      "name": "hinge_rear_hatch",
+      "closure": "rear_hatch",
+      "point": [
+        -1.2097947368421051,
+        0.0,
+        0.97936859306012
+      ],
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "maximum_angle_deg": 72.0,
+      "direction": 1.0,
+      "rise_m": 0.02,
+      "translation_axis": [
+        -1.0,
+        0.0,
+        1.0
+      ],
+      "joint_type": "roof_header_revolute_with_strut_rise"
+    }
+  },
+  "glass_systems": {
+    "front_side_glass_left": {
+      "name": "front_side_glass_left",
+      "parent_closure": "front_door_left",
+      "side": "left",
+      "travel_m": 0.55,
+      "inward_m": 0.018,
+      "longitudinal_m": -0.012,
+      "rotation_deg": 2.2,
+      "pivot": [
+        0.3195684210526317,
+        -0.38856451382499924,
+        0.9991612316323383
+      ]
+    },
+    "front_side_glass_right": {
+      "name": "front_side_glass_right",
+      "parent_closure": "front_door_right",
+      "side": "right",
+      "travel_m": 0.55,
+      "inward_m": 0.018,
+      "longitudinal_m": -0.012,
+      "rotation_deg": 2.2,
+      "pivot": [
+        0.3195684210526317,
+        0.4005395294773642,
+        1.0004140936163586
+      ]
+    },
+    "rear_side_glass_left": {
+      "name": "rear_side_glass_left",
+      "parent_closure": "rear_door_left",
+      "side": "left",
+      "travel_m": 0.49500000000000005,
+      "inward_m": 0.015,
+      "longitudinal_m": 0.01,
+      "rotation_deg": 1.8,
+      "pivot": [
+        -0.5250052631578946,
+        -0.5044752519485296,
+        1.1767874366854278
+      ]
+    },
+    "rear_side_glass_right": {
+      "name": "rear_side_glass_right",
+      "parent_closure": "rear_door_right",
+      "side": "right",
+      "travel_m": 0.49500000000000005,
+      "inward_m": 0.015,
+      "longitudinal_m": 0.01,
+      "rotation_deg": 1.8,
+      "pivot": [
+        -0.5250052631578946,
+        0.5031636775685218,
+        1.1767874366854278
+      ]
+    }
+  },
+  "closure_validation": {
+    "schema": "MCSMv2.2.IndependentClosureSweepValidation.v1",
+    "closures": [
+      {
+        "closure": "front_door_left",
+        "joint_type": "paired_vertical_revolute",
+        "axis_point_m": [
+          0.8445736842105265,
+          -0.7764937402916559,
+          0.4686117136227049
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "maximum_angle_deg": 68.0,
+        "states": [
+          {
+            "state": 0.1,
+            "angle_deg": 6.800000000000001,
+            "minimum_non_hinge_distance_m": 0.0002459179284386558,
+            "intersection": {
+              "candidate_pair_count": 12,
+              "checked_pair_count": 12,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.25,
+            "angle_deg": 17.0,
+            "minimum_non_hinge_distance_m": 0.003183354266870847,
+            "intersection": {
+              "candidate_pair_count": 2,
+              "checked_pair_count": 2,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "angle_deg": 27.200000000000003,
+            "minimum_non_hinge_distance_m": 0.021814561023425386,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.5499999999999999,
+            "angle_deg": 37.4,
+            "minimum_non_hinge_distance_m": 0.04371628231605684,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.7,
+            "angle_deg": 47.599999999999994,
+            "minimum_non_hinge_distance_m": 0.05348184828195672,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.85,
+            "angle_deg": 57.8,
+            "minimum_non_hinge_distance_m": 0.05492071106833347,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "angle_deg": 68.0,
+            "minimum_non_hinge_distance_m": 0.05178111333279946,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      {
+        "closure": "front_door_right",
+        "joint_type": "paired_vertical_revolute",
+        "axis_point_m": [
+          0.8445736842105265,
+          0.7764937402916559,
+          0.4669320985655453
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "maximum_angle_deg": 68.0,
+        "states": [
+          {
+            "state": 0.1,
+            "angle_deg": 6.800000000000001,
+            "minimum_non_hinge_distance_m": 0.0004554512215951733,
+            "intersection": {
+              "candidate_pair_count": 12,
+              "checked_pair_count": 12,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.25,
+            "angle_deg": 17.0,
+            "minimum_non_hinge_distance_m": 0.0010082497193186174,
+            "intersection": {
+              "candidate_pair_count": 3,
+              "checked_pair_count": 3,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "angle_deg": 27.200000000000003,
+            "minimum_non_hinge_distance_m": 0.020320083660883826,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.5499999999999999,
+            "angle_deg": 37.4,
+            "minimum_non_hinge_distance_m": 0.04302753383841714,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.7,
+            "angle_deg": 47.599999999999994,
+            "minimum_non_hinge_distance_m": 0.05348184828195672,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.85,
+            "angle_deg": 57.8,
+            "minimum_non_hinge_distance_m": 0.05492071106833347,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "angle_deg": 68.0,
+            "minimum_non_hinge_distance_m": 0.05178111333279946,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      {
+        "closure": "rear_door_left",
+        "joint_type": "paired_vertical_revolute",
+        "axis_point_m": [
+          -0.20543684210526303,
+          -0.5764352822501285,
+          0.7819702133605657
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "maximum_angle_deg": 68.0,
+        "states": [
+          {
+            "state": 0.1,
+            "angle_deg": 6.800000000000001,
+            "minimum_non_hinge_distance_m": 0.0009052519452271689,
+            "intersection": {
+              "candidate_pair_count": 36,
+              "checked_pair_count": 36,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.25,
+            "angle_deg": 17.0,
+            "minimum_non_hinge_distance_m": 0.006097142583203135,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "angle_deg": 27.200000000000003,
+            "minimum_non_hinge_distance_m": 0.015785383194064303,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.5499999999999999,
+            "angle_deg": 37.4,
+            "minimum_non_hinge_distance_m": 0.02961476579682105,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.7,
+            "angle_deg": 47.599999999999994,
+            "minimum_non_hinge_distance_m": 0.0471803385721516,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.85,
+            "angle_deg": 57.8,
+            "minimum_non_hinge_distance_m": 0.06788633347926659,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "angle_deg": 68.0,
+            "minimum_non_hinge_distance_m": 0.09107354290409193,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      {
+        "closure": "rear_door_right",
+        "joint_type": "paired_vertical_revolute",
+        "axis_point_m": [
+          -0.20543684210526303,
+          0.5764352822501285,
+          0.7819702133605657
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "maximum_angle_deg": 68.0,
+        "states": [
+          {
+            "state": 0.1,
+            "angle_deg": 6.800000000000001,
+            "minimum_non_hinge_distance_m": 0.0009052519452271689,
+            "intersection": {
+              "candidate_pair_count": 18,
+              "checked_pair_count": 18,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.25,
+            "angle_deg": 17.0,
+            "minimum_non_hinge_distance_m": 0.006097142583203135,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "angle_deg": 27.200000000000003,
+            "minimum_non_hinge_distance_m": 0.015785383194064303,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.5499999999999999,
+            "angle_deg": 37.4,
+            "minimum_non_hinge_distance_m": 0.02961476579682105,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.7,
+            "angle_deg": 47.599999999999994,
+            "minimum_non_hinge_distance_m": 0.0471803385721516,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.85,
+            "angle_deg": 57.8,
+            "minimum_non_hinge_distance_m": 0.06788633347926659,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "angle_deg": 68.0,
+            "minimum_non_hinge_distance_m": 0.09107354290409193,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      {
+        "closure": "hood",
+        "joint_type": "rising_revolute_fourbar_approximation",
+        "axis_point_m": [
+          1.1641421052631582,
+          0.0,
+          0.8866369761792748
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "maximum_angle_deg": 62.0,
+        "states": [
+          {
+            "state": 0.1,
+            "angle_deg": 6.2,
+            "minimum_non_hinge_distance_m": 0.016041846092556582,
+            "intersection": {
+              "candidate_pair_count": 6,
+              "checked_pair_count": 6,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.25,
+            "angle_deg": 15.5,
+            "minimum_non_hinge_distance_m": 0.04055752583445123,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "angle_deg": 24.8,
+            "minimum_non_hinge_distance_m": 0.06484073429358242,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.5499999999999999,
+            "angle_deg": 34.099999999999994,
+            "minimum_non_hinge_distance_m": 0.08804586434727547,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.7,
+            "angle_deg": 43.4,
+            "minimum_non_hinge_distance_m": 0.10938847127260136,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.85,
+            "angle_deg": 52.699999999999996,
+            "minimum_non_hinge_distance_m": 0.09181747119406049,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "angle_deg": 62.0,
+            "minimum_non_hinge_distance_m": 0.10361216907345831,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      {
+        "closure": "rear_hatch",
+        "joint_type": "roof_header_revolute_with_strut_rise",
+        "axis_point_m": [
+          -1.2097947368421051,
+          0.0,
+          0.97936859306012
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "maximum_angle_deg": 72.0,
+        "states": [
+          {
+            "state": 0.1,
+            "angle_deg": 7.2,
+            "minimum_non_hinge_distance_m": 0.008754674950797667,
+            "intersection": {
+              "candidate_pair_count": 211,
+              "checked_pair_count": 211,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.25,
+            "angle_deg": 18.0,
+            "minimum_non_hinge_distance_m": 0.03160999676123649,
+            "intersection": {
+              "candidate_pair_count": 25,
+              "checked_pair_count": 25,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "angle_deg": 28.8,
+            "minimum_non_hinge_distance_m": 0.04827280581240809,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.5499999999999999,
+            "angle_deg": 39.599999999999994,
+            "minimum_non_hinge_distance_m": 0.07113136974685705,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.7,
+            "angle_deg": 50.4,
+            "minimum_non_hinge_distance_m": 0.08584161590538811,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.85,
+            "angle_deg": 61.199999999999996,
+            "minimum_non_hinge_distance_m": 0.08492141534242474,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "angle_deg": 72.0,
+            "minimum_non_hinge_distance_m": 0.0744365998290691,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "basis": "transformed closure triangles versus independent fixed-body aperture surface"
+  },
+  "glass_validation": {
+    "schema": "MCSMv2.2.HelicalGlassMotionValidation.v1",
+    "glass_systems": [
+      {
+        "glass": "front_side_glass_left",
+        "parent_closure": "front_door_left",
+        "motion_type": "helical_barrel_approximation",
+        "states": [
+          {
+            "state": 0.0,
+            "vertical_drop_m": 0.0,
+            "rotation_deg": 0.0,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.08041282131953047,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.2,
+            "vertical_drop_m": 0.11000000000000001,
+            "rotation_deg": 0.44000000000000006,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.14250522068630062,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "vertical_drop_m": 0.22000000000000003,
+            "rotation_deg": 0.8800000000000001,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.2284646859625057,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.6000000000000001,
+            "vertical_drop_m": 0.33000000000000007,
+            "rotation_deg": 1.3200000000000003,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.2972758462068312,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.8,
+            "vertical_drop_m": 0.44000000000000006,
+            "rotation_deg": 1.7600000000000002,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.2697473352591136,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "vertical_drop_m": 0.55,
+            "rotation_deg": 2.2,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.15967485204261594,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "combined_parent_child_rotation_determinant": 1.0,
+        "pass": true
+      },
+      {
+        "glass": "front_side_glass_right",
+        "parent_closure": "front_door_right",
+        "motion_type": "helical_barrel_approximation",
+        "states": [
+          {
+            "state": 0.0,
+            "vertical_drop_m": 0.0,
+            "rotation_deg": 0.0,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.08041282131953047,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.2,
+            "vertical_drop_m": 0.11000000000000001,
+            "rotation_deg": 0.44000000000000006,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.1425704955878914,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "vertical_drop_m": 0.22000000000000003,
+            "rotation_deg": 0.8800000000000001,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.22861897819763255,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.6000000000000001,
+            "vertical_drop_m": 0.33000000000000007,
+            "rotation_deg": 1.3200000000000003,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.29346219988178235,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.8,
+            "vertical_drop_m": 0.44000000000000006,
+            "rotation_deg": 1.7600000000000002,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.26938430599283913,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "vertical_drop_m": 0.55,
+            "rotation_deg": 2.2,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.15921212062941112,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "combined_parent_child_rotation_determinant": 1.0,
+        "pass": true
+      },
+      {
+        "glass": "rear_side_glass_left",
+        "parent_closure": "rear_door_left",
+        "motion_type": "helical_barrel_approximation",
+        "states": [
+          {
+            "state": 0.0,
+            "vertical_drop_m": 0.0,
+            "rotation_deg": 0.0,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09169792879110945,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pairs": [],
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.2,
+            "vertical_drop_m": 0.09900000000000002,
+            "rotation_deg": 0.36000000000000004,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09344506959028527,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "vertical_drop_m": 0.19800000000000004,
+            "rotation_deg": 0.7200000000000001,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09622124704708292,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.6000000000000001,
+            "vertical_drop_m": 0.2970000000000001,
+            "rotation_deg": 1.0800000000000003,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09967580904581427,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.8,
+            "vertical_drop_m": 0.3960000000000001,
+            "rotation_deg": 1.4400000000000002,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.10638493474423028,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "vertical_drop_m": 0.49500000000000005,
+            "rotation_deg": 1.8,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.12757982782714034,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "combined_parent_child_rotation_determinant": 0.9999999999999998,
+        "pass": true
+      },
+      {
+        "glass": "rear_side_glass_right",
+        "parent_closure": "rear_door_right",
+        "motion_type": "helical_barrel_approximation",
+        "states": [
+          {
+            "state": 0.0,
+            "vertical_drop_m": 0.0,
+            "rotation_deg": 0.0,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09169792879110945,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.2,
+            "vertical_drop_m": 0.09900000000000002,
+            "rotation_deg": 0.36000000000000004,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09344526358464288,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.4,
+            "vertical_drop_m": 0.19800000000000004,
+            "rotation_deg": 0.7200000000000001,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09622154522510419,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.6000000000000001,
+            "vertical_drop_m": 0.2970000000000001,
+            "rotation_deg": 1.0800000000000003,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.09967502226945243,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 0.8,
+            "vertical_drop_m": 0.3960000000000001,
+            "rotation_deg": 1.4400000000000002,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.10638915593357555,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          },
+          {
+            "state": 1.0,
+            "vertical_drop_m": 0.49500000000000005,
+            "rotation_deg": 1.8,
+            "cavity_containment_fraction": 1.0,
+            "minimum_fixed_body_distance_m": 0.12756486286452542,
+            "support_pose_error_m": 0.0,
+            "intersection": {
+              "candidate_pair_count": 0,
+              "checked_pair_count": 0,
+              "intersection_count": 0,
+              "complete": true,
+              "pass": true
+            },
+            "pass": true
+          }
+        ],
+        "combined_parent_child_rotation_determinant": 0.9999999999999998,
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "assurance_note": "Guide motion is parametric and cavity-based; no regulator hardware or production glass-drop study is claimed."
+  }
+}

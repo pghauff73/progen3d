@@ -1,0 +1,96 @@
+{
+  "version": "2.2.0",
+  "model_schema": "MCSMv2.2-uv-semantic-closure-suspension-kinematics",
+  "reference_frame": {
+    "schema": "MCSMv2.0.1.VehicleReferenceFrame.v1",
+    "name": "MCSMv2VehicleFrame",
+    "origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "axes": {
+      "x": {
+        "semantic": "front",
+        "vector": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "y": {
+        "semantic": "right",
+        "vector": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "z": {
+        "semantic": "up",
+        "vector": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "handedness": "right",
+    "length_unit": "m",
+    "angle_unit": "deg",
+    "to_progen3d_matrix": [
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "validation": {
+      "valid": true,
+      "axis_norms": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gram_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "handedness_scalar": 1.0,
+      "tolerance": 1e-10
+    }
+  },
+  "assurance_model": "MCSMv2.2.Assurance.v1"
+}
