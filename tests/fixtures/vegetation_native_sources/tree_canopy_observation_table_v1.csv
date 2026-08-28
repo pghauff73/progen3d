@@ -1,0 +1,2 @@
+observation_identifier,point_cloud_identifier,leaf_area_index,leaf_area_index_unit,crown_gap_fraction,crown_gap_fraction_unit,mean_leaf_inclination,mean_leaf_inclination_unit
+canopy-observation:tree-001:leaf-on,tls-point-cloud:tree-001:leaf-on,3.4,dimensionless,24,percent,0.7853981633974483,rad

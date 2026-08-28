@@ -1,0 +1,70 @@
+# SMBV05 Tendril Pergola Vine
+
+Start -> SMB_VEGETATION_TENDRIL_PERGOLA_VINE
+
+SMB_VEGETATION_TENDRIL_PERGOLA_VINE ->
+[
+    Object(
+        id(SMB_VEGETATION_TENDRIL_PERGOLA_VINE)
+        class(TendrilPergolaVine)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Vine TendrilPergolaVine)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(baseSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(pergolaConnection) type(Mate) origin(0 3.4 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.01))
+        Interface(id(inspection) type(InspectionInterface) origin(0 2.0 1.2) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ T(-1.55 1.72 -0.92) S(0.18 3.44 0.18) I(CubeY material(darkbrownroughwood) 1 0.18) ]
+        [ T(1.55 1.72 -0.92) S(0.18 3.44 0.18) I(CubeY material(darkbrownroughwood) 1 0.18) ]
+        [ T(-1.55 1.72 0.92) S(0.18 3.44 0.18) I(CubeY material(darkbrownroughwood) 1 0.18) ]
+        [ T(1.55 1.72 0.92) S(0.18 3.44 0.18) I(CubeY material(darkbrownroughwood) 1 0.18) ]
+        [ T(0 3.46 -0.92) S(3.32 0.16 0.18) I(CubeY material(lightoakwood) 1 0.16) ]
+        [ T(0 3.46 0.92) S(3.32 0.16 0.18) I(CubeY material(lightoakwood) 1 0.16) ]
+        SMBV05_Rafter(-1.20) SMBV05_Rafter(-0.60) SMBV05_Rafter(0) SMBV05_Rafter(0.60) SMBV05_Rafter(1.20)
+
+        [ I(Vine(species(IvyVine) start(-1.50 0.10 -0.86) direction(0.05 1.0 0.04) radius(0.042) mode(TendrilClimbing) collision(Seek) attachment(Twine) step(0.14) segments(38) seekDistance(1.8) attachDistance(0.025) tolerance(0.001) radiusDecay(0.972) minimumRadius(0.005) preferred(0 1 0) gamma(2.0) target(pergola_left -1.64 0 -1.02 -1.42 3.56 1.02) detail(LOD4)) material(sagegreenmattepaint) 1 0.16) ]
+        [ I(Vine(species(IvyVine) start(1.50 0.10 0.86) direction(-0.05 1.0 -0.04) radius(0.042) mode(TendrilClimbing) collision(Seek) attachment(Twine) step(0.14) segments(38) seekDistance(1.8) attachDistance(0.025) tolerance(0.001) radiusDecay(0.972) minimumRadius(0.005) preferred(0 1 0) gamma(2.0) target(pergola_right 1.42 0 -1.02 1.64 3.56 1.02) detail(LOD4)) material(sagegreenmattepaint) 1 0.16) ]
+        [ T(0 3.30 0) I(BranchJunction(core(0.10 1.18) parent(0 -1 0 0.11 0.20) child(0.72 0.24 0.26 0.055 0.42) child(-0.72 0.24 -0.26 0.055 0.42) segments(14)) material(sagegreenmattepaint) 1 0.14) ]
+        SMBV05_Leaf(-1.30 1.28 -0.72 -18)
+        SMBV05_Leaf(-1.22 2.38 0.42 22)
+        SMBV05_Leaf(-0.58 3.52 -0.48 -12)
+        SMBV05_Leaf(0.04 3.60 0.24 18)
+        SMBV05_Leaf(0.72 3.54 -0.18 -24)
+        SMBV05_Leaf(1.24 2.46 -0.38 16)
+        SMBV05_Leaf(1.32 1.30 0.70 -20)
+        SMBV05_Flower(-0.82 3.64 0.34 -18)
+        SMBV05_Flower(0.02 3.72 -0.26 8)
+        SMBV05_Flower(0.86 3.62 0.28 20)
+        SMBV05_FoliageLobe(-1.34 1.14 -0.76 0.30 0.24 0.22)
+        SMBV05_FoliageLobe(-1.28 2.02 0.48 0.34 0.26 0.22)
+        SMBV05_FoliageLobe(-1.02 2.86 -0.38 0.36 0.28 0.22)
+        SMBV05_FoliageLobe(-0.62 3.54 0.42 0.38 0.24 0.28)
+        SMBV05_FoliageLobe(-0.06 3.62 -0.36 0.40 0.24 0.30)
+        SMBV05_FoliageLobe(0.52 3.56 0.38 0.38 0.24 0.28)
+        SMBV05_FoliageLobe(1.02 2.88 -0.42 0.36 0.28 0.22)
+        SMBV05_FoliageLobe(1.28 2.04 0.46 0.34 0.26 0.22)
+        SMBV05_FoliageLobe(1.34 1.16 -0.72 0.30 0.24 0.22)
+    ]
+]
+
+SMBV05_Rafter(x) ->
+[
+    T(x 3.54 0) S(0.14 0.14 2.14) I(CubeY material(lightoakwood) 1 0.16)
+]
+
+SMBV05_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Ovate) length(0.50) width(0.25) curvature(0.18) camber(0.038) twist(10) thickness(0.010) widthPower(1.02) segments(16 5)) material(sagegreenmattepaint) 1 0.15)
+]
+
+SMBV05_Flower(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(PetalBlade(profile(Obovate) length(0.34) width(0.20) curvature(0.24) camber(0.050) twist(-10) thickness(0.009) widthPower(0.90) segments(16 5)) material(redglossymetal) 1 0.13)
+]
+
+SMBV05_FoliageLobe(x y z sx sy sz) ->
+[
+    T(x y z) S(sx sy sz) I(Sphere material(sagegreenmattepaint) 1 0.18)
+]

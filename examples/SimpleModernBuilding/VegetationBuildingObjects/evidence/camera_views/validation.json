@@ -1,0 +1,1384 @@
+{
+  "schema": "ProGen3D-SMB-VegetationThreeViewRender-v1",
+  "suite_manifest": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+  "suite_manifest_sha256": "e8cde9aa8b50dd731a1b515588930ed2287010e17a0e1b335827a50f10e3364a",
+  "comparison_views": [
+    "front",
+    "right",
+    "top"
+  ],
+  "projection": {
+    "mode": "narrow-perspective",
+    "vertical_field_of_view_degrees": 5.0,
+    "purpose": "Flatten perspective for elevation-like vegetation object comparisons"
+  },
+  "object_count": 50,
+  "capture_count": 150,
+  "contact_sheets": {
+    "front": {
+      "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/contact_sheets/vegetation_front.png",
+      "sha256": "7d11952c1e97facfd8258d7d83d36b6e9b67dae848106800cf649a388501b2f1"
+    },
+    "right": {
+      "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/contact_sheets/vegetation_right.png",
+      "sha256": "5f9b90b5fc72cd7b7581a0759c8f22c8973873f96a0ef6644d93ad98ce831f61"
+    },
+    "top": {
+      "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/contact_sheets/vegetation_top.png",
+      "sha256": "7c7dc6ad5987176911bc080fa20305ca9b468f0d913efc05471021fba2dcf941"
+    }
+  },
+  "objects": [
+    {
+      "object_id": "SMB_VEGETATION_COURTYARD_CANOPY_TREE",
+      "object_class": "ArchitecturalCanopyTree",
+      "title": "Courtyard Canopy Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV01_CourtyardCanopyTree.grammar",
+      "grammar_sha256": "e3af117a28a75f78d25f1fcd388f6357de76ff16b01a309861d6942bd6cacba2",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/front.png",
+          "sha256": "81f66fb8c05cd42ffbd76be01007b08506e212b12ca682323719d4d693bd0afa"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/right.png",
+          "sha256": "fea7b5f5d1e97c37a231f6d65755cd1f563cbeec95cd276a1f90056e0c679bfe"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/top.png",
+          "sha256": "aa78652efa6e9140b55585e5b8f6e91e5f3d8dd914f4629ffd89cf476acb199f"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/camera_three_views.png",
+      "camera_card_sha256": "8a47220542eff3ba805a8c13c9eaadb1deabf3af95f28de98eb772730e325f79"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE",
+      "object_class": "SculpturalLSystemTree",
+      "title": "Sculptural L-System Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV02_SculpturalLSystemTree.grammar",
+      "grammar_sha256": "c80874a8ab05b0074c1d72d527eec884b11dcf1a25a2aafbacde55c8cbb5c5e9",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/front.png",
+          "sha256": "c7faffd0ab7b06ad7b942d7c56fdfb015ba1ad38000a8929ee8184a64ced35ae"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/right.png",
+          "sha256": "8406739bbec0272ef4a461f28067358051be0eed8619c6c258815ad11ead6556"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/top.png",
+          "sha256": "07d0e5efdfad7ff74058eb6994cbba37167c727180e38f63d9cf1c9d616c00a7"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/camera_three_views.png",
+      "camera_card_sha256": "a9931bc4305a96b007264d0d6e6b6f67009b1dc8f39de8f1786381761ab28c55"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_PLANT_CLUSTER",
+      "object_class": "LayeredFloweringPlantCluster",
+      "title": "Layered Flowering Plant Cluster",
+      "category": "Plant",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV03_LayeredFloweringPlantCluster.grammar",
+      "grammar_sha256": "2b0f9aed7337ac8068893e250de1c70e9841dac601f6ba2d2ccc480abed423c2",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/front.png",
+          "sha256": "c7e1ae1aa4eb3ee16cd16f1f346b5d4b59bc1653b9b4e4091a11795c5ede8085"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/right.png",
+          "sha256": "9525cb7edab009d7b712ae9f7789bb90f402cb1a6a79031b04e3d4bd28294c40"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/top.png",
+          "sha256": "6e64ad12c28de206eb26819e6715bab29d844a06ab44bb0c93e869842956decb"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/camera_three_views.png",
+      "camera_card_sha256": "058cddecd5bec07ec3151e1a0f451b40466839a415e9b1d3ab549fdcc6f34eb1"
+    },
+    {
+      "object_id": "SMB_VEGETATION_IVY_PRIVACY_SCREEN",
+      "object_class": "WallClimbingIvyPrivacyScreen",
+      "title": "Wall-Climbing Ivy Privacy Screen",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV04_WallClimbingIvyPrivacyScreen.grammar",
+      "grammar_sha256": "569af2d7f73bff8ff3a94974ed678127739ccc290157c395e58ee0f9ab263810",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/front.png",
+          "sha256": "9b602333747175c5f71c582a2bf370a798892040bfe03e54fd4579a67b4de81a"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/right.png",
+          "sha256": "a7fa12fe6984c81b4072013b2ff843836d35ebd6c193ab207088da5252676017"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/top.png",
+          "sha256": "6e44ea989ba9c2b9048639067aba9ba5cd4c3b8c441dbb12a192c1879c0413e8"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/camera_three_views.png",
+      "camera_card_sha256": "19c62c51914b607bcd99d8aa537b8ba3efea40bae9f692327dc5417493c739db"
+    },
+    {
+      "object_id": "SMB_VEGETATION_TENDRIL_PERGOLA_VINE",
+      "object_class": "TendrilPergolaVine",
+      "title": "Tendril Pergola Vine",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV05_TendrilPergolaVine.grammar",
+      "grammar_sha256": "b4e2b0e5237c5f10a8a69ded9ce84ed4d738040a2f419473507acc444690915f",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/front.png",
+          "sha256": "5a1fe2d7e0a9952d9233104e6e962a516f3c8a677511744f2791d259befec328"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/right.png",
+          "sha256": "b61527516135595f4816331a6dc39cdf63998eb8d0db38ca2924392ac1821f02"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/top.png",
+          "sha256": "0923ef64e955c12271ea64eb0f0f938d54fffd2fd8da115878e5e0c44c40e3f5"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/camera_three_views.png",
+      "camera_card_sha256": "412a89301f5507c125dbef14c3e7486b8e7408afd6c12e5d1526fcc9b685f0d1"
+    },
+    {
+      "object_id": "SMB_VEGETATION_COLUMNAR_ENTRY_TREE",
+      "object_class": "ColumnarEntryTree",
+      "title": "Columnar Entry Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV06_ColumnarEntryTree.grammar",
+      "grammar_sha256": "040f382909a3210c3968da9c31d935734ddda14b85893dae081601a45441ee8a",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COLUMNAR_ENTRY_TREE/front.png",
+          "sha256": "c2457d60a25e742b6febc0ab4592672294e80635724f1f31cadad07e05d6cf18"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COLUMNAR_ENTRY_TREE/right.png",
+          "sha256": "9d9a8618c03c82b3b2b71cfa19dcd69fdb6f086c661858b8739613817c0dfd55"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COLUMNAR_ENTRY_TREE/top.png",
+          "sha256": "aec71d7f4759b0bf1d723c4f179f51ebf4756d53bcdc0efead76b27826719d2f"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COLUMNAR_ENTRY_TREE/camera_three_views.png",
+      "camera_card_sha256": "037ddd7fe12cec91d95599a101887f653d9dce059584f08201e839965fc3f37d"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MULTI_STEM_BIRCH_TREE",
+      "object_class": "MultiStemBirchTree",
+      "title": "Multi-Stem Birch Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV07_MultiStemBirchTree.grammar",
+      "grammar_sha256": "05fa166bdd4e0a8381a3f096377485cd4918b133c695bfbb57586307eccf41c9",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MULTI_STEM_BIRCH_TREE/front.png",
+          "sha256": "d94430723348a0db63405221c165c9f3809473d435338741dcbf1d9a339a4580"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MULTI_STEM_BIRCH_TREE/right.png",
+          "sha256": "3ea928242fb41a85af35b337ddb12c8239e84214c10da884c6e0ae16eb8df89b"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MULTI_STEM_BIRCH_TREE/top.png",
+          "sha256": "1f6e09721d32cd295649f6e01c52a7ee72da4daffcc216b9271300954f24507b"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MULTI_STEM_BIRCH_TREE/camera_three_views.png",
+      "camera_card_sha256": "6b86201106e85687429791271b68c84dfb7c0225d31aa7172df5a5d2d8971b73"
+    },
+    {
+      "object_id": "SMB_VEGETATION_OLIVE_COURTYARD_TREE",
+      "object_class": "OliveCourtyardTree",
+      "title": "Olive Courtyard Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV08_OliveCourtyardTree.grammar",
+      "grammar_sha256": "c1c73692f8ce08cef111e71258271cf79f5fd0ffbfa7ad097d90f611e55eb37c",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_OLIVE_COURTYARD_TREE/front.png",
+          "sha256": "8270487b151387d82360a97f548b673b1788cddb0ef14887c7ba60d0dab27e64"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_OLIVE_COURTYARD_TREE/right.png",
+          "sha256": "c5ac7b6c330bec071ba7d4d075d42db3e8840d580f52aaf546889383e905e178"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_OLIVE_COURTYARD_TREE/top.png",
+          "sha256": "c62b2d2b9afc3f4118680e90aab4eff80d0d2d795646c7a45c3b7c91fae46c74"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_OLIVE_COURTYARD_TREE/camera_three_views.png",
+      "camera_card_sha256": "c4729d23d0e433f0fff72f7a7130abd593edef1ff5cecec2c35048a276101d2f"
+    },
+    {
+      "object_id": "SMB_VEGETATION_PALM_ACCENT_TREE",
+      "object_class": "PalmAccentTree",
+      "title": "Palm Accent Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV09_PalmAccentTree.grammar",
+      "grammar_sha256": "0ceb3491df6243412ae966ec1a852f6239bcecc3e48cc1b6b037f35e28a8b8c8",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/front.png",
+          "sha256": "17ab97f6ae1b5621bc50a0d597e6e44a8207070193366087e37edf3179e466a2"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/right.png",
+          "sha256": "adb2256f906ed1aaaa08362147ff77c55ddf46ec5503e1786feb91eb4d7fbf25"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/top.png",
+          "sha256": "84ff134b2bc6c58cb3082f68a1bc19d181f211078e3440c21e981dc8d06c0728"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/camera_three_views.png",
+      "camera_card_sha256": "075b65329bc31e3b8d1c2883e9bccb0b54a3deb9c9f5ad9ef9557afa79de6296"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE",
+      "object_class": "FloweringOrnamentalTree",
+      "title": "Flowering Ornamental Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV10_FloweringOrnamentalTree.grammar",
+      "grammar_sha256": "279f75ba182d9a1430e0c549b5305b45ad409dddb68b4a85040915304d69cc2a",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE/front.png",
+          "sha256": "9acee70a76f0dd35b8b4a2513178beadb6f1d71b8c2e5a7e92a29c41c18e57c4"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE/right.png",
+          "sha256": "7788cb0b921936fdcd564db94ad892848f38404d034800ee6a9655b20c5b75fc"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE/top.png",
+          "sha256": "ba3467f5ca3a501f33b0623ce3948fb497a333ed20c518107d081a9f43f30817"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE/camera_three_views.png",
+      "camera_card_sha256": "d49714af6fc1b239608f98b67f824581ab03e3dfd17134de2094ac4650612396"
+    },
+    {
+      "object_id": "SMB_VEGETATION_EVERGREEN_SCREEN_TREE",
+      "object_class": "EvergreenScreenTree",
+      "title": "Evergreen Screen Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV11_EvergreenScreenTree.grammar",
+      "grammar_sha256": "3c12407d8e1f69b8518d869878f7a9e4529aa17941dcfefb77d50c4f4f7dd3e6",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/front.png",
+          "sha256": "0d8fe9e8e5ec4900e24b5769a029466f7820911de3d1215b297947afc4939625"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/right.png",
+          "sha256": "56717123e29a7d41c4d4f4cedd6f2c6db79a71dbf176d91d542f812c21cf7f18"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/top.png",
+          "sha256": "93eb1a0d4d2ebe47d83cfe297faf015561a63085bf7a969ee4ff0763dec905c0"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/camera_three_views.png",
+      "camera_card_sha256": "177dd12bfc563b2fb4fb4050ef361ccc2e3a90eac04eb1bf7ab366cf529a79cd"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BONSAI_COURTYARD_TREE",
+      "object_class": "BonsaiCourtyardTree",
+      "title": "Bonsai Courtyard Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV12_BonsaiCourtyardTree.grammar",
+      "grammar_sha256": "2136db678ef6da26d09ab1dd495f0794e0fd3a9dd3860284d217857e2576310c",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BONSAI_COURTYARD_TREE/front.png",
+          "sha256": "1566a3f8145363fe68ffba7c23100ae4cd2b9740794ba576b380fa82c78e5659"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BONSAI_COURTYARD_TREE/right.png",
+          "sha256": "65497f0c771789ab7a96d97ffb83fa225b7b585a7789b1242a2e18c8270231a6"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BONSAI_COURTYARD_TREE/top.png",
+          "sha256": "d6850c56401a1826f4974bafc69480483419779e4372f6151f7ce1652e2f8890"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BONSAI_COURTYARD_TREE/camera_three_views.png",
+      "camera_card_sha256": "084a71fbfa87b7ce49e7917263c3716dd9eb74d5b5e7595ef53a45e8f49771b4"
+    },
+    {
+      "object_id": "SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE",
+      "object_class": "RainGardenCanopyTree",
+      "title": "Rain Garden Canopy Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV13_RainGardenCanopyTree.grammar",
+      "grammar_sha256": "e2a9185519c275038997e925e0496e897df9a32774bb51d528f7372fbc486897",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE/front.png",
+          "sha256": "4e74bef5b71c6fb9c9e6d6a2c2820a39834bf3fb5afd8f0a0e97f8aa3d70e19a"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE/right.png",
+          "sha256": "d6f1fcb9676e3f0186aaeafb9665832bf78776be803133e0cf8450db2376de38"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE/top.png",
+          "sha256": "df5767fca21a5b70707dad624e1f23798eb471942f7c7dee76f170019d25a9ad"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE/camera_three_views.png",
+      "camera_card_sha256": "3a79f71114e428964eae19dd6d67ceef2fbbd4d2f0d0e43f2d9c88d095f06def"
+    },
+    {
+      "object_id": "SMB_VEGETATION_CLIPPED_BOX_HEDGE",
+      "object_class": "ClippedBoxHedge",
+      "title": "Clipped Box Hedge",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV14_ClippedBoxHedge.grammar",
+      "grammar_sha256": "40469796c15722e7dd1b9acfb3f2e63235f94a16775219ea1cd49eb719749c40",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CLIPPED_BOX_HEDGE/front.png",
+          "sha256": "967597a03761fe2f76a5870e34a03533ac5d7cedea3b8fc02dc865cb965d560f"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CLIPPED_BOX_HEDGE/right.png",
+          "sha256": "bb39ba09b323359813a361495d548a0e300b30b5d5a5cf8e392a77a0d872a247"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CLIPPED_BOX_HEDGE/top.png",
+          "sha256": "a0a58259f078c431a6b6c9d20c125e1bf0ac2e1e1cd6e0c51468c39ab2106768"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CLIPPED_BOX_HEDGE/camera_three_views.png",
+      "camera_card_sha256": "fc0c3bdfaeabf336a4de1852af60cfd2fd1d7559f7eb9cdfe2f116bbd0678647"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB",
+      "object_class": "FloweringHydrangeaShrub",
+      "title": "Flowering Hydrangea Shrub",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV15_FloweringHydrangeaShrub.grammar",
+      "grammar_sha256": "19421b74613f657f2d44217679430eae05759e1cea4541747e5eedf0ab06ecd2",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB/front.png",
+          "sha256": "8f65d8a034707e481e7934058924ba0a06086d61507931c7e42b001b832c0ab3"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB/right.png",
+          "sha256": "c64e8547018824947ecb22f928a246e1a810bdbd8909dfcf02df036fdc57c439"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB/top.png",
+          "sha256": "4ee691b5e44f53c3570530f8d41244ed243bbb0aa716f49ddac4ae4e7bab4f01"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB/camera_three_views.png",
+      "camera_card_sha256": "89ed61faecaa10fb3b7fe1fce221e7675553442be38b7a13c3c333ec4589e433"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER",
+      "object_class": "SculpturalAgaveCluster",
+      "title": "Sculptural Agave Cluster",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV16_SculpturalAgaveCluster.grammar",
+      "grammar_sha256": "6de758808e13bf28a63cd461981099983eb38032c83d53bb53544bb81c45162a",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/front.png",
+          "sha256": "8a30aebc77015571cbca191b7b3446f4944ddfa212c615b7aa640bad903a5c2b"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/right.png",
+          "sha256": "754edab59761f03a6bb1953cb296aacead6f79887b98203e529c17bedfd9bc50"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/top.png",
+          "sha256": "7ecc3f00edd42972be9bc006c9f4c73609860d273062cf84b4e9acc1d143a06b"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/camera_three_views.png",
+      "camera_card_sha256": "9b2ac4afe39979e590482158b7b19e8a482d98ed2c19d80a017c70736d257cbf"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER",
+      "object_class": "FernUnderstoreyCluster",
+      "title": "Fern Understorey Cluster",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV17_FernUnderstoreyCluster.grammar",
+      "grammar_sha256": "31dee6a31828d6744547e6b5b1b2cd017df404b02e82ed276a4432ae4d7cd28f",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/front.png",
+          "sha256": "56924e56b96dd7de03804cd97723324df31e80389bccf6409755ec6fce8fefa4"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/right.png",
+          "sha256": "01debc8bba637224e55be2d247e0ef2080c0d9a36db7cef625bc6faaa0709cd3"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/top.png",
+          "sha256": "a3bd94882ea478254cde7b1cb0e500cc9a0a41d9a75cb2d074c360555b4c4d76"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/camera_three_views.png",
+      "camera_card_sha256": "3cbe47e13050f57f07737c9c7cedfe7ce6e1f426574d55aab03274c4d7d699d9"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER",
+      "object_class": "BambooScreenCluster",
+      "title": "Bamboo Screen Cluster",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV18_BambooScreenCluster.grammar",
+      "grammar_sha256": "90d55908658852099dc2917c6de3795b48587214d789135a3639ebbf6acff21c",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER/front.png",
+          "sha256": "21453824879861242c9d9ee4ccea2791837e3e690a0d08efb5989138ded637eb"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER/right.png",
+          "sha256": "8b255d0a71cdd07bad257ac63860ecd20a85c7f16676909554df76c8948ebc57"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER/top.png",
+          "sha256": "145d1d50d62d4ccdc50359f09c4538b203269b34df70b3364d9d78cd542bf534"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER/camera_three_views.png",
+      "camera_card_sha256": "2b4ac2072a15e0c9e0af262ec9452748580d65ab7e3e2d7a44105e25125cd3d4"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER",
+      "object_class": "SucculentRockeryCluster",
+      "title": "Succulent Rockery Cluster",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV19_SucculentRockeryCluster.grammar",
+      "grammar_sha256": "85df5b02c202a308f272c46836c1db4eff44960ad16e9d84aad5ef8bf4ce05d8",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER/front.png",
+          "sha256": "d3447f72d84ebb6467014575bcf183fc8b14d02e3e0752b0ba05d9ccaa8bbba5"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER/right.png",
+          "sha256": "9f771b310e7e83113c3ef94b225233eea0f2cf369d8a2b30ec3de5f5fec25d7f"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER/top.png",
+          "sha256": "36a15082123884758d04fa48dfe2ae062b9027fd0bda2895545da96b70d371bf"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER/camera_three_views.png",
+      "camera_card_sha256": "a2bb6f155a9d3b857444db5664ae82553f65353df2ddfd628a82b87f35d82b10"
+    },
+    {
+      "object_id": "SMB_VEGETATION_TOPIARY_SPHERE_SHRUB",
+      "object_class": "TopiarySphereShrub",
+      "title": "Topiary Sphere Shrub",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV20_TopiarySphereShrub.grammar",
+      "grammar_sha256": "4dcde8754871190cde6a5f2adb5f5c78a402bafac08730ef30b22d1e03b67032",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/front.png",
+          "sha256": "a8d28ad9de698c75ac4f9e4a8fe2e6463eae2f430ccb804006877c4f4667efe1"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/right.png",
+          "sha256": "4d40bcfbd84eb9463cffb2f38623bc449a6c8ab4f8ffda22f9db3ce32026ad95"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/top.png",
+          "sha256": "5a0d5aeb60f4d212159327ade4df1d282c9b1cb95a48d8bbc0d9e4d37efaf8ba"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/camera_three_views.png",
+      "camera_card_sha256": "ec3287b3e11e1432d9f52962eb32cff92d90f5bfa322fc8dce50800a226fef22"
+    },
+    {
+      "object_id": "SMB_VEGETATION_NATIVE_PRIVACY_SHRUB",
+      "object_class": "NativePrivacyShrub",
+      "title": "Native Privacy Shrub",
+      "category": "Shrub",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV21_NativePrivacyShrub.grammar",
+      "grammar_sha256": "c5a0211cd5b45890816601c591782d498464420b4a7de202b2e56f8b289ef315",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/front.png",
+          "sha256": "8d479c346beefaaf100cedf6f8ae529138edd6e2776a00a697d8aaf3ff19f555"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/right.png",
+          "sha256": "088cea4dec24c01a9d077c044a664aba3f1aa2fc93541a6f9ca10659dc886dba"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/top.png",
+          "sha256": "40f856ae5c81d9f1c89a63393cef74ac0a6fd84294fdc4934c048f8f0b9dadc0"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/camera_three_views.png",
+      "camera_card_sha256": "edf472ec8645aebd8238119b0a02ed4ce184d32f6894040930d8a1fd1317dc27"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FEATHER_REED_GRASS",
+      "object_class": "FeatherReedGrass",
+      "title": "Feather Reed Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV22_FeatherReedGrass.grammar",
+      "grammar_sha256": "4aab023377d8d2d00d9c54114c7ebde854022ee75d9dc2f20bd1c3544b5beb62",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/front.png",
+          "sha256": "e2864952b6512167994a8bb69f9eb2ae49fb2cb670e93147a45ff1f0a6f22127"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/right.png",
+          "sha256": "ab3f338abbb806153de04bae55647e1ad1b9f268d9cc237554d5afadb27d98cf"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/top.png",
+          "sha256": "63ee93b7a44e115e2e14d4d2b7ff9e70d8369e5ef874fc97fd5f0343460dfa98"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/camera_three_views.png",
+      "camera_card_sha256": "1fbbf505bfceca415f858d791baedc8b223e9186e52548caa4241819be76684f"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FOUNTAIN_GRASS",
+      "object_class": "FountainGrass",
+      "title": "Fountain Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV23_FountainGrass.grammar",
+      "grammar_sha256": "9d38b2ae7b85f41360c703d792f5508a59582acffdd1074820060e9d2c1f0995",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FOUNTAIN_GRASS/front.png",
+          "sha256": "c84c7431484df65e6665c785ddaf0de7365072e4bb8e0f2ddc9426b57f2f20f5"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FOUNTAIN_GRASS/right.png",
+          "sha256": "2a7e55212db8e8ee171b9cfe292b0457d554ac9405b70255d8a7300f3d1d8898"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FOUNTAIN_GRASS/top.png",
+          "sha256": "e2988ce8296d6dfd39b1b6caa439fecdb2c6b701143c2626b4cf84e1be8c7bca"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FOUNTAIN_GRASS/camera_three_views.png",
+      "camera_card_sha256": "6cd759691078433a70a679bf793415e5cd5d81d074f163e8a3849be811a35709"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BLUE_FESCUE_GRASS",
+      "object_class": "BlueFescueGrass",
+      "title": "Blue Fescue Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV24_BlueFescueGrass.grammar",
+      "grammar_sha256": "9ee9b84e8f3bf30f1804f774195c1a24159da8249307a09da0569eeb18bb08c5",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BLUE_FESCUE_GRASS/front.png",
+          "sha256": "fc48c101fcc2a91c20a1170d406ff3c2942535831933a9bfea08b76f1e669271"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BLUE_FESCUE_GRASS/right.png",
+          "sha256": "badcc1534b31949ea1efac4c1c3fdcdf6e1b52c1ce7e77cb2340a0e4a7f56645"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BLUE_FESCUE_GRASS/top.png",
+          "sha256": "0aa5f78ec2dd9e16ad3d6f20719bf7b321a53cca811ab7750b8fa7c518646aca"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BLUE_FESCUE_GRASS/camera_three_views.png",
+      "camera_card_sha256": "e902b69e853126af0bf657b8d7cd3c2d8b2480b7df629e0b6e63137b7247fc7b"
+    },
+    {
+      "object_id": "SMB_VEGETATION_LOMANDRA_GRASS",
+      "object_class": "LomandraGrass",
+      "title": "Lomandra Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV25_LomandraGrass.grammar",
+      "grammar_sha256": "558043d48b5c6df6c873a4011dd3eb21f945696dc54dd05f4a7c9cc43fecf97a",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/front.png",
+          "sha256": "d4defedaf400e3f0c882b6b091ddb3c657141f7641c14683c24f40feef411acd"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/right.png",
+          "sha256": "f6c01a0c6e055ae6d65c984a25aa742b539d22a70e32b1c02a319c3086fcc7df"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/top.png",
+          "sha256": "c905e6125439858c272ef2b1a734b3d3330299b2920eb8b7101d84cecfec8a3b"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/camera_three_views.png",
+      "camera_card_sha256": "9ee0197c543c0617cf1c48a4b5a36f4802e321ba73b05692d25def1f6489dabf"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MISCANTHUS_GRASS",
+      "object_class": "MiscanthusGrass",
+      "title": "Miscanthus Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV26_MiscanthusGrass.grammar",
+      "grammar_sha256": "30e93d710927016d1f67c6eb673226a52569706ecd4bcc4e7c50b7a3f53fd09c",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MISCANTHUS_GRASS/front.png",
+          "sha256": "f37e2b173e390e7dc8f0d3cac65f6f0ee62033b5a47bf3dc1cd9351635701f99"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MISCANTHUS_GRASS/right.png",
+          "sha256": "44c4ebeee972ab56045002b488d4c3eb3ac9106dbba00326f4b5d95b1cacd3ab"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MISCANTHUS_GRASS/top.png",
+          "sha256": "7b378fc2b991ce35a04c490d1c6f6e51080c53bb1ae1f936b8eb3c4b6b8f9db8"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MISCANTHUS_GRASS/camera_three_views.png",
+      "camera_card_sha256": "5a0872941251b061e8fb10eee3778efe19ab2f69ae146506cc72e7b3d7eaef20"
+    },
+    {
+      "object_id": "SMB_VEGETATION_PAMPAS_GRASS",
+      "object_class": "PampasGrass",
+      "title": "Pampas Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV27_PampasGrass.grammar",
+      "grammar_sha256": "2baa175881ba8ebebe5d72651cf7276f8899e42222b42bf8692ecfc2975ba3cc",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PAMPAS_GRASS/front.png",
+          "sha256": "d02fd2cf5a302559f3783c23e003f1f345feb7345fecc42c7634be95c66e63fc"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PAMPAS_GRASS/right.png",
+          "sha256": "cd0aeac7d3c453fba8bb3ad5bfff4ba653ae2572cd0264ce6cd49fc8d9b6f4d2"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PAMPAS_GRASS/top.png",
+          "sha256": "41128e6e5a5554149b79bed21731831b3812253aa91e687eecb2025bd9f6844a"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PAMPAS_GRASS/camera_three_views.png",
+      "camera_card_sha256": "ff62242c4199ef9454c6ce922fce3d0af8018fda7148434ce071ef76c272c72b"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MONDO_GRASS",
+      "object_class": "MondoGrass",
+      "title": "Mondo Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV28_MondoGrass.grammar",
+      "grammar_sha256": "110f91bfb0f7f286686200a3bd5d41c399567a98057f332e479883e53e013987",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MONDO_GRASS/front.png",
+          "sha256": "2dcb4e509876d10957e47cf94058ed3003d54d34b595af137855ba655ddb6939"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MONDO_GRASS/right.png",
+          "sha256": "a397983e7dd6e834fee1c50950f3d89359bf2edba4cd5d8b1417ad472ada5af2"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MONDO_GRASS/top.png",
+          "sha256": "b2b1e836a76a341fb3c96ac3990f19aba46c50c3d2925848fda44e2570ddfbe5"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MONDO_GRASS/camera_three_views.png",
+      "camera_card_sha256": "b857fc3f2f0072f6c37463d9a4a8770510ae51103901eacc98333c8dd4498750"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SWITCHGRASS",
+      "object_class": "Switchgrass",
+      "title": "Switchgrass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV29_Switchgrass.grammar",
+      "grammar_sha256": "02e64322b50db9311c4cde7d5b11bb98d190b30b41460334cc6d72b77639c010",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SWITCHGRASS/front.png",
+          "sha256": "1af80bfee52621621e60299837b52fd58adbd8ca8286de58866d5a6f4a7f875d"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SWITCHGRASS/right.png",
+          "sha256": "f1b4ca86ef91b73f1dd2495aa9c7928fd113a61194696609f97f2c51c16298d8"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SWITCHGRASS/top.png",
+          "sha256": "e1c11088b9df914996e9ecf6eab755d8fe2301c0e7cd0d1999a558226e436677"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SWITCHGRASS/camera_three_views.png",
+      "camera_card_sha256": "b8b78820ad5f0d07e5f5020268a30d679a4d8990c4af792deb4501eaebf79a6e"
+    },
+    {
+      "object_id": "SMB_VEGETATION_ARCHITECTURAL_SEDGE",
+      "object_class": "ArchitecturalSedge",
+      "title": "Architectural Sedge",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV30_ArchitecturalSedge.grammar",
+      "grammar_sha256": "9312cfaf35312ef73db8595694ae50920cd6dd53725b9aa20682c1deb6e436fd",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_ARCHITECTURAL_SEDGE/front.png",
+          "sha256": "d4ee50acdce1bdf1226e3b013398a43964b247f49e1b8f657ce1dcb518010919"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_ARCHITECTURAL_SEDGE/right.png",
+          "sha256": "ebfcd67c1c9a40cff126a3675b3c1eef2f43fc297eec7378f9df5e02924f3700"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_ARCHITECTURAL_SEDGE/top.png",
+          "sha256": "ea18c2cfc36936cba67c00b3adc66b32bd2259eb4fce371d7f7d702398caf70f"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_ARCHITECTURAL_SEDGE/camera_three_views.png",
+      "camera_card_sha256": "547bae92cbf67b93df9ca3e3ebe9fc7339f94d2dfcf3f1a6bd0d9cd519756407"
+    },
+    {
+      "object_id": "SMB_VEGETATION_DWARF_BAMBOO_GRASS",
+      "object_class": "DwarfBambooGrass",
+      "title": "Dwarf Bamboo Grass",
+      "category": "Grass",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV31_DwarfBambooGrass.grammar",
+      "grammar_sha256": "dab61a893a7824b73d4419f4a5d9f5069aab116b143eaa9aee5c5e07b6a93c88",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/front.png",
+          "sha256": "0340c17be390435d94c2fb5703f04eeb3419beb9fcaa0b52c3615b13db31027c"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/right.png",
+          "sha256": "d333277a0045149967d5032a8be49219c906059c398d7a3e3a0d7fbc835a97be"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/top.png",
+          "sha256": "573d6b8ebcc2f48556198565ab1b1f233244ecbbf827eb2a6d420cb10835a56b"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/camera_three_views.png",
+      "camera_card_sha256": "7ad929f566cad859519e8748c0435b8d68d20a7f81fd1246cf61ac01a5677b5a"
+    },
+    {
+      "object_id": "SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER",
+      "object_class": "CreepingThymeGroundcover",
+      "title": "Creeping Thyme Groundcover",
+      "category": "Groundcover",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV32_CreepingThymeGroundcover.grammar",
+      "grammar_sha256": "a7c4562482034073586e4880d40ee07eba38ec996e5370160b6dc12a297ee50a",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER/front.png",
+          "sha256": "ef35c36bd335c10bc3695e916fa2cfb832a7fd9cf23a94ed7903cf8811f4c641"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER/right.png",
+          "sha256": "08ca7b124f55bbcf7bb78e689cd43900adffff24a3a6110da2b8ec4b11e186cf"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER/top.png",
+          "sha256": "a777de5eefc6fb41cacaced341175be7e6e4eb77a7df3e7df69b546580bb846b"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER/camera_three_views.png",
+      "camera_card_sha256": "cb92f422549166c80579b9e4aff56298460626eb665b973b5c9312b831dd4eeb"
+    },
+    {
+      "object_id": "SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER",
+      "object_class": "DichondraSilverGroundcover",
+      "title": "Dichondra Silver Groundcover",
+      "category": "Groundcover",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV33_DichondraSilverGroundcover.grammar",
+      "grammar_sha256": "6e592293066ac65d627e6c6366d106a76f1662250a07e2c4ba47258062cba517",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/front.png",
+          "sha256": "2750240cb12e73e8cb4b839fb82d6250cb507cae8def0820568c50c89fddd721"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/right.png",
+          "sha256": "4d698ccd33dc273bf64e7513cbace9ac3cf28d1441e22e86733cc4bc13a764de"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/top.png",
+          "sha256": "f5ab9c650ac7e31ead144cda4f3c478ece06bbe90fe8d428d144096683553fd3"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/camera_three_views.png",
+      "camera_card_sha256": "7e6092c44be3c692746c4336b73ce17b8970aa412e5b29c1d57589a8c204c770"
+    },
+    {
+      "object_id": "SMB_VEGETATION_IVY_GROUNDCOVER",
+      "object_class": "IvyGroundcover",
+      "title": "Ivy Groundcover",
+      "category": "Groundcover",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV34_IvyGroundcover.grammar",
+      "grammar_sha256": "70e39184326e5dbe041084db779694d350eed4e20bb2be89f58f5292eb2c418d",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_GROUNDCOVER/front.png",
+          "sha256": "2f1bb6e861cb4acfd97ae87b520ed263d8b0cc30dfcceaf7c41ade75017f3f87"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_GROUNDCOVER/right.png",
+          "sha256": "091ea2ea141654757600554b1d85d4dfb6fcb7974634a80b8003c209874e8de7"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_GROUNDCOVER/top.png",
+          "sha256": "de89f46ee6375c4fe96c6acc04610c7646f41933d5aa0a4a6a35aaf3f33e227d"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_GROUNDCOVER/camera_three_views.png",
+      "camera_card_sha256": "260a5a5cf6a6fcf314b718c0e05bfee02ca472ac318a3392adf2404a6435408b"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_MEADOW_MAT",
+      "object_class": "FloweringMeadowMat",
+      "title": "Flowering Meadow Mat",
+      "category": "Groundcover",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV35_FloweringMeadowMat.grammar",
+      "grammar_sha256": "5780e70115b18dd6fe292eea72c23ddf2d8689ce3d8003512eae7256e3aaa9b4",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/front.png",
+          "sha256": "ae24f790668d3636dd4e16366c8122ee7d1777eb6fc05860b609ff24e664f339"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/right.png",
+          "sha256": "3ba2b0b6875905d8e4586317e878dcccda7498a2d83948a8147dfab7bbb5ea3a"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/top.png",
+          "sha256": "f8a7ea36c9b7a4698497dcc73942d29e51921135d7f89049ebd2083dc79726c4"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/camera_three_views.png",
+      "camera_card_sha256": "0516d8a76624ea969c4a5a4f333b5e8ed0591d9446841d3d42d58492e71ac342"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MOSS_FERN_CARPET",
+      "object_class": "MossFernCarpet",
+      "title": "Moss and Fern Carpet",
+      "category": "Groundcover",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV36_MossFernCarpet.grammar",
+      "grammar_sha256": "e2f76164599b25b039572ac4322a9b027231a1a9f381f47232d7977c4a1fe3bf",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MOSS_FERN_CARPET/front.png",
+          "sha256": "a5f8889a38366f29b742b508756ddce636e664664b0f08d7917ad1be2eb283bb"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MOSS_FERN_CARPET/right.png",
+          "sha256": "c04de7ad531d4e2ac550e4a8611d71834ebde64f5f9e2c84fc44bc0528d74ada"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MOSS_FERN_CARPET/top.png",
+          "sha256": "01272cd9e30337805b3b38928365da485f480a62a76b57b132087fc0f4f093b9"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MOSS_FERN_CARPET/camera_three_views.png",
+      "camera_card_sha256": "3d31d5f71e346c7699b47dbcf03215d2368a1167635bef6112d8d3f159ba190a"
+    },
+    {
+      "object_id": "SMB_VEGETATION_JASMINE_WALL_CLIMBER",
+      "object_class": "JasmineWallClimber",
+      "title": "Jasmine Wall Climber",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV37_JasmineWallClimber.grammar",
+      "grammar_sha256": "1bf48dd8ee684d94d1d2a95fa618687e44340db9c25342a26f49a2c2830b5504",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/front.png",
+          "sha256": "aeafdd8c57e33ddd5e0d0b7b317192e1f90191fc5228621109cf426021e72f18"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/right.png",
+          "sha256": "130ef8228722bf75d39a00aad68b23b311bd94efb7be7834925c5b2e81e66a90"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/top.png",
+          "sha256": "90a0650888f5db041852b209e2a215c51c2385f5564b93318fcd21ac40227819"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/camera_three_views.png",
+      "camera_card_sha256": "7e33d0e619137e2d062f81af6d99a936e3c7e65fe91e5c8c9b9a081715cc4d86"
+    },
+    {
+      "object_id": "SMB_VEGETATION_WISTERIA_PERGOLA",
+      "object_class": "WisteriaPergola",
+      "title": "Wisteria Pergola",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV38_WisteriaPergola.grammar",
+      "grammar_sha256": "1c81fd11363e77b066d0be265e7211a4e3eae9796eacabbbd366e6d453d45519",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/front.png",
+          "sha256": "2c6349efe1d78fb228f71cb9138fc9b0bd09dcf7b8827e7c6123b56cbd561645"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/right.png",
+          "sha256": "0159009bf465e23088766585662929aaec8673de8163d5d1cbbe6288d52de26c"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/top.png",
+          "sha256": "b615826ef55ab3eff30ca501f500cc05fb3c89bd06a33ccce7b9a1528a487982"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/camera_three_views.png",
+      "camera_card_sha256": "befb7bed21fef10d769ea32378b84b29b1e010cbb061bb610b7b125eb492cabe"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BOUGAINVILLEA_TRELLIS",
+      "object_class": "BougainvilleaTrellis",
+      "title": "Bougainvillea Trellis",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV39_BougainvilleaTrellis.grammar",
+      "grammar_sha256": "951326214ff70a920884dd15a90fdc7dec1d647658600b898c675ea092a84061",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/front.png",
+          "sha256": "946d5ab063aae11c38bf0ad582cc6e8379c0e4a976c0095bd299e3efd892b69d"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/right.png",
+          "sha256": "faae60d084e93481556a898b69c495ff6bc2e2b9345c6aa5c2c2e94b1b53c93b"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/top.png",
+          "sha256": "d04230e1d84d6ef4362279740ed1410049a4ed3c64876e1c68efc879b8546ab5"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/camera_three_views.png",
+      "camera_card_sha256": "2776d6895787e1ef92dcabe8becb02006932dfc7a2fa0e6cc0525c2079a7f6be"
+    },
+    {
+      "object_id": "SMB_VEGETATION_GRAPE_ARBOR_VINE",
+      "object_class": "GrapeArborVine",
+      "title": "Grape Arbor Vine",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV40_GrapeArborVine.grammar",
+      "grammar_sha256": "e48de1bd3894874baac7ccbf429ffe96986c8ebcbad6d65598d91e0fa61f1976",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/front.png",
+          "sha256": "accde8e28d16a499fb537f1304b9c7eaffccb0c58ab0d9dab0b6fe301aa2531a"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/right.png",
+          "sha256": "5c7164d6d067d94687f15ba9b1b632ea27635f94dc27da9e58d108605d5f3ec1"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/top.png",
+          "sha256": "d0ecf5be859e7d214f844ebc5a224bb7bdcbba876ae5217f86a541a5b305f338"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/camera_three_views.png",
+      "camera_card_sha256": "392b0e4b0e20875ea1e3a2c77d52bae52a67804bc3abae9269cd292224a92ddf"
+    },
+    {
+      "object_id": "SMB_VEGETATION_GREEN_FACADE_CABLE_VINE",
+      "object_class": "GreenFacadeCableVine",
+      "title": "Green Facade Cable Vine",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV41_GreenFacadeCableVine.grammar",
+      "grammar_sha256": "1b228060146aca32d8e5a7e0a339cee45ff6f3d39f2e54afe5572f60f4441c33",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/front.png",
+          "sha256": "c8bd6e896b8ce807e6f94726f2e3c5679b7590085a31eb0a9f73b8ed7a883837"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/right.png",
+          "sha256": "a00c0be7b81194a619e2adfa6bca80bcf162ef92d5fb1a8d63249ae98bce5881"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/top.png",
+          "sha256": "cf7978ed605e1c8c63b3a99c083433c531288cb0c4423a20433c0ae77e3e146e"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/camera_three_views.png",
+      "camera_card_sha256": "a83ba3caf30de85810528d6fab0009a16b1b4053cc99a969e4c02b70334b31d9"
+    },
+    {
+      "object_id": "SMB_VEGETATION_INDOOR_FICUS_PLANTER",
+      "object_class": "IndoorFicusPlanter",
+      "title": "Indoor Ficus Planter",
+      "category": "Plant",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV42_IndoorFicusPlanter.grammar",
+      "grammar_sha256": "e9566f52e9c309dafb276b18ec0378ef814ae1f99eac51cce5a97cc896585afb",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_INDOOR_FICUS_PLANTER/front.png",
+          "sha256": "a057239b633d3587161a9b4844cf4f2154a012ecac2cf79c780abdc208846b65"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_INDOOR_FICUS_PLANTER/right.png",
+          "sha256": "54195067c68411e6a99b993fbeab1b48eb96b1bac704f05e8755613f0a94af11"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_INDOOR_FICUS_PLANTER/top.png",
+          "sha256": "fe39cd39244ecdd2abe2484f75882939c492b86f3062845a456e8c62993f54f9"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_INDOOR_FICUS_PLANTER/camera_three_views.png",
+      "camera_card_sha256": "818fda52a08e56388aa5c047f4211f5d681074e29cec4516e5b2ba957f50298d"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SNAKE_PLANT_TROUGH",
+      "object_class": "SnakePlantTrough",
+      "title": "Snake Plant Trough",
+      "category": "Plant",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV43_SnakePlantTrough.grammar",
+      "grammar_sha256": "b6ebbec4a8b1769fc991416c520b06ce2b376bf6300da7f2e6b8adda104d3d54",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/front.png",
+          "sha256": "ea76e1b6755e51f4e0ee9743adec6301ed4e964f8b94304e0a430de909ebc761"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/right.png",
+          "sha256": "292a2a273cfc4d3569c9c2b10f319edb8be6c4d1149f7d14b4002188fcf8903f"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/top.png",
+          "sha256": "a5fcd61874e386cb72429a374cfa6bfef91d20fe9e55cff4f1bd29564cbfb0da"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/camera_three_views.png",
+      "camera_card_sha256": "056821502c80569ca182228849bd110aa700b00d84bbe21bfbb6546e1610604a"
+    },
+    {
+      "object_id": "SMB_VEGETATION_HANGING_FERN_PLANTER",
+      "object_class": "HangingFernPlanter",
+      "title": "Hanging Fern Planter",
+      "category": "Plant",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV44_HangingFernPlanter.grammar",
+      "grammar_sha256": "a939d2b8d5aa93797485cedc63162645fe373ff75283e8ce6661e57e765ba2cf",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/front.png",
+          "sha256": "0af41b3b22b9f71aa1169f05c60db0f567bc9bc147623e58b4e2585ebac8c117"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/right.png",
+          "sha256": "26468d46fd60ccf999ddcb31044d7665a8854573480dc6f85e28946a95ce56d3"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/top.png",
+          "sha256": "8847200ba6f3d9e45b4156e9b4309d9546aae153a7786ac77e2ed184396cc469"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/camera_three_views.png",
+      "camera_card_sha256": "ad3cde8a7ec190a1b83e7851f57d301106047b378784ade66fc45d149b116553"
+    },
+    {
+      "object_id": "SMB_VEGETATION_KITCHEN_HERB_PLANTER",
+      "object_class": "KitchenHerbPlanter",
+      "title": "Kitchen Herb Planter",
+      "category": "Plant",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV45_KitchenHerbPlanter.grammar",
+      "grammar_sha256": "d299a3476bfc63e15ce78271f0f0ebcd551424b16bd325f778974cb724eeae58",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/front.png",
+          "sha256": "a14585425b601376bc7d79e0f7c476ce50722898231203967fb511c7813b5bd7"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/right.png",
+          "sha256": "a96987efda6a7d26c1c87b06c972ddabd631701240b7debe30ea8e7a105ba61c"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/top.png",
+          "sha256": "e39227508d9ff63e09a177016c3111b201ed208f33b695c7bf66890231d51b4e"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/camera_three_views.png",
+      "camera_card_sha256": "bad4f302533f3e078b8318f3d3c424f15d445d9debab13a9225ed28538b41bf8"
+    },
+    {
+      "object_id": "SMB_VEGETATION_RAIN_GARDEN_REED_BED",
+      "object_class": "RainGardenReedBed",
+      "title": "Rain Garden Reed Bed",
+      "category": "EcologicalPlanting",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV46_RainGardenReedBed.grammar",
+      "grammar_sha256": "26dde2781361ef60bff71068315861785c603c86883f082eb5464ed57111e7b9",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_REED_BED/front.png",
+          "sha256": "8be9f0fbe5a56d896d02d65345c51c8289209a8b7b67bbf15d2402027288ddd6"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_REED_BED/right.png",
+          "sha256": "b0ba323839a4c97da2c7cb686ebf3043a528bd47321c77bc024de2e16def53b9"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_REED_BED/top.png",
+          "sha256": "0e7745ada01bcd9a2101f23e439311958614ede930f9b9a62f6487dad48eb6a7"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_REED_BED/camera_three_views.png",
+      "camera_card_sha256": "2ca91750a7df6c2bf9024c17a0ca46d70ab45948478be5dced8691f128342f95"
+    },
+    {
+      "object_id": "SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER",
+      "object_class": "PoolsideTropicalCluster",
+      "title": "Poolside Tropical Cluster",
+      "category": "EcologicalPlanting",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV47_PoolsideTropicalCluster.grammar",
+      "grammar_sha256": "5700dee922fb689aca73aaac513eff16031992b7d9804f9e0f326f6764263b71",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/front.png",
+          "sha256": "0ea2dc2c55499522c967c8182b60ec0cb174cec8a9ce3aa274e47b0e45dc2dee"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/right.png",
+          "sha256": "0613303f2366e52035dbeceb9fd54a5922eab6095828bc766d83fd87981be572"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/top.png",
+          "sha256": "e1fecc4016716d722249c32cb295210d1010706a64e3b94b60c287d314d9454b"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/camera_three_views.png",
+      "camera_card_sha256": "2cfd84ce7c37aea461b5b2fa1aea7680406e12ca0bd0662ebe2e28f53de7f7fe"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BIOSWALE_SEDGE_MODULE",
+      "object_class": "BioswaleSedgeModule",
+      "title": "Bioswale Sedge Module",
+      "category": "EcologicalPlanting",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV48_BioswaleSedgeModule.grammar",
+      "grammar_sha256": "dee0d61c66e2a4fae2c7dfc00767a2eaf59920736a437f48f922fee93ec7e2e9",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BIOSWALE_SEDGE_MODULE/front.png",
+          "sha256": "22861c7ca0dee5e260353690f3e2ca7fa474d67311d2cfb737db36d043f42574"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BIOSWALE_SEDGE_MODULE/right.png",
+          "sha256": "191dd712147bcad48ac80704d599f5074821b2c982ce9b7b3069a989d9e9b0b5"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BIOSWALE_SEDGE_MODULE/top.png",
+          "sha256": "09de728dabbb1e30ac36ab52d741144d63449800c42f2c046cf1d630bec5b2e4"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BIOSWALE_SEDGE_MODULE/camera_three_views.png",
+      "camera_card_sha256": "d924f96a738369aae11aae9bc1d6901984d12b82a3d57b9e3c003456c647a662"
+    },
+    {
+      "object_id": "SMB_VEGETATION_AQUATIC_LILY_PLANTER",
+      "object_class": "AquaticLilyPlanter",
+      "title": "Aquatic Lily Planter",
+      "category": "EcologicalPlanting",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV49_AquaticLilyPlanter.grammar",
+      "grammar_sha256": "283af8cffd8e0b10e64d9a1fce7e7ce46695c81b9cbd6f91b78cdac21f068c82",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/front.png",
+          "sha256": "7592c7d73ac62d4678a040e23e35f2c55cbd78a04909819efae98305106c1b69"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/right.png",
+          "sha256": "4ee9e8b5875ec0893ae54a53db3f9641f1dfb0db474a27b21ee3703a2de570ed"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/top.png",
+          "sha256": "642fae56b9ccdfe5742dc64ab43653903369a08b19614186ca8e6856163c993f"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/camera_three_views.png",
+      "camera_card_sha256": "7643efb2c5972d5132ba46a5be4c4613daebfc906558c753c0f441b4ab353d19"
+    },
+    {
+      "object_id": "SMB_VEGETATION_GREEN_ROOF_MODULE",
+      "object_class": "GreenRoofVegetationModule",
+      "title": "Green Roof Vegetation Module",
+      "category": "EcologicalPlanting",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV50_GreenRoofVegetationModule.grammar",
+      "grammar_sha256": "a30810941ec2304b521d718074f83a953830df6faf6b9a0f5bbfdb26f792b7a6",
+      "views": [
+        {
+          "view": "front",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/front.png",
+          "sha256": "2e2137c7779f75a7805bb0ef94db4860b370fea1aea1ef22c40b640f1faf461f"
+        },
+        {
+          "view": "right",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/right.png",
+          "sha256": "23242458db81eccfec709a3a1b306fb094f57e4ddd8955d1eb4a4ea19a96c8cb"
+        },
+        {
+          "view": "top",
+          "image": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/top.png",
+          "sha256": "0a82332394bb7dddd00aeddca3ebc53b9d88939c91d76ac8167f69b157f23d77"
+        }
+      ],
+      "camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/camera_three_views.png",
+      "camera_card_sha256": "22acea6a7a7e8bd8aa086c7e45c56d8ac3ae2c3ff2f7fcf954ec3b8ace473987"
+    }
+  ],
+  "passed": true
+}

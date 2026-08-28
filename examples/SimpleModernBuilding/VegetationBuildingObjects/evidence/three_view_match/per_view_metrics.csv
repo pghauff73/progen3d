@@ -1,0 +1,16 @@
+object_id,object_class,category,view,observability,silhouette_overlap,edge_alignment,projection_distribution,aspect_ratio,foreground_occupancy,component_count,symmetry,appearance_similarity,composite_score_percent,failed_test_ids,passed,target_passed
+SMB_VEGETATION_COURTYARD_CANOPY_TREE,ArchitecturalCanopyTree,Tree,front,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,,True,True
+SMB_VEGETATION_COURTYARD_CANOPY_TREE,ArchitecturalCanopyTree,Tree,right,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,,True,True
+SMB_VEGETATION_COURTYARD_CANOPY_TREE,ArchitecturalCanopyTree,Tree,top,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.040925,99.904092,,True,True
+SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE,SculpturalLSystemTree,Tree,front,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,97.99423,99.799423,,True,True
+SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE,SculpturalLSystemTree,Tree,right,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,98.059679,99.805968,,True,True
+SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE,SculpturalLSystemTree,Tree,top,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.170658,99.917066,,True,True
+SMB_VEGETATION_FLOWERING_PLANT_CLUSTER,LayeredFloweringPlantCluster,Plant,front,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,98.50977,99.850977,,True,True
+SMB_VEGETATION_FLOWERING_PLANT_CLUSTER,LayeredFloweringPlantCluster,Plant,right,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,98.805908,99.880591,,True,True
+SMB_VEGETATION_FLOWERING_PLANT_CLUSTER,LayeredFloweringPlantCluster,Plant,top,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.072913,99.907291,,True,True
+SMB_VEGETATION_IVY_PRIVACY_SCREEN,WallClimbingIvyPrivacyScreen,Vine,front,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.19078,99.919078,,True,True
+SMB_VEGETATION_IVY_PRIVACY_SCREEN,WallClimbingIvyPrivacyScreen,Vine,right,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.537654,99.953765,,True,True
+SMB_VEGETATION_IVY_PRIVACY_SCREEN,WallClimbingIvyPrivacyScreen,Vine,top,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.417342,99.941734,,True,True
+SMB_VEGETATION_TENDRIL_PERGOLA_VINE,TendrilPergolaVine,Vine,front,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.374999,99.9375,,True,True
+SMB_VEGETATION_TENDRIL_PERGOLA_VINE,TendrilPergolaVine,Vine,right,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.371336,99.937134,,True,True
+SMB_VEGETATION_TENDRIL_PERGOLA_VINE,TendrilPergolaVine,Vine,top,Measured,100.0,100.0,100.0,100.0,100.0,100.0,100.0,99.101819,99.910182,,True,True

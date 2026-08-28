@@ -1,0 +1,33 @@
+{
+  "schema_version": "ProGen3D-RootArchitectureGraph-v1",
+  "plant_architecture": "Tree",
+  "graph_identifier": "root-graph:tree-001:v1",
+  "length_unit": "mm",
+  "root_origin": [0.0, 0.0, 0.0],
+  "segments": [
+    {
+      "identifier": "root-axis-0",
+      "parent_identifier": "",
+      "root_order": 0,
+      "start": [0.0, 0.0, 0.0],
+      "end": [850.0, 0.0, -620.0],
+      "radius": 42.0
+    },
+    {
+      "identifier": "root-lateral-1",
+      "parent_identifier": "root-axis-0",
+      "root_order": 1,
+      "start": [500.0, 0.0, -360.0],
+      "end": [2150.0, 620.0, -940.0],
+      "radius": 14.0
+    },
+    {
+      "identifier": "root-lateral-2",
+      "parent_identifier": "root-axis-0",
+      "root_order": 1,
+      "start": [380.0, 0.0, -290.0],
+      "end": [-1750.0, -540.0, -760.0],
+      "radius": 11.0
+    }
+  ]
+}

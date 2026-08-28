@@ -25,9 +25,22 @@ STATIC_CRYPTO_LIB ?= $(firstword $(wildcard $(VENDOR_LIB_DIR)/libcrypto.a $(VEND
 STATIC_CURL_ARCHIVES := $(strip $(STATIC_CURL_LIB) $(STATIC_SSL_LIB) $(STATIC_CRYPTO_LIB))
 
 GLFW_LIB ?= $(STATIC_GLFW_LIB)
+
+ifeq ($(strip $(GLFW_LIB)),)
+GLFW_LIB = -lglfw
+endif
 GLFW_PLATFORM_LIBS ?= $(shell pkg-config --static --libs x11 xrandr xi xinerama xcursor 2>/dev/null)
 DBUS_CFLAGS ?= $(shell pkg-config --cflags dbus-1 2>/dev/null)
 DBUS_LIBS ?= $(shell pkg-config --libs dbus-1 2>/dev/null)
+JSONCPP_LIBS ?= $(shell pkg-config --libs jsoncpp 2>/dev/null)
+LIBXML2_CFLAGS ?= $(shell pkg-config --cflags libxml-2.0 2>/dev/null)
+LIBXML2_LIBS ?= $(shell pkg-config --libs libxml-2.0 2>/dev/null)
+EIGEN3_CFLAGS ?= $(shell pkg-config --cflags eigen3 2>/dev/null)
+CRYPTO_LIBS ?= -lcrypto
+
+ifeq ($(strip $(JSONCPP_LIBS)),)
+JSONCPP_LIBS = -ljsoncpp
+endif
 
 ifeq ($(words $(STATIC_CURL_ARCHIVES)),3)
 CURL_LIBS ?= $(STATIC_CURL_ARCHIVES)
@@ -48,7 +61,9 @@ COMMON_INCLUDE_FLAGS = \
 	-Ithird_party/debs/stb/usr/include/stb \
 	-I$(GLAD_INCLUDE_DIR) \
 	-I$(NFD_DIR)/include \
-	$(DBUS_CFLAGS)
+	$(DBUS_CFLAGS) \
+	$(LIBXML2_CFLAGS) \
+	$(EIGEN3_CFLAGS)
 
 IMGUI_USER_CONFIG_DEFINE = -DIMGUI_USER_CONFIG=\"imgui_user_config.h\"
 NFD_BACKEND_DEFINE = -DNFD_PORTAL
@@ -58,6 +73,60 @@ DEPFLAGS = -MMD -MP
 APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 
 APP_CPP_SOURCES = \
+	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationBiologicalProfileValidationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCalibrationReadinessEvaluationService.cpp \
+	$(SRC_DIR)/vegetation/model/VegetationCalibrationMeasurement.cpp \
+	$(SRC_DIR)/vegetation/model/VegetationCalibrationEvidenceBundle.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCalibrationEvidenceBundleSerializationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCalibrationPayloadHashService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCalibrationEvidenceBundleParsingService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCalibrationEvidenceBundleValidationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCalibrationEvidenceBindingService.cpp \
+	$(SRC_DIR)/vegetation/model/VegetationMeasuredSourceArtifact.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredSourceArtifactHashService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredSourceArtifactValidationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredCoordinateNormalizationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasurementUnitNormalizationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredCalibrationMeasurementFactory.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredEvidenceBundleFactory.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredSourceJsonDocumentReader.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationQuantitativeStructureModelAdapter.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationRootArchitectureGraphAdapter.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCanopyObservationAdapter.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPhenologyObservationSeriesAdapter.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationBiomechanicalMaterialTestAdapter.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredSourceSchemaRegistry.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredCoordinateReferenceTransformService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredPointCanonicalizationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredSourceDecoderArtifactValidationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationDecodedMeasuredSourceArtifactFactory.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationDelimitedSourceTableReader.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationTreeQsmCylinderTableDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationRootSystemMarkupLanguageDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCanopyObservationTableDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPhenologyObservationTableDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationBiomechanicalMaterialTestTableDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationMeasuredSourceDecodingService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPointCloudFormatCapabilityCatalog.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPointCloudSourceArtifactValidationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPlyPointCloudDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationLasPointCloudDecoder.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPointCloudIngestionService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPointCloudReconstructionAdmissionService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPointCloudReconstructionJobFactory.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCanopyOccupancyQualityEvaluationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationCanopyOccupancyReconstructionService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationWoodyAxisQualityEvaluationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationPrimaryWoodyAxisReconstructionService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationWoodyPointSegmentationValidationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationWoodyBranchGraphQualityEvaluationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationSegmentedWoodyBranchGraphReconstructionService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationWoodyBranchGraphQuantitativeStructureModelArtifactFactory.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationWoodyCoverSetSegmentationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationWoodySegmentationSensitivityEvaluationService.cpp \
+	$(SRC_DIR)/vegetation/service/VegetationAutomatedWoodySegmentationEnsembleService.cpp \
 	$(SRC_DIR)/chair/model/ChairObjectModel.cpp \
 	$(SRC_DIR)/chair/model/ChairThreeViewFitReport.cpp \
 	$(SRC_DIR)/chair/service/ChairCatalog.cpp \
@@ -437,7 +506,7 @@ OBJS = $(APP_OBJS) $(IMGUI_OBJS) $(C_OBJS)
 $(APP_OBJS): CXXFLAGS += $(APPLICATION_WARNING_FLAGS)
 
 LDFLAGS =
-LIBS = $(GLFW_LIB) $(GLFW_PLATFORM_LIBS) -ldl -lm -lpthread $(CURL_LIBS) $(DBUS_LIBS)
+LIBS = $(GLFW_LIB) $(GLFW_PLATFORM_LIBS) -ldl -lm -lpthread $(CURL_LIBS) $(DBUS_LIBS) $(JSONCPP_LIBS) $(LIBXML2_LIBS) $(CRYPTO_LIBS)
 
 .PHONY: all clean
 

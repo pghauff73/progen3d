@@ -1,0 +1,42 @@
+# Generated Simple Modern Building vegetation object.
+# Object-local geometry uses Y-up coordinates and a five-degree comparison lens.
+
+Start -> SMB_VEGETATION_EVERGREEN_SCREEN_TREE
+
+SMB_VEGETATION_EVERGREEN_SCREEN_TREE ->
+[
+    Object(
+        id(SMB_VEGETATION_EVERGREEN_SCREEN_TREE)
+        class(EvergreenScreenTree)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Tree EvergreenScreenTree)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(rootSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(inspection) type(InspectionInterface) origin(0 3.178 0) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ I(TaperedSweep(samples(0 0 0 0.30  0.04 1.534 0.03 0.25  -0.05 3.178 -0.02 0.18  0.02 5.480 0 0.075) up(0 0 1) segments(20) cap(all)) material(amberwarmwood) 1 0.18) ]
+        [ T(0 1.863 0) I(BranchJunction(core(0.24 1.22) parent(0 -1 0 0.25 0.36) child(0.74 0.55 0.12 0.13 0.66) child(-0.70 0.58 -0.16 0.13 0.66) segments(18)) material(amberwarmwood) 1 0.18) ]
+        [ T(0 0.16 0) S(1.70 1.0 1.35) I(Plant(species(Shrub) age(7) state(Mature) seed(510011) generation(LSystem) lAxiom(F) lRule(F F Push Plus F Pop F Push Minus F Pop F) lSystem(3 25 0.16 0.052 0.006 2) phyllotaxis(Alternate 137.50776 0.10 1 0 0 0.16) tropism(Up 0 1 0 0.018) detail(LOD3)) material(sagegreenmattepaint) 1 0.16) ]
+        SMBV11_Crown(-1.690 4.330 -0.28 0.82 0.58 0.72)
+        SMBV11_Crown(1.690 4.450 0.30 0.84 0.60 0.74)
+        SMBV11_Crown(-0.62 5.050 0.54 0.88 0.62 0.76)
+        SMBV11_Crown(0.66 5.110 -0.58 0.90 0.64 0.78)
+        SMBV11_Crown(0 5.510 0 1.05 0.72 0.90)
+        SMBV11_Leaf(-1.870 4.450 -0.18 -24)
+        SMBV11_Leaf(1.870 4.570 0.20 28)
+        SMBV11_Leaf(-0.58 5.450 0.48 46)
+        SMBV11_Leaf(0.60 5.510 -0.50 -42)
+    ]
+]
+
+SMBV11_Crown(x y z sx sy sz) ->
+[
+    T(x y z) S(sx sy sz) I(Sphere material(sagegreenmattepaint) 1 0.20)
+]
+
+SMBV11_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Ovate) length(0.62) width(0.28) curvature(0.16) camber(0.034) twist(10) thickness(0.010) widthPower(1.06) segments(18 5)) material(sagegreenmattepaint) 1 0.15)
+]

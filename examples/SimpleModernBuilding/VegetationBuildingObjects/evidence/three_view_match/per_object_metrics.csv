@@ -1,0 +1,6 @@
+object_id,object_class,category,minimum_view_score_percent,mean_view_score_percent,passed,target_passed
+SMB_VEGETATION_COURTYARD_CANOPY_TREE,ArchitecturalCanopyTree,Tree,99.904092,99.96803066666666,True,True
+SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE,SculpturalLSystemTree,Tree,99.799423,99.84081900000001,True,True
+SMB_VEGETATION_FLOWERING_PLANT_CLUSTER,LayeredFloweringPlantCluster,Plant,99.850977,99.87961966666667,True,True
+SMB_VEGETATION_IVY_PRIVACY_SCREEN,WallClimbingIvyPrivacyScreen,Vine,99.919078,99.93819233333333,True,True
+SMB_VEGETATION_TENDRIL_PERGOLA_VINE,TendrilPergolaVine,Vine,99.910182,99.92827199999999,True,True

@@ -1,0 +1,9 @@
+{
+  "schema_version": "ProGen3D-CanopyObservation-v1",
+  "plant_architecture": "Tree",
+  "observation_identifier": "canopy-observation:tree-001:leaf-on",
+  "point_cloud_identifier": "tls-point-cloud:tree-001:leaf-on",
+  "leaf_area_index": {"value": 3.4, "unit": "dimensionless"},
+  "crown_gap_fraction": {"value": 24.0, "unit": "percent"},
+  "mean_leaf_inclination": {"value": 0.7853981633974483, "unit": "rad"}
+}

@@ -1,0 +1,2142 @@
+{
+  "schema": "ProGen3D-SMB-VegetationImageGenAtlas-v2",
+  "suite_manifest": "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+  "suite_manifest_sha256": "e8cde9aa8b50dd731a1b515588930ed2287010e17a0e1b335827a50f10e3364a",
+  "render_validation": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/validation.json",
+  "render_validation_sha256": "2daea48c505058c7f14720cac8a8a2119ea471b4120cef4f58352e50f0091cb8",
+  "atlas_dimensions": [
+    1536,
+    1024
+  ],
+  "atlas_grid": [
+    2,
+    3
+  ],
+  "camera_card_grid": [
+    3,
+    1
+  ],
+  "objects_per_page": 5,
+  "page_count": 10,
+  "object_count": 50,
+  "view_count": 150,
+  "comparison_projection": {
+    "mode": "narrow-perspective",
+    "vertical_field_of_view_degrees": 5.0,
+    "purpose": "Flatten perspective for elevation-like vegetation object comparisons"
+  },
+  "pages": [
+    {
+      "page_index": 0,
+      "page_number": 1,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_01.png",
+      "atlas_sha256": "04db75020cceaf25f3a144563b3b73e9e1d5bf31339ce3b580cd3b521dada129",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_01.prompt.txt",
+      "prompt_sha256": "84fcc1c58d625cf8ce8992080cccc401ab843e9a98c13a4c229709d9fc50f106",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_COURTYARD_CANOPY_TREE",
+          "object_class": "ArchitecturalCanopyTree",
+          "title": "Courtyard Canopy Tree",
+          "category": "Tree",
+          "design_intent": "A broad, layered courtyard shade tree with a tapered trunk, explicit branch junctions, swept limbs, foliage lobes, and individually modeled leaves.",
+          "page_index": 0,
+          "page_number": 1,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "8a47220542eff3ba805a8c13c9eaadb1deabf3af95f28de98eb772730e325f79"
+        },
+        {
+          "object_id": "SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE",
+          "object_class": "SculpturalLSystemTree",
+          "title": "Sculptural L-System Tree",
+          "category": "Tree",
+          "design_intent": "A narrow architectural tree whose deterministic L-system crown is supported by a visible warm-timber trunk and clipped cloud foliage.",
+          "page_index": 0,
+          "page_number": 1,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "a9931bc4305a96b007264d0d6e6b6f67009b1dc8f39de8f1786381761ab28c55"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FLOWERING_PLANT_CLUSTER",
+          "object_class": "LayeredFloweringPlantCluster",
+          "title": "Layered Flowering Plant Cluster",
+          "category": "Plant",
+          "design_intent": "A modern rectangular planter containing deterministic flowering herbs, scattered grass underplanting, modeled leaves, petals, soil, and drainage feet.",
+          "page_index": 0,
+          "page_number": 1,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/camera_three_views.png",
+          "source_camera_card_sha256": "058cddecd5bec07ec3151e1a0f451b40466839a415e9b1d3ab549fdcc6f34eb1"
+        },
+        {
+          "object_id": "SMB_VEGETATION_IVY_PRIVACY_SCREEN",
+          "object_class": "WallClimbingIvyPrivacyScreen",
+          "title": "Wall-Climbing Ivy Privacy Screen",
+          "category": "Vine",
+          "design_intent": "A freestanding slatted privacy screen with deterministic wall-seeking ivy, offset attachment behavior, a planted trough, and visible support feet.",
+          "page_index": 0,
+          "page_number": 1,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/camera_three_views.png",
+          "source_camera_card_sha256": "19c62c51914b607bcd99d8aa537b8ba3efea40bae9f692327dc5417493c739db"
+        },
+        {
+          "object_id": "SMB_VEGETATION_TENDRIL_PERGOLA_VINE",
+          "object_class": "TendrilPergolaVine",
+          "title": "Tendril Pergola Vine",
+          "category": "Vine",
+          "design_intent": "A compact pergola bay with twining tendril vines, branching overhead growth, leaf blades, and flowering petals around a clear structural frame.",
+          "page_index": 0,
+          "page_number": 1,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/camera_three_views.png",
+          "source_camera_card_sha256": "412a89301f5507c125dbef14c3e7486b8e7408afd6c12e5d1526fcc9b685f0d1"
+        }
+      ]
+    },
+    {
+      "page_index": 1,
+      "page_number": 2,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_02.png",
+      "atlas_sha256": "7f96e8dbccf393d041f512398908c7b86be04045aa13fd8b48c116140453f337",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_02.prompt.txt",
+      "prompt_sha256": "6d12757265b2071933043a2854ce61d2c6741ca98ead6dabf3afe9dad742922e",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_COLUMNAR_ENTRY_TREE",
+          "object_class": "ColumnarEntryTree",
+          "title": "Columnar Entry Tree",
+          "category": "Tree",
+          "design_intent": "A distinct columnar entry tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 1,
+          "page_number": 2,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COLUMNAR_ENTRY_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "037ddd7fe12cec91d95599a101887f653d9dce059584f08201e839965fc3f37d"
+        },
+        {
+          "object_id": "SMB_VEGETATION_MULTI_STEM_BIRCH_TREE",
+          "object_class": "MultiStemBirchTree",
+          "title": "Multi-Stem Birch Tree",
+          "category": "Tree",
+          "design_intent": "A distinct multi-stem birch tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 1,
+          "page_number": 2,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MULTI_STEM_BIRCH_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "6b86201106e85687429791271b68c84dfb7c0225d31aa7172df5a5d2d8971b73"
+        },
+        {
+          "object_id": "SMB_VEGETATION_OLIVE_COURTYARD_TREE",
+          "object_class": "OliveCourtyardTree",
+          "title": "Olive Courtyard Tree",
+          "category": "Tree",
+          "design_intent": "A distinct olive courtyard tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 1,
+          "page_number": 2,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_OLIVE_COURTYARD_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "c4729d23d0e433f0fff72f7a7130abd593edef1ff5cecec2c35048a276101d2f"
+        },
+        {
+          "object_id": "SMB_VEGETATION_PALM_ACCENT_TREE",
+          "object_class": "PalmAccentTree",
+          "title": "Palm Accent Tree",
+          "category": "Tree",
+          "design_intent": "A distinct palm accent tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 1,
+          "page_number": 2,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "075b65329bc31e3b8d1c2883e9bccb0b54a3deb9c9f5ad9ef9557afa79de6296"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE",
+          "object_class": "FloweringOrnamentalTree",
+          "title": "Flowering Ornamental Tree",
+          "category": "Tree",
+          "design_intent": "A distinct flowering ornamental tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 1,
+          "page_number": 2,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "d49714af6fc1b239608f98b67f824581ab03e3dfd17134de2094ac4650612396"
+        }
+      ]
+    },
+    {
+      "page_index": 2,
+      "page_number": 3,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_03.png",
+      "atlas_sha256": "a0222dc1caf17cf12ff2b947efbb7e41bb6a07b08a190ce7552b1516264de9b1",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_03.prompt.txt",
+      "prompt_sha256": "b109587dfd245bdbeb56111bf6b86668f8fd66f0f7a768992bf5b41dc8da5285",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_EVERGREEN_SCREEN_TREE",
+          "object_class": "EvergreenScreenTree",
+          "title": "Evergreen Screen Tree",
+          "category": "Tree",
+          "design_intent": "A distinct evergreen screen tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 2,
+          "page_number": 3,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "177dd12bfc563b2fb4fb4050ef361ccc2e3a90eac04eb1bf7ab366cf529a79cd"
+        },
+        {
+          "object_id": "SMB_VEGETATION_BONSAI_COURTYARD_TREE",
+          "object_class": "BonsaiCourtyardTree",
+          "title": "Bonsai Courtyard Tree",
+          "category": "Tree",
+          "design_intent": "A distinct bonsai courtyard tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 2,
+          "page_number": 3,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BONSAI_COURTYARD_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "084a71fbfa87b7ce49e7917263c3716dd9eb74d5b5e7595ef53a45e8f49771b4"
+        },
+        {
+          "object_id": "SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE",
+          "object_class": "RainGardenCanopyTree",
+          "title": "Rain Garden Canopy Tree",
+          "category": "Tree",
+          "design_intent": "A distinct rain garden canopy tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 2,
+          "page_number": 3,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE/camera_three_views.png",
+          "source_camera_card_sha256": "3a79f71114e428964eae19dd6d67ceef2fbbd4d2f0d0e43f2d9c88d095f06def"
+        },
+        {
+          "object_id": "SMB_VEGETATION_CLIPPED_BOX_HEDGE",
+          "object_class": "ClippedBoxHedge",
+          "title": "Clipped Box Hedge",
+          "category": "Shrub",
+          "design_intent": "A distinct clipped box hedge building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 2,
+          "page_number": 3,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CLIPPED_BOX_HEDGE/camera_three_views.png",
+          "source_camera_card_sha256": "fc0c3bdfaeabf336a4de1852af60cfd2fd1d7559f7eb9cdfe2f116bbd0678647"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB",
+          "object_class": "FloweringHydrangeaShrub",
+          "title": "Flowering Hydrangea Shrub",
+          "category": "Shrub",
+          "design_intent": "A distinct flowering hydrangea shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 2,
+          "page_number": 3,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB/camera_three_views.png",
+          "source_camera_card_sha256": "89ed61faecaa10fb3b7fe1fce221e7675553442be38b7a13c3c333ec4589e433"
+        }
+      ]
+    },
+    {
+      "page_index": 3,
+      "page_number": 4,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_04.png",
+      "atlas_sha256": "f18daae4ccab88285b61f6c8a5784c1be2a17900751bd74b19e576964c88c20c",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_04.prompt.txt",
+      "prompt_sha256": "5ad2f5af3261e443afdb9655ce559c287bcc66f462be7402210f85ace716a883",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER",
+          "object_class": "SculpturalAgaveCluster",
+          "title": "Sculptural Agave Cluster",
+          "category": "Shrub",
+          "design_intent": "A distinct sculptural agave cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 3,
+          "page_number": 4,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/camera_three_views.png",
+          "source_camera_card_sha256": "9b2ac4afe39979e590482158b7b19e8a482d98ed2c19d80a017c70736d257cbf"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER",
+          "object_class": "FernUnderstoreyCluster",
+          "title": "Fern Understorey Cluster",
+          "category": "Shrub",
+          "design_intent": "A distinct fern understorey cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 3,
+          "page_number": 4,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/camera_three_views.png",
+          "source_camera_card_sha256": "3cbe47e13050f57f07737c9c7cedfe7ce6e1f426574d55aab03274c4d7d699d9"
+        },
+        {
+          "object_id": "SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER",
+          "object_class": "BambooScreenCluster",
+          "title": "Bamboo Screen Cluster",
+          "category": "Shrub",
+          "design_intent": "A distinct bamboo screen cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 3,
+          "page_number": 4,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER/camera_three_views.png",
+          "source_camera_card_sha256": "2b4ac2072a15e0c9e0af262ec9452748580d65ab7e3e2d7a44105e25125cd3d4"
+        },
+        {
+          "object_id": "SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER",
+          "object_class": "SucculentRockeryCluster",
+          "title": "Succulent Rockery Cluster",
+          "category": "Shrub",
+          "design_intent": "A distinct succulent rockery cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 3,
+          "page_number": 4,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER/camera_three_views.png",
+          "source_camera_card_sha256": "a2bb6f155a9d3b857444db5664ae82553f65353df2ddfd628a82b87f35d82b10"
+        },
+        {
+          "object_id": "SMB_VEGETATION_TOPIARY_SPHERE_SHRUB",
+          "object_class": "TopiarySphereShrub",
+          "title": "Topiary Sphere Shrub",
+          "category": "Shrub",
+          "design_intent": "A distinct topiary sphere shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 3,
+          "page_number": 4,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/camera_three_views.png",
+          "source_camera_card_sha256": "ec3287b3e11e1432d9f52962eb32cff92d90f5bfa322fc8dce50800a226fef22"
+        }
+      ]
+    },
+    {
+      "page_index": 4,
+      "page_number": 5,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_05.png",
+      "atlas_sha256": "381de4e855c22df30db9c1deb98d4d7a5014318d8b7ff2d7c53d39b82b20c271",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_05.prompt.txt",
+      "prompt_sha256": "8d3eb23dc664793ff85749d4f1248df0604d33a0ce873a4409e346269f013484",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_NATIVE_PRIVACY_SHRUB",
+          "object_class": "NativePrivacyShrub",
+          "title": "Native Privacy Shrub",
+          "category": "Shrub",
+          "design_intent": "A distinct native privacy shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 4,
+          "page_number": 5,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/camera_three_views.png",
+          "source_camera_card_sha256": "edf472ec8645aebd8238119b0a02ed4ce184d32f6894040930d8a1fd1317dc27"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FEATHER_REED_GRASS",
+          "object_class": "FeatherReedGrass",
+          "title": "Feather Reed Grass",
+          "category": "Grass",
+          "design_intent": "A distinct feather reed grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 4,
+          "page_number": 5,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "1fbbf505bfceca415f858d791baedc8b223e9186e52548caa4241819be76684f"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FOUNTAIN_GRASS",
+          "object_class": "FountainGrass",
+          "title": "Fountain Grass",
+          "category": "Grass",
+          "design_intent": "A distinct fountain grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 4,
+          "page_number": 5,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FOUNTAIN_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "6cd759691078433a70a679bf793415e5cd5d81d074f163e8a3849be811a35709"
+        },
+        {
+          "object_id": "SMB_VEGETATION_BLUE_FESCUE_GRASS",
+          "object_class": "BlueFescueGrass",
+          "title": "Blue Fescue Grass",
+          "category": "Grass",
+          "design_intent": "A distinct blue fescue grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 4,
+          "page_number": 5,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BLUE_FESCUE_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "e902b69e853126af0bf657b8d7cd3c2d8b2480b7df629e0b6e63137b7247fc7b"
+        },
+        {
+          "object_id": "SMB_VEGETATION_LOMANDRA_GRASS",
+          "object_class": "LomandraGrass",
+          "title": "Lomandra Grass",
+          "category": "Grass",
+          "design_intent": "A distinct lomandra grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 4,
+          "page_number": 5,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "9ee0197c543c0617cf1c48a4b5a36f4802e321ba73b05692d25def1f6489dabf"
+        }
+      ]
+    },
+    {
+      "page_index": 5,
+      "page_number": 6,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_06.png",
+      "atlas_sha256": "9ad3cc27982560300899e46e3da9f6c38668ace7d144b32ced83e2f14e25df19",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_06.prompt.txt",
+      "prompt_sha256": "5441e6bb4781233f2e8dfb562606e641175cc7b46d61b73f4bcc5602b4d1ada7",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_MISCANTHUS_GRASS",
+          "object_class": "MiscanthusGrass",
+          "title": "Miscanthus Grass",
+          "category": "Grass",
+          "design_intent": "A distinct miscanthus grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 5,
+          "page_number": 6,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MISCANTHUS_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "5a0872941251b061e8fb10eee3778efe19ab2f69ae146506cc72e7b3d7eaef20"
+        },
+        {
+          "object_id": "SMB_VEGETATION_PAMPAS_GRASS",
+          "object_class": "PampasGrass",
+          "title": "Pampas Grass",
+          "category": "Grass",
+          "design_intent": "A distinct pampas grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 5,
+          "page_number": 6,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PAMPAS_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "ff62242c4199ef9454c6ce922fce3d0af8018fda7148434ce071ef76c272c72b"
+        },
+        {
+          "object_id": "SMB_VEGETATION_MONDO_GRASS",
+          "object_class": "MondoGrass",
+          "title": "Mondo Grass",
+          "category": "Grass",
+          "design_intent": "A distinct mondo grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 5,
+          "page_number": 6,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MONDO_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "b857fc3f2f0072f6c37463d9a4a8770510ae51103901eacc98333c8dd4498750"
+        },
+        {
+          "object_id": "SMB_VEGETATION_SWITCHGRASS",
+          "object_class": "Switchgrass",
+          "title": "Switchgrass",
+          "category": "Grass",
+          "design_intent": "A distinct switchgrass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 5,
+          "page_number": 6,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SWITCHGRASS/camera_three_views.png",
+          "source_camera_card_sha256": "b8b78820ad5f0d07e5f5020268a30d679a4d8990c4af792deb4501eaebf79a6e"
+        },
+        {
+          "object_id": "SMB_VEGETATION_ARCHITECTURAL_SEDGE",
+          "object_class": "ArchitecturalSedge",
+          "title": "Architectural Sedge",
+          "category": "Grass",
+          "design_intent": "A distinct architectural sedge building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 5,
+          "page_number": 6,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_ARCHITECTURAL_SEDGE/camera_three_views.png",
+          "source_camera_card_sha256": "547bae92cbf67b93df9ca3e3ebe9fc7339f94d2dfcf3f1a6bd0d9cd519756407"
+        }
+      ]
+    },
+    {
+      "page_index": 6,
+      "page_number": 7,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_07.png",
+      "atlas_sha256": "2081c61f18f954a25e01da0e16550032ff4268ec251e3b6857160603fb958d3e",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_07.prompt.txt",
+      "prompt_sha256": "7ab535b8d9b52c31e64cf4721eb32b1835bcc524292623e3a0db3682ec4a089b",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_DWARF_BAMBOO_GRASS",
+          "object_class": "DwarfBambooGrass",
+          "title": "Dwarf Bamboo Grass",
+          "category": "Grass",
+          "design_intent": "A distinct dwarf bamboo grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 6,
+          "page_number": 7,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/camera_three_views.png",
+          "source_camera_card_sha256": "7ad929f566cad859519e8748c0435b8d68d20a7f81fd1246cf61ac01a5677b5a"
+        },
+        {
+          "object_id": "SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER",
+          "object_class": "CreepingThymeGroundcover",
+          "title": "Creeping Thyme Groundcover",
+          "category": "Groundcover",
+          "design_intent": "A distinct creeping thyme groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 6,
+          "page_number": 7,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER/camera_three_views.png",
+          "source_camera_card_sha256": "cb92f422549166c80579b9e4aff56298460626eb665b973b5c9312b831dd4eeb"
+        },
+        {
+          "object_id": "SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER",
+          "object_class": "DichondraSilverGroundcover",
+          "title": "Dichondra Silver Groundcover",
+          "category": "Groundcover",
+          "design_intent": "A distinct dichondra silver groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 6,
+          "page_number": 7,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/camera_three_views.png",
+          "source_camera_card_sha256": "7e6092c44be3c692746c4336b73ce17b8970aa412e5b29c1d57589a8c204c770"
+        },
+        {
+          "object_id": "SMB_VEGETATION_IVY_GROUNDCOVER",
+          "object_class": "IvyGroundcover",
+          "title": "Ivy Groundcover",
+          "category": "Groundcover",
+          "design_intent": "A distinct ivy groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 6,
+          "page_number": 7,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_GROUNDCOVER/camera_three_views.png",
+          "source_camera_card_sha256": "260a5a5cf6a6fcf314b718c0e05bfee02ca472ac318a3392adf2404a6435408b"
+        },
+        {
+          "object_id": "SMB_VEGETATION_FLOWERING_MEADOW_MAT",
+          "object_class": "FloweringMeadowMat",
+          "title": "Flowering Meadow Mat",
+          "category": "Groundcover",
+          "design_intent": "A distinct flowering meadow mat building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 6,
+          "page_number": 7,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/camera_three_views.png",
+          "source_camera_card_sha256": "0516d8a76624ea969c4a5a4f333b5e8ed0591d9446841d3d42d58492e71ac342"
+        }
+      ]
+    },
+    {
+      "page_index": 7,
+      "page_number": 8,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_08.png",
+      "atlas_sha256": "0db21b8cfbd00fc160bdd9c889c979b996c9c45584ecb3612c938c266f86fbbb",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_08.prompt.txt",
+      "prompt_sha256": "88d7c29f5b959d92dbf257fc0a647e04ab24294c9bcab277d10e661afebcb632",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_MOSS_FERN_CARPET",
+          "object_class": "MossFernCarpet",
+          "title": "Moss and Fern Carpet",
+          "category": "Groundcover",
+          "design_intent": "A distinct moss and fern carpet building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 7,
+          "page_number": 8,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MOSS_FERN_CARPET/camera_three_views.png",
+          "source_camera_card_sha256": "3d31d5f71e346c7699b47dbcf03215d2368a1167635bef6112d8d3f159ba190a"
+        },
+        {
+          "object_id": "SMB_VEGETATION_JASMINE_WALL_CLIMBER",
+          "object_class": "JasmineWallClimber",
+          "title": "Jasmine Wall Climber",
+          "category": "Vine",
+          "design_intent": "A distinct jasmine wall climber building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 7,
+          "page_number": 8,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/camera_three_views.png",
+          "source_camera_card_sha256": "7e33d0e619137e2d062f81af6d99a936e3c7e65fe91e5c8c9b9a081715cc4d86"
+        },
+        {
+          "object_id": "SMB_VEGETATION_WISTERIA_PERGOLA",
+          "object_class": "WisteriaPergola",
+          "title": "Wisteria Pergola",
+          "category": "Vine",
+          "design_intent": "A distinct wisteria pergola building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 7,
+          "page_number": 8,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/camera_three_views.png",
+          "source_camera_card_sha256": "befb7bed21fef10d769ea32378b84b29b1e010cbb061bb610b7b125eb492cabe"
+        },
+        {
+          "object_id": "SMB_VEGETATION_BOUGAINVILLEA_TRELLIS",
+          "object_class": "BougainvilleaTrellis",
+          "title": "Bougainvillea Trellis",
+          "category": "Vine",
+          "design_intent": "A distinct bougainvillea trellis building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 7,
+          "page_number": 8,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/camera_three_views.png",
+          "source_camera_card_sha256": "2776d6895787e1ef92dcabe8becb02006932dfc7a2fa0e6cc0525c2079a7f6be"
+        },
+        {
+          "object_id": "SMB_VEGETATION_GRAPE_ARBOR_VINE",
+          "object_class": "GrapeArborVine",
+          "title": "Grape Arbor Vine",
+          "category": "Vine",
+          "design_intent": "A distinct grape arbor vine building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 7,
+          "page_number": 8,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/camera_three_views.png",
+          "source_camera_card_sha256": "392b0e4b0e20875ea1e3a2c77d52bae52a67804bc3abae9269cd292224a92ddf"
+        }
+      ]
+    },
+    {
+      "page_index": 8,
+      "page_number": 9,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_09.png",
+      "atlas_sha256": "79ebaa7914aaa17a56171b5966a324e8cc225f1d0199d0bc99212334f8b11345",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_09.prompt.txt",
+      "prompt_sha256": "3c101c2f9cc6a1b1394597e8c52c02e1607564cebc8b3edad2834dfe04de5a86",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_GREEN_FACADE_CABLE_VINE",
+          "object_class": "GreenFacadeCableVine",
+          "title": "Green Facade Cable Vine",
+          "category": "Vine",
+          "design_intent": "A distinct green facade cable vine building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 8,
+          "page_number": 9,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/camera_three_views.png",
+          "source_camera_card_sha256": "a83ba3caf30de85810528d6fab0009a16b1b4053cc99a969e4c02b70334b31d9"
+        },
+        {
+          "object_id": "SMB_VEGETATION_INDOOR_FICUS_PLANTER",
+          "object_class": "IndoorFicusPlanter",
+          "title": "Indoor Ficus Planter",
+          "category": "Plant",
+          "design_intent": "A distinct indoor ficus planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 8,
+          "page_number": 9,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_INDOOR_FICUS_PLANTER/camera_three_views.png",
+          "source_camera_card_sha256": "818fda52a08e56388aa5c047f4211f5d681074e29cec4516e5b2ba957f50298d"
+        },
+        {
+          "object_id": "SMB_VEGETATION_SNAKE_PLANT_TROUGH",
+          "object_class": "SnakePlantTrough",
+          "title": "Snake Plant Trough",
+          "category": "Plant",
+          "design_intent": "A distinct snake plant trough building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 8,
+          "page_number": 9,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/camera_three_views.png",
+          "source_camera_card_sha256": "056821502c80569ca182228849bd110aa700b00d84bbe21bfbb6546e1610604a"
+        },
+        {
+          "object_id": "SMB_VEGETATION_HANGING_FERN_PLANTER",
+          "object_class": "HangingFernPlanter",
+          "title": "Hanging Fern Planter",
+          "category": "Plant",
+          "design_intent": "A distinct hanging fern planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 8,
+          "page_number": 9,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/camera_three_views.png",
+          "source_camera_card_sha256": "ad3cde8a7ec190a1b83e7851f57d301106047b378784ade66fc45d149b116553"
+        },
+        {
+          "object_id": "SMB_VEGETATION_KITCHEN_HERB_PLANTER",
+          "object_class": "KitchenHerbPlanter",
+          "title": "Kitchen Herb Planter",
+          "category": "Plant",
+          "design_intent": "A distinct kitchen herb planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 8,
+          "page_number": 9,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/camera_three_views.png",
+          "source_camera_card_sha256": "bad4f302533f3e078b8318f3d3c424f15d445d9debab13a9225ed28538b41bf8"
+        }
+      ]
+    },
+    {
+      "page_index": 9,
+      "page_number": 10,
+      "atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_10.png",
+      "atlas_sha256": "4f1f783a7b38276161aee1f2d079dede2cf78c85ab89e5fe575089e78a7a529c",
+      "prompt": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/pages/SMB_Vegetation_Source_Atlas_Page_10.prompt.txt",
+      "prompt_sha256": "175a6a84ae03dbe37dc72b1dc06ec4e3ce4fb4dc26cf32b37a47ca38f1015afd",
+      "object_count": 5,
+      "objects": [
+        {
+          "object_id": "SMB_VEGETATION_RAIN_GARDEN_REED_BED",
+          "object_class": "RainGardenReedBed",
+          "title": "Rain Garden Reed Bed",
+          "category": "EcologicalPlanting",
+          "design_intent": "A distinct rain garden reed bed building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 9,
+          "page_number": 10,
+          "cell_index": 0,
+          "row": 0,
+          "column": 0,
+          "crop": [
+            0,
+            0,
+            768,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_REED_BED/camera_three_views.png",
+          "source_camera_card_sha256": "2ca91750a7df6c2bf9024c17a0ca46d70ab45948478be5dced8691f128342f95"
+        },
+        {
+          "object_id": "SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER",
+          "object_class": "PoolsideTropicalCluster",
+          "title": "Poolside Tropical Cluster",
+          "category": "EcologicalPlanting",
+          "design_intent": "A distinct poolside tropical cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 9,
+          "page_number": 10,
+          "cell_index": 1,
+          "row": 0,
+          "column": 1,
+          "crop": [
+            768,
+            0,
+            1536,
+            341
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/camera_three_views.png",
+          "source_camera_card_sha256": "2cfd84ce7c37aea461b5b2fa1aea7680406e12ca0bd0662ebe2e28f53de7f7fe"
+        },
+        {
+          "object_id": "SMB_VEGETATION_BIOSWALE_SEDGE_MODULE",
+          "object_class": "BioswaleSedgeModule",
+          "title": "Bioswale Sedge Module",
+          "category": "EcologicalPlanting",
+          "design_intent": "A distinct bioswale sedge module building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 9,
+          "page_number": 10,
+          "cell_index": 2,
+          "row": 1,
+          "column": 0,
+          "crop": [
+            0,
+            341,
+            768,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BIOSWALE_SEDGE_MODULE/camera_three_views.png",
+          "source_camera_card_sha256": "d924f96a738369aae11aae9bc1d6901984d12b82a3d57b9e3c003456c647a662"
+        },
+        {
+          "object_id": "SMB_VEGETATION_AQUATIC_LILY_PLANTER",
+          "object_class": "AquaticLilyPlanter",
+          "title": "Aquatic Lily Planter",
+          "category": "EcologicalPlanting",
+          "design_intent": "A distinct aquatic lily planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 9,
+          "page_number": 10,
+          "cell_index": 3,
+          "row": 1,
+          "column": 1,
+          "crop": [
+            768,
+            341,
+            1536,
+            682
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/camera_three_views.png",
+          "source_camera_card_sha256": "7643efb2c5972d5132ba46a5be4c4613daebfc906558c753c0f441b4ab353d19"
+        },
+        {
+          "object_id": "SMB_VEGETATION_GREEN_ROOF_MODULE",
+          "object_class": "GreenRoofVegetationModule",
+          "title": "Green Roof Vegetation Module",
+          "category": "EcologicalPlanting",
+          "design_intent": "A distinct green roof vegetation module building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+          "page_index": 9,
+          "page_number": 10,
+          "cell_index": 4,
+          "row": 2,
+          "column": 0,
+          "crop": [
+            0,
+            682,
+            768,
+            1024
+          ],
+          "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/camera_three_views.png",
+          "source_camera_card_sha256": "22acea6a7a7e8bd8aa086c7e45c56d8ac3ae2c3ff2f7fcf954ec3b8ace473987"
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "object_id": "SMB_VEGETATION_COURTYARD_CANOPY_TREE",
+      "object_class": "ArchitecturalCanopyTree",
+      "title": "Courtyard Canopy Tree",
+      "category": "Tree",
+      "design_intent": "A broad, layered courtyard shade tree with a tapered trunk, explicit branch junctions, swept limbs, foliage lobes, and individually modeled leaves.",
+      "page_index": 0,
+      "page_number": 1,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "8a47220542eff3ba805a8c13c9eaadb1deabf3af95f28de98eb772730e325f79"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE",
+      "object_class": "SculpturalLSystemTree",
+      "title": "Sculptural L-System Tree",
+      "category": "Tree",
+      "design_intent": "A narrow architectural tree whose deterministic L-system crown is supported by a visible warm-timber trunk and clipped cloud foliage.",
+      "page_index": 0,
+      "page_number": 1,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "a9931bc4305a96b007264d0d6e6b6f67009b1dc8f39de8f1786381761ab28c55"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_PLANT_CLUSTER",
+      "object_class": "LayeredFloweringPlantCluster",
+      "title": "Layered Flowering Plant Cluster",
+      "category": "Plant",
+      "design_intent": "A modern rectangular planter containing deterministic flowering herbs, scattered grass underplanting, modeled leaves, petals, soil, and drainage feet.",
+      "page_index": 0,
+      "page_number": 1,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/camera_three_views.png",
+      "source_camera_card_sha256": "058cddecd5bec07ec3151e1a0f451b40466839a415e9b1d3ab549fdcc6f34eb1"
+    },
+    {
+      "object_id": "SMB_VEGETATION_IVY_PRIVACY_SCREEN",
+      "object_class": "WallClimbingIvyPrivacyScreen",
+      "title": "Wall-Climbing Ivy Privacy Screen",
+      "category": "Vine",
+      "design_intent": "A freestanding slatted privacy screen with deterministic wall-seeking ivy, offset attachment behavior, a planted trough, and visible support feet.",
+      "page_index": 0,
+      "page_number": 1,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/camera_three_views.png",
+      "source_camera_card_sha256": "19c62c51914b607bcd99d8aa537b8ba3efea40bae9f692327dc5417493c739db"
+    },
+    {
+      "object_id": "SMB_VEGETATION_TENDRIL_PERGOLA_VINE",
+      "object_class": "TendrilPergolaVine",
+      "title": "Tendril Pergola Vine",
+      "category": "Vine",
+      "design_intent": "A compact pergola bay with twining tendril vines, branching overhead growth, leaf blades, and flowering petals around a clear structural frame.",
+      "page_index": 0,
+      "page_number": 1,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/camera_three_views.png",
+      "source_camera_card_sha256": "412a89301f5507c125dbef14c3e7486b8e7408afd6c12e5d1526fcc9b685f0d1"
+    },
+    {
+      "object_id": "SMB_VEGETATION_COLUMNAR_ENTRY_TREE",
+      "object_class": "ColumnarEntryTree",
+      "title": "Columnar Entry Tree",
+      "category": "Tree",
+      "design_intent": "A distinct columnar entry tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 1,
+      "page_number": 2,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COLUMNAR_ENTRY_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "037ddd7fe12cec91d95599a101887f653d9dce059584f08201e839965fc3f37d"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MULTI_STEM_BIRCH_TREE",
+      "object_class": "MultiStemBirchTree",
+      "title": "Multi-Stem Birch Tree",
+      "category": "Tree",
+      "design_intent": "A distinct multi-stem birch tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 1,
+      "page_number": 2,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MULTI_STEM_BIRCH_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "6b86201106e85687429791271b68c84dfb7c0225d31aa7172df5a5d2d8971b73"
+    },
+    {
+      "object_id": "SMB_VEGETATION_OLIVE_COURTYARD_TREE",
+      "object_class": "OliveCourtyardTree",
+      "title": "Olive Courtyard Tree",
+      "category": "Tree",
+      "design_intent": "A distinct olive courtyard tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 1,
+      "page_number": 2,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_OLIVE_COURTYARD_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "c4729d23d0e433f0fff72f7a7130abd593edef1ff5cecec2c35048a276101d2f"
+    },
+    {
+      "object_id": "SMB_VEGETATION_PALM_ACCENT_TREE",
+      "object_class": "PalmAccentTree",
+      "title": "Palm Accent Tree",
+      "category": "Tree",
+      "design_intent": "A distinct palm accent tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 1,
+      "page_number": 2,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "075b65329bc31e3b8d1c2883e9bccb0b54a3deb9c9f5ad9ef9557afa79de6296"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE",
+      "object_class": "FloweringOrnamentalTree",
+      "title": "Flowering Ornamental Tree",
+      "category": "Tree",
+      "design_intent": "A distinct flowering ornamental tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 1,
+      "page_number": 2,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_ORNAMENTAL_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "d49714af6fc1b239608f98b67f824581ab03e3dfd17134de2094ac4650612396"
+    },
+    {
+      "object_id": "SMB_VEGETATION_EVERGREEN_SCREEN_TREE",
+      "object_class": "EvergreenScreenTree",
+      "title": "Evergreen Screen Tree",
+      "category": "Tree",
+      "design_intent": "A distinct evergreen screen tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 2,
+      "page_number": 3,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "177dd12bfc563b2fb4fb4050ef361ccc2e3a90eac04eb1bf7ab366cf529a79cd"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BONSAI_COURTYARD_TREE",
+      "object_class": "BonsaiCourtyardTree",
+      "title": "Bonsai Courtyard Tree",
+      "category": "Tree",
+      "design_intent": "A distinct bonsai courtyard tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 2,
+      "page_number": 3,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BONSAI_COURTYARD_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "084a71fbfa87b7ce49e7917263c3716dd9eb74d5b5e7595ef53a45e8f49771b4"
+    },
+    {
+      "object_id": "SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE",
+      "object_class": "RainGardenCanopyTree",
+      "title": "Rain Garden Canopy Tree",
+      "category": "Tree",
+      "design_intent": "A distinct rain garden canopy tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 2,
+      "page_number": 3,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_CANOPY_TREE/camera_three_views.png",
+      "source_camera_card_sha256": "3a79f71114e428964eae19dd6d67ceef2fbbd4d2f0d0e43f2d9c88d095f06def"
+    },
+    {
+      "object_id": "SMB_VEGETATION_CLIPPED_BOX_HEDGE",
+      "object_class": "ClippedBoxHedge",
+      "title": "Clipped Box Hedge",
+      "category": "Shrub",
+      "design_intent": "A distinct clipped box hedge building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 2,
+      "page_number": 3,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CLIPPED_BOX_HEDGE/camera_three_views.png",
+      "source_camera_card_sha256": "fc0c3bdfaeabf336a4de1852af60cfd2fd1d7559f7eb9cdfe2f116bbd0678647"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB",
+      "object_class": "FloweringHydrangeaShrub",
+      "title": "Flowering Hydrangea Shrub",
+      "category": "Shrub",
+      "design_intent": "A distinct flowering hydrangea shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 2,
+      "page_number": 3,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_HYDRANGEA_SHRUB/camera_three_views.png",
+      "source_camera_card_sha256": "89ed61faecaa10fb3b7fe1fce221e7675553442be38b7a13c3c333ec4589e433"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER",
+      "object_class": "SculpturalAgaveCluster",
+      "title": "Sculptural Agave Cluster",
+      "category": "Shrub",
+      "design_intent": "A distinct sculptural agave cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 3,
+      "page_number": 4,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/camera_three_views.png",
+      "source_camera_card_sha256": "9b2ac4afe39979e590482158b7b19e8a482d98ed2c19d80a017c70736d257cbf"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER",
+      "object_class": "FernUnderstoreyCluster",
+      "title": "Fern Understorey Cluster",
+      "category": "Shrub",
+      "design_intent": "A distinct fern understorey cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 3,
+      "page_number": 4,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/camera_three_views.png",
+      "source_camera_card_sha256": "3cbe47e13050f57f07737c9c7cedfe7ce6e1f426574d55aab03274c4d7d699d9"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER",
+      "object_class": "BambooScreenCluster",
+      "title": "Bamboo Screen Cluster",
+      "category": "Shrub",
+      "design_intent": "A distinct bamboo screen cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 3,
+      "page_number": 4,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BAMBOO_SCREEN_CLUSTER/camera_three_views.png",
+      "source_camera_card_sha256": "2b4ac2072a15e0c9e0af262ec9452748580d65ab7e3e2d7a44105e25125cd3d4"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER",
+      "object_class": "SucculentRockeryCluster",
+      "title": "Succulent Rockery Cluster",
+      "category": "Shrub",
+      "design_intent": "A distinct succulent rockery cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 3,
+      "page_number": 4,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SUCCULENT_ROCKERY_CLUSTER/camera_three_views.png",
+      "source_camera_card_sha256": "a2bb6f155a9d3b857444db5664ae82553f65353df2ddfd628a82b87f35d82b10"
+    },
+    {
+      "object_id": "SMB_VEGETATION_TOPIARY_SPHERE_SHRUB",
+      "object_class": "TopiarySphereShrub",
+      "title": "Topiary Sphere Shrub",
+      "category": "Shrub",
+      "design_intent": "A distinct topiary sphere shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 3,
+      "page_number": 4,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/camera_three_views.png",
+      "source_camera_card_sha256": "ec3287b3e11e1432d9f52962eb32cff92d90f5bfa322fc8dce50800a226fef22"
+    },
+    {
+      "object_id": "SMB_VEGETATION_NATIVE_PRIVACY_SHRUB",
+      "object_class": "NativePrivacyShrub",
+      "title": "Native Privacy Shrub",
+      "category": "Shrub",
+      "design_intent": "A distinct native privacy shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 4,
+      "page_number": 5,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/camera_three_views.png",
+      "source_camera_card_sha256": "edf472ec8645aebd8238119b0a02ed4ce184d32f6894040930d8a1fd1317dc27"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FEATHER_REED_GRASS",
+      "object_class": "FeatherReedGrass",
+      "title": "Feather Reed Grass",
+      "category": "Grass",
+      "design_intent": "A distinct feather reed grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 4,
+      "page_number": 5,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "1fbbf505bfceca415f858d791baedc8b223e9186e52548caa4241819be76684f"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FOUNTAIN_GRASS",
+      "object_class": "FountainGrass",
+      "title": "Fountain Grass",
+      "category": "Grass",
+      "design_intent": "A distinct fountain grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 4,
+      "page_number": 5,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FOUNTAIN_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "6cd759691078433a70a679bf793415e5cd5d81d074f163e8a3849be811a35709"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BLUE_FESCUE_GRASS",
+      "object_class": "BlueFescueGrass",
+      "title": "Blue Fescue Grass",
+      "category": "Grass",
+      "design_intent": "A distinct blue fescue grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 4,
+      "page_number": 5,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BLUE_FESCUE_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "e902b69e853126af0bf657b8d7cd3c2d8b2480b7df629e0b6e63137b7247fc7b"
+    },
+    {
+      "object_id": "SMB_VEGETATION_LOMANDRA_GRASS",
+      "object_class": "LomandraGrass",
+      "title": "Lomandra Grass",
+      "category": "Grass",
+      "design_intent": "A distinct lomandra grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 4,
+      "page_number": 5,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "9ee0197c543c0617cf1c48a4b5a36f4802e321ba73b05692d25def1f6489dabf"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MISCANTHUS_GRASS",
+      "object_class": "MiscanthusGrass",
+      "title": "Miscanthus Grass",
+      "category": "Grass",
+      "design_intent": "A distinct miscanthus grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 5,
+      "page_number": 6,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MISCANTHUS_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "5a0872941251b061e8fb10eee3778efe19ab2f69ae146506cc72e7b3d7eaef20"
+    },
+    {
+      "object_id": "SMB_VEGETATION_PAMPAS_GRASS",
+      "object_class": "PampasGrass",
+      "title": "Pampas Grass",
+      "category": "Grass",
+      "design_intent": "A distinct pampas grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 5,
+      "page_number": 6,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PAMPAS_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "ff62242c4199ef9454c6ce922fce3d0af8018fda7148434ce071ef76c272c72b"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MONDO_GRASS",
+      "object_class": "MondoGrass",
+      "title": "Mondo Grass",
+      "category": "Grass",
+      "design_intent": "A distinct mondo grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 5,
+      "page_number": 6,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MONDO_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "b857fc3f2f0072f6c37463d9a4a8770510ae51103901eacc98333c8dd4498750"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SWITCHGRASS",
+      "object_class": "Switchgrass",
+      "title": "Switchgrass",
+      "category": "Grass",
+      "design_intent": "A distinct switchgrass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 5,
+      "page_number": 6,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SWITCHGRASS/camera_three_views.png",
+      "source_camera_card_sha256": "b8b78820ad5f0d07e5f5020268a30d679a4d8990c4af792deb4501eaebf79a6e"
+    },
+    {
+      "object_id": "SMB_VEGETATION_ARCHITECTURAL_SEDGE",
+      "object_class": "ArchitecturalSedge",
+      "title": "Architectural Sedge",
+      "category": "Grass",
+      "design_intent": "A distinct architectural sedge building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 5,
+      "page_number": 6,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_ARCHITECTURAL_SEDGE/camera_three_views.png",
+      "source_camera_card_sha256": "547bae92cbf67b93df9ca3e3ebe9fc7339f94d2dfcf3f1a6bd0d9cd519756407"
+    },
+    {
+      "object_id": "SMB_VEGETATION_DWARF_BAMBOO_GRASS",
+      "object_class": "DwarfBambooGrass",
+      "title": "Dwarf Bamboo Grass",
+      "category": "Grass",
+      "design_intent": "A distinct dwarf bamboo grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 6,
+      "page_number": 7,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/camera_three_views.png",
+      "source_camera_card_sha256": "7ad929f566cad859519e8748c0435b8d68d20a7f81fd1246cf61ac01a5677b5a"
+    },
+    {
+      "object_id": "SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER",
+      "object_class": "CreepingThymeGroundcover",
+      "title": "Creeping Thyme Groundcover",
+      "category": "Groundcover",
+      "design_intent": "A distinct creeping thyme groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 6,
+      "page_number": 7,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_CREEPING_THYME_GROUNDCOVER/camera_three_views.png",
+      "source_camera_card_sha256": "cb92f422549166c80579b9e4aff56298460626eb665b973b5c9312b831dd4eeb"
+    },
+    {
+      "object_id": "SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER",
+      "object_class": "DichondraSilverGroundcover",
+      "title": "Dichondra Silver Groundcover",
+      "category": "Groundcover",
+      "design_intent": "A distinct dichondra silver groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 6,
+      "page_number": 7,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/camera_three_views.png",
+      "source_camera_card_sha256": "7e6092c44be3c692746c4336b73ce17b8970aa412e5b29c1d57589a8c204c770"
+    },
+    {
+      "object_id": "SMB_VEGETATION_IVY_GROUNDCOVER",
+      "object_class": "IvyGroundcover",
+      "title": "Ivy Groundcover",
+      "category": "Groundcover",
+      "design_intent": "A distinct ivy groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 6,
+      "page_number": 7,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_GROUNDCOVER/camera_three_views.png",
+      "source_camera_card_sha256": "260a5a5cf6a6fcf314b718c0e05bfee02ca472ac318a3392adf2404a6435408b"
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_MEADOW_MAT",
+      "object_class": "FloweringMeadowMat",
+      "title": "Flowering Meadow Mat",
+      "category": "Groundcover",
+      "design_intent": "A distinct flowering meadow mat building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 6,
+      "page_number": 7,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/camera_three_views.png",
+      "source_camera_card_sha256": "0516d8a76624ea969c4a5a4f333b5e8ed0591d9446841d3d42d58492e71ac342"
+    },
+    {
+      "object_id": "SMB_VEGETATION_MOSS_FERN_CARPET",
+      "object_class": "MossFernCarpet",
+      "title": "Moss and Fern Carpet",
+      "category": "Groundcover",
+      "design_intent": "A distinct moss and fern carpet building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 7,
+      "page_number": 8,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_MOSS_FERN_CARPET/camera_three_views.png",
+      "source_camera_card_sha256": "3d31d5f71e346c7699b47dbcf03215d2368a1167635bef6112d8d3f159ba190a"
+    },
+    {
+      "object_id": "SMB_VEGETATION_JASMINE_WALL_CLIMBER",
+      "object_class": "JasmineWallClimber",
+      "title": "Jasmine Wall Climber",
+      "category": "Vine",
+      "design_intent": "A distinct jasmine wall climber building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 7,
+      "page_number": 8,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/camera_three_views.png",
+      "source_camera_card_sha256": "7e33d0e619137e2d062f81af6d99a936e3c7e65fe91e5c8c9b9a081715cc4d86"
+    },
+    {
+      "object_id": "SMB_VEGETATION_WISTERIA_PERGOLA",
+      "object_class": "WisteriaPergola",
+      "title": "Wisteria Pergola",
+      "category": "Vine",
+      "design_intent": "A distinct wisteria pergola building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 7,
+      "page_number": 8,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/camera_three_views.png",
+      "source_camera_card_sha256": "befb7bed21fef10d769ea32378b84b29b1e010cbb061bb610b7b125eb492cabe"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BOUGAINVILLEA_TRELLIS",
+      "object_class": "BougainvilleaTrellis",
+      "title": "Bougainvillea Trellis",
+      "category": "Vine",
+      "design_intent": "A distinct bougainvillea trellis building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 7,
+      "page_number": 8,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/camera_three_views.png",
+      "source_camera_card_sha256": "2776d6895787e1ef92dcabe8becb02006932dfc7a2fa0e6cc0525c2079a7f6be"
+    },
+    {
+      "object_id": "SMB_VEGETATION_GRAPE_ARBOR_VINE",
+      "object_class": "GrapeArborVine",
+      "title": "Grape Arbor Vine",
+      "category": "Vine",
+      "design_intent": "A distinct grape arbor vine building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 7,
+      "page_number": 8,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/camera_three_views.png",
+      "source_camera_card_sha256": "392b0e4b0e20875ea1e3a2c77d52bae52a67804bc3abae9269cd292224a92ddf"
+    },
+    {
+      "object_id": "SMB_VEGETATION_GREEN_FACADE_CABLE_VINE",
+      "object_class": "GreenFacadeCableVine",
+      "title": "Green Facade Cable Vine",
+      "category": "Vine",
+      "design_intent": "A distinct green facade cable vine building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 8,
+      "page_number": 9,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/camera_three_views.png",
+      "source_camera_card_sha256": "a83ba3caf30de85810528d6fab0009a16b1b4053cc99a969e4c02b70334b31d9"
+    },
+    {
+      "object_id": "SMB_VEGETATION_INDOOR_FICUS_PLANTER",
+      "object_class": "IndoorFicusPlanter",
+      "title": "Indoor Ficus Planter",
+      "category": "Plant",
+      "design_intent": "A distinct indoor ficus planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 8,
+      "page_number": 9,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_INDOOR_FICUS_PLANTER/camera_three_views.png",
+      "source_camera_card_sha256": "818fda52a08e56388aa5c047f4211f5d681074e29cec4516e5b2ba957f50298d"
+    },
+    {
+      "object_id": "SMB_VEGETATION_SNAKE_PLANT_TROUGH",
+      "object_class": "SnakePlantTrough",
+      "title": "Snake Plant Trough",
+      "category": "Plant",
+      "design_intent": "A distinct snake plant trough building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 8,
+      "page_number": 9,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/camera_three_views.png",
+      "source_camera_card_sha256": "056821502c80569ca182228849bd110aa700b00d84bbe21bfbb6546e1610604a"
+    },
+    {
+      "object_id": "SMB_VEGETATION_HANGING_FERN_PLANTER",
+      "object_class": "HangingFernPlanter",
+      "title": "Hanging Fern Planter",
+      "category": "Plant",
+      "design_intent": "A distinct hanging fern planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 8,
+      "page_number": 9,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/camera_three_views.png",
+      "source_camera_card_sha256": "ad3cde8a7ec190a1b83e7851f57d301106047b378784ade66fc45d149b116553"
+    },
+    {
+      "object_id": "SMB_VEGETATION_KITCHEN_HERB_PLANTER",
+      "object_class": "KitchenHerbPlanter",
+      "title": "Kitchen Herb Planter",
+      "category": "Plant",
+      "design_intent": "A distinct kitchen herb planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 8,
+      "page_number": 9,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/camera_three_views.png",
+      "source_camera_card_sha256": "bad4f302533f3e078b8318f3d3c424f15d445d9debab13a9225ed28538b41bf8"
+    },
+    {
+      "object_id": "SMB_VEGETATION_RAIN_GARDEN_REED_BED",
+      "object_class": "RainGardenReedBed",
+      "title": "Rain Garden Reed Bed",
+      "category": "EcologicalPlanting",
+      "design_intent": "A distinct rain garden reed bed building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 9,
+      "page_number": 10,
+      "cell_index": 0,
+      "row": 0,
+      "column": 0,
+      "crop": [
+        0,
+        0,
+        768,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_RAIN_GARDEN_REED_BED/camera_three_views.png",
+      "source_camera_card_sha256": "2ca91750a7df6c2bf9024c17a0ca46d70ab45948478be5dced8691f128342f95"
+    },
+    {
+      "object_id": "SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER",
+      "object_class": "PoolsideTropicalCluster",
+      "title": "Poolside Tropical Cluster",
+      "category": "EcologicalPlanting",
+      "design_intent": "A distinct poolside tropical cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 9,
+      "page_number": 10,
+      "cell_index": 1,
+      "row": 0,
+      "column": 1,
+      "crop": [
+        768,
+        0,
+        1536,
+        341
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/camera_three_views.png",
+      "source_camera_card_sha256": "2cfd84ce7c37aea461b5b2fa1aea7680406e12ca0bd0662ebe2e28f53de7f7fe"
+    },
+    {
+      "object_id": "SMB_VEGETATION_BIOSWALE_SEDGE_MODULE",
+      "object_class": "BioswaleSedgeModule",
+      "title": "Bioswale Sedge Module",
+      "category": "EcologicalPlanting",
+      "design_intent": "A distinct bioswale sedge module building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 9,
+      "page_number": 10,
+      "cell_index": 2,
+      "row": 1,
+      "column": 0,
+      "crop": [
+        0,
+        341,
+        768,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BIOSWALE_SEDGE_MODULE/camera_three_views.png",
+      "source_camera_card_sha256": "d924f96a738369aae11aae9bc1d6901984d12b82a3d57b9e3c003456c647a662"
+    },
+    {
+      "object_id": "SMB_VEGETATION_AQUATIC_LILY_PLANTER",
+      "object_class": "AquaticLilyPlanter",
+      "title": "Aquatic Lily Planter",
+      "category": "EcologicalPlanting",
+      "design_intent": "A distinct aquatic lily planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 9,
+      "page_number": 10,
+      "cell_index": 3,
+      "row": 1,
+      "column": 1,
+      "crop": [
+        768,
+        341,
+        1536,
+        682
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/camera_three_views.png",
+      "source_camera_card_sha256": "7643efb2c5972d5132ba46a5be4c4613daebfc906558c753c0f441b4ab353d19"
+    },
+    {
+      "object_id": "SMB_VEGETATION_GREEN_ROOF_MODULE",
+      "object_class": "GreenRoofVegetationModule",
+      "title": "Green Roof Vegetation Module",
+      "category": "EcologicalPlanting",
+      "design_intent": "A distinct green roof vegetation module building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+      "page_index": 9,
+      "page_number": 10,
+      "cell_index": 4,
+      "row": 2,
+      "column": 0,
+      "crop": [
+        0,
+        682,
+        768,
+        1024
+      ],
+      "source_camera_card": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/camera_three_views.png",
+      "source_camera_card_sha256": "22acea6a7a7e8bd8aa086c7e45c56d8ac3ae2c3ff2f7fcf954ec3b8ace473987"
+    }
+  ]
+}

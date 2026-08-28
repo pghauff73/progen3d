@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsml>
+  <metadata>
+    <version>1</version>
+    <unit>mm</unit>
+    <resolution>1</resolution>
+    <last-modified>2026-08-28T00:00:00</last-modified>
+    <software>ProGen3D fixture</software>
+    <user>vegetation-test</user>
+    <file-key>root-graph:tree-001:rsml-v1</file-key>
+    <property-definitions>
+      <property-definition>
+        <label>soil-layer</label>
+        <type>string</type>
+      </property-definition>
+    </property-definitions>
+  </metadata>
+  <scene>
+    <plant id="tree-001" label="measured-tree-root-system">
+      <root id="primary-root" label="primary">
+        <geometry>
+          <polyline>
+            <point x="0" y="0" z="0" />
+            <point x="0" y="0" z="-1000" />
+            <point x="200" y="0" z="-2000" />
+          </polyline>
+        </geometry>
+        <functions>
+          <function domain="polyline" name="diameter">
+            <sample value="80" />
+            <sample value="60" />
+            <sample value="40" />
+          </function>
+          <function domain="polyline" name="root-hair-density">
+            <sample value="0.2" />
+            <sample value="0.4" />
+            <sample value="0.6" />
+          </function>
+        </functions>
+        <root id="lateral-root-1" label="lateral">
+          <geometry>
+            <polyline>
+              <point x="0" y="0" z="-700" />
+              <point x="1000" y="400" z="-1100" />
+              <point x="1800" y="700" z="-1400" />
+            </polyline>
+          </geometry>
+          <functions>
+            <function domain="polyline" name="diameter">
+              <sample value="30" />
+              <sample value="20" />
+              <sample value="12" />
+            </function>
+          </functions>
+        </root>
+      </root>
+    </plant>
+  </scene>
+</rsml>

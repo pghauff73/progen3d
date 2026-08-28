@@ -1,0 +1,28 @@
+ply
+format ascii 1.0
+comment ProGen3D D3A frozen mixed woody and foliage fixture
+element vertex 12
+property float x
+property float y
+property float z
+property ushort red
+property ushort green
+property ushort blue
+property ushort intensity
+property uchar classification
+property uchar return_number
+property uchar vegetation_class
+property float confidence
+end_header
+0.0 0.0 0.0 18000 12000 7000 420 1 1 1 0.99
+0.0 0.0 1.0 19000 13000 7500 430 1 1 1 0.99
+0.0 0.0 2.0 20000 14000 8000 440 1 1 1 0.98
+0.0 0.0 3.0 21000 15000 8500 450 1 1 1 0.98
+-1.0 -0.5 1.8 7000 30000 9000 220 5 1 2 0.94
+-0.8 0.6 2.1 8000 32000 10000 230 5 1 2 0.95
+-0.4 -1.0 2.4 9000 34000 11000 240 5 1 2 0.93
+-0.2 1.0 2.7 10000 36000 12000 250 5 1 2 0.96
+0.4 -0.8 2.2 11000 38000 13000 260 4 1 2 0.95
+0.6 0.9 2.5 12000 40000 14000 270 4 1 2 0.94
+0.9 -0.4 2.8 13000 42000 15000 280 3 1 2 0.93
+1.0 0.5 3.0 14000 44000 16000 290 3 1 2 0.92

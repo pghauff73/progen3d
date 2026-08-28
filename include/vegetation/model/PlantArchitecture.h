@@ -1,5 +1,8 @@
 #pragma once
 
+#include <optional>
+#include <string>
+
 enum class PlantArchitecture
 {
 	Tree,
@@ -19,4 +22,15 @@ inline const char *plantArchitectureName(PlantArchitecture architecture)
 	case PlantArchitecture::Vine: return "Vine";
 	}
 	return "Unknown";
+}
+
+inline std::optional<PlantArchitecture> plantArchitectureFromName(
+	const std::string &name)
+{
+	if (name == "Tree") return PlantArchitecture::Tree;
+	if (name == "Shrub") return PlantArchitecture::Shrub;
+	if (name == "Herb") return PlantArchitecture::Herb;
+	if (name == "Grass") return PlantArchitecture::Grass;
+	if (name == "Vine") return PlantArchitecture::Vine;
+	return std::nullopt;
 }
