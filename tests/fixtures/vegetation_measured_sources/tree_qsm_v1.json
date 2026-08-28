@@ -1,0 +1,32 @@
+{
+  "schema_version": "ProGen3D-QuantitativeStructureModel-v1",
+  "plant_architecture": "Tree",
+  "graph_identifier": "qsm:tree-001:v1",
+  "length_unit": "cm",
+  "cylinders": [
+    {
+      "identifier": "trunk-0",
+      "parent_identifier": "",
+      "branch_order": 0,
+      "start": [0.0, 0.0, 0.0],
+      "end": [0.0, 0.0, 240.0],
+      "radius": 18.0
+    },
+    {
+      "identifier": "trunk-1",
+      "parent_identifier": "trunk-0",
+      "branch_order": 0,
+      "start": [0.0, 0.0, 240.0],
+      "end": [0.0, 0.0, 430.0],
+      "radius": 13.0
+    },
+    {
+      "identifier": "branch-1",
+      "parent_identifier": "trunk-1",
+      "branch_order": 1,
+      "start": [0.0, 0.0, 330.0],
+      "end": [165.0, 40.0, 410.0],
+      "radius": 5.5
+    }
+  ]
+}

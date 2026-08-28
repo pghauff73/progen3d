@@ -1,0 +1,13 @@
+{
+  "schema": "MCSMv2.2.GrammarValidation.v1",
+  "file": "/mnt/data/MCSMv2_2_0_RELEASE/MCSMv2_Modern_Car_Family.p3d",
+  "line_count": 213,
+  "rule_definitions": 7,
+  "unique_rule_definitions": 7,
+  "duplicate_rule_names": [],
+  "delimiter_errors": [],
+  "uses_Object_call": false,
+  "current_parser_compatible": false,
+  "target": "FGKv1/MVPv2.5",
+  "pass": true
+}

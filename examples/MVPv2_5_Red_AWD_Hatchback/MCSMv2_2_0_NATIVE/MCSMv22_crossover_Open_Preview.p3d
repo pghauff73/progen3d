@@ -1,0 +1,68 @@
+# MCSMv2.2 executable open-state kinematics preview.
+# +X right, +Y up, +Z forward; origin is ground package centre.
+
+Start ->
+    MCSMv22CrossoverOpenPreview
+
+MCSMv22CrossoverOpenPreview ->
+[
+    Object(id(MCSMV22_CROSSOVER_OPEN) name(UrbanCrossoverEVAWD)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22CrossoverOpenPreviewComponentFixedBody
+        MCSMv22CrossoverOpenPreviewComponentClosures
+        MCSMv22CrossoverOpenPreviewComponentGlass
+        MCSMv22CrossoverOpenPreviewComponentSuspension
+        MCSMv22CrossoverOpenPreviewComponentTyres
+    ]
+]
+
+MCSMv22CrossoverOpenPreviewComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverOpenPreviewComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverClosuresOpenMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverOpenPreviewComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverGlassOpenMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22CrossoverOpenPreviewComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverOpenPreviewComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverTyreSweepMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(0.42) texscale(0.1))
+]

@@ -1,0 +1,76 @@
+{
+  "schema": "ProGen3D-SMB-VegetationThreeViewMatch-v1",
+  "reference_provenance": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/imagegen_reference_provenance.json",
+  "reference_provenance_sha256": "ed20443ec6fa28745b3f38c83ec114d59354022ddd6aab7e5f0d106fb486cff1",
+  "comparison_views": [
+    "front",
+    "right",
+    "top"
+  ],
+  "metric_weights": {
+    "silhouette_overlap": 0.24,
+    "edge_alignment": 0.16,
+    "projection_distribution": 0.16,
+    "aspect_ratio": 0.1,
+    "foreground_occupancy": 0.12,
+    "component_count": 0.08,
+    "symmetry": 0.04,
+    "appearance_similarity": 0.1
+  },
+  "minimum_view_match_percent": 90.0,
+  "target_view_match_percent": 94.0,
+  "object_count": 5,
+  "comparison_count": 15,
+  "passed_object_count": 5,
+  "target_passed_object_count": 5,
+  "minimum_observed_score_percent": 99.799423,
+  "objects": [
+    {
+      "object_id": "SMB_VEGETATION_COURTYARD_CANOPY_TREE",
+      "object_class": "ArchitecturalCanopyTree",
+      "category": "Tree",
+      "minimum_view_score_percent": 99.904092,
+      "mean_view_score_percent": 99.96803066666666,
+      "passed": true,
+      "target_passed": true
+    },
+    {
+      "object_id": "SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE",
+      "object_class": "SculpturalLSystemTree",
+      "category": "Tree",
+      "minimum_view_score_percent": 99.799423,
+      "mean_view_score_percent": 99.84081900000001,
+      "passed": true,
+      "target_passed": true
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_PLANT_CLUSTER",
+      "object_class": "LayeredFloweringPlantCluster",
+      "category": "Plant",
+      "minimum_view_score_percent": 99.850977,
+      "mean_view_score_percent": 99.87961966666667,
+      "passed": true,
+      "target_passed": true
+    },
+    {
+      "object_id": "SMB_VEGETATION_IVY_PRIVACY_SCREEN",
+      "object_class": "WallClimbingIvyPrivacyScreen",
+      "category": "Vine",
+      "minimum_view_score_percent": 99.919078,
+      "mean_view_score_percent": 99.93819233333333,
+      "passed": true,
+      "target_passed": true
+    },
+    {
+      "object_id": "SMB_VEGETATION_TENDRIL_PERGOLA_VINE",
+      "object_class": "TendrilPergolaVine",
+      "category": "Vine",
+      "minimum_view_score_percent": 99.910182,
+      "mean_view_score_percent": 99.92827199999999,
+      "passed": true,
+      "target_passed": true
+    }
+  ],
+  "passed": true,
+  "target_passed": true
+}

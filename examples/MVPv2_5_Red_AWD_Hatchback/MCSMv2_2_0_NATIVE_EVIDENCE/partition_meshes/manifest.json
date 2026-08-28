@@ -1,0 +1,388 @@
+{
+  "coordinate_frame": "source_x_forward_y_right_z_up",
+  "schema": "MCSMv2.2.NativePartitionMeshDerivatives.v1",
+  "source_release_root": "MCSMv2_2_0_RELEASE",
+  "variants": [
+    {
+      "meshes": [
+        {
+          "face_count": 7912,
+          "native_geometry_name": "panel_fixed_body",
+          "relative_path": "reference/panel_fixed_body.stl",
+          "sha256": "d989392c3b874f2e881e3cd4351ea08d3e2fb658b71182ed87fdfd563bc07194",
+          "source_geometry_name": "fixed_body",
+          "vertex_count": 4316
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_left",
+          "relative_path": "reference/panel_front_door_left.stl",
+          "sha256": "0797abfedff19fcb6ccea6ff9675a886318e94a9e6415f885c7c354db218310d",
+          "source_geometry_name": "closure_front_door_left",
+          "vertex_count": 634
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_right",
+          "relative_path": "reference/panel_front_door_right.stl",
+          "sha256": "64a15948bcbc2c25ac503fc5f1126d6f57247dc6a358cf25a6f9f738d526b235",
+          "source_geometry_name": "closure_front_door_right",
+          "vertex_count": 635
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_left",
+          "relative_path": "reference/panel_rear_door_left.stl",
+          "sha256": "65d956caf3d78a74adc43a744c1604945707d449c3e52b032fa33c43febd9604",
+          "source_geometry_name": "closure_rear_door_left",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_right",
+          "relative_path": "reference/panel_rear_door_right.stl",
+          "sha256": "c1101afa8a3157724adde3d576ea7eee9a9b377f6c721660427d5b2db525a52c",
+          "source_geometry_name": "closure_rear_door_right",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 620,
+          "native_geometry_name": "panel_hood",
+          "relative_path": "reference/panel_hood.stl",
+          "sha256": "0bc6d91e00ce06c59107b8341ffdd5830e46ecd14e418da35d47f6e9f4cc8d87",
+          "source_geometry_name": "closure_hood",
+          "vertex_count": 356
+        },
+        {
+          "face_count": 720,
+          "native_geometry_name": "panel_rear_hatch",
+          "relative_path": "reference/panel_rear_hatch.stl",
+          "sha256": "2eda5f6c0e0dee0857d5633a2198942cace6fb3b03480f3ad83b8c5a9c373a13",
+          "source_geometry_name": "closure_rear_hatch",
+          "vertex_count": 416
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_left",
+          "relative_path": "reference/aperture_front_side_glass_left.stl",
+          "sha256": "703bd1d85fe9b976f468f31cc89de916508cb28dac5816f4a445cf811b590bb3",
+          "source_geometry_name": "glass_front_side_glass_left",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_right",
+          "relative_path": "reference/aperture_front_side_glass_right.stl",
+          "sha256": "6a96af460df7547f08cf04eab6e4c9522a748f34874a05d2396e03e74b04a4fb",
+          "source_geometry_name": "glass_front_side_glass_right",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_left",
+          "relative_path": "reference/aperture_rear_side_glass_left.stl",
+          "sha256": "0648cbde22a40d16a0bad270d5597fefe125bc6e6f3871d57a8fd41a67c4d785",
+          "source_geometry_name": "glass_rear_side_glass_left",
+          "vertex_count": 87
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_right",
+          "relative_path": "reference/aperture_rear_side_glass_right.stl",
+          "sha256": "cf2d83621de75f5706a0d36826327763263c27acab404ead4a9c87879fedff2c",
+          "source_geometry_name": "glass_rear_side_glass_right",
+          "vertex_count": 87
+        }
+      ],
+      "source_relative_path": "models/modern_car_v2_reference_closures_closed.glb",
+      "source_sha256": "c0123fe4ea66d16d20d4fc980b6464bfdac09f35031eafa3ff511acfa7752f07",
+      "variant": "reference"
+    },
+    {
+      "meshes": [
+        {
+          "face_count": 7912,
+          "native_geometry_name": "panel_fixed_body",
+          "relative_path": "track/panel_fixed_body.stl",
+          "sha256": "bb03b3721bf42b2fc4d6d97993807d191bdbffedd77b2749c3d6c7b669aed785",
+          "source_geometry_name": "fixed_body",
+          "vertex_count": 4316
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_left",
+          "relative_path": "track/panel_front_door_left.stl",
+          "sha256": "ebb783b151d95ad6e14b7d280ff8cc9fc9ceb21610f554a63211c43c921c271b",
+          "source_geometry_name": "closure_front_door_left",
+          "vertex_count": 634
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_right",
+          "relative_path": "track/panel_front_door_right.stl",
+          "sha256": "2f23fc33ca981d9215d986f199947b462f2af54f9293559cfc07e25aaae0603d",
+          "source_geometry_name": "closure_front_door_right",
+          "vertex_count": 635
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_left",
+          "relative_path": "track/panel_rear_door_left.stl",
+          "sha256": "e8cc317f29a469c8d90eae60e5f78a2119f704ead12e703ba0011f4a17060df4",
+          "source_geometry_name": "closure_rear_door_left",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_right",
+          "relative_path": "track/panel_rear_door_right.stl",
+          "sha256": "9b1f3d53514b580c0690b6fc058557f8e7a257e86e83981495deba4d59b74594",
+          "source_geometry_name": "closure_rear_door_right",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 620,
+          "native_geometry_name": "panel_hood",
+          "relative_path": "track/panel_hood.stl",
+          "sha256": "9b99f458d5deda590cf8dbb7a2d6fdf3d8b6c080c6e788079fa1ec5345b205a4",
+          "source_geometry_name": "closure_hood",
+          "vertex_count": 356
+        },
+        {
+          "face_count": 720,
+          "native_geometry_name": "panel_rear_hatch",
+          "relative_path": "track/panel_rear_hatch.stl",
+          "sha256": "5c820b0f100a9d75c43e9613addd7ce0f53532a74e1d76aa93e8e3e3c5abf418",
+          "source_geometry_name": "closure_rear_hatch",
+          "vertex_count": 416
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_left",
+          "relative_path": "track/aperture_front_side_glass_left.stl",
+          "sha256": "911e55bd29a8fe272a2e9f44c06c2e8582f1de17efb2b679cf2ffe7439024eb3",
+          "source_geometry_name": "glass_front_side_glass_left",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_right",
+          "relative_path": "track/aperture_front_side_glass_right.stl",
+          "sha256": "7fcad707e342872ae86c5a533936832620513efeae2092395190499f3998df05",
+          "source_geometry_name": "glass_front_side_glass_right",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_left",
+          "relative_path": "track/aperture_rear_side_glass_left.stl",
+          "sha256": "34e5898d919d4f5fd957699227a1dbe3bb729159a6a738beda9885931b10ab17",
+          "source_geometry_name": "glass_rear_side_glass_left",
+          "vertex_count": 87
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_right",
+          "relative_path": "track/aperture_rear_side_glass_right.stl",
+          "sha256": "ab65b9c77c97fe21b2b49d60ab5f648b6fffc93846e1e8ec802f027e0cb09ba2",
+          "source_geometry_name": "glass_rear_side_glass_right",
+          "vertex_count": 87
+        }
+      ],
+      "source_relative_path": "models/modern_car_v2_track_closures_closed.glb",
+      "source_sha256": "7f7017418738323ac86962dc139a41db998a17eca6ac6e2ba10181ad4c2340f0",
+      "variant": "track"
+    },
+    {
+      "meshes": [
+        {
+          "face_count": 7912,
+          "native_geometry_name": "panel_fixed_body",
+          "relative_path": "aero/panel_fixed_body.stl",
+          "sha256": "e34eed0859203fbee99e3901be8fd5cf001edae8d14c74d3cf6eb7594231fec0",
+          "source_geometry_name": "fixed_body",
+          "vertex_count": 4316
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_left",
+          "relative_path": "aero/panel_front_door_left.stl",
+          "sha256": "271b2157a1989f0361fbbbe616fc69f71eeaf9ba06d1973a2eeca6010733a283",
+          "source_geometry_name": "closure_front_door_left",
+          "vertex_count": 634
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_right",
+          "relative_path": "aero/panel_front_door_right.stl",
+          "sha256": "6a024f10f48711ba19063a70517938842c6746075441e2bb1b18c83e829462eb",
+          "source_geometry_name": "closure_front_door_right",
+          "vertex_count": 635
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_left",
+          "relative_path": "aero/panel_rear_door_left.stl",
+          "sha256": "4d9285cd9094abdc3cd29b3dce506d0ee04405f9ea6f6eca873b9b074e5ad0af",
+          "source_geometry_name": "closure_rear_door_left",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_right",
+          "relative_path": "aero/panel_rear_door_right.stl",
+          "sha256": "4aac6e1786433486afa8f23cfe9e21d0c05cf58bb681678dc5ad403e43bb5883",
+          "source_geometry_name": "closure_rear_door_right",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 620,
+          "native_geometry_name": "panel_hood",
+          "relative_path": "aero/panel_hood.stl",
+          "sha256": "e07daca943d276b31a80fdc09cfca41c9bbe4d2e68e015baef6dc14ac6a8f3e3",
+          "source_geometry_name": "closure_hood",
+          "vertex_count": 356
+        },
+        {
+          "face_count": 720,
+          "native_geometry_name": "panel_rear_hatch",
+          "relative_path": "aero/panel_rear_hatch.stl",
+          "sha256": "cab3cb17f73c6dda1f39d1f394362888f29b909b59e26eaeef0a45a7d87e4113",
+          "source_geometry_name": "closure_rear_hatch",
+          "vertex_count": 416
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_left",
+          "relative_path": "aero/aperture_front_side_glass_left.stl",
+          "sha256": "783e5a1462f2bbdf11fa7b904580da672d005fa0f059b2145dff7cbde67900b3",
+          "source_geometry_name": "glass_front_side_glass_left",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_right",
+          "relative_path": "aero/aperture_front_side_glass_right.stl",
+          "sha256": "26a57a980b378c761e79f9ad5e83de79019c6fb3ab847b4843f89f4049f62e49",
+          "source_geometry_name": "glass_front_side_glass_right",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_left",
+          "relative_path": "aero/aperture_rear_side_glass_left.stl",
+          "sha256": "c1738b87be294b3c9371a29f9d428983d8e472683301a5815b5162600d211641",
+          "source_geometry_name": "glass_rear_side_glass_left",
+          "vertex_count": 87
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_right",
+          "relative_path": "aero/aperture_rear_side_glass_right.stl",
+          "sha256": "ec5dffda538e19fb3edf34f05ffe869b85c1a77430504f0dfa43547362345691",
+          "source_geometry_name": "glass_rear_side_glass_right",
+          "vertex_count": 87
+        }
+      ],
+      "source_relative_path": "models/modern_car_v2_aero_closures_closed.glb",
+      "source_sha256": "0c6b6e610bc817daccf0b74772a793b8ded5f5d6746b834476c21d86294c0556",
+      "variant": "aero"
+    },
+    {
+      "meshes": [
+        {
+          "face_count": 7912,
+          "native_geometry_name": "panel_fixed_body",
+          "relative_path": "crossover/panel_fixed_body.stl",
+          "sha256": "f0cd6584e5cb2e08544594ba71d361843c3347801f725520b17754ecdf10e8c1",
+          "source_geometry_name": "fixed_body",
+          "vertex_count": 4316
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_left",
+          "relative_path": "crossover/panel_front_door_left.stl",
+          "sha256": "e71163a62ad64a051c0bd84ee678cb1edf9f1dbf589d11ae9f7b02e5855ce7ce",
+          "source_geometry_name": "closure_front_door_left",
+          "vertex_count": 634
+        },
+        {
+          "face_count": 1089,
+          "native_geometry_name": "panel_front_door_right",
+          "relative_path": "crossover/panel_front_door_right.stl",
+          "sha256": "3a478c7c9b50071197c1b0ea111fa61d7f6fd5dbf75f494b8232f3c8eb81698c",
+          "source_geometry_name": "closure_front_door_right",
+          "vertex_count": 635
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_left",
+          "relative_path": "crossover/panel_rear_door_left.stl",
+          "sha256": "519268de4a3c50994e31e8a28ad3e64bee7bb2eae97928c942e1a47dc533efe0",
+          "source_geometry_name": "closure_rear_door_left",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 740,
+          "native_geometry_name": "panel_rear_door_right",
+          "relative_path": "crossover/panel_rear_door_right.stl",
+          "sha256": "d65280705c3cb25a198c1891fc11c62a6bf46aab9046997ee8fed82a30f38266",
+          "source_geometry_name": "closure_rear_door_right",
+          "vertex_count": 450
+        },
+        {
+          "face_count": 620,
+          "native_geometry_name": "panel_hood",
+          "relative_path": "crossover/panel_hood.stl",
+          "sha256": "baee9b3dfcf6bf35a51d1a6c6a79e4397a982be9295342329387b873ec9a9b9c",
+          "source_geometry_name": "closure_hood",
+          "vertex_count": 356
+        },
+        {
+          "face_count": 720,
+          "native_geometry_name": "panel_rear_hatch",
+          "relative_path": "crossover/panel_rear_hatch.stl",
+          "sha256": "3287e48a70700917f173472e9fa6b011070b2f5e27027ba4c618d7e17f0fa0fc",
+          "source_geometry_name": "closure_rear_hatch",
+          "vertex_count": 416
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_left",
+          "relative_path": "crossover/aperture_front_side_glass_left.stl",
+          "sha256": "63208c8876aec8e2a496aecb96a62972a89851a814812b8017afacbccf6eadfd",
+          "source_geometry_name": "glass_front_side_glass_left",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 221,
+          "native_geometry_name": "aperture_front_side_glass_right",
+          "relative_path": "crossover/aperture_front_side_glass_right.stl",
+          "sha256": "9595078a9e6b16b14ad66959ad1b8afdf3f0b4f35d313b479db0640404ec8a0a",
+          "source_geometry_name": "glass_front_side_glass_right",
+          "vertex_count": 143
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_left",
+          "relative_path": "crossover/aperture_rear_side_glass_left.stl",
+          "sha256": "1d6e32df57f2bccfc01d83566063f44dc616d4f933c236f019fc41f8c4c1e32f",
+          "source_geometry_name": "glass_rear_side_glass_left",
+          "vertex_count": 87
+        },
+        {
+          "face_count": 130,
+          "native_geometry_name": "aperture_rear_side_glass_right",
+          "relative_path": "crossover/aperture_rear_side_glass_right.stl",
+          "sha256": "b18758fccd4a0fad264a6c43647a1997752b2b27a170199bb6ea49c50638055f",
+          "source_geometry_name": "glass_rear_side_glass_right",
+          "vertex_count": 87
+        }
+      ],
+      "source_relative_path": "models/modern_car_v2_crossover_closures_closed.glb",
+      "source_sha256": "5f86e84370312c7cfe576ce936cf358924fd6ad3bb35c033f926f345a204eb4b",
+      "variant": "crossover"
+    }
+  ],
+  "welding_tolerance_metres": 1e-06
+}

@@ -1,0 +1,11 @@
+firebase_auth_config.json
+firebase_auth_session.json
+
+/build/
+/progen3d
+/progen3d-editor-gui
+*.o
+*.d
+*.log
+__pycache__/
+*.pyc

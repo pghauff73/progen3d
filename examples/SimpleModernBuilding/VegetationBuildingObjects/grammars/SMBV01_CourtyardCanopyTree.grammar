@@ -1,0 +1,59 @@
+# SMBV01 Courtyard Canopy Tree
+# Object-local geometry uses Y-up coordinates and a five-degree comparison lens.
+
+Start -> SMB_VEGETATION_COURTYARD_CANOPY_TREE
+
+SMB_VEGETATION_COURTYARD_CANOPY_TREE ->
+[
+    Object(
+        id(SMB_VEGETATION_COURTYARD_CANOPY_TREE)
+        class(ArchitecturalCanopyTree)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Tree ArchitecturalCanopyTree)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(rootSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(inspection) type(InspectionInterface) origin(0 3.2 0) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ I(TaperedSweep(samples(0 0 0 0.34  0.08 1.10 0.03 0.30  -0.06 2.25 0.08 0.25  0.02 3.45 0.02 0.18  0 4.35 0 0.11) up(0 0 1) segments(20) cap(all)) material(amberwarmwood) 1 0.20) ]
+        [ T(0 1.35 0) I(BranchJunction(core(0.29 1.24) parent(0 -1 0 0.30 0.42) child(0.82 0.48 0.10 0.17 0.72) child(-0.74 0.56 -0.16 0.16 0.68) segments(18)) material(amberwarmwood) 1 0.20) ]
+        [ T(0 2.45 0) I(BranchJunction(core(0.23 1.20) parent(0 -1 0 0.24 0.35) child(0.58 0.64 -0.50 0.14 0.82) child(-0.62 0.62 0.48 0.14 0.82) segments(18)) material(amberwarmwood) 1 0.20) ]
+
+        SMBV01_Branch(0 2.05 0  1.85 3.05 0.38)
+        SMBV01_Branch(0 2.20 0  -1.75 3.18 -0.48)
+        SMBV01_Branch(0 2.75 0  1.45 3.86 -1.12)
+        SMBV01_Branch(0 2.82 0  -1.38 3.94 1.18)
+        SMBV01_Branch(0 3.32 0  0.92 4.62 1.22)
+        SMBV01_Branch(0 3.36 0  -0.88 4.70 -1.28)
+
+        SMBV01_FoliageLobe(-1.62 3.52 -0.46 1.20 0.90 1.05)
+        SMBV01_FoliageLobe(1.58 3.48 0.42 1.18 0.92 1.05)
+        SMBV01_FoliageLobe(-0.88 4.36 0.95 1.12 0.90 1.02)
+        SMBV01_FoliageLobe(0.92 4.40 -0.98 1.10 0.88 1.00)
+        SMBV01_FoliageLobe(0 4.82 0 1.36 1.02 1.20)
+
+        SMBV01_Leaf(-2.05 3.58 -0.42 -18)
+        SMBV01_Leaf(-1.48 4.08 -0.18 24)
+        SMBV01_Leaf(-0.86 4.72 0.90 52)
+        SMBV01_Leaf(0 5.18 0.10 0)
+        SMBV01_Leaf(0.86 4.76 -0.92 -46)
+        SMBV01_Leaf(1.52 4.02 0.30 20)
+        SMBV01_Leaf(2.02 3.54 0.46 -26)
+    ]
+]
+
+SMBV01_Branch(x0 y0 z0 x1 y1 z1) ->
+[
+    I(TaperedSweep(samples(x0 y0 z0 0.15  x0+(x1-x0)*0.48 y0+(y1-y0)*0.58 z0+(z1-z0)*0.40 0.105  x1 y1 z1 0.045) up(0 0 1) segments(16) cap(all)) material(amberwarmwood) 1 0.20)
+]
+
+SMBV01_FoliageLobe(x y z sx sy sz) ->
+[
+    T(x y z) S(sx sy sz) I(Sphere material(sagegreenmattepaint) 1 0.24)
+]
+
+SMBV01_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Ovate) length(0.72) width(0.32) curvature(0.12) camber(0.035) twist(8) thickness(0.012) widthPower(1.08) segments(18 5)) material(sagegreenmattepaint) 1 0.18)
+]

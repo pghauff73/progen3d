@@ -1,0 +1,68 @@
+# MCSMv2.2 executable open-state kinematics preview.
+# +X right, +Y up, +Z forward; origin is ground package centre.
+
+Start ->
+    MCSMv22TrackOpenPreview
+
+MCSMv22TrackOpenPreview ->
+[
+    Object(id(MCSMV22_TRACK_OPEN) name(TrackWidebodyAWD)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22TrackOpenPreviewComponentFixedBody
+        MCSMv22TrackOpenPreviewComponentClosures
+        MCSMv22TrackOpenPreviewComponentGlass
+        MCSMv22TrackOpenPreviewComponentSuspension
+        MCSMv22TrackOpenPreviewComponentTyres
+    ]
+]
+
+MCSMv22TrackOpenPreviewComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackOpenPreviewComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackClosuresOpenMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackOpenPreviewComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackGlassOpenMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22TrackOpenPreviewComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackOpenPreviewComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackTyreSweepMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(0.42) texscale(0.1))
+]

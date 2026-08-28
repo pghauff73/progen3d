@@ -1,0 +1,43 @@
+# Generated Simple Modern Building vegetation object.
+# Object-local geometry uses Y-up coordinates and a five-degree comparison lens.
+
+Start -> SMB_VEGETATION_JASMINE_WALL_CLIMBER
+
+SMB_VEGETATION_JASMINE_WALL_CLIMBER ->
+[
+    Object(
+        id(SMB_VEGETATION_JASMINE_WALL_CLIMBER)
+        class(JasmineWallClimber)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Vine JasmineWallClimber)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(baseSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(facadeAttachment) type(Mate) origin(0 2.0 0) normal(0 0 -1) tangent(1 0 0) region(Point) tolerance(0.01))
+        Interface(id(inspection) type(InspectionInterface) origin(0 2.0 0.28) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ T(-1.55 2.05 0) S(0.16 4.10 0.18) I(CubeY material(darkbrownroughwood) 1 0.17) ]
+        [ T(1.55 2.05 0) S(0.16 4.10 0.18) I(CubeY material(darkbrownroughwood) 1 0.17) ]
+        SMBV37_Slat(-1.20) SMBV37_Slat(-0.80) SMBV37_Slat(-0.40) SMBV37_Slat(0) SMBV37_Slat(0.40) SMBV37_Slat(0.80) SMBV37_Slat(1.20)
+        [ I(Vine(species(IvyVine) start(-1.28 0.12 0.18) direction(0.08 1.0 0.02) radius(0.038) mode(TendrilClimbing) collision(Seek) attachment(Twine) step(0.14) segments(33) seekDistance(1.8) attachDistance(0.030) tolerance(0.001) radiusDecay(0.968) minimumRadius(0.005) preferred(0 1 0) gamma(2.0) target(vine_support -1.46 0 -0.12 1.46 4.10 0.12) detail(LOD4)) material(sagegreenmattepaint) 1 0.15) ]
+        [ I(Vine(species(IvyVine) start(0.02 0.12 0.18) direction(-0.06 1.0 0.02) radius(0.035) mode(TendrilClimbing) collision(Seek) attachment(Twine) step(0.14) segments(31) seekDistance(1.8) attachDistance(0.030) tolerance(0.001) radiusDecay(0.968) minimumRadius(0.005) preferred(0 1 0) gamma(2.0) target(vine_support -1.46 0 -0.12 1.46 4.10 0.12) detail(LOD4)) material(sagegreenmattepaint) 1 0.15) ]
+        [ I(Vine(species(IvyVine) start(1.18 0.12 0.18) direction(-0.08 1.0 0.02) radius(0.034) mode(TendrilClimbing) collision(Seek) attachment(Twine) step(0.14) segments(29) seekDistance(1.8) attachDistance(0.030) tolerance(0.001) radiusDecay(0.968) minimumRadius(0.005) preferred(0 1 0) gamma(2.0) target(vine_support -1.46 0 -0.12 1.46 4.10 0.12) detail(LOD4)) material(sagegreenmattepaint) 1 0.15) ]
+        SMBV37_Leaf(-1.12 1.20 0.24 -24)
+        SMBV37_Leaf(-0.72 2.08 0.24 18)
+        SMBV37_Leaf(-0.20 3.02 0.24 -12)
+        SMBV37_Leaf(0.34 1.54 0.24 16)
+        SMBV37_Leaf(0.82 2.48 0.24 -20)
+        SMBV37_Leaf(1.18 3.32 0.24 24)
+    ]
+]
+
+SMBV37_Slat(x) ->
+[
+    T(x 2.12 0) S(0.10 3.62 0.12) I(CubeY material(lightoakwood) 1 0.15)
+]
+
+SMBV37_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Ovate) length(0.48) width(0.24) curvature(0.16) camber(0.034) twist(8) thickness(0.010) widthPower(1.04) segments(16 5)) material(sagegreenmattepaint) 1 0.14)
+]

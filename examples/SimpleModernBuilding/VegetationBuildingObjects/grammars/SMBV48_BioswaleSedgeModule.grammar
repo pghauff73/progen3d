@@ -1,0 +1,42 @@
+# Generated Simple Modern Building vegetation object.
+# Object-local geometry uses Y-up coordinates and a five-degree comparison lens.
+
+Start -> SMB_VEGETATION_BIOSWALE_SEDGE_MODULE
+
+SMB_VEGETATION_BIOSWALE_SEDGE_MODULE ->
+[
+    Object(
+        id(SMB_VEGETATION_BIOSWALE_SEDGE_MODULE)
+        class(BioswaleSedgeModule)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem EcologicalPlanting BioswaleSedgeModule)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(baseSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(stormwaterConnection) type(ServiceConnection) origin(0 0.24 -1.18) normal(0 0 -1) tangent(1 0 0) region(Point) tolerance(0.01))
+        Interface(id(inspection) type(InspectionInterface) origin(0 0.84 0) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ T(0 0.12 0) S(3.6 0.24 2.60) I(CubeY material(blackroughmetal) 1 0.18) ]
+        [ T(0 0.28 0) S(3.28 0.10 2.28) I(CubeY material(earthmaterial) 1 0.20) ]
+        [ I(ScatterRegion(region(ecological_48) species(GrassClump) seed(570048) surface(ecological_soil -1.52 0.30 -1.02 1.52 0.36 1.02) face(MaximumY) density(0.46) separation(0.28) scale(0.52 0.92) orientation(WorldUpRandomAzimuth) collisionRadius(0.060) layer(Terrain) mask(Structure Furniture) detail(LOD3)) material(sagegreenmattepaint) 1 0.14) ]
+        [ T(-0.72 0.34 0.12) S(1.35 1.35 1.35) I(Plant(species(GrassClump) age(1.4) state(Flowering) seed(570049) detail(LOD3)) material(sagegreenmattepaint) 1 0.15) ]
+        [ T(0.72 0.34 -0.12) S(1.20 1.20 1.20) I(Plant(species(GrassClump) age(1.1) state(Mature) seed(570050) detail(LOD3)) material(sagegreenmattepaint) 1 0.15) ]
+        SMBV48_Leaf(-1.18 0.74 -0.44 -22)
+        SMBV48_Leaf(-0.34 1.02 0.36 14)
+        SMBV48_Leaf(0.42 0.92 -0.30 -12)
+        SMBV48_Leaf(1.16 0.70 0.42 24)
+        SMBV48_Flower(-0.62 1.18 0.12 -10)
+        SMBV48_Flower(0.70 1.12 -0.10 12)
+    ]
+]
+
+SMBV48_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Lanceolate) length(0.68) width(0.20) curvature(0.20) camber(0.036) twist(12) thickness(0.009) widthPower(1.24) segments(18 5)) material(sagegreenmattepaint) 1 0.14)
+]
+
+SMBV48_Flower(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(PetalBlade(profile(Obovate) length(0.30) width(0.18) curvature(0.24) camber(0.050) twist(-10) thickness(0.008) widthPower(0.90) segments(14 5)) material(redglossymetal) 1 0.12)
+]

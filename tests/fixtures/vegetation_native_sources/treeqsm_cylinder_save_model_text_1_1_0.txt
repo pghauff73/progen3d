@@ -1,0 +1,5 @@
+radius (m)	length (m)	start_point	axis_direction	parent	extension	branch	branch_order	position_in_branch	mad	SurfCov	added	UnmodRadius (m)
+0.2	2.4	0	0	0	0	0	1	0	2	1	0	1
+0.01	0.98	0	0.2	0.13	1.9	0	0	2.4	0	0	1	1
+0	1	0	2	0.012	0.95	0	0.13	0.055	1.8	0	0	3.3
+0.88	0.21	0.43	2	0	2	1	1	0.018	0.9	0	0.055

@@ -1,0 +1,391 @@
+{
+  "schema": "ProGen3D-SMB-VegetationConstrainedImageGenReferences-v1",
+  "suite_manifest": "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+  "suite_manifest_sha256": "1b2ffa0e7a9e8c7d28c6c3d17dcba935bc0056f42c04aaf033ab62c984e965b4",
+  "render_validation": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/validation.json",
+  "render_validation_sha256": "3a11841ba050452ddc661aa9e5838b30481ef7797cd999252a60f761bcad22c3",
+  "atlas_manifest": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/input/atlas_manifest.json",
+  "atlas_manifest_sha256": "13d6c67ddcb3b3514ba125b3228bd85a5b9b4a8026518fc534088ec843b07bb4",
+  "generated_atlas": "examples/SimpleModernBuilding/VegetationBuildingObjects/imagegen/generated/SMB_Vegetation_ImageGen_Atlas.png",
+  "generated_atlas_sha256": "6ed279b79a3a719371c882190d673bd8c159e1a1e00c822be52906eb61d4ff57",
+  "geometry_authority": "five-degree ProGen3D object camera renders",
+  "appearance_authority": "object-specific ImageGen atlas views",
+  "comparison_views": [
+    "front",
+    "right",
+    "top"
+  ],
+  "imagegen_chroma_blend_candidates": [
+    0.45,
+    0.35,
+    0.25,
+    0.12,
+    0.05,
+    0.0
+  ],
+  "construction_target_percent": 94.0,
+  "object_count": 5,
+  "comparison_count": 15,
+  "contact_sheets": {
+    "front": {
+      "image": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/contact_sheets/vegetation_front.png",
+      "sha256": "1516ca6948e1901386b77a5b0716beb13056d4774533c530f887738ab4b2939c"
+    },
+    "right": {
+      "image": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/contact_sheets/vegetation_right.png",
+      "sha256": "51928c1b3f6ef5e9e0cf73e7c06e21f62156741d9c8b5c84a9c9102fd2704100"
+    },
+    "top": {
+      "image": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/contact_sheets/vegetation_top.png",
+      "sha256": "ad7da544c393b3512deaa7dfde1fec23c3eb99802506922414e6611c303e3dd3"
+    }
+  },
+  "objects": [
+    {
+      "object_id": "SMB_VEGETATION_COURTYARD_CANOPY_TREE",
+      "object_class": "ArchitecturalCanopyTree",
+      "title": "Courtyard Canopy Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV01_CourtyardCanopyTree.grammar",
+      "grammar_sha256": "e3af117a28a75f78d25f1fcd388f6357de76ff16b01a309861d6942bd6cacba2",
+      "reference_card": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_COURTYARD_CANOPY_TREE/reference_three_views.png",
+      "reference_card_sha256": "e115a9e01a702afcf223ddec08b7760c21ddd3020de2b9a44ab7ed24ddd3aeba",
+      "views": [
+        {
+          "view": "front",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/front.png",
+          "source_camera_view_sha256": "81f66fb8c05cd42ffbd76be01007b08506e212b12ca682323719d4d693bd0afa",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/front.png",
+          "raw_imagegen_style_view_sha256": "9fc04d836c848094601ae0f074a69cf5bca8ee4d6c0ae22b99f7f5fa9e4bcc50",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_COURTYARD_CANOPY_TREE/reference_views/front.png",
+          "constrained_reference_view_sha256": "06232478d9d3f99f5da77e62e6cc2d4d9c19ad0000da777021ff395db7f60e18",
+          "selected_imagegen_chroma_blend": 0.0,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "right",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/right.png",
+          "source_camera_view_sha256": "fea7b5f5d1e97c37a231f6d65755cd1f563cbeec95cd276a1f90056e0c679bfe",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/right.png",
+          "raw_imagegen_style_view_sha256": "87cfe2bfc335120c2f007681972a06ccf7511eeb913c488aa4d4890186e3b630",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_COURTYARD_CANOPY_TREE/reference_views/right.png",
+          "constrained_reference_view_sha256": "d95ad798c213ab55ac87fcff77a0491eb68d9e5631d05927cc5a78f7d6d89660",
+          "selected_imagegen_chroma_blend": 0.0,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "top",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/top.png",
+          "source_camera_view_sha256": "aa78652efa6e9140b55585e5b8f6e91e5f3d8dd914f4629ffd89cf476acb199f",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/top.png",
+          "raw_imagegen_style_view_sha256": "7d069dd484513a731c29d3cbbb63712daf983b6c5cc7987ee2d0717a4a0a8cf9",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_COURTYARD_CANOPY_TREE/reference_views/top.png",
+          "constrained_reference_view_sha256": "6aea6ba8e667090d1cbc3520dac0c8a01d5aea67b71d72f63e815287750255f0",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE",
+      "object_class": "SculpturalLSystemTree",
+      "title": "Sculptural L-System Tree",
+      "category": "Tree",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV02_SculpturalLSystemTree.grammar",
+      "grammar_sha256": "c80874a8ab05b0074c1d72d527eec884b11dcf1a25a2aafbacde55c8cbb5c5e9",
+      "reference_card": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/reference_three_views.png",
+      "reference_card_sha256": "e9aee08fc178cafdb0c824b9351cdb687bff13103001fe23ee96904c9cd40514",
+      "views": [
+        {
+          "view": "front",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/front.png",
+          "source_camera_view_sha256": "c7faffd0ab7b06ad7b942d7c56fdfb015ba1ad38000a8929ee8184a64ced35ae",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/front.png",
+          "raw_imagegen_style_view_sha256": "3da428101b9abe3b87003dd00fd775eb795d4252591935a5530737811a9d2712",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/reference_views/front.png",
+          "constrained_reference_view_sha256": "16cb4dee5c6e3b4d9bce8ecc357fa711d82a754a381ff0d7aa6ddfb78925130f",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "right",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/right.png",
+          "source_camera_view_sha256": "8406739bbec0272ef4a461f28067358051be0eed8619c6c258815ad11ead6556",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/right.png",
+          "raw_imagegen_style_view_sha256": "bda6081011c5f5fa33caf492aa131ac4a45d6ad7be08ab3eb7d7df4bc4984050",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/reference_views/right.png",
+          "constrained_reference_view_sha256": "f027ba9c5d9bfff02ff3ac0a88d53141a4d30ad79f52241a46c65e4891da879b",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "top",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/top.png",
+          "source_camera_view_sha256": "07d0e5efdfad7ff74058eb6994cbba37167c727180e38f63d9cf1c9d616c00a7",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/top.png",
+          "raw_imagegen_style_view_sha256": "efa6ea6870cac86a4aae9aca96a16cd1a0a59a296f4e9c122cbe19646655a097",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/reference_views/top.png",
+          "constrained_reference_view_sha256": "a38326cf80f7a19b6cc3db8b99291b63b56b83a2cd03e1ee835d884952a6eb79",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "SMB_VEGETATION_FLOWERING_PLANT_CLUSTER",
+      "object_class": "LayeredFloweringPlantCluster",
+      "title": "Layered Flowering Plant Cluster",
+      "category": "Plant",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV03_LayeredFloweringPlantCluster.grammar",
+      "grammar_sha256": "2b0f9aed7337ac8068893e250de1c70e9841dac601f6ba2d2ccc480abed423c2",
+      "reference_card": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/reference_three_views.png",
+      "reference_card_sha256": "ff388430183b5c11ef29cedc82c16f578e4ee3af91f973ec35c3c06740b53c0c",
+      "views": [
+        {
+          "view": "front",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/front.png",
+          "source_camera_view_sha256": "c7e1ae1aa4eb3ee16cd16f1f346b5d4b59bc1653b9b4e4091a11795c5ede8085",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/front.png",
+          "raw_imagegen_style_view_sha256": "056b1d0d29904fbf8ee442ab5d8fa996a4e60da20b09df8095adddcf3fc5cabd",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/reference_views/front.png",
+          "constrained_reference_view_sha256": "9e62ccd701ac6edf5d12c95470c61ae55bd5f8b875780e6bc3032c3e1fd0ddb5",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "right",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/right.png",
+          "source_camera_view_sha256": "9525cb7edab009d7b712ae9f7789bb90f402cb1a6a79031b04e3d4bd28294c40",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/right.png",
+          "raw_imagegen_style_view_sha256": "f523389540a31ab81b84d9d6a85c9b67730c2592fd0bea79e54426f2a21bf67d",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/reference_views/right.png",
+          "constrained_reference_view_sha256": "7b6504907c988a4823173819932c17501114b5163fbf06f0e60a72c3e6406c70",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "top",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/top.png",
+          "source_camera_view_sha256": "6e64ad12c28de206eb26819e6715bab29d844a06ab44bb0c93e869842956decb",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/top.png",
+          "raw_imagegen_style_view_sha256": "9fb9dad353665ebc8befd222ea2dfae883000ddf51759ec03ad6626a62514ff7",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/reference_views/top.png",
+          "constrained_reference_view_sha256": "77b18ca3d2a50518a3a2fd5e52f3c4e1320835dfdaaa4bcc97e04a5f415fb139",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "SMB_VEGETATION_IVY_PRIVACY_SCREEN",
+      "object_class": "WallClimbingIvyPrivacyScreen",
+      "title": "Wall-Climbing Ivy Privacy Screen",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV04_WallClimbingIvyPrivacyScreen.grammar",
+      "grammar_sha256": "569af2d7f73bff8ff3a94974ed678127739ccc290157c395e58ee0f9ab263810",
+      "reference_card": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_IVY_PRIVACY_SCREEN/reference_three_views.png",
+      "reference_card_sha256": "7a6910e668480c091f67fd6c4f03573bf08dfe1aa28371f12e6fa4bccc7002b8",
+      "views": [
+        {
+          "view": "front",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/front.png",
+          "source_camera_view_sha256": "9b602333747175c5f71c582a2bf370a798892040bfe03e54fd4579a67b4de81a",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/front.png",
+          "raw_imagegen_style_view_sha256": "610499986e4bf4508dcd262474dd51ff2716b8ff63d49364a920d67b37f6e094",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_IVY_PRIVACY_SCREEN/reference_views/front.png",
+          "constrained_reference_view_sha256": "dec5a5118c85f372ccb9687fdb2d8d7afdb92dc4b60a8d7a699176383c207f22",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "right",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/right.png",
+          "source_camera_view_sha256": "a7fa12fe6984c81b4072013b2ff843836d35ebd6c193ab207088da5252676017",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/right.png",
+          "raw_imagegen_style_view_sha256": "00f72aedfc3f7ac583aeb3f0aaef9444cd0805298ca3d4a7138da967b1edebb9",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_IVY_PRIVACY_SCREEN/reference_views/right.png",
+          "constrained_reference_view_sha256": "d241988cb74b6a083ca0aac7c00dcb5ac3885ba4c18777bb891840c374fdc804",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "top",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/top.png",
+          "source_camera_view_sha256": "6e44ea989ba9c2b9048639067aba9ba5cd4c3b8c441dbb12a192c1879c0413e8",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/top.png",
+          "raw_imagegen_style_view_sha256": "74e19269dfb84db1a12bd6003eaa63ce0ccf701f860b3afe6eee155c1cc1712b",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_IVY_PRIVACY_SCREEN/reference_views/top.png",
+          "constrained_reference_view_sha256": "4269f716008a89d62be09609d68b543fa7a2b0a7dd4e08002d10012176577bd6",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "SMB_VEGETATION_TENDRIL_PERGOLA_VINE",
+      "object_class": "TendrilPergolaVine",
+      "title": "Tendril Pergola Vine",
+      "category": "Vine",
+      "grammar": "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV05_TendrilPergolaVine.grammar",
+      "grammar_sha256": "b4e2b0e5237c5f10a8a69ded9ce84ed4d738040a2f419473507acc444690915f",
+      "reference_card": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/reference_three_views.png",
+      "reference_card_sha256": "b895ac46d245aae70bea9f2736f387e8b8d07511d15a2f1d4be9ddd3c57ff640",
+      "views": [
+        {
+          "view": "front",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/front.png",
+          "source_camera_view_sha256": "5a1fe2d7e0a9952d9233104e6e962a516f3c8a677511744f2791d259befec328",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/front.png",
+          "raw_imagegen_style_view_sha256": "bcde6e4c6f39a18d232276eca9812a9d898efcb1e2d59f4d7d733cf190676e36",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/reference_views/front.png",
+          "constrained_reference_view_sha256": "0181d4f3ec3abc07b8c33d744349d3696d62fb8881e4f3225a274f6f62b31040",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "right",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/right.png",
+          "source_camera_view_sha256": "b61527516135595f4816331a6dc39cdf63998eb8d0db38ca2924392ac1821f02",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/right.png",
+          "raw_imagegen_style_view_sha256": "b3e48f51ec249072c37cb0d5df1afa43deb9832e03180d01340e1edb485276da",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/reference_views/right.png",
+          "constrained_reference_view_sha256": "ffb65ae261e3f4096bc54a97a49be81805f398270643104cad9d23cc82073ecc",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        },
+        {
+          "view": "top",
+          "source_camera_view": "/home/pamela/Projects/ProGen3d2026/examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/top.png",
+          "source_camera_view_sha256": "0923ef64e955c12271ea64eb0f0f938d54fffd2fd8da115878e5e0c44c40e3f5",
+          "raw_imagegen_style_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/style_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/top.png",
+          "raw_imagegen_style_view_sha256": "2978820008816513ef5b557d84876d25367e886131b459d6ea69b048d3b06fa7",
+          "constrained_reference_view": "examples/SimpleModernBuilding/VegetationBuildingObjects/references/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/reference_views/top.png",
+          "constrained_reference_view_sha256": "ac24c80c9acfc5fae4b7c5b0a78f3f2bbf11ff68bcb36aab54ca67651ce91151",
+          "selected_imagegen_chroma_blend": 0.45,
+          "fitted_geometry_scores": {
+            "silhouette_overlap": 100.0,
+            "edge_alignment": 100.0,
+            "projection_distribution": 100.0,
+            "aspect_ratio": 100.0,
+            "foreground_occupancy": 100.0,
+            "component_count": 100.0,
+            "symmetry": 100.0
+          }
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

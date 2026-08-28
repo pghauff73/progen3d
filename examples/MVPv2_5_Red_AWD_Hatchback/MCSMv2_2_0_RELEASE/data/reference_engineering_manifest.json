@@ -1,0 +1,106 @@
+{
+  "occupants": [
+    "occupant_front_left_head",
+    "occupant_front_left_torso",
+    "occupant_front_right_head",
+    "occupant_front_right_torso",
+    "occupant_rear_left_head",
+    "occupant_rear_left_torso",
+    "occupant_rear_right_head",
+    "occupant_rear_right_torso"
+  ],
+  "functional_envelopes": [
+    "engine_envelope",
+    "rear_differential_envelope"
+  ],
+  "wheel_envelopes": [
+    {
+      "name": "front_left",
+      "axle": "front",
+      "side": "left",
+      "centre": [
+        1.31445,
+        -0.784125,
+        0.34
+      ],
+      "radius_x": 0.4302655135474016,
+      "radius_y": 0.3256725498392897,
+      "radius_z": 0.43800000000000006,
+      "steer_range_deg": [
+        -32.0,
+        32.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.028
+    },
+    {
+      "name": "front_right",
+      "axle": "front",
+      "side": "right",
+      "centre": [
+        1.31445,
+        0.784125,
+        0.34
+      ],
+      "radius_x": 0.4302655135474016,
+      "radius_y": 0.3256725498392897,
+      "radius_z": 0.43800000000000006,
+      "steer_range_deg": [
+        -32.0,
+        32.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.028
+    },
+    {
+      "name": "rear_left",
+      "axle": "rear",
+      "side": "left",
+      "centre": [
+        -1.31445,
+        -0.783995,
+        0.34
+      ],
+      "radius_x": 0.36800000000000005,
+      "radius_y": 0.1455,
+      "radius_z": 0.43800000000000006,
+      "steer_range_deg": [
+        0.0,
+        0.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.028
+    },
+    {
+      "name": "rear_right",
+      "axle": "rear",
+      "side": "right",
+      "centre": [
+        -1.31445,
+        0.783995,
+        0.34
+      ],
+      "radius_x": 0.36800000000000005,
+      "radius_y": 0.1455,
+      "radius_z": 0.43800000000000006,
+      "steer_range_deg": [
+        0.0,
+        0.0
+      ],
+      "travel_range": [
+        -0.07,
+        0.06
+      ],
+      "clearance": 0.028
+    }
+  ]
+}

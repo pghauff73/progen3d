@@ -1,0 +1,9 @@
+{
+  "schema_version": "ProGen3D-BiomechanicalMaterialTest-v1",
+  "plant_architecture": "Tree",
+  "test_identifier": "biomechanical-test:tree-001:v1",
+  "mass_density": {"value": 0.72, "unit": "g/cm3"},
+  "elastic_modulus": {"value": 8.5, "unit": "GPa"},
+  "damping_ratio": {"value": 4.5, "unit": "percent"},
+  "drag_coefficient": {"value": 1.15, "unit": "dimensionless"}
+}
