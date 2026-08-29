@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="The example library should be treated as a maintained product surface rather than a directory of informal snippets." name="description"/>
+<meta content="PROGEN3D_PROCEDURAL_PRIMITIVE_EXAMPLES_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="a8cb9aeb6bbec97b65a23078249defab3d4d78e20bbe1b2d8226c90946f63e6e" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Procedural Primitive Examples Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">ProGen3D Procedural Primitive Examples Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Procedural Primitive Examples Implementation Plan</h1>
+<p class="lead">The example library should be treated as a maintained product surface rather than a directory of informal snippets.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 20 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_PROCEDURAL_PRIMITIVE_EXAMPLES_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="a8cb9aeb6bbec97b65a23078249defab3d4d78e20bbe1b2d8226c90946f63e6e" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Procedural Primitive Examples Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Procedural Primitive Examples Implementation Plan, Executive Decision, Confirmed Repository Baseline, Existing Public Examples.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html">P3D Textured Mesh and Orthographic Three-View Strategy</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Procedural Primitive Examples Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Procedural Primitive Examples Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Executive Decision</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Executive Decision</td></tr><tr><td><dfn title="Named by the source document">Confirmed Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Confirmed Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Existing Public Examples</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Existing Public Examples</td></tr><tr><td><dfn title="Named by the source document">Existing AxialProfile Fixtures</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Existing AxialProfile Fixtures</td></tr><tr><td><dfn title="Named by the source document">Documented Canonical Option Surfaces</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 Documented Canonical Option Surfaces</td></tr><tr><td><dfn title="Named by the source document">Existing Verification Infrastructure</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.4 Existing Verification Infrastructure</td></tr><tr><td><dfn title="Named by the source document">Scope</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>3. Scope</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr><td><dfn title="Typed MCP_OMv1 model">P1</dfn></td><td>Typed MCP_OMv1 model</td></tr><tr><td><dfn title="JavaScript Object Notation">JSON</dfn></td><td>JavaScript Object Notation</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">README</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">FOV</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">BUILDING</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">C01</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">C02</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">C03</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">C04</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Procedural Primitive Examples Implementation Plan, Executive Decision, Confirmed Repository Baseline, Existing Public Examples. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Executive Decision, 2. Confirmed Repository Baseline, 2.1 Existing Public Examples, 2.2 Existing AxialProfile Fixtures. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 28, failed: 3, proposed: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 35 code blocks, 2 tables and the source SHA-256 <code>a8cb9aeb6bbec97b65a23078249defab3d4d78e20bbe1b2d8226c90946f63e6e</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-executive-decision">1. Executive Decision</a></li><li><a href="#source-2-confirmed-repository-baseline">2. Confirmed Repository Baseline</a></li><li><a href="#source-2-1-existing-public-examples">2.1 Existing Public Examples</a></li><li><a href="#source-2-2-existing-axialprofile-fixtures">2.2 Existing AxialProfile Fixtures</a></li><li><a href="#source-2-3-documented-canonical-option-surfaces">2.3 Documented Canonical Option Surfaces</a></li><li><a href="#source-2-4-existing-verification-infrastructure">2.4 Existing Verification Infrastructure</a></li><li><a href="#source-3-scope">3. Scope</a></li><li><a href="#source-3-1-p0-delivery">3.1 P0 Delivery</a></li><li><a href="#source-3-2-explicit-non-goals">3.2 Explicit Non-Goals</a></li><li><a href="#source-4-directory-architecture">4. Directory Architecture</a></li><li><a href="#source-5-public-example-contract">5. Public Example Contract</a></li><li><a href="#source-6-public-catalog-model">6. Public Catalog Model</a></li><li><a href="#source-6-1-catalog-invariants">6.1 Catalog Invariants</a></li><li><a href="#source-6-2-catalog-ownership">6.2 Catalog Ownership</a></li><li><a href="#source-7-coverage-model">7. Coverage Model</a></li><li><a href="#source-8-cylinder-tutorial-inventory">8. Cylinder Tutorial Inventory</a></li><li><a href="#source-lesson">C01 01fullcylinder.p3d</a></li><li><a href="#source-lesson">C02 02ellipticalcylinder.p3d</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>28</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>3</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_PROCEDURAL_PRIMITIVE_EXAMPLES_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Procedural Primitive Examples Implementation Plan, Executive Decision, Confirmed Repository Baseline, Existing Public Examples.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>one-concept tutorial files establish the language;</li><li>comparison scenes explain distinctions that are difficult to learn from text;</li><li>gallery scenes show useful composition;</li><li>deterministic fixtures enforce edge conditions and failures.</li><li>Teach one primary concept per tutorial file.</li><li>Use canonical descriptors before introducing aliases.</li><li>Use purpose-revealing rule and profile names.</li><li>Keep meaningful polygon profiles vertically formatted.</li><li>Use normalized shape values and let S(...) own visible external size.</li><li>Avoid random expressions in deterministic examples.</li><li>Place time-dependent expressions only in catalog entries marked temporal.</li><li>Use materials that preserve readable silhouettes and cut surfaces.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">tutorial examples
+comparison examples
+temporal examples
+gallery examples
+negative diagnostic fixtures</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Procedural Primitive Examples Implementation Plan" data="../../assets/diagrams/pages/progen3d-procedural-primitive-examples-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_PROCEDURAL_PRIMITIVE_EXAMPLES_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>a8cb9aeb6bbec97b65a23078249defab3d4d78e20bbe1b2d8226c90946f63e6e</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>121 headings, 35 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./progen3d-editor-gui \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--open examples/procedural_primitives/cylinder/07_angular_sector.p3d</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_procedural_example_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_editor_architecture_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_release_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>git diff --check</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Procedural Primitive Examples Implementation Plan, Executive Decision, Confirmed Repository Baseline, Existing Public Examples, Existing AxialProfile Fixtures</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</small></li><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li><li><a href="progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li><li><a href="proposed-curved-primitive-examples.html">Proposed curved primitive examples</a> <span class="status-badge status--proposed">Proposed</span><br/><small>These examples explore a later procedural curved-shape family. They are not supported by the current fixed-name I(...) parser.</small></li><li><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html">ProGen3D Preview GL46 and PBR Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</small></li><li><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html">P3D Textured Mesh and Orthographic Three-View Strategy</a> <span class="status-badge status--documented">Documented</span><br/><small>Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_PROCEDURAL_PRIMITIVE_EXAMPLES_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_PROCEDURAL_PRIMITIVE_EXAMPLES_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>a8cb9aeb6bbec97b65a23078249defab3d4d78e20bbe1b2d8226c90946f63e6e</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-procedural-primitive-examples-implementation-plan">ProGen3D Procedural Primitive Examples Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Procedural Primitive Examples Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Date:</strong> August 21, 2026</li>
+<li><strong>Status:</strong> Implementation plan; the comprehensive example library described here has not yet been written.</li>
+<li><strong>Primary objective:</strong> Create a structured, comprehensive, executable example library for the canonical <code>Cylinder</code>, <code>Sphere</code>, and <code>AxialProfile</code> procedural families.</li>
+<li><strong>Teaching objective:</strong> Progress from one-concept examples to comparisons, temporal behavior, and finished gallery scenes without turning the library into a combinatorial list of every parameter permutation.</li>
+<li><strong>Compatibility requirement:</strong> Preserve the existing top-level showcase paths and all current grammar, rendering, export, physics, and editor behavior.</li>
+<li><strong>Release authority:</strong> Catalog validation, grammar-to-scene execution, deterministic geometry evidence, selected GUI smoke checks, the full release gate, and supervised launch of a representative gallery scene.</li>
+</ul>
+<h3 id="source-1-executive-decision">1. Executive Decision</h3><p class="section-guide">Reading guide: this source section records “1. Executive Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</p>
+<p>The implementation shall separate five responsibilities:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tutorial examples
+comparison examples
+temporal examples
+gallery examples
+negative diagnostic fixtures
+</code></pre>
+<p>Public examples must always open successfully. Expected failures belong only in <code>tests/fixtures/procedural_primitives/invalid</code>.</p>
+<p>Comprehensiveness will be measured by <strong>coverage of orthogonal language dimensions</strong>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">family
+domain restriction
+topology
+closure
+profile or clip construction
+transform interaction
+tessellation
+mapping
+temporal evaluation
+physics evidence
+alias equivalence
+diagnostics
+</code></pre>
+<p>The project should not create one public file for every Cartesian-product combination. Instead:</p>
+<ol>
+<li>one-concept tutorial files establish the language;</li>
+<li>comparison scenes explain distinctions that are difficult to learn from text;</li>
+<li>gallery scenes show useful composition;</li>
+<li>deterministic fixtures enforce edge conditions and failures.</li>
+</ol>
+<h3 id="source-2-confirmed-repository-baseline">2. Confirmed Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Confirmed Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-existing-public-examples">2.1 Existing Public Examples</h4><p class="section-guide">Reading guide: this source section records “2.1 Existing Public Examples”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current public example surface contains:</p>
+<ul>
+<li><code>examples/curved_primitives_showcase.p3d</code>, a combined Cylinder and Sphere grid;</li>
+<li><code>examples/curved_primitives_temporal.p3d</code>, one time-varying Cylinder and one time-varying Sphere;</li>
+<li><code>examples/axial_profile_v1_showcase.p3d</code>, one combined AxialProfile object;</li>
+<li><code>examples/P2_time_showcase.p3d</code>, the inherited general temporal grammar example.</li>
+</ul>
+<p>The combined curved showcase already demonstrates:</p>
+<ul>
+<li>full Cylinder and Sphere;</li>
+<li>open surface domains;</li>
+<li>Tube, CylinderSector, DSection, and HalfCylinder aliases;</li>
+<li>shell sectors;</li>
+<li>spherical shells;</li>
+<li>Hemisphere, SphereCap, SphereBowl, SphereQuarter, and SphereOctant aliases;</li>
+<li>sphere slabs.</li>
+</ul>
+<p>Evidence: <code>examples/curved_primitives_showcase.p3d:1</code>.</p>
+<p>The temporal curved showcase demonstrates:</p>
+<ul>
+<li>a time-varying Cylinder azimuth sweep;</li>
+<li>a time-varying Sphere clip offset;</li>
+<li>preservation of the design nonce across temporal sampling.</li>
+</ul>
+<p>Evidence: <code>examples/curved_primitives_temporal.p3d:1</code>.</p>
+<h4 id="source-2-2-existing-axialprofile-fixtures">2.2 Existing AxialProfile Fixtures</h4><p class="section-guide">Reading guide: this source section records “2.2 Existing AxialProfile Fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository contains isolated AxialProfile fixtures for:</p>
+<ul>
+<li>rectangle extrusion;</li>
+<li>linear taper;</li>
+<li>contained step;</li>
+<li>offset, scaled, rotated crown;</li>
+<li>temporal center and rotation expressions.</li>
+</ul>
+<p>Evidence: <code>tests/fixtures/axialprofile/rectangle_extrusion.p3d:1</code>, <code>tests/fixtures/axialprofile/taper.p3d:1</code>, <code>tests/fixtures/axialprofile/step.p3d:1</code>, <code>tests/fixtures/axialprofile/offset_crown.p3d:1</code>, and <code>tests/fixtures/axialprofile/temporal.p3d:1</code>.</p>
+<p class="source-status--passed">These fixtures are intentionally terse. They are suitable as regression inputs but are not a complete teaching sequence.</p>
+<h4 id="source-2-3-documented-canonical-option-surfaces">2.3 Documented Canonical Option Surfaces</h4><p class="section-guide">Reading guide: this source section records “2.3 Documented Canonical Option Surfaces”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Cylinder currently documents:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">radial
+wall
+axial
+azimuth
+chord
+clip
+topology
+close
+segments
+mapping
+</code></pre>
+<p>Sphere currently documents:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">radial
+wall
+polar
+azimuth
+clip
+slab
+topology
+close
+segments
+mapping
+</code></pre>
+<p>AxialProfile currently documents:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">axis
+profile
+at
+hold
+linear
+step
+cap
+center
+scale
+rotate
+</code></pre>
+<p>Evidence: <code>src/geometry/service/ProceduralShapeCatalogRepository.cpp:21</code>, <code>src/geometry/service/ProceduralShapeCatalogRepository.cpp:41</code>, and <code>src/geometry/service/ProceduralShapeCatalogRepository.cpp:61</code>.</p>
+<h4 id="source-2-4-existing-verification-infrastructure">2.4 Existing Verification Infrastructure</h4><p class="section-guide">Reading guide: this source section records “2.4 Existing Verification Infrastructure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository already provides:</p>
+<ul>
+<li>grammar and semantic harnesses;</li>
+<li>procedural mesh topology and volume tests;</li>
+<li>preview/export agreement tests;</li>
+<li>editor catalog and completion tests;</li>
+<li>Xvfb GUI smoke tests;</li>
+<li>temporal GUI smoke tests;</li>
+<li>a clean full release gate.</li>
+</ul>
+<p>The example project should extend these systems rather than introduce a separate parser or renderer.</p>
+<h3 id="source-3-scope">3. Scope</h3><p class="section-guide">Reading guide: this source section records “3. Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-p0-delivery">3.1 P0 Delivery</h4><p class="section-guide">Reading guide: this source section records “3.1 P0 Delivery”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The first complete delivery includes:</p>
+<ul>
+<li>a stable example directory hierarchy;</li>
+<li>a machine-readable public example catalog;</li>
+<li>a human-readable example index;</li>
+<li>one-concept tutorial sequences for all three canonical families;</li>
+<li>side-by-side semantic comparison scenes;</li>
+<li>one temporal sequence for each family plus combined temporal scenes;</li>
+<li>finished gallery scenes using multiple families;</li>
+<li>valid and invalid deterministic fixtures;</li>
+<li>automated catalog, grammar, geometry, and GUI gates;</li>
+<li>preservation of existing top-level showcase paths.</li>
+</ul>
+<h4 id="source-3-2-explicit-non-goals">3.2 Explicit Non-Goals</h4><p class="section-guide">Reading guide: this source section records “3.2 Explicit Non-Goals”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P0 does not require:</p>
+<ul>
+<li>new Cylinder, Sphere, or AxialProfile syntax;</li>
+<li>new mesh algorithms;</li>
+<li>automatic screenshot approval;</li>
+<li>general visual-difference testing;</li>
+<li>online example downloads;</li>
+<li>an editor example browser;</li>
+<li>per-example cloud metadata;</li>
+<li>arbitrary user-authored package installation;</li>
+<li>certification of the external Component 24 reconstruction.</li>
+</ul>
+<p>An editor example browser is a useful P1 extension, but it must not delay the example library itself.</p>
+<h3 id="source-4-directory-architecture">4. Directory Architecture</h3><p class="section-guide">Reading guide: this source section records “4. Directory Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/
+  procedural_primitives/
+    README.md
+    catalog.json
+
+    cylinder/
+      01_full_cylinder.p3d
+      ...
+
+    sphere/
+      01_full_sphere.p3d
+      ...
+
+    axial_profile/
+      01_rectangle_extrusion.p3d
+      ...
+
+    comparisons/
+      01_normalized_scaling.p3d
+      ...
+
+    temporal/
+      01_cylinder_sweep.p3d
+      ...
+
+    gallery/
+      01_observatory.p3d
+      ...
+
+tests/fixtures/procedural_primitives/
+  valid/
+    cylinder/
+    sphere/
+    axial_profile/
+  invalid/
+    cylinder/
+    sphere/
+    axial_profile/
+</code></pre>
+<p>Existing files remain valid compatibility entry points:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/curved_primitives_showcase.p3d
+examples/curved_primitives_temporal.p3d
+examples/axial_profile_v1_showcase.p3d
+</code></pre>
+<p>They may be listed in the new catalog, but they must not be moved or renamed while current tests and user workflows reference them.</p>
+<h3 id="source-5-public-example-contract">5. Public Example Contract</h3><p class="section-guide">Reading guide: this source section records “5. Public Example Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every public <code>.p3d</code> file begins with a compact contract header:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">// Example: Cylinder / Angular Sector
+// Purpose: Demonstrate a closed solid with a restricted azimuth domain.
+// Primary features: azimuth, topology(solid), close(all).
+// Expected result: One watertight partial cylinder with two radial cut faces.
+// Deterministic: yes.
+</code></pre>
+<p>Required authoring rules:</p>
+<ol>
+<li>Teach one primary concept per tutorial file.</li>
+<li>Use canonical descriptors before introducing aliases.</li>
+<li>Use purpose-revealing rule and profile names.</li>
+<li>Keep meaningful polygon profiles vertically formatted.</li>
+<li>Use normalized shape values and let <code>S(...)</code> own visible external size.</li>
+<li>Avoid random expressions in deterministic examples.</li>
+<li>Place time-dependent expressions only in catalog entries marked temporal.</li>
+<li>Use materials that preserve readable silhouettes and cut surfaces.</li>
+<li>Space comparison instances far enough to avoid overlap at supported FOV values.</li>
+<li>Produce no grammar or runtime diagnostic.</li>
+<li>Stay below ordinary geometry safety ceilings without relying on exceptional limits.</li>
+<li>Do not use comments to claim watertightness, collision support, or volume unless the corresponding automated evidence exists.</li>
+</ol>
+<h3 id="source-6-public-catalog-model">6. Public Catalog Model</h3><p class="section-guide">Reading guide: this source section records “6. Public Catalog Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create <code>examples/procedural_primitives/catalog.json</code> with this bounded schema:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-json">{
+  "schema": "progen3d.procedural-example-catalog.v1",
+  "examples": [
+    {
+      "id": "cylinder.angular-sector",
+      "title": "Angular Sector",
+      "path": "cylinder/07_angular_sector.p3d",
+      "category": "tutorial",
+      "families": ["Cylinder"],
+      "difficulty": "beginner",
+      "features": [
+        "cylinder.azimuth",
+        "topology.solid",
+        "closure.all"
+      ],
+      "deterministic": true,
+      "temporal": false,
+      "expected_minimum_instances": 1,
+      "documentation": "Closed angular restriction with generated cut faces."
+    }
+  ]
+}
+</code></pre>
+<h4 id="source-6-1-catalog-invariants">6.1 Catalog Invariants</h4><p class="section-guide">Reading guide: this source section records “6.1 Catalog Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>schema identifier is exact;</li>
+<li>IDs are unique and stable;</li>
+<li>paths are unique, relative, normalized, and remain below the example root;</li>
+<li>every path exists;</li>
+<li>every public <code>.p3d</code> below the new root appears exactly once;</li>
+<li>family values are <code>Cylinder</code>, <code>Sphere</code>, or <code>AxialProfile</code>;</li>
+<li>category values are <code>tutorial</code>, <code>comparison</code>, <code>temporal</code>, or <code>gallery</code>;</li>
+<li>difficulty values are <code>beginner</code>, <code>intermediate</code>, or <code>advanced</code>;</li>
+<li>temporal entries set <code>temporal=true</code>;</li>
+<li>deterministic temporal entries mean deterministic at an explicit <code>t</code> and design nonce;</li>
+<li>every documented canonical option has at least one feature-tagged example;</li>
+<li>every public alias has an alias example and canonical-equivalence fixture;</li>
+<li>invalid fixtures are never included in the public catalog.</li>
+</ul>
+<h4 id="source-6-2-catalog-ownership">6.2 Catalog Ownership</h4><p class="section-guide">Reading guide: this source section records “6.2 Catalog Ownership”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P0 validation may use Python's standard JSON parser in a test script. Runtime code does not need to parse the catalog.</p>
+<p>If P1 adds an editor browser, introduce purpose-specific object-model classes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class ProceduralExampleDefinition;
+class ProceduralExampleCategory;
+class ProceduralExampleCatalog;
+class ProceduralExampleCatalogReader;
+class ProceduralExampleSelection;
+</code></pre>
+<p>Do not add a vague generic JSON utility or reuse the geometry catalog as an unrelated example repository.</p>
+<h3 id="source-7-coverage-model">7. Coverage Model</h3><p class="section-guide">Reading guide: this source section records “7. Coverage Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The catalog validator shall build a coverage table for:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Dimension</th>
+<th scope="col" style="text-align:right">Cylinder</th>
+<th scope="col" style="text-align:right">Sphere</th>
+<th scope="col" style="text-align:right">AxialProfile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bare legacy form</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Not applicable</td>
+</tr>
+<tr>
+<td>Normalized external scaling</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+</tr>
+<tr>
+<td>Surface form</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Not in v1</td>
+</tr>
+<tr>
+<td>Solid form</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+</tr>
+<tr>
+<td>Shell form</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Post-v1</td>
+</tr>
+<tr>
+<td>Domain restriction</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Axial levels</td>
+</tr>
+<tr>
+<td>Clip or step boundary</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+</tr>
+<tr>
+<td>Open form</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+</tr>
+<tr>
+<td>Fully closed form</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+</tr>
+<tr>
+<td>Mapping policy</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Triplanar only</td>
+</tr>
+<tr>
+<td>Tessellation control</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Profile-authored</td>
+</tr>
+<tr>
+<td>Temporal expression</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+</tr>
+<tr>
+<td>Alias equivalence</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">Required</td>
+<td style="text-align:right">No aliases in v1</td>
+</tr>
+<tr>
+<td>Density acceptance</td>
+<td style="text-align:right">Representative</td>
+<td style="text-align:right">Representative</td>
+<td style="text-align:right">Representative</td>
+</tr>
+<tr>
+<td>Density rejection</td>
+<td style="text-align:right">Representative</td>
+<td style="text-align:right">Representative</td>
+<td style="text-align:right">Representative</td>
+</tr>
+</tbody>
+</table></div>
+<p>Coverage is feature-based. A single comparison scene may satisfy several presentation goals, but focused fixtures remain responsible for independent correctness evidence.</p>
+<h3 id="source-8-cylinder-tutorial-inventory">8. Cylinder Tutorial Inventory</h3><p class="section-guide">Reading guide: this source section records “8. Cylinder Tutorial Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create fourteen Cylinder tutorial files.</p>
+<h4 id="source-c01-01-full-cylinder-p3d">C01 <code>01_full_cylinder.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C01 01_full_cylinder.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(Cylinder material(plaster))
+</code></pre>
+<p>Gate:</p>
+<ul>
+<li>backwards-compatible bare form;</li>
+<li>normalized radius <code>0.5</code> and local-Y interval <code>0..1</code>;</li>
+<li>closed solid;</li>
+<li>analytic volume evidence.</li>
+</ul>
+<h4 id="source-c02-02-elliptical-cylinder-p3d">C02 <code>02_elliptical_cylinder.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C02 02_elliptical_cylinder.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate nonuniform <code>S(...)</code> creating an elliptical cylinder without changing the local descriptor.</p>
+<p>Gate:</p>
+<ul>
+<li>correct transformed bounds;</li>
+<li>inverse-transpose normal handling;</li>
+<li>transformed volume determinant.</li>
+</ul>
+<h4 id="source-c03-03-axial-interval-p3d">C03 <code>03_axial_interval.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C03 03_axial_interval.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate <code>axial(min max)</code> as a normalized local-Y domain restriction, not external height control.</p>
+<h4 id="source-c04-04-open-surface-p3d">C04 <code>04_open_surface.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C04 04_open_surface.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">topology(surface)
+close(none)
+</code></pre>
+<p>Gate:</p>
+<ul>
+<li>expected boundary edges;</li>
+<li>no enclosed-volume claim;</li>
+<li>density rejection fixture exists separately.</li>
+</ul>
+<h4 id="source-c05-05-radial-shell-p3d">C05 <code>05_radial_shell.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C05 05_radial_shell.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a closed tube through:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">radial(inner outer)
+topology(shell)
+close(all)
+</code></pre>
+<h4 id="source-c06-06-wall-thickness-p3d">C06 <code>06_wall_thickness.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C06 06_wall_thickness.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare <code>wall(0.25)</code> with <code>radial(0.75 1)</code> and explain normalized wall semantics.</p>
+<h4 id="source-c07-07-angular-sector-p3d">C07 <code>07_angular_sector.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C07 07_angular_sector.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a closed solid sector with a sweep not greater than 180 degrees.</p>
+<h4 id="source-c08-08-reflex-sector-p3d">C08 <code>08_reflex_sector.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C08 08_reflex_sector.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a closed sector greater than 180 degrees and explain why visual closure does not imply convex dynamic collision support.</p>
+<h4 id="source-c09-09-tube-sector-p3d">C09 <code>09_tube_sector.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C09 09_tube_sector.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Combine shell and azimuth restriction. Expose outer, inner, axial, angular, and rim boundaries.</p>
+<h4 id="source-c10-10-half-cylinder-p3d">C10 <code>10_half_cylinder.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C10 10_half_cylinder.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Show the canonical centre chord first, then the <code>HalfCylinder</code> alias.</p>
+<h4 id="source-c11-11-d-section-p3d">C11 <code>11_d_section.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C11 11_d_section.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate an offset chord and compare positive and negative retained sides.</p>
+<h4 id="source-c12-12-oblique-plane-clip-p3d">C12 <code>12_oblique_plane_clip.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C12 12_oblique_plane_clip.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a non-axial 3D plane clip and its generated closure face.</p>
+<h4 id="source-c13-13-multiple-clips-p3d">C13 <code>13_multiple_clips.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C13 13_multiple_clips.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate deterministic ordered intersection of more than one half-space.</p>
+<h4 id="source-c14-14-mapping-and-segments-p3d">C14 <code>14_mapping_and_segments.p3d</code></h4><p class="section-guide">Reading guide: this source section records “C14 14_mapping_and_segments.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place low, default, and high tessellation variants beside cylindrical and triplanar mappings.</p>
+<p>The comments must explain that segment count controls approximation density, not semantic dimensions.</p>
+<h3 id="source-9-sphere-tutorial-inventory">9. Sphere Tutorial Inventory</h3><p class="section-guide">Reading guide: this source section records “9. Sphere Tutorial Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create sixteen Sphere tutorial files.</p>
+<h4 id="source-s01-01-full-sphere-p3d">S01 <code>01_full_sphere.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S01 01_full_sphere.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate the bare backwards-compatible form and analytic full-sphere volume.</p>
+<h4 id="source-s02-02-ellipsoid-p3d">S02 <code>02_ellipsoid.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S02 02_ellipsoid.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate nonuniform scaling of the normalized sphere.</p>
+<h4 id="source-s03-03-surface-sphere-p3d">S03 <code>03_surface_sphere.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S03 03_surface_sphere.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a zero-thickness mathematical skin and undefined density volume.</p>
+<h4 id="source-s04-04-radial-shell-p3d">S04 <code>04_radial_shell.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S04 04_radial_shell.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a closed spherical shell using <code>radial(inner outer)</code>.</p>
+<h4 id="source-s05-05-wall-thickness-p3d">S05 <code>05_wall_thickness.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S05 05_wall_thickness.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare <code>wall(thickness)</code> with its radial interval equivalent.</p>
+<h4 id="source-s06-06-polar-sector-p3d">S06 <code>06_polar_sector.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S06 06_polar_sector.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a solid polar restriction with center-directed radial boundaries.</p>
+<h4 id="source-s07-07-spherical-zone-surface-p3d">S07 <code>07_spherical_zone_surface.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S07 07_spherical_zone_surface.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a surface-only latitude zone.</p>
+<h4 id="source-s08-08-azimuth-wedge-p3d">S08 <code>08_azimuth_wedge.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S08 08_azimuth_wedge.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a restricted azimuth solid with angular closure.</p>
+<h4 id="source-s09-09-spherical-patch-p3d">S09 <code>09_spherical_patch.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S09 09_spherical_patch.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Combine polar and azimuth restrictions in a surface-only patch.</p>
+<h4 id="source-s10-10-hemisphere-p3d">S10 <code>10_hemisphere.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S10 10_hemisphere.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Show the canonical center-plane clip and the <code>Hemisphere</code> alias.</p>
+<h4 id="source-s11-11-sphere-caps-p3d">S11 <code>11_sphere_caps.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S11 11_sphere_caps.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare positive and negative sides at positive, zero, and negative offsets.</p>
+<h4 id="source-s12-12-polar-vs-plane-cap-p3d">S12 <code>12_polar_vs_plane_cap.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S12 12_polar_vs_plane_cap.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place a polar restriction beside a visually similar plane-cut cap.</p>
+<p>This is a required semantic comparison because their internal boundaries and volume differ.</p>
+<h4 id="source-s13-13-spherical-segment-p3d">S13 <code>13_spherical_segment.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S13 13_spherical_segment.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate <code>slab(...)</code> as two ordered parallel clips.</p>
+<h4 id="source-s14-14-quarter-and-octant-p3d">S14 <code>14_quarter_and_octant.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S14 14_quarter_and_octant.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Show canonical multi-clip forms beside <code>SphereQuarter</code> and <code>SphereOctant</code> aliases.</p>
+<h4 id="source-s15-15-open-and-closed-bowls-p3d">S15 <code>15_open_and_closed_bowls.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S15 15_open_and_closed_bowls.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">open shell bowl
+clip-closed shell
+clip-and-rim-closed shell
+</code></pre>
+<p>The example must label material closure rather than relying on visual appearance alone.</p>
+<h4 id="source-s16-16-mapping-and-segments-p3d">S16 <code>16_mapping_and_segments.p3d</code></h4><p class="section-guide">Reading guide: this source section records “S16 16_mapping_and_segments.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare low, default, and high segment counts with spherical and triplanar mapping.</p>
+<h3 id="source-10-axialprofile-tutorial-inventory">10. AxialProfile Tutorial Inventory</h3><p class="section-guide">Reading guide: this source section records “10. AxialProfile Tutorial Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create thirteen AxialProfile tutorial files.</p>
+<h4 id="source-a01-01-rectangle-extrusion-p3d">A01 <code>01_rectangle_extrusion.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A01 01_rectangle_extrusion.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Teach <code>axis</code>, <code>profile</code>, <code>at</code>, <code>hold</code>, and <code>cap(all)</code> with one rectangle.</p>
+<h4 id="source-a02-02-triangle-extrusion-p3d">A02 <code>02_triangle_extrusion.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A02 02_triangle_extrusion.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate the minimum valid profile vertex count.</p>
+<h4 id="source-a03-03-concave-profile-p3d">A03 <code>03_concave_profile.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A03 03_concave_profile.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate deterministic ear-clipped caps on one simple concave polygon.</p>
+<p>The polygon must remain non-self-intersecting and avoid nearly collinear edges.</p>
+<h4 id="source-a04-04-linear-taper-p3d">A04 <code>04_linear_taper.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A04 04_linear_taper.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate two profiles with preserved semantic vertex correspondence.</p>
+<h4 id="source-a05-05-multistage-loft-p3d">A05 <code>05_multistage_loft.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A05 05_multistage_loft.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use several explicit linear states to show a piecewise ruled surface.</p>
+<h4 id="source-a06-06-inward-step-p3d">A06 <code>06_inward_step.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A06 06_inward_step.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a strictly contained smaller replacement profile.</p>
+<h4 id="source-a07-07-outward-step-p3d">A07 <code>07_outward_step.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A07 07_outward_step.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate a strictly containing larger replacement profile.</p>
+<h4 id="source-a08-08-multistep-pedestal-p3d">A08 <code>08_multistep_pedestal.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A08 08_multistep_pedestal.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Combine inward and outward contained steps without crossing contours.</p>
+<h4 id="source-a09-09-center-drift-p3d">A09 <code>09_center_drift.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A09 09_center_drift.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate successive section-center offsets.</p>
+<h4 id="source-a10-10-scale-drift-p3d">A10 <code>10_scale_drift.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A10 10_scale_drift.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate nonzero, orientation-preserving per-section scaling.</p>
+<h4 id="source-a11-11-rotated-tower-p3d">A11 <code>11_rotated_tower.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A11 11_rotated_tower.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use multiple explicit rings with progressive rotation:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">at(0 Square rotate(0))
+linear(1 Square rotate(10))
+linear(2 Square rotate(20))
+linear(3 Square rotate(30))
+linear(4 Square rotate(40))
+</code></pre>
+<p>The comments must state that v1 does not provide implicit smooth interpolation.</p>
+<h4 id="source-a12-12-combined-section-transforms-p3d">A12 <code>12_combined_section_transforms.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A12 12_combined_section_transforms.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Combine center, scale, and rotation on an asymmetric profile.</p>
+<h4 id="source-a13-13-cap-policies-p3d">A13 <code>13_cap_policies.p3d</code></h4><p class="section-guide">Reading guide: this source section records “A13 13_cap_policies.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place <code>cap(all)</code>, <code>cap(bottom)</code>, <code>cap(top)</code>, and <code>cap(none)</code> variants side by side.</p>
+<h3 id="source-11-cross-family-comparison-inventory">11. Cross-Family Comparison Inventory</h3><p class="section-guide">Reading guide: this source section records “11. Cross-Family Comparison Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create seven comparison scenes.</p>
+<h4 id="source-x01-01-normalized-scaling-p3d">X01 <code>01_normalized_scaling.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X01 01_normalized_scaling.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cylinder + nonuniform S
+Sphere + nonuniform S
+AxialProfile + nonuniform S
+</code></pre>
+<p>Explain descriptor-owned topology versus scope-owned external dimensions.</p>
+<h4 id="source-x02-02-surface-solid-shell-p3d">X02 <code>02_surface_solid_shell.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X02 02_surface_solid_shell.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare Cylinder and Sphere surface, solid, and shell forms. Explicitly state that hollow AxialProfile is post-v1.</p>
+<h4 id="source-x03-03-closure-anatomy-p3d">X03 <code>03_closure_anatomy.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X03 03_closure_anatomy.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Expose axial caps, angular faces, clip faces, shell rims, AxialProfile caps, and AxialProfile step ledges.</p>
+<h4 id="source-x04-04-domain-vs-clip-p3d">X04 <code>04_domain_vs_clip.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X04 04_domain_vs_clip.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare:</p>
+<ul>
+<li>Cylinder sector versus chord segment;</li>
+<li>Sphere polar restriction versus plane-cut cap.</li>
+</ul>
+<h4 id="source-x05-05-wall-vs-radial-p3d">X05 <code>05_wall_vs_radial.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X05 05_wall_vs_radial.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Demonstrate equivalent Cylinder and Sphere shell specifications.</p>
+<h4 id="source-x06-06-alias-equivalence-p3d">X06 <code>06_alias_equivalence.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X06 06_alias_equivalence.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place each readable alias beside its canonical descriptor:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Tube
+CylinderSector
+DSection
+HalfCylinder
+Hemisphere
+SphereCap
+SphereBowl
+SphereQuarter
+SphereOctant
+</code></pre>
+<p>Automated tests, not visual similarity, remain the equivalence authority.</p>
+<h4 id="source-x07-07-tessellation-levels-p3d">X07 <code>07_tessellation_levels.p3d</code></h4><p class="section-guide">Reading guide: this source section records “X07 07_tessellation_levels.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compare low, default, and high tessellation across Cylinder and Sphere while showing AxialProfile authored profile density.</p>
+<h3 id="source-12-temporal-example-inventory">12. Temporal Example Inventory</h3><p class="section-guide">Reading guide: this source section records “12. Temporal Example Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create six temporal files.</p>
+<h4 id="source-t01-01-cylinder-sweep-p3d">T01 <code>01_cylinder_sweep.p3d</code></h4><p class="section-guide">Reading guide: this source section records “T01 01_cylinder_sweep.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Animate azimuth sweep while preserving closure.</p>
+<h4 id="source-t02-02-cylinder-clip-p3d">T02 <code>02_cylinder_clip.p3d</code></h4><p class="section-guide">Reading guide: this source section records “T02 02_cylinder_clip.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Animate chord or plane-clip offset through a bounded valid range.</p>
+<h4 id="source-t03-03-sphere-cap-p3d">T03 <code>03_sphere_cap.p3d</code></h4><p class="section-guide">Reading guide: this source section records “T03 03_sphere_cap.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Animate plane-cut cap offset without crossing tangent-invalid states.</p>
+<h4 id="source-t04-04-sphere-wedge-p3d">T04 <code>04_sphere_wedge.p3d</code></h4><p class="section-guide">Reading guide: this source section records “T04 04_sphere_wedge.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Animate azimuth or polar domain in a bounded interval.</p>
+<h4 id="source-t05-05-axial-profile-center-p3d">T05 <code>05_axial_profile_center.p3d</code></h4><p class="section-guide">Reading guide: this source section records “T05 05_axial_profile_center.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Animate one target section's center offset.</p>
+<h4 id="source-t06-06-axial-profile-rotation-p3d">T06 <code>06_axial_profile_rotation.p3d</code></h4><p class="section-guide">Reading guide: this source section records “T06 06_axial_profile_rotation.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Animate a target rotation or scale while retaining the same profile topology.</p>
+<p>Temporal gates sample at least:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">t = 0
+t = 0.5
+t = 1
+t = 2
+</code></pre>
+<p>The design nonce remains unchanged between samples. Geometry changes only through explicit evaluated expressions.</p>
+<h3 id="source-13-gallery-inventory">13. Gallery Inventory</h3><p class="section-guide">Reading guide: this source section records “13. Gallery Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create six polished but deterministic gallery scenes.</p>
+<h4 id="source-g01-01-observatory-p3d">G01 <code>01_observatory.p3d</code></h4><p class="section-guide">Reading guide: this source section records “G01 01_observatory.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use:</p>
+<ul>
+<li>AxialProfile base and tower;</li>
+<li>Hemisphere or SphereCap dome;</li>
+<li>Cylinder-sector shutters or supports.</li>
+</ul>
+<h4 id="source-g02-02-rocket-engine-p3d">G02 <code>02_rocket_engine.p3d</code></h4><p class="section-guide">Reading guide: this source section records “G02 02_rocket_engine.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use:</p>
+<ul>
+<li>AxialProfile nozzle or staged body;</li>
+<li>tube walls;</li>
+<li>clipped cylindrical mounting surfaces.</li>
+</ul>
+<h4 id="source-g03-03-architectural-tower-p3d">G03 <code>03_architectural_tower.p3d</code></h4><p class="section-guide">Reading guide: this source section records “G03 03_architectural_tower.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use a multistage AxialProfile shaft, contained ledges, asymmetric crown, and spherical roof form.</p>
+<h4 id="source-g04-04-industrial-valve-p3d">G04 <code>04_industrial_valve.p3d</code></h4><p class="section-guide">Reading guide: this source section records “G04 04_industrial_valve.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use tubes, D-sections, sphere segments, and an AxialProfile body.</p>
+<h4 id="source-g05-05-planetary-station-p3d">G05 <code>05_planetary_station.p3d</code></h4><p class="section-guide">Reading guide: this source section records “G05 05_planetary_station.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use spherical shells, bowls, cylinder sectors, and axial towers.</p>
+<h4 id="source-g06-06-procedural-chess-set-p3d">G06 <code>06_procedural_chess_set.p3d</code></h4><p class="section-guide">Reading guide: this source section records “G06 06_procedural_chess_set.p3d”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use AxialProfile for turned-like silhouettes, Cylinder for bases, and Sphere for rounded heads.</p>
+<p>Gallery rules:</p>
+<ul>
+<li>no undocumented grammar;</li>
+<li>no imported STL dependency;</li>
+<li>deterministic by default;</li>
+<li>readable rule decomposition;</li>
+<li>ordinary primitive and geometry budgets;</li>
+<li>one scene must remain suitable as the supervised startup showcase.</li>
+</ul>
+<h3 id="source-14-negative-fixture-inventory">14. Negative Fixture Inventory</h3><p class="section-guide">Reading guide: this source section records “14. Negative Fixture Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Negative fixtures are required evidence, not public examples.</p>
+<h4 id="source-14-1-cylinder-invalid-cases">14.1 Cylinder Invalid Cases</h4><p class="section-guide">Reading guide: this source section records “14.1 Cylinder Invalid Cases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create fixtures for:</p>
+<ul>
+<li>inner radius with <code>topology(solid)</code>;</li>
+<li>shell with zero inner radius;</li>
+<li>reversed radial interval;</li>
+<li>zero outer radius;</li>
+<li>zero or invalid axial interval;</li>
+<li>zero or invalid azimuth sweep;</li>
+<li>tangent or outside chord degeneracy where unsupported;</li>
+<li>invalid clip normal;</li>
+<li>invalid segment count;</li>
+<li>density requested on open geometry.</li>
+</ul>
+<h4 id="source-14-2-sphere-invalid-cases">14.2 Sphere Invalid Cases</h4><p class="section-guide">Reading guide: this source section records “14.2 Sphere Invalid Cases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create fixtures for:</p>
+<ul>
+<li>solid topology with positive inner radius;</li>
+<li>shell with zero inner radius;</li>
+<li>reversed polar interval;</li>
+<li>invalid azimuth sweep;</li>
+<li>zero clip normal;</li>
+<li>contradictory or empty clips;</li>
+<li>tangent degeneration where unsupported;</li>
+<li>invalid slab ordering;</li>
+<li>invalid segment count;</li>
+<li>density requested on open geometry.</li>
+</ul>
+<h4 id="source-14-3-axialprofile-invalid-cases">14.3 AxialProfile Invalid Cases</h4><p class="section-guide">Reading guide: this source section records “14.3 AxialProfile Invalid Cases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create fixtures for:</p>
+<ul>
+<li>fewer than three vertices;</li>
+<li>duplicate or zero-length edges;</li>
+<li>collinear profile triples;</li>
+<li>zero signed area;</li>
+<li>self-intersection;</li>
+<li>duplicate profile names;</li>
+<li>undefined profile reference;</li>
+<li>mismatched profile vertex counts;</li>
+<li>missing initial <code>at</code>;</li>
+<li>non-increasing non-step levels;</li>
+<li>crossing step contours;</li>
+<li>touching step contours;</li>
+<li>coincident step contours;</li>
+<li>disjoint step contours;</li>
+<li>zero scale;</li>
+<li>orientation-reversing scale;</li>
+<li>non-finite expression evaluation;</li>
+<li>resource ceiling violations.</li>
+</ul>
+<p class="source-status--failed">Each negative fixture must assert a stable diagnostic category or meaningful message fragment. It is not sufficient to assert only that generation failed.</p>
+<h3 id="source-15-example-documentation">15. Example Documentation</h3><p class="section-guide">Reading guide: this source section records “15. Example Documentation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create <code>examples/procedural_primitives/README.md</code> containing:</p>
+<ol>
+<li>the recommended learning sequence;</li>
+<li>a table generated or validated against <code>catalog.json</code>;</li>
+<li>commands for opening examples;</li>
+<li>explanations of normalized geometry;</li>
+<li>links to <code>docs/CURVED_PRIMITIVES.md</code> and <code>docs/axial_profile_v1.md</code>;</li>
+<li>the distinction between public examples and test fixtures;</li>
+<li>temporal sampling guidance;</li>
+<li>limitations of AxialProfilev1;</li>
+<li>instructions for contributing a new example.</li>
+</ol>
+<p>Example launch command:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui \
+    --open examples/procedural_primitives/cylinder/07_angular_sector.p3d
+</code></pre>
+<p>Update <code>BUILDING.md</code> with:</p>
+<ul>
+<li>the new example index path;</li>
+<li>commands for the catalog and example suites;</li>
+<li>one representative GUI smoke command;</li>
+<li>the authoritative release gate.</li>
+</ul>
+<h3 id="source-16-automated-validation-architecture">16. Automated Validation Architecture</h3><p class="section-guide">Reading guide: this source section records “16. Automated Validation Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-16-1-catalog-validator">16.1 Catalog Validator</h4><p class="section-guide">Reading guide: this source section records “16.1 Catalog Validator”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/validate_procedural_example_catalog.py
+</code></pre>
+<p>Responsibilities:</p>
+<ul>
+<li>parse the bounded JSON schema;</li>
+<li>reject duplicate IDs and paths;</li>
+<li>reject missing files;</li>
+<li>reject unlisted public examples;</li>
+<li>enforce category, family, difficulty, determinism, and temporal enums;</li>
+<li>build a feature-coverage report;</li>
+<li>require every canonical option and public alias to be covered;</li>
+<li>ensure invalid fixtures are outside the public catalog;</li>
+<li>validate the required comment header fields.</li>
+</ul>
+<p>Output a deterministic summary such as:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cylinder tutorials: 14
+Sphere tutorials: 16
+AxialProfile tutorials: 13
+Comparisons: 7
+Temporal examples: 6
+Gallery examples: 6
+Canonical option coverage: complete
+Alias coverage: complete
+</code></pre>
+<h4 id="source-16-2-grammar-to-scene-harness">16.2 Grammar-to-Scene Harness</h4><p class="section-guide">Reading guide: this source section records “16.2 Grammar-to-Scene Harness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/procedural_example_scene_harness.cpp
+tests/run_procedural_example_scene_checks.sh
+</code></pre>
+<p>For every public example:</p>
+<ol>
+<li>load source from the catalog path;</li>
+<li>parse and validate grammar;</li>
+<li>generate the scene with a fixed design nonce;</li>
+<li>require zero diagnostics;</li>
+<li>require at least the catalog minimum instance count;</li>
+<li>require finite scene bounds;</li>
+<li>resolve every procedural mesh;</li>
+<li>require nonempty generated geometry;</li>
+<li>require preview/export triangle agreement;</li>
+<li>rerun and require deterministic shape and topology hashes.</li>
+</ol>
+<p>The harness should report the failing catalog ID, path, family, and stage.</p>
+<h4 id="source-16-3-representative-geometry-evidence">16.3 Representative Geometry Evidence</h4><p class="section-guide">Reading guide: this source section records “16.3 Representative Geometry Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Do not hard-code exact topology hashes for every public teaching file. That would make harmless presentation edits unnecessarily expensive.</p>
+<p>Maintain exact evidence for representative fixtures:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Family</th>
+<th scope="col">Required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cylinder</td>
+<td>full volume, tube volume, sector volume, chord topology, open-boundary behavior</td>
+</tr>
+<tr>
+<td>Sphere</td>
+<td>full volume, shell volume, hemisphere volume, cap/slab topology, open bowl boundary behavior</td>
+</tr>
+<tr>
+<td>AxialProfile</td>
+<td>extrusion volume, frustum volume, inward/outward step volume, cap policy, deterministic triangulation</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-16-4-alias-equivalence-harness">16.4 Alias Equivalence Harness</h4><p class="section-guide">Reading guide: this source section records “16.4 Alias Equivalence Harness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For every public alias:</p>
+<ol>
+<li>parse alias syntax;</li>
+<li>parse its canonical descriptor;</li>
+<li>evaluate both in the same lexical environment;</li>
+<li>compare canonical shape keys;</li>
+<li>compare mesh topology hashes;</li>
+<li>compare bounds and volume evidence.</li>
+</ol>
+<h4 id="source-16-5-temporal-harness">16.5 Temporal Harness</h4><p class="section-guide">Reading guide: this source section records “16.5 Temporal Harness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For each temporal catalog entry:</p>
+<ul>
+<li>evaluate the required sample times;</li>
+<li>preserve the design nonce;</li>
+<li>require finite evaluated values;</li>
+<li>require valid shape specifications;</li>
+<li>require geometry within budgets;</li>
+<li>require no unexpected diagnostic;</li>
+<li>verify the intended descriptor component changes;</li>
+<li>verify unrelated instance appearance and source association remain stable.</li>
+</ul>
+<h4 id="source-16-6-gui-smoke-selection">16.6 GUI Smoke Selection</h4><p class="section-guide">Reading guide: this source section records “16.6 GUI Smoke Selection”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Running every example under a separate GUI process would be expensive and redundant.</p>
+<p>Select representative GUI smoke documents:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cylinder/13_multiple_clips.p3d
+sphere/15_open_and_closed_bowls.p3d
+axial_profile/12_combined_section_transforms.p3d
+comparisons/06_alias_equivalence.p3d
+temporal/06_axial_profile_rotation.p3d
+gallery/03_architectural_tower.p3d
+</code></pre>
+<p>Each GUI smoke must verify:</p>
+<ul>
+<li>startup document load;</li>
+<li>initial scene generation;</li>
+<li class="source-status--passed">one complete rendered preview frame;</li>
+<li>FOV smoke values;</li>
+<li>clean shutdown;</li>
+<li>temporal sample publication where applicable.</li>
+</ul>
+<h3 id="source-17-test-scripts">17. Test Scripts</h3><p class="section-guide">Reading guide: this source section records “17. Test Scripts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/run_procedural_example_catalog_checks.sh
+tests/run_procedural_example_scene_checks.sh
+tests/run_procedural_example_alias_checks.sh
+tests/run_procedural_example_temporal_checks.sh
+tests/run_procedural_example_gui_checks.sh
+tests/run_procedural_example_checks.sh
+</code></pre>
+<p class="source-status--passed"><code>run_procedural_example_checks.sh</code> runs the complete focused set.</p>
+<p>Wire it into:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/run_editor_architecture_checks.sh
+tests/run_release_checks.sh
+</code></pre>
+<p>CI order:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">catalog schema
+source/header rules
+grammar-to-scene execution
+representative geometry evidence
+alias equivalence
+temporal sampling
+selected GUI smoke
+diff check
+</code></pre>
+<h3 id="source-18-optional-p1-editor-integration">18. Optional P1 Editor Integration</h3><p class="section-guide">Reading guide: this source section records “18. Optional P1 Editor Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>After the file library and automated gates are stable, add an editor example browser.</p>
+<p>Recommended object model:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ProceduralExampleCatalog
+    aggregates ProceduralExampleDefinition
+
+ProceduralExampleCatalogReader
+    reads the bounded catalog schema
+
+ProceduralExampleSelection
+    identifies the chosen example
+
+ExampleLibraryPanel
+    presents family, category, difficulty, and feature filters
+
+DocumentPersistenceService
+    remains responsible for reading the selected source
+</code></pre>
+<p>User actions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">browse by family
+filter by feature
+preview description
+open as a new document
+locate source file
+</code></pre>
+<p>Opening an example must never overwrite a dirty document without the existing explicit document workflow.</p>
+<p>Optional thumbnails must be generated from the actual renderer and carry source and binary hashes. They are navigation aids, not correctness evidence.</p>
+<h3 id="source-19-file-level-implementation-sequence">19. File-Level Implementation Sequence</h3><p class="section-guide">Reading guide: this source section records “19. File-Level Implementation Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-new-public-content">New Public Content</h4><p class="section-guide">Reading guide: this source section records “New Public Content”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/procedural_primitives/README.md
+examples/procedural_primitives/catalog.json
+examples/procedural_primitives/cylinder/*.p3d
+examples/procedural_primitives/sphere/*.p3d
+examples/procedural_primitives/axial_profile/*.p3d
+examples/procedural_primitives/comparisons/*.p3d
+examples/procedural_primitives/temporal/*.p3d
+examples/procedural_primitives/gallery/*.p3d
+</code></pre>
+<h4 id="source-new-test-content">New Test Content</h4><p class="section-guide">Reading guide: this source section records “New Test Content”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/fixtures/procedural_primitives/valid/**
+tests/fixtures/procedural_primitives/invalid/**
+tests/validate_procedural_example_catalog.py
+tests/procedural_example_scene_harness.cpp
+tests/procedural_example_alias_harness.cpp
+tests/procedural_example_temporal_harness.cpp
+tests/run_procedural_example_catalog_checks.sh
+tests/run_procedural_example_scene_checks.sh
+tests/run_procedural_example_alias_checks.sh
+tests/run_procedural_example_temporal_checks.sh
+tests/run_procedural_example_gui_checks.sh
+tests/run_procedural_example_checks.sh
+</code></pre>
+<h4 id="source-modified-files">Modified Files</h4><p class="section-guide">Reading guide: this source section records “Modified Files”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BUILDING.md
+tests/README.md
+tests/run_editor_architecture_checks.sh
+tests/run_release_checks.sh
+</code></pre>
+<p>Optional P1 editor work adds:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/editor/model/ProceduralExampleDefinition.h
+include/editor/model/ProceduralExampleCatalog.h
+include/editor/model/ProceduralExampleSelection.h
+include/editor/service/ProceduralExampleCatalogReader.h
+include/editor/presentation/ExampleLibraryPanel.h
+
+src/editor/service/ProceduralExampleCatalogReader.cpp
+src/editor/presentation/ExampleLibraryPanel.cpp
+</code></pre>
+<h3 id="source-20-milestones">20. Milestones</h3><p class="section-guide">Reading guide: this source section records “20. Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-milestone-0-freeze-coverage-contract">Milestone 0: Freeze Coverage Contract</h4><p class="section-guide">Reading guide: this source section records “Milestone 0: Freeze Coverage Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>final catalog schema;</li>
+<li>feature-tag vocabulary;</li>
+<li>tutorial/comparison/temporal/gallery definitions;</li>
+<li>required canonical option and alias coverage matrix;</li>
+<li>positive versus negative file boundary.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li class="source-status--proposed">every currently documented option and alias maps to at least one planned example;</li>
+<li>no unsupported post-v1 capability is represented as available.</li>
+</ul>
+<h4 id="source-milestone-1-catalog-and-harness-skeleton">Milestone 1: Catalog and Harness Skeleton</h4><p class="section-guide">Reading guide: this source section records “Milestone 1: Catalog and Harness Skeleton”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>directory hierarchy;</li>
+<li>catalog validator;</li>
+<li>grammar-to-scene harness;</li>
+<li>focused aggregate test script;</li>
+<li>README skeleton.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li class="source-status--passed">existing top-level showcases can be cataloged and pass through the new harness;</li>
+<li class="source-status--failed">empty or duplicate catalog cases fail deterministically.</li>
+</ul>
+<h4 id="source-milestone-2-cylinder-curriculum">Milestone 2: Cylinder Curriculum</h4><p class="section-guide">Reading guide: this source section records “Milestone 2: Cylinder Curriculum”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver all fourteen Cylinder tutorial files and corresponding valid/invalid fixtures.</p>
+<p>Gate:</p>
+<ul>
+<li class="source-status--passed">complete Cylinder option coverage;</li>
+<li>Tube, CylinderSector, DSection, and HalfCylinder canonical equivalence;</li>
+<li>representative analytic volume and topology evidence;</li>
+<li>public Cylinder examples produce zero diagnostics.</li>
+</ul>
+<h4 id="source-milestone-3-sphere-curriculum">Milestone 3: Sphere Curriculum</h4><p class="section-guide">Reading guide: this source section records “Milestone 3: Sphere Curriculum”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver all sixteen Sphere tutorial files and corresponding valid/invalid fixtures.</p>
+<p>Gate:</p>
+<ul>
+<li class="source-status--passed">complete Sphere option coverage;</li>
+<li>Hemisphere, SphereCap, SphereBowl, SphereQuarter, and SphereOctant equivalence;</li>
+<li>polar-versus-clip comparison exists;</li>
+<li>representative volume, topology, and open-boundary evidence passes.</li>
+</ul>
+<h4 id="source-milestone-4-axialprofile-curriculum">Milestone 4: AxialProfile Curriculum</h4><p class="section-guide">Reading guide: this source section records “Milestone 4: AxialProfile Curriculum”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver all thirteen AxialProfile tutorial files and corresponding invalid fixtures.</p>
+<p>Gate:</p>
+<ul>
+<li class="source-status--passed">extrusion, concave cap, taper, multistage loft, inward step, outward step, center, scale, rotation, and cap policies pass;</li>
+<li>public examples respect v1 equal-vertex correspondence and strict step containment;</li>
+<li>no example implies smooth interpolation or hollow-profile support.</li>
+</ul>
+<h4 id="source-milestone-5-comparison-and-temporal-sets">Milestone 5: Comparison and Temporal Sets</h4><p class="section-guide">Reading guide: this source section records “Milestone 5: Comparison and Temporal Sets”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver seven comparison and six temporal files.</p>
+<p>Gate:</p>
+<ul>
+<li>semantic distinctions are visible and documented;</li>
+<li class="source-status--passed">all required temporal samples pass with the same design nonce;</li>
+<li>aliases compare exactly with canonical descriptors.</li>
+</ul>
+<h4 id="source-milestone-6-gallery-set">Milestone 6: Gallery Set</h4><p class="section-guide">Reading guide: this source section records “Milestone 6: Gallery Set”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver six deterministic gallery scenes.</p>
+<p>Gate:</p>
+<ul>
+<li>every gallery opens with zero diagnostics;</li>
+<li>scenes remain below ordinary budgets;</li>
+<li>at least one gallery uses all three canonical families;</li>
+<li>one gallery passes supervised runtime observation.</li>
+</ul>
+<h4 id="source-milestone-7-diagnostic-completion">Milestone 7: Diagnostic Completion</h4><p class="section-guide">Reading guide: this source section records “Milestone 7: Diagnostic Completion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Deliver the complete invalid fixture matrix and diagnostic assertions.</p>
+<p>Gate:</p>
+<ul>
+<li>every locked semantic invariant has at least one failing fixture;</li>
+<li class="source-status--failed">failure atomicity preserves the last valid scene;</li>
+<li>diagnostics name the relevant family and option or statement.</li>
+</ul>
+<h4 id="source-milestone-8-documentation-and-release">Milestone 8: Documentation and Release</h4><p class="section-guide">Reading guide: this source section records “Milestone 8: Documentation and Release”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li class="source-status--passed">complete example index;</li>
+<li>contribution instructions;</li>
+<li>BUILDING and test documentation;</li>
+<li>release integration;</li>
+<li>final catalog coverage report.</li>
+</ul>
+<p>Run:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_procedural_example_checks.sh
+./tests/run_editor_architecture_checks.sh
+./tests/run_release_checks.sh
+git diff --check
+</code></pre>
+<p class="source-status--passed">Only after a clean pass:</p>
+<ol>
+<li>record the exact example catalog SHA-256;</li>
+<li>record the representative gallery SHA-256;</li>
+<li>record the validated editor binary SHA-256 if application code changed;</li>
+<li>restart <code>progen3d-editor-gui.service</code> with the representative gallery;</li>
+<li>verify <code>ActiveState=active</code> and <code>SubState=running</code>;</li>
+<li>verify <code>NRestarts=0</code> after observation;</li>
+<li>inspect recent logs for grammar or geometry errors.</li>
+</ol>
+<h3 id="source-21-acceptance-gates">21. Acceptance Gates</h3><p class="section-guide">Reading guide: this source section records “21. Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-21-1-catalog">21.1 Catalog</h4><p class="section-guide">Reading guide: this source section records “21.1 Catalog”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>every public example is cataloged exactly once;</li>
+<li>every catalog path exists;</li>
+<li>IDs and paths are unique;</li>
+<li>every canonical family has beginner, intermediate, and advanced entries;</li>
+<li>every canonical option is feature-covered;</li>
+<li>every public alias is represented;</li>
+<li>catalog validation is deterministic.</li>
+</ul>
+<h4 id="source-21-2-public-examples">21.2 Public Examples</h4><p class="section-guide">Reading guide: this source section records “21.2 Public Examples”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>zero grammar diagnostics;</li>
+<li>zero runtime geometry diagnostics;</li>
+<li>at least one generated procedural instance;</li>
+<li>finite bounds;</li>
+<li>nonempty mesh geometry;</li>
+<li>deterministic evaluated shape keys at fixed inputs;</li>
+<li>deterministic topology hashes at fixed inputs;</li>
+<li>preview/export geometry agreement;</li>
+<li>valid temporal behavior for temporal entries.</li>
+</ul>
+<h4 id="source-21-3-geometry-evidence">21.3 Geometry Evidence</h4><p class="section-guide">Reading guide: this source section records “21.3 Geometry Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">closed examples claimed as watertight pass topology analysis;</li>
+<li>open examples retain only expected boundary categories;</li>
+<li>representative analytic volumes match within existing tolerances;</li>
+<li>no degenerate triangles;</li>
+<li>no unexpected nonmanifold edges;</li>
+<li>aliases resolve to the same canonical geometry as their expansions.</li>
+</ul>
+<h4 id="source-21-4-documentation">21.4 Documentation</h4><p class="section-guide">Reading guide: this source section records “21.4 Documentation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>every example has the required header;</li>
+<li>the README learning order matches the catalog;</li>
+<li>limitations are explicit;</li>
+<li>public examples do not contain expected failures;</li>
+<li>test fixtures are not presented as gallery content;</li>
+<li>no screenshot or thumbnail is treated as correctness authority.</li>
+</ul>
+<h4 id="source-21-5-compatibility">21.5 Compatibility</h4><p class="section-guide">Reading guide: this source section records “21.5 Compatibility”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>existing top-level showcase paths still open;</li>
+<li>current Cylinder and Sphere grammar remains unchanged;</li>
+<li>current AxialProfile grammar remains unchanged;</li>
+<li>existing materials, alpha, texture scale, transforms, and temporal functions remain unchanged;</li>
+<li class="source-status--passed">all inherited release tests continue to pass.</li>
+</ul>
+<h3 id="source-22-definition-of-complete">22. Definition of Complete</h3><p class="section-guide">Reading guide: this source section records “22. Definition of Complete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The comprehensive procedural primitive example set is complete when:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">catalog schema is stable
+public directory hierarchy exists
+14 Cylinder tutorials pass
+16 Sphere tutorials pass
+13 AxialProfile tutorials pass
+7 comparison scenes pass
+6 temporal scenes pass
+6 gallery scenes pass
+canonical option coverage is complete
+alias equivalence is proven
+negative diagnostic coverage is complete
+all public examples generate zero diagnostics
+preview and export agree
+representative GUI smoke checks pass
+documentation and contribution guidance are complete
+the full release gate passes
+the supervised representative gallery remains stable
+</code></pre>
+<p>The optional editor example browser is not required for P0 completion. It becomes a separate promotion once the catalog and files have demonstrated stable ownership and test coverage.</p>
+<h3 id="source-23-highest-gain-implementation-order">23. Highest-Gain Implementation Order</h3><p class="section-guide">Reading guide: this source section records “23. Highest-Gain Implementation Order”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The critical path is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">catalog contract
+    ↓
+catalog and grammar-to-scene harness
+    ↓
+Cylinder tutorials and fixtures
+    ↓
+Sphere tutorials and fixtures
+    ↓
+AxialProfile tutorials and fixtures
+    ↓
+comparisons and alias evidence
+    ↓
+temporal examples
+    ↓
+gallery scenes
+    ↓
+diagnostic completion
+    ↓
+release and supervised gallery audit
+</code></pre>
+<p>The strongest immediate coding milestone is <strong>Milestone 1 plus the first three examples from each family</strong>. That proves the catalog, authoring contract, and generic example harness before dozens of files are written. Once that vertical slice passes, the remaining example inventory can be added family by family without weakening verification discipline.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html" rel="prev">← Previous: ProGen3D Preview GL46 and PBR Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-render-pipeline-upgrade-implementation-plan.html" rel="next">Next: ProGen3D Render Pipeline Upgrade Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

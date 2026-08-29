@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Implementation status: complete. Authoritative verification is recorded in COMV1CHAIROBJECTMODELVERIFICATION.md and tests/evidence/comv1chairacceptance2026-08-24.json." name="description"/>
+<meta content="PROGEN3D_COMV1_CHAIR_OBJECT_MODEL_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="cdabc61cd868b65b64e096e7aa754877021cf093c6035ec7211c3594da8cfdce" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-buildings">Buildings and Object Models</a></li>
+<li aria-current="page">ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</h1>
+<p class="lead">Implementation status: complete. Authoritative verification is recorded in COMV1CHAIROBJECTMODELVERIFICATION.md and tests/evidence/comv1chairacceptance2026-08-24.json.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Buildings and Object Models</span>
+<span class="tag">About 12 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_COMV1_CHAIR_OBJECT_MODEL_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="cdabc61cd868b65b64e096e7aa754877021cf093c6035ec7211c3594da8cfdce" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan, Completion Definition, Current State and Required Delta, Already implemented.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="required-progen3d-operators.html">Required Progen3D Operators</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Completion Definition</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Completion Definition</td></tr><tr><td><dfn title="Named by the source document">Current State and Required Delta</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current State and Required Delta</td></tr><tr><td><dfn title="Named by the source document">Already implemented</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Already implemented</td></tr><tr><td><dfn title="Named by the source document">Missing or incomplete</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Missing or incomplete</td></tr><tr><td><dfn title="Named by the source document">Architectural Boundary</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Architectural Boundary</td></tr><tr><td><dfn title="Named by the source document">FGKv1 Curve Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. FGKv1 Curve Object Model</td></tr><tr><td><dfn title="Named by the source document">Curve models</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>4.1 Curve models</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="OMv1, SMB-OMv2, and SMB-OMv2">SMB</dfn></td><td>OMv1, SMB-OMv2, and SMB-OMv2</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SMB-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">P3D-GEO-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr><td><dfn title="JavaScript Object Notation">JSON</dfn></td><td>JavaScript Object Notation</td></tr><tr><td><dfn title="domain Boolean panel extraction">UV</dfn></td><td>domain Boolean panel extraction</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">Y-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">S-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="operation-independent creation and deterministic release boundary, while the existing `PreviewMateria">API</dfn></td><td>operation-independent creation and deterministic release boundary, while the existing `PreviewMateria</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">COM</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Implementation status: complete. Authoritative verification is recorded in COMV1CHAIROBJECTMODELVERIFICATION.md and tests/evidence/comv1chairacceptance2026-08-24.json.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan, Completion Definition, Current State and Required Delta, Already implemented. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Completion Definition, 2. Current State and Required Delta, 2.1 Already implemented, 2.2 Missing or incomplete. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 3, failed: 3, proposed: 2.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 15 code blocks, 2 tables and the source SHA-256 <code>cdabc61cd868b65b64e096e7aa754877021cf093c6035ec7211c3594da8cfdce</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-completion-definition">1. Completion Definition</a></li><li><a href="#source-2-current-state-and-required-delta">2. Current State and Required Delta</a></li><li><a href="#source-2-1-already-implemented">2.1 Already implemented</a></li><li><a href="#source-2-2-missing-or-incomplete">2.2 Missing or incomplete</a></li><li><a href="#source-3-architectural-boundary">3. Architectural Boundary</a></li><li><a href="#source-4-fgkv1-curve-object-model">4. FGKv1 Curve Object Model</a></li><li><a href="#source-4-1-curve-models">4.1 Curve models</a></li><li><a href="#source-4-2-curve-api">4.2 Curve API</a></li><li><a href="#source-4-3-curve-validation">4.3 Curve validation</a></li><li><a href="#source-5-fgkv1-sweepdisk">5. FGKv1 SweepDisk</a></li><li><a href="#source-6-fgkv1-surface-object-model">6. FGKv1 Surface Object Model</a></li><li><a href="#source-6-1-surface-models">6.1 Surface models</a></li><li><a href="#source-6-2-curvenetworksurface-p0">6.2 CurveNetworkSurface P0</a></li><li><a href="#source-7-fgkv1-shelloffset">7. FGKv1 ShellOffset</a></li><li><a href="#source-8-comv1-chair-object-model">8. COMv1 Chair Object Model</a></li><li><a href="#source-8-1-placement-and-orientation">8.1 Placement and orientation</a></li><li><a href="#source-8-2-component-categories">8.2 Component categories</a></li><li><a href="#source-8-3-canonical-style-catalog">8.3 Canonical style catalog</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>3</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>3</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>2</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_COMV1_CHAIR_OBJECT_MODEL_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan, Completion Definition, Current State and Required Delta, Already implemented.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Curve3D, MirrorCurve3D, SweepDisk, CurveNetworkSurface, and</li><li>Curves support line, polyline, Bezier, and Catmull-Rom evaluation, first and</li><li>Mirrored curves preserve their source curve and transformation relationship</li><li>SweepDisk samples a Curve3D, supports constant and linearly varying</li><li>CurveNetworkSurface validates rectangular U/V curve topology, validates</li><li>ShellOffset produces a closed shell from a smooth open source surface,</li><li>COMv1 contains exactly 15 stable chair design definitions covering dining,</li><li>Every chair object is represented by explicit dimensions, components,</li><li>The ProGen3D chair builder can generate a deterministic mesh for every</li><li>All 45 front/side/top comparisons pass raw silhouette IoU greater than</li><li>Dimensional validation separately proves width, depth, overall height, and</li><li>SMB001GroundDiningChairs binds four COMv1 chair instances and</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">Grammar or COMv1 design
+        -&gt; Curve / Surface / Shape specification
+        -&gt; Validation service
+        -&gt; Procedural geometry service
+        -&gt; Mesh
+        -&gt; ResolvedPrimitiveGeometry
+        -&gt; generic preview/export/picking/collision pipeline</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan" data="../../assets/diagrams/pages/progen3d-comv1-chair-object-model-and-fgkv1-curved-geometry-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_COMV1_CHAIR_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>cdabc61cd868b65b64e096e7aa754877021cf093c6035ec7211c3594da8cfdce</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>37 headings, 15 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Implementation status: complete. Authoritative verification is recorded in COMV1CHAIROBJECTMODELVERIFICATION.md and tests/evidence/comv1chairacceptance2026-08-24.json.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan, Completion Definition, Current State and Required Delta, Already implemented, Missing or incomplete</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="comv1-chair-object-model-verification.html">COMv1 Chair Object Model Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>COMv1 and the required FGKv1 primitives are implemented and accepted against the repository-native gates.</small></li><li><a href="progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</small></li><li><a href="progen3d-smb-omv2-1-all-building-objects-implementation-plan.html">ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</small></li><li><a href="progen3d-building-object-image-matching-v1-implementation-plan.html">ProGen3D Building Object Image Matching V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</small></li><li><a href="required-progen3d-operators.html">Required Progen3D Operators</a> <span class="status-badge status--documented">Documented</span><br/><small>This advanced grammar intentionally targets the proposed next-generation geometry/reasoning stack.</small></li><li><a href="progen3d-smbv3-simplemodernbuilding-version-3-implementation-plan.html">ProGen3D SMBv3 SimpleModernBuilding Version 3 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Consolidate the material in examples/SimpleModernBuilding behind one governed SMBv3 package and give every authoritative taxonomy entity an explicit contract for:</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_COMV1_CHAIR_OBJECT_MODEL_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_COMV1_CHAIR_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>cdabc61cd868b65b64e096e7aa754877021cf093c6035ec7211c3594da8cfdce</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-comv1-chair-object-model-and-fgkv1-curved-geometry-implementation-plan">ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Date: 2026-08-24</p>
+<p class="source-status--passed">Implementation status: complete. Authoritative verification is recorded in
+<code>COMV1_CHAIR_OBJECT_MODEL_VERIFICATION.md</code> and
+<code>tests/evidence/comv1_chair_acceptance_2026-08-24.json</code>.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Contract: <code>COMv1</code></li>
+<li>Building integration target: <code>SMB-OMv2.1</code></li>
+<li>Geometry kernel target: <code>FGKv1</code></li>
+<li>Chair catalog size: exactly 15 canonical styles</li>
+<li>Reference views: front, side, and top</li>
+<li>Silhouette acceptance: every individual view must have raw IoU greater than <code>0.80</code></li>
+<li>Compatibility rule: preserve all 124 SMB-OMv2.1 spatial object identities</li>
+</ul>
+<h3 id="source-1-completion-definition">1. Completion Definition</h3><p class="section-guide">Reading guide: this source section records “1. Completion Definition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">This plan is complete only when current source and generated evidence prove all of
+the following:</p>
+<ol>
+<li><code>Curve3D</code>, <code>MirrorCurve3D</code>, <code>SweepDisk</code>, <code>CurveNetworkSurface</code>, and
+<code>ShellOffset</code> resolve through the generic procedural <code>Mesh</code> pipeline.</li>
+<li>Curves support line, polyline, Bezier, and Catmull-Rom evaluation, first and
+second derivatives, deterministic arc-length lookup, and bounded uniform
+arc-distance sampling.</li>
+<li>Mirrored curves preserve their source curve and transformation relationship
+without silently changing source control points.</li>
+<li><code>SweepDisk</code> samples a <code>Curve3D</code>, supports constant and linearly varying
+radius, uses rotation-minimizing frames, and produces deterministic UVs,
+normals, caps, and topology.</li>
+<li><code>CurveNetworkSurface</code> validates rectangular U/V curve topology, validates
+every intersection against a scale-aware tolerance, and produces a
+deterministic parameterized surface and tessellated mesh.</li>
+<li><code>ShellOffset</code> produces a closed shell from a smooth open source surface,
+closes source boundaries, rejects collapsed output, and respects configured
+generated-mesh limits.</li>
+<li>COMv1 contains exactly 15 stable chair design definitions covering dining,
+kitchen, study, living, and patio use contexts.</li>
+<li>Every chair object is represented by explicit dimensions, components,
+support topology, geometry parameters, material variants, context
+applicability, three-view reference evidence, an acceptance state, and a
+<code>ChairPlacement</code> that owns its ground-contact position and orientation.</li>
+<li>The ProGen3D chair builder can generate a deterministic mesh for every
+catalog design.</li>
+<li class="source-status--failed">All 45 front/side/top comparisons pass raw silhouette IoU greater than
+<code>0.80</code>; an average cannot compensate for a failed view.</li>
+<li>Dimensional validation separately proves width, depth, overall height, and
+seat height because normalized silhouettes cannot prove physical scale.</li>
+<li><code>SMB_001_Ground_Dining_Chairs</code> binds four COMv1 chair instances and
+<code>SMB_001_Upper_Study_Chair</code> binds one COMv1 chair instance without adding new
+SMB spatial identities.</li>
+<li>Kitchen, living, and patio chair placements remain explicit proposals until
+a later SMB topology revision supplies stable spatial object identities.</li>
+<li>Existing geometry, vehicle, vegetation, architecture, SMB-OMv2.1, and
+editor compatibility gates remain green.</li>
+</ol>
+<h3 id="source-2-current-state-and-required-delta">2. Current State and Required Delta</h3><p class="section-guide">Reading guide: this source section records “2. Current State and Required Delta”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-already-implemented">2.1 Already implemented</h4><p class="section-guide">Reading guide: this source section records “2.1 Already implemented”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository already provides:</p>
+<ul>
+<li>generic resolved triangle-mesh rendering, export, picking, collision, bounds,
+material, and evidence routing;</li>
+<li>deterministic <code>ShapeSpecificationKey</code> procedural mesh caching;</li>
+<li>a concrete <code>Curve3D</code> value model for line, polyline, Bezier, and Catmull-Rom
+evaluation and first derivatives;</li>
+<li>grammar-visible <code>SweepDisk</code> using a polyline path;</li>
+<li>grammar-visible <code>ShellOffset</code> using an already generated source mesh;</li>
+<li><code>SurfaceLoft</code>, <code>ShellLoft</code>, <code>MirrorShape</code>, <code>CompoundShape</code>, and procedural
+assembly composition;</li>
+<li>deterministic front, side, and top binary silhouette projection;</li>
+<li>SMB-OMv2.1 with 124 stable spatial objects, including one dining <code>ChairSet</code>
+aggregate and one study <code>ChairSet</code> aggregate.</li>
+</ul>
+<h4 id="source-2-2-missing-or-incomplete">2.2 Missing or incomplete</h4><p class="section-guide">Reading guide: this source section records “2.2 Missing or incomplete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>Curve3D</code> has no second derivative, arc-length table, length query,
+parameter-at-distance query, transformed-curve relationship, or explicit
+zero-length/resource-limit validation.</li>
+<li>Existing sweeps construct an independently up-aligned frame at every path
+sample rather than transporting the previous frame. Nearly straight and
+inflected paths can therefore rotate unexpectedly.</li>
+<li><code>SweepDisk</code> accepts only evaluated polyline points and one constant radius.</li>
+<li>There is no common <code>Surface3D</code> model.</li>
+<li>There is no <code>CurveNetworkSurface</code> shape family, validator, runtime surface,
+tessellator, grammar evaluator, procedural repository route, or evidence
+record.</li>
+<li>Current <code>ShellOffset</code> offsets a source mesh but does not explicitly reject
+flipped/collapsed triangles or record scale-aware thickness validity.</li>
+<li>No COMv1 chair model, catalog, geometry builder, SMB binding model, or
+three-view chair fit report exists.</li>
+<li>Existing SMB knowledge maps every <code>ChairSet</code> to dining activity, including
+the study chair.</li>
+</ul>
+<h3 id="source-3-architectural-boundary">3. Architectural Boundary</h3><p class="section-guide">Reading guide: this source section records “3. Architectural Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Grammar or COMv1 design
+        -&gt; Curve / Surface / Shape specification
+        -&gt; Validation service
+        -&gt; Procedural geometry service
+        -&gt; Mesh
+        -&gt; ResolvedPrimitiveGeometry
+        -&gt; generic preview/export/picking/collision pipeline
+</code></pre>
+<p>No new primitive may append GPU vertices directly or branch rendering by shape
+name. Curves and surfaces are mathematical models; tessellators and builders
+are services; only resolved meshes enter the instance pipeline.</p>
+<h3 id="source-4-fgkv1-curve-object-model">4. FGKv1 Curve Object Model</h3><p class="section-guide">Reading guide: this source section records “4. FGKv1 Curve Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-curve-models">4.1 Curve models</h4><p class="section-guide">Reading guide: this source section records “4.1 Curve models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>Curve3D</code>: immutable control-point curve with a declared <code>Curve3DType</code>.</li>
+<li><code>CurveArcLengthTable</code>: immutable ordered parameter/distance samples.</li>
+<li><code>TransformedCurve3D</code>: association between a source curve and one explicit
+transformation matrix.</li>
+<li><code>MirrorCurve3D</code>: purpose-specific reflected curve implemented through a
+<code>TransformedCurve3D</code> relationship.</li>
+</ul>
+<p><code>Curve3D</code> retains value semantics for compatibility with existing vehicle
+models. Transformation wrappers compose a source curve instead of rewriting its
+control-point evidence.</p>
+<h4 id="source-4-2-curve-api">4.2 Curve API</h4><p class="section-guide">Reading guide: this source section records “4.2 Curve API”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">glm::dvec3 evaluate(double parameter) const;
+glm::dvec3 evaluateDerivative(double parameter) const;
+glm::dvec3 evaluateSecondDerivative(double parameter) const;
+double length() const;
+double parameterAtDistance(double distance) const;
+glm::dvec3 evaluateByArcFraction(double arc_fraction) const;
+std::vector&lt;glm::dvec3&gt; sampleByArcLength(std::size_t sample_count) const;
+</code></pre>
+<p>Existing float-returning compatibility methods remain available while geometry
+builders use double-precision evaluation internally.</p>
+<h4 id="source-4-3-curve-validation">4.3 Curve validation</h4><p class="section-guide">Reading guide: this source section records “4.3 Curve validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>finite control points;</li>
+<li>family-specific minimum control-point count;</li>
+<li>no more than the configured control-point limit;</li>
+<li>nonzero scale-aware total length;</li>
+<li>finite first and second derivatives at sampled validation parameters;</li>
+<li>requested arc-length sample count within the configured curve sample limit.</li>
+</ul>
+<p>Diagnostics use stable codes:</p>
+<ul>
+<li><code>P3D-GEO-CURVE-001</code>: insufficient control points;</li>
+<li><code>P3D-GEO-CURVE-002</code>: nonfinite control point;</li>
+<li><code>P3D-GEO-CURVE-003</code>: zero-length curve;</li>
+<li><code>P3D-GEO-CURVE-004</code>: invalid parameter or distance;</li>
+<li><code>P3D-GEO-CURVE-005</code>: configured resource limit exceeded.</li>
+</ul>
+<h3 id="source-5-fgkv1-sweepdisk">5. FGKv1 SweepDisk</h3><p class="section-guide">Reading guide: this source section records “5. FGKv1 SweepDisk”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SweepDisk</code> owns:</p>
+<ul>
+<li>one <code>Curve3D</code> centre path;</li>
+<li>initial up hint;</li>
+<li>start radius and end radius;</li>
+<li>longitudinal sample count;</li>
+<li>circumferential sample count;</li>
+<li>start/end cap policy;</li>
+<li>geometry detail level.</li>
+</ul>
+<p>Legacy <code>path(...) radius(...) segments(...)</code> syntax remains valid and lowers to
+a polyline <code>Curve3D</code> with equal start and end radii.</p>
+<p>Extended syntax:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">SweepDisk(
+    curve(bezier x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3)
+    radiusStart(0.025)
+    radiusEnd(0.018)
+    longitudinalSegments(24)
+    radialSegments(16)
+    up(0 1 0)
+    cap(all)
+)
+</code></pre>
+<p>The mesh builder samples by arc distance and constructs rotation-minimizing
+frames. UV <code>u</code> follows normalized path distance; UV <code>v</code> follows disk angle.</p>
+<h3 id="source-6-fgkv1-surface-object-model">6. FGKv1 Surface Object Model</h3><p class="section-guide">Reading guide: this source section records “6. FGKv1 Surface Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-6-1-surface-models">6.1 Surface models</h4><p class="section-guide">Reading guide: this source section records “6.1 Surface models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>Surface3D</code>: conceptual parameterized surface category.</li>
+<li><code>CurveNetworkSurface</code>: rectangular U/V curve-network surface.</li>
+<li><code>CurveNetworkIntersection</code>: one validated U/V relationship and its resolved
+parameter pair.</li>
+<li><code>CurveNetworkParameterLattice</code>: ordered intersection lattice.</li>
+<li><code>SurfaceTessellationSpecification</code>: U/V sample counts and closure policy.</li>
+</ul>
+<p><code>Surface3D</code> exposes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">glm::dvec3 evaluate(double u, double v) const;
+glm::dvec3 derivativeU(double u, double v) const;
+glm::dvec3 derivativeV(double u, double v) const;
+glm::dvec3 normal(double u, double v) const;
+</code></pre>
+<h4 id="source-6-2-curvenetworksurface-p0">6.2 CurveNetworkSurface P0</h4><p class="section-guide">Reading guide: this source section records “6.2 CurveNetworkSurface P0”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P0 requires:</p>
+<ul>
+<li>at least two U curves and two V curves;</li>
+<li>every U curve intersects every V curve exactly once in the supplied parameter
+lattice;</li>
+<li>identical ordered lattice dimensions;</li>
+<li>intersection residual within a scale-aware tolerance;</li>
+<li>no silent reconciliation unless <code>allowFitting(true)</code> is explicit;</li>
+<li>bounded curve, surface, vertex, and triangle counts.</li>
+</ul>
+<p>P0 uses an interpolating tensor patch over the validated lattice. Gordon
+interpolation remains a compatible later method after the P0 lattice and
+surface diagnostics are stable.</p>
+<p>Grammar shape:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">CurveNetworkSurface(
+    uCurve(bezier ...)
+    uCurve(bezier ...)
+    vCurve(bezier ...)
+    vCurve(bezier ...)
+    samplesU(48)
+    samplesV(48)
+    tolerance(0.002)
+    method(interpolatingPatchGrid)
+)
+</code></pre>
+<h3 id="source-7-fgkv1-shelloffset">7. FGKv1 ShellOffset</h3><p class="section-guide">Reading guide: this source section records “7. FGKv1 ShellOffset”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P0 supports:</p>
+<ul>
+<li>a smooth open or closed source mesh;</li>
+<li>finite positive constant thickness;</li>
+<li>inward, outward, or symmetric offset;</li>
+<li>boundary-wall closure;</li>
+<li>deterministic winding and surface tags;</li>
+<li>collapsed-triangle rejection;</li>
+<li>normal-reversal diagnostics;</li>
+<li>configured vertex and triangle ceilings.</li>
+</ul>
+<p><code>ShellOffset</code> does not claim CAD-grade self-intersection repair. If the requested
+thickness creates collapsed or reversed output, validation fails closed.</p>
+<h3 id="source-8-comv1-chair-object-model">8. COMv1 Chair Object Model</h3><p class="section-guide">Reading guide: this source section records “8. COMv1 Chair Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ChairCatalog
+  *-- ChairDesignDefinition [15]
+
+ChairDesignDefinition
+  *-- ChairDimensionSpecification
+  *-- ChairErgonomicSpecification
+  *-- ChairComponentComposition
+  *-- ChairGeometryParameterSet
+  *-- ChairMaterialVariantSet
+  *-- ChairReferenceViewSet
+  *-- ChairDesignAcceptanceRecord
+  --&gt; ChairContextApplicabilityRelationship
+
+ChairSetInstance
+  o-- ChairInstance [1..*]
+
+ChairInstance
+  --&gt; ChairDesignDefinition
+  --&gt; ChairMaterialVariant
+  *-- ChairPlacement
+
+ChairObjectModel
+  --&gt; ChairDesignDefinition
+  *-- ChairPlacement
+
+ChairPlacement
+  *-- ChairOrientation
+
+ChairBuildingObjectBinding
+  --&gt; ChairSetInstance
+  --&gt; SMB spatial object identifier
+</code></pre>
+<h4 id="source-8-1-placement-and-orientation">8.1 Placement and orientation</h4><p class="section-guide">Reading guide: this source section records “8.1 Placement and orientation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>COMv1 chair geometry is authored in a local right-handed frame:</p>
+<ul>
+<li>local <code>+X</code>: chair right;</li>
+<li>local <code>-Y</code>: chair forward;</li>
+<li>local <code>+Z</code>: chair up;</li>
+<li>local ground plane: <code>Z = local_ground_height</code>.</li>
+</ul>
+<p>ProGen3D scenes are world-Y-up. <code>ChairOrientation</code> owns the fixed local-to-world
+pitch of <code>-90</code> degrees about X and the instance yaw about world Y.
+<code>ChairPlacement</code> owns the world-space ground-contact position and produces the
+deterministic transform:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">T(ground_x ground_y ground_z)
+A(yaw_degrees 1)
+A(-90 0)
+T(0 0 -local_ground_height)
+</code></pre>
+<p class="source-status--failed">The final local translation is omitted when <code>local_ground_height</code> is zero. The
+world transform maps the authored local ground reference to the requested world
+ground-contact point. Invalid nonfinite positions, orientations, or ground
+heights fail closed in <code>ChairAssemblyBuilder</code>.</p>
+<h4 id="source-8-2-component-categories">8.2 Component categories</h4><p class="section-guide">Reading guide: this source section records “8.2 Component categories”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>ChairSeatComponent</code></li>
+<li><code>ChairBackrestComponent</code></li>
+<li><code>ChairArmrestComponent</code></li>
+<li><code>ChairCushionComponent</code></li>
+<li><code>ChairFootrestComponent</code></li>
+<li><code>ChairSupportAssembly</code></li>
+</ul>
+<p>Support assembly specializations:</p>
+<ul>
+<li><code>FourLegSupportAssembly</code></li>
+<li><code>CantileverSupportAssembly</code></li>
+<li><code>SledSupportAssembly</code></li>
+<li><code>PedestalSupportAssembly</code></li>
+<li><code>SwivelCasterSupportAssembly</code></li>
+</ul>
+<p>Chair styles are data definitions, not subclasses.</p>
+<h4 id="source-8-3-canonical-style-catalog">8.3 Canonical style catalog</h4><p class="section-guide">Reading guide: this source section records “8.3 Canonical style catalog”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">ID</th>
+<th scope="col">Style</th>
+<th scope="col">Contexts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COMv1.Windsor</code></td>
+<td>Windsor spindle-back</td>
+<td>Dining, kitchen</td>
+</tr>
+<tr>
+<td><code>COMv1.ShakerLadderBack</code></td>
+<td>Shaker ladder-back</td>
+<td>Dining, kitchen</td>
+</tr>
+<tr>
+<td><code>COMv1.BentwoodCafe</code></td>
+<td>Bentwood cafe</td>
+<td>Dining, kitchen</td>
+</tr>
+<tr>
+<td><code>COMv1.Parsons</code></td>
+<td>Upholstered Parsons</td>
+<td>Dining, living</td>
+</tr>
+<tr>
+<td><code>COMv1.ScandinavianShell</code></td>
+<td>Molded shell</td>
+<td>Dining, kitchen, study, patio</td>
+</tr>
+<tr>
+<td><code>COMv1.Wishbone</code></td>
+<td>Wishbone Y-chair</td>
+<td>Dining, living</td>
+</tr>
+<tr>
+<td><code>COMv1.Cantilever</code></td>
+<td>Tubular cantilever</td>
+<td>Dining, study</td>
+</tr>
+<tr>
+<td><code>COMv1.BackedCounterStool</code></td>
+<td>Backed counter stool</td>
+<td>Kitchen</td>
+</tr>
+<tr>
+<td><code>COMv1.SaddleStool</code></td>
+<td>Saddle stool</td>
+<td>Kitchen</td>
+</tr>
+<tr>
+<td><code>COMv1.MeshTask</code></td>
+<td>Mesh task chair</td>
+<td>Study</td>
+</tr>
+<tr>
+<td><code>COMv1.ExecutiveHighBack</code></td>
+<td>Executive high-back</td>
+<td>Study</td>
+</tr>
+<tr>
+<td><code>COMv1.LoungeArmchair</code></td>
+<td>Lounge armchair</td>
+<td>Living</td>
+</tr>
+<tr>
+<td><code>COMv1.MidCenturyAccent</code></td>
+<td>Mid-century accent</td>
+<td>Living, study</td>
+</tr>
+<tr>
+<td><code>COMv1.Adirondack</code></td>
+<td>Adirondack</td>
+<td>Patio</td>
+</tr>
+<tr>
+<td><code>COMv1.MetalBistro</code></td>
+<td>Metal bistro</td>
+<td>Patio, kitchen</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-9-comv1-geometry-strategy">9. COMv1 Geometry Strategy</h3><p class="section-guide">Reading guide: this source section records “9. COMv1 Geometry Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every chair lowers through a common <code>ChairAssemblyBuilder</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ChairAssembly
+  -&gt; SeatAssembly
+  -&gt; BackrestAssembly
+  -&gt; SupportAssembly
+  -&gt; optional ArmrestAssembly
+  -&gt; optional FootrestAssembly
+  -&gt; optional CushionAssembly
+</code></pre>
+<p>The highest-gain FGKv1 acceptance design is <code>COMv1.ScandinavianShell</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">left shell edge       Curve3D
+right shell edge      MirrorCurve3D
+seat/back centre      Curve3D
+transverse sections   Curve3D set
+        -&gt; CurveNetworkSurface
+        -&gt; ShellOffset
+        -&gt; chair shell
+
+four leg paths
+        -&gt; SweepDisk
+        -&gt; chair support assembly
+</code></pre>
+<p>Other catalog designs may use rounded boxes, extrusions, revolutions, sweeps,
+arrays, and compound composition while preserving the same COMv1 component
+contract.</p>
+<h3 id="source-10-three-view-reference-and-fit-contract">10. Three-View Reference and Fit Contract</h3><p class="section-guide">Reading guide: this source section records “10. Three-View Reference and Fit Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each style owns one approved three-view reference set:</p>
+<ul>
+<li>front;</li>
+<li>side;</li>
+<li>top.</li>
+</ul>
+<p>Generated and reference views use the same fixed physical projection envelope.
+The reference package stores source classification, dimensions, silhouette
+mask, source hash, mask hash, and orientation metadata.</p>
+<p>For view <code>v</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">IoU(v) = intersection(reference(v), generated(v))
+         / union(reference(v), generated(v))
+</code></pre>
+<p>Hard acceptance:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">front IoU &gt; 0.80
+side  IoU &gt; 0.80
+top   IoU &gt; 0.80
+minimum IoU &gt; 0.80
+</code></pre>
+<p>Additional hard gates:</p>
+<ul>
+<li>width, depth, and overall-height relative error no greater than <code>0.03</code>;</li>
+<li>seat-height relative error no greater than <code>0.02</code>;</li>
+<li>required component topology present;</li>
+<li>no nonfinite geometry;</li>
+<li>no generated-mesh resource-limit violation;</li>
+<li>repeated generation has identical mesh and silhouette hashes.</li>
+</ul>
+<p>Parameter fitting uses deterministic bounded coordinate descent. Models may
+propose a candidate, but deterministic metrics choose and accept it.</p>
+<h3 id="source-11-smb-omv2-1-integration">11. SMB-OMv2.1 Integration</h3><p class="section-guide">Reading guide: this source section records “11. SMB-OMv2.1 Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Immediate bindings:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Binding.COMv1.SMB001.DiningChairs
+  -&gt; SMB_001_Ground_Dining_Chairs
+  -&gt; four COMv1 dining chair instances
+
+Binding.COMv1.SMB001.StudyChair
+  -&gt; SMB_001_Upper_Study_Chair
+  -&gt; one COMv1 study chair instance
+</code></pre>
+<p>COM instance identifiers do not become SMB spatial object identities. SMB owns
+containment, the supporting floor reference, and collision layer. Each COMv1
+chair object owns its resolved ground-contact pose relative to the containing
+<code>ChairSet</code>, together with chair style, dimensions, components, material variants,
+geometry, and fit evidence.</p>
+<p>Object-specific functional allocation replaces the current class-only chair
+mapping:</p>
+<ul>
+<li>dining binding: <code>Function.SupportDiningActivity</code>;</li>
+<li>study binding: <code>Function.SupportStudyActivity</code>;</li>
+<li>all chairs: <code>Function.SupportSeatedOccupant</code> and <code>Role.SeatingElement</code>.</li>
+</ul>
+<p class="source-status--proposed">Kitchen, living, and patio placements are proposal records only in
+SMB-OMv2.1. Promoting them to stable spatial objects requires a later topology
+revision.</p>
+<p>Every bound chair instance publishes a <code>placement</code> record containing its
+ground-contact position, yaw, local ground height, local axes, world up axis, and
+grounded state. Legacy <code>relative_translation_m</code> and <code>yaw_degrees</code> fields remain
+derived compatibility projections of that canonical placement record.</p>
+<h3 id="source-12-implementation-sequence">12. Implementation Sequence</h3><p class="section-guide">Reading guide: this source section records “12. Implementation Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-phase-a-baseline-and-plan">Phase A: Baseline and plan</h4><p class="section-guide">Reading guide: this source section records “Phase A: Baseline and plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>record current focused test status;</li>
+<li>preserve unrelated worktree state;</li>
+<li>publish this integrated plan.</li>
+</ul>
+<h4 id="source-phase-b-curve-kernel">Phase B: Curve kernel</h4><p class="section-guide">Reading guide: this source section records “Phase B: Curve kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>extend <code>GeometryComplexityLimits</code> with curve and surface ceilings;</li>
+<li>add second derivatives and deterministic arc-length tables to <code>Curve3D</code>;</li>
+<li>add transformed and mirrored curve models;</li>
+<li>add deterministic curve tests and diagnostics.</li>
+</ul>
+<h4 id="source-phase-c-sweepdisk-extension">Phase C: SweepDisk extension</h4><p class="section-guide">Reading guide: this source section records “Phase C: SweepDisk extension”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add curve family and control-point specification;</li>
+<li>retain legacy path syntax;</li>
+<li>add start/end radius and longitudinal sampling;</li>
+<li>implement rotation-minimizing frames;</li>
+<li>add straight, bent, S-curve, tapered, and nearly-straight fixtures.</li>
+</ul>
+<h4 id="source-phase-d-surface-kernel">Phase D: Surface kernel</h4><p class="section-guide">Reading guide: this source section records “Phase D: Surface kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add <code>Surface3D</code>;</li>
+<li>add <code>CurveNetworkSurface</code> and intersection lattice models;</li>
+<li>add validator and uniform tessellator;</li>
+<li>add grammar parsing/evaluation and procedural repository routing;</li>
+<li>add flat, dome, saddle, and chair-shell fixtures.</li>
+</ul>
+<h4 id="source-phase-e-shelloffset-hardening">Phase E: ShellOffset hardening</h4><p class="section-guide">Reading guide: this source section records “Phase E: ShellOffset hardening”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add scale-aware thickness checks;</li>
+<li>reject collapsed and reversed output;</li>
+<li>preserve boundary closure and stable surface tags;</li>
+<li>add flat-sheet, bowl, and chair-shell fixtures.</li>
+</ul>
+<h4 id="source-phase-f-comv1-catalog-and-geometry">Phase F: COMv1 catalog and geometry</h4><p class="section-guide">Reading guide: this source section records “Phase F: COMv1 catalog and geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add chair model, relationship, context, and service classes;</li>
+<li>define exactly 15 styles;</li>
+<li>build deterministic component meshes;</li>
+<li>create the Scandinavian shell vertical slice using all five FGKv1 primitives;</li>
+<li>produce one grammar example for each style.</li>
+</ul>
+<h4 id="source-phase-g-three-view-evidence">Phase G: Three-view evidence</h4><p class="section-guide">Reading guide: this source section records “Phase G: Three-view evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add fixed-envelope projection;</li>
+<li>add binary silhouette IoU and contour comparison;</li>
+<li>generate 45 reference masks and 45 ProGen3D masks;</li>
+<li>run deterministic bounded fitting;</li>
+<li>publish per-style JSON and contact-sheet evidence.</li>
+</ul>
+<h4 id="source-phase-h-smb-integration">Phase H: SMB integration</h4><p class="section-guide">Reading guide: this source section records “Phase H: SMB integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add COMv1 binding sidecar generated from the authoritative SMB generators;</li>
+<li>bind four dining and one study instance;</li>
+<li>correct object-specific chair functions;</li>
+<li>preserve all 124 SMB identities and current default grammar compatibility.</li>
+</ul>
+<h4 id="source-phase-i-acceptance-audit">Phase I: Acceptance audit</h4><p class="section-guide">Reading guide: this source section records “Phase I: Acceptance audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>run focused curve, surface, chair, fit, grammar, and SMB gates;</li>
+<li>run existing geometry and release compatibility gates;</li>
+<li>verify generated artifacts and hashes;</li>
+<li>audit every completion requirement against authoritative evidence.</li>
+</ul>
+<h3 id="source-13-repository-integration-points">13. Repository Integration Points</h3><p class="section-guide">Reading guide: this source section records “13. Repository Integration Points”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">Planned source areas:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/model/
+include/geometry/relationship/
+include/geometry/service/
+src/geometry/model/
+src/geometry/service/
+include/chair/model/
+include/chair/relationship/
+include/chair/service/
+src/chair/model/
+src/chair/service/
+examples/COMv1_Chair_Catalog/
+examples/SMB_OMv2_Instance_SMB_001/
+tests/
+</code></pre>
+<p>Generated SMB files must continue to be produced by the existing SMB generators;
+generated JSON, grammar, and C++ catalogs are never hand-edited as canonical
+source.</p>
+<h3 id="source-14-required-gates-and-artifacts">14. Required Gates and Artifacts</h3><p class="section-guide">Reading guide: this source section records “14. Required Gates and Artifacts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/run_fgkv1_curve_surface_checks.sh
+tests/run_comv1_chair_catalog_checks.sh
+tests/run_comv1_three_view_fit_checks.sh
+tests/run_comv1_smb_omv21_integration_checks.sh
+tests/run_three_view_projection_checks.sh
+tests/run_profile_extrusion_checks.sh
+tests/run_curved_geometry_pipeline_checks.sh
+tests/run_smb_omv2_checks.sh
+tests/run_smb_omv21_all_objects_checks.sh
+</code></pre>
+<p>Required generated evidence:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/COMv1_Chair_Catalog/COMv1_Chair_Catalog.json
+examples/COMv1_Chair_Catalog/COMv1_Chair_Catalog.p3d
+examples/COMv1_Chair_Catalog/reference_views/
+examples/COMv1_Chair_Catalog/generated_views/
+examples/COMv1_Chair_Catalog/fit_reports/
+examples/SMB_OMv2_Instance_SMB_001/COMv1_Chair_Bindings.json
+tests/evidence/comv1_chair_acceptance_2026-08-24.json
+</code></pre>
+<h3 id="source-15-compatibility-boundary">15. Compatibility Boundary</h3><p class="section-guide">Reading guide: this source section records “15. Compatibility Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Existing grammar syntax remains valid.</li>
+<li>Existing <code>Curve3D</code> call sites remain source-compatible.</li>
+<li>Existing <code>SweepDisk(path(...) radius(...) segments(...))</code> remains valid.</li>
+<li>Existing <code>ShellOffset</code> grammar remains valid.</li>
+<li>No renderer path branches on COMv1 or the new surface family.</li>
+<li>Existing SMB spatial object identifiers and containment remain unchanged.</li>
+<li>The accepted SMB default chair geometry changes only after COMv1 evidence
+passes; until then the COMv1 binding remains an explicit opt-in variant.</li>
+</ul>
+<h3 id="source-16-completion-audit-matrix">16. Completion Audit Matrix</h3><p class="section-guide">Reading guide: this source section records “16. Completion Audit Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Requirement</th>
+<th scope="col">Authoritative evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Five named FGKv1 primitives</td>
+<td>model/service sources plus curve/surface harness</td>
+</tr>
+<tr>
+<td>Generic mesh route</td>
+<td>resolved geometry integration and curved pipeline gate</td>
+</tr>
+<tr>
+<td>Curve derivatives and arc length</td>
+<td>deterministic unit harness</td>
+</tr>
+<tr>
+<td>Rotation-minimizing SweepDisk</td>
+<td>nearly-straight and S-curve fixtures</td>
+</tr>
+<tr>
+<td>Rectangular curve network</td>
+<td>validator tests and surface topology evidence</td>
+</tr>
+<tr>
+<td class="source-status--failed">Shell closure and failure behavior</td>
+<td>topology and invalid-thickness fixtures</td>
+</tr>
+<tr>
+<td>Exactly 15 styles</td>
+<td>catalog validator and generated JSON</td>
+</tr>
+<tr>
+<td>Five use contexts</td>
+<td>context coverage matrix</td>
+</tr>
+<tr>
+<td>45 views</td>
+<td>reference/generated manifest counts</td>
+</tr>
+<tr>
+<td>Every view IoU greater than 0.80</td>
+<td>fit report hard-gate records</td>
+</tr>
+<tr>
+<td>Physical dimensions</td>
+<td>dimension residual report</td>
+</tr>
+<tr>
+<td>Dining/study SMB bindings</td>
+<td>generated binding JSON and integration harness</td>
+</tr>
+<tr>
+<td>124 SMB identities preserved</td>
+<td>existing SMB native and all-object gates</td>
+</tr>
+<tr>
+<td>Determinism</td>
+<td>repeated generation and artifact hash comparison</td>
+</tr>
+<tr>
+<td>Compatibility</td>
+<td>focused existing suites plus full release checks</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-building-object-image-matching-v1-implementation-plan.html" rel="prev">← Previous: ProGen3D Building Object Image Matching V1 Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html" rel="next">Next: ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

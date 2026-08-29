@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ProGen3D models curved primitives through two canonical families: Cylinder and Sphere. Partial, hollow, clipped, open, and sectioned variants are domain restrictions on those families rather than independent mesh classes." name="description"/>
+<meta content="docs/CURVED_PRIMITIVES.md" name="source-markdown"/>
+<meta content="c0d132b80cc8d4b76f1bbc5eb2353f4a848ed5a5537afdefa3a7564ee15d5314" name="source-sha256"/>
+<meta content="Documented" name="documentation-status"/>
+<title>Curved Primitives · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">Curved Primitives</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Curved Primitives</h1>
+<p class="lead">ProGen3D models curved primitives through two canonical families: Cylinder and Sphere. Partial, hollow, clipped, open, and sectioned variants are domain restrictions on those families rather than independent mesh classes.</p>
+<div class="lesson-meta">
+<span class="status-badge status--documented">Documented</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 3 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/docs/CURVED_PRIMITIVES.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="c0d132b80cc8d4b76f1bbc5eb2353f4a848ed5a5537afdefa3a7564ee15d5314" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Curved Primitives in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Curved Primitives, Normalized Geometry, Canonical Syntax, Topology.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="axialprofilev1.html">AxialProfilev1</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Curved Primitives</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>Curved Primitives</td></tr><tr><td><dfn title="Named by the source document">Normalized Geometry</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Normalized Geometry</td></tr><tr><td><dfn title="Named by the source document">Canonical Syntax</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Canonical Syntax</td></tr><tr><td><dfn title="Named by the source document">Topology</dfn></td><td>The phrase appears 9 times in the source and is retained as a learning-path concept.</td><td>Topology</td></tr><tr><td><dfn title="Named by the source document">Closure</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>Closure</td></tr><tr><td><dfn title="Named by the source document">Chords and Plane Clips</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Chords and Plane Clips</td></tr><tr><td><dfn title="Named by the source document">Aliases</dfn></td><td>The phrase appears 3 times in the source and is retained as a learning-path concept.</td><td>Aliases</td></tr><tr><td><dfn title="Named by the source document">Rendering, Export, and Physics</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Rendering, Export, and Physics</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td colspan="2">The analyzer found no repeated all-capital abbreviation requiring a generated definition.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>ProGen3D models curved primitives through two canonical families: Cylinder and Sphere. Partial, hollow, clipped, open, and sectioned variants are domain restrictions on those families rather than independent mesh classes.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Curved Primitives, Normalized Geometry, Canonical Syntax, Topology. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Normalized Geometry, Canonical Syntax, Topology, Closure, Chords and Plane Clips. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 2 code blocks and the source SHA-256 <code>c0d132b80cc8d4b76f1bbc5eb2353f4a848ed5a5537afdefa3a7564ee15d5314</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-normalized-geometry">Normalized Geometry</a></li><li><a href="#source-canonical-syntax">Canonical Syntax</a></li><li><a href="#source-topology">Topology</a></li><li><a href="#source-closure">Closure</a></li><li><a href="#source-chords-and-plane-clips">Chords and Plane Clips</a></li><li><a href="#source-aliases">Aliases</a></li><li><a href="#source-rendering-export-and-physics">Rendering, Export, and Physics</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>1</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>0</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>0</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is docs/CURVED_PRIMITIVES.md.</li><li>Learn the named concepts: Curved Primitives, Normalized Geometry, Canonical Syntax, Topology.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> p3d fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-p3d">I(
+    Cylinder(
+        radial(0.7 1)
+        axial(0 1)
+        azimuth(15 240)
+        topology(shell)
+        close(all)
+        segments(64 1)
+        mapping(cylindrical)
+    )
+    material(plaster)
+    alpha(1)
+    texscale(0.5)
+)</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Curved Primitives" data="../../assets/diagrams/pages/curved-primitives.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>docs/CURVED_PRIMITIVES.md</code></p><p>SHA-256: <code>c0d132b80cc8d4b76f1bbc5eb2353f4a848ed5a5537afdefa3a7564ee15d5314</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>8 headings, 2 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>developers and technical readers following the documented feature.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>ProGen3D models curved primitives through two canonical families: Cylinder and Sphere. Partial, hollow, clipped, open, and sectioned variants are domain restrictions on those families rather than independent mesh classes.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Documented; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Curved Primitives, Normalized Geometry, Canonical Syntax, Topology, Closure</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="axialprofilev1.html">AxialProfilev1</a> <span class="status-badge status--documented">Documented</span><br/><small>AxialProfile is a core procedural geometry family. It separates evaluated shape specification, deterministic mesh construction, cached resolved geometry, and scene-instance state.</small></li><li><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html">P3D Textured Mesh and Orthographic Three-View Strategy</a> <span class="status-badge status--documented">Documented</span><br/><small>Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view</small></li><li><a href="proposed-curved-primitive-examples.html">Proposed curved primitive examples</a> <span class="status-badge status--proposed">Proposed</span><br/><small>These examples explore a later procedural curved-shape family. They are not supported by the current fixed-name I(...) parser.</small></li><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li><li><a href="progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="progen3d-full-geometry-kernel-fgkv1-completion-roadmap.html">ProGen3D Full Geometry Kernel FGKv1 Completion Roadmap</a> <span class="status-badge status--planned">Planned</span><br/><small>FGKv1 should become the single geometry realization boundary:</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/docs/CURVED_PRIMITIVES.md"><code>docs/CURVED_PRIMITIVES.md</code></a></p>
+<p><strong>Source digest:</strong> <code>c0d132b80cc8d4b76f1bbc5eb2353f4a848ed5a5537afdefa3a7564ee15d5314</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-curved-primitives">Curved Primitives</h2><p class="section-guide">Reading guide: this source section records “Curved Primitives”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>ProGen3D models curved primitives through two canonical families: <code>Cylinder</code> and <code>Sphere</code>. Partial, hollow, clipped, open, and sectioned variants are domain restrictions on those families rather than independent mesh classes.</p>
+<h3 id="source-normalized-geometry">Normalized Geometry</h3><p class="section-guide">Reading guide: this source section records “Normalized Geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>Cylinder</code> has outer radius <code>0.5</code>, local-Y span <code>0..1</code>, and is centered on the local Y axis.</li>
+<li><code>Sphere</code> has outer radius <code>0.5</code> and is centered at the local origin.</li>
+<li><code>S(...)</code> owns external dimensions. Nonuniform scaling produces elliptical cylinders and ellipsoids.</li>
+<li>Radial values, wall thickness, clip offsets, and slab offsets are normalized against the canonical outer radius.</li>
+<li>Azimuth and polar values use degrees.</li>
+</ul>
+<h3 id="source-canonical-syntax">Canonical Syntax</h3><p class="section-guide">Reading guide: this source section records “Canonical Syntax”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(
+    Cylinder(
+        radial(0.7 1)
+        axial(0 1)
+        azimuth(15 240)
+        topology(shell)
+        close(all)
+        segments(64 1)
+        mapping(cylindrical)
+    )
+    material(plaster)
+    alpha(1)
+    texscale(0.5)
+)
+</code></pre>
+<p>Cylinder options are <code>radial</code>, <code>wall</code>, <code>axial</code>, <code>azimuth</code>, <code>chord</code>, <code>clip</code>, <code>topology</code>, <code>close</code>, <code>segments</code>, and <code>mapping</code>.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(
+    Sphere(
+        radial(0.84 1)
+        clip(0 1 0 0 positive)
+        topology(shell)
+        close(none)
+        segments(56 28)
+        mapping(spherical)
+    )
+    material(plaster)
+)
+</code></pre>
+<p>Sphere options are <code>radial</code>, <code>wall</code>, <code>polar</code>, <code>azimuth</code>, <code>clip</code>, <code>slab</code>, <code>topology</code>, <code>close</code>, <code>segments</code>, and <code>mapping</code>.</p>
+<h3 id="source-topology">Topology</h3><p class="section-guide">Reading guide: this source section records “Topology”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>topology(surface)</code> emits only the requested mathematical skin. It has no enclosed volume.</li>
+<li><code>topology(solid)</code> requires inner radius zero and represents filled material.</li>
+<li><code>topology(shell)</code> requires a positive inner radius and represents material between outer and inner skins.</li>
+<li><code>wall(thickness)</code> is shorthand for a shell whose inner fraction is <code>1 - thickness</code>.</li>
+</ul>
+<p>Density through <code>P(...)</code> is accepted only when the generated geometry has validated enclosed volume. Open or non-watertight geometry produces a diagnostic instead of falling back to a box volume.</p>
+<h3 id="source-closure">Closure</h3><p class="section-guide">Reading guide: this source section records “Closure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>close(...)</code> describes generated material boundaries:</p>
+<ul>
+<li><code>axial</code>: Cylinder bottom and top.</li>
+<li><code>angular</code>: start and end faces of a non-full azimuth domain.</li>
+<li><code>clip</code>: faces created by half-space clips.</li>
+<li><code>rim</code>: radial connections required by shell, polar, or angular boundaries.</li>
+<li><code>all</code>: all supported closures.</li>
+<li><code>none</code>: curved skins only.</li>
+</ul>
+<p class="source-status--passed">Closed requested shapes must pass topology analysis: every geometric edge has two triangle incidents, face winding is consistent, no triangle is degenerate, and signed volume is finite. Open shapes retain only the boundaries omitted by policy.</p>
+<h3 id="source-chords-and-plane-clips">Chords and Plane Clips</h3><p class="section-guide">Reading guide: this source section records “Chords and Plane Clips”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>chord(angle offset side)</code> applies a 2D half-space to a Cylinder cross-section and extrudes the retained circle-segment region. It does not extrude only the chord line.</p>
+<p><code>clip(nx ny nz offset side)</code> applies an ordered local 3D half-space. The normal is normalized during validation. <code>slab(nx ny nz min max)</code> expands to two ordered parallel clips.</p>
+<p>Polar restriction and plane clipping are not interchangeable. <code>polar(0 60)</code> creates radial boundaries directed toward the sphere center; <code>clip(0 1 0 0.5 positive)</code> creates a flat plane-cut cap.</p>
+<h3 id="source-aliases">Aliases</h3><p class="section-guide">Reading guide: this source section records “Aliases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Aliases compile to canonical descriptors and never own separate mesh generators:</p>
+<ul>
+<li><code>Tube(inner(0.75))</code></li>
+<li><code>CylinderSector(sweep(180))</code></li>
+<li><code>DSection(angle(0) offset(0.25) side(positive))</code></li>
+<li><code>HalfCylinder(angle(0) side(positive))</code>, explicitly a center-chord half cylinder</li>
+<li><code>Hemisphere(axis(y) side(positive))</code></li>
+<li><code>SphereCap(axis(y) offset(0.35) side(positive))</code></li>
+<li><code>SphereBowl(inner(0.85) axis(y) offset(0) side(positive))</code></li>
+<li><code>SphereQuarter</code></li>
+<li><code>SphereOctant</code></li>
+</ul>
+<p>The grammar editor autocompletes these aliases and their documented options. Hovering a procedural symbol shows its canonical expansion and defaults.</p>
+<h3 id="source-rendering-export-and-physics">Rendering, Export, and Physics</h3><p class="section-guide">Reading guide: this source section records “Rendering, Export, and Physics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Preview, bounds, camera fitting, picking, and PLY export consume the same resolved mesh object. Curved normals use inverse-transpose transformation under nonuniform scaling. Local volume is analytic for unclipped domains and mesh-derived for validated clipped solids, then multiplied by the absolute determinant of the primary instance transform.</p>
+<p>Collision policies are explicit:</p>
+<ul>
+<li>full solid Cylinder and Sphere use validated convex-mesh policy;</li>
+<li>simple closed partial solids use convex-mesh policy;</li>
+<li>shells and open surfaces are static-triangle-only;</li>
+<li>dynamic collision is not enabled for hollow, concave, or open geometry.</li>
+</ul>
+<p>See <code>examples/curved_primitives_showcase.p3d</code> and <code>examples/curved_primitives_temporal.p3d</code>.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="axialprofilev1-verification.html" rel="prev">← Previous: AxialProfilev1 Verification</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html" rel="next">Next: P3D Textured Mesh and Orthographic Three-View Strategy →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

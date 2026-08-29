@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Replace the geometry-only townhouse draft with an executable, spatially aware building grammar whose static camera views and scripted walkthrough can be compared reproducibly with the ImageGen building and object references." name="description"/>
+<meta content="MODERN_LUXURY_TOWNHOUSE_V1_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="8e0ef1ddc9032bc732f240d1b333c62dc3128756fcc6948d483876e6f80ed9fc" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>Modern Luxury Townhouse V1 Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-buildings">Buildings and Object Models</a></li>
+<li aria-current="page">Modern Luxury Townhouse V1 Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Modern Luxury Townhouse V1 Implementation Plan</h1>
+<p class="lead">Replace the geometry-only townhouse draft with an executable, spatially aware building grammar whose static camera views and scripted walkthrough can be compared reproducibly with the ImageGen building and object references.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Buildings and Object Models</span>
+<span class="tag">About 4 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/MODERN_LUXURY_TOWNHOUSE_V1_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="8e0ef1ddc9032bc732f240d1b333c62dc3128756fcc6948d483876e6f80ed9fc" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Modern Luxury Townhouse V1 Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Modern Luxury Townhouse V1 Implementation Plan, Authoritative Inputs, Current Baseline, Deliverables.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="modern-luxury-townhouse-camera-and-taxonomy-design.html">Modern Luxury Townhouse Camera and Taxonomy Design</a> — recommended orientation from the generated learning graph.</li><li><a href="smb-omv2-spatially-aware-small-modern-building.html">SMB-OMv2 Spatially Aware Small Modern Building</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Modern Luxury Townhouse V1 Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Modern Luxury Townhouse V1 Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Authoritative Inputs</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Authoritative Inputs</td></tr><tr><td><dfn title="Named by the source document">Current Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Current Baseline</td></tr><tr><td><dfn title="Named by the source document">Deliverables</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Deliverables</td></tr><tr><td><dfn title="Named by the source document">Camera Walkthrough Scripting</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Camera Walkthrough Scripting</td></tr><tr><td><dfn title="Named by the source document">Spatially Aware Grammar Rewrite</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Spatially Aware Grammar Rewrite</td></tr><tr><td><dfn title="Named by the source document">Collision Positioning</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Collision Positioning</td></tr><tr><td><dfn title="Named by the source document">Primitive Coverage</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Primitive Coverage</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="command-line interface">CLI</dfn></td><td>command-line interface</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Replace the geometry-only townhouse draft with an executable, spatially aware building grammar whose static camera views and scripted walkthrough can be compared reproducibly with the ImageGen building and object references.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Modern Luxury Townhouse V1 Implementation Plan, Authoritative Inputs, Current Baseline, Deliverables. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Objective, Authoritative Inputs, Current Baseline, Deliverables, 1. Camera Walkthrough Scripting. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 3, failed: 1, proposed: 1, unresolved: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 1 code blocks and the source SHA-256 <code>8e0ef1ddc9032bc732f240d1b333c62dc3128756fcc6948d483876e6f80ed9fc</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-objective">Objective</a></li><li><a href="#source-authoritative-inputs">Authoritative Inputs</a></li><li><a href="#source-current-baseline">Current Baseline</a></li><li><a href="#source-deliverables">Deliverables</a></li><li><a href="#source-1-camera-walkthrough-scripting">1. Camera Walkthrough Scripting</a></li><li><a href="#source-2-spatially-aware-grammar-rewrite">2. Spatially Aware Grammar Rewrite</a></li><li><a href="#source-3-collision-positioning">3. Collision Positioning</a></li><li><a href="#source-4-primitive-coverage">4. Primitive Coverage</a></li><li><a href="#source-5-camera-and-image-comparison">5. Camera and Image Comparison</a></li><li><a href="#source-validation-gates">Validation Gates</a></li><li><a href="#source-implementation-order">Implementation Order</a></li><li><a href="#source-completion-standard">Completion Standard</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>3</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>1</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>1</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is MODERN_LUXURY_TOWNHOUSE_V1_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: Modern Luxury Townhouse V1 Implementation Plan, Authoritative Inputs, Current Baseline, Deliverables.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Camera model and parser tests pass with warnings enabled.</li><li>Launch-option tests cover both walkthrough flags.</li><li>The walkthrough parser rejects malformed, non-finite, duplicate-time, and</li><li>Playback is deterministic and clamps outside the script duration.</li><li>The rewritten grammar parses and regenerates without diagnostics.</li><li>All declared collision positions resolve or fail closed with explicit</li><li>Object, interface, connection, position, and primitive counts match the</li><li>Two captures of the same view and walkthrough time are byte-identical.</li><li>Static and walkthrough camera operations do not dirty or regenerate the</li><li>The comparison report identifies remaining mismatches instead of treating a</li><li>Freeze baseline captures and hashes.</li><li>Implement and test walkthrough models, parser, and playback.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">--camera-walkthrough &lt;path&gt;
+--camera-time &lt;seconds&gt;
+--camera-frame-directory &lt;path&gt;
+--preview-object &lt;spatial-object-id&gt;</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Modern Luxury Townhouse V1 Implementation Plan" data="../../assets/diagrams/pages/modern-luxury-townhouse-v1-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>MODERN_LUXURY_TOWNHOUSE_V1_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>8e0ef1ddc9032bc732f240d1b333c62dc3128756fcc6948d483876e6f80ed9fc</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>13 headings, 1 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Replace the geometry-only townhouse draft with an executable, spatially aware building grammar whose static camera views and scripted walkthrough can be compared reproducibly with the ImageGen building and object references.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Modern Luxury Townhouse V1 Implementation Plan, Authoritative Inputs, Current Baseline, Deliverables, Camera Walkthrough Scripting</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="modern-luxury-townhouse-camera-and-taxonomy-design.html">Modern Luxury Townhouse Camera and Taxonomy Design</a> <span class="status-badge status--documented">Documented</span><br/><small>ModernLuxuryTownhousev1 demonstrates how ProGen3D can combine a spatially aware building object model, fail-closed placement, object-isolated camera views, and deterministic walkthrough scripting. ImageGen output is retained as a design reference; generated grammar geometry and runtime spatial…</small></li><li><a href="modernluxurytownhousev1-taxonomy-camera-comparison.html">ModernLuxuryTownhousev1 Taxonomy Camera Comparison</a> <span class="status-badge status--evidence">Evidence</span><br/><small>The comparison covers every renderable townhouse taxonomy object in front, back, left, right, top, and bottom orthographic views. ImageGen cards are design references, not authoritative geometry. Perceptual metrics are advisory; deterministic grammar generation, spatial resolution, and camera…</small></li><li><a href="progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</small></li><li><a href="progen3d-smbv3-simplemodernbuilding-version-3-implementation-plan.html">ProGen3D SMBv3 SimpleModernBuilding Version 3 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Consolidate the material in examples/SimpleModernBuilding behind one governed SMBv3 package and give every authoritative taxonomy entity an explicit contract for:</small></li><li><a href="progen3d-building-object-image-matching-v1-implementation-plan.html">ProGen3D Building Object Image Matching V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</small></li><li><a href="smb-omv2-spatially-aware-small-modern-building.html">SMB-OMv2 Spatially Aware Small Modern Building</a> <span class="status-badge status--documented">Documented</span><br/><small>SMB-OMv2 promotes the 124-object Small Modern Building from a positioned geometry grammar into an executable spatial object model. The generated scene retains the SMB-OMv1 hierarchy and geometry while adding stable identity, local frames, typed interfaces, connection evidence, collision policies…</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/MODERN_LUXURY_TOWNHOUSE_V1_IMPLEMENTATION_PLAN.md"><code>MODERN_LUXURY_TOWNHOUSE_V1_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>8e0ef1ddc9032bc732f240d1b333c62dc3128756fcc6948d483876e6f80ed9fc</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-modern-luxury-townhouse-v1-implementation-plan">Modern Luxury Townhouse V1 Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “Modern Luxury Townhouse V1 Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-objective">Objective</h3><p class="section-guide">Reading guide: this source section records “Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Replace the geometry-only townhouse draft with an executable, spatially aware
+building grammar whose static camera views and scripted walkthrough can be
+compared reproducibly with the ImageGen building and object references.</p>
+<p class="source-status--passed">The implementation must preserve the current grammar language, use the complete
+live primitive inventory, keep semantic objects separate from geometry, resolve
+supported collision-positioning constraints transactionally, and produce
+deterministic visual evidence.</p>
+<h3 id="source-authoritative-inputs">Authoritative Inputs</h3><p class="section-guide">Reading guide: this source section records “Authoritative Inputs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Grammar: <code>examples/ModernLuxuryTownhousev1.grammar</code></li>
+<li>Building views: <code>examples/reference_images/ModernLuxuryTownhousev1_imagegen/building_views_v2.png</code></li>
+<li>Building objects: <code>examples/reference_images/ModernLuxuryTownhousev1_imagegen/building_objects_v2.png</code></li>
+<li>Baseline camera captures: <code>examples/reference_images/ModernLuxuryTownhousev1_camera_baseline/</code></li>
+<li>Spatial grammar contract: <code>Object</code>, <code>Interface</code>, <code>Connect</code>, and <code>Position</code></li>
+<li>Supported positioning modes: <code>Touch</code>, <code>Gap</code>, and <code>Drop</code></li>
+<li>Camera presets: front, back, left, right, top, bottom, and isometric</li>
+</ul>
+<h3 id="source-current-baseline">Current Baseline</h3><p class="section-guide">Reading guide: this source section records “Current Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The grammar parses 27 rules and emits 55 primitive instances.</li>
+<li>It exercises all 45 live geometry primitive names.</li>
+<li>It declares only one spatial object and one inspection interface.</li>
+<li>It declares no spatial connections or collision-positioning constraints.</li>
+<li>Camera preset captures are available for front, back, left, right, top, and
+isometric views.</li>
+<li>The current render communicates massing but does not match the reference
+facade hierarchy, object density, vegetation, furniture, or roof-terrace
+composition closely enough.</li>
+</ul>
+<h3 id="source-deliverables">Deliverables</h3><p class="section-guide">Reading guide: this source section records “Deliverables”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-1-camera-walkthrough-scripting">1. Camera Walkthrough Scripting</h4><p class="section-guide">Reading guide: this source section records “1. Camera Walkthrough Scripting”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add a purpose-driven camera scripting model:</p>
+<ul>
+<li><code>CameraWalkthroughKeyframe</code> owns time, camera target, orbit angles, distance,
+scale, and vertical field of view.</li>
+<li><code>CameraWalkthroughScript</code> owns an ordered non-empty keyframe sequence.</li>
+<li><code>CameraWalkthroughSample</code> is an immutable resolved camera state.</li>
+<li><code>CameraWalkthroughScriptParser</code> reads a deterministic text format and reports
+line-specific failures.</li>
+<li><code>CameraWalkthroughPlaybackService</code> interpolates a script at a requested time,
+including shortest-path angular interpolation.</li>
+</ul>
+<p>Add CLI integration:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">--camera-walkthrough &lt;path&gt;
+--camera-time &lt;seconds&gt;
+--camera-frame-directory &lt;path&gt;
+--preview-object &lt;spatial-object-id&gt;
+</code></pre>
+<p>The smoke workflow applies the sampled state to the existing
+<code>PreviewCameraController</code> and <code>PreviewProjectionConfiguration</code>. It must not
+introduce a second camera owner or modify document/generation state.</p>
+<p><code>--preview-object</code> isolates the directly bound geometry of one spatial object,
+selects a retained primitive, refreshes preview resources, and fits the existing
+camera to the resulting visible bounds. It is intentionally separate from the
+semantic inspector selection option.</p>
+<p>Add <code>tools/render_camera_walkthrough.sh</code> to render deterministic numbered PNG
+frames and optionally assemble an MP4 when <code>ffmpeg</code> is available.</p>
+<h4 id="source-2-spatially-aware-grammar-rewrite">2. Spatially Aware Grammar Rewrite</h4><p class="section-guide">Reading guide: this source section records “2. Spatially Aware Grammar Rewrite”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Organize the townhouse as explicit semantic objects:</p>
+<ul>
+<li>property and site</li>
+<li>structural slabs and support surfaces</li>
+<li>front, rear, side, and roof envelope systems</li>
+<li>street entrance and stair-glazing assembly</li>
+<li>street balconies and privacy fins</li>
+<li>courtyard paving and pool</li>
+<li>roof terrace and pergola</li>
+<li>dining tables, chairs, and lounge furniture</li>
+<li>planters, hedges, trees, palm, grasses, shrubs, and vines</li>
+<li>plumbing/service objects represented by visible reference features</li>
+</ul>
+<p>Every physical assembly must declare a collision layer and mask. Geometry-free
+semantic containers remain valid objects and must not receive placeholder
+meshes.</p>
+<h4 id="source-3-collision-positioning">3. Collision Positioning</h4><p class="section-guide">Reading guide: this source section records “3. Collision Positioning”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use only currently supported executable modes:</p>
+<ul>
+<li><code>Drop</code> dining tables and chairs onto courtyard or roof support surfaces.</li>
+<li><code>Drop</code> lounge chairs and planters onto their terrace support surfaces.</li>
+<li><code>Gap</code> facade-mounted fins or screens where the current solver can prove the
+requested separation without initial penetration.</li>
+<li><code>Touch</code> service or fence components only when the initial boundary relation is
+valid for the axis-aligned solver.</li>
+</ul>
+<p class="source-status--proposed">Every positioning declaration must have compatible interfaces, bounded travel,
+explicit tolerance, explicit collision mask, and a corresponding connection.
+Unsupported modes must remain documented future work rather than silently
+falling back.</p>
+<h4 id="source-4-primitive-coverage">4. Primitive Coverage</h4><p class="section-guide">Reading guide: this source section records “4. Primitive Coverage”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Retain executable coverage for all 45 available geometry primitives:</p>
+<ul>
+<li><code>Cube</code>, <code>CubeX</code>, <code>CubeY</code>, <code>CubeZ</code></li>
+<li>32 canonical procedural primitives</li>
+<li>9 curved aliases</li>
+</ul>
+<p>Primitives should be attached to meaningful architectural, furnishing,
+landscape, or controlled design-study objects. Coverage may not be satisfied by
+unowned geometry outside the spatial hierarchy.</p>
+<h4 id="source-5-camera-and-image-comparison">5. Camera and Image Comparison</h4><p class="section-guide">Reading guide: this source section records “5. Camera and Image Comparison”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Render at least these deterministic camera outputs after the rewrite:</p>
+<ul>
+<li>front</li>
+<li>back</li>
+<li>left</li>
+<li>right</li>
+<li>top</li>
+<li>isometric</li>
+<li>walkthrough frames at declared keyframe and midpoint times</li>
+</ul>
+<p>Comparison is evidence-based but not presented as photogrammetric truth. The
+report must record:</p>
+<ul>
+<li>grammar and reference image SHA-256 hashes</li>
+<li>camera parameters and pixel hashes</li>
+<li>silhouette occupancy and non-background bounding boxes</li>
+<li>visual feature coverage for facade, roof, courtyard, furniture, vegetation,
+pool, and boundary objects</li>
+<li>known mismatches caused by perspective-only projection, primitive limits, or
+generated-image inconsistency</li>
+</ul>
+<h3 id="source-validation-gates">Validation Gates</h3><p class="section-guide">Reading guide: this source section records “Validation Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li class="source-status--passed">Camera model and parser tests pass with warnings enabled.</li>
+<li>Launch-option tests cover both walkthrough flags.</li>
+<li>The walkthrough parser rejects malformed, non-finite, duplicate-time, and
+unordered keyframes.</li>
+<li>Playback is deterministic and clamps outside the script duration.</li>
+<li>The rewritten grammar parses and regenerates without diagnostics.</li>
+<li class="source-status--failed">All declared collision positions resolve or fail closed with explicit
+evidence; no constraint is silently ignored.</li>
+<li>Object, interface, connection, position, and primitive counts match the
+checked-in validation contract.</li>
+<li>Two captures of the same view and walkthrough time are byte-identical.</li>
+<li>Static and walkthrough camera operations do not dirty or regenerate the
+document.</li>
+<li>The comparison report identifies remaining mismatches instead of treating a
+successful render as proof of architectural equivalence.</li>
+</ol>
+<h3 id="source-implementation-order">Implementation Order</h3><p class="section-guide">Reading guide: this source section records “Implementation Order”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Freeze baseline captures and hashes.</li>
+<li>Implement and test walkthrough models, parser, and playback.</li>
+<li>Integrate CLI sampling into the existing smoke workflow.</li>
+<li>Add the reusable walkthrough frame renderer.</li>
+<li>Rewrite the grammar into the spatial object hierarchy.</li>
+<li>Add supported positioning constraints and verify resolution.</li>
+<li>Capture static and walkthrough views twice.</li>
+<li>Compute visual metrics and inspect the contact sheets.</li>
+<li>Iterate geometry and camera keyframes from comparison evidence.</li>
+<li class="source-status--unresolved">Publish validation evidence and unresolved next steps.</li>
+</ol>
+<h3 id="source-completion-standard">Completion Standard</h3><p class="section-guide">Reading guide: this source section records “Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Completion requires the implementation, grammar, reference assets, walkthrough
+script, deterministic captures, comparison report, and focused validation to be
+present and current-hash consistent. A parsing pass or one attractive image is
+not sufficient evidence of completion.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="modern-luxury-townhouse-camera-and-taxonomy-design.html" rel="prev">← Previous: Modern Luxury Townhouse Camera and Taxonomy Design</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="modernluxurytownhousev1-taxonomy-camera-comparison.html" rel="next">Next: ModernLuxuryTownhousev1 Taxonomy Camera Comparison →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

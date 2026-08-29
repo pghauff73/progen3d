@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 410" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">Learning map for MCSMv2.1 Source Basis</title>
+  <desc id="diagram-description">The learning map moves from the document purpose to its concepts, then to exact source evidence and finally to verification and status interpretation.</desc>
+  <style>
+    :root { color-scheme: light; }
+    line, path { fill: none; stroke: #7892b1; stroke-width: 3; }
+    .node rect { fill: #f8fbff; stroke: #135f9e; stroke-width: 2.5; rx: 16; }
+    .node text { fill: #172033; font-family: system-ui, sans-serif; text-anchor: middle; }
+    .node .label { font-size: 16px; font-weight: 800; }
+    .node .detail { fill: #526079; font-size: 11px; }
+    .node--emphasized rect { fill: #dceefe; stroke-width: 4; }
+    .node:focus rect, .node:hover rect { fill: #fff0c7; stroke: #8b2532; }
+    a:focus { outline: none; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+  <g aria-hidden="true"><path d="M230 145 C300 100, 340 90, 350 90" /><path d="M510 90 C600 90, 630 110, 640 140" /><path d="M690 205 C630 275, 570 300, 510 300" /><path d="M350 300 C250 290, 185 235, 160 210" /></g>
+  <g>
+<a href="../../../pages/vehicles/mcsmv2-1-source-basis.html#summary" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Purpose. MCSMv2.1 uses the MCSMv2.0.1 package, platform, style, wheel, suspension, powertrain, closure, parameter-evidence, and coordinate-frame records as its input basis. No new external package measurements were introduced in this patch.">
+    <title>Purpose: MCSMv2.1 uses the MCSMv2.0.1 package, platform, style, wheel, suspension, powertrain, closure, parameter-evidence, and coordinate-frame records as its input basis. No new external package measurements were introduced in this patch.</title>
+    <rect x="50.0" y="106.0" width="200" height="88" />
+    <text class="label" x="150.0" y="133.0"><tspan x="150.0" dy="0">Purpose</tspan></text>
+    <text class="detail" x="150.0" y="159.0"><tspan x="150.0" dy="0">MCSMv2.1 uses the MCSMv2.0.1</tspan><tspan x="150.0" dy="14">package, platform, style, wheel…</tspan></text>
+  </g>
+</a>
+<a href="../../../pages/vehicles/mcsmv2-1-source-basis.html#concept-overview" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Concepts. MCSMv2.1 Source Basis">
+    <title>Concepts: MCSMv2.1 Source Basis</title>
+    <rect x="330.0" y="36.0" width="200" height="88" />
+    <text class="label" x="430.0" y="63.0"><tspan x="430.0" dy="0">Concepts</tspan></text>
+    <text class="detail" x="430.0" y="89.0"><tspan x="430.0" dy="0">MCSMv2.1 Source Basis</tspan></text>
+  </g>
+</a>
+<a href="../../../pages/vehicles/mcsmv2-1-source-basis.html#source-lesson" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Source evidence. 1 sections, 0 code blocks, 0 tables.">
+    <title>Source evidence: 1 sections, 0 code blocks, 0 tables.</title>
+    <rect x="610.0" y="106.0" width="200" height="88" />
+    <text class="label" x="710.0" y="133.0"><tspan x="710.0" dy="0">Source evidence</tspan></text>
+    <text class="detail" x="710.0" y="159.0"><tspan x="710.0" dy="0">1 sections, 0 code blocks, 0</tspan><tspan x="710.0" dy="14">tables.</tspan></text>
+  </g>
+</a>
+<a href="../../../pages/vehicles/mcsmv2-1-source-basis.html#verification-guidance" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Verification and status. Document status: Documented. Source signals remain visibly distinguished.">
+    <title>Verification and status: Document status: Documented. Source signals remain visibly distinguished.</title>
+    <rect x="330.0" y="256.0" width="200" height="88" />
+    <text class="label" x="430.0" y="283.0"><tspan x="430.0" dy="0">Verification and status</tspan></text>
+    <text class="detail" x="430.0" y="309.0"><tspan x="430.0" dy="0">Document status: Documented.</tspan><tspan x="430.0" dy="14">Source signals remain visibly…</tspan></text>
+  </g>
+</a></g>
+</svg>

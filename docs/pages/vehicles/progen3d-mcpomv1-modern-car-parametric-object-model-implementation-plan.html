@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Create MCPOMv1, the Modern Car Parametric Object Model v1, by converting the research and generator logic in:" name="description"/>
+<meta content="PROGEN3D_MCP_OMV1_MODERN_CAR_PARAMETRIC_OBJECT_MODEL_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="48de3e4a9aaa2e56547e9b28d8e2e0bf72d0a2162e1ba6eb7f53ac396c135334" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vehicles">Vehicles and Automotive Models</a></li>
+<li aria-current="page">ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan</h1>
+<p class="lead">Create MCPOMv1, the Modern Car Parametric Object Model v1, by converting the research and generator logic in:</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Vehicles and Automotive Models</span>
+<span class="tag">About 11 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_MCP_OMV1_MODERN_CAR_PARAMETRIC_OBJECT_MODEL_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="48de3e4a9aaa2e56547e9b28d8e2e0bf72d0a2162e1ba6eb7f53ac396c135334" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan, Current Baseline, Compatibility Boundary, Current executable grammar.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="mcpomv1-grammar-examples.html">MCPOMv1 Grammar Examples</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan</dfn></td><td>The phrase appears 0 times in the source and is retained as a learning-path concept.</td><td>ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Baseline</td></tr><tr><td><dfn title="Named by the source document">Compatibility Boundary</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Compatibility Boundary</td></tr><tr><td><dfn title="Named by the source document">Current executable grammar</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 Current executable grammar</td></tr><tr><td><dfn title="Named by the source document">Model authority</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.2 Model authority</td></tr><tr><td><dfn title="Named by the source document">Coordinate Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Coordinate Model</td></tr><tr><td><dfn title="Named by the source document">UML-Readable Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>5. UML-Readable Object Model</td></tr><tr><td><dfn title="Named by the source document">Root aggregate</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>5.1 Root aggregate</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">MVP2</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="generated observations with ProGen3D candidate views">MCP</dfn></td><td>generated observations with ProGen3D candidate views</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">MVP</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="JavaScript Object Notation">JSON</dfn></td><td>JavaScript Object Notation</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">EV</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">UML-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr><td><dfn title="Typed MCP_OMv1 model">P1</dfn></td><td>Typed MCP_OMv1 model</td></tr><tr><td><dfn title="Field evaluation and candidate geometry">P2</dfn></td><td>Field evaluation and candidate geometry</td></tr><tr><td><dfn title="Curves, sections, and observations">P3</dfn></td><td>Curves, sections, and observations</td></tr><tr><td><dfn title="Current-parser grammar lowerings">P4</dfn></td><td>Current-parser grammar lowerings</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">P5</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Create MCPOMv1, the Modern Car Parametric Object Model v1, by converting the research and generator logic in:</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan, Current Baseline, Compatibility Boundary, Current executable grammar. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Objective, 2. Current Baseline, 3. Compatibility Boundary, 3.1 Current executable grammar, 3.2 Model authority. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 3, failed: 3, pending: 1, proposed: 5.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 18 code blocks, 2 tables and the source SHA-256 <code>48de3e4a9aaa2e56547e9b28d8e2e0bf72d0a2162e1ba6eb7f53ac396c135334</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-objective">1. Objective</a></li><li><a href="#source-2-current-baseline">2. Current Baseline</a></li><li><a href="#source-3-compatibility-boundary">3. Compatibility Boundary</a></li><li><a href="#source-3-1-current-executable-grammar">3.1 Current executable grammar</a></li><li><a href="#source-3-2-model-authority">3.2 Model authority</a></li><li><a href="#source-4-coordinate-model">4. Coordinate Model</a></li><li><a href="#source-5-uml-readable-object-model">5. UML-Readable Object Model</a></li><li><a href="#source-5-1-root-aggregate">5.1 Root aggregate</a></li><li><a href="#source-5-2-family-and-variant-composition">5.2 Family and variant composition</a></li><li><a href="#source-5-3-parametric-body-composition">5.3 Parametric body composition</a></li><li><a href="#source-5-4-station-functions">5.4 Station functions</a></li><li><a href="#source-5-5-generated-realization">5.5 Generated realization</a></li><li><a href="#source-6-proposed-c-plus-plus-class-layout">6. Proposed C++ Class Layout</a></li><li><a href="#source-7-generator-and-provenance-strategy">7. Generator and Provenance Strategy</a></li><li><a href="#source-8-service-pipeline">8. Service Pipeline</a></li><li><a href="#source-9-mvp2-6-integration-model">9. MVP2.6 Integration Model</a></li><li><a href="#source-10-implementation-work-packages">10. Implementation Work Packages</a></li><li><a href="#source-p0-source-normalization-and-hygiene">P0 - Source normalization and hygiene</a></li><li><a href="#source-lesson">P1 - Typed MCPOMv1 model</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>3</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>3</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>1</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>5</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_MCP_OMV1_MODERN_CAR_PARAMETRIC_OBJECT_MODEL_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan, Current Baseline, Compatibility Boundary, Current executable grammar.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>MCP package parameters to VehiclePackageEvidence candidates;</li><li>MCP character curves to observed curve samples;</li><li>MCP sections to Class-A fitting seeds;</li><li>MCP generated views to VehicleViewObservation candidates;</li><li>MCP style values to soft VehicleShapePrior terms;</li><li>MCP powertrain intent to existing VehiclePowertrainSpecification inputs;</li><li>fit residuals back to VehicleParametricFitReport.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">examples/MVPv2_5_Red_AWD_Hatchback/Modern_Car_MCSMv1/</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan" data="../../assets/diagrams/pages/progen3d-mcpomv1-modern-car-parametric-object-model-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_MCP_OMV1_MODERN_CAR_PARAMETRIC_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>48de3e4a9aaa2e56547e9b28d8e2e0bf72d0a2162e1ba6eb7f53ac396c135334</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>36 headings, 18 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Create MCPOMv1, the Modern Car Parametric Object Model v1, by converting the research and generator logic in:</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan, Current Baseline, Compatibility Boundary, Current executable grammar, Model authority</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="mcpomv1-grammar-examples.html">MCPOMv1 Grammar Examples</a> <span class="status-badge status--documented">Documented</span><br/><small>This directory contains current-parser examples for the planned Modern Car Parametric Object Model v1.</small></li><li><a href="progen3d-mvpv2-hatchback-fitting-implementation-plan.html">ProGen3D MVPv2 Hatchback Fitting Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Promote the red AWD hatchback from an MVPv1 section-loft plus decorative panel-cut model to an MVPv2 spatial fitting model whose body and closures are described by evidence-bearing semantic objects.</small></li><li><a href="progen3d-mcsmv2-2-native-implementation-plan--b0107090.html">ProGen3D MCSMv2.2 Native Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Date: Monday, August 24, 2026</small></li><li><a href="progen3d-mcsmv2-0-1-native-integration-implementation-plan.html">ProGen3D MCSMv2.0.1 Native Integration Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Date: Monday, August 24, 2026 Status: Proposed implementation plan Source release: examples/MVPv25RedAWDHatchback/MCSMv201ModernCarComplete/ Native integration target: examples/MVPv25RedAWDHatchback/MCSMv2ModernCarComplete/</small></li><li><a href="mcsmv2-1-native-implementation-verification.html">MCSMv2.1 Native Implementation Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>Date: Monday, August 24, 2026 Implementation status: Complete Cross-version certification status: Blocked only by the inherited MCPOMv1 side-view baseline</small></li><li><a href="progen3d-mcsmv2-2-native-implementation-plan--07026117.html">ProGen3D MCSMv2.2 Native Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Date: Monday, August 24, 2026</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_MCP_OMV1_MODERN_CAR_PARAMETRIC_OBJECT_MODEL_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_MCP_OMV1_MODERN_CAR_PARAMETRIC_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>48de3e4a9aaa2e56547e9b28d8e2e0bf72d0a2162e1ba6eb7f53ac396c135334</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-mcp-omv1-modern-car-parametric-object-model-implementation-plan">ProGen3D MCP_OMv1 Modern Car Parametric Object Model Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D MCP_OMv1 Modern Car Parametric Object Model Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-1-objective">1. Objective</h3><p class="section-guide">Reading guide: this source section records “1. Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create <code>MCP_OMv1</code>, the Modern Car Parametric Object Model v1, by converting
+the research and generator logic in:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/MVPv2_5_Red_AWD_Hatchback/Modern_Car_MCSMv1/
+</code></pre>
+<p>into a typed, deterministic, provenance-bearing ProGen3D object model.</p>
+<p><code>MCP_OMv1</code> owns the parametric family definition and generated candidate
+realizations. It does not replace the evidence-constrained automotive authority
+already implemented by MVPv2.5. MVP2.6 composes both models:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">MVP2.6
+  = preserved MVPv2.5 semantic authority
+  + MCP_OMv1 parametric family source
+  + explicit source-to-authority fitting evidence
+</code></pre>
+<p>The implementation must retain all MVPv1, MVPv2, and MVPv2.5 compatibility
+gates.</p>
+<h3 id="source-2-current-baseline">2. Current Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The MCSMv1 package currently provides:</p>
+<ul>
+<li>four vehicle variants: reference, track, aero, and crossover;</li>
+<li>package, wheel, style, and powertrain parameters;</li>
+<li>a Python implicit-field and marching-cubes generator;</li>
+<li>generated GLB, OBJ, and watertight body STL artifacts;</li>
+<li>reference-variant character curves and body sections;</li>
+<li>orthographic and isometric previews;</li>
+<li>validation and checksum records;</li>
+<li class="source-status--proposed">a proposed grammar that is explicitly not compatible with the current
+ProGen3D parser.</li>
+</ul>
+<p>The existing MVPv2.5 implementation already owns:</p>
+<ul>
+<li>calibrated reference observations;</li>
+<li>the authoritative vehicle package and reference frame;</li>
+<li>semantic landmarks, wireframe, and silhouette constraints;</li>
+<li>Class-A surface patches and highlight-flow validation;</li>
+<li>panel gaps, apertures, closures, glass motion, and seals;</li>
+<li>BIW, suspension, wheels, tyres, rims, brakes, and wheel houses;</li>
+<li>aero geometry, fitting residuals, and deterministic hashes.</li>
+</ul>
+<p>MCP_OMv1 must therefore be additive. Generated MCSMv1 meshes are candidate
+geometry, not a replacement for the MVPv2.5 semantic graph.</p>
+<h3 id="source-3-compatibility-boundary">3. Compatibility Boundary</h3><p class="section-guide">Reading guide: this source section records “3. Compatibility Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-current-executable-grammar">3.1 Current executable grammar</h4><p class="section-guide">Reading guide: this source section records “3.1 Current executable grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current parser can execute:</p>
+<ul>
+<li>parameterized production rules;</li>
+<li><code>Object</code>, <code>Interface</code>, <code>Position</code>, and <code>Joint</code> records;</li>
+<li>transforms such as <code>T</code>, <code>S</code>, and <code>A</code>;</li>
+<li>procedural shapes including <code>VehicleBodyShell</code>, <code>SurfaceLoft</code>,
+<code>ShellOffset</code>, <code>SweepDisk</code>, <code>Revolve</code>, <code>Extrude</code>, and <code>CompoundShape</code>;</li>
+<li>explicit instance material, alpha, and texture-scale arguments.</li>
+</ul>
+<p>The current parser cannot execute MCSMv1 terms such as
+<code>ImplicitSectionField</code>, <code>IsoSurface</code>, <code>StationInterpolation</code>, or
+<code>GenerateCandidateRealization</code>.</p>
+<p class="source-status--proposed">Every <code>.p3d</code> file added during MCP_OMv1 P0-P5 must therefore use the current
+parser. Future semantic syntax belongs in documentation until the corresponding
+model, parser, evaluator, and geometry services exist.</p>
+<h4 id="source-3-2-model-authority">3.2 Model authority</h4><p class="section-guide">Reading guide: this source section records “3.2 Model authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Semantic fact</th>
+<th scope="col">Canonical owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variant package dimensions</td>
+<td><code>VehiclePackageParameters</code></td>
+</tr>
+<tr>
+<td>Wheel radius, width, and tracks</td>
+<td><code>VehicleWheelParameters</code></td>
+</tr>
+<tr>
+<td>Style factors</td>
+<td><code>VehicleStyleParameters</code></td>
+</tr>
+<tr>
+<td>Powertrain intent</td>
+<td><code>VehiclePowertrainIntent</code></td>
+</tr>
+<tr>
+<td>Station interpolation knots</td>
+<td><code>StationFunction</code></td>
+</tr>
+<tr>
+<td>Lower-body field</td>
+<td><code>LowerBodyFieldDefinition</code></td>
+</tr>
+<tr>
+<td>Greenhouse field</td>
+<td><code>GreenhouseFieldDefinition</code></td>
+</tr>
+<tr>
+<td>Fender blending</td>
+<td><code>FenderFieldDefinition</code> and <code>ImplicitFieldBlendDefinition</code></td>
+</tr>
+<tr>
+<td>Wheelhouse subtraction</td>
+<td><code>WheelhouseDifferenceDefinition</code></td>
+</tr>
+<tr>
+<td>Generated mesh vertices and triangles</td>
+<td><code>GeneratedVehicleRealization</code></td>
+</tr>
+<tr>
+<td>Extracted curves and sections</td>
+<td>generated evidence associated with a realization</td>
+</tr>
+<tr>
+<td>Source files and hashes</td>
+<td><code>ParametricModelSourceManifest</code></td>
+</tr>
+<tr>
+<td>Final Class-A and functional authority</td>
+<td><code>VehicleMvp25Architecture</code> inside MVP2.6</td>
+</tr>
+</tbody>
+</table></div>
+<p>No generated mesh, cache, grammar, or adapter may become a second owner of a
+package or field parameter.</p>
+<h3 id="source-4-coordinate-model">4. Coordinate Model</h3><p class="section-guide">Reading guide: this source section records “4. Coordinate Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>MCSMv1 uses:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">+x = vehicle front
++y = vehicle right
++z = vehicle up
+</code></pre>
+<p>MVP and ProGen3D vehicle models use:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">+X = vehicle right
++Y = vehicle up
++Z = vehicle forward
+</code></pre>
+<p>The authoritative conversion is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">MVP.X = MCSM.y
+MVP.Y = MCSM.z
+MVP.Z = MCSM.x
+</code></pre>
+<p><code>ModernCarCoordinateFrame</code> owns this relationship. Geometry services consume
+the conversion; they must not copy or rediscover it.</p>
+<p>The MCP_OMv1 local origin is the ground projection of the vehicle package
+centre. Axle locations are therefore:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">front axle = (0, wheel radius, +wheelbase / 2)
+rear axle  = (0, wheel radius, -wheelbase / 2)
+</code></pre>
+<h3 id="source-5-uml-readable-object-model">5. UML-Readable Object Model</h3><p class="section-guide">Reading guide: this source section records “5. UML-Readable Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-root-aggregate">5.1 Root aggregate</h4><p class="section-guide">Reading guide: this source section records “5.1 Root aggregate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ModernCarParametricObjectModel
+  *-- ModernCarCoordinateFrame
+  *-- ModernCarFamilyDefinition
+  *-- ParametricModelSourceManifest
+  *-- ParametricModelGenerationPolicy
+  o-- GeneratedVehicleRealization [0..*]
+  o-- ParametricVehicleValidationReport [0..*]
+</code></pre>
+<p><code>GeneratedVehicleRealization</code> is derived from a variant and generation policy.
+It is associated with the root aggregate but does not own the variant source.</p>
+<h4 id="source-5-2-family-and-variant-composition">5.2 Family and variant composition</h4><p class="section-guide">Reading guide: this source section records “5.2 Family and variant composition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ModernCarFamilyDefinition
+  *-- ModernCarVariantDefinition [1..*]
+
+ModernCarVariantDefinition
+  *-- VehiclePackageParameters
+  *-- VehicleWheelParameters
+  *-- VehicleStyleParameters
+  *-- VehiclePowertrainIntent
+  *-- ParametricBodyDefinition
+  *-- VehicleExteriorFeatureDefinition
+</code></pre>
+<h4 id="source-5-3-parametric-body-composition">5.3 Parametric body composition</h4><p class="section-guide">Reading guide: this source section records “5.3 Parametric body composition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ParametricBodyDefinition
+  *-- VehicleLongitudinalDomain
+  *-- LowerBodyFieldDefinition
+  *-- GreenhouseFieldDefinition
+  *-- FenderFieldDefinition
+  *-- WheelhouseDifferenceDefinition
+  *-- ImplicitFieldBlendDefinition
+  *-- ParametricCharacterCurveNetwork
+  *-- ParametricBodySectionNetwork
+</code></pre>
+<h4 id="source-5-4-station-functions">5.4 Station functions</h4><p class="section-guide">Reading guide: this source section records “5.4 Station functions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">StationFunction
+  *-- StationFunctionKnot [2..*]
+</code></pre>
+<p>Each <code>StationFunction</code> has one purpose-revealing identifier, one interpolation
+kind, and an ordered knot list. Examples include:</p>
+<ul>
+<li><code>LowerBodyHalfWidthByStation</code>;</li>
+<li><code>LowerBodyCentreHeightByStation</code>;</li>
+<li><code>GreenhouseHalfWidthByStation</code>;</li>
+<li><code>GreenhouseCentreHeightByStation</code>;</li>
+<li><code>RoofScaleByStation</code>.</li>
+</ul>
+<p>Do not store equivalent sampled tables beside the knot definition. Sampling is
+a derived service result with source-hash provenance.</p>
+<h4 id="source-5-5-generated-realization">5.5 Generated realization</h4><p class="section-guide">Reading guide: this source section records “5.5 Generated realization”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">GeneratedVehicleRealization
+  *-- GeneratedBodyMesh
+  *-- GeneratedCharacterCurveSet
+  *-- GeneratedBodySectionSet
+  *-- GeneratedObservationSet
+  *-- GeneratedArtifactManifest
+</code></pre>
+<p>The realization records:</p>
+<ul>
+<li>source variant identifier;</li>
+<li>source manifest hash;</li>
+<li>generation-policy hash;</li>
+<li>coordinate-frame identifier;</li>
+<li>resolution preset;</li>
+<li>deterministic geometry hash;</li>
+<li>generated artifact paths;</li>
+<li>generation diagnostics.</li>
+</ul>
+<h3 id="source-6-proposed-c-plus-plus-class-layout">6. Proposed C++ Class Layout</h3><p class="section-guide">Reading guide: this source section records “6. Proposed C++ Class Layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/vehicle/parametric/model/
+  ModernCarParametricObjectModel.h
+  ModernCarCoordinateFrame.h
+  ModernCarFamilyDefinition.h
+  ModernCarVariantDefinition.h
+  VehiclePackageParameters.h
+  VehicleWheelParameters.h
+  VehicleStyleParameters.h
+  VehiclePowertrainIntent.h
+  ParametricBodyDefinition.h
+  StationFunction.h
+  LowerBodyFieldDefinition.h
+  GreenhouseFieldDefinition.h
+  FenderFieldDefinition.h
+  WheelhouseDifferenceDefinition.h
+  ImplicitFieldBlendDefinition.h
+  ParametricCharacterCurveNetwork.h
+  ParametricBodySectionNetwork.h
+  VehicleExteriorFeatureDefinition.h
+  GeneratedVehicleRealization.h
+  ParametricModelSourceManifest.h
+  ParametricModelGenerationPolicy.h
+  ParametricVehicleValidationReport.h
+
+include/vehicle/parametric/service/
+  ModernCarParametricCatalogFactory.h
+  ModernCarCoordinateConversionService.h
+  ModernCarFieldEvaluationService.h
+  ModernCarIsoSurfaceGenerationService.h
+  ModernCarCharacterCurveExtractionService.h
+  ModernCarBodySectionExtractionService.h
+  ModernCarObservationGenerationService.h
+  ModernCarParametricValidationService.h
+  ModernCarParametricDeterministicHashService.h
+  ModernCarParametricGrammarLoweringService.h
+  Mvp26ParametricVehicleIntegrationService.h
+</code></pre>
+<p>Inheritance is not required for the initial field classes. They are distinct
+composed concepts with different invariants. A shared abstract field category
+should only be introduced later if all concrete fields genuinely satisfy one
+stable evaluation contract.</p>
+<h3 id="source-7-generator-and-provenance-strategy">7. Generator and Provenance Strategy</h3><p class="section-guide">Reading guide: this source section records “7. Generator and Provenance Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The existing Python generator remains the first source implementation. Do not
+copy its variant constants into handwritten C++.</p>
+<p>Refactor it into importable responsibilities:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">McsM1VariantCatalog
+McsM1FieldDefinitionFactory
+McsM1VehicleGenerator
+McsM1ArtifactWriter
+McsM1ValidationReporter
+</code></pre>
+<p>Add <code>tools/generate_mcp_omv1_artifacts.py</code> as the canonical bridge. It imports
+the refactored MCSMv1 module and writes:</p>
+<ul>
+<li>normalized <code>MCP_OMv1_FamilyDefinition.json</code>;</li>
+<li>normalized <code>MCP_OMv1_SourceManifest.json</code>;</li>
+<li>generated C++ catalog records used by <code>ModernCarParametricCatalogFactory</code>;</li>
+<li>per-variant curve, section, camera, and validation artifacts;</li>
+<li>current-parser <code>.p3d</code> preview lowerings;</li>
+<li>deterministic SHA-256 records.</li>
+</ul>
+<p>The generated C++ records must embed the source JSON hash and must never be
+edited manually. This avoids a runtime JSON dependency while retaining the
+MCSMv1 source as the canonical owner.</p>
+<p>Remove <code>__pycache__</code> and <code>.pyc</code> files from the canonical package and checksum
+manifest. Record exact generator dependency versions in a lock file. Exclude
+timestamps, temporary directories, and machine-specific paths from
+deterministic hashes.</p>
+<h3 id="source-8-service-pipeline">8. Service Pipeline</h3><p class="section-guide">Reading guide: this source section records “8. Service Pipeline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">MCSMv1 source catalog
+  -&gt; MCP_OMv1 normalized catalog generation
+  -&gt; ModernCarParametricCatalogFactory
+  -&gt; ModernCarParametricValidationService
+  -&gt; ModernCarFieldEvaluationService
+  -&gt; ModernCarIsoSurfaceGenerationService
+  -&gt; curve and section extraction services
+  -&gt; observation generation service
+  -&gt; GeneratedVehicleRealization
+  -&gt; grammar lowering or MVP2.6 integration
+</code></pre>
+<p class="source-status--failed">Every stage returns a result object containing value-or-diagnostics. No service
+may silently clamp an invalid package, invent missing station knots, repair an
+unknown coordinate frame, or substitute a mesh after a failed generation.</p>
+<h3 id="source-9-mvp2-6-integration-model">9. MVP2.6 Integration Model</h3><p class="section-guide">Reading guide: this source section records “9. MVP2.6 Integration Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">VehicleMvp26Architecture
+  *-- VehicleMvp25Architecture
+  *-- VehicleVariantDefinition
+  *-- VehicleParametricShapePrior
+  *-- VehicleParametricSourceEvidence
+  *-- VehicleParametricFitReport
+</code></pre>
+<p><code>VehicleMvp26Architecture</code> composes the accepted MVPv2.5 architecture. It must
+not inherit from <code>VehicleMvp25Architecture</code>, because MVP2.6 is an aggregate
+containing an authority model plus new source and fit evidence, not a narrower
+kind of MVPv2.5 architecture.</p>
+<p><code>Mvp26ParametricVehicleIntegrationService</code> performs these explicit mappings:</p>
+<ol>
+<li>MCP package parameters to <code>VehiclePackageEvidence</code> candidates;</li>
+<li>MCP character curves to observed curve samples;</li>
+<li>MCP sections to Class-A fitting seeds;</li>
+<li>MCP generated views to <code>VehicleViewObservation</code> candidates;</li>
+<li>MCP style values to soft <code>VehicleShapePrior</code> terms;</li>
+<li>MCP powertrain intent to existing <code>VehiclePowertrainSpecification</code> inputs;</li>
+<li>fit residuals back to <code>VehicleParametricFitReport</code>.</li>
+</ol>
+<p>MVP package evidence remains hard authority unless a new variant is explicitly
+selected. A variant selection creates a new package definition; it must not
+silently mutate the accepted red hatchback baseline.</p>
+<h3 id="source-10-implementation-work-packages">10. Implementation Work Packages</h3><p class="section-guide">Reading guide: this source section records “10. Implementation Work Packages”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-p0-source-normalization-and-hygiene">P0 - Source normalization and hygiene</h4><p class="section-guide">Reading guide: this source section records “P0 - Source normalization and hygiene”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>refactor <code>modern_car_parametric_model.py</code> into importable responsibilities;</li>
+<li>remove generated Python bytecode from source and checksum ownership;</li>
+<li>pin the generator environment;</li>
+<li>regenerate all source artifacts twice and compare hashes;</li>
+<li>document the source coordinate frame and package-centre origin;</li>
+<li class="source-status--failed">fail if package length differs from front overhang plus wheelbase plus rear
+overhang beyond tolerance.</li>
+</ul>
+<p><strong>Exit gate:</strong> two clean regenerations produce identical normalized records,
+curves, sections, meshes, and hashes.</p>
+<h4 id="source-p1-typed-mcp-omv1-model">P1 - Typed MCP_OMv1 model</h4><p class="section-guide">Reading guide: this source section records “P1 - Typed MCP_OMv1 model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>implement the model classes in Section 6;</li>
+<li>use immutable value semantics after construction;</li>
+<li>separate model, service, relationship, and validation classes;</li>
+<li>implement explicit validation issue codes;</li>
+<li>implement deterministic object-model hashing;</li>
+<li>add a four-variant catalog factory from generated records.</li>
+</ul>
+<p><strong>Exit gate:</strong> the C++ model loads exactly four unique variants and reproduces
+all canonical package and style values without handwritten duplicates.</p>
+<h4 id="source-p2-field-evaluation-and-candidate-geometry">P2 - Field evaluation and candidate geometry</h4><p class="section-guide">Reading guide: this source section records “P2 - Field evaluation and candidate geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>port or bind the generalized superellipsoid field equations;</li>
+<li>implement lower-body and greenhouse field evaluation;</li>
+<li>implement smooth-minimum fender blending;</li>
+<li>implement wheelhouse difference evaluation;</li>
+<li>implement deterministic iso-surface generation with bounded resolution;</li>
+<li>record watertightness, finite geometry, bounds, and topology evidence.</li>
+</ul>
+<p><strong>Exit gate:</strong> each variant produces one finite candidate body whose normalized
+bounds match its package and whose repeated geometry hash is stable.</p>
+<h4 id="source-p3-curves-sections-and-observations">P3 - Curves, sections, and observations</h4><p class="section-guide">Reading guide: this source section records “P3 - Curves, sections, and observations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>export character curves for all four variants, not only reference;</li>
+<li>export body sections for all four variants;</li>
+<li>use deterministic station identifiers and sample ordering;</li>
+<li>generate front, side, and top orthographic observations for every variant;</li>
+<li>generate rear and opposite-side views for MVP2.6 fitting;</li>
+<li>retain camera and projection metadata with every observation.</li>
+</ul>
+<p><strong>Exit gate:</strong> every variant has eight named character curves, a validated body
+section network, and deterministic observation records.</p>
+<h4 id="source-p4-current-parser-grammar-lowerings">P4 - Current-parser grammar lowerings</h4><p class="section-guide">Reading guide: this source section records “P4 - Current-parser grammar lowerings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>implement <code>ModernCarParametricGrammarLoweringService</code>;</li>
+<li>lower packages and coarse silhouettes to supported <code>VehicleBodyShell</code>,
+<code>Revolve</code>, <code>SweepDisk</code>, and <code>Extrude</code> shapes;</li>
+<li>emit one explicit material argument for every <code>I</code> or <code>!I</code> instance;</li>
+<li>emit <code>Start</code> and all production arrows;</li>
+<li>place vehicles upright with <code>+Y</code> up and <code>+Z</code> forward;</li>
+<li>limit preview detail so multi-variant scenes remain below renderer index and
+draw-list budgets.</li>
+</ul>
+<p><strong>Exit gate:</strong> family and adapter grammars parse, generate, render, export, and
+produce deterministic captures without retaining an older scene snapshot.</p>
+<h4 id="source-p5-mvp2-6-adapter">P5 - MVP2.6 adapter</h4><p class="section-guide">Reading guide: this source section records “P5 - MVP2.6 adapter”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add <code>VehicleMvp26Architecture</code>;</li>
+<li>add <code>VehicleVariantDefinition</code>, <code>VehicleParametricShapePrior</code>,
+<code>VehicleParametricSourceEvidence</code>, and <code>VehicleParametricFitReport</code>;</li>
+<li>implement <code>Mvp26ParametricVehicleIntegrationService</code>;</li>
+<li>preserve the accepted MVPv2.5 architecture and hash as a composed member;</li>
+<li>create explicit builders for reference, track, aero, and crossover variants;</li>
+<li>keep <code>RedAwdHatchbackMvp25Builder</code> unchanged as the compatibility builder.</li>
+</ul>
+<p><strong>Exit gate:</strong> the reference variant preserves the accepted MVPv2.5 result,
+while the other variants produce distinct packages and source-evidence hashes.</p>
+<h4 id="source-p6-fit-and-silhouette-validation">P6 - Fit and silhouette validation</h4><p class="section-guide">Reading guide: this source section records “P6 - Fit and silhouette validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>compare MCP-generated observations with ProGen3D candidate views;</li>
+<li>use silhouette intersection-over-union as the primary coarse metric;</li>
+<li>require at least <code>0.80</code> IoU independently for front, side, and top views;</li>
+<li>retain the full five-view MVPv2.5 landmark, character-curve, Class-A,
+closure, chassis, wheel, rim, brake, and fit validations;</li>
+<li>classify package constraints as hard and style resemblance as soft;</li>
+<li class="source-status--failed">fail closed when a view, camera, source hash, or mapping is missing.</li>
+</ul>
+<p class="source-status--passed"><strong>Exit gate:</strong> every variant passes the three-view <code>0.80</code> silhouette floor;
+the reference variant also passes the complete MVP2.6 evidence-constrained
+validation suite.</p>
+<h4 id="source-p7-documentation-and-acceptance-evidence">P7 - Documentation and acceptance evidence</h4><p class="section-guide">Reading guide: this source section records “P7 - Documentation and acceptance evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>add a UML relationship diagram;</li>
+<li>publish source, generated, grammar, native, and visual evidence hashes;</li>
+<li>add a requirement-to-test matrix;</li>
+<li>document known concept-geometry limits such as absent CFD, crash,
+manufacturing, suspension sweep, and homologation validation;</li>
+<li>rerun MVPv1, MVPv2, MVPv2.5, MCP_OMv1, and MVP2.6 compatibility gates.</li>
+</ul>
+<p><strong>Exit gate:</strong> every requirement has one named owner, one validation route, and
+one evidence artifact.</p>
+<h3 id="source-11-required-invariants">11. Required Invariants</h3><p class="section-guide">Reading guide: this source section records “11. Required Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-package">Package</h4><p class="section-guide">Reading guide: this source section records “Package”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>all dimensions are finite and positive;</li>
+<li><code>length = frontOverhang + wheelbase + rearOverhang</code> within tolerance;</li>
+<li>front and rear tracks are smaller than overall width;</li>
+<li>wheel radius and width are positive;</li>
+<li>ground clearance is nonnegative;</li>
+<li>axle centres agree with wheelbase and the package-centre origin.</li>
+</ul>
+<h4 id="source-station-functions">Station functions</h4><p class="section-guide">Reading guide: this source section records “Station functions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>at least two knots;</li>
+<li>finite knot positions and values;</li>
+<li>strictly increasing normalized positions in <code>[0, 1]</code>;</li>
+<li>unique purpose identifier;</li>
+<li>explicit interpolation kind;</li>
+<li>no extrapolation unless the generation policy explicitly permits it.</li>
+</ul>
+<h4 id="source-powertrain">Powertrain</h4><p class="section-guide">Reading guide: this source section records “Powertrain”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>AWD intent names both front and rear driven axles;</li>
+<li>EV variants require an energy-storage envelope;</li>
+<li>EV variants have zero exhaust outlets;</li>
+<li>combustion variants cannot claim a battery-only energy source;</li>
+<li>powertrain intent remains separate from generated exterior detail geometry.</li>
+</ul>
+<h4 id="source-generated-realizations">Generated realizations</h4><p class="section-guide">Reading guide: this source section records “Generated realizations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>source and generation-policy hashes are present;</li>
+<li>all positions are converted to the declared MCP coordinate frame;</li>
+<li>all mesh values are finite;</li>
+<li>package-normalized bounds satisfy tolerance;</li>
+<li>body watertightness is reported explicitly;</li>
+<li>curves and sections reference stable semantic identifiers;</li>
+<li>repeated generation produces identical deterministic hashes.</li>
+</ul>
+<h3 id="source-12-test-and-evidence-matrix">12. Test and Evidence Matrix</h3><p class="section-guide">Reading guide: this source section records “12. Test and Evidence Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Requirement</th>
+<th scope="col">Focused test or artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Four variants and unique identifiers</td>
+<td><code>tests/mcp_omv1_catalog_harness.cpp</code></td>
+</tr>
+<tr>
+<td>Package equations and bounds</td>
+<td><code>ModernCarParametricValidationService</code> tests</td>
+</tr>
+<tr>
+<td>Coordinate conversion</td>
+<td><code>tests/mcp_omv1_coordinate_conversion_harness.cpp</code></td>
+</tr>
+<tr>
+<td>Field samples</td>
+<td><code>tests/mcp_omv1_field_evaluation_harness.cpp</code></td>
+</tr>
+<tr>
+<td>Deterministic generation</td>
+<td>two-run hash comparison</td>
+</tr>
+<tr>
+<td>Curves and sections for every variant</td>
+<td>catalog artifact audit</td>
+</tr>
+<tr>
+<td>Executable grammar syntax</td>
+<td><code>tests/run_mcp_omv1_grammar_checks.sh</code></td>
+</tr>
+<tr>
+<td>Three-view silhouette IoU</td>
+<td><code>tests/run_mcp_omv1_visual_checks.sh</code></td>
+</tr>
+<tr>
+<td>MVP2.6 source adapter</td>
+<td><code>tests/mvp26_parametric_integration_harness.cpp</code></td>
+</tr>
+<tr>
+<td>MVPv2.5 compatibility</td>
+<td>existing MVPv2.5 native and visual scripts</td>
+</tr>
+<tr>
+<td>MVPv2 and MVPv1 compatibility</td>
+<td>existing compatibility scripts</td>
+</tr>
+<tr>
+<td>Source hygiene and provenance</td>
+<td>checksum and manifest audit</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-13-planned-artifacts">13. Planned Artifacts</h3><p class="section-guide">Reading guide: this source section records “13. Planned Artifacts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/MVPv2_5_Red_AWD_Hatchback/Modern_Car_MCP_OMv1/
+  README.md
+  MCP_OMv1_FamilyDefinition.json
+  MCP_OMv1_SourceManifest.json
+  MCP_OMv1_Validation.json
+  MCP_OMv1_Executable_Family_Preview.p3d
+  MCP_OMv1_MVP26_Reference_Adapter.p3d
+  generated/reference/
+  generated/track/
+  generated/aero/
+  generated/crossover/
+</code></pre>
+<p>The two example <code>.p3d</code> files are current-parser demonstrations. They expose
+package, frame, axle, and candidate-geometry concepts, but they are not the
+canonical MCP_OMv1 data store.</p>
+<h3 id="source-14-current-parser-grammar-example">14. Current-Parser Grammar Example</h3><p class="section-guide">Reading guide: this source section records “14. Current-Parser Grammar Example”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The executable family example follows this pattern:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    MCPOMv1Ground
+    MCPOMv1Reference
+    MCPOMv1Track
+    MCPOMv1Aero
+    MCPOMv1Crossover
+
+MCPOMv1Reference -&gt;
+[
+    T(-2.4 0 3.4)
+    Object(
+        id(MCPOMV1_REFERENCE)
+        name(ResearchMedianAwdHotHatch)
+        class(ModernCarParametricVariant)
+        taxonomy(Vehicle ParametricCandidate Hatchback Reference)
+        layer(Equipment)
+        mask(Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCPOMv1VehicleCandidate(4.353 1.816 1.46812 2.6289
+                               1.56825 1.56799 0.13 0.34 0.235)
+    ]
+]
+</code></pre>
+<p>Every instance includes its material inside the same <code>I(...)</code> or <code>!I(...)</code>
+call. Descriptor-only constructs are kept inside <code>Object</code> and <code>Interface</code>
+records rather than emitted as top-level unwrapped text.</p>
+<h3 id="source-15-future-semantic-grammar-contract">15. Future Semantic Grammar Contract</h3><p class="section-guide">Reading guide: this source section records “15. Future Semantic Grammar Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following is a design target, not current executable syntax:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt; ModernCarParametricObjectModel(MCP_OMv1)
+
+ModernCarParametricObjectModel(modelId) -&gt;
+    CoordinateFrame(MCPVehicleFrame)
+    SourceManifest(MCSMv1SourceManifest)
+    FamilyDefinition(ModernCarFamilyV1)
+    GenerationPolicy(MediumDeterministicPolicy)
+    GenerateFamilyRealizations(ModernCarFamilyV1)
+
+VariantDefinition(reference) -&gt;
+    VehiclePackageParameters(...)
+    VehicleWheelParameters(...)
+    VehicleStyleParameters(...)
+    VehiclePowertrainIntent(AWD Combustion)
+    ParametricBodyDefinition(
+        LowerBodyField(...)
+        GreenhouseField(...)
+        FenderField(...)
+        WheelhouseDifference(...)
+        Blend(SmoothMinimum 7.0)
+    )
+
+GenerateVariantRealization(reference) -&gt;
+    EvaluateImplicitField(reference)
+    ExtractIsoSurface(0)
+    ExtractCharacterCurves()
+    ExtractBodySections()
+    GenerateObservations(front side top rear oppositeSide)
+    ValidateParametricRealization()
+    AdaptToMvp26()
+</code></pre>
+<p>This syntax may only become a <code>.p3d</code> grammar after corresponding typed model
+objects, parser productions, semantic validation, evaluation services, and
+deterministic tests are implemented.</p>
+<h3 id="source-16-completion-standard">16. Completion Standard</h3><p class="section-guide">Reading guide: this source section records “16. Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">MCP_OMv1 is complete only when:</p>
+<ul>
+<li>MCSMv1 is refactored and remains the generator source rather than being
+duplicated;</li>
+<li>four typed variants exist with one canonical owner for every parameter;</li>
+<li>coordinate conversion and package-centre placement are explicit;</li>
+<li>all variants generate deterministic body, curve, section, and view evidence;</li>
+<li>current-parser family and adapter grammars execute without diagnostics;</li>
+<li>every variant exceeds <code>0.80</code> silhouette IoU in front, side, and top views;</li>
+<li>the reference variant integrates into MVP2.6 without weakening any accepted
+MVPv2.5 validation;</li>
+<li class="source-status--passed">MVPv1, MVPv2, MVPv2.5, MCP_OMv1, and MVP2.6 gates pass;</li>
+<li>provenance, limitations, hashes, and evidence remain reviewable.</li>
+</ul>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-ch01-ch22-three-view-primitive-set-implementation-plan.html" rel="prev">← Previous: ProGen3D CH01-CH22 Three-View Primitive Set Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-mcsmv2-primitive-implementation-plan.html" rel="next">Next: ProGen3D MCSMv2 Primitive Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

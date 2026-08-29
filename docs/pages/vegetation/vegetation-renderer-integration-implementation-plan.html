@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission." name="description"/>
+<meta content="docs/VEGETATION_RENDERER_INTEGRATION_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="e53a76139d21f9e09486775405b069f132d8fa856320831d55396a279d75638e" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>Vegetation Renderer Integration Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vegetation">Vegetation Systems</a></li>
+<li aria-current="page">Vegetation Renderer Integration Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Vegetation Renderer Integration Implementation Plan</h1>
+<p class="lead">Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Vegetation Systems</span>
+<span class="tag">About 11 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/docs/VEGETATION_RENDERER_INTEGRATION_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="e53a76139d21f9e09486775405b069f132d8fa856320831d55396a279d75638e" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Vegetation Renderer Integration Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Vegetation Renderer Integration Implementation Plan, Current Renderer Boundary, Slice A: Offline Vegetation LOD Bundle, Slice A Evidence.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="improved-building-vegetation-object-model.html">Improved Building Vegetation Object Model</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Vegetation Renderer Integration Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Vegetation Renderer Integration Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Renderer Boundary</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Current Renderer Boundary</td></tr><tr><td><dfn title="Named by the source document">Slice A: Offline Vegetation LOD Bundle</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice A: Offline Vegetation LOD Bundle</td></tr><tr><td><dfn title="Named by the source document">Slice A Evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice A Evidence</td></tr><tr><td><dfn title="Named by the source document">Slice A Limits At Completion</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice A Limits At Completion</td></tr><tr><td><dfn title="Named by the source document">Slice B: Scene And Renderer Integration</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice B: Scene And Renderer Integration</td></tr><tr><td><dfn title="Named by the source document">Slice B Implemented Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice B Implemented Object Model</td></tr><tr><td><dfn title="Named by the source document">Slice B Evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice B Evidence</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="aware geometry while semantic sections, panel cuts, arches, and joints remain present">LOD</dfn></td><td>aware geometry while semantic sections, panel cuts, arches, and joints remain present</td></tr><tr><td><dfn title="preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co">GPU</dfn></td><td>preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co</td></tr><tr><td><dfn title="side generated scene ownership">CPU</dfn></td><td>side generated scene ownership</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">VAO</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">F1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">CPU-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">EBO</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">NVIDIA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">RTX</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">PSNR</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Vegetation Renderer Integration Implementation Plan, Current Renderer Boundary, Slice A: Offline Vegetation LOD Bundle, Slice A Evidence. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Objective, Current Renderer Boundary, Slice A: Offline Vegetation LOD Bundle, Slice A Evidence, Slice A Limits At Completion. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 15, failed: 8, pending: 1, unresolved: 2.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves prose and list evidence and the source SHA-256 <code>e53a76139d21f9e09486775405b069f132d8fa856320831d55396a279d75638e</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-objective">Objective</a></li><li><a href="#source-current-renderer-boundary">Current Renderer Boundary</a></li><li><a href="#source-slice-a-offline-vegetation-lod-bundle">Slice A: Offline Vegetation LOD Bundle</a></li><li><a href="#source-slice-a-evidence">Slice A Evidence</a></li><li><a href="#source-slice-a-limits-at-completion">Slice A Limits At Completion</a></li><li><a href="#source-slice-b-scene-and-renderer-integration">Slice B: Scene And Renderer Integration</a></li><li><a href="#source-slice-b-implemented-object-model">Slice B Implemented Object Model</a></li><li><a href="#source-slice-b-evidence">Slice B Evidence</a></li><li><a href="#source-slice-b-limits">Slice B Limits</a></li><li><a href="#source-slice-c-hardware-a-b-enablement-and-submission-scaling">Slice C: Hardware A/B Enablement And Submission Scaling</a></li><li><a href="#source-slice-c-feasible-reduction-repair">Slice C Feasible Reduction Repair</a></li><li><a href="#source-slice-c-hardware-evidence">Slice C Hardware Evidence</a></li><li><a href="#source-slice-c-decision">Slice C Decision</a></li><li><a href="#source-slice-d-packed-geometry-and-indirect-submission">Slice D: Packed Geometry And Indirect Submission</a></li><li><a href="#source-slice-d-implementation">Slice D Implementation</a></li><li><a href="#source-slice-d-hardware-evidence">Slice D Hardware Evidence</a></li><li><a href="#source-slice-d-decision">Slice D Decision</a></li><li><a href="#source-slice-e-budgeted-representation-residency">Slice E: Budgeted Representation Residency</a></li><li><a href="#source-acceptance-gates">Acceptance Gates</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>15</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>8</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>1</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>0</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>2</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is docs/VEGETATION_RENDERER_INTEGRATION_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: Vegetation Renderer Integration Implementation Plan, Current Renderer Boundary, Slice A: Offline Vegetation LOD Bundle, Slice A Evidence.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Classify every vegetation geometry part into a semantic triangle role.</li><li>Allocate per-part triangle budgets with</li><li>Decimate structural geometry with deterministic protected-edge collapse.</li><li>Remove complete leaf, petal, flower, fruit, or bud organs before simplifying</li><li>Preserve represented organ area by scaling surviving organs around their own</li><li>Construct deterministic semantic and spatial meshlets.</li><li>Package fine-to-coarse representations with object-space geometric error and</li><li>Select representations at runtime from projected screen error, motion bias,</li><li>Add a generic resolved-primitive representation set that can aggregate a</li><li>Generate the bundle while resolving procedural Plant and Vine geometry, then</li><li>Extend ScenePreviewGeometryBatches with per-object vegetation upload records</li><li>Upload all validated representations when scene resources change; do not</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source prose example:</strong> Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission.</p>
+</div>
+<details class="solution"><summary>Worked interpretation</summary><p>Separate the nouns that name project entities from verbs that state behavior. Then classify each behavior as documented, proposed, evidenced, or unresolved using the source status signals. The source contains no fenced code block, so no executable example is invented.</p></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Vegetation Renderer Integration Implementation Plan" data="../../assets/diagrams/pages/vegetation-renderer-integration-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>docs/VEGETATION_RENDERER_INTEGRATION_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>e53a76139d21f9e09486775405b069f132d8fa856320831d55396a279d75638e</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>20 headings, 0 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Vegetation Renderer Integration Implementation Plan, Current Renderer Boundary, Slice A: Offline Vegetation LOD Bundle, Slice A Evidence, Slice A Limits At Completion</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="building-vegetation-object-model-implementation-plan.html">Building Vegetation Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Plan snapshot: August 28, 2026.</small></li><li><a href="building-vegetation-object-model-literature-review.html">Building Vegetation Object Model Literature Review</a> <span class="status-badge status--research">Research</span><br/><small>Research snapshot: August 28, 2026.</small></li><li><a href="building-vegetation-object-model-triangle-distribution-research.html">Building Vegetation Object Model: Triangle Distribution Research</a> <span class="status-badge status--research">Research</span><br/><small>Research snapshot: August 28, 2026.</small></li><li><a href="improved-building-vegetation-object-model.html">Improved Building Vegetation Object Model</a> <span class="status-badge status--documented">Documented</span><br/><small>BVO-OMv2.1 enriches the existing building spatial object model without changing the frozen 124-object SMB inventory.</small></li><li><a href="progen3d-vegetation-grammar-v1-verification.html">Progen3D Vegetation Grammar V1 Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>This document audits the implementation against:</small></li><li><a href="progen3d-vegetation-grammar-implementation-plan.html">Progen3D Vegetation Grammar Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Verification authority: VEGETATIONGRAMMARV1VERIFICATION.md maps every originating requirement to current source, deterministic tests, and supervisor visual evidence. The release command composes the subsystem through runvegetationchecks.sh and runvegetationvisualmatrix.sh.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/docs/VEGETATION_RENDERER_INTEGRATION_IMPLEMENTATION_PLAN.md"><code>docs/VEGETATION_RENDERER_INTEGRATION_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>e53a76139d21f9e09486775405b069f132d8fa856320831d55396a279d75638e</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-vegetation-renderer-integration-implementation-plan">Vegetation Renderer Integration Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “Vegetation Renderer Integration Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Date: 2026-08-28</p>
+<h3 id="source-objective">Objective</h3><p class="section-guide">Reading guide: this source section records “Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Convert the vegetation triangle-distribution contract into executable geometry
+representations that preserve biological structure, projected organ area,
+deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable
+draw submission.</p>
+<h3 id="source-current-renderer-boundary">Current Renderer Boundary</h3><p class="section-guide">Reading guide: this source section records “Current Renderer Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--unresolved">The renderer now preserves vegetation object and representation identity through
+scene admission, selection, packed per-material GPU pages, CPU command planning,
+direct indexed fallback, and multi-draw indirect submission. All LOD levels remain
+resident together, so representation residency rather than command submission is
+the next unresolved scaling boundary.</p>
+<h3 id="source-slice-a-offline-vegetation-lod-bundle">Slice A: Offline Vegetation LOD Bundle</h3><p class="section-guide">Reading guide: this source section records “Slice A: Offline Vegetation LOD Bundle”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: Completed and validated</p>
+<ol>
+<li>Classify every vegetation geometry part into a semantic triangle role.</li>
+<li>Allocate per-part triangle budgets with
+<code>VegetationTriangleDistributionService</code>.</li>
+<li>Decimate structural geometry with deterministic protected-edge collapse.</li>
+<li class="source-status--passed">Remove complete leaf, petal, flower, fruit, or bud organs before simplifying
+surviving organ geometry.</li>
+<li>Preserve represented organ area by scaling surviving organs around their own
+centroids within an explicit scale limit.</li>
+<li>Construct deterministic semantic and spatial meshlets.</li>
+<li>Package fine-to-coarse representations with object-space geometric error and
+stable evidence hashes.</li>
+<li>Select representations at runtime from projected screen error, motion bias,
+silhouette bias, and hysteresis.</li>
+</ol>
+<h4 id="source-slice-a-evidence">Slice A Evidence</h4><p class="section-guide">Reading guide: this source section records “Slice A Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed"><code>tests/run_vegetation_renderer_lod_pipeline_checks.sh</code> passes protected
+structural edge collapse, complete-organ removal, surface-area preservation,
+meshlet limits, deterministic bundle generation, projected-error selection,
+semantic bias, and hysteresis.</li>
+<li><code>tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes the
+preceding triangle-allocation and independent fidelity contracts.</li>
+<li><code>tests/run_vegetation_geometry_assembly_checks.sh</code> passes the existing
+vegetation assembly topology and scale fixtures.</li>
+<li><code>make -j2 progen3d-editor-gui</code> compiles and links the editor with the new
+services.</li>
+<li>Validated editor SHA-256:
+<code>489f3bd447361c28d94c9b4258eabe3422215d95c5d3ffea5f072bc2ad225338</code>.</li>
+</ul>
+<h4 id="source-slice-a-limits-at-completion">Slice A Limits At Completion</h4><p class="section-guide">Reading guide: this source section records “Slice A Limits At Completion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--failed">Billboard cloud construction remains fail-closed and is not represented as
+executable geometry yet.</li>
+<li>At Slice A completion, the renderer did not yet consume
+<code>VegetationLodBundle</code>; Slice B subsequently replaced that limit with the
+generic resolved-representation path.</li>
+<li>No frame-time, upload-bandwidth, overdraw, or memory improvement is claimed
+before Slice B benchmarks the integrated renderer path.</li>
+</ul>
+<h3 id="source-slice-b-scene-and-renderer-integration">Slice B: Scene And Renderer Integration</h3><p class="section-guide">Reading guide: this source section records “Slice B: Scene And Renderer Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: Completed and validated</p>
+<ol>
+<li>Add a generic resolved-primitive representation set that can aggregate a
+vegetation LOD bundle without making scene primitives own vegetation logic.</li>
+<li>Generate the bundle while resolving procedural Plant and Vine geometry, then
+associate it with the admitted scene primitive instance.</li>
+<li>Extend <code>ScenePreviewGeometryBatches</code> with per-object vegetation upload records
+instead of appending those vertices to material-wide opaque buffers.</li>
+<li>Upload all validated representations when scene resources change; do not
+re-upload geometry when only the camera changes.</li>
+<li>Select one representation per visible vegetation object in the render frame,
+after camera matrices and frustum visibility are known.</li>
+<li>Submit selected meshlet ranges through an indexed path while retaining the
+existing direct triangle-array path as fallback.</li>
+<li>Record selected LOD, projected error, submitted meshlets, triangles,
+hysteresis decisions, upload bytes, and fallback use in preview performance
+evidence.</li>
+<li>Add deterministic resource/batch tests, headless camera-distance tests, and
+a before/after frame-time and memory benchmark before enabling the path by
+default.</li>
+</ol>
+<h4 id="source-slice-b-implemented-object-model">Slice B Implemented Object Model</h4><p class="section-guide">Reading guide: this source section records “Slice B Implemented Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>ResolvedPrimitiveRepresentationSet</code> gives admitted primitive geometry one
+generic owner for fine-to-coarse meshes, meshlets, geometric error, and
+deterministic evidence.</li>
+<li><code>PlantGeometryAssemblyService</code> and <code>VineGeometryAssemblyService</code> retain
+semantic vegetation parts long enough to generate LOD bundles during
+procedural resolution.</li>
+<li><code>PreviewVegetationLodObjectFactory</code> converts resolved representations into
+per-object world-space vertex/index uploads while preserving primitive,
+material, meshlet, bounds, error, and evidence identity.</li>
+<li><code>OpenGlPreviewVegetationLodSelectionService</code> applies the shared projected-error
+policy after camera matrices exist and before shadow submission.</li>
+<li><code>OpenGlPreviewVegetationLodObjectResource</code> owns one VAO/VBO/EBO set per
+representation and retains previous selection state for hysteresis.</li>
+<li><code>OpenGlPreviewVegetationLodPass</code> owns visible indexed meshlet submission and
+selected-representation shadow submission; scene and shadow passes compose it
+instead of retaining vegetation-specific procedural blocks.</li>
+<li><code>OpenGlPreviewMaterialResourceBindingService</code> keeps texture and material-record
+binding semantics shared by array, dynamic-instance, and vegetation paths.</li>
+<li><code>PreviewRenderPerformanceEvidence</code> reports object, selection, hysteresis,
+meshlet, projected-error, upload, fallback, triangle, and culling evidence.</li>
+</ul>
+<h4 id="source-slice-b-evidence">Slice B Evidence</h4><p class="section-guide">Reading guide: this source section records “Slice B Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--failed"><code>tests/run_vegetation_renderer_scene_integration_checks.sh</code> passes direct
+resolved-representation upload, object-level batch ownership, opaque and
+transparent fallback counting, near/far selection, hysteresis, fail-closed
+invalid ordering, evidence accounting, indexed draw ownership, and frame
+selection ordering.</li>
+<li class="source-status--passed"><code>tests/run_vegetation_renderer_lod_pipeline_checks.sh</code> continues to pass the
+shared offline decimation, organ-removal, meshlet, and runtime policy gates.</li>
+<li><code>tests/run_scene_preview_resource_checks.sh</code> passes compatibility resource and
+batch ownership gates.</li>
+<li><code>tests/run_scene_preview_rendering_workflow_checks.sh</code> passes render-setting
+propagation and preview workflow ownership after the new configuration was
+added.</li>
+<li class="source-status--passed"><code>tests/run_vegetation_geometry_assembly_checks.sh</code> continues to pass existing
+topology and assembly evidence.</li>
+<li class="source-status--passed"><code>tests/run_open_gl_preview_renderer_architecture_checks.sh</code> passes with the
+frame orchestration, general render-pass, vegetation pass, material binding,
+geometry upload, and render error publication responsibilities below their
+explicit ownership ceilings.</li>
+<li><code>make -j2 progen3d-editor-gui</code> compiles and links the integrated renderer.</li>
+<li>Validated editor SHA-256:
+<code>89ae0efc37ca6ee2c99452da7d91a59eb8fd7cba01bc93836c144945dd4a5957</code>.</li>
+</ul>
+<h4 id="source-slice-b-limits">Slice B Limits</h4><p class="section-guide">Reading guide: this source section records “Slice B Limits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--failed">Vegetation LOD remains an opt-in render setting. Slice C now supplies the
+retained hardware A/B evidence, but default enablement remains blocked by
+representation residency and broader plant-shape coverage.</li>
+<li>Transparent Plant and Vine objects retain the existing sorted direct-array
+compatibility path; alpha-masked indexed vegetation is not yet separated from
+blended transparency.</li>
+<li>Meshlets are submitted with direct <code>glDrawElements</code> calls. GPU meshlet culling,
+multi-draw indirect command generation, and mesh shaders are not claimed.</li>
+<li class="source-status--failed">Billboard cloud construction remains fail-closed.</li>
+<li>Slice B deterministic and compile evidence does not independently establish a
+performance claim; Slice C owns the retained hardware measurements.</li>
+</ul>
+<h3 id="source-slice-c-hardware-a-b-enablement-and-submission-scaling">Slice C: Hardware A/B Enablement And Submission Scaling</h3><p class="section-guide">Reading guide: this source section records “Slice C: Hardware A/B Enablement And Submission Scaling”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: Hardware A/B completed; default enablement deferred</p>
+<ol>
+<li>Add an explicit A/B launch configuration that renders identical vegetation
+scenes with runtime LOD disabled and enabled.</li>
+<li>Add a dense Plant/Vine/grass workload with near, transition, and far camera
+frames plus a fixed material and lighting configuration.</li>
+<li class="source-status--passed">Record GPU pass medians, CPU frame medians, resident representation bytes,
+selected LOD distribution, visible meshlets, triangles, fallback count, and
+upload bytes for both paths.</li>
+<li>Capture deterministic comparison images and reject silhouette, projected
+organ-area, topology, or alpha-coverage regressions before enabling by
+default.</li>
+<li>Assess grouped multi-draw indirect submission from the measured direct draw
+count instead of assuming that additional command infrastructure is useful.</li>
+<li>Decide default enablement from measured performance, visual fidelity,
+selection stability, and representation residency evidence.</li>
+</ol>
+<h4 id="source-slice-c-feasible-reduction-repair">Slice C Feasible Reduction Repair</h4><p class="section-guide">Reading guide: this source section records “Slice C Feasible Reduction Repair”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">The first retained hardware A/B run exposed that every production vegetation
+bundle had collapsed to <code>lod0_full</code>. The default representation factory retried
+generation by removing coarse levels whenever any part failed. Two valid
+semantic constraints made arbitrary distributed triangle counts unreachable:</p>
+<ul>
+<li>Protected petiole and stem endpoints can leave no legal structural edge
+collapse at the requested count.</li>
+<li class="source-status--passed">Complete-organ removal can require more leaf or flower triangles than the
+distributed count in order to preserve represented area within the configured
+linear scale.</li>
+</ul>
+<p>The repaired contract treats a distributed triangle count as a requested budget,
+not permission to violate botanical semantics:</p>
+<ul>
+<li><code>VegetationStructuralMeshDecimationService</code> now returns the closest legal
+topology it can reach and records requested versus actual triangles, including
+unchanged protected parts.</li>
+<li class="source-status--passed"><code>VegetationOrganAreaPreservingReductionService</code> first retains complete organs
+within the request, then retains additional complete organs until the
+configured area-preservation scale is satisfied.</li>
+<li><code>VegetationOfflineLodGenerationService</code> composes the actual feasible part
+results; representation triangle counts remain deterministic and decreasing at
+the assembly level.</li>
+<li><code>tests/run_vegetation_default_lod_representation_checks.sh</code> proves four
+decreasing default representations for real <code>GrassClump</code>, <code>Shrub</code>, and
+<code>IvyVine</code> catalog geometry.</li>
+</ul>
+<h4 id="source-slice-c-hardware-evidence">Slice C Hardware Evidence</h4><p class="section-guide">Reading guide: this source section records “Slice C Hardware Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>tests/run_vegetation_renderer_lod_ab_checks.sh --refresh</code> runs three independent
+process repetitions for each near, transition, and far camera state in both
+<code>full</code> and <code>lod</code> modes. Each process reports the median of eight non-blocking GPU
+timing samples and produces a deterministic capture. Retained evidence lives in
+<code>tests/evidence/vegetation_renderer_lod_ab_2026-08-28.json</code>.</p>
+<ul>
+<li>Hardware: NVIDIA GeForce RTX 5060 Ti, direct OpenGL 4.6, 16,311 MB dedicated
+video memory.</li>
+<li>Near: runtime LOD submits 74.0% of full triangles and uses 85.8% of full GPU
+time; one-pixel-tolerant green silhouette F1 is 98.4% and represented green
+area is 101.2%.</li>
+<li>Transition: runtime LOD submits 66.8% of full triangles and uses 70.3% of full
+GPU time; silhouette F1 is 96.2%, represented green area is 98.7%, and PSNR is
+40.9 dB.</li>
+<li>Far: runtime LOD selects <code>0,0,6,20</code> objects across LOD0-LOD3, submits 60.1% of
+full triangles and 62.2% of full meshlets, and uses 63.2% of full GPU time;
+silhouette F1 is 94.0%, represented green area is 94.3%, and PSNR is 47.7 dB.</li>
+<li>All A/B modes use the same resources and report 224,159,696 resident vegetation
+representation bytes. Runtime selection therefore reduces submission work but
+does not yet reduce representation residency.</li>
+<li>Far runtime LOD still emits 25,148 direct scene draws, decisively exceeding the
+retained indirect-submission candidate threshold of 128 draws.</li>
+</ul>
+<h4 id="source-slice-c-decision">Slice C Decision</h4><p class="section-guide">Reading guide: this source section records “Slice C Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The integrated runtime LOD path is validated for the retained dense vegetation
+fixture and now has measured CPU, GPU, geometry, selection, and visual evidence.</li>
+<li>Runtime LOD remains disabled by default. The current all-level residency cost
+and limited catalog/view coverage do not justify global enablement yet.</li>
+<li>Multi-draw indirect submission is justified as the next renderer slice because
+direct per-meshlet submission remains the dominant scaling defect after LOD.</li>
+<li class="source-status--failed">Billboard clouds remain fail-closed until alpha coverage, cross-fade, and
+shadow behavior have independent evidence.</li>
+</ul>
+<h3 id="source-slice-d-packed-geometry-and-indirect-submission">Slice D: Packed Geometry And Indirect Submission</h3><p class="section-guide">Reading guide: this source section records “Slice D: Packed Geometry And Indirect Submission”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: Completed and validated</p>
+<ol>
+<li>Introduce a purpose-driven <code>VegetationIndirectSubmissionBatch</code> model that
+groups selected opaque meshlets by compatible material, vertex layout, and
+shared index-buffer ownership.</li>
+<li>Replace per-object VAO/EBO ownership where necessary with packed vegetation
+geometry pages so one <code>glMultiDrawElementsIndirect</code> call can submit many
+selected meshlets without changing material semantics.</li>
+<li>Build indirect commands from the already selected representation and CPU
+frustum result first; add GPU command compaction only after the CPU-generated
+command path has deterministic evidence.</li>
+<li class="source-status--failed">Preserve the direct indexed path as a fail-closed fallback and report command
+count, packed-buffer bytes, visible meshlets, rejected commands, and fallback
+use in <code>PreviewRenderPerformanceEvidence</code>.</li>
+<li>Repeat the near/transition/far hardware A/B matrix against direct indexed
+submission and require unchanged captures, reduced CPU submission cost, and
+no GPU regression before adopting indirect submission.</li>
+<li>Keep multi-draw indirect opt-in until additional plant architectures,
+alpha-masked foliage, blended transparent vegetation, animated wind, and
+broader material ordering are covered.</li>
+</ol>
+<h4 id="source-slice-d-implementation">Slice D Implementation</h4><p class="section-guide">Reading guide: this source section records “Slice D Implementation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewVegetationPackedPageResource</code> owns one shared VAO, vertex buffer,
+index buffer, and preallocated indirect command buffer per vegetation material.</li>
+<li>Each representation owns explicit packed-page, first-index, base-vertex,
+vertex-count, and index-count metadata rather than private GL buffers.</li>
+<li><code>OpenGlPreviewVegetationIndirectCommandService</code> preserves object order while
+producing contiguous compatible command batches from the selected LOD and CPU
+frustum result.</li>
+<li><code>OpenGlPreviewVegetationSubmissionService</code> submits those exact commands through
+either <code>glDrawElementsBaseVertex</code> or <code>glMultiDrawElementsIndirect</code>; unavailable
+or over-capacity indirect storage falls back to direct indexed submission.</li>
+<li><code>--vegetation-submission-mode direct|indirect</code> exposes an A/B control while the
+configured default remains direct indexed.</li>
+<li>Performance evidence reports packed pages, command capacity, indirect batches,
+command count, ABI upload bytes, rejected commands, fallback commands, and
+direct versus indirect scene draw calls.</li>
+</ul>
+<h4 id="source-slice-d-hardware-evidence">Slice D Hardware Evidence</h4><p class="section-guide">Reading guide: this source section records “Slice D Hardware Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>tests/run_vegetation_renderer_submission_ab_checks.sh --refresh</code> runs three
+independent process repetitions for each near, transition, and far camera state
+in direct and indirect modes. Retained evidence and six captures live in
+<code>tests/evidence/vegetation_renderer_submission_ab_2026-08-28.json</code> and
+<code>tests/evidence/vegetation_renderer_submission_ab_2026-08-28/</code>.</p>
+<ul>
+<li>Hardware: NVIDIA GeForce RTX 5060 Ti, direct OpenGL 4.6.</li>
+<li>Every direct/indirect capture pair is byte-identical.</li>
+<li>Every state reports one packed page, zero rejected commands, zero direct
+fallback commands, and one indirect batch when indirect mode is requested.</li>
+<li>Near: CPU ratio is 38.4%, total GPU ratio is 80.7%, and draw-call ratio is
+0.057% of direct submission.</li>
+<li>Transition: CPU ratio is 33.4%, total GPU ratio is 57.9%, and draw-call ratio is
+0.033% of direct submission.</li>
+<li>Far: CPU ratio is 35.0%, total GPU ratio is 53.6%, opaque GPU ratio is 51.8%,
+and draw-call ratio is 0.036% of direct submission.</li>
+<li>Far submission changes from 25,148 direct scene draws to two non-vegetation
+direct draws plus one vegetation indirect draw while preserving 459,039
+submitted triangles and 25,146 visible meshlet commands.</li>
+<li>Direct and indirect modes both retain 224,159,696 vegetation bytes. Indirect
+submission fixes command scaling but does not reduce representation residency.</li>
+</ul>
+<h4 id="source-slice-d-decision">Slice D Decision</h4><p class="section-guide">Reading guide: this source section records “Slice D Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The packed-page and CPU-generated multi-draw indirect path is validated for the
+retained dense opaque vegetation fixture.</li>
+<li>Multi-draw indirect remains disabled by default until alpha-masked, transparent,
+wind-deformed, multi-material, and broader plant coverage is retained.</li>
+<li>GPU command compaction is not justified: one CPU-built indirect batch already
+removes the dominant direct-call overhead for the retained fixture.</li>
+<li>Representation residency is now the next renderer integration slice.</li>
+</ul>
+<h3 id="source-slice-e-budgeted-representation-residency">Slice E: Budgeted Representation Residency</h3><p class="section-guide">Reading guide: this source section records “Slice E: Budgeted Representation Residency”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Status: Next renderer integration slice</p>
+<ol>
+<li>Introduce a <code>VegetationRepresentationResidencyPolicy</code> model with explicit
+always-resident, distance-window, and budgeted-working-set policies.</li>
+<li>Split packed material pages into independently resident representation segments
+so unused LOD tiers can be uploaded, retained, and evicted without destroying
+selected-object or shared-material identity.</li>
+<li>Keep CPU representation metadata and evidence hashes resident while GPU
+geometry residency changes; never infer missing geometry from another tier.</li>
+<li class="source-status--unresolved">Prefetch the selected representation and one hysteresis-neighbor tier, retain
+the previous valid tier until replacement upload completes, and fail closed to
+the direct compatibility path on an unresolved residency miss.</li>
+<li>Add fence-safe staged upload and retirement so no in-flight indirect command
+references an evicted page segment.</li>
+<li class="source-status--pending">Report requested, resident, pending-upload, evicted, reused, and peak vegetation
+bytes; residency hits, misses, substitutions, and upload latency; and the exact
+representation set resident for each camera state.</li>
+<li>Repeat near/transition/far movement and camera-reversal tests under constrained
+budgets, requiring unchanged steady-state captures, bounded transition latency,
+no invalid command references, and a material resident-byte reduction.</li>
+<li>Extend the fixture matrix to alpha-masked foliage, blended vines, wind animation,
+multiple vegetation materials, and broader plant architectures before changing
+either runtime LOD or indirect submission defaults.</li>
+</ol>
+<h3 id="source-acceptance-gates">Acceptance Gates</h3><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Structural output contains no invalid or degenerate triangles.</li>
+<li>Protected boundaries and botanical junction surfaces are not collapsed.</li>
+<li class="source-status--passed">Organ reduction removes complete organ groups identified by
+<code>objectPartIndex()</code>.</li>
+<li>Organ area preservation stays within its configured linear scale limit.</li>
+<li>Meshlets respect both vertex and triangle limits.</li>
+<li>LOD generation and selection are input-order independent and deterministic.</li>
+<li>Runtime selection uses projected error rather than fixed distance bands.</li>
+<li>Renderer integration retains a compatibility fallback and reports evidence;
+performance improvement is not claimed until measured.</li>
+</ul>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="vegetation-building-objects-three-view-match-report.html" rel="prev">← Previous: Vegetation Building Objects Three-View Match Report</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="../validation/progen3d-p0-p1-and-p2-verification.html" rel="next">Next: Progen3D P0, P1, and P2 verification →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

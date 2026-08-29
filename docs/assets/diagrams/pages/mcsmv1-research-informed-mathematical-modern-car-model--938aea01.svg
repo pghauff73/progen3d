@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 410" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">Learning map for MCSMv1: Research-Informed Mathematical Modern-Car Model</title>
+  <desc id="diagram-description">The learning map moves from the document purpose to its concepts, then to exact source evidence and finally to verification and status interpretation.</desc>
+  <style>
+    :root { color-scheme: light; }
+    line, path { fill: none; stroke: #7892b1; stroke-width: 3; }
+    .node rect { fill: #f8fbff; stroke: #135f9e; stroke-width: 2.5; rx: 16; }
+    .node text { fill: #172033; font-family: system-ui, sans-serif; text-anchor: middle; }
+    .node .label { font-size: 16px; font-weight: 800; }
+    .node .detail { fill: #526079; font-size: 11px; }
+    .node--emphasized rect { fill: #dceefe; stroke-width: 4; }
+    .node:focus rect, .node:hover rect { fill: #fff0c7; stroke: #8b2532; }
+    a:focus { outline: none; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+  <g aria-hidden="true"><path d="M230 145 C300 100, 340 90, 350 90" /><path d="M510 90 C600 90, 630 110, 640 140" /><path d="M690 205 C630 275, 570 300, 510 300" /><path d="M350 300 C250 290, 185 235, 160 210" /></g>
+  <g>
+<a href="../../../pages/vehicles/mcsmv1-research-informed-mathematical-modern-car-model--938aea01.html#summary" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Purpose. This package contains four original parametric 3D vehicles. Manufacturer data are used as dimensional and architectural reference points only; none of the meshes is a copy of a production CAD model.">
+    <title>Purpose: This package contains four original parametric 3D vehicles. Manufacturer data are used as dimensional and architectural reference points only; none of the meshes is a copy of a production CAD model.</title>
+    <rect x="50.0" y="106.0" width="200" height="88" />
+    <text class="label" x="150.0" y="133.0"><tspan x="150.0" dy="0">Purpose</tspan></text>
+    <text class="detail" x="150.0" y="159.0"><tspan x="150.0" dy="0">This package contains four</tspan><tspan x="150.0" dy="14">original parametric 3D vehicles…</tspan></text>
+  </g>
+</a>
+<a href="../../../pages/vehicles/mcsmv1-research-informed-mathematical-modern-car-model--938aea01.html#concept-overview" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Concepts. MCSMv1: Research-Informed Mathematical Modern-Car Model, Deliverable, Internet research data">
+    <title>Concepts: MCSMv1: Research-Informed Mathematical Modern-Car Model, Deliverable, Internet research data</title>
+    <rect x="330.0" y="36.0" width="200" height="88" />
+    <text class="label" x="430.0" y="63.0"><tspan x="430.0" dy="0">Concepts</tspan></text>
+    <text class="detail" x="430.0" y="89.0"><tspan x="430.0" dy="0">MCSMv1: Research-Informed</tspan><tspan x="430.0" dy="14">Mathematical Modern-Car Model…</tspan></text>
+  </g>
+</a>
+<a href="../../../pages/vehicles/mcsmv1-research-informed-mathematical-modern-car-model--938aea01.html#source-lesson" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Source evidence. 13 sections, 5 code blocks, 2 tables.">
+    <title>Source evidence: 13 sections, 5 code blocks, 2 tables.</title>
+    <rect x="610.0" y="106.0" width="200" height="88" />
+    <text class="label" x="710.0" y="133.0"><tspan x="710.0" dy="0">Source evidence</tspan></text>
+    <text class="detail" x="710.0" y="159.0"><tspan x="710.0" dy="0">13 sections, 5 code blocks, 2</tspan><tspan x="710.0" dy="14">tables.</tspan></text>
+  </g>
+</a>
+<a href="../../../pages/vehicles/mcsmv1-research-informed-mathematical-modern-car-model--938aea01.html#verification-guidance" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Verification and status. Document status: Research. Source signals remain visibly distinguished.">
+    <title>Verification and status: Document status: Research. Source signals remain visibly distinguished.</title>
+    <rect x="330.0" y="256.0" width="200" height="88" />
+    <text class="label" x="430.0" y="283.0"><tspan x="430.0" dy="0">Verification and status</tspan></text>
+    <text class="detail" x="430.0" y="309.0"><tspan x="430.0" dy="0">Document status: Research. Source</tspan><tspan x="430.0" dy="14">signals remain visibly…</tspan></text>
+  </g>
+</a></g>
+</svg>

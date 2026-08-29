@@ -1,0 +1,11 @@
+{
+  "file": "/mnt/data/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d",
+  "syntax_class": "proposed_extended_progen3d",
+  "line_count": 2382,
+  "rule_definitions": 145,
+  "unique_rule_definitions": 145,
+  "duplicate_rule_names": [],
+  "delimiter_errors": [],
+  "current_parser_compatible": false,
+  "note": "Proposed grammar uses not-yet-implemented operators. Structural delimiter/rule-name validation only."
+}

@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Implement a Progen3dDesignAgent inside the editor as a proposal-first application service." name="description"/>
+<meta content="PROGEN3D_AGENT_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="38d798cbef6fa8f9de8078c3386cd8a6055462bebbc5b8e600b5154ac37f5572" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Design Agent Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-plans-research">Plans and Research</a></li>
+<li aria-current="page">ProGen3D Design Agent Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Design Agent Implementation Plan</h1>
+<p class="lead">Implement a Progen3dDesignAgent inside the editor as a proposal-first application service.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Plans and Research</span>
+<span class="tag">About 34 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_AGENT_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="38d798cbef6fa8f9de8078c3386cd8a6055462bebbc5b8e600b5154ac37f5572" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Design Agent Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Design Agent Implementation Plan, Executive Decision, Current Repository Baseline, Existing Components to Preserve.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Design Agent Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Design Agent Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Executive Decision</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Executive Decision</td></tr><tr><td><dfn title="Named by the source document">Current Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Existing Components to Preserve</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Existing Components to Preserve</td></tr><tr><td><dfn title="Named by the source document">Existing Behavior That Is Not Yet a Governed Agent</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Existing Behavior That Is Not Yet a Governed Agent</td></tr><tr><td><dfn title="Named by the source document">Working-Tree Constraint</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 Working-Tree Constraint</td></tr><tr><td><dfn title="Named by the source document">Scope</dfn></td><td>The phrase appears 3 times in the source and is retained as a learning-path concept.</td><td>3. Scope, 3.1 MVP Scope, 3.2 Deferred Scope</td></tr><tr><td><dfn title="Named by the source document">MVP Scope</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 MVP Scope</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="publication harnesses">AI</dfn></td><td>publication harnesses</td></tr><tr><td><dfn title="image upload/release behavior">UI</dfn></td><td>image upload/release behavior</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">MVP</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ID</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">DTO</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co">GPU</dfn></td><td>preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co</td></tr><tr><td><dfn title="operation-independent creation and deterministic release boundary, while the existing `PreviewMateria">API</dfn></td><td>operation-independent creation and deterministic release boundary, while the existing `PreviewMateria</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">EVP</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="JavaScript Object Notation">JSON</dfn></td><td>JavaScript Object Notation</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">README</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Implement a Progen3dDesignAgent inside the editor as a proposal-first application service.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Design Agent Implementation Plan, Executive Decision, Current Repository Baseline, Existing Components to Preserve. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Executive Decision, 2. Current Repository Baseline, 2.1 Existing Components to Preserve, 2.2 Existing Behavior That Is Not Yet a Governed Agent. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 31, failed: 25, pending: 7, proposed: 47, unresolved: 7.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 19 code blocks, 2 tables and the source SHA-256 <code>38d798cbef6fa8f9de8078c3386cd8a6055462bebbc5b8e600b5154ac37f5572</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-executive-decision">1. Executive Decision</a></li><li><a href="#source-2-current-repository-baseline">2. Current Repository Baseline</a></li><li><a href="#source-2-1-existing-components-to-preserve">2.1 Existing Components to Preserve</a></li><li><a href="#source-2-2-existing-behavior-that-is-not-yet-a-governed-agent">2.2 Existing Behavior That Is Not Yet a Governed Agent</a></li><li><a href="#source-2-3-working-tree-constraint">2.3 Working-Tree Constraint</a></li><li><a href="#source-3-scope">3. Scope</a></li><li><a href="#source-3-1-mvp-scope">3.1 MVP Scope</a></li><li><a href="#source-3-2-deferred-scope">3.2 Deferred Scope</a></li><li><a href="#source-4-architectural-invariants">4. Architectural Invariants</a></li><li><a href="#source-4-1-authority-invariants">4.1 Authority Invariants</a></li><li><a href="#source-4-2-generation-invariants">4.2 Generation Invariants</a></li><li><a href="#source-4-3-compatibility-invariants">4.3 Compatibility Invariants</a></li><li><a href="#source-5-target-object-model">5. Target Object Model</a></li><li><a href="#source-5-1-model-classes">5.1 Model Classes</a></li><li><a href="#source-agentoperationmode">AgentOperationMode</a></li><li><a href="#source-grammarsourcefingerprint">GrammarSourceFingerprint</a></li><li><a href="#source-agentdesignrequest">AgentDesignRequest</a></li><li><a href="#source-agentproviderresponse">AgentProviderResponse</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>31</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>25</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>7</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>47</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>7</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_AGENT_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Design Agent Implementation Plan, Executive Decision, Current Repository Baseline, Existing Components to Preserve.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>capture an immutable snapshot of the current grammar and editor context;</li><li>send a structured request through a replaceable model-provider boundary;</li><li>receive an explanation or candidate grammar proposal;</li><li>compile and validate proposed grammar in an isolated candidate runtime;</li><li>collect deterministic evidence about the candidate scene;</li><li>present source differences, diagnostics, evidence, and preview controls;</li><li>require human approval bound to the exact candidate source fingerprint;</li><li>reject stale or changed candidates;</li><li>publish only through an explicit publication authority; and</li><li>retain a rollback transaction for every accepted proposal.</li><li>rebuild the selected source;</li><li>compute a new selected candidate fingerprint;</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">schema_version
+operation_mode
+user_instruction
+document_source
+document_source_fingerprint
+selected_source
+selected_source_range
+deterministic_diagnostics
+conversation_history
+document_metadata
+candidate_design_nonce</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Design Agent Implementation Plan" data="../../assets/diagrams/pages/progen3d-design-agent-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_AGENT_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>38d798cbef6fa8f9de8078c3386cd8a6055462bebbc5b8e600b5154ac37f5572</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>152 headings, 19 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_authentication_ai_workflow_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_ai_grammar_proposal_review_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_completed_scene_generation_publication_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_editor_scene_generation_runtime_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_preview_session_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_progen3d_agent_source_contract_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_progen3d_agent_model_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_progen3d_agent_provider_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Implement a Progen3dDesignAgent inside the editor as a proposal-first application service.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Design Agent Implementation Plan, Executive Decision, Current Repository Baseline, Existing Components to Preserve, Existing Behavior That Is Not Yet a Governed Agent</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-editor-gui-implementation-plan.html">Progen3D Editor GUI Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create progen3d-editor-gui as a maintainable desktop editor for authoring, validating, previewing, animating, storing, and exporting ProGen3D grammar documents.</small></li><li><a href="progen3d-canonical-material-catalog-proposal.html">ProGen3D Canonical Material Catalog Proposal</a> <span class="status-badge status--proposed">Proposed</span><br/><small>Implemented in the current workspace:</small></li><li><a href="../geometry-rendering/progen3d-axialprofilev1-core-primitive-implementation-plan.html">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</small></li><li><a href="../geometry-rendering/progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="../vehicles/progen3d-mcsmv2-2-native-implementation-plan--b0107090.html">ProGen3D MCSMv2.2 Native Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Date: Monday, August 24, 2026</small></li><li><a href="../buildings/progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_AGENT_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_AGENT_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>38d798cbef6fa8f9de8078c3386cd8a6055462bebbc5b8e600b5154ac37f5572</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-design-agent-implementation-plan">ProGen3D Design Agent Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Design Agent Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Project:</strong> ProGen3D</li>
+<li><strong>Target executable:</strong> <code>progen3d-editor-gui</code></li>
+<li><strong>Plan date:</strong> August 27, 2026</li>
+<li class="source-status--proposed"><strong>Status:</strong> Proposed implementation sequence; implementation not started by this document</li>
+<li><strong>Primary technology:</strong> C++17, Dear ImGui, GLFW, OpenGL, existing backend AI API</li>
+<li><strong>Primary release goal:</strong> Validated grammar-repair and grammar-authoring agent</li>
+<li><strong>Authority model:</strong> Model output is advisory; deterministic validation and exact-candidate human approval are authoritative</li>
+</ul>
+<h3 id="source-1-executive-decision">1. Executive Decision</h3><p class="section-guide">Reading guide: this source section records “1. Executive Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">Implement a <code>Progen3dDesignAgent</code> inside the editor as a proposal-first application service.</p>
+<p>The agent will:</p>
+<ol>
+<li>capture an immutable snapshot of the current grammar and editor context;</li>
+<li>send a structured request through a replaceable model-provider boundary;</li>
+<li class="source-status--proposed">receive an explanation or candidate grammar proposal;</li>
+<li class="source-status--proposed">compile and validate proposed grammar in an isolated candidate runtime;</li>
+<li>collect deterministic evidence about the candidate scene;</li>
+<li>present source differences, diagnostics, evidence, and preview controls;</li>
+<li>require human approval bound to the exact candidate source fingerprint;</li>
+<li>reject stale or changed candidates;</li>
+<li>publish only through an explicit publication authority; and</li>
+<li class="source-status--proposed">retain a rollback transaction for every accepted proposal.</li>
+</ol>
+<p>The provider will never receive direct document, filesystem, shell, OpenGL, or publication authority.</p>
+<p>The first release will support these agent modes:</p>
+<ul>
+<li><code>ExplainSelection</code></li>
+<li><code>DiagnoseGrammar</code></li>
+<li><code>RepairGrammar</code></li>
+<li><code>DraftGrammar</code></li>
+</ul>
+<p>Variant exploration, visual-reference reasoning, and multi-document planning are later releases and must use the same validation and approval path.</p>
+<h3 id="source-2-current-repository-baseline">2. Current Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-existing-components-to-preserve">2.1 Existing Components to Preserve</h4><p class="section-guide">Reading guide: this source section records “2.1 Existing Components to Preserve”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository already contains the major editor boundaries required for an agent implementation:</p>
+<ul>
+<li><code>AiAssistantPanel</code> presents requests, conversation threads, responses, and modes.</li>
+<li class="source-status--proposed"><code>AiGrammarProposalPanel</code> presents line-based proposal differences and explicit acceptance or rejection controls.</li>
+<li class="source-status--proposed"><code>AiConversationWorkflowService</code> assembles the current source, selection, diagnostics, thread, and request fields before calling an AI proposal service.</li>
+<li><code>AiGrammarProposalService</code> and <code>BackendAiGrammarProposalService</code> isolate the current backend transport.</li>
+<li><code>AiGrammarProposalPublicationService</code> prevents direct presentation-layer document mutation and rejects proposals based on changed source text.</li>
+<li><code>EditorDocumentPublicationService</code> is the existing document-edit publication path.</li>
+<li><code>GrammarStructuralValidationService</code> is the existing structural validation service.</li>
+<li><code>GrammarCompilationService</code>, <code>SceneRegenerationCoordinator</code>, and <code>EditorSceneGenerationRuntime</code> provide asynchronous scene generation machinery.</li>
+<li><code>CompletedSceneGenerationPublicationService</code> preserves the last valid scene when generation or preview preparation fails.</li>
+<li><code>ScenePreviewPublicationPreparationService</code> and <code>OpenGlScenePreviewResourceService</code> prepare candidate scene resources before canonical scene publication.</li>
+<li><code>ScenePreviewSession</code> owns the last valid published <code>GeneratedSceneSnapshot</code>.</li>
+<li><code>EditorApplicationRuntimeContext</code> exposes presentation and workflow associations.</li>
+<li><code>Progen3dEditorApplication</code> is the composition root.</li>
+</ul>
+<h4 id="source-2-2-existing-behavior-that-is-not-yet-a-governed-agent">2.2 Existing Behavior That Is Not Yet a Governed Agent</h4><p class="section-guide">Reading guide: this source section records “2.2 Existing Behavior That Is Not Yet a Governed Agent”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">The current AI workflow is a useful proposal UI, but it does not yet establish a complete design-agent authority model:</p>
+<ul>
+<li>The backend returns a full grammar string rather than a domain-level candidate with a client-owned identity.</li>
+<li class="source-status--proposed">Proposal identity is based on source-text equality rather than an explicit cryptographic source fingerprint.</li>
+<li class="source-status--proposed">A received grammar proposal is staged for review before deterministic candidate compilation has passed.</li>
+<li>Accepted selected changes are composed immediately and are not revalidated as a new exact candidate before publication.</li>
+<li>Acceptance replaces editor source and schedules a new generation rather than publishing the exact scene candidate that was reviewed.</li>
+<li>The reviewed evidence is therefore not necessarily bound to the scene produced after acceptance.</li>
+<li class="source-status--unresolved">Candidate diagnostics, generation statistics, source associations, and unresolved constraints are not represented by a dedicated evidence model.</li>
+<li>Candidate preview state is not separated from the published <code>ScenePreviewSession</code>.</li>
+<li>There is no durable approval object, append-only transaction record, or user-visible rollback operation.</li>
+<li>Provider DTOs from <code>BackendApiClient.h</code> are stored directly in editor domain state.</li>
+<li>Provider requests are synchronous from the workflow call site and can block the interactive interface.</li>
+</ul>
+<h4 id="source-2-3-working-tree-constraint">2.3 Working-Tree Constraint</h4><p class="section-guide">Reading guide: this source section records “2.3 Working-Tree Constraint”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository currently contains extensive unrelated modified, deleted, and generated files.</p>
+<p>Agent implementation work must:</p>
+<ul>
+<li>preserve unrelated working-tree state;</li>
+<li>avoid reset, checkout, or cleanup operations that discard current work;</li>
+<li class="source-status--proposed">record the pre-change status of every planned implementation slice;</li>
+<li>modify only files listed for that slice plus discovered build/test registration files; and</li>
+<li>distinguish implementation completion from release certification.</li>
+</ul>
+<h3 id="source-3-scope">3. Scope</h3><p class="section-guide">Reading guide: this source section records “3. Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-mvp-scope">3.1 MVP Scope</h4><p class="section-guide">Reading guide: this source section records “3.1 MVP Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The MVP will provide a validated single-document grammar agent that can:</p>
+<ul>
+<li class="source-status--passed">explain the active selection or complete grammar;</li>
+<li>diagnose parser and structural problems;</li>
+<li class="source-status--passed">propose a complete grammar repair or authored grammar;</li>
+<li class="source-status--proposed">validate the exact proposed source with existing compiler and structural rules;</li>
+<li>generate one deterministic candidate scene using an explicit candidate design nonce;</li>
+<li>show validation diagnostics and measured candidate statistics;</li>
+<li>show line-based source differences;</li>
+<li class="source-status--passed">allow complete or selected difference groups;</li>
+<li>invalidate evidence whenever selected differences change;</li>
+<li>recompile the exact selected candidate;</li>
+<li>preview the validated candidate without replacing the published scene owner;</li>
+<li>approve the exact validated candidate fingerprint;</li>
+<li>publish the exact validated source and candidate scene through one authority;</li>
+<li>reject stale proposals after source drift;</li>
+<li>retain the previous source for explicit rollback; and</li>
+<li>operate with a scripted provider in automated tests without network access.</li>
+</ul>
+<h4 id="source-3-2-deferred-scope">3.2 Deferred Scope</h4><p class="section-guide">Reading guide: this source section records “3.2 Deferred Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The MVP will not:</p>
+<ul>
+<li>modify C++ source files;</li>
+<li>execute shell commands;</li>
+<li>edit multiple grammar documents in one transaction;</li>
+<li>publish cloud documents automatically;</li>
+<li>upload assets automatically;</li>
+<li>infer missing reference-image measurements as facts;</li>
+<li>silently repair invalid proposals;</li>
+<li class="source-status--proposed">approve its own proposal;</li>
+<li>rank candidates using model opinion as authoritative evidence;</li>
+<li>replace the existing grammar language or generation engine; or</li>
+<li>provide unrestricted autonomous operation.</li>
+</ul>
+<h3 id="source-4-architectural-invariants">4. Architectural Invariants</h3><p class="section-guide">Reading guide: this source section records “4. Architectural Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The implementation must preserve these invariants.</p>
+<h4 id="source-4-1-authority-invariants">4.1 Authority Invariants</h4><p class="section-guide">Reading guide: this source section records “4.1 Authority Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--proposed">Model output is a proposal, never an instruction to mutate state.</li>
+<li>Only <code>ApprovedAgentCandidatePublicationService</code> may publish an agent-authored source into the editor document.</li>
+<li class="source-status--proposed">Presentation classes may request actions but may not mutate proposal, approval, document, or published-scene state directly.</li>
+<li>An approval is valid only for one exact candidate source fingerprint.</li>
+<li>Approval is rejected when the current document fingerprint differs from the candidate base-document fingerprint.</li>
+<li>Changing selected difference groups invalidates prior validation, evidence, preview activation, and approval.</li>
+<li class="source-status--passed">A candidate that has not passed deterministic generation is not approvable.</li>
+<li>An explanation-only or diagnosis-only response cannot acquire publication authority.</li>
+<li>Provider text embedded in grammar comments, imported metadata, conversation history, or external references is treated as untrusted data.</li>
+</ul>
+<h4 id="source-4-2-generation-invariants">4.2 Generation Invariants</h4><p class="section-guide">Reading guide: this source section records “4.2 Generation Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Candidate compilation runs in a runtime separate from normal editor regeneration.</li>
+<li>Candidate and normal editor compilation are serialized through an explicit <code>GrammarGenerationExecutionGate</code> while the grammar engine still uses process-global <code>grammar_rng</code> and <code>effects_rng</code> instances.</li>
+<li>Candidate generation never replaces <code>ScenePreviewSession::lastValidSceneSnapshot()</code>.</li>
+<li class="source-status--failed">Failed candidate generation leaves editor source and the published scene unchanged.</li>
+<li>Candidate evidence records the exact source fingerprint, design nonce, evaluation time, and generation request identity.</li>
+<li class="source-status--passed">The scene published after approval must be the exact validated candidate snapshot or a deterministically verified equivalent with the same source fingerprint and design nonce.</li>
+<li class="source-status--failed">Candidate preview activation is reversible and restores published OpenGL resources when closed, rejected, invalidated, or failed.</li>
+</ul>
+<h4 id="source-4-3-compatibility-invariants">4.3 Compatibility Invariants</h4><p class="section-guide">Reading guide: this source section records “4.3 Compatibility Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Existing backend AI endpoints and thread history remain usable during the migration.</li>
+<li>Existing <code>active_helper_chat</code>, <code>draft_grammar</code>, and <code>repair_grammar</code> backend mode strings remain accepted by the backend adapter.</li>
+<li>Existing non-agent editing, generation, cloud, material, lighting, export, and temporal behavior remains unchanged.</li>
+<li>Existing AI source gates remain green until their replacements are installed in the same implementation slice.</li>
+<li class="source-status--passed">The complete GUI build remains authoritative; focused harnesses alone do not establish completion.</li>
+</ul>
+<h3 id="source-5-target-object-model">5. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “5. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-model-classes">5.1 Model Classes</h4><p class="section-guide">Reading guide: this source section records “5.1 Model Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-agentoperationmode"><code>AgentOperationMode</code></h5>
+<p>Purpose-revealing enum for supported behavior:</p>
+<ul>
+<li><code>ExplainSelection</code></li>
+<li><code>DiagnoseGrammar</code></li>
+<li><code>RepairGrammar</code></li>
+<li><code>DraftGrammar</code></li>
+<li>later: <code>ExploreVariants</code></li>
+<li>later: <code>AuditDesign</code></li>
+</ul>
+<p>Backend mode strings are translated only inside the provider adapter.</p>
+<h5 id="source-grammarsourcefingerprint"><code>GrammarSourceFingerprint</code></h5>
+<p>Immutable value object containing:</p>
+<ul>
+<li>algorithm identifier;</li>
+<li>lowercase hexadecimal digest; and</li>
+<li>exact source byte count.</li>
+</ul>
+<p>Equality compares algorithm and digest. The canonical algorithm for approval and transaction identity is SHA-256 over the exact UTF-8 source bytes without newline normalization.</p>
+<h5 id="source-agentdesignrequest"><code>AgentDesignRequest</code></h5>
+<p>Immutable request model containing:</p>
+<ul>
+<li>local request ID;</li>
+<li>operation mode;</li>
+<li>user instruction;</li>
+<li class="source-status--passed">complete source snapshot;</li>
+<li>base-document fingerprint;</li>
+<li>selected source and selected source range;</li>
+<li class="source-status--passed">complete deterministic diagnostic collection;</li>
+<li>recent conversation messages;</li>
+<li>document title and storage identity as documentary metadata;</li>
+<li>requested candidate design nonce;</li>
+<li>request creation timestamp; and</li>
+<li>provider conversation identity when available.</li>
+</ul>
+<p>The request does not contain references to mutable editor objects.</p>
+<h5 id="source-agentproviderresponse"><code>AgentProviderResponse</code></h5>
+<p>Provider-neutral response model containing:</p>
+<ul>
+<li>provider request ID;</li>
+<li>provider name and model name;</li>
+<li>conversation identity;</li>
+<li>assistant response text;</li>
+<li class="source-status--proposed">proposed grammar source when present;</li>
+<li>summary;</li>
+<li class="source-status--proposed">proposed changes;</li>
+<li>warnings;</li>
+<li class="source-status--unresolved">unresolved constraints;</li>
+<li>provider usage evidence; and</li>
+<li>raw response only when diagnostic retention is explicitly enabled.</li>
+</ul>
+<h5 id="source-agentproposalcandidate"><code>AgentProposalCandidate</code></h5>
+<p class="source-status--proposed">Canonical proposal model containing:</p>
+<ul>
+<li>candidate ID;</li>
+<li class="source-status--proposed">source used as the proposal base;</li>
+<li>base-document fingerprint;</li>
+<li class="source-status--proposed">proposed source;</li>
+<li>candidate source fingerprint;</li>
+<li>operation mode;</li>
+<li>provider provenance;</li>
+<li>candidate design nonce;</li>
+<li>model rationale and warnings;</li>
+<li class="source-status--unresolved">unresolved constraints.</li>
+</ul>
+<p>The class owns no editor or provider service references.</p>
+<h5 id="source-agentproposaldifference"><code>AgentProposalDifference</code></h5>
+<p class="source-status--proposed">Relationship model connecting an original source range to proposed replacement lines.</p>
+<p>It contains:</p>
+<ul>
+<li>stable difference ID;</li>
+<li>original line range;</li>
+<li>original lines;</li>
+<li class="source-status--proposed">proposed lines; and</li>
+<li>selection state.</li>
+</ul>
+<h5 id="source-agentproposalreviewsession"><code>AgentProposalReviewSession</code></h5>
+<p>Review model containing:</p>
+<ul>
+<li>the active <code>AgentProposalCandidate</code>;</li>
+<li>ordered <code>AgentProposalDifference</code> relationships;</li>
+<li>selected-source composition state;</li>
+<li>selected candidate fingerprint;</li>
+<li>optional exact <code>AgentCandidateValidationReport</code>;</li>
+<li>optional owned <code>AgentCandidateScene</code>;</li>
+<li>current review decision;</li>
+<li>validation invalidation reason; and</li>
+<li>optional exact approval.</li>
+</ul>
+<p>Every difference-selection change must:</p>
+<ol>
+<li>rebuild the selected source;</li>
+<li>compute a new selected candidate fingerprint;</li>
+<li>clear previous validation and evidence;</li>
+<li>clear previous approval; and</li>
+<li>deactivate candidate preview.</li>
+</ol>
+<h5 id="source-agentcandidatevalidationreport"><code>AgentCandidateValidationReport</code></h5>
+<p>Deterministic validation model containing:</p>
+<ul>
+<li>candidate fingerprint;</li>
+<li>base-document fingerprint;</li>
+<li>structural validation outcome;</li>
+<li>compiler/generation outcome;</li>
+<li class="source-status--passed">complete diagnostics;</li>
+<li>generation duration;</li>
+<li>rule count;</li>
+<li>token count;</li>
+<li>primitive count;</li>
+<li>material count;</li>
+<li>source-association count;</li>
+<li>candidate design nonce;</li>
+<li>evaluation time;</li>
+<li>validation timestamp; and</li>
+<li class="source-status--unresolved">explicit unresolved constraints.</li>
+</ul>
+<p>Provider warnings are not stored as deterministic diagnostics. They remain separately identified advisory claims.</p>
+<h5 id="source-agentcandidatescene"><code>AgentCandidateScene</code></h5>
+<p>Candidate scene owner containing:</p>
+<ul>
+<li>exact candidate source fingerprint;</li>
+<li>candidate design nonce;</li>
+<li>evaluation time;</li>
+<li><code>std::unique_ptr&lt;GeneratedSceneSnapshot&gt;</code>;</li>
+<li><code>PreparedScenePreviewPublication</code> derived facts after preparation;</li>
+<li>candidate <code>PreviewStatistics</code>.</li>
+</ul>
+<p>This model is separate from <code>ScenePreviewSession</code>. It cannot publish itself and does not own lifecycle state; <code>Progen3dAgentSession</code> is the canonical lifecycle owner.</p>
+<h5 id="source-agentproposalapproval"><code>AgentProposalApproval</code></h5>
+<p>Immutable approval value containing:</p>
+<ul>
+<li>approval ID;</li>
+<li>candidate ID;</li>
+<li>base-document fingerprint;</li>
+<li>approved candidate fingerprint;</li>
+<li>candidate design nonce;</li>
+<li>approval timestamp; and</li>
+<li>explicit human-approval marker.</li>
+</ul>
+<p>The approval contains no model-authored authorization field.</p>
+<h5 id="source-agentpublicationtransaction"><code>AgentPublicationTransaction</code></h5>
+<p>Transaction model containing:</p>
+<ul>
+<li>transaction ID;</li>
+<li>previous transaction hash;</li>
+<li>base source and fingerprint;</li>
+<li>approved source and fingerprint;</li>
+<li>approved candidate identity;</li>
+<li>approval identity;</li>
+<li>provider provenance;</li>
+<li>validation report;</li>
+<li>publication status;</li>
+<li>publication timestamp;</li>
+<li>previous published design nonce;</li>
+<li>rollback status; and</li>
+<li>transaction hash.</li>
+</ul>
+<p>The durable transaction records source-level rollback provenance. An in-memory rollback state may additionally retain the previous <code>GeneratedSceneSnapshot</code> for exact same-session scene restoration. After application restart, rollback restores the previous source and regenerates it; that regenerated scene must be labeled as regenerated rather than claimed to be the original snapshot.</p>
+<h5 id="source-agentpublicationrollbackstate"><code>AgentPublicationRollbackState</code></h5>
+<p>Same-session rollback owner containing:</p>
+<ul>
+<li>previous source and fingerprint;</li>
+<li>previous published design nonce;</li>
+<li><code>std::unique_ptr&lt;GeneratedSceneSnapshot&gt;</code> for the prior published scene when available;</li>
+<li>prepared preview facts required to republish that scene; and</li>
+<li>the transaction ID that created the rollback opportunity.</li>
+</ul>
+<p>This state is intentionally not serialized as a scene snapshot. It is cleared after rollback, source drift, or a later accepted publication according to explicit lifecycle rules.</p>
+<h5 id="source-progen3dagentsession"><code>Progen3dAgentSession</code></h5>
+<p>Canonical workspace-owned agent state containing:</p>
+<ul>
+<li>conversation threads and messages;</li>
+<li>request input and operation mode;</li>
+<li>active provider/model presentation state;</li>
+<li>current request state;</li>
+<li class="source-status--proposed">active proposal review session;</li>
+<li>latest transaction summary;</li>
+<li>optional same-session <code>AgentPublicationRollbackState</code>;</li>
+<li>current status message; and</li>
+<li>cancellation and busy state.</li>
+</ul>
+<p><code>EditorWorkspaceSession</code> will compose one <code>Progen3dAgentSession</code>.</p>
+<p class="source-status--passed">Backend DTOs from <code>BackendApiClient.h</code> must not remain canonical members of this class after the migration is complete.</p>
+<h4 id="source-5-2-service-classes">5.2 Service Classes</h4><p class="section-guide">Reading guide: this source section records “5.2 Service Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-grammarsourcefingerprintservice"><code>GrammarSourceFingerprintService</code></h5>
+<p>Computes SHA-256 fingerprints for exact grammar source bytes.</p>
+<p>Implementation requirement:</p>
+<ul>
+<li>use the already linked OpenSSL crypto library through the EVP interface;</li>
+<li>never use <code>std::hash</code> for approval or persistence identity;</li>
+<li>return lowercase hexadecimal output; and</li>
+<li>provide deterministic test vectors.</li>
+</ul>
+<h5 id="source-agentrequestcontextassemblyservice"><code>AgentRequestContextAssemblyService</code></h5>
+<p>Builds an immutable <code>AgentDesignRequest</code> from:</p>
+<ul>
+<li><code>EditorWorkspaceSession</code>;</li>
+<li><code>GrammarEditorInteractionState</code>;</li>
+<li>current diagnostics;</li>
+<li>current conversation history; and</li>
+<li>a candidate nonce supplied by the agent workflow.</li>
+</ul>
+<p>This service replaces ad hoc request assembly inside <code>AiConversationWorkflowService</code>.</p>
+<h5 id="source-designagentprovider"><code>DesignAgentProvider</code></h5>
+<p>Abstract provider category with operations to:</p>
+<ul>
+<li>list conversation threads;</li>
+<li>load one conversation thread; and</li>
+<li>submit one immutable <code>AgentDesignRequest</code>.</li>
+</ul>
+<p>It returns provider-neutral conversation and response models.</p>
+<h5 id="source-backenddesignagentprovider"><code>BackendDesignAgentProvider</code></h5>
+<p>Concrete adapter that:</p>
+<ul>
+<li>composes the existing <code>AiGrammarProposalServiceFactory</code>;</li>
+<li>translates <code>AgentOperationMode</code> to existing backend mode strings;</li>
+<li>maps <code>AgentDesignRequest</code> to <code>BackendAiGenerateRequest</code>;</li>
+<li>maps backend threads, messages, usage, and results into domain models;</li>
+<li>persists refreshed authentication sessions through the existing repository; and</li>
+<li>never mutates editor source or preview state.</li>
+</ul>
+<p>The existing <code>BackendAiGrammarProposalService</code> remains the HTTP/Firebase transport adapter.</p>
+<h5 id="source-scripteddesignagentprovider"><code>ScriptedDesignAgentProvider</code></h5>
+<p>Test-only provider used by harnesses and GUI smoke tests.</p>
+<p>It supports:</p>
+<ul>
+<li>deterministic responses;</li>
+<li>delayed completion;</li>
+<li class="source-status--failed">provider failure;</li>
+<li>stale response ordering;</li>
+<li>explanations without grammar;</li>
+<li>valid grammar proposals; and</li>
+<li>invalid grammar proposals.</li>
+</ul>
+<h5 id="source-agentrequestcoordinator"><code>AgentRequestCoordinator</code></h5>
+<p>Owns provider-request worker lifecycle.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>assign monotonic local request IDs;</li>
+<li>run synchronous provider adapters off the UI thread;</li>
+<li class="source-status--pending">retain only bounded pending work;</li>
+<li class="source-status--passed">expose completed responses to the main thread;</li>
+<li>mark superseded responses stale;</li>
+<li>provide cooperative cancellation state; and</li>
+<li>join worker threads during shutdown.</li>
+</ul>
+<p>This is associated with provider work only. It does not compile grammar.</p>
+<h5 id="source-grammargenerationexecutiongate"><code>GrammarGenerationExecutionGate</code></h5>
+<p>Explicit process-level serialization boundary for grammar compilation.</p>
+<p>The current grammar runtime reads process-global <code>grammar_rng</code> and <code>effects_rng</code> objects from <code>Grammar.cpp</code> and <code>Context.cpp</code>. Two independent generation workers therefore cannot safely seed or consume those streams concurrently.</p>
+<p>For the MVP:</p>
+<ul>
+<li>every <code>GrammarCompilationService::compile()</code> acquires this gate before seeding, parsing, validating, and evaluating grammar;</li>
+<li>normal editor and agent candidate runtimes retain independent request queues but never execute grammar generation concurrently;</li>
+<li>waiting occurs on worker threads rather than the UI thread; and</li>
+<li>tests prove that two generation runtimes cannot overlap protected execution.</li>
+</ul>
+<p>A later grammar-runtime refactor may replace the gate with context-owned random streams. Removing the gate is not permitted until all global random-engine uses have been removed or made explicitly thread-local and deterministic.</p>
+<h5 id="source-agentcandidategenerationruntime"><code>AgentCandidateGenerationRuntime</code></h5>
+<p>Owns isolated candidate compilation lifecycle.</p>
+<p>It composes:</p>
+<ul>
+<li>one <code>GrammarCompilationService</code>; and</li>
+<li>one <code>SceneRegenerationCoordinator</code>.</li>
+</ul>
+<p class="source-status--passed">It uses the same <code>GrammarGenerationRandomizationService</code>, <code>GrammarStructuralValidationService</code>, and <code>GrammarGenerationExecutionGate</code> behavior as normal editor generation but owns an independent queue and completed-result channel.</p>
+<p>It cannot access <code>CompletedSceneGenerationPublicationService</code> directly.</p>
+<h5 id="source-agentcandidatevalidationservice"><code>AgentCandidateValidationService</code></h5>
+<p class="source-status--proposed">Converts one selected proposal source into an isolated candidate-generation request.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>verify that the candidate fingerprint still matches selected source;</li>
+<li>assign or preserve the candidate design nonce;</li>
+<li>submit generation to <code>AgentCandidateGenerationRuntime</code>;</li>
+<li>reject stale generation results;</li>
+<li>convert diagnostics and generation facts into <code>AgentCandidateValidationReport</code>;</li>
+<li>create <code>AgentCandidateScene</code> only after successful generation; and</li>
+<li>leave canonical editor diagnostics and published scene unchanged.</li>
+</ul>
+<h5 id="source-agentproposalevidencecollectionservice"><code>AgentProposalEvidenceCollectionService</code></h5>
+<p>Builds evidence from the generated candidate and prepared preview facts.</p>
+<p>Evidence includes:</p>
+<ul>
+<li>source and base fingerprints;</li>
+<li>provider provenance;</li>
+<li>candidate nonce and evaluation time;</li>
+<li>compiler and structural status;</li>
+<li class="source-status--passed">complete deterministic diagnostics;</li>
+<li>rule, token, primitive, material, and source-association counts;</li>
+<li>generation duration;</li>
+<li>optional preview capture fingerprint; and</li>
+<li class="source-status--unresolved">unresolved constraints separated into provider claims and deterministic findings.</li>
+</ul>
+<h5 id="source-agentcandidatepreviewactivationservice"><code>AgentCandidatePreviewActivationService</code></h5>
+<p>Temporarily presents a validated candidate scene.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>require a successful validation report for the exact candidate fingerprint;</li>
+<li>call <code>ScenePreviewPublicationPreparationService</code> on the OpenGL-owning thread;</li>
+<li>activate candidate geometry and materials without replacing the canonical scene snapshot;</li>
+<li>retain whether the candidate or published scene is currently displayed;</li>
+<li>restore published scene resources when candidate preview ends; and</li>
+<li class="source-status--failed">restore published resources after every candidate-preparation failure.</li>
+</ul>
+<p>The service must not move the candidate snapshot into <code>ScenePreviewSession</code>.</p>
+<h5 id="source-agentproposalapprovalservice"><code>AgentProposalApprovalService</code></h5>
+<p>Creates <code>AgentProposalApproval</code> only when:</p>
+<ul>
+<li class="source-status--pending">review is pending;</li>
+<li>exact selected source has a successful validation report;</li>
+<li>candidate source fingerprint matches the report;</li>
+<li>candidate scene identity matches the report;</li>
+<li>current document fingerprint matches the base fingerprint; and</li>
+<li>the request originated from an explicit human UI action.</li>
+</ul>
+<h5 id="source-preparedscenepreviewpublicationservice"><code>PreparedScenePreviewPublicationService</code></h5>
+<p>New canonical service extracted from the successful-state projection portion of <code>CompletedSceneGenerationPublicationService</code>.</p>
+<p>It publishes:</p>
+<ul>
+<li>a prepared <code>GeneratedSceneSnapshot</code>;</li>
+<li>source associations;</li>
+<li>lighting definition;</li>
+<li>preview statistics;</li>
+<li>timeline state;</li>
+<li>editor selection reset; and</li>
+<li>document generation identity.</li>
+</ul>
+<p>The extraction must preserve existing successful-publication behavior, including grammar runtime-variable cleanup, electrical switch-state preservation, lighting evaluation/evidence publication, statistics, timeline reset, selection reset, and diagnostic clearing.</p>
+<p class="source-status--failed"><code>CompletedSceneGenerationPublicationService</code> will continue to own stale-result and failure handling, then delegate successful projection to this service.</p>
+<h5 id="source-approvedagentcandidatepublicationservice"><code>ApprovedAgentCandidatePublicationService</code></h5>
+<p>Sole agent publication authority.</p>
+<p>It will:</p>
+<ol>
+<li class="source-status--pending">verify the pending review and exact approval;</li>
+<li>recompute current document and candidate fingerprints;</li>
+<li>reject source drift, candidate drift, missing evidence, or nonce mismatch;</li>
+<li>prepare the exact candidate scene for OpenGL publication;</li>
+<li class="source-status--pending">create a pending <code>AgentPublicationTransaction</code> containing the previous source;</li>
+<li>publish the validated source without scheduling a different stochastic generation;</li>
+<li>move the exact candidate snapshot into canonical scene publication;</li>
+<li>record publication success and append the transaction event;</li>
+<li>clear candidate preview ownership; and</li>
+<li>expose explicit rollback through the same authority.</li>
+</ol>
+<p class="source-status--failed">The service must fail closed before source mutation if preview preparation fails.</p>
+<h5 id="source-agentpublicationrollbackservice"><code>AgentPublicationRollbackService</code></h5>
+<p>Restores the prior source from the most recent eligible transaction.</p>
+<p>Rollback will:</p>
+<ul>
+<li>require explicit human action;</li>
+<li>verify the transaction has not already been rolled back;</li>
+<li>verify the current source fingerprint still matches the transaction's published fingerprint unless the user explicitly resolves drift through a separate confirmation path;</li>
+<li>restore previous source through <code>EditorDocumentPublicationService</code>;</li>
+<li>schedule normal deterministic editor regeneration;</li>
+<li>append a rollback event; and</li>
+<li>never delete transaction history.</li>
+</ul>
+<p>When the previous same-session <code>GeneratedSceneSnapshot</code> remains available, rollback prepares and republishes that exact snapshot. When it is unavailable after restart, rollback restores the previous source and previous design nonce, performs a new generation under the current recorded generation environment, and records that the scene was regenerated rather than exactly restored.</p>
+<h5 id="source-agenttransactionrepository"><code>AgentTransactionRepository</code></h5>
+<p>Abstract repository for append-only transaction events.</p>
+<h5 id="source-jsonagenttransactionrepository"><code>JsonAgentTransactionRepository</code></h5>
+<p>Concrete repository that stores transactions in the existing application-data path infrastructure.</p>
+<p>Requirements:</p>
+<ul>
+<li>one append-only JSON Lines ledger per workspace or local document identity;</li>
+<li class="source-status--passed">no secrets, authentication tokens, or complete raw provider payloads;</li>
+<li>exact source may be stored only when local transaction history is enabled;</li>
+<li>previous-event hash and event hash on every event;</li>
+<li>atomic state-summary replacement through a temporary file and rename; and</li>
+<li>deterministic schema versioning.</li>
+</ul>
+<h5 id="source-progen3ddesignagent"><code>Progen3dDesignAgent</code></h5>
+<p>Application service orchestrating the agent state machine.</p>
+<p>It aggregates:</p>
+<ul>
+<li><code>AgentRequestContextAssemblyService</code>;</li>
+<li><code>DesignAgentProvider</code> creation;</li>
+<li><code>AgentRequestCoordinator</code>;</li>
+<li><code>AgentCandidateValidationService</code>;</li>
+<li><code>AgentProposalEvidenceCollectionService</code>;</li>
+<li><code>AgentProposalApprovalService</code>;</li>
+<li><code>ApprovedAgentCandidatePublicationService</code>;</li>
+<li><code>AgentCandidatePreviewActivationService</code>;</li>
+<li><code>AgentPublicationRollbackService</code>; and</li>
+<li>application logging.</li>
+</ul>
+<p>It does not own editor source, the published scene, authentication data, or OpenGL resources.</p>
+<h4 id="source-5-3-context-classes">5.3 Context Classes</h4><p class="section-guide">Reading guide: this source section records “5.3 Context Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-progen3dagentruntimecontext"><code>Progen3dAgentRuntimeContext</code></h5>
+<p>Narrow context supplied to <code>Progen3dDesignAgent</code> operations.</p>
+<p>It associates the agent with only:</p>
+<ul>
+<li><code>EditorWorkspaceSession</code>;</li>
+<li><code>GrammarEditorInteractionState</code>;</li>
+<li><code>GrammarSourceFingerprintService</code>;</li>
+<li><code>AgentCandidateGenerationRuntime</code>;</li>
+<li><code>ScenePreviewPublicationPreparationService</code>;</li>
+<li><code>ScenePreviewResourceService</code>;</li>
+<li><code>EditorDocumentPublicationService</code>;</li>
+<li><code>PreparedScenePreviewPublicationService</code>;</li>
+<li><code>AgentTransactionRepository</code>;</li>
+<li><code>ApplicationLogPublisher</code>; and</li>
+<li>the provider factory or provider session required for the current request.</li>
+</ul>
+<p>It must not expose arbitrary filesystem, command execution, renderer internals, or cloud publication services.</p>
+<p class="source-status--passed"><code>EditorApplicationRuntimeContext</code> will expose one <code>Progen3dAgentRuntimeContext &amp;progen3dAgentRuntimeContext() const</code> association and presentation-facing workflow interfaces. The agent core will not depend on the complete editor runtime context.</p>
+<h4 id="source-5-4-presentation-classes">5.4 Presentation Classes</h4><p class="section-guide">Reading guide: this source section records “5.4 Presentation Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-existing-compatibility-presentation">Existing Compatibility Presentation</h5>
+<p>The first implementation slices will retain:</p>
+<ul>
+<li><code>AiAssistantPanel</code>; and</li>
+<li><code>AiGrammarProposalPanel</code>.</li>
+</ul>
+<p>Their behavior will be migrated before optional renaming. This avoids mixing an authority redesign with an unnecessary presentation rename.</p>
+<h5 id="source-target-presentation-responsibilities">Target Presentation Responsibilities</h5>
+<p><code>AiAssistantPanel</code> will present:</p>
+<ul>
+<li>operation mode;</li>
+<li>request input;</li>
+<li>provider busy/cancel state;</li>
+<li>conversation history;</li>
+<li>provider response;</li>
+<li class="source-status--proposed">proposal lifecycle status; and</li>
+<li>deterministic validation progress.</li>
+</ul>
+<p><code>AiGrammarProposalPanel</code> will present:</p>
+<ul>
+<li>base and candidate short fingerprints;</li>
+<li>source drift status;</li>
+<li>line-based differences;</li>
+<li>difference selection controls;</li>
+<li>deterministic diagnostics;</li>
+<li>candidate statistics;</li>
+<li>provider warnings;</li>
+<li class="source-status--unresolved">unresolved constraints;</li>
+<li><code>Validate Selected Candidate</code> when evidence is invalidated;</li>
+<li><code>Preview Candidate</code> and <code>Return to Published Scene</code>;</li>
+<li><code>Approve Exact Candidate</code>;</li>
+<li><code>Publish Approved Candidate</code>;</li>
+<li class="source-status--proposed"><code>Reject Proposal</code>; and</li>
+<li><code>Rollback Last Agent Publication</code> when eligible.</li>
+</ul>
+<p>The panel must never call <code>proposal_review.acceptFullProposal()</code> or mutate source directly.</p>
+<h3 id="source-6-agent-state-machine">6. Agent State Machine</h3><p class="section-guide">Reading guide: this source section records “6. Agent State Machine”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>Progen3dAgentSession</code> will expose one explicit lifecycle state:</p>
+<ol>
+<li><code>Idle</code></li>
+<li><code>AwaitingProvider</code></li>
+<li><code>ProviderResponseReceived</code></li>
+<li><code>CandidateValidationQueued</code></li>
+<li><code>CandidateValidationRunning</code></li>
+<li><code>CandidateInvalid</code></li>
+<li><code>ReadyForReview</code></li>
+<li><code>CandidatePreviewActive</code></li>
+<li><code>Approved</code></li>
+<li><code>Publishing</code></li>
+<li><code>Published</code></li>
+<li><code>Rejected</code></li>
+<li><code>Stale</code></li>
+<li class="source-status--failed"><code>Failed</code></li>
+<li><code>Cancelled</code></li>
+</ol>
+<p>Allowed transitions must be implemented as named methods on <code>Progen3dAgentSession</code> or a dedicated lifecycle model. Presentation code must not assign lifecycle state directly.</p>
+<p class="source-status--failed">Required fail-closed transitions:</p>
+<ul>
+<li>document edit during <code>ReadyForReview</code>, <code>CandidatePreviewActive</code>, or <code>Approved</code> -&gt; <code>Stale</code>;</li>
+<li>selected difference change -&gt; <code>CandidateValidationQueued</code> or <code>ProviderResponseReceived</code> with all evidence cleared;</li>
+<li>provider response without grammar -&gt; <code>Idle</code> after response publication;</li>
+<li>invalid candidate -&gt; <code>CandidateInvalid</code>;</li>
+<li class="source-status--failed">preview preparation failure -&gt; remain <code>ReadyForReview</code> with published preview restored;</li>
+<li class="source-status--failed">approval hash mismatch -&gt; <code>Stale</code> or <code>Failed</code>, never <code>Publishing</code>;</li>
+<li class="source-status--failed">publication preparation failure -&gt; remain approved/reviewable with source unchanged;</li>
+<li>superseded provider or generation completion -&gt; discard as stale without user-state mutation.</li>
+</ul>
+<h3 id="source-7-end-to-end-request-lifecycle">7. End-to-End Request Lifecycle</h3><p class="section-guide">Reading guide: this source section records “7. End-to-End Request Lifecycle”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-7-1-explanation-or-diagnosis">7.1 Explanation or Diagnosis</h4><p class="section-guide">Reading guide: this source section records “7.1 Explanation or Diagnosis”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>User selects <code>ExplainSelection</code> or <code>DiagnoseGrammar</code>.</li>
+<li><code>AgentRequestContextAssemblyService</code> captures immutable source, selection, diagnostics, and source fingerprint.</li>
+<li><code>AgentRequestCoordinator</code> runs the provider call outside the UI thread.</li>
+<li><code>Progen3dDesignAgent::advancePendingWork()</code> publishes the latest non-stale response on the main thread.</li>
+<li>Response text and advisory findings are displayed.</li>
+<li>No <code>AgentProposalCandidate</code> is created unless the provider supplied grammar and the selected mode permits grammar proposals.</li>
+<li>No publication controls are enabled.</li>
+</ol>
+<h4 id="source-7-2-repair-or-draft">7.2 Repair or Draft</h4><p class="section-guide">Reading guide: this source section records “7.2 Repair or Draft”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>User selects <code>RepairGrammar</code> or <code>DraftGrammar</code> and submits a request.</li>
+<li>Immutable request context and base fingerprint are captured.</li>
+<li class="source-status--proposed">Provider returns a proposed grammar.</li>
+<li>Client computes the candidate fingerprint; provider-supplied hashes are ignored.</li>
+<li><code>AgentProposalReviewSession</code> builds differences.</li>
+<li class="source-status--proposed">Exact full proposal is submitted automatically to candidate validation.</li>
+<li>Candidate runtime compiles with the assigned candidate design nonce.</li>
+<li class="source-status--failed">Failure publishes candidate diagnostics without changing editor diagnostics or preview.</li>
+<li>Success creates <code>AgentCandidateScene</code> and deterministic evidence.</li>
+<li>Review controls become available.</li>
+</ol>
+<h4 id="source-7-3-selected-changes">7.3 Selected Changes</h4><p class="section-guide">Reading guide: this source section records “7.3 Selected Changes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>User changes one difference selection.</li>
+<li>Review session composes the selected source.</li>
+<li>Client computes a new selected candidate fingerprint.</li>
+<li>Previous candidate scene, validation report, evidence, preview state, and approval are discarded.</li>
+<li>User requests validation, or validation starts automatically after a bounded debounce.</li>
+<li>Only the newly validated selected source may be approved.</li>
+</ol>
+<h4 id="source-7-4-preview">7.4 Preview</h4><p class="section-guide">Reading guide: this source section records “7.4 Preview”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>User requests candidate preview.</li>
+<li>Agent verifies exact validation evidence and source fingerprint.</li>
+<li>Candidate resources are prepared on the OpenGL thread.</li>
+<li>Candidate geometry is displayed while <code>ScenePreviewSession</code> retains canonical ownership of the published snapshot.</li>
+<li class="source-status--failed">Closing preview, changing selection, editing source, rejecting, or encountering failure restores published scene resources.</li>
+</ol>
+<h4 id="source-7-5-approval-and-publication">7.5 Approval and Publication</h4><p class="section-guide">Reading guide: this source section records “7.5 Approval and Publication”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>User presses <code>Approve Exact Candidate</code>.</li>
+<li><code>AgentProposalApprovalService</code> verifies current document, candidate, evidence, and nonce identities.</li>
+<li class="source-status--passed">UI displays the complete candidate fingerprint and approval timestamp.</li>
+<li>User presses <code>Publish Approved Candidate</code>.</li>
+<li><code>ApprovedAgentCandidatePublicationService</code> repeats all identity checks.</li>
+<li>Exact candidate scene preparation occurs before source mutation.</li>
+<li class="source-status--pending">Pending transaction is appended.</li>
+<li>Exact validated source replaces the editor source without requesting a new stochastic candidate.</li>
+<li>Exact validated scene snapshot becomes the canonical published scene.</li>
+<li>Publication event is appended and rollback becomes available.</li>
+</ol>
+<h3 id="source-8-provider-contract">8. Provider Contract</h3><p class="section-guide">Reading guide: this source section records “8. Provider Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-8-1-client-owned-request-schema">8.1 Client-Owned Request Schema</h4><p class="section-guide">Reading guide: this source section records “8.1 Client-Owned Request Schema”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The provider adapter will serialize these logical fields:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">schema_version
+operation_mode
+user_instruction
+document_source
+document_source_fingerprint
+selected_source
+selected_source_range
+deterministic_diagnostics
+conversation_history
+document_metadata
+candidate_design_nonce
+</code></pre>
+<p>The backend adapter may continue mapping these to existing fields during compatibility operation:</p>
+<ul>
+<li><code>mode</code></li>
+<li><code>prompt</code> or <code>question</code></li>
+<li><code>grammar</code></li>
+<li><code>selection</code></li>
+<li><code>parserError</code></li>
+<li><code>history</code></li>
+<li><code>file_id</code></li>
+<li><code>title</code></li>
+</ul>
+<p class="source-status--passed">The backend prompt implementation must treat document source, selected source, diagnostics, conversation history, comments, and imported metadata as quoted untrusted data. Client code cannot enforce server-side prompt construction, so backend conformance must be a separately verified integration requirement.</p>
+<h4 id="source-8-2-provider-response-schema">8.2 Provider Response Schema</h4><p class="section-guide">Reading guide: this source section records “8.2 Provider Response Schema”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The preferred response schema is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">schema_version
+response_kind
+assistant_text
+proposed_grammar
+summary
+changes[]
+warnings[]
+unresolved_constraints[]
+provider_request_id
+conversation_id
+model_name
+usage
+</code></pre>
+<p>MVP compatibility mapping will use existing <code>BackendAiResult</code> fields:</p>
+<ul>
+<li><code>grammar</code></li>
+<li><code>summary</code></li>
+<li><code>answer</code></li>
+<li><code>repair_summary</code></li>
+<li><code>diagnosis</code></li>
+<li><code>changes</code></li>
+<li><code>observations</code></li>
+<li><code>suggested_edits</code></li>
+<li><code>warnings</code></li>
+</ul>
+<p>All candidate and base fingerprints are computed locally after response parsing.</p>
+<h3 id="source-9-publication-and-rollback-transaction">9. Publication and Rollback Transaction</h3><p class="section-guide">Reading guide: this source section records “9. Publication and Rollback Transaction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-9-1-publication-preconditions">9.1 Publication Preconditions</h4><p class="section-guide">Reading guide: this source section records “9.1 Publication Preconditions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Publication must reject unless all conditions are true:</p>
+<ul>
+<li class="source-status--pending">review is pending;</li>
+<li>approval exists;</li>
+<li>approval candidate ID equals active candidate ID;</li>
+<li>approval candidate fingerprint equals selected-source fingerprint;</li>
+<li>validation report candidate fingerprint equals selected-source fingerprint;</li>
+<li>candidate scene fingerprint equals selected-source fingerprint;</li>
+<li>candidate design nonce equals validation design nonce;</li>
+<li class="source-status--proposed">current document fingerprint equals proposal base fingerprint;</li>
+<li>provider request is the latest request;</li>
+<li>candidate validation request is the latest candidate request; and</li>
+<li>candidate scene snapshot exists.</li>
+</ul>
+<h4 id="source-9-2-transaction-sequence">9.2 Transaction Sequence</h4><p class="section-guide">Reading guide: this source section records “9.2 Transaction Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Recompute all fingerprints.</li>
+<li>Deactivate any transient candidate preview and restore canonical resources.</li>
+<li>Prepare the exact candidate scene again for publication.</li>
+<li>Append <code>PublicationPrepared</code> transaction event.</li>
+<li>Replace source through a new non-regenerating <code>EditorDocumentPublicationService::publishValidatedSource()</code> operation.</li>
+<li>Publish the prepared candidate through <code>PreparedScenePreviewPublicationService</code>.</li>
+<li>Append <code>PublicationCommitted</code> event.</li>
+<li>Move the previous published scene into same-session rollback ownership when available.</li>
+<li>Clear candidate ownership from the agent session.</li>
+<li>Mark review decision <code>Published</code>.</li>
+</ol>
+<p>If source replacement or scene publication fails after preparation:</p>
+<ul>
+<li>restore the previous source;</li>
+<li>restore published preview resources;</li>
+<li class="source-status--failed">append <code>PublicationFailed</code> with a deterministic failure code; and</li>
+<li class="source-status--proposed">retain the proposal for review when safe.</li>
+</ul>
+<h4 id="source-9-3-rollback-sequence">9.3 Rollback Sequence</h4><p class="section-guide">Reading guide: this source section records “9.3 Rollback Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>User requests rollback.</li>
+<li>Load the latest committed, non-rolled-back agent transaction.</li>
+<li>Verify current source still equals the transaction's published fingerprint.</li>
+<li>Append <code>RollbackPrepared</code>.</li>
+<li>Restore prior source through <code>EditorDocumentPublicationService</code>.</li>
+<li>Republish the retained prior scene snapshot when it is available in the current session; otherwise request regeneration with the recorded prior design nonce.</li>
+<li>Append <code>RollbackCommitted</code> after successful exact restoration or regeneration, or <code>RollbackFailed</code> if restoration fails.</li>
+</ol>
+<p>Rollback does not delete, rewrite, or truncate transaction history.</p>
+<h3 id="source-10-candidate-preview-resource-strategy">10. Candidate Preview Resource Strategy</h3><p class="section-guide">Reading guide: this source section records “10. Candidate Preview Resource Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current OpenGL resource service owns one active material library and one renderer upload set. The MVP will therefore use reversible activation rather than duplicate all GPU resources.</p>
+<h4 id="source-10-1-candidate-activation">10.1 Candidate Activation</h4><p class="section-guide">Reading guide: this source section records “10.1 Candidate Activation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>AgentCandidateScene</code> retains CPU-side generated scene ownership.</li>
+<li><code>AgentCandidatePreviewActivationService</code> calls <code>prepareCandidateScene()</code> for the candidate.</li>
+<li>The renderer temporarily displays candidate geometry.</li>
+<li><code>ScenePreviewSession</code> still owns the published scene snapshot and published source associations.</li>
+<li>Agent UI clearly labels the viewport <code>Candidate Preview</code>.</li>
+</ul>
+<h4 id="source-10-2-published-scene-restoration">10.2 Published Scene Restoration</h4><p class="section-guide">Reading guide: this source section records “10.2 Published Scene Restoration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Candidate preview exit calls <code>ScenePreviewResourceService::refreshSceneResources()</code> with the published generation context.</li>
+<li>Material synchronization returns to the published material set.</li>
+<li>Candidate preview state is cleared only after restoration succeeds or a recovery attempt is recorded.</li>
+<li>Application shutdown restores or releases resources through existing shutdown ownership.</li>
+</ul>
+<h4 id="source-10-3-later-dual-resource-optimization">10.3 Later Dual-Resource Optimization</h4><p class="section-guide">Reading guide: this source section records “10.3 Later Dual-Resource Optimization”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A later performance release may introduce separate published and candidate GPU resource collections. It is not required for the MVP and must not be added until reversible single-resource activation is validated.</p>
+<h3 id="source-11-implementation-milestones">11. Implementation Milestones</h3><p class="section-guide">Reading guide: this source section records “11. Implementation Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-milestone-0-freeze-baseline-and-add-agent-source-gates">Milestone 0: Freeze Baseline and Add Agent Source Gates</h3><p class="section-guide">Reading guide: this source section records “Milestone 0: Freeze Baseline and Add Agent Source Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Capture <code>git status --short</code> and hashes for all files to be modified in the first slice.</li>
+<li>Run existing focused AI and generation gates before modification.</li>
+<li>Add an agent source-contract script before adding authority-bearing code.</li>
+<li>Make the source gate reject direct provider-to-document and presentation-to-document mutation.</li>
+<li>Keep existing source gates active.</li>
+</ul>
+<h4 id="source-files-to-add">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>tests/run_progen3d_agent_source_contract_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>none outside test registration unless required by the current release-check structure</li>
+</ul>
+<h4 id="source-required-checks">Required Checks</h4><p class="section-guide">Reading guide: this source section records “Required Checks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_authentication_ai_workflow_checks.sh
+./tests/run_ai_grammar_proposal_review_checks.sh
+./tests/run_completed_scene_generation_publication_checks.sh
+./tests/run_editor_scene_generation_runtime_checks.sh
+./tests/run_preview_session_checks.sh
+./tests/run_progen3d_agent_source_contract_checks.sh
+</code></pre>
+<h4 id="source-exit-gate">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Baseline outcomes are recorded without claiming they are current release certification.</li>
+<li>Source gate fails when a fixture introduces direct AI workflow document publication.</li>
+</ul>
+<h3 id="source-milestone-1-add-domain-models-and-exact-fingerprints">Milestone 1: Add Domain Models and Exact Fingerprints</h3><p class="section-guide">Reading guide: this source section records “Milestone 1: Add Domain Models and Exact Fingerprints”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-2">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--proposed">Add provider-neutral request, response, proposal, validation, evidence, approval, and transaction models.</li>
+<li>Add <code>GrammarSourceFingerprintService</code> using OpenSSL EVP SHA-256.</li>
+<li>Add lifecycle methods that prevent direct state assignment.</li>
+<li>Add selected-source reconstruction with stable difference IDs.</li>
+<li>Preserve current line-difference behavior while migrating from <code>AiGrammarProposalReview</code>.</li>
+</ul>
+<h4 id="source-files-to-add-2">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/model/AgentOperationMode.h</code></li>
+<li><code>include/editor/model/GrammarSourceFingerprint.h</code></li>
+<li><code>include/editor/model/AgentDesignRequest.h</code></li>
+<li><code>include/editor/model/AgentConversation.h</code></li>
+<li><code>include/editor/model/AgentProviderResponse.h</code></li>
+<li><code>include/editor/model/AgentProposalCandidate.h</code></li>
+<li><code>include/editor/model/AgentProposalDifference.h</code></li>
+<li><code>include/editor/model/AgentProposalReviewSession.h</code></li>
+<li><code>include/editor/model/AgentCandidateValidationReport.h</code></li>
+<li><code>include/editor/model/AgentCandidateScene.h</code></li>
+<li><code>include/editor/model/AgentProposalApproval.h</code></li>
+<li><code>include/editor/model/AgentPublicationTransaction.h</code></li>
+<li><code>include/editor/model/AgentPublicationRollbackState.h</code></li>
+<li><code>include/editor/model/Progen3dAgentSession.h</code></li>
+<li><code>include/editor/service/GrammarSourceFingerprintService.h</code></li>
+<li>corresponding <code>src/editor/model/*.cpp</code></li>
+<li><code>src/editor/service/GrammarSourceFingerprintService.cpp</code></li>
+<li><code>tests/grammar_source_fingerprint_harness.cpp</code></li>
+<li><code>tests/agent_proposal_review_session_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_model_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-2">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/model/EditorWorkspaceSession.h</code></li>
+<li><code>Makefile</code></li>
+</ul>
+<h4 id="source-required-tests">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>known SHA-256 test vectors;</li>
+<li>byte-for-byte sensitivity, including final newline changes;</li>
+<li>stable difference IDs;</li>
+<li>selected-source reconstruction;</li>
+<li>evidence invalidation after selection changes;</li>
+<li>approval invalidation after selection changes;</li>
+<li>lifecycle transition rejection; and</li>
+<li>no backend DTO types in new canonical models.</li>
+</ul>
+<h4 id="source-exit-gate-2">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>New domain model harness passes with no network, OpenGL, or backend dependency.</li>
+<li><code>EditorWorkspaceSession</code> composes one canonical agent session.</li>
+</ul>
+<h3 id="source-milestone-2-introduce-provider-neutral-request-boundary">Milestone 2: Introduce Provider-Neutral Request Boundary</h3><p class="section-guide">Reading guide: this source section records “Milestone 2: Introduce Provider-Neutral Request Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-3">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add <code>AgentRequestContextAssemblyService</code>.</li>
+<li>Add <code>DesignAgentProvider</code> and provider-neutral conversation models.</li>
+<li>Add <code>BackendDesignAgentProvider</code> as an adapter over existing AI transport.</li>
+<li>Move backend request/response translation out of <code>AiConversationWorkflowService</code>.</li>
+<li>Keep thread listing and loading behavior compatible.</li>
+<li>Add <code>ScriptedDesignAgentProvider</code> under test support.</li>
+</ul>
+<h4 id="source-files-to-add-3">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/AgentRequestContextAssemblyService.h</code></li>
+<li><code>include/editor/service/DesignAgentProvider.h</code></li>
+<li><code>include/editor/service/DesignAgentProviderFactory.h</code></li>
+<li><code>include/editor/service/BackendDesignAgentProvider.h</code></li>
+<li><code>include/editor/service/BackendDesignAgentProviderFactory.h</code></li>
+<li><code>src/editor/service/AgentRequestContextAssemblyService.cpp</code></li>
+<li><code>src/editor/service/BackendDesignAgentProvider.cpp</code></li>
+<li><code>src/editor/service/BackendDesignAgentProviderFactory.cpp</code></li>
+<li><code>tests/harness/ScriptedDesignAgentProvider.h</code></li>
+<li><code>tests/agent_request_context_assembly_harness.cpp</code></li>
+<li><code>tests/backend_design_agent_provider_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_provider_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-3">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/AiConversationWorkflowService.h</code></li>
+<li><code>src/editor/service/AiConversationWorkflowService.cpp</code></li>
+<li><code>include/editor/application/Progen3dEditorApplication.h</code></li>
+<li><code>src/editor/application/Progen3dEditorApplication.cpp</code></li>
+<li><code>Makefile</code></li>
+<li><code>tests/run_authentication_ai_workflow_checks.sh</code></li>
+</ul>
+<h4 id="source-required-tests-2">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>immutable request captures source and fingerprint before provider call;</li>
+<li class="source-status--passed">complete diagnostics are captured deterministically;</li>
+<li>selected source and range are captured accurately;</li>
+<li>backend mode compatibility mapping;</li>
+<li>backend response translation;</li>
+<li>refreshed authentication session persistence;</li>
+<li class="source-status--failed">provider failure does not clear current proposal or document;</li>
+<li class="source-status--proposed">explanation response without grammar does not create a proposal; and</li>
+<li>no provider adapter has document or preview publication access.</li>
+</ul>
+<h4 id="source-exit-gate-3">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>AiConversationWorkflowService</code> contains no direct <code>BackendAiGenerateRequest</code> construction.</li>
+<li>Existing backend behavior remains available through the new adapter.</li>
+</ul>
+<h3 id="source-milestone-3-add-asynchronous-agent-orchestration">Milestone 3: Add Asynchronous Agent Orchestration</h3><p class="section-guide">Reading guide: this source section records “Milestone 3: Add Asynchronous Agent Orchestration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-4">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add <code>AgentRequestCoordinator</code> for provider worker ownership.</li>
+<li>Add <code>AgentCandidateGenerationRuntime</code> using existing compilation and regeneration classes.</li>
+<li>Add <code>GrammarGenerationExecutionGate</code> and route every production grammar compilation through it before two runtimes are enabled.</li>
+<li>Add <code>Progen3dAgentRuntimeContext</code>.</li>
+<li>Add <code>Progen3dDesignAgent</code> state-machine orchestration.</li>
+<li>Add a main-thread <code>advancePendingWork()</code> call to <code>EditorFrameCycle</code> before presentation rendering.</li>
+<li>Add deterministic shutdown of provider and candidate workers.</li>
+</ul>
+<h4 id="source-files-to-add-4">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/AgentRequestCoordinator.h</code></li>
+<li><code>src/editor/service/AgentRequestCoordinator.cpp</code></li>
+<li><code>include/editor/service/GrammarGenerationExecutionGate.h</code></li>
+<li><code>src/editor/service/GrammarGenerationExecutionGate.cpp</code></li>
+<li><code>include/editor/application/AgentCandidateGenerationRuntime.h</code></li>
+<li><code>src/editor/application/AgentCandidateGenerationRuntime.cpp</code></li>
+<li><code>include/editor/context/Progen3dAgentRuntimeContext.h</code></li>
+<li><code>src/editor/context/Progen3dAgentRuntimeContext.cpp</code></li>
+<li><code>include/editor/service/Progen3dDesignAgent.h</code></li>
+<li><code>src/editor/service/Progen3dDesignAgent.cpp</code></li>
+<li><code>tests/agent_request_coordinator_harness.cpp</code></li>
+<li><code>tests/grammar_generation_execution_gate_harness.cpp</code></li>
+<li><code>tests/agent_candidate_generation_runtime_harness.cpp</code></li>
+<li><code>tests/progen3d_design_agent_state_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_runtime_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-4">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/application/EditorApplicationRuntimeContext.h</code></li>
+<li><code>src/editor/application/EditorApplicationRuntimeContext.cpp</code></li>
+<li><code>include/editor/service/GrammarCompilationService.h</code></li>
+<li><code>src/editor/service/GrammarCompilationService.cpp</code></li>
+<li><code>include/editor/application/EditorSceneGenerationRuntime.h</code></li>
+<li><code>src/editor/application/EditorSceneGenerationRuntime.cpp</code></li>
+<li><code>include/editor/application/Progen3dEditorApplication.h</code></li>
+<li><code>src/editor/application/Progen3dEditorApplication.cpp</code></li>
+<li><code>include/editor/application/EditorFrameCycle.h</code></li>
+<li><code>src/editor/application/EditorFrameCycle.cpp</code></li>
+<li>application shutdown operations</li>
+<li><code>Makefile</code></li>
+</ul>
+<h4 id="source-required-tests-3">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>provider call runs outside the calling thread;</li>
+<li>editor and candidate grammar compilation never overlap while global random streams remain;</li>
+<li>stale provider response is discarded;</li>
+<li>stale candidate result is discarded;</li>
+<li>cancellation prevents result publication;</li>
+<li>shutdown joins workers;</li>
+<li>normal editor generation and candidate generation use independent queues;</li>
+<li>candidate generation cannot call canonical scene publication; and</li>
+<li>frame-cycle advancement performs state publication on the main thread.</li>
+</ul>
+<h4 id="source-exit-gate-4">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Slow scripted provider does not block the frame-cycle harness.</li>
+<li>Competing editor and agent generation requests serialize on worker threads without random-stream races.</li>
+<li>Closing the application with provider or candidate work in progress exits cleanly.</li>
+</ul>
+<h3 id="source-milestone-4-add-candidate-validation-and-evidence">Milestone 4: Add Candidate Validation and Evidence</h3><p class="section-guide">Reading guide: this source section records “Milestone 4: Add Candidate Validation and Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-5">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add <code>AgentCandidateValidationService</code>.</li>
+<li>Add <code>AgentProposalEvidenceCollectionService</code>.</li>
+<li class="source-status--passed">Automatically validate complete repair/draft proposals.</li>
+<li>Preserve candidate diagnostics separately from editor diagnostics.</li>
+<li>Create candidate scene only after successful generation.</li>
+<li>Bind validation report and evidence to exact source fingerprint and nonce.</li>
+</ul>
+<h4 id="source-files-to-add-5">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/AgentCandidateValidationService.h</code></li>
+<li><code>src/editor/service/AgentCandidateValidationService.cpp</code></li>
+<li><code>include/editor/service/AgentProposalEvidenceCollectionService.h</code></li>
+<li><code>src/editor/service/AgentProposalEvidenceCollectionService.cpp</code></li>
+<li><code>tests/agent_candidate_validation_harness.cpp</code></li>
+<li><code>tests/agent_proposal_evidence_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_validation_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-5">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/Progen3dDesignAgent.h</code></li>
+<li><code>src/editor/service/Progen3dDesignAgent.cpp</code></li>
+<li><code>include/editor/model/Progen3dAgentSession.h</code></li>
+<li>related model source files</li>
+<li><code>Makefile</code></li>
+</ul>
+<h4 id="source-required-tests-4">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>invalid grammar creates candidate diagnostics and no candidate scene;</li>
+<li>valid grammar creates a candidate scene and validation report;</li>
+<li>editor diagnostics remain unchanged during candidate validation;</li>
+<li>published scene remains unchanged during candidate validation;</li>
+<li>source fingerprint, nonce, and result identity match;</li>
+<li>selected difference change destroys old candidate evidence;</li>
+<li>provider warnings cannot satisfy deterministic validation; and</li>
+<li>source-association and scene statistics are measured from the candidate.</li>
+</ul>
+<h4 id="source-exit-gate-5">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Invalid proposals cannot reach an approvable state.</li>
+<li>Valid proposals expose deterministic evidence without canonical mutation.</li>
+</ul>
+<h3 id="source-milestone-5-add-exact-approval-publication-and-rollback">Milestone 5: Add Exact Approval, Publication, and Rollback</h3><p class="section-guide">Reading guide: this source section records “Milestone 5: Add Exact Approval, Publication, and Rollback”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-6">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Extract successful canonical state projection into <code>PreparedScenePreviewPublicationService</code>.</li>
+<li class="source-status--failed">Preserve existing stale/failure behavior in <code>CompletedSceneGenerationPublicationService</code>.</li>
+<li>Add <code>AgentProposalApprovalService</code>.</li>
+<li>Add <code>ApprovedAgentCandidatePublicationService</code>.</li>
+<li>Add <code>AgentPublicationRollbackService</code>.</li>
+<li>Add non-regenerating validated-source publication to <code>EditorDocumentPublicationService</code>.</li>
+<li>Replace the current direct accepted-source scheduling path for agent proposals.</li>
+</ul>
+<h4 id="source-files-to-add-6">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/PreparedScenePreviewPublicationService.h</code></li>
+<li><code>src/editor/service/PreparedScenePreviewPublicationService.cpp</code></li>
+<li><code>include/editor/service/AgentProposalApprovalService.h</code></li>
+<li><code>src/editor/service/AgentProposalApprovalService.cpp</code></li>
+<li><code>include/editor/service/ApprovedAgentCandidatePublicationService.h</code></li>
+<li><code>src/editor/service/ApprovedAgentCandidatePublicationService.cpp</code></li>
+<li><code>include/editor/service/AgentPublicationRollbackService.h</code></li>
+<li><code>src/editor/service/AgentPublicationRollbackService.cpp</code></li>
+<li><code>tests/prepared_scene_preview_publication_harness.cpp</code></li>
+<li><code>tests/agent_proposal_approval_harness.cpp</code></li>
+<li><code>tests/approved_agent_candidate_publication_harness.cpp</code></li>
+<li><code>tests/agent_publication_rollback_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_publication_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-6">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/CompletedSceneGenerationPublicationService.h</code></li>
+<li><code>src/editor/service/CompletedSceneGenerationPublicationService.cpp</code></li>
+<li><code>include/editor/service/EditorDocumentPublicationService.h</code></li>
+<li><code>src/editor/service/EditorDocumentPublicationService.cpp</code></li>
+<li><code>include/editor/model/ScenePreviewSession.h</code></li>
+<li><code>include/editor/service/AiGrammarProposalPublication.h</code></li>
+<li><code>include/editor/service/AiGrammarProposalPublicationService.h</code></li>
+<li><code>src/editor/service/AiGrammarProposalPublicationService.cpp</code></li>
+<li><code>include/editor/application/Progen3dEditorApplication.h</code></li>
+<li><code>src/editor/application/Progen3dEditorApplication.cpp</code></li>
+<li><code>Makefile</code></li>
+<li class="source-status--passed">existing completed-publication and AI-publication harnesses</li>
+</ul>
+<h4 id="source-required-tests-5">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>approval requires exact candidate validation;</li>
+<li>approval is rejected after document drift;</li>
+<li>approval is rejected after selected differences change;</li>
+<li class="source-status--failed">candidate preview preparation failure leaves source and scene unchanged;</li>
+<li>publication transfers the exact validated snapshot and design nonce;</li>
+<li>publication moves the previous published snapshot into same-session rollback ownership;</li>
+<li>publication does not request a new stochastic generation;</li>
+<li>current source and published scene correspond to the approved fingerprint;</li>
+<li>transaction contains previous source and exact approval identity;</li>
+<li>rollback restores previous source;</li>
+<li>rollback requires explicit action;</li>
+<li>rollback is rejected after unrelated source drift; and</li>
+<li class="source-status--failed">legacy completed-generation success and failure tests remain green.</li>
+</ul>
+<h4 id="source-exit-gate-6">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>No agent acceptance path calls <code>requestSceneGeneration()</code> for the accepted candidate.</li>
+<li>Exact reviewed candidate identity becomes the published scene identity.</li>
+</ul>
+<h3 id="source-milestone-6-add-candidate-preview-and-review-ui">Milestone 6: Add Candidate Preview and Review UI</h3><p class="section-guide">Reading guide: this source section records “Milestone 6: Add Candidate Preview and Review UI”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-7">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add candidate preview activation service and state.</li>
+<li class="source-status--proposed">Extend proposal panel with evidence, fingerprints, validation, preview, approval, publication, and rollback controls.</li>
+<li>Extend assistant panel with asynchronous busy/cancel state.</li>
+<li>Label provider claims and deterministic evidence separately.</li>
+<li>Add source-drift and candidate-drift status chips.</li>
+<li>Restore published preview when panel closes or candidate becomes invalid.</li>
+</ul>
+<h4 id="source-files-to-add-7">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/AgentCandidatePreviewWorkflow.h</code></li>
+<li><code>include/editor/service/AgentCandidatePreviewActivationService.h</code></li>
+<li><code>src/editor/service/AgentCandidatePreviewActivationService.cpp</code></li>
+<li><code>tests/agent_candidate_preview_activation_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_preview_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-7">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/presentation/AiAssistantPanel.h</code></li>
+<li><code>src/editor/presentation/AiAssistantPanel.cpp</code></li>
+<li><code>include/editor/presentation/AiGrammarProposalPanel.h</code></li>
+<li><code>src/editor/presentation/AiGrammarProposalPanel.cpp</code></li>
+<li><code>include/editor/presentation/EditorPresentationComposition.h</code></li>
+<li><code>src/editor/presentation/EditorPresentationComposition.cpp</code></li>
+<li><code>include/editor/application/EditorApplicationRuntimeContext.h</code></li>
+<li><code>src/editor/application/EditorApplicationRuntimeContext.cpp</code></li>
+<li><code>include/editor/model/WorkspaceLayoutState.h</code> when a new agent pane state is required</li>
+<li><code>Makefile</code></li>
+</ul>
+<h4 id="source-required-tests-6">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>preview requires valid exact candidate;</li>
+<li>candidate activation does not replace <code>lastValidSceneSnapshot()</code>;</li>
+<li>return-to-published restores published geometry and materials;</li>
+<li>selection change during preview restores published scene;</li>
+<li class="source-status--proposed">document edit during preview marks proposal stale and restores published scene;</li>
+<li class="source-status--failed">preview preparation failure restores published resources;</li>
+<li>presentation code uses workflow interfaces only; and</li>
+<li>UI disables approval and publication when validation is stale.</li>
+</ul>
+<h4 id="source-exit-gate-7">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Candidate and published scene ownership are visibly and structurally distinct.</li>
+<li>GUI smoke demonstrates request, validation, preview, approval, publication, and rollback using a scripted provider.</li>
+</ul>
+<h3 id="source-milestone-7-add-append-only-transaction-persistence">Milestone 7: Add Append-Only Transaction Persistence</h3><p class="section-guide">Reading guide: this source section records “Milestone 7: Add Append-Only Transaction Persistence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-8">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add transaction repository contract and JSON Lines implementation.</li>
+<li>Add hash-chained event serialization.</li>
+<li>Add transaction summary projection.</li>
+<li class="source-status--failed">Integrate persistence with approval, publication, failure, and rollback events.</li>
+<li class="source-status--passed">Add privacy controls for retaining complete source and raw provider output.</li>
+</ul>
+<h4 id="source-files-to-add-8">Files to Add</h4><p class="section-guide">Reading guide: this source section records “Files to Add”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/AgentTransactionRepository.h</code></li>
+<li><code>include/editor/service/JsonAgentTransactionRepository.h</code></li>
+<li><code>src/editor/service/JsonAgentTransactionRepository.cpp</code></li>
+<li><code>include/editor/service/AgentTransactionHashService.h</code></li>
+<li><code>src/editor/service/AgentTransactionHashService.cpp</code></li>
+<li><code>tests/agent_transaction_repository_harness.cpp</code></li>
+<li><code>tests/agent_transaction_hash_chain_harness.cpp</code></li>
+<li><code>tests/run_progen3d_agent_transaction_checks.sh</code></li>
+</ul>
+<h4 id="source-files-to-modify-8">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/service/ApprovedAgentCandidatePublicationService.h</code></li>
+<li><code>src/editor/service/ApprovedAgentCandidatePublicationService.cpp</code></li>
+<li><code>include/editor/service/AgentPublicationRollbackService.h</code></li>
+<li><code>src/editor/service/AgentPublicationRollbackService.cpp</code></li>
+<li><code>include/editor/application/Progen3dEditorApplication.h</code></li>
+<li><code>src/editor/application/Progen3dEditorApplication.cpp</code></li>
+<li><code>Makefile</code></li>
+</ul>
+<h4 id="source-required-tests-7">Required Tests</h4><p class="section-guide">Reading guide: this source section records “Required Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>event hash changes when any event field changes;</li>
+<li>previous hash forms an unbroken chain;</li>
+<li>corrupted event is detected;</li>
+<li>appending never rewrites earlier events;</li>
+<li>projection can be rebuilt from ledger;</li>
+<li>secrets and authentication tokens are absent;</li>
+<li>temporary-file projection replacement is atomic; and</li>
+<li>transaction history survives application restart.</li>
+</ul>
+<h4 id="source-exit-gate-8">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--proposed">Every accepted proposal has durable approval, publication, and rollback evidence.</li>
+</ul>
+<h3 id="source-milestone-8-complete-ui-migration-and-compatibility-cleanup">Milestone 8: Complete UI Migration and Compatibility Cleanup</h3><p class="section-guide">Reading guide: this source section records “Milestone 8: Complete UI Migration and Compatibility Cleanup”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-9">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Make <code>Progen3dAgentSession</code> the only canonical agent state.</li>
+<li>Remove backend DTO ownership from editor models.</li>
+<li>Reduce <code>AiConversationWorkflowService</code> and <code>AiGrammarProposalPublicationService</code> to compatibility adapters or replace their interfaces in one reviewed slice.</li>
+<li>Update source gates to enforce the final object model.</li>
+<li>Update README and editor implementation documentation.</li>
+<li>Add agent tests to release checks only after all focused gates are stable.</li>
+</ul>
+<h4 id="source-files-to-modify-9">Files to Modify</h4><p class="section-guide">Reading guide: this source section records “Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/model/AiAssistantSession.h</code></li>
+<li><code>src/editor/model/AiAssistantSession.cpp</code></li>
+<li><code>include/editor/model/AiGrammarProposal.h</code></li>
+<li><code>include/editor/model/AiGrammarProposalReview.h</code></li>
+<li><code>src/editor/model/AiGrammarProposalReview.cpp</code></li>
+<li>AI workflow and publication interfaces</li>
+<li>presentation composition and panels</li>
+<li><code>README.md</code></li>
+<li><code>PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md</code> or a completion addendum</li>
+<li><code>tests/run_release_checks.sh</code></li>
+<li><code>Makefile</code></li>
+</ul>
+<h4 id="source-compatibility-rule">Compatibility Rule</h4><p class="section-guide">Reading guide: this source section records “Compatibility Rule”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Do not remove old backend DTO or workflow types until:</p>
+<ul>
+<li>all live uses are migrated;</li>
+<li>backend thread loading still works;</li>
+<li>current AI source gates have replacements;</li>
+<li class="source-status--passed">scripted provider tests pass; and</li>
+<li>full GUI linking passes.</li>
+</ul>
+<h4 id="source-exit-gate-9">Exit Gate</h4><p class="section-guide">Reading guide: this source section records “Exit Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The editor object model exposes a ProGen3D design agent rather than backend AI DTO state.</li>
+</ul>
+<h3 id="source-milestone-9-later-capability-expansion">Milestone 9: Later Capability Expansion</h3><p class="section-guide">Reading guide: this source section records “Milestone 9: Later Capability Expansion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>These capabilities are explicitly outside the MVP but must reuse the same candidate and approval model.</p>
+<h4 id="source-explorevariants"><code>ExploreVariants</code></h4><p class="section-guide">Reading guide: this source section records “ExploreVariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>generate bounded candidate count;</li>
+<li>assign one deterministic nonce per candidate;</li>
+<li>validate every candidate independently;</li>
+<li>compare measured statistics and explicit user constraints;</li>
+<li>never rank solely from provider prose; and</li>
+<li>approve one exact candidate only.</li>
+</ul>
+<h4 id="source-auditdesign"><code>AuditDesign</code></h4><p class="section-guide">Reading guide: this source section records “AuditDesign”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>inspect source, diagnostics, generated scene facts, source associations, and declared constraints;</li>
+<li>identify contradictions and unknowns;</li>
+<li class="source-status--proposed">produce no mutation unless the user separately requests a repair proposal.</li>
+</ul>
+<h4 id="source-reference-driven-design">Reference-Driven Design</h4><p class="section-guide">Reading guide: this source section records “Reference-Driven Design”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>retain reference identity and content hash;</li>
+<li>separate observed measurements from inferred measurements;</li>
+<li class="source-status--unresolved">keep unresolved constraints explicit;</li>
+<li>bind generated evidence to reference and grammar hashes; and</li>
+<li>require normal exact-candidate approval.</li>
+</ul>
+<h4 id="source-local-provider">Local Provider</h4><p class="section-guide">Reading guide: this source section records “Local Provider”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>An <code>OllamaDesignAgentProvider</code> may be added after the provider-neutral contract is stable. Local model availability, model tag, context size, and GPU state must be detected at runtime rather than embedded as permanent assumptions.</p>
+<h3 id="source-12-concrete-api-shape">12. Concrete API Shape</h3><p class="section-guide">Reading guide: this source section records “12. Concrete API Shape”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following signatures describe the intended ownership boundaries. Exact spelling may change only when repository compilation requires a clearer equivalent.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class DesignAgentProvider
+{
+public:
+    virtual ~DesignAgentProvider() = default;
+
+    virtual bool listThreads(
+        std::vector&lt;AgentConversationThreadSummary&gt; *threads,
+        std::string *error_message) = 0;
+
+    virtual bool loadThread(
+        const std::string &amp;thread_id,
+        AgentConversation *conversation,
+        std::string *error_message) = 0;
+
+    virtual bool submitRequest(
+        const AgentDesignRequest &amp;request,
+        AgentProviderResponse *response,
+        std::string *error_message) = 0;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class GrammarSourceFingerprintService
+{
+public:
+    GrammarSourceFingerprint fingerprint(
+        const std::string &amp;source_text) const;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class AgentCandidateValidationService
+{
+public:
+    std::uint64_t requestValidation(
+        AgentCandidateGenerationRuntime &amp;generation_runtime,
+        const AgentProposalCandidate &amp;candidate,
+        const std::string &amp;selected_source);
+
+    bool publishCompletedValidation(
+        Progen3dAgentSession &amp;agent_session,
+        AgentCandidateGenerationRuntime &amp;generation_runtime) const;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class AgentProposalApprovalService
+{
+public:
+    std::optional&lt;AgentProposalApproval&gt; approveExactCandidate(
+        const Progen3dAgentSession &amp;agent_session,
+        const GrammarSourceFingerprint &amp;current_document_fingerprint,
+        bool explicit_human_action) const;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class ApprovedAgentCandidatePublicationService
+{
+public:
+    AgentCandidatePublicationOutcome publish(
+        Progen3dAgentRuntimeContext &amp;runtime_context,
+        const AgentProposalApproval &amp;approval);
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class Progen3dDesignAgent
+{
+public:
+    bool submitCurrentRequest(Progen3dAgentRuntimeContext &amp;runtime_context);
+    void cancelCurrentRequest(Progen3dAgentRuntimeContext &amp;runtime_context);
+    void advancePendingWork(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool validateSelectedCandidate(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool previewCandidate(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool restorePublishedPreview(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool approveExactCandidate(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool publishApprovedCandidate(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool rejectProposal(Progen3dAgentRuntimeContext &amp;runtime_context);
+    bool rollbackLastPublication(Progen3dAgentRuntimeContext &amp;runtime_context);
+};
+</code></pre>
+<h3 id="source-13-existing-file-change-map">13. Existing File Change Map</h3><p class="section-guide">Reading guide: this source section records “13. Existing File Change Map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Existing file</th>
+<th scope="col">Planned responsibility change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>include/editor/model/EditorWorkspaceSession.h</code></td>
+<td>Compose canonical <code>Progen3dAgentSession</code>.</td>
+</tr>
+<tr>
+<td><code>include/editor/model/AiAssistantSession.h</code></td>
+<td>Temporary compatibility shell, then remove backend DTO ownership.</td>
+</tr>
+<tr>
+<td><code>src/editor/model/AiAssistantSession.cpp</code></td>
+<td class="source-status--proposed">Delegate lifecycle and proposal state to canonical agent models.</td>
+</tr>
+<tr>
+<td><code>include/editor/model/AiGrammarProposalReview.h</code></td>
+<td>Migrate or adapt line differences to <code>AgentProposalReviewSession</code>.</td>
+</tr>
+<tr>
+<td><code>src/editor/model/AiGrammarProposalReview.cpp</code></td>
+<td>Preserve tested difference behavior during migration.</td>
+</tr>
+<tr>
+<td><code>include/editor/service/AiConversationWorkflowService.h</code></td>
+<td>Delegate request submission to <code>Progen3dDesignAgent</code>.</td>
+</tr>
+<tr>
+<td><code>src/editor/service/AiConversationWorkflowService.cpp</code></td>
+<td class="source-status--proposed">Remove backend request construction and direct proposal staging.</td>
+</tr>
+<tr>
+<td><code>include/editor/service/AiGrammarProposalPublicationService.h</code></td>
+<td>Become compatibility adapter over exact approval/publication authority.</td>
+</tr>
+<tr>
+<td><code>src/editor/service/AiGrammarProposalPublicationService.cpp</code></td>
+<td>Remove direct accepted-source scheduling path.</td>
+</tr>
+<tr>
+<td><code>include/editor/service/EditorDocumentPublicationService.h</code></td>
+<td>Add validated source publication without stochastic regeneration.</td>
+</tr>
+<tr>
+<td><code>src/editor/service/EditorDocumentPublicationService.cpp</code></td>
+<td>Preserve focus/source behavior while separating source commit from generation request.</td>
+</tr>
+<tr>
+<td><code>include/editor/model/ScenePreviewSession.h</code></td>
+<td>Add explicit transfer of the published snapshot for governed publication and same-session rollback.</td>
+</tr>
+<tr>
+<td><code>include/editor/service/CompletedSceneGenerationPublicationService.h</code></td>
+<td>Delegate successful state projection.</td>
+</tr>
+<tr>
+<td><code>src/editor/service/CompletedSceneGenerationPublicationService.cpp</code></td>
+<td class="source-status--failed">Retain stale/failure behavior; use prepared publication service for success.</td>
+</tr>
+<tr>
+<td><code>include/editor/application/EditorApplicationRuntimeContext.h</code></td>
+<td>Expose narrow agent workflow/context associations.</td>
+</tr>
+<tr>
+<td><code>src/editor/application/EditorApplicationRuntimeContext.cpp</code></td>
+<td>Store and return those associations.</td>
+</tr>
+<tr>
+<td><code>include/editor/application/Progen3dEditorApplication.h</code></td>
+<td>Compose agent services, runtimes, provider factory, and repository.</td>
+</tr>
+<tr>
+<td><code>src/editor/application/Progen3dEditorApplication.cpp</code></td>
+<td>Construct services in dependency order and shut them down deterministically.</td>
+</tr>
+<tr>
+<td><code>src/editor/application/EditorFrameCycle.cpp</code></td>
+<td>Advance provider and candidate completion before drawing.</td>
+</tr>
+<tr>
+<td><code>src/editor/presentation/AiAssistantPanel.cpp</code></td>
+<td>Present async request and provider-neutral response state.</td>
+</tr>
+<tr>
+<td><code>src/editor/presentation/AiGrammarProposalPanel.cpp</code></td>
+<td>Present validation, evidence, preview, exact approval, publication, and rollback.</td>
+</tr>
+<tr>
+<td><code>Makefile</code></td>
+<td>Register all production and harness sources.</td>
+</tr>
+<tr>
+<td><code>tests/run_authentication_ai_workflow_checks.sh</code></td>
+<td>Preserve transport/workflow boundaries and add new adapter checks.</td>
+</tr>
+<tr>
+<td><code>tests/run_release_checks.sh</code></td>
+<td>Add consolidated agent checks only after focused completion.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-14-test-and-verification-strategy">14. Test and Verification Strategy</h3><p class="section-guide">Reading guide: this source section records “14. Test and Verification Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-14-1-focused-model-tests">14.1 Focused Model Tests</h4><p class="section-guide">Reading guide: this source section records “14.1 Focused Model Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_model_checks.sh
+</code></pre>
+<p>Must cover fingerprints, lifecycle, differences, selected-source composition, validation invalidation, and approval invalidation.</p>
+<h4 id="source-14-2-provider-tests">14.2 Provider Tests</h4><p class="section-guide">Reading guide: this source section records “14.2 Provider Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_provider_checks.sh
+</code></pre>
+<p>Must use scripted or transport-stubbed providers and require no live network.</p>
+<h4 id="source-14-3-runtime-tests">14.3 Runtime Tests</h4><p class="section-guide">Reading guide: this source section records “14.3 Runtime Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_runtime_checks.sh
+</code></pre>
+<p>Must cover asynchronous provider work, independent candidate generation, stale results, cancellation, and shutdown.</p>
+<h4 id="source-14-4-validation-tests">14.4 Validation Tests</h4><p class="section-guide">Reading guide: this source section records “14.4 Validation Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_validation_checks.sh
+</code></pre>
+<p>Must compile representative valid and invalid grammar candidates with fixed nonces.</p>
+<h4 id="source-14-5-publication-tests">14.5 Publication Tests</h4><p class="section-guide">Reading guide: this source section records “14.5 Publication Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_publication_checks.sh
+</code></pre>
+<p class="source-status--failed">Must prove exact source/snapshot publication, source-drift rejection, preparation failure atomicity, and rollback.</p>
+<h4 id="source-14-6-preview-tests">14.6 Preview Tests</h4><p class="section-guide">Reading guide: this source section records “14.6 Preview Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_preview_checks.sh
+</code></pre>
+<p>Must prove candidate activation and restoration without canonical ownership replacement.</p>
+<h4 id="source-14-7-transaction-tests">14.7 Transaction Tests</h4><p class="section-guide">Reading guide: this source section records “14.7 Transaction Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_transaction_checks.sh
+</code></pre>
+<p>Must prove append-only hash-chain integrity and restart recovery.</p>
+<h4 id="source-14-8-consolidated-agent-gate">14.8 Consolidated Agent Gate</h4><p class="section-guide">Reading guide: this source section records “14.8 Consolidated Agent Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_checks.sh
+</code></pre>
+<p>It will run all focused agent scripts plus inherited AI, generation, preview, and source-contract checks.</p>
+<h4 id="source-14-9-full-application-verification">14.9 Full Application Verification</h4><p class="section-guide">Reading guide: this source section records “14.9 Full Application Verification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>After each authority-bearing milestone:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">make -j2 progen3d-editor-gui
+./tests/run_authentication_ai_workflow_checks.sh
+./tests/run_completed_scene_generation_publication_checks.sh
+./tests/run_editor_scene_generation_runtime_checks.sh
+./tests/run_preview_session_checks.sh
+./tests/run_editor_architecture_checks.sh
+./tests/run_gui_smoke_check.sh
+./tests/run_temporal_gui_smoke_check.sh
+</code></pre>
+<p>After MVP completion:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_progen3d_agent_checks.sh
+./tests/run_release_checks.sh
+</code></pre>
+<p class="source-status--pending">An interrupted or timed-out command has unknown final status and cannot be reported as passed.</p>
+<h3 id="source-15-agent-gui-smoke-scenario">15. Agent GUI Smoke Scenario</h3><p class="section-guide">Reading guide: this source section records “15. Agent GUI Smoke Scenario”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The GUI smoke must use <code>ScriptedDesignAgentProvider</code> and perform this deterministic scenario:</p>
+<ol>
+<li>Open a known valid grammar.</li>
+<li>Submit a repair request.</li>
+<li class="source-status--proposed">Receive a scripted two-difference proposal.</li>
+<li>Observe asynchronous provider completion.</li>
+<li class="source-status--proposed">Validate the full proposal with fixed candidate nonce.</li>
+<li>Confirm published scene identity has not changed.</li>
+<li>Deselect one difference.</li>
+<li>Confirm prior evidence and approval are cleared.</li>
+<li>Validate selected source.</li>
+<li>Activate candidate preview.</li>
+<li>Confirm viewport is labeled as candidate and canonical snapshot owner is unchanged.</li>
+<li>Return to published preview.</li>
+<li>Approve exact candidate.</li>
+<li>Publish approved candidate.</li>
+<li>Confirm source fingerprint, published design nonce, and transaction identity match.</li>
+<li>Roll back.</li>
+<li>Confirm previous source is restored and normal generation completes.</li>
+</ol>
+<p>The scenario must not require Firebase credentials or a live backend.</p>
+<h3 id="source-16-requirement-to-evidence-matrix">16. Requirement-to-Evidence Matrix</h3><p class="section-guide">Reading guide: this source section records “16. Requirement-to-Evidence Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Requirement</th>
+<th scope="col">Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provider cannot mutate editor state</td>
+<td>source-contract gate plus provider harness</td>
+</tr>
+<tr>
+<td>Request context is immutable</td>
+<td>request assembly harness</td>
+</tr>
+<tr>
+<td>Exact source identity uses SHA-256</td>
+<td>fingerprint harness and known vectors</td>
+</tr>
+<tr>
+<td>Provider work does not block UI</td>
+<td>request coordinator/frame-cycle harness</td>
+</tr>
+<tr>
+<td>Candidate generation is isolated</td>
+<td>candidate runtime harness</td>
+</tr>
+<tr>
+<td class="source-status--proposed">Invalid proposal cannot be approved</td>
+<td>validation and approval harnesses</td>
+</tr>
+<tr>
+<td>Selected changes are revalidated</td>
+<td>review-session and validation harnesses</td>
+</tr>
+<tr>
+<td>Candidate preview preserves canonical ownership</td>
+<td>preview harness and GUI smoke</td>
+</tr>
+<tr>
+<td>Document drift rejects approval/publication</td>
+<td>approval/publication harnesses</td>
+</tr>
+<tr>
+<td>Published scene matches reviewed candidate</td>
+<td>publication harness comparing fingerprint and nonce</td>
+</tr>
+<tr>
+<td class="source-status--failed">Failure retains current source and scene</td>
+<td class="source-status--failed">publication failure harness</td>
+</tr>
+<tr>
+<td>Human action is required</td>
+<td>approval service and presentation source gates</td>
+</tr>
+<tr>
+<td>Rollback is explicit and reversible</td>
+<td>rollback harness and GUI smoke</td>
+</tr>
+<tr>
+<td>Transaction history is append-only</td>
+<td>transaction repository harness</td>
+</tr>
+<tr>
+<td>Existing editor behavior remains compatible</td>
+<td>inherited focused checks, full build, GUI and temporal smokes</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-17-source-contract-rules">17. Source-Contract Rules</h3><p class="section-guide">Reading guide: this source section records “17. Source-Contract Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The new source gate must reject:</p>
+<ul>
+<li><code>publishEditedSource</code>, <code>publishValidatedSource</code>, or <code>replaceSourceText</code> calls from provider adapters;</li>
+<li>document publication calls from <code>AiAssistantPanel</code> or <code>AiGrammarProposalPanel</code>;</li>
+<li><code>replacePublishedScene</code> calls from provider, request assembly, validation, or presentation code;</li>
+<li>approval creation outside <code>AgentProposalApprovalService</code>;</li>
+<li>agent source publication outside <code>ApprovedAgentCandidatePublicationService</code>;</li>
+<li>direct lifecycle-state assignments from presentation code;</li>
+<li>backend DTO members in <code>Progen3dAgentSession</code>;</li>
+<li>use of <code>std::hash</code> for candidate, approval, or transaction identity;</li>
+<li>candidate validation through the canonical editor generation queue;</li>
+<li>model-generated approval flags; and</li>
+<li>automatic cloud save or publish after agent acceptance.</li>
+</ul>
+<p>The gate must require:</p>
+<ul>
+<li><code>Progen3dDesignAgent</code> composition in <code>Progen3dEditorApplication</code>;</li>
+<li><code>Progen3dAgentRuntimeContext</code> exposure through <code>EditorApplicationRuntimeContext</code>;</li>
+<li>independent <code>AgentCandidateGenerationRuntime</code> ownership;</li>
+<li>exact approval checks in <code>ApprovedAgentCandidatePublicationService</code>;</li>
+<li>successful publication delegation through <code>PreparedScenePreviewPublicationService</code>;</li>
+<li>source and candidate fingerprint comparison; and</li>
+<li>candidate preview restoration calls.</li>
+</ul>
+<h3 id="source-18-release-sequence">18. Release Sequence</h3><p class="section-guide">Reading guide: this source section records “18. Release Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-release-a-read-only-design-agent">Release A: Read-Only Design Agent</h4><p class="section-guide">Reading guide: this source section records “Release A: Read-Only Design Agent”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes:</p>
+<ul>
+<li>Milestones 0-3;</li>
+<li><code>ExplainSelection</code> and <code>DiagnoseGrammar</code>;</li>
+<li>asynchronous provider calls; and</li>
+<li>no publication controls.</li>
+</ul>
+<h4 id="source-release-b-validated-proposal-agent">Release B: Validated Proposal Agent</h4><p class="section-guide">Reading guide: this source section records “Release B: Validated Proposal Agent”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes:</p>
+<ul>
+<li>Milestone 4;</li>
+<li><code>RepairGrammar</code> and <code>DraftGrammar</code>;</li>
+<li>exact candidate compilation and evidence; and</li>
+<li>review without publication.</li>
+</ul>
+<h4 id="source-release-c-governed-authoring-agent">Release C: Governed Authoring Agent</h4><p class="section-guide">Reading guide: this source section records “Release C: Governed Authoring Agent”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes:</p>
+<ul>
+<li>Milestones 5-7;</li>
+<li>exact approval;</li>
+<li>exact candidate publication;</li>
+<li>candidate preview;</li>
+<li>rollback; and</li>
+<li>append-only transaction persistence.</li>
+</ul>
+<h4 id="source-release-d-expanded-design-operations">Release D: Expanded Design Operations</h4><p class="section-guide">Reading guide: this source section records “Release D: Expanded Design Operations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes:</p>
+<ul>
+<li>Milestones 8-9;</li>
+<li>final compatibility cleanup;</li>
+<li>variant exploration;</li>
+<li>evidence-constrained reference workflows; and</li>
+<li>optional local provider support.</li>
+</ul>
+<h3 id="source-19-completion-standard">19. Completion Standard</h3><p class="section-guide">Reading guide: this source section records “19. Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The ProGen3D agent MVP is complete only when all statements below are supported by current evidence:</p>
+<ul>
+<li><code>Progen3dDesignAgent</code> is composed by the application and used by the UI.</li>
+<li>Provider responses are represented by provider-neutral domain models.</li>
+<li>Provider calls and candidate generation do not block the interactive frame.</li>
+<li>Candidate compilation is isolated from canonical generation publication.</li>
+<li>Invalid candidates retain current source and the last valid scene.</li>
+<li class="source-status--passed">Complete and selected proposals are validated as exact source candidates.</li>
+<li>Candidate evidence includes local source fingerprint, nonce, diagnostics, and measured scene facts.</li>
+<li>Candidate preview is reversible and does not replace canonical scene ownership.</li>
+<li>Human approval is bound to the exact candidate fingerprint.</li>
+<li class="source-status--failed">Source drift, candidate drift, stale request results, and nonce mismatch fail closed.</li>
+<li>Publication transfers the exact reviewed candidate rather than generating an unreviewed stochastic replacement.</li>
+<li class="source-status--proposed">Every accepted proposal has an append-only transaction record and explicit rollback path.</li>
+<li class="source-status--passed">Existing AI, generation, preview, editor architecture, GUI, and temporal checks pass.</li>
+<li class="source-status--passed">The complete <code>progen3d-editor-gui</code> build succeeds from current source.</li>
+<li>The requirement-to-evidence matrix has no unverified MVP requirement.</li>
+</ul>
+<p>Focused green harnesses, provider success, or a visually plausible candidate do not independently establish completion.</p>
+<h3 id="source-20-recommended-first-implementation-slice">20. Recommended First Implementation Slice</h3><p class="section-guide">Reading guide: this source section records “20. Recommended First Implementation Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Begin with Milestones 0 and 1 only:</p>
+<ol>
+<li>add the agent source-contract gate;</li>
+<li>add SHA-256 grammar fingerprints;</li>
+<li class="source-status--proposed">add provider-neutral request, proposal, validation, approval, and transaction models;</li>
+<li class="source-status--proposed">add the proposal review session with evidence invalidation; and</li>
+<li>add focused model harnesses.</li>
+</ol>
+<p>Do not modify provider calls, scene generation, OpenGL preview, or document publication in this first slice. Establishing exact identity and state ownership first makes every later authority-bearing change testable and reviewable.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-canonical-material-catalog-proposal.html" rel="prev">← Previous: ProGen3D Canonical Material Catalog Proposal</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-editor-gui-implementation-plan.html" rel="next">Next: Progen3D Editor GUI Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

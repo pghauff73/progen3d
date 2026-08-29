@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver." name="description"/>
+<meta content="PROGEN3D_SMB_OMV2_SPATIALLY_AWARE_OBJECT_MODEL_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="8fa26fca53103dd05a6691f03cf9a958c16eafbdb76879b32f8f6f1623a9ea61" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-buildings">Buildings and Object Models</a></li>
+<li aria-current="page">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</h1>
+<p class="lead">SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Buildings and Object Models</span>
+<span class="tag">About 28 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_SMB_OMV2_SPATIALLY_AWARE_OBJECT_MODEL_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="8fa26fca53103dd05a6691f03cf9a958c16eafbdb76879b32f8f6f1623a9ea61" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan, Executive Decision, Current Repository Baseline, Scene Instances.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="smb-omv2-spatially-aware-small-modern-building.html">SMB-OMv2 Spatially Aware Small Modern Building</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Executive Decision</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Executive Decision</td></tr><tr><td><dfn title="Named by the source document">Current Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Scene Instances</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Scene Instances</td></tr><tr><td><dfn title="Named by the source document">Transform Authority</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Transform Authority</td></tr><tr><td><dfn title="Named by the source document">Procedural Geometry</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>2.3 Procedural Geometry</td></tr><tr><td><dfn title="Named by the source document">Collision Infrastructure</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.4 Collision Infrastructure</td></tr><tr><td><dfn title="Named by the source document">Connection Metadata and Overlays</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.5 Connection Metadata and Overlays</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SMB-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="axis-aligned bounding box">AABB</dfn></td><td>axis-aligned bounding box</td></tr><tr><td><dfn title="Field evaluation and candidate geometry">P2</dfn></td><td>Field evaluation and candidate geometry</td></tr><tr><td><dfn title="OMv1, SMB-OMv2, and SMB-OMv2">SMB</dfn></td><td>OMv1, SMB-OMv2, and SMB-OMv2</td></tr><tr><td><dfn title="Typed MCP_OMv1 model">P1</dfn></td><td>Typed MCP_OMv1 model</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">BVH</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">GJK</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">OBB</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">EPA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="style overlap, GJK/EPA convex collision, triangle-mesh overlap, penetration normals, depths, contact">SAT</dfn></td><td>style overlap, GJK/EPA convex collision, triangle-mesh overlap, penetration normals, depths, contact</td></tr><tr><td><dfn title="Curves, sections, and observations">P3</dfn></td><td>Curves, sections, and observations</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan, Executive Decision, Current Repository Baseline, Scene Instances. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Executive Decision, 2. Current Repository Baseline, 2.1 Scene Instances, 2.2 Transform Authority. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 20, failed: 22, pending: 2, proposed: 2, unresolved: 4.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 118 code blocks and the source SHA-256 <code>8fa26fca53103dd05a6691f03cf9a958c16eafbdb76879b32f8f6f1623a9ea61</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-executive-decision">1. Executive Decision</a></li><li><a href="#source-2-current-repository-baseline">2. Current Repository Baseline</a></li><li><a href="#source-2-1-scene-instances">2.1 Scene Instances</a></li><li><a href="#source-2-2-transform-authority">2.2 Transform Authority</a></li><li><a href="#source-2-3-procedural-geometry">2.3 Procedural Geometry</a></li><li><a href="#source-2-4-collision-infrastructure">2.4 Collision Infrastructure</a></li><li><a href="#source-2-5-connection-metadata-and-overlays">2.5 Connection Metadata and Overlays</a></li><li><a href="#source-2-6-smb-omv1-compatibility-fixture">2.6 SMB-OMv1 Compatibility Fixture</a></li><li><a href="#source-2-7-missing-capabilities">2.7 Missing Capabilities</a></li><li><a href="#source-3-architectural-principles">3. Architectural Principles</a></li><li><a href="#source-3-1-identity-is-not-geometry">3.1 Identity Is Not Geometry</a></li><li><a href="#source-3-2-authored-and-resolved-placement-are-separate">3.2 Authored and Resolved Placement Are Separate</a></li><li><a href="#source-3-3-three-independent-graphs">3.3 Three Independent Graphs</a></li><li><a href="#source-3-4-placement-is-transactional">3.4 Placement Is Transactional</a></li><li><a href="#source-3-5-interfaces-are-frames">3.5 Interfaces Are Frames</a></li><li><a href="#source-3-6-fail-closed">3.6 Fail Closed</a></li><li><a href="#source-4-target-object-model">4. Target Object Model</a></li><li><a href="#source-4-1-aggregate-root">4.1 Aggregate Root</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>20</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>22</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>2</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>2</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>4</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_SMB_OMV2_SPATIALLY_AWARE_OBJECT_MODEL_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan, Executive Decision, Current Repository Baseline, Scene Instances.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>validate references and compatibility;</li><li>evaluate candidate transforms without mutating the scene;</li><li>record search and residual evidence;</li><li>validate required contact and forbidden collision;</li><li>commit all affected primitives together;</li><li>publish no partial model on failure.</li><li>capture the authored object world matrix;</li><li>execute existing transform actions normally;</li><li>when I() emits geometry, calculate primitive-local-to-object;</li><li>append a geometry binding;</li><li>preserve primitive source ranges;</li><li>bind child object primitives only to the nearest object scope.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">SpatialBuildingModel
+├── SpatialBuildingObject[]
+├── SpatialContainmentTree
+├── SpatialConnectionGraph
+├── SpatialConstraintGraph
+├── SpatialObjectGeometryBinding[]
+└── SpatialResolutionRecord[]
+        │
+        └── references ScenePrimitiveInstance[]</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan" data="../../assets/diagrams/pages/progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_SMB_OMV2_SPATIALLY_AWARE_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>8fa26fca53103dd05a6691f03cf9a958c16eafbdb76879b32f8f6f1623a9ea61</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>139 headings, 118 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan, Executive Decision, Current Repository Baseline, Scene Instances, Transform Authority</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-smb-omv2-1-all-building-objects-implementation-plan.html">ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</small></li><li><a href="smb-omv2-spatially-aware-small-modern-building.html">SMB-OMv2 Spatially Aware Small Modern Building</a> <span class="status-badge status--documented">Documented</span><br/><small>SMB-OMv2 promotes the 124-object Small Modern Building from a positioned geometry grammar into an executable spatial object model. The generated scene retains the SMB-OMv1 hierarchy and geometry while adding stable identity, local frames, typed interfaces, connection evidence, collision policies…</small></li><li><a href="modern-luxury-townhouse-v1-implementation-plan.html">Modern Luxury Townhouse V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Replace the geometry-only townhouse draft with an executable, spatially aware building grammar whose static camera views and scripted walkthrough can be compared reproducibly with the ImageGen building and object references.</small></li><li><a href="progen3d-comv1-chair-object-model-and-fgkv1-curved-geometry-implementation-plan.html">ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Implementation status: complete. Authoritative verification is recorded in COMV1CHAIROBJECTMODELVERIFICATION.md and tests/evidence/comv1chairacceptance2026-08-24.json.</small></li><li><a href="progen3d-building-object-image-matching-v1-implementation-plan.html">ProGen3D Building Object Image Matching V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</small></li><li><a href="smb-omv2-1-all-building-objects-verification.html">SMB-OMv2.1 All Building Objects Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>SMB-OMv2.1 is implemented as an additive building-knowledge model over the accepted SMB-OMv2 spatial model. The frozen SMB-OMv1 grammar remains the source fixture, SMB-OMv2 remains the spatial authority, and SMB-OMv2.1 adds explicit classification, role, function, service, relationship…</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_SMB_OMV2_SPATIALLY_AWARE_OBJECT_MODEL_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_SMB_OMV2_SPATIALLY_AWARE_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>8fa26fca53103dd05a6691f03cf9a958c16eafbdb76879b32f8f6f1623a9ea61</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-smb-omv2-spatially-aware-object-model-implementation-plan">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Date:</strong> Friday, August 21, 2026</li>
+<li><strong>Status:</strong> Implementation plan only; no SMB-OMv2 syntax or runtime behavior is promoted by this document.</li>
+<li><strong>Objective:</strong> Add a first-class spatial building model whose transforms are derived from parent frames, interfaces, connections, constraints, collision queries, clearances, and immutable resolution evidence.</li>
+<li><strong>Compatibility authority:</strong> SMB-OMv1, existing grammar syntax, primitive transforms, procedural geometry, preview, export, and physics remain unchanged until each SMB-OMv2 release gate passes.</li>
+<li class="source-status--passed"><strong>Release authority:</strong> Deterministic focused tests, evidence hashes, the full SMB-OMv2 fixture, visual overlays, the complete editor release gate, and a collected supervisor-mode run.</li>
+</ul>
+<h3 id="source-1-executive-decision">1. Executive Decision</h3><p class="section-guide">Reading guide: this source section records “1. Executive Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to <code>ScenePrimitiveInstance</code>, and it should not use the dynamic physics loop as its assembly solver.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialBuildingModel
+├── SpatialBuildingObject[]
+├── SpatialContainmentTree
+├── SpatialConnectionGraph
+├── SpatialConstraintGraph
+├── SpatialObjectGeometryBinding[]
+└── SpatialResolutionRecord[]
+        │
+        └── references ScenePrimitiveInstance[]
+</code></pre>
+<p>The core rule is:</p>
+<blockquote>
+<p>A building object may own zero, one, or many rendered primitives. A primitive is geometry evidence, not the object's permanent identity.</p>
+</blockquote>
+<p>This is required because:</p>
+<ul>
+<li>SMB containers and semantic relationships may have no geometry;</li>
+<li>one SMB object may emit several L5 primitives;</li>
+<li>object identity must survive geometry replacement;</li>
+<li>constraints must move an entire object assembly coherently;</li>
+<li>connections join interfaces rather than primitive indices;</li>
+<li>source selection currently identifies primitive occurrences, not stable building objects.</li>
+</ul>
+<p>The target snapshot relationship is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">GeneratedSceneSnapshot
+├── GrammarDocument
+│   └── SceneGenerationContext
+│       └── ScenePrimitiveInstance[]
+└── SpatialBuildingModel
+</code></pre>
+<p>During construction, <code>SceneGenerationContext</code> may own a mutable spatial construction context. After successful validation and resolution, the published <code>SpatialBuildingModel</code> is immutable.</p>
+<h3 id="source-2-current-repository-baseline">2. Current Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-scene-instances">2.1 Scene Instances</h4><p class="section-guide">Reading guide: this source section records “2.1 Scene Instances”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>ScenePrimitiveInstance</code> already owns primary and secondary transforms, authored initial transforms, dual transforms, motion state, mass, source range, immutable shape specifications, resolved geometry, and collision geometry cache state.</p>
+<p>Evidence: <code>include/Context.h:109</code>.</p>
+<p><code>SceneGenerationContext::addPrimitive()</code> resolves geometry and copies the current transform scope into the primitive instance.</p>
+<p>Evidence: <code>src/Context.cpp:2581</code>.</p>
+<p>This is a strong geometry-instance layer, but it does not model stable building identity, containment, object aggregation, interfaces, connection endpoints, constraint dependencies, or placement evidence.</p>
+<h4 id="source-2-2-transform-authority">2.2 Transform Authority</h4><p class="section-guide">Reading guide: this source section records “2.2 Transform Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SpatialTransformScope</code> already provides matrix-authoritative translation, primary scaling, secondary scaling, dual-axis transforms, rotation, cloning, and restoration.</p>
+<p>Evidence: <code>include/Scope.h:9</code> and <code>src/Scope.cpp:142</code>.</p>
+<p>SMB-OMv2 must preserve the meaning of <code>T</code>, <code>S</code>, <code>D</code>, <code>DS*</code>, <code>DT*</code>, and <code>A</code>. It adds an object resolution transform rather than changing authored transform semantics.</p>
+<h4 id="source-2-3-procedural-geometry">2.3 Procedural Geometry</h4><p class="section-guide">Reading guide: this source section records “2.3 Procedural Geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository already provides:</p>
+<ul>
+<li>immutable Cylinder, Sphere, and AxialProfile shape specifications;</li>
+<li>generic resolved triangle geometry;</li>
+<li>actual local bounds;</li>
+<li>topology hashes and watertightness;</li>
+<li>volume evidence and collision policy;</li>
+<li>semantic mesh surface tags;</li>
+<li>generic preview, export, picking, and collision geometry generation.</li>
+</ul>
+<p>Evidence:</p>
+<ul>
+<li><code>include/geometry/model/ShapeSpecification.h:11</code></li>
+<li><code>include/geometry/model/ResolvedPrimitiveGeometry.h:16</code></li>
+<li><code>include/geometry/model/MeshSurfaceTag.h:5</code></li>
+<li><code>src/geometry/service/PrimitiveGeometryResolver.cpp:42</code></li>
+</ul>
+<p>SMB-OMv2 must reuse these results rather than creating another mesh model.</p>
+<h4 id="source-2-4-collision-infrastructure">2.4 Collision Infrastructure</h4><p class="section-guide">Reading guide: this source section records “2.4 Collision Infrastructure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current runtime already has AABB bounds, OBB data, convex hulls, triangle meshes, BVH acceleration, SAT-style overlap, GJK/EPA convex collision, triangle-mesh overlap, penetration normals, depths, contact points, and mass-weighted dynamic correction.</p>
+<p>Evidence:</p>
+<ul>
+<li><code>include/Context.h:25</code></li>
+<li><code>include/physics/model/CollisionContact.h:5</code></li>
+<li><code>include/physics/service/ConvexCollisionDetector.h:6</code></li>
+<li><code>src/Context.cpp:1800</code></li>
+<li><code>tests/collision_positioning_harness.cpp:94</code></li>
+</ul>
+<p>The dynamic physics loop answers what happens over time. SMB-OMv2 needs a deterministic query-and-commit solver that reuses collision geometry without using gravity, velocity, sleep thresholds, or frame stepping as placement authority.</p>
+<h4 id="source-2-5-connection-metadata-and-overlays">2.5 Connection Metadata and Overlays</h4><p class="section-guide">Reading guide: this source section records “2.5 Connection Metadata and Overlays”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The STL catalog already contains connection points, surfaces, detected features, centers, axes, dimensions, diameters, threads, planes, and evidence. The preview already draws catalog connection overlays.</p>
+<p>Evidence: <code>include/StlCatalog.h:28</code>, <code>src/StlCatalog.cpp:622</code>, and <code>src/imgui_main.cpp:3342</code>.</p>
+<p>This metadata is useful input, but it is catalog-specific. A later adapter should translate it into validated core <code>SpatialInterface</code> objects.</p>
+<h4 id="source-2-6-smb-omv1-compatibility-fixture">2.6 SMB-OMv1 Compatibility Fixture</h4><p class="section-guide">Reading guide: this source section records “2.6 SMB-OMv1 Compatibility Fixture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv1 already provides:</p>
+<ul>
+<li>124 unique SMB object rules;</li>
+<li class="source-status--passed">48 complete L1-L5 templates;</li>
+<li>fixed structure and collision-active loose contents;</li>
+<li class="source-status--failed">fail-closed configuration validation;</li>
+<li>zero fake geometry for semantic and relationship leaves;</li>
+<li>finite scene bounds and supervisor-mode GUI evidence.</li>
+</ul>
+<p>Evidence:</p>
+<ul>
+<li><code>examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d:1</code></li>
+<li><code>docs/SMB_OMv1_SMALL_MODERN_BUILDING.md:1</code></li>
+<li><code>tests/run_smb_omv1_checks.sh:1</code></li>
+</ul>
+<p>SMB-OMv1 remains append-only compatibility evidence. SMB-OMv2 receives a new fixture.</p>
+<h4 id="source-2-7-missing-capabilities">2.7 Missing Capabilities</h4><p class="section-guide">Reading guide: this source section records “2.7 Missing Capabilities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current runtime does not yet provide:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">stable building object IDs
+object-local frames relative to semantic containers
+object-to-primitive aggregation
+validated containment tree
+object-owned interface frames
+interface-to-interface connections
+collision layers and masks per object
+constraint dependency graph
+translation-to-contact query service
+atomic placement transactions
+clearance validation
+cycle diagnostics
+resolution evidence in the snapshot
+object-level selection and inspection
+</code></pre>
+<h3 id="source-3-architectural-principles">3. Architectural Principles</h3><p class="section-guide">Reading guide: this source section records “3. Architectural Principles”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-identity-is-not-geometry">3.1 Identity Is Not Geometry</h4><p class="section-guide">Reading guide: this source section records “3.1 Identity Is Not Geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SpatialBuildingObject</code> must not inherit from <code>ScenePrimitiveInstance</code>.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialBuildingObject
+    1
+    ├── 0..* SpatialObjectGeometryBinding
+    │          └── 1 ScenePrimitiveInstance
+    └── 0..* SpatialInterface
+</code></pre>
+<h4 id="source-3-2-authored-and-resolved-placement-are-separate">3.2 Authored and Resolved Placement Are Separate</h4><p class="section-guide">Reading guide: this source section records “3.2 Authored and Resolved Placement Are Separate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every object stores:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">authored_local_transform
+resolution_local_transform
+resolved_world_transform
+</code></pre>
+<p>The solver never destroys authored placement.</p>
+<h4 id="source-3-3-three-independent-graphs">3.3 Three Independent Graphs</h4><p class="section-guide">Reading guide: this source section records “3.3 Three Independent Graphs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Containment tree
+    What contains this object?
+
+Connection graph
+    What interfaces are functionally or physically connected?
+
+Constraint graph
+    What placement dependencies determine the transform?
+</code></pre>
+<h4 id="source-3-4-placement-is-transactional">3.4 Placement Is Transactional</h4><p class="section-guide">Reading guide: this source section records “3.4 Placement Is Transactional”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A placement operation must:</p>
+<ol>
+<li>validate references and compatibility;</li>
+<li>evaluate candidate transforms without mutating the scene;</li>
+<li>record search and residual evidence;</li>
+<li>validate required contact and forbidden collision;</li>
+<li>commit all affected primitives together;</li>
+<li class="source-status--failed">publish no partial model on failure.</li>
+</ol>
+<h4 id="source-3-5-interfaces-are-frames">3.5 Interfaces Are Frames</h4><p class="section-guide">Reading guide: this source section records “3.5 Interfaces Are Frames”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A P0 interface stores an origin, normal, tangent axis, type, region, compatibility profile, tolerance, and clearance policy. The tangent axis is required so later orientation alignment can resolve roll ambiguity.</p>
+<h4 id="source-3-6-fail-closed">3.6 Fail Closed</h4><p class="section-guide">Reading guide: this source section records “3.6 Fail Closed”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--unresolved">Duplicate IDs, missing containers, graph cycles, missing interfaces, incompatible connections, zero directions, non-finite values, impossible travel, forbidden collision, and unresolved required constraints abort spatial publication.</p>
+<h3 id="source-4-target-object-model">4. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “4. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-aggregate-root">4.1 Aggregate Root</h4><p class="section-guide">Reading guide: this source section records “4.1 Aggregate Root”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialBuildingModel
+{
+public:
+    const SpatialObjectRegistry &amp;objects() const;
+    const SpatialContainmentTree &amp;containmentTree() const;
+    const SpatialConnectionGraph &amp;connectionGraph() const;
+    const SpatialConstraintGraph &amp;constraintGraph() const;
+    const std::vector&lt;SpatialObjectGeometryBinding&gt; &amp;geometryBindings() const;
+    const std::vector&lt;SpatialResolutionRecord&gt; &amp;resolutionRecords() const;
+};
+</code></pre>
+<h4 id="source-4-2-identity">4.2 Identity</h4><p class="section-guide">Reading guide: this source section records “4.2 Identity”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialObjectIdentity
+{
+public:
+    const SpatialObjectId &amp;objectId() const;
+    const std::string &amp;objectName() const;
+    const SpatialObjectClass &amp;objectClass() const;
+    const SpatialTaxonomyPath &amp;taxonomyPath() const;
+    std::size_t instanceIndex() const;
+    std::uint64_t revision() const;
+    const SpatialObjectProvenance &amp;provenance() const;
+};
+</code></pre>
+<p>Supporting purpose classes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectId
+SpatialObjectClass
+SpatialTaxonomyPath
+SpatialObjectProvenance
+</code></pre>
+<p>P0 identity rules:</p>
+<ul>
+<li>grammar IDs use safe identifiers such as <code>SMB001_Ground_Kitchen_Sink01</code>;</li>
+<li>explicit IDs are unique in one expanded model;</li>
+<li>repeated declarations require an explicit deterministic instance policy;</li>
+<li>primitive indices are never permanent object IDs;</li>
+<li>identical source, seed, time, and configuration produce the same ID set.</li>
+</ul>
+<h4 id="source-4-3-spatial-object">4.3 Spatial Object</h4><p class="section-guide">Reading guide: this source section records “4.3 Spatial Object”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialBuildingObject
+{
+public:
+    const SpatialObjectIdentity &amp;identity() const;
+    const SpatialFrameState &amp;frameState() const;
+    const SpatialBoundaryModel &amp;boundaryModel() const;
+    const std::vector&lt;SpatialInterface&gt; &amp;interfaces() const;
+    const CollisionParticipationPolicy &amp;collisionPolicy() const;
+    SpatialObjectState state() const;
+};
+</code></pre>
+<p>The class composes purpose-specific models. It should not become a large mutable struct.</p>
+<h4 id="source-4-4-frame-state">4.4 Frame State</h4><p class="section-guide">Reading guide: this source section records “4.4 Frame State”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialFrameState
+{
+public:
+    const glm::mat4 &amp;authoredLocalTransform() const;
+    const glm::mat4 &amp;resolutionLocalTransform() const;
+    const glm::mat4 &amp;resolvedWorldTransform() const;
+    const SpatialFrameReference &amp;parentFrame() const;
+    const SpatialPoseUncertainty &amp;uncertainty() const;
+};
+</code></pre>
+<p>P0 uncertainty is explicitly zero. Nonzero uncertainty is deferred, but the frame model should not require redesign later.</p>
+<h4 id="source-4-5-containment">4.5 Containment</h4><p class="section-guide">Reading guide: this source section records “4.5 Containment”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialContainmentRelationship
+{
+public:
+    const SpatialObjectId &amp;containerId() const;
+    const SpatialObjectId &amp;containedObjectId() const;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialContainmentTree
+{
+public:
+    const SpatialObjectId &amp;rootObjectId() const;
+    const SpatialObjectId *parentOf(const SpatialObjectId &amp;object_id) const;
+    const std::vector&lt;SpatialObjectId&gt; &amp;childrenOf(
+        const SpatialObjectId &amp;object_id) const;
+};
+</code></pre>
+<p>Validation:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">exactly one root
+every non-root object has one container
+all containers exist
+no self containment
+no containment cycle
+parent world frame resolves before child
+geometry-free containers are valid
+</code></pre>
+<h4 id="source-4-6-geometry-binding">4.6 Geometry Binding</h4><p class="section-guide">Reading guide: this source section records “4.6 Geometry Binding”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialObjectGeometryBinding
+{
+public:
+    const SpatialObjectId &amp;objectId() const;
+    std::size_t primitiveInstanceIndex() const;
+    const glm::mat4 &amp;primitiveLocalToObjectTransform() const;
+    const std::vector&lt;MeshSurfaceTag&gt; &amp;boundSurfaceTags() const;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialObjectGeometryBindingService
+{
+public:
+    bool applyResolvedObjectTransform(
+        const SpatialBuildingObject &amp;object,
+        const std::vector&lt;SpatialObjectGeometryBinding&gt; &amp;bindings,
+        SceneGenerationContext *scene_context,
+        std::string *diagnostic) const;
+};
+</code></pre>
+<p>The service updates all bound primitives coherently, preserves initial transforms, updates metadata, and marks collision geometry dirty.</p>
+<h4 id="source-4-7-boundary-representations">4.7 Boundary Representations</h4><p class="section-guide">Reading guide: this source section records “4.7 Boundary Representations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use inheritance only for real representation categories:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class BoundaryRepresentation
+{
+public:
+    virtual ~BoundaryRepresentation() = default;
+    virtual BoundaryRepresentationKind kind() const = 0;
+};
+
+class AxisAlignedBoundingBoundary : public BoundaryRepresentation { ... };
+class OrientedBoundingBoundary : public BoundaryRepresentation { ... };
+class ConvexHullBoundary : public BoundaryRepresentation { ... };
+class TriangleMeshBoundary : public BoundaryRepresentation { ... };
+class AnalyticSurfaceBoundary : public BoundaryRepresentation { ... };
+class CompoundBoundary : public BoundaryRepresentation { ... };
+</code></pre>
+<p>P0 authorizes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Broad phase       AxisAlignedBoundingBoundary
+Positioning       AxisAlignedBoundingBoundary
+Exact query       existing CollisionGeometry adapter when available
+</code></pre>
+<p>P1 promotes OBB, convex, triangle mesh, analytic surface, and surface-tag boundaries.</p>
+<h4 id="source-4-8-interface-model">4.8 Interface Model</h4><p class="section-guide">Reading guide: this source section records “4.8 Interface Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class SpatialInterfaceType
+{
+    Support,
+    Bearing,
+    Mate,
+    Seat,
+    Insert,
+    Socket,
+    Shaft,
+    Seal,
+    Fastener,
+    Anchor,
+    Hinge,
+    Slide,
+    PipePort,
+    DuctPort,
+    ElectricalPort,
+    DataPort,
+    ControlPort,
+    DrainPort,
+    ThermalInterface,
+    InspectionInterface
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialInterfaceFrame
+{
+public:
+    const glm::vec3 &amp;localOrigin() const;
+    const glm::vec3 &amp;localNormal() const;
+    const glm::vec3 &amp;localTangent() const;
+    glm::vec3 localBitangent() const;
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialInterface
+{
+public:
+    const SpatialInterfaceId &amp;interfaceId() const;
+    const SpatialObjectId &amp;ownerObjectId() const;
+    SpatialInterfaceType type() const;
+    const SpatialInterfaceFrame &amp;localFrame() const;
+    const SpatialInterfaceRegion &amp;region() const;
+    const InterfaceCompatibilityProfile &amp;compatibility() const;
+    const SpatialClearanceRequirement &amp;clearance() const;
+    SpatialInterfaceState state() const;
+};
+</code></pre>
+<p>P0 regions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Point
+PlaneRectangle
+AxisSegment
+ObjectBoundaryFace
+</code></pre>
+<p>Frame validation requires finite values, nonzero normal and tangent, nonparallel axes, and deterministic orthonormalization.</p>
+<h4 id="source-4-9-compatibility">4.9 Compatibility</h4><p class="section-guide">Reading guide: this source section records “4.9 Compatibility”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class InterfaceCompatibilityProfile
+{
+public:
+    InterfaceShape shape() const;
+    InterfaceGender gender() const;
+    float nominalDiameter() const;
+    float nominalWidth() const;
+    float nominalHeight() const;
+    const std::string &amp;threadType() const;
+    float threadPitch() const;
+    const std::string &amp;flowType() const;
+    float voltage() const;
+    const std::string &amp;pressureClass() const;
+};
+</code></pre>
+<p>P0 enforcement covers interface type pairing, shape, diameter or rectangular size tolerance, optional gender, and finite values. Thread, pressure, voltage, material, fire, and load enforcement are later releases.</p>
+<h4 id="source-4-10-connections">4.10 Connections</h4><p class="section-guide">Reading guide: this source section records “4.10 Connections”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class SpatialConnectionType
+{
+    Contains,
+    ConnectedTo,
+    DrainsTo,
+    Powers,
+    ServedBy,
+    Monitors,
+    SupportedBy,
+    SeatedIn,
+    InsertedIn,
+    SealedTo,
+    FixedTo,
+    AlignedWith
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialConnection
+{
+public:
+    const SpatialConnectionId &amp;connectionId() const;
+    const SpatialInterfaceReference &amp;sourceInterface() const;
+    const SpatialInterfaceReference &amp;targetInterface() const;
+    SpatialConnectionType connectionType() const;
+    const InterfaceAlignmentRequirement &amp;alignmentRequirement() const;
+    const SpatialClearanceRequirement &amp;clearance() const;
+    float insertionDepth() const;
+    const ConstraintDegreeOfFreedomState &amp;lockedDegreesOfFreedom() const;
+    SpatialConnectionState state() const;
+};
+</code></pre>
+<p>Connections state relationships. They may generate constraints, but they are not themselves transform commands.</p>
+<h4 id="source-4-11-constraints">4.11 Constraints</h4><p class="section-guide">Reading guide: this source section records “4.11 Constraints”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use a real constraint hierarchy:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialConstraint
+{
+public:
+    virtual ~SpatialConstraint() = default;
+    virtual SpatialConstraintKind kind() const = 0;
+    virtual const SpatialConstraintId &amp;constraintId() const = 0;
+    virtual int priority() const = 0;
+};
+
+class CoincidentConstraint : public SpatialConstraint { ... };
+class ParallelConstraint : public SpatialConstraint { ... };
+class PerpendicularConstraint : public SpatialConstraint { ... };
+class AxisAlignedConstraint : public SpatialConstraint { ... };
+class CenteredConstraint : public SpatialConstraint { ... };
+class ContactConstraint : public SpatialConstraint { ... };
+class ClearanceConstraint : public SpatialConstraint { ... };
+class InsertionConstraint : public SpatialConstraint { ... };
+class SeatedConstraint : public SpatialConstraint { ... };
+class SupportedConstraint : public SpatialConstraint { ... };
+class ContainmentConstraint : public SpatialConstraint { ... };
+class CollisionPositionConstraint : public SpatialConstraint { ... };
+class AvoidCollisionConstraint : public SpatialConstraint { ... };
+</code></pre>
+<p class="source-status--failed">P0 gives solving authority only to translation collision positioning, clearance, and containment validation. Unimplemented modes fail explicitly.</p>
+<h4 id="source-4-12-collision-position-constraint">4.12 Collision Position Constraint</h4><p class="section-guide">Reading guide: this source section records “4.12 Collision Position Constraint”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class CollisionPositionMode
+{
+    Touch,
+    Gap,
+    Drop,
+    Seat,
+    Insert,
+    Tangent,
+    Between,
+    CenterContact
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class CollisionPositionConstraint : public SpatialConstraint
+{
+public:
+    const SpatialObjectId &amp;movingObjectId() const;
+    const SpatialInterfaceId &amp;movingInterfaceId() const;
+    const SpatialObjectId &amp;targetObjectId() const;
+    const SpatialInterfaceId &amp;targetInterfaceId() const;
+    const SpatialDirection &amp;direction() const;
+    CollisionPositionMode mode() const;
+    const SpatialClearanceRequirement &amp;clearance() const;
+    float seatingDepth() const;
+    float maximumDistance() const;
+    float tolerance() const;
+    const CollisionLayerMask &amp;collisionMask() const;
+};
+</code></pre>
+<p>P0 modes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Touch
+Gap
+Drop
+</code></pre>
+<p>P2 modes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Seat
+Insert
+Tangent
+Between
+CenterContact
+</code></pre>
+<h4 id="source-4-13-collision-layers">4.13 Collision Layers</h4><p class="section-guide">Reading guide: this source section records “4.13 Collision Layers”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class CollisionLayer
+{
+    Structure,
+    Envelope,
+    Interior,
+    Furniture,
+    Plumbing,
+    Hvac,
+    Electrical,
+    Equipment,
+    Terrain,
+    Temporary
+};
+</code></pre>
+<p>A pair blocks only when both masks permit the other layer.</p>
+<h4 id="source-4-14-query-result">4.14 Query Result</h4><p class="section-guide">Reading guide: this source section records “4.14 Query Result”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialRelationResult
+{
+public:
+    const SpatialObjectId &amp;firstObjectId() const;
+    const SpatialObjectId &amp;secondObjectId() const;
+    SpatialRelationKind relation() const;
+    float distance() const;
+    float penetration() const;
+    const glm::vec3 &amp;contactPoint() const;
+    const glm::vec3 &amp;contactNormal() const;
+    const glm::vec3 &amp;closestPointOnFirst() const;
+    const glm::vec3 &amp;closestPointOnSecond() const;
+    float confidence() const;
+};
+</code></pre>
+<p>P0 guarantees AABB distance, overlap, containment, above, below, and adjacency. Exact closest surfaces are P1.</p>
+<h4 id="source-4-15-state-models">4.15 State Models</h4><p class="section-guide">Reading guide: this source section records “4.15 State Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class SpatialObjectState
+{
+    Unplaced,
+    Approximate,
+    Positioned,
+    ContactResolved,
+    Connected,
+    Constrained,
+    Validated,
+    Invalid
+};
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class SpatialConnectionState
+{
+    Proposed,
+    Compatible,
+    Positioned,
+    Engaged,
+    Seated,
+    Locked,
+    Verified,
+    Broken,
+    Invalid
+};
+</code></pre>
+<p>State transition services validate legal progression. Public code should not assign arbitrary state values.</p>
+<h4 id="source-4-16-resolution-evidence">4.16 Resolution Evidence</h4><p class="section-guide">Reading guide: this source section records “4.16 Resolution Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialResolutionRecord
+{
+public:
+    const SpatialConstraintId &amp;constraintId() const;
+    const SpatialObjectId &amp;sourceObjectId() const;
+    const SpatialObjectId &amp;targetObjectId() const;
+    const glm::mat4 &amp;initialWorldTransform() const;
+    const glm::mat4 &amp;finalWorldTransform() const;
+    SpatialResolutionAlgorithm algorithm() const;
+    int broadPhaseStepCount() const;
+    int refinementIterationCount() const;
+    float tolerance() const;
+    const glm::vec3 &amp;contactPoint() const;
+    const glm::vec3 &amp;contactNormal() const;
+    float resultingClearance() const;
+    float residualError() const;
+    SpatialResolutionStatus status() const;
+    const std::vector&lt;std::string&gt; &amp;warnings() const;
+    std::uint64_t evidenceHash() const;
+};
+</code></pre>
+<p>Resolution evidence becomes immutable after snapshot publication.</p>
+<h3 id="source-5-transform-and-frame-authority">5. Transform and Frame Authority</h3><p class="section-guide">Reading guide: this source section records “5. Transform and Frame Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-composition">5.1 Composition</h4><p class="section-guide">Reading guide: this source section records “5.1 Composition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object_world =
+    parent_world
+    * authored_object_local
+    * resolution_object_local
+
+primitive_world =
+    object_world
+    * primitive_local_to_object
+</code></pre>
+<p>At binding time:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">primitive_local_to_object =
+    inverse(authored_object_world)
+    * authored_primitive_world
+</code></pre>
+<p>Spatial object frames must be finite and invertible.</p>
+<h4 id="source-5-2-direction-frames">5.2 Direction Frames</h4><p class="section-guide">Reading guide: this source section records “5.2 Direction Frames”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class SpatialDirectionFrame
+{
+    World,
+    Parent,
+    MovingObject,
+    MovingInterface,
+    TargetObject,
+    TargetInterface
+};
+</code></pre>
+<p>Every direction declares its frame. P0 grammar should default collision approach directions to <code>TargetInterface</code>, not guess world space.</p>
+<h4 id="source-5-3-object-scope-binding">5.3 Object Scope Binding</h4><p class="section-guide">Reading guide: this source section records “5.3 Object Scope Binding”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>While an object scope is active:</p>
+<ol>
+<li>capture the authored object world matrix;</li>
+<li>execute existing transform actions normally;</li>
+<li>when <code>I()</code> emits geometry, calculate primitive-local-to-object;</li>
+<li>append a geometry binding;</li>
+<li>preserve primitive source ranges;</li>
+<li>bind child object primitives only to the nearest object scope.</li>
+</ol>
+<h4 id="source-5-4-reset-semantics">5.4 Reset Semantics</h4><p class="section-guide">Reading guide: this source section records “5.4 Reset Semantics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>resetSimulation()</code> continues restoring authored dynamic state.</p>
+<p>Add a distinct <code>SpatialAssemblyResolutionService::resetResolvedPlacement()</code> operation that restores resolution transforms to identity and reapplies authored object and primitive transforms.</p>
+<h3 id="source-6-canonical-p0-grammar-direction">6. Canonical P0 Grammar Direction</h3><p class="section-guide">Reading guide: this source section records “6. Canonical P0 Grammar Direction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--pending">Use a dedicated composite object scope, not pending global object state.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">SMB_001_Ground_Kitchen_CabinetRun -&gt;
+Object(
+    id(SMB001_Ground_Kitchen_CabinetRun)
+    class(Cabinet)
+    taxonomy(Building GroundFloor Kitchen Furniture Cabinet)
+    container(SMB001_Ground_Kitchen_01)
+    layer(Furniture)
+    mask(Structure Interior Furniture)
+)
+[
+    Interface(
+        id(bottom)
+        type(Support)
+        origin(0 -0.5 0)
+        normal(0 -1 0)
+        tangent(1 0 0)
+        region(PlaneRectangle 3 0.7)
+        tolerance(0.001)
+    )
+
+    Interface(
+        id(back)
+        type(Mate)
+        origin(0 0 0.35)
+        normal(0 0 1)
+        tangent(1 0 0)
+        region(PlaneRectangle 3 1)
+        tolerance(0.001)
+    )
+
+    Position(
+        id(DropCabinetToFloor)
+        moving(bottom)
+        target(SMB001_GroundFloor upperSurface)
+        mode(Drop)
+        direction(TargetInterface 0 0 -1)
+        clearance(0)
+        maxDistance(3)
+        tolerance(0.0005)
+        priority(10)
+    )
+
+    Position(
+        id(BackCabinetFromWall)
+        moving(back)
+        target(SMB001_Ground_Kitchen_Wall internalFace)
+        mode(Gap)
+        direction(TargetInterface 0 0 -1)
+        clearance(0.01)
+        maxDistance(2)
+        tolerance(0.0005)
+        priority(20)
+    )
+
+    S(3 1 0.7)
+    I(Cube material(offwhiteceramic) 1 0.3)
+]
+</code></pre>
+<p>The exact syntax is new and requires dedicated parser tests. The structural invariant is that <code>Object(...)</code> owns its body token list, so object state cannot leak into a later unrelated <code>I()</code>.</p>
+<h4 id="source-6-1-dedicated-syntax-models">6.1 Dedicated Syntax Models</h4><p class="section-guide">Reading guide: this source section records “6.1 Dedicated Syntax Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectDescriptorSyntax
+SpatialTaxonomySyntax
+SpatialInterfaceDeclarationSyntax
+SpatialConnectionDeclarationSyntax
+SpatialConstraintDeclarationSyntax
+CollisionParticipationSyntax
+SpatialClearanceSyntax
+SpatialDirectionSyntax
+SpatialObjectScopeToken
+</code></pre>
+<p>Do not encode spatial metadata in generic <code>GrammarActionToken::arguments</code> or <code>var_names</code>.</p>
+<h4 id="source-6-2-expression-preservation">6.2 Expression Preservation</h4><p class="section-guide">Reading guide: this source section records “6.2 Expression Preservation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Numeric transforms, interface coordinates, dimensions, tolerances, clearances, travel limits, and priorities remain <code>GeometryExpression</code> values until expansion. IDs, classes, interface names, enum names, and reference paths are identifiers.</p>
+<p>This preserves grammar variables, rule arguments, <code>t</code>, deterministic random declarations, and checked finite expression evaluation.</p>
+<h4 id="source-6-3-two-pass-construction">6.3 Two-Pass Construction</h4><p class="section-guide">Reading guide: this source section records “6.3 Two-Pass Construction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Pass 1
+    expand grammar
+    create evaluated objects
+    capture primitive bindings
+    collect interfaces, connections, and constraints
+
+Pass 2
+    resolve references
+    validate containment
+    validate interface compatibility
+    build connection and constraint graphs
+    detect cycles
+    resolve placement
+    publish immutable model
+</code></pre>
+<p>Constraint behavior must not depend on source order.</p>
+<h4 id="source-6-4-semantic-relationship-rules">6.4 Semantic Relationship Rules</h4><p class="section-guide">Reading guide: this source section records “6.4 Semantic Relationship Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Existing zero-geometry relationship rules should create connections without fake primitives.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">SMB_REL_KitchenSink_CONNECTED_TO_ColdWater -&gt;
+Connect(
+    id(KitchenSinkColdWater)
+    source(SMB001_Ground_Kitchen_Sink coldWaterInlet)
+    target(SMB001_Plumbing_ColdWaterRiser outlet)
+    type(ConnectedTo)
+)
+</code></pre>
+<h3 id="source-7-spatial-query-architecture">7. Spatial Query Architecture</h3><p class="section-guide">Reading guide: this source section records “7. Spatial Query Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-7-1-boundary-derivation">7.1 Boundary Derivation</h4><p class="section-guide">Reading guide: this source section records “7.1 Boundary Derivation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialObjectBoundaryDerivationService
+{
+public:
+    SpatialBoundaryModel derive(
+        const SpatialBuildingObject &amp;object,
+        const std::vector&lt;SpatialObjectGeometryBinding&gt; &amp;bindings,
+        const SceneGenerationContext &amp;scene_context) const;
+};
+</code></pre>
+<p>P0 uses the union AABB of all bound primitives after applying a candidate object transform. Geometry-free objects require explicit interface regions to participate in positioning.</p>
+<h4 id="source-7-2-query-services">7.2 Query Services</h4><p class="section-guide">Reading guide: this source section records “7.2 Query Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialAabbQueryService
+SpatialContainmentQueryService
+SpatialDistanceQueryService
+SpatialCollisionQueryService
+SpatialInterfaceQueryService
+</code></pre>
+<p>Do not introduce a vague <code>SpatialManager</code> or <code>SpatialUtil</code>.</p>
+<h4 id="source-7-3-shared-collision-models">7.3 Shared Collision Models</h4><p class="section-guide">Reading guide: this source section records “7.3 Shared Collision Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Extract collision models currently declared in <code>Context.h</code> so physics and spatial services can share them without depending on the complete scene context.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/model/AxisAlignedBounds.h
+include/physics/model/CollisionTriangle.h
+include/physics/model/CollisionOrientedBox.h
+include/physics/model/CollisionGeometry.h
+</code></pre>
+<p>Keep temporary compatibility aliases if needed. Do not duplicate GJK, SAT, triangle overlap, or BVH code.</p>
+<h3 id="source-8-deterministic-collision-positioning">8. Deterministic Collision Positioning</h3><p class="section-guide">Reading guide: this source section records “8. Deterministic Collision Positioning”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-8-1-solver-interface">8.1 Solver Interface</h4><p class="section-guide">Reading guide: this source section records “8.1 Solver Interface”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class CollisionPositioningSolver
+{
+public:
+    SpatialConstraintResolutionResult solve(
+        const CollisionPositionConstraint &amp;constraint,
+        const SpatialBuildingModel &amp;model,
+        const SceneGenerationContext &amp;scene_context) const;
+};
+</code></pre>
+<p>The solver returns a candidate result and never mutates the scene.</p>
+<h4 id="source-8-2-validation">8.2 Validation</h4><p class="section-guide">Reading guide: this source section records “8.2 Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Before search:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">moving and target objects exist
+moving differs from target
+interfaces exist and belong to their owners
+interfaces are compatible
+direction is finite and nonzero
+direction frame resolves
+maximum distance is finite and positive
+tolerance is finite and positive
+clearance is finite and supported
+object frames are invertible
+moving and target boundaries exist
+starting overlap policy is supported
+collision masks permit target contact
+</code></pre>
+<h4 id="source-8-3-candidate-evaluation">8.3 Candidate Evaluation</h4><p class="section-guide">Reading guide: this source section records “8.3 Candidate Evaluation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">candidate_world(s) = initial_world * translation_world(s)
+</code></pre>
+<p>Candidate transforms are evaluated against derived boundaries without updating primitive instances.</p>
+<h4 id="source-8-4-bracketing">8.4 Bracketing</h4><p class="section-guide">Reading guide: this source section records “8.4 Bracketing”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Find deterministic samples:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">s_separated
+s_intersecting
+</code></pre>
+<p>such that the first is separated and the second intersects the target.</p>
+<p>The step is derived from tolerance and projected extent, capped by maximum travel and solver ceilings.</p>
+<p>Suggested limits:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">broad-phase steps       &lt;= 4096
+binary refinements      &lt;= 64
+minimum tolerance       &gt;= 0.000001 scene units
+</code></pre>
+<h4 id="source-8-5-refinement">8.5 Refinement</h4><p class="section-guide">Reading guide: this source section records “8.5 Refinement”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">s_mid = (s_separated + s_intersecting) / 2
+</code></pre>
+<p>Repeat until the bracket width is within tolerance.</p>
+<h4 id="source-8-6-clearance">8.6 Clearance</h4><p class="section-guide">Reading guide: this source section records “8.6 Clearance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For <code>Touch</code> and <code>Drop</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">s_final = s_separated
+</code></pre>
+<p>For <code>Gap</code> with nonnegative clearance <code>c</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">s_final = max(0, s_separated - c)
+</code></pre>
+<p>Clearance sign and direction are fixed by the contract and tested. They are not inferred after search.</p>
+<h4 id="source-8-7-final-validation">8.7 Final Validation</h4><p class="section-guide">Reading guide: this source section records “8.7 Final Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">required contact or gap is present
+clearance is within tolerance
+moving interface overlaps target region
+no forbidden collision exceeds slop
+higher-priority constraints remain satisfied
+final transform is finite
+no primitive is removed or out of bounds
+</code></pre>
+<h4 id="source-8-8-sequential-p0-constraints">8.8 Sequential P0 Constraints</h4><p class="section-guide">Reading guide: this source section records “8.8 Sequential P0 Constraints”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P0 may resolve multiple translation constraints in priority order when the graph is acyclic, each constraint removes one translational degree of freedom, orientation remains unchanged, and later constraints preserve earlier residuals.</p>
+<p>This supports:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Drop cabinet to floor
+then
+move cabinet to wall with 10 mm gap
+</code></pre>
+<p>P0 does not perform global numerical optimization.</p>
+<h4 id="source-8-9-placement-transaction">8.9 Placement Transaction</h4><p class="section-guide">Reading guide: this source section records “8.9 Placement Transaction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialPlacementTransaction
+{
+public:
+    void stageObjectTransform(const SpatialObjectId &amp;object_id,
+                              const glm::mat4 &amp;resolution_local_transform);
+    void stageResolutionRecord(SpatialResolutionRecord record);
+    bool validate(...);
+    bool commit(...);
+    void discard();
+};
+</code></pre>
+<p>Commit order:</p>
+<ol>
+<li>stage object transforms;</li>
+<li>derive affected primitive transforms;</li>
+<li>rebuild candidate object boundaries;</li>
+<li>validate residuals and forbidden collisions;</li>
+<li>update the construction model;</li>
+<li>update bound primitives;</li>
+<li>append evidence;</li>
+<li>publish only after every constraint succeeds.</li>
+</ol>
+<h3 id="source-9-dependency-and-assembly-resolution">9. Dependency and Assembly Resolution</h3><p class="section-guide">Reading guide: this source section records “9. Dependency and Assembly Resolution”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A positioning dependency creates an edge:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">target object -&gt; moving object
+</code></pre>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialConstraintDependencyAnalyzer
+{
+public:
+    SpatialConstraintDependencyReport analyze(
+        const SpatialConstraintGraph &amp;constraint_graph) const;
+};
+</code></pre>
+<p class="source-status--unresolved">The report contains topological object order, topological constraint order, unresolved references, and an exact cycle path.</p>
+<p>Cycle diagnostic:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Spatial constraint cycle:
+Cabinet01
+-&gt; Benchtop01
+-&gt; Sink01
+-&gt; Cabinet01
+</code></pre>
+<p>No source-order fallback is allowed.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialAssemblyResolutionService
+{
+public:
+    SpatialAssemblyResolutionResult resolve(
+        SpatialBuildingModel construction_model,
+        SceneGenerationContext *scene_context) const;
+};
+</code></pre>
+<p>Responsibilities:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">validate containment and frames
+validate interfaces and connections
+build dependency order
+execute deterministic solvers
+advance object and connection states
+revalidate prior constraints
+create immutable resolution records
+return a complete result or fail closed
+</code></pre>
+<h3 id="source-10-grammar-integration">10. Grammar Integration</h3><p class="section-guide">Reading guide: this source section records “10. Grammar Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-10-1-parser-services">10.1 Parser Services</h4><p class="section-guide">Reading guide: this source section records “10.1 Parser Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectSpecificationParser
+SpatialInterfaceDeclarationParser
+SpatialConnectionDeclarationParser
+SpatialConstraintDeclarationParser
+</code></pre>
+<p>Do not extend the <code>I()</code> parser with unrelated spatial syntax.</p>
+<h4 id="source-10-2-evaluators">10.2 Evaluators</h4><p class="section-guide">Reading guide: this source section records “10.2 Evaluators”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectSpecificationEvaluator
+SpatialInterfaceDeclarationEvaluator
+SpatialConnectionDeclarationEvaluator
+SpatialConstraintDeclarationEvaluator
+</code></pre>
+<p>They use the existing checked expression callback.</p>
+<h4 id="source-10-3-construction-context">10.3 Construction Context</h4><p class="section-guide">Reading guide: this source section records “10.3 Construction Context”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SpatialBuildingModelConstructionContext
+{
+public:
+    void beginObject(...);
+    void bindPrimitive(...);
+    void addInterface(...);
+    void addConnection(...);
+    void addConstraint(...);
+    void endObject(...);
+    SpatialBuildingModel finalize(...);
+};
+</code></pre>
+<p>Construction-time state is mutable. Published model classes are immutable.</p>
+<h4 id="source-10-4-diagnostics">10.4 Diagnostics</h4><p class="section-guide">Reading guide: this source section records “10.4 Diagnostics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every nested spatial syntax node stores a source range.</p>
+<p>Required errors:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">duplicate object ID
+undefined container
+containment cycle
+duplicate interface ID
+undefined object or interface reference
+incompatible interfaces
+invalid direction frame
+zero direction
+invalid clearance
+unsupported positioning mode
+constraint cycle
+no contact within maximum distance
+forbidden collision
+residual violation
+non-invertible frame
+safety ceiling exceeded
+</code></pre>
+<p class="source-status--failed">A failed spatial expansion publishes neither a partial model nor a partially positioned scene.</p>
+<h3 id="source-11-scene-and-snapshot-integration">11. Scene and Snapshot Integration</h3><p class="section-guide">Reading guide: this source section records “11. Scene and Snapshot Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-11-1-construction-ownership">11.1 Construction Ownership</h4><p class="section-guide">Reading guide: this source section records “11.1 Construction Ownership”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extend <code>SceneGenerationContext</code> by composition with a <code>SpatialBuildingModelConstructionContext</code>. Expose narrow operations rather than public mutable collections.</p>
+<h4 id="source-11-2-snapshot-publication">11.2 Snapshot Publication</h4><p class="section-guide">Reading guide: this source section records “11.2 Snapshot Publication”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">const SpatialBuildingModel *GeneratedSceneSnapshot::spatialBuildingModel() const;
+</code></pre>
+<p>The result may be null for legacy grammars. Legacy scenes remain valid without synthetic spatial objects.</p>
+<h4 id="source-11-3-source-and-primitive-associations">11.3 Source and Primitive Associations</h4><p class="section-guide">Reading guide: this source section records “11.3 Source and Primitive Associations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Keep the current primitive source association index and add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectSourceAssociation
+SpatialObjectSourceAssociationIndex
+SpatialObjectPrimitiveAssociationIndex
+</code></pre>
+<p>This supports primitive-to-object lookup, object-wide highlighting, navigation to object declarations, and inspection of geometry-free semantic objects.</p>
+<h3 id="source-12-editor-integration">12. Editor Integration</h3><p class="section-guide">Reading guide: this source section records “12. Editor Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-12-1-spatial-object-inspector">12.1 Spatial Object Inspector</h4><p class="section-guide">Reading guide: this source section records “12.1 Spatial Object Inspector”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectInspection
+SpatialObjectInspectionService
+SpatialObjectInspectorPanel
+</code></pre>
+<p>Display:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object ID, class, taxonomy, container, state
+authored local, resolution, and world transforms
+uncertainty
+primitive bindings
+boundary representations
+collision layer and mask
+interfaces
+connections
+constraints
+resolution records and residuals
+evidence hash
+source range
+</code></pre>
+<p>Do not continue enlarging <code>ScenePrimitiveInspection</code> with the full object model.</p>
+<h4 id="source-12-2-object-and-graph-views">12.2 Object and Graph Views</h4><p class="section-guide">Reading guide: this source section records “12.2 Object and Graph Views”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Staged views:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Containment Tree
+Connection Graph
+Constraint Dependency Graph
+Resolution Timeline
+</code></pre>
+<p>P0 may use hierarchical lists, but the underlying graph models remain authoritative.</p>
+<h4 id="source-12-3-overlays">12.3 Overlays</h4><p class="section-guide">Reading guide: this source section records “12.3 Overlays”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extend preview overlays with:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object frames
+interface frames and regions
+connection links
+constraint directions
+sweep paths
+contact points and normals
+clearance segments
+forbidden collision highlights
+object AABBs
+resolution status labels
+</code></pre>
+<p>Stable colors:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">green     validated
+yellow    approximate or pending
+cyan      interface
+blue      connection
+orange    clearance
+magenta   constraint direction
+red       invalid or forbidden collision
+</code></pre>
+<h4 id="source-12-4-visual-evidence">12.4 Visual Evidence</h4><p class="section-guide">Reading guide: this source section records “12.4 Visual Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Capture authored, resolved, interface, constraint, contact, clearance, cycle-failure, and collision-failure views. Repeated valid captures must be byte-identical for the same source, seed, and time.</p>
+<h3 id="source-13-progressive-fixtures">13. Progressive Fixtures</h3><p class="section-guide">Reading guide: this source section records “13. Progressive Fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-13-1-cabinet-fixture">13.1 Cabinet Fixture</h4><p class="section-guide">Reading guide: this source section records “13.1 Cabinet Fixture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Building
+└── GroundFloor
+    └── Kitchen
+        ├── KitchenWall
+        └── Cabinet01
+</code></pre>
+<p>Requirements:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">bottom support interface
+back mate interface
+Drop to floor
+Gap 10 mm from wall
+two resolution records
+zero forbidden collision
+</code></pre>
+<h4 id="source-13-2-sink-and-benchtop-fixture">13.2 Sink and Benchtop Fixture</h4><p class="section-guide">Reading guide: this source section records “13.2 Sink and Benchtop Fixture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Objects:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cabinet01
+Benchtop01
+Sink01
+WastePipe01
+ColdWaterPipe01
+HotWaterPipe01
+</code></pre>
+<p>Requirements include interface compatibility, support placement, and the required plumbing connection graph. Centering and orientation become P2 solving gates.</p>
+<h4 id="source-13-3-window-fixture">13.3 Window Fixture</h4><p class="section-guide">Reading guide: this source section records “13.3 Window Fixture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Objects:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ExternalWall01
+WindowOpening01
+Window01
+</code></pre>
+<p>P0 proves containment, sill support, perimeter clearance, and collision validation. Full normal/tangent alignment is P2.</p>
+<h4 id="source-13-4-pipe-and-elbow-fixture">13.4 Pipe and Elbow Fixture</h4><p class="section-guide">Reading guide: this source section records “13.4 Pipe and Elbow Fixture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Proves axis interface compatibility and diameter tolerance. Insertion and internal-stop seating are P2.</p>
+<h4 id="source-13-5-full-fixture">13.5 Full Fixture</h4><p class="section-guide">Reading guide: this source section records “13.5 Full Fixture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add without modifying v1:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+docs/SMB_OMv2_SPATIALLY_AWARE_BUILDING.md
+tests/smb_omv2_grammar_scene_harness.cpp
+tests/run_smb_omv2_checks.sh
+</code></pre>
+<h3 id="source-14-implementation-milestones">14. Implementation Milestones</h3><p class="section-guide">Reading guide: this source section records “14. Implementation Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-milestone-0-freeze-the-contract">Milestone 0: Freeze the Contract</h4><p class="section-guide">Reading guide: this source section records “Milestone 0: Freeze the Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">identity repeat policy
+transform composition
+direction frame semantics
+Touch/Gap/Drop clearance signs
+default collision layer matrix
+legal state transitions
+evidence hash serialization
+safety ceilings
+</code></pre>
+<p>Gate: every invariant has positive and negative programmatic tests; no grammar change exists yet.</p>
+<h4 id="source-milestone-1-extract-shared-boundary-models">Milestone 1: Extract Shared Boundary Models</h4><p class="section-guide">Reading guide: this source section records “Milestone 1: Extract Shared Boundary Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">extract bounds, triangles, OBB data, and CollisionGeometry
+preserve compatibility aliases
+remove model responsibilities from Context.h
+</code></pre>
+<p class="source-status--passed">Gate: all existing collision, transform, and curved geometry suites pass unchanged.</p>
+<h4 id="source-milestone-2-spatial-domain-kernel">Milestone 2: Spatial Domain Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 2: Spatial Domain Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">identity and taxonomy
+frame state and zero uncertainty
+containment tree
+interfaces and compatibility
+connections and graph
+constraint hierarchy
+collision layers
+geometry bindings
+resolution evidence hashing
+immutable model builders
+</code></pre>
+<p class="source-status--failed">Gate: duplicate IDs, missing parents, cycles, invalid frames, and missing endpoints fail deterministically.</p>
+<h4 id="source-milestone-3-spatial-queries">Milestone 3: Spatial Queries</h4><p class="section-guide">Reading guide: this source section records “Milestone 3: Spatial Queries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">compound object AABBs
+candidate-transform queries
+containment and distance queries
+collision query adapter
+interface world frames and region projection
+</code></pre>
+<p class="source-status--passed">Gate: nested and multi-primitive object queries pass without scene mutation.</p>
+<h4 id="source-milestone-4-translation-positioning">Milestone 4: Translation Positioning</h4><p class="section-guide">Reading guide: this source section records “Milestone 4: Translation Positioning”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">validation and compatibility
+bounded bracketing
+binary refinement
+clearance
+forbidden collision validation
+residual checks
+transactions
+sequential orthogonal constraints
+cabinet programmatic fixture
+</code></pre>
+<p>Gate: cabinet floor and wall placement passes with identical transforms, iterations, and evidence hashes across runs.</p>
+<h4 id="source-milestone-5-dependency-resolution">Milestone 5: Dependency Resolution</h4><p class="section-guide">Reading guide: this source section records “Milestone 5: Dependency Resolution”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">topological ordering
+cycle paths
+stable equal-priority ordering
+higher-priority residual revalidation
+full rollback
+</code></pre>
+<p class="source-status--failed">Gate: source order does not affect results and failed assemblies leave no mutations.</p>
+<h4 id="source-milestone-6-grammar-syntax">Milestone 6: Grammar Syntax</h4><p class="section-guide">Reading guide: this source section records “Milestone 6: Grammar Syntax”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Object composite scope
+Interface declarations
+Connect declarations
+Position declarations
+layer and mask
+two-pass semantic construction
+source diagnostics
+syntax highlighting and autocomplete
+canonical printing
+</code></pre>
+<p>Gate: grammar fixture matches programmatic fixture evidence exactly and legacy grammar remains unchanged.</p>
+<h4 id="source-milestone-7-snapshot-and-editor-evidence">Milestone 7: Snapshot and Editor Evidence</h4><p class="section-guide">Reading guide: this source section records “Milestone 7: Snapshot and Editor Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">optional spatial snapshot
+object source and primitive indices
+object selection
+spatial inspector
+hierarchy lists
+overlays
+visual capture
+</code></pre>
+<p>Gate: objects with zero, one, and many primitives are selectable and evidence matches runtime values.</p>
+<h4 id="source-milestone-8-progressive-real-assemblies">Milestone 8: Progressive Real Assemblies</h4><p class="section-guide">Reading guide: this source section records “Milestone 8: Progressive Real Assemblies”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cabinet
+sink and benchtop
+window opening
+pipe and elbow
+invalid compatibility, collision, reference, and cycle fixtures
+</code></pre>
+<p class="source-status--failed">Gate: every valid fixture has deterministic JSON and visual evidence; invalid fixtures fail with exact diagnostics.</p>
+<h4 id="source-milestone-9-full-124-object-smb-omv2">Milestone 9: Full 124-Object SMB-OMv2</h4><p class="section-guide">Reading guide: this source section records “Milestone 9: Full 124-Object SMB-OMv2”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">stable IDs and classes for all 124 objects
+one containment tree
+interface-level conversion of relationship rules
+interfaces for structure, fixtures, services, and equipment
+derived placement constraints where reliable
+explicit authored placement where no solver exists
+collision layers and masks
+priority validity predicates
+full visual and inspector evidence
+</code></pre>
+<p class="source-status--passed">Gate: all full-model acceptance conditions pass while SMB-OMv1 remains green.</p>
+<h4 id="source-milestone-10-p1-exact-boundaries">Milestone 10: P1 Exact Boundaries</h4><p class="section-guide">Reading guide: this source section records “Milestone 10: P1 Exact Boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">OBB, convex, and triangle boundaries
+surface-tag interfaces
+AxialProfile interfaces
+catalog interface adapter
+exact nearest surface and interface queries
+surface IDs in evidence
+</code></pre>
+<p>Gate: exact results are identified as exact, AABB fallback remains visible, and surface bindings survive procedural regeneration.</p>
+<h4 id="source-milestone-11-p2-orientation-and-insertion">Milestone 11: P2 Orientation and Insertion</h4><p class="section-guide">Reading guide: this source section records “Milestone 11: P2 Orientation and Insertion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">normal alignment
+tangent alignment
+DOF tracking
+centering
+insertion
+seating depth
+contact patches
+supported simultaneous constraints
+</code></pre>
+<p>Gate: window and pipe fixtures resolve orientation and insertion without roll ambiguity or forbidden penetration.</p>
+<h4 id="source-milestone-12-p3-uncertainty-and-adaptation">Milestone 12: P3 Uncertainty and Adaptation</h4><p class="section-guide">Reading guide: this source section records “Milestone 12: P3 Uncertainty and Adaptation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">pose covariance
+uncertainty propagation
+tolerance versus uncertainty validation
+automatic interface discovery
+governed geometry adaptation proposals
+</code></pre>
+<p>Gate: no placement claims validated status when accumulated uncertainty exceeds tolerance; every adaptive change retains provenance and rollback.</p>
+<h3 id="source-15-proposed-source-layout">15. Proposed Source Layout</h3><p class="section-guide">Reading guide: this source section records “15. Proposed Source Layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-15-1-spatial-models">15.1 Spatial Models</h4><p class="section-guide">Reading guide: this source section records “15.1 Spatial Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/spatial/model/
+    SpatialObjectId.h
+    SpatialObjectClass.h
+    SpatialTaxonomyPath.h
+    SpatialObjectProvenance.h
+    SpatialObjectIdentity.h
+    SpatialFrameReference.h
+    SpatialPoseUncertainty.h
+    SpatialFrameState.h
+    SpatialObjectState.h
+    SpatialBuildingObject.h
+    SpatialBuildingModel.h
+    BoundaryRepresentation.h
+    AxisAlignedBoundingBoundary.h
+    OrientedBoundingBoundary.h
+    ConvexHullBoundary.h
+    TriangleMeshBoundary.h
+    AnalyticSurfaceBoundary.h
+    CompoundBoundary.h
+    SpatialBoundaryModel.h
+    SpatialInterfaceId.h
+    SpatialInterfaceType.h
+    SpatialInterfaceFrame.h
+    SpatialInterfaceRegion.h
+    InterfaceCompatibilityProfile.h
+    SpatialInterfaceState.h
+    SpatialInterface.h
+    SpatialConnectionId.h
+    SpatialConnectionType.h
+    SpatialConnectionState.h
+    SpatialConnection.h
+    SpatialConstraintId.h
+    SpatialConstraint.h
+    CollisionPositionConstraint.h
+    ClearanceConstraint.h
+    ContainmentConstraint.h
+    SpatialClearanceRequirement.h
+    SpatialDirection.h
+    CollisionLayer.h
+    CollisionLayerMask.h
+    CollisionParticipationPolicy.h
+    SpatialRelationResult.h
+    SpatialResolutionRecord.h
+    SpatialResolutionStatus.h
+    ConstraintDegreeOfFreedomState.h
+</code></pre>
+<h4 id="source-15-2-relationships-and-graphs">15.2 Relationships and Graphs</h4><p class="section-guide">Reading guide: this source section records “15.2 Relationships and Graphs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/spatial/relationship/
+    SpatialContainmentRelationship.h
+    SpatialObjectGeometryBinding.h
+    SpatialInterfaceReference.h
+    SpatialObjectSourceAssociation.h
+    SpatialObjectPrimitiveAssociation.h
+
+include/spatial/graph/
+    SpatialObjectRegistry.h
+    SpatialContainmentTree.h
+    SpatialConnectionGraph.h
+    SpatialConstraintGraph.h
+</code></pre>
+<h4 id="source-15-3-services">15.3 Services</h4><p class="section-guide">Reading guide: this source section records “15.3 Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/spatial/service/
+src/spatial/service/
+    SpatialBuildingModelConstructionService
+    SpatialContainmentValidationService
+    SpatialWorldFrameResolutionService
+    SpatialObjectBoundaryDerivationService
+    SpatialAabbQueryService
+    SpatialContainmentQueryService
+    SpatialDistanceQueryService
+    SpatialCollisionQueryService
+    SpatialInterfaceQueryService
+    SpatialInterfaceCompatibilityService
+    SpatialConstraintDependencyAnalyzer
+    CollisionPositioningSolver
+    SpatialPlacementTransaction
+    SpatialAssemblyResolutionService
+    SpatialObjectGeometryBindingService
+    SpatialValidityEvaluationService
+    SpatialResolutionEvidenceHashService
+    CatalogSpatialInterfaceImportService
+</code></pre>
+<h4 id="source-15-4-grammar">15.4 Grammar</h4><p class="section-guide">Reading guide: this source section records “15.4 Grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/grammar/model/
+    SpatialObjectDescriptorSyntax.h
+    SpatialTaxonomySyntax.h
+    SpatialInterfaceDeclarationSyntax.h
+    SpatialConnectionDeclarationSyntax.h
+    SpatialConstraintDeclarationSyntax.h
+    SpatialClearanceSyntax.h
+    SpatialDirectionSyntax.h
+    SpatialObjectScopeToken.h
+
+include/grammar/service/
+src/grammar/service/
+    SpatialObjectSpecificationParser
+    SpatialInterfaceDeclarationParser
+    SpatialConnectionDeclarationParser
+    SpatialConstraintDeclarationParser
+    SpatialObjectSpecificationEvaluator
+    SpatialInterfaceDeclarationEvaluator
+    SpatialConnectionDeclarationEvaluator
+    SpatialConstraintDeclarationEvaluator
+</code></pre>
+<h4 id="source-15-5-editor">15.5 Editor</h4><p class="section-guide">Reading guide: this source section records “15.5 Editor”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/editor/model/
+    SpatialObjectInspection.h
+    SpatialGraphInspection.h
+    SpatialResolutionInspection.h
+
+include/editor/relationship/
+    SpatialObjectSourceAssociationIndex.h
+    SpatialObjectPrimitiveAssociationIndex.h
+
+include/editor/service/
+    SpatialObjectInspectionService.h
+    SpatialOverlayEvidenceService.h
+
+include/editor/presentation/
+    SpatialObjectInspectorPanel.h
+    SpatialHierarchyPanel.h
+    SpatialConnectionPanel.h
+    SpatialConstraintPanel.h
+</code></pre>
+<h4 id="source-15-6-existing-files-expected-to-change">15.6 Existing Files Expected to Change</h4><p class="section-guide">Reading guide: this source section records “15.6 Existing Files Expected to Change”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/Context.h
+src/Context.cpp
+include/grammar.h
+src/Grammar.cpp
+include/editor/model/GeneratedSceneSnapshot.h
+include/editor/model/ScenePreviewSession.h
+include/editor/model/SceneOverlayConfiguration.h
+src/imgui_main.cpp
+src/editor/presentation/GrammarSyntaxPresentation.cpp
+src/editor/presentation/GrammarAutocompletePresentation.cpp
+Makefile
+tests/run_editor_architecture_checks.sh
+tests/run_release_checks.sh
+.github/workflows/ci.yml
+tests/README.md
+</code></pre>
+<h3 id="source-16-test-plan">16. Test Plan</h3><p class="section-guide">Reading guide: this source section records “16. Test Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-16-1-focused-harnesses">16.1 Focused Harnesses</h4><p class="section-guide">Reading guide: this source section records “16.1 Focused Harnesses”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/spatial_object_model_harness.cpp
+tests/spatial_containment_tree_harness.cpp
+tests/spatial_interface_compatibility_harness.cpp
+tests/spatial_boundary_query_harness.cpp
+tests/collision_positioning_solver_harness.cpp
+tests/spatial_constraint_graph_harness.cpp
+tests/spatial_assembly_resolution_harness.cpp
+tests/spatial_grammar_scene_harness.cpp
+tests/spatial_editor_inspection_harness.cpp
+tests/smb_omv2_grammar_scene_harness.cpp
+</code></pre>
+<p>Runner scripts:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/run_spatial_object_model_checks.sh
+tests/run_spatial_query_checks.sh
+tests/run_spatial_positioning_checks.sh
+tests/run_spatial_grammar_scene_checks.sh
+tests/run_spatial_editor_checks.sh
+tests/run_smb_omv2_checks.sh
+tests/run_smb_omv2_visual_checks.sh
+tests/run_smb_omv2_supervisor_matrix.sh
+</code></pre>
+<h4 id="source-16-2-required-matrices">16.2 Required Matrices</h4><p class="section-guide">Reading guide: this source section records “16.2 Required Matrices”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Identity:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">unique and duplicate IDs
+deterministic repeated IDs
+identity survives geometry replacement
+zero-geometry object
+one object with several primitives
+</code></pre>
+<p>Containment:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">single root
+missing parent
+self containment
+two parents
+short and long cycles
+nested world transforms
+moving storey moves descendants
+</code></pre>
+<p>Interfaces:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">frame normalization
+zero normal
+parallel tangent
+world transformation
+point, plane, axis, and boundary-face regions
+duplicate interface ID
+</code></pre>
+<p>Compatibility:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">allowed and disallowed types
+diameter match and mismatch
+rectangular size tolerance
+gender match and mismatch
+missing optional dimensions
+non-finite values
+</code></pre>
+<p>Collision layers:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Furniture versus Structure
+Furniture versus Interior
+Furniture ignoring Electrical
+Plumbing versus Plumbing
+Temporary policy
+asymmetric masks do not collide
+</code></pre>
+<p>Positioning:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cube, Sphere, and Cylinder drop
+positive and negative approach
+requested gap
+multi-primitive assembly
+maximum travel failure
+starting overlap failure
+zero direction
+forbidden obstacle
+target layer excluded
+transaction rollback
+sequential floor and wall constraints
+conflicting constraints
+</code></pre>
+<h4 id="source-16-3-numerical-gates">16.3 Numerical Gates</h4><p class="section-guide">Reading guide: this source section records “16.3 Numerical Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">abs(resulting_clearance - requested_clearance) &lt;= tolerance
+penetration &lt;= contact_slop
+residual_error &lt;= tolerance
+broad_phase_steps &lt;= ceiling
+refinement_iterations &lt;= ceiling
+final transforms finite
+evidence hash stable
+</code></pre>
+<h4 id="source-16-4-determinism">16.4 Determinism</h4><p class="section-guide">Reading guide: this source section records “16.4 Determinism”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Identical evaluated specifications produce identical:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object and graph ordering
+dependency order
+candidate sequence
+iteration counts
+final matrices
+resolution record order
+evidence hashes
+preview and export geometry
+</code></pre>
+<h4 id="source-16-5-transform-tests">16.5 Transform Tests</h4><p class="section-guide">Reading guide: this source section records “16.5 Transform Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Under nested translation, rotation, and nonuniform scale, verify parent-to-child frames, interface world frames, direction conversion, compound bounds, primitive binding transforms, clearance, resolution-local transform, final primitive world transform, and reset behavior.</p>
+<h4 id="source-16-6-failure-atomicity">16.6 Failure Atomicity</h4><p class="section-guide">Reading guide: this source section records “16.6 Failure Atomicity”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Every failure leaves primitive transforms, object transforms, collision caches, resolution records, and the previous valid editor snapshot unchanged. Diagnostics point to the responsible nested source declaration.</p>
+<h4 id="source-16-7-visual-evidence">16.7 Visual Evidence</h4><p class="section-guide">Reading guide: this source section records “16.7 Visual Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Capture object axes, container axes, interface normals and tangents, constraint vectors, contacts, clearances, AABBs, selected object groups, valid state, collision failure, and cycle failure. Deterministic captures are byte-identical.</p>
+<h3 id="source-17-full-smb-omv2-acceptance">17. Full SMB-OMv2 Acceptance</h3><p class="section-guide">Reading guide: this source section records “17. Full SMB-OMv2 Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Machine-readable evidence reports:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object, containment, connection, constraint, and interface counts
+geometry binding count
+resolved and validated object counts
+invalid object count
+collision query count
+broad-phase and refinement totals
+maximum residual
+maximum forbidden penetration
+minimum and maximum measured clearance
+resolution evidence hash
+aggregate topology hash
+</code></pre>
+<p>Required gates:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">124 object IDs exactly once
+one containment root
+zero containment cycles
+zero constraint cycles
+zero unresolved references
+zero incompatible required connections
+zero fake geometry on semantic leaves
+zero forbidden collision above tolerance
+zero unresolved required P0 constraints
+all transforms finite
+all evidence hashes stable
+</code></pre>
+<p>Priority validity:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cabinet supported and wall-cleared
+sink supported and plumbing-connected
+water heater connected to hot-water riser
+HVAC indoor units served by outdoor unit
+solar array connected to electrical system
+smoke alarms connected to monitored floors
+windows contained by openings
+loose furniture supported by correct floors
+</code></pre>
+<h3 id="source-18-safety-and-performance">18. Safety and Performance</h3><p class="section-guide">Reading guide: this source section records “18. Safety and Performance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Suggested ceilings:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">objects per model                &lt;= 4096
+interfaces per object            &lt;= 64
+connections per model            &lt;= 8192
+constraints per model            &lt;= 8192
+primitive bindings per object    &lt;= 1024
+containment depth                 &lt;= 128
+constraint dependency depth      &lt;= 512
+broad-phase steps per constraint &lt;= 4096
+binary refinements               &lt;= 64
+resolution records per object    &lt;= 256
+cycle diagnostic length          &lt;= 512
+</code></pre>
+<p>Benchmark separately:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">syntax parse
+expression evaluation
+model construction
+containment validation
+world frame resolution
+compatibility
+constraint graph and cycle detection
+boundary derivation
+collision queries
+positioning search
+transaction validation
+primitive transform application
+overlay construction
+snapshot publication
+</code></pre>
+<p>Benchmark one cabinet, ten cabinets, 100 objects, the 124-object SMB, 1000 semantic objects, and a time sample with unchanged topology. Establish thresholds from measured evidence rather than guessing them in advance.</p>
+<h3 id="source-19-backward-compatibility-gates">19. Backward Compatibility Gates</h3><p class="section-guide">Reading guide: this source section records “19. Backward Compatibility Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Before every merge:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SMB-OMv1 source and runtime gates pass
+Cube, Cylinder, Sphere, and AxialProfile grammars pass
+transform scope and grammar-scene gates pass
+collision positioning passes
+80-example positioning convention passes
+preview and export geometry remain unchanged
+legacy snapshots may omit a spatial model
+legacy primitive selection remains functional
+</code></pre>
+<p>No existing grammar token changes meaning for SMB-OMv2.</p>
+<h3 id="source-20-recommended-merge-sequence">20. Recommended Merge Sequence</h3><p class="section-guide">Reading guide: this source section records “20. Recommended Merge Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-merge-1-shared-collision-models">Merge 1: Shared Collision Models</h4><p class="section-guide">Reading guide: this source section records “Merge 1: Shared Collision Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extract bounds and collision model classes. Gate on all existing transform and collision suites.</p>
+<h4 id="source-merge-2-spatial-model-kernel">Merge 2: Spatial Model Kernel</h4><p class="section-guide">Reading guide: this source section records “Merge 2: Spatial Model Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add identity, frames, objects, containment, interfaces, connections, constraints, layers, bindings, and evidence. Gate on programmatic model tests.</p>
+<h4 id="source-merge-3-spatial-queries">Merge 3: Spatial Queries</h4><p class="section-guide">Reading guide: this source section records “Merge 3: Spatial Queries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add compound AABBs, candidate transforms, and collision adapters. Gate on transformed multi-primitive object queries without mutation.</p>
+<h4 id="source-merge-4-p0-positioning">Merge 4: P0 Positioning</h4><p class="section-guide">Reading guide: this source section records “Merge 4: P0 Positioning”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add <code>Touch</code>, <code>Gap</code>, <code>Drop</code>, clearance, masks, transactions, and evidence. Gate on the programmatic cabinet fixture.</p>
+<h4 id="source-merge-5-dependency-resolution">Merge 5: Dependency Resolution</h4><p class="section-guide">Reading guide: this source section records “Merge 5: Dependency Resolution”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add topological ordering, cycle detection, sequential constraints, and rollback. Gate on source-order independence.</p>
+<h4 id="source-merge-6-grammar">Merge 6: Grammar</h4><p class="section-guide">Reading guide: this source section records “Merge 6: Grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Add object scopes, interfaces, connections, positions, layer/mask, two-pass validation, diagnostics, highlighting, and autocomplete. Gate on exact programmatic-versus-grammar evidence parity.</p>
+<h4 id="source-merge-7-editor-evidence">Merge 7: Editor Evidence</h4><p class="section-guide">Reading guide: this source section records “Merge 7: Editor Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add spatial snapshot, object selection, inspector, graph lists, overlays, and visual capture. Gate on deterministic editor evidence.</p>
+<h4 id="source-merge-8-full-smb-omv2">Merge 8: Full SMB-OMv2</h4><p class="section-guide">Reading guide: this source section records “Merge 8: Full SMB-OMv2”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Add the complete 124-object fixture, connection migration, reliable derived placements, validity predicates, documentation, and supervisor matrix. Gate on the full acceptance matrix with SMB-OMv1 still green.</p>
+<h3 id="source-21-risks-and-mitigations">21. Risks and Mitigations</h3><p class="section-guide">Reading guide: this source section records “21. Risks and Mitigations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-primitive-instances-become-the-object-model">Primitive Instances Become the Object Model</h4><p class="section-guide">Reading guide: this source section records “Primitive Instances Become the Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use <code>SpatialObjectGeometryBinding</code>; never inherit building objects from primitives.</p>
+<h4 id="source-object-scope-leaks">Object Scope Leaks</h4><p class="section-guide">Reading guide: this source section records “Object Scope Leaks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Parse <code>Object(...) [ ... ]</code> as a composite token with owned body tokens.</p>
+<h4 id="source-authored-and-resolved-transforms-mix">Authored and Resolved Transforms Mix</h4><p class="section-guide">Reading guide: this source section records “Authored and Resolved Transforms Mix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Store and inspect authored local, resolution local, and resolved world transforms separately.</p>
+<h4 id="source-dynamic-physics-becomes-placement-authority">Dynamic Physics Becomes Placement Authority</h4><p class="section-guide">Reading guide: this source section records “Dynamic Physics Becomes Placement Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Reuse only collision queries. Never use gravity or frame stepping for assembly placement.</p>
+<h4 id="source-collision-algorithms-are-duplicated">Collision Algorithms Are Duplicated</h4><p class="section-guide">Reading guide: this source section records “Collision Algorithms Are Duplicated”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extract shared models and adapt existing SAT, GJK/EPA, mesh overlap, and BVH services.</p>
+<h4 id="source-aabb-results-are-reported-as-exact">AABB Results Are Reported as Exact</h4><p class="section-guide">Reading guide: this source section records “AABB Results Are Reported as Exact”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Store representation kind and confidence in query and resolution evidence. Label AABB positioning as approximate.</p>
+<h4 id="source-multi-primitive-objects-split-apart">Multi-Primitive Objects Split Apart</h4><p class="section-guide">Reading guide: this source section records “Multi-Primitive Objects Split Apart”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Commit one object transform through the binding service to all owned primitives atomically.</p>
+<h4 id="source-forward-references-depend-on-source-order">Forward References Depend on Source Order</h4><p class="section-guide">Reading guide: this source section records “Forward References Depend on Source Order”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Use two-pass model construction and graph resolution.</p>
+<h4 id="source-cycles-are-silently-relaxed">Cycles Are Silently Relaxed</h4><p class="section-guide">Reading guide: this source section records “Cycles Are Silently Relaxed”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Fail before solving and report the exact cycle path.</p>
+<h4 id="source-later-constraints-break-earlier-constraints">Later Constraints Break Earlier Constraints</h4><p class="section-guide">Reading guide: this source section records “Later Constraints Break Earlier Constraints”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Revalidate higher-priority residuals after every placement and roll back on failure.</p>
+<h4 id="source-interface-semantics-become-strings">Interface Semantics Become Strings</h4><p class="section-guide">Reading guide: this source section records “Interface Semantics Become Strings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use typed enums and purpose classes for authoritative P0 semantics.</p>
+<h4 id="source-catalog-metadata-becomes-unvalidated-authority">Catalog Metadata Becomes Unvalidated Authority</h4><p class="section-guide">Reading guide: this source section records “Catalog Metadata Becomes Unvalidated Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Import through a validation adapter. Catalog text remains data, never executable instruction.</p>
+<h4 id="source-full-smb-conversion-hides-kernel-bugs">Full SMB Conversion Hides Kernel Bugs</h4><p class="section-guide">Reading guide: this source section records “Full SMB Conversion Hides Kernel Bugs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Require cabinet, sink, window, and pipe fixtures first.</p>
+<h4 id="source-visual-success-hides-semantic-failure">Visual Success Hides Semantic Failure</h4><p class="section-guide">Reading guide: this source section records “Visual Success Hides Semantic Failure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Visual evidence remains supporting evidence. Graph, residual, collision, and hash gates are authoritative.</p>
+<h3 id="source-22-p0-non-goals">22. P0 Non-Goals</h3><p class="section-guide">Reading guide: this source section records “22. P0 Non-Goals”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">general 6-DOF optimization
+automatic interface discovery
+nonzero uncertainty propagation
+mesh contact patches
+deformable placement
+automatic geometry adaptation
+dynamic joints
+general insertion or seating
+thread engagement
+electrical or hydraulic simulation
+automatic conflict repair
+source-order relaxation
+silent collider approximation
+</code></pre>
+<p class="source-status--failed">Unimplemented modes fail explicitly; placeholder enum storage is not implementation.</p>
+<h3 id="source-23-p0-completion-standard">23. P0 Completion Standard</h3><p class="section-guide">Reading guide: this source section records “23. P0 Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">SMB-OMv2 P0 is complete only when:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">stable object identity exists
+containment is cycle-free
+local and world frames exist
+objects bind to zero or more primitives
+manual interfaces exist
+connection and constraint graphs exist
+collision layers and masks exist
+Touch, Gap, and Drop resolve deterministically
+clearance is validated
+placement commits atomically
+resolution evidence is immutable and hashed
+object source and primitive associations exist
+spatial inspector and overlays exist
+cabinet fixture passes
+full 124-object SMB-OMv2 passes
+invalid fixtures fail closed
+SMB-OMv1 remains unchanged and green
+full editor release checks pass
+supervisor-mode evidence passes
+</code></pre>
+<p>P1, P2, and P3 capabilities are not required and must not be claimed by P0.</p>
+<h3 id="source-24-recommended-first-implementation-slice">24. Recommended First Implementation Slice</h3><p class="section-guide">Reading guide: this source section records “24. Recommended First Implementation Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The strongest first coding slice is the model/query/solver kernel for a floor-supported cabinet, with no grammar changes.</p>
+<p>Implement:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialObjectIdentity
+SpatialFrameState
+SpatialBuildingObject
+SpatialContainmentTree
+SpatialObjectGeometryBinding
+AxisAlignedBoundingBoundary
+SpatialInterface
+CollisionLayerMask
+CollisionPositionConstraint
+SpatialResolutionRecord
+SpatialObjectBoundaryDerivationService
+SpatialInterfaceCompatibilityService
+CollisionPositioningSolver
+SpatialPlacementTransaction
+</code></pre>
+<p>Construct programmatically:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Building
+└── GroundFloor
+    └── Kitchen
+        ├── Wall
+        └── Cabinet
+</code></pre>
+<p>Resolve:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cabinet.bottom Drop to GroundFloor.upperSurface
+Cabinet.back Gap 0.01 from Wall.internalFace
+</code></pre>
+<p>Required evidence:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">authored and resolved cabinet transforms
+floor contact point and normal
+wall clearance
+zero forbidden penetration
+two deterministic resolution records
+stable evidence hash
+all bound primitives updated together
+full rollback after an injected conflicting obstacle
+</code></pre>
+<p>Do not modify grammar parsing until this programmatic kernel passes. That isolates spatial object and collision-positioning correctness from language risk and creates a UML-readable foundation for the full SMB-OMv2 building.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-comv1-chair-object-model-and-fgkv1-curved-geometry-implementation-plan.html" rel="prev">← Previous: ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-smb-omv2-1-all-building-objects-implementation-plan.html" rel="next">Next: ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

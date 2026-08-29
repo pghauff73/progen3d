@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="This document audits the implementation against:" name="description"/>
+<meta content="VEGETATION_GRAMMAR_V1_VERIFICATION.md" name="source-markdown"/>
+<meta content="d3c2888f2ac8c464bd7e814a9830a6e936520fa4ea73f880a2cba7ade99cdeef" name="source-sha256"/>
+<meta content="Evidence" name="documentation-status"/>
+<title>Progen3D Vegetation Grammar V1 Verification · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vegetation">Vegetation Systems</a></li>
+<li aria-current="page">Progen3D Vegetation Grammar V1 Verification</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Progen3D Vegetation Grammar V1 Verification</h1>
+<p class="lead">This document audits the implementation against:</p>
+<div class="lesson-meta">
+<span class="status-badge status--evidence">Evidence</span>
+<span class="tag">Vegetation Systems</span>
+<span class="tag">About 9 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/VEGETATION_GRAMMAR_V1_VERIFICATION.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="d3c2888f2ac8c464bd7e814a9830a6e936520fa4ea73f880a2cba7ade99cdeef" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Progen3D Vegetation Grammar V1 Verification in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Progen3D Vegetation Grammar V1 Verification, Authority and completion boundary, Architectural result, Requirement-by-requirement audit.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="improved-building-vegetation-object-model.html">Improved Building Vegetation Object Model</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Progen3D Vegetation Grammar V1 Verification</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Progen3D Vegetation Grammar V1 Verification</td></tr><tr><td><dfn title="Named by the source document">Authority and completion boundary</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Authority and completion boundary</td></tr><tr><td><dfn title="Named by the source document">Architectural result</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Architectural result</td></tr><tr><td><dfn title="Named by the source document">Requirement-by-requirement audit</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Requirement-by-requirement audit</td></tr><tr><td><dfn title="Named by the source document">Recommended implementation-order audit</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Recommended implementation-order audit</td></tr><tr><td><dfn title="Named by the source document">Grammar and editor surface</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>5. Grammar and editor surface</td></tr><tr><td><dfn title="Named by the source document">Deterministic nonvisual evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>6. Deterministic nonvisual evidence</td></tr><tr><td><dfn title="Named by the source document">Supervisor visual evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>7. Supervisor visual evidence</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="aware geometry while semantic sections, panel cuts, arches, and joints remain present">LOD</dfn></td><td>aware geometry while semantic sections, panel cuts, arches, and joints remain present</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V2</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">L-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="V5 status and diagnostics">V0</dfn></td><td>V5 status and diagnostics</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>This document audits the implementation against:</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Progen3D Vegetation Grammar V1 Verification, Authority and completion boundary, Architectural result, Requirement-by-requirement audit. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Authority and completion boundary, 2. Architectural result, 3. Requirement-by-requirement audit, 4. Recommended implementation-order audit, 5. Grammar and editor surface. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 19, failed: 1, proposed: 2.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 3 code blocks, 4 tables and the source SHA-256 <code>d3c2888f2ac8c464bd7e814a9830a6e936520fa4ea73f880a2cba7ade99cdeef</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-authority-and-completion-boundary">1. Authority and completion boundary</a></li><li><a href="#source-2-architectural-result">2. Architectural result</a></li><li><a href="#source-3-requirement-by-requirement-audit">3. Requirement-by-requirement audit</a></li><li><a href="#source-4-recommended-implementation-order-audit">4. Recommended implementation-order audit</a></li><li><a href="#source-5-grammar-and-editor-surface">5. Grammar and editor surface</a></li><li><a href="#source-6-deterministic-nonvisual-evidence">6. Deterministic nonvisual evidence</a></li><li><a href="#source-7-supervisor-visual-evidence">7. Supervisor visual evidence</a></li><li><a href="#source-8-safety-and-determinism">8. Safety and determinism</a></li><li><a href="#source-9-known-warnings-and-explicit-limitations">9. Known warnings and explicit limitations</a></li><li><a href="#source-10-completion-decision">10. Completion decision</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>19</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>1</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>2</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is VEGETATION_GRAMMAR_V1_VERIFICATION.md.</li><li>Learn the named concepts: Progen3D Vegetation Grammar V1 Verification, Authority and completion boundary, Architectural result, Requirement-by-requirement audit.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>the V0 topology, geometry, and organ-placement kernel;</li><li>V1 environmental reasoning, growth, vines, attachment, collision behavior,</li><li>LOD and instancing as required architecture.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">/home/pamela/.codex/attachments/
+3a05c73f-9624-4c7a-a6d4-20c6a147d3c7/pasted-text-1.txt</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Progen3D Vegetation Grammar V1 Verification" data="../../assets/diagrams/pages/progen3d-vegetation-grammar-v1-verification.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>VEGETATION_GRAMMAR_V1_VERIFICATION.md</code></p><p>SHA-256: <code>d3c2888f2ac8c464bd7e814a9830a6e936520fa4ea73f880a2cba7ade99cdeef</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>11 headings, 3 fenced code blocks, 4 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>maintainers, reviewers, and readers checking project evidence.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>This document audits the implementation against:</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Evidence; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Progen3D Vegetation Grammar V1 Verification, Authority and completion boundary, Architectural result, Requirement-by-requirement audit, Recommended implementation-order audit</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-vegetation-grammar-implementation-plan.html">Progen3D Vegetation Grammar Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Verification authority: VEGETATIONGRAMMARV1VERIFICATION.md maps every originating requirement to current source, deterministic tests, and supervisor visual evidence. The release command composes the subsystem through runvegetationchecks.sh and runvegetationvisualmatrix.sh.</small></li><li><a href="vegetation-renderer-integration-implementation-plan.html">Vegetation Renderer Integration Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission.</small></li><li><a href="improved-building-vegetation-object-model.html">Improved Building Vegetation Object Model</a> <span class="status-badge status--documented">Documented</span><br/><small>BVO-OMv2.1 enriches the existing building spatial object model without changing the frozen 124-object SMB inventory.</small></li><li><a href="vegetation-building-objects-three-view-match-report.html">Vegetation Building Objects Three-View Match Report</a> <span class="status-badge status--evidence">Evidence</span><br/><small>ImageGen supplies object-specific appearance intent. The deterministic five-degree ProGen3D camera views retain geometry authority for silhouette, extent, orientation, component placement, and support relationships.</small></li><li><a href="building-vegetation-object-model-implementation-plan.html">Building Vegetation Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Plan snapshot: August 28, 2026.</small></li><li><a href="building-vegetation-object-model-literature-review.html">Building Vegetation Object Model Literature Review</a> <span class="status-badge status--research">Research</span><br/><small>Research snapshot: August 28, 2026.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/VEGETATION_GRAMMAR_V1_VERIFICATION.md"><code>VEGETATION_GRAMMAR_V1_VERIFICATION.md</code></a></p>
+<p><strong>Source digest:</strong> <code>d3c2888f2ac8c464bd7e814a9830a6e936520fa4ea73f880a2cba7ade99cdeef</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-vegetation-grammar-v1-verification">Progen3D Vegetation Grammar V1 Verification</h2><p class="section-guide">Reading guide: this source section records “Progen3D Vegetation Grammar V1 Verification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-1-authority-and-completion-boundary">1. Authority and completion boundary</h3><p class="section-guide">Reading guide: this source section records “1. Authority and completion boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>This document audits the implementation against:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">/home/pamela/.codex/attachments/
+3a05c73f-9624-4c7a-a6d4-20c6a147d3c7/pasted-text-1.txt
+</code></pre>
+<p>The originating specification defines three delivery bands:</p>
+<ol>
+<li>the V0 topology, geometry, and organ-placement kernel;</li>
+<li>V1 environmental reasoning, growth, vines, attachment, collision behavior,
+and scatter;</li>
+<li>LOD and instancing as required architecture.</li>
+</ol>
+<p>Section 42 and recommended implementation step 16 explicitly place implicit
+junction blending, bark displacement, detailed veins, deformation, wind,
+seasonality, root systems, fruit development, and resource competition after
+the main architecture. Those features are therefore recorded as intentional
+post-V1 work rather than silently treated as implemented.</p>
+<p>The implemented grammar is intentionally executable rather than copying the
+illustrative syntax in section 39 verbatim. <code>Plant(...)</code>, <code>Vine(...)</code>, and
+<code>ScatterRegion(...)</code> evaluate checked expressions into immutable specifications,
+then lower through deterministic services to <code>BranchGraph</code> and procedural mesh
+families.</p>
+<h3 id="source-2-architectural-result">2. Architectural result</h3><p class="section-guide">Reading guide: this source section records “2. Architectural result”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Plant/Vine/Scatter grammar
+    -&gt; evaluated botanical specification
+    -&gt; BranchGraph or deterministic placement topology
+    -&gt; growth and environmental resolution
+    -&gt; organ attachment and shared instance arrays
+    -&gt; TaperedSweep / BranchJunction / LeafBlade / PetalBlade /
+       Revolve / ShellLoft geometry
+    -&gt; deterministic mesh, bounds, surface tags, collision policy, and evidence
+</code></pre>
+<p>Primary ownership is separated into UML-readable model and service layers:</p>
+<ul>
+<li><code>include/vegetation/model</code> owns botanical identity and immutable state.</li>
+<li><code>include/vegetation/service</code> defines topology, growth, placement, and
+environmental operations.</li>
+<li><code>src/vegetation/service</code> implements those operations.</li>
+<li><code>include/geometry/model</code> and <code>src/geometry/service</code> own reusable mesh families.</li>
+<li>grammar parsing/evaluation remains in <code>src/grammar/service</code>.</li>
+<li>editor discovery remains in the procedural shape catalog and structured
+completion services.</li>
+</ul>
+<h3 id="source-3-requirement-by-requirement-audit">3. Requirement-by-requirement audit</h3><p class="section-guide">Reading guide: this source section records “3. Requirement-by-requirement audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col" style="text-align:right">Spec section</th>
+<th scope="col">Requirement</th>
+<th scope="col">Authoritative implementation evidence</th>
+<th scope="col">Verification</th>
+<th scope="col">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Separate topology, geometry, and development primitives</td>
+<td><code>include/vegetation/model</code>, <code>include/vegetation/service</code>, <code>include/geometry/model</code></td>
+<td>Full source organization and grammar-scene gate</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td><code>BranchGraph</code> with root, nodes, edges, buds, organ attachments, and growth points</td>
+<td><code>BranchGraph</code>, <code>BranchNode</code>, <code>BranchSegment</code>, <code>VegetationBud</code>, <code>OrganAttachment</code>, <code>VegetationGrowthTip</code></td>
+<td><code>run_vegetation_topology_checks.sh</code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Continuous-taper branch geometry</td>
+<td><code>TaperedSweepShapeSpecification</code>, validator, parallel-transport mesh generator</td>
+<td><code>run_vegetation_tapered_sweep_checks.sh</code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Parent/child branch-radius conservation</td>
+<td><code>BranchRadiusConservationService</code> and species gamma/tolerance data</td>
+<td>Topology and rule-branching gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Branch-junction transition geometry</td>
+<td><code>BranchJunctionShapeSpecification</code>, <code>BranchJunctionMeshGenerator</code></td>
+<td><code>run_vegetation_branch_junction_checks.sh</code> and LOD geometry gate</td>
+<td>Implemented as compound P0 junction; implicit watertight blend deferred</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Branch angle, azimuth, roll/internode-style spacing, order, and count controls</td>
+<td><code>PlantBranchingSpecification</code>, rule branching, deterministic variation, turtle angle rules</td>
+<td><code>run_vegetation_rule_branching_checks.sh</code>, <code>run_vegetation_lsystem_checks.sh</code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Explicit Internode and Stem semantics</td>
+<td><code>PlantInternode</code>, <code>PlantStem</code>, <code>PlantTopologyDecomposition</code>, <code>PlantTopologyDecompositionService</code></td>
+<td>Topology gate proves two primary internodes plus a lateral stem</td>
+<td>Implemented as derived topology</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Bud lifecycle and meaningful node attachment</td>
+<td><code>VegetationBud</code>, bud states, <code>PlantOrganAttachmentService</code>, node-referenced attachments</td>
+<td>Topology and growth gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Parametric <code>LeafBlade</code></td>
+<td><code>BotanicalBladeShapeSpecification</code>, <code>LeafBladeShapeSpecification</code>, blade generator</td>
+<td><code>run_vegetation_botanical_blade_checks.sh</code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Canonical leaf profile variants</td>
+<td><code>BotanicalBladeProfile</code>: Linear, Lanceolate, Elliptic, Ovate, Obovate, Cordate, Palmate, Needle</td>
+<td>Blade, grammar-scene, and catalog completion gates</td>
+<td>Implemented as parameterizations</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Compound leaf as rachis plus leaflet array</td>
+<td><code>PlantCompoundLeafSpecification</code>, <code>CompoundLeafPlacementService</code>, instanced rachis and leaflet parts</td>
+<td>Placement, geometry assembly, grammar-scene gates</td>
+<td>Implemented for alternate/opposite P0 patterns</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Semantically distinct Petiole using tapered sweep</td>
+<td><code>PlantPetioleSpecification</code>, <code>petiole(...)</code>, <code>node_surface -&gt; petiole_base</code> semantic roles</td>
+<td>Geometry assembly and grammar-scene gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td>Alternate, Opposite, Decussate, Whorled, Spiral, and Rosette phyllotaxis</td>
+<td><code>PhyllotaxisMode</code>, <code>PhyllotaxisSpecification</code>, <code>OrganPlacementService</code></td>
+<td>Placement gate</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td>General <code>OrganArray</code> with count, spacing, azimuth, falloff, orientation, and variation</td>
+<td><code>PlantOrganArraySpecification</code>, <code>OrganArrayPlacementService</code> for Bud, Leaf, Petal, Flower, Fruit, Thorn and Stem, Branch, FlowerHead, Surface hosts</td>
+<td>Placement and geometry assembly gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">15</td>
+<td>Parametric <code>PetalBlade</code></td>
+<td>Shared botanical blade model with petal specialization</td>
+<td>Botanical blade and primitive visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">16</td>
+<td>Whorl placement</td>
+<td><code>WhorlSpecification</code>, deterministic radial transforms</td>
+<td>Placement and geometry assembly gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">17</td>
+<td>Golden-angle flower-head packing</td>
+<td><code>FlowerHeadSpecification</code>, <code>FlowerHeadPlacementService</code> using radial square-root packing</td>
+<td>Placement, grammar-scene, plant visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">18</td>
+<td>Raceme, Spike, Panicle, Umbel, Corymb, and Head inflorescences</td>
+<td><code>InflorescenceKind</code>, specification, placement service</td>
+<td>Placement gate exercises all six kinds; shrub grammar uses Panicle</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">19</td>
+<td>Weighted tropism vectors</td>
+<td><code>TropismInfluence</code>, <code>TropismSpecification</code>, <code>TropismDirectionService</code></td>
+<td>Placement, growth, rule branching, space colonization, and vine gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">20</td>
+<td>Space-colonization tree generation</td>
+<td>crown sampling, seed graph, validation, resolution evidence, <code>SpaceColonizationService</code></td>
+<td><code>run_vegetation_space_colonization_checks.sh</code>, grammar-scene and environment visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">21</td>
+<td>Crown volumes including sphere, ellipsoid, cone, inverse cone, cylinder, dome, lobed, and custom</td>
+<td><code>CrownVolumeKind</code>, <code>CrownVolumeSpecification</code>, containment and sampling services</td>
+<td>Space-colonization gate and showcase</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">22</td>
+<td><code>VinePath</code> as topology over a guided path</td>
+<td><code>VineGrowthSpecification</code>, <code>VineGrowthService</code>, <code>VinePathState</code></td>
+<td>Vine-growth, grammar-scene, environment visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">23</td>
+<td>Surface attachment with offset and projection semantics</td>
+<td><code>SurfaceAttachmentSpecification</code>, <code>SurfaceAttachmentService</code>, target boundaries</td>
+<td>Vine-growth and environment visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">24</td>
+<td>Free, wall-climbing, hanging, twining, and surface-creeping growth</td>
+<td><code>VineGrowthMode</code> and showcase records</td>
+<td>Vine-growth and grammar-scene gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Tendril geometry and twining</td>
+<td>tendril mode/path construction lowered through TaperedSweep</td>
+<td>Vine-growth gate exercises tendril twining</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">26</td>
+<td>Avoid, Seek, and PermitIntersection environmental collision behavior</td>
+<td><code>VegetationCollisionBehavior</code>, obstacle boundaries and deterministic evidence</td>
+<td>Vine-growth, scatter, and grammar-scene gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">27</td>
+<td>Time/age-driven Growth</td>
+<td><code>PlantGrowthSpecification</code>, channels, curves, requests, service, evidence</td>
+<td><code>run_vegetation_growth_checks.sh</code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">28</td>
+<td>Seed, Bud, Shoot, Juvenile, Mature, Flowering, Fruiting, Senescent, Dormant, Dead states</td>
+<td><code>PlantDevelopmentState</code>, growth filtering and organ visibility</td>
+<td>Growth and grammar-scene gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">29</td>
+<td>Bounded L-system rewriting lowered to BranchGraph</td>
+<td>symbol/rule/specification models, validation, turtle lowering, topology evidence</td>
+<td><code>run_vegetation_lsystem_checks.sh</code>, grammar-scene and L-system visual gates</td>
+<td>Implemented with explicit P0 alphabet</td>
+</tr>
+<tr>
+<td style="text-align:right">30</td>
+<td>Multiple generation algorithms</td>
+<td><code>PlantTopologyGenerationMethod</code>: RuleBranching, SpaceColonization, LSystem; guided vine growth remains separate</td>
+<td>Rule branching, space colonization, L-system, and vine gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">31</td>
+<td>Root systems using shared BranchGraph/TaperedSweep/Tropism</td>
+<td>The specification says roots should “eventually” exist and lists root systems in V2</td>
+<td>Completion boundary</td>
+<td>Deferred by specification</td>
+</tr>
+<tr>
+<td style="text-align:right">32</td>
+<td>Bark displacement at close LOD</td>
+<td>Listed in section 42 V2 realism and step 16</td>
+<td>Completion boundary</td>
+<td>Deferred by specification</td>
+</tr>
+<tr>
+<td style="text-align:right">33</td>
+<td>Midrib/vein detail</td>
+<td>Listed in section 42 V2 realism and step 16</td>
+<td>Completion boundary</td>
+<td>Deferred by specification</td>
+</tr>
+<tr>
+<td style="text-align:right">34</td>
+<td>Generative flower hierarchy</td>
+<td class="source-status--proposed">PetalBlade, Whorl, OrganArray, FlowerHead, Inflorescence, TaperedSweep, and Revolve provide the proposed compact kernel</td>
+<td>Placement, fruit shell, geometry assembly, plant visual gates</td>
+<td>Core hierarchy implemented; detailed reproductive organs and flower development remain V2</td>
+</tr>
+<tr>
+<td style="text-align:right">35</td>
+<td>Shrubs and grasses without separate kernels</td>
+<td><code>Shrub</code> and <code>GrassClump</code> species use BranchGraph/LeafBlade/OrganArray</td>
+<td>Plant grammar-scene and visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">36</td>
+<td>Groundcover and vegetation regions</td>
+<td><code>ScatterRegionSpecification</code>, service, mesh generator, collision masks</td>
+<td>Scatter-region, grammar-scene, environment visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">37</td>
+<td>Deterministic variation</td>
+<td>hierarchical <code>DeterministicPlantVariationService</code>, explicit seeds, stable graph and mesh hashes</td>
+<td>Rule branching, growth, scatter, grammar-scene repetition</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">38</td>
+<td>Species definition as data</td>
+<td><code>PlantSpeciesSpecification</code>, five-entry <code>PlantSpeciesCatalog</code>, grammar overrides</td>
+<td>Rule branching, grammar-scene and plant visual gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">39</td>
+<td>User-facing vegetation grammar</td>
+<td><code>Plant(...)</code>, <code>Vine(...)</code>, <code>ScatterRegion(...)</code>, repeated options, checked expressions, catalog completion</td>
+<td>Editor and grammar-scene gates</td>
+<td>Implemented with production syntax; pasted syntax remains illustrative</td>
+</tr>
+<tr>
+<td style="text-align:right">40</td>
+<td>V0 geometry: TaperedSweep, LeafBlade, PetalBlade, Revolve, ShellLoft, BranchJunction</td>
+<td>botanical geometry plus existing procedural Revolve/ShellLoft kernel</td>
+<td>Vegetation geometry gates, FruitShell gate, <code>run_profile_extrusion_checks.sh</code></td>
+<td>Implemented/reused</td>
+</tr>
+<tr>
+<td style="text-align:right">40</td>
+<td>V0 grammar: BranchGraph, OrganAttach, OrganArray, Phyllotaxis, Whorl, Tropism</td>
+<td>BranchGraph is the internal authority reached by Plant/LSystem/SpaceColonization; public options expose placement and tropism</td>
+<td>Topology, placement, grammar-scene gates</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">41</td>
+<td>V1 environmental reasoning</td>
+<td>Growth, SpaceColonization, SurfaceAttachment, collision behavior, ScatterRegion</td>
+<td>Full V1 source and environment visual matrix</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">42</td>
+<td>V2 realism</td>
+<td>Explicitly later work</td>
+<td>Completion boundary</td>
+<td>Deferred as specified</td>
+</tr>
+<tr>
+<td style="text-align:right">43</td>
+<td>LOD0 through LOD5</td>
+<td><code>GeometryDetailLevel</code>, detail ranges, progressively richer vegetation parts</td>
+<td>Geometry assembly gate proves triangle/part progression across six levels</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">44</td>
+<td>Shared instancing for leaves, petals, flowers, and fruit</td>
+<td><code>InstanceArrayShapeSpecification</code>, shared organ geometry sources</td>
+<td>Geometry assembly proves typed arrays and 10,000 leaf transforms sharing one <code>LeafBlade</code> source</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td style="text-align:right">45</td>
+<td>Spatially aware plant collision positioning</td>
+<td>Avoid/Seek/PermitIntersection, target layers/masks, attachment resolution and evidence</td>
+<td>Vine-growth, scatter, environment visual gates</td>
+<td>Implemented for promoted V1 query/growth scope</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-4-recommended-implementation-order-audit">4. Recommended implementation-order audit</h3><p class="section-guide">Reading guide: this source section records “4. Recommended implementation-order audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col" style="text-align:right">Step</th>
+<th scope="col">Deliverable</th>
+<th scope="col">Evidence</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>BranchGraph</td>
+<td>Topology model/service/gate</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>TaperedSweep</td>
+<td>Shape family/generator/gate</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>BranchJunction</td>
+<td>Shape family/generator/gate</td>
+<td class="source-status--passed">Complete at P0 compound level</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>LeafBlade</td>
+<td>Shared blade kernel/gate</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>OrganAttach</td>
+<td>Attachment model/service/gates</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>OrganArray</td>
+<td>General organ/host placement/gates</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Phyllotaxis</td>
+<td>Six modes/placement gate</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>PetalBlade + Whorl</td>
+<td>Shared blade and whorl placement/gates</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Tropism</td>
+<td>Weighted resolution service/gates</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Growth(age,t)</td>
+<td>Growth channels/states/evidence</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>SpaceColonization</td>
+<td>Crown sampling and topology service</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>SurfaceAttachment</td>
+<td>Projection/offset service</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td>VinePath</td>
+<td>Guided vine and tendril topology</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td>ScatterRegion</td>
+<td>Deterministic regional placement</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">15</td>
+<td>LOD + instancing</td>
+<td>Six LOD levels and shared arrays</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td style="text-align:right">16</td>
+<td>Bark, veins, wind, seasons, roots</td>
+<td>Explicit post-V1 realism work</td>
+<td>Deferred by source specification</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-5-grammar-and-editor-surface">5. Grammar and editor surface</h3><p class="section-guide">Reading guide: this source section records “5. Grammar and editor surface”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The promoted grammar families are:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Plant(
+    species(...)
+    age(...)
+    state(...)
+    seed(...)
+    branching(...)
+    leaf(...)
+    petiole(...)
+    leafArray(...)
+    organArray(...)
+    flower(...)
+    whorl(...)
+    flowerHead(...)
+    inflorescence(...)
+    fruit(...)
+    tropism(...)
+    crown(...)
+    spaceColonization(...)
+    lAxiom(...)
+    lRule(...)
+    lSystem(...)
+    detail(LOD0|LOD1|LOD2|LOD3|LOD4|LOD5)
+)
+
+Vine(
+    species(...)
+    start(...)
+    direction(...)
+    mode(...)
+    collision(Avoid|Seek|PermitIntersection)
+    attachment(...)
+    target(...)
+    detail(...)
+)
+
+ScatterRegion(
+    region(...)
+    species(...)
+    seed(...)
+    surface(...)
+    density(...)
+    separation(...)
+    scale(...)
+    orientation(...)
+    layer(...)
+    mask(...)
+    detail(...)
+)
+</code></pre>
+<p><code>run_vegetation_editor_checks.sh</code> proves that these options are exposed through
+the structured shape catalog and completion system rather than being parser-only
+features.</p>
+<h3 id="source-6-deterministic-nonvisual-evidence">6. Deterministic nonvisual evidence</h3><p class="section-guide">Reading guide: this source section records “6. Deterministic nonvisual evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">All commands below passed on Saturday, August 22, 2026:</p>
+<p class="source-status--passed">The repository release gate invokes the complete matrix through
+<code>tests/run_vegetation_checks.sh</code>.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Command</th>
+<th scope="col">Principal evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run_vegetation_topology_checks.sh</code></td>
+<td>4 nodes, 3 segments, 2 stems, 3 internodes</td>
+</tr>
+<tr>
+<td><code>run_vegetation_tapered_sweep_checks.sh</code></td>
+<td>216 vertices, 72 triangles, stable topology hash</td>
+</tr>
+<tr>
+<td><code>run_vegetation_branch_junction_checks.sh</code></td>
+<td>870 vertices, 896 triangles, stable topology hash</td>
+</tr>
+<tr>
+<td><code>run_vegetation_botanical_blade_checks.sh</code></td>
+<td>deterministic leaf and petal hashes</td>
+</tr>
+<tr>
+<td><code>run_vegetation_growth_checks.sh</code></td>
+<td>growth channels and deterministic evidence hash</td>
+</tr>
+<tr>
+<td><code>run_vegetation_placement_checks.sh</code></td>
+<td>all placement modes, 8-floret head, six inflorescence kinds</td>
+</tr>
+<tr>
+<td><code>run_vegetation_rule_branching_checks.sh</code></td>
+<td>140 nodes, 139 segments, 202 leaves</td>
+</tr>
+<tr>
+<td><code>run_vegetation_fruit_shell_checks.sh</code></td>
+<td>closed 528-triangle Revolve shell with positive volume</td>
+</tr>
+<tr>
+<td><code>run_vegetation_space_colonization_checks.sh</code></td>
+<td>216 nodes, 20 iterations, obstacle rejection evidence</td>
+</tr>
+<tr>
+<td><code>run_vegetation_vine_growth_checks.sh</code></td>
+<td>attachment, seeking, twining, avoidance, deterministic evidence</td>
+</tr>
+<tr>
+<td><code>run_vegetation_scatter_region_checks.sh</code></td>
+<td>deterministic density, spacing, masks, scale and orientation</td>
+</tr>
+<tr>
+<td><code>run_vegetation_geometry_assembly_checks.sh</code></td>
+<td>LOD triangle progression plus 10,000 shared leaf instances</td>
+</tr>
+<tr>
+<td><code>run_vegetation_editor_checks.sh</code></td>
+<td>structured completion and editor integration</td>
+</tr>
+<tr>
+<td><code>run_vegetation_lsystem_checks.sh</code></td>
+<td>126 nodes, 125 segments, 63 tips, bounded expansion</td>
+</tr>
+<tr>
+<td><code>run_vegetation_grammar_scene_checks.sh</code></td>
+<td>deterministic primitive, plant, vine, scatter, space-colonization, and L-system scenes</td>
+</tr>
+<tr>
+<td><code>run_profile_extrusion_checks.sh</code></td>
+<td>shared Revolve and ShellLoft geometry kernel</td>
+</tr>
+</tbody>
+</table></div>
+<p>The geometry-assembly and profile-extrusion scripts were corrected to link all
+current source dependencies. The shared SMB-OMv2 gate was likewise corrected to
+link the vegetation source manifest after <code>ShapeSpecificationEvaluator</code> gained
+vegetation families.</p>
+<h3 id="source-7-supervisor-visual-evidence">7. Supervisor visual evidence</h3><p class="section-guide">Reading guide: this source section records “7. Supervisor visual evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every visual fixture is rendered twice. A gate passes only when captures are
+byte-identical, all GUI smoke/render/FOV/capture markers are present, and the
+expected silhouette or color regions are non-collapsed.</p>
+<p>The repository release gate invokes all four visual suites through
+<code>tests/run_vegetation_visual_matrix.sh</code>.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Fixture</th>
+<th scope="col">Evidence file</th>
+<th scope="col">Capture SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TaperedSweep, LeafBlade, PetalBlade primitives</td>
+<td><code>tests/evidence/vegetation_visual_2026-08-22.json</code></td>
+<td><code>6e7dfe5817d2ff7ef5fddfe96047d1a81a03c5614280d61a4108ec9206d6ce0a</code></td>
+</tr>
+<tr>
+<td>DeciduousTree, Shrub, FloweringHerb, GrassClump</td>
+<td><code>tests/evidence/vegetation_plant_visual_2026-08-22.json</code></td>
+<td><code>cbb32f220af78407d20f516182a2730ec066ec991f4d08a0d6f0598c68865d17</code></td>
+</tr>
+<tr>
+<td>L-system tree</td>
+<td><code>tests/evidence/vegetation_lsystem_visual_2026-08-22.json</code></td>
+<td><code>c41539d635d8962abe57be53d8db9c0d7f8f99b7dc8b74521e063b958d088057</code></td>
+</tr>
+<tr>
+<td>Vine environment</td>
+<td><code>tests/evidence/vegetation_environment_visual_2026-08-22.json</code></td>
+<td><code>ff0d61d374604a9ca4d1f100b29a5184610fc22c84352754c942b81f6b6368df</code></td>
+</tr>
+<tr>
+<td>ScatterRegion environment</td>
+<td><code>tests/evidence/vegetation_environment_visual_2026-08-22.json</code></td>
+<td><code>5df19d71940fd57c4c79808de7c728dae5eb5abdb570b7934f1c3a22289152b7</code></td>
+</tr>
+<tr>
+<td>SpaceColonization environment</td>
+<td><code>tests/evidence/vegetation_environment_visual_2026-08-22.json</code></td>
+<td><code>2a71b2991bd60d4ffa9dd909881f44897fccc8def7dc41b2dbf044e4bb80e7a3</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>The environment captures were also inspected directly. They show attached/climbing
+vine paths, separated regional vegetation instances, and a non-collapsed irregular
+space-colonized crown.</p>
+<h3 id="source-8-safety-and-determinism">8. Safety and determinism</h3><p class="section-guide">Reading guide: this source section records “8. Safety and determinism”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>VegetationComplexityLimits</code> bounds nodes, segments, organs, growth iterations,
+attraction points, and generated topology. Validators reject non-finite values,
+invalid references, cycles, unsupported states, invalid tessellation, excessive
+arrays, and pathological geometry before allocation or mesh generation.</p>
+<p>Determinism is proven through repeated:</p>
+<ul>
+<li>traversal and topology hashes;</li>
+<li>expression-evaluated shape keys;</li>
+<li>vertex and triangle ordering;</li>
+<li>growth/scatter/colonization resolution evidence;</li>
+<li>grammar-to-scene topology and bounds;</li>
+<li>byte-identical visual captures.</li>
+</ul>
+<p>Geometry generators never draw random values internally. Randomness is reduced to
+explicit deterministic seeds and stable hierarchical variation before topology or
+mesh construction.</p>
+<h3 id="source-9-known-warnings-and-explicit-limitations">9. Known warnings and explicit limitations</h3><p class="section-guide">Reading guide: this source section records “9. Known warnings and explicit limitations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">The focused C++ builds report pre-existing warnings in <code>include/grammar.h</code>,
+<code>include/Solution.h</code>, and <code>src/Mesh.cpp</code> concerning signed-size comparisons and
+unused declarations. They do not fail the vegetation gates and were not changed as
+part of this subsystem.</p>
+<p>The following are not claimed as V1 features:</p>
+<ul>
+<li>implicit/SDF watertight branch-junction blending;</li>
+<li>bark displacement and peeling geometry;</li>
+<li>detailed midrib and vein geometry;</li>
+<li>wind and leaf deformation;</li>
+<li>flower and fruit developmental morphing;</li>
+<li>seasonal state transitions beyond explicit development-state selection;</li>
+<li>root-system generation;</li>
+<li>resource competition.</li>
+</ul>
+<p>These match the originating specification's V2/step-16 boundary.</p>
+<h3 id="source-10-completion-decision">10. Completion decision</h3><p class="section-guide">Reading guide: this source section records “10. Completion decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">Every non-deferred V0, V1, LOD, instancing, grammar, editor, deterministic,
+collision/environmental, and supervisor-visual requirement has direct current-state
+evidence. The implementation plan and this verification record preserve V2 work as
+explicit future scope rather than treating it as silently complete.</p>
+<p class="source-status--passed">The Progen3D vegetation grammar V1 promotion is therefore complete.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-vegetation-grammar-implementation-plan.html" rel="prev">← Previous: Progen3D Vegetation Grammar Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="vegetation-building-objects-three-view-match-report.html" rel="next">Next: Vegetation Building Objects Three-View Match Report →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

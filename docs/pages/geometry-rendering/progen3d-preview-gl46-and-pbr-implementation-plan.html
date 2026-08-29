@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness." name="description"/>
+<meta content="PROGEN3D_PREVIEW_GL46_PBR_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="cac418c34780c76d2ec0fa4e3542ad338655d6f0b1306f0598cc10d000672380" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Preview GL46 and PBR Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">ProGen3D Preview GL46 and PBR Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Preview GL46 and PBR Implementation Plan</h1>
+<p class="lead">Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 3 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_PREVIEW_GL46_PBR_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="cac418c34780c76d2ec0fa4e3542ad338655d6f0b1306f0598cc10d000672380" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Preview GL46 and PBR Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Preview GL46 and PBR Implementation Plan, Implemented Object Model, Implementation Phases, Glass Contract.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Preview GL46 and PBR Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Preview GL46 and PBR Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Implemented Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Implemented Object Model</td></tr><tr><td><dfn title="Named by the source document">Implementation Phases</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Implementation Phases</td></tr><tr><td><dfn title="Named by the source document">Glass Contract</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Glass Contract</td></tr><tr><td><dfn title="Named by the source document">GL46 Lighting Completion</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>GL46 Lighting Completion</td></tr><tr><td><dfn title="Named by the source document">Verification Evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Verification Evidence</td></tr><tr><td><dfn title="Named by the source document">Acceptance Gate Result</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Acceptance Gate Result</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">GLSL</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="capable runtime">GL46</dfn></td><td>capable runtime</td></tr><tr><td><dfn title="physically based rendering">PBR</dfn></td><td>physically based rendering</td></tr><tr><td><dfn title="preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co">GPU</dfn></td><td>preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Preview GL46 and PBR Implementation Plan, Implemented Object Model, Implementation Phases, Glass Contract. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Objective, Implemented Object Model, Implementation Phases, Glass Contract, GL46 Lighting Completion. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 4.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves prose and list evidence and the source SHA-256 <code>cac418c34780c76d2ec0fa4e3542ad338655d6f0b1306f0598cc10d000672380</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-objective">Objective</a></li><li><a href="#source-implemented-object-model">Implemented Object Model</a></li><li><a href="#source-implementation-phases">Implementation Phases</a></li><li><a href="#source-glass-contract">Glass Contract</a></li><li><a href="#source-gl46-lighting-completion">GL46 Lighting Completion</a></li><li><a href="#source-verification-evidence">Verification Evidence</a></li><li><a href="#source-acceptance-gate-result">Acceptance Gate Result</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>4</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>0</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>0</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_PREVIEW_GL46_PBR_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Preview GL46 and PBR Implementation Plan, Implemented Object Model, Implementation Phases, Glass Contract.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Add W/A/S/D/Q/E movement and Z/C left/right rotation around the camera position.</li><li>Add a preview checkbox that suppresses hit testing and all selection outlines.</li><li>Require an OpenGL 4.6 Core context and migrate every shader to GLSL 460 Core.</li><li>Replace the fixed 128-pixel procedural material size with selectable 256, 512,</li><li>Bind base-color, normal, roughness, metallic, ambient-occlusion, alpha, height,</li><li>Use energy-conserving GGX lighting, clearcoat, sheen, anisotropy, subsurface</li><li>Render transparent surfaces back-to-front with premultiplied-alpha blending and</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source prose example:</strong> Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</p>
+</div>
+<details class="solution"><summary>Worked interpretation</summary><p>Separate the nouns that name project entities from verbs that state behavior. Then classify each behavior as documented, proposed, evidenced, or unresolved using the source status signals. The source contains no fenced code block, so no executable example is invented.</p></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Preview GL46 and PBR Implementation Plan" data="../../assets/diagrams/pages/progen3d-preview-gl46-and-pbr-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_PREVIEW_GL46_PBR_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>cac418c34780c76d2ec0fa4e3542ad338655d6f0b1306f0598cc10d000672380</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>8 headings, 0 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Preview GL46 and PBR Implementation Plan, Implemented Object Model, Implementation Phases, Glass Contract, GL46 Lighting Completion</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li><li><a href="progen3d-render-pipeline-upgrade-implementation-plan.html">ProGen3D Render Pipeline Upgrade Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</small></li><li><a href="progen3d-full-geometry-kernel-fgkv1-completion-roadmap.html">ProGen3D Full Geometry Kernel FGKv1 Completion Roadmap</a> <span class="status-badge status--planned">Planned</span><br/><small>FGKv1 should become the single geometry realization boundary:</small></li><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li><li><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</small></li><li><a href="axialprofilev1-verification.html">AxialProfilev1 Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>The source tree now contains the AxialProfile object model, validator, deterministic mesh generator, procedural repository dispatch, nested grammar AST/parser/evaluator, scene integration, editor catalog/autocomplete/inspection/overlay support, fixtures, benchmarks, COLLADA tooling, and release…</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_PREVIEW_GL46_PBR_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_PREVIEW_GL46_PBR_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>cac418c34780c76d2ec0fa4e3542ad338655d6f0b1306f0598cc10d000672380</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-preview-gl46-and-pbr-implementation-plan">ProGen3D Preview GL46 and PBR Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Preview GL46 and PBR Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Date: 2026-08-22</p>
+<h3 id="source-objective">Objective</h3><p class="section-guide">Reading guide: this source section records “Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation,
+optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically
+based materials, and corrected glass transparency and reflectiveness.</p>
+<h3 id="source-implemented-object-model">Implemented Object Model</h3><p class="section-guide">Reading guide: this source section records “Implemented Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>PreviewNavigationInput</code> represents held preview-navigation actions.</li>
+<li><code>PreviewInteractionSettings</code> owns picking visibility and navigation velocities.</li>
+<li><code>PreviewCameraMotionController</code> advances a <code>PreviewCameraController</code> from input
+and elapsed time without frame-rate-dependent movement or rotation.</li>
+<li><code>OpenGl46CapabilityValidator</code> rejects contexts below OpenGL 4.6 with an explicit
+runtime diagnostic.</li>
+<li><code>PreviewSurfaceMaterial</code> owns the PBR factors and composed texture maps used by
+the renderer.</li>
+</ul>
+<h3 id="source-implementation-phases">Implementation Phases</h3><p class="section-guide">Reading guide: this source section records “Implementation Phases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add W/A/S/D/Q/E movement and Z/C left/right rotation around the camera position.</li>
+<li>Add a preview checkbox that suppresses hit testing and all selection outlines.</li>
+<li>Require an OpenGL 4.6 Core context and migrate every shader to GLSL 460 Core.</li>
+<li>Replace the fixed 128-pixel procedural material size with selectable 256, 512,
+1024, and 2048 resolutions.</li>
+<li>Bind base-color, normal, roughness, metallic, ambient-occlusion, alpha, height,
+emissive, and environment maps to the material shader.</li>
+<li>Use energy-conserving GGX lighting, clearcoat, sheen, anisotropy, subsurface
+wrapping, environment reflection, and Fresnel transmission.</li>
+<li>Render transparent surfaces back-to-front with premultiplied-alpha blending and
+depth writes disabled.</li>
+</ol>
+<h3 id="source-glass-contract">Glass Contract</h3><p class="section-guide">Reading guide: this source section records “Glass Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Glass materials expose opacity, transmission, index of refraction, thickness,
+attenuation color, roughness, reflectance, normal strength, and clearcoat. Clear,
+smoky, frosted, crystal, polished, and mirror descriptors alter those properties.
+Reflection uses the active cubemap when available and a deterministic procedural
+environment otherwise.</p>
+<h3 id="source-gl46-lighting-completion">GL46 Lighting Completion</h3><p class="section-guide">Reading guide: this source section records “GL46 Lighting Completion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The preview lighting path now uses a purpose-driven scene and electrical object
+model rather than hard-coded shader lights:</p>
+<ul>
+<li><code>SceneLight</code> represents directional, point, spot, and rectangular-area light
+definitions with photometry, provenance, reference frame, and shadow policy.</li>
+<li><code>PreviewLightCollection</code> owns the editable light set and deterministic studio
+defaults.</li>
+<li><code>PreviewLightBuffer</code> uploads 80-byte <code>GpuLightRecord</code> values through an OpenGL
+4.6 shader-storage buffer bound at binding point 2.</li>
+<li>the GLSL 460 lighting shader reads as many as 32 visible lights and applies
+directional, point, spot, and bounded rectangular-area fallback evaluation.</li>
+<li><code>LightFixture</code>, <code>LightSwitch</code>, <code>LightingCircuit</code>, and the electrical evaluator
+preserve fixture-control relationships independently of rendering.</li>
+<li>the Lights and Electrical Controls panels expose editing, presets, gizmos,
+picking, circuit state, validation, and sidecar persistence.</li>
+<li>grammar declarations lower <code>Light</code>, <code>LightFixture</code>, <code>LightSwitch</code>,
+<code>LightingCircuit</code>, <code>Controls</code>, and <code>LightingArray</code> into the scene model.</li>
+</ul>
+<p>Shadow allocation is deterministic and bounded at one directional, four spot,
+and two point-light requests. The current renderer produces one primary shadow
+depth map; additional accepted spot slots are reserved architecture rather than
+independent rendered shadow maps. Forward+ is recommended by evidence when more
+than 24 GPU lights are visible, but remains intentionally deferred until a
+measured workload justifies the additional render path. Multi-map shadow arrays
+and LTC rectangular-area evaluation also remain later work.</p>
+<p>The modern-residence grammar now realizes 27 lights, 27 fixtures, 6 switches,
+and 9 circuits. Three spot lights request shadows, all three requests receive a
+bounded allocation, and 27 GPU records occupy 2160 SSBO bytes. Its deterministic
+lighting-state hash is <code>7986025927890646612</code>.</p>
+<h3 id="source-verification-evidence">Verification Evidence</h3><p class="section-guide">Reading guide: this source section records “Verification Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>tests/run_preview_session_checks.sh</code> compiles and runs deterministic camera,
+projection, timeline, and selection model checks.</li>
+<li>The camera tests compare one second of movement at 30, 60, and 144 frames per
+second and validate constant position-preserving rotation velocity.</li>
+<li>Static renderer gates require GLSL 460, environment-map sampling, physical
+transmission uniforms, premultiplied-alpha blending, and selectable material
+resolution.</li>
+<li class="source-status--passed"><code>make -j2</code> proves the complete editor compiles and links with the new model and
+renderer surfaces.</li>
+<li>GUI smoke and visual capture runs prove OpenGL 4.6 context creation, shader
+compilation, scene generation, and framebuffer capture on a GL46-capable runtime.</li>
+<li><code>tests/run_lighting_model_checks.sh</code>,
+<code>tests/run_lighting_scene_persistence_checks.sh</code>, and
+<code>tests/run_lighting_grammar_scene_checks.sh</code> prove the scene model, electrical
+graph, sidecar round trip, grammar lowering, and scope-relative placement.</li>
+<li class="source-status--passed"><code>tests/evidence/modern_luxury_residence_lighting_evidence_2026-08-22.json</code>
+records the complete residence lighting and shadow-allocation state.</li>
+</ul>
+<h3 id="source-acceptance-gate-result">Acceptance Gate Result</h3><p class="section-guide">Reading guide: this source section records “Acceptance Gate Result”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Passed on August 22, 2026 using a Mesa 26.1.4 OpenGL 4.6 Core context with GLSL
+4.60. The modern-residence visual test completed scene generation, FOV checks,
+frame rendering, and framebuffer capture without shader or program diagnostics.
+The final editor binary SHA-256 is
+<code>b83020f8c844248eea6ccab28bc8365170c11742356cebc5415f1d12a43df288</code>.
+The deterministic front and rear residence overlays have SHA-256 values
+<code>038f7426e3db3b891d54382cfdec43c2d761eaa60a868e250344f985cb54db1c</code>
+and <code>69b3c66e199fff6d54a774c1947c9b712ddbb227f6a88bf852c1be967723c6fb</code>.
+The lighting, placement, and visual evidence JSON SHA-256 values are respectively
+<code>76c56b91b3a5cf6ec3336536110fff3ba28588dd918b8c5eaa97df9bcb5e92f3</code>,
+<code>59e429a8ef77b68a45c85dca2d5147b6473e6652562b77aaee1a03cd8233187d</code>,
+and <code>cdbe6592ce3429c2f7378f8d168ef934ddd47059d0b664448b3d17fe285be851</code>.
+A machine exposing OpenGL 4.5 or earlier fails explicitly rather than silently
+downgrading the renderer.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-preview-fov-slider-implementation-plan.html" rel="prev">← Previous: ProGen3D Preview FOV Slider Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-procedural-primitive-examples-implementation-plan.html" rel="next">Next: ProGen3D Procedural Primitive Examples Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

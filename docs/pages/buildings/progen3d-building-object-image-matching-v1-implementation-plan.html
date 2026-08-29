@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model." name="description"/>
+<meta content="PROGEN3D_BUILDING_OBJECT_IMAGE_MATCHING_V1_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="49e4de84f392b2f00fbde131c60c487780901d845ec449941ba855aa20c1a8ea" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Building Object Image Matching V1 Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-buildings">Buildings and Object Models</a></li>
+<li aria-current="page">ProGen3D Building Object Image Matching V1 Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Building Object Image Matching V1 Implementation Plan</h1>
+<p class="lead">Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Buildings and Object Models</span>
+<span class="tag">About 17 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_BUILDING_OBJECT_IMAGE_MATCHING_V1_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="49e4de84f392b2f00fbde131c60c487780901d845ec449941ba855aa20c1a8ea" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Building Object Image Matching V1 Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Building Object Image Matching V1 Implementation Plan, Current Evidence Baseline, Independent Test Design, Hard-Gate Tests.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="smb-imagegen-three-view-matched-examples.html">SMB ImageGen Three-View Matched Examples</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Building Object Image Matching V1 Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Building Object Image Matching V1 Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Evidence Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Evidence Baseline</td></tr><tr><td><dfn title="Named by the source document">Independent Test Design</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Independent Test Design</td></tr><tr><td><dfn title="Named by the source document">Hard-Gate Tests</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 Hard-Gate Tests</td></tr><tr><td><dfn title="Named by the source document">Independent Numeric Tests</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.2 Independent Numeric Tests</td></tr><tr><td><dfn title="Named by the source document">Independence Rules</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.3 Independence Rules</td></tr><tr><td><dfn title="Named by the source document">Acceptance Formula</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Acceptance Formula</td></tr><tr><td><dfn title="Named by the source document">Object-Local Camera Contract</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>5. Object-Local Camera Contract</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Building Object Image Matching V1 Implementation Plan, Current Evidence Baseline, Independent Test Design, Hard-Gate Tests. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Objective, 2. Current Evidence Baseline, 3. Independent Test Design, 3.1 Hard-Gate Tests. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 10, failed: 10, proposed: 13.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 3 code blocks, 10 tables and the source SHA-256 <code>49e4de84f392b2f00fbde131c60c487780901d845ec449941ba855aa20c1a8ea</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-objective">1. Objective</a></li><li><a href="#source-2-current-evidence-baseline">2. Current Evidence Baseline</a></li><li><a href="#source-3-independent-test-design">3. Independent Test Design</a></li><li><a href="#source-3-1-hard-gate-tests">3.1 Hard-Gate Tests</a></li><li><a href="#source-3-2-independent-numeric-tests">3.2 Independent Numeric Tests</a></li><li><a href="#source-3-3-independence-rules">3.3 Independence Rules</a></li><li><a href="#source-4-acceptance-formula">4. Acceptance Formula</a></li><li><a href="#source-5-object-local-camera-contract">5. Object-Local Camera Contract</a></li><li><a href="#source-6-native-object-model">6. Native Object Model</a></li><li><a href="#source-6-1-model-responsibilities">6.1 Model Responsibilities</a></li><li><a href="#source-7-visual-building-object-catalog">7. Visual Building Object Catalog</a></li><li><a href="#source-7-1-organic-and-exterior-objects">7.1 Organic and Exterior Objects</a></li><li><a href="#source-7-2-structural-and-architectural-objects">7.2 Structural and Architectural Objects</a></li><li><a href="#source-7-3-furniture-and-interior-objects">7.3 Furniture and Interior Objects</a></li><li><a href="#source-7-4-rooms-and-interior-assemblies">7.4 Rooms and Interior Assemblies</a></li><li><a href="#source-7-5-plumbing-and-bathroom-objects">7.5 Plumbing and Bathroom Objects</a></li><li><a href="#source-7-6-fixtures-media-and-decoration">7.6 Fixtures, Media, and Decoration</a></li><li><a href="#source-7-7-pool-objects">7.7 Pool Objects</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>10</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>10</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>13</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_BUILDING_OBJECT_IMAGE_MATCHING_V1_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Building Object Image Matching V1 Implementation Plan, Current Evidence Baseline, Independent Test Design, Hard-Gate Tests.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>A missing observation fails only its own object view; it does not abort the</li><li>Hard gates never contribute a weighted score and cannot be averaged away.</li><li>Every implemented weighted test must meet its own minimum, initially 60%.</li><li>The weighted composite must also meet the camera-view minimum of 80%.</li><li>An object passes only when every required view passes.</li><li>An optional-degenerate view passes only when both reference and render are</li><li>A required unobservable view fails even if the other five views are perfect.</li><li>Duplicate object IDs, reference crops, view contracts, test specifications,</li><li>Planned tests have zero score weight until an implementation and synthetic</li><li>Whenever a planned weighted test becomes active, the category profile is</li><li>Freeze the object taxonomy record, ImageGen crop, camera contract, grammar,</li><li>Confirm object isolation and classify all six views as required,</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">independent_test_pass = every implemented test meets its own threshold
+
+view_score =
+    sum(test_score * category_test_weight)
+    / sum(category_test_weight)
+
+view_pass =
+    provenance_pass
+    and camera_calibration_pass
+    and object_isolation_pass
+    and observability_pass
+    and independent_test_pass
+    and view_score &gt;= 80
+
+object_pass = every required view_pass</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Building Object Image Matching V1 Implementation Plan" data="../../assets/diagrams/pages/progen3d-building-object-image-matching-v1-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_BUILDING_OBJECT_IMAGE_MATCHING_V1_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>49e4de84f392b2f00fbde131c60c487780901d845ec449941ba855aa20c1a8ea</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>35 headings, 3 fenced code blocks, 10 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_building_object_image_matching_model_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Building Object Image Matching V1 Implementation Plan, Current Evidence Baseline, Independent Test Design, Hard-Gate Tests, Independent Numeric Tests</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="smbv3-independent-building-object-image-match-baseline.html">SMBv3 Independent Building Object Image Match Baseline</a> <span class="status-badge status--evidence">Evidence</span><br/><small>This is a diagnostic baseline, not certification. Missing references, failed independent tests, and scores below 80% remain explicit.</small></li><li><a href="small-modern-building-three-view-comparison.html">Small Modern Building Three-View Comparison</a> <span class="status-badge status--evidence">Evidence</span><br/><small>ImageGen references are design targets. The comparison score is a deterministic shape metric and does not replace spatial, collision, or grammar validation.</small></li><li><a href="smbv3-building-object-image-matching-requirement-audit.html">SMBv3 Building Object Image Matching Requirement Audit</a> <span class="status-badge status--evidence">Evidence</span><br/><small>The exact specialist set is:</small></li><li><a href="progen3d-smb-omv2-1-all-building-objects-implementation-plan.html">ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</small></li><li><a href="smb-imagegen-three-view-matched-examples.html">SMB ImageGen Three-View Matched Examples</a> <span class="status-badge status--documented">Documented</span><br/><small>This additive example suite gives the selected examples/SimpleModernBuilding/ grammars canonical names, renders deterministic orthographic front/right/top camera views, uses ImageGen for controlled material and chroma intent, and requires every independent metric and every view composite to exceed…</small></li><li><a href="progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_BUILDING_OBJECT_IMAGE_MATCHING_V1_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_BUILDING_OBJECT_IMAGE_MATCHING_V1_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>49e4de84f392b2f00fbde131c60c487780901d845ec449941ba855aa20c1a8ea</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-building-object-image-matching-v1-implementation-plan">ProGen3D Building Object Image Matching V1 Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Building Object Image Matching V1 Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Date:</strong> August 27, 2026</li>
+<li><strong>Program name:</strong> <code>Building Object Image Matching V1</code></li>
+<li><strong>Canonical building package:</strong> <code>SMBv3 SimpleModernBuilding Version 3</code></li>
+<li><strong>Reference source:</strong> six-view ImageGen object cards</li>
+<li><strong>Render source:</strong> object-local ProGen3D camera views</li>
+<li><strong>Comparison views:</strong> front, back, left, right, top, and bottom</li>
+<li><strong>Minimum acceptance:</strong> every required view scores at least 80%</li>
+<li><strong>Construction target:</strong> every required view scores at least 84%</li>
+<li><strong>Current scope:</strong> 108 renderable SMBv3 taxonomy objects</li>
+</ul>
+<h3 id="source-1-objective">1. Objective</h3><p class="section-guide">Reading guide: this source section records “1. Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create a repeatable image-matching program in which each building object is
+rendered independently, compared with its corresponding ImageGen reference in
+six object-local camera views, and improved through grammar changes that are
+owned by an explicit visual object model.</p>
+<p class="source-status--failed">The program must improve real agreement rather than optimize one blended score.
+Camera errors, missing references, invisible views, wrong silhouettes, missing
+parts, material differences, and connection mistakes remain separate facts.
+No strong metric may conceal a failed independent test.</p>
+<h3 id="source-2-current-evidence-baseline">2. Current Evidence Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Evidence Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current deterministic freeform six-view baseline records:</p>
+<ul>
+<li>18 expected ImageGen atlases;</li>
+<li>18 available atlases;</li>
+<li>108 renderable taxonomy objects;</li>
+<li>108 objects with available ImageGen references;</li>
+<li>648 front/back/left/right/top/bottom comparison slots;</li>
+<li>600 measurable comparisons;</li>
+<li>48 isolated observability failures;</li>
+<li>0 objects passing every required view at 80%.</li>
+</ul>
+<p>The highest current model-family means are <code>couch</code> at 66.84%, <code>canopy</code> at
+63.62%, <code>site_assembly</code> at 63.04%, <code>toilet</code> at 61.37%, <code>interior_wall</code> at
+59.91%, and <code>downpipe</code> at 59.70%. The weakest families include <code>stair</code> at
+27.79%, <code>chair</code> at 33.61%, <code>privacy_screen</code> at 34.87%, and <code>television</code> at
+37.24%.</p>
+<p class="source-status--passed">This baseline is diagnostic evidence, not a certification result. Reference
+coverage is complete; the next six-view priority is to correct view
+observability and improve grammar geometry without averaging away failures.</p>
+<p>An additive constrained front/right/top program now records 108 of 108 objects
+passing 324 comparisons with a 96.63% minimum. It preserves deterministic
+ProGen3D silhouettes and transfers ImageGen chroma inside them, so it is useful
+construction evidence but not a substitute for the freeform six-view gate.</p>
+<h3 id="source-3-independent-test-design">3. Independent Test Design</h3><p class="section-guide">Reading guide: this source section records “3. Independent Test Design”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each test produces one <code>BuildingImageMatchingObservation</code> for one object, one
+camera view, and one test kind. An observation records its state, optional
+numeric score, and evidence. Tests do not write another test's result.</p>
+<h4 id="source-3-1-hard-gate-tests">3.1 Hard-Gate Tests</h4><p class="section-guide">Reading guide: this source section records “3.1 Hard-Gate Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Test</th>
+<th scope="col">Purpose</th>
+<th scope="col">Failure Meaning</th>
+<th scope="col">State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source provenance</td>
+<td>Verify exact taxonomy, catalog, reference, grammar, and camera hashes.</td>
+<td>The comparison cannot be reproduced.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Camera calibration</td>
+<td>Verify orthographic projection, local axes, framing, background, and scale policy.</td>
+<td>Geometry and reference are not being viewed under the same contract.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Object isolation</td>
+<td>Verify one taxonomy object, one reference crop, and one object-local render set.</td>
+<td>The test contains another object, duplicate reference, or ambiguous ownership.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>View observability</td>
+<td class="source-status--failed">Classify a view as measurable, accepted-degenerate, or failed.</td>
+<td>A transparent or edge-on object was silently discarded or an expected view is absent.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Landmark topology</td>
+<td>Verify named part counts, adjacency, hierarchy, and relative placement.</td>
+<td>The render may have a similar mass but depicts the wrong object structure.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Cross-view consistency</td>
+<td>Reconstruct dimensions and part counts across all six views.</td>
+<td>The ImageGen card or grammar renders incompatible objects between views.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Connection-point alignment</td>
+<td>Compare supports, mounts, openings, services, and host contacts.</td>
+<td>The isolated shape cannot connect correctly in the building.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Extent agreement</td>
+<td>Compare visual, collision, access, motion, growth, and aggregate extents.</td>
+<td>The visible object does not agree with its spatial contract.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Human semantic review</td>
+<td>Confirm identity, material intent, and acceptable visual equivalence.</td>
+<td>Deterministic similarity is high but the object is semantically wrong.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-3-2-independent-numeric-tests">3.2 Independent Numeric Tests</h4><p class="section-guide">Reading guide: this source section records “3.2 Independent Numeric Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Test</th>
+<th scope="col">Measurement</th>
+<th scope="col">Primary Grammar Signal</th>
+<th scope="col">State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Silhouette overlap</td>
+<td>Intersection-over-union after object-local normalization.</td>
+<td>Primary volumes, profile, protrusions, cut-outs.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Edge alignment</td>
+<td>Tolerant F1 score over extracted foreground boundaries.</td>
+<td>Part boundaries, frame lines, tread edges, seams.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Projection distribution</td>
+<td>Row and column occupancy distributions.</td>
+<td>Where mass is located within the object extent.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Aspect ratio</td>
+<td>Width-to-height agreement per view.</td>
+<td>Authoritative dimensions and local orientation.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Foreground occupancy</td>
+<td>Normalized filled-area agreement.</td>
+<td>Thickness, voids, openings, foliage density.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Component count</td>
+<td>Connected visible component agreement.</td>
+<td>Part counts, gaps, disconnected supports, repeated elements.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Symmetry</td>
+<td>Horizontal and vertical reflection agreement.</td>
+<td>Balanced layouts and intentional asymmetry.</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Repetition spacing</td>
+<td>Count, pitch, run length, and terminal spacing.</td>
+<td>Slats, pickets, treads, chairs, mullions, rods.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Transparency boundary</td>
+<td>Boundary agreement separate from transparent interior.</td>
+<td>Glazing, shower glass, pool water, translucent curtains.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Material region</td>
+<td>Semantic region segmentation independent of lighting.</td>
+<td>Wood, metal, glass, stone, fabric, water, foliage.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Color palette</td>
+<td>Illumination-normalized region color comparison.</td>
+<td>Material color parameters rather than geometry.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+<tr>
+<td>Texture frequency</td>
+<td>Direction, module, scale, and spatial-frequency comparison.</td>
+<td>Paving joints, timber grain, fabric pleats, foliage scale.</td>
+<td class="source-status--proposed">Planned</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-3-3-independence-rules">3.3 Independence Rules</h4><p class="section-guide">Reading guide: this source section records “3.3 Independence Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>A missing observation fails only its own object view; it does not abort the
+remaining 647 comparison slots.</li>
+<li>Hard gates never contribute a weighted score and cannot be averaged away.</li>
+<li>Every implemented weighted test must meet its own minimum, initially 60%.</li>
+<li>The weighted composite must also meet the camera-view minimum of 80%.</li>
+<li>An object passes only when every required view passes.</li>
+<li>An optional-degenerate view passes only when both reference and render are
+unobservable under the same declared view contract.</li>
+<li>A required unobservable view fails even if the other five views are perfect.</li>
+<li class="source-status--failed">Duplicate object IDs, reference crops, view contracts, test specifications,
+or observations fail closed.</li>
+<li class="source-status--proposed">Planned tests have zero score weight until an implementation and synthetic
+validation fixture exist.</li>
+<li class="source-status--proposed">Whenever a planned weighted test becomes active, the category profile is
+rebalanced to sum to exactly one.</li>
+</ol>
+<h3 id="source-4-acceptance-formula">4. Acceptance Formula</h3><p class="section-guide">Reading guide: this source section records “4. Acceptance Formula”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For each measurable required view:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">independent_test_pass = every implemented test meets its own threshold
+
+view_score =
+    sum(test_score * category_test_weight)
+    / sum(category_test_weight)
+
+view_pass =
+    provenance_pass
+    and camera_calibration_pass
+    and object_isolation_pass
+    and observability_pass
+    and independent_test_pass
+    and view_score &gt;= 80
+
+object_pass = every required view_pass
+</code></pre>
+<p>The construction target is 84%, not 80%, so minor renderer, anti-aliasing, or
+segmentation differences do not immediately regress a previously accepted
+object below the release gate.</p>
+<p class="source-status--passed">Certification additionally requires the complete 18-atlas reference set, all
+108 renderable objects, deterministic rerun equality, active topology and
+cross-view gates, and recorded human review.</p>
+<h3 id="source-5-object-local-camera-contract">5. Object-Local Camera Contract</h3><p class="section-guide">Reading guide: this source section records “5. Object-Local Camera Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every comparison uses the object's canonical local frame:</p>
+<ul>
+<li>front and back follow the local forward axis;</li>
+<li>left and right follow the local right axis;</li>
+<li>top and bottom follow the local up axis;</li>
+<li>the camera frames the declared visual extent with a fixed margin;</li>
+<li>orthographic scale derives from the same extent used by collision and
+spatial inspection;</li>
+<li>the object pivot is its declared visual center, not the building origin;</li>
+<li>hierarchy objects frame the deterministic descendant extent;</li>
+<li>spatial areas frame their occupancy boundary;</li>
+<li>planar and linear objects may declare specific optional-degenerate views;</li>
+<li class="source-status--passed">transparent objects retain a visible boundary pass independent of opacity;</li>
+<li>rotational symmetry declares equivalent views without deleting evidence.</li>
+</ul>
+<p class="source-status--passed">Perspective, arbitrary auto-framing, environment-dependent exposure, and
+building-global camera axes are prohibited in the deterministic comparison
+pass. They may be used in a separate presentation render, but not in the
+acceptance score.</p>
+<h3 id="source-6-native-object-model">6. Native Object Model</h3><p class="section-guide">Reading guide: this source section records “6. Native Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The C++ design is compositional and UML-readable:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingVisualObjectModelCatalog
+    aggregates 1..* BuildingVisualObjectModel
+
+BuildingVisualObjectModel
+    composes 1..* BuildingVisualFeatureRequirement
+    composes 6 BuildingCameraViewMatchContract
+    composes 1..* BuildingImageMatchingTestSpecification
+    composes 1..* BuildingGrammarImageConstructionDirective
+
+BuildingImageMatchingObservation
+    associates 1 BuildingCameraViewName
+    associates 1 BuildingImageMatchingTestKind
+
+BuildingObjectImageMatchEvaluationService
+    consumes 1 BuildingVisualObjectModel
+    consumes 0..* BuildingImageMatchingObservation
+    creates 1 BuildingObjectImageMatchReport
+
+BuildingObjectImageMatchReport
+    composes 6 BuildingCameraViewMatchResult
+
+BuildingVisualObjectModelValidationService
+    validates 1 BuildingVisualObjectModel
+    creates 1 BuildingVisualObjectModelValidationReport
+</code></pre>
+<p>No inheritance is used merely to share data. The visual families classify
+behavior and metric profiles, while each concrete object model owns its named
+features and construction directives.</p>
+<h4 id="source-6-1-model-responsibilities">6.1 Model Responsibilities</h4><p class="section-guide">Reading guide: this source section records “6.1 Model Responsibilities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>BuildingVisualObjectModel</code> owns the visual contract for one object category.</li>
+<li><code>BuildingVisualFeatureRequirement</code> owns named landmark counts and required
+views.</li>
+<li><code>BuildingCameraViewMatchContract</code> owns observability and minimum similarity
+for one canonical view.</li>
+<li><code>BuildingImageMatchingTestSpecification</code> owns criticality, implementation
+state, score weight, and threshold.</li>
+<li><code>BuildingGrammarImageConstructionDirective</code> owns one ordered grammar change.</li>
+<li><code>BuildingImageMatchingObservation</code> owns one independent measured fact.</li>
+<li class="source-status--failed"><code>BuildingCameraViewMatchResult</code> owns one view's composite and failed tests.</li>
+<li><code>BuildingObjectImageMatchReport</code> owns the all-required-views decision.</li>
+<li><code>BuildingVisualObjectModelCatalog</code> owns model lookup, not taxonomy identity.</li>
+<li><code>BuildingObjectImageMatchEvaluationService</code> applies acceptance policy but does
+not generate images or mutate grammar.</li>
+<li><code>BuildingVisualObjectModelValidationService</code> rejects malformed contracts.</li>
+</ul>
+<h3 id="source-7-visual-building-object-catalog">7. Visual Building Object Catalog</h3><p class="section-guide">Reading guide: this source section records “7. Visual Building Object Catalog”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The generated catalog contains 49 visual object models: 38 specialist models
+covering the requested object families and 11 generic models covering the
+remaining renderable SMBv3 taxonomy classes. The generated coverage map assigns
+all 108 renderable taxonomy objects exactly once.</p>
+<h4 id="source-7-1-organic-and-exterior-objects">7.1 Organic and Exterior Objects</h4><p class="section-guide">Reading guide: this source section records “7.1 Organic and Exterior Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vegetation</td>
+<td>Build trunk and primary branches first; replace spherical crowns with overlapping asymmetric foliage clusters; separate bark, leaf, soil, and planter regions; constrain growth extent.</td>
+<td>Silhouette, occupancy, component count, texture frequency, extent agreement</td>
+</tr>
+<tr>
+<td>Paving</td>
+<td>Use a bounded profile; expose module size and direction; generate joints and edge restraints; encode drainage fall and hosted drains.</td>
+<td>Projection, repetition, texture frequency, edge alignment</td>
+</tr>
+<tr>
+<td>Privacy screen</td>
+<td>Model posts, rails, slats or panels, mounts, exact count, pitch, and viewing orientation.</td>
+<td>Repetition, silhouette, edge alignment, component count</td>
+</tr>
+<tr>
+<td>Fencing</td>
+<td>Build from an authored path; parameterize posts, infill, terminals, gates, ground contacts, and exact spacing.</td>
+<td>Repetition, connection alignment, projection, silhouette</td>
+</tr>
+<tr>
+<td>Guttering</td>
+<td>Sweep an authored channel profile; add fall, brackets, outlets, corners, and end caps.</td>
+<td>Silhouette, edge alignment, connection alignment, extent agreement</td>
+</tr>
+<tr>
+<td>Drain downpipes</td>
+<td>Sweep a segmented pipe path; add bends, offsets, brackets, gutter inlet, and drain outlet.</td>
+<td>Silhouette, component count, connection alignment, aspect ratio</td>
+</tr>
+<tr>
+<td>Ground drains</td>
+<td>Cut a hosted paving recess; model drain body, grate bars or slots, and outlet invert.</td>
+<td>Repetition, edge alignment, connection alignment, topology</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-2-structural-and-architectural-objects">7.2 Structural and Architectural Objects</h4><p class="section-guide">Reading guide: this source section records “7.2 Structural and Architectural Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exterior walls</td>
+<td>Use solids with explicit thickness and returns; subtract hosted door/window openings before frames; separate substrate, cladding, reveal, and trim.</td>
+<td>Silhouette, aspect ratio, topology, material region</td>
+</tr>
+<tr>
+<td>Structural floors</td>
+<td>Use bounded profiles with thickness; subtract stair/service openings; model slab edge, finish layer, direction, and perimeter trim.</td>
+<td>Aspect ratio, occupancy, topology, texture frequency</td>
+</tr>
+<tr>
+<td>Inner walls</td>
+<td>Use a partition profile with explicit thickness; subtract openings; create wall-end and junction connection points.</td>
+<td>Silhouette, edge alignment, connection alignment, extent agreement</td>
+</tr>
+<tr>
+<td>Windows and glazing</td>
+<td>Separate outer frame, sash, mullions, sill, reveal, and panes; bind to a hosted opening; retain deterministic transparent boundaries.</td>
+<td>Transparency boundary, repetition, topology, edge alignment</td>
+</tr>
+<tr>
+<td>Balconies</td>
+<td>Model platform, fascia, soffit, guard, posts, panels, supports, door threshold, and drainage fall as connected parts.</td>
+<td>Topology, repetition, connection alignment, silhouette</td>
+</tr>
+<tr>
+<td>Doors</td>
+<td>Separate leaf, frame, handle, threshold, hinge axis, swing state, opening, and reveal depth.</td>
+<td>Topology, edge alignment, aspect ratio, connection alignment</td>
+</tr>
+<tr>
+<td>Stairs</td>
+<td>Derive exact tread and riser count from rise/run; model stringers, landings, nosing, guards, and local stair axis.</td>
+<td>Repetition, topology, projection, component count</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-3-furniture-and-interior-objects">7.3 Furniture and Interior Objects</h4><p class="section-guide">Reading guide: this source section records “7.3 Furniture and Interior Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chairs</td>
+<td>Parameterize seat, back, supports, arms, caster or pedestal topology; use rounded upholstered profiles; generate explicit set count and spacing.</td>
+<td>Topology, component count, symmetry, repetition</td>
+</tr>
+<tr>
+<td>Couches</td>
+<td>Generate counted seat, back, and accent cushions; separate arms and base; use rounded profiles and compression rather than boxes.</td>
+<td>Silhouette, topology, component count, symmetry</td>
+</tr>
+<tr>
+<td>Tables</td>
+<td>Separate top and support topology; match leg or pedestal count, edge profile, overhang, and authoritative dimensions.</td>
+<td>Component count, topology, aspect ratio, symmetry</td>
+</tr>
+<tr>
+<td>Beds</td>
+<td>Layer frame, mattress, bedding, pillows, and headboard; use rounded soft profiles and explicit paired symmetry.</td>
+<td>Silhouette, topology, symmetry, occupancy</td>
+</tr>
+<tr>
+<td>Cushions</td>
+<td>Use rounded volumes, seams, controlled compression, host contact, and deterministic rotation.</td>
+<td>Silhouette, edge alignment, material region, connection alignment</td>
+</tr>
+<tr>
+<td>Vases</td>
+<td>Revolve an authored hollow profile with body, neck, rim, base, wall thickness, and optional contents.</td>
+<td>Silhouette, aspect ratio, symmetry, material region</td>
+</tr>
+<tr>
+<td>Cabinets</td>
+<td>Build carcass modules, doors, drawers, gaps, handles, top, plinth or legs; expose exact bay count.</td>
+<td>Topology, repetition, edge alignment, component count</td>
+</tr>
+<tr>
+<td>Wardrobes</td>
+<td>Build explicit carcass bays, door leaves, panel gaps, handles, plinth, and deterministic open/closed state.</td>
+<td>Repetition, topology, symmetry, edge alignment</td>
+</tr>
+<tr>
+<td>Study desks</td>
+<td>Separate worktop, supports, drawers, cabinets, cable opening, knee clearance, and service points.</td>
+<td>Topology, aspect ratio, connection alignment, extent agreement</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-4-rooms-and-interior-assemblies">7.4 Rooms and Interior Assemblies</h4><p class="section-guide">Reading guide: this source section records “7.4 Rooms and Interior Assemblies”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kitchens</td>
+<td>Compose named cabinet runs, benchtops, island, sink, taps, appliances, splashback, and service bays on one dimensional grid.</td>
+<td>Topology, cross-view consistency, repetition, connection alignment</td>
+</tr>
+<tr>
+<td>Study</td>
+<td>Compose desk, chair, storage, window, light, clearances, and object-owned sub-cameras; do not flatten the room into one mesh.</td>
+<td>Topology, extent agreement, cross-view consistency, connection alignment</td>
+</tr>
+<tr>
+<td>Generic rooms</td>
+<td>Derive the room camera from occupancy extent; preserve doors, windows, major furniture, and circulation voids as named descendants.</td>
+<td>Occupancy, topology, extent agreement, cross-view consistency</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-5-plumbing-and-bathroom-objects">7.5 Plumbing and Bathroom Objects</h4><p class="section-guide">Reading guide: this source section records “7.5 Plumbing and Bathroom Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Toilets</td>
+<td>Use rounded bowl and cistern profiles; model seat, base, waste, inlet, wall offset, and floor contact separately.</td>
+<td>Silhouette, aspect ratio, topology, connection alignment</td>
+</tr>
+<tr>
+<td>Bathroom vanities</td>
+<td>Layer cabinet, top, basin, tap, mirror, cut-out, waste, and hot/cold service points.</td>
+<td>Topology, edge alignment, connection alignment, material region</td>
+</tr>
+<tr>
+<td>Bathroom showers</td>
+<td>Model tray or floor fall, glass screens, door, head, controls, drain, seals, and enclosure opening state.</td>
+<td>Transparency boundary, topology, connection alignment, extent agreement</td>
+</tr>
+<tr>
+<td>Sinks</td>
+<td>Use a rounded basin with depth and wall thickness; bind rim or under-mount flange to the worktop cut-out; expose waste and overflow.</td>
+<td>Silhouette, topology, connection alignment, component count</td>
+</tr>
+<tr>
+<td>Taps</td>
+<td>Sweep the spout path; separate body, controls, outlet, mount, aerator, and hot/cold connections.</td>
+<td>Silhouette, topology, connection alignment, symmetry</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-6-fixtures-media-and-decoration">7.6 Fixtures, Media, and Decoration</h4><p class="section-guide">Reading guide: this source section records “7.6 Fixtures, Media, and Decoration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lights</td>
+<td>Separate emitter, housing, mount, stem or cable, shade, and repeated fixture count; compare emission independently from shape.</td>
+<td>Component count, topology, material region, repetition</td>
+</tr>
+<tr>
+<td>Television</td>
+<td>Model screen, bezel, housing, mount, cable zone, and exact screen ratio; avoid a single unframed rectangle.</td>
+<td>Aspect ratio, edge alignment, topology, material region</td>
+</tr>
+<tr>
+<td>Artwork</td>
+<td>Separate panel, frame, content region, thickness, and wall mount; keep texture comparison out of silhouette scoring.</td>
+<td>Aspect ratio, material region, color palette, texture frequency</td>
+</tr>
+<tr>
+<td>Fireplace</td>
+<td>Model firebox opening, surround, hearth, flue or vent, layered depth, and flame/emissive region.</td>
+<td>Topology, occupancy, edge alignment, material region</td>
+</tr>
+<tr>
+<td>Curtains</td>
+<td>Generate a wave or pleat profile, hem, heading, opening state, overlap, and fabric material rather than a flat sheet.</td>
+<td>Projection, texture frequency, silhouette, material region</td>
+</tr>
+<tr>
+<td>Curtain rods or tracks</td>
+<td>Sweep the rod or track; add brackets, finials or stops, rings or gliders, and curtain connection points.</td>
+<td>Repetition, component count, connection alignment, edge alignment</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-7-pool-objects">7.7 Pool Objects</h4><p class="section-guide">Reading guide: this source section records “7.7 Pool Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Object Model</th>
+<th scope="col">Grammar Changes</th>
+<th scope="col">Leading Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pool shell</td>
+<td>Build one authored boundary with depth profile, coping, steps, benches, skimmers, inlets, and drains.</td>
+<td>Silhouette, topology, connection alignment, extent agreement</td>
+</tr>
+<tr>
+<td>Pool water</td>
+<td>Derive water boundary from the pool shell; model waterline and transparent volume separately; prohibit an unrelated duplicate pool outline.</td>
+<td>Transparency boundary, extent agreement, cross-view consistency, material region</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-7-8-remaining-generic-taxonomy-models">7.8 Remaining Generic Taxonomy Models</h4><p class="section-guide">Reading guide: this source section records “7.8 Remaining Generic Taxonomy Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>building_assembly</code>, <code>site_assembly</code>, <code>structural_assembly</code>, <code>room_assembly</code>,
+<code>service_equipment</code>, <code>system_aggregate</code>, <code>appliance</code>, <code>safety_equipment</code>,
+<code>canopy</code>, <code>ground_surface</code>, and <code>solar_equipment</code> preserve exact coverage for
+taxonomy objects that do not yet have a specialist model. Each generic model
+requires decomposition into named visible masses before material refinement.
+Repeated use or a persistent score below 80% is a trigger to replace a generic
+model with a purpose-specific visual object model.</p>
+<h3 id="source-8-grammar-image-construction-loop">8. Grammar Image Construction Loop</h3><p class="section-guide">Reading guide: this source section records “8. Grammar Image Construction Loop”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each object is improved by one controlled grammar-image iteration:</p>
+<ol>
+<li>Freeze the object taxonomy record, ImageGen crop, camera contract, grammar,
+renderer settings, and source hashes.</li>
+<li>Confirm object isolation and classify all six views as required,
+optional-degenerate, or not applicable.</li>
+<li>Extract the reference silhouette, bounding aspect, foreground occupancy,
+connected components, symmetry, repeated-element counts, and named
+landmarks.</li>
+<li>Define authoritative local dimensions and orientation in the object model.</li>
+<li>Construct primary masses and voids first.</li>
+<li>Construct named structural parts and enforce feature counts.</li>
+<li>Add repeated elements from count and spacing parameters rather than copies.</li>
+<li>Add host openings, support contacts, service points, and connection graph
+edges.</li>
+<li>Add rounded profiles, sweeps, revolutions, extrusions, subtractive openings,
+and assemblies according to the category directive.</li>
+<li>Add semantic material regions before color or texture tuning.</li>
+<li>Render all six canonical views with the deterministic object-local camera.</li>
+<li>Run every implemented independent test and record per-view evidence.</li>
+<li class="source-status--failed">Modify only the parameter group owned by the weakest failed test.</li>
+<li>Rerender all six views so a local improvement cannot regress another view.</li>
+<li>Stop geometry tuning only when every required view reaches at least 84% and
+every independent minimum passes.</li>
+<li>Run a clean deterministic rerun and a human semantic review before
+accepting the object at the 80% release gate.</li>
+</ol>
+<h4 id="source-8-1-metric-to-parameter-ownership">8.1 Metric-to-Parameter Ownership</h4><p class="section-guide">Reading guide: this source section records “8.1 Metric-to-Parameter Ownership”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Weakest Test</th>
+<th scope="col">Permitted First Changes</th>
+<th scope="col">Changes Deferred</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Silhouette</td>
+<td>Primary profile, dimensions, protrusions, cut-outs, orientation.</td>
+<td>Color and texture</td>
+</tr>
+<tr>
+<td>Edge alignment</td>
+<td>Frame widths, seams, reveals, tread edges, part boundaries.</td>
+<td>Global rescaling</td>
+</tr>
+<tr>
+<td>Projection distribution</td>
+<td>Relative part placement and mass distribution.</td>
+<td>Material color</td>
+</tr>
+<tr>
+<td>Aspect ratio</td>
+<td>Authoritative width, height, depth, and local axis.</td>
+<td>Fine detail</td>
+</tr>
+<tr>
+<td>Occupancy</td>
+<td>Thickness, holes, open space, foliage density, cushion fullness.</td>
+<td>Lighting</td>
+</tr>
+<tr>
+<td>Component count</td>
+<td>Explicit part count, gaps, supports, repeated elements.</td>
+<td>Smoothing</td>
+</tr>
+<tr>
+<td>Symmetry</td>
+<td>Mirrored parameter relationships or deliberate asymmetry.</td>
+<td>Texture noise</td>
+</tr>
+<tr>
+<td>Repetition</td>
+<td>Count, pitch, phase, terminal spacing, path length.</td>
+<td>Random scatter</td>
+</tr>
+<tr>
+<td>Transparency</td>
+<td>Boundary mesh, thickness, opacity model, depth sorting.</td>
+<td>Opaque silhouette substitution</td>
+</tr>
+<tr>
+<td>Material region</td>
+<td>Region ownership and material assignment.</td>
+<td>Geometry unless region boundary is wrong</td>
+</tr>
+<tr>
+<td>Connection alignment</td>
+<td>Connection point position, host cut-out, support contact.</td>
+<td>Decorative detail</td>
+</tr>
+<tr>
+<td>Extent agreement</td>
+<td>Visual/collision/access/motion/growth extent owners.</td>
+<td>Camera compensation</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-9-delivery-phases">9. Delivery Phases</h3><p class="section-guide">Reading guide: this source section records “9. Delivery Phases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-phase-0-matching-architecture">Phase 0 — Matching Architecture</h4><p class="section-guide">Reading guide: this source section records “Phase 0 — Matching Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Status: implemented and deterministically tested.</p>
+<ul>
+<li>define native visual object, view, test, directive, observation, and report
+classes;</li>
+<li>generate 49 object models and exact assignments for 108 renderable objects;</li>
+<li>isolate failures per object view;</li>
+<li>enforce hard gates, independent minimums, and 80% per-view composites;</li>
+<li>preserve optional-degenerate view semantics;</li>
+<li>publish the current baseline and focused acceptance runner.</li>
+</ul>
+<h4 id="source-phase-1-reference-and-camera-completion">Phase 1 — Reference and Camera Completion</h4><p class="section-guide">Reading guide: this source section records “Phase 1 — Reference and Camera Completion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: reference coverage completed; six-view observability repair remains.</p>
+<ul>
+<li>generated and ingested ImageGen atlases 16, 17, and 18;</li>
+<li class="source-status--passed">verified exactly one crop for every renderable taxonomy object;</li>
+<li>recorded 108/108 references and all 648 comparison slots;</li>
+<li>added a constrained front/right/top gate with 108/108 objects above 84%;</li>
+<li>retain 48 freeform six-view observability failures for explicit repair;</li>
+<li class="source-status--failed">freeze remaining transparent-boundary behavior without hiding failed views.</li>
+</ul>
+<p class="source-status--failed">Exit gate: complete provenance, object isolation, and camera calibration are
+met. Phase closure still requires no failed six-view observation and no silent
+comparison.</p>
+<h4 id="source-phase-2-planar-framed-and-linear-objects">Phase 2 — Planar, Framed, and Linear Objects</h4><p class="section-guide">Reading guide: this source section records “Phase 2 — Planar, Framed, and Linear Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Prioritize walls, floors, windows, doors, television, artwork, paving, canopy,
+gutters, downpipes, rods, screens, fences, and drains. These objects expose
+camera, thickness, profile, frame, and repetition errors with comparatively low
+organic-shape uncertainty.</p>
+<p>Exit gate: each selected object reaches an 84% construction target in every
+required view and passes topology/repetition tests relevant to its category.</p>
+<h4 id="source-phase-3-furniture-and-sanitary-objects">Phase 3 — Furniture and Sanitary Objects</h4><p class="section-guide">Reading guide: this source section records “Phase 3 — Furniture and Sanitary Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Prioritize couch, chairs, tables, beds, cabinets, wardrobe, desk, toilet,
+vanity, shower, sink, taps, cushions, and vases. Replace box-only approximations
+with explicit parts and rounded profiles.</p>
+<p class="source-status--passed">Exit gate: named landmark counts and support/service connections pass in
+addition to the image scores.</p>
+<h4 id="source-phase-4-repeated-transparent-and-organic-objects">Phase 4 — Repeated, Transparent, and Organic Objects</h4><p class="section-guide">Reading guide: this source section records “Phase 4 — Repeated, Transparent, and Organic Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Prioritize stairs, vegetation, privacy screens, fencing, curtains, glazing,
+lights, pool shell, and pool water. Activate repetition, transparency,
+material-region, color, and texture tests only after synthetic fixtures prove
+that each metric is stable.</p>
+<p class="source-status--passed">Exit gate: transparent boundaries, repeated counts, growth extents, and
+cross-view part consistency pass.</p>
+<h4 id="source-phase-5-assemblies-and-rooms">Phase 5 — Assemblies and Rooms</h4><p class="section-guide">Reading guide: this source section records “Phase 5 — Assemblies and Rooms”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Prioritize kitchen, study, balconies, bathroom and bedroom assemblies, building
+storeys, envelope, roof, services, and site. Score named descendants and their
+relationships; do not compare only the outer aggregate silhouette.</p>
+<p>Exit gate: descendant identities, clearances, connection graph edges, and
+aggregate extents agree across all six views.</p>
+<h4 id="source-phase-6-certification-candidate">Phase 6 — Certification Candidate</h4><p class="section-guide">Reading guide: this source section records “Phase 6 — Certification Candidate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>run all 108 objects and all 648 comparison slots from a clean build;</li>
+<li>require every required view to score at least 80%;</li>
+<li>require the object construction target of at least 84% before promotion;</li>
+<li class="source-status--passed">require all active independent tests to pass;</li>
+<li>require no missing, duplicate, or unclassified observation;</li>
+<li>verify deterministic evidence files byte-for-byte;</li>
+<li>record grammar, renderer, taxonomy, reference, and report hashes;</li>
+<li>perform human semantic review and record any accepted equivalence;</li>
+<li>retain rollback to the prior accepted grammar artifact.</li>
+</ul>
+<h3 id="source-10-independent-test-fixtures">10. Independent Test Fixtures</h3><p class="section-guide">Reading guide: this source section records “10. Independent Test Fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The matching metrics require synthetic tests in addition to building images:</p>
+<ul>
+<li>identical masks score 100% for every implemented numeric metric;</li>
+<li>component-count changes affect the component observation independently;</li>
+<li>aspect-ratio changes affect the aspect observation independently;</li>
+<li>occupancy changes affect the occupancy observation independently;</li>
+<li>symmetry changes affect the symmetry observation independently;</li>
+<li>spatial shifts reduce silhouette, edge, and projection agreement without
+changing declared aspect ratio;</li>
+<li>background-only images are classified as unobservable;</li>
+<li class="source-status--failed">duplicate object records fail the isolation gate;</li>
+<li>an independent score below its minimum fails even when the weighted composite
+exceeds 90%;</li>
+<li>a required degenerate view fails;</li>
+<li>an explicitly optional degenerate view passes;</li>
+<li class="source-status--failed">invalid model weights or missing six-view contracts fail validation;</li>
+<li>a regenerated baseline must byte-match the committed evidence.</li>
+</ul>
+<h3 id="source-11-canonical-artifacts">11. Canonical Artifacts</h3><p class="section-guide">Reading guide: this source section records “11. Canonical Artifacts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/building/model/BuildingVisualObjectModel.h</code></li>
+<li><code>include/building/model/BuildingVisualFeatureRequirement.h</code></li>
+<li><code>include/building/model/BuildingCameraViewMatchContract.h</code></li>
+<li><code>include/building/model/BuildingImageMatchingTestSpecification.h</code></li>
+<li><code>include/building/model/BuildingGrammarImageConstructionDirective.h</code></li>
+<li><code>include/building/model/BuildingImageMatchingObservation.h</code></li>
+<li><code>include/building/model/BuildingCameraViewMatchResult.h</code></li>
+<li><code>include/building/model/BuildingObjectImageMatchReport.h</code></li>
+<li><code>include/building/model/BuildingVisualObjectModelCatalog.h</code></li>
+<li><code>include/building/service/BuildingVisualObjectModelValidationService.h</code></li>
+<li><code>include/building/service/BuildingObjectImageMatchEvaluationService.h</code></li>
+<li><code>examples/SimpleModernBuilding/SMBv3_SimpleModernBuilding/source/SMBv3_Building_Object_Visual_Matching_Models.json</code></li>
+<li><code>examples/SimpleModernBuilding/SMBv3_SimpleModernBuilding/generated/SMBv3_Building_Object_Image_Matching_Coverage.csv</code></li>
+<li><code>examples/SimpleModernBuilding/SMBv3_SimpleModernBuilding/evidence/SMBv3_Building_Object_Image_Matching_Baseline/</code></li>
+<li><code>tools/analyze_building_object_image_matches.py</code></li>
+<li><code>tests/test_building_object_image_match_metrics.py</code></li>
+<li><code>tests/building_object_image_matching_model_harness.cpp</code></li>
+<li><code>tests/run_building_object_image_matching_model_checks.sh</code></li>
+</ul>
+<h3 id="source-12-acceptance-command">12. Acceptance Command</h3><p class="section-guide">Reading guide: this source section records “12. Acceptance Command”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_building_object_image_matching_model_checks.sh
+</code></pre>
+<p>The command checks generated catalog drift, exact 108-object coverage,
+six-view contracts, metric weights, construction directives, deterministic
+baseline replay, synthetic metric independence, C++ model validation, hard-gate
+behavior, optional-degenerate handling, and the no-averaging acceptance rule.</p>
+<h3 id="source-13-current-limit">13. Current Limit</h3><p class="section-guide">Reading guide: this source section records “13. Current Limit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">The matching architecture and construction plan are implemented, but no object
+is currently certified above 80% in every required view. Fifteen of eighteen
+ImageGen atlases are present, and the planned topology, repetition,
+transparency, material, color, texture, cross-view, connection, extent, and
+human-review gates are not yet all executable. Those limits remain explicit so
+the current baseline cannot be mistaken for completion of the image-fitting
+program.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="om20-spatial-object-model-schema.html" rel="prev">← Previous: OM20 Spatial Object Model Schema</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-comv1-chair-object-model-and-fgkv1-curved-geometry-implementation-plan.html" rel="next">Next: ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,3202 @@
+# ================================================================
+# COMPLEX MODERN COURTYARD BUILDING — OM5 OBJECT MODEL EXAMPLE
+# Current Progen3D grammar syntax
+#
+# Taxonomy depth:
+#   L0 Building object
+#   L1 System
+#   L2 Assembly
+#   L3 Component
+#   L4 Feature / interface
+#   L5 Atomic geometry or semantic evidence leaf
+#
+# Plan:
+#   U-shaped single-floor building around a landscaped courtyard.
+#   Three structural wings, multiple wall-opening systems, furnished
+#   interior zones, roof daylighting/PV, services, and relationship
+#   records for containment, connections, collision positioning,
+#   clearance checks, and validation.
+#
+# Current-language limitation:
+#   Progen3D does not yet expose native object/interface/CP statements.
+#   Relationship and collision-positioning objects therefore terminate
+#   in OM5_SemanticLeaf(); geometric coordinates represent resolved poses.
+# ================================================================
+
+Start ->
+    OM5_Building_001()
+
+# L0 building object
+OM5_Building_001() ->
+    OM5_L1_SiteSystem()
+    OM5_L1_StructuralSystem()
+    OM5_L1_EnvelopeSystem()
+    OM5_L1_OpeningSystem()
+    OM5_L1_InteriorSystem()
+    OM5_L1_RoofSystem()
+    OM5_L1_ServicesSystem()
+    OM5_L1_ExternalAmenitySystem()
+    OM5_L1_RelationshipSystem()
+
+# ================================================================
+# L1 SYSTEM: SiteSystem
+# ================================================================
+
+OM5_L1_SiteSystem() ->
+    OM5_L2_SiteSystem_GroundAssembly()
+    OM5_L2_SiteSystem_LandscapeAssembly()
+    OM5_L2_SiteSystem_BoundaryAssembly()
+
+# L2 Assembly: SiteSystem / GroundAssembly
+OM5_L2_SiteSystem_GroundAssembly() ->
+    OM5_L3_SiteSystem_GroundAssembly_SiteGroundComponent()
+    OM5_L3_SiteSystem_GroundAssembly_EntryWalkComponent()
+    OM5_L3_SiteSystem_GroundAssembly_DrivewayComponent()
+    OM5_L3_SiteSystem_GroundAssembly_ServicePadComponent()
+    OM5_L3_SiteSystem_GroundAssembly_RearTerraceComponent()
+
+# L3 Component: SiteGroundComponent
+OM5_L3_SiteSystem_GroundAssembly_SiteGroundComponent() ->
+    OM5_L4_SiteSystem_GroundAssembly_SiteGroundComponent_GroundSurfaceFeature()
+
+# L4 Feature / interface: GroundSurfaceFeature
+OM5_L4_SiteSystem_GroundAssembly_SiteGroundComponent_GroundSurfaceFeature() ->
+    OM5_L5_SiteSystem_GroundAssembly_SiteGroundComponent_GroundSurfaceFeature_GroundPlaneLeaf()
+
+# L5 Leaf: GroundPlaneLeaf
+OM5_L5_SiteSystem_GroundAssembly_SiteGroundComponent_GroundSurfaceFeature_GroundPlaneLeaf() ->
+    GEO_Concrete(0 -0.28 0 34 0.28 28)
+
+# L3 Component: EntryWalkComponent
+OM5_L3_SiteSystem_GroundAssembly_EntryWalkComponent() ->
+    OM5_L4_SiteSystem_GroundAssembly_EntryWalkComponent_PavingSurfaceFeature()
+
+# L4 Feature / interface: PavingSurfaceFeature
+OM5_L4_SiteSystem_GroundAssembly_EntryWalkComponent_PavingSurfaceFeature() ->
+    OM5_L5_SiteSystem_GroundAssembly_EntryWalkComponent_PavingSurfaceFeature_EntryWalkLeaf()
+
+# L5 Leaf: EntryWalkLeaf
+OM5_L5_SiteSystem_GroundAssembly_EntryWalkComponent_PavingSurfaceFeature_EntryWalkLeaf() ->
+    GEO_Sandstone(0 0 -10.0 4.2 0.10 8.0)
+
+# L3 Component: DrivewayComponent
+OM5_L3_SiteSystem_GroundAssembly_DrivewayComponent() ->
+    OM5_L4_SiteSystem_GroundAssembly_DrivewayComponent_VehicleSurfaceFeature()
+
+# L4 Feature / interface: VehicleSurfaceFeature
+OM5_L4_SiteSystem_GroundAssembly_DrivewayComponent_VehicleSurfaceFeature() ->
+    OM5_L5_SiteSystem_GroundAssembly_DrivewayComponent_VehicleSurfaceFeature_DrivewayLeaf()
+
+# L5 Leaf: DrivewayLeaf
+OM5_L5_SiteSystem_GroundAssembly_DrivewayComponent_VehicleSurfaceFeature_DrivewayLeaf() ->
+    GEO_DarkStone(11.0 0 -3.0 8.0 0.10 15.0)
+
+# L3 Component: ServicePadComponent
+OM5_L3_SiteSystem_GroundAssembly_ServicePadComponent() ->
+    OM5_L4_SiteSystem_GroundAssembly_ServicePadComponent_EquipmentBearingFeature()
+
+# L4 Feature / interface: EquipmentBearingFeature
+OM5_L4_SiteSystem_GroundAssembly_ServicePadComponent_EquipmentBearingFeature() ->
+    OM5_L5_SiteSystem_GroundAssembly_ServicePadComponent_EquipmentBearingFeature_ServicePadLeaf()
+
+# L5 Leaf: ServicePadLeaf
+OM5_L5_SiteSystem_GroundAssembly_ServicePadComponent_EquipmentBearingFeature_ServicePadLeaf() ->
+    GEO_Concrete(10.8 0 7.8 4.0 0.16 3.2)
+
+# L3 Component: RearTerraceComponent
+OM5_L3_SiteSystem_GroundAssembly_RearTerraceComponent() ->
+    OM5_L4_SiteSystem_GroundAssembly_RearTerraceComponent_TerraceSurfaceFeature()
+
+# L4 Feature / interface: TerraceSurfaceFeature
+OM5_L4_SiteSystem_GroundAssembly_RearTerraceComponent_TerraceSurfaceFeature() ->
+    OM5_L5_SiteSystem_GroundAssembly_RearTerraceComponent_TerraceSurfaceFeature_RearTerraceLeaf()
+
+# L5 Leaf: RearTerraceLeaf
+OM5_L5_SiteSystem_GroundAssembly_RearTerraceComponent_TerraceSurfaceFeature_RearTerraceLeaf() ->
+    GEO_Sandstone(0 0 9.2 10.0 0.10 4.0)
+
+# L2 Assembly: SiteSystem / LandscapeAssembly
+OM5_L2_SiteSystem_LandscapeAssembly() ->
+    OM5_L3_SiteSystem_LandscapeAssembly_LeftPlanterComponent()
+    OM5_L3_SiteSystem_LandscapeAssembly_RightPlanterComponent()
+    OM5_L3_SiteSystem_LandscapeAssembly_LeftTreeComponent()
+    OM5_L3_SiteSystem_LandscapeAssembly_RightTreeComponent()
+
+# L3 Component: LeftPlanterComponent
+OM5_L3_SiteSystem_LandscapeAssembly_LeftPlanterComponent() ->
+    OM5_L4_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlanterContainerFeature()
+    OM5_L4_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlantingMediumFeature()
+
+# L4 Feature / interface: PlanterContainerFeature
+OM5_L4_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlanterContainerFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlanterContainerFeature_LeftPlanterBoxLeaf()
+
+# L5 Leaf: LeftPlanterBoxLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlanterContainerFeature_LeftPlanterBoxLeaf() ->
+    GEO_Terracotta(-12.0 0 -7.5 3.6 0.60 3.6)
+
+# L4 Feature / interface: PlantingMediumFeature
+OM5_L4_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlantingMediumFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlantingMediumFeature_LeftPlanterSoilLeaf()
+
+# L5 Leaf: LeftPlanterSoilLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_LeftPlanterComponent_PlantingMediumFeature_LeftPlanterSoilLeaf() ->
+    GEO_Green(-12.0 0.60 -7.5 3.2 0.35 3.2)
+
+# L3 Component: RightPlanterComponent
+OM5_L3_SiteSystem_LandscapeAssembly_RightPlanterComponent() ->
+    OM5_L4_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlanterContainerFeature()
+    OM5_L4_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlantingMediumFeature()
+
+# L4 Feature / interface: PlanterContainerFeature
+OM5_L4_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlanterContainerFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlanterContainerFeature_RightPlanterBoxLeaf()
+
+# L5 Leaf: RightPlanterBoxLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlanterContainerFeature_RightPlanterBoxLeaf() ->
+    GEO_Terracotta(7.8 0 -7.5 3.6 0.60 3.6)
+
+# L4 Feature / interface: PlantingMediumFeature
+OM5_L4_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlantingMediumFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlantingMediumFeature_RightPlanterSoilLeaf()
+
+# L5 Leaf: RightPlanterSoilLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_RightPlanterComponent_PlantingMediumFeature_RightPlanterSoilLeaf() ->
+    GEO_Green(7.8 0.60 -7.5 3.2 0.35 3.2)
+
+# L3 Component: LeftTreeComponent
+OM5_L3_SiteSystem_LandscapeAssembly_LeftTreeComponent() ->
+    OM5_L4_SiteSystem_LandscapeAssembly_LeftTreeComponent_TrunkFeature()
+    OM5_L4_SiteSystem_LandscapeAssembly_LeftTreeComponent_CrownFeature()
+
+# L4 Feature / interface: TrunkFeature
+OM5_L4_SiteSystem_LandscapeAssembly_LeftTreeComponent_TrunkFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_LeftTreeComponent_TrunkFeature_LeftTreeTrunkLeaf()
+
+# L5 Leaf: LeftTreeTrunkLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_LeftTreeComponent_TrunkFeature_LeftTreeTrunkLeaf() ->
+    GEO_CylinderWood(-12.0 0 5.8 0.55 3.8)
+
+# L4 Feature / interface: CrownFeature
+OM5_L4_SiteSystem_LandscapeAssembly_LeftTreeComponent_CrownFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_LeftTreeComponent_CrownFeature_LeftTreeCrownLeaf()
+
+# L5 Leaf: LeftTreeCrownLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_LeftTreeComponent_CrownFeature_LeftTreeCrownLeaf() ->
+    GEO_SphereGreen(-12.0 3.6999999999999997 5.8 3.4)
+
+# L3 Component: RightTreeComponent
+OM5_L3_SiteSystem_LandscapeAssembly_RightTreeComponent() ->
+    OM5_L4_SiteSystem_LandscapeAssembly_RightTreeComponent_TrunkFeature()
+    OM5_L4_SiteSystem_LandscapeAssembly_RightTreeComponent_CrownFeature()
+
+# L4 Feature / interface: TrunkFeature
+OM5_L4_SiteSystem_LandscapeAssembly_RightTreeComponent_TrunkFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_RightTreeComponent_TrunkFeature_RightTreeTrunkLeaf()
+
+# L5 Leaf: RightTreeTrunkLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_RightTreeComponent_TrunkFeature_RightTreeTrunkLeaf() ->
+    GEO_CylinderWood(12.0 0 5.0 0.55 3.5)
+
+# L4 Feature / interface: CrownFeature
+OM5_L4_SiteSystem_LandscapeAssembly_RightTreeComponent_CrownFeature() ->
+    OM5_L5_SiteSystem_LandscapeAssembly_RightTreeComponent_CrownFeature_RightTreeCrownLeaf()
+
+# L5 Leaf: RightTreeCrownLeaf
+OM5_L5_SiteSystem_LandscapeAssembly_RightTreeComponent_CrownFeature_RightTreeCrownLeaf() ->
+    GEO_SphereGreen(12.0 3.4 5.0 3.2)
+
+# L2 Assembly: SiteSystem / BoundaryAssembly
+OM5_L2_SiteSystem_BoundaryAssembly() ->
+    OM5_L3_SiteSystem_BoundaryAssembly_PerimeterFenceComponent()
+    OM5_L3_SiteSystem_BoundaryAssembly_PropertyBoundaryComponent()
+
+# L3 Component: PerimeterFenceComponent
+OM5_L3_SiteSystem_BoundaryAssembly_PerimeterFenceComponent() ->
+    OM5_L4_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RearFenceFeature()
+    OM5_L4_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_LeftFenceFeature()
+    OM5_L4_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RightFenceFeature()
+
+# L4 Feature / interface: RearFenceFeature
+OM5_L4_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RearFenceFeature() ->
+    OM5_L5_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RearFenceFeature_RearFenceLeaf()
+
+# L5 Leaf: RearFenceLeaf
+OM5_L5_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RearFenceFeature_RearFenceLeaf() ->
+    GEO_DarkMetal(0 0 13.4 32 1.35 0.12)
+
+# L4 Feature / interface: LeftFenceFeature
+OM5_L4_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_LeftFenceFeature() ->
+    OM5_L5_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_LeftFenceFeature_LeftFenceLeaf()
+
+# L5 Leaf: LeftFenceLeaf
+OM5_L5_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_LeftFenceFeature_LeftFenceLeaf() ->
+    GEO_DarkMetal(-16 0 2.0 0.12 1.35 22.8)
+
+# L4 Feature / interface: RightFenceFeature
+OM5_L4_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RightFenceFeature() ->
+    OM5_L5_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RightFenceFeature_RightFenceLeaf()
+
+# L5 Leaf: RightFenceLeaf
+OM5_L5_SiteSystem_BoundaryAssembly_PerimeterFenceComponent_RightFenceFeature_RightFenceLeaf() ->
+    GEO_DarkMetal(16 0 2.0 0.12 1.35 22.8)
+
+# L3 Component: PropertyBoundaryComponent
+OM5_L3_SiteSystem_BoundaryAssembly_PropertyBoundaryComponent() ->
+    OM5_L4_SiteSystem_BoundaryAssembly_PropertyBoundaryComponent_SurveyInterfaceFeature()
+
+# L4 Feature / interface: SurveyInterfaceFeature
+OM5_L4_SiteSystem_BoundaryAssembly_PropertyBoundaryComponent_SurveyInterfaceFeature() ->
+    OM5_L5_SiteSystem_BoundaryAssembly_PropertyBoundaryComponent_SurveyInterfaceFeature_PropertyBoundaryEvidenceLeaf()
+
+# L5 Leaf: PropertyBoundaryEvidenceLeaf
+OM5_L5_SiteSystem_BoundaryAssembly_PropertyBoundaryComponent_SurveyInterfaceFeature_PropertyBoundaryEvidenceLeaf() ->
+    OM5_SemanticLeaf()
+
+# ================================================================
+# L1 SYSTEM: StructuralSystem
+# ================================================================
+
+OM5_L1_StructuralSystem() ->
+    OM5_L2_StructuralSystem_FoundationAssembly()
+    OM5_L2_StructuralSystem_FloorAssembly()
+    OM5_L2_StructuralSystem_VerticalSupportAssembly()
+    OM5_L2_StructuralSystem_CoreAssembly()
+    OM5_L2_StructuralSystem_HeaderAssembly()
+
+# L2 Assembly: StructuralSystem / FoundationAssembly
+OM5_L2_StructuralSystem_FoundationAssembly() ->
+    OM5_L3_StructuralSystem_FoundationAssembly_FrontWingFoundationComponent()
+    OM5_L3_StructuralSystem_FoundationAssembly_LeftWingFoundationComponent()
+    OM5_L3_StructuralSystem_FoundationAssembly_RightWingFoundationComponent()
+
+# L3 Component: FrontWingFoundationComponent
+OM5_L3_StructuralSystem_FoundationAssembly_FrontWingFoundationComponent() ->
+    OM5_L4_StructuralSystem_FoundationAssembly_FrontWingFoundationComponent_LoadTransferFeature()
+
+# L4 Feature / interface: LoadTransferFeature
+OM5_L4_StructuralSystem_FoundationAssembly_FrontWingFoundationComponent_LoadTransferFeature() ->
+    OM5_L5_StructuralSystem_FoundationAssembly_FrontWingFoundationComponent_LoadTransferFeature_FrontWingFoundationLeaf()
+
+# L5 Leaf: FrontWingFoundationLeaf
+OM5_L5_StructuralSystem_FoundationAssembly_FrontWingFoundationComponent_LoadTransferFeature_FrontWingFoundationLeaf() ->
+    GEO_Concrete(0 -0.42 -3.5 18.8 0.42 5.8)
+
+# L3 Component: LeftWingFoundationComponent
+OM5_L3_StructuralSystem_FoundationAssembly_LeftWingFoundationComponent() ->
+    OM5_L4_StructuralSystem_FoundationAssembly_LeftWingFoundationComponent_LoadTransferFeature()
+
+# L4 Feature / interface: LoadTransferFeature
+OM5_L4_StructuralSystem_FoundationAssembly_LeftWingFoundationComponent_LoadTransferFeature() ->
+    OM5_L5_StructuralSystem_FoundationAssembly_LeftWingFoundationComponent_LoadTransferFeature_LeftWingFoundationLeaf()
+
+# L5 Leaf: LeftWingFoundationLeaf
+OM5_L5_StructuralSystem_FoundationAssembly_LeftWingFoundationComponent_LoadTransferFeature_LeftWingFoundationLeaf() ->
+    GEO_Concrete(-6 -0.42 2.5 6.8 0.42 7.8)
+
+# L3 Component: RightWingFoundationComponent
+OM5_L3_StructuralSystem_FoundationAssembly_RightWingFoundationComponent() ->
+    OM5_L4_StructuralSystem_FoundationAssembly_RightWingFoundationComponent_LoadTransferFeature()
+
+# L4 Feature / interface: LoadTransferFeature
+OM5_L4_StructuralSystem_FoundationAssembly_RightWingFoundationComponent_LoadTransferFeature() ->
+    OM5_L5_StructuralSystem_FoundationAssembly_RightWingFoundationComponent_LoadTransferFeature_RightWingFoundationLeaf()
+
+# L5 Leaf: RightWingFoundationLeaf
+OM5_L5_StructuralSystem_FoundationAssembly_RightWingFoundationComponent_LoadTransferFeature_RightWingFoundationLeaf() ->
+    GEO_Concrete(6 -0.42 2.5 6.8 0.42 7.8)
+
+# L2 Assembly: StructuralSystem / FloorAssembly
+OM5_L2_StructuralSystem_FloorAssembly() ->
+    OM5_L3_StructuralSystem_FloorAssembly_FrontWingFloorSlabComponent()
+    OM5_L3_StructuralSystem_FloorAssembly_LeftWingFloorSlabComponent()
+    OM5_L3_StructuralSystem_FloorAssembly_RightWingFloorSlabComponent()
+
+# L3 Component: FrontWingFloorSlabComponent
+OM5_L3_StructuralSystem_FloorAssembly_FrontWingFloorSlabComponent() ->
+    OM5_L4_StructuralSystem_FloorAssembly_FrontWingFloorSlabComponent_StructuralSlabFeature()
+
+# L4 Feature / interface: StructuralSlabFeature
+OM5_L4_StructuralSystem_FloorAssembly_FrontWingFloorSlabComponent_StructuralSlabFeature() ->
+    OM5_L5_StructuralSystem_FloorAssembly_FrontWingFloorSlabComponent_StructuralSlabFeature_FrontWingFloorSlabLeaf()
+
+# L5 Leaf: FrontWingFloorSlabLeaf
+OM5_L5_StructuralSystem_FloorAssembly_FrontWingFloorSlabComponent_StructuralSlabFeature_FrontWingFloorSlabLeaf() ->
+    GEO_Concrete(0 0 -3.5 18.0 0.22 5.0)
+
+# L3 Component: LeftWingFloorSlabComponent
+OM5_L3_StructuralSystem_FloorAssembly_LeftWingFloorSlabComponent() ->
+    OM5_L4_StructuralSystem_FloorAssembly_LeftWingFloorSlabComponent_StructuralSlabFeature()
+
+# L4 Feature / interface: StructuralSlabFeature
+OM5_L4_StructuralSystem_FloorAssembly_LeftWingFloorSlabComponent_StructuralSlabFeature() ->
+    OM5_L5_StructuralSystem_FloorAssembly_LeftWingFloorSlabComponent_StructuralSlabFeature_LeftWingFloorSlabLeaf()
+
+# L5 Leaf: LeftWingFloorSlabLeaf
+OM5_L5_StructuralSystem_FloorAssembly_LeftWingFloorSlabComponent_StructuralSlabFeature_LeftWingFloorSlabLeaf() ->
+    GEO_Concrete(-6 0 2.5 6.0 0.22 7.0)
+
+# L3 Component: RightWingFloorSlabComponent
+OM5_L3_StructuralSystem_FloorAssembly_RightWingFloorSlabComponent() ->
+    OM5_L4_StructuralSystem_FloorAssembly_RightWingFloorSlabComponent_StructuralSlabFeature()
+
+# L4 Feature / interface: StructuralSlabFeature
+OM5_L4_StructuralSystem_FloorAssembly_RightWingFloorSlabComponent_StructuralSlabFeature() ->
+    OM5_L5_StructuralSystem_FloorAssembly_RightWingFloorSlabComponent_StructuralSlabFeature_RightWingFloorSlabLeaf()
+
+# L5 Leaf: RightWingFloorSlabLeaf
+OM5_L5_StructuralSystem_FloorAssembly_RightWingFloorSlabComponent_StructuralSlabFeature_RightWingFloorSlabLeaf() ->
+    GEO_Concrete(6 0 2.5 6.0 0.22 7.0)
+
+# L2 Assembly: StructuralSystem / VerticalSupportAssembly
+OM5_L2_StructuralSystem_VerticalSupportAssembly() ->
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_FrontLeftCornerColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_FrontRightCornerColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_LeftRearCornerColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_RightRearCornerColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardFrontLeftColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardFrontRightColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardRearLeftColumnComponent()
+    OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardRearRightColumnComponent()
+
+# L3 Component: FrontLeftCornerColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_FrontLeftCornerColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_FrontLeftCornerColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_FrontLeftCornerColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_FrontLeftCornerColumnComponent_ColumnShaftFeature_FrontLeftCornerColumnLeaf()
+
+# L5 Leaf: FrontLeftCornerColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_FrontLeftCornerColumnComponent_ColumnShaftFeature_FrontLeftCornerColumnLeaf() ->
+    GEO_Metal(-8.55 0.22 -5.55 0.32 3.30 0.32)
+
+# L3 Component: FrontRightCornerColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_FrontRightCornerColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_FrontRightCornerColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_FrontRightCornerColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_FrontRightCornerColumnComponent_ColumnShaftFeature_FrontRightCornerColumnLeaf()
+
+# L5 Leaf: FrontRightCornerColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_FrontRightCornerColumnComponent_ColumnShaftFeature_FrontRightCornerColumnLeaf() ->
+    GEO_Metal(8.55 0.22 -5.55 0.32 3.30 0.32)
+
+# L3 Component: LeftRearCornerColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_LeftRearCornerColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_LeftRearCornerColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_LeftRearCornerColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_LeftRearCornerColumnComponent_ColumnShaftFeature_LeftRearCornerColumnLeaf()
+
+# L5 Leaf: LeftRearCornerColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_LeftRearCornerColumnComponent_ColumnShaftFeature_LeftRearCornerColumnLeaf() ->
+    GEO_Metal(-8.55 0.22 5.55 0.32 3.30 0.32)
+
+# L3 Component: RightRearCornerColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_RightRearCornerColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_RightRearCornerColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_RightRearCornerColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_RightRearCornerColumnComponent_ColumnShaftFeature_RightRearCornerColumnLeaf()
+
+# L5 Leaf: RightRearCornerColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_RightRearCornerColumnComponent_ColumnShaftFeature_RightRearCornerColumnLeaf() ->
+    GEO_Metal(8.55 0.22 5.55 0.32 3.30 0.32)
+
+# L3 Component: CourtyardFrontLeftColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardFrontLeftColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardFrontLeftColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardFrontLeftColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardFrontLeftColumnComponent_ColumnShaftFeature_CourtyardFrontLeftColumnLeaf()
+
+# L5 Leaf: CourtyardFrontLeftColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardFrontLeftColumnComponent_ColumnShaftFeature_CourtyardFrontLeftColumnLeaf() ->
+    GEO_Metal(-2.75 0.22 -0.75 0.32 3.30 0.32)
+
+# L3 Component: CourtyardFrontRightColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardFrontRightColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardFrontRightColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardFrontRightColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardFrontRightColumnComponent_ColumnShaftFeature_CourtyardFrontRightColumnLeaf()
+
+# L5 Leaf: CourtyardFrontRightColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardFrontRightColumnComponent_ColumnShaftFeature_CourtyardFrontRightColumnLeaf() ->
+    GEO_Metal(2.75 0.22 -0.75 0.32 3.30 0.32)
+
+# L3 Component: CourtyardRearLeftColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardRearLeftColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardRearLeftColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardRearLeftColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardRearLeftColumnComponent_ColumnShaftFeature_CourtyardRearLeftColumnLeaf()
+
+# L5 Leaf: CourtyardRearLeftColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardRearLeftColumnComponent_ColumnShaftFeature_CourtyardRearLeftColumnLeaf() ->
+    GEO_Metal(-2.75 0.22 5.55 0.32 3.30 0.32)
+
+# L3 Component: CourtyardRearRightColumnComponent
+OM5_L3_StructuralSystem_VerticalSupportAssembly_CourtyardRearRightColumnComponent() ->
+    OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardRearRightColumnComponent_ColumnShaftFeature()
+
+# L4 Feature / interface: ColumnShaftFeature
+OM5_L4_StructuralSystem_VerticalSupportAssembly_CourtyardRearRightColumnComponent_ColumnShaftFeature() ->
+    OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardRearRightColumnComponent_ColumnShaftFeature_CourtyardRearRightColumnLeaf()
+
+# L5 Leaf: CourtyardRearRightColumnLeaf
+OM5_L5_StructuralSystem_VerticalSupportAssembly_CourtyardRearRightColumnComponent_ColumnShaftFeature_CourtyardRearRightColumnLeaf() ->
+    GEO_Metal(2.75 0.22 5.55 0.32 3.30 0.32)
+
+# L2 Assembly: StructuralSystem / CoreAssembly
+OM5_L2_StructuralSystem_CoreAssembly() ->
+    OM5_L3_StructuralSystem_CoreAssembly_ServiceCoreComponent()
+
+# L3 Component: ServiceCoreComponent
+OM5_L3_StructuralSystem_CoreAssembly_ServiceCoreComponent() ->
+    OM5_L4_StructuralSystem_CoreAssembly_ServiceCoreComponent_CoreWallFeature()
+
+# L4 Feature / interface: CoreWallFeature
+OM5_L4_StructuralSystem_CoreAssembly_ServiceCoreComponent_CoreWallFeature() ->
+    OM5_L5_StructuralSystem_CoreAssembly_ServiceCoreComponent_CoreWallFeature_ServiceCoreLeaf()
+
+# L5 Leaf: ServiceCoreLeaf
+OM5_L5_StructuralSystem_CoreAssembly_ServiceCoreComponent_CoreWallFeature_ServiceCoreLeaf() ->
+    GEO_DarkStone(6.4 0.22 2.8 3.2 3.30 3.8)
+
+# L2 Assembly: StructuralSystem / HeaderAssembly
+OM5_L2_StructuralSystem_HeaderAssembly() ->
+    OM5_L3_StructuralSystem_HeaderAssembly_FrontOpeningHeaderComponent()
+    OM5_L3_StructuralSystem_HeaderAssembly_CourtyardOpeningHeaderComponent()
+
+# L3 Component: FrontOpeningHeaderComponent
+OM5_L3_StructuralSystem_HeaderAssembly_FrontOpeningHeaderComponent() ->
+    OM5_L4_StructuralSystem_HeaderAssembly_FrontOpeningHeaderComponent_LintelFeature()
+
+# L4 Feature / interface: LintelFeature
+OM5_L4_StructuralSystem_HeaderAssembly_FrontOpeningHeaderComponent_LintelFeature() ->
+    OM5_L5_StructuralSystem_HeaderAssembly_FrontOpeningHeaderComponent_LintelFeature_FrontHeaderLeaf()
+
+# L5 Leaf: FrontHeaderLeaf
+OM5_L5_StructuralSystem_HeaderAssembly_FrontOpeningHeaderComponent_LintelFeature_FrontHeaderLeaf() ->
+    GEO_Concrete(0 3.22 -6.0 18.0 0.30 0.34)
+
+# L3 Component: CourtyardOpeningHeaderComponent
+OM5_L3_StructuralSystem_HeaderAssembly_CourtyardOpeningHeaderComponent() ->
+    OM5_L4_StructuralSystem_HeaderAssembly_CourtyardOpeningHeaderComponent_LintelFeature()
+
+# L4 Feature / interface: LintelFeature
+OM5_L4_StructuralSystem_HeaderAssembly_CourtyardOpeningHeaderComponent_LintelFeature() ->
+    OM5_L5_StructuralSystem_HeaderAssembly_CourtyardOpeningHeaderComponent_LintelFeature_CourtyardHeaderLeaf()
+
+# L5 Leaf: CourtyardHeaderLeaf
+OM5_L5_StructuralSystem_HeaderAssembly_CourtyardOpeningHeaderComponent_LintelFeature_CourtyardHeaderLeaf() ->
+    GEO_Concrete(0 3.15 -1.0 6.0 0.37 0.30)
+
+# ================================================================
+# L1 SYSTEM: EnvelopeSystem
+# ================================================================
+
+OM5_L1_EnvelopeSystem() ->
+    OM5_L2_EnvelopeSystem_FrontFacadeAssembly()
+    OM5_L2_EnvelopeSystem_LeftFacadeAssembly()
+    OM5_L2_EnvelopeSystem_RightFacadeAssembly()
+    OM5_L2_EnvelopeSystem_RearFacadeAssembly()
+    OM5_L2_EnvelopeSystem_CourtyardFacadeAssembly()
+    OM5_L2_EnvelopeSystem_FacadeDetailAssembly()
+
+# L2 Assembly: EnvelopeSystem / FrontFacadeAssembly
+OM5_L2_EnvelopeSystem_FrontFacadeAssembly() ->
+    OM5_L3_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent()
+
+# L3 Component: FrontOpaqueWallComponent
+OM5_L3_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent() ->
+    OM5_L4_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature()
+
+# L4 Feature / interface: SegmentedWallFeature
+OM5_L4_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature() ->
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierFarLeftLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierLeftCenterLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierRightCenterLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierFarRightLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_LeftWindowSillLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_LeftWindowHeadLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_RightWindowSillLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_RightWindowHeadLeaf()
+    OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_EntryDoorHeadLeaf()
+
+# L5 Leaf: PierFarLeftLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierFarLeftLeaf() ->
+    GEO_Wall(-8.1 0.22 -6.0 1.8 3.3 0.24)
+
+# L5 Leaf: PierLeftCenterLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierLeftCenterLeaf() ->
+    GEO_Wall(-2.3 0.22 -6.0 2.6 3.3 0.24)
+
+# L5 Leaf: PierRightCenterLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierRightCenterLeaf() ->
+    GEO_Wall(2.3 0.22 -6.0 2.6 3.3 0.24)
+
+# L5 Leaf: PierFarRightLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_PierFarRightLeaf() ->
+    GEO_Wall(8.1 0.22 -6.0 1.8 3.3 0.24)
+
+# L5 Leaf: LeftWindowSillLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_LeftWindowSillLeaf() ->
+    GEO_Wall(-5.4 0.22 -6.0 3.6 0.83 0.24)
+
+# L5 Leaf: LeftWindowHeadLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_LeftWindowHeadLeaf() ->
+    GEO_Wall(-5.4 2.6 -6.0 3.6 0.92 0.24)
+
+# L5 Leaf: RightWindowSillLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_RightWindowSillLeaf() ->
+    GEO_Wall(5.4 0.22 -6.0 3.6 0.83 0.24)
+
+# L5 Leaf: RightWindowHeadLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_RightWindowHeadLeaf() ->
+    GEO_Wall(5.4 2.6 -6.0 3.6 0.92 0.24)
+
+# L5 Leaf: EntryDoorHeadLeaf
+OM5_L5_EnvelopeSystem_FrontFacadeAssembly_FrontOpaqueWallComponent_SegmentedWallFeature_EntryDoorHeadLeaf() ->
+    GEO_Wall(0.0 2.72 -6.0 2.0 0.8 0.24)
+
+# L2 Assembly: EnvelopeSystem / LeftFacadeAssembly
+OM5_L2_EnvelopeSystem_LeftFacadeAssembly() ->
+    OM5_L3_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent()
+
+# L3 Component: LeftOpaqueWallComponent
+OM5_L3_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent() ->
+    OM5_L4_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature()
+    OM5_L4_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowSillFeature()
+    OM5_L4_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowHeadFeature()
+
+# L4 Feature / interface: FullHeightPierFeature
+OM5_L4_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature() ->
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature_FrontEndPierLeaf()
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature_MiddlePierLeaf()
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature_RearEndPierLeaf()
+
+# L5 Leaf: FrontEndPierLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature_FrontEndPierLeaf() ->
+    GEO_Wall(-9.0 0.22 -5.45 0.24 3.3 1.1)
+
+# L5 Leaf: MiddlePierLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature_MiddlePierLeaf() ->
+    GEO_Wall(-9.0 0.22 -0.15 0.24 3.3 4.3)
+
+# L5 Leaf: RearEndPierLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_FullHeightPierFeature_RearEndPierLeaf() ->
+    GEO_Wall(-9.0 0.22 5.3 0.24 3.3 1.4)
+
+# L4 Feature / interface: WindowSillFeature
+OM5_L4_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowSillFeature() ->
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowSillFeature_FrontRibbonSillLeaf()
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowSillFeature_RearRibbonSillLeaf()
+
+# L5 Leaf: FrontRibbonSillLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowSillFeature_FrontRibbonSillLeaf() ->
+    GEO_Wall(-9.0 0.22 -3.6 0.24 0.83 2.60)
+
+# L5 Leaf: RearRibbonSillLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowSillFeature_RearRibbonSillLeaf() ->
+    GEO_Wall(-9.0 0.22 3.3 0.24 0.83 2.60)
+
+# L4 Feature / interface: WindowHeadFeature
+OM5_L4_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowHeadFeature() ->
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowHeadFeature_FrontRibbonHeadLeaf()
+    OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowHeadFeature_RearRibbonHeadLeaf()
+
+# L5 Leaf: FrontRibbonHeadLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowHeadFeature_FrontRibbonHeadLeaf() ->
+    GEO_Wall(-9.0 2.60 -3.6 0.24 0.92 2.60)
+
+# L5 Leaf: RearRibbonHeadLeaf
+OM5_L5_EnvelopeSystem_LeftFacadeAssembly_LeftOpaqueWallComponent_WindowHeadFeature_RearRibbonHeadLeaf() ->
+    GEO_Wall(-9.0 2.60 3.3 0.24 0.92 2.60)
+
+# L2 Assembly: EnvelopeSystem / RightFacadeAssembly
+OM5_L2_EnvelopeSystem_RightFacadeAssembly() ->
+    OM5_L3_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent()
+
+# L3 Component: RightOpaqueWallComponent
+OM5_L3_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent() ->
+    OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature()
+    OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowSillFeature()
+    OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowHeadFeature()
+    OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_ServiceDoorHeadFeature()
+
+# L4 Feature / interface: FullHeightPierFeature
+OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature() ->
+    OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature_FrontEndPierLeaf()
+    OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature_CentralPierLeaf()
+    OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature_RearEndPierLeaf()
+
+# L5 Leaf: FrontEndPierLeaf
+OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature_FrontEndPierLeaf() ->
+    GEO_Wall(9.0 0.22 -5.3 0.24 3.30 1.4)
+
+# L5 Leaf: CentralPierLeaf
+OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature_CentralPierLeaf() ->
+    GEO_Wall(9.0 0.22 0.7 0.24 3.30 5.4)
+
+# L5 Leaf: RearEndPierLeaf
+OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_FullHeightPierFeature_RearEndPierLeaf() ->
+    GEO_Wall(9.0 0.22 5.4 0.24 3.30 1.2)
+
+# L4 Feature / interface: WindowSillFeature
+OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowSillFeature() ->
+    OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowSillFeature_RightRibbonSillLeaf()
+
+# L5 Leaf: RightRibbonSillLeaf
+OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowSillFeature_RightRibbonSillLeaf() ->
+    GEO_Wall(9.0 0.22 -3.30 0.24 0.83 2.60)
+
+# L4 Feature / interface: WindowHeadFeature
+OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowHeadFeature() ->
+    OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowHeadFeature_RightRibbonHeadLeaf()
+
+# L5 Leaf: RightRibbonHeadLeaf
+OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_WindowHeadFeature_RightRibbonHeadLeaf() ->
+    GEO_Wall(9.0 2.60 -3.30 0.24 0.92 2.60)
+
+# L4 Feature / interface: ServiceDoorHeadFeature
+OM5_L4_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_ServiceDoorHeadFeature() ->
+    OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_ServiceDoorHeadFeature_ServiceDoorHeadLeaf()
+
+# L5 Leaf: ServiceDoorHeadLeaf
+OM5_L5_EnvelopeSystem_RightFacadeAssembly_RightOpaqueWallComponent_ServiceDoorHeadFeature_ServiceDoorHeadLeaf() ->
+    GEO_Wall(9.0 2.72 4.10 0.24 0.80 1.40)
+
+# L2 Assembly: EnvelopeSystem / RearFacadeAssembly
+OM5_L2_EnvelopeSystem_RearFacadeAssembly() ->
+    OM5_L3_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent()
+    OM5_L3_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent()
+
+# L3 Component: LeftRearOpaqueComponent
+OM5_L3_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent() ->
+    OM5_L4_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_FullHeightPierFeature()
+    OM5_L4_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowSillFeature()
+    OM5_L4_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowHeadFeature()
+
+# L4 Feature / interface: FullHeightPierFeature
+OM5_L4_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_FullHeightPierFeature() ->
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_FullHeightPierFeature_LeftWingLeftPierLeaf()
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_FullHeightPierFeature_LeftWingRightPierLeaf()
+
+# L5 Leaf: LeftWingLeftPierLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_FullHeightPierFeature_LeftWingLeftPierLeaf() ->
+    GEO_Wall(-8.4 0.22 6.0 1.2 3.30 0.24)
+
+# L5 Leaf: LeftWingRightPierLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_FullHeightPierFeature_LeftWingRightPierLeaf() ->
+    GEO_Wall(-3.6 0.22 6.0 1.2 3.30 0.24)
+
+# L4 Feature / interface: WindowSillFeature
+OM5_L4_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowSillFeature() ->
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowSillFeature_LeftRearWindowSillLeaf()
+
+# L5 Leaf: LeftRearWindowSillLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowSillFeature_LeftRearWindowSillLeaf() ->
+    GEO_Wall(-6.0 0.22 6.0 3.60 0.83 0.24)
+
+# L4 Feature / interface: WindowHeadFeature
+OM5_L4_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowHeadFeature() ->
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowHeadFeature_LeftRearWindowHeadLeaf()
+
+# L5 Leaf: LeftRearWindowHeadLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_LeftRearOpaqueComponent_WindowHeadFeature_LeftRearWindowHeadLeaf() ->
+    GEO_Wall(-6.0 2.60 6.0 3.60 0.92 0.24)
+
+# L3 Component: RightRearOpaqueComponent
+OM5_L3_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent() ->
+    OM5_L4_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_FullHeightPierFeature()
+    OM5_L4_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowSillFeature()
+    OM5_L4_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowHeadFeature()
+
+# L4 Feature / interface: FullHeightPierFeature
+OM5_L4_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_FullHeightPierFeature() ->
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_FullHeightPierFeature_RightWingLeftPierLeaf()
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_FullHeightPierFeature_RightWingRightPierLeaf()
+
+# L5 Leaf: RightWingLeftPierLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_FullHeightPierFeature_RightWingLeftPierLeaf() ->
+    GEO_Wall(3.4 0.22 6.0 0.8 3.30 0.24)
+
+# L5 Leaf: RightWingRightPierLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_FullHeightPierFeature_RightWingRightPierLeaf() ->
+    GEO_Wall(7.6 0.22 6.0 2.8 3.30 0.24)
+
+# L4 Feature / interface: WindowSillFeature
+OM5_L4_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowSillFeature() ->
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowSillFeature_RightRearWindowSillLeaf()
+
+# L5 Leaf: RightRearWindowSillLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowSillFeature_RightRearWindowSillLeaf() ->
+    GEO_Wall(5.0 0.22 6.0 2.40 0.83 0.24)
+
+# L4 Feature / interface: WindowHeadFeature
+OM5_L4_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowHeadFeature() ->
+    OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowHeadFeature_RightRearWindowHeadLeaf()
+
+# L5 Leaf: RightRearWindowHeadLeaf
+OM5_L5_EnvelopeSystem_RearFacadeAssembly_RightRearOpaqueComponent_WindowHeadFeature_RightRearWindowHeadLeaf() ->
+    GEO_Wall(5.0 2.60 6.0 2.40 0.92 0.24)
+
+# L2 Assembly: EnvelopeSystem / CourtyardFacadeAssembly
+OM5_L2_EnvelopeSystem_CourtyardFacadeAssembly() ->
+    OM5_L3_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent()
+    OM5_L3_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent()
+    OM5_L3_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent()
+
+# L3 Component: FrontCourtyardWallComponent
+OM5_L3_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent() ->
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_LeftPierFeature()
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_RightPierFeature()
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_DoorHeadFeature()
+
+# L4 Feature / interface: LeftPierFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_LeftPierFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_LeftPierFeature_FrontCourtyardLeftPierLeaf()
+
+# L5 Leaf: FrontCourtyardLeftPierLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_LeftPierFeature_FrontCourtyardLeftPierLeaf() ->
+    GEO_Wall(-2.65 0.22 -1.0 0.70 3.30 0.24)
+
+# L4 Feature / interface: RightPierFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_RightPierFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_RightPierFeature_FrontCourtyardRightPierLeaf()
+
+# L5 Leaf: FrontCourtyardRightPierLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_RightPierFeature_FrontCourtyardRightPierLeaf() ->
+    GEO_Wall(2.65 0.22 -1.0 0.70 3.30 0.24)
+
+# L4 Feature / interface: DoorHeadFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_DoorHeadFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_DoorHeadFeature_FrontCourtyardDoorHeadLeaf()
+
+# L5 Leaf: FrontCourtyardDoorHeadLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_FrontCourtyardWallComponent_DoorHeadFeature_FrontCourtyardDoorHeadLeaf() ->
+    GEO_Wall(0 2.75 -1.0 4.60 0.77 0.24)
+
+# L3 Component: LeftCourtyardWallComponent
+OM5_L3_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent() ->
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_FrontPierFeature()
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_RearPierFeature()
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_OpeningHeadFeature()
+
+# L4 Feature / interface: FrontPierFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_FrontPierFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_FrontPierFeature_LeftCourtyardFrontPierLeaf()
+
+# L5 Leaf: LeftCourtyardFrontPierLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_FrontPierFeature_LeftCourtyardFrontPierLeaf() ->
+    GEO_Wall(-3.0 0.22 -0.10 0.24 3.30 1.80)
+
+# L4 Feature / interface: RearPierFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_RearPierFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_RearPierFeature_LeftCourtyardRearPierLeaf()
+
+# L5 Leaf: LeftCourtyardRearPierLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_RearPierFeature_LeftCourtyardRearPierLeaf() ->
+    GEO_Wall(-3.0 0.22 5.10 0.24 3.30 1.80)
+
+# L4 Feature / interface: OpeningHeadFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_OpeningHeadFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_OpeningHeadFeature_LeftCourtyardOpeningHeadLeaf()
+
+# L5 Leaf: LeftCourtyardOpeningHeadLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_LeftCourtyardWallComponent_OpeningHeadFeature_LeftCourtyardOpeningHeadLeaf() ->
+    GEO_Wall(-3.0 2.75 2.50 0.24 0.77 3.40)
+
+# L3 Component: RightCourtyardWallComponent
+OM5_L3_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent() ->
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_FrontPierFeature()
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_RearPierFeature()
+    OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_OpeningHeadFeature()
+
+# L4 Feature / interface: FrontPierFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_FrontPierFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_FrontPierFeature_RightCourtyardFrontPierLeaf()
+
+# L5 Leaf: RightCourtyardFrontPierLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_FrontPierFeature_RightCourtyardFrontPierLeaf() ->
+    GEO_Wall(3.0 0.22 -0.10 0.24 3.30 1.80)
+
+# L4 Feature / interface: RearPierFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_RearPierFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_RearPierFeature_RightCourtyardRearPierLeaf()
+
+# L5 Leaf: RightCourtyardRearPierLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_RearPierFeature_RightCourtyardRearPierLeaf() ->
+    GEO_Wall(3.0 0.22 5.10 0.24 3.30 1.80)
+
+# L4 Feature / interface: OpeningHeadFeature
+OM5_L4_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_OpeningHeadFeature() ->
+    OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_OpeningHeadFeature_RightCourtyardOpeningHeadLeaf()
+
+# L5 Leaf: RightCourtyardOpeningHeadLeaf
+OM5_L5_EnvelopeSystem_CourtyardFacadeAssembly_RightCourtyardWallComponent_OpeningHeadFeature_RightCourtyardOpeningHeadLeaf() ->
+    GEO_Wall(3.0 2.75 2.50 0.24 0.77 3.40)
+
+# L2 Assembly: EnvelopeSystem / FacadeDetailAssembly
+OM5_L2_EnvelopeSystem_FacadeDetailAssembly() ->
+    OM5_L3_EnvelopeSystem_FacadeDetailAssembly_LeftFrontFinComponent()
+    OM5_L3_EnvelopeSystem_FacadeDetailAssembly_RightFrontFinComponent()
+    OM5_L3_EnvelopeSystem_FacadeDetailAssembly_FrontBaseBandComponent()
+    OM5_L3_EnvelopeSystem_FacadeDetailAssembly_FrontRoofBandComponent()
+
+# L3 Component: LeftFrontFinComponent
+OM5_L3_EnvelopeSystem_FacadeDetailAssembly_LeftFrontFinComponent() ->
+    OM5_L4_EnvelopeSystem_FacadeDetailAssembly_LeftFrontFinComponent_VerticalBladeFeature()
+
+# L4 Feature / interface: VerticalBladeFeature
+OM5_L4_EnvelopeSystem_FacadeDetailAssembly_LeftFrontFinComponent_VerticalBladeFeature() ->
+    OM5_L5_EnvelopeSystem_FacadeDetailAssembly_LeftFrontFinComponent_VerticalBladeFeature_LeftFrontFinLeaf()
+
+# L5 Leaf: LeftFrontFinLeaf
+OM5_L5_EnvelopeSystem_FacadeDetailAssembly_LeftFrontFinComponent_VerticalBladeFeature_LeftFrontFinLeaf() ->
+    GEO_Metal(-8.75 0.22 -6.35 0.18 3.30 0.70)
+
+# L3 Component: RightFrontFinComponent
+OM5_L3_EnvelopeSystem_FacadeDetailAssembly_RightFrontFinComponent() ->
+    OM5_L4_EnvelopeSystem_FacadeDetailAssembly_RightFrontFinComponent_VerticalBladeFeature()
+
+# L4 Feature / interface: VerticalBladeFeature
+OM5_L4_EnvelopeSystem_FacadeDetailAssembly_RightFrontFinComponent_VerticalBladeFeature() ->
+    OM5_L5_EnvelopeSystem_FacadeDetailAssembly_RightFrontFinComponent_VerticalBladeFeature_RightFrontFinLeaf()
+
+# L5 Leaf: RightFrontFinLeaf
+OM5_L5_EnvelopeSystem_FacadeDetailAssembly_RightFrontFinComponent_VerticalBladeFeature_RightFrontFinLeaf() ->
+    GEO_Metal(8.75 0.22 -6.35 0.18 3.30 0.70)
+
+# L3 Component: FrontBaseBandComponent
+OM5_L3_EnvelopeSystem_FacadeDetailAssembly_FrontBaseBandComponent() ->
+    OM5_L4_EnvelopeSystem_FacadeDetailAssembly_FrontBaseBandComponent_HorizontalBandFeature()
+
+# L4 Feature / interface: HorizontalBandFeature
+OM5_L4_EnvelopeSystem_FacadeDetailAssembly_FrontBaseBandComponent_HorizontalBandFeature() ->
+    OM5_L5_EnvelopeSystem_FacadeDetailAssembly_FrontBaseBandComponent_HorizontalBandFeature_FrontBaseBandLeaf()
+
+# L5 Leaf: FrontBaseBandLeaf
+OM5_L5_EnvelopeSystem_FacadeDetailAssembly_FrontBaseBandComponent_HorizontalBandFeature_FrontBaseBandLeaf() ->
+    GEO_DarkMetal(0 0.22 -6.16 18.0 0.22 0.14)
+
+# L3 Component: FrontRoofBandComponent
+OM5_L3_EnvelopeSystem_FacadeDetailAssembly_FrontRoofBandComponent() ->
+    OM5_L4_EnvelopeSystem_FacadeDetailAssembly_FrontRoofBandComponent_HorizontalBandFeature()
+
+# L4 Feature / interface: HorizontalBandFeature
+OM5_L4_EnvelopeSystem_FacadeDetailAssembly_FrontRoofBandComponent_HorizontalBandFeature() ->
+    OM5_L5_EnvelopeSystem_FacadeDetailAssembly_FrontRoofBandComponent_HorizontalBandFeature_FrontRoofBandLeaf()
+
+# L5 Leaf: FrontRoofBandLeaf
+OM5_L5_EnvelopeSystem_FacadeDetailAssembly_FrontRoofBandComponent_HorizontalBandFeature_FrontRoofBandLeaf() ->
+    GEO_DarkMetal(0 3.30 -6.16 18.0 0.22 0.14)
+
+# ================================================================
+# L1 SYSTEM: OpeningSystem
+# ================================================================
+
+OM5_L1_OpeningSystem() ->
+    OM5_L2_OpeningSystem_FrontWindowAssembly()
+    OM5_L2_OpeningSystem_RearWindowAssembly()
+    OM5_L2_OpeningSystem_SideWindowAssembly()
+    OM5_L2_OpeningSystem_MainEntryDoorAssembly()
+    OM5_L2_OpeningSystem_ServiceDoorAssembly()
+    OM5_L2_OpeningSystem_CourtyardSliderAssembly()
+    OM5_L2_OpeningSystem_WingCourtyardOpeningAssembly()
+
+# L2 Assembly: OpeningSystem / FrontWindowAssembly
+OM5_L2_OpeningSystem_FrontWindowAssembly() ->
+    OM5_L3_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent()
+    OM5_L3_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent()
+
+# L3 Component: LeftFrontWindowComponent
+OM5_L3_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent() ->
+    OM5_L4_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(-5.4 1.1300000000000001 -6.12 3.44 1.3900000000000001 0.06)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_LeftJambLeaf()
+    OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_RightJambLeaf()
+    OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: LeftJambLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_LeftJambLeaf() ->
+    GEO_Metal(-7.2 1.05 -6.12 0.08 1.55 0.10)
+
+# L5 Leaf: RightJambLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_RightJambLeaf() ->
+    GEO_Metal(-3.6000000000000005 1.05 -6.12 0.08 1.55 0.10)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(-5.4 1.05 -6.12 3.6 0.08 0.10)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(-5.4 2.52 -6.12 3.6 0.08 0.10)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_LeftFrontWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(-5.4 1.05 -6.15 0.06 1.55 0.06)
+
+# L3 Component: RightFrontWindowComponent
+OM5_L3_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent() ->
+    OM5_L4_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(5.4 1.1300000000000001 -6.12 3.44 1.3900000000000001 0.06)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_LeftJambLeaf()
+    OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_RightJambLeaf()
+    OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: LeftJambLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_LeftJambLeaf() ->
+    GEO_Metal(3.6000000000000005 1.05 -6.12 0.08 1.55 0.10)
+
+# L5 Leaf: RightJambLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_RightJambLeaf() ->
+    GEO_Metal(7.2 1.05 -6.12 0.08 1.55 0.10)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(5.4 1.05 -6.12 3.6 0.08 0.10)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(5.4 2.52 -6.12 3.6 0.08 0.10)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_FrontWindowAssembly_RightFrontWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(5.4 1.05 -6.15 0.06 1.55 0.06)
+
+# L2 Assembly: OpeningSystem / RearWindowAssembly
+OM5_L2_OpeningSystem_RearWindowAssembly() ->
+    OM5_L3_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent()
+    OM5_L3_OpeningSystem_RearWindowAssembly_RightRearWindowComponent()
+
+# L3 Component: LeftRearWindowComponent
+OM5_L3_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent() ->
+    OM5_L4_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(-6.0 1.1300000000000001 6.12 3.44 1.3900000000000001 0.06)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_LeftJambLeaf()
+    OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_RightJambLeaf()
+    OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: LeftJambLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_LeftJambLeaf() ->
+    GEO_Metal(-7.8 1.05 6.12 0.08 1.55 0.10)
+
+# L5 Leaf: RightJambLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_RightJambLeaf() ->
+    GEO_Metal(-4.2 1.05 6.12 0.08 1.55 0.10)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(-6.0 1.05 6.12 3.6 0.08 0.10)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(-6.0 2.52 6.12 3.6 0.08 0.10)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_LeftRearWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(-6.0 1.05 6.09 0.06 1.55 0.06)
+
+# L3 Component: RightRearWindowComponent
+OM5_L3_OpeningSystem_RearWindowAssembly_RightRearWindowComponent() ->
+    OM5_L4_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(5.0 1.1300000000000001 6.12 2.2399999999999998 1.3900000000000001 0.06)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_LeftJambLeaf()
+    OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_RightJambLeaf()
+    OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: LeftJambLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_LeftJambLeaf() ->
+    GEO_Metal(3.8 1.05 6.12 0.08 1.55 0.10)
+
+# L5 Leaf: RightJambLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_RightJambLeaf() ->
+    GEO_Metal(6.2 1.05 6.12 0.08 1.55 0.10)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(5.0 1.05 6.12 2.4 0.08 0.10)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(5.0 2.52 6.12 2.4 0.08 0.10)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_RearWindowAssembly_RightRearWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(5.0 1.05 6.09 0.06 1.55 0.06)
+
+# L2 Assembly: OpeningSystem / SideWindowAssembly
+OM5_L2_OpeningSystem_SideWindowAssembly() ->
+    OM5_L3_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent()
+    OM5_L3_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent()
+    OM5_L3_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent()
+
+# L3 Component: LeftFrontRibbonWindowComponent
+OM5_L3_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent() ->
+    OM5_L4_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(-9.12 1.1300000000000001 -3.6 0.06 1.3900000000000001 2.44)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_FrontJambLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_RearJambLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: FrontJambLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_FrontJambLeaf() ->
+    GEO_Metal(-9.12 1.05 -4.9 0.10 1.55 0.08)
+
+# L5 Leaf: RearJambLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_RearJambLeaf() ->
+    GEO_Metal(-9.12 1.05 -2.3 0.10 1.55 0.08)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(-9.12 1.05 -3.6 0.10 0.08 2.6)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(-9.12 2.52 -3.6 0.10 0.08 2.6)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftFrontRibbonWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(-9.149999999999999 1.05 -3.6 0.06 1.55 0.06)
+
+# L3 Component: LeftRearRibbonWindowComponent
+OM5_L3_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent() ->
+    OM5_L4_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(-9.12 1.1300000000000001 3.3 0.06 1.3900000000000001 2.44)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_FrontJambLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_RearJambLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: FrontJambLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_FrontJambLeaf() ->
+    GEO_Metal(-9.12 1.05 1.9999999999999998 0.10 1.55 0.08)
+
+# L5 Leaf: RearJambLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_RearJambLeaf() ->
+    GEO_Metal(-9.12 1.05 4.6 0.10 1.55 0.08)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(-9.12 1.05 3.3 0.10 0.08 2.6)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(-9.12 2.52 3.3 0.10 0.08 2.6)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_LeftRearRibbonWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(-9.149999999999999 1.05 3.3 0.06 1.55 0.06)
+
+# L3 Component: RightRibbonWindowComponent
+OM5_L3_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent() ->
+    OM5_L4_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature()
+    OM5_L4_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_MullionFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_GlazingFeature_GlassPaneLeaf()
+
+# L5 Leaf: GlassPaneLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_GlazingFeature_GlassPaneLeaf() ->
+    GEO_Glass(9.12 1.1300000000000001 -3.3 0.06 1.3900000000000001 2.44)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_FrontJambLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_RearJambLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_SillFrameLeaf()
+    OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_HeadFrameLeaf()
+
+# L5 Leaf: FrontJambLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_FrontJambLeaf() ->
+    GEO_Metal(9.12 1.05 -4.6 0.10 1.55 0.08)
+
+# L5 Leaf: RearJambLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_RearJambLeaf() ->
+    GEO_Metal(9.12 1.05 -1.9999999999999998 0.10 1.55 0.08)
+
+# L5 Leaf: SillFrameLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_SillFrameLeaf() ->
+    GEO_Metal(9.12 1.05 -3.3 0.10 0.08 2.6)
+
+# L5 Leaf: HeadFrameLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_FrameFeature_HeadFrameLeaf() ->
+    GEO_Metal(9.12 2.52 -3.3 0.10 0.08 2.6)
+
+# L4 Feature / interface: MullionFeature
+OM5_L4_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_MullionFeature() ->
+    OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_MullionFeature_CenterMullionLeaf()
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_SideWindowAssembly_RightRibbonWindowComponent_MullionFeature_CenterMullionLeaf() ->
+    GEO_Metal(9.09 1.05 -3.3 0.06 1.55 0.06)
+
+# L2 Assembly: OpeningSystem / MainEntryDoorAssembly
+OM5_L2_OpeningSystem_MainEntryDoorAssembly() ->
+    OM5_L3_OpeningSystem_MainEntryDoorAssembly_EntryDoorLeafComponent()
+    OM5_L3_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent()
+    OM5_L3_OpeningSystem_MainEntryDoorAssembly_EntryDoorHardwareComponent()
+
+# L3 Component: EntryDoorLeafComponent
+OM5_L3_OpeningSystem_MainEntryDoorAssembly_EntryDoorLeafComponent() ->
+    OM5_L4_OpeningSystem_MainEntryDoorAssembly_EntryDoorLeafComponent_GlazedLeafFeature()
+
+# L4 Feature / interface: GlazedLeafFeature
+OM5_L4_OpeningSystem_MainEntryDoorAssembly_EntryDoorLeafComponent_GlazedLeafFeature() ->
+    OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorLeafComponent_GlazedLeafFeature_EntryDoorGlassLeaf()
+
+# L5 Leaf: EntryDoorGlassLeaf
+OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorLeafComponent_GlazedLeafFeature_EntryDoorGlassLeaf() ->
+    GEO_SmokeGlass(0 0.32 -6.15 1.65 2.30 0.08)
+
+# L3 Component: EntryDoorFrameComponent
+OM5_L3_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent() ->
+    OM5_L4_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature()
+
+# L4 Feature / interface: FrameMemberFeature
+OM5_L4_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature() ->
+    OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature_LeftJambLeaf()
+    OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature_RightJambLeaf()
+    OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature_HeadLeaf()
+
+# L5 Leaf: LeftJambLeaf
+OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature_LeftJambLeaf() ->
+    GEO_Metal(-0.95 0.22 -6.16 0.1 2.5 0.12)
+
+# L5 Leaf: RightJambLeaf
+OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature_RightJambLeaf() ->
+    GEO_Metal(0.95 0.22 -6.16 0.1 2.5 0.12)
+
+# L5 Leaf: HeadLeaf
+OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorFrameComponent_FrameMemberFeature_HeadLeaf() ->
+    GEO_Metal(0 2.62 -6.16 1.9 0.1 0.12)
+
+# L3 Component: EntryDoorHardwareComponent
+OM5_L3_OpeningSystem_MainEntryDoorAssembly_EntryDoorHardwareComponent() ->
+    OM5_L4_OpeningSystem_MainEntryDoorAssembly_EntryDoorHardwareComponent_HandleFeature()
+
+# L4 Feature / interface: HandleFeature
+OM5_L4_OpeningSystem_MainEntryDoorAssembly_EntryDoorHardwareComponent_HandleFeature() ->
+    OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorHardwareComponent_HandleFeature_EntryHandleLeaf()
+
+# L5 Leaf: EntryHandleLeaf
+OM5_L5_OpeningSystem_MainEntryDoorAssembly_EntryDoorHardwareComponent_HandleFeature_EntryHandleLeaf() ->
+    GEO_CylinderDark(0.52 1.05 -6.25 0.07 0.65)
+
+# L2 Assembly: OpeningSystem / ServiceDoorAssembly
+OM5_L2_OpeningSystem_ServiceDoorAssembly() ->
+    OM5_L3_OpeningSystem_ServiceDoorAssembly_ServiceDoorLeafComponent()
+    OM5_L3_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent()
+    OM5_L3_OpeningSystem_ServiceDoorAssembly_ServiceDoorHardwareComponent()
+
+# L3 Component: ServiceDoorLeafComponent
+OM5_L3_OpeningSystem_ServiceDoorAssembly_ServiceDoorLeafComponent() ->
+    OM5_L4_OpeningSystem_ServiceDoorAssembly_ServiceDoorLeafComponent_SolidLeafFeature()
+
+# L4 Feature / interface: SolidLeafFeature
+OM5_L4_OpeningSystem_ServiceDoorAssembly_ServiceDoorLeafComponent_SolidLeafFeature() ->
+    OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorLeafComponent_SolidLeafFeature_ServiceDoorPanelLeaf()
+
+# L5 Leaf: ServiceDoorPanelLeaf
+OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorLeafComponent_SolidLeafFeature_ServiceDoorPanelLeaf() ->
+    GEO_Wood(9.14 0.30 4.10 0.10 2.20 1.18)
+
+# L3 Component: ServiceDoorFrameComponent
+OM5_L3_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent() ->
+    OM5_L4_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature()
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature_FrontJambLeaf()
+    OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature_RearJambLeaf()
+    OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature_HeadLeaf()
+
+# L5 Leaf: FrontJambLeaf
+OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature_FrontJambLeaf() ->
+    GEO_Metal(9.15 0.22 3.35 0.12 2.50 0.10)
+
+# L5 Leaf: RearJambLeaf
+OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature_RearJambLeaf() ->
+    GEO_Metal(9.15 0.22 4.85 0.12 2.50 0.10)
+
+# L5 Leaf: HeadLeaf
+OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorFrameComponent_FrameFeature_HeadLeaf() ->
+    GEO_Metal(9.15 2.62 4.10 0.12 0.10 1.50)
+
+# L3 Component: ServiceDoorHardwareComponent
+OM5_L3_OpeningSystem_ServiceDoorAssembly_ServiceDoorHardwareComponent() ->
+    OM5_L4_OpeningSystem_ServiceDoorAssembly_ServiceDoorHardwareComponent_HandleFeature()
+
+# L4 Feature / interface: HandleFeature
+OM5_L4_OpeningSystem_ServiceDoorAssembly_ServiceDoorHardwareComponent_HandleFeature() ->
+    OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorHardwareComponent_HandleFeature_ServiceHandleLeaf()
+
+# L5 Leaf: ServiceHandleLeaf
+OM5_L5_OpeningSystem_ServiceDoorAssembly_ServiceDoorHardwareComponent_HandleFeature_ServiceHandleLeaf() ->
+    GEO_CylinderDark(9.24 1.05 3.72 0.07 0.50)
+
+# L2 Assembly: OpeningSystem / CourtyardSliderAssembly
+OM5_L2_OpeningSystem_CourtyardSliderAssembly() ->
+    OM5_L3_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent()
+
+# L3 Component: FrontCourtyardSliderComponent
+OM5_L3_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent() ->
+    OM5_L4_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_GlazingFeature_LeftSlidingPaneLeaf()
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_GlazingFeature_RightSlidingPaneLeaf()
+
+# L5 Leaf: LeftSlidingPaneLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_GlazingFeature_LeftSlidingPaneLeaf() ->
+    GEO_Glass(-1.15 0.30 -1.13 2.20 2.35 0.07)
+
+# L5 Leaf: RightSlidingPaneLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_GlazingFeature_RightSlidingPaneLeaf() ->
+    GEO_Glass(1.15 0.30 -1.13 2.20 2.35 0.07)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_LeftJambLeaf()
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_CenterMullionLeaf()
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_RightJambLeaf()
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_SillLeaf()
+    OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_HeadLeaf()
+
+# L5 Leaf: LeftJambLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_LeftJambLeaf() ->
+    GEO_Metal(-2.35 0.22 -1.14 0.1 2.53 0.12)
+
+# L5 Leaf: CenterMullionLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_CenterMullionLeaf() ->
+    GEO_Metal(0 0.22 -1.14 0.1 2.53 0.12)
+
+# L5 Leaf: RightJambLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_RightJambLeaf() ->
+    GEO_Metal(2.35 0.22 -1.14 0.1 2.53 0.12)
+
+# L5 Leaf: SillLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_SillLeaf() ->
+    GEO_Metal(0 0.22 -1.14 4.7 0.1 0.12)
+
+# L5 Leaf: HeadLeaf
+OM5_L5_OpeningSystem_CourtyardSliderAssembly_FrontCourtyardSliderComponent_FrameFeature_HeadLeaf() ->
+    GEO_Metal(0 2.65 -1.14 4.7 0.1 0.12)
+
+# L2 Assembly: OpeningSystem / WingCourtyardOpeningAssembly
+OM5_L2_OpeningSystem_WingCourtyardOpeningAssembly() ->
+    OM5_L3_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent()
+    OM5_L3_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent()
+
+# L3 Component: LeftWingSliderComponent
+OM5_L3_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent() ->
+    OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_GlazingFeature_LeftWingGlassLeaf()
+
+# L5 Leaf: LeftWingGlassLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_GlazingFeature_LeftWingGlassLeaf() ->
+    GEO_Glass(-3.13 0.30 2.50 0.07 2.35 3.10)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingFrontJambLeaf()
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingRearJambLeaf()
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingSillLeaf()
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingHeadLeaf()
+
+# L5 Leaf: LeftWingFrontJambLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingFrontJambLeaf() ->
+    GEO_Metal(-3.13 0.22 0.80 0.12 2.53 0.10)
+
+# L5 Leaf: LeftWingRearJambLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingRearJambLeaf() ->
+    GEO_Metal(-3.13 0.22 4.20 0.12 2.53 0.10)
+
+# L5 Leaf: LeftWingSillLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingSillLeaf() ->
+    GEO_Metal(-3.13 0.22 2.50 0.12 0.10 3.40)
+
+# L5 Leaf: LeftWingHeadLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_LeftWingSliderComponent_FrameFeature_LeftWingHeadLeaf() ->
+    GEO_Metal(-3.13 2.65 2.50 0.12 0.10 3.40)
+
+# L3 Component: RightWingSliderComponent
+OM5_L3_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent() ->
+    OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_GlazingFeature()
+    OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_GlazingFeature() ->
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_GlazingFeature_RightWingGlassLeaf()
+
+# L5 Leaf: RightWingGlassLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_GlazingFeature_RightWingGlassLeaf() ->
+    GEO_Glass(3.13 0.30 2.50 0.07 2.35 3.10)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature() ->
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingFrontJambLeaf()
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingRearJambLeaf()
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingSillLeaf()
+    OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingHeadLeaf()
+
+# L5 Leaf: RightWingFrontJambLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingFrontJambLeaf() ->
+    GEO_Metal(3.13 0.22 0.80 0.12 2.53 0.10)
+
+# L5 Leaf: RightWingRearJambLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingRearJambLeaf() ->
+    GEO_Metal(3.13 0.22 4.20 0.12 2.53 0.10)
+
+# L5 Leaf: RightWingSillLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingSillLeaf() ->
+    GEO_Metal(3.13 0.22 2.50 0.12 0.10 3.40)
+
+# L5 Leaf: RightWingHeadLeaf
+OM5_L5_OpeningSystem_WingCourtyardOpeningAssembly_RightWingSliderComponent_FrameFeature_RightWingHeadLeaf() ->
+    GEO_Metal(3.13 2.65 2.50 0.12 0.10 3.40)
+
+# ================================================================
+# L1 SYSTEM: InteriorSystem
+# ================================================================
+
+OM5_L1_InteriorSystem() ->
+    OM5_L2_InteriorSystem_SpatialLayoutAssembly()
+    OM5_L2_InteriorSystem_FinishAssembly()
+    OM5_L2_InteriorSystem_LoungeAssembly()
+    OM5_L2_InteriorSystem_KitchenDiningAssembly()
+    OM5_L2_InteriorSystem_OfficeStudioAssembly()
+    OM5_L2_InteriorSystem_BathroomUtilityAssembly()
+    OM5_L2_InteriorSystem_CeilingFixtureAssembly()
+
+# L2 Assembly: InteriorSystem / SpatialLayoutAssembly
+OM5_L2_InteriorSystem_SpatialLayoutAssembly() ->
+    OM5_L3_InteriorSystem_SpatialLayoutAssembly_LobbyLeftPartitionComponent()
+    OM5_L3_InteriorSystem_SpatialLayoutAssembly_LobbyRightPartitionComponent()
+    OM5_L3_InteriorSystem_SpatialLayoutAssembly_LeftWingOfficePartitionComponent()
+    OM5_L3_InteriorSystem_SpatialLayoutAssembly_RightWingBathroomPartitionComponent()
+    OM5_L3_InteriorSystem_SpatialLayoutAssembly_RightWingUtilityPartitionComponent()
+
+# L3 Component: LobbyLeftPartitionComponent
+OM5_L3_InteriorSystem_SpatialLayoutAssembly_LobbyLeftPartitionComponent() ->
+    OM5_L4_InteriorSystem_SpatialLayoutAssembly_LobbyLeftPartitionComponent_PartitionFeature()
+
+# L4 Feature / interface: PartitionFeature
+OM5_L4_InteriorSystem_SpatialLayoutAssembly_LobbyLeftPartitionComponent_PartitionFeature() ->
+    OM5_L5_InteriorSystem_SpatialLayoutAssembly_LobbyLeftPartitionComponent_PartitionFeature_LobbyLeftPartitionLeaf()
+
+# L5 Leaf: LobbyLeftPartitionLeaf
+OM5_L5_InteriorSystem_SpatialLayoutAssembly_LobbyLeftPartitionComponent_PartitionFeature_LobbyLeftPartitionLeaf() ->
+    GEO_Wall(-2.0 0.22 -3.5 0.14 3.0 4.5)
+
+# L3 Component: LobbyRightPartitionComponent
+OM5_L3_InteriorSystem_SpatialLayoutAssembly_LobbyRightPartitionComponent() ->
+    OM5_L4_InteriorSystem_SpatialLayoutAssembly_LobbyRightPartitionComponent_PartitionFeature()
+
+# L4 Feature / interface: PartitionFeature
+OM5_L4_InteriorSystem_SpatialLayoutAssembly_LobbyRightPartitionComponent_PartitionFeature() ->
+    OM5_L5_InteriorSystem_SpatialLayoutAssembly_LobbyRightPartitionComponent_PartitionFeature_LobbyRightPartitionLeaf()
+
+# L5 Leaf: LobbyRightPartitionLeaf
+OM5_L5_InteriorSystem_SpatialLayoutAssembly_LobbyRightPartitionComponent_PartitionFeature_LobbyRightPartitionLeaf() ->
+    GEO_Wall(2.0 0.22 -3.5 0.14 3.0 4.5)
+
+# L3 Component: LeftWingOfficePartitionComponent
+OM5_L3_InteriorSystem_SpatialLayoutAssembly_LeftWingOfficePartitionComponent() ->
+    OM5_L4_InteriorSystem_SpatialLayoutAssembly_LeftWingOfficePartitionComponent_PartitionFeature()
+
+# L4 Feature / interface: PartitionFeature
+OM5_L4_InteriorSystem_SpatialLayoutAssembly_LeftWingOfficePartitionComponent_PartitionFeature() ->
+    OM5_L5_InteriorSystem_SpatialLayoutAssembly_LeftWingOfficePartitionComponent_PartitionFeature_LeftWingOfficePartitionLeaf()
+
+# L5 Leaf: LeftWingOfficePartitionLeaf
+OM5_L5_InteriorSystem_SpatialLayoutAssembly_LeftWingOfficePartitionComponent_PartitionFeature_LeftWingOfficePartitionLeaf() ->
+    GEO_Wall(-6.0 0.22 2.2 5.6 3.0 0.14)
+
+# L3 Component: RightWingBathroomPartitionComponent
+OM5_L3_InteriorSystem_SpatialLayoutAssembly_RightWingBathroomPartitionComponent() ->
+    OM5_L4_InteriorSystem_SpatialLayoutAssembly_RightWingBathroomPartitionComponent_PartitionFeature()
+
+# L4 Feature / interface: PartitionFeature
+OM5_L4_InteriorSystem_SpatialLayoutAssembly_RightWingBathroomPartitionComponent_PartitionFeature() ->
+    OM5_L5_InteriorSystem_SpatialLayoutAssembly_RightWingBathroomPartitionComponent_PartitionFeature_RightWingBathroomPartitionLeaf()
+
+# L5 Leaf: RightWingBathroomPartitionLeaf
+OM5_L5_InteriorSystem_SpatialLayoutAssembly_RightWingBathroomPartitionComponent_PartitionFeature_RightWingBathroomPartitionLeaf() ->
+    GEO_Wall(6.0 0.22 1.2 5.6 3.0 0.14)
+
+# L3 Component: RightWingUtilityPartitionComponent
+OM5_L3_InteriorSystem_SpatialLayoutAssembly_RightWingUtilityPartitionComponent() ->
+    OM5_L4_InteriorSystem_SpatialLayoutAssembly_RightWingUtilityPartitionComponent_PartitionFeature()
+
+# L4 Feature / interface: PartitionFeature
+OM5_L4_InteriorSystem_SpatialLayoutAssembly_RightWingUtilityPartitionComponent_PartitionFeature() ->
+    OM5_L5_InteriorSystem_SpatialLayoutAssembly_RightWingUtilityPartitionComponent_PartitionFeature_RightWingUtilityPartitionLeaf()
+
+# L5 Leaf: RightWingUtilityPartitionLeaf
+OM5_L5_InteriorSystem_SpatialLayoutAssembly_RightWingUtilityPartitionComponent_PartitionFeature_RightWingUtilityPartitionLeaf() ->
+    GEO_Wall(6.0 0.22 4.2 5.6 3.0 0.14)
+
+# L2 Assembly: InteriorSystem / FinishAssembly
+OM5_L2_InteriorSystem_FinishAssembly() ->
+    OM5_L3_InteriorSystem_FinishAssembly_LoungeFloorComponent()
+    OM5_L3_InteriorSystem_FinishAssembly_LobbyFloorComponent()
+    OM5_L3_InteriorSystem_FinishAssembly_KitchenFloorComponent()
+    OM5_L3_InteriorSystem_FinishAssembly_OfficeFloorComponent()
+    OM5_L3_InteriorSystem_FinishAssembly_ServiceFloorComponent()
+
+# L3 Component: LoungeFloorComponent
+OM5_L3_InteriorSystem_FinishAssembly_LoungeFloorComponent() ->
+    OM5_L4_InteriorSystem_FinishAssembly_LoungeFloorComponent_FloorFinishFeature()
+
+# L4 Feature / interface: FloorFinishFeature
+OM5_L4_InteriorSystem_FinishAssembly_LoungeFloorComponent_FloorFinishFeature() ->
+    OM5_L5_InteriorSystem_FinishAssembly_LoungeFloorComponent_FloorFinishFeature_LoungeFloorLeaf()
+
+# L5 Leaf: LoungeFloorLeaf
+OM5_L5_InteriorSystem_FinishAssembly_LoungeFloorComponent_FloorFinishFeature_LoungeFloorLeaf() ->
+    GEO_Wood(-5.5 0.23 -3.5 6.2 0.05 4.5)
+
+# L3 Component: LobbyFloorComponent
+OM5_L3_InteriorSystem_FinishAssembly_LobbyFloorComponent() ->
+    OM5_L4_InteriorSystem_FinishAssembly_LobbyFloorComponent_FloorFinishFeature()
+
+# L4 Feature / interface: FloorFinishFeature
+OM5_L4_InteriorSystem_FinishAssembly_LobbyFloorComponent_FloorFinishFeature() ->
+    OM5_L5_InteriorSystem_FinishAssembly_LobbyFloorComponent_FloorFinishFeature_LobbyFloorLeaf()
+
+# L5 Leaf: LobbyFloorLeaf
+OM5_L5_InteriorSystem_FinishAssembly_LobbyFloorComponent_FloorFinishFeature_LobbyFloorLeaf() ->
+    GEO_StoneTile(0 0.23 -3.5 3.6 0.05 4.5)
+
+# L3 Component: KitchenFloorComponent
+OM5_L3_InteriorSystem_FinishAssembly_KitchenFloorComponent() ->
+    OM5_L4_InteriorSystem_FinishAssembly_KitchenFloorComponent_FloorFinishFeature()
+
+# L4 Feature / interface: FloorFinishFeature
+OM5_L4_InteriorSystem_FinishAssembly_KitchenFloorComponent_FloorFinishFeature() ->
+    OM5_L5_InteriorSystem_FinishAssembly_KitchenFloorComponent_FloorFinishFeature_KitchenFloorLeaf()
+
+# L5 Leaf: KitchenFloorLeaf
+OM5_L5_InteriorSystem_FinishAssembly_KitchenFloorComponent_FloorFinishFeature_KitchenFloorLeaf() ->
+    GEO_StoneTile(5.5 0.23 -3.5 6.2 0.05 4.5)
+
+# L3 Component: OfficeFloorComponent
+OM5_L3_InteriorSystem_FinishAssembly_OfficeFloorComponent() ->
+    OM5_L4_InteriorSystem_FinishAssembly_OfficeFloorComponent_FloorFinishFeature()
+
+# L4 Feature / interface: FloorFinishFeature
+OM5_L4_InteriorSystem_FinishAssembly_OfficeFloorComponent_FloorFinishFeature() ->
+    OM5_L5_InteriorSystem_FinishAssembly_OfficeFloorComponent_FloorFinishFeature_OfficeFloorLeaf()
+
+# L5 Leaf: OfficeFloorLeaf
+OM5_L5_InteriorSystem_FinishAssembly_OfficeFloorComponent_FloorFinishFeature_OfficeFloorLeaf() ->
+    GEO_Wood(-6 0.23 2.6 5.6 0.05 6.4)
+
+# L3 Component: ServiceFloorComponent
+OM5_L3_InteriorSystem_FinishAssembly_ServiceFloorComponent() ->
+    OM5_L4_InteriorSystem_FinishAssembly_ServiceFloorComponent_FloorFinishFeature()
+
+# L4 Feature / interface: FloorFinishFeature
+OM5_L4_InteriorSystem_FinishAssembly_ServiceFloorComponent_FloorFinishFeature() ->
+    OM5_L5_InteriorSystem_FinishAssembly_ServiceFloorComponent_FloorFinishFeature_ServiceFloorLeaf()
+
+# L5 Leaf: ServiceFloorLeaf
+OM5_L5_InteriorSystem_FinishAssembly_ServiceFloorComponent_FloorFinishFeature_ServiceFloorLeaf() ->
+    GEO_Ceramic(6 0.23 2.6 5.6 0.05 6.4)
+
+# L2 Assembly: InteriorSystem / LoungeAssembly
+OM5_L2_InteriorSystem_LoungeAssembly() ->
+    OM5_L3_InteriorSystem_LoungeAssembly_SofaComponent()
+    OM5_L3_InteriorSystem_LoungeAssembly_CoffeeTableComponent()
+    OM5_L3_InteriorSystem_LoungeAssembly_MediaWallComponent()
+
+# L3 Component: SofaComponent
+OM5_L3_InteriorSystem_LoungeAssembly_SofaComponent() ->
+    OM5_L4_InteriorSystem_LoungeAssembly_SofaComponent_SeatBaseFeature()
+    OM5_L4_InteriorSystem_LoungeAssembly_SofaComponent_BackrestFeature()
+
+# L4 Feature / interface: SeatBaseFeature
+OM5_L4_InteriorSystem_LoungeAssembly_SofaComponent_SeatBaseFeature() ->
+    OM5_L5_InteriorSystem_LoungeAssembly_SofaComponent_SeatBaseFeature_SofaBaseLeaf()
+
+# L5 Leaf: SofaBaseLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_SofaComponent_SeatBaseFeature_SofaBaseLeaf() ->
+    GEO_Fabric(-6.0 0.28 -3.0 3.6 0.65 1.30)
+
+# L4 Feature / interface: BackrestFeature
+OM5_L4_InteriorSystem_LoungeAssembly_SofaComponent_BackrestFeature() ->
+    OM5_L5_InteriorSystem_LoungeAssembly_SofaComponent_BackrestFeature_SofaBackLeaf()
+
+# L5 Leaf: SofaBackLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_SofaComponent_BackrestFeature_SofaBackLeaf() ->
+    GEO_Fabric(-6.0 0.92 -2.45 3.6 0.70 0.34)
+
+# L3 Component: CoffeeTableComponent
+OM5_L3_InteriorSystem_LoungeAssembly_CoffeeTableComponent() ->
+    OM5_L4_InteriorSystem_LoungeAssembly_CoffeeTableComponent_TableTopFeature()
+    OM5_L4_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature()
+
+# L4 Feature / interface: TableTopFeature
+OM5_L4_InteriorSystem_LoungeAssembly_CoffeeTableComponent_TableTopFeature() ->
+    OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_TableTopFeature_CoffeeTableTopLeaf()
+
+# L5 Leaf: CoffeeTableTopLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_TableTopFeature_CoffeeTableTopLeaf() ->
+    GEO_Wood(-5.0 0.55 -4.5 1.8 0.10 0.9)
+
+# L4 Feature / interface: LegFeature
+OM5_L4_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature() ->
+    OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegFLLeaf()
+    OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegFRLeaf()
+    OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegRLLeaf()
+    OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegRRLeaf()
+
+# L5 Leaf: CoffeeTableLegFLLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegFLLeaf() ->
+    GEO_DarkMetal(-5.7 0.23 -4.8 0.10 0.32 0.10)
+
+# L5 Leaf: CoffeeTableLegFRLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegFRLeaf() ->
+    GEO_DarkMetal(-4.3 0.23 -4.8 0.10 0.32 0.10)
+
+# L5 Leaf: CoffeeTableLegRLLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegRLLeaf() ->
+    GEO_DarkMetal(-5.7 0.23 -4.2 0.10 0.32 0.10)
+
+# L5 Leaf: CoffeeTableLegRRLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_CoffeeTableComponent_LegFeature_CoffeeTableLegRRLeaf() ->
+    GEO_DarkMetal(-4.3 0.23 -4.2 0.10 0.32 0.10)
+
+# L3 Component: MediaWallComponent
+OM5_L3_InteriorSystem_LoungeAssembly_MediaWallComponent() ->
+    OM5_L4_InteriorSystem_LoungeAssembly_MediaWallComponent_CabinetFeature()
+
+# L4 Feature / interface: CabinetFeature
+OM5_L4_InteriorSystem_LoungeAssembly_MediaWallComponent_CabinetFeature() ->
+    OM5_L5_InteriorSystem_LoungeAssembly_MediaWallComponent_CabinetFeature_MediaCabinetLeaf()
+
+# L5 Leaf: MediaCabinetLeaf
+OM5_L5_InteriorSystem_LoungeAssembly_MediaWallComponent_CabinetFeature_MediaCabinetLeaf() ->
+    GEO_DarkStone(-8.45 0.30 -2.0 0.35 0.75 2.8)
+
+# L2 Assembly: InteriorSystem / KitchenDiningAssembly
+OM5_L2_InteriorSystem_KitchenDiningAssembly() ->
+    OM5_L3_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent()
+    OM5_L3_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent()
+    OM5_L3_InteriorSystem_KitchenDiningAssembly_KitchenSinkComponent()
+    OM5_L3_InteriorSystem_KitchenDiningAssembly_OvenComponent()
+    OM5_L3_InteriorSystem_KitchenDiningAssembly_DiningTableComponent()
+    OM5_L3_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent()
+
+# L3 Component: RearCabinetRunComponent
+OM5_L3_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent() ->
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_CabinetBodyFeature()
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_BenchtopFeature()
+
+# L4 Feature / interface: CabinetBodyFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_CabinetBodyFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_CabinetBodyFeature_RearCabinetRunLeaf()
+
+# L5 Leaf: RearCabinetRunLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_CabinetBodyFeature_RearCabinetRunLeaf() ->
+    GEO_Cabinet(6.0 0.23 -1.35 5.2 0.90 0.72)
+
+# L4 Feature / interface: BenchtopFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_BenchtopFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_BenchtopFeature_RearBenchtopLeaf()
+
+# L5 Leaf: RearBenchtopLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_RearCabinetRunComponent_BenchtopFeature_RearBenchtopLeaf() ->
+    GEO_DarkStone(6.0 1.13 -1.35 5.35 0.12 0.82)
+
+# L3 Component: KitchenIslandComponent
+OM5_L3_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent() ->
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_CabinetBodyFeature()
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_BenchtopFeature()
+
+# L4 Feature / interface: CabinetBodyFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_CabinetBodyFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_CabinetBodyFeature_IslandBodyLeaf()
+
+# L5 Leaf: IslandBodyLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_CabinetBodyFeature_IslandBodyLeaf() ->
+    GEO_Cabinet(5.2 0.23 -3.9 3.4 0.92 1.45)
+
+# L4 Feature / interface: BenchtopFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_BenchtopFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_BenchtopFeature_IslandTopLeaf()
+
+# L5 Leaf: IslandTopLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_KitchenIslandComponent_BenchtopFeature_IslandTopLeaf() ->
+    GEO_DarkStone(5.2 1.15 -3.9 3.65 0.12 1.65)
+
+# L3 Component: KitchenSinkComponent
+OM5_L3_InteriorSystem_KitchenDiningAssembly_KitchenSinkComponent() ->
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_KitchenSinkComponent_BowlFeature()
+
+# L4 Feature / interface: BowlFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_KitchenSinkComponent_BowlFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_KitchenSinkComponent_BowlFeature_SinkBowlLeaf()
+
+# L5 Leaf: SinkBowlLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_KitchenSinkComponent_BowlFeature_SinkBowlLeaf() ->
+    GEO_Metal(5.7 1.28 -3.9 1.1 0.10 0.58)
+
+# L3 Component: OvenComponent
+OM5_L3_InteriorSystem_KitchenDiningAssembly_OvenComponent() ->
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_OvenComponent_ApplianceBodyFeature()
+
+# L4 Feature / interface: ApplianceBodyFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_OvenComponent_ApplianceBodyFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_OvenComponent_ApplianceBodyFeature_OvenLeaf()
+
+# L5 Leaf: OvenLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_OvenComponent_ApplianceBodyFeature_OvenLeaf() ->
+    GEO_DarkMetal(7.6 0.30 -1.78 0.90 0.85 0.22)
+
+# L3 Component: DiningTableComponent
+OM5_L3_InteriorSystem_KitchenDiningAssembly_DiningTableComponent() ->
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_TableTopFeature()
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature()
+
+# L4 Feature / interface: TableTopFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_TableTopFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_TableTopFeature_DiningTableTopLeaf()
+
+# L5 Leaf: DiningTableTopLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_TableTopFeature_DiningTableTopLeaf() ->
+    GEO_Wood(4.2 0.80 -5.0 2.8 0.12 1.3)
+
+# L4 Feature / interface: LegFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegFLLeaf()
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegFRLeaf()
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegRLLeaf()
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegRRLeaf()
+
+# L5 Leaf: DiningTableLegFLLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegFLLeaf() ->
+    GEO_DarkMetal(3.2 0.23 -5.45 0.12 0.57 0.12)
+
+# L5 Leaf: DiningTableLegFRLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegFRLeaf() ->
+    GEO_DarkMetal(5.2 0.23 -5.45 0.12 0.57 0.12)
+
+# L5 Leaf: DiningTableLegRLLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegRLLeaf() ->
+    GEO_DarkMetal(3.2 0.23 -4.55 0.12 0.57 0.12)
+
+# L5 Leaf: DiningTableLegRRLeaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningTableComponent_LegFeature_DiningTableLegRRLeaf() ->
+    GEO_DarkMetal(5.2 0.23 -4.55 0.12 0.57 0.12)
+
+# L3 Component: DiningChairSetComponent
+OM5_L3_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent() ->
+    OM5_L4_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature()
+
+# L4 Feature / interface: ChairFeature
+OM5_L4_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature() ->
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair1Leaf()
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair2Leaf()
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair3Leaf()
+    OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair4Leaf()
+
+# L5 Leaf: DiningChair1Leaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair1Leaf() ->
+    GEO_DarkMetal(2.4 0.28 -5.0 0.58 0.62 0.58)
+
+# L5 Leaf: DiningChair2Leaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair2Leaf() ->
+    GEO_DarkMetal(6.0 0.28 -5.0 0.58 0.62 0.58)
+
+# L5 Leaf: DiningChair3Leaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair3Leaf() ->
+    GEO_DarkMetal(4.2 0.28 -4.1 0.58 0.62 0.58)
+
+# L5 Leaf: DiningChair4Leaf
+OM5_L5_InteriorSystem_KitchenDiningAssembly_DiningChairSetComponent_ChairFeature_DiningChair4Leaf() ->
+    GEO_DarkMetal(4.2 0.28 -5.9 0.58 0.62 0.58)
+
+# L2 Assembly: InteriorSystem / OfficeStudioAssembly
+OM5_L2_InteriorSystem_OfficeStudioAssembly() ->
+    OM5_L3_InteriorSystem_OfficeStudioAssembly_WorkstationComponent()
+    OM5_L3_InteriorSystem_OfficeStudioAssembly_StorageComponent()
+    OM5_L3_InteriorSystem_OfficeStudioAssembly_MeetingTableComponent()
+
+# L3 Component: WorkstationComponent
+OM5_L3_InteriorSystem_OfficeStudioAssembly_WorkstationComponent() ->
+    OM5_L4_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_DeskTopFeature()
+    OM5_L4_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_ChairFeature()
+
+# L4 Feature / interface: DeskTopFeature
+OM5_L4_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_DeskTopFeature() ->
+    OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_DeskTopFeature_OfficeDesk1TopLeaf()
+    OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_DeskTopFeature_OfficeDesk2TopLeaf()
+
+# L5 Leaf: OfficeDesk1TopLeaf
+OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_DeskTopFeature_OfficeDesk1TopLeaf() ->
+    GEO_Wood(-7.4 0.75 0.2 2.2 0.12 0.9)
+
+# L5 Leaf: OfficeDesk2TopLeaf
+OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_DeskTopFeature_OfficeDesk2TopLeaf() ->
+    GEO_Wood(-4.6 0.75 0.2 2.2 0.12 0.9)
+
+# L4 Feature / interface: ChairFeature
+OM5_L4_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_ChairFeature() ->
+    OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_ChairFeature_OfficeChair1Leaf()
+    OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_ChairFeature_OfficeChair2Leaf()
+
+# L5 Leaf: OfficeChair1Leaf
+OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_ChairFeature_OfficeChair1Leaf() ->
+    GEO_DarkMetal(-7.4 0.28 1.2 0.62 0.65 0.62)
+
+# L5 Leaf: OfficeChair2Leaf
+OM5_L5_InteriorSystem_OfficeStudioAssembly_WorkstationComponent_ChairFeature_OfficeChair2Leaf() ->
+    GEO_DarkMetal(-4.6 0.28 1.2 0.62 0.65 0.62)
+
+# L3 Component: StorageComponent
+OM5_L3_InteriorSystem_OfficeStudioAssembly_StorageComponent() ->
+    OM5_L4_InteriorSystem_OfficeStudioAssembly_StorageComponent_ShelfFeature()
+
+# L4 Feature / interface: ShelfFeature
+OM5_L4_InteriorSystem_OfficeStudioAssembly_StorageComponent_ShelfFeature() ->
+    OM5_L5_InteriorSystem_OfficeStudioAssembly_StorageComponent_ShelfFeature_OfficeShelfLeaf()
+
+# L5 Leaf: OfficeShelfLeaf
+OM5_L5_InteriorSystem_OfficeStudioAssembly_StorageComponent_ShelfFeature_OfficeShelfLeaf() ->
+    GEO_Wood(-8.55 0.25 4.7 0.45 2.25 2.2)
+
+# L3 Component: MeetingTableComponent
+OM5_L3_InteriorSystem_OfficeStudioAssembly_MeetingTableComponent() ->
+    OM5_L4_InteriorSystem_OfficeStudioAssembly_MeetingTableComponent_TableTopFeature()
+
+# L4 Feature / interface: TableTopFeature
+OM5_L4_InteriorSystem_OfficeStudioAssembly_MeetingTableComponent_TableTopFeature() ->
+    OM5_L5_InteriorSystem_OfficeStudioAssembly_MeetingTableComponent_TableTopFeature_MeetingTableTopLeaf()
+
+# L5 Leaf: MeetingTableTopLeaf
+OM5_L5_InteriorSystem_OfficeStudioAssembly_MeetingTableComponent_TableTopFeature_MeetingTableTopLeaf() ->
+    GEO_Wood(-6.0 0.78 3.4 2.5 0.12 1.2)
+
+# L2 Assembly: InteriorSystem / BathroomUtilityAssembly
+OM5_L2_InteriorSystem_BathroomUtilityAssembly() ->
+    OM5_L3_InteriorSystem_BathroomUtilityAssembly_VanityComponent()
+    OM5_L3_InteriorSystem_BathroomUtilityAssembly_ToiletComponent()
+    OM5_L3_InteriorSystem_BathroomUtilityAssembly_ShowerComponent()
+    OM5_L3_InteriorSystem_BathroomUtilityAssembly_WasherComponent()
+    OM5_L3_InteriorSystem_BathroomUtilityAssembly_WaterHeaterComponent()
+
+# L3 Component: VanityComponent
+OM5_L3_InteriorSystem_BathroomUtilityAssembly_VanityComponent() ->
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_VanityComponent_CabinetFeature()
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_VanityComponent_BasinFeature()
+
+# L4 Feature / interface: CabinetFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_VanityComponent_CabinetFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_VanityComponent_CabinetFeature_VanityBodyLeaf()
+
+# L5 Leaf: VanityBodyLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_VanityComponent_CabinetFeature_VanityBodyLeaf() ->
+    GEO_Cabinet(4.3 0.30 0.1 1.5 0.78 0.58)
+
+# L4 Feature / interface: BasinFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_VanityComponent_BasinFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_VanityComponent_BasinFeature_VanityBasinLeaf()
+
+# L5 Leaf: VanityBasinLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_VanityComponent_BasinFeature_VanityBasinLeaf() ->
+    GEO_Ceramic(4.3 1.08 0.1 1.3 0.16 0.52)
+
+# L3 Component: ToiletComponent
+OM5_L3_InteriorSystem_BathroomUtilityAssembly_ToiletComponent() ->
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_ToiletComponent_PanFeature()
+
+# L4 Feature / interface: PanFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_ToiletComponent_PanFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_ToiletComponent_PanFeature_ToiletPanLeaf()
+
+# L5 Leaf: ToiletPanLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_ToiletComponent_PanFeature_ToiletPanLeaf() ->
+    GEO_Ceramic(6.5 0.28 0.0 0.68 0.68 0.90)
+
+# L3 Component: ShowerComponent
+OM5_L3_InteriorSystem_BathroomUtilityAssembly_ShowerComponent() ->
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_TrayFeature()
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_ScreenFeature()
+
+# L4 Feature / interface: TrayFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_TrayFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_TrayFeature_ShowerTrayLeaf()
+
+# L5 Leaf: ShowerTrayLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_TrayFeature_ShowerTrayLeaf() ->
+    GEO_Ceramic(7.5 0.24 1.0 1.45 0.08 1.45)
+
+# L4 Feature / interface: ScreenFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_ScreenFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_ScreenFeature_ShowerScreenLeaf()
+
+# L5 Leaf: ShowerScreenLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_ShowerComponent_ScreenFeature_ShowerScreenLeaf() ->
+    GEO_SmokeGlass(8.15 0.30 1.0 0.07 2.20 1.45)
+
+# L3 Component: WasherComponent
+OM5_L3_InteriorSystem_BathroomUtilityAssembly_WasherComponent() ->
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_WasherComponent_ApplianceBodyFeature()
+
+# L4 Feature / interface: ApplianceBodyFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_WasherComponent_ApplianceBodyFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_WasherComponent_ApplianceBodyFeature_WasherLeaf()
+
+# L5 Leaf: WasherLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_WasherComponent_ApplianceBodyFeature_WasherLeaf() ->
+    GEO_Cabinet(4.5 0.30 4.8 0.92 0.95 0.92)
+
+# L3 Component: WaterHeaterComponent
+OM5_L3_InteriorSystem_BathroomUtilityAssembly_WaterHeaterComponent() ->
+    OM5_L4_InteriorSystem_BathroomUtilityAssembly_WaterHeaterComponent_TankFeature()
+
+# L4 Feature / interface: TankFeature
+OM5_L4_InteriorSystem_BathroomUtilityAssembly_WaterHeaterComponent_TankFeature() ->
+    OM5_L5_InteriorSystem_BathroomUtilityAssembly_WaterHeaterComponent_TankFeature_WaterHeaterLeaf()
+
+# L5 Leaf: WaterHeaterLeaf
+OM5_L5_InteriorSystem_BathroomUtilityAssembly_WaterHeaterComponent_TankFeature_WaterHeaterLeaf() ->
+    GEO_CylinderCeramic(7.5 0.25 4.8 0.78 1.85)
+
+# L2 Assembly: InteriorSystem / CeilingFixtureAssembly
+OM5_L2_InteriorSystem_CeilingFixtureAssembly() ->
+    OM5_L3_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent()
+    OM5_L3_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent()
+
+# L3 Component: CeilingLightComponent
+OM5_L3_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent() ->
+    OM5_L4_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature()
+
+# L4 Feature / interface: LuminaireFeature
+OM5_L4_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature() ->
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight1Leaf()
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight2Leaf()
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight3Leaf()
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight4Leaf()
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight5Leaf()
+
+# L5 Leaf: CeilingLight1Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight1Leaf() ->
+    GEO_CeilingLight(-6 3.25 -3.5)
+
+# L5 Leaf: CeilingLight2Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight2Leaf() ->
+    GEO_CeilingLight(0 3.25 -3.5)
+
+# L5 Leaf: CeilingLight3Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight3Leaf() ->
+    GEO_CeilingLight(6 3.25 -3.5)
+
+# L5 Leaf: CeilingLight4Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight4Leaf() ->
+    GEO_CeilingLight(-6 3.25 2.5)
+
+# L5 Leaf: CeilingLight5Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_CeilingLightComponent_LuminaireFeature_CeilingLight5Leaf() ->
+    GEO_CeilingLight(6 3.25 2.5)
+
+# L3 Component: PendantLightComponent
+OM5_L3_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent() ->
+    OM5_L4_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent_LuminaireFeature()
+
+# L4 Feature / interface: LuminaireFeature
+OM5_L4_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent_LuminaireFeature() ->
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent_LuminaireFeature_PendantLight1Leaf()
+    OM5_L5_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent_LuminaireFeature_PendantLight2Leaf()
+
+# L5 Leaf: PendantLight1Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent_LuminaireFeature_PendantLight1Leaf() ->
+    GEO_PendantLight(4.2 2.50 -5.0)
+
+# L5 Leaf: PendantLight2Leaf
+OM5_L5_InteriorSystem_CeilingFixtureAssembly_PendantLightComponent_LuminaireFeature_PendantLight2Leaf() ->
+    GEO_PendantLight(5.2 2.50 -3.9)
+
+# ================================================================
+# L1 SYSTEM: RoofSystem
+# ================================================================
+
+OM5_L1_RoofSystem() ->
+    OM5_L2_RoofSystem_FlatRoofAssembly()
+    OM5_L2_RoofSystem_ParapetAssembly()
+    OM5_L2_RoofSystem_DaylightAssembly()
+    OM5_L2_RoofSystem_SolarArrayAssembly()
+    OM5_L2_RoofSystem_DrainageAssembly()
+
+# L2 Assembly: RoofSystem / FlatRoofAssembly
+OM5_L2_RoofSystem_FlatRoofAssembly() ->
+    OM5_L3_RoofSystem_FlatRoofAssembly_FrontWingRoofDeckComponent()
+    OM5_L3_RoofSystem_FlatRoofAssembly_FrontWingRoofMembraneComponent()
+    OM5_L3_RoofSystem_FlatRoofAssembly_LeftWingRoofDeckComponent()
+    OM5_L3_RoofSystem_FlatRoofAssembly_LeftWingRoofMembraneComponent()
+    OM5_L3_RoofSystem_FlatRoofAssembly_RightWingRoofDeckComponent()
+    OM5_L3_RoofSystem_FlatRoofAssembly_RightWingRoofMembraneComponent()
+
+# L3 Component: FrontWingRoofDeckComponent
+OM5_L3_RoofSystem_FlatRoofAssembly_FrontWingRoofDeckComponent() ->
+    OM5_L4_RoofSystem_FlatRoofAssembly_FrontWingRoofDeckComponent_RoofSlabFeature()
+
+# L4 Feature / interface: RoofSlabFeature
+OM5_L4_RoofSystem_FlatRoofAssembly_FrontWingRoofDeckComponent_RoofSlabFeature() ->
+    OM5_L5_RoofSystem_FlatRoofAssembly_FrontWingRoofDeckComponent_RoofSlabFeature_FrontWingRoofSlabLeaf()
+
+# L5 Leaf: FrontWingRoofSlabLeaf
+OM5_L5_RoofSystem_FlatRoofAssembly_FrontWingRoofDeckComponent_RoofSlabFeature_FrontWingRoofSlabLeaf() ->
+    GEO_Concrete(0 3.52 -3.5 18.4 0.22 5.4)
+
+# L3 Component: FrontWingRoofMembraneComponent
+OM5_L3_RoofSystem_FlatRoofAssembly_FrontWingRoofMembraneComponent() ->
+    OM5_L4_RoofSystem_FlatRoofAssembly_FrontWingRoofMembraneComponent_WeatherproofLayerFeature()
+
+# L4 Feature / interface: WeatherproofLayerFeature
+OM5_L4_RoofSystem_FlatRoofAssembly_FrontWingRoofMembraneComponent_WeatherproofLayerFeature() ->
+    OM5_L5_RoofSystem_FlatRoofAssembly_FrontWingRoofMembraneComponent_WeatherproofLayerFeature_FrontWingMembraneLeaf()
+
+# L5 Leaf: FrontWingMembraneLeaf
+OM5_L5_RoofSystem_FlatRoofAssembly_FrontWingRoofMembraneComponent_WeatherproofLayerFeature_FrontWingMembraneLeaf() ->
+    GEO_DarkStone(0 3.74 -3.5 18.2 0.06 5.2)
+
+# L3 Component: LeftWingRoofDeckComponent
+OM5_L3_RoofSystem_FlatRoofAssembly_LeftWingRoofDeckComponent() ->
+    OM5_L4_RoofSystem_FlatRoofAssembly_LeftWingRoofDeckComponent_RoofSlabFeature()
+
+# L4 Feature / interface: RoofSlabFeature
+OM5_L4_RoofSystem_FlatRoofAssembly_LeftWingRoofDeckComponent_RoofSlabFeature() ->
+    OM5_L5_RoofSystem_FlatRoofAssembly_LeftWingRoofDeckComponent_RoofSlabFeature_LeftWingRoofSlabLeaf()
+
+# L5 Leaf: LeftWingRoofSlabLeaf
+OM5_L5_RoofSystem_FlatRoofAssembly_LeftWingRoofDeckComponent_RoofSlabFeature_LeftWingRoofSlabLeaf() ->
+    GEO_Concrete(-6 3.52 2.5 6.4 0.22 7.4)
+
+# L3 Component: LeftWingRoofMembraneComponent
+OM5_L3_RoofSystem_FlatRoofAssembly_LeftWingRoofMembraneComponent() ->
+    OM5_L4_RoofSystem_FlatRoofAssembly_LeftWingRoofMembraneComponent_WeatherproofLayerFeature()
+
+# L4 Feature / interface: WeatherproofLayerFeature
+OM5_L4_RoofSystem_FlatRoofAssembly_LeftWingRoofMembraneComponent_WeatherproofLayerFeature() ->
+    OM5_L5_RoofSystem_FlatRoofAssembly_LeftWingRoofMembraneComponent_WeatherproofLayerFeature_LeftWingMembraneLeaf()
+
+# L5 Leaf: LeftWingMembraneLeaf
+OM5_L5_RoofSystem_FlatRoofAssembly_LeftWingRoofMembraneComponent_WeatherproofLayerFeature_LeftWingMembraneLeaf() ->
+    GEO_DarkStone(-6 3.74 2.5 6.2 0.06 7.2)
+
+# L3 Component: RightWingRoofDeckComponent
+OM5_L3_RoofSystem_FlatRoofAssembly_RightWingRoofDeckComponent() ->
+    OM5_L4_RoofSystem_FlatRoofAssembly_RightWingRoofDeckComponent_RoofSlabFeature()
+
+# L4 Feature / interface: RoofSlabFeature
+OM5_L4_RoofSystem_FlatRoofAssembly_RightWingRoofDeckComponent_RoofSlabFeature() ->
+    OM5_L5_RoofSystem_FlatRoofAssembly_RightWingRoofDeckComponent_RoofSlabFeature_RightWingRoofSlabLeaf()
+
+# L5 Leaf: RightWingRoofSlabLeaf
+OM5_L5_RoofSystem_FlatRoofAssembly_RightWingRoofDeckComponent_RoofSlabFeature_RightWingRoofSlabLeaf() ->
+    GEO_Concrete(6 3.52 2.5 6.4 0.22 7.4)
+
+# L3 Component: RightWingRoofMembraneComponent
+OM5_L3_RoofSystem_FlatRoofAssembly_RightWingRoofMembraneComponent() ->
+    OM5_L4_RoofSystem_FlatRoofAssembly_RightWingRoofMembraneComponent_WeatherproofLayerFeature()
+
+# L4 Feature / interface: WeatherproofLayerFeature
+OM5_L4_RoofSystem_FlatRoofAssembly_RightWingRoofMembraneComponent_WeatherproofLayerFeature() ->
+    OM5_L5_RoofSystem_FlatRoofAssembly_RightWingRoofMembraneComponent_WeatherproofLayerFeature_RightWingMembraneLeaf()
+
+# L5 Leaf: RightWingMembraneLeaf
+OM5_L5_RoofSystem_FlatRoofAssembly_RightWingRoofMembraneComponent_WeatherproofLayerFeature_RightWingMembraneLeaf() ->
+    GEO_DarkStone(6 3.74 2.5 6.2 0.06 7.2)
+
+# L2 Assembly: RoofSystem / ParapetAssembly
+OM5_L2_RoofSystem_ParapetAssembly() ->
+    OM5_L3_RoofSystem_ParapetAssembly_FrontOuterParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_LeftOuterParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_RightOuterParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_LeftRearParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_RightRearParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_CourtyardFrontParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_CourtyardLeftParapetComponent()
+    OM5_L3_RoofSystem_ParapetAssembly_CourtyardRightParapetComponent()
+
+# L3 Component: FrontOuterParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_FrontOuterParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_FrontOuterParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_FrontOuterParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_FrontOuterParapetComponent_CopingWallFeature_FrontOuterParapetLeaf()
+
+# L5 Leaf: FrontOuterParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_FrontOuterParapetComponent_CopingWallFeature_FrontOuterParapetLeaf() ->
+    GEO_DarkMetal(0 3.80 -6.1 18.4 0.55 0.2)
+
+# L3 Component: LeftOuterParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_LeftOuterParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_LeftOuterParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_LeftOuterParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_LeftOuterParapetComponent_CopingWallFeature_LeftOuterParapetLeaf()
+
+# L5 Leaf: LeftOuterParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_LeftOuterParapetComponent_CopingWallFeature_LeftOuterParapetLeaf() ->
+    GEO_DarkMetal(-9.1 3.80 0 0.2 0.55 12.2)
+
+# L3 Component: RightOuterParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_RightOuterParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_RightOuterParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_RightOuterParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_RightOuterParapetComponent_CopingWallFeature_RightOuterParapetLeaf()
+
+# L5 Leaf: RightOuterParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_RightOuterParapetComponent_CopingWallFeature_RightOuterParapetLeaf() ->
+    GEO_DarkMetal(9.1 3.80 0 0.2 0.55 12.2)
+
+# L3 Component: LeftRearParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_LeftRearParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_LeftRearParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_LeftRearParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_LeftRearParapetComponent_CopingWallFeature_LeftRearParapetLeaf()
+
+# L5 Leaf: LeftRearParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_LeftRearParapetComponent_CopingWallFeature_LeftRearParapetLeaf() ->
+    GEO_DarkMetal(-6 3.80 6.1 6.4 0.55 0.2)
+
+# L3 Component: RightRearParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_RightRearParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_RightRearParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_RightRearParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_RightRearParapetComponent_CopingWallFeature_RightRearParapetLeaf()
+
+# L5 Leaf: RightRearParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_RightRearParapetComponent_CopingWallFeature_RightRearParapetLeaf() ->
+    GEO_DarkMetal(6 3.80 6.1 6.4 0.55 0.2)
+
+# L3 Component: CourtyardFrontParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_CourtyardFrontParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_CourtyardFrontParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_CourtyardFrontParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_CourtyardFrontParapetComponent_CopingWallFeature_CourtyardFrontParapetLeaf()
+
+# L5 Leaf: CourtyardFrontParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_CourtyardFrontParapetComponent_CopingWallFeature_CourtyardFrontParapetLeaf() ->
+    GEO_DarkMetal(0 3.80 -0.9 6.0 0.55 0.2)
+
+# L3 Component: CourtyardLeftParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_CourtyardLeftParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_CourtyardLeftParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_CourtyardLeftParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_CourtyardLeftParapetComponent_CopingWallFeature_CourtyardLeftParapetLeaf()
+
+# L5 Leaf: CourtyardLeftParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_CourtyardLeftParapetComponent_CopingWallFeature_CourtyardLeftParapetLeaf() ->
+    GEO_DarkMetal(-2.9 3.80 2.55 0.2 0.55 6.9)
+
+# L3 Component: CourtyardRightParapetComponent
+OM5_L3_RoofSystem_ParapetAssembly_CourtyardRightParapetComponent() ->
+    OM5_L4_RoofSystem_ParapetAssembly_CourtyardRightParapetComponent_CopingWallFeature()
+
+# L4 Feature / interface: CopingWallFeature
+OM5_L4_RoofSystem_ParapetAssembly_CourtyardRightParapetComponent_CopingWallFeature() ->
+    OM5_L5_RoofSystem_ParapetAssembly_CourtyardRightParapetComponent_CopingWallFeature_CourtyardRightParapetLeaf()
+
+# L5 Leaf: CourtyardRightParapetLeaf
+OM5_L5_RoofSystem_ParapetAssembly_CourtyardRightParapetComponent_CopingWallFeature_CourtyardRightParapetLeaf() ->
+    GEO_DarkMetal(2.9 3.80 2.55 0.2 0.55 6.9)
+
+# L2 Assembly: RoofSystem / DaylightAssembly
+OM5_L2_RoofSystem_DaylightAssembly() ->
+    OM5_L3_RoofSystem_DaylightAssembly_LobbySkylightComponent()
+    OM5_L3_RoofSystem_DaylightAssembly_OfficeSkylightComponent()
+
+# L3 Component: LobbySkylightComponent
+OM5_L3_RoofSystem_DaylightAssembly_LobbySkylightComponent() ->
+    OM5_L4_RoofSystem_DaylightAssembly_LobbySkylightComponent_GlazingFeature()
+    OM5_L4_RoofSystem_DaylightAssembly_LobbySkylightComponent_FrameFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_RoofSystem_DaylightAssembly_LobbySkylightComponent_GlazingFeature() ->
+    OM5_L5_RoofSystem_DaylightAssembly_LobbySkylightComponent_GlazingFeature_LobbySkylightGlassLeaf()
+
+# L5 Leaf: LobbySkylightGlassLeaf
+OM5_L5_RoofSystem_DaylightAssembly_LobbySkylightComponent_GlazingFeature_LobbySkylightGlassLeaf() ->
+    GEO_Glass(0 3.86 -3.3 2.4 0.08 1.4)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_RoofSystem_DaylightAssembly_LobbySkylightComponent_FrameFeature() ->
+    OM5_L5_RoofSystem_DaylightAssembly_LobbySkylightComponent_FrameFeature_LobbySkylightFrameLeaf()
+
+# L5 Leaf: LobbySkylightFrameLeaf
+OM5_L5_RoofSystem_DaylightAssembly_LobbySkylightComponent_FrameFeature_LobbySkylightFrameLeaf() ->
+    GEO_DarkMetal(0 3.80 -3.3 2.58 0.12 1.5799999999999998)
+
+# L3 Component: OfficeSkylightComponent
+OM5_L3_RoofSystem_DaylightAssembly_OfficeSkylightComponent() ->
+    OM5_L4_RoofSystem_DaylightAssembly_OfficeSkylightComponent_GlazingFeature()
+    OM5_L4_RoofSystem_DaylightAssembly_OfficeSkylightComponent_FrameFeature()
+
+# L4 Feature / interface: GlazingFeature
+OM5_L4_RoofSystem_DaylightAssembly_OfficeSkylightComponent_GlazingFeature() ->
+    OM5_L5_RoofSystem_DaylightAssembly_OfficeSkylightComponent_GlazingFeature_OfficeSkylightGlassLeaf()
+
+# L5 Leaf: OfficeSkylightGlassLeaf
+OM5_L5_RoofSystem_DaylightAssembly_OfficeSkylightComponent_GlazingFeature_OfficeSkylightGlassLeaf() ->
+    GEO_Glass(-6 3.86 1.8 1.8 0.08 1.2)
+
+# L4 Feature / interface: FrameFeature
+OM5_L4_RoofSystem_DaylightAssembly_OfficeSkylightComponent_FrameFeature() ->
+    OM5_L5_RoofSystem_DaylightAssembly_OfficeSkylightComponent_FrameFeature_OfficeSkylightFrameLeaf()
+
+# L5 Leaf: OfficeSkylightFrameLeaf
+OM5_L5_RoofSystem_DaylightAssembly_OfficeSkylightComponent_FrameFeature_OfficeSkylightFrameLeaf() ->
+    GEO_DarkMetal(-6 3.80 1.8 1.98 0.12 1.38)
+
+# L2 Assembly: RoofSystem / SolarArrayAssembly
+OM5_L2_RoofSystem_SolarArrayAssembly() ->
+    OM5_L3_RoofSystem_SolarArrayAssembly_PVModuleComponent()
+
+# L3 Component: PVModuleComponent
+OM5_L3_RoofSystem_SolarArrayAssembly_PVModuleComponent() ->
+    OM5_L4_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature()
+
+# L4 Feature / interface: PanelFeature
+OM5_L4_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature() ->
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel1Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel2Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel3Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel4Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel5Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel6Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel7Leaf()
+    OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel8Leaf()
+
+# L5 Leaf: SolarPanel1Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel1Leaf() ->
+    GEO_SolarPanel(-7.4 4.05 1.0 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel2Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel2Leaf() ->
+    GEO_SolarPanel(-4.6 4.05 1.0 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel3Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel3Leaf() ->
+    GEO_SolarPanel(-7.4 4.05 3.5 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel4Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel4Leaf() ->
+    GEO_SolarPanel(-4.6 4.05 3.5 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel5Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel5Leaf() ->
+    GEO_SolarPanel(4.6 4.05 1.0 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel6Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel6Leaf() ->
+    GEO_SolarPanel(7.4 4.05 1.0 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel7Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel7Leaf() ->
+    GEO_SolarPanel(4.6 4.05 3.5 2.4 1.25 -10)
+
+# L5 Leaf: SolarPanel8Leaf
+OM5_L5_RoofSystem_SolarArrayAssembly_PVModuleComponent_PanelFeature_SolarPanel8Leaf() ->
+    GEO_SolarPanel(7.4 4.05 3.5 2.4 1.25 -10)
+
+# L2 Assembly: RoofSystem / DrainageAssembly
+OM5_L2_RoofSystem_DrainageAssembly() ->
+    OM5_L3_RoofSystem_DrainageAssembly_FrontLeftDownpipeComponent()
+    OM5_L3_RoofSystem_DrainageAssembly_FrontRightDownpipeComponent()
+    OM5_L3_RoofSystem_DrainageAssembly_RearLeftDownpipeComponent()
+    OM5_L3_RoofSystem_DrainageAssembly_RearRightDownpipeComponent()
+
+# L3 Component: FrontLeftDownpipeComponent
+OM5_L3_RoofSystem_DrainageAssembly_FrontLeftDownpipeComponent() ->
+    OM5_L4_RoofSystem_DrainageAssembly_FrontLeftDownpipeComponent_VerticalPipeFeature()
+
+# L4 Feature / interface: VerticalPipeFeature
+OM5_L4_RoofSystem_DrainageAssembly_FrontLeftDownpipeComponent_VerticalPipeFeature() ->
+    OM5_L5_RoofSystem_DrainageAssembly_FrontLeftDownpipeComponent_VerticalPipeFeature_FrontLeftDownpipeLeaf()
+
+# L5 Leaf: FrontLeftDownpipeLeaf
+OM5_L5_RoofSystem_DrainageAssembly_FrontLeftDownpipeComponent_VerticalPipeFeature_FrontLeftDownpipeLeaf() ->
+    GEO_CylinderDark(-8.7 0 -5.7 0.20 3.70)
+
+# L3 Component: FrontRightDownpipeComponent
+OM5_L3_RoofSystem_DrainageAssembly_FrontRightDownpipeComponent() ->
+    OM5_L4_RoofSystem_DrainageAssembly_FrontRightDownpipeComponent_VerticalPipeFeature()
+
+# L4 Feature / interface: VerticalPipeFeature
+OM5_L4_RoofSystem_DrainageAssembly_FrontRightDownpipeComponent_VerticalPipeFeature() ->
+    OM5_L5_RoofSystem_DrainageAssembly_FrontRightDownpipeComponent_VerticalPipeFeature_FrontRightDownpipeLeaf()
+
+# L5 Leaf: FrontRightDownpipeLeaf
+OM5_L5_RoofSystem_DrainageAssembly_FrontRightDownpipeComponent_VerticalPipeFeature_FrontRightDownpipeLeaf() ->
+    GEO_CylinderDark(8.7 0 -5.7 0.20 3.70)
+
+# L3 Component: RearLeftDownpipeComponent
+OM5_L3_RoofSystem_DrainageAssembly_RearLeftDownpipeComponent() ->
+    OM5_L4_RoofSystem_DrainageAssembly_RearLeftDownpipeComponent_VerticalPipeFeature()
+
+# L4 Feature / interface: VerticalPipeFeature
+OM5_L4_RoofSystem_DrainageAssembly_RearLeftDownpipeComponent_VerticalPipeFeature() ->
+    OM5_L5_RoofSystem_DrainageAssembly_RearLeftDownpipeComponent_VerticalPipeFeature_RearLeftDownpipeLeaf()
+
+# L5 Leaf: RearLeftDownpipeLeaf
+OM5_L5_RoofSystem_DrainageAssembly_RearLeftDownpipeComponent_VerticalPipeFeature_RearLeftDownpipeLeaf() ->
+    GEO_CylinderDark(-8.7 0 5.7 0.20 3.70)
+
+# L3 Component: RearRightDownpipeComponent
+OM5_L3_RoofSystem_DrainageAssembly_RearRightDownpipeComponent() ->
+    OM5_L4_RoofSystem_DrainageAssembly_RearRightDownpipeComponent_VerticalPipeFeature()
+
+# L4 Feature / interface: VerticalPipeFeature
+OM5_L4_RoofSystem_DrainageAssembly_RearRightDownpipeComponent_VerticalPipeFeature() ->
+    OM5_L5_RoofSystem_DrainageAssembly_RearRightDownpipeComponent_VerticalPipeFeature_RearRightDownpipeLeaf()
+
+# L5 Leaf: RearRightDownpipeLeaf
+OM5_L5_RoofSystem_DrainageAssembly_RearRightDownpipeComponent_VerticalPipeFeature_RearRightDownpipeLeaf() ->
+    GEO_CylinderDark(8.7 0 5.7 0.20 3.70)
+
+# ================================================================
+# L1 SYSTEM: ServicesSystem
+# ================================================================
+
+OM5_L1_ServicesSystem() ->
+    OM5_L2_ServicesSystem_PlumbingAssembly()
+    OM5_L2_ServicesSystem_ElectricalAssembly()
+    OM5_L2_ServicesSystem_HVACAssembly()
+    OM5_L2_ServicesSystem_FireSafetyAssembly()
+
+# L2 Assembly: ServicesSystem / PlumbingAssembly
+OM5_L2_ServicesSystem_PlumbingAssembly() ->
+    OM5_L3_ServicesSystem_PlumbingAssembly_ColdWaterRiserComponent()
+    OM5_L3_ServicesSystem_PlumbingAssembly_HotWaterRiserComponent()
+    OM5_L3_ServicesSystem_PlumbingAssembly_SanitaryStackComponent()
+    OM5_L3_ServicesSystem_PlumbingAssembly_CourtyardDrainComponent()
+
+# L3 Component: ColdWaterRiserComponent
+OM5_L3_ServicesSystem_PlumbingAssembly_ColdWaterRiserComponent() ->
+    OM5_L4_ServicesSystem_PlumbingAssembly_ColdWaterRiserComponent_PipeRunFeature()
+
+# L4 Feature / interface: PipeRunFeature
+OM5_L4_ServicesSystem_PlumbingAssembly_ColdWaterRiserComponent_PipeRunFeature() ->
+    OM5_L5_ServicesSystem_PlumbingAssembly_ColdWaterRiserComponent_PipeRunFeature_ColdWaterRiserLeaf()
+
+# L5 Leaf: ColdWaterRiserLeaf
+OM5_L5_ServicesSystem_PlumbingAssembly_ColdWaterRiserComponent_PipeRunFeature_ColdWaterRiserLeaf() ->
+    GEO_CylinderMetal(5.0 0.22 4.9 0.10 3.20)
+
+# L3 Component: HotWaterRiserComponent
+OM5_L3_ServicesSystem_PlumbingAssembly_HotWaterRiserComponent() ->
+    OM5_L4_ServicesSystem_PlumbingAssembly_HotWaterRiserComponent_PipeRunFeature()
+
+# L4 Feature / interface: PipeRunFeature
+OM5_L4_ServicesSystem_PlumbingAssembly_HotWaterRiserComponent_PipeRunFeature() ->
+    OM5_L5_ServicesSystem_PlumbingAssembly_HotWaterRiserComponent_PipeRunFeature_HotWaterRiserLeaf()
+
+# L5 Leaf: HotWaterRiserLeaf
+OM5_L5_ServicesSystem_PlumbingAssembly_HotWaterRiserComponent_PipeRunFeature_HotWaterRiserLeaf() ->
+    GEO_CylinderCopper(5.3 0.22 4.9 0.10 3.20)
+
+# L3 Component: SanitaryStackComponent
+OM5_L3_ServicesSystem_PlumbingAssembly_SanitaryStackComponent() ->
+    OM5_L4_ServicesSystem_PlumbingAssembly_SanitaryStackComponent_PipeRunFeature()
+
+# L4 Feature / interface: PipeRunFeature
+OM5_L4_ServicesSystem_PlumbingAssembly_SanitaryStackComponent_PipeRunFeature() ->
+    OM5_L5_ServicesSystem_PlumbingAssembly_SanitaryStackComponent_PipeRunFeature_SanitaryStackLeaf()
+
+# L5 Leaf: SanitaryStackLeaf
+OM5_L5_ServicesSystem_PlumbingAssembly_SanitaryStackComponent_PipeRunFeature_SanitaryStackLeaf() ->
+    GEO_CylinderDark(7.8 0.22 0.2 0.18 3.20)
+
+# L3 Component: CourtyardDrainComponent
+OM5_L3_ServicesSystem_PlumbingAssembly_CourtyardDrainComponent() ->
+    OM5_L4_ServicesSystem_PlumbingAssembly_CourtyardDrainComponent_DrainFeature()
+
+# L4 Feature / interface: DrainFeature
+OM5_L4_ServicesSystem_PlumbingAssembly_CourtyardDrainComponent_DrainFeature() ->
+    OM5_L5_ServicesSystem_PlumbingAssembly_CourtyardDrainComponent_DrainFeature_CourtyardDrainLeaf()
+
+# L5 Leaf: CourtyardDrainLeaf
+OM5_L5_ServicesSystem_PlumbingAssembly_CourtyardDrainComponent_DrainFeature_CourtyardDrainLeaf() ->
+    GEO_DarkMetal(0 0.12 4.9 0.65 0.08 0.65)
+
+# L2 Assembly: ServicesSystem / ElectricalAssembly
+OM5_L2_ServicesSystem_ElectricalAssembly() ->
+    OM5_L3_ServicesSystem_ElectricalAssembly_MainPanelComponent()
+    OM5_L3_ServicesSystem_ElectricalAssembly_DistributionConduitComponent()
+    OM5_L3_ServicesSystem_ElectricalAssembly_LightingCircuitComponent()
+
+# L3 Component: MainPanelComponent
+OM5_L3_ServicesSystem_ElectricalAssembly_MainPanelComponent() ->
+    OM5_L4_ServicesSystem_ElectricalAssembly_MainPanelComponent_PanelEnclosureFeature()
+
+# L4 Feature / interface: PanelEnclosureFeature
+OM5_L4_ServicesSystem_ElectricalAssembly_MainPanelComponent_PanelEnclosureFeature() ->
+    OM5_L5_ServicesSystem_ElectricalAssembly_MainPanelComponent_PanelEnclosureFeature_MainPanelLeaf()
+
+# L5 Leaf: MainPanelLeaf
+OM5_L5_ServicesSystem_ElectricalAssembly_MainPanelComponent_PanelEnclosureFeature_MainPanelLeaf() ->
+    GEO_DarkMetal(8.55 1.0 3.5 0.18 1.2 0.9)
+
+# L3 Component: DistributionConduitComponent
+OM5_L3_ServicesSystem_ElectricalAssembly_DistributionConduitComponent() ->
+    OM5_L4_ServicesSystem_ElectricalAssembly_DistributionConduitComponent_ConduitRunFeature()
+
+# L4 Feature / interface: ConduitRunFeature
+OM5_L4_ServicesSystem_ElectricalAssembly_DistributionConduitComponent_ConduitRunFeature() ->
+    OM5_L5_ServicesSystem_ElectricalAssembly_DistributionConduitComponent_ConduitRunFeature_RoofConduitLeaf()
+
+# L5 Leaf: RoofConduitLeaf
+OM5_L5_ServicesSystem_ElectricalAssembly_DistributionConduitComponent_ConduitRunFeature_RoofConduitLeaf() ->
+    GEO_CylinderDark(7.8 3.75 3.5 0.08 1.0)
+
+# L3 Component: LightingCircuitComponent
+OM5_L3_ServicesSystem_ElectricalAssembly_LightingCircuitComponent() ->
+    OM5_L4_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature()
+
+# L4 Feature / interface: ControlledPointFeature
+OM5_L4_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature() ->
+    OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint1Leaf()
+    OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint2Leaf()
+    OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint3Leaf()
+    OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint4Leaf()
+    OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint5Leaf()
+
+# L5 Leaf: LightCircuitPoint1Leaf
+OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint1Leaf() ->
+    OM5_SemanticLeaf()
+
+# L5 Leaf: LightCircuitPoint2Leaf
+OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint2Leaf() ->
+    OM5_SemanticLeaf()
+
+# L5 Leaf: LightCircuitPoint3Leaf
+OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint3Leaf() ->
+    OM5_SemanticLeaf()
+
+# L5 Leaf: LightCircuitPoint4Leaf
+OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint4Leaf() ->
+    OM5_SemanticLeaf()
+
+# L5 Leaf: LightCircuitPoint5Leaf
+OM5_L5_ServicesSystem_ElectricalAssembly_LightingCircuitComponent_ControlledPointFeature_LightCircuitPoint5Leaf() ->
+    OM5_SemanticLeaf()
+
+# L2 Assembly: ServicesSystem / HVACAssembly
+OM5_L2_ServicesSystem_HVACAssembly() ->
+    OM5_L3_ServicesSystem_HVACAssembly_OutdoorHeatPumpComponent()
+    OM5_L3_ServicesSystem_HVACAssembly_LoungeIndoorUnitComponent()
+    OM5_L3_ServicesSystem_HVACAssembly_OfficeIndoorUnitComponent()
+    OM5_L3_ServicesSystem_HVACAssembly_BathroomExhaustComponent()
+
+# L3 Component: OutdoorHeatPumpComponent
+OM5_L3_ServicesSystem_HVACAssembly_OutdoorHeatPumpComponent() ->
+    OM5_L4_ServicesSystem_HVACAssembly_OutdoorHeatPumpComponent_EquipmentBodyFeature()
+
+# L4 Feature / interface: EquipmentBodyFeature
+OM5_L4_ServicesSystem_HVACAssembly_OutdoorHeatPumpComponent_EquipmentBodyFeature() ->
+    OM5_L5_ServicesSystem_HVACAssembly_OutdoorHeatPumpComponent_EquipmentBodyFeature_OutdoorHeatPumpLeaf()
+
+# L5 Leaf: OutdoorHeatPumpLeaf
+OM5_L5_ServicesSystem_HVACAssembly_OutdoorHeatPumpComponent_EquipmentBodyFeature_OutdoorHeatPumpLeaf() ->
+    GEO_LightMetal(10.8 0.18 7.8 1.65 1.25 1.10)
+
+# L3 Component: LoungeIndoorUnitComponent
+OM5_L3_ServicesSystem_HVACAssembly_LoungeIndoorUnitComponent() ->
+    OM5_L4_ServicesSystem_HVACAssembly_LoungeIndoorUnitComponent_EquipmentBodyFeature()
+
+# L4 Feature / interface: EquipmentBodyFeature
+OM5_L4_ServicesSystem_HVACAssembly_LoungeIndoorUnitComponent_EquipmentBodyFeature() ->
+    OM5_L5_ServicesSystem_HVACAssembly_LoungeIndoorUnitComponent_EquipmentBodyFeature_LoungeIndoorUnitLeaf()
+
+# L5 Leaf: LoungeIndoorUnitLeaf
+OM5_L5_ServicesSystem_HVACAssembly_LoungeIndoorUnitComponent_EquipmentBodyFeature_LoungeIndoorUnitLeaf() ->
+    GEO_Ceramic(-8.45 2.55 -2.0 0.35 0.45 1.8)
+
+# L3 Component: OfficeIndoorUnitComponent
+OM5_L3_ServicesSystem_HVACAssembly_OfficeIndoorUnitComponent() ->
+    OM5_L4_ServicesSystem_HVACAssembly_OfficeIndoorUnitComponent_EquipmentBodyFeature()
+
+# L4 Feature / interface: EquipmentBodyFeature
+OM5_L4_ServicesSystem_HVACAssembly_OfficeIndoorUnitComponent_EquipmentBodyFeature() ->
+    OM5_L5_ServicesSystem_HVACAssembly_OfficeIndoorUnitComponent_EquipmentBodyFeature_OfficeIndoorUnitLeaf()
+
+# L5 Leaf: OfficeIndoorUnitLeaf
+OM5_L5_ServicesSystem_HVACAssembly_OfficeIndoorUnitComponent_EquipmentBodyFeature_OfficeIndoorUnitLeaf() ->
+    GEO_Ceramic(-8.45 2.55 4.0 0.35 0.45 1.8)
+
+# L3 Component: BathroomExhaustComponent
+OM5_L3_ServicesSystem_HVACAssembly_BathroomExhaustComponent() ->
+    OM5_L4_ServicesSystem_HVACAssembly_BathroomExhaustComponent_FanFeature()
+
+# L4 Feature / interface: FanFeature
+OM5_L4_ServicesSystem_HVACAssembly_BathroomExhaustComponent_FanFeature() ->
+    OM5_L5_ServicesSystem_HVACAssembly_BathroomExhaustComponent_FanFeature_BathroomExhaustLeaf()
+
+# L5 Leaf: BathroomExhaustLeaf
+OM5_L5_ServicesSystem_HVACAssembly_BathroomExhaustComponent_FanFeature_BathroomExhaustLeaf() ->
+    GEO_CeilingLight(6.8 3.25 0.8)
+
+# L2 Assembly: ServicesSystem / FireSafetyAssembly
+OM5_L2_ServicesSystem_FireSafetyAssembly() ->
+    OM5_L3_ServicesSystem_FireSafetyAssembly_GroundSmokeAlarmComponent()
+    OM5_L3_ServicesSystem_FireSafetyAssembly_ExtinguisherComponent()
+    OM5_L3_ServicesSystem_FireSafetyAssembly_ExitLightComponent()
+
+# L3 Component: GroundSmokeAlarmComponent
+OM5_L3_ServicesSystem_FireSafetyAssembly_GroundSmokeAlarmComponent() ->
+    OM5_L4_ServicesSystem_FireSafetyAssembly_GroundSmokeAlarmComponent_DetectorFeature()
+
+# L4 Feature / interface: DetectorFeature
+OM5_L4_ServicesSystem_FireSafetyAssembly_GroundSmokeAlarmComponent_DetectorFeature() ->
+    OM5_L5_ServicesSystem_FireSafetyAssembly_GroundSmokeAlarmComponent_DetectorFeature_SmokeAlarmLeaf()
+
+# L5 Leaf: SmokeAlarmLeaf
+OM5_L5_ServicesSystem_FireSafetyAssembly_GroundSmokeAlarmComponent_DetectorFeature_SmokeAlarmLeaf() ->
+    GEO_CeilingLight(0 3.28 -2.0)
+
+# L3 Component: ExtinguisherComponent
+OM5_L3_ServicesSystem_FireSafetyAssembly_ExtinguisherComponent() ->
+    OM5_L4_ServicesSystem_FireSafetyAssembly_ExtinguisherComponent_CylinderFeature()
+
+# L4 Feature / interface: CylinderFeature
+OM5_L4_ServicesSystem_FireSafetyAssembly_ExtinguisherComponent_CylinderFeature() ->
+    OM5_L5_ServicesSystem_FireSafetyAssembly_ExtinguisherComponent_CylinderFeature_ExtinguisherLeaf()
+
+# L5 Leaf: ExtinguisherLeaf
+OM5_L5_ServicesSystem_FireSafetyAssembly_ExtinguisherComponent_CylinderFeature_ExtinguisherLeaf() ->
+    GEO_CylinderRed(7.8 0.25 -5.1 0.22 0.90)
+
+# L3 Component: ExitLightComponent
+OM5_L3_ServicesSystem_FireSafetyAssembly_ExitLightComponent() ->
+    OM5_L4_ServicesSystem_FireSafetyAssembly_ExitLightComponent_LuminaireFeature()
+
+# L4 Feature / interface: LuminaireFeature
+OM5_L4_ServicesSystem_FireSafetyAssembly_ExitLightComponent_LuminaireFeature() ->
+    OM5_L5_ServicesSystem_FireSafetyAssembly_ExitLightComponent_LuminaireFeature_ExitLightLeaf()
+
+# L5 Leaf: ExitLightLeaf
+OM5_L5_ServicesSystem_FireSafetyAssembly_ExitLightComponent_LuminaireFeature_ExitLightLeaf() ->
+    GEO_GreenLight(0 2.85 -5.80 0.70 0.25 0.12)
+
+# ================================================================
+# L1 SYSTEM: ExternalAmenitySystem
+# ================================================================
+
+OM5_L1_ExternalAmenitySystem() ->
+    OM5_L2_ExternalAmenitySystem_CourtyardAssembly()
+    OM5_L2_ExternalAmenitySystem_EntryCanopyAssembly()
+
+# L2 Assembly: ExternalAmenitySystem / CourtyardAssembly
+OM5_L2_ExternalAmenitySystem_CourtyardAssembly() ->
+    OM5_L3_ExternalAmenitySystem_CourtyardAssembly_CourtyardDeckComponent()
+    OM5_L3_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent()
+    OM5_L3_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent()
+    OM5_L3_ExternalAmenitySystem_CourtyardAssembly_BenchComponent()
+
+# L3 Component: CourtyardDeckComponent
+OM5_L3_ExternalAmenitySystem_CourtyardAssembly_CourtyardDeckComponent() ->
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_CourtyardDeckComponent_DeckSurfaceFeature()
+
+# L4 Feature / interface: DeckSurfaceFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_CourtyardDeckComponent_DeckSurfaceFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_CourtyardDeckComponent_DeckSurfaceFeature_CourtyardDeckLeaf()
+
+# L5 Leaf: CourtyardDeckLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_CourtyardDeckComponent_DeckSurfaceFeature_CourtyardDeckLeaf() ->
+    GEO_Sandstone(0 0.02 2.5 5.6 0.10 6.6)
+
+# L3 Component: PergolaComponent
+OM5_L3_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent() ->
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature()
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature()
+
+# L4 Feature / interface: PostFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostFLLeaf()
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostFRLeaf()
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostRLLeaf()
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostRRLeaf()
+
+# L5 Leaf: PergolaPostFLLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostFLLeaf() ->
+    GEO_CylinderMetal(-2.5 0.12 -0.5 0.18 2.90)
+
+# L5 Leaf: PergolaPostFRLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostFRLeaf() ->
+    GEO_CylinderMetal(2.5 0.12 -0.5 0.18 2.90)
+
+# L5 Leaf: PergolaPostRLLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostRLLeaf() ->
+    GEO_CylinderMetal(-2.5 0.12 5.5 0.18 2.90)
+
+# L5 Leaf: PergolaPostRRLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_PostFeature_PergolaPostRRLeaf() ->
+    GEO_CylinderMetal(2.5 0.12 5.5 0.18 2.90)
+
+# L4 Feature / interface: BeamFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam1Leaf()
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam2Leaf()
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam3Leaf()
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam4Leaf()
+
+# L5 Leaf: PergolaBeam1Leaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam1Leaf() ->
+    GEO_Metal(0 3.02 -0.5 5.2 0.16 0.16)
+
+# L5 Leaf: PergolaBeam2Leaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam2Leaf() ->
+    GEO_Metal(0 3.02 5.5 5.2 0.16 0.16)
+
+# L5 Leaf: PergolaBeam3Leaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam3Leaf() ->
+    GEO_Metal(-2.5 3.02 2.5 0.16 0.16 6.0)
+
+# L5 Leaf: PergolaBeam4Leaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_PergolaComponent_BeamFeature_PergolaBeam4Leaf() ->
+    GEO_Metal(2.5 3.02 2.5 0.16 0.16 6.0)
+
+# L3 Component: WaterFeatureComponent
+OM5_L3_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent() ->
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_BasinFeature()
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_WaterSurfaceFeature()
+
+# L4 Feature / interface: BasinFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_BasinFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_BasinFeature_WaterBasinLeaf()
+
+# L5 Leaf: WaterBasinLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_BasinFeature_WaterBasinLeaf() ->
+    GEO_DarkStone(0 0.12 4.7 2.4 0.30 1.2)
+
+# L4 Feature / interface: WaterSurfaceFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_WaterSurfaceFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_WaterSurfaceFeature_WaterSurfaceLeaf()
+
+# L5 Leaf: WaterSurfaceLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_WaterFeatureComponent_WaterSurfaceFeature_WaterSurfaceLeaf() ->
+    GEO_Water(0 0.38 4.7 2.1 0.05 0.9)
+
+# L3 Component: BenchComponent
+OM5_L3_ExternalAmenitySystem_CourtyardAssembly_BenchComponent() ->
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SeatFeature()
+    OM5_L4_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SupportFeature()
+
+# L4 Feature / interface: SeatFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SeatFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SeatFeature_CourtyardBenchSeatLeaf()
+
+# L5 Leaf: CourtyardBenchSeatLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SeatFeature_CourtyardBenchSeatLeaf() ->
+    GEO_Wood(-1.5 0.52 0.6 2.2 0.12 0.55)
+
+# L4 Feature / interface: SupportFeature
+OM5_L4_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SupportFeature() ->
+    OM5_L5_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SupportFeature_CourtyardBenchSupportsLeaf()
+
+# L5 Leaf: CourtyardBenchSupportsLeaf
+OM5_L5_ExternalAmenitySystem_CourtyardAssembly_BenchComponent_SupportFeature_CourtyardBenchSupportsLeaf() ->
+    GEO_DarkMetal(-2.2 0.12 0.6 0.12 0.40 0.45)
+    GEO_DarkMetal(-0.8 0.12 0.6 0.12 0.40 0.45)
+
+# L2 Assembly: ExternalAmenitySystem / EntryCanopyAssembly
+OM5_L2_ExternalAmenitySystem_EntryCanopyAssembly() ->
+    OM5_L3_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent()
+    OM5_L3_ExternalAmenitySystem_EntryCanopyAssembly_LeftCanopyColumnComponent()
+    OM5_L3_ExternalAmenitySystem_EntryCanopyAssembly_RightCanopyColumnComponent()
+
+# L3 Component: CanopyRoofComponent
+OM5_L3_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent() ->
+    OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_MetalPlateFeature()
+    OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_GlassSoffitFeature()
+
+# L4 Feature / interface: MetalPlateFeature
+OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_MetalPlateFeature() ->
+    OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_MetalPlateFeature_CanopyRoofLeaf()
+
+# L5 Leaf: CanopyRoofLeaf
+OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_MetalPlateFeature_CanopyRoofLeaf() ->
+    GEO_Metal(0 3.05 -7.1 4.6 0.16 2.2)
+
+# L4 Feature / interface: GlassSoffitFeature
+OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_GlassSoffitFeature() ->
+    OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_GlassSoffitFeature_CanopyGlassLeaf()
+
+# L5 Leaf: CanopyGlassLeaf
+OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_CanopyRoofComponent_GlassSoffitFeature_CanopyGlassLeaf() ->
+    GEO_SmokeGlass(0 2.98 -7.1 4.2 0.06 1.8)
+
+# L3 Component: LeftCanopyColumnComponent
+OM5_L3_ExternalAmenitySystem_EntryCanopyAssembly_LeftCanopyColumnComponent() ->
+    OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_LeftCanopyColumnComponent_ColumnFeature()
+
+# L4 Feature / interface: ColumnFeature
+OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_LeftCanopyColumnComponent_ColumnFeature() ->
+    OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_LeftCanopyColumnComponent_ColumnFeature_LeftCanopyColumnLeaf()
+
+# L5 Leaf: LeftCanopyColumnLeaf
+OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_LeftCanopyColumnComponent_ColumnFeature_LeftCanopyColumnLeaf() ->
+    GEO_CylinderMetal(-2.0 0 -7.7 0.18 3.05)
+
+# L3 Component: RightCanopyColumnComponent
+OM5_L3_ExternalAmenitySystem_EntryCanopyAssembly_RightCanopyColumnComponent() ->
+    OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_RightCanopyColumnComponent_ColumnFeature()
+
+# L4 Feature / interface: ColumnFeature
+OM5_L4_ExternalAmenitySystem_EntryCanopyAssembly_RightCanopyColumnComponent_ColumnFeature() ->
+    OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_RightCanopyColumnComponent_ColumnFeature_RightCanopyColumnLeaf()
+
+# L5 Leaf: RightCanopyColumnLeaf
+OM5_L5_ExternalAmenitySystem_EntryCanopyAssembly_RightCanopyColumnComponent_ColumnFeature_RightCanopyColumnLeaf() ->
+    GEO_CylinderMetal(2.0 0 -7.7 0.18 3.05)
+
+# ================================================================
+# L1 SYSTEM: RelationshipSystem
+# ================================================================
+
+OM5_L1_RelationshipSystem() ->
+    OM5_L2_RelationshipSystem_ContainmentAssembly()
+    OM5_L2_RelationshipSystem_ConnectionAssembly()
+    OM5_L2_RelationshipSystem_CollisionPositioningAssembly()
+    OM5_L2_RelationshipSystem_ValidationAssembly()
+
+# L2 Assembly: RelationshipSystem / ContainmentAssembly
+OM5_L2_RelationshipSystem_ContainmentAssembly() ->
+    OM5_L3_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent()
+
+# L3 Component: RoomContainmentComponent
+OM5_L3_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent() ->
+    OM5_L4_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature()
+
+# L4 Feature / interface: SpatialContainmentFeature
+OM5_L4_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature() ->
+    OM5_L5_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature_LoungeContainedByFrontWingLeaf()
+    OM5_L5_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature_OfficeContainedByLeftWingLeaf()
+    OM5_L5_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature_ServiceRoomsContainedByRightWingLeaf()
+
+# L5 Leaf: LoungeContainedByFrontWingLeaf
+OM5_L5_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature_LoungeContainedByFrontWingLeaf() ->
+    OM5_SemanticLeaf()
+
+# L5 Leaf: OfficeContainedByLeftWingLeaf
+OM5_L5_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature_OfficeContainedByLeftWingLeaf() ->
+    OM5_SemanticLeaf()
+
+# L5 Leaf: ServiceRoomsContainedByRightWingLeaf
+OM5_L5_RelationshipSystem_ContainmentAssembly_RoomContainmentComponent_SpatialContainmentFeature_ServiceRoomsContainedByRightWingLeaf() ->
+    OM5_SemanticLeaf()
+
+# L2 Assembly: RelationshipSystem / ConnectionAssembly
+OM5_L2_RelationshipSystem_ConnectionAssembly() ->
+    OM5_L3_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent()
+    OM5_L3_RelationshipSystem_ConnectionAssembly_SolarElectricalConnectionComponent()
+    OM5_L3_RelationshipSystem_ConnectionAssembly_HVACConnectionComponent()
+
+# L3 Component: KitchenSinkConnectionComponent
+OM5_L3_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent() ->
+    OM5_L4_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_HydraulicInterfaceFeature()
+    OM5_L4_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_DrainInterfaceFeature()
+
+# L4 Feature / interface: HydraulicInterfaceFeature
+OM5_L4_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_HydraulicInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_HydraulicInterfaceFeature_SinkConnectedToWaterLeaf()
+
+# L5 Leaf: SinkConnectedToWaterLeaf
+OM5_L5_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_HydraulicInterfaceFeature_SinkConnectedToWaterLeaf() ->
+    OM5_SemanticLeaf()
+
+# L4 Feature / interface: DrainInterfaceFeature
+OM5_L4_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_DrainInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_DrainInterfaceFeature_SinkDrainsToSanitaryLeaf()
+
+# L5 Leaf: SinkDrainsToSanitaryLeaf
+OM5_L5_RelationshipSystem_ConnectionAssembly_KitchenSinkConnectionComponent_DrainInterfaceFeature_SinkDrainsToSanitaryLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: SolarElectricalConnectionComponent
+OM5_L3_RelationshipSystem_ConnectionAssembly_SolarElectricalConnectionComponent() ->
+    OM5_L4_RelationshipSystem_ConnectionAssembly_SolarElectricalConnectionComponent_PowerInterfaceFeature()
+
+# L4 Feature / interface: PowerInterfaceFeature
+OM5_L4_RelationshipSystem_ConnectionAssembly_SolarElectricalConnectionComponent_PowerInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_ConnectionAssembly_SolarElectricalConnectionComponent_PowerInterfaceFeature_SolarArrayPowersPanelLeaf()
+
+# L5 Leaf: SolarArrayPowersPanelLeaf
+OM5_L5_RelationshipSystem_ConnectionAssembly_SolarElectricalConnectionComponent_PowerInterfaceFeature_SolarArrayPowersPanelLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: HVACConnectionComponent
+OM5_L3_RelationshipSystem_ConnectionAssembly_HVACConnectionComponent() ->
+    OM5_L4_RelationshipSystem_ConnectionAssembly_HVACConnectionComponent_ThermalServiceFeature()
+
+# L4 Feature / interface: ThermalServiceFeature
+OM5_L4_RelationshipSystem_ConnectionAssembly_HVACConnectionComponent_ThermalServiceFeature() ->
+    OM5_L5_RelationshipSystem_ConnectionAssembly_HVACConnectionComponent_ThermalServiceFeature_IndoorUnitsServedByOutdoorUnitLeaf()
+
+# L5 Leaf: IndoorUnitsServedByOutdoorUnitLeaf
+OM5_L5_RelationshipSystem_ConnectionAssembly_HVACConnectionComponent_ThermalServiceFeature_IndoorUnitsServedByOutdoorUnitLeaf() ->
+    OM5_SemanticLeaf()
+
+# L2 Assembly: RelationshipSystem / CollisionPositioningAssembly
+OM5_L2_RelationshipSystem_CollisionPositioningAssembly() ->
+    OM5_L3_RelationshipSystem_CollisionPositioningAssembly_CabinetFloorConstraintComponent()
+    OM5_L3_RelationshipSystem_CollisionPositioningAssembly_CabinetWallConstraintComponent()
+    OM5_L3_RelationshipSystem_CollisionPositioningAssembly_SinkSeatConstraintComponent()
+    OM5_L3_RelationshipSystem_CollisionPositioningAssembly_WindowOpeningConstraintComponent()
+    OM5_L3_RelationshipSystem_CollisionPositioningAssembly_SolarRoofConstraintComponent()
+    OM5_L3_RelationshipSystem_CollisionPositioningAssembly_HVACPadConstraintComponent()
+
+# L3 Component: CabinetFloorConstraintComponent
+OM5_L3_RelationshipSystem_CollisionPositioningAssembly_CabinetFloorConstraintComponent() ->
+    OM5_L4_RelationshipSystem_CollisionPositioningAssembly_CabinetFloorConstraintComponent_SupportInterfaceFeature()
+
+# L4 Feature / interface: SupportInterfaceFeature
+OM5_L4_RelationshipSystem_CollisionPositioningAssembly_CabinetFloorConstraintComponent_SupportInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_CollisionPositioningAssembly_CabinetFloorConstraintComponent_SupportInterfaceFeature_CabinetSupportedByFloorLeaf()
+
+# L5 Leaf: CabinetSupportedByFloorLeaf
+OM5_L5_RelationshipSystem_CollisionPositioningAssembly_CabinetFloorConstraintComponent_SupportInterfaceFeature_CabinetSupportedByFloorLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: CabinetWallConstraintComponent
+OM5_L3_RelationshipSystem_CollisionPositioningAssembly_CabinetWallConstraintComponent() ->
+    OM5_L4_RelationshipSystem_CollisionPositioningAssembly_CabinetWallConstraintComponent_ClearanceInterfaceFeature()
+
+# L4 Feature / interface: ClearanceInterfaceFeature
+OM5_L4_RelationshipSystem_CollisionPositioningAssembly_CabinetWallConstraintComponent_ClearanceInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_CollisionPositioningAssembly_CabinetWallConstraintComponent_ClearanceInterfaceFeature_CabinetWallClearanceLeaf()
+
+# L5 Leaf: CabinetWallClearanceLeaf
+OM5_L5_RelationshipSystem_CollisionPositioningAssembly_CabinetWallConstraintComponent_ClearanceInterfaceFeature_CabinetWallClearanceLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: SinkSeatConstraintComponent
+OM5_L3_RelationshipSystem_CollisionPositioningAssembly_SinkSeatConstraintComponent() ->
+    OM5_L4_RelationshipSystem_CollisionPositioningAssembly_SinkSeatConstraintComponent_SeatInterfaceFeature()
+
+# L4 Feature / interface: SeatInterfaceFeature
+OM5_L4_RelationshipSystem_CollisionPositioningAssembly_SinkSeatConstraintComponent_SeatInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_CollisionPositioningAssembly_SinkSeatConstraintComponent_SeatInterfaceFeature_SinkSeatedInIslandLeaf()
+
+# L5 Leaf: SinkSeatedInIslandLeaf
+OM5_L5_RelationshipSystem_CollisionPositioningAssembly_SinkSeatConstraintComponent_SeatInterfaceFeature_SinkSeatedInIslandLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: WindowOpeningConstraintComponent
+OM5_L3_RelationshipSystem_CollisionPositioningAssembly_WindowOpeningConstraintComponent() ->
+    OM5_L4_RelationshipSystem_CollisionPositioningAssembly_WindowOpeningConstraintComponent_FrameInterfaceFeature()
+
+# L4 Feature / interface: FrameInterfaceFeature
+OM5_L4_RelationshipSystem_CollisionPositioningAssembly_WindowOpeningConstraintComponent_FrameInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_CollisionPositioningAssembly_WindowOpeningConstraintComponent_FrameInterfaceFeature_WindowFramesPositionedInOpeningsLeaf()
+
+# L5 Leaf: WindowFramesPositionedInOpeningsLeaf
+OM5_L5_RelationshipSystem_CollisionPositioningAssembly_WindowOpeningConstraintComponent_FrameInterfaceFeature_WindowFramesPositionedInOpeningsLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: SolarRoofConstraintComponent
+OM5_L3_RelationshipSystem_CollisionPositioningAssembly_SolarRoofConstraintComponent() ->
+    OM5_L4_RelationshipSystem_CollisionPositioningAssembly_SolarRoofConstraintComponent_BearingInterfaceFeature()
+
+# L4 Feature / interface: BearingInterfaceFeature
+OM5_L4_RelationshipSystem_CollisionPositioningAssembly_SolarRoofConstraintComponent_BearingInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_CollisionPositioningAssembly_SolarRoofConstraintComponent_BearingInterfaceFeature_SolarPanelsSupportedByRoofLeaf()
+
+# L5 Leaf: SolarPanelsSupportedByRoofLeaf
+OM5_L5_RelationshipSystem_CollisionPositioningAssembly_SolarRoofConstraintComponent_BearingInterfaceFeature_SolarPanelsSupportedByRoofLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: HVACPadConstraintComponent
+OM5_L3_RelationshipSystem_CollisionPositioningAssembly_HVACPadConstraintComponent() ->
+    OM5_L4_RelationshipSystem_CollisionPositioningAssembly_HVACPadConstraintComponent_BearingInterfaceFeature()
+
+# L4 Feature / interface: BearingInterfaceFeature
+OM5_L4_RelationshipSystem_CollisionPositioningAssembly_HVACPadConstraintComponent_BearingInterfaceFeature() ->
+    OM5_L5_RelationshipSystem_CollisionPositioningAssembly_HVACPadConstraintComponent_BearingInterfaceFeature_HVACSupportedByServicePadLeaf()
+
+# L5 Leaf: HVACSupportedByServicePadLeaf
+OM5_L5_RelationshipSystem_CollisionPositioningAssembly_HVACPadConstraintComponent_BearingInterfaceFeature_HVACSupportedByServicePadLeaf() ->
+    OM5_SemanticLeaf()
+
+# L2 Assembly: RelationshipSystem / ValidationAssembly
+OM5_L2_RelationshipSystem_ValidationAssembly() ->
+    OM5_L3_RelationshipSystem_ValidationAssembly_ForbiddenCollisionCheckComponent()
+    OM5_L3_RelationshipSystem_ValidationAssembly_ClearanceCheckComponent()
+    OM5_L3_RelationshipSystem_ValidationAssembly_ConnectionCheckComponent()
+
+# L3 Component: ForbiddenCollisionCheckComponent
+OM5_L3_RelationshipSystem_ValidationAssembly_ForbiddenCollisionCheckComponent() ->
+    OM5_L4_RelationshipSystem_ValidationAssembly_ForbiddenCollisionCheckComponent_CollisionPolicyFeature()
+
+# L4 Feature / interface: CollisionPolicyFeature
+OM5_L4_RelationshipSystem_ValidationAssembly_ForbiddenCollisionCheckComponent_CollisionPolicyFeature() ->
+    OM5_L5_RelationshipSystem_ValidationAssembly_ForbiddenCollisionCheckComponent_CollisionPolicyFeature_NoForbiddenCollisionLeaf()
+
+# L5 Leaf: NoForbiddenCollisionLeaf
+OM5_L5_RelationshipSystem_ValidationAssembly_ForbiddenCollisionCheckComponent_CollisionPolicyFeature_NoForbiddenCollisionLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: ClearanceCheckComponent
+OM5_L3_RelationshipSystem_ValidationAssembly_ClearanceCheckComponent() ->
+    OM5_L4_RelationshipSystem_ValidationAssembly_ClearanceCheckComponent_TolerancePolicyFeature()
+
+# L4 Feature / interface: TolerancePolicyFeature
+OM5_L4_RelationshipSystem_ValidationAssembly_ClearanceCheckComponent_TolerancePolicyFeature() ->
+    OM5_L5_RelationshipSystem_ValidationAssembly_ClearanceCheckComponent_TolerancePolicyFeature_RequiredClearancesVerifiedLeaf()
+
+# L5 Leaf: RequiredClearancesVerifiedLeaf
+OM5_L5_RelationshipSystem_ValidationAssembly_ClearanceCheckComponent_TolerancePolicyFeature_RequiredClearancesVerifiedLeaf() ->
+    OM5_SemanticLeaf()
+
+# L3 Component: ConnectionCheckComponent
+OM5_L3_RelationshipSystem_ValidationAssembly_ConnectionCheckComponent() ->
+    OM5_L4_RelationshipSystem_ValidationAssembly_ConnectionCheckComponent_ConnectionPolicyFeature()
+
+# L4 Feature / interface: ConnectionPolicyFeature
+OM5_L4_RelationshipSystem_ValidationAssembly_ConnectionCheckComponent_ConnectionPolicyFeature() ->
+    OM5_L5_RelationshipSystem_ValidationAssembly_ConnectionCheckComponent_ConnectionPolicyFeature_RequiredConnectionsVerifiedLeaf()
+
+# L5 Leaf: RequiredConnectionsVerifiedLeaf
+OM5_L5_RelationshipSystem_ValidationAssembly_ConnectionCheckComponent_ConnectionPolicyFeature_RequiredConnectionsVerifiedLeaf() ->
+    OM5_SemanticLeaf()
+
+# ================================================================
+# GEOMETRY BACK END — implementation helpers, not taxonomy nodes
+# ================================================================
+
+OM5_SemanticLeaf() ->
+    T(0 0 0)
+
+GEO_Concrete(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(lightgreyroughconcrete) 1 0.40)
+]
+
+GEO_Wall(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(warmwhitematteplaster) 1 0.34)
+]
+
+GEO_DarkStone(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(darkslatesmoothstone) 1 0.30)
+]
+
+GEO_Sandstone(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(softbeigemattesandstone) 1 0.42)
+]
+
+GEO_Metal(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(silverbluepolishedmetal) 1 0.20)
+]
+
+GEO_LightMetal(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(lightgreyroughmetal) 1 0.24)
+]
+
+GEO_DarkMetal(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(charcoalroughmetal) 1 0.20)
+]
+
+GEO_Glass(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(bluewhiteglossysmoothglass) 0.68 0.24)
+]
+
+GEO_SmokeGlass(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(smokytransparentglass) 0.50 0.22)
+]
+
+GEO_Wood(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(amberwarmwood) 1 0.26)
+]
+
+GEO_Cabinet(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(offwhiteceramic) 1 0.24)
+]
+
+GEO_Ceramic(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(whiteglossyceramic) 1 0.22)
+]
+
+GEO_StoneTile(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(creamtiledceramic) 1 0.24)
+]
+
+GEO_Fabric(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(softbeigematteplaster) 1 0.34)
+]
+
+GEO_Green(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(sagegreenmattepaint) 1 0.30)
+]
+
+GEO_Terracotta(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(terracottaroughceramic) 1 0.32)
+]
+
+GEO_Water(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(cyantransparentglass) 0.44 0.18)
+]
+
+GEO_CylinderMetal(x y z d h) ->
+[
+    T(x y z)
+    S(d h d)
+    !I(Cylinder material(silverbluepolishedmetal) 1 0.16)
+]
+
+GEO_CylinderDark(x y z d h) ->
+[
+    T(x y z)
+    S(d h d)
+    !I(Cylinder material(charcoalroughmetal) 1 0.16)
+]
+
+GEO_CylinderWood(x y z d h) ->
+[
+    T(x y z)
+    S(d h d)
+    !I(Cylinder material(amberwarmwood) 1 0.22)
+]
+
+GEO_CylinderCopper(x y z d h) ->
+[
+    T(x y z)
+    S(d h d)
+    !I(Cylinder material(copperroughmetal) 1 0.14)
+]
+
+GEO_CylinderCeramic(x y z d h) ->
+[
+    T(x y z)
+    S(d h d)
+    !I(Cylinder material(offwhiteceramic) 1 0.18)
+]
+
+GEO_CylinderRed(x y z d h) ->
+[
+    T(x y z)
+    S(d h d)
+    !I(Cylinder material(redglossymetal) 1 0.14)
+]
+
+GEO_SphereGreen(x y z d) ->
+[
+    T(x y z)
+    S(d d d)
+    !I(Sphere material(sagegreenmattepaint) 1 0.28)
+]
+
+GEO_CeilingLight(x y z) ->
+[
+    T(x y z)
+    S(0.34 0.12 0.34)
+    !I(Cylinder material(whiteglossyceramic) 0.95 0.14)
+]
+
+GEO_PendantLight(x y z) ->
+[
+    T(x y z)
+    S(0.50 0.50 0.50)
+    !I(Sphere material(whiteglossyceramic) 0.94 0.16)
+]
+
+GEO_GreenLight(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(greenglowingglass) 0.92 0.14)
+]
+
+GEO_SolarPanel(x y z sx sz angle) ->
+[
+    T(x y z)
+    A(angle 0)
+    S(sx 0.10 sz)
+    !I(CubeY material(bluewhiteshinysmoothmetal) 1 0.18)
+]

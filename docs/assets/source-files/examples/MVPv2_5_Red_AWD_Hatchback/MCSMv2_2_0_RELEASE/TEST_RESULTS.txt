@@ -1,0 +1,42 @@
+test_24_all_four_variants_present (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_24_all_four_variants_present) ... ok
+test_25_all_variants_reach_v3 (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_25_all_variants_reach_v3) ... ok
+test_26_all_variants_have_complete_partition (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_26_all_variants_have_complete_partition) ... ok
+test_27_all_variants_pass_actual_tyre_sweeps (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_27_all_variants_pass_actual_tyre_sweeps) ... ok
+test_28_all_variants_pass_closure_and_glass_motion (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_28_all_variants_pass_closure_and_glass_motion) ... ok
+test_29_all_variants_pass_hardpoint_model (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_29_all_variants_pass_hardpoint_model) ... ok
+test_30_alignment_is_within_declared_gate (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_30_alignment_is_within_declared_gate) ... ok
+test_31_body_stl_files_are_watertight (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_31_body_stl_files_are_watertight) ... ok
+test_32_reference_glb_assets_load (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_32_reference_glb_assets_load) ... ok
+test_33_kinematic_json_records_are_present (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_33_kinematic_json_records_are_present) ... ok
+test_34_target_grammar_is_structurally_balanced (test_mcsmv22.MCSMv22ReleaseAcceptanceTests.test_34_target_grammar_is_structurally_balanced) ... ok
+test_01_version_and_schema (test_mcsmv22.MCSMv22UnitTests.test_01_version_and_schema) ... ok
+test_02_unit_vector_normalizes (test_mcsmv22.MCSMv22UnitTests.test_02_unit_vector_normalizes) ... ok
+test_03_zero_vector_uses_fallback (test_mcsmv22.MCSMv22UnitTests.test_03_zero_vector_uses_fallback) ... ok
+test_04_axis_rotation_preserves_homogeneous_form (test_mcsmv22.MCSMv22UnitTests.test_04_axis_rotation_preserves_homogeneous_form) ... ok
+test_05_transformed_points_rotate_correctly (test_mcsmv22.MCSMv22UnitTests.test_05_transformed_points_rotate_correctly) ... ok
+test_06_tyre_mesh_is_watertight (test_mcsmv22.MCSMv22UnitTests.test_06_tyre_mesh_is_watertight) ... ok
+test_07_tyre_mesh_has_expected_outer_radius (test_mcsmv22.MCSMv22UnitTests.test_07_tyre_mesh_has_expected_outer_radius) ... ok
+test_08_suspension_hardpoint_validation (test_mcsmv22.MCSMv22UnitTests.test_08_suspension_hardpoint_validation) ... ok
+test_09_front_wheel_pose_keeps_declared_steer (test_mcsmv22.MCSMv22UnitTests.test_09_front_wheel_pose_keeps_declared_steer) ... ok
+test_10_rear_wheel_pose_zeroes_steer (test_mcsmv22.MCSMv22UnitTests.test_10_rear_wheel_pose_zeroes_steer) ... ok
+test_11_pose_grid_count (test_mcsmv22.MCSMv22UnitTests.test_11_pose_grid_count) ... ok
+test_12_semantic_projection_succeeds (test_mcsmv22.MCSMv22UnitTests.test_12_semantic_projection_succeeds) ... ok
+test_13_semantic_uv_dimensions (test_mcsmv22.MCSMv22UnitTests.test_13_semantic_uv_dimensions) ... ok
+test_14_surface_partition_is_exclusive (test_mcsmv22.MCSMv22UnitTests.test_14_surface_partition_is_exclusive) ... ok
+test_15_surface_partition_has_six_apertures (test_mcsmv22.MCSMv22UnitTests.test_15_surface_partition_has_six_apertures) ... ok
+test_16_surface_partition_has_six_closures (test_mcsmv22.MCSMv22UnitTests.test_16_surface_partition_has_six_closures) ... ok
+test_17_closure_system_counts (test_mcsmv22.MCSMv22UnitTests.test_17_closure_system_counts) ... ok
+test_18_hinge_state_zero_is_identity (test_mcsmv22.MCSMv22UnitTests.test_18_hinge_state_zero_is_identity) ... ok
+test_19_hinge_rotation_is_rigid (test_mcsmv22.MCSMv22UnitTests.test_19_hinge_rotation_is_rigid) ... ok
+test_20_helical_glass_zero_is_identity (test_mcsmv22.MCSMv22UnitTests.test_20_helical_glass_zero_is_identity) ... ok
+test_21_helical_glass_full_state_moves_down (test_mcsmv22.MCSMv22UnitTests.test_21_helical_glass_full_state_moves_down) ... ok
+test_22_direct_closure_sweep_validation (test_mcsmv22.MCSMv22UnitTests.test_22_direct_closure_sweep_validation) ... ok
+test_23_direct_glass_motion_validation (test_mcsmv22.MCSMv22UnitTests.test_23_direct_glass_motion_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 3.975s
+
+OK
+
+TIME 0:05.61
+MAX_RSS_KB 332424

@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view" name="description"/>
+<meta content="docs/P3D_TO_TEXTURED_MESH_AND_THREE_VIEW_STRATEGY.md" name="source-markdown"/>
+<meta content="72c11007ab80a5516221964dd53f8ddc9707b414258aa485fc55b5a93c517dd5" name="source-sha256"/>
+<meta content="Documented" name="documentation-status"/>
+<title>P3D Textured Mesh and Orthographic Three-View Strategy · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">P3D Textured Mesh and Orthographic Three-View Strategy</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>P3D Textured Mesh and Orthographic Three-View Strategy</h1>
+<p class="lead">Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view</p>
+<div class="lesson-meta">
+<span class="status-badge status--documented">Documented</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 19 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/docs/P3D_TO_TEXTURED_MESH_AND_THREE_VIEW_STRATEGY.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="72c11007ab80a5516221964dd53f8ddc9707b414258aa485fc55b5a93c517dd5" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of P3D Textured Mesh and Orthographic Three-View Strategy in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: P3D Textured Mesh and Orthographic Three-View Strategy, Existing Repository Baseline, Command Contracts, p3dto3dtexmesh.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="curved-primitives.html">Curved Primitives</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">P3D Textured Mesh and Orthographic Three-View Strategy</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>P3D Textured Mesh and Orthographic Three-View Strategy</td></tr><tr><td><dfn title="Named by the source document">Existing Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Existing Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Command Contracts</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Command Contracts</td></tr><tr><td><dfn title="Named by the source document">p3dto3dtexmesh</dfn></td><td>The phrase appears 0 times in the source and is retained as a learning-path concept.</td><td>3.1 p3dto3dtexmesh</td></tr><tr><td><dfn title="Named by the source document">p3dto3view</dfn></td><td>The phrase appears 0 times in the source and is retained as a learning-path concept.</td><td>3.2 p3dto3view</td></tr><tr><td><dfn title="Named by the source document">Format Capability Matrix</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Format Capability Matrix</td></tr><tr><td><dfn title="Named by the source document">Canonical Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>5. Canonical Object Model</td></tr><tr><td><dfn title="Named by the source document">Compilation models</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>5.1 Compilation models</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="side generated scene ownership">CPU</dfn></td><td>side generated scene ownership</td></tr><tr><td><dfn title="domain Boolean panel extraction">UV</dfn></td><td>domain Boolean panel extraction</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">OBJ</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">PNG</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="specific mesh path, but `Mesh::isStlInstanceType()` currently always returns false in this snapshot">STL</dfn></td><td>specific mesh path, but `Mesh::isStlInstanceType()` currently always returns false in this snapshot</td></tr><tr><td><dfn title="Polygon File Format">PLY</dfn></td><td>Polygon File Format</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ASCII</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">MTL</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">RGBA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="physically based rendering">PBR</dfn></td><td>physically based rendering</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">RGB</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co">GPU</dfn></td><td>preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes P3D Textured Mesh and Orthographic Three-View Strategy, Existing Repository Baseline, Command Contracts, p3dto3dtexmesh. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Purpose, 2. Existing Repository Baseline, 3. Command Contracts, 3.1 p3dto3dtexmesh, 3.2 p3dto3view. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 6, failed: 4, proposed: 2, unresolved: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 11 code blocks, 3 tables and the source SHA-256 <code>72c11007ab80a5516221964dd53f8ddc9707b414258aa485fc55b5a93c517dd5</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-purpose">1. Purpose</a></li><li><a href="#source-2-existing-repository-baseline">2. Existing Repository Baseline</a></li><li><a href="#source-3-command-contracts">3. Command Contracts</a></li><li><a href="#source-lesson">3.1 p3dto3dtexmesh</a></li><li><a href="#source-lesson">3.2 p3dto3view</a></li><li><a href="#source-4-format-capability-matrix">4. Format Capability Matrix</a></li><li><a href="#source-5-canonical-object-model">5. Canonical Object Model</a></li><li><a href="#source-5-1-compilation-models">5.1 Compilation models</a></li><li><a href="#source-5-2-textured-mesh-models">5.2 Textured mesh models</a></li><li><a href="#source-5-3-mesh-export-services">5.3 Mesh export services</a></li><li><a href="#source-5-4-orthographic-image-models">5.4 Orthographic image models</a></li><li><a href="#source-5-5-orthographic-image-services">5.5 Orthographic image services</a></li><li><a href="#source-6-uml-readable-relationships">6. UML-Readable Relationships</a></li><li><a href="#source-7-textured-mesh-assembly-algorithm">7. Textured Mesh Assembly Algorithm</a></li><li><a href="#source-8-canonical-cpu-material-pipeline">8. Canonical CPU Material Pipeline</a></li><li><a href="#source-8-1-required-refactor">8.1 Required refactor</a></li><li><a href="#source-8-2-channel-policy">8.2 Channel policy</a></li><li><a href="#source-8-3-mapping-policy">8.3 Mapping policy</a></li><li><a href="#source-9-writer-requirements">9. Writer Requirements</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>6</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>4</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>2</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>1</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is docs/P3D_TO_TEXTURED_MESH_AND_THREE_VIEW_STRATEGY.md.</li><li>Learn the named concepts: P3D Textured Mesh and Orthographic Three-View Strategy, Existing Repository Baseline, Command Contracts, p3dto3dtexmesh.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>p3dto3dtexmesh compiles a .p3d grammar into a deterministic textured</li><li>p3dto3view compiles the same .p3d grammar and writes deterministic</li><li>Compile the grammar with explicit time, seed, and expansion limits.</li><li>Finalize spatial object associations.</li><li>Select the whole scene or the requested object hierarchy.</li><li>For each retained primitive in source order, call</li><li>Read each vertex as position [0..2], normal [3..5], and UV [6..7].</li><li>Add one TexturedMeshTriangle for each ordered group of three vertices.</li><li>Copy ScenePrimitiveInstance::materialindex and source primitive index.</li><li>Resolve the optional spatial object identifier through the existing primitive</li><li>Validate finite positions, finite normalized normals, finite UVs, valid</li><li>Apply the requested unit and coordinate conversion in one explicit basis</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> bash fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-bash">p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format obj \
+  --encoding ascii \
+  --texture-mapping bake-atlas \
+  --texture-resolution 2048 \
+  --output build/SMBv3/SMBv3.obj
+
+p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format stl \
+  --encoding binary-little-endian \
+  --texture-policy sidecar \
+  --output build/SMBv3/SMBv3.stl
+
+p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format ply \
+  --encoding ascii \
+  --texture-mapping bake-atlas \
+  --output build/SMBv3/SMBv3.ply
+
+p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format ply \
+  --encoding binary-little-endian \
+  --texture-mapping bake-atlas \
+  --output build/SMBv3/SMBv3-binary.ply</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for P3D Textured Mesh and Orthographic Three-View Strategy" data="../../assets/diagrams/pages/p3d-textured-mesh-and-orthographic-three-view-strategy.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>docs/P3D_TO_TEXTURED_MESH_AND_THREE_VIEW_STRATEGY.md</code></p><p>SHA-256: <code>72c11007ab80a5516221964dd53f8ddc9707b414258aa485fc55b5a93c517dd5</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>46 headings, 11 fenced code blocks, 3 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>developers and technical readers following the documented feature.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>p3d_to_3dtexmesh \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--input examples/SimpleModernBuilding/SMBv3.grammar \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--format obj \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--encoding ascii \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--texture-mapping bake-atlas \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--texture-resolution 2048 \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>--output build/SMBv3/SMBv3.obj</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>p3d_to_3dtexmesh \</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Documented; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>P3D Textured Mesh and Orthographic Three-View Strategy, Existing Repository Baseline, Command Contracts, p3dto3dtexmesh, p3dto3view</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="curved-primitives.html">Curved Primitives</a> <span class="status-badge status--documented">Documented</span><br/><small>ProGen3D models curved primitives through two canonical families: Cylinder and Sphere. Partial, hollow, clipped, open, and sectioned variants are domain restrictions on those families rather than independent mesh classes.</small></li><li><a href="progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li><li><a href="axialprofilev1.html">AxialProfilev1</a> <span class="status-badge status--documented">Documented</span><br/><small>AxialProfile is a core procedural geometry family. It separates evaluated shape specification, deterministic mesh construction, cached resolved geometry, and scene-instance state.</small></li><li><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html">ProGen3D Preview GL46 and PBR Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</small></li><li><a href="progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/docs/P3D_TO_TEXTURED_MESH_AND_THREE_VIEW_STRATEGY.md"><code>docs/P3D_TO_TEXTURED_MESH_AND_THREE_VIEW_STRATEGY.md</code></a></p>
+<p><strong>Source digest:</strong> <code>72c11007ab80a5516221964dd53f8ddc9707b414258aa485fc55b5a93c517dd5</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-p3d-textured-mesh-and-orthographic-three-view-strategy">P3D Textured Mesh and Orthographic Three-View Strategy</h2><p class="section-guide">Reading guide: this source section records “P3D Textured Mesh and Orthographic Three-View Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed"><strong>Strategy date:</strong> 2026-08-28
+<strong>Proposed commands:</strong> <code>p3d_to_3dtexmesh</code>, <code>p3d_to_3view</code></p>
+<h3 id="source-1-purpose">1. Purpose</h3><p class="section-guide">Reading guide: this source section records “1. Purpose”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>This strategy defines two native C++ conversion tools:</p>
+<ol>
+<li><code>p3d_to_3dtexmesh</code> compiles a <code>.p3d</code> grammar into a deterministic textured
+mesh package and writes OBJ, STL, or PLY output in every encoding that the
+selected format actually supports.</li>
+<li><code>p3d_to_3view</code> compiles the same <code>.p3d</code> grammar and writes deterministic
+front, side, and top PNG images using orthographic projection and automatic
+zoom-to-extents framing.</li>
+</ol>
+<p>Both commands must use one frozen generated-scene snapshot. Geometry exported
+to a mesh and geometry rendered into the three views must therefore come from
+the same primitive instances, transforms, material slots, and evaluated grammar
+state.</p>
+<h3 id="source-2-existing-repository-baseline">2. Existing Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Existing Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The implementation should extend the following current owners rather than
+create a second grammar or preview runtime:</p>
+<ul>
+<li><code>SceneGenerationContext</code> owns evaluated <code>ScenePrimitiveInstance</code> objects and
+the ordered <code>SceneMaterialCatalog</code>.</li>
+<li><code>ScenePrimitiveVertexAssemblyService</code> already produces the required render
+vertex tuple: world position, world normal, and texture coordinate.</li>
+<li><code>SceneExportMeshAssemblyService</code> currently collapses that tuple into a
+position-only <code>Mesh</code>; it is suitable for legacy export but is not the source
+model for a textured export.</li>
+<li><code>PreviewObjectCameraViewService</code> already isolates direct object geometry or
+an object containment hierarchy.</li>
+<li><code>PreviewObjectCameraFramingService</code> already targets an object's bounds center,
+sets horizontal views to zero elevation, and selects orthographic projection.</li>
+<li><code>ScenePreviewCameraFrameFactory</code> already creates a <code>glm::ortho</code> projection.</li>
+<li><code>PreviewFramebufferCaptureService</code> already reads deterministic framebuffer
+pixels and hashes them, but currently writes PPM rather than PNG.</li>
+<li><code>ThreeViewProjectionService</code> establishes the compatible view orientation:
+front <code>(x, y)</code>, side <code>(-z, y)</code>, and top <code>(-z, x)</code>.</li>
+<li><code>third_party/debs/stb/usr/include/stb/stb_image_write.h</code> is available for a
+native C++ PNG writer.</li>
+</ul>
+<p>The root export defect is loss of semantic data after render-vertex assembly.
+The root texture defect is that preview materials are represented primarily by
+OpenGL texture handles after creation. Export needs canonical CPU texture
+assets before any GPU upload occurs.</p>
+<h3 id="source-3-command-contracts">3. Command Contracts</h3><p class="section-guide">Reading guide: this source section records “3. Command Contracts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-p3d-to-3dtexmesh">3.1 <code>p3d_to_3dtexmesh</code></h4><p class="section-guide">Reading guide: this source section records “3.1 p3d_to_3dtexmesh”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Example invocations:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format obj \
+  --encoding ascii \
+  --texture-mapping bake-atlas \
+  --texture-resolution 2048 \
+  --output build/SMBv3/SMBv3.obj
+
+p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format stl \
+  --encoding binary-little-endian \
+  --texture-policy sidecar \
+  --output build/SMBv3/SMBv3.stl
+
+p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format ply \
+  --encoding ascii \
+  --texture-mapping bake-atlas \
+  --output build/SMBv3/SMBv3.ply
+
+p3d_to_3dtexmesh \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --format ply \
+  --encoding binary-little-endian \
+  --texture-mapping bake-atlas \
+  --output build/SMBv3/SMBv3-binary.ply
+</code></pre>
+<p>Required options:</p>
+<ul>
+<li><code>--input &lt;path&gt;</code> identifies the <code>.p3d</code> grammar.</li>
+<li><code>--format obj|stl|ply</code> selects the output format.</li>
+<li><code>--encoding ascii|binary-little-endian</code> selects a valid format encoding.</li>
+<li><code>--output &lt;path&gt;</code> identifies the primary mesh document.</li>
+</ul>
+<p>Important optional controls:</p>
+<ul>
+<li><code>--object &lt;spatial-object-id&gt;</code> exports one object hierarchy instead of the
+whole generated scene.</li>
+<li><code>--texture-mapping preserve-uv|bake-atlas</code> selects portable texture mapping.</li>
+<li><code>--texture-policy required|sidecar|none</code> states whether texture loss is an
+error, is documented in a sidecar package, or is intentionally accepted.</li>
+<li><code>--texture-resolution &lt;pixels&gt;</code> controls generated or baked texture maps.</li>
+<li><code>--units meters|millimeters</code> applies an explicit scale conversion.</li>
+<li><code>--coordinate-system progen3d-y-up|right-handed-y-up|right-handed-z-up</code>
+applies an explicit basis conversion.</li>
+<li><code>--time &lt;seconds&gt;</code> evaluates temporal grammar content at an explicit time.</li>
+<li><code>--seed &lt;integer&gt;</code> freezes seeded procedural behavior.</li>
+<li><code>--manifest &lt;path&gt;</code> overrides the default JSON manifest path.</li>
+<li>Repeatable <code>--texture-slot usertextureN=&lt;image-path&gt;</code> assignments freeze
+texture-library CPU image inputs for standalone conversion. Referencing an
+unassigned <code>usertextureN</code> material fails instead of generating a fallback.</li>
+</ul>
+<p class="source-status--passed">The command must reject an unsupported combination before writing any output.
+It must write through temporary files, validate the package, and atomically
+rename the completed package into place.</p>
+<h4 id="source-3-2-p3d-to-3view">3.2 <code>p3d_to_3view</code></h4><p class="section-guide">Reading guide: this source section records “3.2 p3d_to_3view”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Example invocation:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">p3d_to_3view \
+  --input examples/SimpleModernBuilding/SMBv3.grammar \
+  --output-directory build/SMBv3/three-view \
+  --width 1024 \
+  --height 1024 \
+  --padding 0.04 \
+  --render-mode shaded \
+  --background transparent
+</code></pre>
+<p>Required output names are:</p>
+<ul>
+<li><code>front.png</code></li>
+<li><code>side.png</code></li>
+<li><code>top.png</code></li>
+<li><code>three-view-manifest.json</code></li>
+</ul>
+<p>Important optional controls:</p>
+<ul>
+<li><code>--object &lt;spatial-object-id&gt;</code> captures one direct object or object hierarchy.</li>
+<li><code>--scope direct|hierarchy|scene</code> selects the geometry included in extents.</li>
+<li><code>--render-mode shaded|albedo|normal|silhouette</code> selects deterministic output.</li>
+<li><code>--background transparent|white|#RRGGBB</code> selects a fixed background.</li>
+<li><code>--width &lt;pixels&gt;</code> and <code>--height &lt;pixels&gt;</code> define each view independently of
+the interactive editor viewport.</li>
+<li><code>--padding &lt;ratio&gt;</code> reserves a fixed image-space border around the extents.</li>
+<li><code>--time &lt;seconds&gt;</code> and <code>--seed &lt;integer&gt;</code> freeze temporal and procedural state.</li>
+<li><code>--alpha-cutoff &lt;0..1&gt;</code> defines deterministic cutout rendering for vegetation.</li>
+<li>Repeatable <code>--texture-slot usertextureN=&lt;image-path&gt;</code> assignments provide the
+same frozen texture-library CPU assets used by mesh export.</li>
+</ul>
+<h3 id="source-4-format-capability-matrix">4. Format Capability Matrix</h3><p class="section-guide">Reading guide: this source section records “4. Format Capability Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Format</th>
+<th scope="col" style="text-align:right">ASCII</th>
+<th scope="col" style="text-align:right">Binary</th>
+<th scope="col" style="text-align:right">Normals</th>
+<th scope="col" style="text-align:right">UVs</th>
+<th scope="col" style="text-align:right">Native material/texture binding</th>
+<th scope="col">Required strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OBJ</td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right">No standard binary OBJ</td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right">Yes, through MTL and image files</td>
+<td>Write OBJ + MTL + PNG maps. Reject <code>--encoding binary-little-endian</code>.</td>
+</tr>
+<tr>
+<td>STL</td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right">Yes, little-endian de facto</td>
+<td style="text-align:right">Facet normal only</td>
+<td style="text-align:right">No</td>
+<td style="text-align:right">No</td>
+<td>Write geometry only. Textures may be retained only in the sidecar package and manifest. Reject <code>--texture-policy required</code>.</td>
+</tr>
+<tr>
+<td>PLY</td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right">Yes, little-endian</td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right">Custom but common</td>
+<td style="text-align:right">Non-standard</td>
+<td>Write UV and <code>material_index</code> properties plus documented texture comments and a sidecar manifest.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The tools must not describe STL as textured and must not invent a binary OBJ
+encoding. A request for impossible native texture preservation fails closed.</p>
+<p>Binary big-endian PLY is a possible later extension. Version 1 should reuse and
+harden the repository's existing binary little-endian direction rather than add
+an untested second binary byte order.</p>
+<h3 id="source-5-canonical-object-model">5. Canonical Object Model</h3><p class="section-guide">Reading guide: this source section records “5. Canonical Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-compilation-models">5.1 Compilation models</h4><p class="section-guide">Reading guide: this source section records “5.1 Compilation models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>P3dSceneCompilationRequest</code></p>
+<ul>
+<li>input grammar path</li>
+<li>explicit time and seed</li>
+<li>expansion limits</li>
+<li>optional spatial object selection</li>
+</ul>
+<p><code>CompiledP3dScene</code></p>
+<ul>
+<li>frozen <code>SceneGenerationContext</code></li>
+<li>frozen spatial building model</li>
+<li>grammar source hash</li>
+<li>generation settings</li>
+<li>deterministic scene bounds</li>
+<li>diagnostics</li>
+</ul>
+<p><code>P3dSceneCompilationService</code></p>
+<ul>
+<li>parses and validates the grammar</li>
+<li>evaluates it exactly once</li>
+<li>finalizes the spatial model</li>
+<li class="source-status--unresolved">rejects unresolved diagnostics</li>
+<li>returns an immutable compiled-scene snapshot</li>
+</ul>
+<h4 id="source-5-2-textured-mesh-models">5.2 Textured mesh models</h4><p class="section-guide">Reading guide: this source section records “5.2 Textured mesh models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>TexturedMeshVertex</code></p>
+<ul>
+<li>world position</li>
+<li>world normal</li>
+<li>texture coordinate</li>
+</ul>
+<p><code>TexturedMeshTriangle</code></p>
+<ul>
+<li>three vertex indices</li>
+<li>material slot</li>
+<li>source primitive index</li>
+<li>optional spatial object identifier</li>
+</ul>
+<p><code>MaterialTextureImage</code></p>
+<ul>
+<li>semantic channel: base color, alpha, normal, roughness, metallic, ambient
+occlusion, emissive, or height</li>
+<li>width and height</li>
+<li>pixel format</li>
+<li>color space</li>
+<li>CPU pixel bytes</li>
+<li>content hash</li>
+</ul>
+<p><code>SceneMaterialDefinition</code></p>
+<ul>
+<li>canonical material name</li>
+<li>scalar PBR values</li>
+<li>opacity and alpha mode</li>
+<li>mapping mode and mapping scale</li>
+<li>projection axes</li>
+<li>owned <code>MaterialTextureImage</code> collection</li>
+</ul>
+<p><code>SceneTexturedMesh</code></p>
+<ul>
+<li>ordered vertices</li>
+<li>ordered triangles</li>
+<li>ordered material definitions</li>
+<li>coordinate system and unit metadata</li>
+<li>world bounds</li>
+<li>source-scene provenance</li>
+</ul>
+<p><code>TexturedMeshExportPackage</code></p>
+<ul>
+<li>primary mesh document</li>
+<li>material document when required</li>
+<li>texture image files</li>
+<li>JSON manifest</li>
+<li>validation evidence</li>
+</ul>
+<h4 id="source-5-3-mesh-export-services">5.3 Mesh export services</h4><p class="section-guide">Reading guide: this source section records “5.3 Mesh export services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SceneTexturedMeshAssemblyService</code></p>
+<ul>
+<li>reads each retained <code>ScenePrimitiveInstance</code></li>
+<li>delegates geometry generation to <code>ScenePrimitiveVertexAssemblyService</code></li>
+<li>reads every 8-component <code>SceneRenderVertex</code></li>
+<li>preserves position, normal, texture coordinate, material slot, primitive
+provenance, and object association</li>
+<li>preserves triangle order and winding</li>
+</ul>
+<p><code>SceneMaterialAssetService</code></p>
+<ul>
+<li>creates canonical CPU <code>SceneMaterialDefinition</code> objects</li>
+<li>resolves procedural and texture-library materials</li>
+<li>owns color-space and alpha interpretation</li>
+<li>provides the same CPU material definitions to preview upload and export</li>
+</ul>
+<p><code>TextureAtlasBakingService</code></p>
+<ul>
+<li>unwraps or uses the existing face-aligned UVs</li>
+<li>evaluates UV or triplanar material mapping into portable 2D atlases</li>
+<li>bakes all enabled PBR channels with matching texel footprints</li>
+<li>writes deterministic padding around atlas islands</li>
+</ul>
+<p><code>MeshExportCapabilityValidationService</code></p>
+<ul>
+<li>validates format, encoding, texture mapping, and texture policy</li>
+<li>reports exactly which properties would be lost</li>
+<li>fails before files are opened when required information cannot be represented</li>
+</ul>
+<p><code>MeshDocumentWriter</code></p>
+<ul>
+<li>abstract category for a service that writes one supported mesh document</li>
+<li>receives <code>SceneTexturedMesh</code> and a validated request</li>
+<li>returns document hashes and diagnostics</li>
+</ul>
+<p>Concrete writers are real specializations of <code>MeshDocumentWriter</code>:</p>
+<ul>
+<li><code>ObjMeshDocumentWriter</code></li>
+<li><code>StlMeshDocumentWriter</code></li>
+<li><code>PlyMeshDocumentWriter</code></li>
+</ul>
+<p><code>PngTextureImageWriter</code></p>
+<ul>
+<li>writes CPU texture images using <code>stb_image_write.h</code></li>
+<li>handles RGB/RGBA channel count explicitly</li>
+<li>never reads texture pixels back from OpenGL</li>
+</ul>
+<p><code>TexturedMeshManifestWriter</code></p>
+<ul>
+<li>records source hash, output hashes, units, coordinate basis, bounds, material
+slots, texture paths, color spaces, alpha policy, mapping policy, and known
+format losses</li>
+</ul>
+<p><code>TexturedMeshExportWorkflow</code></p>
+<ul>
+<li>composes compilation, assembly, capability validation, texture baking,
+document writing, package validation, and atomic publication</li>
+</ul>
+<h4 id="source-5-4-orthographic-image-models">5.4 Orthographic image models</h4><p class="section-guide">Reading guide: this source section records “5.4 Orthographic image models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>OrthographicThreeViewRequest</code></p>
+<ul>
+<li>output dimensions</li>
+<li>padding ratio</li>
+<li>render mode and background</li>
+<li>scene, object, or object-hierarchy scope</li>
+<li>explicit time and seed</li>
+</ul>
+<p><code>OrthographicViewDefinition</code></p>
+<ul>
+<li>view name</li>
+<li>world right axis</li>
+<li>world up axis</li>
+<li>world forward axis</li>
+<li>projected center</li>
+<li>orthographic vertical span</li>
+<li>near and far clip distances</li>
+</ul>
+<p><code>ProjectedSceneExtents</code></p>
+<ul>
+<li>minimum and maximum right-axis coordinates</li>
+<li>minimum and maximum up-axis coordinates</li>
+<li>minimum and maximum depth coordinates</li>
+<li>validity and degeneracy evidence</li>
+</ul>
+<p><code>ThreeViewImageSet</code></p>
+<ul>
+<li>front RGBA image</li>
+<li>side RGBA image</li>
+<li>top RGBA image</li>
+<li>shared source-scene hash</li>
+</ul>
+<p><code>ThreeViewCaptureEvidence</code></p>
+<ul>
+<li>view definitions</li>
+<li>source bounds</li>
+<li>projected bounds</li>
+<li>image dimensions</li>
+<li>pixel hashes</li>
+<li>output hashes</li>
+<li>renderer settings</li>
+</ul>
+<h4 id="source-5-5-orthographic-image-services">5.5 Orthographic image services</h4><p class="section-guide">Reading guide: this source section records “5.5 Orthographic image services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>OrthographicViewDefinitionFactory</code></p>
+<ul>
+<li>creates front, side, and top view axis definitions</li>
+<li>delegates projected-bound calculation</li>
+<li>calculates aspect-correct zoom-to-extents spans</li>
+</ul>
+<p><code>ProjectedSceneExtentsService</code></p>
+<ul>
+<li>projects all retained world-space geometry or all eight corners of exact
+retained-object bounds into a view basis</li>
+<li>does not use collision bounds when render geometry bounds are available</li>
+<li>rejects an empty or non-finite scene</li>
+</ul>
+<p><code>OffscreenThreeViewRenderingService</code></p>
+<ul>
+<li>owns a fixed-size offscreen RGBA framebuffer and depth buffer</li>
+<li>renders each <code>OrthographicViewDefinition</code> through the normal preview renderer</li>
+<li>freezes simulation, material animation, exposure, and random jitter</li>
+<li>reads rows into top-left image order</li>
+</ul>
+<p><code>PngImageWriter</code></p>
+<ul>
+<li>writes front, side, and top images with <code>stb_image_write.h</code></li>
+<li>emits an error when dimensions, channels, or row stride are invalid</li>
+</ul>
+<p><code>ThreeViewManifestWriter</code></p>
+<ul>
+<li>writes axis, bounds, span, clip planes, pixel hash, output hash, source hash,
+material mode, lighting mode, alpha cutoff, and background</li>
+</ul>
+<p><code>OrthographicThreeViewWorkflow</code></p>
+<ul>
+<li>composes compilation, optional object isolation, extents, view construction,
+rendering, PNG writing, validation, and atomic publication</li>
+</ul>
+<h3 id="source-6-uml-readable-relationships">6. UML-Readable Relationships</h3><p class="section-guide">Reading guide: this source section records “6. UML-Readable Relationships”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">P3dSceneCompilationService creates CompiledP3dScene
+
+TexturedMeshExportWorkflow composes
+  P3dSceneCompilationService
+  SceneTexturedMeshAssemblyService
+  SceneMaterialAssetService
+  TextureAtlasBakingService
+  MeshExportCapabilityValidationService
+  MeshDocumentWriter
+  PngTextureImageWriter
+  TexturedMeshManifestWriter
+
+SceneTexturedMesh aggregates
+  TexturedMeshVertex
+  TexturedMeshTriangle
+  SceneMaterialDefinition
+
+SceneMaterialDefinition composes MaterialTextureImage
+
+OrthographicThreeViewWorkflow composes
+  P3dSceneCompilationService
+  PreviewObjectCameraViewService
+  ProjectedSceneExtentsService
+  OrthographicViewDefinitionFactory
+  OffscreenThreeViewRenderingService
+  PngImageWriter
+  ThreeViewManifestWriter
+
+ThreeViewImageSet composes three PreviewRgbaImage values
+</code></pre>
+<p>The two workflows associate through the immutable <code>CompiledP3dScene</code>; neither
+workflow owns a second grammar evaluator.</p>
+<h3 id="source-7-textured-mesh-assembly-algorithm">7. Textured Mesh Assembly Algorithm</h3><p class="section-guide">Reading guide: this source section records “7. Textured Mesh Assembly Algorithm”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Compile the grammar with explicit time, seed, and expansion limits.</li>
+<li>Finalize spatial object associations.</li>
+<li>Select the whole scene or the requested object hierarchy.</li>
+<li>For each retained primitive in source order, call
+<code>ScenePrimitiveVertexAssemblyService::appendInstanceVertices</code>.</li>
+<li>Read each vertex as position <code>[0..2]</code>, normal <code>[3..5]</code>, and UV <code>[6..7]</code>.</li>
+<li>Add one <code>TexturedMeshTriangle</code> for each ordered group of three vertices.</li>
+<li>Copy <code>ScenePrimitiveInstance::material_index</code> and source primitive index.</li>
+<li>Resolve the optional spatial object identifier through the existing primitive
+association index.</li>
+<li class="source-status--passed">Validate finite positions, finite normalized normals, finite UVs, valid
+material slots, complete triangles, and consistent winding.</li>
+<li>Apply the requested unit and coordinate conversion in one explicit basis
+transformation. Transform normals with the inverse-transpose. Reverse
+winding when the basis determinant is negative.</li>
+<li class="source-status--passed">Keep vertices split across UV seams, hard-normal seams, material boundaries,
+and object boundaries. Optional deduplication may combine only vertices with
+identical complete semantic tuples.</li>
+<li>Compute exported bounds from final exported vertices, not from stale authored
+metadata.</li>
+</ol>
+<p>The legacy <code>SceneExportMeshAssemblyService</code> remains available for compatibility.
+It should not be expanded into a multi-responsibility textured exporter.</p>
+<h3 id="source-8-canonical-cpu-material-pipeline">8. Canonical CPU Material Pipeline</h3><p class="section-guide">Reading guide: this source section records “8. Canonical CPU Material Pipeline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-8-1-required-refactor">8.1 Required refactor</h4><p class="section-guide">Reading guide: this source section records “8.1 Required refactor”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Material generation should return a CPU <code>SceneMaterialDefinition</code> first.
+OpenGL preview upload becomes a consumer of that model rather than its owner.
+This prevents mesh export from depending on an active OpenGL context and avoids
+non-portable <code>glGetTexImage</code> readback.</p>
+<p>The procedural material path already creates CPU pixel arrays before upload.
+Those arrays should be retained in <code>MaterialTextureImage</code> objects. Texture
+library images should be decoded once into the same CPU model. GPU handles in
+<code>PreviewSurfaceMaterial</code> remain runtime resources and must never appear in an
+export manifest.</p>
+<h4 id="source-8-2-channel-policy">8.2 Channel policy</h4><p class="section-guide">Reading guide: this source section records “8.2 Channel policy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Channel</th>
+<th scope="col" style="text-align:right">PNG channels</th>
+<th scope="col">Color interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base color</td>
+<td style="text-align:right">RGB or RGBA</td>
+<td>sRGB</td>
+</tr>
+<tr>
+<td>Alpha</td>
+<td style="text-align:right">Gray or RGBA alpha</td>
+<td>Linear coverage</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td style="text-align:right">RGB</td>
+<td>Linear tangent-space vector</td>
+</tr>
+<tr>
+<td>Roughness</td>
+<td style="text-align:right">Gray</td>
+<td>Linear scalar</td>
+</tr>
+<tr>
+<td>Metallic</td>
+<td style="text-align:right">Gray</td>
+<td>Linear scalar</td>
+</tr>
+<tr>
+<td>Ambient occlusion</td>
+<td style="text-align:right">Gray</td>
+<td>Linear scalar</td>
+</tr>
+<tr>
+<td>Emissive</td>
+<td style="text-align:right">RGB</td>
+<td>sRGB color with linear strength metadata</td>
+</tr>
+<tr>
+<td>Height</td>
+<td style="text-align:right">Gray</td>
+<td>Linear scalar with scale metadata</td>
+</tr>
+</tbody>
+</table></div>
+<p class="source-status--passed"><code>stb_image_write</code> does not establish a complete ICC workflow. Version 1 must
+record color-space semantics in the manifest and MTL comments. A later libpng
+writer may add explicit PNG color-profile chunks without changing the material
+object model.</p>
+<h4 id="source-8-3-mapping-policy">8.3 Mapping policy</h4><p class="section-guide">Reading guide: this source section records “8.3 Mapping policy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed"><code>preserve-uv</code> is valid only when the material appearance is defined by exported
+UVs. If the preview uses triplanar mapping, <code>preserve-uv</code> with
+<code>--texture-policy required</code> must fail.</p>
+<p><code>bake-atlas</code> is the portable default for exact appearance. It evaluates the
+current UV or triplanar mapping over exported triangles and bakes all material
+channels into UV atlases. Atlas generation must use a deterministic triangle
+order, deterministic island packing, fixed padding, and an explicit resolution.</p>
+<p>Normal maps must be baked into the tangent basis implied by the exported UVs.
+The manifest records MikkTSpace as the required tangent reconstruction rule for
+consumers that need tangent-space normal mapping.</p>
+<h3 id="source-9-writer-requirements">9. Writer Requirements</h3><p class="section-guide">Reading guide: this source section records “9. Writer Requirements”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-9-1-obj-and-mtl">9.1 OBJ and MTL</h4><p class="section-guide">Reading guide: this source section records “9.1 OBJ and MTL”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The OBJ writer must:</p>
+<ul>
+<li>write <code>v</code>, <code>vt</code>, and <code>vn</code> records</li>
+<li>write triangle <code>f</code> records with aligned position/UV/normal indices</li>
+<li>write deterministic <code>o</code> or <code>g</code> names from spatial object identifiers</li>
+<li>write <code>usemtl</code> only when the material slot changes</li>
+<li>reference one deterministic <code>.mtl</code> file</li>
+<li>use relative, normalized texture paths</li>
+</ul>
+<p>The MTL writer must use portable baseline fields and documented extensions:</p>
+<ul>
+<li><code>Kd</code> and <code>map_Kd</code> for base color</li>
+<li><code>d</code> and <code>map_d</code> for opacity</li>
+<li><code>Ke</code> and <code>map_Ke</code> for emissive color</li>
+<li><code>Ns</code> as a compatibility approximation derived from roughness</li>
+<li><code>map_Bump</code> for tangent-space normal maps</li>
+<li><code>map_Pr</code> and <code>map_Pm</code> as documented roughness/metallic extensions</li>
+</ul>
+<p>The manifest remains authoritative where importers disagree about MTL PBR
+extensions.</p>
+<h4 id="source-9-2-stl">9.2 STL</h4><p class="section-guide">Reading guide: this source section records “9.2 STL”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The STL writer must support:</p>
+<ul>
+<li>deterministic ASCII STL</li>
+<li>binary little-endian STL with an 80-byte deterministic header</li>
+<li>geometric facet normals derived from final triangle positions</li>
+<li>finite-coordinate and non-degenerate-triangle validation</li>
+</ul>
+<p>STL cannot carry UVs, material slots, object hierarchy, or textures. The writer
+must not use vendor-specific packed facet colors in version 1. When
+<code>--texture-policy sidecar</code> is selected, texture images and the manifest may be
+written for provenance, but they are not bound to the STL document.</p>
+<h4 id="source-9-3-ply">9.3 PLY</h4><p class="section-guide">Reading guide: this source section records “9.3 PLY”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The PLY writer must support the same schema in ASCII and binary little-endian:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">element vertex &lt;count&gt;
+property float x
+property float y
+property float z
+property float nx
+property float ny
+property float nz
+property float s
+property float t
+element face &lt;count&gt;
+property list uchar uint vertex_indices
+property int material_index
+</code></pre>
+<p>The header may include deterministic <code>comment TextureFile &lt;relative-path&gt;</code> and
+material comments. Because these conventions are not universal, the JSON
+manifest remains authoritative. Binary serialization must write explicit
+little-endian bytes rather than dumping host memory.</p>
+<h3 id="source-10-orthographic-view-definitions">10. Orthographic View Definitions</h3><p class="section-guide">Reading guide: this source section records “10. Orthographic View Definitions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The view convention intentionally matches <code>ThreeViewProjectionService</code>:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">View</th>
+<th scope="col">Camera position side</th>
+<th scope="col">Forward axis</th>
+<th scope="col">Image right</th>
+<th scope="col">Image up</th>
+<th scope="col">Projection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Front</td>
+<td>positive Z</td>
+<td>negative Z</td>
+<td>positive X</td>
+<td>positive Y</td>
+<td><code>(x, y)</code></td>
+</tr>
+<tr>
+<td>Side</td>
+<td>positive X</td>
+<td>negative X</td>
+<td>negative Z</td>
+<td>positive Y</td>
+<td><code>(-z, y)</code></td>
+</tr>
+<tr>
+<td>Top</td>
+<td>positive Y</td>
+<td>negative Y</td>
+<td>negative Z</td>
+<td>positive X</td>
+<td><code>(-z, x)</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>These definitions produce true flattened elevations. No perspective matrix,
+field-of-view approximation, dolly zoom, or perspective post-processing is
+permitted.</p>
+<h3 id="source-11-zoom-to-extents-mathematics">11. Zoom-to-Extents Mathematics</h3><p class="section-guide">Reading guide: this source section records “11. Zoom-to-Extents Mathematics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For each view, let <code>right</code>, <code>up</code>, and <code>forward</code> be an orthonormal basis. Project
+each retained world-space vertex <code>position</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">u = dot(position, right)
+v = dot(position, up)
+d = dot(position, forward)
+</code></pre>
+<p>Accumulate <code>minimum_u</code>, <code>maximum_u</code>, <code>minimum_v</code>, <code>maximum_v</code>, <code>minimum_d</code>, and
+<code>maximum_d</code>.</p>
+<p>For output width <code>W</code>, height <code>H</code>, aspect <code>A = W / H</code>, padding ratio <code>P</code>, and a
+small nonzero minimum span:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">content_width  = max(maximum_u - minimum_u, minimum_span)
+content_height = max(maximum_v - minimum_v, minimum_span)
+padded_width   = content_width  * (1 + 2P)
+padded_height  = content_height * (1 + 2P)
+vertical_span  = max(padded_height, padded_width / A)
+horizontal_span = vertical_span * A
+</code></pre>
+<p>The projected center is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">center_u = (minimum_u + maximum_u) / 2
+center_v = (minimum_v + maximum_v) / 2
+center_d = (minimum_d + maximum_d) / 2
+target = right * center_u + up * center_v + forward * center_d
+</code></pre>
+<p>The camera is placed opposite the forward axis far enough to enclose the depth
+span. Orthographic image scale is controlled only by <code>vertical_span</code>; camera
+distance exists solely for valid near/far clipping.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">depth_span = max(maximum_d - minimum_d, minimum_span)
+clip_margin = max(depth_span * 0.25, 1.0)
+camera_position = target - forward * (depth_span / 2 + clip_margin)
+near_plane = 0.01
+far_plane = depth_span + 2 * clip_margin
+</code></pre>
+<p>Each image must be validated by reprojecting all retained vertices and proving
+that every projected point falls inside the padded orthographic rectangle.</p>
+<h3 id="source-12-deterministic-rendering-contract">12. Deterministic Rendering Contract</h3><p class="section-guide">Reading guide: this source section records “12. Deterministic Rendering Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>p3d_to_3view</code> must not inherit mutable editor state. It creates a dedicated
+offscreen render session with:</p>
+<ul>
+<li>fixed viewport dimensions</li>
+<li>RGBA8 or SRGB8_ALPHA8 color attachment</li>
+<li>depth attachment</li>
+<li>orthographic projection only</li>
+<li>fixed camera axes from this document</li>
+<li>fixed studio lighting preset</li>
+<li>fixed exposure and tone mapping</li>
+<li>fixed background</li>
+<li>disabled camera easing and user input</li>
+<li>disabled temporal antialiasing jitter</li>
+<li>frozen physics and grammar time</li>
+<li>frozen material UV animation and pulse phase</li>
+<li>fixed alpha cutoff</li>
+<li>deterministic vegetation LOD selected from projected coverage, or a forced
+export LOD for golden evidence</li>
+</ul>
+<p>The renderer should support these stable modes:</p>
+<ul>
+<li><code>shaded</code>: deterministic PBR preview appearance</li>
+<li><code>albedo</code>: unlit base color and alpha</li>
+<li><code>normal</code>: encoded world normal</li>
+<li><code>silhouette</code>: binary foreground coverage compatible with the existing CPU
+three-view service</li>
+</ul>
+<p>Transparent capture requires RGBA framebuffer readback. OpenGL rows must be
+flipped once into top-left image origin before hashing and PNG writing.</p>
+<h3 id="source-13-output-manifests">13. Output Manifests</h3><p class="section-guide">Reading guide: this source section records “13. Output Manifests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-13-1-mesh-manifest-minimum-fields">13.1 Mesh manifest minimum fields</h4><p class="section-guide">Reading guide: this source section records “13.1 Mesh manifest minimum fields”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-json">{
+  "schema": "progen3d.textured-mesh-export.v1",
+  "source": {"path": "...", "sha256": "...", "time": 0.0, "seed": 1},
+  "format": "obj",
+  "encoding": "ascii",
+  "units": "meters",
+  "coordinate_system": "right-handed-y-up",
+  "bounds": {"minimum": [0, 0, 0], "maximum": [1, 1, 1]},
+  "geometry": {"vertices": 0, "triangles": 0, "materials": 0},
+  "texture_mapping": "bake-atlas",
+  "files": [{"path": "...", "sha256": "..."}],
+  "losses": []
+}
+</code></pre>
+<h4 id="source-13-2-three-view-manifest-minimum-fields">13.2 Three-view manifest minimum fields</h4><p class="section-guide">Reading guide: this source section records “13.2 Three-view manifest minimum fields”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-json">{
+  "schema": "progen3d.orthographic-three-view.v1",
+  "source": {"path": "...", "sha256": "...", "time": 0.0, "seed": 1},
+  "projection": "orthographic",
+  "padding_ratio": 0.04,
+  "views": [
+    {
+      "name": "front",
+      "right": [1, 0, 0],
+      "up": [0, 1, 0],
+      "forward": [0, 0, -1],
+      "vertical_span": 1.0,
+      "width": 1024,
+      "height": 1024,
+      "pixel_hash": "...",
+      "file_sha256": "..."
+    }
+  ]
+}
+</code></pre>
+<h3 id="source-14-proposed-source-layout">14. Proposed Source Layout</h3><p class="section-guide">Reading guide: this source section records “14. Proposed Source Layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/conversion/model/P3dSceneCompilationRequest.h
+include/conversion/model/CompiledP3dScene.h
+include/conversion/model/TexturedMeshVertex.h
+include/conversion/model/TexturedMeshTriangle.h
+include/conversion/model/MaterialTextureImage.h
+include/conversion/model/SceneMaterialDefinition.h
+include/conversion/model/SceneTexturedMesh.h
+include/conversion/model/TexturedMeshExportRequest.h
+include/conversion/model/TexturedMeshExportPackage.h
+include/conversion/model/OrthographicThreeViewRequest.h
+include/conversion/model/OrthographicViewDefinition.h
+include/conversion/model/ProjectedSceneExtents.h
+include/conversion/model/ThreeViewImageSet.h
+include/conversion/model/ThreeViewCaptureEvidence.h
+
+include/conversion/service/P3dSceneCompilationService.h
+include/conversion/service/SceneTexturedMeshAssemblyService.h
+include/conversion/service/SceneMaterialAssetService.h
+include/conversion/service/TextureAtlasBakingService.h
+include/conversion/service/MeshExportCapabilityValidationService.h
+include/conversion/service/MeshDocumentWriter.h
+include/conversion/service/ObjMeshDocumentWriter.h
+include/conversion/service/StlMeshDocumentWriter.h
+include/conversion/service/PlyMeshDocumentWriter.h
+include/conversion/service/PngTextureImageWriter.h
+include/conversion/service/TexturedMeshManifestWriter.h
+include/conversion/service/TexturedMeshExportWorkflow.h
+include/conversion/service/ProjectedSceneExtentsService.h
+include/conversion/service/OrthographicViewDefinitionFactory.h
+include/conversion/service/OffscreenThreeViewRenderingService.h
+include/conversion/service/PngImageWriter.h
+include/conversion/service/ThreeViewManifestWriter.h
+include/conversion/service/OrthographicThreeViewWorkflow.h
+
+src/conversion/model/*.cpp
+src/conversion/service/*.cpp
+src/conversion/application/p3d_to_3dtexmesh_main.cpp
+src/conversion/application/p3d_to_3view_main.cpp
+src/image/third_party/StbImageWriteImplementation.cpp
+</code></pre>
+<p><code>MeshDocumentWriter</code> inheritance is justified because each concrete writer is a
+kind of mesh-document writer. Format capability, texture baking, compilation,
+and publication remain composed services rather than hidden writer behavior.</p>
+<h3 id="source-15-implementation-phases">15. Implementation Phases</h3><p class="section-guide">Reading guide: this source section records “15. Implementation Phases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-phase-1-freeze-conversion-inputs">Phase 1: Freeze conversion inputs</h4><p class="section-guide">Reading guide: this source section records “Phase 1: Freeze conversion inputs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Introduce <code>P3dSceneCompilationRequest</code> and <code>CompiledP3dScene</code>.</li>
+<li>Reuse the editor grammar runtime without editor UI ownership.</li>
+<li>Require explicit seed, time, and expansion limits in evidence.</li>
+<li>Add scene and object-hierarchy selection tests.</li>
+</ul>
+<h4 id="source-phase-2-establish-canonical-cpu-material-assets">Phase 2: Establish canonical CPU material assets</h4><p class="section-guide">Reading guide: this source section records “Phase 2: Establish canonical CPU material assets”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Introduce <code>MaterialTextureImage</code> and <code>SceneMaterialDefinition</code>.</li>
+<li>Refactor procedural and texture-library material creation to produce CPU assets
+before OpenGL upload.</li>
+<li>Make preview upload and export consume the same material definition.</li>
+<li>Prove byte-identical CPU material hashes across repeated runs.</li>
+</ul>
+<h4 id="source-phase-3-preserve-textured-geometry">Phase 3: Preserve textured geometry</h4><p class="section-guide">Reading guide: this source section records “Phase 3: Preserve textured geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add <code>SceneTexturedMeshAssemblyService</code> beside the legacy position-only service.</li>
+<li>Preserve render vertices, material slots, primitive provenance, and spatial
+object association.</li>
+<li>Add coordinate conversion, unit conversion, winding, UV seam, and normal tests.</li>
+</ul>
+<h4 id="source-phase-4-implement-format-writers">Phase 4: Implement format writers</h4><p class="section-guide">Reading guide: this source section records “Phase 4: Implement format writers”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Implement OBJ/MTL/PNG package writing.</li>
+<li>Implement ASCII and binary little-endian STL.</li>
+<li>Replace host-memory PLY binary writes with explicit little-endian serialization.</li>
+<li>Extend PLY ASCII and binary schemas with normals, UVs, and material index.</li>
+<li>Add capability validation and atomic package publication.</li>
+</ul>
+<h4 id="source-phase-5-implement-portable-texture-baking">Phase 5: Implement portable texture baking</h4><p class="section-guide">Reading guide: this source section records “Phase 5: Implement portable texture baking”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Support exact UV preservation where valid.</li>
+<li>Add deterministic atlas packing and triplanar-to-UV baking.</li>
+<li>Bake base color, alpha, normal, roughness, metallic, AO, emissive, and height.</li>
+<li>Add atlas bleed and tangent-space validation.</li>
+</ul>
+<h4 id="source-phase-6-implement-offscreen-orthographic-png-capture">Phase 6: Implement offscreen orthographic PNG capture</h4><p class="section-guide">Reading guide: this source section records “Phase 6: Implement offscreen orthographic PNG capture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add exact projected-extents calculation.</li>
+<li>Add front, side, and top view definitions.</li>
+<li>Add dedicated RGBA offscreen framebuffer rendering.</li>
+<li>Add native PNG writing and manifests.</li>
+<li>Reuse object isolation for direct and hierarchy captures.</li>
+</ul>
+<h4 id="source-phase-7-add-command-line-applications">Phase 7: Add command-line applications</h4><p class="section-guide">Reading guide: this source section records “Phase 7: Add command-line applications”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Add both executables to the repository build.</li>
+<li>Return nonzero for grammar, capability, render, validation, or publication
+failures.</li>
+<li>Print concise output paths and evidence hashes on success.</li>
+</ul>
+<h4 id="source-phase-8-certification-and-compatibility">Phase 8: Certification and compatibility</h4><p class="section-guide">Reading guide: this source section records “Phase 8: Certification and compatibility”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Keep existing PLY APIs and PPM preview evidence operational.</li>
+<li>Run focused conversion tests, full test discovery, headless rendering smoke,
+and packaging/build gates.</li>
+<li>Publish golden artifacts only from the exact tested source hash.</li>
+</ul>
+<h3 id="source-16-independent-validation-matrix">16. Independent Validation Matrix</h3><p class="section-guide">Reading guide: this source section records “16. Independent Validation Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-16-1-geometry-and-format-fixtures">16.1 Geometry and format fixtures</h4><p class="section-guide">Reading guide: this source section records “16.1 Geometry and format fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li><strong>Asymmetric axis sentinel</strong> proves front/side/top orientation.</li>
+<li><strong>Single textured triangle</strong> proves position, normal, UV, winding, and one
+material in OBJ and PLY.</li>
+<li><strong>UV seam cube</strong> proves vertices are not merged across UV seams.</li>
+<li><strong>Hard-normal cube</strong> proves vertices are not merged across normal seams.</li>
+<li><strong>Two-material wall and window</strong> proves deterministic material partitions.</li>
+<li><strong>Transparent leaf cards</strong> prove alpha map and double-sided policy.</li>
+<li><strong>Triplanar concrete block</strong> proves <code>preserve-uv</code> fails when required and
+<code>bake-atlas</code> succeeds.</li>
+<li><strong>Non-uniform transform</strong> proves inverse-transpose normal conversion.</li>
+<li><strong>Reflected coordinate basis</strong> proves winding reversal.</li>
+<li class="source-status--failed"><strong>Degenerate triangle</strong> proves fail-closed validation.</li>
+</ol>
+<p>For every valid fixture:</p>
+<ul>
+<li>export twice and require byte-identical files</li>
+<li>independently parse the generated document</li>
+<li>compare counts, bounds, winding, normals, UVs, material indices, and hashes</li>
+<li>prove binary output byte order using known byte sequences</li>
+</ul>
+<h4 id="source-16-2-texture-fixtures">16.2 Texture fixtures</h4><p class="section-guide">Reading guide: this source section records “16.2 Texture fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>RGB checkerboard base color</li>
+<li>RGBA cutout foliage</li>
+<li>tangent-space normal direction sentinel</li>
+<li>roughness gradient</li>
+<li>metallic split</li>
+<li>ambient-occlusion corner mask</li>
+<li>emissive stripe</li>
+<li>height ramp with scale metadata</li>
+</ol>
+<p>OBJ must preserve all portable bindings in MTL and the manifest. PLY must
+preserve UVs/material indices and sidecar bindings. STL tests must prove that
+native texture requirements are rejected and sidecar loss is explicit.</p>
+<h4 id="source-16-3-orthographic-three-view-fixtures">16.3 Orthographic three-view fixtures</h4><p class="section-guide">Reading guide: this source section records “16.3 Orthographic three-view fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For each fixture and each front/side/top view:</p>
+<ul>
+<li>prove the projection kind is orthographic</li>
+<li>prove the camera height/target aligns with the bounds center for horizontal
+views</li>
+<li>prove every retained vertex projects inside the padded rectangle</li>
+<li>prove the occupied pixel bounds approach the requested padding without
+clipping</li>
+<li>prove front <code>(x,y)</code>, side <code>(-z,y)</code>, and top <code>(-z,x)</code> orientation</li>
+<li>prove repeated PNG bytes and pixel hashes are identical</li>
+<li>prove rectangular outputs preserve aspect-correct framing</li>
+<li>prove scene, direct-object, and hierarchy scopes exclude unrelated geometry</li>
+</ul>
+<p>The CPU <code>ThreeViewProjectionService</code> silhouette should be used as an independent
+coverage oracle for <code>--render-mode silhouette</code>. GPU and CPU silhouettes should
+meet an explicit intersection-over-union threshold after matching resolution
+and raster edge policy.</p>
+<h4 id="source-16-4-round-trip-and-visual-gates">16.4 Round-trip and visual gates</h4><p class="section-guide">Reading guide: this source section records “16.4 Round-trip and visual gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Load OBJ through an independent test parser and compare semantic mesh data.</li>
+<li>Load STL ASCII and binary and compare triangle geometry.</li>
+<li>Load PLY ASCII and binary and compare the declared schema and values.</li>
+<li>Re-render imported OBJ and PLY fixtures from the same orthographic views.</li>
+<li>Compare albedo images with per-pixel error and silhouette IoU metrics.</li>
+<li>Require no clipped geometry and no missing texture paths.</li>
+<li>Record accepted thresholds per render mode; do not claim exact PBR identity
+across third-party renderers whose lighting models differ.</li>
+</ul>
+<h3 id="source-17-completion-gates">17. Completion Gates</h3><p class="section-guide">Reading guide: this source section records “17. Completion Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The conversion slice is complete only when all of the following are true:</p>
+<ul>
+<li>OBJ ASCII writes geometry, normals, UVs, MTL, and PNG textures.</li>
+<li class="source-status--failed">Binary OBJ requests fail with an exact capability diagnostic.</li>
+<li>STL ASCII and binary little-endian write equivalent geometry.</li>
+<li class="source-status--failed">STL texture loss is explicit and required native texture requests fail.</li>
+<li>PLY ASCII and binary little-endian use equivalent textured-mesh schemas.</li>
+<li>PLY binary byte order is host-independent.</li>
+<li>UV and triplanar materials have a portable, validated mapping path.</li>
+<li>CPU material assets are the shared authority for preview and export.</li>
+<li>Front, side, and top PNGs use orthographic projection only.</li>
+<li>Three-view framing is centered and zoomed to the selected geometry extents.</li>
+<li>Object and object-hierarchy capture exclude unrelated geometry.</li>
+<li>Every output package contains source and artifact hashes.</li>
+<li>Repeated conversion of deterministic fixtures is byte-identical.</li>
+<li class="source-status--passed">Focused tests, broad repository tests, headless rendering smoke, and build
+packaging pass from the same source revision.</li>
+</ul>
+<p>Passing a position-only mesh export test or a CPU silhouette test alone does not
+establish completion of this strategy.</p>
+<h3 id="source-18-recommended-first-implementation-slice">18. Recommended First Implementation Slice</h3><p class="section-guide">Reading guide: this source section records “18. Recommended First Implementation Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The safest first slice is:</p>
+<ol>
+<li>Add canonical <code>SceneTexturedMesh</code> assembly from the existing
+<code>SceneRenderVertex</code> stream.</li>
+<li>Add CPU <code>SceneMaterialDefinition</code> output for one procedural material and one
+texture-library material.</li>
+<li>Implement OBJ/MTL/PNG with <code>preserve-uv</code> only.</li>
+<li>Implement exact projected extents and PNG <code>silhouette</code> mode through a fixed
+offscreen framebuffer.</li>
+<li>Validate the asymmetric axis sentinel, textured triangle, UV seam cube, and
+transparent leaf card.</li>
+</ol>
+<p>This slice proves the shared data authority and orthographic camera contract
+before binary formats, atlas baking, and full shaded capture add complexity.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="curved-primitives.html" rel="prev">← Previous: Curved Primitives</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html" rel="next">Next: ProGen3D AxialProfilev1 Core Primitive Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry." name="description"/>
+<meta content="P1_IMPLEMENTATION.md" name="source-markdown"/>
+<meta content="33353badd183baee98d57ebccd4dec63a4f76d0998924d7cfaab9aaea0462d63" name="source-sha256"/>
+<meta content="Documented" name="documentation-status"/>
+<title>Progen3D P1 Semantic Isolation · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-architecture">Architecture and Runtime</a></li>
+<li aria-current="page">Progen3D P1 Semantic Isolation</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Progen3D P1 Semantic Isolation</h1>
+<p class="lead">P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry.</p>
+<div class="lesson-meta">
+<span class="status-badge status--documented">Documented</span>
+<span class="tag">Architecture and Runtime</span>
+<span class="tag">About 4 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/P1_IMPLEMENTATION.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="33353badd183baee98d57ebccd4dec63a4f76d0998924d7cfaab9aaea0462d63" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Progen3D P1 Semantic Isolation in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Progen3D P1 Semantic Isolation, Random declarations execute during expansion, Per-grammar lexical environments, Semantic symbol tables and preflight.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="progen3d-grammar.html">Progen3D Grammar</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Progen3D P1 Semantic Isolation</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Progen3D P1 Semantic Isolation</td></tr><tr><td><dfn title="Named by the source document">Random declarations execute during expansion</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Random declarations execute during expansion</td></tr><tr><td><dfn title="Named by the source document">Per-grammar lexical environments</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Per-grammar lexical environments</td></tr><tr><td><dfn title="Named by the source document">Semantic symbol tables and preflight</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Semantic symbol tables and preflight</td></tr><tr><td><dfn title="Named by the source document">Checked expression engine</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Checked expression engine</td></tr><tr><td><dfn title="Named by the source document">Range and conversion safety</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>5. Range and conversion safety</td></tr><tr><td><dfn title="Named by the source document">Explicit material intent</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>6. Explicit material intent</td></tr><tr><td><dfn title="Named by the source document">Authoritative transform metadata</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>7. Authoritative transform metadata</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="Typed MCP_OMv1 model">P1</dfn></td><td>Typed MCP_OMv1 model</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Progen3D P1 Semantic Isolation, Random declarations execute during expansion, Per-grammar lexical environments, Semantic symbol tables and preflight. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Random declarations execute during expansion, 2. Per-grammar lexical environments, 3. Semantic symbol tables and preflight, 4. Checked expression engine, 5. Range and conversion safety. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 3, failed: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 8 code blocks and the source SHA-256 <code>33353badd183baee98d57ebccd4dec63a4f76d0998924d7cfaab9aaea0462d63</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-random-declarations-execute-during-expansion">1. Random declarations execute during expansion</a></li><li><a href="#source-2-per-grammar-lexical-environments">2. Per-grammar lexical environments</a></li><li><a href="#source-3-semantic-symbol-tables-and-preflight">3. Semantic symbol tables and preflight</a></li><li><a href="#source-4-checked-expression-engine">4. Checked expression engine</a></li><li><a href="#source-5-range-and-conversion-safety">5. Range and conversion safety</a></li><li><a href="#source-6-explicit-material-intent">6. Explicit material intent</a></li><li><a href="#source-7-authoritative-transform-metadata">7. Authoritative transform metadata</a></li><li><a href="#source-compatibility-notes">Compatibility notes</a></li><li><a href="#source-verification">Verification</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>3</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>1</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>0</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is P1_IMPLEMENTATION.md.</li><li>Learn the named concepts: Progen3D P1 Semantic Isolation, Random declarations execute during expansion, Per-grammar lexical environments, Semantic symbol tables and preflight.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">Start -&gt;
+    R Height(3 5)
+    S(1 Height 1)
+    I(Cube material(plaster))</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Progen3D P1 Semantic Isolation" data="../../assets/diagrams/pages/progen3d-p1-semantic-isolation.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>P1_IMPLEMENTATION.md</code></p><p>SHA-256: <code>33353badd183baee98d57ebccd4dec63a4f76d0998924d7cfaab9aaea0462d63</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>10 headings, 8 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>developers and technical readers following the documented feature.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_p1_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>CXX=g++ ./tests/run_p1_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Documented; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Progen3D P1 Semantic Isolation, Random declarations execute during expansion, Per-grammar lexical environments, Semantic symbol tables and preflight, Checked expression engine</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-grammar.html">Progen3D Grammar</a> <span class="status-badge status--documented">Documented</span><br/><small>Guide status: current implementation guide for the uploaded 21 August 2026 source snapshot.</small></li><li><a href="progen3d-p2-temporal-grammar-and-bounded-rotation.html">Progen3D P2 Temporal Grammar and Bounded Rotation</a> <span class="status-badge status--documented">Documented</span><br/><small>P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state.</small></li><li><a href="progen3d-example-grammar-corpus.html">Progen3D Example Grammar Corpus</a> <span class="status-badge status--documented">Documented</span><br/><small>This archive is a source-grounded example corpus for the Progen3D grammar implementation represented by the uploaded C++ snapshot.</small></li><li><a href="expected-invalid-diagnostic-fixtures.html">Expected-invalid diagnostic fixtures</a> <span class="status-badge status--documented">Documented</span><br/><small>Every .p3d file in this directory is intentionally invalid. They are regression fixtures for parser, semantic-validation, expression, and runtime-preflight diagnostics.</small></li><li><a href="progen3d-p0-hardening.html">Progen3D P0 Hardening</a> <span class="status-badge status--documented">Documented</span><br/><small>This patch implements the immediate safety gates identified in the grammar analysis while preserving the current grammar syntax.</small></li><li><a href="../validation/progen3d-p0-p1-and-p2-verification.html">Progen3D P0, P1, and P2 verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>The supplied source snapshot contains implementation files but no matching project headers or complete build configuration. The test suite therefore combines source gates, contract builds of the actual changed implementation units, runtime harnesses, and exact-body extraction tests.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/P1_IMPLEMENTATION.md"><code>P1_IMPLEMENTATION.md</code></a></p>
+<p><strong>Source digest:</strong> <code>33353badd183baee98d57ebccd4dec63a4f76d0998924d7cfaab9aaea0462d63</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-p1-semantic-isolation">Progen3D P1 Semantic Isolation</h2><p class="section-guide">Reading guide: this source section records “Progen3D P1 Semantic Isolation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry.</p>
+<h3 id="source-1-random-declarations-execute-during-expansion">1. Random declarations execute during expansion</h3><p class="section-guide">Reading guide: this source section records “1. Random declarations execute during expansion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>R</code> and <code>R*</code> now parse into declaration tokens without sampling or mutating a process-global variable pool. A declaration is evaluated only when its production is reached in expansion order.</p>
+<p>Consequences:</p>
+<ul>
+<li>unreachable rules no longer consume random numbers or create variables;</li>
+<li>a declaration cannot affect tokens that precede it;</li>
+<li>ranges may depend on values already visible in the lexical environment;</li>
+<li>random declarations never enter the scene-action VM;</li>
+<li class="source-status--failed">failed expansion publishes neither a partial action stream nor partial runtime snapshots.</li>
+</ul>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    R Height(3 5)
+    S(1 Height 1)
+    I(Cube material(plaster))
+</code></pre>
+<h3 id="source-2-per-grammar-lexical-environments">2. Per-grammar lexical environments</h3><p class="section-guide">Reading guide: this source section records “2. Per-grammar lexical environments”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The former process-global <code>variable_list</code> and <code>full_variable_list</code> have been removed. Each active grammar expansion owns a stack of lexical frames:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">grammar root frame
+  └─ rule-call frame
+       └─ nested rule-call frame
+</code></pre>
+<p class="source-status--passed">Rule parameters, rerolled values, random declarations, and <code>&lt;Rule&gt;_count</code> are bound in the current frame. RAII removes the complete frame on every normal return, diagnostic abort, and exception path. Two <code>GrammarDocument</code> instances can no longer read or clear one another's values.</p>
+<p>A mutex-protected, per-grammar snapshot registry exposes the last successfully generated random values to the editor without exposing mutable runtime storage. The public contract is in <code>src/GrammarRuntime.h</code>.</p>
+<h3 id="source-3-semantic-symbol-tables-and-preflight">3. Semantic symbol tables and preflight</h3><p class="section-guide">Reading guide: this source section records “3. Semantic symbol tables and preflight”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Before expansion, P1 constructs tables for:</p>
+<ul>
+<li>rule definitions;</li>
+<li>parameters;</li>
+<li>random declarations;</li>
+<li>reroll bindings;</li>
+<li>call-graph edges;</li>
+<li>potentially visible lexical names.</li>
+</ul>
+<p class="source-status--passed">The semantic pass blocks:</p>
+<ul>
+<li>duplicate rule definitions;</li>
+<li>duplicate parameters and reroll bindings;</li>
+<li>reserved iteration-counter collisions;</li>
+<li>parameter/reroll/random-binding collisions;</li>
+<li>undefined rule calls;</li>
+<li>undefined variables and unsupported functions in expressions;</li>
+<li>rule-call arity mismatches;</li>
+<li>entry rules that require arguments;</li>
+<li>probabilities outside <code>[0, 1]</code>;</li>
+<li>invalid literal and evaluated random ranges.</li>
+</ul>
+<p>Runtime checks remain in place as a defensive second gate for path-dependent values.</p>
+<h3 id="source-4-checked-expression-engine">4. Checked expression engine</h3><p class="section-guide">Reading guide: this source section records “4. Checked expression engine”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The old substitution-and-zero fallback has been replaced with a recursive-descent evaluator supporting:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">+  -  *  /  ^
+unary + and -
+parentheses
+sin cos tan abs sqrt floor ceil min max
+variable lookup
+&amp;Variable random resampling
+scientific notation
+</code></pre>
+<p>The parser reports an explicit diagnostic for:</p>
+<ul>
+<li>empty or malformed expressions;</li>
+<li>undefined variables;</li>
+<li>unsupported functions;</li>
+<li>missing parentheses;</li>
+<li>division by zero;</li>
+<li>negative <code>sqrt</code> arguments;</li>
+<li>non-finite power results;</li>
+<li>values outside the engine's finite <code>float</code> range, including silent underflow to zero.</li>
+</ul>
+<p>Errors return <code>NaN</code> internally and abort expansion. Zero is no longer used as an error sentinel.</p>
+<h3 id="source-5-range-and-conversion-safety">5. Range and conversion safety</h3><p class="section-guide">Reading guide: this source section records “5. Range and conversion safety”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P1 validates random ranges both statically when literal and dynamically when expression-based:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">minimum &lt;= maximum
+finite minimum and maximum
+integer range contains at least one integer
+integer range fits the supported C++ int domain
+</code></pre>
+<p>Real random sampling uses a double-precision interval calculation before conversion to <code>float</code>, avoiding overflow in <code>max - min</code>. Material-index expressions are also checked before conversion to <code>int</code>.</p>
+<h3 id="source-6-explicit-material-intent">6. Explicit material intent</h3><p class="section-guide">Reading guide: this source section records “6. Explicit material intent”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Instance materials now support explicit forms:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">I(Cube material(plaster))
+I(Cube material("plaster"))
+I(Cube index(FloorTex))
+</code></pre>
+<p>Legacy forms remain accepted:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">I(Cube plaster)
+I(Cube FloorTex)
+</code></pre>
+<p>A bare identifier is resolved against semantic lexical visibility instead of whichever values happened to have been sampled while parsing. <code>material(...)</code> and <code>index(...)</code> are the deterministic forms and should be used in new grammars.</p>
+<h3 id="source-7-authoritative-transform-metadata">7. Authoritative transform metadata</h3><p class="section-guide">Reading guide: this source section records “7. Authoritative transform metadata”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The transform matrices are now the source of truth for spatial state. <code>Scope.cpp</code> derives:</p>
+<ul>
+<li>position from the transform translation column;</li>
+<li>primary and secondary scale magnitudes from matrix basis columns;</li>
+<li>a cumulative orthonormal basis using Gram-Schmidt rejection;</li>
+<li>Euler display metadata from a normalized quaternion.</li>
+</ul>
+<p>Translation, scaling, rotation, scope copying, and <code>setPosition</code> all resynchronize metadata after modifying a matrix. <code>Context.cpp</code> derives primitive position, size, and orientation from the emitted transform, not separately accumulated scope fields.</p>
+<p>Physics translations and rotations also recompute pose metadata from the resulting matrices. This prevents rendered geometry, collision geometry, and stored primitive pose from drifting apart.</p>
+<h3 id="source-compatibility-notes">Compatibility notes</h3><p class="section-guide">Reading guide: this source section records “Compatibility notes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>P0 limits and pre-execution safety gates remain active.</li>
+<li>Bare material identifiers remain available for older grammars, but explicit <code>material(...)</code> or <code>index(...)</code> is recommended.</li>
+<li>Variables declared in a rule are lexical and do not leak into sibling calls.</li>
+<li>A variable must exist on the executed path before it is read.</li>
+<li class="source-status--passed">The uploaded source snapshot does not include the matching project headers, third-party dependencies, or complete build configuration. The included contract harnesses compile and execute the changed grammar and scope cores, plus exact extracted Context transform functions.</li>
+</ul>
+<h3 id="source-verification">Verification</h3><p class="section-guide">Reading guide: this source section records “Verification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Run all inherited P0 and new P1 gates:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_p1_checks.sh
+</code></pre>
+<p>The script uses Clang by default and automatically enables AddressSanitizer and UndefinedBehaviorSanitizer when available. GCC can be selected with:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">CXX=g++ ./tests/run_p1_checks.sh
+</code></pre>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-p0-hardening.html" rel="prev">← Previous: Progen3D P0 Hardening</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-p2-temporal-grammar-and-bounded-rotation.html" rel="next">Next: Progen3D P2 Temporal Grammar and Bounded Rotation →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

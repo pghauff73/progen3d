@@ -508,9 +508,16 @@ $(APP_OBJS): CXXFLAGS += $(APPLICATION_WARNING_FLAGS)
 LDFLAGS =
 LIBS = $(GLFW_LIB) $(GLFW_PLATFORM_LIBS) -ldl -lm -lpthread $(CURL_LIBS) $(DBUS_LIBS) $(JSONCPP_LIBS) $(LIBXML2_LIBS) $(CRYPTO_LIBS)
 
-.PHONY: all clean
+.PHONY: all clean docs docs-check
 
 all: $(TARGET) $(LEGACY_TARGET)
+
+docs:
+	python3 tools/generate_educational_docs.py
+
+docs-check:
+	python3 tools/generate_educational_docs.py --check
+	python3 tools/validate_educational_docs.py
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LIBS)

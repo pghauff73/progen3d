@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Plan snapshot: August 28, 2026." name="description"/>
+<meta content="docs/BUILDING_VEGETATION_OBJECT_MODEL_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="7e7f8a82512fcd33d614c74de185f213586f8bb5bc2a6874ef42eb2aaa396cc2" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>Building Vegetation Object Model Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vegetation">Vegetation Systems</a></li>
+<li aria-current="page">Building Vegetation Object Model Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Building Vegetation Object Model Implementation Plan</h1>
+<p class="lead">Plan snapshot: August 28, 2026.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Vegetation Systems</span>
+<span class="tag">About 24 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-28</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/docs/BUILDING_VEGETATION_OBJECT_MODEL_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="7e7f8a82512fcd33d614c74de185f213586f8bb5bc2a6874ef42eb2aaa396cc2" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Building Vegetation Object Model Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Building Vegetation Object Model Implementation Plan, Governing Rules, Slice A: Research-Backed Biological Profiles, Slice B: Validation and Calibration Readiness.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="improved-building-vegetation-object-model.html">Improved Building Vegetation Object Model</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Building Vegetation Object Model Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Building Vegetation Object Model Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Governing Rules</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Governing Rules</td></tr><tr><td><dfn title="Named by the source document">Slice A: Research-Backed Biological Profiles</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice A: Research-Backed Biological Profiles</td></tr><tr><td><dfn title="Named by the source document">Slice B: Validation and Calibration Readiness</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice B: Validation and Calibration Readiness</td></tr><tr><td><dfn title="Named by the source document">Slice C: Evidence Bundle Import and Binding</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice C: Evidence Bundle Import and Binding</td></tr><tr><td><dfn title="Named by the source document">Slice D1: Canonical Measured-Source Adapters</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice D1: Canonical Measured-Source Adapters</td></tr><tr><td><dfn title="Named by the source document">Slice D2: Native Decoders and Georeferencing</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice D2: Native Decoders and Georeferencing</td></tr><tr><td><dfn title="Named by the source document">Slice D3A: Point-Cloud Intake and Reconstruction Admission</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Slice D3A: Point-Cloud Intake and Reconstruction Admission</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="derived architecture against destructively measured tropical">QSM</dfn></td><td>derived architecture against destructively measured tropical</td></tr><tr><td><dfn title="Polygon File Format">PLY</dfn></td><td>Polygon File Format</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">LAS</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="JavaScript Object Notation">JSON</dfn></td><td>JavaScript Object Notation</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">RSML</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">D3B2C1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">D1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">D3A</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ASCII</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">LAZ</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">E57</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Plan snapshot: August 28, 2026.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Building Vegetation Object Model Implementation Plan, Governing Rules, Slice A: Research-Backed Biological Profiles, Slice B: Validation and Calibration Readiness. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Objective, Governing Rules, Slice A: Research-Backed Biological Profiles, Slice B: Validation and Calibration Readiness, Slice C: Evidence Bundle Import and Binding. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 29, failed: 15, pending: 13, proposed: 2.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves prose and list evidence and the source SHA-256 <code>7e7f8a82512fcd33d614c74de185f213586f8bb5bc2a6874ef42eb2aaa396cc2</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-objective">Objective</a></li><li><a href="#source-governing-rules">Governing Rules</a></li><li><a href="#source-slice-a-research-backed-biological-profiles">Slice A: Research-Backed Biological Profiles</a></li><li><a href="#source-slice-b-validation-and-calibration-readiness">Slice B: Validation and Calibration Readiness</a></li><li><a href="#source-slice-c-evidence-bundle-import-and-binding">Slice C: Evidence Bundle Import and Binding</a></li><li><a href="#source-slice-d1-canonical-measured-source-adapters">Slice D1: Canonical Measured-Source Adapters</a></li><li><a href="#source-slice-d2-native-decoders-and-georeferencing">Slice D2: Native Decoders and Georeferencing</a></li><li><a href="#source-slice-d3a-point-cloud-intake-and-reconstruction-admission">Slice D3A: Point-Cloud Intake and Reconstruction Admission</a></li><li><a href="#source-slice-d3b1-binary-ply-point-records">Slice D3B1: Binary PLY Point Records</a></li><li><a href="#source-slice-d3b2a-canopy-occupancy-reconstruction-quality">Slice D3B2A: Canopy Occupancy Reconstruction Quality</a></li><li><a href="#source-slice-d3b2b-primary-woody-axis-reconstruction-quality">Slice D3B2B: Primary Woody Axis Reconstruction Quality</a></li><li><a href="#source-slice-d3b2c1-segmentation-contract-and-quality-admitted-branch-graph">Slice D3B2C1: Segmentation Contract and Quality-Admitted Branch Graph</a></li><li><a href="#source-slice-d3b2c2-automated-segmentation-and-parameter-sensitivity-ensembles">Slice D3B2C2: Automated Segmentation and Parameter-Sensitivity Ensembles</a></li><li><a href="#source-slice-d3b2c3-component-level-ground-truth-and-volume-admission">Slice D3B2C3: Component-Level Ground Truth and Volume Admission</a></li><li><a href="#source-slice-d3c-additional-native-formats-and-calibration-methods">Slice D3C: Additional Native Formats and Calibration Methods</a></li><li><a href="#source-slice-e-runtime-consumers">Slice E: Runtime Consumers</a></li><li><a href="#source-current-boundary">Current Boundary</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>29</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>15</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>13</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>2</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is docs/BUILDING_VEGETATION_OBJECT_MODEL_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: Building Vegetation Object Model Implementation Plan, Governing Rules, Slice A: Research-Backed Biological Profiles, Slice B: Validation and Calibration Readiness.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>VegetationCalibrationEvidenceBundle owns bundle identity, schema version,</li><li>VegetationCalibrationMeasurement owns one typed measurement, value, unit,</li><li>VegetationCalibrationEvidenceBundleParsingService parses JSON without</li><li>VegetationCalibrationEvidenceBundleValidationService rejects unknown</li><li>VegetationCalibrationEvidenceBindingService creates a new specialized</li><li>VegetationCalibrationEvidenceBindingReport records accepted, deferred, and</li><li>Deterministic tests cover exact round trips, order independence, duplicate</li><li>Exact payload hashes and exact JSON round trips required one canonical owner,</li><li>The original identity model could distinguish taxon and cultivar evidence but</li><li>Shoot and root readiness originally lacked the minimum graph-completeness</li><li>The first focused pass exposed generated-schema drift after those C++ model</li><li>Final semantic review found that accepted text measurements could be copied</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source prose example:</strong> Plan snapshot: August 28, 2026.</p>
+</div>
+<details class="solution"><summary>Worked interpretation</summary><p>Separate the nouns that name project entities from verbs that state behavior. Then classify each behavior as documented, proposed, evidenced, or unresolved using the source status signals. The source contains no fenced code block, so no executable example is invented.</p></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Building Vegetation Object Model Implementation Plan" data="../../assets/diagrams/pages/building-vegetation-object-model-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>docs/BUILDING_VEGETATION_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>7e7f8a82512fcd33d614c74de185f213586f8bb5bc2a6874ef42eb2aaa396cc2</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>18 headings, 0 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Plan snapshot: August 28, 2026.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Building Vegetation Object Model Implementation Plan, Governing Rules, Slice A: Research-Backed Biological Profiles, Slice B: Validation and Calibration Readiness, Slice C: Evidence Bundle Import and Binding</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="vegetation-renderer-integration-implementation-plan.html">Vegetation Renderer Integration Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Convert the vegetation triangle-distribution contract into executable geometry representations that preserve biological structure, projected organ area, deterministic evidence, runtime LOD selection, packed GPU ownership, and scalable draw submission.</small></li><li><a href="improved-building-vegetation-object-model.html">Improved Building Vegetation Object Model</a> <span class="status-badge status--documented">Documented</span><br/><small>BVO-OMv2.1 enriches the existing building spatial object model without changing the frozen 124-object SMB inventory.</small></li><li><a href="building-vegetation-object-model-literature-review.html">Building Vegetation Object Model Literature Review</a> <span class="status-badge status--research">Research</span><br/><small>Research snapshot: August 28, 2026.</small></li><li><a href="building-vegetation-object-model-triangle-distribution-research.html">Building Vegetation Object Model: Triangle Distribution Research</a> <span class="status-badge status--research">Research</span><br/><small>Research snapshot: August 28, 2026.</small></li><li><a href="progen3d-vegetation-grammar-implementation-plan.html">Progen3D Vegetation Grammar Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Verification authority: VEGETATIONGRAMMARV1VERIFICATION.md maps every originating requirement to current source, deterministic tests, and supervisor visual evidence. The release command composes the subsystem through runvegetationchecks.sh and runvegetationvisualmatrix.sh.</small></li><li><a href="vegetation-building-objects-three-view-match-report.html">Vegetation Building Objects Three-View Match Report</a> <span class="status-badge status--evidence">Evidence</span><br/><small>ImageGen supplies object-specific appearance intent. The deterministic five-degree ProGen3D camera views retain geometry authority for silhouette, extent, orientation, component placement, and support relationships.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/docs/BUILDING_VEGETATION_OBJECT_MODEL_IMPLEMENTATION_PLAN.md"><code>docs/BUILDING_VEGETATION_OBJECT_MODEL_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>7e7f8a82512fcd33d614c74de185f213586f8bb5bc2a6874ef42eb2aaa396cc2</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-building-vegetation-object-model-implementation-plan">Building Vegetation Object Model Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “Building Vegetation Object Model Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Plan snapshot: August 28, 2026.</p>
+<h3 id="source-objective">Objective</h3><p class="section-guide">Reading guide: this source section records “Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Evolve the Building Vegetation Object Model from deterministic architectural
+vegetation geometry into an evidence-bound, domain-calibrated object model
+without changing the frozen 124-object Simple Modern Building inventory or
+inventing species and specimen measurements.</p>
+<h3 id="source-governing-rules">Governing Rules</h3><p class="section-guide">Reading guide: this source section records “Governing Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Grammar and authored extents remain current geometry authority.</li>
+<li>Biological domains have separate model owners and readiness gates.</li>
+<li class="source-status--pending">Unknown measurements remain null.</li>
+<li>One ready domain cannot certify another domain.</li>
+<li>Calibration evidence must identify its source, units, acquisition method,
+uncertainty, specimen or taxon scope, and exact content hash.</li>
+<li>Imported evidence may specialize an architectural archetype but may not
+silently replace its object identity, spatial interfaces, or geometry.</li>
+<li>Validation, binding, readiness evaluation, and simulation remain separate
+service responsibilities.</li>
+</ul>
+<h3 id="source-slice-a-research-backed-biological-profiles">Slice A: Research-Backed Biological Profiles</h3><p class="section-guide">Reading guide: this source section records “Slice A: Research-Backed Biological Profiles”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated.</p>
+<p>Implemented:</p>
+<ul>
+<li><code>PlantIdentityProfile</code>;</li>
+<li><code>PlantArchitecturalTopologyProfile</code>;</li>
+<li><code>PlantPhenologyProfile</code>;</li>
+<li><code>PlantRootArchitectureProfile</code>;</li>
+<li><code>PlantCanopyOpticalProfile</code>;</li>
+<li><code>PlantBiomechanicalProfile</code>;</li>
+<li><code>PlantEnvironmentalResponseProfile</code>;</li>
+<li><code>PlantSemanticAnnotationProfile</code>;</li>
+<li><code>PlantFunctionalTraitProfile</code>;</li>
+<li><code>PlantHydraulicProfile</code>;</li>
+<li><code>PlantSizeAllometryProfile</code>;</li>
+<li><code>VegetationSubstrateRequirementProfile</code>;</li>
+<li><code>VegetationEvidenceProfile</code>;</li>
+<li><code>VegetationBiologicalProfile</code> composition in
+<code>BuildingVegetationObjectModel</code>;</li>
+<li>BVO-OMv2.1 records for all 50 vegetation objects;</li>
+<li>a seventeen-source primary literature review and stable source identifiers.</li>
+</ul>
+<p>Acceptance evidence:</p>
+<ul>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li>all 50 generated objects carry every biological profile;</li>
+<li>uncalibrated values remain null;</li>
+<li>generated grammar hashes remain the geometry-provenance authority.</li>
+</ul>
+<h3 id="source-slice-b-validation-and-calibration-readiness">Slice B: Validation and Calibration Readiness</h3><p class="section-guide">Reading guide: this source section records “Slice B: Validation and Calibration Readiness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated.</p>
+<p>Implemented:</p>
+<ul>
+<li><code>VegetationBiologicalProfileValidationService</code>;</li>
+<li><code>VegetationCalibrationReadinessEvaluationService</code>;</li>
+<li>fourteen independent calibration domains;</li>
+<li class="source-status--failed">calibrated, uncalibrated, contradictory, duplicate-domain, and fail-closed
+coverage;</li>
+<li>generated readiness records for all 50 objects;</li>
+<li>Makefile ownership and full editor linkage.</li>
+</ul>
+<p>The current generated suite is ready for authored <code>BuildingPlacement</code>. It is
+not yet ready for calibrated identity, shoot topology, roots, canopy optics,
+phenology, biomechanics, environmental response, semantic annotation,
+functional traits, hydraulics, size allometry, substrate suitability, or
+measured representation fidelity.</p>
+<p>Issue adjustment:</p>
+<p class="source-status--failed">The complete vegetation matrix initially failed because its grammar-scene gate
+still referenced showcase files at <code>examples/</code>. The canonical files had moved
+to <code>examples/SimpleModernBuilding/</code>. The gate now uses the canonical paths and
+the complete nonvisual vegetation matrix passes.</p>
+<p>Acceptance evidence:</p>
+<ul>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_grammar_scene_checks.sh</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes;</li>
+<li><code>git diff --check</code> passes for the changed implementation surface.</li>
+</ul>
+<h3 id="source-slice-c-evidence-bundle-import-and-binding">Slice C: Evidence Bundle Import and Binding</h3><p class="section-guide">Reading guide: this source section records “Slice C: Evidence Bundle Import and Binding”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated.</p>
+<p>Implemented an immutable calibration evidence boundary:</p>
+<ol>
+<li><code>VegetationCalibrationEvidenceBundle</code> owns bundle identity, schema version,
+taxon or specimen scope, coordinate and unit systems, acquisition method,
+uncertainty statement, source references, and exact payload hash.</li>
+<li><code>VegetationCalibrationMeasurement</code> owns one typed measurement, value, unit,
+domain, observation scope, and uncertainty.</li>
+<li><code>VegetationCalibrationEvidenceBundleParsingService</code> parses JSON without
+mutating canonical object state.</li>
+<li class="source-status--pending"><code>VegetationCalibrationEvidenceBundleValidationService</code> rejects unknown
+domains, unsupported units, duplicate measurements, non-finite values,
+architecture mismatch, missing evidence hashes, and contradictory identity.</li>
+<li><code>VegetationCalibrationEvidenceBindingService</code> creates a new specialized
+<code>VegetationBiologicalProfile</code>; it never mutates the input profile.</li>
+<li><code>VegetationCalibrationEvidenceBindingReport</code> records accepted, deferred, and
+rejected measurements and the before/after readiness domains.</li>
+<li>Deterministic tests cover exact round trips, order independence, duplicate
+rejection, partial bundles, mismatched specimen identity, stale hashes, and
+domain readiness transitions.</li>
+</ol>
+<p>Supporting model corrections:</p>
+<ul>
+<li><code>PlantIdentityProfile</code> now owns an explicit specimen identifier so measured
+specimen evidence cannot be represented by a taxon name alone;</li>
+<li><code>PlantArchitecturalTopologyProfile</code> now owns maximum branch order and
+topology evidence identifiers;</li>
+<li><code>PlantRootArchitectureProfile</code> now owns an explicit root-graph identifier and
+root evidence identifiers;</li>
+<li>the generated BVO-OMv2.1 schema exposes those fields and records the evidence
+bundle authority, services, hash policy, and immutable domain-atomic binding
+policy for every vegetation object.</li>
+</ul>
+<p>Issue adjustments:</p>
+<ol>
+<li>Exact payload hashes and exact JSON round trips required one canonical owner,
+so <code>VegetationCalibrationEvidenceBundleSerializationService</code> was added rather
+than duplicating JSON ordering rules in the parser, validator, and tests.</li>
+<li>The original identity model could distinguish taxon and cultivar evidence but
+could not prove measured-specimen identity. An explicit specimen identifier is
+now required at that resolution.</li>
+<li>Shoot and root readiness originally lacked the minimum graph-completeness
+fields needed by the bundle contract. Maximum branch order and root-graph
+identity are now explicit rather than inferred from geometry.</li>
+<li class="source-status--passed">The first focused pass exposed generated-schema drift after those C++ model
+changes. The generator now emits the same fields and evidence authority as the
+canonical object model.</li>
+<li>Final semantic review found that accepted text measurements could be copied
+into <code>VegetationEvidenceProfile.sourceIdentifiers</code>. Binding now records only
+bundle and referenced source identifiers; taxon names and artifact identifiers
+remain owned by their purpose-specific profiles.</li>
+</ol>
+<p>Initial supported measurements:</p>
+<ul>
+<li>identity: scientific name, cultivar, specimen identifier;</li>
+<li>shoot topology: topology artifact identifier and maximum branch order;</li>
+<li>roots: graph identifier, depth, radial spread, maximum order;</li>
+<li>canopy optics: leaf area index, gap fraction, mean leaf inclination;</li>
+<li>phenology: seasonal schedule artifact identifier;</li>
+<li>biomechanics: density, elastic modulus, damping ratio, drag coefficient;</li>
+<li>environmental response: response-model artifact identifier;</li>
+<li>semantic annotation: ontology, release, anatomy and development term identifiers;</li>
+<li>functional traits: measured leaf traits, mature height, scope and uncertainty;</li>
+<li>hydraulics: conductance, capacitance, vulnerability thresholds and area ratio;</li>
+<li>size allometry: reference dimensions and relationship model identifier;</li>
+<li>substrate suitability: rootable volume, depth, density, porosity and water capacity;</li>
+<li>representation fidelity: grammar and camera evidence identifiers.</li>
+</ul>
+<p>Acceptance evidence:</p>
+<ul>
+<li>canonical serialize-parse-serialize output is byte-identical;</li>
+<li>source and measurement ordering does not change the payload hash;</li>
+<li class="source-status--pending">duplicate, stale-hash, unknown-domain, unsupported-unit, non-finite,
+architecture-mismatch, missing-source-hash, and identity-conflict bundles are
+rejected;</li>
+<li>partial domains are deferred without falsely changing readiness;</li>
+<li class="source-status--passed">a complete valid bundle produces a new profile and transitions the calibrated
+domains without mutating the architectural archetype;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li class="source-status--passed"><code>make -j2 progen3d-editor-gui</code> passes with the JsonCpp and SHA-256 boundary
+linked into the complete editor;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d1-canonical-measured-source-adapters">Slice D1: Canonical Measured-Source Adapters</h3><p class="section-guide">Reading guide: this source section records “Slice D1: Canonical Measured-Source Adapters”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated.</p>
+<p>Implemented evidence-producing adapters that never mutate a canonical profile:</p>
+<ol>
+<li><code>VegetationMeasuredSourceArtifact</code> owns immutable source identity, citation,
+locator, media type, coordinate and unit systems, acquisition metadata,
+uncertainty, raw payload, and exact payload SHA-256.</li>
+<li><code>VegetationQuantitativeStructureModelAdapter</code> validates QSM cylinder identity,
+parent connectivity, branch order, positive dimensions, architecture, units,
+and source hash before emitting shoot-topology evidence.</li>
+<li><code>VegetationRootArchitectureGraphAdapter</code> validates root segment connectivity
+and computes normalized maximum depth, radial spread, and root order relative
+to the declared root origin.</li>
+<li><code>VegetationCanopyObservationAdapter</code> converts optical observations into leaf
+area index, crown gap fraction, and mean leaf inclination measurements while
+explicitly deferring point-cloud identifiers not represented by bundle v1.</li>
+<li><code>VegetationPhenologyObservationSeriesAdapter</code> requires valid, unique,
+chronologically ordered ISO dates and at least two development stages.</li>
+<li><code>VegetationBiomechanicalMaterialTestAdapter</code> converts measured density,
+elastic modulus, damping, and drag into the existing biomechanical domain.</li>
+<li><code>VegetationMeasurementUnitNormalizationService</code> supports explicit length,
+density, pressure, fraction, angle, and dimensionless conversions.</li>
+<li class="source-status--failed"><code>VegetationMeasuredCoordinateNormalizationService</code> converts declared local
+Y-up and Z-up coordinates into canonical <code>LocalPlantXYZ-ZUp</code>; coordinate
+frames requiring an undeclared world-to-local transform fail closed.</li>
+<li><code>VegetationMeasuredSourceAdapterReport</code> preserves accepted, deferred, and
+rejected source records, while <code>VegetationMeasuredEvidenceBundleFactory</code>
+creates a canonically hashed Slice C evidence bundle.</li>
+</ol>
+<p>Issue adjustments:</p>
+<ol>
+<li>QSM, root, phenology, point-cloud, and laboratory tools do not share one
+stable vendor-native file contract. Slice D was split so the validated
+canonical JSON interchange boundary is established before format-specific
+decoders are added.</li>
+<li>Preserving a source coordinate-system label was insufficient after scalar
+geometry measurements had been normalized. Evidence bundles now declare the
+canonical local Z-up frame, while the immutable source artifact preserves the
+original frame.</li>
+<li>A world-coordinate label cannot establish a specimen-local transform by
+itself. Global frames are rejected until an exact transform, units, axis
+convention, and provenance are supplied.</li>
+<li>Point-cloud identifiers currently have no dedicated measurement kind in
+evidence bundle v1. The canopy adapter records them as deferred rather than
+silently treating them as calibrated optical values.</li>
+</ol>
+<p>Acceptance evidence:</p>
+<ul>
+<li>five frozen measured-source fixtures cover QSM, roots, canopy optics,
+phenology, and biomechanics;</li>
+<li>repeated adaptation of the same hashed artifact produces byte-identical
+canonical evidence JSON;</li>
+<li>centimetres, millimetres, density, pressure, percent, and radians are converted
+to the exact SI units required by Slice C;</li>
+<li>local Y-up coordinates convert deterministically to local Z-up coordinates;</li>
+<li>stale hashes, unsupported coordinate systems and units, architecture mismatch,
+invalid parent references, incomplete graphs, and unordered observations are
+rejected;</li>
+<li>adapter uncertainty and source identifiers propagate to every output
+measurement;</li>
+<li>sequential adapter bundles transition shoot topology, roots, canopy optics,
+phenology, and biomechanics to ready without mutating the source archetype;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d2-native-decoders-and-georeferencing">Slice D2: Native Decoders and Georeferencing</h3><p class="section-guide">Reading guide: this source section records “Slice D2: Native Decoders and Georeferencing”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated on August 28, 2026.</p>
+<p>Implemented source decoders outside the validated adapter boundary:</p>
+<ol>
+<li class="source-status--failed"><code>VegetationMeasuredSourceSchemaRegistry</code> maps an exact media type and schema
+version to one decoder; unknown or ambiguous variants fail closed.</li>
+<li>QSM decoders convert declared cylinder-table and supported TreeQSM exports into
+<code>ProGen3D-QuantitativeStructureModel-v1</code> without changing source values.</li>
+<li>Root decoders convert declared root-system graph exports into
+<code>ProGen3D-RootArchitectureGraph-v1</code> with explicit origin and axis semantics.</li>
+<li>Canopy decoders read declared optical-result tables and point-cloud metadata;
+raw point-cloud processing remains a separate reconstruction service.</li>
+<li>Phenology and biomechanical table decoders preserve row-level source
+provenance, missing fields, and declared uncertainty.</li>
+<li><code>VegetationMeasuredCoordinateReferenceTransform</code> owns the exact affine
+world-to-specimen transform, source and target frames, units, uncertainty, and
+evidence hash required before georeferenced sources can enter D1.</li>
+<li>Decoder reports distinguish unsupported source format, lossy conversion,
+deferred fields, and records rejected before canonical adaptation.</li>
+</ol>
+<p>Implementation details:</p>
+<ol>
+<li><code>VegetationMeasuredSourceDecodeContext</code> composes the exact source schema,
+target plant architecture, canonical record identifier, and optional proven
+coordinate reference transform.</li>
+<li><code>VegetationMeasuredSourceDecodeReport</code> owns fatal decode issues, raw source
+identity and hash, explicit decoded, derived, lossy, deferred, and rejected
+observations, and the optional canonical artifact.</li>
+<li class="source-status--pending"><code>VegetationMeasuredSourceSchemaRegistry</code> registers five exact source
+contracts. <code>VegetationMeasuredSourceDecodingService</code> refuses unknown schema
+versions, unknown media types, and ambiguous registrations.</li>
+<li><code>VegetationTreeQsmCylinderTableDecoder</code> implements the official TreeQSM
+<code>save_model_text</code> 1.1.0 cylinder export. It preserves the raw seventeen-value
+rows, derives endpoints from start, axis, and length, and defers auxiliary
+fields not represented by canonical QSM v1.</li>
+<li><code>VegetationRootSystemMarkupLanguageDecoder</code> implements metric,
+three-dimensional RSML v1. It applies metadata resolution, traverses nested
+roots, emits one segment per polyline interval, derives child attachment to
+the nearest containing-root segment, and converts polyline diameter samples
+to segment radii.</li>
+<li class="source-status--passed">Three declared ProGen3D table decoders preserve canopy, phenology, and
+biomechanical values and units for validation by the completed D1 adapters.</li>
+<li><code>VegetationMeasuredCoordinateReferenceTransform</code> and its service validate an
+invertible affine matrix, map source points into <code>LocalPlantXYZ-ZUp</code>, map
+target points back for round-trip tests, and retain transform uncertainty,
+evidence identity, and evidence SHA-256.</li>
+<li><code>VegetationDecodedMeasuredSourceArtifactFactory</code> embeds raw source media,
+schema, identity, payload hash, decoder identity, and optional transform
+evidence in deterministic canonical JSON before attaching a new exact hash.</li>
+</ol>
+<p>Issues discovered and adjustments:</p>
+<ol>
+<li>TreeQSM <code>save_model_text</code> 1.1.0 writes thirteen header labels for seventeen
+numeric cylinder values because <code>start_point</code> and <code>axis_direction</code> each
+represent three columns. MATLAB reuses the thirteen-field numeric format
+across the transposed cylinder matrix, so physical line breaks do not
+necessarily coincide with logical cylinders. The decoder validates the exact
+header and regroups the numeric token stream into seventeen-value records.</li>
+<li>RSML geometry is defined in image coordinates. Metadata <code>resolution</code>
+converts pixels to the declared unit, while <code>z</code> is optional. The building
+vegetation decoder therefore accepts only metric units and explicit 3D
+points; pixel-only or 2D files are rejected until independent calibration is
+supplied.</li>
+<li>RSML nesting identifies the containing root but does not identify one
+canonical parent segment. Nearest-segment attachment is therefore marked as
+derived geometry, never silently presented as a measured parent relation.</li>
+<li>One diameter sample per point requires averaging adjacent values to obtain a
+segment diameter. This is marked as lossy conversion. One sample per segment
+is preserved directly.</li>
+<li>Circular radii cannot survive a non-uniform affine transform without becoming
+elliptical. QSM and RSML decoders therefore require rigid or uniformly scaled
+transforms and reject non-uniform scale.</li>
+<li>Vendor binary QSM files, raw point clouds, arbitrary CSV files, and
+pixel-only RSML remain outside the supported source registry.</li>
+</ol>
+<p>Acceptance evidence:</p>
+<ul>
+<li>exact decode output from frozen native-format fixtures;</li>
+<li>source schema and version mismatch rejection;</li>
+<li>world-to-local transform round trips and axis-convention fixtures;</li>
+<li>unchanged raw-source hash and source-to-canonical provenance;</li>
+<li class="source-status--passed">decoder output accepted by every completed D1 adapter;</li>
+<li><code>tests/vegetation_native_source_decoder_harness.cpp</code> passes under
+<code>-Wall -Wextra -Wpedantic -Werror</code>;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d3a-point-cloud-intake-and-reconstruction-admission">Slice D3A: Point-Cloud Intake and Reconstruction Admission</h3><p class="section-guide">Reading guide: this source section records “Slice D3A: Point-Cloud Intake and Reconstruction Admission”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated on August 28, 2026.</p>
+<p>Implemented prerequisite boundary:</p>
+<ol>
+<li><code>VegetationPointCloudFormatCapabilityCatalog</code> declares exact point-record,
+metadata-only, and unsupported combinations without format guessing.</li>
+<li class="source-status--pending"><code>VegetationPlyPointCloudDecoder</code> reads PLY 1.0 headers, decodes bounded ASCII
+scalar vertex records, preserves unknown properties as deferred evidence, and
+exposes binary little- and big-endian files as metadata-only.</li>
+<li><code>VegetationLasPointCloudDecoder</code> reads uncompressed little-endian LAS 1.0
+through 1.4 public headers and point data records. It applies authoritative
+integer scales and offsets, validates version-specific header and record
+lengths, maps source coordinates into canonical plant space, and compares
+decoded extent with transformed public-header bounds.</li>
+<li class="source-status--failed">LAS 1.5 is explicitly represented but rejected because it is newer than the
+frozen D3A decoder contract. LAZ and E57 fail closed with named LASzip/PDAL
+and libE57Format dependency requirements.</li>
+<li class="source-status--pending"><code>VegetationPointCloudDataset</code> composes immutable source metadata, exact source
+payload SHA-256, canonical point records, optional colour/intensity/class and
+return attributes, explicit woody/foliage/unknown organ labels, and observed
+metric bounds.</li>
+<li><code>VegetationPointCloudReconstructionAdmissionService</code> evaluates minimum point
+count, three-axis extent, exact duplicate fraction, source identity, and
+target-specific woody/foliage label requirements.</li>
+<li><code>VegetationPointCloudReconstructionJobFactory</code> creates deterministic bounded
+job intent only when the admission report names the same dataset and source
+hash. It does not create inferred cylinders, leaves, or optical parameters.</li>
+</ol>
+<p>Research-driven adjustments:</p>
+<ol>
+<li class="source-status--pending">PLY's extensible property model means unknown scalar properties are deferred,
+not treated as decoder errors or silently discarded.</li>
+<li>LAS public-header counts, scales, offsets, record lengths, and bounds remain
+the source authority. The decoder does not infer them from point records.</li>
+<li class="source-status--pending">ASPRS low, medium, and high vegetation classification codes describe return
+classes by height, not botanical organs. They remain <code>Unknown</code>; canopy jobs
+requiring leaf/wood separation must use independent organ evidence.</li>
+<li>QSM and leaf-surface construction are reconstruction algorithms with
+sampling, occlusion, segmentation, and parameter uncertainty. Successful
+point ingestion therefore creates an admissible dataset, not a calibrated
+biological profile.</li>
+<li>LAS 1.5 became the current ASPRS specification before the August 28, 2026
+snapshot. Compatibility is versioned explicitly instead of silently treating
+current LAS as LAS 1.4.</li>
+</ol>
+<p>Focused evidence:</p>
+<ul>
+<li>frozen PLY 1.0 ASCII fixture with woody and foliage labels, colour,
+intensity, returns, classifications, and a deferred extension property;</li>
+<li>frozen text-encoded LAS 1.4 point-format 6 binary fixture with exact scales,
+offsets, counts, attributes, and declared bounds;</li>
+<li>successful deterministic PLY and LAS ingestion with unchanged source hashes;</li>
+<li>metadata-only binary PLY behavior;</li>
+<li class="source-status--failed">stale hashes, duplicates, point limits, truncation, LAS 1.5, LAZ, E57, and
+unknown media fail closed;</li>
+<li>canopy admission succeeds only with explicit woody and foliage coverage;</li>
+<li>shoot reconstruction intent is provenance-bound and deterministic;</li>
+<li><code>tests/vegetation_point_cloud_ingestion_harness.cpp</code> passes under
+<code>-Wall -Wextra -Wpedantic -Werror</code>;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d3b1-binary-ply-point-records">Slice D3B1: Binary PLY Point Records</h3><p class="section-guide">Reading guide: this source section records “Slice D3B1: Binary PLY Point Records”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated on August 28, 2026.</p>
+<p>Implemented extension:</p>
+<ol>
+<li><code>VegetationPlyPointCloudDecoder</code> now decodes PLY 1.0
+<code>binary_little_endian</code> and <code>binary_big_endian</code> scalar vertex records instead
+of stopping at metadata.</li>
+<li>Exact readers cover signed and unsigned 8-, 16-, and 32-bit integers plus
+IEEE-754 32- and 64-bit floating-point properties in both byte orders.</li>
+<li>Existing semantic mapping remains shared across ASCII and binary records, so
+coordinate canonicalization, colour, intensity, class, return, organ labels,
+duplicate policy, source hashing, deferred properties, bounds, and
+reconstruction admission do not diverge by encoding.</li>
+<li>Header-declared scalar byte widths own binary record length. Payload size and
+multiplication overflow are checked before any point record is admitted.</li>
+<li>Frozen equivalent little- and big-endian fixtures exercise every admitted
+scalar family and prove identical canonical positions and attributes.</li>
+</ol>
+<p>Focused evidence:</p>
+<ul>
+<li>equivalent 42-byte little- and big-endian vertex records decode successfully;</li>
+<li>signed extension values, unsigned 32-bit values, and double precision values
+are consumed and preserved through source provenance as deferred properties;</li>
+<li class="source-status--failed">truncated binary records fail closed;</li>
+<li>both endian variants retain exact independent source hashes;</li>
+<li>the D3A and D3B1 point-cloud harness passes under
+<code>-Wall -Wextra -Wpedantic -Werror</code>;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d3b2a-canopy-occupancy-reconstruction-quality">Slice D3B2A: Canopy Occupancy Reconstruction Quality</h3><p class="section-guide">Reading guide: this source section records “Slice D3B2A: Canopy Occupancy Reconstruction Quality”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated on August 28, 2026.</p>
+<p>Implemented reconstruction boundary:</p>
+<ol>
+<li class="source-status--pending"><code>VegetationCanopyVoxelIndex</code> and <code>VegetationCanopyOccupancyCell</code> provide an
+explicit metric voxel topology with foliage, woody, and unknown point counts.</li>
+<li><code>VegetationCanopyOccupancyReconstructionPolicy</code> owns voxel edge length,
+minimum foliage support, occupied-cell limit, deterministic holdout split,
+neighborhood radius, holdout recall threshold, and organ-label threshold.</li>
+<li><code>VegetationCanopyOccupancyReconstructionService</code> requires an admitted
+<code>CanopyOptics</code> point-cloud job whose dataset identifier and source hash match
+the immutable dataset and admission report.</li>
+<li class="source-status--pending">Foliage points are voxelized relative to the canonical dataset minimum.
+Woody and unknown points remain explicit cell evidence but cannot make a cell
+foliage-occupied.</li>
+<li>The job seed and source point index produce a deterministic training/holdout
+split without arithmetic overflow. Cell ordering is deterministic.</li>
+<li><code>VegetationCanopyOccupancyQualityEvaluationService</code> independently evaluates
+organ-label fraction, holdout neighborhood recall, projected occupancy areas,
+and projected gap proxies on the final occupancy cells.</li>
+<li class="source-status--failed">Reconstruction succeeds only after the quality report accepts geometry use.
+Failed reports remain inspectable but cannot produce a reconstruction.</li>
+<li class="source-status--failed">Projected gap values are named proxies. The service does not emit leaf area
+index, optical gap fraction, leaf angle, or a canonical canopy observation,
+so D1 canopy calibration remains fail closed.</li>
+</ol>
+<p>Research-driven adjustments:</p>
+<ol>
+<li>Voxel-based TLS literature supports explicit three-dimensional occupancy but
+shows that voxel size, occlusion, beam sampling, and attenuation correction
+affect inferred leaf-area and gap metrics.</li>
+<li>D3B2A therefore reconstructs bounded geometry occupancy only. It does not
+apply a point-count-to-leaf-area conversion or reinterpret an occupancy gap
+proxy as an optical measurement.</li>
+<li>Holdout neighborhood recall is a ProGen3D reconstruction consistency metric,
+not a biological trait. It tests whether withheld foliage samples are near
+occupied training cells under the declared voxel scale.</li>
+<li>Maximum occupied cells are bounded by both the reconstruction policy and the
+point-cloud job's maximum output primitive count.</li>
+</ol>
+<p>Focused evidence:</p>
+<ul>
+<li>the frozen mixed woody/foliage PLY fixture reconstructs seven deterministic
+occupied cells at one-metre resolution;</li>
+<li>the seeded split produces five training cells and two withheld foliage points;</li>
+<li>holdout neighborhood recall is one and organ-label fraction is one;</li>
+<li>XY projected occupancy is six square metres with an explicit one-third gap
+proxy;</li>
+<li>repeated reconstruction produces identical ordered cells and counts;</li>
+<li class="source-status--failed">low holdout recall, occupied-cell overflow, and unsupported algorithms fail
+closed;</li>
+<li>source payload SHA-256 propagates unchanged into quality and reconstruction
+evidence;</li>
+<li><code>tests/vegetation_point_cloud_ingestion_harness.cpp</code> passes under
+<code>-Wall -Wextra -Wpedantic -Werror</code>;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d3b2b-primary-woody-axis-reconstruction-quality">Slice D3B2B: Primary Woody Axis Reconstruction Quality</h3><p class="section-guide">Reading guide: this source section records “Slice D3B2B: Primary Woody Axis Reconstruction Quality”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Status: completed and validated on Friday, August 28, 2026.</p>
+<p>Implemented reconstruction boundary:</p>
+<ol>
+<li><code>VegetationWoodyAxisReconstructionPolicy</code> owns axial station spacing,
+minimum woody support, training and station support, cylinder limits,
+deterministic holdout selection, bounded radial trimming, label coverage,
+principal variance, surface residual, axial coverage, taper, and minimum
+observed-radius thresholds.</li>
+<li><code>VegetationWoodyAxisRadiusStation</code> represents one measured cross-section
+estimate along the dominant woody axis. It retains axial projection, metric
+centre, radius, ordering, and supporting point count.</li>
+<li class="source-status--passed"><code>VegetationWoodyAxisCylinder</code> connects two consecutive radius stations for
+primary-axis geometry. It contains no parent branch, branch order, or
+complete-tree volume claim.</li>
+<li><code>VegetationPrimaryWoodyAxisReconstructionService</code> accepts only a
+provenance-bound admitted <code>ShootArchitecture</code> job whose exact algorithm is
+<code>ProGen3D-PrimaryWoodyAxis-v1</code>.</li>
+<li>The job seed and source point index produce a deterministic woody
+training/holdout split. An initial Eigen3 covariance solution establishes a
+candidate axis; a bounded median-absolute-deviation radial trim records and
+limits obvious contamination before the final covariance solution.</li>
+<li>Training points are assigned to fixed-spacing axial stations. Every station
+must retain the declared point support, preserve a measured radius above the
+policy floor, and participate in a contiguous cylinder chain.</li>
+<li><code>VegetationWoodyAxisQualityEvaluationService</code> independently evaluates woody
+label fraction, excluded-outlier fraction, principal variance fraction,
+training and holdout cylinder-surface RMSE, holdout axial coverage, and
+taper-violation fraction.</li>
+<li class="source-status--failed">A failed quality report remains inspectable but cannot emit geometry.
+Output primitive count is bounded by both policy and reconstruction job.</li>
+<li><code>VegetationWoodyAxisReconstructionScope::PrimaryAxisOnly</code> and
+<code>representsCompleteBranchTopology() == false</code> keep the artifact outside the
+canonical quantitative-structure-model adapter.</li>
+</ol>
+<p>Research-driven adjustments:</p>
+<ol>
+<li>TreeQSM and SimpleTree model woody trees as ordered cylinder collections,
+but their full methods also require segmentation, branching topology,
+parameter selection, and radius correction.</li>
+<li class="source-status--passed">Robust-cylinder research shows ordinary PCA can be badly biased by partial
+cylinders and outliers. D3B2B therefore records a bounded deterministic
+radial trim, while explicitly avoiding any claim that this is equivalent to
+robust PCA or a complete local-cylinder estimator.</li>
+<li>Ground-truth QSM studies show that volume and small-branch accuracy require
+separate validation. D3B2B therefore admits primary-axis geometry only and
+emits no branch graph, whole-tree volume, biomass, or D1 QSM evidence.</li>
+<li>Training and holdout surface residuals are measured against linearly
+interpolated station radii, so taper is evaluated without silently forcing a
+constant-radius trunk.</li>
+</ol>
+<p>Focused evidence:</p>
+<ul>
+<li>a frozen 40-point PLY fixture describes five symmetric woody rings over a
+three-metre axis with radii tapering from 0.20 to 0.12 metres;</li>
+<li>the deterministic split produces 30 training and 10 holdout woody points;</li>
+<li>reconstruction emits five ordered radius stations and four cylinders;</li>
+<li>the recovered axis is positive Z, all station radii match the fixture within
+one micrometre, and no training points are excluded;</li>
+<li>principal variance exceeds 0.97, both surface RMSE values remain below one
+micrometre, axial coverage is one, and taper violation is zero;</li>
+<li>repeated reconstruction preserves exact station identifiers and radii;</li>
+<li class="source-status--failed">strict variance, cylinder limits, insufficient woody support, unsupported
+algorithms, wrong targets, and source-hash mismatches fail closed;</li>
+<li><code>tests/vegetation_point_cloud_ingestion_harness.cpp</code> passes under
+<code>-Wall -Wextra -Wpedantic -Werror</code> with Eigen3;</li>
+<li><code>./tests/run_building_vegetation_triangle_distribution_checks.sh</code> passes;</li>
+<li><code>make -j2 progen3d-editor-gui</code> passes;</li>
+<li><code>./tests/run_vegetation_checks.sh</code> passes.</li>
+</ul>
+<h3 id="source-slice-d3b2c1-segmentation-contract-and-quality-admitted-branch-graph">Slice D3B2C1: Segmentation Contract and Quality-Admitted Branch Graph</h3><p class="section-guide">Reading guide: this source section records “Slice D3B2C1: Segmentation Contract and Quality-Admitted Branch Graph”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Status: implemented and validated on August 28, 2026.</p>
+<p>Implemented object model:</p>
+<ol>
+<li><code>VegetationWoodyAxisSegmentDefinition</code> declares one root or lateral axis,
+its parent axis, branch order, and reconstruction station spacing.</li>
+<li><code>VegetationWoodyPointSegmentAssignment</code> binds one immutable source-point
+index to one axis with explicit assignment confidence.</li>
+<li><code>VegetationWoodyPointSegmentation</code> owns exact dataset and source hashes,
+segmentation and algorithm identifiers, root-axis identity, completeness for
+observed woody points, axis definitions, and point assignments.</li>
+<li><code>VegetationWoodyPointSegmentationValidationService</code> rejects unsupported
+schemas, identity or hash drift, duplicate assignments, non-woody points,
+missing axes, invalid parent/order relations, cycles, incomplete coverage,
+and insufficient confidence before graph construction.</li>
+<li><code>VegetationWoodyBranchAxis</code>, <code>VegetationWoodyBranchCylinder</code>, and
+<code>VegetationWoodyBranchConnection</code> separate branch hierarchy, tapered
+geometry, and parent-child attachment relationships.</li>
+<li><code>VegetationSegmentedWoodyBranchGraphReconstructionService</code> accepts only an
+admitted <code>ShootArchitecture</code> job using
+<code>ProGen3D-SegmentedWoodyBranchGraph-v1</code>. Per-axis Eigen3 covariance, fixed
+axial stations, deterministic holdout selection, tapered radius estimates,
+parent-cylinder chains, and explicit attachment points remain inspectable.</li>
+<li><code>VegetationWoodyBranchGraphQualityEvaluationService</code> evaluates assignment
+coverage and confidence, per-axis principal variance, training and holdout
+surface residuals, holdout surface coverage, attachment surface gap, taper,
+branch order, and bounded axis/cylinder/connection counts.</li>
+<li><code>VegetationWoodyBranchGraphQuantitativeStructureModelArtifactFactory</code>
+exports a deterministic provenance-bound QSM JSON artifact only after the
+graph quality report passes. The existing QSM adapter then validates the
+rooted cylinder graph and branch-order relationships.</li>
+<li><code>VegetationWoodyBranchGraphReconstructionScope::CompleteForObservedWoodyEvidence</code>
+means all explicitly segmented observed woody points are represented. It
+does not mean the scan observed every biological branch, and
+<code>representsCompleteBiologicalTree() == false</code> preserves that boundary.</li>
+</ol>
+<p>Research-driven adjustments:</p>
+<ol>
+<li>TreeQSM cover-set and cylinder construction, leaf/wood classification, and
+branch segmentation are separate inference responsibilities. The current
+point records contain organ labels but no general axis labels, so D3B2C1
+consumes an explicit segmentation contract instead of silently inventing
+branch identities.</li>
+<li>Harvested-branch comparison demonstrates that branch architecture needs
+component-level ground truth, not silhouette or whole-volume agreement
+alone. D3B2C1 therefore preserves axis, cylinder, connection, source-point,
+and holdout evidence as separate inspectable records.</li>
+<li>TreeQSM sensitivity experiments show that cover-patch and relative-cylinder
+parameters can materially change branch estimates. A single accepted graph
+therefore cannot establish parameter stability or whole-tree volume.</li>
+<li>The frozen fixture maps three project-specific PLY classification values to
+three explicit axes only for deterministic contract validation. It is not a
+general LAS botanical segmentation rule.</li>
+</ol>
+<p>Focused evidence:</p>
+<ul>
+<li>a frozen 96-point PLY fixture describes a tapered root axis, first-order
+lateral axis, and second-order lateral axis;</li>
+<li class="source-status--passed">complete explicit segmentation reconstructs three axes, nine cylinders, two
+parent-child connections, and maximum branch order two;</li>
+<li>recovered axis directions match positive Z, positive X, and positive Y;</li>
+<li>assignment coverage and holdout surface coverage equal one, surface RMSE is
+below one micrometre, taper violations are zero, and maximum attachment gap
+remains below 0.081 metres;</li>
+<li>repeated reconstruction and QSM export preserve exact identifiers, radii,
+canonical payload, and SHA-256;</li>
+<li class="source-status--failed">incomplete segmentation, missing assignments, low confidence, excessive
+attachment gap, cylinder limits, and unsupported algorithms fail closed;</li>
+<li>the generated QSM artifact retains source point-cloud and segmentation
+provenance and passes the canonical QSM adapter for measured-specimen scope.</li>
+</ul>
+<h3 id="source-slice-d3b2c2-automated-segmentation-and-parameter-sensitivity-ensembles">Slice D3B2C2: Automated Segmentation and Parameter-Sensitivity Ensembles</h3><p class="section-guide">Reading guide: this source section records “Slice D3B2C2: Automated Segmentation and Parameter-Sensitivity Ensembles”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Status: implemented and validated on August 28, 2026.</p>
+<p>Implemented object model:</p>
+<ol>
+<li><code>VegetationWoodySegmentationParameterSet</code> owns one bounded cover-cell,
+neighbour, continuation, assignment-confidence, axis-count, and axial-station
+configuration.</li>
+<li><code>VegetationWoodyCoverSet</code> preserves deterministic grid identity, metric
+centroid, and source-point membership. <code>VegetationWoodyCoverConnection</code>
+records one oriented spanning-tree relationship and centre distance.</li>
+<li><code>VegetationWoodySegmentationAxisCandidate</code> owns one inferred axis hierarchy,
+branch order, cover ownership, refined centreline, and station spacing.</li>
+<li class="source-status--passed"><code>VegetationWoodySegmentationCandidate</code> aggregates the parameter set, cover
+partition, rooted cover graph, axis candidates, and complete
+<code>VegetationWoodyPointSegmentation</code> contract.</li>
+<li><code>VegetationWoodySegmentationCandidateEvaluation</code> binds the candidate report
+to its D3B2C1 branch-graph report plus derived total cylinder length and
+observed woody volume for sensitivity analysis.</li>
+<li><code>VegetationWoodySegmentationSensitivityPolicy</code> and
+<code>VegetationWoodySegmentationSensitivityReport</code> separate selection thresholds
+from measured candidate evidence.</li>
+<li><code>VegetationAutomatedWoodySegmentationEnsembleReport</code> preserves every
+candidate evaluation, sensitivity decision, and the selected segmentation
+and graph only when the full ensemble gate passes.</li>
+</ol>
+<p>Implemented services:</p>
+<ol>
+<li><code>VegetationWoodyCoverSetSegmentationService</code> partitions canonical woody
+points into deterministic cover cells, constructs a bounded neighbour graph,
+selects a rooted minimum spanning tree, and separates axes through branch
+components and direction-continuity breaks.</li>
+<li>A provisional nearest-centreline assignment is refined by per-axis Eigen3
+covariance. Child centrelines are extended to their closest parent-line
+attachment before final geometric assignment confidence is calculated.</li>
+<li>The service never reads vendor or fixture classification values. Branch
+identity depends only on canonical metric positions and the explicit Woody
+organ class.</li>
+<li><code>VegetationAutomatedWoodySegmentationEnsembleService</code> reconstructs every
+successful candidate through the exact D3B2C1 graph service using a
+deterministic parameter-specific seed.</li>
+<li><code>VegetationWoodySegmentationSensitivityEvaluationService</code> selects the
+candidate with strongest assignment consensus, then lower holdout residual,
+then stable parameter identity. Admission checks accepted-candidate fraction,
+selected assignment agreement, axis-count and branch-order consensus, and
+coefficients of variation for cylinder count, total length, and derived
+observed-woody volume.</li>
+</ol>
+<p>Research-driven adjustments:</p>
+<ol>
+<li>Official TreeQSM code treats cover creation, neighbour relationships,
+branch segmentation, cylinder construction, and optimum multi-run selection
+as distinct stages. D3B2C2 retains the same responsibility boundaries rather
+than embedding them in one procedural reconstruction blob.</li>
+<li>The frozen junction rings expose unavoidable assignment competition where
+two cylindrical surfaces meet. The automated graph policy therefore permits
+two training points at a junction station only inside the later sensitivity
+gate; the explicit D3B2C1 fixture retains its stronger five-point boundary.</li>
+<li class="source-status--failed">Short terminal axes require a 0.35-metre station-spacing floor in the frozen
+fixture. Smaller inferred spacing over-segmented three observed rings and
+correctly failed station support.</li>
+<li>Sensitivity agreement establishes deterministic reconstruction stability,
+not biological correctness. Derived candidate volume remains a comparison
+metric and cannot enter calibrated evidence.</li>
+</ol>
+<p>Focused evidence:</p>
+<ul>
+<li>three cover-cell parameter candidates are evaluated without consulting PLY
+classification values;</li>
+<li>the selected candidate assigns all 96 woody points, reconstructs three axes,
+two parent-child connections, and maximum branch order two;</li>
+<li class="source-status--passed">selected assignment agreement is at least 0.88 and accepted graph candidates
+have complete axis-count and branch-order consensus;</li>
+<li>repeated ensembles preserve the selected parameter, every point assignment,
+assignment confidence, graph geometry, canonical QSM payload, and SHA-256;</li>
+<li class="source-status--passed">the selected graph remains <code>CompleteForObservedWoodyEvidence</code>, passes the QSM
+adapter for measured-specimen scope, and explicitly rejects complete-tree
+authority;</li>
+<li class="source-status--failed">disconnected cover graphs, ambiguous assignments, unstable parameter
+ensembles, and unsupported algorithms fail closed;</li>
+<li class="source-status--passed">focused compilation and runtime checks pass under
+<code>-Wall -Wextra -Wpedantic -Werror</code>.</li>
+</ul>
+<h3 id="source-slice-d3b2c3-component-level-ground-truth-and-volume-admission">Slice D3B2C3: Component-Level Ground Truth and Volume Admission</h3><p class="section-guide">Reading guide: this source section records “Slice D3B2C3: Component-Level Ground Truth and Volume Admission”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Status: next.</p>
+<ul>
+<li>define measured branch-component observations with exact specimen, source,
+coordinate, unit, uncertainty, and payload-hash provenance;</li>
+<li>associate measured and reconstructed branches without assuming identifier or
+traversal-order equality;</li>
+<li>evaluate branch detection precision and recall by branch order and diameter
+class;</li>
+<li>evaluate per-axis attachment, direction, length, diameter, taper, and volume
+residuals against harvested-branch or equivalent component-level evidence;</li>
+<li>preserve unmatched measured and reconstructed components as explicit false
+negatives and false positives;</li>
+<li class="source-status--passed">admit observed woody volume only when component coverage, residual, bias,
+sensitivity, and uncertainty policies pass;</li>
+<li class="source-status--passed">retain complete biological-tree and biomass claims as separate later gates.</li>
+</ul>
+<h3 id="source-slice-d3c-additional-native-formats-and-calibration-methods">Slice D3C: Additional Native Formats and Calibration Methods</h3><p class="section-guide">Reading guide: this source section records “Slice D3C: Additional Native Formats and Calibration Methods”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">Status: planned after D3B2C3.</p>
+<ul>
+<li>measured TreeQSM MATLAB <code>.mat</code> intake and other declared QSM export versions;</li>
+<li>LAS 1.5, LAZ, and E57 integration through audited dependencies;</li>
+<li>canopy reconstruction with independently evaluated leaf/wood classification,
+leaf area, gap fraction, and projected-area error;</li>
+<li>pixel-only or two-dimensional RSML with an independently calibrated image
+transform and explicit depth policy;</li>
+<li>richer laboratory and phenology exchange profiles with protocol metadata.</li>
+</ul>
+<h3 id="source-slice-e-runtime-consumers">Slice E: Runtime Consumers</h3><p class="section-guide">Reading guide: this source section records “Slice E: Runtime Consumers”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">Status: planned after reconstruction and additional native formats.</p>
+<ul>
+<li>calibrated light-interception service;</li>
+<li>calibrated wind-material assignment;</li>
+<li>root-zone spatial constraints and collision queries;</li>
+<li>phenology-driven representation state selection;</li>
+<li>environment-response and competition evaluation;</li>
+<li>renderer evidence reporting of selected calibrated versus authored fallback
+domains.</li>
+</ul>
+<h3 id="source-current-boundary">Current Boundary</h3><p class="section-guide">Reading guide: this source section records “Current Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">BVO-OMv2.1 now owns the concepts and gates needed to distinguish architectural
+geometry from calibrated biology. It can parse, validate, hash, serialize, and
+immutably bind typed external calibration evidence bundles. It accepts five
+hashed canonical measured-source JSON schemas and D2 decodes the exact TreeQSM
+text cylinder export, metric 3D RSML v1, and three declared measurement tables.
+D3A additionally ingests bounded PLY 1.0 ASCII and uncompressed LAS 1.0-1.4
+point records, preserves exact source metadata and hashes, and admits datasets
+to provenance-bound deterministic reconstruction jobs. D3B1 extends the same
+contract to PLY 1.0 little- and big-endian scalar vertex records. D3B2A adds
+quality-gated foliage occupancy for geometry use while keeping canopy optical
+calibration closed. D3B2B adds a quality-gated primary woody-axis station and
+cylinder chain while keeping complete QSM topology, whole-tree volume, and D1
+calibration closed. D3B2C1 now validates an explicit woody point segmentation,
+constructs a parent-child axis/cylinder/connection graph, evaluates deterministic
+holdout and junction quality, and emits a provenance-bound QSM artifact whose
+scope is complete only for observed woody evidence. D3B2C2 now constructs
+classification-independent cover candidates, refines axis centrelines, evaluates
+each candidate through the D3B2C1 graph authority, and selects a graph only after
+assignment, topology, cylinder-count, axis-length, and observed-volume
+sensitivity pass. It does not yet establish component-level branch-detection
+accuracy, admit calibrated observed woody volume, claim a complete biological
+tree, calculate biomass, reconstruct leaf surfaces, read TreeQSM MATLAB files,
+decode LAS 1.5, LAZ, or E57, accept pixel-only RSML, or infer arbitrary vendor
+tables. The next implementation slice is D3B2C3 component-level ground truth and
+volume admission—not direct profile mutation and not coupled biological
+simulation.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="../vehicles/validation-summary--502486d8.html" rel="prev">← Previous: Validation Summary</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="building-vegetation-object-model-literature-review.html" rel="next">Next: Building Vegetation Object Model Literature Review →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

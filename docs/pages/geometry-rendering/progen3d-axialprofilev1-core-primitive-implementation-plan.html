@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:" name="description"/>
+<meta content="PROGEN3D_AXIAL_PROFILE_V1_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="8cec7e5ddeeef433f5ad4909bbe48fa0c8c1b48f4c76f221f8549aa6023c7194" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D AxialProfilev1 Core Primitive Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D AxialProfilev1 Core Primitive Implementation Plan</h1>
+<p class="lead">The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 23 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_AXIAL_PROFILE_V1_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="8cec7e5ddeeef433f5ad4909bbe48fa0c8c1b48f4c76f221f8549aa6023c7194" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D AxialProfilev1 Core Primitive Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D AxialProfilev1 Core Primitive Implementation Plan, Executive Decision, Current Repository Baseline, Already Implemented and Reusable.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="axialprofilev1.html">AxialProfilev1</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D AxialProfilev1 Core Primitive Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Executive Decision</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Executive Decision</td></tr><tr><td><dfn title="Named by the source document">Current Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Already Implemented and Reusable</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Already Implemented and Reusable</td></tr><tr><td><dfn title="Named by the source document">Radial Assumptions That Must Be Removed</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Radial Assumptions That Must Be Removed</td></tr><tr><td><dfn title="Named by the source document">Important Scope Correction</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 Important Scope Correction</td></tr><tr><td><dfn title="Named by the source document">P0 Scope</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. P0 Scope</td></tr><tr><td><dfn title="Named by the source document">Locked Language Contract</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Locked Language Contract</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">COLLADA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="Polygon File Format">PLY</dfn></td><td>Polygon File Format</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ID3050</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">AST</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">XZ</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">EBNF</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D AxialProfilev1 Core Primitive Implementation Plan, Executive Decision, Current Repository Baseline, Already Implemented and Reusable. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Executive Decision, 2. Current Repository Baseline, 2.1 Already Implemented and Reusable, 2.2 Radial Assumptions That Must Be Removed. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 21, failed: 5, proposed: 1, unresolved: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 57 code blocks, 1 tables and the source SHA-256 <code>8cec7e5ddeeef433f5ad4909bbe48fa0c8c1b48f4c76f221f8549aa6023c7194</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-executive-decision">1. Executive Decision</a></li><li><a href="#source-2-current-repository-baseline">2. Current Repository Baseline</a></li><li><a href="#source-2-1-already-implemented-and-reusable">2.1 Already Implemented and Reusable</a></li><li><a href="#source-2-2-radial-assumptions-that-must-be-removed">2.2 Radial Assumptions That Must Be Removed</a></li><li><a href="#source-2-3-important-scope-correction">2.3 Important Scope Correction</a></li><li><a href="#source-3-p0-scope">3. P0 Scope</a></li><li><a href="#source-4-locked-language-contract">4. Locked Language Contract</a></li><li><a href="#source-4-1-canonical-syntax">4.1 Canonical Syntax</a></li><li><a href="#source-4-2-ebnf">4.2 EBNF</a></li><li><a href="#source-4-3-ordering-and-coordinate-semantics">4.3 Ordering and Coordinate Semantics</a></li><li><a href="#source-4-4-level-transform-semantics">4.4 Level Transform Semantics</a></li><li><a href="#source-4-5-cap-semantics">4.5 Cap Semantics</a></li><li><a href="#source-5-locked-validation-invariants">5. Locked Validation Invariants</a></li><li><a href="#source-5-1-profile-invariants">5.1 Profile Invariants</a></li><li><a href="#source-5-2-level-invariants">5.2 Level Invariants</a></li><li><a href="#source-5-3-linear-transition-invariants">5.3 Linear Transition Invariants</a></li><li><a href="#source-5-4-step-invariants">5.4 Step Invariants</a></li><li><a href="#source-5-5-shape-safety-ceilings">5.5 Shape Safety Ceilings</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>21</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>5</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>1</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_AXIAL_PROFILE_V1_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D AxialProfilev1 Core Primitive Implementation Plan, Executive Decision, Current Repository Baseline, Already Implemented and Reusable.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>exactly one axis(y) statement;</li><li>one or more named profile declarations;</li><li>exactly one initial at(...) statement;</li><li>one or more transition statements;</li><li>zero or one final cap(...) statement.</li><li>identify the shape name;</li><li>create the token cursor;</li><li>call the shape parser;</li><li>attach returned syntax or a diagnostic to the action token.</li><li>canonical positive-area loop;</li><li>candidate ears visited in ascending semantic vertex order;</li><li>strictly convex ear test;</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> p3d fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-p3d">I(
+    AxialProfile(
+        axis(y)
+
+        profile(Base polygon(
+            -0.5 -0.5
+             0.5 -0.5
+             0.5  0.5
+            -0.5  0.5
+        ))
+
+        profile(Shaft polygon(
+            -0.45 -0.45
+             0.45 -0.45
+             0.45  0.45
+            -0.45  0.45
+        ))
+
+        at(0 Base)
+        hold(1.4)
+        step(Shaft)
+        hold(20)
+        linear(24 Shaft center(0 0) scale(1 1) rotate(0))
+        cap(all)
+    )
+    material(darkslatesmoothmetal)
+    1
+    0.3
+)</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D AxialProfilev1 Core Primitive Implementation Plan" data="../../assets/diagrams/pages/progen3d-axialprofilev1-core-primitive-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_AXIAL_PROFILE_V1_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>8cec7e5ddeeef433f5ad4909bbe48fa0c8c1b48f4c76f221f8549aa6023c7194</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>88 headings, 57 fenced code blocks, 1 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_release_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D AxialProfilev1 Core Primitive Implementation Plan, Executive Decision, Current Repository Baseline, Already Implemented and Reusable, Radial Assumptions That Must Be Removed</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li><li><a href="axialprofilev1.html">AxialProfilev1</a> <span class="status-badge status--documented">Documented</span><br/><small>AxialProfile is a core procedural geometry family. It separates evaluated shape specification, deterministic mesh construction, cached resolved geometry, and scene-instance state.</small></li><li><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html">ProGen3D Preview GL46 and PBR Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</small></li><li><a href="progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li><li><a href="axialprofilev1-verification.html">AxialProfilev1 Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>The source tree now contains the AxialProfile object model, validator, deterministic mesh generator, procedural repository dispatch, nested grammar AST/parser/evaluator, scene integration, editor catalog/autocomplete/inspection/overlay support, fixtures, benchmarks, COLLADA tooling, and release…</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/PROGEN3D_AXIAL_PROFILE_V1_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_AXIAL_PROFILE_V1_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>8cec7e5ddeeef433f5ad4909bbe48fa0c8c1b48f4c76f221f8549aa6023c7194</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-axialprofilev1-core-primitive-implementation-plan">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D AxialProfilev1 Core Primitive Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Date:</strong> August 21, 2026</li>
+<li><strong>Status:</strong> Implementation plan; no AxialProfile runtime implementation is included in this document.</li>
+<li><strong>Primary objective:</strong> Promote <code>AxialProfile</code> to a first-class procedural shape family that produces deterministic, validated, immutable triangle geometry.</li>
+<li class="source-status--passed"><strong>Release authority:</strong> Deterministic source tests, mesh evidence, quantitative Component 24 comparison, the complete editor release gate, and an exact-binary supervisor restart.</li>
+<li class="source-status--failed"><strong>External prerequisite:</strong> The Coruscant <code>Component_24 / ID3050</code> COLLADA source is not present in this checkout. Core promotion remains evidence-blocked until an approved source artifact and provenance record are supplied.</li>
+</ul>
+<h3 id="source-1-executive-decision">1. Executive Decision</h3><p class="section-guide">Reading guide: this source section records “1. Executive Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</p>
+<ul>
+<li>immutable evaluated <code>ShapeSpecification</code> objects;</li>
+<li><code>ScenePrimitiveInstance::shape_specification</code> and <code>resolved_geometry</code> ownership;</li>
+<li>a generic triangle-mesh preview and export path;</li>
+<li>actual mesh bounds and triangle picking;</li>
+<li>topology analysis, volume evidence, collision policy, and per-generation procedural caching;</li>
+<li>expansion-time shape-expression evaluation;</li>
+<li>procedural catalog and shape-option autocomplete support.</li>
+</ul>
+<p>Evidence:</p>
+<ul>
+<li><code>include/geometry/model/ShapeSpecification.h:13</code></li>
+<li><code>include/Context.h:118</code></li>
+<li><code>src/Context.cpp:895</code></li>
+<li><code>src/Context.cpp:2094</code></li>
+<li><code>src/Context.cpp:2195</code></li>
+<li><code>src/geometry/service/ProceduralMeshRepository.cpp:117</code></li>
+<li><code>src/Grammar.cpp:3178</code></li>
+<li><code>src/Grammar.cpp:4104</code></li>
+</ul>
+<p>Therefore, AxialProfilev1 should <strong>extend and generalize the existing procedural-shape architecture</strong>, not introduce a second <code>ProceduralMeshFactory</code>, a second mesh cache, or another instance rendering path.</p>
+<p>The true first implementation boundary is now:</p>
+<blockquote>
+<p>Refactor the radial assumptions out of the common <code>ShapeSpecification</code> and procedural-generation interfaces, while preserving Cylinder and Sphere behavior exactly.</p>
+</blockquote>
+<h3 id="source-2-current-repository-baseline">2. Current Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-already-implemented-and-reusable">2.1 Already Implemented and Reusable</h4><p class="section-guide">Reading guide: this source section records “2.1 Already Implemented and Reusable”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Capability</th>
+<th scope="col">Current implementation</th>
+<th scope="col">AxialProfile action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Evaluated shape ownership</td>
+<td><code>ScenePrimitiveInstance</code> stores immutable shape and resolved geometry</td>
+<td>Reuse unchanged</td>
+</tr>
+<tr>
+<td>Generic mesh rendering</td>
+<td>Triangle-mesh instances use <code>append_mesh_vertices()</code></td>
+<td>Reuse unchanged</td>
+</tr>
+<tr>
+<td>Export</td>
+<td>Preview instance buffers feed PLY export</td>
+<td>Reuse unchanged</td>
+</tr>
+<tr>
+<td>Bounds and picking</td>
+<td>Resolved triangle mesh drives bounds and collision geometry</td>
+<td>Reuse unchanged</td>
+</tr>
+<tr>
+<td>Density volume</td>
+<td>Mesh/analytic volume evidence is transformed by matrix determinant</td>
+<td>Reuse mesh-derived path</td>
+</tr>
+<tr>
+<td>Static mesh collision</td>
+<td><code>StaticTriangleMesh</code> is accepted for immovable instances</td>
+<td>Reuse for v1</td>
+</tr>
+<tr>
+<td>Procedural cache</td>
+<td><code>ProceduralMeshRepository</code> caches by evaluated shape key</td>
+<td>Extend family dispatch</td>
+</tr>
+<tr>
+<td>Expression timing</td>
+<td>Shape expressions evaluate during expansion</td>
+<td>Extend with AxialProfile AST</td>
+</tr>
+<tr>
+<td>Topology evidence</td>
+<td><code>MeshTopologyAnalyzer</code> checks degeneracy, boundary edges, and hash</td>
+<td>Reuse and extend tests</td>
+</tr>
+<tr>
+<td>Editor catalog</td>
+<td>Procedural entries provide tooltips and option completions</td>
+<td>Add structured AxialProfile entry</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-2-2-radial-assumptions-that-must-be-removed">2.2 Radial Assumptions That Must Be Removed</h4><p class="section-guide">Reading guide: this source section records “2.2 Radial Assumptions That Must Be Removed”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current abstract <code>ShapeSpecification</code> owns radial domains, curved topology, closure masks, tessellation, mapping, and clips directly. Those are valid common properties for Cylinder and Sphere but not for an axial profile.</p>
+<p>Evidence: <code>include/geometry/model/ShapeSpecification.h:33</code>.</p>
+<p><code>ProceduralMeshRepository</code> also assumes every non-Cylinder specification is a Sphere and performs family-specific static casts when deriving volume and collision policy.</p>
+<p>Evidence: <code>src/geometry/service/ProceduralMeshRepository.cpp:16</code>, <code>src/geometry/service/ProceduralMeshRepository.cpp:39</code>, and <code>src/geometry/service/ProceduralMeshRepository.cpp:117</code>.</p>
+<p>The current syntax model is also flat: <code>ShapeDescriptorSyntax</code> owns a vector of named options whose arguments are all <code>GeometryExpression</code> values. That is insufficient for nested named profile declarations and ordered transition statements.</p>
+<p>Evidence: <code>include/grammar/model/ShapeDescriptorSyntax.h:9</code> and <code>include/grammar/model/ShapeOptionSyntax.h:8</code>.</p>
+<h4 id="source-2-3-important-scope-correction">2.3 Important Scope Correction</h4><p class="section-guide">Reading guide: this source section records “2.3 Important Scope Correction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Cube and its split-transform variants should not be migrated into the procedural shape hierarchy during AxialProfilev1. Their specialized dynamic preview behavior remains intentional.</p>
+<p><code>AxialProfile</code> reaches core-primitive status by participating in parsing, catalog discovery, scene instances, resolved geometry, preview, export, bounds, picking, mass, diagnostics, and static collision. It does not require Cube to become a procedural specification.</p>
+<h3 id="source-3-p0-scope">3. P0 Scope</h3><p class="section-guide">Reading guide: this source section records “3. P0 Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>AxialProfilev1 supports:</p>
+<ul>
+<li>local Y axis only;</li>
+<li>one simple closed outer polygon per named profile;</li>
+<li>one explicit initial <code>at(...)</code> statement;</li>
+<li>absolute, ordered axial coordinates;</li>
+<li><code>hold</code>, <code>linear</code>, and same-level <code>step</code> transitions;</li>
+<li>per-level center offset, nonzero orientation-preserving scale, and rotation;</li>
+<li>independent bottom and top cap policy;</li>
+<li>deterministic simple-polygon cap triangulation;</li>
+<li>deterministic nested-polygon step-ring triangulation;</li>
+<li>triplanar texture mapping;</li>
+<li>exact mesh bounds, picking, PLY export, and mesh-derived closed volume;</li>
+<li>immovable triangle-mesh collision;</li>
+<li>editor diagnostics, catalog completion, inspector evidence, and optional construction overlays.</li>
+</ul>
+<p>P0 deliberately excludes:</p>
+<ul>
+<li>holes inside a section profile;</li>
+<li>multiple disconnected loops at one level;</li>
+<li>arbitrary intersecting step contours;</li>
+<li>topology changes during <code>linear</code> transitions;</li>
+<li>automatic perimeter resampling;</li>
+<li>curved or spline interpolation;</li>
+<li>direct COLLADA runtime dependency;</li>
+<li>dynamic AxialProfile collision or generalized inertia;</li>
+<li>per-surface materials;</li>
+<li>continuous perimeter/height UVs;</li>
+<li>general polygon Boolean operations or CSG.</li>
+</ul>
+<h3 id="source-4-locked-language-contract">4. Locked Language Contract</h3><p class="section-guide">Reading guide: this source section records “4. Locked Language Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-canonical-syntax">4.1 Canonical Syntax</h4><p class="section-guide">Reading guide: this source section records “4.1 Canonical Syntax”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(
+    AxialProfile(
+        axis(y)
+
+        profile(Base polygon(
+            -0.5 -0.5
+             0.5 -0.5
+             0.5  0.5
+            -0.5  0.5
+        ))
+
+        profile(Shaft polygon(
+            -0.45 -0.45
+             0.45 -0.45
+             0.45  0.45
+            -0.45  0.45
+        ))
+
+        at(0 Base)
+        hold(1.4)
+        step(Shaft)
+        hold(20)
+        linear(24 Shaft center(0 0) scale(1 1) rotate(0))
+        cap(all)
+    )
+    material(darkslatesmoothmetal)
+    1
+    0.3
+)
+</code></pre>
+<h4 id="source-4-2-ebnf">4.2 EBNF</h4><p class="section-guide">Reading guide: this source section records “4.2 EBNF”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-ebnf">shape-specification =
+      primitive-name
+    | curved-shape-specification
+    | axial-profile-specification ;
+
+axial-profile-specification =
+    "AxialProfile", "(",
+        axis-statement,
+        profile-statement,
+        { profile-statement },
+        initial-level-statement,
+        axial-transition-statement,
+        { axial-transition-statement },
+        [ cap-statement ],
+    ")" ;
+
+axis-statement =
+    "axis", "(", "y", ")" ;
+
+profile-statement =
+    "profile", "(", identifier,
+        "polygon", "(",
+            expression, expression,
+            expression, expression,
+            expression, expression,
+            { expression, expression },
+        ")",
+    ")" ;
+
+initial-level-statement =
+    "at", "(", expression, identifier,
+        { level-transform },
+    ")" ;
+
+axial-transition-statement =
+      hold-statement
+    | linear-statement
+    | step-statement ;
+
+hold-statement =
+    "hold", "(", expression, ")" ;
+
+linear-statement =
+    "linear", "(", expression, identifier,
+        { level-transform },
+    ")" ;
+
+step-statement =
+    "step", "(", identifier,
+        { level-transform },
+    ")" ;
+
+level-transform =
+      "center", "(", expression, expression, ")"
+    | "scale", "(", expression, expression, ")"
+    | "rotate", "(", expression, ")" ;
+
+cap-statement =
+    "cap", "(", cap-component, { cap-component }, ")" ;
+
+cap-component =
+      "none"
+    | "all"
+    | "bottom"
+    | "top" ;
+</code></pre>
+<h4 id="source-4-3-ordering-and-coordinate-semantics">4.3 Ordering and Coordinate Semantics</h4><p class="section-guide">Reading guide: this source section records “4.3 Ordering and Coordinate Semantics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The parser and validator enforce this order:</p>
+<ol>
+<li>exactly one <code>axis(y)</code> statement;</li>
+<li>one or more named profile declarations;</li>
+<li>exactly one initial <code>at(...)</code> statement;</li>
+<li>one or more transition statements;</li>
+<li>zero or one final <code>cap(...)</code> statement.</li>
+</ol>
+<p class="source-status--proposed"><code>at</code>, <code>hold</code>, and <code>linear</code> coordinates are <strong>absolute local-axis positions</strong>, not deltas. This interpretation matches the proposed sequence <code>at(0)</code>, <code>hold(1.4)</code>, <code>hold(20)</code>, and <code>linear(24 ...)</code>.</p>
+<p><code>step(...)</code> creates a new axial state at the current coordinate. It is the only intentional equal-coordinate event.</p>
+<h4 id="source-4-4-level-transform-semantics">4.4 Level Transform Semantics</h4><p class="section-guide">Reading guide: this source section records “4.4 Level Transform Semantics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each evaluated section state is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">position
+ profile reference
+ center offset
+ scale
+ rotation
+ transition from previous state
+ source range
+</code></pre>
+<p>Defaults:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">center(0 0)
+scale(1 1)
+rotate(0)
+</code></pre>
+<p><code>hold(y)</code> copies the current profile, center, scale, and rotation exactly at target coordinate <code>y</code>.</p>
+<p><code>linear(y Profile ...)</code> establishes a new transformed ring and connects it to the previous ring by semantic vertex index.</p>
+<p><code>step(Profile ...)</code> replaces the section at the current coordinate and creates a horizontal material boundary between the old and new transformed contours.</p>
+<h4 id="source-4-5-cap-semantics">4.5 Cap Semantics</h4><p class="section-guide">Reading guide: this source section records “4.5 Cap Semantics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cap(all)        bottom and top
+cap(none)       neither boundary
+cap(bottom)     bottom only
+cap(top)        top only
+cap(bottom top) both boundaries
+</code></pre>
+<p><code>all</code> and <code>none</code> cannot be combined with other components. Omitted <code>cap(...)</code> defaults to <code>all</code>.</p>
+<h3 id="source-5-locked-validation-invariants">5. Locked Validation Invariants</h3><p class="section-guide">Reading guide: this source section records “5. Locked Validation Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-profile-invariants">5.1 Profile Invariants</h4><p class="section-guide">Reading guide: this source section records “5.1 Profile Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every profile must:</p>
+<ul>
+<li>have a unique identifier;</li>
+<li>contain at least three distinct vertices after optional duplicate-terminal removal;</li>
+<li>contain only finite coordinates;</li>
+<li>contain no zero-length edge;</li>
+<li>contain no consecutive zero-turn triple in P0;</li>
+<li>have nonzero signed area;</li>
+<li>be a simple non-self-intersecting polygon;</li>
+<li>be normalized to positive signed area in the local XZ coordinate pair;</li>
+<li class="source-status--passed">preserve semantic vertex order apart from a complete winding reversal;</li>
+<li>remain immutable after validation.</li>
+</ul>
+<p>Removing one terminal vertex that exactly repeats the first vertex is the only accepted normalization that changes vertex count. All other invalidity produces a diagnostic.</p>
+<h4 id="source-5-2-level-invariants">5.2 Level Invariants</h4><p class="section-guide">Reading guide: this source section records “5.2 Level Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>All evaluated values are finite.</li>
+<li><code>axis(y)</code> is the only supported axis.</li>
+<li>There is exactly one initial <code>at(...)</code> state.</li>
+<li>At least one <code>hold</code> or <code>linear</code> transition creates positive axial height.</li>
+<li>Every <code>hold</code> and <code>linear</code> target is strictly greater than the current coordinate.</li>
+<li><code>step</code> preserves the current coordinate and must change the transformed contour.</li>
+<li>Center offsets are finite.</li>
+<li>Both scale components are nonzero.</li>
+<li>P0 accepts only orientation-preserving scale pairs where <code>scale_x * scale_z &gt; 0</code>.</li>
+<li>Rotation is canonicalized to a stable degree interval before key generation.</li>
+</ul>
+<h4 id="source-5-3-linear-transition-invariants">5.3 Linear Transition Invariants</h4><p class="section-guide">Reading guide: this source section records “5.3 Linear Transition Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Previous and target profiles contain the same number of vertices.</li>
+<li>Vertex index <code>j</code> maps only to vertex index <code>j</code>.</li>
+<li>Corresponding side quads must have nonzero area.</li>
+<li>Generated side triangles must not introduce non-adjacent self-intersections.</li>
+<li>Profile name changes are allowed when correspondence remains valid.</li>
+</ul>
+<p>P0 never silently resamples or rotates the starting vertex index to improve a fit.</p>
+<h4 id="source-5-4-step-invariants">5.4 Step Invariants</h4><p class="section-guide">Reading guide: this source section records “5.4 Step Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>At the shared axial coordinate, the transformed old and new contours must satisfy exactly one relationship:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">old strictly contains new
+or
+new strictly contains old
+</code></pre>
+<p>Reject:</p>
+<ul>
+<li>intersecting boundaries;</li>
+<li>touching boundaries;</li>
+<li>coincident contours;</li>
+<li>partial overlap;</li>
+<li>disconnected Boolean results.</li>
+</ul>
+<p>Required diagnostic for crossing contours:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AxialProfile step profiles intersect and cannot be resolved by v1.
+</code></pre>
+<h4 id="source-5-5-shape-safety-ceilings">5.5 Shape Safety Ceilings</h4><p class="section-guide">Reading guide: this source section records “5.5 Shape Safety Ceilings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Initial hard ceilings:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">profiles per shape               &lt;= 128
+vertices per profile             &lt;= 256
+total declared profile vertices  &lt;= 32768
+axial states                     &lt;= 512
+step events                      &lt;= 256
+generated vertices               &lt;= 131072
+generated triangles              &lt;= 262144
+</code></pre>
+<p>The validator must calculate conservative output bounds before allocation. The generator must also enforce actual output counts while building.</p>
+<h3 id="source-6-purpose-driven-object-model">6. Purpose-Driven Object Model</h3><p class="section-guide">Reading guide: this source section records “6. Purpose-Driven Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-6-1-general-shape-hierarchy">6.1 General Shape Hierarchy</h4><p class="section-guide">Reading guide: this source section records “6.1 General Shape Hierarchy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Refactor the current radial-heavy base into a true conceptual hierarchy:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ShapeSpecification
+├── RadialShapeSpecification
+│   ├── CylinderShapeSpecification
+│   └── SphereShapeSpecification
+└── AxialProfileShapeSpecification
+</code></pre>
+<p><code>ShapeSpecification</code> owns only properties shared by every evaluated procedural shape:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class ShapeSpecification {
+public:
+    ShapeFamily family() const;
+    const ShapeSpecificationKey &amp;key() const;
+    virtual std::string canonicalText() const = 0;
+    virtual bool isDefaultFamilyShape() const = 0;
+    virtual bool requestsClosedGeometry() const = 0;
+};
+</code></pre>
+<p><code>RadialShapeSpecification</code> owns:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">radial domain
+topology
+closure policy
+tessellation
+mapping
+clip planes
+</code></pre>
+<p>Cylinder and Sphere retain their current behavior through this intermediate abstraction.</p>
+<p><code>AxialProfileShapeSpecification</code> owns:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">axis
+validated profile library
+ordered axial states
+cap policy
+mapping policy
+canonical specification key
+</code></pre>
+<h4 id="source-6-2-axial-model-classes">6.2 Axial Model Classes</h4><p class="section-guide">Reading guide: this source section records “6.2 Axial Model Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">enum class AxialProfileAxis {
+    Y
+};
+
+enum class AxialTransitionKind {
+    Initial,
+    Hold,
+    Linear,
+    Step
+};
+
+class AxialProfilePolygon {
+public:
+    const std::string &amp;name() const;
+    const std::vector&lt;glm::vec2&gt; &amp;vertices() const;
+    float signedArea() const;
+};
+
+class AxialProfileLevel {
+public:
+    float axialPosition() const;
+    std::size_t profileIndex() const;
+    const glm::vec2 &amp;centerOffset() const;
+    const glm::vec2 &amp;scale() const;
+    float rotationDegrees() const;
+    AxialTransitionKind transitionKind() const;
+};
+
+class AxialProfileCapPolicy {
+public:
+    bool closesBottom() const;
+    bool closesTop() const;
+};
+</code></pre>
+<p>Profile references are resolved to stable indices during evaluation. The evaluated specification does not perform name lookup during mesh generation.</p>
+<h4 id="source-6-3-generic-generated-geometry">6.3 Generic Generated Geometry</h4><p class="section-guide">Reading guide: this source section records “6.3 Generic Generated Geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Rename radial-specific interfaces:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">CurvedShapeMeshGenerator -&gt; ProceduralShapeMeshGenerator
+GeneratedCurvedMesh      -&gt; GeneratedPrimitiveMesh
+</code></pre>
+<p>The generated result continues to contain:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">mutable construction mesh
+face surface tags
+optional family construction evidence
+</code></pre>
+<p>Add AxialProfile surface roles:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AxialSide
+AxialStep
+AxialBottomCap
+AxialTopCap
+</code></pre>
+<p>Do not overload <code>Outer</code>, <code>AxialStart</code>, or <code>Rim</code> with ambiguous AxialProfile meanings.</p>
+<h4 id="source-6-4-construction-evidence">6.4 Construction Evidence</h4><p class="section-guide">Reading guide: this source section records “6.4 Construction Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add immutable optional construction evidence to <code>ResolvedPrimitiveGeometry</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ShapeConstructionEvidence
+└── AxialProfileConstructionEvidence
+</code></pre>
+<p>Axial evidence contains:</p>
+<ul>
+<li>transformed section rings;</li>
+<li>section centers;</li>
+<li>transition kinds;</li>
+<li>profile, level, hold, linear, and step counts;</li>
+<li>generated surface counts.</li>
+</ul>
+<p>The scene inspector and debug overlay consume this evidence rather than regenerating geometry.</p>
+<h3 id="source-7-dedicated-syntax-model">7. Dedicated Syntax Model</h3><p class="section-guide">Reading guide: this source section records “7. Dedicated Syntax Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The flat <code>ShapeOptionSyntax</code> representation remains appropriate for Cylinder and Sphere but must not be stretched into a nested mini-language.</p>
+<p>Introduce:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AxialProfileDescriptorSyntax
+AxialProfileAxisSyntax
+AxialProfileDefinitionSyntax
+AxialProfilePolygonVertexSyntax
+AxialProfileInitialLevelSyntax
+AxialProfileHoldSyntax
+AxialProfileLinearSyntax
+AxialProfileStepSyntax
+AxialProfileLevelTransformSyntax
+AxialProfileCapSyntax
+</code></pre>
+<p>Each nested syntax object owns a <code>SourceRange</code> or equivalent token span.</p>
+<p>Extend <code>GeometryExpression</code> to retain its source span, or introduce <code>GeometryExpressionSyntax</code> containing:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">source text
+line
+start column
+end column
+</code></pre>
+<p class="source-status--passed">This is required to produce diagnostics against <code>CrownB</code>, a scale expression, or one polygon coordinate rather than highlighting the complete <code>I(...)</code> action.</p>
+<h3 id="source-8-parser-architecture">8. Parser Architecture</h3><p class="section-guide">Reading guide: this source section records “8. Parser Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-8-1-token-cursor">8.1 Token Cursor</h4><p class="section-guide">Reading guide: this source section records “8.1 Token Cursor”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create a <code>ShapeSyntaxTokenCursor</code> that wraps the existing parallel arrays:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">raw token strings
+SourceTokenSpan values
+current index
+</code></pre>
+<p>It provides explicit operations:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">peek
+consume
+consumeIdentifier
+consumeOpeningParenthesis
+consumeClosingParenthesis
+parseExpressionUntilBoundary
+currentSourceRange
+</code></pre>
+<p>This avoids introducing a second lexer and removes raw-index manipulation from the AxialProfile parser.</p>
+<h4 id="source-8-2-parser-services">8.2 Parser Services</h4><p class="section-guide">Reading guide: this source section records “8.2 Parser Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ShapeSpecificationParser
+└── dispatches to AxialProfileSyntaxParser
+
+AxialProfileSyntaxParser
+├── parseAxis
+├── parseProfileDefinition
+├── parsePolygon
+├── parseInitialLevel
+├── parseHold
+├── parseLinear
+├── parseStep
+├── parseLevelTransforms
+└── parseCapPolicy
+</code></pre>
+<p><code>Grammar.cpp</code> should only:</p>
+<ol>
+<li>identify the shape name;</li>
+<li>create the token cursor;</li>
+<li>call the shape parser;</li>
+<li>attach returned syntax or a diagnostic to the action token.</li>
+</ol>
+<p>No polygon or transition construction logic belongs in <code>Grammar.cpp</code>.</p>
+<h3 id="source-9-semantic-and-runtime-evaluation">9. Semantic and Runtime Evaluation</h3><p class="section-guide">Reading guide: this source section records “9. Semantic and Runtime Evaluation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-9-1-semantic-validation">9.1 Semantic Validation</h4><p class="section-guide">Reading guide: this source section records “9.1 Semantic Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Replace the current flat <code>validate_shape_descriptor_expressions()</code> special cases with visitor-based traversal:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ShapeSyntaxSemanticAnalyzer
+├── CurvedShapeSyntaxSemanticAnalyzer
+└── AxialProfileSyntaxSemanticAnalyzer
+</code></pre>
+<p>The Axial analyzer validates:</p>
+<ul>
+<li>numeric expression symbols and supported functions;</li>
+<li>immutable <code>t</code> usage;</li>
+<li>duplicate profile names;</li>
+<li>profile-reference existence;</li>
+<li>statement ordering;</li>
+<li>duplicate center/scale/rotate modifiers;</li>
+<li>supported axis and cap keywords;</li>
+<li>profile identifiers as identifiers, not variable expressions.</li>
+</ul>
+<h4 id="source-9-2-expansion-time-evaluator">9.2 Expansion-Time Evaluator</h4><p class="section-guide">Reading guide: this source section records “9.2 Expansion-Time Evaluator”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AxialProfileDescriptorSyntax
+    -&gt; AxialProfileSpecificationEvaluator
+    -&gt; AxialProfileSpecificationCandidate
+    -&gt; AxialProfileSpecificationValidator
+    -&gt; immutable AxialProfileShapeSpecification
+</code></pre>
+<p>The evaluator uses the existing checked expression callback so grammar variables, <code>R</code>, rerolls, <code>&amp;</code>, <code>t</code>, <code>sin</code>, <code>swing</code>, and other supported functions retain current behavior.</p>
+<p>The geometry generator consumes no random stream.</p>
+<h4 id="source-9-3-canonical-key">9.3 Canonical Key</h4><p class="section-guide">Reading guide: this source section records “9.3 Canonical Key”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The key contains only normalized evaluated values in stable order:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">family
+axis
+profile count
+for each profile: name, vertex count, exact canonical float bits
+level count
+for each level: position, profile index, center, scale, rotation, transition
+cap mask
+mapping mode
+</code></pre>
+<p>Canonicalization includes negative-zero removal and stable rotation wrapping. Expression source text is excluded.</p>
+<h3 id="source-10-polygon-geometry-kernel">10. Polygon Geometry Kernel</h3><p class="section-guide">Reading guide: this source section records “10. Polygon Geometry Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create independently testable services:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SimplePolygonValidator
+SimplePolygonTriangulator
+PolygonContainmentAnalyzer
+NestedPolygonRingTriangulator
+TriangleSelfIntersectionAnalyzer
+</code></pre>
+<h4 id="source-10-1-simple-polygon-validation">10.1 Simple Polygon Validation</h4><p class="section-guide">Reading guide: this source section records “10.1 Simple Polygon Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use robust epsilon-aware segment intersection and signed-area tests. Adjacent edges may meet only at their shared endpoint. Non-adjacent edges may not touch or cross.</p>
+<h4 id="source-10-2-cap-triangulation">10.2 Cap Triangulation</h4><p class="section-guide">Reading guide: this source section records “10.2 Cap Triangulation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SimplePolygonTriangulator</code> uses deterministic ear clipping:</p>
+<ol>
+<li>canonical positive-area loop;</li>
+<li>candidate ears visited in ascending semantic vertex order;</li>
+<li>strictly convex ear test;</li>
+<li>no remaining vertex inside the ear;</li>
+<li>deterministic tie handling;</li>
+<li>no zero-area output triangle.</li>
+</ol>
+<p>Bottom-cap winding points toward local <code>-Y</code>; top-cap winding points toward local <code>+Y</code>.</p>
+<h4 id="source-10-3-step-ring-triangulation">10.3 Step Ring Triangulation</h4><p class="section-guide">Reading guide: this source section records “10.3 Step Ring Triangulation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A step surface is a polygon with one hole, so a simple cap ear clipper alone is insufficient.</p>
+<p><code>NestedPolygonRingTriangulator</code> shall:</p>
+<ol>
+<li>classify which transformed contour is outer and which is inner;</li>
+<li>reject touching, crossing, or coincident contours;</li>
+<li>select the inner contour's rightmost vertex with deterministic tie-breaking;</li>
+<li>select a visible outer bridge vertex deterministically;</li>
+<li>create one bridged simple loop without changing source contours;</li>
+<li>ear-clip the bridged loop;</li>
+<li>orient inward steps toward <code>+Y</code> and outward steps toward <code>-Y</code>;</li>
+<li>tag every triangle as <code>AxialStep</code> with the step-event index.</li>
+</ol>
+<p>This is constrained nested-polygon triangulation, not a general polygon Boolean engine.</p>
+<h3 id="source-11-axialprofile-mesh-generation">11. AxialProfile Mesh Generation</h3><p class="section-guide">Reading guide: this source section records “11. AxialProfile Mesh Generation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-11-1-ring-construction">11.1 Ring Construction</h4><p class="section-guide">Reading guide: this source section records “11.1 Ring Construction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For each level and profile vertex <code>q = (qx, qz)</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">scaled = (sx * qx, sz * qz)
+rotated = rotate2D(rotation_degrees, scaled)
+offset = rotated + center
+embedded = (offset.x, axial_position, offset.y)
+</code></pre>
+<p>Keep the transformed rings in semantic vertex order as construction evidence.</p>
+<h4 id="source-11-2-hold-transition">11.2 Hold Transition</h4><p class="section-guide">Reading guide: this source section records “11.2 Hold Transition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>hold(target)</code> creates an exact copy of the previous ring at the new axial coordinate and connects matching indices.</p>
+<p>The specification key and tests must confirm that all XZ coordinates and profile identity remain unchanged.</p>
+<h4 id="source-11-3-linear-transition">11.3 Linear Transition</h4><p class="section-guide">Reading guide: this source section records “11.3 Linear Transition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For each index <code>j</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">addQuad(
+    previous[j],
+    previous[next],
+    target[next],
+    target[j]
+);
+</code></pre>
+<p>No intermediate rings are generated. The result is a planar ruled strip between corresponding polygon edges.</p>
+<h4 id="source-11-4-step-transition">11.4 Step Transition</h4><p class="section-guide">Reading guide: this source section records “11.4 Step Transition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>At one axial coordinate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">old transformed ring
+new transformed ring
+nested-polygon transition face
+</code></pre>
+<p>The previous positive-height loft terminates on the old ring. The next positive-height loft starts from the new ring. The step triangulator fills the material difference between them.</p>
+<h4 id="source-11-5-vertex-duplication-and-normals">11.5 Vertex Duplication and Normals</h4><p class="section-guide">Reading guide: this source section records “11.5 Vertex Duplication and Normals”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Maintain explicit hard surface boundaries:</p>
+<ul>
+<li>side vertices are not shared with caps;</li>
+<li>side vertices are not shared with step faces;</li>
+<li>step vertices are not shared with adjacent side strips;</li>
+<li>cap and step normals are constant axis normals;</li>
+<li>side normals derive from triangle geometry and point outward.</li>
+</ul>
+<p>P0 uses deterministic face/strip normals and triplanar UV fallback. Continuous perimeter smoothing and perimeter/height UVs remain post-v1 improvements.</p>
+<h4 id="source-11-6-finalization">11.6 Finalization</h4><p class="section-guide">Reading guide: this source section records “11.6 Finalization”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The generator:</p>
+<ol>
+<li>enforces actual output budgets;</li>
+<li>rejects zero-area triangles;</li>
+<li>builds collision acceleration;</li>
+<li>returns mesh, surface tags, and construction evidence;</li>
+<li>consumes no random values.</li>
+</ol>
+<h3 id="source-12-procedural-repository-integration">12. Procedural Repository Integration</h3><p class="section-guide">Reading guide: this source section records “12. Procedural Repository Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extend <code>ProceduralMeshRepository</code> with an explicit exhaustive family dispatch:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">switch (specification.family()) {
+case ShapeFamily::Cylinder:
+    generated = cylinder_mesh_generator_-&gt;generate(...);
+    break;
+case ShapeFamily::Sphere:
+    generated = sphere_mesh_generator_-&gt;generate(...);
+    break;
+case ShapeFamily::AxialProfile:
+    generated = axial_profile_mesh_generator_-&gt;generate(...);
+    break;
+}
+</code></pre>
+<p>Do not retain the current Cylinder-versus-everything-else ternary.</p>
+<p>Extract family-specific evidence decisions from <code>ProceduralMeshRepository</code> into:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ProceduralGeometryEvidenceService
+</code></pre>
+<p>It resolves:</p>
+<ul>
+<li>whether the specification requests watertight geometry;</li>
+<li>analytic versus mesh-derived volume;</li>
+<li>collision policy;</li>
+<li>actionable topology diagnostics.</li>
+</ul>
+<p>AxialProfile policy:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">both caps + valid steps + watertight mesh -&gt; MeshDerived volume
+one or both end caps omitted            -&gt; Undefined volume
+all AxialProfile forms                  -&gt; StaticTriangleMesh collision in v1
+</code></pre>
+<p><code>Context.cpp</code> already permits a <code>StaticTriangleMesh</code> only when the instance is immovable. Dynamic AxialProfile instances may render and animate transforms, but they do not participate as dynamic collision bodies in v1.</p>
+<h3 id="source-13-cache-policy">13. Cache Policy</h3><p class="section-guide">Reading guide: this source section records “13. Cache Policy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current <code>PrimitiveGeometryResolver</code> belongs to <code>SceneGenerationContext</code>, and each successful compilation creates a fresh context. The existing cache is therefore generation-local and naturally bounded by the generated scene.</p>
+<p>Evidence: <code>src/Grammar.cpp:4633</code> and <code>src/editor/service/GrammarCompilationService.cpp:35</code>.</p>
+<p>P0 correctness uses this existing generation-local cache.</p>
+<p>An optional reusable LRU cache may be added only after benchmarks demonstrate a material benefit. If added, it must be bounded by both:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">maximum entry count
+maximum retained mesh bytes
+</code></pre>
+<p>and expose hit, miss, eviction, and retained-byte evidence. Time-varying expressions must never create an unbounded mesh attic.</p>
+<h3 id="source-14-scene-export-bounds-mass-and-collision">14. Scene, Export, Bounds, Mass, and Collision</h3><p class="section-guide">Reading guide: this source section records “14. Scene, Export, Bounds, Mass, and Collision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>No AxialProfile-specific render or export branch is allowed.</p>
+<p>Required path:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">evaluated AxialProfileShapeSpecification
+-&gt; PrimitiveGeometryResolver
+-&gt; ProceduralMeshRepository
+-&gt; ResolvedPrimitiveGeometry
+-&gt; ScenePrimitiveInstance
+-&gt; generic preview/export/picking/bounds path
+</code></pre>
+<p>The existing resolved-geometry path already provides:</p>
+<ul>
+<li>actual local mesh bounds;</li>
+<li>transformed world bounds;</li>
+<li>inverse-transpose normal transformation;</li>
+<li>triangle picking;</li>
+<li>PLY export;</li>
+<li>determinant-scaled density mass;</li>
+<li>static triangle collision for immovable geometry.</li>
+</ul>
+<p>Regression tests must prove AxialProfile uses these paths without adding a type-name exception.</p>
+<p>Dynamic collision and AxialProfile inertia remain disabled. The implementation must not reuse box inertia as certified AxialProfile evidence.</p>
+<h3 id="source-15-editor-integration">15. Editor Integration</h3><p class="section-guide">Reading guide: this source section records “15. Editor Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-15-1-catalog-and-syntax">15.1 Catalog and Syntax</h4><p class="section-guide">Reading guide: this source section records “15.1 Catalog and Syntax”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add <code>AxialProfile</code> as a canonical procedural catalog entry with a multiline template rather than a misleading flat option signature.</p>
+<p>Syntax highlighting recognizes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AxialProfile
+axis
+profile
+polygon
+at
+hold
+linear
+step
+center
+scale
+rotate
+cap
+</code></pre>
+<h4 id="source-15-2-context-sensitive-completion">15.2 Context-Sensitive Completion</h4><p class="section-guide">Reading guide: this source section records “15.2 Context-Sensitive Completion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current autocomplete only offers options at descriptor depth one and explicitly returns when deeper parentheses are active.</p>
+<p>Evidence: <code>src/imgui_main.cpp:7343</code>.</p>
+<p>Replace the single Boolean <code>shape_option_context</code> with a purpose-revealing context model:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ShapeCompletionContext
+├── ShapeStatement
+├── ProfileBody
+├── LevelTransform
+├── ProfileReference
+└── CapComponent
+</code></pre>
+<p>Suggested completions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">inside AxialProfile(...) -&gt; profile, at, hold, linear, step, cap
+inside profile(...)      -&gt; polygon
+inside at/linear/step    -&gt; center, scale, rotate, known profile names
+inside cap(...)          -&gt; all, none, bottom, top
+</code></pre>
+<h4 id="source-15-3-scene-inspector">15.3 Scene Inspector</h4><p class="section-guide">Reading guide: this source section records “15.3 Scene Inspector”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extend <code>ScenePrimitiveInspection</code> with optional AxialProfile fields:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">family
+profile count
+level count
+hold count
+linear count
+step count
+generated vertex count
+generated triangle count
+cap policy
+watertightness
+volume evidence
+topology hash
+shape key
+</code></pre>
+<p>The existing generic shape text remains available.</p>
+<h4 id="source-15-4-construction-overlay">15.4 Construction Overlay</h4><p class="section-guide">Reading guide: this source section records “15.4 Construction Overlay”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use the existing preview overlay-line renderer to add an AxialProfile overlay mode:</p>
+<ul>
+<li>section rings;</li>
+<li>section centers;</li>
+<li>axial centerline;</li>
+<li>step planes;</li>
+<li>optional normal lines;</li>
+<li>transition colors and <code>H</code>, <code>L</code>, <code>S</code> legend in the inspector.</li>
+</ul>
+<p>Overlay geometry comes from <code>AxialProfileConstructionEvidence</code> and never mutates the scene mesh.</p>
+<h3 id="source-16-component-24-evidence-gate">16. Component 24 Evidence Gate</h3><p class="section-guide">Reading guide: this source section records “16. Component 24 Evidence Gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-16-1-current-blocker">16.1 Current Blocker</h4><p class="section-guide">Reading guide: this source section records “16.1 Current Blocker”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>No file matching <code>Component_24</code>, <code>ID3050</code>, Coruscant, <code>.dae</code>, or COLLADA exists in the repository as of August 21, 2026.</p>
+<p class="source-status--passed">The implementation may reach <strong>candidate complete</strong> using synthetic fixtures, but it may not claim <strong>core promotion complete</strong> until Component 24 evidence is available and approved.</p>
+<h4 id="source-16-2-evidence-intake">16.2 Evidence Intake</h4><p class="section-guide">Reading guide: this source section records “16.2 Evidence Intake”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/fixtures/axialprofile/component24/
+    README.md
+    source_manifest.json
+    expected_metrics.json
+    approved_profile.p3d
+</code></pre>
+<p><code>source_manifest.json</code> records:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">source filename or external path
+SHA-256
+license or use authority
+COLLADA node identifier
+coordinate-system conversion
+unit conversion
+extraction tool version
+approval status
+</code></pre>
+<p>Do not commit the original COLLADA asset unless its license and repository policy permit it.</p>
+<h4 id="source-16-3-offline-tools">16.3 Offline Tools</h4><p class="section-guide">Reading guide: this source section records “16.3 Offline Tools”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Keep source analysis separate from runtime:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tools/axialprofile/collada_axial_profile_analyzer.py
+tools/axialprofile/collada_axial_profile_fit.py
+tools/axialprofile/compare_axial_profile_mesh.py
+</code></pre>
+<p>The analyzer must resolve COLLADA node transforms and units before measuring sections. Outputs include source hashes and deterministic JSON evidence.</p>
+<h4 id="source-16-4-comparison-metrics">16.4 Comparison Metrics</h4><p class="section-guide">Reading guide: this source section records “16.4 Comparison Metrics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>At agreed axial sample levels, calculate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cross-section bidirectional RMS boundary distance
+maximum bidirectional section deviation
+closed volume difference
+source/generated triangle counts
+source/generated axial event counts
+profile parameter count
+unexpected boundary edges
+degenerate triangles
+nonmanifold edges
+</code></pre>
+<p>Initial promotion thresholds:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cross-section RMS error       &lt;= 2%
+maximum section error         &lt;= 5%
+volume error                  &lt;= 3%
+unexpected boundary edges     = 0
+degenerate triangles          = 0
+nonmanifold edges              = 0
+deterministic mesh hash        stable
+preview/export geometry        identical
+</code></pre>
+<p>Normalization for percentage distances must be declared in <code>expected_metrics.json</code>; use the source component's maximum cross-section diameter unless evidence review selects another measure.</p>
+<h3 id="source-17-test-matrix">17. Test Matrix</h3><p class="section-guide">Reading guide: this source section records “17. Test Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-17-1-specification-and-polygon-tests">17.1 Specification and Polygon Tests</h4><p class="section-guide">Reading guide: this source section records “17.1 Specification and Polygon Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">three-vertex minimum profile
+duplicate terminal point normalization
+clockwise winding reversal
+zero-length edge rejection
+zero-area polygon rejection
+self-intersection rejection
+touching non-adjacent edges rejection
+duplicate profile name rejection
+undefined profile reference rejection
+unsupported axis rejection
+non-finite expression rejection
+zero scale rejection
+orientation-reversing scale rejection
+safety budget rejection
+</code></pre>
+<h4 id="source-17-2-transition-geometry-tests">17.2 Transition Geometry Tests</h4><p class="section-guide">Reading guide: this source section records “17.2 Transition Geometry Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">rectangle hold extrusion
+triangle hold extrusion
+octagonal hold extrusion
+linear square taper
+center drift
+scale drift
+rotation drift
+profile-name change with preserved correspondence
+linear vertex-count mismatch rejection
+inward step
+outward step
+different-count nested step
+intersecting step rejection
+touching step rejection
+coincident step rejection
+multiple ordered steps
+</code></pre>
+<h4 id="source-17-3-cap-and-topology-tests">17.3 Cap and Topology Tests</h4><p class="section-guide">Reading guide: this source section records “17.3 Cap and Topology Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cap(all)
+cap(none)
+cap(bottom)
+cap(top)
+concave asymmetric bottom cap
+concave asymmetric top cap
+step annulus winding
+every closed edge incident exactly twice
+open boundary edges match omitted caps
+zero degenerate triangles
+zero nonmanifold edges
+finite nonzero signed volume for closed forms
+</code></pre>
+<h4 id="source-17-4-analytic-volume-tests">17.4 Analytic Volume Tests</h4><p class="section-guide">Reading guide: this source section records “17.4 Analytic Volume Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Rectangle extrusion:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">expected volume = width * depth * height
+</code></pre>
+<p>Linear square frustum:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">expected volume = h / 3 * (A1 + A2 + sqrt(A1 * A2))
+</code></pre>
+<p>Compare against mesh-derived tetrahedral volume with tessellation-independent tolerances, since AxialProfile side surfaces are already planar.</p>
+<h4 id="source-17-5-determinism-tests">17.5 Determinism Tests</h4><p class="section-guide">Reading guide: this source section records “17.5 Determinism Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Identical evaluated specifications must produce identical:</p>
+<ul>
+<li>shape key;</li>
+<li>canonical text;</li>
+<li>vertex count and order;</li>
+<li>face count and order;</li>
+<li>normals and texture coordinates;</li>
+<li>surface-tag order;</li>
+<li>topology hash;</li>
+<li>bounds;</li>
+<li>signed volume;</li>
+<li>preview buffer hash;</li>
+<li>PLY geometry payload hash.</li>
+</ul>
+<h4 id="source-17-6-runtime-integration-tests">17.6 Runtime Integration Tests</h4><p class="section-guide">Reading guide: this source section records “17.6 Runtime Integration Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Verify:</p>
+<ul>
+<li>grammar variables in profile coordinates and levels;</li>
+<li><code>t</code>-driven center, scale, rotation, and height;</li>
+<li class="source-status--failed">failed time samples preserve the last valid scene;</li>
+<li>no random values are consumed by mesh generation;</li>
+<li>one specification pointer reaches the stored instance;</li>
+<li>one resolved geometry object drives preview, export, bounds, and picking;</li>
+<li>density mass uses mesh volume and transform determinant;</li>
+<li>open forms reject density-derived mass;</li>
+<li>immovable AxialProfile uses triangle collision;</li>
+<li>dynamic AxialProfile does not claim supported collision;</li>
+<li>legacy Cube/Cylinder/Sphere grammar remains unchanged.</li>
+</ul>
+<h4 id="source-17-7-gui-tests">17.7 GUI Tests</h4><p class="section-guide">Reading guide: this source section records “17.7 GUI Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add separate startup examples and smoke tests:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/axial_profile_showcase.p3d
+examples/axial_profile_temporal.p3d
+tests/run_axial_profile_gui_smoke_check.sh
+tests/run_axial_profile_temporal_gui_smoke_check.sh
+</code></pre>
+<p>Do not replace the existing curved-primitive smoke fixtures.</p>
+<h3 id="source-18-performance-and-cache-evidence">18. Performance and Cache Evidence</h3><p class="section-guide">Reading guide: this source section records “18. Performance and Cache Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create a deterministic benchmark harness for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">1 unique AxialProfile
+100 cached identical instances in one scene
+100 unique profiles
+1000 cached identical instances
+time-varying evaluated profiles
+Component 24 candidate
+</code></pre>
+<p>Record separately:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">syntax parse time
+expression evaluation time
+validation time
+polygon triangulation time
+mesh construction time
+topology analysis time
+BVH construction time
+cache lookup count and hit rate
+preview buffer construction time
+generated and retained bytes
+</code></pre>
+<p>Correctness gates use cache build counts and deterministic outputs, not fragile machine-specific timing thresholds. Timing results are recorded as evidence and compared to an approved baseline.</p>
+<h3 id="source-19-file-level-change-plan">19. File-Level Change Plan</h3><p class="section-guide">Reading guide: this source section records “19. File-Level Change Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-19-1-new-model-files">19.1 New Model Files</h4><p class="section-guide">Reading guide: this source section records “19.1 New Model Files”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/model/RadialShapeSpecification.h
+include/geometry/model/AxialProfileAxis.h
+include/geometry/model/AxialTransitionKind.h
+include/geometry/model/AxialProfilePolygon.h
+include/geometry/model/AxialProfileLevel.h
+include/geometry/model/AxialProfileCapPolicy.h
+include/geometry/model/AxialProfileShapeSpecification.h
+include/geometry/model/AxialProfileConstructionEvidence.h
+include/geometry/model/GeneratedPrimitiveMesh.h
+</code></pre>
+<h4 id="source-19-2-new-geometry-services">19.2 New Geometry Services</h4><p class="section-guide">Reading guide: this source section records “19.2 New Geometry Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/service/ProceduralShapeMeshGenerator.h
+include/geometry/service/AxialProfileSpecificationValidator.h
+include/geometry/service/AxialProfileMeshGenerator.h
+include/geometry/service/SimplePolygonValidator.h
+include/geometry/service/SimplePolygonTriangulator.h
+include/geometry/service/PolygonContainmentAnalyzer.h
+include/geometry/service/NestedPolygonRingTriangulator.h
+include/geometry/service/TriangleSelfIntersectionAnalyzer.h
+include/geometry/service/ProceduralGeometryEvidenceService.h
+
+src/geometry/service/*.cpp
+</code></pre>
+<h4 id="source-19-3-new-grammar-model-and-services">19.3 New Grammar Model and Services</h4><p class="section-guide">Reading guide: this source section records “19.3 New Grammar Model and Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/grammar/model/AxialProfileDescriptorSyntax.h
+include/grammar/model/AxialProfileDefinitionSyntax.h
+include/grammar/model/AxialProfileTransitionSyntax.h
+include/grammar/model/AxialProfileLevelTransformSyntax.h
+include/grammar/model/ShapeSyntaxTokenCursor.h
+include/grammar/service/AxialProfileSyntaxParser.h
+include/grammar/service/AxialProfileSyntaxSemanticAnalyzer.h
+include/grammar/service/AxialProfileSpecificationEvaluator.h
+
+src/grammar/service/*.cpp
+</code></pre>
+<h4 id="source-19-4-existing-files-to-modify">19.4 Existing Files to Modify</h4><p class="section-guide">Reading guide: this source section records “19.4 Existing Files to Modify”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/model/ShapeSpecification.h
+include/geometry/model/CylinderShapeSpecification.h
+include/geometry/model/SphereShapeSpecification.h
+include/geometry/model/MeshSurfaceTag.h
+include/geometry/model/ResolvedPrimitiveGeometry.h
+include/geometry/service/ProceduralMeshRepository.h
+src/geometry/service/ProceduralMeshRepository.cpp
+src/geometry/service/PrimitiveGeometryResolver.cpp
+include/grammar/model/GeometryExpression.h
+include/grammar/service/ShapeSpecificationParser.h
+src/grammar/service/ShapeSpecificationParser.cpp
+include/grammar/service/ShapeSpecificationEvaluator.h
+src/grammar/service/ShapeSpecificationEvaluator.cpp
+include/grammar.h
+src/Grammar.cpp
+include/Context.h
+src/Context.cpp
+src/geometry/service/ProceduralShapeCatalogRepository.cpp
+include/editor/model/GrammarEditorInteractionState.h
+include/editor/model/ScenePrimitiveInspection.h
+src/editor/presentation/GrammarAutocompletePresentation.cpp
+src/editor/presentation/GrammarSyntaxPresentation.cpp
+src/editor/presentation/SceneInspectorPanel.cpp
+src/imgui_main.cpp
+Makefile
+tests/run_editor_architecture_checks.sh
+tests/run_release_checks.sh
+tests/README.md
+</code></pre>
+<p><code>Mesh.cpp</code>, <code>PLYWriter.cpp</code>, and the renderer should require no AxialProfile-specific geometry branch. Changes there require explicit justification and a source gate.</p>
+<h3 id="source-20-milestone-and-merge-sequence">20. Milestone and Merge Sequence</h3><p class="section-guide">Reading guide: this source section records “20. Milestone and Merge Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-milestone-0-evidence-and-contract-lock">Milestone 0: Evidence and Contract Lock</h4><p class="section-guide">Reading guide: this source section records “Milestone 0: Evidence and Contract Lock”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>this semantic contract;</li>
+<li>synthetic fixture definitions;</li>
+<li>Component 24 provenance placeholder;</li>
+<li>source gates that protect the existing generic mesh path.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li>no code assumes the Component 24 asset is present;</li>
+<li>all existing release checks remain green.</li>
+</ul>
+<h4 id="source-milestone-1-general-shape-abstraction">Milestone 1: General Shape Abstraction</h4><p class="section-guide">Reading guide: this source section records “Milestone 1: General Shape Abstraction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>lean <code>ShapeSpecification</code> base;</li>
+<li><code>RadialShapeSpecification</code> intermediate class;</li>
+<li>renamed generic generated-mesh interfaces;</li>
+<li>exhaustive procedural family dispatch;</li>
+<li>extracted geometry evidence service.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li>Cylinder and Sphere shape keys, canonical text, meshes, topology hashes, preview/export payloads, mass, and collision policies remain unchanged;</li>
+<li class="source-status--passed">complete curved and release suites pass before AxialProfile is added.</li>
+</ul>
+<h4 id="source-milestone-2-syntax-independent-axial-geometry-kernel">Milestone 2: Syntax-Independent Axial Geometry Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 2: Syntax-Independent Axial Geometry Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>Axial model classes;</li>
+<li>profile validator;</li>
+<li>simple cap triangulator;</li>
+<li>nested step-ring triangulator;</li>
+<li>Axial mesh generator;</li>
+<li>construction evidence;</li>
+<li>programmatic specification tests.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li class="source-status--passed">rectangle, taper, drift, rotation, inward step, outward step, asymmetric concave caps, topology, volume, and determinism tests pass;</li>
+<li>generator contains no grammar or random dependencies.</li>
+</ul>
+<h4 id="source-milestone-3-procedural-repository-and-scene-integration">Milestone 3: Procedural Repository and Scene Integration</h4><p class="section-guide">Reading guide: this source section records “Milestone 3: Procedural Repository and Scene Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li><code>ShapeFamily::AxialProfile</code> dispatch;</li>
+<li>cached resolved geometry;</li>
+<li>mesh-derived volume evidence;</li>
+<li>static collision policy;</li>
+<li>inspector-ready construction evidence.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li>programmatically constructed AxialProfile uses the same preview, export, bounds, picking, mass, and collision paths as other resolved meshes;</li>
+<li>no <code>instance.type == "AxialProfile"</code> geometry branch exists in <code>Context.cpp</code>.</li>
+</ul>
+<h4 id="source-milestone-4-grammar-ast-semantics-and-evaluation">Milestone 4: Grammar AST, Semantics, and Evaluation</h4><p class="section-guide">Reading guide: this source section records “Milestone 4: Grammar AST, Semantics, and Evaluation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>dedicated nested syntax hierarchy;</li>
+<li>token cursor with source spans;</li>
+<li>parser, semantic analyzer, evaluator, and validator diagnostics;</li>
+<li>backwards-compatible <code>I(...)</code> appearance parsing.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li>all valid canonical syntax forms expand;</li>
+<li>every invalid invariant produces a source-located blocking diagnostic;</li>
+<li class="source-status--failed">failed expansion publishes no partial scene;</li>
+<li>existing Cube/Cylinder/Sphere grammar tests remain green.</li>
+</ul>
+<h4 id="source-milestone-5-editor-and-debug-evidence">Milestone 5: Editor and Debug Evidence</h4><p class="section-guide">Reading guide: this source section records “Milestone 5: Editor and Debug Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>procedural catalog entry;</li>
+<li>nested syntax coloring;</li>
+<li>context-aware statement, transform, cap, and profile-name completion;</li>
+<li>inspector metrics;</li>
+<li>optional construction overlay.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li>editor harnesses cover each completion context;</li>
+<li>selected AxialProfile reports correct immutable geometry evidence;</li>
+<li>overlay generation is deterministic and does not affect exported mesh.</li>
+</ul>
+<h4 id="source-milestone-6-fixtures-performance-and-gui-validation">Milestone 6: Fixtures, Performance, and GUI Validation</h4><p class="section-guide">Reading guide: this source section records “Milestone 6: Fixtures, Performance, and GUI Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver:</p>
+<ul>
+<li>synthetic fixture suite;</li>
+<li>showcase and temporal examples;</li>
+<li>benchmark evidence;</li>
+<li>ordinary and temporal GUI smoke checks.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li>architecture suite passes;</li>
+<li class="source-status--passed">both AxialProfile GUI smoke checks pass;</li>
+<li>cached identical instances build one topology per scene;</li>
+<li>safety ceilings reject pathological inputs before allocation.</li>
+</ul>
+<h4 id="source-milestone-7-component-24-certification">Milestone 7: Component 24 Certification</h4><p class="section-guide">Reading guide: this source section records “Milestone 7: Component 24 Certification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Deliver after approved asset intake:</p>
+<ul>
+<li>source manifest and exact hash;</li>
+<li>deterministic extraction evidence;</li>
+<li>approved AxialProfile reconstruction;</li>
+<li>comparison metrics and plots/data;</li>
+<li class="source-status--failed">explicit pass/fail report against thresholds.</li>
+</ul>
+<p>Gate:</p>
+<ul>
+<li class="source-status--passed">all Component 24 thresholds pass against the approved exact source hash;</li>
+<li class="source-status--unresolved">unresolved deviations are disclosed rather than silently accepted.</li>
+</ul>
+<h4 id="source-milestone-8-release-and-supervisor-promotion">Milestone 8: Release and Supervisor Promotion</h4><p class="section-guide">Reading guide: this source section records “Milestone 8: Release and Supervisor Promotion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Run:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_release_checks.sh
+</code></pre>
+<p class="source-status--passed">Only after a clean pass:</p>
+<ol>
+<li>record the built binary SHA-256;</li>
+<li>restart <code>progen3d-editor-gui.service</code>;</li>
+<li>verify a new PID;</li>
+<li>verify <code>ActiveState=active</code> and <code>SubState=running</code>;</li>
+<li>verify <code>NRestarts=0</code> after observation;</li>
+<li>verify <code>/proc/&lt;pid&gt;/exe</code> matches the validated binary hash;</li>
+<li>inspect recent supervisor logs for runtime geometry errors.</li>
+</ol>
+<h3 id="source-21-source-gates">21. Source Gates</h3><p class="section-guide">Reading guide: this source section records “21. Source Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Add deterministic guards that fail when:</p>
+<ul>
+<li><code>ShapeSpecification</code> regains radial-only fields;</li>
+<li>procedural dispatch treats every non-Cylinder family as Sphere;</li>
+<li>AxialProfile generation appears in <code>Grammar.cpp</code>;</li>
+<li>AxialProfile geometry is selected by <code>instance.type</code> in <code>Context.cpp</code>;</li>
+<li>AxialProfile bypasses <code>ResolvedPrimitiveGeometry</code>;</li>
+<li>preview and export resolve different meshes;</li>
+<li>density mass uses box volume for AxialProfile;</li>
+<li>dynamic AxialProfile collision is advertised as supported;</li>
+<li>a generator reads <code>grammar_rng</code>, <code>effects_rng</code>, <code>rand</code>, or another random source;</li>
+<li>shape keys contain expression source text;</li>
+<li>a closed generated mesh bypasses topology analysis;</li>
+<li>cap or step triangulation emits untagged faces;</li>
+<li>generated budgets are checked only after allocation;</li>
+<li>runtime code imports or parses COLLADA.</li>
+</ul>
+<h3 id="source-22-completion-states">22. Completion States</h3><p class="section-guide">Reading guide: this source section records “22. Completion States”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use three explicit states:</p>
+<h4 id="source-candidate-complete">Candidate Complete</h4><p class="section-guide">Reading guide: this source section records “Candidate Complete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">geometry kernel, grammar, scene integration, editor support, synthetic tests, performance evidence, and GUI smoke checks pass;</li>
+<li>Component 24 source is unavailable or not yet approved.</li>
+</ul>
+<h4 id="source-validation-complete">Validation Complete</h4><p class="section-guide">Reading guide: this source section records “Validation Complete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>approved Component 24 artifact is available;</li>
+<li class="source-status--passed">reconstruction and quantitative thresholds pass;</li>
+<li>exact source and candidate hashes are recorded.</li>
+</ul>
+<h4 id="source-core-promotion-complete">Core Promotion Complete</h4><p class="section-guide">Reading guide: this source section records “Core Promotion Complete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">validation is complete;</li>
+<li>full clean release gate passes;</li>
+<li>supervised GUI runs the exact validated binary without restart churn or runtime geometry errors.</li>
+</ul>
+<h3 id="source-23-definition-of-axialprofilev1-complete">23. Definition of AxialProfilev1 Complete</h3><p class="section-guide">Reading guide: this source section records “23. Definition of AxialProfilev1 Complete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">AxialProfilev1 is complete only when:</p>
+<ul>
+<li>the common shape hierarchy contains no false radial relationship;</li>
+<li>syntax and evaluated specification models are separate and immutable;</li>
+<li>all nested expressions evaluate through the existing lexical environment;</li>
+<li>profiles are validated simple polygons with canonical winding;</li>
+<li>hold, linear, inward step, and outward step behave deterministically;</li>
+<li>center, scale, and rotation transforms work;</li>
+<li>caps and step rings triangulate without degeneracy;</li>
+<li>closed forms are watertight and have mesh-derived volume;</li>
+<li>open forms reject density-derived mass;</li>
+<li>preview, export, bounds, Fit, picking, and static collision use one resolved geometry object;</li>
+<li>editor diagnostics identify the nested failing construct;</li>
+<li>catalog, autocomplete, inspector, and debug evidence are present;</li>
+<li>existing Cube, CubeX/Y/Z, Cylinder, Sphere, curved aliases, material, alpha, texscale, physics, and temporal behavior remain compatible;</li>
+<li>Component 24 passes the approved quantitative evidence gate;</li>
+<li><code>./tests/run_release_checks.sh</code> passes from a clean build;</li>
+<li>the supervised GUI runs the exact validated executable hash.</li>
+</ul>
+<p>Dynamic collision, generalized inertia, inner profile holes, topology-changing interpolation, curved transitions, automatic profile resampling, and direct COLLADA conversion remain post-v1 work.</p>
+<h3 id="source-24-highest-gain-implementation-order">24. Highest-Gain Implementation Order</h3><p class="section-guide">Reading guide: this source section records “24. Highest-Gain Implementation Order”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">generalize ShapeSpecification without regressions
+        -&gt;
+syntax-independent AxialProfile geometry kernel
+        -&gt;
+procedural repository and resolved-geometry integration
+        -&gt;
+dedicated nested grammar AST and evaluator
+        -&gt;
+editor evidence and GUI fixtures
+        -&gt;
+Component 24 exact-hash certification
+        -&gt;
+clean release and supervisor promotion
+</code></pre>
+<p>The generic mesh-instance refactor is no longer the critical path because it is already implemented. The highest-risk work is now the correctness boundary around nested syntax, polygon validation, deterministic cap triangulation, and constrained step-ring construction.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html" rel="prev">← Previous: P3D Textured Mesh and Orthographic Three-View Strategy</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-curved-primitive-extension-implementation-plan.html" rel="next">Next: ProGen3D Curved Primitive Extension Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

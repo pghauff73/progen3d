@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state." name="description"/>
+<meta content="P2_IMPLEMENTATION.md" name="source-markdown"/>
+<meta content="e5aee343146b88f33e0cd335713f2e6967c0cafd1384ca1a955702c602792cf2" name="source-sha256"/>
+<meta content="Documented" name="documentation-status"/>
+<title>Progen3D P2 Temporal Grammar and Bounded Rotation · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-architecture">Architecture and Runtime</a></li>
+<li aria-current="page">Progen3D P2 Temporal Grammar and Bounded Rotation</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Progen3D P2 Temporal Grammar and Bounded Rotation</h1>
+<p class="lead">P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state.</p>
+<div class="lesson-meta">
+<span class="status-badge status--documented">Documented</span>
+<span class="tag">Architecture and Runtime</span>
+<span class="tag">About 6 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-30</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/main/P2_IMPLEMENTATION.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="e5aee343146b88f33e0cd335713f2e6967c0cafd1384ca1a955702c602792cf2" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Progen3D P2 Temporal Grammar and Bounded Rotation in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Progen3D P2 Temporal Grammar and Bounded Rotation, Investigation result: t is a scene input, not mutable state, Built-in time variable, Stable randomness through time.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="progen3d-grammar.html">Progen3D Grammar</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Progen3D P2 Temporal Grammar and Bounded Rotation</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Progen3D P2 Temporal Grammar and Bounded Rotation</td></tr><tr><td><dfn title="Named by the source document">Investigation result: t is a scene input, not mutable state</dfn></td><td>The phrase appears 0 times in the source and is retained as a learning-path concept.</td><td>1. Investigation result: t is a scene input, not mutable state</td></tr><tr><td><dfn title="Named by the source document">Built-in time variable</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Built-in time variable</td></tr><tr><td><dfn title="Named by the source document">Stable randomness through time</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Stable randomness through time</td></tr><tr><td><dfn title="Named by the source document">Temporal and interpolation functions</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Temporal and interpolation functions</td></tr><tr><td><dfn title="Named by the source document">Cycle model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Cycle model</td></tr><tr><td><dfn title="Named by the source document">Ping-pong model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Ping-pong model</td></tr><tr><td><dfn title="Named by the source document">Acceleration and deceleration</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Acceleration and deceleration</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="Field evaluation and candidate geometry">P2</dfn></td><td>Field evaluation and candidate geometry</td></tr><tr><td><dfn title="Typed MCP_OMv1 model">P1</dfn></td><td>Typed MCP_OMv1 model</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Progen3D P2 Temporal Grammar and Bounded Rotation, Investigation result: t is a scene input, not mutable state, Built-in time variable, Stable randomness through time. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Investigation result: t is a scene input, not mutable state, 2. Built-in time variable, 3. Stable randomness through time, 4. Temporal and interpolation functions, Cycle model. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 3, failed: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 9 display-equation blocks, 14 code blocks, 1 tables and the source SHA-256 <code>e5aee343146b88f33e0cd335713f2e6967c0cafd1384ca1a955702c602792cf2</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-investigation-result-t-is-a-scene-input-not-mutable-state">1. Investigation result: t is a scene input, not mutable state</a></li><li><a href="#source-2-built-in-time-variable">2. Built-in time variable</a></li><li><a href="#source-3-stable-randomness-through-time">3. Stable randomness through time</a></li><li><a href="#source-4-temporal-and-interpolation-functions">4. Temporal and interpolation functions</a></li><li><a href="#source-cycle-model">Cycle model</a></li><li><a href="#source-ping-pong-model">Ping-pong model</a></li><li><a href="#source-acceleration-and-deceleration">Acceleration and deceleration</a></li><li><a href="#source-smooth-arrival-and-departure">Smooth arrival and departure</a></li><li><a href="#source-5-composition-patterns">5. Composition patterns</a></li><li><a href="#source-eased-out-and-back-motion">Eased out-and-back motion</a></li><li><a href="#source-continuous-wrapped-rotation">Continuous wrapped rotation</a></li><li><a href="#source-bounded-smooth-rotation">Bounded smooth rotation</a></li><li><a href="#source-accelerating-one-way-interval">Accelerating one-way interval</a></li><li><a href="#source-time-selected-structure">Time-selected structure</a></li><li><a href="#source-6-bounded-angle-rotations">6. Bounded angle rotations</a></li><li><a href="#source-7-preview-clock-and-editor-integration">7. Preview clock and editor integration</a></li><li><a href="#source-8-compatibility-and-limits">8. Compatibility and limits</a></li><li><a href="#source-9-verification">9. Verification</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>3</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>1</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>0</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is P2_IMPLEMENTATION.md.</li><li>Learn the named concepts: Progen3D P2 Temporal Grammar and Bounded Rotation, Investigation result: t is a scene input, not mutable state, Built-in time variable, Stable randomness through time.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Evaluating the same source, design seed, and time produces the same action stream.</li><li>Scrubbing backward requires no undo operation.</li><li>A frame can be regenerated independently of every earlier frame.</li><li>Random declarations remain stable while time changes.</li><li>Failed time samples cannot corrupt the last valid scene.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">Start -&gt;
+    T(0 sin(t) 0)
+    I(Cube material(plaster))</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Progen3D P2 Temporal Grammar and Bounded Rotation" data="../../assets/diagrams/pages/progen3d-p2-temporal-grammar-and-bounded-rotation.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>P2_IMPLEMENTATION.md</code></p><p>SHA-256: <code>e5aee343146b88f33e0cd335713f2e6967c0cafd1384ca1a955702c602792cf2</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>19 headings, 14 fenced code blocks, 1 Markdown tables, and 9 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>developers and technical readers following the documented feature.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_p2_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Documented; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Progen3D P2 Temporal Grammar and Bounded Rotation, Investigation result: t is a scene input, not mutable state, Built-in time variable, Stable randomness through time, Temporal and interpolation functions</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-grammar.html">Progen3D Grammar</a> <span class="status-badge status--documented">Documented</span><br/><small>Guide status: current implementation guide for the uploaded 21 August 2026 source snapshot.</small></li><li><a href="progen3d-example-grammar-corpus.html">Progen3D Example Grammar Corpus</a> <span class="status-badge status--documented">Documented</span><br/><small>This archive is a source-grounded example corpus for the Progen3D grammar implementation represented by the uploaded C++ snapshot.</small></li><li><a href="progen3d-p1-semantic-isolation.html">Progen3D P1 Semantic Isolation</a> <span class="status-badge status--documented">Documented</span><br/><small>P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry.</small></li><li><a href="progen3d-p0-hardening.html">Progen3D P0 Hardening</a> <span class="status-badge status--documented">Documented</span><br/><small>This patch implements the immediate safety gates identified in the grammar analysis while preserving the current grammar syntax.</small></li><li><a href="expected-invalid-diagnostic-fixtures.html">Expected-invalid diagnostic fixtures</a> <span class="status-badge status--documented">Documented</span><br/><small>Every .p3d file in this directory is intentionally invalid. They are regression fixtures for parser, semantic-validation, expression, and runtime-preflight diagnostics.</small></li><li><a href="../vegetation/progen3d-vegetation-grammar-v1-verification.html">Progen3D Vegetation Grammar V1 Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>This document audits the implementation against:</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/main/P2_IMPLEMENTATION.md"><code>P2_IMPLEMENTATION.md</code></a></p>
+<p><strong>Source digest:</strong> <code>e5aee343146b88f33e0cd335713f2e6967c0cafd1384ca1a955702c602792cf2</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-p2-temporal-grammar-and-bounded-rotation">Progen3D P2 Temporal Grammar and Bounded Rotation</h2><p class="section-guide">Reading guide: this source section records “Progen3D P2 Temporal Grammar and Bounded Rotation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state.</p>
+<h3 id="source-1-investigation-result-t-is-a-scene-input-not-mutable-state">1. Investigation result: <code>t</code> is a scene input, not mutable state</h3><p class="section-guide">Reading guide: this source section records “1. Investigation result: t is a scene input, not mutable state”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The most reliable temporal model is:</p>
+<p>[
+\mathcal{S}=F(G,\sigma,t)
+]</p>
+<p>where:</p>
+<ul>
+<li>(G) is the grammar source;</li>
+<li>(\sigma) is the stochastic design seed;</li>
+<li>(t) is evaluation time in seconds;</li>
+<li class="source-status--passed">(\mathcal{S}) is the complete generated scene snapshot.</li>
+</ul>
+<p>This model was selected instead of incrementally changing a global time variable. It gives five useful invariants:</p>
+<ol>
+<li>Evaluating the same source, design seed, and time produces the same action stream.</li>
+<li>Scrubbing backward requires no undo operation.</li>
+<li>A frame can be regenerated independently of every earlier frame.</li>
+<li>Random declarations remain stable while time changes.</li>
+<li class="source-status--failed">Failed time samples cannot corrupt the last valid scene.</li>
+</ol>
+<p><code>dt</code> is deliberately not exposed as a grammar variable in P2. A mutable <code>dt</code> would make output depend on frame rate, dropped frames, playback history, and the order in which samples were requested. The preview clock advances <code>t</code>, while the grammar itself remains a pure snapshot description.</p>
+<h3 id="source-2-built-in-time-variable">2. Built-in time variable</h3><p class="section-guide">Reading guide: this source section records “2. Built-in time variable”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>t</code> is an immutable built-in value measured in seconds:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    T(0 sin(t) 0)
+    I(Cube material(plaster))
+</code></pre>
+<p>Properties:</p>
+<ul>
+<li>default value: <code>0</code>;</li>
+<li>negative time: supported;</li>
+<li>storage: per <code>GrammarDocument</code>;</li>
+<li>precision domain: finite values representable by the grammar's <code>float</code> action layer;</li>
+<li>lexical visibility: every rule;</li>
+<li>mutability: none;</li>
+<li>random resampling: <code>&amp;t</code> is rejected;</li>
+<li>reserved name: <code>t</code> cannot be a rule, parameter, reroll binding, <code>R</code>, or <code>R*</code> declaration.</li>
+</ul>
+<p>The public evaluation interface is in <code>src/GrammarRuntime.h</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">setGrammarEvaluationTime(grammar, seconds);
+getGrammarEvaluationTime(grammar);
+grammarUsesTime(grammar);
+getGrammarEvaluationState(grammar, &amp;state);
+</code></pre>
+<p>P2 also records <code>t</code> in the immutable editor/debug snapshot registry with defining rule <code>&lt;builtin-time&gt;</code>.</p>
+<h3 id="source-3-stable-randomness-through-time">3. Stable randomness through time</h3><p class="section-guide">Reading guide: this source section records “3. Stable randomness through time”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A normal <strong>Run</strong> creates a new design nonce and therefore rerolls stochastic design choices. Temporal samples reuse the current design nonce:</p>
+<p>[
+\sigma_{\text{sample}}=\sigma_{\text{active design}}
+]</p>
+<p>Consequently:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    R Width(2 4)
+    S(Width+0.2*sin(t) 1 1)
+    I(Cube material(plaster))
+</code></pre>
+<p>keeps <code>Width</code> fixed while the sinusoidal component moves. Running the grammar again intentionally generates another design. Physics and collision effects continue to use independent random streams inherited from P0.</p>
+<h3 id="source-4-temporal-and-interpolation-functions">4. Temporal and interpolation functions</h3><p class="section-guide">Reading guide: this source section records “4. Temporal and interpolation functions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Function arguments use commas. Action and rule-call arguments remain whitespace-separated.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Function</th>
+<th scope="col">Contract</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cycle(t, period[, phase])</code></td>
+<td><code>period &gt; 0</code>; phase is in cycles</td>
+<td>Repeating sawtooth in <code>[0, 1)</code></td>
+</tr>
+<tr>
+<td><code>pingpong(t, period[, phase])</code></td>
+<td><code>period &gt; 0</code></td>
+<td>Out-and-back triangle in <code>[0, 1]</code></td>
+</tr>
+<tr>
+<td><code>pulse(t, period, duty[, phase])</code></td>
+<td><code>period &gt; 0</code>, <code>duty ∈ [0,1]</code></td>
+<td><code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>accelerate(u[, exponent])</code></td>
+<td><code>exponent &gt; 0</code>; clamps <code>u</code></td>
+<td>Ease-in in <code>[0,1]</code></td>
+</tr>
+<tr>
+<td><code>decelerate(u[, exponent])</code></td>
+<td><code>exponent &gt; 0</code>; clamps <code>u</code></td>
+<td>Ease-out in <code>[0,1]</code></td>
+</tr>
+<tr>
+<td><code>ease(u)</code></td>
+<td>clamps <code>u</code></td>
+<td>Cubic smoothstep</td>
+</tr>
+<tr>
+<td><code>smoother(u)</code></td>
+<td>clamps <code>u</code></td>
+<td>Quintic smootherstep</td>
+</tr>
+<tr>
+<td><code>swing(t, min, max, period[, phase])</code></td>
+<td><code>max &gt;= min</code>, <code>period &gt; 0</code></td>
+<td>Bounded triangle motion</td>
+</tr>
+<tr>
+<td><code>oscillate(t, min, max, period[, phase])</code></td>
+<td><code>max &gt;= min</code>, <code>period &gt; 0</code></td>
+<td>Bounded sinusoidal motion</td>
+</tr>
+<tr>
+<td><code>spin(t, rate[, offset])</code></td>
+<td>finite arguments</td>
+<td><code>offset + t·rate</code></td>
+</tr>
+<tr>
+<td><code>lerp(a, b, u)</code></td>
+<td>finite arguments</td>
+<td>Linear interpolation, with extrapolation allowed</td>
+</tr>
+<tr>
+<td><code>clamp(x, min, max)</code></td>
+<td><code>max &gt;= min</code></td>
+<td>Inclusive clamp</td>
+</tr>
+<tr>
+<td><code>wrap(x, min, max)</code></td>
+<td><code>max &gt; min</code></td>
+<td>Value in <code>[min,max)</code></td>
+</tr>
+<tr>
+<td><code>radians(degrees)</code></td>
+<td>one argument</td>
+<td>Degrees to radians</td>
+</tr>
+<tr>
+<td><code>degrees(radians)</code></td>
+<td>one argument</td>
+<td>Radians to degrees</td>
+</tr>
+</tbody>
+</table></div>
+<p>Existing checked functions remain available:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">sin cos tan abs sqrt floor ceil min max
+</code></pre>
+<p>Trigonometric functions consume radians. <code>A()</code> consumes degrees.</p>
+<h4 id="source-cycle-model">Cycle model</h4><p class="section-guide">Reading guide: this source section records “Cycle model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For period (P&gt;0) and phase (\phi) measured in cycles:</p>
+<p>[
+c(t)=\operatorname{frac}\left(\frac{t}{P}+\phi\right)
+]</p>
+<p>P2 reduces <code>t</code> with <code>fmod</code> before normalization to preserve useful phase precision over long runs and handles negative time without producing negative cycle values.</p>
+<h4 id="source-ping-pong-model">Ping-pong model</h4><p class="section-guide">Reading guide: this source section records “Ping-pong model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>[
+p(t)=1-|2c(t)-1|
+]</p>
+<p class="source-status--passed">This traverses <code>0 → 1 → 0</code> over one complete period.</p>
+<h4 id="source-acceleration-and-deceleration">Acceleration and deceleration</h4><p class="section-guide">Reading guide: this source section records “Acceleration and deceleration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>With (u=\operatorname{clamp}(x,0,1)) and exponent (q&gt;0):</p>
+<p>[
+\operatorname{accelerate}(u,q)=u^q
+]</p>
+<p>[
+\operatorname{decelerate}(u,q)=1-(1-u)^q
+]</p>
+<p>The default exponent is <code>2</code>.</p>
+<h4 id="source-smooth-arrival-and-departure">Smooth arrival and departure</h4><p class="section-guide">Reading guide: this source section records “Smooth arrival and departure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Cubic easing:</p>
+<p>[
+\operatorname{ease}(u)=u^2(3-2u)
+]</p>
+<p>Quintic easing:</p>
+<p>[
+\operatorname{smoother}(u)=u^3\left(u(6u-15)+10\right)
+]</p>
+<p>Both functions clamp input to <code>[0,1]</code>. <code>ease</code> has zero first derivative at both endpoints. <code>smoother</code> also has zero second derivative there.</p>
+<h3 id="source-5-composition-patterns">5. Composition patterns</h3><p class="section-guide">Reading guide: this source section records “5. Composition patterns”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-eased-out-and-back-motion">Eased out-and-back motion</h4><p class="section-guide">Reading guide: this source section records “Eased out-and-back motion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    T(lerp(-4,4,ease(pingpong(t,3))) 0 0)
+    I(Cube material(plaster))
+</code></pre>
+<h4 id="source-continuous-wrapped-rotation">Continuous wrapped rotation</h4><p class="section-guide">Reading guide: this source section records “Continuous wrapped rotation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    A(wrap(spin(t,90),-180,180) 2 -180 180)
+    I(Cube material(plaster))
+</code></pre>
+<h4 id="source-bounded-smooth-rotation">Bounded smooth rotation</h4><p class="section-guide">Reading guide: this source section records “Bounded smooth rotation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    A(oscillate(t,-35,50,4) 1 -35 50)
+    I(Cube material(plaster))
+</code></pre>
+<h4 id="source-accelerating-one-way-interval">Accelerating one-way interval</h4><p class="section-guide">Reading guide: this source section records “Accelerating one-way interval”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    T(0 lerp(0,8,accelerate(clamp(t/2,0,1),3)) 0)
+    I(Cube material(plaster))
+</code></pre>
+<h4 id="source-time-selected-structure">Time-selected structure</h4><p class="section-guide">Reading guide: this source section records “Time-selected structure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    ?(pulse(t,2,0.25) == 1) Visible : Hidden
+
+Visible -&gt; I(Cube material(plaster))
+Hidden -&gt; S(0.001 0.001 0.001) I(Cube material(plaster))
+</code></pre>
+<p>A conditional may alter topology between snapshots. Every selected snapshot still passes the P0/P1 validation and generation gates.</p>
+<h3 id="source-6-bounded-angle-rotations">6. Bounded angle rotations</h3><p class="section-guide">Reading guide: this source section records “6. Bounded angle rotations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The original form remains valid:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">A(angle axis)
+</code></pre>
+<p>P2 adds:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">A(angle axis lower upper)
+</code></pre>
+<p>The evaluated rotation is:</p>
+<p>[
+\theta_{\text{applied}}=
+\operatorname{clamp}(\theta,\theta_{\min},\theta_{\max})
+]</p>
+<p>Rules:</p>
+<ul>
+<li>axis must be exactly <code>0</code>, <code>1</code>, or <code>2</code>, corresponding to X, Y, or Z;</li>
+<li>bounds are inclusive;</li>
+<li><code>lower &lt;= upper</code>;</li>
+<li>all four values may be checked expressions, including expressions using <code>t</code>;</li>
+<li>invalid axis or bounds abort expansion before geometry execution.</li>
+</ul>
+<p>Example with moving bounds:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+    A(spin(t,100) 0 -20+t 20+t)
+    I(Cube material(plaster))
+</code></pre>
+<p>Bounds are a safety envelope, not a cycle operator. Use <code>swing</code>, <code>oscillate</code>, or <code>wrap</code> to define motion shape, then use bounded <code>A()</code> as the final invariant gate.</p>
+<h3 id="source-7-preview-clock-and-editor-integration">7. Preview clock and editor integration</h3><p class="section-guide">Reading guide: this source section records “7. Preview clock and editor integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The preview uses one authoritative clock at a time:</p>
+<ul>
+<li>a grammar that references <code>t</code> is regenerated as deterministic temporal snapshots;</li>
+<li>a grammar that does not reference <code>t</code> retains the existing physics simulation clock.</li>
+</ul>
+<p>This avoids applying both procedural time and physics integration to the same scene during preview, which would otherwise create two competing definitions of state.</p>
+<p>Temporal preview controls include:</p>
+<ul>
+<li>Play/Pause;</li>
+<li>one-frame Step;</li>
+<li>Reset Time;</li>
+<li>signed time scrubber;</li>
+<li>speed control;</li>
+<li><code>grammar t</code> status display.</li>
+</ul>
+<p>Snapshot requests are asynchronous, coalesced to the latest request, and capped at a 60 Hz wall-clock request cadence. The target <code>t</code> advances at the selected speed. Slow motion therefore remains smooth rather than reducing the rebuild cadence. Routine success diagnostics are quiet during playback.</p>
+<p>If a temporal sample fails semantic validation, expansion, context creation, or the generation gates, playback stops and the last valid scene remains active.</p>
+<h3 id="source-8-compatibility-and-limits">8. Compatibility and limits</h3><p class="section-guide">Reading guide: this source section records “8. Compatibility and limits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Existing grammars that do not mention <code>t</code> retain P1 behavior.</li>
+<li>Existing <code>A(angle axis)</code> syntax remains valid.</li>
+<li>A normal Run still rerolls random design variables.</li>
+<li>Temporal sampling keeps random design variables stable.</li>
+<li>P0 recursion, action, primitive, repeat, and scope gates remain active for every sample.</li>
+<li>P1 lexical environments, semantic preflight, checked expressions, and matrix-authoritative transforms remain active.</li>
+<li>P2 performs full grammar regeneration for a temporal snapshot. This favors correctness and topology-changing animation over maximum frame throughput. A later typed scene IR could cache invariant subgraphs and evaluate only time-dependent expressions.</li>
+<li class="source-status--passed">The supplied project snapshot does not contain the matching application headers, complete dependency tree, or full build configuration. The actual grammar core is compiled and executed by the included contract harnesses; UI integration is covered by source-level structural regression gates.</li>
+</ul>
+<h3 id="source-9-verification">9. Verification</h3><p class="section-guide">Reading guide: this source section records “9. Verification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Run all inherited and P2 gates:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_p2_checks.sh
+</code></pre>
+<p>The suite includes:</p>
+<ul>
+<li>15 P0 source/behavior gates;</li>
+<li>11 P1 semantic gates;</li>
+<li>14 P2 temporal source/mathematical gates;</li>
+<li>actual <code>Grammar.cpp</code> compilation;</li>
+<li>a runtime P2 grammar harness;</li>
+<li>AddressSanitizer and UndefinedBehaviorSanitizer when supported;</li>
+<li>shell and Python syntax checks.</li>
+</ul>
+<p>The executable example is in:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/P2_time_showcase.p3d
+</code></pre>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-p1-semantic-isolation.html" rel="prev">← Previous: Progen3D P1 Semantic Isolation</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="../geometry-rendering/axialprofilev1.html" rel="next">Next: AxialProfilev1 →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>
