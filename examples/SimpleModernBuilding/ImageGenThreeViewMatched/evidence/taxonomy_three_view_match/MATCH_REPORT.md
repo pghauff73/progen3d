@@ -1,0 +1,119 @@
+# SMBv3 Taxonomy ImageGen Three-View Match Report
+
+- Renderable taxonomy objects: 108
+- Front/right/top comparisons: 324
+- Objects passing every view above 80%: 108 / 108
+- Minimum observed object-view score: 96.63%
+
+| Object | Class | Minimum View | Mean View | Result |
+|---|---|---:|---:|---|
+| `SMB_001` | SmallModernBuilding | 99.84% | 99.88% | PASS |
+| `SMB_001_Site` | BuildingSite | 99.78% | 99.89% | PASS |
+| `SMB_001_Site_PropertyBoundary` | PropertyBoundary | 99.79% | 99.91% | PASS |
+| `SMB_001_Site_GroundSurface` | GroundSurface | 99.91% | 99.93% | PASS |
+| `SMB_001_Site_EntryPath` | PavedPath | 99.88% | 99.93% | PASS |
+| `SMB_001_Site_Driveway` | PavedPath | 99.69% | 99.77% | PASS |
+| `SMB_001_Site_Landscape` | LandscapeSystem | 99.93% | 99.96% | PASS |
+| `SMB_001_Site_Planter_Left` | Planter | 99.82% | 99.85% | PASS |
+| `SMB_001_Site_Planter_Right` | Planter | 99.80% | 99.83% | PASS |
+| `SMB_001_Site_Tree_Left` | Tree | 99.85% | 99.86% | PASS |
+| `SMB_001_Site_Tree_Right` | Tree | 99.86% | 99.87% | PASS |
+| `SMB_001_Structure` | StructuralSystem | 99.68% | 99.78% | PASS |
+| `SMB_001_Structure_Foundation` | Foundation | 99.83% | 99.90% | PASS |
+| `SMB_001_Structure_GroundSlab` | StructuralSlab | 98.98% | 99.62% | PASS |
+| `SMB_001_Structure_UpperSlab` | StructuralSlab | 99.88% | 99.91% | PASS |
+| `SMB_001_Structure_RoofSlab` | StructuralSlab | 99.84% | 99.90% | PASS |
+| `SMB_001_Structure_Columns` | ColumnSystem | 99.97% | 99.98% | PASS |
+| `SMB_001_Structure_Column_FL` | StructuralColumn | 99.96% | 99.99% | PASS |
+| `SMB_001_Structure_Column_FR` | StructuralColumn | 99.98% | 99.99% | PASS |
+| `SMB_001_Structure_Column_RL` | StructuralColumn | 99.98% | 99.99% | PASS |
+| `SMB_001_Structure_Column_RR` | StructuralColumn | 99.98% | 99.99% | PASS |
+| `SMB_001_Structure_Core` | BuildingCore | 99.26% | 99.61% | PASS |
+| `SMB_001_GroundFloor` | GroundStorey | 99.93% | 99.94% | PASS |
+| `SMB_001_Ground_Entry_01` | EntranceZone | 99.89% | 99.92% | PASS |
+| `SMB_001_Ground_Entry_Door_01` | Door | 99.38% | 99.69% | PASS |
+| `SMB_001_Ground_Entry_Canopy_01` | Canopy | 99.85% | 99.87% | PASS |
+| `SMB_001_Ground_LivingRoom_01` | LivingRoom | 99.92% | 99.93% | PASS |
+| `SMB_001_Ground_Living_FloorFinish` | FloorFinish | 98.71% | 99.52% | PASS |
+| `SMB_001_Ground_Living_Glazing` | Glazing | 98.61% | 99.05% | PASS |
+| `SMB_001_Ground_Living_Sofa` | Furniture | 99.76% | 99.76% | PASS |
+| `SMB_001_Ground_Living_MediaUnit` | Furniture | 99.84% | 99.85% | PASS |
+| `SMB_001_Ground_Living_Light` | Luminaire | 99.84% | 99.86% | PASS |
+| `SMB_001_Ground_Kitchen_01` | Kitchen | 97.79% | 99.08% | PASS |
+| `SMB_001_Ground_Kitchen_CabinetRun` | Cabinet | 97.61% | 98.80% | PASS |
+| `SMB_001_Ground_Kitchen_Benchtop` | Benchtop | 99.92% | 99.94% | PASS |
+| `SMB_001_Ground_Kitchen_Island` | Cabinet | 99.82% | 99.84% | PASS |
+| `SMB_001_Ground_Kitchen_Sink` | Sink | 99.71% | 99.77% | PASS |
+| `SMB_001_Ground_Kitchen_Oven` | Appliance | 99.79% | 99.80% | PASS |
+| `SMB_001_Ground_Kitchen_Light` | Luminaire | 99.85% | 99.86% | PASS |
+| `SMB_001_Ground_DiningRoom_01` | DiningRoom | 99.76% | 99.83% | PASS |
+| `SMB_001_Ground_Dining_Table` | Table | 99.78% | 99.82% | PASS |
+| `SMB_001_Ground_Dining_Chairs` | ChairSet | 99.87% | 99.88% | PASS |
+| `SMB_001_Ground_Dining_Light` | Luminaire | 99.84% | 99.87% | PASS |
+| `SMB_001_Ground_Bathroom_01` | Bathroom | 99.92% | 99.94% | PASS |
+| `SMB_001_Ground_Bathroom_Partitions` | Partition | 99.80% | 99.86% | PASS |
+| `SMB_001_Ground_Bathroom_Vanity` | Vanity | 99.81% | 99.84% | PASS |
+| `SMB_001_Ground_Bathroom_Toilet` | Toilet | 99.89% | 99.92% | PASS |
+| `SMB_001_Ground_Bathroom_Shower` | Shower | 99.46% | 99.47% | PASS |
+| `SMB_001_Ground_UtilityRoom_01` | UtilityRoom | 99.87% | 99.88% | PASS |
+| `SMB_001_Ground_Utility_Partition` | Partition | 99.89% | 99.89% | PASS |
+| `SMB_001_Ground_Utility_Washer` | Appliance | 99.83% | 99.83% | PASS |
+| `SMB_001_Ground_Utility_WaterHeater` | WaterHeater | 99.78% | 99.80% | PASS |
+| `SMB_001_Ground_Stair_01` | StairSystem | 99.85% | 99.88% | PASS |
+| `SMB_StairStep` | StairFlight | 99.86% | 99.89% | PASS |
+| `SMB_001_UpperFloor` | UpperStorey | 99.91% | 99.93% | PASS |
+| `SMB_001_Upper_Hall_01` | UpperHall | 96.63% | 98.85% | PASS |
+| `SMB_001_Upper_Bedroom_01` | Bedroom | 99.89% | 99.91% | PASS |
+| `SMB_001_Upper_Bedroom_01_Floor` | FloorFinish | 99.64% | 99.74% | PASS |
+| `SMB_001_Upper_Bedroom_01_Bed` | Bed | 99.70% | 99.75% | PASS |
+| `SMB_001_Upper_Bedroom_01_Wardrobe` | Wardrobe | 99.80% | 99.83% | PASS |
+| `SMB_001_Upper_Bedroom_01_Window` | Window | 97.77% | 99.02% | PASS |
+| `SMB_001_Upper_Bedroom_02` | Bedroom | 99.86% | 99.88% | PASS |
+| `SMB_001_Upper_Bedroom_02_Floor` | FloorFinish | 99.63% | 99.76% | PASS |
+| `SMB_001_Upper_Bedroom_02_Bed` | Bed | 99.69% | 99.75% | PASS |
+| `SMB_001_Upper_Bedroom_02_Wardrobe` | Wardrobe | 99.73% | 99.78% | PASS |
+| `SMB_001_Upper_Bedroom_02_Window` | Window | 99.34% | 99.54% | PASS |
+| `SMB_001_Upper_Bathroom_01` | Bathroom | 99.86% | 99.90% | PASS |
+| `SMB_001_Upper_Bathroom_Partition` | Partition | 99.82% | 99.85% | PASS |
+| `SMB_001_Upper_Bathroom_Vanity` | Vanity | 99.79% | 99.82% | PASS |
+| `SMB_001_Upper_Bathroom_Toilet` | Toilet | 99.86% | 99.87% | PASS |
+| `SMB_001_Upper_Bathroom_Shower` | Shower | 99.55% | 99.56% | PASS |
+| `SMB_001_Upper_Study_01` | Study | 99.93% | 99.95% | PASS |
+| `SMB_001_Upper_Study_Desk` | Desk | 99.27% | 99.63% | PASS |
+| `SMB_001_Upper_Study_Chair` | ChairSet | 99.64% | 99.66% | PASS |
+| `SMB_001_Upper_Study_Window` | Window | 99.41% | 99.60% | PASS |
+| `SMB_001_Envelope` | EnvelopeSystem | 99.87% | 99.92% | PASS |
+| `SMB_001_Envelope_Front` | Facade | 99.92% | 99.97% | PASS |
+| `SMB_001_Envelope_Rear` | Facade | 99.92% | 99.97% | PASS |
+| `SMB_001_Envelope_Left` | Facade | 99.90% | 99.94% | PASS |
+| `SMB_001_Envelope_Right` | Facade | 99.86% | 99.92% | PASS |
+| `SMB_001_Envelope_ExternalFins` | FacadeFin | 99.93% | 99.96% | PASS |
+| `SMB_001_Envelope_Downpipes` | PipeRun | 99.70% | 99.87% | PASS |
+| `SMB_001_RoofZone` | RoofSystem | 99.88% | 99.93% | PASS |
+| `SMB_001_Roof_Parapet` | Parapet | 99.91% | 99.94% | PASS |
+| `SMB_001_Roof_SolarArray` | PhotovoltaicArray | 97.97% | 99.29% | PASS |
+| `SMB_SolarPanel` | PhotovoltaicModuleSet | 97.97% | 99.32% | PASS |
+| `SMB_001_Roof_HVACOutdoorUnit` | HVACEquipment | 99.51% | 99.69% | PASS |
+| `SMB_001_Services` | BuildingServices | 99.91% | 99.92% | PASS |
+| `SMB_001_Plumbing` | PlumbingSystem | 98.54% | 99.00% | PASS |
+| `SMB_001_Plumbing_ColdWaterRiser` | PipeRun | 97.51% | 99.09% | PASS |
+| `SMB_001_Plumbing_HotWaterRiser` | PipeRun | 99.89% | 99.91% | PASS |
+| `SMB_001_Plumbing_SanitaryStack` | PipeRun | 99.86% | 99.88% | PASS |
+| `SMB_001_Electrical` | ElectricalSystem | 99.31% | 99.74% | PASS |
+| `SMB_001_Electrical_MainPanel` | ElectricalPanel | 99.83% | 99.85% | PASS |
+| `SMB_CeilingLight` | CeilingLuminaireSet | 98.00% | 99.12% | PASS |
+| `SMB_001_HVAC` | HVACSystem | 99.63% | 99.87% | PASS |
+| `SMB_001_HVAC_LivingIndoorUnit` | HVACEquipment | 99.82% | 99.84% | PASS |
+| `SMB_001_HVAC_BedroomIndoorUnit` | HVACEquipment | 99.82% | 99.84% | PASS |
+| `SMB_001_HVAC_BathroomExhaust` | HVACEquipment | 99.78% | 99.80% | PASS |
+| `SMB_001_FireSafety` | FireSafetySystem | 99.80% | 99.90% | PASS |
+| `SMB_001_FireSafety_SmokeAlarm_Ground` | SmokeAlarm | 99.80% | 99.82% | PASS |
+| `SMB_001_FireSafety_SmokeAlarm_Upper` | SmokeAlarm | 99.80% | 99.82% | PASS |
+| `SMB_001_FireSafety_Extinguisher` | FireExtinguisher | 99.78% | 99.80% | PASS |
+| `SMB_001_ExternalWorks` | ExternalWorksSystem | 99.96% | 99.96% | PASS |
+| `SMB_001_External_Patio` | Patio | 99.89% | 99.90% | PASS |
+| `SMB_001_External_PerimeterFence` | Fence | 99.73% | 99.86% | PASS |
+| `SMB_001_External_Lights` | ExternalLightingSystem | 99.35% | 99.78% | PASS |
+| `SMB_ExternalLight` | ExternalLuminaireSet | 99.45% | 99.81% | PASS |
+
+ImageGen supplies constrained chroma and material intent while source luminance, silhouettes, camera axes, extents, and part placement remain owned by deterministic SMBv3 camera renders.

@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior." name="description"/>
+<meta content="PROGEN3D_RENDER_PIPELINE_UPGRADE_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="2e0bebe69634ce73247a6e6d3b34fdb29bab4daa4274260227eb6c66b910ddb5" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Render Pipeline Upgrade Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">ProGen3D Render Pipeline Upgrade Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Render Pipeline Upgrade Implementation Plan</h1>
+<p class="lead">Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 27 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_RENDER_PIPELINE_UPGRADE_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="2e0bebe69634ce73247a6e6d3b34fdb29bab4daa4274260227eb6c66b910ddb5" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Render Pipeline Upgrade Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Render Pipeline Upgrade Implementation Plan, Current Pipeline, Target Object Model, Render-state classes.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Render Pipeline Upgrade Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Render Pipeline Upgrade Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Pipeline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Pipeline</td></tr><tr><td><dfn title="Named by the source document">Target Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Target Object Model</td></tr><tr><td><dfn title="Named by the source document">Render-state classes</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Render-state classes</td></tr><tr><td><dfn title="Named by the source document">Service classes</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Service classes</td></tr><tr><td><dfn title="Named by the source document">Render-pass classes</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Render-pass classes</td></tr><tr><td><dfn title="Named by the source document">Step-by-Step Implementation</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Step-by-Step Implementation</td></tr><tr><td><dfn title="Named by the source document">Loop 1 — HDR Presentation and Quality-Control Truthfulness</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Loop 1 — HDR Presentation and Quality-Control Truthfulness</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="to-LDR tone mapping and gamma conversion">HDR</dfn></td><td>to-LDR tone mapping and gamma conversion</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="enabled residence capture: 694,401 bytes">SSAO</dfn></td><td>enabled residence capture: 694,401 bytes</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co">GPU</dfn></td><td>preview, credit, material-invalidation, and regeneration ownership from presentation code, but the co</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">FXAA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="resource readiness, no OpenGL errors, and nontrivial 501x462 image">AO</dfn></td><td>resource readiness, no OpenGL errors, and nontrivial 501x462 image</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">LDR</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SSBO</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="physically based rendering">PBR</dfn></td><td>physically based rendering</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">MSAA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="integration resource models">BRDF</dfn></td><td>integration resource models</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Render Pipeline Upgrade Implementation Plan, Current Pipeline, Target Object Model, Render-state classes. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Objective, 2. Current Pipeline, 3. Target Object Model, Render-state classes. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 137, failed: 5, proposed: 6.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 1 code blocks, 7 tables and the source SHA-256 <code>2e0bebe69634ce73247a6e6d3b34fdb29bab4daa4274260227eb6c66b910ddb5</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-objective">1. Objective</a></li><li><a href="#source-2-current-pipeline">2. Current Pipeline</a></li><li><a href="#source-3-target-object-model">3. Target Object Model</a></li><li><a href="#source-render-state-classes">Render-state classes</a></li><li><a href="#source-service-classes">Service classes</a></li><li><a href="#source-render-pass-classes">Render-pass classes</a></li><li><a href="#source-4-step-by-step-implementation">4. Step-by-Step Implementation</a></li><li><a href="#source-loop-1-hdr-presentation-and-quality-control-truthfulness">Loop 1 — HDR Presentation and Quality-Control Truthfulness</a></li><li><a href="#source-loop-1-exit-gate">Loop 1 exit gate</a></li><li><a href="#source-loop-2-shadow-projection-completion">Loop 2 — Shadow Projection Completion</a></li><li><a href="#source-loop-3-environment-lighting-and-glass">Loop 3 — Environment Lighting and Glass</a></li><li><a href="#source-loop-4-screen-space-effects">Loop 4 — Screen-Space Effects</a></li><li><a href="#source-loop-5-performance-and-scalability">Loop 5 — Performance and Scalability</a></li><li><a href="#source-5-validation-strategy">5. Validation Strategy</a></li><li><a href="#source-6-completion-standard">6. Completion Standard</a></li><li><a href="#source-7-loop-1-implementation-report">7. Loop 1 Implementation Report</a></li><li><a href="#source-status">Status</a></li><li><a href="#source-implemented-object-model">Implemented object model</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>137</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>5</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>6</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_RENDER_PIPELINE_UPGRADE_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Render Pipeline Upgrade Implementation Plan, Current Pipeline, Target Object Model, Render-state classes.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>configurable anti-aliasing that matches the selected quality level;</li><li>an HDR scene target;</li><li>deterministic HDR-to-LDR tone mapping and gamma conversion;</li><li>implemented FXAA and bloom rather than presentation-only controls;</li><li>explicit availability status for effects that are not implemented;</li><li>multi-shadow rendering that follows the accepted shadow assignment model;</li><li>improved environment lighting and transparent-surface rendering;</li><li>measured performance evidence before adopting Forward+ or indirect drawing; and</li><li>deterministic validation through architecture gates, native builds, bounded GUI smokes, and representative visual evidence.</li><li>Add this implementation plan and record the current renderer file hashes.</li><li>Make PreviewRenderSettings resolve the requested multisample count and FXAA state deterministically.</li><li>Extend OpenGlPreviewRenderTargetState with an HDR resolve texture, display framebuffer, and allocated sample count.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> bash fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-bash">./tests/run_open_gl_preview_renderer_architecture_checks.sh
+./tests/run_scene_preview_rendering_workflow_checks.sh
+./tests/run_scene_preview_resource_checks.sh
+./tests/run_preview_session_checks.sh
+make -j2 progen3d-editor-gui
+./tests/run_gui_smoke_check.sh
+./tests/run_temporal_gui_smoke_check.sh</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Render Pipeline Upgrade Implementation Plan" data="../../assets/diagrams/pages/progen3d-render-pipeline-upgrade-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_RENDER_PIPELINE_UPGRADE_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>2e0bebe69634ce73247a6e6d3b34fdb29bab4daa4274260227eb6c66b910ddb5</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>59 headings, 1 fenced code blocks, 7 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_open_gl_preview_renderer_architecture_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_scene_preview_rendering_workflow_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_scene_preview_resource_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_preview_session_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>make -j2 progen3d-editor-gui</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_gui_smoke_check.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_temporal_gui_smoke_check.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Render Pipeline Upgrade Implementation Plan, Current Pipeline, Target Object Model, Render-state classes, Service classes</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html">ProGen3D Preview GL46 and PBR Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</small></li><li><a href="progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li><li><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</small></li><li><a href="progen3d-full-geometry-kernel-fgkv1-completion-roadmap.html">ProGen3D Full Geometry Kernel FGKv1 Completion Roadmap</a> <span class="status-badge status--planned">Planned</span><br/><small>FGKv1 should become the single geometry realization boundary:</small></li><li><a href="progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_RENDER_PIPELINE_UPGRADE_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_RENDER_PIPELINE_UPGRADE_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>2e0bebe69634ce73247a6e6d3b34fdb29bab4daa4274260227eb6c66b910ddb5</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-render-pipeline-upgrade-implementation-plan">ProGen3D Render Pipeline Upgrade Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Render Pipeline Upgrade Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Project:</strong> ProGen3D preview renderer</li>
+<li><strong>Plan date:</strong> August 27, 2026</li>
+<li><strong>Target executable:</strong> <code>progen3d-editor-gui</code></li>
+<li><strong>Current implementation loop:</strong> Loop 5 — performance and scalability</li>
+<li><strong>Compatibility boundary:</strong> Preserve the existing <code>PreviewRenderer</code> interface, scene-resource ownership, preview capture behavior, PBR material model, and published-scene authority.</li>
+</ul>
+<h3 id="source-1-objective">1. Objective</h3><p class="section-guide">Reading guide: this source section records “1. Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</p>
+<p class="source-status--passed">The completed pipeline should provide:</p>
+<ol>
+<li>configurable anti-aliasing that matches the selected quality level;</li>
+<li>an HDR scene target;</li>
+<li>deterministic HDR-to-LDR tone mapping and gamma conversion;</li>
+<li>implemented FXAA and bloom rather than presentation-only controls;</li>
+<li>explicit availability status for effects that are not implemented;</li>
+<li>multi-shadow rendering that follows the accepted shadow assignment model;</li>
+<li>improved environment lighting and transparent-surface rendering;</li>
+<li>measured performance evidence before adopting Forward+ or indirect drawing; and</li>
+<li>deterministic validation through architecture gates, native builds, bounded GUI smokes, and representative visual evidence.</li>
+</ol>
+<h3 id="source-2-current-pipeline">2. Current Pipeline</h3><p class="section-guide">Reading guide: this source section records “2. Current Pipeline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current renderer composes:</p>
+<ul>
+<li><code>OpenGlPreviewShaderProgramService</code>;</li>
+<li><code>OpenGlPreviewGeometryResourceService</code>;</li>
+<li><code>OpenGlPreviewRenderTargetService</code>;</li>
+<li><code>OpenGlPreviewFrameRenderingService</code>;</li>
+<li><code>OpenGlPreviewShadowMapPass</code>;</li>
+<li><code>OpenGlPreviewScenePass</code>; and</li>
+<li><code>OpenGlPreviewResolvePass</code>.</li>
+</ul>
+<p>The current code already provides GLSL 4.60 PBR shading, material map sets, environment reflection, a GL46 light SSBO, one primary shadow map, sorted premultiplied-alpha transparency, overlays, outlines, and RGB capture.</p>
+<p>The current gaps are:</p>
+<ul>
+<li>the scene and resolved color targets use <code>GL_RGBA8</code> rather than HDR storage;</li>
+<li>the target is always allocated with four samples even when the UI requests another mode;</li>
+<li>FXAA, bloom, exposure, and gamma controls cross the workflow boundary but do not produce their named effects;</li>
+<li class="source-status--passed">SSAO and lens flare controls imply functionality that has no render pass;</li>
+<li>the accepted multi-light shadow assignment model is projected into one rendered shadow map; and</li>
+<li class="source-status--passed">render statistics report total CPU submission time but not per-pass GPU time.</li>
+</ul>
+<h3 id="source-3-target-object-model">3. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “3. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>OpenGlPreviewRenderer</code> remains the concrete <code>PreviewRenderer</code> and composition root for renderer-owned resources.</p>
+<h4 id="source-render-state-classes">Render-state classes</h4><p class="section-guide">Reading guide: this source section records “Render-state classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewShaderProgramState</code> owns OpenGL program identities.</li>
+<li><code>OpenGlPreviewGeometryResourceState</code> owns uploaded geometry identities.</li>
+<li><code>OpenGlPreviewRenderTargetState</code> owns scene, HDR resolve, display, depth, and shadow targets.</li>
+<li><code>OpenGlPreviewRenderRuntime</code> composes the three states and the light buffer.</li>
+</ul>
+<h4 id="source-service-classes">Service classes</h4><p class="section-guide">Reading guide: this source section records “Service classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewShaderProgramService</code> owns scene-program compilation.</li>
+<li><code>OpenGlPreviewPostProcessingShaderProgramService</code> owns post-processing-program compilation.</li>
+<li><code>OpenGlPreviewRenderTargetService</code> owns target creation, recreation, readback, and release.</li>
+<li><code>OpenGlPreviewFrameRenderingService</code> orchestrates one frame without owning OpenGL resources.</li>
+</ul>
+<h4 id="source-render-pass-classes">Render-pass classes</h4><p class="section-guide">Reading guide: this source section records “Render-pass classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewShadowMapPass</code> renders accepted primary shadow evidence.</li>
+<li><code>OpenGlPreviewScenePass</code> renders HDR scene geometry.</li>
+<li><code>OpenGlPreviewResolvePass</code> resolves multisample HDR color.</li>
+<li><code>OpenGlPreviewPostProcessingPass</code> performs bloom, tone mapping, gamma conversion, and optional FXAA into the display target.</li>
+</ul>
+<p class="source-status--passed">Later loops will split additional real passes only when their inputs and outputs exist. Placeholder pass classes are prohibited.</p>
+<h3 id="source-4-step-by-step-implementation">4. Step-by-Step Implementation</h3><p class="section-guide">Reading guide: this source section records “4. Step-by-Step Implementation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-loop-1-hdr-presentation-and-quality-control-truthfulness">Loop 1 — HDR Presentation and Quality-Control Truthfulness</h3><p class="section-guide">Reading guide: this source section records “Loop 1 — HDR Presentation and Quality-Control Truthfulness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add this implementation plan and record the current renderer file hashes.</li>
+<li>Make <code>PreviewRenderSettings</code> resolve the requested multisample count and FXAA state deterministically.</li>
+<li>Extend <code>OpenGlPreviewRenderTargetState</code> with an HDR resolve texture, display framebuffer, and allocated sample count.</li>
+<li>Change scene color storage to <code>GL_RGBA16F</code>.</li>
+<li>Allocate 1x, 2x, 4x, or 8x targets according to the selected anti-aliasing mode and supported OpenGL limit.</li>
+<li>Move multisample resolve responsibility into <code>OpenGlPreviewResolvePass</code>.</li>
+<li>Add <code>OpenGlPreviewPostProcessingShaderSourceCatalog</code>.</li>
+<li>Add <code>OpenGlPreviewPostProcessingShaderProgramService</code>.</li>
+<li>Add <code>OpenGlPreviewPostProcessingPass</code> with implemented bloom, exposure, tone mapping, gamma conversion, and FXAA.</li>
+<li>Keep <code>previewTextureId()</code> and RGB capture bound to the final LDR display texture.</li>
+<li class="source-status--proposed">Mark SSAO and lens flare as planned but unavailable instead of exposing active no-op controls.</li>
+<li>Extend renderer architecture and runtime-state gates.</li>
+<li>Build the native GUI and run focused preview, renderer, resource, lighting, and capture checks.</li>
+</ol>
+<h4 id="source-loop-1-exit-gate">Loop 1 exit gate</h4><p class="section-guide">Reading guide: this source section records “Loop 1 exit gate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Every enabled quality control has an implemented renderer effect.</li>
+<li>The allocated MSAA sample count follows the selected mode.</li>
+<li>Scene rendering occurs in HDR storage.</li>
+<li>The final ImGui texture and captured RGB pixels are tone-mapped LDR output.</li>
+<li>Existing PBR, transparent-surface, lighting, overlay, outline, and capture contracts remain intact.</li>
+</ul>
+<h3 id="source-loop-2-shadow-projection-completion">Loop 2 — Shadow Projection Completion</h3><p class="section-guide">Reading guide: this source section records “Loop 2 — Shadow Projection Completion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Introduce <code>OpenGlPreviewShadowTargetCollection</code>.</li>
+<li>Render accepted directional and spot assignments into a texture array or deterministic atlas.</li>
+<li>Add cascades for the primary directional light.</li>
+<li>Add bounded PCF filtering and bias controls.</li>
+<li>Bind each <code>GpuLightRecord</code> to its rendered shadow allocation.</li>
+<li>Add deterministic shadow-allocation and visual-evidence checks.</li>
+</ol>
+<h3 id="source-loop-3-environment-lighting-and-glass">Loop 3 — Environment Lighting and Glass</h3><p class="section-guide">Reading guide: this source section records “Loop 3 — Environment Lighting and Glass”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add irradiance, prefiltered specular, and BRDF integration resources.</li>
+<li>Separate environment generation from environment-lighting convolution.</li>
+<li>Add opaque-scene color and depth inputs for physical glass refraction.</li>
+<li>Preserve sorted premultiplied transparency as the compatibility path.</li>
+<li>Evaluate weighted blended order-independent transparency only against measured intersecting-transparent workloads.</li>
+</ol>
+<h3 id="source-loop-4-screen-space-effects">Loop 4 — Screen-Space Effects</h3><p class="section-guide">Reading guide: this source section records “Loop 4 — Screen-Space Effects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add a normal/depth prepass or explicit MRT scene outputs.</li>
+<li>Implement <code>OpenGlPreviewAmbientOcclusionPass</code>.</li>
+<li>Add temporal or spatial denoising appropriate to the preview workload.</li>
+<li class="source-status--passed">Enable the SSAO UI only after deterministic pass and restoration checks exist.</li>
+<li>Implement lens artifacts only from measured bright-light screen projections; otherwise remove the deferred control.</li>
+</ol>
+<h3 id="source-loop-5-performance-and-scalability">Loop 5 — Performance and Scalability</h3><p class="section-guide">Reading guide: this source section records “Loop 5 — Performance and Scalability”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li class="source-status--passed">Add GPU timestamp queries per pass.</li>
+<li>Record draw calls, submitted triangles, visible lights, target memory, and upload volume.</li>
+<li>Move repeated material parameters into structured GPU storage.</li>
+<li>Add instancing for repeated geometry.</li>
+<li>Add frustum culling.</li>
+<li>Adopt Forward+ only when measured visible-light workloads justify it.</li>
+<li>Adopt indirect drawing only when draw-call evidence justifies the added execution path.</li>
+</ol>
+<h3 id="source-5-validation-strategy">5. Validation Strategy</h3><p class="section-guide">Reading guide: this source section records “5. Validation Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each loop must run the narrowest relevant gates first, then the broader architecture and GUI gates:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_open_gl_preview_renderer_architecture_checks.sh
+./tests/run_scene_preview_rendering_workflow_checks.sh
+./tests/run_scene_preview_resource_checks.sh
+./tests/run_preview_session_checks.sh
+make -j2 progen3d-editor-gui
+./tests/run_gui_smoke_check.sh
+./tests/run_temporal_gui_smoke_check.sh
+</code></pre>
+<p class="source-status--passed">Visual comparisons must use tolerant metrics and stable same-machine captures rather than cross-driver exact pixel hashes. Source manifests, shader contracts, framebuffer formats, ownership, and pass order remain deterministic gates.</p>
+<h3 id="source-6-completion-standard">6. Completion Standard</h3><p class="section-guide">Reading guide: this source section records “6. Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The render-pipeline upgrade is complete only when all five loops are implemented and their requirement-to-evidence records are current. A successful Loop 1 does not establish multi-shadow, physical refraction, SSAO, Forward+, or release completion.</p>
+<h3 id="source-7-loop-1-implementation-report">7. Loop 1 Implementation Report</h3><p class="section-guide">Reading guide: this source section records “7. Loop 1 Implementation Report”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-status">Status</h4><p class="section-guide">Reading guide: this source section records “Status”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 1 was implemented and validated on Thursday, August 27, 2026.</p>
+<h4 id="source-implemented-object-model">Implemented object model</h4><p class="section-guide">Reading guide: this source section records “Implemented object model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewRenderTargetState</code> now owns multisample HDR scene color, single-sample HDR resolve color, LDR post-processing color, and final display color as distinct resources.</li>
+<li><code>OpenGlPreviewRenderTargetService</code> recreates those resources when viewport dimensions or the requested multisample count changes.</li>
+<li><code>OpenGlPreviewPostProcessingShaderSourceCatalog</code> owns the full-screen, bloom/tone-mapping, and FXAA shader sources.</li>
+<li><code>OpenGlPreviewPostProcessingShaderProgramService</code> owns compilation, linking, diagnostics, and release for the post-processing programs.</li>
+<li><code>OpenGlPreviewPostProcessingPass</code> performs bloom, ACES tone mapping, gamma conversion, and optional FXAA.</li>
+<li class="source-status--passed"><code>OpenGlPreviewResolvePass</code> now owns the multisample HDR resolve operation rather than leaving it hidden in the scene pass.</li>
+<li><code>PreviewRenderSettings</code> deterministically maps Off, FXAA, MSAA 2x, MSAA 4x, and MSAA 8x to the required scene sample count.</li>
+</ul>
+<h4 id="source-corrected-behavior">Corrected behavior</h4><p class="section-guide">Reading guide: this source section records “Corrected behavior”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Scene color is rendered into <code>GL_RGBA16F</code> storage.</li>
+<li>The requested MSAA level is clamped to the OpenGL implementation's supported sample count.</li>
+<li class="source-status--passed">FXAA uses a single-sample HDR scene and a real LDR edge-resolution pass.</li>
+<li>Bloom samples bright HDR neighborhoods using the configured threshold and intensity.</li>
+<li>Exposure and gamma are consumed by the post-processing shader.</li>
+<li>The legacy PBR shader no longer performs its own Reinhard mapping or gamma conversion; lighting remains linear until the post-processing stage.</li>
+<li>Background, grid, semantic overlay, and outline colors are converted to linear values before HDR composition.</li>
+<li>SSAO and lens flare remain disabled and are explicitly labeled as later-loop capabilities.</li>
+<li><code>previewTextureId()</code> and framebuffer capture continue to expose the final LDR display texture.</li>
+</ul>
+<h4 id="source-requirement-to-evidence-audit">Requirement-to-evidence audit</h4><p class="section-guide">Reading guide: this source section records “Requirement-to-evidence audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Loop 1 requirement</th>
+<th scope="col">Current evidence</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configurable sample mapping</td>
+<td><code>preview_render_quality_harness.cpp</code> checks Off, FXAA, 2x, 4x, and 8x</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Supported-sample clamping</td>
+<td><code>OpenGlPreviewRenderTargetService::supportedMultisampleCount()</code> and source gate</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>HDR scene storage</td>
+<td>Renderer source gate requires <code>GL_RGBA16F</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Implemented bloom</td>
+<td>Post-processing shader and source gate require <code>sample_bloom</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Implemented tone mapping and gamma</td>
+<td>Post-processing shader and source gate require <code>aces_filmic_tone_map</code> and gamma uniform</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Implemented FXAA</td>
+<td>FXAA shader, activation mapping, and source gate</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Separate resolve and presentation ownership</td>
+<td>Renderer architecture gate requires resolve followed by post-processing</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Final LDR capture</td>
+<td>Visual capture produced a valid 501x462 raw PPM after post-processing</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Full native linkage</td>
+<td><code>make -j2 progen3d-editor-gui</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Standard OpenGL runtime</td>
+<td>Visual capture reported FOV, rendered-frame, visual-capture, and GUI smoke markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Temporal compatibility</td>
+<td><code>run_temporal_gui_smoke_check.sh</code> reported all temporal and GUI markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Preview model compatibility</td>
+<td><code>run_preview_session_checks.sh</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Preview workflow compatibility</td>
+<td><code>run_scene_preview_rendering_workflow_checks.sh</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Preview resource compatibility</td>
+<td><code>run_scene_preview_resource_checks.sh</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Material resource compatibility</td>
+<td><code>run_material_resource_architecture_checks.sh</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Lighting compatibility</td>
+<td><code>run_lighting_model_checks.sh</code> and <code>run_lighting_controls_workflow_checks.sh</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Diagnostic ownership compatibility</td>
+<td><code>run_application_logging_context_checks.sh</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-evidence-identities">Evidence identities</h4><p class="section-guide">Reading guide: this source section records “Evidence identities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Native GUI binary: 290,224,792 bytes; SHA-256 <code>2748fc7aaa466bd34458b3493dcbe71cffadb598ace2719d8791ea5552969b4d</code>.</li>
+<li>Tone-mapped visual capture: 694,401 bytes; SHA-256 <code>783d11b72531a1950deec64f7d94cb8839a7e6adc337f7dfcc2430f1e3f6527f</code>.</li>
+<li>Capture dimensions: 501x462.</li>
+<li class="source-status--passed">Source formatting, shell syntax, target freshness, and renderer ownership ceilings passed.</li>
+</ul>
+<h4 id="source-next-implementation-loop">Next implementation loop</h4><p class="section-guide">Reading guide: this source section records “Next implementation loop”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Loop 2 will complete projection of the existing shadow-assignment object model into rendered resources:</p>
+<ol>
+<li>inspect <code>ShadowAssignmentPlan</code>, <code>PreviewLightingFrame</code>, and <code>GpuLightRecord</code> as the authoritative allocation contracts;</li>
+<li>introduce <code>OpenGlPreviewShadowTargetCollection</code> with deterministic texture-array ownership;</li>
+<li>render each accepted directional or spot allocation into its assigned layer;</li>
+<li>preserve the existing primary-shadow compatibility projection while migrating shader sampling;</li>
+<li>add bounded PCF sampling and purpose-specific bias settings;</li>
+<li>add model, source-contract, shader, and runtime harnesses;</li>
+<li>run lighting, renderer, full GUI, temporal, and representative modern-residence visual checks; and</li>
+<li class="source-status--passed">record a new requirement-to-evidence audit without claiming Loops 3-5 complete.</li>
+</ol>
+<h3 id="source-8-loop-2-implementation-report">8. Loop 2 Implementation Report</h3><p class="section-guide">Reading guide: this source section records “8. Loop 2 Implementation Report”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-status-2">Status</h4><p class="section-guide">Reading guide: this source section records “Status”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 2 was implemented and validated on Thursday, August 27, 2026.</p>
+<h4 id="source-implemented-object-model-2">Implemented object model</h4><p class="section-guide">Reading guide: this source section records “Implemented object model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>PreviewShadowMapFrame</code> represents one rendered shadow projection, including its light identity, texture-array layer, cascade relationship, projection matrix, authored resolution request, softness, and bias values.</li>
+<li><code>ShadowAssignmentRecord</code> preserves its authoritative type-local storage allocation and now separately records the rendered texture layer range owned by the current backend.</li>
+<li><code>PreviewLightingFrame</code> aggregates ordered <code>PreviewShadowMapFrame</code> values, reports required layer capacity and resolution, and retains the first rendered projection through the existing primary-shadow compatibility fields.</li>
+<li><code>OpenGlPreviewShadowTargetCollection</code> owns the framebuffer and depth texture array independently of the HDR preview render targets.</li>
+<li><code>OpenGlPreviewShadowTargetService</code> owns allocation, layer attachment, framebuffer validation, supported-resolution bounding, and release of the shadow texture array.</li>
+<li><code>OpenGlPreviewShadowMapPass</code> is associated with the shadow-target service and renders every accepted projection into its assigned layer.</li>
+<li><code>OpenGlPreviewRenderer</code> composes the preview-target and shadow-target services as separate renderer lifecycle owners.</li>
+</ul>
+<h4 id="source-corrected-behavior-2">Corrected behavior</h4><p class="section-guide">Reading guide: this source section records “Corrected behavior”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The accepted directional-light budget now projects one directional light into three ordered cascade layers.</li>
+<li>The accepted spot-light budget now projects four spot lights into deterministic layers 3 through 6.</li>
+<li>Allocated point-light cube shadows remain explicit but are not falsely projected into the 2D texture-array backend.</li>
+<li><code>GpuLightRecord::metadata.y</code> identifies the first rendered shadow layer and <code>metadata.w</code> identifies the light's layer count.</li>
+<li>The scene shader selects directional cascades by camera distance and directly samples each accepted spot layer.</li>
+<li>Shadow sampling uses a bounded 3x3 PCF kernel with authored softness, constant bias, slope bias, and normal bias projected per layer.</li>
+<li>Scene and dynamic-cube shadow casters are rendered for every accepted layer.</li>
+<li>The former single <code>shadow_fbo</code>, <code>shadow_depth_texture</code>, <code>sampler2D shadow_map</code>, primary-only shader branch, and vertex-to-fragment primary shadow position have been removed from current source.</li>
+<li class="source-status--passed">Texture-array and cubemap bindings are restored after the scene pass.</li>
+<li>The August 22 residence lighting evidence remains unchanged; the upgraded backend writes a new August 27 v2 evidence record.</li>
+</ul>
+<h4 id="source-requirement-to-evidence-audit-2">Requirement-to-evidence audit</h4><p class="section-guide">Reading guide: this source section records “Requirement-to-evidence audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Loop 2 requirement</th>
+<th scope="col">Current evidence</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dedicated multi-shadow resource owner</td>
+<td>Architecture gate requires <code>OpenGlPreviewShadowTargetCollection</code> and <code>OpenGlPreviewShadowTargetService</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Deterministic directional cascade range</td>
+<td><code>preview_shadow_projection_harness.cpp</code> requires layers 0-2 with monotonically increasing coverage</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Deterministic spot-shadow range</td>
+<td>Harness requires accepted spots on layers 3-6</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Explicit unsupported point projection</td>
+<td>Harness requires cube-array allocation with no rendered 2D layer or GPU shadow flag</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Layer-aware GPU relationship</td>
+<td>Harness requires <code>metadata.y</code> first-layer and <code>metadata.w</code> layer-count values</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Texture-array allocation and layer attachment</td>
+<td>Source gate requires <code>GL_TEXTURE_2D_ARRAY</code> and <code>glFramebufferTextureLayer</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Every accepted projection rendered</td>
+<td>Source gate requires iteration over <code>PreviewShadowMapFrame</code> and <code>bindLayerForWriting()</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Layer-aware shader sampling</td>
+<td>Source gate requires <code>sampler2DArray</code>, projection arrays, and <code>select_shadow_layer</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Bounded PCF and authored bias projection</td>
+<td>Shader source and source gate require 3x3 sampling, softness, constant, slope, and normal bias arrays</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Primary compatibility projection</td>
+<td>Harness requires the first rendered frame to populate the primary compatibility fields</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Residence multi-shadow evidence</td>
+<td>August 27 v2 evidence records three rendered spot assignments on layers 3-5</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Full native linkage and freshness</td>
+<td><code>make -j2 progen3d-editor-gui</code> followed by <code>make -q progen3d-editor-gui</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Standard OpenGL runtime</td>
+<td><code>run_gui_smoke_check.sh</code> reported FOV, rendered-frame, and GUI smoke markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Temporal compatibility</td>
+<td><code>run_temporal_gui_smoke_check.sh</code> reported temporal, FOV, rendered-frame, and GUI smoke markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Representative residence capture</td>
+<td>Direct visual test loaded 105 rules and produced a valid 501x462 capture</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Preview model and workflow compatibility</td>
+<td>Preview session, rendering workflow, and resource gates</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Lighting and material compatibility</td>
+<td>Lighting model, lighting controls, and material resource gates</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Diagnostic ownership compatibility</td>
+<td>Application logging context gate</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Source and script hygiene</td>
+<td><code>git diff --check</code>, shell syntax, architecture ceilings, and source registration</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-evidence-identities-2">Evidence identities</h4><p class="section-guide">Reading guide: this source section records “Evidence identities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Native GUI binary: 290,373,264 bytes; SHA-256 <code>1a9511ae1b61ec904ad7a7bf074365426bd112c919346bc2afff8359d47ae608</code>.</li>
+<li>Modern residence visual capture: 694,401 bytes; SHA-256 <code>0d1d870eff3ea81b3078a32dabe2c97fe3404131015af7815fb1b64c5cdce948</code>.</li>
+<li>Capture dimensions: 501x462; runtime pixel hash <code>3480326198373706539</code>.</li>
+<li>August 27 lighting evidence: 17,616 bytes; SHA-256 <code>3a74845e2e9a3605eb75914757530318bf5b29d83364d0e211b8f8f821f82243</code>.</li>
+<li>Preserved August 22 lighting evidence SHA-256: <code>76c56b91b3a5cf6ec3336536110fff3ba28588dd918b8c5eaa97df9bcb5e92f3</code>.</li>
+<li>Existing unrelated compiler warnings remain in <code>include/grammar.h</code>, <code>include/Solution.h</code>, and <code>src/Mesh.cpp</code>.</li>
+</ul>
+<h4 id="source-remaining-limits">Remaining limits</h4><p class="section-guide">Reading guide: this source section records “Remaining limits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Point-light cube-map shadow rendering remains a later extension; Loop 2 fails closed instead of substituting an incorrect 2D projection.</li>
+<li>The directional cascades use deterministic preview-oriented coverage rather than stabilized texel snapping or blend bands.</li>
+<li>Shadow-map resolution is shared across the texture array and bounded to 2048 for preview memory control.</li>
+<li>Loops 3-5 remain unimplemented and no release or full render-pipeline completion claim is made.</li>
+</ul>
+<h4 id="source-next-implementation-loop-2">Next implementation loop</h4><p class="section-guide">Reading guide: this source section records “Next implementation loop”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 3 will upgrade environment lighting and glass through the following steps:</p>
+<ol>
+<li>audit current cubemap generation, PBR environment sampling, transparency, and material transmission contracts;</li>
+<li>introduce explicit irradiance, prefiltered-specular, and BRDF-integration resource models;</li>
+<li>separate environment-source generation from environment-lighting convolution services;</li>
+<li>bind diffuse irradiance and roughness-dependent specular image-based lighting in the opaque PBR path;</li>
+<li>introduce opaque scene color and depth inputs for physical glass refraction while preserving sorted premultiplied transparency as the compatibility path;</li>
+<li>add deterministic shader, resource-lifecycle, material, and capture gates;</li>
+<li>run the renderer, material, preview, GUI, temporal, and representative glass-scene validation matrix; and</li>
+<li class="source-status--passed">publish a Loop 3 requirement-to-evidence audit without claiming screen-space or scalability loops complete.</li>
+</ol>
+<h3 id="source-9-loop-3-implementation-report">9. Loop 3 Implementation Report</h3><p class="section-guide">Reading guide: this source section records “9. Loop 3 Implementation Report”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-status-3">Status</h4><p class="section-guide">Reading guide: this source section records “Status”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 3 was implemented and validated on Thursday, August 27, 2026.</p>
+<h4 id="source-implemented-object-model-3">Implemented object model</h4><p class="section-guide">Reading guide: this source section records “Implemented object model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewEnvironmentLightingState</code> owns the derived irradiance cubemap, prefiltered-specular cubemap, BRDF integration texture, convolution framebuffer, and convolution depth renderbuffer while associating them with one non-owned source cubemap revision.</li>
+<li><code>OpenGlPreviewEnvironmentLightingShaderSourceCatalog</code> owns bounded diffuse convolution, GGX prefilter, and split-sum BRDF integration shader sources.</li>
+<li><code>OpenGlPreviewEnvironmentLightingShaderProgramService</code> owns compilation, linking, diagnostics, and release for the three environment programs.</li>
+<li><code>OpenGlPreviewEnvironmentLightingService</code> allocates and renders the derived environment resources only when the explicit source texture revision changes, preserves surrounding OpenGL state, and never assumes ownership of the source cubemap.</li>
+<li><code>OpenGlPreviewRenderTargetState</code> now owns a single-sample opaque HDR color texture and depth-stencil texture in addition to the multisample scene target and final resolve targets.</li>
+<li><code>OpenGlPreviewOpaqueSceneCapturePass</code> copies opaque color and depth before transparent rendering.</li>
+<li><code>OpenGlPreviewScenePass</code> composes the opaque capture between opaque and sorted premultiplied transparent drawing.</li>
+<li><code>PreviewCubemapGenerator</code> now owns source-cubemap release; presentation code no longer calls <code>glDeleteTextures</code> directly.</li>
+<li><code>PreviewRenderSettings</code> and <code>RenderConfiguration</code> carry an explicit cubemap revision so reused OpenGL texture names cannot falsely preserve stale convolution products.</li>
+</ul>
+<h4 id="source-implemented-rendering-behavior">Implemented rendering behavior</h4><p class="section-guide">Reading guide: this source section records “Implemented rendering behavior”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">Procedural enhanced sky cubemaps retain linear HDR radiance; tone mapping remains the final presentation pass responsibility.</li>
+<li>Diffuse image-based lighting samples a dedicated irradiance cubemap.</li>
+<li>Roughness-dependent specular image-based lighting samples a five-level GGX-prefiltered cubemap.</li>
+<li class="source-status--failed">The environment BRDF term samples a generated two-channel integration texture, with the former analytic approximation retained only as a fail-safe fallback.</li>
+<li>Transmission samples the opaque HDR scene through an IOR-, thickness-, normal-, and roughness-dependent screen offset.</li>
+<li>Opaque depth validates that a sampled surface is behind the glass fragment before scene color is accepted; invalid samples fall back to the environment.</li>
+<li>Material attenuation color and thickness remain authoritative for transmitted absorption.</li>
+<li>Sorted back-to-front premultiplied-alpha transparency remains the compatibility path.</li>
+<li>Weighted blended order-independent transparency was not adopted because no measured intersecting-transparent workload currently justifies replacing the compatibility path.</li>
+<li>The smoke-only <code>--environment-lighting-smoke</code> option generates a bounded source cubemap and verifies renderer-observable convolution readiness after a real frame.</li>
+</ul>
+<h4 id="source-requirement-to-evidence-audit-3">Requirement-to-evidence audit</h4><p class="section-guide">Reading guide: this source section records “Requirement-to-evidence audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Loop 3 requirement</th>
+<th scope="col">Current evidence</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explicit environment resource owner</td>
+<td>Architecture gate requires <code>OpenGlPreviewEnvironmentLightingState</code> and renderer-composed environment services</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Diffuse irradiance convolution</td>
+<td>Source gate requires <code>renderIrradiance</code> and the bounded irradiance shader</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>GGX prefiltered specular convolution</td>
+<td>Source gate requires <code>importance_sample_ggx</code>, five mip levels, and <code>renderPrefilteredSpecular</code></td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>BRDF integration texture</td>
+<td>Source gate requires the BRDF integration shader, program, texture, and render phase</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Revision-safe source association</td>
+<td>Runtime harness requires default/reset revision state; smoke path observes readiness for the exact texture and revision</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Linear HDR source radiance</td>
+<td class="source-status--passed">Source gate requires the retained-HDR generation contract and final-pass tone-mapping ownership</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Service-owned source release</td>
+<td>Source gate requires <code>releaseCubemap</code>; presentation and shutdown use the service</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Opaque color and depth inputs</td>
+<td class="source-status--passed">Target and pass gates require the HDR color texture, depth-stencil texture, and color-plus-depth blit</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Scene-behind refraction validation</td>
+<td>Shader gate requires <code>scene_surface_is_behind_glass</code> before opaque scene color is accepted</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>IOR, thickness, attenuation, and roughness projection</td>
+<td>Current scene shader projects each material property into the transmission result</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Compatibility transparency retained</td>
+<td class="source-status--passed">Current pass retains depth-write disable, back-to-front sorting, and <code>GL_ONE, GL_ONE_MINUS_SRC_ALPHA</code> blending</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>No unjustified OIT replacement</td>
+<td>Source contains no weighted blended accumulation/revealage path; the accepted sorted path remains authoritative</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Deterministic live glass-scene evidence</td>
+<td>Two environment-enabled hatchback captures are byte-identical and differ from the disabled control</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Runtime shader and resource execution</td>
+<td><code>PROGEN3D_GUI_ENVIRONMENT_LIGHTING_PASSED</code> follows actual generation, convolution, and rendering under Xvfb</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Native linkage and freshness</td>
+<td><code>make -j2 progen3d-editor-gui</code> succeeded after the final source changes</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Standard and temporal GUI compatibility</td>
+<td>Ordinary and temporal GUI smoke gates reported their required success markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Representative residence compatibility</td>
+<td class="source-status--passed">Current 105-rule residence capture completed at 501x462 without OpenGL errors</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Preview, material, lighting, logging, and editor ownership compatibility</td>
+<td>Focused repository-native workflow, lifecycle, material, lighting, logging, and composition gates</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Source and script hygiene</td>
+<td><code>git diff --check</code>, shell syntax, architecture ceilings, source registration, and retained-evidence verification</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-evidence-identities-3">Evidence identities</h4><p class="section-guide">Reading guide: this source section records “Evidence identities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Native GUI binary: 290,666,880 bytes; SHA-256 <code>6d30b9ea596d4bf80b11d5c1825c12544c570d050baac14ec302376cde533c57</code>.</li>
+<li>Environment-enabled hatchback capture: 694,401 bytes; SHA-256 <code>e6525627858e51673a71a7ed12bfddc6a5d01a934f6ef732b0c743d1f761c802</code>.</li>
+<li>Disabled environment control capture SHA-256: <code>ea3852f576a5980d25b804e5176be2b2ae22ff56282d28e941375f80a7b3f9f9</code>.</li>
+<li>Environment capture dimensions: 501x462; runtime pixel hash <code>7193995482140735809</code>.</li>
+<li>Retained environment PNG: 111,297 bytes; SHA-256 <code>a8956373d3366ecf1c7846ebf3d8ac91fc1641ff1acd4de826a008310b0db7db</code>.</li>
+<li>Environment evidence record: 1,286 bytes; SHA-256 <code>6f98f4a913c515165ce238d1f94642ce73fd68f5c1387cac0ae0349d238ce292</code>.</li>
+<li>Environment implementation fingerprint: <code>6e98619f5e3f7688aaca073203415028b4676f924284b4690d499a65e41f6ed0</code>.</li>
+<li>Current residence capture: 694,401 bytes; SHA-256 <code>350fac9e10a37fe3a874ea18d76f3f80c14f3fc92466817480a9069a4354e346</code>; runtime pixel hash <code>3903638578799107957</code>.</li>
+<li>August 27 residence lighting evidence remains 17,616 bytes with SHA-256 <code>3a74845e2e9a3605eb75914757530318bf5b29d83364d0e211b8f8f821f82243</code>.</li>
+<li class="source-status--passed">The accepted August 22 residence visual evidence was verified without rewriting its frozen captures.</li>
+<li>Existing unrelated compiler warnings remain in <code>include/grammar.h</code>, <code>include/Solution.h</code>, and <code>src/Mesh.cpp</code>.</li>
+</ul>
+<h4 id="source-remaining-limits-2">Remaining limits</h4><p class="section-guide">Reading guide: this source section records “Remaining limits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Environment preprocessing is synchronous when a new source revision is generated; no asynchronous upload or convolution queue exists yet.</li>
+<li class="source-status--proposed">The current source generator is procedural; equirectangular HDR import and authored environment assets remain future work.</li>
+<li>Refraction uses one opaque color/depth snapshot and cannot reconstruct multiple transparent layers or objects hidden only behind other transparent surfaces.</li>
+<li>Transparent surfaces remain order-dependent for intersections; Loop 3 intentionally retains the established sorted compatibility path.</li>
+<li>Screen-space normals, SSAO, AO denoising, and bright-light lens artifacts remain unimplemented and their UI controls remain unavailable.</li>
+<li class="source-status--passed">Per-pass GPU timing, instancing, culling, Forward+, and indirect drawing remain Loop 5 work.</li>
+<li>Point-light cube-map shadow rendering remains deferred from Loop 2.</li>
+<li>No release or full five-loop render-pipeline completion claim is made.</li>
+</ul>
+<h4 id="source-next-implementation-loop-3">Next implementation loop</h4><p class="section-guide">Reading guide: this source section records “Next implementation loop”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 4 will implement truthful screen-space effects through the following steps:</p>
+<ol>
+<li>audit current scene outputs, opaque snapshot ordering, viewport resize behavior, and the disabled SSAO and lens-flare controls;</li>
+<li>introduce an explicit screen-space geometry resource model for resolved opaque normals and the existing opaque depth texture;</li>
+<li>extend opaque scene rendering with a normal MRT while preserving HDR color, shadow, material, and transparent compatibility;</li>
+<li>add <code>OpenGlPreviewAmbientOcclusionShaderSourceCatalog</code>, program service, target resources, and <code>OpenGlPreviewAmbientOcclusionPass</code>;</li>
+<li>implement bounded hemisphere sampling plus edge-aware spatial denoising using the resolved depth and normal inputs;</li>
+<li>composite ambient occlusion onto opaque scene color before transparent surfaces and overlays;</li>
+<li class="source-status--passed">enable the SSAO control only after deterministic allocation, restoration, resize, disable-path, and visual gates pass;</li>
+<li class="source-status--passed">measure bright-light screen projections and either implement a bounded lens-artifact pass or remove the deferred control rather than retaining a no-op; and</li>
+<li>run the renderer, material, lighting, GUI, temporal, residence, and new SSAO control-capture matrix before publishing the Loop 4 audit.</li>
+</ol>
+<h3 id="source-10-loop-4-implementation-report">10. Loop 4 Implementation Report</h3><p class="section-guide">Reading guide: this source section records “10. Loop 4 Implementation Report”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-status-4">Status</h4><p class="section-guide">Reading guide: this source section records “Status”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 4 was implemented and validated on Thursday, August 27, 2026.</p>
+<h4 id="source-implemented-object-model-4">Implemented object model</h4><p class="section-guide">Reading guide: this source section records “Implemented object model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>OpenGlPreviewAmbientOcclusionTargetState</code> owns two full-resolution single-channel textures and their framebuffers for occlusion generation and bilateral denoising.</li>
+<li><code>OpenGlPreviewAmbientOcclusionShaderSourceCatalog</code> owns the deterministic view-space sampling, bilateral blur, and multiplicative composite shader sources.</li>
+<li><code>OpenGlPreviewAmbientOcclusionShaderProgramService</code> owns compilation, linking, diagnostics, and release for the three ambient-occlusion programs.</li>
+<li><code>OpenGlPreviewAmbientOcclusionTargetService</code> owns AO target allocation, resize replacement, completeness validation, and release.</li>
+<li><code>OpenGlPreviewAmbientOcclusionPass</code> composes occlusion sampling, horizontal blur, vertical blur, and opaque HDR composition while restoring surrounding OpenGL state.</li>
+<li><code>OpenGlPreviewRenderTargetState</code> now owns a multisample opaque view-normal attachment and a resolved opaque view-normal texture alongside the existing color and depth resources.</li>
+<li><code>OpenGlPreviewScenePass</code> exposes explicit opaque and transparent phases; <code>OpenGlPreviewFrameRenderingService</code> composes ambient occlusion between them.</li>
+<li><code>OpenGlPreviewRenderer</code> remains the composition root for AO program and target services and exposes read-only runtime readiness evidence.</li>
+</ul>
+<h4 id="source-implemented-rendering-behavior-2">Implemented rendering behavior</h4><p class="section-guide">Reading guide: this source section records “Implemented rendering behavior”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Opaque scene fragments write HDR color and packed view-space normals through an explicit multisample MRT.</li>
+<li><code>OpenGlPreviewOpaqueSceneCapturePass</code> resolves opaque color, view normals, and depth before any transparent surface is submitted.</li>
+<li>SSAO reconstructs view-space positions from the resolved depth texture and evaluates a deterministic 16-sample hemisphere oriented by the resolved view normal.</li>
+<li>A separable bilateral blur rejects samples across depth and normal discontinuities before the AO texture is composed into opaque HDR color.</li>
+<li>AO composition occurs after opaque capture and before sorted premultiplied transparency, so glass and other transparent compatibility behavior remains intact.</li>
+<li class="source-status--passed">The SSAO checkbox is active and truthfully controls a real render pass.</li>
+<li class="source-status--passed">The unavailable lens-flare checkbox was removed; stale persisted enablement is forced off and the panel states that no bright-light artifact pass is owned.</li>
+<li>AO allocation and shader execution are observable through the <code>--ambient-occlusion-smoke</code> launch mode and <code>PROGEN3D_GUI_AMBIENT_OCCLUSION_PASSED</code> runtime marker.</li>
+</ul>
+<h4 id="source-requirement-to-evidence-audit-4">Requirement-to-evidence audit</h4><p class="section-guide">Reading guide: this source section records “Requirement-to-evidence audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Loop 4 requirement</th>
+<th scope="col">Current evidence</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explicit screen-space geometry inputs</td>
+<td>Multisample <code>preview_normal_ms</code>, resolved <code>preview_opaque_normal</code>, and resolved opaque depth are renderer-owned and architecture-gated</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td class="source-status--passed">Real ambient-occlusion pass</td>
+<td class="source-status--passed">Purpose-specific AO state, shader catalog, program service, target service, and pass are registered in the native build</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Bounded deterministic sampling</td>
+<td>Shader source gate requires the fixed 16-sample hemisphere; two enabled captures are byte-identical</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Edge-aware denoising</td>
+<td>Horizontal and vertical bilateral passes weight both depth and view-normal agreement</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Correct frame ordering</td>
+<td class="source-status--passed">Source gate requires opaque phase, AO pass, then transparent phase before resolve and post-processing</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Transparent compatibility</td>
+<td>Transparent draws retain back-to-front sorting, depth-write disable, and premultiplied-alpha blending after AO composition</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Truthful SSAO control</td>
+<td class="source-status--passed"><code>RenderSettingsPanel</code> exposes an active SSAO checkbox only after the live pass and gates exist</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Truthful lens-artifact status</td>
+<td>The former disabled no-op checkbox is absent and stale persisted state is cleared</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Runtime allocation and shader execution</td>
+<td>Isolated Xvfb smoke reports <code>PROGEN3D_GUI_AMBIENT_OCCLUSION_PASSED</code> with no OpenGL, shader, program, or framebuffer diagnostics</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Deterministic visual effect</td>
+<td>Two enabled residence captures are byte-identical and differ from the disabled control in 82,578 color channels</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Native linkage and freshness</td>
+<td><code>make -j2 progen3d-editor-gui</code> succeeded after the final source changes</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Preview, material, lighting, logging, and editor compatibility</td>
+<td class="source-status--passed">Repository-native workflow, resource, session, material, lighting, logging, runtime-context, and composition gates passed</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Standard and temporal GUI compatibility</td>
+<td>Ordinary and temporal GUI smoke gates reported all required markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Residence and environment compatibility</td>
+<td class="source-status--passed">Residence lighting and frozen visual evidence passed; current environment evidence was refreshed after shared-source drift without changing its PPM capture</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Source and evidence hygiene</td>
+<td class="source-status--passed">Architecture ceilings, launch-option checks, current fingerprints, retained evidence verification, and explicit control comparison passed</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-evidence-identities-4">Evidence identities</h4><p class="section-guide">Reading guide: this source section records “Evidence identities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Native GUI binary: 290,934,480 bytes; SHA-256 <code>6ee1374ad4b5bcd0859c2cc4772d2161eb89aa73b17c42a03506384a294d5f12</code>.</li>
+<li>SSAO-enabled residence capture: 694,401 bytes; SHA-256 <code>518d5e6ac44f5e945a7112e101fcffd97e34cd0f387d60cbc71cb7e7e70a0eb4</code>.</li>
+<li>Disabled SSAO control capture SHA-256: <code>ad99be209b822c4f270918c755ecd1907d156a074d9ee4123107bd4ebdfee5ee</code>.</li>
+<li>SSAO capture dimensions: 501x462; runtime pixel hash <code>16260234159206950962</code>.</li>
+<li>Measured SSAO delta: 82,578 changed channels, mean absolute channel delta <code>5.980942876152457</code>, maximum channel delta <code>87</code>.</li>
+<li>Retained SSAO PNG: 133,621 bytes; SHA-256 <code>269b1b32c923ea378d64ae767da878edc435f83179cc6303a2fcd4bc01db9615</code>.</li>
+<li>SSAO evidence record: 1,441 bytes; SHA-256 <code>b95e703d333f7c431ddf44a51b1b90c5758b28d83c935a386f1d08b3130437aa</code>.</li>
+<li>SSAO implementation fingerprint: <code>29f0d3d3117f90ef46cd62f4bf4b648d48adc76e54d1a2a9acf486746b9c1441</code>.</li>
+<li>Current environment-enabled hatchback capture remains SHA-256 <code>e6525627858e51673a71a7ed12bfddc6a5d01a934f6ef732b0c743d1f761c802</code>; its current binary/source evidence record SHA-256 is <code>ea19292f3d85ee6bee39cb11f44e5c9ae09ccd1cf4fc1d07a506a31600aa83b6</code>.</li>
+<li>Current retained environment PNG: 111,297 bytes; SHA-256 <code>e5d5ddab5f92a957f9d82ae6adccd42f19df6c8ab3fa4d61c94becbeb54fbe13</code>.</li>
+<li>Existing unrelated compiler warnings remain in <code>include/grammar.h</code>, <code>include/Solution.h</code>, and <code>src/Mesh.cpp</code>.</li>
+</ul>
+<h4 id="source-remaining-limits-3">Remaining limits</h4><p class="section-guide">Reading guide: this source section records “Remaining limits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>SSAO affects only the resolved opaque layer; transparent-only geometry neither occludes nor receives the screen-space term.</li>
+<li class="source-status--passed">The AO pass is full-resolution and spatially denoised; it has no temporal accumulation, half-resolution mode, or adaptive sample count.</li>
+<li>The 16-sample kernel is preview-oriented rather than a physically calibrated ground-truth occlusion integrator.</li>
+<li>Environment preprocessing remains synchronous when a source revision changes.</li>
+<li>Refraction still uses one opaque color/depth snapshot and transparent intersections remain order-dependent.</li>
+<li class="source-status--passed">GPU pass timing, detailed submission statistics, structured material storage, measured instancing, frustum culling, Forward+, and indirect-draw decisions remain Loop 5 work.</li>
+<li>Point-light cube-map shadow rendering remains deferred from Loop 2.</li>
+<li>No release or full five-loop render-pipeline completion claim is made.</li>
+</ul>
+<h4 id="source-next-implementation-loop-4">Next implementation loop</h4><p class="section-guide">Reading guide: this source section records “Next implementation loop”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 5 will establish measured scalability before adopting additional execution paths:</p>
+<ol>
+<li class="source-status--passed">audit current frame-statistic ownership, pass boundaries, geometry batching, repeated dynamic geometry, and available representative workloads;</li>
+<li class="source-status--passed">introduce explicit GPU timestamp-query state and a non-blocking per-pass timing publication service;</li>
+<li>record draw calls, submitted and culled triangles, visible lights, render-target memory, and geometry upload volume through purpose-specific frame evidence;</li>
+<li>move repeated scalar and vector material parameters into structured GPU storage while retaining per-material texture ownership;</li>
+<li>add deterministic view-frustum culling before opaque, transparent, outline, and repeated-geometry submission;</li>
+<li>add instanced submission for measured repeated dynamic-cube geometry while preserving temporal interpolation and material identity;</li>
+<li>capture current workload evidence and adopt Forward+ only if visible-light counts justify replacing the existing GL46 light SSBO loop;</li>
+<li>adopt indirect drawing only if measured post-culling draw-call counts justify a second submission path; and</li>
+<li>run the full renderer, editor, GUI, temporal, representative-scene, performance-evidence, and requirement-to-evidence audit before any five-loop completion claim.</li>
+</ol>
+<h3 id="source-11-loop-5-implementation-report">11. Loop 5 Implementation Report</h3><p class="section-guide">Reading guide: this source section records “11. Loop 5 Implementation Report”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-status-5">Status</h4><p class="section-guide">Reading guide: this source section records “Status”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Loop 5 is implemented and validated. The renderer now owns explicit performance
+evidence, structured material and dynamic-instance GPU storage, deterministic
+camera-frustum visibility decisions, and measured candidate assessments for
+advanced submission paths.</p>
+<h4 id="source-implemented-object-model-5">Implemented object model</h4><p class="section-guide">Reading guide: this source section records “Implemented object model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed"><code>PreviewRenderPassTimingEvidence</code> and <code>PreviewRenderPerformanceEvidence</code>
+model pass timings, submission counts, memory ownership, upload volume,
+dynamic-instance visibility, and advanced-path decisions.</li>
+<li><code>OpenGlPreviewGpuTimingState</code> composes double-buffered query frames;
+<code>OpenGlPreviewGpuTimingService</code> begins, ends, and publishes non-blocking
+<code>GL_TIME_ELAPSED</code> results without stalling the frame.</li>
+<li><code>OpenGlPreviewFrameSubmissionEvidence</code> records scene and non-scene draws,
+framebuffer transfers, submitted and culled triangles, line submissions, and
+visible dynamic instances.</li>
+<li><code>OpenGlPreviewPerformanceEvidenceService</code> composes timing, submission,
+render-target, environment, shadow, AO, geometry, material, and lighting
+evidence into one published frame model.</li>
+<li><code>GpuPreviewMaterialRecordFactory</code> creates a nine-<code>vec4</code> std430 material
+record; <code>PreviewMaterialBuffer</code> owns its binding-point 3 SSBO.</li>
+<li class="source-status--failed"><code>PreviewBoundingSphereFactory</code>, <code>PreviewViewFrustumFactory</code>, and
+<code>PreviewSceneVisibilityService</code> model the bound, six plane relationships, and
+fail-open visibility decision separately.</li>
+<li><code>GpuDynamicCubeInstanceRecordFactory</code> creates a four-<code>mat4</code>, seven-<code>vec4</code>
+std430 record; <code>PreviewDynamicCubeInstanceBuffer</code> owns its binding-point 4
+SSBO; <code>OpenGlPreviewDynamicCubeInstanceUploadService</code> owns synchronization.</li>
+<li><code>PreviewAdvancedRenderPathAssessmentService</code> separates a measured candidate
+from a justified replacement.</li>
+<li><code>EditorRenderPerformanceSmokeWorkflow</code> owns warmup, sampling, median
+publication, and the machine-readable runtime marker.</li>
+</ul>
+<h4 id="source-implemented-rendering-behavior-3">Implemented rendering behavior</h4><p class="section-guide">Reading guide: this source section records “Implemented rendering behavior”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Seven render phases are timed with non-blocking, double-buffered GPU queries:
+environment, shadow, opaque, ambient occlusion, transparent, resolve, and
+post-processing.</li>
+<li>Per-frame evidence records total and direct scene draw calls, transfers,
+submitted and culled triangles, visible lights, render-target bytes, geometry
+upload bytes, material upload bytes, lighting upload bytes, and dynamic cube
+totals.</li>
+<li>Repeated scalar and vector material uniforms were replaced by an indexed
+std430 material record while texture objects remain owned by each material
+resource.</li>
+<li class="source-status--failed">Opaque, transparent, outline, and dynamic preview submissions use
+deterministic camera-frustum culling; camera-invalid bounds fail open and
+shadow casters are not incorrectly culled by the camera frustum.</li>
+<li>Dynamic cubes retain previous/current transforms, dual deformation, cube
+mode, material identity, and transparency semantics in one instance record.</li>
+<li>Visible opaque dynamic cubes are stable-grouped by material and submitted by
+<code>glDrawArraysInstanced</code>; transparent cubes retain depth ordering and select
+the required instance record explicitly.</li>
+<li>The 64-cube retained workload produces one direct scene draw while preserving
+all 64 visible temporal instances.</li>
+<li>Forward+ becomes a candidate only above 24 visible lights. Indirect drawing
+becomes a candidate at 128 direct scene draws. Neither candidate is reported
+as justified without a controlled implementation comparison.</li>
+</ul>
+<h4 id="source-measured-workload-evidence">Measured workload evidence</h4><p class="section-guide">Reading guide: this source section records “Measured workload evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The retained timings were collected under Xvfb using Mesa 26.1.4 llvmpipe,
+which reports direct rendering but no hardware acceleration. These values are
+diagnostic medians for pipeline ownership and workload comparison; they are not
+production-GPU benchmarks.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Workload</th>
+<th scope="col" style="text-align:right">CPU median</th>
+<th scope="col" style="text-align:right">GPU median</th>
+<th scope="col" style="text-align:right">Direct scene draws</th>
+<th scope="col" style="text-align:right">Submitted triangles</th>
+<th scope="col" style="text-align:right">Visible lights</th>
+<th scope="col" style="text-align:right">Dynamic instances</th>
+<th scope="col">Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modern luxury residence</td>
+<td style="text-align:right">869.3732 ms</td>
+<td style="text-align:right">992.3785 ms</td>
+<td style="text-align:right">73</td>
+<td style="text-align:right">146,891</td>
+<td style="text-align:right">30</td>
+<td style="text-align:right">0</td>
+<td>Forward+ candidate; not justified. Indirect drawing is not a candidate.</td>
+</tr>
+<tr>
+<td>64 deformable cubes</td>
+<td style="text-align:right">30.9384 ms</td>
+<td style="text-align:right">30.9354 ms</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">775</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">64/64 visible</td>
+<td>Instancing is effective. Forward+ and indirect drawing are not candidates.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="source-status--proposed">The residence GPU median is dominated by opaque rendering at 738.9712 ms,
+with transparent rendering at 123.5619 ms and resolve at 124.1668 ms under the
+software renderer. This identifies the future hardware-benchmark focus without
+authorizing an unmeasured replacement path.</p>
+<h4 id="source-requirement-to-evidence-audit-5">Requirement-to-evidence audit</h4><p class="section-guide">Reading guide: this source section records “Requirement-to-evidence audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Requirement</th>
+<th scope="col">Current evidence</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="source-status--passed">Non-blocking per-pass GPU timing</td>
+<td>Double-buffered <code>GL_TIME_ELAPSED</code> service plus eight post-warmup median samples</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Explicit frame submission evidence</td>
+<td>Draw, transfer, submitted-triangle, culled-triangle, line, and instance counters are published per frame</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Render and upload memory evidence</td>
+<td>Render-target, geometry, material, and lighting byte counts are retained in both workloads</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Structured material GPU storage</td>
+<td>Nine-<code>vec4</code> record, binding-point 3 SSBO, factory normalization tests, and removal of repeated material uniforms</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Deterministic frustum culling</td>
+<td class="source-status--failed">Six normalized planes, conservative bounds, fail-open invalid bounds, and source-level integration gates</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Repeated dynamic geometry instancing</td>
+<td>Four-<code>mat4</code>/seven-<code>vec4</code> record, binding-point 4 SSBO, instanced scene/shadow draws, and 64-to-1 runtime evidence</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Temporal and material identity preservation</td>
+<td>Instance factory checks and live deformation workloads retain previous/current and material data</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Forward+ decision is evidence-constrained</td>
+<td>30-light residence is candidate=true and justified=false; llvmpipe provenance prevents a production-GPU claim</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Indirect-drawing decision is evidence-constrained</td>
+<td>Residence has 73 direct scene draws and the instance workload has 1, both below 128</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Runtime marker completeness</td>
+<td>Both workloads publish all seven timing medians, counters, memory bytes, and decision flags</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Native build freshness</td>
+<td>Full <code>make -j2</code> reports the final native target current</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Renderer source ownership</td>
+<td class="source-status--passed">Renderer architecture ceilings and purpose-driven naming gates pass</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Editor and subsystem compatibility</td>
+<td class="source-status--passed">Preview, material, lighting, logging, runtime-context, composition, and all remaining editor sub-gates pass in isolated sequence</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Standard and temporal GUI compatibility</td>
+<td>Ordinary and temporal Xvfb smoke checks report all required markers</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Cross-loop visual compatibility</td>
+<td>Residence placement, environment lighting, and SSAO evidence verify against the final source and binary</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+<tr>
+<td>Retained evidence freshness</td>
+<td>Source, scene, binary, renderer-provenance, and evidence hashes verify without timing-value equality requirements</td>
+<td class="source-status--passed">Passed</td>
+</tr>
+</tbody>
+</table></div>
+<p class="source-status--failed">The broad editor architecture wrapper stopped once during its post-preview
+segment without a retained diagnostic. The same remaining sub-gates were then
+run command-by-command and all passed; the failure was not reproducible and no
+render-owned regression was identified.</p>
+<h4 id="source-evidence-identities-5">Evidence identities</h4><p class="section-guide">Reading guide: this source section records “Evidence identities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Native GUI binary: 292,361,656 bytes; SHA-256
+<code>f672678f5f94957b96cd9a8df37d5bcb4a01e5cbd5e379a49d68a7a9c856edb8</code>.</li>
+<li>Loop 5 implementation fingerprint:
+<code>f1be9babb7873a95ba19fe72029fba584fa9d4b9a22b7df52e071167baf36ebe</code>.</li>
+<li>Performance evidence record: 3,790 bytes; SHA-256
+<code>d968604d275af07c2a64d8779a2134e1ed3323e4546ab0d2d09cfe6018c91ee7</code>.</li>
+<li>Residence source SHA-256:
+<code>8cde0c9cf9721f0959152bf67430e4e5afbaacce8369ccc533b46268ae67faae</code>.</li>
+<li>Dynamic-instance fixture SHA-256:
+<code>0fc4bb011d478caae02f8ce2e830a8553048e54573c8182a82d21b5ee1c94427</code>.</li>
+<li>Current environment evidence record: 1,286 bytes; SHA-256
+<code>1ab1cb802cd7ad81a3927bcea24d286d0ba31db83fb500abeae607bc6c82c55c</code>.</li>
+<li>Current SSAO evidence record: 1,441 bytes; SHA-256
+<code>4402c1613f5dbf8532b730378a50a66e535b7c531e1eb4940236129eb8ef7e07</code>.</li>
+<li>Environment-enabled capture remains SHA-256
+<code>e6525627858e51673a71a7ed12bfddc6a5d01a934f6ef732b0c743d1f761c802</code>.</li>
+<li>SSAO-enabled capture remains SHA-256
+<code>518d5e6ac44f5e945a7112e101fcffd97e34cd0f387d60cbc71cb7e7e70a0eb4</code>.</li>
+<li>Existing unrelated compiler warnings remain in <code>include/grammar.h</code>,
+<code>include/Solution.h</code>, and <code>src/Mesh.cpp</code>.</li>
+</ul>
+<h4 id="source-remaining-limits-4">Remaining limits</h4><p class="section-guide">Reading guide: this source section records “Remaining limits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Hardware-accelerated GPU benchmark evidence has not been collected. Forward+
+remains a measured candidate, not an authorized implementation replacement.</li>
+<li>No indirect or multi-draw path is implemented because the retained workloads
+remain below the explicit direct-scene-draw threshold after batching.</li>
+<li>The retained fit-to-extents workloads produce zero culled triangles; focused
+deterministic frustum tests are authoritative for off-screen rejection.</li>
+<li>GPU query samples are diagnostic and driver-dependent; only schema,
+provenance, required sample count, valid ranges, and decision consistency are
+deterministic evidence requirements.</li>
+<li>Point-light cube-map shadow rendering remains deferred from Loop 2.</li>
+<li>Environment preprocessing remains synchronous when a source revision changes.</li>
+<li>Refraction remains based on one opaque color/depth snapshot, and transparent
+intersections remain order-dependent.</li>
+<li>SSAO remains full-resolution, spatial-only, and limited to the opaque layer.</li>
+</ul>
+<h3 id="source-12-five-loop-completion-audit">12. Five-Loop Completion Audit</h3><p class="section-guide">Reading guide: this source section records “12. Five-Loop Completion Audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-completion-status">Completion status</h4><p class="section-guide">Reading guide: this source section records “Completion status”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The five-loop render-pipeline upgrade defined by this plan is complete at the
+implementation and repository-validation level on August 27, 2026.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Loop</th>
+<th scope="col">Planned capability</th>
+<th scope="col">Completion evidence</th>
+<th scope="col">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>HDR presentation, real MSAA, bloom, ACES, gamma, FXAA, truthful controls</td>
+<td>HDR/post-process source gates, quality harness, native build, GUI smoke</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Directional cascades and spot-light shadow projection</td>
+<td class="source-status--passed">Layered shadow target, projection harness, shader/pass gates, runtime compatibility</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Environment IBL and scene-aware glass</td>
+<td>Deterministic visual/control evidence, source ownership, HDR/depth snapshot, sorted compatibility transparency</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td>4</td>
+<td>View-normal MRT and deterministic SSAO</td>
+<td>AO harness/source gates, enabled/control image delta, current visual evidence</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Timing, metrics, material SSBO, culling, instancing, measured advanced-path decisions</td>
+<td>Performance harnesses, 64-to-1 workload evidence, source/binary/driver provenance, full compatibility matrix</td>
+<td class="source-status--passed">Complete</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-completion-boundary">Completion boundary</h4><p class="section-guide">Reading guide: this source section records “Completion boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">This completion claim applies to the five planned implementation loops and
+their repository-native evidence. It does not certify a release package, all
+hardware vendors, production-GPU performance, point-light cube shadows,
+order-independent transparency, temporal SSAO, or asynchronous environment
+preprocessing. Those remain explicit future work rather than hidden completion
+assumptions.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-procedural-primitive-examples-implementation-plan.html" rel="prev">← Previous: ProGen3D Procedural Primitive Examples Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="proposed-curved-primitive-examples.html" rel="next">Next: Proposed curved primitive examples →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

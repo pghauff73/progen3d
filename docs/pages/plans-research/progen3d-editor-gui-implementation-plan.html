@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Create progen3d-editor-gui as a maintainable desktop editor for authoring, validating, previewing, animating, storing, and exporting ProGen3D grammar documents." name="description"/>
+<meta content="PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="14987102309c30b30fa691567ef70be6ebcb8517233ca186d9816f100f33d9c7" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>Progen3D Editor GUI Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-plans-research">Plans and Research</a></li>
+<li aria-current="page">Progen3D Editor GUI Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Progen3D Editor GUI Implementation Plan</h1>
+<p class="lead">Create progen3d-editor-gui as a maintainable desktop editor for authoring, validating, previewing, animating, storing, and exporting ProGen3D grammar documents.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Plans and Research</span>
+<span class="tag">About 17 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="14987102309c30b30fa691567ef70be6ebcb8517233ca186d9816f100f33d9c7" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Progen3D Editor GUI Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Progen3D Editor GUI Implementation Plan, Current Repository Baseline, Existing Capabilities, Verified Test State.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Progen3D Editor GUI Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Progen3D Editor GUI Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Existing Capabilities</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Existing Capabilities</td></tr><tr><td><dfn title="Named by the source document">Verified Test State</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Verified Test State</td></tr><tr><td><dfn title="Named by the source document">Immediate Full-Build Failure</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 Immediate Full-Build Failure</td></tr><tr><td><dfn title="Named by the source document">Working-Tree Migration State</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.4 Working-Tree Migration State</td></tr><tr><td><dfn title="Named by the source document">Architectural Principles</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Architectural Principles</td></tr><tr><td><dfn title="Named by the source document">Object-Model Rules</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 Object-Model Rules</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="publication harnesses">AI</dfn></td><td>publication harnesses</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr><td><dfn title="Field evaluation and candidate geometry">P2</dfn></td><td>Field evaluation and candidate geometry</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="Typed MCP_OMv1 model">P1</dfn></td><td>Typed MCP_OMv1 model</td></tr><tr><td><dfn title="Polygon File Format">PLY</dfn></td><td>Polygon File Format</td></tr><tr><td><dfn title="OpenGL">GLFW</dfn></td><td>OpenGL</td></tr><tr><td><dfn title="continuous integration">CI</dfn></td><td>continuous integration</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">AI-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ID</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="operation-independent creation and deterministic release boundary, while the existing `PreviewMateria">API</dfn></td><td>operation-independent creation and deterministic release boundary, while the existing `PreviewMateria</td></tr><tr><td><dfn title="image upload/release behavior">UI</dfn></td><td>image upload/release behavior</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Create progen3d-editor-gui as a maintainable desktop editor for authoring, validating, previewing, animating, storing, and exporting ProGen3D grammar documents.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Progen3D Editor GUI Implementation Plan, Current Repository Baseline, Existing Capabilities, Verified Test State. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Objective, 2. Current Repository Baseline, 2.1 Existing Capabilities, 2.2 Verified Test State. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 18, failed: 12, pending: 2, proposed: 8.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 3 code blocks, 2 tables and the source SHA-256 <code>14987102309c30b30fa691567ef70be6ebcb8517233ca186d9816f100f33d9c7</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-objective">1. Objective</a></li><li><a href="#source-2-current-repository-baseline">2. Current Repository Baseline</a></li><li><a href="#source-2-1-existing-capabilities">2.1 Existing Capabilities</a></li><li><a href="#source-2-2-verified-test-state">2.2 Verified Test State</a></li><li><a href="#source-2-3-immediate-full-build-failure">2.3 Immediate Full-Build Failure</a></li><li><a href="#source-2-4-working-tree-migration-state">2.4 Working-Tree Migration State</a></li><li><a href="#source-3-architectural-principles">3. Architectural Principles</a></li><li><a href="#source-3-1-object-model-rules">3.1 Object-Model Rules</a></li><li><a href="#source-3-2-runtime-invariants">3.2 Runtime Invariants</a></li><li><a href="#source-4-target-object-model">4. Target Object Model</a></li><li><a href="#source-4-1-application-and-context-classes">4.1 Application and Context Classes</a></li><li><a href="#source-progen3deditorapplication">Progen3dEditorApplication</a></li><li><a href="#source-editorruntimeenvironment">EditorRuntimeEnvironment</a></li><li><a href="#source-editorworkspacesession">EditorWorkspaceSession</a></li><li><a href="#source-4-2-model-classes">4.2 Model Classes</a></li><li><a href="#source-grammarsourcedocument">GrammarSourceDocument</a></li><li><a href="#source-documentstorageidentity">DocumentStorageIdentity</a></li><li><a href="#source-documentdiagnosticcollection">DocumentDiagnosticCollection</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>18</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>12</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>2</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>8</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: Progen3D Editor GUI Implementation Plan, Current Repository Baseline, Existing Capabilities, Verified Test State.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>GrammarActionToken::varnames is declared as a C array, while the implementation calls .size().</li><li>Conditional branch storage is declared on GrammarConditionalActionToken, while semantic validation accesses it through GrammarActionToken.</li><li>Reconcile include/grammar.h with src/Grammar.cpp.</li><li>Perform a clean full build.</li><li>Run ./tests/runp2checks.sh after the full build.</li><li>Decide which root-level deletions and src-old/ files belong in the migration.</li><li>Ensure .gitignore excludes build objects, generated executables, test harness outputs, and temporary logs.</li><li>Make progen3d-editor-gui the primary target while temporarily retaining progen3d as a compatibility target if needed.</li><li>Document the supported build command and dependency assumptions.</li><li>Add src/main.cpp containing only argument handling and Progen3dEditorApplication::run().</li><li>Create Progen3dEditorApplication.</li><li>Create EditorRuntimeEnvironment.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> bash fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-bash">./tests/run_p2_checks.sh</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Progen3D Editor GUI Implementation Plan" data="../../assets/diagrams/pages/progen3d-editor-gui-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>14987102309c30b30fa691567ef70be6ebcb8517233ca186d9816f100f33d9c7</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>98 headings, 3 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_p2_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Create progen3d-editor-gui as a maintainable desktop editor for authoring, validating, previewing, animating, storing, and exporting ProGen3D grammar documents.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Progen3D Editor GUI Implementation Plan, Current Repository Baseline, Existing Capabilities, Verified Test State, Immediate Full-Build Failure</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-design-agent-implementation-plan.html">ProGen3D Design Agent Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Implement a Progen3dDesignAgent inside the editor as a proposal-first application service.</small></li><li><a href="progen3d-canonical-material-catalog-proposal.html">ProGen3D Canonical Material Catalog Proposal</a> <span class="status-badge status--proposed">Proposed</span><br/><small>Implemented in the current workspace:</small></li><li><a href="../vehicles/progen3d-mvpv2-hatchback-fitting-implementation-plan.html">ProGen3D MVPv2 Hatchback Fitting Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Promote the red AWD hatchback from an MVPv1 section-loft plus decorative panel-cut model to an MVPv2 spatial fitting model whose body and closures are described by evidence-bearing semantic objects.</small></li><li><a href="../buildings/progen3d-building-object-image-matching-v1-implementation-plan.html">ProGen3D Building Object Image Matching V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</small></li><li><a href="../geometry-rendering/progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li><li><a href="../geometry-rendering/progen3d-render-pipeline-upgrade-implementation-plan.html">ProGen3D Render Pipeline Upgrade Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_EDITOR_GUI_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>14987102309c30b30fa691567ef70be6ebcb8517233ca186d9816f100f33d9c7</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-editor-gui-implementation-plan">Progen3D Editor GUI Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “Progen3D Editor GUI Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Project:</strong> ProGen3D</li>
+<li><strong>Target executable:</strong> <code>progen3d-editor-gui</code></li>
+<li><strong>Plan date:</strong> August 21, 2026</li>
+<li class="source-status--proposed"><strong>Status:</strong> Proposed implementation sequence</li>
+<li><strong>Primary technology:</strong> C++17, Dear ImGui, GLFW, OpenGL, GLM</li>
+<li><strong>Existing verification baseline:</strong> P0, P1, and P2 focused suites</li>
+</ul>
+<h3 id="source-1-objective">1. Objective</h3><p class="section-guide">Reading guide: this source section records “1. Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create <code>progen3d-editor-gui</code> as a maintainable desktop editor for authoring, validating, previewing, animating, storing, and exporting ProGen3D grammar documents.</p>
+<p>The implementation will preserve the existing grammar language, renderer, cloud services, material system, temporal preview behavior, and safety gates while restructuring the GUI around explicit model, service, context, relationship, and presentation classes.</p>
+<p>This is an architectural extraction of the current editor prototype, not a rewrite of the grammar engine or OpenGL renderer.</p>
+<h3 id="source-2-current-repository-baseline">2. Current Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-existing-capabilities">2.1 Existing Capabilities</h4><p class="section-guide">Reading guide: this source section records “2.1 Existing Capabilities”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The working tree already contains:</p>
+<ul>
+<li>A Dear ImGui application shell using GLFW and OpenGL.</li>
+<li>A grammar source editor with syntax presentation, diagnostics, autocomplete, identifier inspection, and source navigation.</li>
+<li>Asynchronous scene regeneration with queued requests.</li>
+<li>A rendered scene preview with camera interaction, selection outlines, view cube, connection overlays, and fullscreen mode.</li>
+<li>Physics simulation and deterministic grammar-time preview.</li>
+<li>Material parsing, texture previews, cubemap generation, and render controls.</li>
+<li>Firebase authentication and cloud grammar storage.</li>
+<li>Backend file, texture, credit, publishing, and AI APIs.</li>
+<li>AI thread history and grammar-generating responses.</li>
+<li>PLY mesh export.</li>
+<li>STL part-class catalog loading and autocomplete.</li>
+<li>P0 validation and expansion limits.</li>
+<li class="source-status--failed">P1 semantic isolation and failure atomicity.</li>
+<li>P2 temporal grammar functions and one-clock preview behavior.</li>
+</ul>
+<h4 id="source-2-2-verified-test-state">2.2 Verified Test State</h4><p class="section-guide">Reading guide: this source section records “2.2 Verified Test State”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following command passes in the current working tree:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_p2_checks.sh
+</code></pre>
+<p class="source-status--passed">That command exercises all inherited P0 and P1 checks and the P2 temporal checks. It validates focused runtime contracts but does not prove that the complete GUI links against the repository's production headers.</p>
+<h4 id="source-2-3-immediate-full-build-failure">2.3 Immediate Full-Build Failure</h4><p class="section-guide">Reading guide: this source section records “2.3 Immediate Full-Build Failure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The complete application currently fails during <code>make</code> because <code>src/Grammar.cpp</code> and <code>include/grammar.h</code> have incompatible contracts:</p>
+<ol>
+<li><code>GrammarActionToken::var_names</code> is declared as a C array, while the implementation calls <code>.size()</code>.</li>
+<li>Conditional branch storage is declared on <code>GrammarConditionalActionToken</code>, while semantic validation accesses it through <code>GrammarActionToken</code>.</li>
+</ol>
+<p>The full build must become authoritative before GUI restructuring begins.</p>
+<h4 id="source-2-4-working-tree-migration-state">2.4 Working-Tree Migration State</h4><p class="section-guide">Reading guide: this source section records “2.4 Working-Tree Migration State”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository is in an uncommitted source-layout migration:</p>
+<ul>
+<li>Legacy root-level source files are deleted.</li>
+<li>Replacement files exist under <code>include/</code>, <code>src/</code>, and <code>src-old/</code>.</li>
+<li>Tests, assets, and vendored dependencies are currently untracked.</li>
+<li>Generated build artifacts are present under <code>build/</code>.</li>
+</ul>
+<p>The first milestone must establish one intentional, reviewable source layout and prevent generated files from becoming part of the implementation baseline.</p>
+<h3 id="source-3-architectural-principles">3. Architectural Principles</h3><p class="section-guide">Reading guide: this source section records “3. Architectural Principles”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-object-model-rules">3.1 Object-Model Rules</h4><p class="section-guide">Reading guide: this source section records “3.1 Object-Model Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Use inheritance only for real conceptual categories.</li>
+<li>Use composition for application ownership and panel assembly.</li>
+<li>Use aggregation for repositories and services supplied to the application.</li>
+<li>Use association classes when connecting grammar source ranges to generated scene objects.</li>
+<li>Keep model classes independent from Dear ImGui.</li>
+<li>Keep OpenGL calls inside rendering classes.</li>
+<li>Keep HTTP and Firebase calls inside service adapters.</li>
+<li>Keep worker-thread ownership inside the regeneration coordinator.</li>
+<li>Give every class one explainable purpose.</li>
+<li>Avoid new generic <code>Manager</code>, <code>Helper</code>, <code>Util</code>, <code>Base</code>, or <code>Processor</code> classes.</li>
+</ul>
+<h4 id="source-3-2-runtime-invariants">3.2 Runtime Invariants</h4><p class="section-guide">Reading guide: this source section records “3.2 Runtime Invariants”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Grammar validation completes before scene mutation.</li>
+<li class="source-status--failed">A failed generation never replaces the last valid scene.</li>
+<li>A normal Run selects a new stochastic design seed.</li>
+<li>Time sampling retains the current design seed and changes only grammar time.</li>
+<li>Procedural grammar time and physics simulation are never authoritative simultaneously.</li>
+<li>OpenGL resource creation and destruction occur on the OpenGL-owning thread.</li>
+<li>Remote-service failures never prevent local editing, preview, or export.</li>
+<li class="source-status--proposed">AI-generated grammar remains a proposal until explicitly accepted by the user.</li>
+</ul>
+<h3 id="source-4-target-object-model">4. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “4. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-application-and-context-classes">4.1 Application and Context Classes</h4><p class="section-guide">Reading guide: this source section records “4.1 Application and Context Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-progen3deditorapplication"><code>Progen3dEditorApplication</code></h5>
+<p>Composition root for the desktop application.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Initialize paths, GLFW, OpenGL, Dear ImGui, fonts, artwork, renderer, and catalogs.</li>
+<li>Own the main frame loop.</li>
+<li>Own startup and shutdown ordering.</li>
+<li>Assemble the workspace, services, repositories, and panels.</li>
+<li>Route application-level shortcuts and shutdown requests.</li>
+</ul>
+<h5 id="source-editorruntimeenvironment"><code>EditorRuntimeEnvironment</code></h5>
+<p>Owns runtime objects that live for the duration of the application.</p>
+<p>Composed objects:</p>
+<ul>
+<li><code>GlfwApplicationWindow</code></li>
+<li><code>ImGuiRuntimeContext</code></li>
+<li><code>PreviewRenderer</code></li>
+<li><code>ApplicationPathLocator</code></li>
+<li><code>PartCatalogRepository</code></li>
+</ul>
+<h5 id="source-editorworkspacesession"><code>EditorWorkspaceSession</code></h5>
+<p>Represents one open editing workspace.</p>
+<p>Composed objects:</p>
+<ul>
+<li><code>GrammarSourceDocument</code></li>
+<li><code>DocumentStorageIdentity</code></li>
+<li><code>DocumentDiagnosticCollection</code></li>
+<li><code>ScenePreviewSession</code></li>
+<li><code>EditorSelection</code></li>
+<li><code>WorkspaceLayoutState</code></li>
+<li><code>AiAssistantSession</code></li>
+<li><code>AuthenticatedUserSession</code></li>
+</ul>
+<p>The first implementation supports one workspace session. Multi-document tabs can be added later by aggregating multiple <code>EditorWorkspaceSession</code> instances.</p>
+<h4 id="source-4-2-model-classes">4.2 Model Classes</h4><p class="section-guide">Reading guide: this source section records “4.2 Model Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-grammarsourcedocument"><code>GrammarSourceDocument</code></h5>
+<p>Owns:</p>
+<ul>
+<li>Grammar source text.</li>
+<li>Dirty state.</li>
+<li>Document title.</li>
+<li>Local path when present.</li>
+<li>Stochastic design nonce.</li>
+<li>Last successful generation request identity.</li>
+</ul>
+<p>It does not own cloud transport, rendering, authentication, or Dear ImGui state.</p>
+<h5 id="source-documentstorageidentity"><code>DocumentStorageIdentity</code></h5>
+<p>Owns:</p>
+<ul>
+<li>Cloud file ID.</li>
+<li>Cloud title.</li>
+<li>Publication state.</li>
+<li>Last known remote update time.</li>
+</ul>
+<p>This keeps local document identity separate from cloud identity.</p>
+<h5 id="source-documentdiagnosticcollection"><code>DocumentDiagnosticCollection</code></h5>
+<p>Owns parser, semantic, generation, and editor diagnostics with source ranges and severity.</p>
+<p>It replaces parallel collections such as <code>grammar_error_lines</code> and <code>grammar_error_details</code>.</p>
+<h5 id="source-scenegenerationrequest"><code>SceneGenerationRequest</code></h5>
+<p>Immutable request containing:</p>
+<ul>
+<li>Source text.</li>
+<li>Design seed.</li>
+<li>Evaluation time.</li>
+<li>Request sequence number.</li>
+<li>Whether the request is a normal generation or a temporal sample.</li>
+<li>Whether success logging should be quiet.</li>
+</ul>
+<h5 id="source-scenegenerationresult"><code>SceneGenerationResult</code></h5>
+<p>Owns either:</p>
+<ul>
+<li class="source-status--passed">A complete <code>GeneratedSceneSnapshot</code>, or</li>
+<li>Blocking diagnostics and an error description.</li>
+</ul>
+<h5 id="source-generatedscenesnapshot"><code>GeneratedSceneSnapshot</code></h5>
+<p>Owns the successful generation artifacts:</p>
+<ul>
+<li>Parsed <code>GrammarDocument</code>.</li>
+<li><code>SceneGenerationContext</code>.</li>
+<li>Runtime variable snapshots.</li>
+<li>Material names.</li>
+<li>Evaluation time.</li>
+<li>Design seed.</li>
+<li>Source-to-scene association index.</li>
+</ul>
+<h5 id="source-scenepreviewsession"><code>ScenePreviewSession</code></h5>
+<p>Owns:</p>
+<ul>
+<li>Last valid <code>GeneratedSceneSnapshot</code>.</li>
+<li>Preview camera state.</li>
+<li>Preview timeline state.</li>
+<li>Current render configuration.</li>
+<li>Selected and hovered scene identities.</li>
+</ul>
+<h5 id="source-previewtimelinestate"><code>PreviewTimelineState</code></h5>
+<p>Owns:</p>
+<ul>
+<li>Play/pause state.</li>
+<li>Grammar evaluation time.</li>
+<li>Physics simulation time.</li>
+<li>Playback speed.</li>
+<li>Sampling accumulator.</li>
+<li>Active clock type.</li>
+</ul>
+<h5 id="source-renderconfiguration"><code>RenderConfiguration</code></h5>
+<p>Owns:</p>
+<ul>
+<li>Shadow, anti-aliasing, cubemap, bloom, ambient-occlusion, exposure, and gamma values.</li>
+<li>Texture debug view and mapping override.</li>
+<li>Environment-map generation settings.</li>
+</ul>
+<h5 id="source-workspacelayoutstate"><code>WorkspaceLayoutState</code></h5>
+<p>Owns editor/preview/console ratios, fullscreen state, panel visibility, and font scale.</p>
+<h4 id="source-4-3-relationship-classes">4.3 Relationship Classes</h4><p class="section-guide">Reading guide: this source section records “4.3 Relationship Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-sourcerange"><code>SourceRange</code></h5>
+<p>Value object representing start and end line/column positions.</p>
+<h5 id="source-sceneprimitiveidentity"><code>ScenePrimitiveIdentity</code></h5>
+<p>Stable identity for one generated primitive within a scene snapshot.</p>
+<h5 id="source-scenesourceassociation"><code>SceneSourceAssociation</code></h5>
+<p>Associates one <code>ScenePrimitiveIdentity</code> with the <code>SourceRange</code> responsible for generating it.</p>
+<h5 id="source-scenesourceassociationindex"><code>SceneSourceAssociationIndex</code></h5>
+<p>Indexes all <code>SceneSourceAssociation</code> values for preview-to-editor and editor-to-preview navigation.</p>
+<h5 id="source-editorselection"><code>EditorSelection</code></h5>
+<p>Owns the selected source range, selected grammar symbol, and selected scene primitive identity without owning either the document or scene.</p>
+<h4 id="source-4-4-service-classes">4.4 Service Classes</h4><p class="section-guide">Reading guide: this source section records “4.4 Service Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-grammarcompilationservice"><code>GrammarCompilationService</code></h5>
+<p>Performs source structure validation, parsing, semantic binding, preflight, expansion, context construction, and scene generation.</p>
+<p class="source-status--passed">It returns a complete <code>SceneGenerationResult</code> and does not publish partial state.</p>
+<h5 id="source-sceneregenerationcoordinator"><code>SceneRegenerationCoordinator</code></h5>
+<p>Owns:</p>
+<ul>
+<li>Worker thread.</li>
+<li class="source-status--pending">Pending request.</li>
+<li class="source-status--passed">Completed result queue.</li>
+<li>Request sequence ordering.</li>
+<li>Auto-run deadline.</li>
+<li>Cancellation and shutdown behavior.</li>
+</ul>
+<p>Only this class may replace the workspace's last valid scene snapshot.</p>
+<h5 id="source-documentpersistenceservice"><code>DocumentPersistenceService</code></h5>
+<p>Coordinates local save/open behavior and cloud repository calls without owning the document.</p>
+<h5 id="source-cloudgrammarrepository"><code>CloudGrammarRepository</code></h5>
+<p>Abstract conceptual category for cloud grammar persistence.</p>
+<p>Concrete implementation:</p>
+<ul>
+<li><code>BackendCloudGrammarRepository</code></li>
+</ul>
+<h5 id="source-authenticationservice"><code>AuthenticationService</code></h5>
+<p>Abstract conceptual category for authentication.</p>
+<p>Concrete implementation:</p>
+<ul>
+<li><code>FirebaseAuthenticationService</code></li>
+</ul>
+<h5 id="source-texturelibraryrepository"><code>TextureLibraryRepository</code></h5>
+<p>Provides texture-slot listing, upload, generation, activation, and preview-image retrieval.</p>
+<h5 id="source-aigrammarproposalservice"><code>AiGrammarProposalService</code></h5>
+<p>Submits editor context to the backend and returns an <code>AiGrammarProposal</code> without modifying the document.</p>
+<h5 id="source-aigrammarproposalreview"><code>AiGrammarProposalReview</code></h5>
+<p class="source-status--proposed">Owns proposed grammar, calculated source differences, warnings, and acceptance state.</p>
+<h5 id="source-meshexportservice"><code>MeshExportService</code></h5>
+<p>Builds an export request from the last valid scene and delegates encoding to <code>MeshExportWriter</code> implementations.</p>
+<h4 id="source-4-5-presentation-classes">4.5 Presentation Classes</h4><p class="section-guide">Reading guide: this source section records “4.5 Presentation Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The presentation layer uses composition. It does not require an artificial common panel base class.</p>
+<ul>
+<li><code>ApplicationHeaderPanel</code></li>
+<li><code>GrammarEditorPanel</code></li>
+<li><code>GrammarSymbolInspectorPanel</code></li>
+<li><code>ScenePreviewPanel</code></li>
+<li><code>PreviewTimelinePanel</code></li>
+<li><code>SceneInspectorPanel</code></li>
+<li><code>DiagnosticsPanel</code></li>
+<li><code>ConsolePanel</code></li>
+<li><code>MaterialLibraryPanel</code></li>
+<li><code>RenderSettingsPanel</code></li>
+<li><code>CloudDocumentDialog</code></li>
+<li><code>AuthenticationPanel</code></li>
+<li><code>AiAssistantPanel</code></li>
+<li><code>AiGrammarProposalPanel</code></li>
+</ul>
+<p>Each panel receives only the models, services, and commands it needs.</p>
+<h4 id="source-4-6-relationship-diagram">4.6 Relationship Diagram</h4><p class="section-guide">Reading guide: this source section records “4.6 Relationship Diagram”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-mermaid">classDiagram
+    class Progen3dEditorApplication
+    class EditorRuntimeEnvironment
+    class EditorWorkspaceSession
+    class GrammarSourceDocument
+    class DocumentStorageIdentity
+    class DocumentDiagnosticCollection
+    class ScenePreviewSession
+    class GeneratedSceneSnapshot
+    class PreviewTimelineState
+    class RenderConfiguration
+    class EditorSelection
+    class SceneSourceAssociationIndex
+    class GrammarCompilationService
+    class SceneRegenerationCoordinator
+    class CloudGrammarRepository
+    class BackendCloudGrammarRepository
+    class AuthenticationService
+    class FirebaseAuthenticationService
+    class PreviewRenderer
+    class DefaultPreviewRenderer
+    class MeshExportWriter
+    class BinaryLittleEndianPlyMeshWriter
+
+    Progen3dEditorApplication *-- EditorRuntimeEnvironment
+    Progen3dEditorApplication *-- EditorWorkspaceSession
+    EditorWorkspaceSession *-- GrammarSourceDocument
+    EditorWorkspaceSession *-- DocumentStorageIdentity
+    EditorWorkspaceSession *-- DocumentDiagnosticCollection
+    EditorWorkspaceSession *-- ScenePreviewSession
+    EditorWorkspaceSession *-- EditorSelection
+    ScenePreviewSession *-- GeneratedSceneSnapshot
+    ScenePreviewSession *-- PreviewTimelineState
+    ScenePreviewSession *-- RenderConfiguration
+    GeneratedSceneSnapshot *-- SceneSourceAssociationIndex
+    SceneRegenerationCoordinator --&gt; GrammarCompilationService
+    SceneRegenerationCoordinator --&gt; EditorWorkspaceSession
+    BackendCloudGrammarRepository --|&gt; CloudGrammarRepository
+    FirebaseAuthenticationService --|&gt; AuthenticationService
+    DefaultPreviewRenderer --|&gt; PreviewRenderer
+    BinaryLittleEndianPlyMeshWriter --|&gt; MeshExportWriter
+</code></pre>
+<h3 id="source-5-proposed-source-layout">5. Proposed Source Layout</h3><p class="section-guide">Reading guide: this source section records “5. Proposed Source Layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/
+  editor/
+    application/
+      Progen3dEditorApplication.h
+      EditorRuntimeEnvironment.h
+    model/
+      GrammarSourceDocument.h
+      DocumentStorageIdentity.h
+      DocumentDiagnosticCollection.h
+      SceneGenerationRequest.h
+      SceneGenerationResult.h
+      GeneratedSceneSnapshot.h
+      ScenePreviewSession.h
+      PreviewTimelineState.h
+      RenderConfiguration.h
+      WorkspaceLayoutState.h
+      EditorSelection.h
+    relationship/
+      SourceRange.h
+      ScenePrimitiveIdentity.h
+      SceneSourceAssociation.h
+      SceneSourceAssociationIndex.h
+    service/
+      GrammarCompilationService.h
+      SceneRegenerationCoordinator.h
+      DocumentPersistenceService.h
+      CloudGrammarRepository.h
+      BackendCloudGrammarRepository.h
+      AuthenticationService.h
+      FirebaseAuthenticationService.h
+      TextureLibraryRepository.h
+      AiGrammarProposalService.h
+      MeshExportService.h
+    presentation/
+      ApplicationHeaderPanel.h
+      GrammarEditorPanel.h
+      GrammarSymbolInspectorPanel.h
+      ScenePreviewPanel.h
+      PreviewTimelinePanel.h
+      SceneInspectorPanel.h
+      DiagnosticsPanel.h
+      ConsolePanel.h
+      MaterialLibraryPanel.h
+      RenderSettingsPanel.h
+      CloudDocumentDialog.h
+      AuthenticationPanel.h
+      AiAssistantPanel.h
+      AiGrammarProposalPanel.h
+
+src/
+  editor/
+    application/
+    model/
+    relationship/
+    service/
+    presentation/
+  main.cpp
+
+  Grammar.cpp
+  Context.cpp
+  Scope.cpp
+  Mesh.cpp
+  Solution.cpp
+  StlCatalog.cpp
+  imgui_render.cpp
+  BackendApiClient.cpp
+  FirebaseAuth.cpp
+  FirebaseStorage.cpp
+</code></pre>
+<p class="source-status--passed">Existing grammar and scene-runtime files remain in place during extraction. They should only move after their public contracts are stable and the full build is continuously verified.</p>
+<h3 id="source-6-implementation-milestones">6. Implementation Milestones</h3><p class="section-guide">Reading guide: this source section records “6. Implementation Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-milestone-0-restore-the-authoritative-build">Milestone 0: Restore the Authoritative Build</h3><p class="section-guide">Reading guide: this source section records “Milestone 0: Restore the Authoritative Build”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Make the complete application build and establish a clean migration baseline before architectural changes.</p>
+<h4 id="source-tasks">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Reconcile <code>include/grammar.h</code> with <code>src/Grammar.cpp</code>.
+<ul>
+<li>Replace <code>GrammarActionToken::var_names</code> with <code>std::array&lt;std::string, 3&gt;</code> or remove implementation assumptions that require container methods.</li>
+<li>Use <code>getTrueBranchTokens()</code> and <code>getFalseBranchTokens()</code> when reading conditional branches through a base token pointer.</li>
+<li>Verify cloning and destruction of conditional tokens.</li>
+</ul>
+</li>
+<li>Perform a clean full build.</li>
+<li>Run <code>./tests/run_p2_checks.sh</code> after the full build.</li>
+<li>Decide which root-level deletions and <code>src-old/</code> files belong in the migration.</li>
+<li>Ensure <code>.gitignore</code> excludes build objects, generated executables, test harness outputs, and temporary logs.</li>
+<li>Make <code>progen3d-editor-gui</code> the primary target while temporarily retaining <code>progen3d</code> as a compatibility target if needed.</li>
+<li>Document the supported build command and dependency assumptions.</li>
+</ol>
+<h4 id="source-acceptance-gates">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>make clean</code> succeeds.</li>
+<li><code>make progen3d-editor-gui</code> succeeds from a clean tree.</li>
+<li><code>./tests/run_p2_checks.sh</code> passes.</li>
+<li>No stale object file is required for linking.</li>
+<li>No generated binary or object is treated as source evidence.</li>
+<li>The intentional source migration is visible through a reviewable Git diff.</li>
+</ul>
+<h3 id="source-milestone-1-introduce-the-application-composition-root">Milestone 1: Introduce the Application Composition Root</h3><p class="section-guide">Reading guide: this source section records “Milestone 1: Introduce the Application Composition Root”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-2">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Move lifecycle ownership out of procedural <code>main()</code> logic without changing visible behavior.</p>
+<h4 id="source-tasks-2">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add <code>src/main.cpp</code> containing only argument handling and <code>Progen3dEditorApplication::run()</code>.</li>
+<li>Create <code>Progen3dEditorApplication</code>.</li>
+<li>Create <code>EditorRuntimeEnvironment</code>.</li>
+<li>Move path initialization, GLFW setup, OpenGL loading, ImGui setup, font loading, catalog loading, and renderer startup into explicit methods.</li>
+<li>Represent startup stages as <code>ApplicationStartupStage</code> values rather than repeated procedural blocks.</li>
+<li>Move shutdown ordering into deterministic destructors or explicit shutdown methods.</li>
+<li>Preserve the existing startup loader presentation.</li>
+</ol>
+<h4 id="source-acceptance-gates-2">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Application startup behavior remains visually equivalent.</li>
+<li class="source-status--failed">Initialization failure reports which subsystem failed.</li>
+<li>Shutdown joins the regeneration worker before destroying grammar or rendering state.</li>
+<li>OpenGL resources are destroyed before the window and context.</li>
+<li><code>main()</code> contains no editor behavior.</li>
+</ul>
+<h3 id="source-milestone-2-establish-the-document-and-workspace-model">Milestone 2: Establish the Document and Workspace Model</h3><p class="section-guide">Reading guide: this source section records “Milestone 2: Establish the Document and Workspace Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-3">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Replace the broad <code>AppState</code> structure with purpose-specific model and context classes.</p>
+<h4 id="source-tasks-3">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Create <code>GrammarSourceDocument</code>.</li>
+<li>Create <code>DocumentStorageIdentity</code>.</li>
+<li>Create <code>DocumentDiagnosticCollection</code>.</li>
+<li>Create <code>WorkspaceLayoutState</code>.</li>
+<li>Create <code>AuthenticatedUserSession</code> and <code>AiAssistantSession</code> as separate models.</li>
+<li>Create <code>EditorWorkspaceSession</code> as the aggregate root for one open workspace.</li>
+<li>Move New, local Open, local Save, and document-dirty transitions behind <code>DocumentPersistenceService</code>.</li>
+<li>Make local editing available without authentication.</li>
+<li>Disable cloud, publishing, texture, and AI commands when their services are unavailable instead of hiding the entire workspace.</li>
+</ol>
+<h4 id="source-acceptance-gates-3">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The editor opens in local mode without Firebase configuration.</li>
+<li>New, edit, Run, local Save, local Open, and PLY export work offline.</li>
+<li>Signing in does not replace or reset the current local document.</li>
+<li>Cloud identity is not inferred from the local filename.</li>
+<li>No presentation class directly mutates unrelated workspace state.</li>
+</ul>
+<h3 id="source-milestone-3-extract-compilation-and-regeneration">Milestone 3: Extract Compilation and Regeneration</h3><p class="section-guide">Reading guide: this source section records “Milestone 3: Extract Compilation and Regeneration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-4">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Give parsing, generation, worker-thread coordination, and last-valid-scene publication explicit owners.</p>
+<h4 id="source-tasks-4">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Create <code>SceneGenerationRequest</code> and <code>SceneGenerationResult</code> value objects.</li>
+<li>Create <code>GeneratedSceneSnapshot</code> with exclusive ownership of successful grammar and context objects.</li>
+<li>Create <code>GrammarCompilationService</code> by extracting the current regeneration-worker body.</li>
+<li>Create <code>SceneRegenerationCoordinator</code>.</li>
+<li>Move regeneration globals into the coordinator.</li>
+<li>Replace raw result pointers with <code>std::unique_ptr</code> ownership.</li>
+<li>Add monotonically increasing request sequence numbers.</li>
+<li class="source-status--passed">Discard completed results older than the newest requested document revision.</li>
+<li class="source-status--failed">Preserve the last valid snapshot after parser, semantic, expansion, upload, or time-sample failure.</li>
+<li>Keep normal design generation and temporal sampling as different request types.</li>
+</ol>
+<h4 id="source-acceptance-gates-4">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Editing during generation cannot publish an obsolete scene.</li>
+<li class="source-status--failed">A failed generation leaves the last valid preview visible.</li>
+<li>A normal Run creates a new design seed.</li>
+<li>A time sample retains the current design seed.</li>
+<li>Worker shutdown cannot access destroyed workspace state.</li>
+<li class="source-status--passed">Existing P0–P2 checks continue to pass.</li>
+<li class="source-status--failed">New coordinator tests cover request supersession and failure preservation.</li>
+</ul>
+<h3 id="source-milestone-4-extract-the-grammar-editor-presentation">Milestone 4: Extract the Grammar Editor Presentation</h3><p class="section-guide">Reading guide: this source section records “Milestone 4: Extract the Grammar Editor Presentation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-5">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Move the grammar editor out of <code>src/imgui_main.cpp</code> without changing its established editing behavior.</p>
+<h4 id="source-tasks-5">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Create <code>GrammarEditorPanel</code>.</li>
+<li>Create <code>GrammarSyntaxPresentation</code> for token color and tooltip classification.</li>
+<li>Create <code>GrammarAutocompletePresentation</code> for part and material suggestions.</li>
+<li>Create <code>GrammarSymbolIndex</code> as a document-derived model rather than static global UI state.</li>
+<li>Move diagnostic underlines and tooltips into <code>GrammarDiagnosticPresentation</code>.</li>
+<li>Move selected-symbol information into <code>GrammarSymbolInspectorPanel</code>.</li>
+<li>Preserve cursor, selection, scroll, Ctrl+wheel zoom, and selection restoration.</li>
+<li>Keep the two-second auto-run delay in <code>SceneRegenerationCoordinator</code>, not inside the panel.</li>
+<li>Add a diagnostics gutter or compact line marker region.</li>
+</ol>
+<h4 id="source-acceptance-gates-5">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Existing grammar text can be edited without corruption.</li>
+<li>Source selection and caret restoration continue to work.</li>
+<li>Part-class and material autocomplete still work.</li>
+<li>Diagnostics retain line and column precision.</li>
+<li>Selecting a diagnostic navigates to its source range.</li>
+<li><code>GrammarEditorPanel</code> does not call backend or OpenGL APIs.</li>
+</ul>
+<h3 id="source-milestone-5-extract-preview-timeline-and-selection">Milestone 5: Extract Preview, Timeline, and Selection</h3><p class="section-guide">Reading guide: this source section records “Milestone 5: Extract Preview, Timeline, and Selection”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-6">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Separate preview presentation, camera interaction, temporal control, and source-scene relationships.</p>
+<h4 id="source-tasks-6">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Create <code>ScenePreviewSession</code>.</li>
+<li>Create <code>PreviewTimelineState</code> and <code>PreviewTimelineController</code>.</li>
+<li>Create <code>PreviewCameraController</code>.</li>
+<li>Create <code>SceneSelectionController</code>.</li>
+<li>Create <code>SceneSourceAssociationIndex</code> from generated primitive source ranges.</li>
+<li>Move <code>draw_preview()</code> into <code>ScenePreviewPanel</code>.</li>
+<li>Move view-cube behavior into <code>PreviewOrientationControl</code>.</li>
+<li>Move overlay settings into <code>SceneOverlayConfiguration</code>.</li>
+<li>Move render settings into <code>RenderConfiguration</code> and <code>RenderSettingsPanel</code>.</li>
+<li>Keep <code>PreviewRenderer</code> as the rendering abstraction and rename its concrete implementation to <code>OpenGlPreviewRenderer</code> when practical.</li>
+</ol>
+<h4 id="source-acceptance-gates-6">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Preview orbit, pan, zoom, fit, view cube, and fullscreen behavior remain functional.</li>
+<li>Hovered and selected objects retain distinct outlines.</li>
+<li>Clicking a primitive selects its generating source range.</li>
+<li>Grammar-time scenes show grammar time and do not advance physics.</li>
+<li>Physics scenes advance simulation and do not request grammar-time snapshots.</li>
+<li>Step and Reset operate on the currently authoritative clock only.</li>
+<li class="source-status--failed">A failed time sample preserves the last valid preview.</li>
+</ul>
+<h3 id="source-milestone-6-extract-diagnostics-console-and-inspector-panels">Milestone 6: Extract Diagnostics, Console, and Inspector Panels</h3><p class="section-guide">Reading guide: this source section records “Milestone 6: Extract Diagnostics, Console, and Inspector Panels”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-7">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Present runtime evidence through explicit, navigable panels.</p>
+<h4 id="source-tasks-7">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Create <code>DiagnosticsPanel</code> with severity filters and source navigation.</li>
+<li>Create <code>ConsolePanel</code> backed by a bounded <code>ApplicationLog</code> model.</li>
+<li>Create <code>SceneInspectorPanel</code> for the selected primitive.</li>
+<li>Show primitive type, material, bounds, transform, mass, density, velocity, source range, and connection evidence where available.</li>
+<li>Create <code>PreviewStatistics</code> for rule, token, primitive, material, generation-time, and render-time metrics.</li>
+<li>Keep parser diagnostics separate from operational backend errors.</li>
+</ol>
+<h4 id="source-acceptance-gates-7">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Diagnostic selection navigates to source.</li>
+<li>Runtime and backend errors do not appear as grammar syntax errors.</li>
+<li>Scene inspection reads from the current immutable scene snapshot.</li>
+<li>The log remains bounded during long preview sessions.</li>
+</ul>
+<h3 id="source-milestone-7-adapt-cloud-texture-ai-and-export-workflows">Milestone 7: Adapt Cloud, Texture, AI, and Export Workflows</h3><p class="section-guide">Reading guide: this source section records “Milestone 7: Adapt Cloud, Texture, AI, and Export Workflows”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-8">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Move remote and export behavior out of panels and make every workflow explicit and failure-isolated.</p>
+<h4 id="source-tasks-8">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Implement <code>BackendCloudGrammarRepository</code> using the existing backend API client.</li>
+<li>Implement <code>FirebaseAuthenticationService</code> using the existing authentication functions.</li>
+<li>Move cloud Open, Save As, Save, and Publish behavior into <code>DocumentPersistenceService</code>.</li>
+<li>Create <code>TextureLibraryRepository</code> and preserve the 20-slot contract.</li>
+<li>Create <code>AiGrammarProposalService</code>.</li>
+<li>Replace direct Apply Grammar behavior with <code>AiGrammarProposalReview</code>.</li>
+<li>Show source differences before AI grammar is accepted.</li>
+<li class="source-status--proposed">Support Accept Full Proposal, Accept Selected Changes, and Reject Proposal.</li>
+<li>Keep existing PLY export through <code>MeshExportService</code>.</li>
+<li>Treat additional export formats as separate <code>MeshExportWriter</code> subclasses only when their format contracts are defined.</li>
+</ol>
+<h4 id="source-acceptance-gates-8">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Local editor behavior remains available while signed out.</li>
+<li>Remote failures produce actionable status without clearing the document.</li>
+<li>Save and Publish are separate operations.</li>
+<li>AI output cannot mutate the document without an explicit acceptance action.</li>
+<li>Accepted AI changes mark the document dirty and trigger normal validation.</li>
+<li class="source-status--failed">Export always uses the last valid scene, never a failed partial generation.</li>
+</ul>
+<h3 id="source-milestone-8-verification-ci-and-release-readiness">Milestone 8: Verification, CI, and Release Readiness</h3><p class="section-guide">Reading guide: this source section records “Milestone 8: Verification, CI, and Release Readiness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-goal-9">Goal</h4><p class="section-guide">Reading guide: this source section records “Goal”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Make the complete editor, not only focused harnesses, continuously verifiable.</p>
+<h4 id="source-tasks-9">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add a deterministic application smoke-test mode.</li>
+<li>Add a headless startup test using Xvfb when available.</li>
+<li>Add a startup option that loads <code>examples/P2_time_showcase.p3d</code>.</li>
+<li>Verify initial scene generation and one rendered frame.</li>
+<li>Add integration tests for local document lifecycle.</li>
+<li>Add regeneration-coordinator concurrency tests.</li>
+<li>Add service contract fakes for authentication, cloud files, textures, and AI proposals.</li>
+<li>Add compiler warnings for application sources.</li>
+<li>Restore CI only after it builds the current source layout and runs the same authoritative commands used locally.</li>
+<li>Restore packaging after the executable name, resources, and runtime paths are stable.</li>
+</ol>
+<h4 id="source-acceptance-gates-9">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Clean full build passes on the supported Linux environment.</li>
+<li class="source-status--passed">P0, P1, and P2 suites pass.</li>
+<li>Headless editor startup reaches a generated preview.</li>
+<li>Offline editing smoke test passes.</li>
+<li>Temporal preview smoke test passes.</li>
+<li class="source-status--passed">Cloud and AI contract tests pass without live credentials.</li>
+<li>No release artifact relies on stale build objects.</li>
+</ul>
+<h3 id="source-7-current-to-target-responsibility-map">7. Current-to-Target Responsibility Map</h3><p class="section-guide">Reading guide: this source section records “7. Current-to-Target Responsibility Map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Current state or function</th>
+<th scope="col">Target owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global <code>Grammar *grammar</code></td>
+<td><code>GeneratedSceneSnapshot</code></td>
+</tr>
+<tr>
+<td class="source-status--pending">Global regeneration worker and pending flags</td>
+<td><code>SceneRegenerationCoordinator</code></td>
+</tr>
+<tr>
+<td><code>AppState::editor_text</code></td>
+<td><code>GrammarSourceDocument</code></td>
+</tr>
+<tr>
+<td><code>AppState::editor_dirty</code></td>
+<td><code>GrammarSourceDocument</code></td>
+</tr>
+<tr>
+<td>Cloud ID, title, and publication flags</td>
+<td><code>DocumentStorageIdentity</code></td>
+</tr>
+<tr>
+<td>Grammar error line/detail vectors</td>
+<td><code>DocumentDiagnosticCollection</code></td>
+</tr>
+<tr>
+<td>Workspace split ratios and fullscreen flag</td>
+<td><code>WorkspaceLayoutState</code></td>
+</tr>
+<tr>
+<td>Render-setting fields</td>
+<td><code>RenderConfiguration</code></td>
+</tr>
+<tr>
+<td>Global play and animation-time values</td>
+<td><code>PreviewTimelineState</code></td>
+</tr>
+<tr>
+<td>Hovered and selected instance indices</td>
+<td><code>EditorSelection</code> and <code>ScenePrimitiveIdentity</code></td>
+</tr>
+<tr>
+<td>Primitive source line and column metadata</td>
+<td><code>SceneSourceAssociationIndex</code></td>
+</tr>
+<tr>
+<td><code>draw_main_layout()</code></td>
+<td><code>EditorWorkspaceWindow</code></td>
+</tr>
+<tr>
+<td><code>draw_editor()</code></td>
+<td><code>GrammarEditorPanel</code> plus document command controls</td>
+</tr>
+<tr>
+<td><code>draw_smart_editor()</code></td>
+<td><code>GrammarEditorPanel</code></td>
+</tr>
+<tr>
+<td><code>draw_preview()</code></td>
+<td><code>ScenePreviewPanel</code> and preview controllers</td>
+</tr>
+<tr>
+<td><code>draw_console()</code></td>
+<td><code>ConsolePanel</code></td>
+</tr>
+<tr>
+<td><code>draw_material_controls()</code></td>
+<td><code>MaterialLibraryPanel</code></td>
+</tr>
+<tr>
+<td><code>draw_render_settings_controls()</code></td>
+<td><code>RenderSettingsPanel</code></td>
+</tr>
+<tr>
+<td><code>draw_ai_controls()</code></td>
+<td><code>AiAssistantPanel</code> and <code>AiGrammarProposalPanel</code></td>
+</tr>
+<tr>
+<td>Cloud modal functions</td>
+<td><code>CloudDocumentDialog</code> and <code>DocumentPersistenceService</code></td>
+</tr>
+<tr>
+<td>Firebase login drawing</td>
+<td><code>AuthenticationPanel</code></td>
+</tr>
+<tr>
+<td>Direct PLY action</td>
+<td><code>MeshExportService</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-8-recommended-change-sequence">8. Recommended Change Sequence</h3><p class="section-guide">Reading guide: this source section records “8. Recommended Change Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The implementation should remain runnable after every milestone. The recommended review sequence is:</p>
+<ol>
+<li>
+<p><strong>Build Contract Repair</strong></p>
+<ul>
+<li>Header/source reconciliation.</li>
+<li>Clean full build.</li>
+<li>P0–P2 verification.</li>
+</ul>
+</li>
+<li>
+<p><strong>Application Shell Extraction</strong></p>
+<ul>
+<li>New executable target.</li>
+<li>Composition root.</li>
+<li>Startup and shutdown ownership.</li>
+</ul>
+</li>
+<li>
+<p><strong>Workspace and Document Models</strong></p>
+<ul>
+<li>Decompose <code>AppState</code> without changing visual behavior.</li>
+<li>Enable offline workspace access.</li>
+</ul>
+</li>
+<li>
+<p><strong>Regeneration Ownership</strong></p>
+<ul>
+<li>Request/result objects.</li>
+<li>Worker coordinator.</li>
+<li>Last-valid-scene invariant.</li>
+</ul>
+</li>
+<li>
+<p><strong>Editor Panel Extraction</strong></p>
+<ul>
+<li>Syntax, diagnostics, autocomplete, and symbol navigation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Preview Panel Extraction</strong></p>
+<ul>
+<li>Camera, timeline, selection, overlays, and rendering configuration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Remote-Service Adapters</strong></p>
+<ul>
+<li>Authentication, cloud files, textures, and AI proposals.</li>
+</ul>
+</li>
+<li class="source-status--passed">
+<p class="source-status--passed"><strong>Complete-Application Verification</strong></p>
+<ul>
+<li>Headless startup, smoke tests, CI, and packaging.</li>
+</ul>
+</li>
+</ol>
+<p class="source-status--failed">Do not combine the build repair, state-model rewrite, renderer changes, and backend workflow rewrite into one change set. Their failure modes are different and should remain independently reviewable.</p>
+<h3 id="source-9-verification-matrix">9. Verification Matrix</h3><p class="section-guide">Reading guide: this source section records “9. Verification Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Area</th>
+<th scope="col">Required verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grammar safety</td>
+<td>Existing P0 checks</td>
+</tr>
+<tr>
+<td>Semantic isolation</td>
+<td>Existing P1 checks</td>
+</tr>
+<tr>
+<td>Temporal behavior</td>
+<td>Existing P2 checks</td>
+</tr>
+<tr>
+<td>Full compilation</td>
+<td>Clean <code>make progen3d-editor-gui</code></td>
+</tr>
+<tr>
+<td>Startup</td>
+<td>Headless application smoke test</td>
+</tr>
+<tr>
+<td>Document lifecycle</td>
+<td>New, edit, save, open, dirty-state integration tests</td>
+</tr>
+<tr>
+<td>Regeneration</td>
+<td>Request supersession, last-valid preservation, shutdown tests</td>
+</tr>
+<tr>
+<td>Preview clock</td>
+<td>Grammar-time versus physics-time integration tests</td>
+</tr>
+<tr>
+<td>Selection</td>
+<td>Preview-to-source and source-to-preview tests</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>Initial frame, resize, fullscreen, and resource shutdown smoke tests</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td>Repository contract tests with fake responses</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>Signed-out local mode and fake-session tests</td>
+</tr>
+<tr>
+<td>AI</td>
+<td class="source-status--proposed">Proposal review and explicit-acceptance tests</td>
+</tr>
+<tr>
+<td>Export</td>
+<td>PLY export from the last valid scene</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-10-primary-risks-and-mitigations">10. Primary Risks and Mitigations</h3><p class="section-guide">Reading guide: this source section records “10. Primary Risks and Mitigations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-risk-focused-tests-mask-production-header-drift">Risk: Focused tests mask production-header drift</h4><p class="section-guide">Reading guide: this source section records “Risk: Focused tests mask production-header drift”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Make the clean full application build the first gate, then run focused tests.</p>
+<h4 id="source-risk-procedural-globals-hide-ownership-dependencies">Risk: Procedural globals hide ownership dependencies</h4><p class="section-guide">Reading guide: this source section records “Risk: Procedural globals hide ownership dependencies”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Move one responsibility at a time into explicit session or service classes while retaining behavior.</p>
+<h4 id="source-risk-opengl-resources-cross-worker-thread-boundaries">Risk: OpenGL resources cross worker-thread boundaries</h4><p class="section-guide">Reading guide: this source section records “Risk: OpenGL resources cross worker-thread boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Worker threads produce CPU-side scene data. The application thread performs GPU uploads and resource destruction.</p>
+<h4 id="source-risk-obsolete-regeneration-results-replace-newer-edits">Risk: Obsolete regeneration results replace newer edits</h4><p class="section-guide">Reading guide: this source section records “Risk: Obsolete regeneration results replace newer edits”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Assign monotonic request sequence numbers and publish only the newest applicable result.</p>
+<h4 id="source-risk-authentication-blocks-the-core-editor">Risk: Authentication blocks the core editor</h4><p class="section-guide">Reading guide: this source section records “Risk: Authentication blocks the core editor”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Treat authentication as an optional capability and keep the local workspace always available.</p>
+<h4 id="source-risk-ai-changes-bypass-deterministic-validation">Risk: AI changes bypass deterministic validation</h4><p class="section-guide">Reading guide: this source section records “Risk: AI changes bypass deterministic validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed"><strong>Mitigation:</strong> Stage AI output as a proposal, require explicit acceptance, then run it through the normal document and generation pipeline.</p>
+<h4 id="source-risk-source-layout-migration-obscures-actual-changes">Risk: Source-layout migration obscures actual changes</h4><p class="section-guide">Reading guide: this source section records “Risk: Source-layout migration obscures actual changes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Finish or intentionally revert the migration before broad GUI extraction and exclude generated files.</p>
+<h4 id="source-risk-large-visual-changes-hide-architectural-regressions">Risk: Large visual changes hide architectural regressions</h4><p class="section-guide">Reading guide: this source section records “Risk: Large visual changes hide architectural regressions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Preserve current visual behavior through Milestones 1–5. Perform visual redesign only after ownership and tests are stable.</p>
+<h3 id="source-11-deferred-work">11. Deferred Work</h3><p class="section-guide">Reading guide: this source section records “11. Deferred Work”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following work is intentionally outside the first implementation sequence:</p>
+<ul>
+<li>Rewriting the grammar syntax.</li>
+<li>Replacing Dear ImGui with Qt or another toolkit.</li>
+<li>Replacing OpenGL with Vulkan or another renderer.</li>
+<li>Multi-document tabs.</li>
+<li>Collaborative live editing.</li>
+<li>New mesh export formats without defined contracts.</li>
+<li>Remote rendering.</li>
+<li>Plugin scripting.</li>
+<li>Major backend API redesign.</li>
+<li>Packaging changes before the executable and resource layout are stable.</li>
+</ul>
+<h3 id="source-12-completion-standard">12. Completion Standard</h3><p class="section-guide">Reading guide: this source section records “12. Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed"><code>progen3d-editor-gui</code> is complete when:</p>
+<ul>
+<li class="source-status--passed">The repository builds the complete GUI from a clean checkout.</li>
+<li class="source-status--passed">The P0, P1, and P2 suites pass unchanged or with explicitly reviewed extensions.</li>
+<li>Local editing, validation, preview, animation, selection, and PLY export work without authentication.</li>
+<li>Cloud, texture, publishing, and AI capabilities activate after authentication without owning core editor state.</li>
+<li>Invalid grammars cannot mutate or replace the last valid scene.</li>
+<li>Grammar time and physics time remain mutually exclusive authorities.</li>
+<li>AI-generated grammar is reviewable before application.</li>
+<li>Application, document, regeneration, preview, persistence, and presentation responsibilities are represented by purpose-named classes.</li>
+<li>The relationships between the classes can be translated into a UML diagram without guessing.</li>
+<li>The former <code>src/imgui_main.cpp</code> procedural responsibilities have been reduced to explicit application and presentation components.</li>
+</ul>
+<h3 id="source-13-first-implementation-slice">13. First Implementation Slice</h3><p class="section-guide">Reading guide: this source section records “13. First Implementation Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The first implementation slice should contain only:</p>
+<ol>
+<li>Reconcile <code>include/grammar.h</code> with <code>src/Grammar.cpp</code>.</li>
+<li>Add the <code>progen3d-editor-gui</code> build target.</li>
+<li>Produce a clean linked executable without stale objects.</li>
+<li>Run <code>./tests/run_p2_checks.sh</code>.</li>
+<li>Add a minimal full-application startup smoke check.</li>
+</ol>
+<p class="source-status--passed">No GUI restructuring should begin until those five items pass together.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-design-agent-implementation-plan.html" rel="prev">← Previous: ProGen3D Design Agent Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="../governance/agents-md.html" rel="next">Next: AGENTS.md →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

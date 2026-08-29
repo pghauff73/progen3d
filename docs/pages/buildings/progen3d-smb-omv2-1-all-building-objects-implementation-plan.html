@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims." name="description"/>
+<meta content="PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="e96f4231ea91aacb9ea004ceb343ebe5c552e9ee83c8f96d760e90938ab28bc2" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-buildings">Buildings and Object Models</a></li>
+<li aria-current="page">ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</h1>
+<p class="lead">SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Buildings and Object Models</span>
+<span class="tag">About 33 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="e96f4231ea91aacb9ea004ceb343ebe5c552e9ee83c8f96d760e90938ab28bc2" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan, Executive Decision, Version and Compatibility Boundary, SMB-OMv1 Remains Frozen.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Executive Decision</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Executive Decision</td></tr><tr><td><dfn title="Named by the source document">Version and Compatibility Boundary</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Version and Compatibility Boundary</td></tr><tr><td><dfn title="Named by the source document">SMB-OMv1 Remains Frozen</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 SMB-OMv1 Remains Frozen</td></tr><tr><td><dfn title="Named by the source document">SMB-OMv2 Remains the Spatial Authority</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 SMB-OMv2 Remains the Spatial Authority</td></tr><tr><td><dfn title="Named by the source document">SMB-OMv2.1 Is Additive</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 SMB-OMv2.1 Is Additive</td></tr><tr><td><dfn title="Named by the source document">Current All-Object Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Current All-Object Baseline</td></tr><tr><td><dfn title="Named by the source document">Theory of the Complete Building Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Theory of the Complete Building Model</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SMB-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">HVAC</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ID</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="OMv1, SMB-OMv2, and SMB-OMv2">SMB</dfn></td><td>OMv1, SMB-OMv2, and SMB-OMv2</td></tr><tr><td><dfn title="comma-separated values">CSV</dfn></td><td>comma-separated values</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan, Executive Decision, Version and Compatibility Boundary, SMB-OMv1 Remains Frozen. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Executive Decision, 2. Version and Compatibility Boundary, 2.1 SMB-OMv1 Remains Frozen, 2.2 SMB-OMv2 Remains the Spatial Authority. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 23, failed: 14, pending: 30, proposed: 1, unresolved: 7.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 116 code blocks, 2 tables and the source SHA-256 <code>e96f4231ea91aacb9ea004ceb343ebe5c552e9ee83c8f96d760e90938ab28bc2</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-executive-decision">1. Executive Decision</a></li><li><a href="#source-2-version-and-compatibility-boundary">2. Version and Compatibility Boundary</a></li><li><a href="#source-2-1-smb-omv1-remains-frozen">2.1 SMB-OMv1 Remains Frozen</a></li><li><a href="#source-2-2-smb-omv2-remains-the-spatial-authority">2.2 SMB-OMv2 Remains the Spatial Authority</a></li><li><a href="#source-2-3-smb-omv2-1-is-additive">2.3 SMB-OMv2.1 Is Additive</a></li><li><a href="#source-3-current-all-object-baseline">3. Current All-Object Baseline</a></li><li><a href="#source-4-theory-of-the-complete-building-model">4. Theory of the Complete Building Model</a></li><li><a href="#source-4-1-identity-is-not-classification">4.1 Identity Is Not Classification</a></li><li><a href="#source-4-2-classification-is-not-role">4.2 Classification Is Not Role</a></li><li><a href="#source-4-3-role-is-not-function">4.3 Role Is Not Function</a></li><li><a href="#source-4-4-connection-is-not-flow">4.4 Connection Is Not Flow</a></li><li><a href="#source-4-5-requirement-is-not-state">4.5 Requirement Is Not State</a></li><li><a href="#source-4-6-authored-is-not-derived">4.6 Authored Is Not Derived</a></li><li><a href="#source-4-7-unknown-is-not-false">4.7 Unknown Is Not False</a></li><li><a href="#source-5-completion-contract-for-every-object">5. Completion Contract for Every Object</a></li><li><a href="#source-5-1-container-objects">5.1 Container Objects</a></li><li><a href="#source-5-2-physical-leaf-objects">5.2 Physical Leaf Objects</a></li><li><a href="#source-5-3-space-objects">5.3 Space Objects</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>23</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>14</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>30</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>7</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan, Executive Decision, Version and Compatibility Boundary, SMB-OMv1 Remains Frozen.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>invoke or import the existing SMB-OMv2 generator;</li><li>load the generated 124-object spatial manifest;</li><li>verify the expected source schema and exact object ID set;</li><li>apply explicit semantic profiles keyed by stable object ID;</li><li>reject unknown, duplicate, or missing object profiles;</li><li>validate all catalog and graph references;</li><li>evaluate deterministic requirements supported at generation time;</li><li>emit the knowledge model and coverage CSV;</li><li>regenerate twice and prove byte-identical output in acceptance tests.</li><li>clone the prior immutable state snapshot;</li><li>apply declared input state changes;</li><li>evaluate affected service paths;</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">SmallModernBuildingModel
+├── SpatialBuildingModel
+├── BuildingClassificationModel
+├── BuildingFunctionModel
+├── BuildingServiceModel
+├── BuildingRequirementModel
+├── BuildingScenarioModel
+└── BuildingEvidenceLedger</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan" data="../../assets/diagrams/pages/progen3d-smb-omv2-1-all-building-objects-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>e96f4231ea91aacb9ea004ceb343ebe5c552e9ee83c8f96d760e90938ab28bc2</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>142 headings, 116 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_smb_omv1_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_smb_omv2_checks.sh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./tests/run_smb_omv2_visual_checks.sh</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan, Executive Decision, Version and Compatibility Boundary, SMB-OMv1 Remains Frozen, SMB-OMv2 Remains the Spatial Authority</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html">ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>SMB-OMv2 should be a semantic and spatial layer above the existing primitive scene. It should not be implemented as unrelated fields added to ScenePrimitiveInstance, and it should not use the dynamic physics loop as its assembly solver.</small></li><li><a href="smb-omv2-1-all-building-objects-verification.html">SMB-OMv2.1 All Building Objects Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>SMB-OMv2.1 is implemented as an additive building-knowledge model over the accepted SMB-OMv2 spatial model. The frozen SMB-OMv1 grammar remains the source fixture, SMB-OMv2 remains the spatial authority, and SMB-OMv2.1 adds explicit classification, role, function, service, relationship…</small></li><li><a href="progen3d-smbv3-simplemodernbuilding-version-3-implementation-plan.html">ProGen3D SMBv3 SimpleModernBuilding Version 3 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Consolidate the material in examples/SimpleModernBuilding behind one governed SMBv3 package and give every authoritative taxonomy entity an explicit contract for:</small></li><li><a href="progen3d-building-object-image-matching-v1-implementation-plan.html">ProGen3D Building Object Image Matching V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create a repeatable image-matching program in which each building object is rendered independently, compared with its corresponding ImageGen reference in six object-local camera views, and improved through grammar changes that are owned by an explicit visual object model.</small></li><li><a href="progen3d-comv1-chair-object-model-and-fgkv1-curved-geometry-implementation-plan.html">ProGen3D COMv1 Chair Object Model and FGKv1 Curved Geometry Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Implementation status: complete. Authoritative verification is recorded in COMV1CHAIROBJECTMODELVERIFICATION.md and tests/evidence/comv1chairacceptance2026-08-24.json.</small></li><li><a href="smbv3-independent-building-object-image-match-baseline.html">SMBv3 Independent Building Object Image Match Baseline</a> <span class="status-badge status--evidence">Evidence</span><br/><small>This is a diagnostic baseline, not certification. Missing references, failed independent tests, and scores below 80% remain explicit.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>e96f4231ea91aacb9ea004ceb343ebe5c552e9ee83c8f96d760e90938ab28bc2</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-smb-omv2-1-all-building-objects-implementation-plan">ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D SMB-OMv2.1 All Building Objects Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Date:</strong> Monday, August 24, 2026</li>
+<li><strong>Status:</strong> Implementation plan only. No new SMB runtime claim is promoted by this document.</li>
+<li class="source-status--passed"><strong>Objective:</strong> Extend the complete 124-object Small Modern Building with first-class classification, role, function, service-flow, requirement, state, scenario, and evidence models while preserving the accepted SMB-OMv1 and SMB-OMv2 behavior.</li>
+<li><strong>Object coverage authority:</strong> <code>examples/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json</code>.</li>
+<li><strong>Generator authority:</strong> <code>examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py</code> remains authoritative for the accepted SMB-OMv2 spatial fixture. SMB-OMv2.1 must enrich its output rather than duplicate or reinterpret the 124-object hierarchy.</li>
+<li class="source-status--passed"><strong>Compatibility authority:</strong> <code>examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d</code>, the accepted SMB-OMv2 grammar, existing primitive transforms, object identities, containment, geometry bindings, interfaces, connections, constraints, and evidence hashes remain unchanged until all SMB-OMv2.1 gates pass.</li>
+<li><strong>Release authority:</strong> Deterministic generation, exact all-object coverage, native model tests, invalid-fixture tests, requirement-to-evidence audit, editor inspection, visual evidence, compatibility gates, and a collected supervisor-mode matrix.</li>
+</ul>
+<h3 id="source-1-executive-decision">1. Executive Decision</h3><p class="section-guide">Reading guide: this source section records “1. Executive Decision”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv2.1 should make every building object explainable in terms of what it is, what roles it performs, what functions it contributes to, what services it exchanges, what requirements apply to it, what state it occupies, and what evidence supports those claims.</p>
+<p>It should be an additive knowledge model around the accepted spatial model:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SmallModernBuildingModel
+├── SpatialBuildingModel
+├── BuildingClassificationModel
+├── BuildingFunctionModel
+├── BuildingServiceModel
+├── BuildingRequirementModel
+├── BuildingScenarioModel
+└── BuildingEvidenceLedger
+</code></pre>
+<p>The existing <code>SpatialBuildingModel</code> remains the canonical owner of:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">stable object identity
+containment
+authored and resolved frames
+geometry bindings
+spatial interfaces
+spatial connections
+placement constraints
+collision policy
+resolution evidence
+</code></pre>
+<p>SMB-OMv2.1 adds canonical owners for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">validated concept definitions
+contextual object roles
+building functions
+functional allocations and dependencies
+directed service ports and flows
+requirements and applicability
+requirement evaluations
+orthogonal operational and condition states
+scenarios and state snapshots
+cross-model evidence and deterministic hashes
+</code></pre>
+<p>The core completion rule is:</p>
+<blockquote class="source-status--pending">
+<p class="source-status--pending">Every one of the 124 accepted SMB objects must have one deterministic semantic profile. Every profile must explicitly state which model dimensions are applicable, not applicable, or pending evidence. No missing field may be interpreted as an inferred fact.</p>
+</blockquote>
+<h3 id="source-2-version-and-compatibility-boundary">2. Version and Compatibility Boundary</h3><p class="section-guide">Reading guide: this source section records “2. Version and Compatibility Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-smb-omv1-remains-frozen">2.1 SMB-OMv1 Remains Frozen</h4><p class="section-guide">Reading guide: this source section records “2.1 SMB-OMv1 Remains Frozen”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv1 remains the authoritative compatibility fixture for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">124 supplied object names
+container decomposition
+48 reusable L1-L5 template chains
+physical leaf geometry
+zero geometry for relationship and semantic leaves
+fixed and collision-active primitive populations
+configuration guards
+legacy source transforms
+</code></pre>
+<p>SMB-OMv2.1 must not modify the SMB-OMv1 source grammar.</p>
+<h4 id="source-2-2-smb-omv2-remains-the-spatial-authority">2.2 SMB-OMv2 Remains the Spatial Authority</h4><p class="section-guide">Reading guide: this source section records “2.2 SMB-OMv2 Remains the Spatial Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv2 remains authoritative for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">124 stable object IDs
+123 containment relationships
+143 primitive bindings
+178 typed spatial interfaces
+28 accepted connections
+3 executable P0 placement constraints
+3 immutable resolution records
+CubeY placement semantics
+authored and resolved transforms
+spatial editor overlays
+</code></pre>
+<p>SMB-OMv2.1 must not silently change any of these counts or meanings.</p>
+<h4 id="source-2-3-smb-omv2-1-is-additive">2.3 SMB-OMv2.1 Is Additive</h4><p class="section-guide">Reading guide: this source section records “2.3 SMB-OMv2.1 Is Additive”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The initial SMB-OMv2.1 release should use a deterministic sidecar model rather than requiring new grammar syntax.</p>
+<p>Canonical generated artifact:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/SMB_OMv2_Instance_SMB_001/
+    SMB_OMv21_Building_Knowledge_Model.json
+</code></pre>
+<p>Coverage audit artifact:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/SMB_OMv2_Instance_SMB_001/
+    SMB_OMv21_Object_Coverage.csv
+</code></pre>
+<p>Acceptance evidence:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/evidence/smb_omv21_all_objects_acceptance_YYYY-MM-DD.json
+tests/evidence/smb_omv21_all_objects_visual_YYYY-MM-DD.json
+tests/evidence/smb_omv21_supervisor_matrix_YYYY-MM-DD.json
+</code></pre>
+<h3 id="source-3-current-all-object-baseline">3. Current All-Object Baseline</h3><p class="section-guide">Reading guide: this source section records “3. Current All-Object Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The accepted spatial manifest contains exactly 124 objects:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Root branch</th>
+<th scope="col" style="text-align:right">Object count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Building root</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Site</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td>Ground floor</td>
+<td style="text-align:right">32</td>
+</tr>
+<tr>
+<td>Upper floor</td>
+<td style="text-align:right">21</td>
+</tr>
+<tr>
+<td>Envelope</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td>Roof zone</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td>Services</td>
+<td style="text-align:right">18</td>
+</tr>
+<tr>
+<td>External works</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td>Relationships and semantic evidence</td>
+<td style="text-align:right">14</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>124</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The implementation must preserve this inventory exactly. A newly inferred object, implicit subsystem, virtual connection, or aggregate requirement must receive its own model identity only if a later reviewed version explicitly adds it. SMB-OMv2.1 may add functions, roles, ports, flows, requirements, scenarios, and evidence without adding building object IDs.</p>
+<h3 id="source-4-theory-of-the-complete-building-model">4. Theory of the Complete Building Model</h3><p class="section-guide">Reading guide: this source section records “4. Theory of the Complete Building Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The complete model is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SMB = (O, H, G, I, C, K, F, R, T, E)
+</code></pre>
+<p>where:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">O = stable objects and classifications
+H = containment hierarchy
+G = geometry realizations and boundaries
+I = spatial and service interfaces
+C = physical and functional connections
+K = placement and compatibility constraints
+F = functions, allocations, dependencies, and service flows
+R = requirements, applicability, evaluation, and compliance
+T = operational state, condition, scenarios, and lifecycle snapshots
+E = provenance, uncertainty, diagnostics, evidence, and hashes
+</code></pre>
+<h4 id="source-4-1-identity-is-not-classification">4.1 Identity Is Not Classification</h4><p class="section-guide">Reading guide: this source section records “4.1 Identity Is Not Classification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SMB_001_Ground_Kitchen_Sink</code> is an object identity. <code>Sink</code> is a concept assignment. The identity must remain stable if classification terminology is refined.</p>
+<h4 id="source-4-2-classification-is-not-role">4.2 Classification Is Not Role</h4><p class="section-guide">Reading guide: this source section records “4.2 Classification Is Not Role”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A <code>Window</code> may perform several roles:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">WeatherBoundaryClosure
+DaylightOpening
+ViewOpening
+VentilationOpening
+FacadeAssemblyMember
+</code></pre>
+<p>Roles are contextual assignments, not subclasses.</p>
+<h4 id="source-4-3-role-is-not-function">4.3 Role Is Not Function</h4><p class="section-guide">Reading guide: this source section records “4.3 Role Is Not Function”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>PotableWaterConsumer</code> is a role. <code>ProvideWashingFacility</code> is a building function. The sink may perform both without merging the concepts.</p>
+<h4 id="source-4-4-connection-is-not-flow">4.4 Connection Is Not Flow</h4><p class="section-guide">Reading guide: this source section records “4.4 Connection Is Not Flow”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A physical or semantic connection identifies related interfaces. A service flow is directed and carries a declared medium from a source port to a target port.</p>
+<h4 id="source-4-5-requirement-is-not-state">4.5 Requirement Is Not State</h4><p class="section-guide">Reading guide: this source section records “4.5 Requirement Is Not State”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed"><code>SinkMustReachWasteStack</code> is a requirement. <code>Passed</code> is an evaluation status. <code>Operational</code> is an object state. These must have separate canonical owners.</p>
+<h4 id="source-4-6-authored-is-not-derived">4.6 Authored Is Not Derived</h4><p class="section-guide">Reading guide: this source section records “4.6 Authored Is Not Derived”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Authored taxonomy, placement, and declared connections remain distinct from derived function coverage, service continuity, measured clearance, and scenario state.</p>
+<h4 id="source-4-7-unknown-is-not-false">4.7 Unknown Is Not False</h4><p class="section-guide">Reading guide: this source section records “4.7 Unknown Is Not False”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The model must use explicit statuses:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Applicable
+NotApplicable
+PendingEvidence
+</code></pre>
+<p>and:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Passed
+Failed
+Unknown
+NotEvaluated
+NotApplicable
+</code></pre>
+<p>Missing data must never be promoted as a successful fact.</p>
+<h3 id="source-5-completion-contract-for-every-object">5. Completion Contract for Every Object</h3><p class="section-guide">Reading guide: this source section records “5. Completion Contract for Every Object”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every object in Appendix A must have one <code>BuildingObjectSemanticProfile</code> containing:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object ID
+concept ID
+taxonomy path reference
+role assignment IDs
+function allocation IDs
+service port IDs
+requirement IDs
+scenario applicability IDs
+state facet applicability
+source provenance
+profile revision
+deterministic profile hash
+</code></pre>
+<p>Every profile must provide an explicit applicability record for:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Model dimension</th>
+<th scope="col">Allowed applicability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry</td>
+<td><code>Applicable</code>, <code>NotApplicable</code></td>
+</tr>
+<tr>
+<td>Spatial boundary</td>
+<td><code>Applicable</code>, <code>NotApplicable</code>, <code>PendingEvidence</code></td>
+</tr>
+<tr>
+<td>Spatial interfaces</td>
+<td><code>Applicable</code>, <code>NotApplicable</code>, <code>PendingEvidence</code></td>
+</tr>
+<tr>
+<td>Functional roles</td>
+<td><code>Applicable</code></td>
+</tr>
+<tr>
+<td>Building functions</td>
+<td><code>Applicable</code>, <code>NotApplicable</code></td>
+</tr>
+<tr>
+<td>Service ports</td>
+<td><code>Applicable</code>, <code>NotApplicable</code>, <code>PendingEvidence</code></td>
+</tr>
+<tr>
+<td>Requirements</td>
+<td><code>Applicable</code></td>
+</tr>
+<tr>
+<td>Operational state</td>
+<td><code>Applicable</code>, <code>NotApplicable</code></td>
+</tr>
+<tr>
+<td>Condition state</td>
+<td><code>Applicable</code>, <code>NotApplicable</code></td>
+</tr>
+<tr>
+<td>Scenario participation</td>
+<td><code>Applicable</code>, <code>NotApplicable</code>, <code>PendingEvidence</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>No profile may omit a model dimension.</p>
+<h4 id="source-5-1-container-objects">5.1 Container Objects</h4><p class="section-guide">Reading guide: this source section records “5.1 Container Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Container objects must:</p>
+<ul>
+<li>retain zero geometry unless the accepted SMB-OMv2 object already owns geometry;</li>
+<li>declare aggregate roles and functions;</li>
+<li>own containment completeness requirements;</li>
+<li>aggregate child requirement results without replacing child evidence;</li>
+<li class="source-status--unresolved">expose child coverage and unresolved-child counts;</li>
+<li>never receive placeholder geometry merely to make them selectable.</li>
+</ul>
+<h4 id="source-5-2-physical-leaf-objects">5.2 Physical Leaf Objects</h4><p class="section-guide">Reading guide: this source section records “5.2 Physical Leaf Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Physical leaves must:</p>
+<ul>
+<li>retain their existing geometry bindings;</li>
+<li>declare physical and functional roles;</li>
+<li>declare boundary and interface applicability;</li>
+<li>receive support, clearance, containment, service, or collision requirements as appropriate;</li>
+<li>retain authored and resolved spatial evidence;</li>
+<li>participate in operational and condition state only where meaningful.</li>
+</ul>
+<h4 id="source-5-3-space-objects">5.3 Space Objects</h4><p class="section-guide">Reading guide: this source section records “5.3 Space Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Rooms, storeys, entrance zones, halls, studies, bathrooms, kitchens, utility rooms, and bedrooms must:</p>
+<ul>
+<li>remain semantic/spatial containers rather than synthetic room solids unless exact space boundaries are authored later;</li>
+<li>declare occupancy or activity functions;</li>
+<li>declare containment and access requirements;</li>
+<li>aggregate installed fixtures and loose contents;</li>
+<li>expose explicit <code>PendingEvidence</code> for unsupported usable-area, headroom, circulation, daylight, ventilation, or egress claims.</li>
+</ul>
+<h4 id="source-5-4-system-objects">5.4 System Objects</h4><p class="section-guide">Reading guide: this source section records “5.4 System Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Structural, envelope, plumbing, electrical, HVAC, fire-safety, roof, landscape, lighting, and external-works systems must:</p>
+<ul>
+<li>declare system roles and functions;</li>
+<li>own system-level continuity or completeness requirements;</li>
+<li>aggregate component ports, flows, and state;</li>
+<li>avoid claiming analytical simulation not provided by the implementation.</li>
+</ul>
+<h4 id="source-5-5-relationship-and-semantic-objects">5.5 Relationship and Semantic Objects</h4><p class="section-guide">Reading guide: this source section records “5.5 Relationship and Semantic Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Relationship assertion objects must:</p>
+<ul>
+<li>retain zero geometry;</li>
+<li>reference exactly one canonical containment, connection, functional dependency, service flow, or monitoring relationship where the source meaning is executable;</li>
+<li>remain compatibility evidence rather than duplicate graph authority;</li>
+<li>report <code>PendingEvidence</code> when the legacy assertion is not executable;</li>
+<li>never create inferred endpoints from name similarity.</li>
+</ul>
+<h3 id="source-6-target-aggregate-object-model">6. Target Aggregate Object Model</h3><p class="section-guide">Reading guide: this source section records “6. Target Aggregate Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SmallModernBuildingModel
+{
+public:
+    const SpatialBuildingModel &amp;spatialModel() const;
+    const BuildingClassificationModel &amp;classificationModel() const;
+    const BuildingFunctionModel &amp;functionModel() const;
+    const BuildingServiceModel &amp;serviceModel() const;
+    const BuildingRequirementModel &amp;requirementModel() const;
+    const BuildingScenarioModel &amp;scenarioModel() const;
+    const BuildingEvidenceLedger &amp;evidenceLedger() const;
+    std::uint64_t modelHash() const;
+};
+</code></pre>
+<p><code>SmallModernBuildingModel</code> composes purpose-specific models. It must not become a mutable property bag.</p>
+<h3 id="source-7-classification-and-role-model">7. Classification and Role Model</h3><p class="section-guide">Reading guide: this source section records “7. Classification and Role Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-7-1-purpose-classes">7.1 Purpose Classes</h4><p class="section-guide">Reading guide: this source section records “7.1 Purpose Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingConceptId
+BuildingConceptDefinition
+BuildingClassificationModel
+BuildingRoleId
+BuildingRoleDefinition
+BuildingObjectRoleAssignment
+BuildingObjectSemanticProfile
+BuildingModelApplicability
+</code></pre>
+<h4 id="source-7-2-building-concept-definition">7.2 Building Concept Definition</h4><p class="section-guide">Reading guide: this source section records “7.2 Building Concept Definition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class BuildingConceptDefinition
+{
+public:
+    const BuildingConceptId &amp;conceptId() const;
+    const std::string &amp;canonicalName() const;
+    const std::optional&lt;BuildingConceptId&gt; &amp;broaderConceptId() const;
+    const std::vector&lt;std::string&gt; &amp;acceptedAliases() const;
+    bool geometryExpected() const;
+    bool containerExpected() const;
+};
+</code></pre>
+<p>Concept inheritance is allowed only for real “is-a” relationships:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingObjectConcept
+├── SpatialContainerConcept
+├── PhysicalElementConcept
+├── BuildingSystemConcept
+├── BuildingSpaceConcept
+└── SemanticEvidenceConcept
+</code></pre>
+<p>Concrete concepts such as <code>Window</code>, <code>Sink</code>, <code>StructuralSlab</code>, and <code>HVACEquipment</code> narrow those real categories.</p>
+<h4 id="source-7-3-role-assignment">7.3 Role Assignment</h4><p class="section-guide">Reading guide: this source section records “7.3 Role Assignment”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class BuildingObjectRoleAssignment
+{
+public:
+    const SpatialObjectId &amp;objectId() const;
+    const BuildingRoleId &amp;roleId() const;
+    const BuildingEvidenceReference &amp;evidence() const;
+};
+</code></pre>
+<p>Roles must not be encoded by multiplying object subclasses.</p>
+<h4 id="source-7-4-classification-validation">7.4 Classification Validation</h4><p class="section-guide">Reading guide: this source section records “7.4 Classification Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>BuildingClassificationValidationService</code> must reject:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">undefined concept IDs
+concept hierarchy cycles
+duplicate canonical names
+conflicting object concept assignments
+geometry-bearing semantic-only concepts
+container-only concepts assigned to physical leaves without explicit compatibility evidence
+unresolved role IDs
+duplicate role assignments
+</code></pre>
+<h3 id="source-8-function-model">8. Function Model</h3><p class="section-guide">Reading guide: this source section records “8. Function Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-8-1-purpose-classes">8.1 Purpose Classes</h4><p class="section-guide">Reading guide: this source section records “8.1 Purpose Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingFunctionId
+BuildingFunction
+BuildingFunctionModel
+BuildingFunctionAllocationRelationship
+BuildingFunctionalDependencyRelationship
+BuildingFunctionCoverageResult
+</code></pre>
+<h4 id="source-8-2-function-definition">8.2 Function Definition</h4><p class="section-guide">Reading guide: this source section records “8.2 Function Definition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class BuildingFunction
+{
+public:
+    const BuildingFunctionId &amp;functionId() const;
+    const std::string &amp;purpose() const;
+    BuildingFunctionCriticality criticality() const;
+    const std::vector&lt;BuildingFunctionId&gt; &amp;requiredDependencyIds() const;
+};
+</code></pre>
+<p>Initial function vocabulary:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">DefineBuildingSite
+DefinePropertyExtent
+ProvideGroundSupport
+ProvidePedestrianAccess
+ProvideVehicleAccess
+ProvideLandscapeAmenity
+TransferBuildingLoads
+ProvideHorizontalSupport
+ProvideVerticalSupport
+ProvideBuildingStability
+ProvideWeatherProtection
+ControlRainwater
+ProvideDaylight
+ProvideView
+ProvideEntrance
+SupportOccupancy
+SupportLivingActivity
+SupportCookingActivity
+SupportDiningActivity
+SupportSleepingActivity
+SupportStudyActivity
+SupportSanitationActivity
+SupportUtilityActivity
+ProvideVerticalCirculation
+ProvideFurnitureSupport
+ProvidePotableColdWater
+ProvidePotableHotWater
+RemoveWasteWater
+DistributeElectricalPower
+ProvideInteriorLighting
+ProvideExteriorLighting
+ConditionIndoorAir
+ExtractBathroomAir
+DetectSmoke
+ProvidePortableFireSuppression
+GenerateElectricalPower
+ProvideOutdoorAmenity
+DefineSiteSecurityBoundary
+RecordSemanticRelationshipEvidence
+</code></pre>
+<h4 id="source-8-3-function-allocation-rules">8.3 Function Allocation Rules</h4><p class="section-guide">Reading guide: this source section records “8.3 Function Allocation Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Every non-relationship object must have at least one applicable role.</li>
+<li>Every building space and system container must have at least one allocated function.</li>
+<li>A physical object may contribute to several functions.</li>
+<li>A function may be fulfilled by several objects.</li>
+<li>Relationship assertion objects may use <code>NotApplicable</code> for direct building function while performing <code>RecordSemanticRelationshipEvidence</code> as an evidence role.</li>
+<li>Every hard function must have at least one allocation before release.</li>
+<li>Function coverage does not prove performance. It proves only that declared model objects are assigned to the function.</li>
+</ul>
+<h3 id="source-9-service-model">9. Service Model</h3><p class="section-guide">Reading guide: this source section records “9. Service Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-9-1-purpose-classes">9.1 Purpose Classes</h4><p class="section-guide">Reading guide: this source section records “9.1 Purpose Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingServiceSystemId
+BuildingServiceSystem
+BuildingServicePortId
+BuildingServicePort
+BuildingServiceFlowId
+BuildingServiceFlow
+BuildingServiceMedium
+BuildingServiceFlowDirection
+BuildingServiceFlowGraph
+BuildingServiceContinuityResult
+</code></pre>
+<h4 id="source-9-2-port-relationship-to-spatial-interfaces">9.2 Port Relationship to Spatial Interfaces</h4><p class="section-guide">Reading guide: this source section records “9.2 Port Relationship to Spatial Interfaces”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A <code>BuildingServicePort</code> references zero or one <code>SpatialInterface</code>:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingServicePort
+├── object owner
+├── service medium
+├── direction
+├── optional spatial interface reference
+├── optional nominal capacity metadata
+└── evidence reference
+</code></pre>
+<p>The service port does not duplicate the spatial interface frame. If no spatial interface exists, the port must report <code>PendingEvidence</code> for spatial localization.</p>
+<h4 id="source-9-3-initial-service-media">9.3 Initial Service Media</h4><p class="section-guide">Reading guide: this source section records “9.3 Initial Service Media”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ElectricalPower
+PotableColdWater
+PotableHotWater
+WasteWater
+ConditionedAir
+ExhaustAir
+RefrigerantCircuit
+SmokeMonitoringSignal
+ControlSignal
+Rainwater
+</code></pre>
+<h4 id="source-9-4-p0-service-authority">9.4 P0 Service Authority</h4><p class="section-guide">Reading guide: this source section records “9.4 P0 Service Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv2.1 P0 validates topology only:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">port compatibility
+direction consistency
+required source reachability
+required sink reachability
+missing endpoints
+prohibited self-loops
+declared cycle policy
+orphan ports
+duplicate flow IDs
+deterministic graph traversal
+</code></pre>
+<p>It does not claim:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">hydraulic pressure
+pipe sizing
+electrical voltage drop
+circuit protection
+airflow rate
+thermal load
+refrigerant thermodynamics
+fire-code certification
+</code></pre>
+<h3 id="source-10-requirement-model">10. Requirement Model</h3><p class="section-guide">Reading guide: this source section records “10. Requirement Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-10-1-real-requirement-hierarchy">10.1 Real Requirement Hierarchy</h4><p class="section-guide">Reading guide: this source section records “10.1 Real Requirement Hierarchy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingRequirement
+├── IdentityRequirement
+├── ClassificationRequirement
+├── ContainmentRequirement
+├── ConnectionRequirement
+├── ClearanceRequirement
+├── CollisionAvoidanceRequirement
+├── FunctionalCoverageRequirement
+├── ServiceContinuityRequirement
+├── BoundaryRequirement
+├── StateRequirement
+└── ScenarioRequirement
+</code></pre>
+<p>Inheritance is used because each concrete class is a real kind of building requirement with distinct evaluation data.</p>
+<h4 id="source-10-2-common-requirement-contract">10.2 Common Requirement Contract</h4><p class="section-guide">Reading guide: this source section records “10.2 Common Requirement Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class BuildingRequirement
+{
+public:
+    virtual ~BuildingRequirement() = default;
+    virtual const BuildingRequirementId &amp;requirementId() const = 0;
+    virtual BuildingRequirementKind kind() const = 0;
+    virtual BuildingRequirementCriticality criticality() const = 0;
+    virtual const BuildingRequirementTarget &amp;target() const = 0;
+    virtual const std::vector&lt;BuildingRequirementId&gt; &amp;dependencyIds() const = 0;
+};
+</code></pre>
+<h4 id="source-10-3-evaluation-record">10.3 Evaluation Record</h4><p class="section-guide">Reading guide: this source section records “10.3 Evaluation Record”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class BuildingRequirementEvaluationRecord
+{
+public:
+    const BuildingRequirementId &amp;requirementId() const;
+    BuildingRequirementEvaluationStatus status() const;
+    const BuildingMeasuredValue &amp;measuredValue() const;
+    const BuildingRequiredValue &amp;requiredValue() const;
+    float tolerance() const;
+    const std::vector&lt;BuildingEvidenceReference&gt; &amp;evidenceReferences() const;
+    const std::vector&lt;std::string&gt; &amp;diagnostics() const;
+    std::uint64_t evidenceHash() const;
+};
+</code></pre>
+<h4 id="source-10-4-criticality">10.4 Criticality</h4><p class="section-guide">Reading guide: this source section records “10.4 Criticality”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Hard
+Soft
+Informational
+</code></pre>
+<ul>
+<li class="source-status--passed">A <code>Hard</code> requirement must evaluate <code>Passed</code> for release.</li>
+<li class="source-status--pending">A <code>Soft</code> requirement may remain <code>Unknown</code> only when the release report names it explicitly.</li>
+<li>An <code>Informational</code> requirement records evidence without gating release.</li>
+<li><code>NotEvaluated</code> is never an acceptable final status for an applicable hard requirement.</li>
+</ul>
+<h4 id="source-10-5-requirement-dependencies">10.5 Requirement Dependencies</h4><p class="section-guide">Reading guide: this source section records “10.5 Requirement Dependencies”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The requirement dependency graph must be acyclic. Evaluation order is topological and source-order independent.</p>
+<p>Examples:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">sink service continuity depends on port compatibility
+cabinet wall clearance depends on resolved placement evidence
+solar electrical contribution depends on the power-flow connection
+space function completeness depends on child object function allocations
+system completeness depends on required component profiles
+</code></pre>
+<h3 id="source-11-state-and-scenario-model">11. State and Scenario Model</h3><p class="section-guide">Reading guide: this source section records “11. State and Scenario Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-11-1-orthogonal-state-facets">11.1 Orthogonal State Facets</h4><p class="section-guide">Reading guide: this source section records “11.1 Orthogonal State Facets”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Do not replace the existing spatial object state. Add purpose-specific facets:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingPlacementState
+BuildingOperationalState
+BuildingConditionState
+BuildingComplianceState
+BuildingServiceAvailabilityState
+</code></pre>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SMB_001_HVAC_LivingIndoorUnit
+    placement = ContactResolved
+    operation = Available
+    condition = Serviceable
+    compliance = Passed
+    service availability = Connected
+</code></pre>
+<h4 id="source-11-2-purpose-classes">11.2 Purpose Classes</h4><p class="section-guide">Reading guide: this source section records “11.2 Purpose Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingScenarioId
+BuildingScenario
+BuildingScenarioParticipation
+BuildingStateSnapshot
+BuildingStateTransitionRecord
+BuildingScenarioStateTransitionService
+</code></pre>
+<h4 id="source-11-3-initial-scenarios">11.3 Initial Scenarios</h4><p class="section-guide">Reading guide: this source section records “11.3 Initial Scenarios”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AuthoredConfiguration
+ResolvedPlacement
+NormalOccupancy
+BuildingUnoccupied
+ElectricalPowerUnavailable
+ColdWaterUnavailable
+HotWaterUnavailable
+HVACUnavailable
+SmokeDetectedGroundFloor
+SmokeDetectedUpperFloor
+MaintenanceInspection
+</code></pre>
+<p>P0 scenario evaluation is discrete and deterministic. It does not run time-stepped physical simulation.</p>
+<h3 id="source-12-evidence-model">12. Evidence Model</h3><p class="section-guide">Reading guide: this source section records “12. Evidence Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-12-1-purpose-classes">12.1 Purpose Classes</h4><p class="section-guide">Reading guide: this source section records “12.1 Purpose Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingEvidenceId
+BuildingEvidenceReference
+BuildingEvidenceRecord
+BuildingEvidenceLedger
+BuildingEvidenceKind
+BuildingEvidenceAuthority
+BuildingEvidenceHashService
+</code></pre>
+<h4 id="source-12-2-evidence-kinds">12.2 Evidence Kinds</h4><p class="section-guide">Reading guide: this source section records “12.2 Evidence Kinds”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">AuthoredSource
+GeneratedManifest
+SpatialResolution
+GeometryBinding
+InterfaceCompatibility
+ConnectionGraph
+ServiceTopology
+RequirementEvaluation
+ScenarioEvaluation
+VisualInspection
+CompatibilityGate
+</code></pre>
+<h4 id="source-12-3-evidence-authority">12.3 Evidence Authority</h4><p class="section-guide">Reading guide: this source section records “12.3 Evidence Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Authoritative
+Supporting
+Documentary
+Pending
+</code></pre>
+<p>Visual evidence is supporting. Source, graph, deterministic evaluation, collision, residual, and exact-hash evidence are authoritative where their declared capability applies.</p>
+<h4 id="source-12-4-hashes">12.4 Hashes</h4><p class="section-guide">Reading guide: this source section records “12.4 Hashes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The acceptance artifact must include:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">concept catalog hash
+object semantic profile hash
+function allocation hash
+functional dependency hash
+service topology hash
+requirement definition hash
+requirement evaluation hash
+scenario definition hash
+scenario snapshot hash
+aggregate SMB-OMv2.1 model hash
+</code></pre>
+<p>Repeated generation from identical SMB-OMv2 input must reproduce every hash exactly.</p>
+<h3 id="source-13-independent-graphs-and-relationships">13. Independent Graphs and Relationships</h3><p class="section-guide">Reading guide: this source section records “13. Independent Graphs and Relationships”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>SMB-OMv2.1 must preserve separate graph owners:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SpatialContainmentTree
+    answers: what contains this object?
+
+SpatialConnectionGraph
+    answers: what spatial interfaces are connected?
+
+SpatialConstraintGraph
+    answers: what placement dependencies determine transforms?
+
+BuildingFunctionGraph
+    answers: what functions depend on other functions?
+
+BuildingServiceFlowGraph
+    answers: what directed service medium flows between ports?
+
+BuildingRequirementDependencyGraph
+    answers: what evidence or prerequisite requirement must resolve first?
+</code></pre>
+<p>Do not create a universal relationship graph that erases these semantics.</p>
+<h3 id="source-14-all-object-branch-implementation-program">14. All-Object Branch Implementation Program</h3><p class="section-guide">Reading guide: this source section records “14. All-Object Branch Implementation Program”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-14-1-building-root-1-object">14.1 Building Root — 1 Object</h4><p class="section-guide">Reading guide: this source section records “14.1 Building Root — 1 Object”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Objects:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SMB_001
+</code></pre>
+<p>Required development:</p>
+<ul>
+<li>assign <code>SmallModernBuilding</code> as the canonical concept;</li>
+<li>allocate whole-building functions for shelter, occupancy support, services, safety, and external works;</li>
+<li>reference all nine root branches;</li>
+<li>require exactly 123 contained descendants and 124 total profiles;</li>
+<li>aggregate hard requirement status without replacing child records;</li>
+<li class="source-status--unresolved">expose the aggregate model hash and unresolved-object count;</li>
+<li class="source-status--failed">fail if any accepted object lacks a semantic profile.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">root profile exists exactly once
+all root branches resolve
+all-object count equals 124
+aggregate hard requirement status is Passed
+</code></pre>
+<h4 id="source-14-2-site-branch-10-objects">14.2 Site Branch — 10 Objects</h4><p class="section-guide">Reading guide: this source section records “14.2 Site Branch — 10 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required roles and functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">site definition
+property extent
+terrain support
+pedestrian access
+vehicle access
+landscape organization
+planting containment
+outdoor amenity
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>property boundary contains authored site elements where exact boundaries permit evaluation;</li>
+<li class="source-status--pending">ground surface supports building and external-work objects through declared or pending interfaces;</li>
+<li>entry path and driveway remain inside the site boundary;</li>
+<li>planters and trees remain contained by the landscape system;</li>
+<li>geometry-bearing site leaves retain finite boundaries;</li>
+<li>no ecological, drainage, root-zone, or accessibility performance is inferred without evidence.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">10/10 profiles
+10/10 concept assignments
+no orphan landscape child
+all geometry applicability records agree with SMB-OMv2
+site requirements have explicit statuses
+</code></pre>
+<h4 id="source-14-3-structure-branch-11-objects">14.3 Structure Branch — 11 Objects</h4><p class="section-guide">Reading guide: this source section records “14.3 Structure Branch — 11 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required roles and functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">foundation support
+horizontal load transfer
+vertical load transfer
+building stability
+storey support
+roof support
+core stability and circulation enclosure
+</code></pre>
+<p>Required structural topology:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">foundation -&gt; ground slab
+foundation -&gt; structural columns
+columns/core -&gt; upper slab
+columns/core -&gt; roof slab
+</code></pre>
+<p>This topology is semantic evidence only in P0. It is not finite-element or code-compliance analysis.</p>
+<p>Required requirements:</p>
+<ul>
+<li>all structural leaves have finite geometry bindings and boundaries;</li>
+<li>all four columns belong to the column system;</li>
+<li>ground, upper, and roof slabs belong to the structural system;</li>
+<li>the load-path graph reaches the foundation for every supported slab;</li>
+<li>structural objects reject service or furniture collision classifications;</li>
+<li class="source-status--unresolved">unresolved exact bearing surfaces remain explicit.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">11/11 profiles
+load-path topology connected
+zero topology cycles
+zero inferred structural capacities
+</code></pre>
+<h4 id="source-14-4-ground-floor-branch-32-objects">14.4 Ground Floor Branch — 32 Objects</h4><p class="section-guide">Reading guide: this source section records “14.4 Ground Floor Branch — 32 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required space functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">entrance
+living
+cooking
+dining
+sanitation
+utility
+vertical circulation
+</code></pre>
+<p>Required physical roles:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">floor finish
+glazing
+door closure
+weather canopy
+furniture
+cabinetry
+work surface
+plumbing fixture
+appliance
+lighting
+partition
+sanitary fixture
+stair flight
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>every room container owns the expected accepted child objects;</li>
+<li>all loose furniture retains explicit floor-support evidence or <code>PendingEvidence</code>;</li>
+<li>cabinet support and wall clearance use existing SMB-OMv2 resolution evidence;</li>
+<li>the sink is supported by the benchtop and connected to cold-water, hot-water, and waste service paths;</li>
+<li>sanitary fixtures declare water and waste applicability without inventing missing executable ports;</li>
+<li>room lights allocate interior-lighting function and later connect to ground lighting service topology;</li>
+<li>the water heater participates in hot-water supply topology;</li>
+<li>the stair flight belongs to the stair system and participates in vertical-circulation function;</li>
+<li class="source-status--pending">occupancy capacity, accessibility, appliance power, headroom, and egress remain pending unless exact evidence is added.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">32/32 profiles
+all seven ground-floor space functions allocated
+existing cabinet and sink predicates reproduced by requirement evaluation
+all loose contents have explicit support status
+</code></pre>
+<h4 id="source-14-5-upper-floor-branch-21-objects">14.5 Upper Floor Branch — 21 Objects</h4><p class="section-guide">Reading guide: this source section records “14.5 Upper Floor Branch — 21 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required space functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">upper circulation
+sleeping
+clothing storage
+sanitation
+study
+daylight and view
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>both bedroom containers own floor, bed, wardrobe, and window profiles;</li>
+<li>the upper bathroom owns partition, vanity, toilet, and shower profiles;</li>
+<li>the study owns desk, chair, and window profiles;</li>
+<li>all three windows retain their accepted facade-opening connections;</li>
+<li>loose beds, wardrobes, desk, and chair set retain explicit floor-support evidence;</li>
+<li>upper floor lights represented through the electrical aggregate remain distinguishable from room contents;</li>
+<li class="source-status--pending">usable area, daylight, ventilation, privacy, and escape claims remain pending without exact evidence.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">21/21 profiles
+bedroom profile symmetry checked without forcing identical authored geometry
+3/3 windows connected to authored opening interfaces
+all loose upper-floor contents have support status
+</code></pre>
+<h4 id="source-14-6-envelope-branch-7-objects">14.6 Envelope Branch — 7 Objects</h4><p class="section-guide">Reading guide: this source section records “14.6 Envelope Branch — 7 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required roles and functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">weather boundary
+facade enclosure
+solar shading
+rainwater collection and conveyance
+opening host
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>four facade objects form the declared envelope set;</li>
+<li>external fins allocate shading role without claiming measured solar performance;</li>
+<li>downpipes use plumbing/rainwater service semantics rather than envelope collision classification;</li>
+<li>window opening interfaces remain semantic until exact surface boundaries exist;</li>
+<li>envelope continuity is a topological requirement in P0, not a watertight mesh claim;</li>
+<li>facade geometry remains finite and bound to the accepted objects.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">7/7 profiles
+4/4 facade members present
+downpipe service medium is Rainwater
+no Boolean opening or exact weather-tightness claim without evidence
+</code></pre>
+<h4 id="source-14-7-roof-zone-branch-5-objects">14.7 Roof Zone Branch — 5 Objects</h4><p class="section-guide">Reading guide: this source section records “14.7 Roof Zone Branch — 5 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required roles and functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">roof enclosure
+edge protection representation
+solar power generation
+roof equipment support
+outdoor HVAC service
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>roof system contains parapet, solar array, and outdoor HVAC profiles;</li>
+<li>photovoltaic module set remains one aggregate object owning repeated panel geometry;</li>
+<li>solar array reaches the electrical system through a directed power flow;</li>
+<li>outdoor HVAC remains supported by the roof slab using existing resolved placement evidence;</li>
+<li class="source-status--pending">parapet height compliance, photovoltaic capacity, wind loading, and equipment maintenance clearance remain pending unless measured evidence is added.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">5/5 profiles
+solar aggregate geometry count preserved
+power-flow path reaches electrical system
+outdoor HVAC support requirement passes
+</code></pre>
+<h4 id="source-14-8-services-branch-18-objects">14.8 Services Branch — 18 Objects</h4><p class="section-guide">Reading guide: this source section records “14.8 Services Branch — 18 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required system models:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">PlumbingSystem
+ElectricalSystem
+HVACSystem
+FireSafetySystem
+</code></pre>
+<p>Required plumbing topology:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cold-water riser -&gt; cold-water consumers
+water heater -&gt; hot-water riser
+hot-water riser -&gt; hot-water consumers
+waste-producing fixtures -&gt; sanitary stack
+</code></pre>
+<p>Required electrical topology:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">solar array -&gt; electrical system
+main panel -&gt; ground lighting circuit
+main panel -&gt; upper lighting circuit
+lighting circuits -&gt; luminaire sets
+</code></pre>
+<p>Required HVAC topology:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">outdoor HVAC unit -&gt; living indoor unit
+outdoor HVAC unit -&gt; bedroom indoor unit
+bathroom exhaust -&gt; exhaust-air outlet pending exact endpoint
+</code></pre>
+<p>Required fire-safety topology:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ground smoke alarm -&gt; ground-floor monitoring zone
+upper smoke alarm -&gt; upper-floor monitoring zone
+fire extinguisher -&gt; portable suppression function
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>every service system and component has an explicit service-port applicability record;</li>
+<li>every executable service assertion maps to one directed flow or monitoring relationship;</li>
+<li>no capacity or regulatory compliance is inferred from connectivity;</li>
+<li>aggregate luminaire objects preserve repeated primitive ownership;</li>
+<li class="source-status--unresolved">unresolved fixture ports and external source/sink endpoints remain pending.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">18/18 profiles
+all executable service paths deterministic
+zero orphan executable ports
+zero incompatible service media
+no unsupported analytical claims
+</code></pre>
+<h4 id="source-14-9-external-works-branch-5-objects">14.9 External Works Branch — 5 Objects</h4><p class="section-guide">Reading guide: this source section records “14.9 External Works Branch — 5 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required roles and functions:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">outdoor amenity
+site boundary/security representation
+external illumination
+external lighting aggregation
+</code></pre>
+<p>Required requirements:</p>
+<ul>
+<li>patio remains within the site and is supported by terrain where evaluable;</li>
+<li>perimeter fence references the property/site boundary relationship without inventing exact coincidence;</li>
+<li>external luminaires allocate exterior-lighting function and electrical service applicability;</li>
+<li>the external luminaire set retains four accepted primitive bindings under one stable object;</li>
+<li class="source-status--pending">lighting levels, security compliance, and accessibility remain pending without measurements.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">5/5 profiles
+external luminaire aggregation preserved
+all external objects have site containment status
+</code></pre>
+<h4 id="source-14-10-relationship-branch-14-objects">14.10 Relationship Branch — 14 Objects</h4><p class="section-guide">Reading guide: this source section records “14.10 Relationship Branch — 14 Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required development:</p>
+<ul>
+<li>retain the relationship system and semantic leaf as zero-geometry objects;</li>
+<li>map five containment assertions to the canonical containment tree;</li>
+<li>map sink cold-water, water-heater hot-water, two HVAC service, solar power, and two smoke-monitoring assertions to canonical connection or service relationships;</li>
+<li>retain exact source provenance for every assertion;</li>
+<li>ensure each assertion references one canonical fact and does not become a second authority;</li>
+<li class="source-status--pending">report any non-executable semantic leaf as documentary or pending.</li>
+</ul>
+<p>Gate:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">14/14 profiles
+12/12 assertion objects reference canonical relationships
+zero invented geometry
+zero duplicate graph authority
+zero unresolved executable endpoints
+</code></pre>
+<h3 id="source-15-canonical-semantic-profile-schema">15. Canonical Semantic Profile Schema</h3><p class="section-guide">Reading guide: this source section records “15. Canonical Semantic Profile Schema”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The generated knowledge model should use a versioned schema:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-json">{
+  "schema": "ProGen3D-SMB-OMv2.1-BuildingKnowledgeModel-v1",
+  "source_spatial_schema": "SMB-OMv2-SpatialObjectModel-v1",
+  "source_object_count": 124,
+  "model_revision": 1,
+  "concept_catalog": [],
+  "role_catalog": [],
+  "functions": [],
+  "functional_allocations": [],
+  "functional_dependencies": [],
+  "service_systems": [],
+  "service_ports": [],
+  "service_flows": [],
+  "requirements": [],
+  "requirement_dependencies": [],
+  "object_profiles": [],
+  "scenarios": [],
+  "evidence_records": [],
+  "deterministic_hashes": {}
+}
+</code></pre>
+<h4 id="source-15-1-object-profile-record">15.1 Object Profile Record</h4><p class="section-guide">Reading guide: this source section records “15.1 Object Profile Record”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-json">{
+  "object_id": "SMB_001_Ground_Kitchen_Sink",
+  "concept_id": "BuildingConcept.Sink",
+  "role_ids": [
+    "BuildingRole.WashingFixture",
+    "BuildingRole.PotableWaterConsumer",
+    "BuildingRole.WasteWaterProducer",
+    "BuildingRole.BenchtopSupportedFixture"
+  ],
+  "function_allocation_ids": [
+    "FunctionAllocation.KitchenSink.ProvideWashingFacility"
+  ],
+  "service_port_ids": [
+    "ServicePort.KitchenSink.ColdWaterIn",
+    "ServicePort.KitchenSink.HotWaterIn",
+    "ServicePort.KitchenSink.WasteWaterOut"
+  ],
+  "requirement_ids": [
+    "Requirement.KitchenSink.SupportedByBenchtop",
+    "Requirement.KitchenSink.ColdWaterContinuity",
+    "Requirement.KitchenSink.HotWaterContinuity",
+    "Requirement.KitchenSink.WasteWaterContinuity"
+  ],
+  "applicability": {
+    "geometry": "Applicable",
+    "spatial_boundary": "Applicable",
+    "spatial_interfaces": "Applicable",
+    "building_functions": "Applicable",
+    "service_ports": "Applicable",
+    "requirements": "Applicable",
+    "operational_state": "Applicable",
+    "condition_state": "Applicable",
+    "scenario_participation": "Applicable"
+  },
+  "profile_revision": 1,
+  "profile_hash": 0
+}
+</code></pre>
+<h3 id="source-16-generator-architecture">16. Generator Architecture</h3><p class="section-guide">Reading guide: this source section records “16. Generator Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-16-1-preserve-the-existing-generator">16.1 Preserve the Existing Generator</h4><p class="section-guide">Reading guide: this source section records “16.1 Preserve the Existing Generator”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Do not duplicate the SMB-OMv2 hierarchy logic.</p>
+<p>Add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/SMB_OMv2_Instance_SMB_001/
+    generate_smb_omv21.py
+    smb_omv21_concept_catalog.py
+    smb_omv21_role_catalog.py
+    smb_omv21_function_definitions.py
+    smb_omv21_service_definitions.py
+    smb_omv21_requirement_definitions.py
+    smb_omv21_scenario_definitions.py
+</code></pre>
+<p><code>generate_smb_omv21.py</code> should:</p>
+<ol>
+<li>invoke or import the existing SMB-OMv2 generator;</li>
+<li>load the generated 124-object spatial manifest;</li>
+<li>verify the expected source schema and exact object ID set;</li>
+<li>apply explicit semantic profiles keyed by stable object ID;</li>
+<li class="source-status--pending">reject unknown, duplicate, or missing object profiles;</li>
+<li>validate all catalog and graph references;</li>
+<li>evaluate deterministic requirements supported at generation time;</li>
+<li>emit the knowledge model and coverage CSV;</li>
+<li>regenerate twice and prove byte-identical output in acceptance tests.</li>
+</ol>
+<h4 id="source-16-2-generator-data-rules">16.2 Generator Data Rules</h4><p class="section-guide">Reading guide: this source section records “16.2 Generator Data Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Use explicit object-ID keyed records, not name-fragment inference.</li>
+<li>Reusable profile templates may reduce repetition but must expand to explicit per-object records.</li>
+<li>A template may not assign a service port or requirement solely because an object name contains a matching word.</li>
+<li>Repeated aggregate objects such as <code>SMB_StairStep</code>, <code>SMB_SolarPanel</code>, <code>SMB_CeilingLight</code>, and <code>SMB_ExternalLight</code> retain one semantic profile each.</li>
+<li class="source-status--unresolved">Unresolved concepts remain explicit and fail closed.</li>
+<li>The coverage CSV is generated from the same in-memory records as the JSON model.</li>
+</ul>
+<h3 id="source-17-runtime-construction-architecture">17. Runtime Construction Architecture</h3><p class="section-guide">Reading guide: this source section records “17. Runtime Construction Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-17-1-construction-context">17.1 Construction Context</h4><p class="section-guide">Reading guide: this source section records “17.1 Construction Context”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SmallModernBuildingModelConstructionContext
+├── concept definitions
+├── role definitions
+├── object profiles
+├── functions and allocations
+├── service systems, ports, and flows
+├── requirements and dependencies
+├── scenarios
+├── provisional evaluation records
+└── diagnostics
+</code></pre>
+<h4 id="source-17-2-construction-service">17.2 Construction Service</h4><p class="section-guide">Reading guide: this source section records “17.2 Construction Service”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class SmallModernBuildingModelConstructionService
+{
+public:
+    SmallModernBuildingModelConstructionResult construct(
+        const SpatialBuildingModel &amp;spatial_model,
+        const SmallModernBuildingModelConstructionRequest &amp;request) const;
+};
+</code></pre>
+<p>Construction order:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">validate source spatial model
+load catalogs
+construct semantic profiles
+validate object coverage
+construct function graph
+construct service-flow graph
+construct requirement dependency graph
+evaluate source-derived requirements
+construct scenario catalog
+hash immutable records
+publish aggregate model atomically
+</code></pre>
+<p class="source-status--failed">No partial <code>SmallModernBuildingModel</code> is published on failure.</p>
+<h4 id="source-17-3-snapshot-integration">17.3 Snapshot Integration</h4><p class="section-guide">Reading guide: this source section records “17.3 Snapshot Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The target snapshot relationship is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">GeneratedSceneSnapshot
+├── GrammarDocument
+├── SceneGenerationContext
+│   └── ScenePrimitiveInstance[]
+├── SpatialBuildingModel
+└── SmallModernBuildingModel
+</code></pre>
+<p>The knowledge model references stable spatial IDs and never owns primitive instances.</p>
+<h3 id="source-18-requirement-evaluation-architecture">18. Requirement Evaluation Architecture</h3><p class="section-guide">Reading guide: this source section records “18. Requirement Evaluation Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-18-1-evaluation-services">18.1 Evaluation Services</h4><p class="section-guide">Reading guide: this source section records “18.1 Evaluation Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingIdentityRequirementEvaluationService
+BuildingClassificationRequirementEvaluationService
+BuildingContainmentRequirementEvaluationService
+BuildingConnectionRequirementEvaluationService
+BuildingClearanceRequirementEvaluationService
+BuildingCollisionRequirementEvaluationService
+BuildingFunctionCoverageEvaluationService
+BuildingServiceContinuityEvaluationService
+BuildingBoundaryRequirementEvaluationService
+BuildingScenarioRequirementEvaluationService
+</code></pre>
+<h4 id="source-18-2-evaluation-context">18.2 Evaluation Context</h4><p class="section-guide">Reading guide: this source section records “18.2 Evaluation Context”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingRequirementEvaluationContext
+├── SpatialBuildingModel
+├── BuildingClassificationModel
+├── BuildingFunctionModel
+├── BuildingServiceModel
+├── current scenario
+├── source evidence index
+└── numerical tolerance policy
+</code></pre>
+<h4 id="source-18-3-reproduce-existing-priority-validity">18.3 Reproduce Existing Priority Validity</h4><p class="section-guide">Reading guide: this source section records “18.3 Reproduce Existing Priority Validity”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following current acceptance predicates must become first-class requirements while retaining equivalent acceptance behavior:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">cabinet supported and wall-cleared
+sink supported and connected to cold, hot, and waste plumbing
+water heater connected to hot-water riser
+both indoor HVAC units served by outdoor HVAC unit
+solar array connected to electrical system
+both smoke alarms connected to monitored floors
+three windows seated in authored facade openings
+all loose furniture supported by the correct floor
+</code></pre>
+<p>The existing harness remains green while the new evaluator proves parity.</p>
+<h3 id="source-19-state-transition-architecture">19. State Transition Architecture</h3><p class="section-guide">Reading guide: this source section records “19. State Transition Architecture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-19-1-transition-authority">19.1 Transition Authority</h4><p class="section-guide">Reading guide: this source section records “19.1 Transition Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Public code must not assign arbitrary state values. State changes occur through:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingPlacementStateTransitionService
+BuildingOperationalStateTransitionService
+BuildingConditionStateTransitionService
+BuildingComplianceStateTransitionService
+BuildingServiceAvailabilityTransitionService
+</code></pre>
+<h4 id="source-19-2-scenario-transaction">19.2 Scenario Transaction</h4><p class="section-guide">Reading guide: this source section records “19.2 Scenario Transaction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A scenario evaluation must:</p>
+<ol>
+<li>clone the prior immutable state snapshot;</li>
+<li>apply declared input state changes;</li>
+<li>evaluate affected service paths;</li>
+<li>evaluate dependent functions;</li>
+<li>evaluate dependent requirements;</li>
+<li>publish a new snapshot only when all records are internally consistent;</li>
+<li>retain the prior snapshot for rollback and comparison.</li>
+</ol>
+<h3 id="source-20-editor-integration">20. Editor Integration</h3><p class="section-guide">Reading guide: this source section records “20. Editor Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-20-1-object-inspector">20.1 Object Inspector</h4><p class="section-guide">Reading guide: this source section records “20.1 Object Inspector”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The selected object inspector should add:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">canonical concept
+taxonomy path
+roles
+allocated functions
+service ports
+incoming and outgoing flows
+applicable requirements
+evaluation status
+operational state
+condition state
+scenario participation
+evidence references
+profile hash
+</code></pre>
+<p>Geometry-free container and relationship objects must remain inspectable.</p>
+<h4 id="source-20-2-building-views">20.2 Building Views</h4><p class="section-guide">Reading guide: this source section records “20.2 Building Views”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add purpose-specific views:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Classification View
+Function Allocation View
+Service Flow View
+Requirement Status View
+Scenario State View
+Evidence View
+</code></pre>
+<p>Do not overload the existing containment tree with unrelated edges.</p>
+<h4 id="source-20-3-overlays">20.3 Overlays</h4><p class="section-guide">Reading guide: this source section records “20.3 Overlays”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Optional overlays:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">service port markers
+directed service-flow lines
+requirement target highlights
+failed requirement markers
+pending evidence markers
+scenario-unavailable objects
+</code></pre>
+<p>Visual overlays support inspection but do not replace graph and evidence gates.</p>
+<h3 id="source-21-proposed-source-layout">21. Proposed Source Layout</h3><p class="section-guide">Reading guide: this source section records “21. Proposed Source Layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/building/
+    graph/
+        BuildingFunctionGraph.h
+        BuildingRequirementDependencyGraph.h
+        BuildingServiceFlowGraph.h
+    model/
+        SmallModernBuildingModel.h
+        BuildingClassificationModel.h
+        BuildingConceptDefinition.h
+        BuildingConceptId.h
+        BuildingRoleDefinition.h
+        BuildingRoleId.h
+        BuildingObjectSemanticProfile.h
+        BuildingModelApplicability.h
+        BuildingFunction.h
+        BuildingFunctionId.h
+        BuildingFunctionModel.h
+        BuildingFunctionCriticality.h
+        BuildingServiceSystem.h
+        BuildingServiceSystemId.h
+        BuildingServicePort.h
+        BuildingServicePortId.h
+        BuildingServiceFlow.h
+        BuildingServiceFlowId.h
+        BuildingServiceMedium.h
+        BuildingServiceFlowDirection.h
+        BuildingRequirement.h
+        BuildingRequirementId.h
+        BuildingRequirementKind.h
+        BuildingRequirementCriticality.h
+        BuildingRequirementEvaluationRecord.h
+        BuildingRequirementEvaluationStatus.h
+        BuildingRequirementTarget.h
+        BuildingMeasuredValue.h
+        BuildingRequiredValue.h
+        BuildingPlacementState.h
+        BuildingOperationalState.h
+        BuildingConditionState.h
+        BuildingComplianceState.h
+        BuildingServiceAvailabilityState.h
+        BuildingScenario.h
+        BuildingScenarioId.h
+        BuildingStateSnapshot.h
+        BuildingStateTransitionRecord.h
+        BuildingEvidenceRecord.h
+        BuildingEvidenceReference.h
+        BuildingEvidenceLedger.h
+    relationship/
+        BuildingObjectRoleAssignment.h
+        BuildingFunctionAllocationRelationship.h
+        BuildingFunctionalDependencyRelationship.h
+        BuildingRequirementApplicabilityRelationship.h
+        BuildingScenarioParticipation.h
+    service/
+        SmallModernBuildingModelConstructionService.h
+        SmallModernBuildingModelConstructionContext.h
+        SmallModernBuildingModelValidationService.h
+        SmallModernBuildingDeterministicHashService.h
+        BuildingClassificationValidationService.h
+        BuildingFunctionCoverageEvaluationService.h
+        BuildingServiceTopologyValidationService.h
+        BuildingRequirementEvaluationService.h
+        BuildingScenarioEvaluationService.h
+        BuildingScenarioStateTransitionService.h
+        BuildingEvidenceHashService.h
+
+src/building/
+    graph/
+    model/
+    service/
+</code></pre>
+<p>Dedicated concrete requirement headers should be added only when their data or evaluation behavior differs materially:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">IdentityRequirement
+ClassificationRequirement
+ContainmentRequirement
+ConnectionRequirement
+ClearanceRequirement
+CollisionAvoidanceRequirement
+FunctionalCoverageRequirement
+ServiceContinuityRequirement
+BoundaryRequirement
+StateRequirement
+ScenarioRequirement
+</code></pre>
+<h3 id="source-22-implementation-milestones">22. Implementation Milestones</h3><p class="section-guide">Reading guide: this source section records “22. Implementation Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-milestone-0-freeze-accepted-contracts">Milestone 0: Freeze Accepted Contracts</h4><p class="section-guide">Reading guide: this source section records “Milestone 0: Freeze Accepted Contracts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">record exact SMB-OMv1 source hash
+record exact SMB-OMv2 generator hash
+record exact spatial manifest hash
+record exact 124-object ID set
+record accepted object, interface, connection, constraint, and binding counts
+record current native and visual evidence paths
+</code></pre>
+<p class="source-status--passed">Gate: existing SMB-OMv1 and SMB-OMv2 checks pass without modification.</p>
+<h4 id="source-milestone-1-classification-and-profile-kernel">Milestone 1: Classification and Profile Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 1: Classification and Profile Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">implement concept and role models
+implement semantic profile and applicability models
+implement classification validation
+implement deterministic profile hashing
+construct programmatic valid and invalid fixtures
+</code></pre>
+<p class="source-status--failed">Gate: duplicate concepts, hierarchy cycles, unknown roles, missing applicability, and conflicting classifications fail closed.</p>
+<h4 id="source-milestone-2-function-kernel">Milestone 2: Function Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 2: Function Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">implement function model
+implement allocation and dependency relationships
+implement function coverage evaluation
+implement deterministic function graph hashing
+</code></pre>
+<p class="source-status--failed">Gate: every required function has an allocation; dependency cycles and orphan allocations fail.</p>
+<h4 id="source-milestone-3-service-kernel">Milestone 3: Service Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 3: Service Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">implement service systems, ports, media, directions, and flows
+implement service-flow graph
+implement topology validation
+implement reachability evidence
+</code></pre>
+<p class="source-status--failed">Gate: wrong media, wrong direction, missing endpoints, orphan ports, prohibited cycles, and nondeterministic traversal fail.</p>
+<h4 id="source-milestone-4-requirement-kernel">Milestone 4: Requirement Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 4: Requirement Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">implement requirement hierarchy
+implement criticality and applicability
+implement dependency graph
+implement evaluation records and evidence hashes
+implement source-order-independent evaluation
+</code></pre>
+<p class="source-status--pending">Gate: all hard requirements evaluate deterministically; unknown hard requirements block publication.</p>
+<h4 id="source-milestone-5-state-and-scenario-kernel">Milestone 5: State and Scenario Kernel</h4><p class="section-guide">Reading guide: this source section records “Milestone 5: State and Scenario Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">implement orthogonal state facets
+implement legal transition services
+implement scenarios and immutable snapshots
+implement scenario transactions and rollback
+</code></pre>
+<p class="source-status--failed">Gate: invalid transitions and partial scenario publication fail closed.</p>
+<h4 id="source-milestone-6-all-object-generator-skeleton">Milestone 6: All-Object Generator Skeleton</h4><p class="section-guide">Reading guide: this source section records “Milestone 6: All-Object Generator Skeleton”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">add SMB-OMv2.1 generator wrapper
+load exact spatial object inventory
+emit one skeleton profile per object
+emit explicit applicability for every dimension
+emit coverage CSV
+regenerate twice
+</code></pre>
+<p>Gate: exactly 124 unique profiles and byte-identical outputs.</p>
+<h4 id="source-milestone-7-site-structure-envelope-roof-and-external-works">Milestone 7: Site, Structure, Envelope, Roof, and External Works</h4><p class="section-guide">Reading guide: this source section records “Milestone 7: Site, Structure, Envelope, Roof, and External Works”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">populate 38 object profiles
+add structural topology
+add envelope and rainwater semantics
+add roof solar and HVAC semantics
+add external works functions and requirements
+</code></pre>
+<p class="source-status--passed">Gate: all five branch acceptance sections pass with no inferred analytical claims.</p>
+<h4 id="source-milestone-8-ground-and-upper-occupied-floors">Milestone 8: Ground and Upper Occupied Floors</h4><p class="section-guide">Reading guide: this source section records “Milestone 8: Ground and Upper Occupied Floors”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">populate 53 object profiles
+add space functions
+add loose-object support requirements
+add fixture roles
+add window and opening requirements
+add cabinet and sink requirement parity
+</code></pre>
+<p class="source-status--passed">Gate: 53/53 profiles pass and the current priority-validity behavior is preserved.</p>
+<h4 id="source-milestone-9-building-services">Milestone 9: Building Services</h4><p class="section-guide">Reading guide: this source section records “Milestone 9: Building Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">populate 18 service profiles
+add plumbing topology
+add electrical topology
+add HVAC topology
+add fire-safety monitoring topology
+</code></pre>
+<p>Gate: all executable service paths resolve with zero incompatible media or orphan executable ports.</p>
+<h4 id="source-milestone-10-relationship-compatibility-migration">Milestone 10: Relationship Compatibility Migration</h4><p class="section-guide">Reading guide: this source section records “Milestone 10: Relationship Compatibility Migration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">populate 14 relationship profiles
+map 12 assertions to canonical facts
+retain semantic leaf documentary evidence
+prove zero duplicate authority
+</code></pre>
+<p>Gate: relationship objects remain geometry-free and reference exact canonical relationships.</p>
+<h4 id="source-milestone-11-runtime-and-snapshot-integration">Milestone 11: Runtime and Snapshot Integration</h4><p class="section-guide">Reading guide: this source section records “Milestone 11: Runtime and Snapshot Integration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">construct aggregate runtime model
+publish atomically with generated scene snapshot
+add source and object associations
+add deterministic aggregate hashes
+</code></pre>
+<p>Gate: invalid knowledge models do not publish and do not alter the accepted spatial scene.</p>
+<h4 id="source-milestone-12-editor-and-visual-evidence">Milestone 12: Editor and Visual Evidence</h4><p class="section-guide">Reading guide: this source section records “Milestone 12: Editor and Visual Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">add object semantic inspector
+add classification, function, service, requirement, scenario, and evidence views
+add optional overlays
+capture deterministic visual evidence twice
+inspect retained capture directly
+</code></pre>
+<p>Gate: all 124 profiles are inspectable, geometry-free objects remain visible in the inspector, and two captures are byte-identical.</p>
+<h4 id="source-milestone-13-full-acceptance-and-compatibility-matrix">Milestone 13: Full Acceptance and Compatibility Matrix</h4><p class="section-guide">Reading guide: this source section records “Milestone 13: Full Acceptance and Compatibility Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Tasks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">run focused model harnesses
+run all-object acceptance
+run invalid fixtures
+run SMB-OMv1 compatibility
+run SMB-OMv2 compatibility
+run visual evidence
+run supervisor matrix
+run full editor release checks
+audit requirement-to-evidence coverage
+</code></pre>
+<p>Gate: every completion condition in Section 28 passes.</p>
+<h3 id="source-23-test-plan">23. Test Plan</h3><p class="section-guide">Reading guide: this source section records “23. Test Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-23-1-focused-harnesses">23.1 Focused Harnesses</h4><p class="section-guide">Reading guide: this source section records “23.1 Focused Harnesses”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/building_classification_model_harness.cpp
+tests/building_function_model_harness.cpp
+tests/building_service_flow_model_harness.cpp
+tests/building_requirement_model_harness.cpp
+tests/building_scenario_model_harness.cpp
+tests/building_evidence_hash_harness.cpp
+tests/smb_omv21_all_objects_harness.cpp
+tests/smb_omv21_editor_model_harness.cpp
+</code></pre>
+<h4 id="source-23-2-test-scripts">23.2 Test Scripts</h4><p class="section-guide">Reading guide: this source section records “23.2 Test Scripts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/run_building_classification_checks.sh
+tests/run_building_function_checks.sh
+tests/run_building_service_flow_checks.sh
+tests/run_building_requirement_checks.sh
+tests/run_building_scenario_checks.sh
+tests/run_smb_omv21_checks.sh
+tests/run_smb_omv21_visual_checks.sh
+tests/run_smb_omv21_supervisor_matrix.sh
+</code></pre>
+<h4 id="source-23-3-required-invalid-fixtures">23.3 Required Invalid Fixtures</h4><p class="section-guide">Reading guide: this source section records “23.3 Required Invalid Fixtures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">duplicate object semantic profile
+missing accepted object profile
+unknown object ID
+undefined concept
+concept hierarchy cycle
+undefined role
+function without allocation
+functional dependency cycle
+service port with unknown owner
+service flow with incompatible medium
+service flow with invalid direction
+orphan required service port
+requirement with unknown target
+requirement dependency cycle
+applicable hard requirement not evaluated
+non-finite measured value
+invalid state transition
+scenario with unknown participant
+relationship assertion with duplicate authority
+semantic object with invented geometry
+non-deterministic generation
+</code></pre>
+<h4 id="source-23-4-all-object-coverage-tests">23.4 All-Object Coverage Tests</h4><p class="section-guide">Reading guide: this source section records “23.4 All-Object Coverage Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The all-object harness must require:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">124 source spatial objects
+124 semantic profiles
+124 unique concept assignments
+124 complete applicability records
+zero unknown profile object IDs
+zero missing profile object IDs
+zero duplicate profile object IDs
+all geometry applicability values match source has_geometry
+all relationship and semantic objects have zero geometry bindings
+all profile hashes are nonzero
+all profile hashes repeat exactly
+</code></pre>
+<h4 id="source-23-5-branch-count-tests">23.5 Branch Count Tests</h4><p class="section-guide">Reading guide: this source section records “23.5 Branch Count Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">building root = 1
+site = 10
+structure = 11
+ground floor = 32
+upper floor = 21
+envelope = 7
+roof zone = 5
+services = 18
+external works = 5
+relationships = 14
+</code></pre>
+<h4 id="source-23-6-requirement-coverage-tests">23.6 Requirement Coverage Tests</h4><p class="section-guide">Reading guide: this source section records “23.6 Requirement Coverage Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">every object has identity, classification, and containment requirements
+every applicable physical object has boundary status
+every applicable movable object has support status
+every service port has continuity applicability
+every hard function has allocation coverage
+every hard requirement has one final evaluation record
+every evaluation record cites evidence
+every evidence hash is nonzero
+zero Passed evaluations depend on Unknown prerequisites
+</code></pre>
+<h4 id="source-23-7-determinism">23.7 Determinism</h4><p class="section-guide">Reading guide: this source section records “23.7 Determinism”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Run the full generator and runtime construction twice. Require exact equality for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">knowledge-model JSON bytes
+coverage CSV bytes
+catalog hash
+profile hash
+function graph hash
+service graph hash
+requirement definition hash
+requirement evaluation hash
+scenario hash
+aggregate model hash
+visual capture bytes
+</code></pre>
+<h4 id="source-23-8-compatibility">23.8 Compatibility</h4><p class="section-guide">Reading guide: this source section records “23.8 Compatibility”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Required compatibility commands remain:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_smb_omv1_checks.sh
+./tests/run_smb_omv2_checks.sh
+./tests/run_smb_omv2_visual_checks.sh
+</code></pre>
+<p>The new matrix adds SMB-OMv2.1 checks without weakening those gates.</p>
+<h3 id="source-24-acceptance-evidence-schema">24. Acceptance Evidence Schema</h3><p class="section-guide">Reading guide: this source section records “24. Acceptance Evidence Schema”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-json">{
+  "schema": "SMB-OMv2.1-AllObjectsAcceptanceEvidence-v1",
+  "source_object_count": 124,
+  "semantic_profile_count": 124,
+  "classified_object_count": 124,
+  "complete_applicability_count": 124,
+  "function_count": 0,
+  "function_allocation_count": 0,
+  "service_system_count": 0,
+  "service_port_count": 0,
+  "service_flow_count": 0,
+  "requirement_count": 0,
+  "hard_requirement_count": 0,
+  "passed_hard_requirement_count": 0,
+  "failed_hard_requirement_count": 0,
+  "unknown_hard_requirement_count": 0,
+  "scenario_count": 0,
+  "evidence_record_count": 0,
+  "branch_coverage": {},
+  "priority_requirement_parity": {},
+  "compatibility_gates": {},
+  "deterministic_hashes": {},
+  "passed": false
+}
+</code></pre>
+<p>Counts shown as zero are runtime-produced values, not expected final values. The final acceptance harness must compare them against explicit constants generated from the reviewed catalogs.</p>
+<h3 id="source-25-safety-and-performance">25. Safety and Performance</h3><p class="section-guide">Reading guide: this source section records “25. Safety and Performance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-25-1-safety-ceilings">25.1 Safety Ceilings</h4><p class="section-guide">Reading guide: this source section records “25.1 Safety Ceilings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add limits for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">maximum concept definitions
+maximum role definitions
+maximum functions
+maximum allocations
+maximum functional dependencies
+maximum service systems
+maximum service ports
+maximum service flows
+maximum requirements
+maximum requirement dependency depth
+maximum scenarios
+maximum evidence records
+maximum diagnostic count
+maximum source string length
+</code></pre>
+<h4 id="source-25-2-fail-closed-conditions">25.2 Fail-Closed Conditions</h4><p class="section-guide">Reading guide: this source section records “25.2 Fail-Closed Conditions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Abort publication for:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">profile coverage mismatch
+duplicate IDs
+unknown references
+graph cycles where prohibited
+non-finite values
+invalid state transitions
+failed hard requirements
+unknown applicable hard requirements
+hash mismatch
+source schema mismatch
+source object set mismatch
+</code></pre>
+<h4 id="source-25-3-performance-boundary">25.3 Performance Boundary</h4><p class="section-guide">Reading guide: this source section records “25.3 Performance Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The 124-object fixture is small enough for deterministic full-graph validation. Prefer readable graph traversal and immutable records over premature optimization.</p>
+<p>Required metrics:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">construction time
+validation time
+requirement evaluation time
+hashing time
+peak model record counts
+</code></pre>
+<p>Performance evidence must not replace correctness evidence.</p>
+<h3 id="source-26-risks-and-mitigations">26. Risks and Mitigations</h3><p class="section-guide">Reading guide: this source section records “26. Risks and Mitigations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-taxonomy-depth-is-mistaken-for-semantic-completeness">Taxonomy Depth Is Mistaken for Semantic Completeness</h4><p class="section-guide">Reading guide: this source section records “Taxonomy Depth Is Mistaken for Semantic Completeness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add explicit roles, functions, services, and requirements. Do not add hierarchy levels merely to represent cross-cutting meaning.</p>
+<h4 id="source-classification-strings-become-unvalidated-authority">Classification Strings Become Unvalidated Authority</h4><p class="section-guide">Reading guide: this source section records “Classification Strings Become Unvalidated Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Resolve object concepts through a validated catalog with stable IDs.</p>
+<h4 id="source-roles-become-artificial-subclasses">Roles Become Artificial Subclasses</h4><p class="section-guide">Reading guide: this source section records “Roles Become Artificial Subclasses”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use <code>BuildingObjectRoleAssignment</code>. Reserve inheritance for real conceptual categories.</p>
+<h4 id="source-spatial-connections-and-service-flows-are-conflated">Spatial Connections and Service Flows Are Conflated</h4><p class="section-guide">Reading guide: this source section records “Spatial Connections and Service Flows Are Conflated”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Retain the spatial graph and add a separate directed service-flow graph.</p>
+<h4 id="source-requirements-remain-hidden-in-tests">Requirements Remain Hidden in Tests</h4><p class="section-guide">Reading guide: this source section records “Requirements Remain Hidden in Tests”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Promote accepted validity predicates to first-class requirement definitions and retain test parity.</p>
+<h4 id="source-every-object-is-forced-through-one-state-machine">Every Object Is Forced Through One State Machine</h4><p class="section-guide">Reading guide: this source section records “Every Object Is Forced Through One State Machine”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use orthogonal placement, operational, condition, compliance, and service-availability states.</p>
+<h4 id="source-missing-evidence-is-treated-as-success">Missing Evidence Is Treated as Success</h4><p class="section-guide">Reading guide: this source section records “Missing Evidence Is Treated as Success”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--pending">Use explicit applicability and evaluation statuses. Unknown applicable hard requirements block release.</p>
+<h4 id="source-semantic-assertions-duplicate-graph-authority">Semantic Assertions Duplicate Graph Authority</h4><p class="section-guide">Reading guide: this source section records “Semantic Assertions Duplicate Graph Authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Assertion objects reference canonical graph facts and remain evidence objects.</p>
+<h4 id="source-generator-data-is-inferred-from-names">Generator Data Is Inferred From Names</h4><p class="section-guide">Reading guide: this source section records “Generator Data Is Inferred From Names”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Use explicit stable object-ID keyed records and fail on unknown IDs.</p>
+<h4 id="source-all-object-conversion-hides-kernel-errors">All-Object Conversion Hides Kernel Errors</h4><p class="section-guide">Reading guide: this source section records “All-Object Conversion Hides Kernel Errors”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">Complete programmatic kernel fixtures before populating all 124 profiles.</p>
+<h4 id="source-visual-success-hides-model-failure">Visual Success Hides Model Failure</h4><p class="section-guide">Reading guide: this source section records “Visual Success Hides Model Failure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Keep graph, requirement, evidence, and deterministic hash gates authoritative.</p>
+<h4 id="source-new-knowledge-model-changes-spatial-output">New Knowledge Model Changes Spatial Output</h4><p class="section-guide">Reading guide: this source section records “New Knowledge Model Changes Spatial Output”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Run exact SMB-OMv1 and SMB-OMv2 compatibility gates and compare accepted counts and hashes.</p>
+<h3 id="source-27-non-goals-for-the-first-smb-omv2-1-release">27. Non-Goals for the First SMB-OMv2.1 Release</h3><p class="section-guide">Reading guide: this source section records “27. Non-Goals for the First SMB-OMv2.1 Release”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">structural finite-element analysis
+building-code certification
+hydraulic pressure simulation
+pipe sizing
+electrical load flow
+protective-device coordination
+thermal-zone simulation
+computational fluid dynamics
+daylight simulation
+energy-rating certification
+fire and smoke propagation
+occupant evacuation simulation
+automatic service-port discovery
+automatic requirement inference from object names
+automatic geometry repair
+automatic regulatory compliance claims
+nonzero pose covariance propagation
+deformable building objects
+silent conflict relaxation
+</code></pre>
+<p class="source-status--pending">Unimplemented capabilities must report <code>PendingEvidence</code>, <code>Unknown</code>, or an explicit unsupported diagnostic.</p>
+<h3 id="source-28-definition-of-complete">28. Definition of Complete</h3><p class="section-guide">Reading guide: this source section records “28. Definition of Complete”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">SMB-OMv2.1 all-building-object implementation is complete only when:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SMB-OMv1 source remains unchanged
+SMB-OMv1 native checks pass
+SMB-OMv2 generated spatial output remains compatible
+SMB-OMv2 native and visual checks pass
+exactly 124 semantic profiles exist
+every accepted object ID appears exactly once
+every object has one validated concept assignment
+every object has a complete applicability record
+every applicable object has explicit role assignments
+every required building function has allocation coverage
+functional dependencies are cycle-free
+all executable service ports and flows are valid
+all hard requirements evaluate Passed
+no Passed requirement depends on Unknown evidence
+existing priority validity is reproduced as first-class requirements
+relationship assertions reference canonical facts
+semantic and relationship objects remain geometry-free
+all state transitions are legal and service-controlled
+scenario snapshots are immutable and deterministic
+all evidence records cite source or derived authority
+all required hashes are nonzero and repeat exactly
+all invalid fixtures fail with exact diagnostics
+all 124 profiles are inspectable in the editor
+visual overlays and captures are deterministic
+visual evidence remains supporting rather than authoritative
+the requirement-to-evidence audit has zero uncovered hard requirements
+the supervisor matrix passes
+the full editor release gate passes
+</code></pre>
+<p>No narrower fixture, green visual capture, or partial branch implementation justifies an all-object completion claim.</p>
+<h3 id="source-29-recommended-first-implementation-slice">29. Recommended First Implementation Slice</h3><p class="section-guide">Reading guide: this source section records “29. Recommended First Implementation Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Implement the classification, function, requirement, and evidence kernel for this existing assembly without changing geometry or grammar:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">SMB_001_Ground_Kitchen_01
+├── SMB_001_Ground_Kitchen_CabinetRun
+├── SMB_001_Ground_Kitchen_Benchtop
+├── SMB_001_Ground_Kitchen_Sink
+├── SMB_001_Plumbing_ColdWaterRiser
+├── SMB_001_Plumbing_HotWaterRiser
+└── SMB_001_Plumbing_SanitaryStack
+</code></pre>
+<p>Implement:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">BuildingConceptDefinition
+BuildingRoleDefinition
+BuildingObjectSemanticProfile
+BuildingFunction
+BuildingFunctionAllocationRelationship
+BuildingServicePort
+BuildingServiceFlow
+BuildingRequirement
+BuildingRequirementEvaluationRecord
+BuildingEvidenceRecord
+BuildingClassificationValidationService
+BuildingFunctionCoverageEvaluationService
+BuildingServiceTopologyValidationService
+BuildingRequirementEvaluationService
+BuildingEvidenceHashService
+</code></pre>
+<p>Prove:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">kitchen supports cooking activity
+cabinet is supported and wall-cleared
+benchtop supports the sink
+sink receives cold water
+sink receives hot water
+sink reaches the sanitary stack
+all requirement records cite accepted spatial or connection evidence
+all outputs are deterministic
+an injected missing hot-water flow rolls back the candidate model
+</code></pre>
+<p>After the kernel passes, populate the remaining 118 profiles branch by branch according to Milestones 7 through 10.</p>
+<h3 id="source-appendix-a-authoritative-124-object-inventory">Appendix A. Authoritative 124-Object Inventory</h3><p class="section-guide">Reading guide: this source section records “Appendix A. Authoritative 124-Object Inventory”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each object below must receive exactly one <code>BuildingObjectSemanticProfile</code>.</p>
+<h4 id="source-a-1-building-root-1">A.1 Building Root — 1</h4><p class="section-guide">Reading guide: this source section records “A.1 Building Root — 1”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001</code> — <code>SmallModernBuilding</code> — geometry: no</li>
+</ul>
+<h4 id="source-a-2-site-10">A.2 Site — 10</h4><p class="section-guide">Reading guide: this source section records “A.2 Site — 10”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_Site</code> — <code>BuildingSite</code> — geometry: no</li>
+<li><code>SMB_001_Site_PropertyBoundary</code> — <code>PropertyBoundary</code> — geometry: yes</li>
+<li><code>SMB_001_Site_GroundSurface</code> — <code>GroundSurface</code> — geometry: yes</li>
+<li><code>SMB_001_Site_EntryPath</code> — <code>PavedPath</code> — geometry: yes</li>
+<li><code>SMB_001_Site_Driveway</code> — <code>PavedPath</code> — geometry: yes</li>
+<li><code>SMB_001_Site_Landscape</code> — <code>LandscapeSystem</code> — geometry: no</li>
+<li><code>SMB_001_Site_Planter_Left</code> — <code>Planter</code> — geometry: yes</li>
+<li><code>SMB_001_Site_Planter_Right</code> — <code>Planter</code> — geometry: yes</li>
+<li><code>SMB_001_Site_Tree_Left</code> — <code>Tree</code> — geometry: yes</li>
+<li><code>SMB_001_Site_Tree_Right</code> — <code>Tree</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-3-structure-11">A.3 Structure — 11</h4><p class="section-guide">Reading guide: this source section records “A.3 Structure — 11”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_Structure</code> — <code>StructuralSystem</code> — geometry: no</li>
+<li><code>SMB_001_Structure_Foundation</code> — <code>Foundation</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_GroundSlab</code> — <code>StructuralSlab</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_UpperSlab</code> — <code>StructuralSlab</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_RoofSlab</code> — <code>StructuralSlab</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_Columns</code> — <code>ColumnSystem</code> — geometry: no</li>
+<li><code>SMB_001_Structure_Column_FL</code> — <code>StructuralColumn</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_Column_FR</code> — <code>StructuralColumn</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_Column_RL</code> — <code>StructuralColumn</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_Column_RR</code> — <code>StructuralColumn</code> — geometry: yes</li>
+<li><code>SMB_001_Structure_Core</code> — <code>BuildingCore</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-4-ground-floor-32">A.4 Ground Floor — 32</h4><p class="section-guide">Reading guide: this source section records “A.4 Ground Floor — 32”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_GroundFloor</code> — <code>GroundStorey</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Entry_01</code> — <code>EntranceZone</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Entry_Door_01</code> — <code>Door</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Entry_Canopy_01</code> — <code>Canopy</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_LivingRoom_01</code> — <code>LivingRoom</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Living_FloorFinish</code> — <code>FloorFinish</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Living_Glazing</code> — <code>Glazing</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Living_Sofa</code> — <code>Furniture</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Living_MediaUnit</code> — <code>Furniture</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Living_Light</code> — <code>Luminaire</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Kitchen_01</code> — <code>Kitchen</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Kitchen_CabinetRun</code> — <code>Cabinet</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Kitchen_Benchtop</code> — <code>Benchtop</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Kitchen_Island</code> — <code>Cabinet</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Kitchen_Sink</code> — <code>Sink</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Kitchen_Oven</code> — <code>Appliance</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Kitchen_Light</code> — <code>Luminaire</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_DiningRoom_01</code> — <code>DiningRoom</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Dining_Table</code> — <code>Table</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Dining_Chairs</code> — <code>ChairSet</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Dining_Light</code> — <code>Luminaire</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Bathroom_01</code> — <code>Bathroom</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Bathroom_Partitions</code> — <code>Partition</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Bathroom_Vanity</code> — <code>Vanity</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Bathroom_Toilet</code> — <code>Toilet</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Bathroom_Shower</code> — <code>Shower</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_UtilityRoom_01</code> — <code>UtilityRoom</code> — geometry: no</li>
+<li><code>SMB_001_Ground_Utility_Partition</code> — <code>Partition</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Utility_Washer</code> — <code>Appliance</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Utility_WaterHeater</code> — <code>WaterHeater</code> — geometry: yes</li>
+<li><code>SMB_001_Ground_Stair_01</code> — <code>StairSystem</code> — geometry: no</li>
+<li><code>SMB_StairStep</code> — <code>StairFlight</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-5-upper-floor-21">A.5 Upper Floor — 21</h4><p class="section-guide">Reading guide: this source section records “A.5 Upper Floor — 21”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_UpperFloor</code> — <code>UpperStorey</code> — geometry: no</li>
+<li><code>SMB_001_Upper_Hall_01</code> — <code>UpperHall</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_01</code> — <code>Bedroom</code> — geometry: no</li>
+<li><code>SMB_001_Upper_Bedroom_01_Floor</code> — <code>FloorFinish</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_01_Bed</code> — <code>Bed</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_01_Wardrobe</code> — <code>Wardrobe</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_01_Window</code> — <code>Window</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_02</code> — <code>Bedroom</code> — geometry: no</li>
+<li><code>SMB_001_Upper_Bedroom_02_Floor</code> — <code>FloorFinish</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_02_Bed</code> — <code>Bed</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_02_Wardrobe</code> — <code>Wardrobe</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bedroom_02_Window</code> — <code>Window</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bathroom_01</code> — <code>Bathroom</code> — geometry: no</li>
+<li><code>SMB_001_Upper_Bathroom_Partition</code> — <code>Partition</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bathroom_Vanity</code> — <code>Vanity</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bathroom_Toilet</code> — <code>Toilet</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Bathroom_Shower</code> — <code>Shower</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Study_01</code> — <code>Study</code> — geometry: no</li>
+<li><code>SMB_001_Upper_Study_Desk</code> — <code>Desk</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Study_Chair</code> — <code>ChairSet</code> — geometry: yes</li>
+<li><code>SMB_001_Upper_Study_Window</code> — <code>Window</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-6-envelope-7">A.6 Envelope — 7</h4><p class="section-guide">Reading guide: this source section records “A.6 Envelope — 7”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_Envelope</code> — <code>EnvelopeSystem</code> — geometry: no</li>
+<li><code>SMB_001_Envelope_Front</code> — <code>Facade</code> — geometry: yes</li>
+<li><code>SMB_001_Envelope_Rear</code> — <code>Facade</code> — geometry: yes</li>
+<li><code>SMB_001_Envelope_Left</code> — <code>Facade</code> — geometry: yes</li>
+<li><code>SMB_001_Envelope_Right</code> — <code>Facade</code> — geometry: yes</li>
+<li><code>SMB_001_Envelope_ExternalFins</code> — <code>FacadeFin</code> — geometry: yes</li>
+<li><code>SMB_001_Envelope_Downpipes</code> — <code>PipeRun</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-7-roof-zone-5">A.7 Roof Zone — 5</h4><p class="section-guide">Reading guide: this source section records “A.7 Roof Zone — 5”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_RoofZone</code> — <code>RoofSystem</code> — geometry: no</li>
+<li><code>SMB_001_Roof_Parapet</code> — <code>Parapet</code> — geometry: yes</li>
+<li><code>SMB_001_Roof_SolarArray</code> — <code>PhotovoltaicArray</code> — geometry: no</li>
+<li><code>SMB_SolarPanel</code> — <code>PhotovoltaicModuleSet</code> — geometry: yes</li>
+<li><code>SMB_001_Roof_HVACOutdoorUnit</code> — <code>HVACEquipment</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-8-services-18">A.8 Services — 18</h4><p class="section-guide">Reading guide: this source section records “A.8 Services — 18”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_Services</code> — <code>BuildingServices</code> — geometry: no</li>
+<li><code>SMB_001_Plumbing</code> — <code>PlumbingSystem</code> — geometry: no</li>
+<li><code>SMB_001_Plumbing_ColdWaterRiser</code> — <code>PipeRun</code> — geometry: yes</li>
+<li><code>SMB_001_Plumbing_HotWaterRiser</code> — <code>PipeRun</code> — geometry: yes</li>
+<li><code>SMB_001_Plumbing_SanitaryStack</code> — <code>PipeRun</code> — geometry: yes</li>
+<li><code>SMB_001_Electrical</code> — <code>ElectricalSystem</code> — geometry: no</li>
+<li><code>SMB_001_Electrical_MainPanel</code> — <code>ElectricalPanel</code> — geometry: yes</li>
+<li><code>SMB_001_Electrical_GroundLights</code> — <code>GroundLightingCircuit</code> — geometry: no</li>
+<li><code>SMB_001_Electrical_UpperLights</code> — <code>UpperLightingCircuit</code> — geometry: no</li>
+<li><code>SMB_CeilingLight</code> — <code>CeilingLuminaireSet</code> — geometry: yes</li>
+<li><code>SMB_001_HVAC</code> — <code>HVACSystem</code> — geometry: no</li>
+<li><code>SMB_001_HVAC_LivingIndoorUnit</code> — <code>HVACEquipment</code> — geometry: yes</li>
+<li><code>SMB_001_HVAC_BedroomIndoorUnit</code> — <code>HVACEquipment</code> — geometry: yes</li>
+<li><code>SMB_001_HVAC_BathroomExhaust</code> — <code>HVACEquipment</code> — geometry: yes</li>
+<li><code>SMB_001_FireSafety</code> — <code>FireSafetySystem</code> — geometry: no</li>
+<li><code>SMB_001_FireSafety_SmokeAlarm_Ground</code> — <code>SmokeAlarm</code> — geometry: yes</li>
+<li><code>SMB_001_FireSafety_SmokeAlarm_Upper</code> — <code>SmokeAlarm</code> — geometry: yes</li>
+<li><code>SMB_001_FireSafety_Extinguisher</code> — <code>FireExtinguisher</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-9-external-works-5">A.9 External Works — 5</h4><p class="section-guide">Reading guide: this source section records “A.9 External Works — 5”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_001_ExternalWorks</code> — <code>ExternalWorksSystem</code> — geometry: no</li>
+<li><code>SMB_001_External_Patio</code> — <code>Patio</code> — geometry: yes</li>
+<li><code>SMB_001_External_PerimeterFence</code> — <code>Fence</code> — geometry: yes</li>
+<li><code>SMB_001_External_Lights</code> — <code>ExternalLightingSystem</code> — geometry: no</li>
+<li><code>SMB_ExternalLight</code> — <code>ExternalLuminaireSet</code> — geometry: yes</li>
+</ul>
+<h4 id="source-a-10-relationships-and-semantic-evidence-14">A.10 Relationships and Semantic Evidence — 14</h4><p class="section-guide">Reading guide: this source section records “A.10 Relationships and Semantic Evidence — 14”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>SMB_SemanticLeaf</code> — <code>SemanticEvidence</code> — geometry: no</li>
+<li><code>SMB_001_Relationships</code> — <code>RelationshipSystem</code> — geometry: no</li>
+<li><code>SMB_REL_GroundFloor_CONTAINS_LivingRoom</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_GroundFloor_CONTAINS_Kitchen</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_GroundFloor_CONTAINS_DiningRoom</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_UpperFloor_CONTAINS_Bedroom01</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_UpperFloor_CONTAINS_Bedroom02</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_KitchenSink_CONNECTED_TO_ColdWater</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_WaterHeater_CONNECTED_TO_HotWater</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_LivingIndoorUnit_SERVED_BY_HVACOutdoor</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_BedroomIndoorUnit_SERVED_BY_HVACOutdoor</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_SolarArray_POWERS_ElectricalSystem</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_SmokeAlarmGround_MONITORS_GroundFloor</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+<li><code>SMB_REL_SmokeAlarmUpper_MONITORS_UpperFloor</code> — <code>SpatialRelationshipAssertion</code> — geometry: no</li>
+</ul>
+<h3 id="source-appendix-b-mandatory-all-object-audit-columns">Appendix B. Mandatory All-Object Audit Columns</h3><p class="section-guide">Reading guide: this source section records “Appendix B. Mandatory All-Object Audit Columns”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>SMB_OMv21_Object_Coverage.csv</code> must contain one row per object and these columns:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">object_id
+parent_object_id
+root_branch_id
+concept_id
+taxonomy_path
+has_geometry
+geometry_applicability
+boundary_applicability
+spatial_interface_applicability
+role_assignment_count
+function_allocation_count
+service_port_applicability
+service_port_count
+requirement_count
+hard_requirement_count
+passed_hard_requirement_count
+failed_hard_requirement_count
+unknown_hard_requirement_count
+operational_state_applicability
+condition_state_applicability
+scenario_applicability
+evidence_record_count
+profile_revision
+profile_hash
+coverage_passed
+</code></pre>
+<p>Release requires:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">row count = 124
+unique object_id count = 124
+coverage_passed = true for every row
+failed_hard_requirement_count = 0 for every row
+unknown_hard_requirement_count = 0 for every row
+profile_hash != 0 for every row
+</code></pre>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-smb-omv2-spatially-aware-object-model-implementation-plan.html" rel="prev">← Previous: ProGen3D SMB-OMv2 Spatially Aware Object Model Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-smbv3-simplemodernbuilding-version-3-implementation-plan.html" rel="next">Next: ProGen3D SMBv3 SimpleModernBuilding Version 3 Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

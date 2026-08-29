@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Guide status: current implementation guide for the uploaded 21 August 2026 source snapshot." name="description"/>
+<meta content="examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md" name="source-markdown"/>
+<meta content="5e829d7c9472a6ba57131c87226e3cb64cd5ab8ec83a4f76a4ef5d38b5cc4cc9" name="source-sha256"/>
+<meta content="Documented" name="documentation-status"/>
+<title>Progen3D Grammar · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-architecture">Architecture and Runtime</a></li>
+<li aria-current="page">Progen3D Grammar</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>Progen3D Grammar</h1>
+<p class="lead">Guide status: current implementation guide for the uploaded 21 August 2026 source snapshot.</p>
+<div class="lesson-meta">
+<span class="status-badge status--documented">Documented</span>
+<span class="tag">Architecture and Runtime</span>
+<span class="tag">About 21 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="5e829d7c9472a6ba57131c87226e3cb64cd5ab8ec83a4f76a4ef5d38b5cc4cc9" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of Progen3D Grammar in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: Progen3D Grammar, Parser-Compatible EBNF and Grammar Writing Guide, The language model, Minimal grammar.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="progen3d-example-grammar-corpus.html">Progen3D Example Grammar Corpus</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">Progen3D Grammar</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Progen3D Grammar</td></tr><tr><td><dfn title="Named by the source document">Parser-Compatible EBNF and Grammar Writing Guide</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Parser-Compatible EBNF and Grammar Writing Guide</td></tr><tr><td><dfn title="Named by the source document">The language model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. The language model</td></tr><tr><td><dfn title="Named by the source document">Minimal grammar</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Minimal grammar</td></tr><tr><td><dfn title="Named by the source document">Canonical EBNF</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Canonical EBNF</td></tr><tr><td><dfn title="Named by the source document">Why the EBNF has semantic notes</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Why the EBNF has semantic notes</td></tr><tr><td><dfn title="Named by the source document">Lexical rules</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>4. Lexical rules</td></tr><tr><td><dfn title="Named by the source document">Identifiers</dfn></td><td>The phrase appears 4 times in the source and is retained as a learning-path concept.</td><td>4.1 Identifiers</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">EBNF</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="specific mesh path, but `Mesh::isStlInstanceType()` currently always returns false in this snapshot">STL</dfn></td><td>specific mesh path, but `Mesh::isStlInstanceType()` currently always returns false in this snapshot</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">C_</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="image upload/release behavior">UI</dfn></td><td>image upload/release behavior</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">S_0</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">S_1</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">S_2</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Guide status: current implementation guide for the uploaded 21 August 2026 source snapshot.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes Progen3D Grammar, Parser-Compatible EBNF and Grammar Writing Guide, The language model, Minimal grammar. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Parser-Compatible EBNF and Grammar Writing Guide, 1. The language model, 2. Minimal grammar, 3. Canonical EBNF, Why the EBNF has semantic notes. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 2, pending: 4, proposed: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 8 display-equation blocks, 68 code blocks, 9 tables and the source SHA-256 <code>5e829d7c9472a6ba57131c87226e3cb64cd5ab8ec83a4f76a4ef5d38b5cc4cc9</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-parser-compatible-ebnf-and-grammar-writing-guide">Parser-Compatible EBNF and Grammar Writing Guide</a></li><li><a href="#source-1-the-language-model">1. The language model</a></li><li><a href="#source-2-minimal-grammar">2. Minimal grammar</a></li><li><a href="#source-3-canonical-ebnf">3. Canonical EBNF</a></li><li><a href="#source-why-the-ebnf-has-semantic-notes">Why the EBNF has semantic notes</a></li><li><a href="#source-4-lexical-rules">4. Lexical rules</a></li><li><a href="#source-4-1-identifiers">4.1 Identifiers</a></li><li><a href="#source-4-2-numbers">4.2 Numbers</a></li><li><a href="#source-4-3-comments">4.3 Comments</a></li><li><a href="#source-4-4-whitespace-and-punctuation">4.4 Whitespace and punctuation</a></li><li><a href="#source-5-logical-rules-and-multiline-layout">5. Logical rules and multiline layout</a></li><li><a href="#source-6-entry-rule">6. Entry rule</a></li><li><a href="#source-7-rule-headers">7. Rule headers</a></li><li><a href="#source-7-1-parameters">7.1 Parameters</a></li><li><a href="#source-7-2-repeat-count">7.2 Repeat count</a></li><li><a href="#source-7-3-header-reroll-bindings">7.3 Header reroll bindings</a></li><li><a href="#source-7-4-probability-and-alternate-production">7.4 Probability and alternate production</a></li><li><a href="#source-8-body-sections-and-repetition">8. Body sections and repetition</a></li><li><a href="#source-9-variables-and-randomness">9. Variables and randomness</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>2</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>0</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>4</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md.</li><li>Learn the named concepts: Progen3D Grammar, Parser-Compatible EBNF and Grammar Writing Guide, The language model, Minimal grammar.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>find caller-visible Height and Width;</li><li>sample fresh values from their original ranges;</li><li>bind the fresh values inside this invocation of Child.</li><li>primary values and function calls;</li><li>exponentiation ^, right-associative;</li><li>unary + and -;</li><li>multiplication and division;</li><li>addition and subtraction.</li><li>material or material index;</li><li>optional alpha field;</li><li>optional texture scale.</li><li>Define an explicit zero-parameter Start rule.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">source text
+  -&gt; logical rules
+  -&gt; structural and semantic validation
+  -&gt; recursive stochastic expansion
+  -&gt; flat scene-action stream
+  -&gt; scope transforms, instancing, and physics setup</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for Progen3D Grammar" data="../../assets/diagrams/pages/progen3d-grammar.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md</code></p><p>SHA-256: <code>5e829d7c9472a6ba57131c87226e3cb64cd5ab8ec83a4f76a4ef5d38b5cc4cc9</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>59 headings, 68 fenced code blocks, 9 Markdown tables, and 8 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>developers and technical readers following the documented feature.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Guide status: current implementation guide for the uploaded 21 August 2026 source snapshot.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Documented; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>Progen3D Grammar, Parser-Compatible EBNF and Grammar Writing Guide, The language model, Minimal grammar, Canonical EBNF</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-example-grammar-corpus.html">Progen3D Example Grammar Corpus</a> <span class="status-badge status--documented">Documented</span><br/><small>This archive is a source-grounded example corpus for the Progen3D grammar implementation represented by the uploaded C++ snapshot.</small></li><li><a href="expected-invalid-diagnostic-fixtures.html">Expected-invalid diagnostic fixtures</a> <span class="status-badge status--documented">Documented</span><br/><small>Every .p3d file in this directory is intentionally invalid. They are regression fixtures for parser, semantic-validation, expression, and runtime-preflight diagnostics.</small></li><li><a href="progen3d-p1-semantic-isolation.html">Progen3D P1 Semantic Isolation</a> <span class="status-badge status--documented">Documented</span><br/><small>P1 builds on the P0 safety gates and separates parsing, semantic binding, expansion-time values, and scene metadata. The grammar syntax remains broadly compatible, while ambiguous or invalid programs now stop with diagnostics rather than producing plausible but incorrect geometry.</small></li><li><a href="progen3d-p2-temporal-grammar-and-bounded-rotation.html">Progen3D P2 Temporal Grammar and Bounded Rotation</a> <span class="status-badge status--documented">Documented</span><br/><small>P2 adds deterministic time to the P1 semantic engine. A grammar can now describe a scene at an explicit instant, compose time through checked motion functions, and constrain axis-angle rotations without accumulating hidden animation state.</small></li><li><a href="progen3d-p0-hardening.html">Progen3D P0 Hardening</a> <span class="status-badge status--documented">Documented</span><br/><small>This patch implements the immediate safety gates identified in the grammar analysis while preserving the current grammar syntax.</small></li><li><a href="../geometry-rendering/axialprofilev1-proposed-examples.html">AxialProfilev1 proposed examples</a> <span class="status-badge status--proposed">Proposed</span><br/><small>These files are design fixtures, not current executable grammars.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md"><code>examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md</code></a></p>
+<p><strong>Source digest:</strong> <code>5e829d7c9472a6ba57131c87226e3cb64cd5ab8ec83a4f76a4ef5d38b5cc4cc9</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-grammar">Progen3D Grammar</h2><p class="section-guide">Reading guide: this source section records “Progen3D Grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-parser-compatible-ebnf-and-grammar-writing-guide">Parser-Compatible EBNF and Grammar Writing Guide</h3><p class="section-guide">Reading guide: this source section records “Parser-Compatible EBNF and Grammar Writing Guide”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Guide status:</strong> current implementation guide for the uploaded 21 August 2026 source snapshot.</p>
+<p class="source-status--pending"><strong>Normative source order:</strong> <code>Grammar.cpp</code> defines source parsing, semantic validation, expression evaluation, stochastic expansion, conditionals, time, rule calls, and action emission. <code>Scope.cpp</code> defines transform behavior. <code>Context.cpp</code> defines instancing, material canonicalisation, pending physics state, gravity, and simulation state. <code>Mesh.cpp</code> defines the six currently usable primitive meshes. <code>imgui_main.cpp</code> supplies editor syntax help, procedural material lexemes, and deterministic time-sample seeding.</p>
+<p>This guide describes what the current parser and runtime actually do. It does not silently promote unfinished UI or STL-catalog features into the language.</p>
+<hr/>
+<h3 id="source-1-the-language-model">1. The language model</h3><p class="section-guide">Reading guide: this source section records “1. The language model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A Progen3D document is a procedural shape program built from named production rules.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">source text
+  -&gt; logical rules
+  -&gt; structural and semantic validation
+  -&gt; recursive stochastic expansion
+  -&gt; flat scene-action stream
+  -&gt; scope transforms, instancing, and physics setup
+</code></pre>
+<p>Random declarations, rule selection, rule parameters, repeat counts, rerolls, and conditionals are resolved during expansion. Transform, instancing, and physics actions are then executed in order against a scene-generation context.</p>
+<p>This distinction matters:</p>
+<ul>
+<li><code>R</code> and <code>R*</code> do not reach the scene action virtual machine.</li>
+<li>A conditional chooses which tokens are expanded.</li>
+<li>A rule call is replaced by its expanded actions.</li>
+<li>By scene execution time, action expressions have already been evaluated to finite floats.</li>
+</ul>
+<hr/>
+<h3 id="source-2-minimal-grammar">2. Minimal grammar</h3><p class="section-guide">Reading guide: this source section records “2. Minimal grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    S(1 2 1)
+    I(Cube material(softblueglossyceramic) 1 1)
+</code></pre>
+<p><code>Start</code> is the recommended entry rule. <code>S</code> scales the current scope. <code>I</code> instantiates a primitive using the current scope.</p>
+<p>The explicit material form is recommended:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">material(softblueglossyceramic)
+</code></pre>
+<p>The final two instance arguments are the legacy per-instance alpha field and texture scale. Supplying both, commonly <code>1 1</code>, avoids depending on defaults or renderer-path differences.</p>
+<hr/>
+<h3 id="source-3-canonical-ebnf">3. Canonical EBNF</h3><p class="section-guide">Reading guide: this source section records “3. Canonical EBNF”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The standalone EBNF file accompanies this guide. Its central document grammar is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-ebnf">document   = spacing, rule, { spacing, rule }, spacing ;
+
+rule       = rule-header, "-&gt;", production,
+             [ "-&gt;", production ] ;
+
+rule-header =
+    identifier,
+    [ parameter-list ],
+    [ repeat-and-reroll-clause ],
+    [ probability-clause ] ;
+
+parameter-list =
+    "(", [ identifier, { argument-separator, identifier } ], ")" ;
+
+repeat-and-reroll-clause =
+    compact-repeat-expression,
+    { argument-separator, identifier } ;
+
+probability-clause =
+    ";", probability-literal ;
+
+production =
+    section,
+    [ "|", section,
+      [ "|", section ] ] ;
+
+sequence =
+    { item }, [ conditional ] ;
+
+conditional =
+    "?", "(", condition-expression, ")",
+    sequence, ":", sequence ;
+</code></pre>
+<p>The full file also formalises all actions, rule calls, instancing forms, conditions, expressions, numbers, identifiers, comments, and the current primitive set.</p>
+<h4 id="source-why-the-ebnf-has-semantic-notes">Why the EBNF has semantic notes</h4><p class="section-guide">Reading guide: this source section records “Why the EBNF has semantic notes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Several implementation rules are context-sensitive and cannot be expressed cleanly in ordinary EBNF:</p>
+<ul>
+<li>rule-call arity must match the target rule;</li>
+<li>an entry rule may not have parameters;</li>
+<li>a bare instance material identifier may become a material index when a visible variable has the same name;</li>
+<li><code>&lt;RuleName&gt;_count</code> is created only during repeated-body expansion;</li>
+<li>variable visibility depends on the active rule-call frame;</li>
+<li>a conditional consumes the remainder of its enclosing sequence into its false branch;</li>
+<li>action arguments use whitespace, while function arguments use commas.</li>
+</ul>
+<hr/>
+<h3 id="source-4-lexical-rules">4. Lexical rules</h3><p class="section-guide">Reading guide: this source section records “4. Lexical rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-identifiers">4.1 Identifiers</h4><p class="section-guide">Reading guide: this source section records “4.1 Identifiers”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">[A-Za-z_][A-Za-z0-9_]*
+</code></pre>
+<p>Identifiers are case-sensitive. <code>Tower</code>, <code>tower</code>, and <code>TOWER</code> are different names.</p>
+<p>The built-in identifier <code>t</code> is reserved. Do not use <code>t</code> as a rule name, parameter, random variable, or header reroll binding.</p>
+<p>Also reserve every generated counter name:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">&lt;RuleName&gt;_count
+</code></pre>
+<p>For example, the repeated-body counter for <code>Floor</code> is <code>Floor_count</code>.</p>
+<h4 id="source-4-2-numbers">4.2 Numbers</h4><p class="section-guide">Reading guide: this source section records “4.2 Numbers”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The runtime accepts finite floating-point numbers, including decimal and scientific notation:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">S(0.01 2e1 -3e-1)
+</code></pre>
+<p>Values must remain representable as nonzero finite <code>float</code> values. Overflow, nonfinite results, and nonzero values that underflow to zero are rejected.</p>
+<h4 id="source-4-3-comments">4.3 Comments</h4><p class="section-guide">Reading guide: this source section records “4.3 Comments”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Both comment forms run to the end of the physical line:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d"># hash comment
+// slash comment
+</code></pre>
+<p>Comment discovery is not string-aware. Avoid <code>#</code> or <code>//</code> inside material text.</p>
+<h4 id="source-4-4-whitespace-and-punctuation">4.4 Whitespace and punctuation</h4><p class="section-guide">Reading guide: this source section records “4.4 Whitespace and punctuation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The lexer inserts token boundaries around:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">-&gt;  ( )  [ ]  { }  |  ;  ?  :
+</code></pre>
+<p>It does not separately tokenise commas or arithmetic operators.</p>
+<p>The practical rule is:</p>
+<ul>
+<li>separate action arguments with whitespace;</li>
+<li>separate rule-call arguments with whitespace;</li>
+<li>separate function arguments with commas.</li>
+</ul>
+<p>Correct:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">S(width height depth)
+Child(width height/2)
+lerp(0.5,1.5,progress)
+</code></pre>
+<p>Incorrect:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">S(width,height,depth)
+Child(width,height/2)
+lerp(0.5 1.5 progress)
+</code></pre>
+<p>A backslash outside a comment is rejected.</p>
+<hr/>
+<h3 id="source-5-logical-rules-and-multiline-layout">5. Logical rules and multiline layout</h3><p class="section-guide">Reading guide: this source section records “5. Logical rules and multiline layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A logical rule starts at a noncomment line and continues until the next noncomment line that contains <code>-&gt;</code>, unless that next line begins with <code>-&gt;</code>.</p>
+<p>Recommended multiline style:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    Ground
+    Tower
+    Beacon
+</code></pre>
+<p>A multiline alternate can place its second arrow at the beginning of a continuation line:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Cap ; 0.7 -&gt;
+    PrimaryCap
+-&gt;
+    AlternateCap
+</code></pre>
+<p>A logical rule may contain:</p>
+<ul>
+<li>exactly one primary production arrow;</li>
+<li>at most one alternate production arrow;</li>
+<li>at most three <code>|</code> sections in each production.</li>
+</ul>
+<hr/>
+<h3 id="source-6-entry-rule">6. Entry rule</h3><p class="section-guide">Reading guide: this source section records “6. Entry rule”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The parser moves the first exact <code>Start</code> or <code>start</code> rule to the front. If neither exists, the first parsed rule becomes the entry.</p>
+<p>Use this strict form:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt; Scene
+</code></pre>
+<p>The entry rule receives no call arguments, so it must have zero parameters.</p>
+<p>Invalid:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start(width) -&gt; S(width 1 1)
+</code></pre>
+<hr/>
+<h3 id="source-7-rule-headers">7. Rule headers</h3><p class="section-guide">Reading guide: this source section records “7. Rule headers”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The canonical header shape is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">RuleName(parameters) repeat-expression reroll-name... ; probability
+</code></pre>
+<p>Every part after the name is optional, but its order is fixed.</p>
+<h4 id="source-7-1-parameters">7.1 Parameters</h4><p class="section-guide">Reading guide: this source section records “7.1 Parameters”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Parameters are whitespace-separated:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Tower(width height floors) -&gt;
+    Building(width height floors)
+</code></pre>
+<p>Calls are also whitespace-separated:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Tower(8 20 5)
+</code></pre>
+<p>A bare identifier argument that refers to a random variable preserves the variable's sampled value, original range, integer flag, and resampleability. A calculated argument becomes an immutable value in the callee.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    R Width(3 6)
+    Panel(Width)       # preserves Width's random range metadata
+    Panel(Width*0.5)   # passes an immutable calculated value
+
+Panel(w) -&gt;
+    S(w 1 1)
+</code></pre>
+<p>Parameters shadow caller-visible names. A local <code>R</code> declaration may not use the same name as a parameter.</p>
+<h4 id="source-7-2-repeat-count">7.2 Repeat count</h4><p class="section-guide">Reading guide: this source section records “7.2 Repeat count”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A repeat count follows the optional parameter list:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Row 8 -&gt; Item
+Row(n) n -&gt; Item
+Row(n) n+1 -&gt; Item
+</code></pre>
+<p>The header parser consumes the repeat expression as one lexical token. Use a compact expression with no spaces or parentheses:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">n
+n+1
+2*n
+n/2
+t*3
+</code></pre>
+<p>Do not use function calls or grouped expressions in a repeat header:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d"># Not supported by the current header parser
+Row(n) floor(n/2) -&gt; Item
+Row(n) (n+1) -&gt; Item
+</code></pre>
+<p>Repeat values are converted to <code>int</code>, so positive fractional values truncate toward zero. Write integer-valued expressions deliberately.</p>
+<p>If the repeat value is zero or negative, the rule emits nothing. Setup and tail sections are not executed.</p>
+<h4 id="source-7-3-header-reroll-bindings">7.3 Header reroll bindings</h4><p class="section-guide">Reading guide: this source section records “7.3 Header reroll bindings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Identifiers after the repeat token and before <code>;</code> or <code>-&gt;</code> are reroll bindings:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Child 1 Height Width -&gt; ...
+</code></pre>
+<p>This means:</p>
+<ol>
+<li>find caller-visible <code>Height</code> and <code>Width</code>;</li>
+<li>sample fresh values from their original ranges;</li>
+<li>bind the fresh values inside this invocation of <code>Child</code>.</li>
+</ol>
+<p>The first token is still the repeat count. To reroll a value without repeating, write <code>1</code> explicitly:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    R Width(0.6 1.4)
+    Panel
+    Panel
+
+Panel 1 Width -&gt;
+    S(Width 1 0.2)
+    I(Cube material(whitepaintmatte) 1 0.5)
+</code></pre>
+<p>Each call to <code>Panel</code> receives one fresh <code>Width</code>.</p>
+<h4 id="source-7-4-probability-and-alternate-production">7.4 Probability and alternate production</h4><p class="section-guide">Reading guide: this source section records “7.4 Probability and alternate production”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Cap ; 0.72 -&gt;
+    PrimaryCap
+-&gt;
+    AlternateCap
+</code></pre>
+<p>The primary probability must be a finite literal in <code>[0,1]</code>. The alternate probability is <code>1-p</code>.</p>
+<p>Selection occurs once per rule invocation, before the rule's repeated body is expanded. It does not select a new alternate on every repeat iteration.</p>
+<p>A probability without an alternate is accepted but has no branching effect. Avoid that ornamental semicolon.</p>
+<hr/>
+<h3 id="source-8-body-sections-and-repetition">8. Body sections and repetition</h3><p class="section-guide">Reading guide: this source section records “8. Body sections and repetition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A production has one, two, or three sections:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Source form</th>
+<th scope="col">Section 0</th>
+<th scope="col">Section 1</th>
+<th scope="col">Section 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body</code></td>
+<td>empty</td>
+<td>repeated body</td>
+<td>empty</td>
+</tr>
+<tr>
+<td><code>setup | body</code></td>
+<td>setup once</td>
+<td>repeated body</td>
+<td>empty</td>
+</tr>
+<tr>
+<td><code>setup | body | tail</code></td>
+<td>setup once</td>
+<td>repeated body</td>
+<td>tail once</td>
+</tr>
+</tbody>
+</table></div>
+<p>For repeat count <code>n &gt; 0</code>:</p>
+<p>[
+E(R)=E(S_0)+\sum_{i=0}^{n-1}E(S_1,i)+E(S_2)
+]</p>
+<p>The generated counter is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">&lt;RuleName&gt;_count = 0, 1, ..., n-1
+</code></pre>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt; Row(7)
+
+Row(n) n -&gt;
+    T(-3 0 0)
+    |
+    [ T(Row_count 0 0)
+      S(0.8 1 0.8)
+      I(Cube material(warmwhitematteplaster) 1 0.5) ]
+</code></pre>
+<p><code>Row_count</code> is created after setup, so do not use it in section 0. It is available in the repeated body and remains visible to the tail with its final value.</p>
+<p>A one-section rule is often the cleanest repeated rule:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Levels(height floors) floors -&gt;
+    [ T(0 Levels_count*(height/floors) 0)
+      S(2 height/floors 2)
+      I(Cube material(whitepaintmatte) 1 0.5) ]
+</code></pre>
+<hr/>
+<h3 id="source-9-variables-and-randomness">9. Variables and randomness</h3><p class="section-guide">Reading guide: this source section records “9. Variables and randomness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-9-1-continuous-random-variable">9.1 Continuous random variable</h4><p class="section-guide">Reading guide: this source section records “9.1 Continuous random variable”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">R Height(4 8)
+</code></pre>
+<p><code>R</code> samples between the evaluated bounds using the runtime's continuous uniform distribution. Equal bounds produce a deterministic value; do not depend on the upper endpoint being sampled.</p>
+<p>Bounds are expressions and are evaluated in order at expansion time:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">R A(2 3)
+R B(A A+1)
+</code></pre>
+<p>Declare a variable before its first executed use.</p>
+<h4 id="source-9-2-integer-random-variable">9.2 Integer random variable</h4><p class="section-guide">Reading guide: this source section records “9.2 Integer random variable”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">R* Floors(2 6)
+</code></pre>
+<p><code>R*</code> samples an integer uniformly from:</p>
+<p>[
+\lceil minimum\rceil,\ldots,\lfloor maximum\rfloor
+]</p>
+<p>The value is stored numerically as a float but retains an integer flag and integer range metadata.</p>
+<p>Use <code>R*</code> for repeat counts, discrete choices, and legacy material indices.</p>
+<h4 id="source-9-3-fresh-sample-expression">9.3 Fresh sample expression</h4><p class="section-guide">Reading guide: this source section records “9.3 Fresh sample expression”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">&amp;W
+</code></pre>
+<p><code>&amp;name</code> samples a fresh value from that random variable's original range without replacing the stored value.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    R Width(0.7 1.3)
+    S(&amp;Width 1 1)
+</code></pre>
+<p><code>&amp;</code> works only for a resampleable value. A calculated parameter is immutable:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Child(Width)      # resampleable when Width is a bare random variable
+Child(Width*0.5)  # immutable calculated value
+</code></pre>
+<h4 id="source-9-4-visibility-and-shadowing">9.4 Visibility and shadowing</h4><p class="section-guide">Reading guide: this source section records “9.4 Visibility and shadowing”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Each rule invocation creates a new variable frame. Lookup searches the current frame and then its callers.</p>
+<p>Consequences:</p>
+<ul>
+<li>a called rule can read caller-visible variables;</li>
+<li>a parameter or local declaration shadows an outer value;</li>
+<li>a local declaration disappears when the rule returns;</li>
+<li>sibling rule calls do not inherit each other's local variables.</li>
+</ul>
+<p>Prefer explicit parameters for stable, reviewable dependencies. Caller visibility is useful, but it can turn a small edit into a hidden coupling.</p>
+<hr/>
+<h3 id="source-10-expressions">10. Expressions</h3><p class="section-guide">Reading guide: this source section records “10. Expressions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-10-1-operators-and-precedence">10.1 Operators and precedence</h4><p class="section-guide">Reading guide: this source section records “10.1 Operators and precedence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>From highest practical binding to lowest:</p>
+<ol>
+<li>primary values and function calls;</li>
+<li>exponentiation <code>^</code>, right-associative;</li>
+<li>unary <code>+</code> and <code>-</code>;</li>
+<li>multiplication and division;</li>
+<li>addition and subtraction.</li>
+</ol>
+<p>Examples:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">S(3^2 1 1)      # 9
+S(-2^2 1 1)     # -4
+S(2^-2 1 1)     # 0.25
+</code></pre>
+<p>Division by a value whose magnitude is at most <code>1e-12</code> is rejected.</p>
+<h4 id="source-10-2-core-functions">10.2 Core functions</h4><p class="section-guide">Reading guide: this source section records “10.2 Core functions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Function</th>
+<th scope="col" style="text-align:right">Arity</th>
+<th scope="col">Meaning and constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sin(x)</code>, <code>cos(x)</code>, <code>tan(x)</code></td>
+<td style="text-align:right">1</td>
+<td>Trigonometry in radians</td>
+</tr>
+<tr>
+<td><code>radians(d)</code></td>
+<td style="text-align:right">1</td>
+<td>Degrees to radians</td>
+</tr>
+<tr>
+<td><code>degrees(r)</code></td>
+<td style="text-align:right">1</td>
+<td>Radians to degrees</td>
+</tr>
+<tr>
+<td><code>abs(x)</code></td>
+<td style="text-align:right">1</td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td><code>sqrt(x)</code></td>
+<td style="text-align:right">1</td>
+<td>Requires <code>x &gt;= 0</code></td>
+</tr>
+<tr>
+<td><code>floor(x)</code>, <code>ceil(x)</code></td>
+<td style="text-align:right">1</td>
+<td>Integer boundary as float</td>
+</tr>
+<tr>
+<td><code>min(a,b)</code>, <code>max(a,b)</code></td>
+<td style="text-align:right">2</td>
+<td>Pairwise minimum or maximum</td>
+</tr>
+<tr>
+<td><code>clamp(x,a,b)</code></td>
+<td style="text-align:right">3</td>
+<td>Requires <code>b &gt;= a</code></td>
+</tr>
+<tr>
+<td><code>wrap(x,a,b)</code></td>
+<td style="text-align:right">3</td>
+<td>Wraps into <code>[a,b)</code>, requires <code>b &gt; a</code></td>
+</tr>
+<tr>
+<td><code>lerp(a,b,u)</code></td>
+<td style="text-align:right">3</td>
+<td><code>a + (b-a)u</code>; <code>u</code> is not clamped</td>
+</tr>
+<tr>
+<td><code>ease(u)</code></td>
+<td style="text-align:right">1</td>
+<td>Clamped cubic smoothstep</td>
+</tr>
+<tr>
+<td><code>smoother(u)</code></td>
+<td style="text-align:right">1</td>
+<td>Clamped quintic smootherstep</td>
+</tr>
+<tr>
+<td><code>accelerate(u[,p])</code></td>
+<td style="text-align:right">1 or 2</td>
+<td>Clamped ease-in, default <code>p=2</code>, requires <code>p&gt;0</code></td>
+</tr>
+<tr>
+<td><code>decelerate(u[,p])</code></td>
+<td style="text-align:right">1 or 2</td>
+<td>Clamped ease-out, default <code>p=2</code>, requires <code>p&gt;0</code></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-10-3-time-functions">10.3 Time functions</h4><p class="section-guide">Reading guide: this source section records “10.3 Time functions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Function</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cycle(time,period[,phase])</code></td>
+<td>Repeating sawtooth in <code>[0,1)</code></td>
+</tr>
+<tr>
+<td><code>pingpong(time,period[,phase])</code></td>
+<td>Out-and-back triangle in <code>[0,1]</code></td>
+</tr>
+<tr>
+<td><code>pulse(time,period,duty[,phase])</code></td>
+<td><code>1</code> during duty fraction, otherwise <code>0</code></td>
+</tr>
+<tr>
+<td><code>swing(time,min,max,period[,phase])</code></td>
+<td>Triangle motion between bounds</td>
+</tr>
+<tr>
+<td><code>oscillate(time,min,max,period[,phase])</code></td>
+<td>Sinusoidal motion between bounds</td>
+</tr>
+<tr>
+<td><code>spin(time,rate[,offset])</code></td>
+<td><code>offset + time*rate</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Periods must be greater than zero. <code>pulse</code> duty must lie in <code>[0,1]</code>. <code>swing</code> and <code>oscillate</code> require <code>maximum &gt;= minimum</code>.</p>
+<hr/>
+<h3 id="source-11-conditions">11. Conditions</h3><p class="section-guide">Reading guide: this source section records “11. Conditions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Syntax:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">?(condition) true-sequence : false-sequence
+</code></pre>
+<p>Supported comparisons:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">&lt;  &gt;  &lt;=  &gt;=  ==  !=
+</code></pre>
+<p>Without a comparison, an arithmetic value is true when its absolute value exceeds <code>1e-6</code>.</p>
+<p>Equality and inequality use an absolute epsilon of <code>1e-6</code>.</p>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Beacon -&gt;
+    ?(pulse(t,2,0.25)==1)
+        BeaconOn
+    :
+        BeaconOff
+</code></pre>
+<h4 id="source-tail-branch-rule">Tail-branch rule</h4><p class="section-guide">Reading guide: this source section records “Tail-branch rule”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The parser gives the false branch the remainder of the current section or square-bracket block. Therefore a conditional is effectively a tail construct.</p>
+<p>This:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Rule -&gt;
+    ?(x&gt;0) A : B
+    Common
+</code></pre>
+<p>means:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">true  -&gt; A
+false -&gt; B Common
+</code></pre>
+<p>It does not mean <code>(A or B) followed by Common</code>.</p>
+<p>Use one of these patterns:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Rule -&gt;
+    ?(x&gt;0) AWithCommon : BWithCommon
+</code></pre>
+<p>or:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">AWithCommon -&gt; A Common
+BWithCommon -&gt; B Common
+</code></pre>
+<p>There are no <code>&amp;&amp;</code>, <code>||</code>, or logical-not operators in the current condition parser.</p>
+<hr/>
+<h3 id="source-12-scope-and-transform-actions">12. Scope and transform actions</h3><p class="section-guide">Reading guide: this source section records “12. Scope and transform actions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Square brackets clone the current scope, execute the branch, then restore the parent scope:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    [ T(-1 0 0) Block ]
+    [ T( 1 0 0) Block ]
+</code></pre>
+<p>This is the main transform-isolation mechanism.</p>
+<h4 id="source-12-1-transform-table">12.1 Transform table</h4><p class="section-guide">Reading guide: this source section records “12.1 Transform table”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Action</th>
+<th scope="col">Arguments</th>
+<th scope="col">Current effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>S(x y z)</code></td>
+<td>3 expressions</td>
+<td>Scales primary and secondary transforms</td>
+</tr>
+<tr>
+<td><code>T(x y z)</code></td>
+<td>3 expressions</td>
+<td>Translates primary and secondary transforms</td>
+</tr>
+<tr>
+<td><code>A(angle axis)</code></td>
+<td>2 expressions</td>
+<td>Rotates in degrees around axis <code>0=X</code>, <code>1=Y</code>, <code>2=Z</code></td>
+</tr>
+<tr>
+<td><code>A(angle axis low high)</code></td>
+<td>4 expressions</td>
+<td>Evaluates then clamps angle into <code>[low,high]</code></td>
+</tr>
+<tr>
+<td><code>D(x y z)</code></td>
+<td>3 expressions</td>
+<td>Scales only the secondary transform</td>
+</tr>
+<tr>
+<td><code>DSX(x y z)</code></td>
+<td>3 expressions</td>
+<td>Multiplies deformation scale on the minimum X face</td>
+</tr>
+<tr>
+<td><code>DSY(x y z)</code></td>
+<td>3 expressions</td>
+<td>Multiplies deformation scale on the minimum Y face</td>
+</tr>
+<tr>
+<td><code>DSZ(x y z)</code></td>
+<td>3 expressions</td>
+<td>Multiplies deformation scale on the minimum Z face</td>
+</tr>
+<tr>
+<td><code>DTX(x y z)</code></td>
+<td>3 expressions</td>
+<td>Adds deformation translation on the minimum X face</td>
+</tr>
+<tr>
+<td><code>DTY(x y z)</code></td>
+<td>3 expressions</td>
+<td>Adds deformation translation on the minimum Y face</td>
+</tr>
+<tr>
+<td><code>DTZ(x y z)</code></td>
+<td>3 expressions</td>
+<td>Adds deformation translation on the minimum Z face</td>
+</tr>
+</tbody>
+</table></div>
+<p>Transforms are composed in source order and are not reset after instancing. Use <code>[...]</code> whenever a part should not leak its transforms into following parts.</p>
+<h4 id="source-12-2-rotation">12.2 Rotation</h4><p class="section-guide">Reading guide: this source section records “12.2 Rotation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>A</code> consumes degrees. Trigonometric functions consume radians.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">A(45 2)
+A(degrees(0.5) 1)
+A(oscillate(t,-35,50,4) 2 -35 50)
+</code></pre>
+<p>The axis must evaluate exactly to <code>0</code>, <code>1</code>, or <code>2</code>.</p>
+<h4 id="source-12-3-split-and-face-deformed-cubes">12.3 Split and face-deformed cubes</h4><p class="section-guide">Reading guide: this source section records “12.3 Split and face-deformed cubes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>Cube</code>, <code>CubeX</code>, <code>CubeY</code>, and <code>CubeZ</code> have primary and secondary transform paths. <code>D</code> changes the secondary path. The axis variants establish split-cube orientations suited to X, Y, or Z extension.</p>
+<p><code>DS*</code> and <code>DT*</code> apply local deformation to vertices on the corresponding minimum face. They are useful for tapering, contouring, chaining, and asymmetric section control.</p>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">WingSegment -&gt;
+    [ S(4 0.35 1.2)
+      D(1 1 0.45)
+      DSX(1 0.75 0.75)
+      DTX(0 0.08 0)
+      I(CubeX material(agedwhitepaintmatte) 1 0.5) ]
+</code></pre>
+<h4 id="source-12-4-braces">12.4 Braces</h4><p class="section-guide">Reading guide: this source section records “12.4 Braces”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The scene runtime contains handlers for <code>{</code> and <code>}</code>, but the current source parser discards both tokens. Balanced braces therefore provide no source-level scope behavior.</p>
+<p>Do not write:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">{ T(1 0 0) Block }
+</code></pre>
+<p>Use:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">[ T(1 0 0) Block ]
+</code></pre>
+<p>A standalone <code>*</code> is also discarded and should not be used.</p>
+<hr/>
+<h3 id="source-13-instancing">13. Instancing</h3><p class="section-guide">Reading guide: this source section records “13. Instancing”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-13-1-current-primitive-set">13.1 Current primitive set</h4><p class="section-guide">Reading guide: this source section records “13.1 Current primitive set”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current grammar parser accepts exactly:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cube
+CubeX
+CubeY
+CubeZ
+Cylinder
+Sphere
+</code></pre>
+<p>Use exact case.</p>
+<p>Although the uploaded project includes STL catalog and UI infrastructure, <code>Grammar.cpp</code> accepts only the six built-ins and <code>Mesh::isStlInstanceType</code> currently returns false. <code>STL.*</code> is not part of the executable source grammar in this build.</p>
+<h4 id="source-13-2-instance-syntax">13.2 Instance syntax</h4><p class="section-guide">Reading guide: this source section records “13.2 Instance syntax”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(type material-spec [alpha [texture-scale]])
+!I(type material-spec [alpha [texture-scale]])
+</code></pre>
+<p>Examples:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(Cube material(warmwhitematteplaster) 1 0.5)
+!I(Cube material(lightgreyroughconcrete) 1 0.5)
+I(Sphere index(MaterialChoice) 1 1)
+</code></pre>
+<p class="source-status--pending"><code>!I</code> creates an immovable primitive. Pending linear and rotational velocity are ignored for it.</p>
+<p>The parser allows one to three arguments after the primitive type:</p>
+<ol>
+<li>material or material index;</li>
+<li>optional alpha field;</li>
+<li>optional texture scale.</li>
+</ol>
+<p>The implementation defaults are:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">alpha = 0.0
+texture scale = 0.125
+</code></pre>
+<p>For cross-path clarity, supply both explicitly.</p>
+<h4 id="source-13-3-explicit-material-versus-explicit-index">13.3 Explicit material versus explicit index</h4><p class="section-guide">Reading guide: this source section records “13.3 Explicit material versus explicit index”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">material(name)
+index(expression)
+</code></pre>
+<p>These forms are deterministic and self-documenting.</p>
+<p>A bare identifier is ambiguous:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(Cube FloorTex 1 1)
+</code></pre>
+<ul>
+<li>if <code>FloorTex</code> is visible as a grammar value, it becomes a legacy material index;</li>
+<li>otherwise it becomes the literal material name <code>FloorTex</code>.</li>
+</ul>
+<p>A later variable declaration or call-path change can therefore change the meaning of old source. Prefer:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(Cube index(FloorTex) 1 1)
+I(Cube material(FloorTex) 1 1)
+</code></pre>
+<h4 id="source-13-4-legacy-material-indices">13.4 Legacy material indices</h4><p class="section-guide">Reading guide: this source section records “13.4 Legacy material indices”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col" style="text-align:right">Index</th>
+<th scope="col">Material</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td><code>warmwhitematteplaster</code></td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td><code>pastelbluemattepaint</code></td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td><code>lightgreyroughconcrete</code></td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td><code>softbeigemattesandstone</code></td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td><code>darkslatesmoothstone</code></td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td><code>bluewhiteglossysmoothglass</code></td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td><code>amberwarmwood</code></td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td><code>steelshinyroughmetal</code></td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td><code>creamtiledceramic</code></td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td><code>terracottaroughceramic</code></td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td><code>sagegreenmattepaint</code></td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td><code>lightoakwood</code></td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td><code>offwhiteceramic</code></td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td><code>silverbluepolishedmetal</code></td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td><code>charcoalroughmetal</code></td>
+</tr>
+<tr>
+<td style="text-align:right">15</td>
+<td><code>softpinkmatteplaster</code></td>
+</tr>
+<tr>
+<td style="text-align:right">16</td>
+<td><code>mintglossysmoothtile</code></td>
+</tr>
+<tr>
+<td style="text-align:right">17</td>
+<td><code>smokytransparentglass</code></td>
+</tr>
+<tr>
+<td style="text-align:right">18</td>
+<td><code>bluewhiteshinysmoothmetal</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Other integer indices map to <code>materialN</code>.</p>
+<hr/>
+<h3 id="source-14-material-descriptor-language">14. Material descriptor language</h3><p class="section-guide">Reading guide: this source section records “14. Material descriptor language”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Procedural material names are compact descriptor strings. The editor scans recognised lexemes and recommends this order:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">color [color2] [color3] [opacity] family [finish...]
+</code></pre>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">material(silvermetalpolishedreflective)
+material(cyantransparentglassglossy)
+material(amberwoodagedrough)
+material(cyanneonglowingactive)
+</code></pre>
+<p>The current editor lexemes are:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Group</th>
+<th scope="col">Recognised words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Colors</td>
+<td><code>orange purple silver yellow magenta lime violet white green black chrome copper beige brown blue grey gray gold amber teal cyan pink red</code></td>
+</tr>
+<tr>
+<td>Opacity</td>
+<td><code>transparent translucent opaque smoky</code></td>
+</tr>
+<tr>
+<td>Families</td>
+<td><code>concrete ceramic plastic plaster grass brick neon floral boards glass marble stone metal paint wood rock tile</code></td>
+</tr>
+<tr>
+<td>Finishes and species</td>
+<td><code>emissive glowing active animated rotating reflective weathered polished mirror twotone duotone horizontal vertical veins veined oak walnut pine cedar birch smooth glossy shiny rough aged matte satin dull</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Up to three distinct colors are collected.</p>
+<p>Material names are canonicalised to lowercase alphanumeric text. <code>usertextureN</code> is preserved as a special texture slot. Empty material text becomes <code>softwhitematteplaster</code>. If no recognised texture suffix is found by the context, <code>plaster</code> is appended.</p>
+<p>Use compact no-space names. Quoting is supported only as a light wrapper around a single token, not as a general free-form string system.</p>
+<hr/>
+<h3 id="source-15-physics-actions">15. Physics actions</h3><p class="section-guide">Reading guide: this source section records “15. Physics actions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--pending">Physics setters are pending state for the next <code>I</code> or <code>!I</code>. They are cleared after every instancing attempt.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Action</th>
+<th scope="col">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>V(vx vy vz)</code></td>
+<td>Initial linear velocity for the next movable primitive</td>
+</tr>
+<tr>
+<td><code>VR(rx ry rz)</code></td>
+<td>Initial rotational velocity for the next movable primitive</td>
+</tr>
+<tr>
+<td><code>M(mass)</code></td>
+<td>Mass for the next movable primitive</td>
+</tr>
+<tr>
+<td><code>P(density)</code></td>
+<td>Density-derived mass for the next cube-like primitive</td>
+</tr>
+<tr>
+<td><code>G(magnitude dx dy dz)</code></td>
+<td>Global gravity, persistent until another <code>G</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    G(9.81 0 -1 0)
+
+    [ T(0 -0.5 0)
+      S(12 0.5 12)
+      !I(Cube material(lightgreyroughconcrete) 1 0.5) ]
+
+    [ T(0 4 0)
+      V(1 0 0)
+      VR(0 45 0)
+      M(2)
+      S(1 1 1)
+      I(Cube material(redmetalglossy) 1 0.5) ]
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>gravity direction is normalised before applying magnitude;</li>
+<li>zero direction or zero magnitude disables gravity;</li>
+<li>later <code>G</code> calls replace earlier gravity;</li>
+<li>mass is clamped to at least <code>0.001</code>;</li>
+<li>density is clamped to nonnegative;</li>
+<li class="source-status--pending">density overrides pending <code>M</code> only for <code>Cube</code>, <code>CubeX</code>, <code>CubeY</code>, and <code>CubeZ</code>;</li>
+<li>rotational velocity magnitude is capped at <code>720</code> degrees per second;</li>
+<li>immovable instances receive zero velocity and default mass.</li>
+</ul>
+<hr/>
+<h3 id="source-16-time-variable-grammars">16. Time-variable grammars</h3><p class="section-guide">Reading guide: this source section records “16. Time-variable grammars”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>t</code> is an immutable evaluation input measured in seconds. It is supplied externally for each grammar rebuild.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Rotor -&gt;
+    [ A(wrap(spin(t,90),-180,180) 1 -180 180)
+      S(0.25 3 0.25)
+      I(Cube material(silvermetalpolished) 1 0.5) ]
+</code></pre>
+<p>The editor reseeds the grammar generator from the source text and a design nonce. Time-sampled rebuilds reuse that nonce, so <code>R</code>, <code>R*</code>, and probabilistic production choices remain stable while only <code>t</code> changes.</p>
+<p>This produces a useful model:</p>
+<p>[
+Scene = F(source,\ designNonce,\ t)
+]</p>
+<p>A new ordinary Run changes the design nonce. Timeline samples change only <code>t</code>.</p>
+<h4 id="source-bounded-motion-pattern">Bounded motion pattern</h4><p class="section-guide">Reading guide: this source section records “Bounded motion pattern”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use a bounded function and an <code>A</code> safety envelope together:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">A(oscillate(t,-30,45,4) 2 -30 45)
+</code></pre>
+<p>For continuous spin, wrap before applying:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">A(wrap(spin(t,90),-180,180) 1 -180 180)
+</code></pre>
+<p>A time conditional may change topology:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Beacon -&gt;
+    ?(pulse(t,2,0.25)==1) BeaconOn : BeaconOff
+</code></pre>
+<p>Topology-changing time conditions are valid, but they rebuild different action streams at threshold crossings.</p>
+<hr/>
+<h3 id="source-17-recursive-grammar-design">17. Recursive grammar design</h3><p class="section-guide">Reading guide: this source section records “17. Recursive grammar design”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Recursive calls are legal, but termination is your responsibility.</p>
+<p>Safe pattern:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt; Branch(7 2.0)
+
+Branch(depth length) -&gt;
+    ?(depth&gt;0)
+        [ S(length 0.15 0.15)
+          I(CubeX material(amberwoodaged) 1 0.5)
+          T(length 0 0)
+          [ A( 25 2) Branch(depth-1 length*0.72) ]
+          [ A(-25 2) Branch(depth-1 length*0.72) ] ]
+    :
+        Tip
+
+Tip -&gt;
+    S(0.2 0.2 0.2)
+    I(Sphere material(greenmattepaint) 1 0.5)
+</code></pre>
+<p>The decreasing <code>depth</code> parameter is the proof of termination.</p>
+<h4 id="source-17-1-static-growth-model">17.1 Static growth model</h4><p class="section-guide">Reading guide: this source section records “17.1 Static growth model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For a selected production with setup <code>S0</code>, repeated body <code>S1</code>, tail <code>S2</code>, and repeat <code>n</code>:</p>
+<p>[
+C(R)=C(S_0)+nC(S_1)+C(S_2)
+]</p>
+<p>Use a cost vector:</p>
+<p>[
+C=(actions,\ primitives,\ ruleInvocations,\ work)
+]</p>
+<p>For an alternate rule with primary probability <code>p</code>:</p>
+<p>[
+E[C]=pC_{primary}+(1-p)C_{alternate}
+]</p>
+<p>For safety, use the componentwise worst case:</p>
+<p>[
+C_{max}=\max(C_{primary},C_{alternate})
+]</p>
+<p>For a binary recursive grammar with one primitive per node:</p>
+<p>[
+P(0)=1,\qquad P(d)=1+2P(d-1)=2^{d+1}-1
+]</p>
+<p>At depth <code>14</code>, this is <code>32,767</code> primitives. At depth <code>15</code>, it is <code>65,535</code>, which exceeds the current <code>50,000</code> primitive ceiling.</p>
+<p>Estimate worst-case growth before increasing repeat or recursion dimensions. The geometry may look innocent while the expansion tree is quietly inflating a balloon behind the curtain. 🎈</p>
+<hr/>
+<h3 id="source-18-runtime-safety-ceilings">18. Runtime safety ceilings</h3><p class="section-guide">Reading guide: this source section records “18. Runtime safety ceilings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The current grammar expansion limits are:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Limit</th>
+<th scope="col" style="text-align:right">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recursion depth</td>
+<td style="text-align:right">256</td>
+</tr>
+<tr>
+<td>Rule invocations</td>
+<td style="text-align:right">250,000</td>
+</tr>
+<tr>
+<td>Expansion work units</td>
+<td style="text-align:right">1,000,000</td>
+</tr>
+<tr>
+<td>Emitted actions</td>
+<td style="text-align:right">250,000</td>
+</tr>
+<tr>
+<td>Generated primitives</td>
+<td style="text-align:right">50,000</td>
+</tr>
+<tr>
+<td>Absolute repeat count</td>
+<td style="text-align:right">100,000</td>
+</tr>
+</tbody>
+</table></div>
+<p>Exceeding a limit aborts the expansion. Partial action streams and runtime variable snapshots are not published.</p>
+<p>These are hard emergency ceilings, not design targets.</p>
+<hr/>
+<h3 id="source-19-recommended-strict-writing-profile">19. Recommended strict writing profile</h3><p class="section-guide">Reading guide: this source section records “19. Recommended strict writing profile”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use these rules for source that remains readable and resistant to parser ambiguity:</p>
+<ol>
+<li>Define an explicit zero-parameter <code>Start</code> rule.</li>
+<li>Use one logical rule header per line.</li>
+<li>Indent continuation lines.</li>
+<li>Use exact built-in primitive case.</li>
+<li>Use <code>material(name)</code> or <code>index(expression)</code>.</li>
+<li>Supply both instance trailing arguments, commonly <code>1 0.5</code> or <code>1 1</code>.</li>
+<li>Separate action and rule-call arguments with whitespace.</li>
+<li>Use commas only inside function calls.</li>
+<li>Keep repeat expressions compact and parenthesis-free.</li>
+<li>Put each conditional at the end of its section or <code>[...]</code> block.</li>
+<li>Use <code>[...]</code> for transform isolation.</li>
+<li>Do not use <code>{...}</code> or standalone <code>*</code>.</li>
+<li>Declare random variables before executed use.</li>
+<li class="source-status--passed">Pass important dependencies as parameters.</li>
+<li>Use <code>R*</code> for discrete values.</li>
+<li>Use <code>&lt;RuleName&gt;_count</code> only in repeated body or tail.</li>
+<li>Bound time-driven angles and recursive dimensions.</li>
+<li>Estimate worst-case action and primitive growth.</li>
+</ol>
+<hr/>
+<h3 id="source-20-common-failures">20. Common failures</h3><p class="section-guide">Reading guide: this source section records “20. Common failures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Source</th>
+<th scope="col">Problem</th>
+<th scope="col">Correction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>S(1,2,3)</code></td>
+<td>Action commas are not argument separators</td>
+<td><code>S(1 2 3)</code></td>
+</tr>
+<tr>
+<td><code>Child(1,2)</code></td>
+<td>Rule-call commas are not separators</td>
+<td><code>Child(1 2)</code></td>
+</tr>
+<tr>
+<td><code>lerp(0 1 t)</code></td>
+<td>Function arguments require commas</td>
+<td><code>lerp(0,1,t)</code></td>
+</tr>
+<tr>
+<td><code>A(30 3)</code></td>
+<td>Axis must be <code>0</code>, <code>1</code>, or <code>2</code></td>
+<td><code>A(30 2)</code></td>
+</tr>
+<tr>
+<td><code>Start(x) -&gt; ...</code></td>
+<td>Entry rule receives no arguments</td>
+<td>Move parameters to a called rule</td>
+</tr>
+<tr>
+<td><code>R t(0 1)</code></td>
+<td><code>t</code> is reserved</td>
+<td>Choose another identifier</td>
+</tr>
+<tr>
+<td><code>Row(n) floor(n/2) -&gt; ...</code></td>
+<td>Repeat header accepts one compact token</td>
+<td class="source-status--passed">Precompute/pass a value or use <code>n/2</code></td>
+</tr>
+<tr>
+<td><code>{ T(1 0 0) Part }</code></td>
+<td>Braces are discarded</td>
+<td><code>[ T(1 0 0) Part ]</code></td>
+</tr>
+<tr>
+<td><code>I(STL.part material(x) 1 1)</code></td>
+<td>STL instancing is disabled in this build</td>
+<td>Use one of the six built-ins</td>
+</tr>
+<tr>
+<td><code>I(Cube FloorTex 1 1)</code></td>
+<td>Bare name may change between material and index</td>
+<td>Use <code>material(FloorTex)</code> or <code>index(FloorTex)</code></td>
+</tr>
+<tr>
+<td><code>?(x&gt;0) A : B Common</code></td>
+<td><code>Common</code> belongs only to false branch</td>
+<td>Call a common helper from both branches</td>
+</tr>
+<tr>
+<td><code>S(H 1 1) R H(2 2)</code></td>
+<td>Runtime declaration order is wrong</td>
+<td>Move <code>R H(...)</code> before the use</td>
+</tr>
+</tbody>
+</table></div>
+<hr/>
+<h3 id="source-21-compact-feature-examples">21. Compact feature examples</h3><p class="section-guide">Reading guide: this source section records “21. Compact feature examples”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-random-parameter">Random parameter</h4><p class="section-guide">Reading guide: this source section records “Random parameter”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    R Height(2 5)
+    Tower(Height)
+
+Tower(h) -&gt;
+    S(1 h 1)
+    I(Cube material(whitepaintmatte) 1 0.5)
+</code></pre>
+<h4 id="source-integer-repeat-and-counter">Integer repeat and counter</h4><p class="section-guide">Reading guide: this source section records “Integer repeat and counter”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt; Stack(6)
+
+Stack(n) n -&gt;
+    [ T(0 Stack_count 0)
+      S(1 0.9 1)
+      I(Cube material(lightgreyroughconcrete) 1 0.5) ]
+</code></pre>
+<h4 id="source-per-call-header-reroll">Per-call header reroll</h4><p class="section-guide">Reading guide: this source section records “Per-call header reroll”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    R Width(0.6 1.2)
+    Panel
+    T(1.5 0 0)
+    Panel
+
+Panel 1 Width -&gt;
+    S(Width 1 0.2)
+    I(Cube material(bluepaintmatte) 1 0.5)
+</code></pre>
+<h4 id="source-per-use-reroll">Per-use reroll</h4><p class="section-guide">Reading guide: this source section records “Per-use reroll”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    R Width(0.6 1.2)
+    S(&amp;Width 1 0.2)
+    I(Cube material(bluepaintmatte) 1 0.5)
+</code></pre>
+<h4 id="source-alternate-geometry">Alternate geometry</h4><p class="section-guide">Reading guide: this source section records “Alternate geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Cap ; 0.8 -&gt;
+    I(Cube material(whiteceramicglossy) 1 0.5)
+-&gt;
+    I(Sphere material(whiteceramicglossy) 1 0.5)
+</code></pre>
+<h4 id="source-time-animation">Time animation</h4><p class="section-guide">Reading guide: this source section records “Time animation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">Start -&gt;
+    [ T(0 oscillate(t,0,3,4) 0)
+      A(swing(t,-25,25,3) 2 -25 25)
+      I(Cube material(cyanneonglowing) 1 0.5) ]
+</code></pre>
+<hr/>
+<h3 id="source-22-conformance-checklist">22. Conformance checklist</h3><p class="section-guide">Reading guide: this source section records “22. Conformance checklist”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A grammar is ready for a parser test when all answers are yes:</p>
+<ul>
+<li>Is every delimiter balanced within its logical rule?</li>
+<li>Is every rule name unique?</li>
+<li>Does <code>Start</code> have zero parameters?</li>
+<li>Does every call supply exactly the target parameter count?</li>
+<li>Are all action arities exact?</li>
+<li>Are all variables visible and declared before the executed use?</li>
+<li>Are all function names supported and arities correct?</li>
+<li>Are function arguments comma-separated?</li>
+<li>Are action and rule arguments whitespace-separated?</li>
+<li>Is every random range finite and ordered?</li>
+<li>Does every <code>R*</code> range contain at least one integer?</li>
+<li>Are rotation axes exact integers in <code>{0,1,2}</code>?</li>
+<li>Are rotation bounds ordered?</li>
+<li>Is every material/index choice explicit?</li>
+<li>Does every conditional intentionally own the rest of its sequence?</li>
+<li>Does every recursive cycle have a decreasing termination measure?</li>
+<li>Is worst-case expansion below all safety ceilings?</li>
+</ul>
+<hr/>
+<h3 id="source-23-current-implementation-boundaries">23. Current implementation boundaries</h3><p class="section-guide">Reading guide: this source section records “23. Current implementation boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following features are present in surrounding source or UI scaffolding but are not executable source-grammar features in this snapshot:</p>
+<ul>
+<li>STL instancing;</li>
+<li>semantic brace scopes;</li>
+<li>comma-separated action arguments;</li>
+<li>general boolean expressions;</li>
+<li>assignments;</li>
+<li>named source scopes;</li>
+<li>arbitrary string literals;</li>
+<li>more than one alternate;</li>
+<li>more than three body sections;</li>
+<li>function calls in rule-header repeat expressions.</li>
+</ul>
+<p class="source-status--proposed">These are good candidates for a future grammar revision, but they should not be inferred into current source.</p>
+<hr/>
+<h3 id="source-24-files-delivered-with-this-guide">24. Files delivered with this guide</h3><p class="section-guide">Reading guide: this source section records “24. Files delivered with this guide”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>Progen3D_Grammar.ebnf</code>: standalone strict EBNF.</li>
+<li><code>Progen3D_Grammar_Writing_Guide.md</code>: this guide.</li>
+<li><code>Progen3D_Grammar_Showcase.p3d</code>: a single current-syntax example combining sections, counters, parameters, random values, alternate productions, materials, physics, deformation, and time.</li>
+</ul>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-example-grammar-corpus.html" rel="prev">← Previous: Progen3D Example Grammar Corpus</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-p0-hardening.html" rel="next">Next: Progen3D P0 Hardening →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

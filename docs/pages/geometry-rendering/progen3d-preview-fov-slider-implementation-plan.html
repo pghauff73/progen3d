@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state." name="description"/>
+<meta content="PROGEN3D_PREVIEW_FOV_SLIDER_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="11862f6e84f2b3b7bd2eb0d9dd6875da0e1635ff307ffb731f5fe9f9f4f5abe7" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Preview FOV Slider Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">ProGen3D Preview FOV Slider Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Preview FOV Slider Implementation Plan</h1>
+<p class="lead">Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 10 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_PREVIEW_FOV_SLIDER_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="11862f6e84f2b3b7bd2eb0d9dd6875da0e1635ff307ffb731f5fe9f9f4f5abe7" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Preview FOV Slider Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Preview FOV Slider Implementation Plan, Current Repository Evidence, Existing Camera State, Fixed Projection Values.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Preview FOV Slider Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Preview FOV Slider Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Repository Evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Repository Evidence</td></tr><tr><td><dfn title="Named by the source document">Existing Camera State</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Existing Camera State</td></tr><tr><td><dfn title="Named by the source document">Fixed Projection Values</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Fixed Projection Values</td></tr><tr><td><dfn title="Named by the source document">Existing Preview UI</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 Existing Preview UI</td></tr><tr><td><dfn title="Named by the source document">Product Decisions</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Product Decisions</td></tr><tr><td><dfn title="Named by the source document">FOV Meaning</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 FOV Meaning</td></tr><tr><td><dfn title="Named by the source document">Camera Interaction</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.2 Camera Interaction</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">FOV</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="libcurl with OpenSSL">GLM</dfn></td><td>libcurl with OpenSSL</td></tr><tr><td><dfn title="image upload/release behavior">UI</dfn></td><td>image upload/release behavior</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Preview FOV Slider Implementation Plan, Current Repository Evidence, Existing Camera State, Fixed Projection Values. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, 1. Objective, 2. Current Repository Evidence, 2.1 Existing Camera State, 2.2 Fixed Projection Values. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 13, proposed: 5.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 7 code blocks, 1 tables and the source SHA-256 <code>11862f6e84f2b3b7bd2eb0d9dd6875da0e1635ff307ffb731f5fe9f9f4f5abe7</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-1-objective">1. Objective</a></li><li><a href="#source-2-current-repository-evidence">2. Current Repository Evidence</a></li><li><a href="#source-2-1-existing-camera-state">2.1 Existing Camera State</a></li><li><a href="#source-2-2-fixed-projection-values">2.2 Fixed Projection Values</a></li><li><a href="#source-2-3-existing-preview-ui">2.3 Existing Preview UI</a></li><li><a href="#source-3-product-decisions">3. Product Decisions</a></li><li><a href="#source-3-1-fov-meaning">3.1 FOV Meaning</a></li><li><a href="#source-3-2-camera-interaction">3.2 Camera Interaction</a></li><li><a href="#source-3-3-persistence">3.3 Persistence</a></li><li><a href="#source-3-4-deferred-projection-modes">3.4 Deferred Projection Modes</a></li><li><a href="#source-4-target-object-model">4. Target Object Model</a></li><li><a href="#source-4-1-previewprojectionconfiguration">4.1 PreviewProjectionConfiguration</a></li><li><a href="#source-4-2-scenepreviewsession">4.2 ScenePreviewSession</a></li><li><a href="#source-4-3-previewcameracontroller">4.3 PreviewCameraController</a></li><li><a href="#source-4-4-renderer-camera-contract">4.4 Renderer Camera Contract</a></li><li><a href="#source-5-presentation-design">5. Presentation Design</a></li><li><a href="#source-5-1-toolbar-entry">5.1 Toolbar Entry</a></li><li><a href="#source-5-2-camera-popup">5.2 Camera Popup</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>13</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>0</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>5</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_PREVIEW_FOV_SLIDER_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Preview FOV Slider Implementation Plan, Current Repository Evidence, Existing Camera State, Fixed Projection Values.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>PreviewCameraController::fitToBounds() treats it as degrees and converts it to radians.</li><li>buildpreviewcamerastate() passes it directly to glm::perspective() for picking.</li><li>buildcameramatrices() passes it directly to glm::perspective() for rendering.</li><li>Heading: Camera Lens.</li><li>Explanatory text describing narrow and wide FOV.</li><li>ImGui::SliderFloat from 15 to 100 degrees.</li><li>Preset buttons:</li><li>Reset Lens button.</li><li>Current camera-distance readout.</li><li>Run ./tests/runpreviewsessionchecks.sh.</li><li>Run ./tests/runguismokecheck.sh.</li><li>Confirm the supervised GUI process state before rebuilding.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> cpp fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-cpp">class PreviewProjectionConfiguration
+{
+public:
+    static constexpr float minimum_vertical_field_of_view_degrees = 15.0f;
+    static constexpr float default_vertical_field_of_view_degrees = 43.0f;
+    static constexpr float maximum_vertical_field_of_view_degrees = 100.0f;
+
+    float verticalFieldOfViewDegrees() const;
+    float verticalFieldOfViewRadians() const;
+
+    void setVerticalFieldOfViewDegrees(float requested_degrees);
+    void reset();
+
+private:
+    float vertical_field_of_view_degrees_ =
+        default_vertical_field_of_view_degrees;
+};</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Preview FOV Slider Implementation Plan" data="../../assets/diagrams/pages/progen3d-preview-fov-slider-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_PREVIEW_FOV_SLIDER_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>11862f6e84f2b3b7bd2eb0d9dd6875da0e1635ff307ffb731f5fe9f9f4f5abe7</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>57 headings, 7 fenced code blocks, 1 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Preview FOV Slider Implementation Plan, Current Repository Evidence, Existing Camera State, Fixed Projection Values, Existing Preview UI</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-curved-primitive-extension-implementation-plan.html">ProGen3D Curved Primitive Extension Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</small></li><li><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html">ProGen3D Preview GL46 and PBR Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</small></li><li><a href="progen3d-render-pipeline-upgrade-implementation-plan.html">ProGen3D Render Pipeline Upgrade Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the OpenGL 4.6 preview renderer through explicit, UML-readable render-pass and resource ownership while preserving current editor behavior.</small></li><li><a href="progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</small></li><li><a href="progen3d-full-geometry-kernel-fgkv1-completion-roadmap.html">ProGen3D Full Geometry Kernel FGKv1 Completion Roadmap</a> <span class="status-badge status--planned">Planned</span><br/><small>FGKv1 should become the single geometry realization boundary:</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_PREVIEW_FOV_SLIDER_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_PREVIEW_FOV_SLIDER_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>11862f6e84f2b3b7bd2eb0d9dd6875da0e1635ff307ffb731f5fe9f9f4f5abe7</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-preview-fov-slider-implementation-plan">ProGen3D Preview FOV Slider Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Preview FOV Slider Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Project:</strong> ProGen3D Editor GUI</li>
+<li><strong>Target executable:</strong> <code>progen3d-editor-gui</code></li>
+<li><strong>Plan date:</strong> August 21, 2026</li>
+<li class="source-status--proposed"><strong>Status:</strong> Proposed implementation sequence</li>
+<li><strong>Feature:</strong> Adjustable vertical field of view for the preview canvas</li>
+<li><strong>Primary technology:</strong> C++17, Dear ImGui, GLM, OpenGL</li>
+<li><strong>Authoritative verification command:</strong> <code>./tests/run_release_checks.sh</code></li>
+</ul>
+<h3 id="source-1-objective">1. Objective</h3><p class="section-guide">Reading guide: this source section records “1. Objective”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</p>
+<p>The feature must establish one explicit projection configuration used by:</p>
+<ul>
+<li>Preview rendering.</li>
+<li>Preview object picking.</li>
+<li>Camera fit-to-bounds calculations.</li>
+<li>Camera reset behavior.</li>
+<li>The preview camera controls presented by Dear ImGui.</li>
+</ul>
+<p>The implementation must first correct the existing degree-versus-radian inconsistency before exposing the value to users.</p>
+<h3 id="source-2-current-repository-evidence">2. Current Repository Evidence</h3><p class="section-guide">Reading guide: this source section records “2. Current Repository Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-existing-camera-state">2.1 Existing Camera State</h4><p class="section-guide">Reading guide: this source section records “2.1 Existing Camera State”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>PreviewCameraController</code> currently owns:</p>
+<ul>
+<li>Scene scale.</li>
+<li>Orbit azimuth and elevation.</li>
+<li>Camera target.</li>
+<li>Camera distance.</li>
+<li>Orbit, pan, wheel zoom, orientation, reset, and fit-to-bounds behavior.</li>
+</ul>
+<p>It does not own or receive a configurable FOV.</p>
+<p>Relevant files:</p>
+<ul>
+<li><code>include/editor/controller/PreviewCameraController.h</code></li>
+<li><code>src/editor/controller/PreviewCameraController.cpp</code></li>
+<li><code>include/editor/model/ScenePreviewSession.h</code></li>
+</ul>
+<h4 id="source-2-2-fixed-projection-values">2.2 Fixed Projection Values</h4><p class="section-guide">Reading guide: this source section records “2.2 Fixed Projection Values”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The nominal value <code>43.0</code> exists in three projection-related paths:</p>
+<ol>
+<li><code>PreviewCameraController::fitToBounds()</code> treats it as degrees and converts it to radians.</li>
+<li><code>build_preview_camera_state()</code> passes it directly to <code>glm::perspective()</code> for picking.</li>
+<li><code>build_camera_matrices()</code> passes it directly to <code>glm::perspective()</code> for rendering.</li>
+</ol>
+<p>The installed GLM implementation expects radians. The fitting path therefore assumes a 43-degree lens while the picking and rendering paths consume the numeric value as radians.</p>
+<p>This inconsistency must be fixed before adding the slider.</p>
+<h4 id="source-2-3-existing-preview-ui">2.3 Existing Preview UI</h4><p class="section-guide">Reading guide: this source section records “2.3 Existing Preview UI”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The preview toolbar currently contains:</p>
+<ul>
+<li>Play or Pause.</li>
+<li>Step.</li>
+<li>Reset Time or Reset Simulation.</li>
+<li>Reset View.</li>
+<li>Fit.</li>
+<li>Run.</li>
+<li>Full Screen or Windowed.</li>
+<li>Playback speed.</li>
+<li>Grammar time or simulation time.</li>
+<li>Camera-distance status.</li>
+<li>Overlay controls.</li>
+</ul>
+<p>A permanently expanded FOV slider would overcrowd this row. The control should therefore use a compact camera button and popup.</p>
+<h3 id="source-3-product-decisions">3. Product Decisions</h3><p class="section-guide">Reading guide: this source section records “3. Product Decisions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-fov-meaning">3.1 FOV Meaning</h4><p class="section-guide">Reading guide: this source section records “3.1 FOV Meaning”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The value is <strong>vertical perspective field of view in degrees</strong>.</li>
+<li>The default value is <strong>43 degrees</strong>.</li>
+<li>The supported range is <strong>15 through 100 degrees</strong>.</li>
+<li>Lower values produce a telephoto-like, flatter view.</li>
+<li>Higher values produce a wider, more perspective-exaggerated view.</li>
+</ul>
+<h4 id="source-3-2-camera-interaction">3.2 Camera Interaction</h4><p class="section-guide">Reading guide: this source section records “3.2 Camera Interaction”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Mouse-wheel zoom continues to change camera distance.</li>
+<li>Dragging the FOV slider changes only the lens angle.</li>
+<li>Changing FOV does not automatically move the camera.</li>
+<li><code>Fit</code> preserves the selected FOV and calculates a matching distance.</li>
+<li><code>Reset View</code> restores camera pose, distance, target, scale, and the default 43-degree FOV.</li>
+<li>FOV changes take effect immediately without grammar regeneration.</li>
+</ul>
+<h4 id="source-3-3-persistence">3.3 Persistence</h4><p class="section-guide">Reading guide: this source section records “3.3 Persistence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>FOV is preview-session state, not grammar-document content.</li>
+<li>Changing FOV must not mark <code>GrammarSourceDocument</code> dirty.</li>
+<li>The first implementation does not persist FOV across application launches.</li>
+<li class="source-status--proposed">Future workspace-preference persistence may store it without changing grammar files.</li>
+</ul>
+<h4 id="source-3-4-deferred-projection-modes">3.4 Deferred Projection Modes</h4><p class="section-guide">Reading guide: this source section records “3.4 Deferred Projection Modes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Orthographic projection is explicitly deferred. The FOV implementation should not introduce a partially implemented projection-mode enum or inactive orthographic fields.</p>
+<h3 id="source-4-target-object-model">4. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “4. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-previewprojectionconfiguration">4.1 <code>PreviewProjectionConfiguration</code></h4><p class="section-guide">Reading guide: this source section records “4.1 PreviewProjectionConfiguration”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Create a model class dedicated to preview projection state.</p>
+<p class="source-status--proposed">Proposed file:</p>
+<ul>
+<li><code>include/editor/model/PreviewProjectionConfiguration.h</code></li>
+<li><code>src/editor/model/PreviewProjectionConfiguration.cpp</code></li>
+</ul>
+<p>Responsibilities:</p>
+<ul>
+<li>Own vertical FOV in degrees.</li>
+<li>Clamp requested values to the supported range.</li>
+<li>Provide the value in degrees for presentation.</li>
+<li>Provide an explicitly named radians value for GLM.</li>
+<li>Restore the default projection configuration.</li>
+</ul>
+<p class="source-status--proposed">Proposed public contract:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">class PreviewProjectionConfiguration
+{
+public:
+    static constexpr float minimum_vertical_field_of_view_degrees = 15.0f;
+    static constexpr float default_vertical_field_of_view_degrees = 43.0f;
+    static constexpr float maximum_vertical_field_of_view_degrees = 100.0f;
+
+    float verticalFieldOfViewDegrees() const;
+    float verticalFieldOfViewRadians() const;
+
+    void setVerticalFieldOfViewDegrees(float requested_degrees);
+    void reset();
+
+private:
+    float vertical_field_of_view_degrees_ =
+        default_vertical_field_of_view_degrees;
+};
+</code></pre>
+<p>The class name and methods make the measurement unit explicit and prevent another degree-versus-radian ambiguity.</p>
+<h4 id="source-4-2-scenepreviewsession">4.2 <code>ScenePreviewSession</code></h4><p class="section-guide">Reading guide: this source section records “4.2 ScenePreviewSession”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Compose the new model beside the existing camera controller:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">PreviewCameraController camera;
+PreviewProjectionConfiguration projection;
+</code></pre>
+<p>Relationship:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-mermaid">classDiagram
+    class ScenePreviewSession
+    class PreviewCameraController
+    class PreviewProjectionConfiguration
+    class PreviewRenderer
+
+    ScenePreviewSession *-- PreviewCameraController
+    ScenePreviewSession *-- PreviewProjectionConfiguration
+    PreviewRenderer --&gt; PreviewProjectionConfiguration : consumes derived FOV
+</code></pre>
+<h4 id="source-4-3-previewcameracontroller">4.3 <code>PreviewCameraController</code></h4><p class="section-guide">Reading guide: this source section records “4.3 PreviewCameraController”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extend <code>fitToBounds()</code> so its calculation uses the active projection configuration rather than a private fixed constant.</p>
+<p>Preferred contract:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">void fitToBounds(float center_x,
+                 float center_y,
+                 float center_z,
+                 float half_extent_x,
+                 float half_extent_y,
+                 float half_extent_z,
+                 float viewport_width,
+                 float viewport_height,
+                 const PreviewProjectionConfiguration &amp;projection);
+</code></pre>
+<p>Add a reset overload or coordinated session-level reset command so the existing camera reset and projection reset occur together. Do not make the camera controller own document, rendering, or Dear ImGui responsibilities.</p>
+<h4 id="source-4-4-renderer-camera-contract">4.4 Renderer Camera Contract</h4><p class="section-guide">Reading guide: this source section records “4.4 Renderer Camera Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Extend <code>PreviewCameraState</code> with an explicitly unit-named value:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">float vertical_field_of_view_radians = glm::radians(43.0f);
+</code></pre>
+<p>The renderer must not infer units or contain another hardcoded 43 value.</p>
+<h3 id="source-5-presentation-design">5. Presentation Design</h3><p class="section-guide">Reading guide: this source section records “5. Presentation Design”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-toolbar-entry">5.1 Toolbar Entry</h4><p class="section-guide">Reading guide: this source section records “5.1 Toolbar Entry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Replace the passive camera-distance chip with a compact button such as:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Camera 43 deg / 5.00
+</code></pre>
+<p>Clicking the button opens <code>PreviewCameraOptions</code>.</p>
+<p>The button should remain in <code>PreviewTimelinePanel</code> because it controls the active preview viewport rather than post-processing quality.</p>
+<h4 id="source-5-2-camera-popup">5.2 Camera Popup</h4><p class="section-guide">Reading guide: this source section records “5.2 Camera Popup”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The popup contains:</p>
+<ol>
+<li>Heading: <code>Camera Lens</code>.</li>
+<li>Explanatory text describing narrow and wide FOV.</li>
+<li><code>ImGui::SliderFloat</code> from 15 to 100 degrees.</li>
+<li>Preset buttons:
+<ul>
+<li><code>24 deg Telephoto</code></li>
+<li><code>43 deg Standard</code></li>
+<li><code>70 deg Wide</code></li>
+</ul>
+</li>
+<li><code>Reset Lens</code> button.</li>
+<li>Current camera-distance readout.</li>
+</ol>
+<p class="source-status--proposed">Proposed slider behavior:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-cpp">float editable_fov = projection.verticalFieldOfViewDegrees();
+if (ImGui::SliderFloat("Vertical FOV",
+                       &amp;editable_fov,
+                       PreviewProjectionConfiguration::minimum_vertical_field_of_view_degrees,
+                       PreviewProjectionConfiguration::maximum_vertical_field_of_view_degrees,
+                       "%.0f deg",
+                       ImGuiSliderFlags_AlwaysClamp)) {
+    projection.setVerticalFieldOfViewDegrees(editable_fov);
+}
+</code></pre>
+<p>The popup may request a preview redraw, but it must not call grammar regeneration.</p>
+<h4 id="source-5-3-accessibility-and-feedback">5.3 Accessibility and Feedback</h4><p class="section-guide">Reading guide: this source section records “5.3 Accessibility and Feedback”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The slider must support keyboard navigation through normal Dear ImGui behavior.</li>
+<li>Hovering the control should explain that mouse-wheel zoom changes distance instead.</li>
+<li>The toolbar button must display the effective clamped value.</li>
+<li>Presets must use the same setter as the slider.</li>
+</ul>
+<h3 id="source-6-implementation-milestones">6. Implementation Milestones</h3><p class="section-guide">Reading guide: this source section records “6. Implementation Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-milestone-0-capture-the-current-baseline">Milestone 0: Capture the Current Baseline</h3><p class="section-guide">Reading guide: this source section records “Milestone 0: Capture the Current Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Run <code>./tests/run_preview_session_checks.sh</code>.</li>
+<li>Run <code>./tests/run_gui_smoke_check.sh</code>.</li>
+<li>Confirm the supervised GUI process state before rebuilding.</li>
+<li>Record that existing rendering and picking both use the same hardcoded numeric value, while fit-to-bounds converts degrees.</li>
+</ol>
+<h4 id="source-acceptance-gates">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">Preview controller checks pass.</li>
+<li>GUI smoke check reaches a rendered frame.</li>
+<li>No source changes are made during baseline capture.</li>
+</ul>
+<h3 id="source-milestone-1-correct-projection-units">Milestone 1: Correct Projection Units</h3><p class="section-guide">Reading guide: this source section records “Milestone 1: Correct Projection Units”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-2">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Replace both direct <code>43.0</code> perspective arguments with explicit radians conversion.</li>
+<li>Keep the visible default equivalent to an actual 43-degree vertical FOV.</li>
+<li>Verify rendering, picking, selection, view-cube interaction, and Fit behavior.</li>
+<li class="source-status--passed">Add a source gate preventing a bare degree value from being passed to <code>glm::perspective()</code>.</li>
+</ol>
+<h4 id="source-acceptance-gates-2">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Both GLM projection calls receive radians.</li>
+<li>Picking remains aligned with rendered primitives.</li>
+<li>Fit-to-bounds frames the scene using the corrected projection.</li>
+<li>The ordinary GUI smoke test passes.</li>
+</ul>
+<h3 id="source-milestone-2-add-projection-state">Milestone 2: Add Projection State</h3><p class="section-guide">Reading guide: this source section records “Milestone 2: Add Projection State”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-3">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Implement <code>PreviewProjectionConfiguration</code>.</li>
+<li>Compose it into <code>ScenePreviewSession</code>.</li>
+<li>Add the new source file to <code>Makefile</code>.</li>
+<li>Remove the private FOV constant from <code>PreviewCameraController.cpp</code>.</li>
+<li>Make camera fitting consume the projection model.</li>
+<li>Make reset behavior restore the projection default.</li>
+</ol>
+<h4 id="source-acceptance-gates-3">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>FOV has one authoritative model owner.</li>
+<li>Requested values clamp to 15 through 100 degrees.</li>
+<li>The default is exactly 43 degrees.</li>
+<li>Camera fitting has no hardcoded FOV.</li>
+</ul>
+<h3 id="source-milestone-3-unify-rendering-and-picking-inputs">Milestone 3: Unify Rendering and Picking Inputs</h3><p class="section-guide">Reading guide: this source section records “Milestone 3: Unify Rendering and Picking Inputs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-4">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add <code>vertical_field_of_view_radians</code> to <code>PreviewCameraState</code>.</li>
+<li>Populate it from <code>PreviewProjectionConfiguration</code>.</li>
+<li class="source-status--passed">Pass it through <code>render_scene_to_preview()</code> or replace the long camera argument list with a complete <code>PreviewCameraState</code> value.</li>
+<li>Make <code>build_preview_camera_state()</code> use the same projection configuration for picking.</li>
+<li>Remove the remaining hardcoded preview FOV values.</li>
+</ol>
+<p>Preferred incremental design:</p>
+<ul>
+<li class="source-status--passed">Construct one complete <code>PreviewCameraState</code> in the preview presentation path.</li>
+<li>Supply that state to the renderer.</li>
+<li>Construct the interaction projection from the same session configuration.</li>
+<li>Avoid adding new process-global FOV references.</li>
+</ul>
+<h4 id="source-acceptance-gates-4">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Rendering and picking consume the same effective FOV.</li>
+<li>Projection units are explicit at every API boundary.</li>
+<li>The renderer does not access <code>EditorWorkspaceSession</code> directly.</li>
+<li>Changing FOV does not request scene regeneration.</li>
+</ul>
+<h3 id="source-milestone-4-add-the-fov-slider">Milestone 4: Add the FOV Slider</h3><p class="section-guide">Reading guide: this source section records “Milestone 4: Add the FOV Slider”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-5">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Convert the camera status chip into a popup-opening camera control.</li>
+<li>Add the vertical FOV slider.</li>
+<li>Add telephoto, standard, and wide presets.</li>
+<li>Add Reset Lens.</li>
+<li class="source-status--passed">Update Reset View to restore the complete default camera view.</li>
+<li>Keep Fit based on the current FOV.</li>
+<li>Ensure the popup remains usable in narrow and fullscreen preview layouts.</li>
+</ol>
+<h4 id="source-acceptance-gates-5">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Slider changes are visible in the next rendered frame.</li>
+<li>No grammar request is queued while moving the slider.</li>
+<li>No document dirty flag changes.</li>
+<li>The displayed value matches the effective clamped value.</li>
+<li>Reset and presets are deterministic.</li>
+</ul>
+<h3 id="source-milestone-5-verification-and-supervised-restart">Milestone 5: Verification and Supervised Restart</h3><p class="section-guide">Reading guide: this source section records “Milestone 5: Verification and Supervised Restart”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-6">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Extend <code>tests/preview_session_harness.cpp</code> for projection defaults, clamping, reset, and fitting.</li>
+<li>Add projection-matrix checks for narrow, standard, and wide FOV values.</li>
+<li>Add a source gate confirming that renderer and interaction paths use the projection model.</li>
+<li>Run the focused preview suite.</li>
+<li class="source-status--passed">Run the complete release suite.</li>
+<li class="source-status--passed">Restart <code>progen3d-editor-gui.service</code> only after all checks pass.</li>
+<li>Verify the service PID, restart count, and recent logs.</li>
+</ol>
+<h4 id="source-acceptance-gates-6">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>./tests/run_preview_session_checks.sh</code> passes.</li>
+<li><code>./tests/run_editor_architecture_checks.sh</code> passes.</li>
+<li><code>./tests/run_release_checks.sh</code> passes from a clean application build.</li>
+<li class="source-status--passed">Both GUI smoke modes pass.</li>
+<li>The supervised GUI remains <code>active (running)</code> after restart.</li>
+</ul>
+<h3 id="source-7-file-change-map">7. File Change Map</h3><p class="section-guide">Reading guide: this source section records “7. File Change Map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-new-files">New Files</h4><p class="section-guide">Reading guide: this source section records “New Files”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/model/PreviewProjectionConfiguration.h</code></li>
+<li><code>src/editor/model/PreviewProjectionConfiguration.cpp</code></li>
+</ul>
+<h4 id="source-modified-model-and-controller-files">Modified Model and Controller Files</h4><p class="section-guide">Reading guide: this source section records “Modified Model and Controller Files”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/editor/model/ScenePreviewSession.h</code></li>
+<li><code>include/editor/controller/PreviewCameraController.h</code></li>
+<li><code>src/editor/controller/PreviewCameraController.cpp</code></li>
+</ul>
+<h4 id="source-modified-rendering-files">Modified Rendering Files</h4><p class="section-guide">Reading guide: this source section records “Modified Rendering Files”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/imgui_render.h</code></li>
+<li><code>src/imgui_render.cpp</code></li>
+<li><code>src/imgui_main.cpp</code></li>
+</ul>
+<h4 id="source-modified-build-and-test-files">Modified Build and Test Files</h4><p class="section-guide">Reading guide: this source section records “Modified Build and Test Files”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>Makefile</code></li>
+<li><code>tests/preview_session_harness.cpp</code></li>
+<li><code>tests/run_preview_session_checks.sh</code></li>
+<li><code>tests/test_p2_time.py</code> only if its exact source gates need updating after signature changes</li>
+<li><code>tests/README.md</code></li>
+</ul>
+<h3 id="source-8-verification-matrix">8. Verification Matrix</h3><p class="section-guide">Reading guide: this source section records “8. Verification Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Area</th>
+<th scope="col">Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Projection default</td>
+<td>New configuration starts at exactly 43 degrees</td>
+</tr>
+<tr>
+<td>Input bounds</td>
+<td>Values below 15 and above 100 clamp safely</td>
+</tr>
+<tr>
+<td>Unit correctness</td>
+<td>GLM receives radians through explicitly named APIs</td>
+</tr>
+<tr>
+<td>Fit behavior</td>
+<td>Wider FOV produces a nearer fitted distance for identical bounds</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>Narrow, standard, and wide matrices are finite and non-degenerate</td>
+</tr>
+<tr>
+<td>Picking</td>
+<td>Selection projection uses the same effective FOV as rendering</td>
+</tr>
+<tr>
+<td>Reset</td>
+<td>Reset View restores 43 degrees and the default camera pose</td>
+</tr>
+<tr>
+<td>Presets</td>
+<td>24, 43, and 70-degree actions use the model setter</td>
+</tr>
+<tr>
+<td>Document isolation</td>
+<td>Slider changes never mark grammar source dirty</td>
+</tr>
+<tr>
+<td>Regeneration isolation</td>
+<td>Slider changes never enqueue grammar compilation</td>
+</tr>
+<tr>
+<td>Temporal behavior</td>
+<td>Grammar-time and physics-time tests remain unchanged</td>
+</tr>
+<tr>
+<td>Full application</td>
+<td class="source-status--passed">Ordinary and temporal Xvfb smoke tests pass</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-9-risks-and-mitigations">9. Risks and Mitigations</h3><p class="section-guide">Reading guide: this source section records “9. Risks and Mitigations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-risk-rendering-and-picking-drift-apart">Risk: Rendering and Picking Drift Apart</h4><p class="section-guide">Reading guide: this source section records “Risk: Rendering and Picking Drift Apart”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Feed both paths from <code>PreviewProjectionConfiguration</code> and test the effective projection input at narrow, default, and wide settings.</p>
+<h4 id="source-risk-degree-and-radian-confusion-returns">Risk: Degree and Radian Confusion Returns</h4><p class="section-guide">Reading guide: this source section records “Risk: Degree and Radian Confusion Returns”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Include the unit in every relevant method and field name. Convert degrees to radians only through <code>verticalFieldOfViewRadians()</code>.</p>
+<h4 id="source-risk-extreme-fov-values-produce-unusable-views">Risk: Extreme FOV Values Produce Unusable Views</h4><p class="section-guide">Reading guide: this source section records “Risk: Extreme FOV Values Produce Unusable Views”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Clamp values to 15 through 100 degrees and keep presets within common modeling ranges.</p>
+<h4 id="source-risk-fit-to-bounds-ignores-the-active-lens">Risk: Fit-to-Bounds Ignores the Active Lens</h4><p class="section-guide">Reading guide: this source section records “Risk: Fit-to-Bounds Ignores the Active Lens”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Require the projection configuration in the fit method and add monotonic-distance tests.</p>
+<h4 id="source-risk-slider-movement-triggers-expensive-scene-work">Risk: Slider Movement Triggers Expensive Scene Work</h4><p class="section-guide">Reading guide: this source section records “Risk: Slider Movement Triggers Expensive Scene Work”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Treat FOV as camera-only state. Do not set document dirty state, regeneration flags, or render-material invalidation flags.</p>
+<h4 id="source-risk-toolbar-becomes-overcrowded">Risk: Toolbar Becomes Overcrowded</h4><p class="section-guide">Reading guide: this source section records “Risk: Toolbar Becomes Overcrowded”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Use one compact camera button and a popup rather than an always-visible slider.</p>
+<h4 id="source-risk-correcting-the-existing-projection-changes-the-visual-baseline">Risk: Correcting the Existing Projection Changes the Visual Baseline</h4><p class="section-guide">Reading guide: this source section records “Risk: Correcting the Existing Projection Changes the Visual Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Land and verify the radians correction before the adjustable-state and UI changes. Review screenshots or the live GUI after each slice.</p>
+<h3 id="source-10-explicit-non-goals">10. Explicit Non-Goals</h3><p class="section-guide">Reading guide: this source section records “10. Explicit Non-Goals”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Orthographic projection.</li>
+<li>Physical camera focal-length or sensor-size simulation.</li>
+<li>Depth-of-field rendering.</li>
+<li>Animated FOV in grammar time.</li>
+<li>Saving FOV inside <code>.p3d</code> grammar documents.</li>
+<li>Changing the existing mouse-wheel zoom convention.</li>
+<li>Regenerating geometry when camera projection changes.</li>
+</ul>
+<h3 id="source-11-completion-standard">11. Completion Standard</h3><p class="section-guide">Reading guide: this source section records “11. Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The adjustable FOV feature is complete when:</p>
+<ul>
+<li>The preview presents a discoverable vertical FOV control.</li>
+<li>The effective default is an actual 43-degree vertical field of view.</li>
+<li>FOV is owned by a purpose-named preview model.</li>
+<li>Rendering, picking, and Fit use the same projection configuration.</li>
+<li>Reset and preset actions behave deterministically.</li>
+<li>Camera-only changes do not affect grammar or scene-generation state.</li>
+<li class="source-status--passed">The focused preview tests and complete release checks pass.</li>
+<li>The supervised GUI restarts successfully and displays the feature without runtime errors.</li>
+</ul>
+<h3 id="source-12-recommended-review-sequence">12. Recommended Review Sequence</h3><p class="section-guide">Reading guide: this source section records “12. Recommended Review Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Projection-unit correction and regression tests.</li>
+<li><code>PreviewProjectionConfiguration</code> model and session composition.</li>
+<li>Camera fitting and renderer/picking plumbing.</li>
+<li>Dear ImGui camera popup and presets.</li>
+<li>Full release verification and supervised GUI restart.</li>
+</ol>
+<p>Each review slice should leave <code>progen3d-editor-gui</code> buildable and runnable.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-full-geometry-kernel-fgkv1-completion-roadmap.html" rel="prev">← Previous: ProGen3D Full Geometry Kernel FGKv1 Completion Roadmap</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html" rel="next">Next: ProGen3D Preview GL46 and PBR Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

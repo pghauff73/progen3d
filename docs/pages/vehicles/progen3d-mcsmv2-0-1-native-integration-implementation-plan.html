@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Date: Monday, August 24, 2026 Status: Proposed implementation plan Source release: examples/MVPv25RedAWDHatchback/MCSMv201ModernCarComplete/ Native integration target: examples/MVPv25RedAWDHatchback/MCSMv2ModernCarComplete/" name="description"/>
+<meta content="PROGEN3D_MCSMV201_NATIVE_INTEGRATION_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="98fa7966425346dc9cb92dec38cd400cf7e3e6b1e0658e0b3f5898de3a7db7e6" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D MCSMv2.0.1 Native Integration Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vehicles">Vehicles and Automotive Models</a></li>
+<li aria-current="page">ProGen3D MCSMv2.0.1 Native Integration Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D MCSMv2.0.1 Native Integration Implementation Plan</h1>
+<p class="lead">Date: Monday, August 24, 2026 Status: Proposed implementation plan Source release: examples/MVPv25RedAWDHatchback/MCSMv201ModernCarComplete/ Native integration target: examples/MVPv25RedAWDHatchback/MCSMv2ModernCarComplete/</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Vehicles and Automotive Models</span>
+<span class="tag">About 15 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_MCSMV201_NATIVE_INTEGRATION_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="98fa7966425346dc9cb92dec38cd400cf7e3e6b1e0658e0b3f5898de3a7db7e6" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D MCSMv2.0.1 Native Integration Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D MCSMv2.0.1 Native Integration Implementation Plan, Current Baseline, MCSMv2.0.1 reference release, Existing native implementation.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D MCSMv2.0.1 Native Integration Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D MCSMv2.0.1 Native Integration Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Current Baseline</td></tr><tr><td><dfn title="Named by the source document">MCSMv2.0.1 reference release</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 MCSMv2.0.1 reference release</td></tr><tr><td><dfn title="Named by the source document">Existing native implementation</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Existing native implementation</td></tr><tr><td><dfn title="Named by the source document">Architectural Decisions</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Architectural Decisions</td></tr><tr><td><dfn title="Named by the source document">Immutable reference authority</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 Immutable reference authority</td></tr><tr><td><dfn title="Named by the source document">Canonical native catalog</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>3.2 Canonical native catalog, Phase 1 — Generate the Canonical Native Catalog</td></tr><tr><td><dfn title="Named by the source document">Grammar is a lowering target</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.3 Grammar is a lowering target</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">BIW</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="JavaScript Object Notation">JSON</dfn></td><td>JavaScript Object Notation</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V2</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="comma-separated values">CSV</dfn></td><td>comma-separated values</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Date: Monday, August 24, 2026 Status: Proposed implementation plan Source release: examples/MVPv25RedAWDHatchback/MCSMv201ModernCarComplete/ Native integration target: examples/MVPv25RedAWDHatchback/MCSMv2ModernCarComplete/</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D MCSMv2.0.1 Native Integration Implementation Plan, Current Baseline, MCSMv2.0.1 reference release, Existing native implementation. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Purpose, 2. Current Baseline, 2.1 MCSMv2.0.1 reference release, 2.2 Existing native implementation, 3. Architectural Decisions. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 17, failed: 5, proposed: 2.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 3 code blocks, 4 tables and the source SHA-256 <code>98fa7966425346dc9cb92dec38cd400cf7e3e6b1e0658e0b3f5898de3a7db7e6</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-purpose">1. Purpose</a></li><li><a href="#source-2-current-baseline">2. Current Baseline</a></li><li><a href="#source-2-1-mcsmv2-0-1-reference-release">2.1 MCSMv2.0.1 reference release</a></li><li><a href="#source-2-2-existing-native-implementation">2.2 Existing native implementation</a></li><li><a href="#source-3-architectural-decisions">3. Architectural Decisions</a></li><li><a href="#source-3-1-immutable-reference-authority">3.1 Immutable reference authority</a></li><li><a href="#source-3-2-canonical-native-catalog">3.2 Canonical native catalog</a></li><li><a href="#source-3-3-grammar-is-a-lowering-target">3.3 Grammar is a lowering target</a></li><li><a href="#source-3-4-explicit-placement-contract">3.4 Explicit placement contract</a></li><li><a href="#source-3-5-assurance-boundaries">3.5 Assurance boundaries</a></li><li><a href="#source-4-target-object-model">4. Target Object Model</a></li><li><a href="#source-4-1-existing-model-classes-to-retain">4.1 Existing model classes to retain</a></li><li><a href="#source-4-2-new-classes-required-only-when-absent">4.2 New classes required only when absent</a></li><li><a href="#source-5-implementation-phases">5. Implementation Phases</a></li><li><a href="#source-phase-0-reproduce-and-freeze-the-source-contract">Phase 0 — Reproduce and Freeze the Source Contract</a></li><li><a href="#source-tasks">Tasks</a></li><li><a href="#source-commands">Commands</a></li><li><a href="#source-acceptance">Acceptance</a></li><li><a href="#source-phase-1-generate-the-canonical-native-catalog">Phase 1 — Generate the Canonical Native Catalog</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>17</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>5</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>2</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_MCSMV201_NATIVE_INTEGRATION_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D MCSMv2.0.1 Native Integration Implementation Plan, Current Baseline, MCSMv2.0.1 reference release, Existing native implementation.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>preserve the signed MCSMv2.0.1 release as immutable source evidence;</li><li>reproduce its four vehicle variants through purpose-driven native C++</li><li>retain one canonical owner for every parameter, station, curve, engineering</li><li>make every supported vehicle executable through current ProGen3D grammar;</li><li>maintain deterministic direct-service and grammar-generated geometry;</li><li>require native, grammar, GUI, artifact, and three-view visual acceptance;</li><li>preserve MVPv2.5, MCPOMv1, and existing MCSMv2 compatibility; and</li><li>fail closed for deferred MCSMv2.1, kinematic, structural, manufacturing, and</li><li>Add a source-contract checker outside the immutable release directory.</li><li>Verify all RELEASEMANIFEST.json file sizes and SHA-256 hashes.</li><li>Verify the declared schema and version are exactly MCSMv2.0.1.</li><li>Create a clean Python environment from source/requirements.txt.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">ModernCarSemanticGrammarLoweringService
+    -&gt; GeneratedMeshReference
+    -&gt; GeneratedMeshReferenceResolutionService
+    -&gt; GeneratedMeshProviderRegistry
+    -&gt; McsMv2GeneratedMeshProvider
+    -&gt; ProceduralMeshRepository</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D MCSMv2.0.1 Native Integration Implementation Plan" data="../../assets/diagrams/pages/progen3d-mcsmv2-0-1-native-integration-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_MCSMV201_NATIVE_INTEGRATION_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>98fa7966425346dc9cb92dec38cd400cf7e3e6b1e0658e0b3f5898de3a7db7e6</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>53 headings, 3 fenced code blocks, 4 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>python3 -m venv /tmp/mcsmv201-venv</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>/tmp/mcsmv201-venv/bin/python -m pip install --upgrade pip</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>/tmp/mcsmv201-venv/bin/python -m pip install \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>-r examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_0_1_Modern_Car_Complete/source/requirements.txt</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>cd examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_0_1_Modern_Car_Complete/source</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>PYTHONDONTWRITEBYTECODE=1 /tmp/mcsmv201-venv/bin/python -B \</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>-m unittest discover -s tests -v</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Date: Monday, August 24, 2026 Status: Proposed implementation plan Source release: examples/MVPv25RedAWDHatchback/MCSMv201ModernCarComplete/ Native integration target: examples/MVPv25RedAWDHatchback/MCSMv2ModernCarComplete/</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D MCSMv2.0.1 Native Integration Implementation Plan, Current Baseline, MCSMv2.0.1 reference release, Existing native implementation, Architectural Decisions</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-mcsmv2-1-0-native-integration-implementation-plan.html">ProGen3D MCSMv2.1.0 Native Integration Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Date: Monday, August 24, 2026 Status: Implemented; cross-version release certification remains blocked by the inherited MCPOMv1 side-view baseline Source release: examples/MVPv25RedAWDHatchback/MCSMv210ModernCarComplete/ Native integration target…</small></li><li><a href="progen3d-mcsmv2-2-native-implementation-plan.html">ProGen3D MCSMv2.2 Native Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Date: Monday, August 24, 2026</small></li><li><a href="mcsmv2-0-1-native-integration-verification.html">MCSMv2.0.1 Native Integration Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>Date: Monday, August 24, 2026</small></li><li><a href="progen3d-mcpomv1-modern-car-parametric-object-model-implementation-plan.html">ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Create MCPOMv1, the Modern Car Parametric Object Model v1, by converting the research and generator logic in:</small></li><li><a href="progen3d-mvpv2-hatchback-fitting-implementation-plan.html">ProGen3D MVPv2 Hatchback Fitting Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Promote the red AWD hatchback from an MVPv1 section-loft plus decorative panel-cut model to an MVPv2 spatial fitting model whose body and closures are described by evidence-bearing semantic objects.</small></li><li><a href="progen3d-mcsmv2-primitive-implementation-plan.html">ProGen3D MCSMv2 Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Status: Implemented and MCSMv2-validated; cross-version release certification retains one inherited MCPOMv1 visual exception.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_MCSMV201_NATIVE_INTEGRATION_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_MCSMV201_NATIVE_INTEGRATION_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>98fa7966425346dc9cb92dec38cd400cf7e3e6b1e0658e0b3f5898de3a7db7e6</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-mcsmv2-0-1-native-integration-implementation-plan">ProGen3D MCSMv2.0.1 Native Integration Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D MCSMv2.0.1 Native Integration Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed"><strong>Date:</strong> Monday, August 24, 2026
+<strong>Status:</strong> Proposed implementation plan
+<strong>Source release:</strong> <code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_0_1_Modern_Car_Complete/</code>
+<strong>Native integration target:</strong> <code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_Modern_Car_Complete/</code></p>
+<h3 id="source-1-purpose">1. Purpose</h3><p class="section-guide">Reading guide: this source section records “1. Purpose”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Integrate the MCSMv2.0.1 reference generator, semantic data, engineering data,
+and integrity evidence into the active native ProGen3D MCSMv2 object model.</p>
+<p>The implementation must:</p>
+<ol>
+<li>preserve the signed MCSMv2.0.1 release as immutable source evidence;</li>
+<li>reproduce its four vehicle variants through purpose-driven native C++
+model and service classes;</li>
+<li>retain one canonical owner for every parameter, station, curve, engineering
+relationship, and assurance fact;</li>
+<li>make every supported vehicle executable through current ProGen3D grammar;</li>
+<li>maintain deterministic direct-service and grammar-generated geometry;</li>
+<li>require native, grammar, GUI, artifact, and three-view visual acceptance;</li>
+<li>preserve MVPv2.5, MCP_OMv1, and existing MCSMv2 compatibility; and</li>
+<li class="source-status--failed">fail closed for deferred MCSMv2.1, kinematic, structural, manufacturing, and
+physical-validation claims.</li>
+</ol>
+<p>This plan does not modify the source release directory because adding or
+changing files there would invalidate its stored file count and hashes.</p>
+<h3 id="source-2-current-baseline">2. Current Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Current Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-mcsmv2-0-1-reference-release">2.1 MCSMv2.0.1 reference release</h4><p class="section-guide">Reading guide: this source section records “2.1 MCSMv2.0.1 reference release”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The reference package already provides:</p>
+<ul>
+<li>four variants: reference, track, aero, and crossover;</li>
+<li>an explicit X-front, Y-right, Z-up source frame;</li>
+<li>a source-to-ProGen3D coordinate adapter;</li>
+<li>parameter-specific evidence, units, confidence, and uncertainty;</li>
+<li>a typed causal parameter dependency graph;</li>
+<li>eleven semantic section stations;</li>
+<li>fourteen named character curves;</li>
+<li>semantic surface and implicit body representations;</li>
+<li>wheel-motion envelope approximations;</li>
+<li>panel, BIW, occupant, and functional-package graphs;</li>
+<li>final-mesh integrity and package checks;</li>
+<li>stored V2 assurance records and release manifests; and</li>
+<li>high-resolution STL, GLB, CSV, JSON, and preview artifacts.</li>
+</ul>
+<p>The package's <code>.p3d</code> file is a target grammar specification. Its conceptual
+operators are not compatible with the current parser and must not be treated as
+an executable acceptance artifact.</p>
+<h4 id="source-2-2-existing-native-implementation">2.2 Existing native implementation</h4><p class="section-guide">Reading guide: this source section records “2.2 Existing native implementation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository already contains a native MCSMv2 object model and should be
+extended rather than replaced. Important existing abstractions include:</p>
+<ul>
+<li><code>ModernCarSemanticFamily</code>;</li>
+<li><code>ModernCarSemanticVariant</code>;</li>
+<li><code>VehicleSemanticSectionField</code>;</li>
+<li><code>VehicleCharacterCurveNetwork</code>;</li>
+<li><code>VehicleSemanticSurface</code>;</li>
+<li><code>ImplicitScalarField</code> implementations;</li>
+<li><code>VehicleWheelEnvelopeSet</code>;</li>
+<li><code>VehiclePanelPatchGraph</code>;</li>
+<li><code>VehicleBodyInWhiteAssembly</code>;</li>
+<li><code>VehicleOccupantEnvelopeSystem</code>;</li>
+<li><code>VehicleFunctionalPackageSystem</code>;</li>
+<li><code>ModernCarSemanticCatalogFactory</code>;</li>
+<li><code>ModernCarSemanticBodyFieldFactory</code>;</li>
+<li><code>ModernCarSemanticIsoSurfaceGenerationService</code>;</li>
+<li><code>McsMv2GeneratedMeshProvider</code>; and</li>
+<li><code>ModernCarSemanticGrammarLoweringService</code>.</li>
+</ul>
+<p>The integration must first compare this implementation to MCSMv2.0.1 and add
+only missing source-contract, integrity, parity, or MCSMv2.1 responsibilities.</p>
+<h3 id="source-3-architectural-decisions">3. Architectural Decisions</h3><p class="section-guide">Reading guide: this source section records “3. Architectural Decisions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-3-1-immutable-reference-authority">3.1 Immutable reference authority</h4><p class="section-guide">Reading guide: this source section records “3.1 Immutable reference authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>MCSMv2_0_1_Modern_Car_Complete</code> remains the authoritative historical source
+release. It is read-only input to catalog generation and parity validation.</p>
+<p>No implementation step may:</p>
+<ul>
+<li>rewrite its Python source;</li>
+<li>remove its signed bytecode files in place;</li>
+<li>regenerate its stored models over existing artifacts;</li>
+<li>update its manifest without producing a separately versioned release; or</li>
+<li class="source-status--passed">reinterpret a deferred assurance item as complete.</li>
+</ul>
+<h4 id="source-3-2-canonical-native-catalog">3.2 Canonical native catalog</h4><p class="section-guide">Reading guide: this source section records “3.2 Canonical native catalog”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The generated native catalog is the runtime owner of imported source facts.
+Grammar files, services, tests, and preview tools consume the catalog instead of
+duplicating vehicle dimensions or styling constants.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Fact</th>
+<th scope="col">Canonical owner</th>
+<th scope="col">Derived consumers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source artifact hashes</td>
+<td>native catalog manifest</td>
+<td>contract tests, release report</td>
+</tr>
+<tr>
+<td>Coordinate frame</td>
+<td>variant reference-frame record</td>
+<td>field, curve, grammar placement</td>
+</tr>
+<tr>
+<td>Package dimensions</td>
+<td><code>ModernCarSemanticVariant</code> composition</td>
+<td>body field, wheels, validation</td>
+</tr>
+<tr>
+<td>Station values</td>
+<td><code>VehicleSemanticSectionField</code></td>
+<td>curves, surface, body field</td>
+</tr>
+<tr>
+<td>Character curves</td>
+<td><code>VehicleCharacterCurveNetwork</code></td>
+<td>previews, surface, parity checks</td>
+</tr>
+<tr>
+<td>Body mesh</td>
+<td>procedural mesh repository entry</td>
+<td>grammar, exporters, GUI</td>
+</tr>
+<tr>
+<td>Panel relationships</td>
+<td><code>VehiclePanelPatchGraph</code></td>
+<td>engineering validation and views</td>
+</tr>
+<tr>
+<td>BIW relationships</td>
+<td><code>VehicleBodyInWhiteAssembly</code></td>
+<td>engineering validation and views</td>
+</tr>
+<tr>
+<td>Occupant envelopes</td>
+<td><code>VehicleOccupantEnvelopeSystem</code></td>
+<td>containment validation</td>
+</tr>
+<tr>
+<td>Functional envelopes</td>
+<td><code>VehicleFunctionalPackageSystem</code></td>
+<td>package validation</td>
+</tr>
+<tr>
+<td>Assurance result</td>
+<td><code>ModernCarSemanticValidationReport</code></td>
+<td>evidence and release gates</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-3-3-grammar-is-a-lowering-target">3.3 Grammar is a lowering target</h4><p class="section-guide">Reading guide: this source section records “3.3 Grammar is a lowering target”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The initial integration will not add every conceptual MCSMv2.0.1 Python
+operation as a grammar primitive. Current grammar should express object
+identity, orientation, material, detail level, and immutable mesh references.</p>
+<p>Detailed geometry remains native C++ behavior reached through:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ModernCarSemanticGrammarLoweringService
+    -&gt; GeneratedMeshReference
+    -&gt; GeneratedMeshReferenceResolutionService
+    -&gt; GeneratedMeshProviderRegistry
+    -&gt; McsMv2GeneratedMeshProvider
+    -&gt; ProceduralMeshRepository
+</code></pre>
+<h4 id="source-3-4-explicit-placement-contract">3.4 Explicit placement contract</h4><p class="section-guide">Reading guide: this source section records “3.4 Explicit placement contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Every vehicle object must carry:</p>
+<ul>
+<li>a named reference frame;</li>
+<li>a ground-contact plane;</li>
+<li>a local origin;</li>
+<li>an explicit forward direction;</li>
+<li>an explicit up direction;</li>
+<li>a source-to-ProGen3D transform; and</li>
+<li class="source-status--passed">a verified ground-clearance relationship.</li>
+</ul>
+<p>Vehicle orientation must never be inferred from mesh bounds or camera view.</p>
+<h4 id="source-3-5-assurance-boundaries">3.5 Assurance boundaries</h4><p class="section-guide">Reading guide: this source section records “3.5 Assurance boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The first integration target remains <strong>V2 concept geometry</strong>. MCSMv2.1 status
+may be assigned only after its separately listed gates pass.</p>
+<p>The implementation must not claim:</p>
+<ul>
+<li>production Class-A surface quality;</li>
+<li>continuous closure or suspension kinematics;</li>
+<li>geometric BIW load-path adequacy;</li>
+<li>manufacturability;</li>
+<li>CFD, crash, thermal, durability, or NVH validation; or</li>
+<li>homologation or physical validation.</li>
+</ul>
+<h3 id="source-4-target-object-model">4. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “4. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-4-1-existing-model-classes-to-retain">4.1 Existing model classes to retain</h4><p class="section-guide">Reading guide: this source section records “4.1 Existing model classes to retain”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Class</th>
+<th scope="col">Category</th>
+<th scope="col">Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ModernCarSemanticFamily</code></td>
+<td>model</td>
+<td>Composes the supported vehicle variants</td>
+</tr>
+<tr>
+<td><code>ModernCarSemanticVariant</code></td>
+<td>model</td>
+<td>Owns one coherent vehicle definition</td>
+</tr>
+<tr>
+<td><code>VehicleSemanticSectionField</code></td>
+<td>model</td>
+<td>Owns ordered semantic section stations</td>
+</tr>
+<tr>
+<td><code>VehicleCharacterCurveNetwork</code></td>
+<td>model</td>
+<td>Owns the fourteen named character curves</td>
+</tr>
+<tr>
+<td><code>VehicleSemanticSurface</code></td>
+<td>model</td>
+<td>Owns the sampled semantic design surface</td>
+</tr>
+<tr>
+<td><code>VehicleWheelEnvelopeSet</code></td>
+<td>model</td>
+<td>Owns side-specific wheel motion envelopes</td>
+</tr>
+<tr>
+<td><code>VehiclePanelPatchGraph</code></td>
+<td>relationship model</td>
+<td>Owns panel patches and adjacency relationships</td>
+</tr>
+<tr>
+<td><code>VehicleBodyInWhiteAssembly</code></td>
+<td>assembly model</td>
+<td>Owns BIW members and joint relationships</td>
+</tr>
+<tr>
+<td><code>VehicleOccupantEnvelopeSystem</code></td>
+<td>system model</td>
+<td>Owns occupant package envelopes</td>
+</tr>
+<tr>
+<td><code>VehicleFunctionalPackageSystem</code></td>
+<td>system model</td>
+<td>Owns functional volume envelopes</td>
+</tr>
+<tr>
+<td><code>ModernCarSemanticValidationReport</code></td>
+<td>evidence model</td>
+<td>Owns measured validation and assurance results</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-4-2-new-classes-required-only-when-absent">4.2 New classes required only when absent</h4><p class="section-guide">Reading guide: this source section records “4.2 New classes required only when absent”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Class</th>
+<th scope="col">Category</th>
+<th scope="col">Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>McsMv201SourceRelease</code></td>
+<td>source model</td>
+<td>Identifies version, schema, root, and immutable manifest</td>
+</tr>
+<tr>
+<td><code>McsMv201SourceArtifact</code></td>
+<td>source model</td>
+<td>Identifies one source artifact and expected hash</td>
+</tr>
+<tr>
+<td><code>McsMv201SourceContractValidationService</code></td>
+<td>validation service</td>
+<td>Verifies schemas, files, hashes, and required records</td>
+</tr>
+<tr>
+<td><code>McsMv201CatalogGenerationService</code></td>
+<td>generation service</td>
+<td>Converts validated source data into deterministic native records</td>
+</tr>
+<tr>
+<td><code>VehicleReferenceFrameDefinition</code></td>
+<td>model</td>
+<td>Owns axes, units, handedness, and adapter transform</td>
+</tr>
+<tr>
+<td><code>VehicleCoordinateTransformationService</code></td>
+<td>service</td>
+<td>Converts points and directions between source and ProGen3D frames</td>
+</tr>
+<tr>
+<td><code>McsMv201ParityEvaluationService</code></td>
+<td>validation service</td>
+<td>Compares source and native semantic outputs</td>
+</tr>
+<tr>
+<td><code>SemanticImplicitAgreementReport</code></td>
+<td>evidence model</td>
+<td>Records semantic-to-implicit surface distance metrics</td>
+</tr>
+<tr>
+<td><code>SemanticImplicitAgreementEvaluationService</code></td>
+<td>validation service</td>
+<td>Implements the MCSMv2.1 authoritative-surface convergence gate</td>
+</tr>
+<tr>
+<td><code>VehiclePanelDomainPartition</code></td>
+<td>relationship model</td>
+<td>Owns an exclusive panel-domain assignment for MCSMv2.1</td>
+</tr>
+<tr>
+<td><code>VehiclePanelDomainValidationService</code></td>
+<td>validation service</td>
+<td>Detects overlaps, gaps, and invalid panel boundaries</td>
+</tr>
+<tr>
+<td><code>VehicleGlassApertureSystem</code></td>
+<td>system model</td>
+<td>Owns explicit glass apertures and supporting surfaces</td>
+</tr>
+</tbody>
+</table></div>
+<p>Before adding any new class, audit the current native model for an existing
+class with the same semantic responsibility. Extend the existing owner when the
+relationship is truly the same; do not create aliases or parallel owners.</p>
+<h3 id="source-5-implementation-phases">5. Implementation Phases</h3><p class="section-guide">Reading guide: this source section records “5. Implementation Phases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-phase-0-reproduce-and-freeze-the-source-contract">Phase 0 — Reproduce and Freeze the Source Contract</h3><p class="section-guide">Reading guide: this source section records “Phase 0 — Reproduce and Freeze the Source Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add a source-contract checker outside the immutable release directory.</li>
+<li>Verify all <code>RELEASE_MANIFEST.json</code> file sizes and SHA-256 hashes.</li>
+<li>Verify the declared schema and version are exactly MCSMv2.0.1.</li>
+<li>Create a clean Python environment from <code>source/requirements.txt</code>.</li>
+<li>Install NumPy, SciPy, scikit-image, trimesh, and Pillow.</li>
+<li class="source-status--passed">Run the complete Python unit-test suite without importing stored <code>.pyc</code>
+files.</li>
+<li>Regenerate all four variants to a temporary output directory.</li>
+<li>Compare regenerated semantic and validation artifacts to stored evidence.</li>
+<li>Record runtime, dependency versions, commands, and source hashes.</li>
+</ol>
+<h4 id="source-commands">Commands</h4><p class="section-guide">Reading guide: this source section records “Commands”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">python3 -m venv /tmp/mcsmv201-venv
+/tmp/mcsmv201-venv/bin/python -m pip install --upgrade pip
+/tmp/mcsmv201-venv/bin/python -m pip install \
+  -r examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_0_1_Modern_Car_Complete/source/requirements.txt
+
+cd examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_0_1_Modern_Car_Complete/source
+PYTHONDONTWRITEBYTECODE=1 /tmp/mcsmv201-venv/bin/python -B \
+  -m unittest discover -s tests -v
+</code></pre>
+<h4 id="source-acceptance">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>all 25 archived tests reproduce in the clean environment;</li>
+<li>the manifest has no missing, modified, or unexpected source artifacts;</li>
+<li>regeneration writes only to a temporary directory;</li>
+<li>dependency versions and Python version are captured; and</li>
+<li>any source/artifact mismatch blocks catalog generation.</li>
+</ul>
+<h3 id="source-phase-1-generate-the-canonical-native-catalog">Phase 1 — Generate the Canonical Native Catalog</h3><p class="section-guide">Reading guide: this source section records “Phase 1 — Generate the Canonical Native Catalog”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-2">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Extend
+<code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_Modern_Car_Complete/source/generate_native_catalog.py</code>
+to consume the MCSMv2.0.1 source release explicitly.</li>
+<li>Validate JSON schemas before reading values.</li>
+<li>Validate CSV station roles, order, units, and finite values.</li>
+<li>Import the source reference frame and adapter matrix.</li>
+<li>Import all four parameter dependency graphs.</li>
+<li>Import the eleven stations and eight semantic landmarks per variant.</li>
+<li>Import the fourteen character curves per variant.</li>
+<li>Import panel, BIW, occupant, and functional-package records.</li>
+<li>Import evidence status, confidence, uncertainty, and assurance data.</li>
+<li>Store source artifact hashes in <code>native_catalog_manifest.json</code>.</li>
+<li>Generate <code>include/vehicle/mcsmv2/generated/GeneratedMcsMv2Catalog.h</code>.</li>
+<li>Run two independent generations and require byte-identical output.</li>
+</ol>
+<h4 id="source-acceptance-2">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>exactly four variants are generated;</li>
+<li>every generated record identifies its source artifact and schema;</li>
+<li>all station and curve roles are preserved by name;</li>
+<li>no grammar file owns duplicated dimensions or style constants;</li>
+<li>generated output contains no timestamps, absolute paths, <code>.pyc</code>, or
+<code>__pycache__</code> data; and</li>
+<li>two generations produce identical header and manifest hashes.</li>
+</ul>
+<h3 id="source-phase-2-establish-native-semantic-parity">Phase 2 — Establish Native Semantic Parity</h3><p class="section-guide">Reading guide: this source section records “Phase 2 — Establish Native Semantic Parity”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-3">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Construct each variant through <code>ModernCarSemanticCatalogFactory</code>.</li>
+<li>Validate family composition and variant identity.</li>
+<li>Validate package, platform, style, wheel, powertrain, and closure values.</li>
+<li class="source-status--passed">Evaluate the complete dependency graph in deterministic topological order.</li>
+<li>Construct the source and ProGen3D reference frames explicitly.</li>
+<li>Validate axis mapping for points, vectors, wheel centers, and ground plane.</li>
+<li>Evaluate all semantic station landmarks over a dense longitudinal domain.</li>
+<li>Require positive landmark gaps and non-crossing interpolation.</li>
+<li>Extract all fourteen character curves.</li>
+<li>Generate the semantic surface and record its deterministic hash.</li>
+<li>Compare source and native values through
+<code>McsMv201ParityEvaluationService</code>.</li>
+</ol>
+<h4 id="source-acceptance-3">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">the dependency graph is acyclic and complete;</li>
+<li>all source units and value types are retained;</li>
+<li>all semantic stations remain ordered over the dense audit domain;</li>
+<li>frame conversion is round-trip stable within the selected tolerance;</li>
+<li>curve and field residuals remain within the source-contract tolerance; and</li>
+<li>native semantic hashes are deterministic across repeated runs.</li>
+</ul>
+<h3 id="source-phase-3-establish-native-body-and-wheel-envelope-parity">Phase 3 — Establish Native Body and Wheel-Envelope Parity</h3><p class="section-guide">Reading guide: this source section records “Phase 3 — Establish Native Body and Wheel-Envelope Parity”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-4">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Build each semantic body field through
+<code>ModernCarSemanticBodyFieldFactory</code>.</li>
+<li>Preserve lower-body, greenhouse, fender, wheelhouse, and package-field
+composition as explicit scalar-field objects.</li>
+<li>Construct side-specific wheel motion envelopes.</li>
+<li>Generate editor-safe native bodies through
+<code>ModernCarSemanticIsoSurfaceGenerationService</code>.</li>
+<li>Orient closed surfaces through the existing face-orientation service.</li>
+<li>Reject non-finite vertices, degenerate triangles, boundary edges,
+nonmanifold edges, negative volume, and unstable topology hashes.</li>
+<li>Validate package dimensions, wheelbase, tracks, ground clearance, occupant
+containment, and final-mesh tyre clearance.</li>
+<li>Retain the high-resolution Python body as the reference silhouette, not as
+the editor runtime mesh.</li>
+</ol>
+<h4 id="source-resolution-policy">Resolution policy</h4><p class="section-guide">Reading guide: this source section records “Resolution policy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Editor preview:</strong> use the established editor-safe native grid.</li>
+<li><strong>Visual acceptance:</strong> use the accepted watertight comparison grid.</li>
+<li><strong>Offline reference:</strong> retain the high-resolution Python artifacts.</li>
+<li><strong>Family preview:</strong> avoid dense debug-point and curve overlays that can exceed
+the ImGui 16-bit draw-list vertex limit.</li>
+</ul>
+<h4 id="source-acceptance-4">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>all four native bodies are watertight and consistently wound;</li>
+<li>signed volume is positive;</li>
+<li>each body is grounded in the declared frame;</li>
+<li>wheelhouse clearance meets the declared tolerance;</li>
+<li>repeated generation produces identical topology hashes;</li>
+<li>direct-service and repository-resolved meshes are identical; and</li>
+<li class="source-status--failed">the GUI preview completes without assertion failure or <code>SIGABRT</code>.</li>
+</ul>
+<h3 id="source-phase-4-integrate-engineering-relationship-models">Phase 4 — Integrate Engineering Relationship Models</h3><p class="section-guide">Reading guide: this source section records “Phase 4 — Integrate Engineering Relationship Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-5">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Construct panel patches with <code>VehiclePanelPatchExtractionService</code>.</li>
+<li>Construct panel adjacency through explicit relationship objects.</li>
+<li>Construct BIW members and joints through
+<code>VehicleBodyInWhiteAssemblyService</code>.</li>
+<li>Construct occupant envelopes through
+<code>VehicleOccupantEnvelopeConstructionService</code>.</li>
+<li>Construct functional envelopes through
+<code>VehicleFunctionalPackageConstructionService</code>.</li>
+<li>Run the corresponding validation service for every system.</li>
+<li>Generate deterministic engineering hashes.</li>
+<li>Keep graph connectivity claims separate from geometric contact or load-path
+claims.</li>
+</ol>
+<h4 id="source-acceptance-5">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>panel and BIW identifiers are unique and source-traceable;</li>
+<li>every relationship references existing endpoints;</li>
+<li>BIW connectivity passes without claiming structural adequacy;</li>
+<li>occupant and functional envelopes remain inside their required package;</li>
+<li>engineering hashes are deterministic; and</li>
+<li>visual engineering scenes agree with the native relationship models.</li>
+</ul>
+<h3 id="source-phase-5-produce-current-parser-executable-grammars">Phase 5 — Produce Current-Parser Executable Grammars</h3><p class="section-guide">Reading guide: this source section records “Phase 5 — Produce Current-Parser Executable Grammars”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-6">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Generate grammars through
+<code>tools/generate_mcsmv2_grammars.cpp</code> and
+<code>ModernCarSemanticGrammarLoweringService</code>.</li>
+<li>Generate one preview grammar for each variant.</li>
+<li>Generate an executable four-variant family preview.</li>
+<li>Generate the current executable <code>MCSMv2_Modern_Car_Family.p3d</code>.</li>
+<li>Put <code>Start</code> first in every grammar.</li>
+<li>Use <code>GeneratedMeshReference</code> with a registered immutable mesh key.</li>
+<li>Supply a valid material argument to every <code>!I(...)</code> instance.</li>
+<li>Emit explicit object class, identity, frame, position, and orientation
+metadata.</li>
+<li>Keep conceptual target grammar text as documentation only.</li>
+<li>Do not embed generated vertices or high-resolution mesh data in grammar.</li>
+</ol>
+<h4 id="source-example-executable-grammar-shape">Example executable grammar shape</h4><p class="section-guide">Reading guide: this source section records “Example executable grammar shape”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+[
+    Object(
+        name(MCSMv2Reference)
+        class(ModernCarSemanticVariant)
+        frame(MCSMv2VehicleFrame)
+        position(0 0 0)
+        forward(0 0 1)
+        up(0 1 0)
+        grounded(true))
+
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv2ReferenceBodyMesh)
+          detail(LOD2))
+       material(redmetallicpaint)
+       alpha(1)
+       texscale(0.16))
+]
+</code></pre>
+<p>The exact object metadata syntax must use only syntax already supported by the
+current parser. If a metadata field is unsupported, store it in the native
+object model and lower only the supported geometry instance rather than adding
+unvalidated grammar syntax.</p>
+<h4 id="source-acceptance-6">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--passed">all generated grammars pass parser and semantic validation;</li>
+<li>no undefined conceptual operator remains;</li>
+<li>every grammar regenerates byte-identically;</li>
+<li>direct-service and grammar-generated topology hashes match;</li>
+<li>all grammars render under the GUI smoke test; and</li>
+<li>the family preview remains within the editor-safe geometry budget.</li>
+</ul>
+<h3 id="source-phase-6-three-view-silhouette-acceptance">Phase 6 — Three-View Silhouette Acceptance</h3><p class="section-guide">Reading guide: this source section records “Phase 6 — Three-View Silhouette Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-7">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Define canonical orthographic front, side, and top cameras in the explicit
+ProGen3D vehicle frame.</li>
+<li>Render the high-resolution MCSMv2.0.1 reference bodies into binary masks.</li>
+<li>Render direct native bodies using the same cameras and framing.</li>
+<li>Render grammar-generated bodies using the same cameras and framing.</li>
+<li>Normalize image size, crop, ground plane, and mask threshold.</li>
+<li>Measure intersection-over-union independently for each view.</li>
+<li>Produce side-by-side comparison images and machine-readable results.</li>
+<li>Track direct-native versus source and grammar-native versus source results.</li>
+</ol>
+<h4 id="source-acceptance-7">Acceptance</h4><p class="section-guide">Reading guide: this source section records “Acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For every variant:</p>
+<ul>
+<li>front-view silhouette IoU is at least <code>0.80</code>;</li>
+<li>side-view silhouette IoU is at least <code>0.80</code>;</li>
+<li>top-view silhouette IoU is at least <code>0.80</code>;</li>
+<li>grammar and direct-native masks are pixel-identical or explainably equivalent;</li>
+<li class="source-status--failed">no average score may hide a failed individual view; and</li>
+<li class="source-status--failed">failed MCP_OMv1 compatibility baselines remain separately visible and block
+cross-version certification when applicable.</li>
+</ul>
+<h3 id="source-phase-7-implement-the-mcsmv2-1-geometry-gates">Phase 7 — Implement the MCSMv2.1 Geometry Gates</h3><p class="section-guide">Reading guide: this source section records “Phase 7 — Implement the MCSMv2.1 Geometry Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>This phase begins only after MCSMv2.0.1 native parity is accepted.</p>
+<h4 id="source-7-1-semantic-and-implicit-convergence">7.1 Semantic and implicit convergence</h4><p class="section-guide">Reading guide: this source section records “7.1 Semantic and implicit convergence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Select the authoritative design-surface contract.</li>
+<li>Sample semantic and implicit surfaces in the same reference frame.</li>
+<li>Measure mean, RMS, p95, and maximum bidirectional distance.</li>
+<li>Record station- and region-specific residuals.</li>
+<li>Define explicit release tolerances.</li>
+<li class="source-status--failed">Fail release when the authoritative convergence gate is exceeded.</li>
+</ol>
+<h4 id="source-7-2-exclusive-panel-domain-partition">7.2 Exclusive panel-domain partition</h4><p class="section-guide">Reading guide: this source section records “7.2 Exclusive panel-domain partition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Define a common semantic surface domain.</li>
+<li>Assign every valid domain location to exactly one exterior panel or one
+explicitly named opening.</li>
+<li>Reject panel overlaps, uncovered regions, and invalid boundaries.</li>
+<li>Derive panel adjacency from shared boundaries.</li>
+<li>Validate closure seams independently from visual triangle masks.</li>
+</ol>
+<h4 id="source-7-3-explicit-glass-apertures">7.3 Explicit glass apertures</h4><p class="section-guide">Reading guide: this source section records “7.3 Explicit glass apertures”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Define windscreen, backlight, and side-glass apertures.</li>
+<li>Define supporting greenhouse surfaces.</li>
+<li>Derive glass geometry from the aperture/support relationship.</li>
+<li>Validate containment, boundary closure, and body intersection.</li>
+</ol>
+<h4 id="source-mcsmv2-1-acceptance">MCSMv2.1 acceptance</h4><p class="section-guide">Reading guide: this source section records “MCSMv2.1 acceptance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>semantic/implicit convergence is a release gate rather than a diagnostic;</li>
+<li>panel coverage is exclusive and gap-free over the declared domain;</li>
+<li>glass is aperture-derived; and</li>
+<li class="source-status--passed">all MCSMv2.0.1 native, grammar, visual, and compatibility gates still pass.</li>
+</ul>
+<p>MCSMv2.1 must not absorb closure kinematics, suspension solving, structural
+analysis, manufacturing, or physical validation without separate named plans
+and acceptance evidence.</p>
+<h3 id="source-phase-8-release-evidence-and-packaging">Phase 8 — Release Evidence and Packaging</h3><p class="section-guide">Reading guide: this source section records “Phase 8 — Release Evidence and Packaging”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-8">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Create a separately versioned native integration release.</li>
+<li>Do not overwrite or rename the historical MCSMv2.0.1 release.</li>
+<li>Generate a native source-contract manifest.</li>
+<li>Generate direct and grammar topology hashes.</li>
+<li>Generate semantic, curve, surface, and engineering hashes.</li>
+<li>Generate three-view silhouette evidence.</li>
+<li>Capture all commands, exit codes, compiler versions, Python versions, and
+dependency versions.</li>
+<li>Exclude <code>.pyc</code>, <code>__pycache__</code>, temporary models, GUI state, and transient
+logs from the release.</li>
+<li>Run additive compatibility checks for MVPv2.5, MCP_OMv1, and current MCSMv2.</li>
+<li>Produce a requirement-to-evidence audit before declaring completion.</li>
+</ol>
+<h4 id="source-required-evidence-artifacts">Required evidence artifacts</h4><p class="section-guide">Reading guide: this source section records “Required evidence artifacts”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>source-contract verification JSON;</li>
+<li>native catalog manifest;</li>
+<li>native object-model test report;</li>
+<li>body-integrity and wheel-clearance report;</li>
+<li>engineering-relationship report;</li>
+<li>grammar validation report;</li>
+<li>GUI smoke-test report;</li>
+<li>three-view silhouette acceptance JSON;</li>
+<li>visual comparison images;</li>
+<li>compatibility report;</li>
+<li>release manifest with hashes; and</li>
+<li>known-limitations document.</li>
+</ul>
+<h3 id="source-6-repository-work-map">6. Repository Work Map</h3><p class="section-guide">Reading guide: this source section records “6. Repository Work Map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-reuse-and-extend">Reuse and extend</h4><p class="section-guide">Reading guide: this source section records “Reuse and extend”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/vehicle/mcsmv2/model/</code></li>
+<li><code>include/vehicle/mcsmv2/service/</code></li>
+<li><code>src/vehicle/mcsmv2/model/</code></li>
+<li><code>src/vehicle/mcsmv2/service/</code></li>
+<li><code>include/vehicle/mcsmv2/generated/GeneratedMcsMv2Catalog.h</code></li>
+<li><code>include/geometry/service/GeneratedMeshProviderRegistry.h</code></li>
+<li><code>include/geometry/service/GeneratedMeshReferenceResolutionService.h</code></li>
+<li><code>include/geometry/service/ProceduralMeshRepository.h</code></li>
+<li><code>tools/generate_mcsmv2_grammars.cpp</code></li>
+<li><code>tools/export_mcsmv2_native_bodies.cpp</code></li>
+<li><code>tests/mcsmv2_*_harness.cpp</code></li>
+<li><code>tests/run_mcsmv2_*_checks.sh</code></li>
+<li><code>tests/mcsmv2_visual_iou.py</code></li>
+</ul>
+<h4 id="source-add-when-required-by-the-parity-audit">Add when required by the parity audit</h4><p class="section-guide">Reading guide: this source section records “Add when required by the parity audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>include/vehicle/mcsmv2/model/VehicleReferenceFrameDefinition.h</code></li>
+<li><code>include/vehicle/mcsmv2/model/McsMv201SourceRelease.h</code></li>
+<li><code>include/vehicle/mcsmv2/model/McsMv201SourceArtifact.h</code></li>
+<li><code>include/vehicle/mcsmv2/model/SemanticImplicitAgreementReport.h</code></li>
+<li><code>include/vehicle/mcsmv2/model/VehiclePanelDomainPartition.h</code></li>
+<li><code>include/vehicle/mcsmv2/model/VehicleGlassApertureSystem.h</code></li>
+<li>corresponding purpose-matched service headers and source files;</li>
+<li><code>tests/mcsmv201_source_contract_harness.cpp</code>;</li>
+<li><code>tests/mcsmv201_parity_harness.cpp</code>;</li>
+<li><code>tests/run_mcsmv201_source_contract_checks.sh</code>; and</li>
+<li><code>tests/run_mcsmv201_parity_checks.sh</code>.</li>
+</ul>
+<p class="source-status--proposed">Do not add a proposed file when the current implementation already has a class
+that owns the same responsibility.</p>
+<h3 id="source-7-acceptance-matrix">7. Acceptance Matrix</h3><p class="section-guide">Reading guide: this source section records “7. Acceptance Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Gate</th>
+<th scope="col" style="text-align:right">Reference</th>
+<th scope="col" style="text-align:right">Track</th>
+<th scope="col" style="text-align:right">Aero</th>
+<th scope="col" style="text-align:right">Crossover</th>
+<th scope="col" style="text-align:right">Blocking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source files and hashes valid</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td class="source-status--passed">Python reference tests pass</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Native catalog deterministic</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Frame and ground placement valid</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Semantic stations non-crossing</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Fourteen curves present</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Body watertight and outward</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Wheel clearance passes</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Occupant containment passes</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Engineering graphs valid</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Direct and grammar hashes match</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Grammar GUI smoke passes</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Front silhouette IoU &gt;= 0.80</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Side silhouette IoU &gt;= 0.80</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Top silhouette IoU &gt;= 0.80</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">required</td>
+<td style="text-align:right">yes</td>
+</tr>
+<tr>
+<td>Semantic/implicit convergence</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">2.1 only</td>
+</tr>
+<tr>
+<td>Exclusive panel partition</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">2.1 only</td>
+</tr>
+<tr>
+<td>Explicit glass apertures</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">MCSMv2.1</td>
+<td style="text-align:right">2.1 only</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-8-fastest-safe-critical-path">8. Fastest Safe Critical Path</h3><p class="section-guide">Reading guide: this source section records “8. Fastest Safe Critical Path”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li class="source-status--passed">Restore the complete Python dependency set, especially <code>scikit-image</code>.</li>
+<li>Reproduce the 25 reference tests in a clean environment.</li>
+<li>Verify the immutable release manifest.</li>
+<li>Diff MCSMv2.0.1 source data against the existing generated native catalog.</li>
+<li>Add only missing catalog fields and provenance.</li>
+<li>Run deterministic catalog generation twice.</li>
+<li>Run semantic-section, surface, implicit-body, and engineering harnesses.</li>
+<li>Regenerate executable grammars through the existing lowering service.</li>
+<li>Run grammar and GUI smoke tests at editor-safe LOD.</li>
+<li>Run all twelve three-view comparisons and require IoU &gt;= <code>0.80</code> per view.</li>
+<li>Run MVPv2.5 and MCP_OMv1 additive compatibility checks.</li>
+<li>Produce the requirement-to-evidence audit.</li>
+<li>Begin MCSMv2.1 convergence and panel work only after parity acceptance.</li>
+</ol>
+<h3 id="source-9-completion-definition">9. Completion Definition</h3><p class="section-guide">Reading guide: this source section records “9. Completion Definition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">MCSMv2.0.1 native integration is complete only when:</p>
+<ol>
+<li>the historical source release remains byte-for-byte unchanged;</li>
+<li>its source contract reproduces in a clean Python environment;</li>
+<li class="source-status--passed">the generated native catalog is deterministic and provenance-complete;</li>
+<li>all four variants are represented by the native object model;</li>
+<li class="source-status--passed">source and native semantic outputs pass the defined parity tolerances;</li>
+<li class="source-status--passed">native bodies pass topology, package, occupant, and wheel-clearance gates;</li>
+<li class="source-status--passed">engineering models pass their relationship and containment gates;</li>
+<li>current-parser grammars regenerate, resolve, and render successfully;</li>
+<li>direct-service and grammar-generated topology hashes match;</li>
+<li>every front, side, and top silhouette score is at least <code>0.80</code>;</li>
+<li>compatibility failures remain explicit rather than being averaged away;</li>
+<li>release artifacts contain no bytecode or transient files;</li>
+<li>evidence identifies exact source and generated hashes; and</li>
+<li>the final requirement-to-evidence audit has no unsupported completion claim.</li>
+</ol>
+<p class="source-status--passed">MCSMv2.1 is complete only after the additional convergence, exclusive panel
+partition, and explicit glass-aperture gates pass for all four variants without
+regressing the MCSMv2.0.1 integration contract.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-mcsmv2-primitive-implementation-plan.html" rel="prev">← Previous: ProGen3D MCSMv2 Primitive Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-mcsmv2-1-0-native-integration-implementation-plan.html" rel="next">Next: ProGen3D MCSMv2.1.0 Native Integration Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

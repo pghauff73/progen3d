@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Sections describing the repository baseline preserve the pre-implementation state that motivated this plan." name="description"/>
+<meta content="PROGEN3D_CURVED_PRIMITIVE_EXTENSION_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="147624480a6f881d0bc401eae9e31e91c2b3ea71a0f673fd8da960c0e9ccd12b" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D Curved Primitive Extension Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-geometry-rendering">Geometry and Rendering</a></li>
+<li aria-current="page">ProGen3D Curved Primitive Extension Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D Curved Primitive Extension Implementation Plan</h1>
+<p class="lead">Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Geometry and Rendering</span>
+<span class="tag">About 25 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_CURVED_PRIMITIVE_EXTENSION_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="147624480a6f881d0bc401eae9e31e91c2b3ea71a0f673fd8da960c0e9ccd12b" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D Curved Primitive Extension Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D Curved Primitive Extension Implementation Plan, Implementation Evidence, Outcome, Confirmed Repository Baseline.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html">P3D Textured Mesh and Orthographic Three-View Strategy</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D Curved Primitive Extension Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D Curved Primitive Extension Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Implementation Evidence</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Implementation Evidence</td></tr><tr><td><dfn title="Named by the source document">Outcome</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Outcome</td></tr><tr><td><dfn title="Named by the source document">Confirmed Repository Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2. Confirmed Repository Baseline</td></tr><tr><td><dfn title="Named by the source document">Grammar Ownership</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 Grammar Ownership</td></tr><tr><td><dfn title="Named by the source document">Existing Mesh Families</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Existing Mesh Families</td></tr><tr><td><dfn title="Named by the source document">Preview and Export Integration Gap</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.3 Preview and Export Integration Gap</td></tr><tr><td><dfn title="Named by the source document">Bounds, Picking, Collision, and Mass</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.4 Bounds, Picking, Collision, and Mass</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="Polygon File Format">PLY</dfn></td><td>Polygon File Format</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="specific mesh path, but `Mesh::isStlInstanceType()` currently always returns false in this snapshot">STL</dfn></td><td>specific mesh path, but `Mesh::isStlInstanceType()` currently always returns false in this snapshot</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">STL-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">CSG</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="domain Boolean panel extraction">UV</dfn></td><td>domain Boolean panel extraction</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D Curved Primitive Extension Implementation Plan, Implementation Evidence, Outcome, Confirmed Repository Baseline. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Document Control, Implementation Evidence, 1. Outcome, 2. Confirmed Repository Baseline, 2.1 Grammar Ownership. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 19, failed: 5, pending: 1, proposed: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 20 code blocks, 2 tables and the source SHA-256 <code>147624480a6f881d0bc401eae9e31e91c2b3ea71a0f673fd8da960c0e9ccd12b</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-document-control">Document Control</a></li><li><a href="#source-implementation-evidence">Implementation Evidence</a></li><li><a href="#source-1-outcome">1. Outcome</a></li><li><a href="#source-2-confirmed-repository-baseline">2. Confirmed Repository Baseline</a></li><li><a href="#source-2-1-grammar-ownership">2.1 Grammar Ownership</a></li><li><a href="#source-2-2-existing-mesh-families">2.2 Existing Mesh Families</a></li><li><a href="#source-2-3-preview-and-export-integration-gap">2.3 Preview and Export Integration Gap</a></li><li><a href="#source-2-4-bounds-picking-collision-and-mass">2.4 Bounds, Picking, Collision, and Mass</a></li><li><a href="#source-2-5-existing-useful-infrastructure">2.5 Existing Useful Infrastructure</a></li><li><a href="#source-3-locked-semantic-decisions">3. Locked Semantic Decisions</a></li><li><a href="#source-3-1-canonical-families">3.1 Canonical Families</a></li><li><a href="#source-3-2-normalized-geometry">3.2 Normalized Geometry</a></li><li><a href="#source-3-3-grammar-units">3.3 Grammar Units</a></li><li><a href="#source-3-4-topology-rules">3.4 Topology Rules</a></li><li><a href="#source-3-5-closure-rules">3.5 Closure Rules</a></li><li><a href="#source-3-6-parameter-validation">3.6 Parameter Validation</a></li><li><a href="#source-3-7-expressions-and-determinism">3.7 Expressions and Determinism</a></li><li><a href="#source-3-8-appearance-compatibility">3.8 Appearance Compatibility</a></li><li><a href="#source-4-target-object-model">4. Target Object Model</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>19</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>5</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>1</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is PROGEN3D_CURVED_PRIMITIVE_EXTENSION_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D Curved Primitive Extension Implementation Plan, Implementation Evidence, Outcome, Confirmed Repository Baseline.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>correct generic mesh handling for existing full Cylinder and Sphere instances;</li><li>evaluated Cylinder and Sphere shape specifications;</li><li>backwards-compatible nested shape syntax inside I(...);</li><li>partial, hollow, sector, chord, cap, slab, and open/closed variants;</li><li>deterministic preview, picking, bounds, and PLY export;</li><li>watertightness, volume, and staged collision policies;</li><li>procedural catalog aliases backed by the same canonical descriptors.</li><li>reads one fixed primitive name;</li><li>rejects any other identifier;</li><li>parses one to three remaining arguments as appearance values;</li><li>has no shape-descriptor AST or nested geometry option parser.</li><li>consume I or !I and the outer opening parenthesis;</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">base family
++ normalized parameter domain
++ radial interval or wall thickness
++ optional half-space restrictions
++ topology
++ closure policy
++ tessellation</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D Curved Primitive Extension Implementation Plan" data="../../assets/diagrams/pages/progen3d-curved-primitive-extension-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>PROGEN3D_CURVED_PRIMITIVE_EXTENSION_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>147624480a6f881d0bc401eae9e31e91c2b3ea71a0f673fd8da960c0e9ccd12b</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>94 headings, 20 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D Curved Primitive Extension Implementation Plan, Implementation Evidence, Outcome, Confirmed Repository Baseline, Grammar Ownership</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="progen3d-procedural-primitive-examples-implementation-plan.html">ProGen3D Procedural Primitive Examples Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The example library should be treated as a maintained product surface rather than a directory of informal snippets.</small></li><li><a href="progen3d-preview-fov-slider-implementation-plan.html">ProGen3D Preview FOV Slider Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Add an adjustable vertical field-of-view control to the preview camera without changing grammar source, generated scene state, temporal authority, selection semantics, or document dirty state.</small></li><li><a href="proposed-curved-primitive-examples.html">Proposed curved primitive examples</a> <span class="status-badge status--proposed">Proposed</span><br/><small>These examples explore a later procedural curved-shape family. They are not supported by the current fixed-name I(...) parser.</small></li><li><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html">ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>The original architectural hinge has already been completed by the curved-primitive work. ProGen3D now has:</small></li><li><a href="progen3d-preview-gl46-and-pbr-implementation-plan.html">ProGen3D Preview GL46 and PBR Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Upgrade the preview canvas with constant-velocity keyboard navigation, position-pivoted view rotation, optional picking/highlighting, OpenGL 4.6 rendering, higher-resolution physically based materials, and corrected glass transparency and reflectiveness.</small></li><li><a href="p3d-textured-mesh-and-orthographic-three-view-strategy.html">P3D Textured Mesh and Orthographic Three-View Strategy</a> <span class="status-badge status--documented">Documented</span><br/><small>Strategy date: 2026-08-28 Proposed commands: p3dto3dtexmesh, p3dto3view</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/PROGEN3D_CURVED_PRIMITIVE_EXTENSION_IMPLEMENTATION_PLAN.md"><code>PROGEN3D_CURVED_PRIMITIVE_EXTENSION_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>147624480a6f881d0bc401eae9e31e91c2b3ea71a0f673fd8da960c0e9ccd12b</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-curved-primitive-extension-implementation-plan">ProGen3D Curved Primitive Extension Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D Curved Primitive Extension Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-document-control">Document Control</h3><p class="section-guide">Reading guide: this source section records “Document Control”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><strong>Date:</strong> August 21, 2026</li>
+<li><strong>Status:</strong> Implemented and release-validated on August 21, 2026.</li>
+<li><strong>Primary objective:</strong> Introduce a compact curved-shape algebra based on normalized Cylinder and Sphere domains without creating one C++ mesh class for every named shape.</li>
+<li><strong>Required first boundary:</strong> Repair the existing Cylinder and Sphere preview/export/bounds/picking path before accepting parameterized curved-shape grammar.</li>
+<li><strong>Primary grammar form:</strong> A named shape descriptor inside <code>I(...)</code>.</li>
+<li><strong>Compatibility requirement:</strong> Existing Cube, Cylinder, Sphere, material, alpha, texture-scale, transformation, and temporal grammar behavior must remain valid.</li>
+</ul>
+<h4 id="source-implementation-evidence">Implementation Evidence</h4><p class="section-guide">Reading guide: this source section records “Implementation Evidence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Canonical Cylinder and Sphere descriptors, validation, alias expansion, deterministic mesh generation, half-space clipping, topology analysis, volume evidence, and collision policy are implemented under <code>include/geometry</code>, <code>src/geometry</code>, <code>include/grammar</code>, and <code>src/grammar</code>.</li>
+<li>Preview, export, picking, bounds, mass, and scene inspection consume the resolved primitive geometry stored on each instance; Cube retains its specialized preview path.</li>
+<li>Procedural catalog aliases remain descriptor expansions and do not own mesh generators.</li>
+<li>Boundary coverage includes minimum tessellation, exact and near-zero sweeps, thin shells, centre and near-tangent chords, tangent/full/outside clips, coincident slabs, invalid domains, and geometry-budget rejection.</li>
+<li class="source-status--passed"><code>./tests/run_release_checks.sh</code> passed from a clean build, including the editor architecture suite and both GUI smoke modes.</li>
+<li>The supervised <code>progen3d-editor-gui.service</code> was restarted after validation and remained active with <code>NRestarts=0</code>; its running executable matched the built SHA-256 <code>505636c2e7a2a8262acef1c5e7e69f3975332d01251cd2f204682c75eb885431</code>.</li>
+</ul>
+<p>Sections describing the repository baseline preserve the pre-implementation state that motivated this plan.</p>
+<h3 id="source-1-outcome">1. Outcome</h3><p class="section-guide">Reading guide: this source section records “1. Outcome”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>ProGen3D should represent curved primitives as:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">base family
++ normalized parameter domain
++ radial interval or wall thickness
++ optional half-space restrictions
++ topology
++ closure policy
++ tessellation
+</code></pre>
+<p>Common names such as <code>Hemisphere</code>, <code>Tube</code>, <code>Bowl</code>, <code>DSection</code>, and <code>SphereCap</code> will be catalog aliases that expand into the canonical representation. They will not own separate mesh-generation implementations.</p>
+<p class="source-status--passed">The first complete delivery covered by this plan includes:</p>
+<ol>
+<li>correct generic mesh handling for existing full Cylinder and Sphere instances;</li>
+<li>evaluated Cylinder and Sphere shape specifications;</li>
+<li>backwards-compatible nested shape syntax inside <code>I(...)</code>;</li>
+<li>partial, hollow, sector, chord, cap, slab, and open/closed variants;</li>
+<li>deterministic preview, picking, bounds, and PLY export;</li>
+<li>watertightness, volume, and staged collision policies;</li>
+<li>procedural catalog aliases backed by the same canonical descriptors.</li>
+</ol>
+<p>Direct <code>Extrude(...)</code>, direct <code>Revolve(...)</code>, and general Boolean CSG remain later projects.</p>
+<h3 id="source-2-confirmed-repository-baseline">2. Confirmed Repository Baseline</h3><p class="section-guide">Reading guide: this source section records “2. Confirmed Repository Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-grammar-ownership">2.1 Grammar Ownership</h4><p class="section-guide">Reading guide: this source section records “2.1 Grammar Ownership”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The parser currently accepts only six built-in names in <code>is_supported_instance_type_name()</code>:</p>
+<ul>
+<li><code>Cube</code></li>
+<li><code>CubeX</code></li>
+<li><code>CubeY</code></li>
+<li><code>CubeZ</code></li>
+<li><code>Cylinder</code></li>
+<li><code>Sphere</code></li>
+</ul>
+<p>Evidence: <code>src/Grammar.cpp:1863</code>.</p>
+<p>The <code>I</code> parser currently:</p>
+<ol>
+<li>reads one fixed primitive name;</li>
+<li>rejects any other identifier;</li>
+<li>parses one to three remaining arguments as appearance values;</li>
+<li>has no shape-descriptor AST or nested geometry option parser.</li>
+</ol>
+<p>Evidence: <code>src/Grammar.cpp:2998</code>.</p>
+<p><code>GrammarActionToken</code> stores <code>instance_type</code>, <code>material_name</code>, three variable slots, and numeric appearance arguments. It has no object representing geometry syntax or evaluated geometry.</p>
+<p>Evidence: <code>include/grammar.h:44</code> and <code>include/grammar.h:177</code>.</p>
+<p>During execution, <code>GrammarActionToken::performAction()</code> resolves a shared mesh by primitive name, transforms a mesh copy for the legacy accumulated scene, and independently calls <code>SceneGenerationContext::addPrimitive()</code> with only the type and appearance values.</p>
+<p>Evidence: <code>src/Grammar.cpp:2665</code>.</p>
+<h4 id="source-2-2-existing-mesh-families">2.2 Existing Mesh Families</h4><p class="section-guide">Reading guide: this source section records “2.2 Existing Mesh Families”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>Mesh::getSharedInstance()</code> owns one static Cube, Cylinder, and Sphere mesh.</p>
+<p>Evidence: <code>src/Mesh.cpp:413</code>.</p>
+<p>The existing Cylinder generator uses:</p>
+<ul>
+<li>normalized radius <code>0.5</code>;</li>
+<li>local Y range <code>0</code> through <code>1</code>;</li>
+<li>40 circumferential divisions;</li>
+<li>bottom and top closure triangles.</li>
+</ul>
+<p>Evidence: <code>src/Mesh.cpp:497</code>.</p>
+<p>The existing Sphere generator uses:</p>
+<ul>
+<li>normalized radius <code>0.5</code>;</li>
+<li>origin-centered geometry;</li>
+<li>20 polar divisions;</li>
+<li>40 azimuth divisions.</li>
+</ul>
+<p>Evidence: <code>src/Mesh.cpp:544</code>.</p>
+<p>These normalized dimensions remain authoritative. External sizing continues to belong to <code>S(...)</code> and the existing scope transforms.</p>
+<h4 id="source-2-3-preview-and-export-integration-gap">2.3 Preview and Export Integration Gap</h4><p class="section-guide">Reading guide: this source section records “2.3 Preview and Export Integration Gap”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>append_instance_vertices()</code> currently selects the mesh-appending path only when <code>is_stl_instance_type()</code> is true. Every other instance uses the 36-vertex base primitive buffer.</p>
+<p>Evidence: <code>src/Context.cpp:2106</code> and <code>src/Context.cpp:2114</code>.</p>
+<p>Consequences in the current source:</p>
+<ul>
+<li>built-in Cylinder and Sphere reserve 36 vertices rather than their mesh face counts;</li>
+<li class="source-status--passed">built-in Cylinder and Sphere are passed through cube-oriented vertex transformation;</li>
+<li>static preview buffers receive the same incorrect representation;</li>
+<li>PLY export consumes the same incorrect instance-buffer geometry.</li>
+</ul>
+<p>Evidence: <code>src/imgui_main.cpp:4233</code>, <code>src/Context.cpp:2395</code>, and <code>src/Context.cpp:2494</code>.</p>
+<p>The code contains an STL-specific mesh path, but <code>Mesh::isStlInstanceType()</code> currently always returns false in this snapshot. The repair must therefore be representation-based rather than expressed as “STL versus non-STL.”</p>
+<p>Evidence: <code>src/Mesh.cpp:445</code>.</p>
+<h4 id="source-2-4-bounds-picking-collision-and-mass">2.4 Bounds, Picking, Collision, and Mass</h4><p class="section-guide">Reading guide: this source section records “2.4 Bounds, Picking, Collision, and Mass”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Collision geometry uses a triangle mesh only for the STL-classified path. Every other type receives a transformed box hull.</p>
+<p>Evidence: <code>src/Context.cpp:911</code>.</p>
+<p>Preview picking uses <code>getInstanceCollisionGeometry()</code> and performs triangle intersection when the geometry kind is a triangle mesh. Therefore, routing procedural curves through a resolved mesh can improve picking without creating a separate picking system.</p>
+<p>Evidence: <code>src/imgui_main.cpp:3901</code>.</p>
+<p>Scene bounds and Fit currently derive from collision geometry, so Cylinder and Sphere bounds are also box-derived.</p>
+<p>Evidence: <code>src/Context.cpp:2445</code> and <code>src/Context.cpp:2464</code>.</p>
+<p>Simulation collision eligibility is explicitly cube-only.</p>
+<p>Evidence: <code>src/Context.cpp:314</code>.</p>
+<p>Density-derived mass is also cube-only, despite an existing generic signed-volume function for triangle buffers.</p>
+<p>Evidence: <code>src/Context.cpp:141</code> and <code>src/Context.cpp:2187</code>.</p>
+<h4 id="source-2-5-existing-useful-infrastructure">2.5 Existing Useful Infrastructure</h4><p class="section-guide">Reading guide: this source section records “2.5 Existing Useful Infrastructure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The repository already provides:</p>
+<ul>
+<li><code>Mesh</code> vertices, faces, normals, texture coordinates, triangle bounds, and BVH storage;</li>
+<li>affine transform and safe normal-transform functions;</li>
+<li>triangle-based picking;</li>
+<li>triangle-based center-of-mass calculation;</li>
+<li>signed tetrahedral volume calculation;</li>
+<li>material-batched preview uploads;</li>
+<li>PLY export from instance-buffer geometry;</li>
+<li>grammar expression evaluation with lexical variables and immutable <code>t</code>;</li>
+<li>diagnostic source ranges;</li>
+<li>a part-class catalog and editor autocomplete path;</li>
+<li>focused architecture harnesses and a clean release gate.</li>
+</ul>
+<p>The implementation should extend these systems rather than introduce parallel render, export, or expression engines.</p>
+<h3 id="source-3-locked-semantic-decisions">3. Locked Semantic Decisions</h3><p class="section-guide">Reading guide: this source section records “3. Locked Semantic Decisions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>These decisions should be treated as contracts before implementation begins.</p>
+<h4 id="source-3-1-canonical-families">3.1 Canonical Families</h4><p class="section-guide">Reading guide: this source section records “3.1 Canonical Families”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The first canonical curved families are:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Cylinder
+Sphere
+</code></pre>
+<p>Aliases never introduce a new mesh family. They expand to one of these two specifications.</p>
+<h4 id="source-3-2-normalized-geometry">3.2 Normalized Geometry</h4><p class="section-guide">Reading guide: this source section records “3.2 Normalized Geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Cylinder defaults:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">outer radius = 0.5
+inner radius = 0
+axial interval = [0, 1]
+azimuth = start 0 degrees, sweep 360 degrees
+segments = 40 circumferential, 1 axial
+topology = solid
+closure = all
+</code></pre>
+<p>Sphere defaults:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">outer radius = 0.5
+inner radius = 0
+polar interval = [0, 180] degrees
+azimuth = start 0 degrees, sweep 360 degrees
+segments = 40 azimuth, 20 polar
+topology = solid
+closure = all
+</code></pre>
+<p><code>S(...)</code> remains the only external-dimension control. Nonuniform scaling intentionally produces elliptical cylinders, ellipsoids, and nonuniform shells.</p>
+<h4 id="source-3-3-grammar-units">3.3 Grammar Units</h4><p class="section-guide">Reading guide: this source section records “3.3 Grammar Units”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>azimuth(...)</code> and <code>polar(...)</code> use degrees.</li>
+<li>Geometry generators receive explicitly named radians values only after evaluation and validation.</li>
+<li><code>radial(inner outer)</code> values are fractions of the canonical family radius.</li>
+<li><code>wall(thickness)</code> sets <code>radial_min = 1 - thickness</code> and <code>radial_max = 1</code>.</li>
+<li><code>clip(... offset ...)</code> and <code>chord(... offset ...)</code> offsets are normalized by the evaluated outer radius.</li>
+<li><code>axial(min max)</code> uses the canonical Cylinder Y domain where <code>0</code> is the bottom and <code>1</code> is the top.</li>
+</ul>
+<h4 id="source-3-4-topology-rules">3.4 Topology Rules</h4><p class="section-guide">Reading guide: this source section records “3.4 Topology Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">surface = one outer mathematical skin; no enclosed-volume promise
+solid   = material from radius zero to the outer skin
+shell   = material between distinct inner and outer skins
+</code></pre>
+<p>Canonicalization rules:</p>
+<ul>
+<li>omitted topology defaults to <code>solid</code>;</li>
+<li><code>wall(...)</code> implies <code>shell</code>;</li>
+<li><code>radial(inner outer)</code> with <code>inner &gt; 0</code> implies <code>shell</code> when topology is omitted;</li>
+<li>explicit <code>solid</code> with <code>inner &gt; 0</code> is invalid;</li>
+<li>explicit <code>shell</code> requires <code>0 &lt; inner &lt; outer &lt;= 1</code>;</li>
+<li><code>surface</code> emits the outer skin and rejects <code>wall(...)</code> or a nonzero radial minimum in the first implementation.</li>
+</ul>
+<h4 id="source-3-5-closure-rules">3.5 Closure Rules</h4><p class="section-guide">Reading guide: this source section records “3.5 Closure Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The closure policy is a set containing:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">axial
+angular
+clip
+rim
+</code></pre>
+<p><code>all</code> expands to every boundary component relevant to the family and domain. <code>none</code> expands to an empty set. <code>all</code> and <code>none</code> cannot be combined with other values.</p>
+<p>Closure requests describe generated boundary surfaces. They do not automatically imply that the result is watertight. Watertightness is measured from the generated mesh and stored as derived evidence.</p>
+<h4 id="source-3-6-parameter-validation">3.6 Parameter Validation</h4><p class="section-guide">Reading guide: this source section records “3.6 Parameter Validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Initial limits:</p>
+<ul>
+<li>radial values: finite and within <code>[0, 1]</code>;</li>
+<li>Cylinder axial values: finite and within <code>[0, 1]</code>, with <code>min &lt; max</code>;</li>
+<li>azimuth sweep: finite and within <code>(0, 360]</code> for the first implementation;</li>
+<li>polar values: finite and within <code>[0, 180]</code>, with <code>min &lt; max</code>;</li>
+<li>clip normal: finite and nonzero, then normalized;</li>
+<li>normalized clip/chord offset: finite and within <code>[-1, 1]</code> unless an explicit empty/full-result diagnostic is being tested;</li>
+<li>circumferential/azimuth segments: integer in <code>[3, 512]</code>;</li>
+<li>axial segments: integer in <code>[1, 256]</code>;</li>
+<li>polar segments: integer in <code>[2, 256]</code>;</li>
+<li>total generated vertices and triangles: bounded by explicit per-shape budgets.</li>
+</ul>
+<p>Duplicate mutually exclusive options are errors. Examples include <code>radial</code> plus <code>wall</code>, two topology declarations, or two segment declarations.</p>
+<h4 id="source-3-7-expressions-and-determinism">3.7 Expressions and Determinism</h4><p class="section-guide">Reading guide: this source section records “3.7 Expressions and Determinism”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Shape numeric fields retain expression text during parsing and are evaluated during grammar expansion in the same lexical environment as existing action arguments.</p>
+<p>This permits variables and <code>t</code> without adding a second expression evaluator.</p>
+<p>The mesh generators must:</p>
+<ul>
+<li>consume no random values;</li>
+<li>iterate clips and surfaces in stable order;</li>
+<li>produce stable vertex and triangle ordering;</li>
+<li>produce identical topology hashes for identical evaluated specifications.</li>
+</ul>
+<h4 id="source-3-8-appearance-compatibility">3.8 Appearance Compatibility</h4><p class="section-guide">Reading guide: this source section records “3.8 Appearance Compatibility”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The parser must preserve all current forms, including legacy material indices and positional alpha/texture-scale arguments.</p>
+<p>New named appearance forms are added without forcing migration:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">material(name)
+alpha(expression)
+texscale(expression)
+</code></pre>
+<p>Named and positional forms for the same appearance property cannot be mixed in one instance.</p>
+<h3 id="source-4-target-object-model">4. Target Object Model</h3><p class="section-guide">Reading guide: this source section records “4. Target Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The design separates parsed syntax, evaluated shape meaning, resolved geometry, generation services, and runtime instances.</p>
+<h4 id="source-4-1-grammar-syntax-models">4.1 Grammar Syntax Models</h4><p class="section-guide">Reading guide: this source section records “4.1 Grammar Syntax Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>ShapeDescriptorSyntax</code> is the conceptual base for parsed curved-shape syntax.</p>
+<p>Concrete syntax classes:</p>
+<ul>
+<li><code>CylinderShapeDescriptorSyntax</code></li>
+<li><code>SphereShapeDescriptorSyntax</code></li>
+<li><code>ShapeAliasDescriptorSyntax</code>, added when catalog aliases are enabled</li>
+</ul>
+<p>Supporting value models:</p>
+<ul>
+<li><code>GeometryExpression</code> — immutable expression source text;</li>
+<li><code>PlaneClipDescriptorSyntax</code> — normal, offset, and retained-side expressions;</li>
+<li><code>ChordDescriptorSyntax</code> — angle, offset, and retained side;</li>
+<li><code>ShapeClosureSyntax</code> — requested closure names;</li>
+<li><code>ShapeTessellationSyntax</code> — segment expressions.</li>
+</ul>
+<p>Inheritance is appropriate here because Cylinder and Sphere descriptor syntax are both genuine shape descriptors with different valid option sets.</p>
+<p><code>GrammarActionToken</code> owns one optional <code>ShapeDescriptorSyntax</code>. A bare <code>Cylinder</code> or <code>Sphere</code> produces the same syntax object with defaults rather than bypassing the model.</p>
+<h4 id="source-4-2-evaluated-geometry-models">4.2 Evaluated Geometry Models</h4><p class="section-guide">Reading guide: this source section records “4.2 Evaluated Geometry Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>ShapeSpecification</code> is the conceptual base for validated evaluated curved shapes.</p>
+<p>Concrete evaluated classes:</p>
+<ul>
+<li><code>CylinderShapeSpecification</code></li>
+<li><code>SphereShapeSpecification</code></li>
+</ul>
+<p>Supporting value models:</p>
+<ul>
+<li><code>RadialDomainSpecification</code></li>
+<li><code>AxialDomainSpecification</code></li>
+<li><code>AngularDomainSpecification</code></li>
+<li><code>PolarDomainSpecification</code></li>
+<li><code>PlaneClipSpecification</code></li>
+<li><code>ShapeClosurePolicy</code></li>
+<li><code>ShapeTessellation</code></li>
+<li><code>ShapeTopology</code></li>
+<li><code>ClipRetainedSide</code></li>
+</ul>
+<p>Every evaluated field is finite, normalized, and semantically valid. Mesh generators never receive unchecked expression text.</p>
+<h4 id="source-4-3-resolved-geometry-models">4.3 Resolved Geometry Models</h4><p class="section-guide">Reading guide: this source section records “4.3 Resolved Geometry Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><code>ResolvedPrimitiveGeometry</code> contains:</p>
+<ul>
+<li>a shared immutable <code>Mesh</code>;</li>
+<li>local bounds;</li>
+<li>face-aligned <code>MeshSurfaceTag</code> values;</li>
+<li>watertightness evidence;</li>
+<li>optional local signed volume;</li>
+<li>collision policy metadata;</li>
+<li>deterministic topology hash.</li>
+</ul>
+<p><code>ScenePrimitiveInstance</code> composes:</p>
+<ul>
+<li>the evaluated <code>ShapeSpecification</code>, when procedural;</li>
+<li>a shared <code>ResolvedPrimitiveGeometry</code>;</li>
+<li>existing transforms, material, source range, simulation, and selection state.</li>
+</ul>
+<p>The instance type string remains useful for presentation and backwards compatibility, but geometry behavior is no longer selected from the string alone.</p>
+<h4 id="source-4-4-service-classes">4.4 Service Classes</h4><p class="section-guide">Reading guide: this source section records “4.4 Service Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>ShapeSpecificationParser</code> parses only nested shape and named appearance syntax.</li>
+<li><code>ShapeSpecificationEvaluator</code> evaluates stored expressions through the existing grammar evaluation context.</li>
+<li><code>ShapeSpecificationValidator</code> canonicalizes and validates evaluated values.</li>
+<li><code>PrimitiveGeometryResolver</code> resolves Cube, built-in curves, parameterized curves, aliases, and imported meshes into <code>ResolvedPrimitiveGeometry</code>.</li>
+<li><code>ProceduralMeshRepository</code> provides a bounded per-generation cache keyed by canonical evaluated specifications.</li>
+<li><code>CurvedShapeMeshGenerator</code> is the abstract conceptual generator category.</li>
+<li><code>CylinderMeshGenerator</code> and <code>SphereMeshGenerator</code> are concrete generators.</li>
+<li><code>HalfSpaceMeshClipper</code> clips triangle meshes and creates tagged intersection boundaries when requested.</li>
+<li><code>MeshTopologyAnalyzer</code> measures boundary edges, manifold incidence, winding, degenerate triangles, and signed volume.</li>
+<li><code>SceneMeshVertexAssembler</code> transforms resolved mesh triangles into the existing preview/export vertex layout.</li>
+<li><code>ShapeAliasExpansionService</code> expands catalog aliases into canonical descriptor syntax.</li>
+</ul>
+<h4 id="source-4-5-relationships">4.5 Relationships</h4><p class="section-guide">Reading guide: this source section records “4.5 Relationships”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-mermaid">classDiagram
+    class GrammarActionToken
+    class ShapeDescriptorSyntax
+    class CylinderShapeDescriptorSyntax
+    class SphereShapeDescriptorSyntax
+    class ShapeAliasDescriptorSyntax
+    class ShapeSpecificationEvaluator
+    class ShapeSpecification
+    class CylinderShapeSpecification
+    class SphereShapeSpecification
+    class ScenePrimitiveInstance
+    class ResolvedPrimitiveGeometry
+    class PrimitiveGeometryResolver
+    class ProceduralMeshRepository
+    class CurvedShapeMeshGenerator
+    class CylinderMeshGenerator
+    class SphereMeshGenerator
+    class SceneMeshVertexAssembler
+
+    ShapeDescriptorSyntax &lt;|-- CylinderShapeDescriptorSyntax
+    ShapeDescriptorSyntax &lt;|-- SphereShapeDescriptorSyntax
+    ShapeDescriptorSyntax &lt;|-- ShapeAliasDescriptorSyntax
+    ShapeSpecification &lt;|-- CylinderShapeSpecification
+    ShapeSpecification &lt;|-- SphereShapeSpecification
+    CurvedShapeMeshGenerator &lt;|-- CylinderMeshGenerator
+    CurvedShapeMeshGenerator &lt;|-- SphereMeshGenerator
+
+    GrammarActionToken *-- ShapeDescriptorSyntax
+    ShapeSpecificationEvaluator --&gt; ShapeDescriptorSyntax
+    ShapeSpecificationEvaluator --&gt; ShapeSpecification
+    ScenePrimitiveInstance *-- ShapeSpecification
+    ScenePrimitiveInstance o-- ResolvedPrimitiveGeometry
+    PrimitiveGeometryResolver --&gt; ProceduralMeshRepository
+    ProceduralMeshRepository --&gt; CurvedShapeMeshGenerator
+    ResolvedPrimitiveGeometry o-- Mesh
+    SceneMeshVertexAssembler --&gt; ResolvedPrimitiveGeometry
+</code></pre>
+<h3 id="source-5-grammar-contract">5. Grammar Contract</h3><p class="section-guide">Reading guide: this source section records “5. Grammar Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-canonical-form">5.1 Canonical Form</h4><p class="section-guide">Reading guide: this source section records “5.1 Canonical Form”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(
+    Cylinder(
+        radial(0.70 1.00)
+        azimuth(15 220)
+        topology(shell)
+        close(all)
+        segments(64 1)
+    )
+    material(steelshinyroughmetal)
+    alpha(1)
+    texscale(0.5)
+)
+</code></pre>
+<h4 id="source-5-2-backwards-compatible-forms">5.2 Backwards-Compatible Forms</h4><p class="section-guide">Reading guide: this source section records “5.2 Backwards-Compatible Forms”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>These remain valid and compile to default specifications:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">I(Cylinder material(lightgreymattemetal) 1 0.5)
+I(Sphere material(whiteglossyceramic) 1 1)
+I(Cube material(plaster))
+</code></pre>
+<h4 id="source-5-3-parser-strategy">5.3 Parser Strategy</h4><p class="section-guide">Reading guide: this source section records “5.3 Parser Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The <code>I</code> parser becomes a structured sequence:</p>
+<ol>
+<li>consume <code>I</code> or <code>!I</code> and the outer opening parenthesis;</li>
+<li>parse a shape identifier;</li>
+<li>when the next token is <code>(</code>, delegate to <code>ShapeSpecificationParser</code>;</li>
+<li>otherwise construct the default bare shape descriptor;</li>
+<li>parse appearance arguments using a dedicated appearance parser;</li>
+<li>require the outer closing parenthesis;</li>
+<li class="source-status--passed">attach the complete source range to the token.</li>
+</ol>
+<p class="source-status--passed">The shape parser consumes option names and their balanced argument lists. It does not pass an entire nested descriptor through <code>parse_expression_argument()</code>.</p>
+<h4 id="source-5-4-initial-cylinder-options">5.4 Initial Cylinder Options</h4><p class="section-guide">Reading guide: this source section records “5.4 Initial Cylinder Options”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">radial(inner outer)
+wall(thickness)
+axial(min max)
+azimuth(start sweep)
+chord(normal_angle offset side)
+clip(nx ny nz offset side)
+topology(surface|solid|shell)
+close(none|all|axial|angular|clip|rim ...)
+segments(circumferential [axial])
+mapping(triplanar|cylindrical)
+</code></pre>
+<p>Multiple <code>clip(...)</code> options are represented as an ordered list. <code>chord(...)</code> is canonicalized into a Cylinder-local vertical plane clip while retaining its semantic source tag.</p>
+<h4 id="source-5-5-initial-sphere-options">5.5 Initial Sphere Options</h4><p class="section-guide">Reading guide: this source section records “5.5 Initial Sphere Options”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">radial(inner outer)
+wall(thickness)
+polar(min max)
+azimuth(start sweep)
+clip(nx ny nz offset side)
+slab(nx ny nz min_offset max_offset)
+topology(surface|solid|shell)
+close(none|all|angular|clip|rim ...)
+segments(azimuth [polar])
+mapping(triplanar|spherical)
+</code></pre>
+<p><code>slab(...)</code> canonicalizes into two ordered plane clips.</p>
+<h4 id="source-5-6-diagnostics">5.6 Diagnostics</h4><p class="section-guide">Reading guide: this source section records “5.6 Diagnostics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Diagnostics must identify:</p>
+<ul>
+<li class="source-status--pending">unknown family or option;</li>
+<li>option not supported by the selected family;</li>
+<li>duplicate or conflicting option;</li>
+<li>wrong argument count;</li>
+<li>invalid identifier such as a topology or side name;</li>
+<li class="source-status--failed">expression evaluation failure;</li>
+<li>non-finite result;</li>
+<li>invalid interval or segment count;</li>
+<li>zero clip normal;</li>
+<li>empty, full, tangent, or degenerate clip result;</li>
+<li>requested closure that cannot be generated consistently;</li>
+<li>per-shape vertex or triangle budget violation.</li>
+</ul>
+<p class="source-status--failed">Failed shape evaluation must preserve the last valid preview through the existing regeneration result boundary.</p>
+<h3 id="source-6-runtime-data-flow">6. Runtime Data Flow</h3><p class="section-guide">Reading guide: this source section records “6. Runtime Data Flow”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">grammar source
+  -&gt; ShapeSpecificationParser
+  -&gt; ShapeDescriptorSyntax or ShapeAliasDescriptorSyntax stored on GrammarActionToken
+  -&gt; ShapeAliasExpansionService when an alias is present
+  -&gt; canonical ShapeDescriptorSyntax
+  -&gt; rule expansion and ShapeSpecificationEvaluator
+  -&gt; validated ShapeSpecification
+  -&gt; PrimitiveGeometryResolver
+  -&gt; per-generation ProceduralMeshRepository
+  -&gt; ResolvedPrimitiveGeometry
+  -&gt; ScenePrimitiveInstance
+  -&gt; preview / picking / bounds / export / mass / collision consumers
+</code></pre>
+<p>No preview, export, picking, mass, or collision system regenerates a curved mesh independently.</p>
+<h3 id="source-7-implementation-milestones">7. Implementation Milestones</h3><p class="section-guide">Reading guide: this source section records “7. Implementation Milestones”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-milestone-0-capture-curved-primitive-baseline">Milestone 0: Capture Curved-Primitive Baseline</h3><p class="section-guide">Reading guide: this source section records “Milestone 0: Capture Curved-Primitive Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Run <code>./tests/run_p2_checks.sh</code>.</li>
+<li>Run <code>./tests/run_editor_architecture_checks.sh</code>.</li>
+<li>Run both GUI smoke modes.</li>
+<li>Export one Cube, Cylinder, and Sphere to PLY.</li>
+<li>Record source mesh vertex/face counts and topology hashes for the current normalized Cylinder and Sphere.</li>
+<li>Record current preview-buffer counts, export counts, bounds, and picking behavior to demonstrate the known mismatch.</li>
+<li>Add small example grammars for the three baseline shapes without changing semantics.</li>
+</ol>
+<h4 id="source-acceptance-gates">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>The pre-change release gate passes.</li>
+<li>Existing normalized Cylinder and Sphere source meshes are reproducibly characterized.</li>
+<li>The preview/export mismatch is represented by a failing regression test before repair.</li>
+<li>No production source changes are included in the baseline commit or evidence record.</li>
+</ul>
+<h3 id="source-milestone-1-unify-existing-mesh-geometry">Milestone 1: Unify Existing Mesh Geometry</h3><p class="section-guide">Reading guide: this source section records “Milestone 1: Unify Existing Mesh Geometry”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>This is the mandatory first release boundary.</p>
+<h4 id="source-tasks-2">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add <code>ResolvedPrimitiveGeometry</code> and an explicit geometry representation category.</li>
+<li>Make bare Cylinder and Sphere resolve to their existing shared <code>Mesh</code> instances.</li>
+<li>Rename <code>append_stl_vertices()</code> to <code>append_mesh_vertices()</code> and remove STL-specific assumptions.</li>
+<li>Make mesh vertex assembly use:
+<ul>
+<li>mesh face counts;</li>
+<li>mesh vertices;</li>
+<li>vertex normals when available;</li>
+<li>face normals as fallback;</li>
+<li>mesh texture coordinates when available;</li>
+<li>the existing planar/triplanar fallback otherwise.</li>
+</ul>
+</li>
+<li>Keep Cube, CubeX, CubeY, and CubeZ on the specialized split-transform and dynamic-cube paths.</li>
+<li>Make <code>vertex_count_for_instance()</code> derive mesh counts from the resolved representation.</li>
+<li>Make PLY export consume the same resolved geometry as preview.</li>
+<li>Build instance bounds from transformed resolved-mesh vertices.</li>
+<li>Build picking triangle geometry from resolved meshes for Cylinder and Sphere.</li>
+<li>Separate “has geometry for bounds/picking” from “eligible for simulation collision.”</li>
+<li>Preserve the legacy accumulated <code>context-&gt;getScene()</code> mesh only while required; ensure it receives the same resolved mesh and document its eventual removal.</li>
+</ol>
+<h4 id="source-acceptance-gates-2">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Bare Cylinder preview uses the existing Cylinder mesh rather than 36 cube vertices.</li>
+<li>Bare Sphere preview uses the existing Sphere mesh rather than 36 cube vertices.</li>
+<li>Preview and PLY export report matching triangle counts.</li>
+<li>Camera Fit uses actual curved-mesh bounds.</li>
+<li>Picking uses actual curved triangles rather than a box hull.</li>
+<li>Cubes retain their existing preview, split-transform, export, and simulation behavior.</li>
+<li>Existing Cylinder and Sphere grammar remains unchanged.</li>
+<li class="source-status--passed">The complete release gate passes before shape syntax work begins.</li>
+</ul>
+<h3 id="source-milestone-2-introduce-shape-syntax-and-evaluated-specifications">Milestone 2: Introduce Shape Syntax and Evaluated Specifications</h3><p class="section-guide">Reading guide: this source section records “Milestone 2: Introduce Shape Syntax and Evaluated Specifications”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-3">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add the syntax and evaluated model classes described in Section 4.</li>
+<li>Add deep-copy or immutable shared ownership for shape syntax during token cloning.</li>
+<li>Extend token printing to emit a stable canonical descriptor.</li>
+<li>Implement <code>ShapeSpecificationParser</code> for Cylinder and Sphere option vocabularies.</li>
+<li>Implement a dedicated instance appearance parser that preserves legacy positional forms.</li>
+<li>Implement <code>ShapeSpecificationEvaluator</code> through the existing checked expression evaluation path.</li>
+<li>Implement <code>ShapeSpecificationValidator</code> and canonicalization rules.</li>
+<li>Store the evaluated specification on the expanded token and then on <code>ScenePrimitiveInstance</code>.</li>
+<li>Add source diagnostics for every invalid option and boundary condition.</li>
+<li>Add a canonical <code>ShapeSpecificationKey</code> using normalized values, stable clip order, integer tessellation, and exact float bit patterns after canonicalization.</li>
+</ol>
+<h4 id="source-acceptance-gates-3">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Bare Cylinder and Sphere produce default specifications identical to Milestone 1 geometry.</li>
+<li>Nested Cylinder and Sphere syntax parses without changing Cube syntax.</li>
+<li>Variables, rule parameters, random declarations, and immutable <code>t</code> evaluate through the existing lexical environment.</li>
+<li>Parsing has no random side effects.</li>
+<li>Invalid specifications block generation before geometry mutation.</li>
+<li>Token clone, print, and source-range behavior remain deterministic.</li>
+<li>Existing material, alpha, and texture-scale grammars remain valid.</li>
+</ul>
+<h3 id="source-milestone-3-implement-the-cylinder-domain-engine">Milestone 3: Implement the Cylinder Domain Engine</h3><p class="section-guide">Reading guide: this source section records “Milestone 3: Implement the Cylinder Domain Engine”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-delivery-order">Delivery Order</h4><p class="section-guide">Reading guide: this source section records “Delivery Order”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>full disk extrusion;</li>
+<li>axial restriction;</li>
+<li>annulus extrusion;</li>
+<li>angular sector extrusion;</li>
+<li>annular sector extrusion;</li>
+<li>circle-segment or chord extrusion;</li>
+<li>annular chord extrusion;</li>
+<li>ordered additional plane clips;</li>
+<li>closure components.</li>
+</ol>
+<h4 id="source-tasks-4">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Implement <code>CylinderMeshGenerator</code> from normalized radial, axial, and angular domains.</li>
+<li>Generate separate surface regions for outer, inner, axial start/end, angular start/end, clip, and rim surfaces.</li>
+<li>Use duplicated vertices at hard normal boundaries.</li>
+<li>Generate outward winding for all closed material boundaries.</li>
+<li>Treat <code>chord(...)</code> as extrusion of the retained circle-segment region, not extrusion of the chord line.</li>
+<li>Handle inner/outer chord intersection transitions explicitly.</li>
+<li>Reject tangent and near-zero-area results with diagnostics unless a documented surface-only result is valid.</li>
+<li>Add per-generation mesh caching.</li>
+<li>Run every generated mesh through <code>MeshTopologyAnalyzer</code> in tests and optionally in debug builds.</li>
+<li>Compute local signed volume for watertight results.</li>
+</ol>
+<h4 id="source-acceptance-gates-4">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Full default Cylinder remains geometrically compatible with the existing normalized mesh.</li>
+<li>Full solid volume approximates <code>pi / 4</code> within tessellation tolerance.</li>
+<li>Centre-chord half-cylinder volume approximates <code>pi / 8</code>.</li>
+<li>Shell, sector, tube-sector, chord, and chord-shell examples render and export.</li>
+<li>Every closed Cylinder variant has two triangle incidents per undirected edge.</li>
+<li>Open boundaries exactly match omitted closure components.</li>
+<li>No triangle has non-finite values or near-zero area.</li>
+<li>Identical specifications produce identical topology hashes.</li>
+<li>Nonuniform <code>S(...)</code> produces correct transformed bounds and determinant-scaled volume.</li>
+</ul>
+<h3 id="source-milestone-4-implement-the-sphere-domain-engine">Milestone 4: Implement the Sphere Domain Engine</h3><p class="section-guide">Reading guide: this source section records “Milestone 4: Implement the Sphere Domain Engine”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-delivery-order-2">Delivery Order</h4><p class="section-guide">Reading guide: this source section records “Delivery Order”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>full sphere;</li>
+<li>radial shell;</li>
+<li>polar restriction;</li>
+<li>azimuth restriction;</li>
+<li>hemisphere through a centre-plane clip;</li>
+<li>open bowl;</li>
+<li>single offset-plane cap;</li>
+<li>parallel-plane slab or segment;</li>
+<li>multiple ordered plane clips;</li>
+<li>closure and rim surfaces.</li>
+</ol>
+<h4 id="source-tasks-5">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Implement <code>SphereMeshGenerator</code> from normalized radial, polar, and azimuth domains.</li>
+<li>Avoid duplicate or degenerate pole triangles.</li>
+<li>Generate outer and inner spherical normals with opposite directions.</li>
+<li>Generate tagged polar, angular, clip, and rim boundaries.</li>
+<li>Implement <code>HalfSpaceMeshClipper</code> for arbitrary oriented local planes.</li>
+<li>Reconstruct deterministic intersection loops for clip closures.</li>
+<li>Triangulate clip closures with support for shell holes before enabling closed clipped shells.</li>
+<li>Expand <code>slab(...)</code> to two ordered clips.</li>
+<li>Validate empty, tangent, full-retention, and multi-plane cases explicitly.</li>
+<li>Compute local signed volume only when the topology analyzer confirms watertightness.</li>
+</ol>
+<h4 id="source-acceptance-gates-5">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Full default Sphere remains geometrically compatible with the normalized baseline.</li>
+<li>Full solid volume approximates <code>pi / 6</code> within tessellation tolerance.</li>
+<li>Hemisphere volume approximates <code>pi / 12</code>.</li>
+<li>Shell volume approximates analytic outer-minus-inner volume.</li>
+<li>Hemisphere, bowl, cap, slab, wedge, patch, quarter, and octant examples render and export.</li>
+<li>Plane-cut caps produce planar closure normals and consistent winding.</li>
+<li>Closed clipped shapes are manifold and watertight.</li>
+<li>Open bowls expose only the requested boundary loops.</li>
+<li>Multiple clips execute in stable source order and produce deterministic hashes.</li>
+</ul>
+<h3 id="source-milestone-5-normals-uvs-surface-tags-and-catalog-aliases">Milestone 5: Normals, UVs, Surface Tags, and Catalog Aliases</h3><p class="section-guide">Reading guide: this source section records “Milestone 5: Normals, UVs, Surface Tags, and Catalog Aliases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-6">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Finalize <code>MeshSurfaceTag</code> values:
+<ul>
+<li><code>Outer</code>;</li>
+<li><code>Inner</code>;</li>
+<li><code>AxialStart</code>;</li>
+<li><code>AxialEnd</code>;</li>
+<li><code>AngularStart</code>;</li>
+<li><code>AngularEnd</code>;</li>
+<li><code>PolarStart</code>;</li>
+<li><code>PolarEnd</code>;</li>
+<li>indexed <code>Clip</code>;</li>
+<li><code>Rim</code>.</li>
+</ul>
+</li>
+<li>Add cylindrical and spherical UV mappings.</li>
+<li>Keep existing triplanar mapping as a supported explicit mode and fallback.</li>
+<li>Add a procedural catalog model separate from imported STL metadata.</li>
+<li>Implement <code>ShapeAliasExpansionService</code>.</li>
+<li>Add initial aliases:
+<ul>
+<li><code>Tube</code>;</li>
+<li><code>CylinderSector</code>;</li>
+<li><code>DSection</code>;</li>
+<li><code>Hemisphere</code>;</li>
+<li><code>SphereCap</code>;</li>
+<li><code>SphereBowl</code>;</li>
+<li><code>SphereQuarter</code>;</li>
+<li><code>SphereOctant</code>.</li>
+</ul>
+</li>
+<li>Require ambiguous aliases such as <code>HalfCylinder</code> to expose or document their exact canonical expansion.</li>
+<li>Add alias parameters and defaults to editor autocomplete and tooltips.</li>
+<li>Preserve one material per instance for this milestone while retaining surface tags for later per-surface material work.</li>
+</ol>
+<h4 id="source-acceptance-gates-6">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Curved outer and inner surfaces shade smoothly.</li>
+<li>Cut, cap, angular, and rim boundaries retain hard normals.</li>
+<li>UV seams are stable and deterministic.</li>
+<li>Aliases expand to the same specification key and topology hash as handwritten canonical descriptors.</li>
+<li>No alias invokes a separate mesh generator.</li>
+<li class="source-status--failed">Catalog loading failure still preserves the six original built-in names.</li>
+<li>Existing STL catalog behavior remains independent of procedural aliases.</li>
+</ul>
+<h3 id="source-milestone-6-volume-mass-and-collision-policies">Milestone 6: Volume, Mass, and Collision Policies</h3><p class="section-guide">Reading guide: this source section records “Milestone 6: Volume, Mass, and Collision Policies”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-7">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add <code>PrimitiveVolumeEvidence</code> containing analytic, mesh-derived, or undefined status.</li>
+<li>Prefer analytic local volumes for validated simple cases.</li>
+<li>Use signed tetrahedral mesh volume for other watertight generated meshes.</li>
+<li>Multiply local volume by the absolute determinant of the instance linear transform.</li>
+<li>Reject density-derived mass for surface or non-watertight geometry.</li>
+<li>Split picking geometry policy from simulation collision policy.</li>
+<li>Enable static triangle-mesh collision for immovable procedural curves.</li>
+<li>Add analytic or convex collision for full solid spheres and cylinders.</li>
+<li>Add convex mesh collision for solid caps, chord cylinders, and eligible sectors.</li>
+<li>Keep hollow, concave, or open dynamic shapes disabled until compound or dynamic triangle-mesh behavior is explicitly validated.</li>
+<li>Surface collision-policy state in diagnostics or the scene inspector.</li>
+</ol>
+<h4 id="source-acceptance-gates-7">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Density-derived mass matches analytic expectations for full Cylinder, half Cylinder, full Sphere, hemisphere, and shells.</li>
+<li>Open surfaces produce a clear undefined-volume diagnostic rather than a cube-derived mass.</li>
+<li>Static bowls and shells use triangle geometry when collision is enabled.</li>
+<li>A hollow sphere never silently receives a solid outer-sphere collider.</li>
+<li>Dynamic collision is enabled only for geometry with an explicit supported policy.</li>
+<li>Existing cube collision and physics tests remain unchanged.</li>
+</ul>
+<h3 id="source-milestone-7-full-application-verification-and-documentation">Milestone 7: Full Application Verification and Documentation</h3><p class="section-guide">Reading guide: this source section records “Milestone 7: Full Application Verification and Documentation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-tasks-8">Tasks</h4><p class="section-guide">Reading guide: this source section records “Tasks”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Add example grammars for every supported canonical form and alias.</li>
+<li>Add grammar editor tooltip and autocomplete documentation.</li>
+<li>Document normalized units, closure semantics, topology, and transform behavior.</li>
+<li>Add ordinary GUI smoke coverage for one Cylinder sector and one Sphere cap.</li>
+<li>Add temporal smoke coverage for a bounded expression-driven sweep or clip.</li>
+<li>Add PLY regression exports and topology hashes.</li>
+<li>Run the focused shape suites.</li>
+<li>Run <code>./tests/run_release_checks.sh</code> from a clean build.</li>
+<li class="source-status--passed">Restart <code>progen3d-editor-gui.service</code> only after the complete release gate passes.</li>
+<li>Verify PID, restart policy, restart count, recent logs, and the exact running executable hash.</li>
+</ol>
+<h4 id="source-acceptance-gates-8">Acceptance Gates</h4><p class="section-guide">Reading guide: this source section records “Acceptance Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Existing grammars remain valid without migration.</li>
+<li>All canonical examples parse, render, pick, Fit, and export.</li>
+<li>Invalid examples produce source-located diagnostics.</li>
+<li class="source-status--passed">Determinism, topology, metric, transform, and compatibility suites pass.</li>
+<li class="source-status--passed">Both GUI smoke modes pass.</li>
+<li class="source-status--passed">The complete release gate passes from a clean application build.</li>
+<li>The supervised GUI remains active with no restart loop or runtime geometry error.</li>
+</ul>
+<h3 id="source-8-recommended-release-boundaries">8. Recommended Release Boundaries</h3><p class="section-guide">Reading guide: this source section records “8. Recommended Release Boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-release-a-existing-curves-correctness">Release A: Existing Curves Correctness</h4><p class="section-guide">Reading guide: this source section records “Release A: Existing Curves Correctness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes Milestones 0 and 1 only.</p>
+<p>This release fixes current Cylinder and Sphere preview, export, bounds, and picking without adding grammar syntax.</p>
+<h4 id="source-release-b-canonical-cylinder-algebra">Release B: Canonical Cylinder Algebra</h4><p class="section-guide">Reading guide: this source section records “Release B: Canonical Cylinder Algebra”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes Milestones 2 and 3.</p>
+<p>This release introduces the canonical descriptor grammar and Cylinder variants.</p>
+<h4 id="source-release-c-canonical-sphere-algebra">Release C: Canonical Sphere Algebra</h4><p class="section-guide">Reading guide: this source section records “Release C: Canonical Sphere Algebra”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes Milestone 4.</p>
+<p>This release adds Sphere shells, caps, slabs, wedges, and clips.</p>
+<h4 id="source-release-d-catalog-and-physical-semantics">Release D: Catalog and Physical Semantics</h4><p class="section-guide">Reading guide: this source section records “Release D: Catalog and Physical Semantics”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Includes Milestones 5 through 7.</p>
+<p>This release adds aliases, finalized surface metadata, volume, mass, collision policy, documentation, and full runtime verification.</p>
+<p class="source-status--passed">Each release must pass the complete existing release gate. Later release work must not be used to justify an incomplete earlier correctness boundary.</p>
+<h3 id="source-9-proposed-file-map">9. Proposed File Map</h3><p class="section-guide">Reading guide: this source section records “9. Proposed File Map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-9-1-new-grammar-models-and-services">9.1 New Grammar Models and Services</h4><p class="section-guide">Reading guide: this source section records “9.1 New Grammar Models and Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/grammar/model/GeometryExpression.h
+include/grammar/model/ShapeDescriptorSyntax.h
+include/grammar/model/CylinderShapeDescriptorSyntax.h
+include/grammar/model/SphereShapeDescriptorSyntax.h
+include/grammar/model/ShapeAliasDescriptorSyntax.h
+include/grammar/model/PlaneClipDescriptorSyntax.h
+include/grammar/service/ShapeSpecificationParser.h
+include/grammar/service/ShapeSpecificationEvaluator.h
+src/grammar/service/ShapeSpecificationParser.cpp
+src/grammar/service/ShapeSpecificationEvaluator.cpp
+</code></pre>
+<h4 id="source-9-2-new-geometry-models">9.2 New Geometry Models</h4><p class="section-guide">Reading guide: this source section records “9.2 New Geometry Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/model/ShapeSpecification.h
+include/geometry/model/CylinderShapeSpecification.h
+include/geometry/model/SphereShapeSpecification.h
+include/geometry/model/RadialDomainSpecification.h
+include/geometry/model/AxialDomainSpecification.h
+include/geometry/model/AngularDomainSpecification.h
+include/geometry/model/PolarDomainSpecification.h
+include/geometry/model/PlaneClipSpecification.h
+include/geometry/model/ShapeClosurePolicy.h
+include/geometry/model/ShapeTessellation.h
+include/geometry/model/MeshSurfaceTag.h
+include/geometry/model/ResolvedPrimitiveGeometry.h
+</code></pre>
+<h4 id="source-9-3-new-geometry-services">9.3 New Geometry Services</h4><p class="section-guide">Reading guide: this source section records “9.3 New Geometry Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/geometry/service/ShapeSpecificationValidator.h
+include/geometry/service/PrimitiveGeometryResolver.h
+include/geometry/service/ProceduralMeshRepository.h
+include/geometry/service/CurvedShapeMeshGenerator.h
+include/geometry/service/CylinderMeshGenerator.h
+include/geometry/service/SphereMeshGenerator.h
+include/geometry/service/HalfSpaceMeshClipper.h
+include/geometry/service/MeshTopologyAnalyzer.h
+include/geometry/service/SceneMeshVertexAssembler.h
+include/geometry/service/ShapeAliasExpansionService.h
+src/geometry/service/*.cpp
+</code></pre>
+<h4 id="source-9-4-existing-files-expected-to-change">9.4 Existing Files Expected to Change</h4><p class="section-guide">Reading guide: this source section records “9.4 Existing Files Expected to Change”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">include/grammar.h
+src/Grammar.cpp
+include/Context.h
+src/Context.cpp
+include/Mesh.h
+src/Mesh.cpp
+include/StlCatalog.h
+src/StlCatalog.cpp
+src/imgui_main.cpp
+include/imgui_render.h
+src/imgui_render.cpp
+Makefile
+tests/run_editor_architecture_checks.sh
+tests/run_release_checks.sh
+tests/README.md
+</code></pre>
+<p><code>StlCatalog</code> should not be renamed as part of the first geometry releases unless the procedural catalog integration proves that a broader catalog rename is necessary. Avoid mixing a large catalog migration into the mesh correctness boundary.</p>
+<h3 id="source-10-test-plan">10. Test Plan</h3><p class="section-guide">Reading guide: this source section records “10. Test Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-10-1-new-focused-harnesses">10.1 New Focused Harnesses</h4><p class="section-guide">Reading guide: this source section records “10.1 New Focused Harnesses”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">tests/shape_specification_parser_harness.cpp
+tests/shape_specification_evaluator_harness.cpp
+tests/primitive_geometry_resolver_harness.cpp
+tests/cylinder_mesh_generator_harness.cpp
+tests/sphere_mesh_generator_harness.cpp
+tests/mesh_topology_analyzer_harness.cpp
+tests/curved_shape_scene_geometry_harness.cpp
+tests/procedural_shape_catalog_harness.cpp
+</code></pre>
+<p>Each harness receives a dedicated <code>run_*_checks.sh</code> entry and is added to <code>run_editor_architecture_checks.sh</code>.</p>
+<h4 id="source-10-2-compatibility-matrix">10.2 Compatibility Matrix</h4><p class="section-guide">Reading guide: this source section records “10.2 Compatibility Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Area</th>
+<th scope="col">Required result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bare Cube</td>
+<td>Existing specialized path and behavior unchanged</td>
+</tr>
+<tr>
+<td>Bare Cylinder</td>
+<td>Existing normalized source mesh used everywhere</td>
+</tr>
+<tr>
+<td>Bare Sphere</td>
+<td>Existing normalized source mesh used everywhere</td>
+</tr>
+<tr>
+<td>Material syntax</td>
+<td>Existing named, deferred, and indexed forms unchanged</td>
+</tr>
+<tr>
+<td>Positional appearance</td>
+<td>Existing alpha and texture-scale positions unchanged</td>
+</tr>
+<tr>
+<td>Named appearance</td>
+<td><code>alpha(...)</code> and <code>texscale(...)</code> map to the same values</td>
+</tr>
+<tr>
+<td>Scope transforms</td>
+<td>Existing translation, scales, secondary scales, and rotations remain valid</td>
+</tr>
+<tr>
+<td>Temporal grammar</td>
+<td>Existing <code>t</code> behavior and design nonce preservation remain valid</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-10-3-metric-matrix">10.3 Metric Matrix</h4><p class="section-guide">Reading guide: this source section records “10.3 Metric Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Using canonical radius <code>0.5</code> and Cylinder height <code>1</code>:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Shape</th>
+<th scope="col" style="text-align:right">Expected local volume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full Cylinder</td>
+<td style="text-align:right"><code>pi / 4</code></td>
+</tr>
+<tr>
+<td>Centre-chord half Cylinder</td>
+<td style="text-align:right"><code>pi / 8</code></td>
+</tr>
+<tr>
+<td>Full Sphere</td>
+<td style="text-align:right"><code>pi / 6</code></td>
+</tr>
+<tr>
+<td>Hemisphere</td>
+<td style="text-align:right"><code>pi / 12</code></td>
+</tr>
+<tr>
+<td>Full shell</td>
+<td style="text-align:right">analytic outer volume minus inner volume</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tolerances must be tied to tessellation and documented in each harness.</p>
+<h4 id="source-10-4-topology-matrix">10.4 Topology Matrix</h4><p class="section-guide">Reading guide: this source section records “10.4 Topology Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Closed meshes must satisfy:</p>
+<ul>
+<li>every undirected edge has exactly two triangle incidents;</li>
+<li>no degenerate triangle exceeds the allowed tolerance;</li>
+<li>signed volume is finite and nonzero;</li>
+<li>winding is consistent with outward material boundaries;</li>
+<li>face surface-tag count equals face count.</li>
+</ul>
+<p>Open meshes must satisfy:</p>
+<ul>
+<li>boundary edges exist only for omitted closure components;</li>
+<li>boundary loop counts are deterministic;</li>
+<li>no unexpected internal holes exist.</li>
+</ul>
+<h4 id="source-10-5-boundary-matrix">10.5 Boundary Matrix</h4><p class="section-guide">Reading guide: this source section records “10.5 Boundary Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">azimuth sweep = 360
+azimuth sweep = 180
+azimuth sweep approaching zero
+inner radius = 0
+inner radius approaching outer radius
+chord offset = 0
+chord offset approaching +1
+chord offset approaching -1
+polar minimum = 0
+polar maximum = 180
+clip through center
+clip tangent to outer surface
+clip outside outer surface
+slab with coincident planes
+segment count at minimum and maximum
+per-shape geometry budget exceeded
+</code></pre>
+<h4 id="source-10-6-determinism-matrix">10.6 Determinism Matrix</h4><p class="section-guide">Reading guide: this source section records “10.6 Determinism Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The same evaluated specification must produce identical:</p>
+<ul>
+<li>canonical specification key;</li>
+<li>vertex count;</li>
+<li>face count;</li>
+<li>vertex order;</li>
+<li>triangle order;</li>
+<li>surface-tag order;</li>
+<li>topology hash;</li>
+<li>bounds;</li>
+<li>signed volume;</li>
+<li>PLY payload hash.</li>
+</ul>
+<h4 id="source-10-7-transform-matrix">10.7 Transform Matrix</h4><p class="section-guide">Reading guide: this source section records “10.7 Transform Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>For representative Cylinder and Sphere variants, apply:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-p3d">S(2 3 4)
+A(30 0)
+A(40 1)
+A(50 2)
+</code></pre>
+<p>Verify:</p>
+<ul>
+<li>transformed mesh bounds;</li>
+<li>inverse-transpose normal transformation;</li>
+<li>determinant-scaled volume;</li>
+<li>preview picking;</li>
+<li>camera Fit;</li>
+<li>exported vertex positions.</li>
+</ul>
+<h3 id="source-11-source-gates">11. Source Gates</h3><p class="section-guide">Reading guide: this source section records “11. Source Gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Add deterministic source checks that fail when:</p>
+<ul>
+<li>built-in Cylinder or Sphere enters the 36-vertex cube path;</li>
+<li>mesh geometry is selected by <code>is_stl_instance_type()</code> rather than resolved representation;</li>
+<li><code>vertex_count_for_instance()</code> returns 36 for all non-STL types;</li>
+<li>bounds for procedural curves are produced from the base cube hull;</li>
+<li>density-derived mass silently uses cube volume for curved shapes;</li>
+<li>an alias owns a direct mesh-generation function;</li>
+<li>a mesh generator reads the grammar random stream;</li>
+<li>geometry expressions are evaluated during parsing rather than expansion;</li>
+<li>preview and export resolve separate meshes for one instance;</li>
+<li>a generated mesh bypasses topology-budget validation.</li>
+</ul>
+<h3 id="source-12-risks-and-mitigations">12. Risks and Mitigations</h3><p class="section-guide">Reading guide: this source section records “12. Risks and Mitigations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-risk-syntax-lands-before-geometry-correctness">Risk: Syntax Lands Before Geometry Correctness</h4><p class="section-guide">Reading guide: this source section records “Risk: Syntax Lands Before Geometry Correctness”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Milestone 1 is a separate release boundary. Nested curved syntax cannot merge while bare Cylinder or Sphere still renders or exports through the cube path.</p>
+<h4 id="source-risk-grammar-parser-becomes-more-procedural">Risk: Grammar Parser Becomes More Procedural</h4><p class="section-guide">Reading guide: this source section records “Risk: Grammar Parser Becomes More Procedural”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Move nested shape responsibilities into <code>ShapeSpecificationParser</code> and store purpose-named syntax objects on the token.</p>
+<h4 id="source-risk-parsed-and-evaluated-state-become-confused">Risk: Parsed and Evaluated State Become Confused</h4><p class="section-guide">Reading guide: this source section records “Risk: Parsed and Evaluated State Become Confused”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Keep <code>ShapeDescriptorSyntax</code> and <code>ShapeSpecification</code> as separate conceptual hierarchies. Mesh code consumes only evaluated specifications.</p>
+<h4 id="source-risk-float-keys-produce-cache-drift">Risk: Float Keys Produce Cache Drift</h4><p class="section-guide">Reading guide: this source section records “Risk: Float Keys Produce Cache Drift”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Canonicalize values first, normalize negative zero, store integer segment counts, preserve clip order, and hash exact canonical float bit patterns.</p>
+<h4 id="source-risk-time-varying-shapes-grow-an-unlimited-cache">Risk: Time-Varying Shapes Grow an Unlimited Cache</h4><p class="section-guide">Reading guide: this source section records “Risk: Time-Varying Shapes Grow an Unlimited Cache”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Use a per-generation repository initially. Do not add an unbounded process-global procedural mesh cache.</p>
+<h4 id="source-risk-clip-closures-fail-on-shell-holes">Risk: Clip Closures Fail on Shell Holes</h4><p class="section-guide">Reading guide: this source section records “Risk: Clip Closures Fail on Shell Holes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed"><strong>Mitigation:</strong> Do not mark clipped shells closed until deterministic loop reconstruction and polygon-with-holes triangulation pass topology tests.</p>
+<h4 id="source-risk-smooth-normals-leak-across-hard-boundaries">Risk: Smooth Normals Leak Across Hard Boundaries</h4><p class="section-guide">Reading guide: this source section records “Risk: Smooth Normals Leak Across Hard Boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Duplicate vertices at cap, cut, angular, polar, and rim boundaries and assign normals by surface role.</p>
+<h4 id="source-risk-topology-and-closure-semantics-diverge">Risk: Topology and Closure Semantics Diverge</h4><p class="section-guide">Reading guide: this source section records “Risk: Topology and Closure Semantics Diverge”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Store requested topology, requested closure, and measured watertightness separately. Volume and collision use measured geometry evidence.</p>
+<h4 id="source-risk-hollow-shapes-receive-solid-colliders">Risk: Hollow Shapes Receive Solid Colliders</h4><p class="section-guide">Reading guide: this source section records “Risk: Hollow Shapes Receive Solid Colliders”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Make collision policy explicit in <code>ResolvedPrimitiveGeometry</code>; never infer collider shape from outer bounds alone.</p>
+<h4 id="source-risk-general-plane-clipping-becomes-premature-csg">Risk: General Plane Clipping Becomes Premature CSG</h4><p class="section-guide">Reading guide: this source section records “Risk: General Plane Clipping Becomes Premature CSG”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Restrict <code>HalfSpaceMeshClipper</code> to ordered half-space intersection and boundary closure. Do not add union, difference, or arbitrary mesh Boolean operations in this plan.</p>
+<h4 id="source-risk-catalog-work-expands-the-initial-scope">Risk: Catalog Work Expands the Initial Scope</h4><p class="section-guide">Reading guide: this source section records “Risk: Catalog Work Expands the Initial Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Mitigation:</strong> Land aliases only after canonical descriptors and mesh hashes are stable. Alias expansion must be testably equivalent to handwritten descriptors.</p>
+<h3 id="source-13-explicit-non-goals">13. Explicit Non-Goals</h3><p class="section-guide">Reading guide: this source section records “13. Explicit Non-Goals”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The following are not required for completion of this plan:</p>
+<ul>
+<li>one C++ class per named curved shape;</li>
+<li>direct user-authored <code>Extrude(...)</code> grammar;</li>
+<li>direct user-authored <code>Revolve(...)</code> grammar;</li>
+<li>general mesh union, difference, or intersection;</li>
+<li>arbitrary path sweeps such as pipe elbows;</li>
+<li>depth-of-field or camera changes;</li>
+<li>per-surface materials in the first curved-shape release;</li>
+<li>unbounded global mesh caching;</li>
+<li>dynamic collision for arbitrary open, hollow, or concave geometry;</li>
+<li class="source-status--passed">replacing the complete legacy grammar parser in one change;</li>
+<li>renaming every existing STL catalog type during geometry repair.</li>
+</ul>
+<h3 id="source-14-completion-standard">14. Completion Standard</h3><p class="section-guide">Reading guide: this source section records “14. Completion Standard”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The curved primitive extension is complete when:</p>
+<ul>
+<li>Cylinder and Sphere are correct generic mesh instances before parameterization;</li>
+<li>existing bare grammars remain backwards compatible;</li>
+<li>one canonical descriptor model owns all Cylinder and Sphere variations;</li>
+<li>grammar expressions evaluate during expansion and produce validated specifications;</li>
+<li>Cylinder supports solid, surface, shell, axial, sector, chord, clip, and closure forms;</li>
+<li>Sphere supports solid, surface, shell, polar, azimuth, hemisphere, bowl, cap, slab, multi-plane, and closure forms;</li>
+<li>preview, picking, bounds, Fit, and PLY export consume one resolved geometry object;</li>
+<li class="source-status--passed">closed meshes pass manifold, winding, degeneracy, and volume tests;</li>
+<li>open boundaries match the closure policy;</li>
+<li>repeated generation is deterministic;</li>
+<li>aliases expand to canonical descriptors without duplicate generators;</li>
+<li>density and collision policies never pretend an open or hollow shape is a solid box;</li>
+<li class="source-status--passed">all focused harnesses, both GUI smoke modes, and <code>./tests/run_release_checks.sh</code> pass;</li>
+<li>the rebuilt supervised GUI remains active without runtime geometry errors.</li>
+</ul>
+<h3 id="source-15-recommended-first-implementation-slice">15. Recommended First Implementation Slice</h3><p class="section-guide">Reading guide: this source section records “15. Recommended First Implementation Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The first code change should implement only Milestone 1:</p>
+<ol>
+<li>introduce <code>ResolvedPrimitiveGeometry</code>;</li>
+<li>resolve existing Cube, Cylinder, and Sphere geometry;</li>
+<li>replace the STL-only mesh appender with a generic mesh appender;</li>
+<li>fix instance vertex counts;</li>
+<li>route Cylinder and Sphere through the same preview/export mesh;</li>
+<li>produce exact curved bounds and triangle picking;</li>
+<li>add focused preview/export regression tests;</li>
+<li class="source-status--passed">run the complete release gate.</li>
+</ol>
+<p class="source-status--passed">Do not add <code>Cylinder(...)</code> or <code>Sphere(...)</code> nested options until this slice is independently verified and releasable.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-axialprofilev1-core-primitive-implementation-plan.html" rel="prev">← Previous: ProGen3D AxialProfilev1 Core Primitive Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-full-geometry-kernel-fgkv1-completion-roadmap.html" rel="next">Next: ProGen3D Full Geometry Kernel FGKv1 Completion Roadmap →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

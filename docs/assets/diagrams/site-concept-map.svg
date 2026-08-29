@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">ProGen3D documentation concept map</title>
+  <desc id="diagram-description">A central ProGen3D learning-path node connects to ten documentation categories. Each category node links to its homepage section and states its page count.</desc>
+  <style>
+    :root { color-scheme: light; }
+    line, path { fill: none; stroke: #7892b1; stroke-width: 3; }
+    .node rect { fill: #f8fbff; stroke: #135f9e; stroke-width: 2.5; rx: 16; }
+    .node text { fill: #172033; font-family: system-ui, sans-serif; text-anchor: middle; }
+    .node .label { font-size: 16px; font-weight: 800; }
+    .node .detail { fill: #526079; font-size: 11px; }
+    .node--emphasized rect { fill: #dceefe; stroke-width: 4; }
+    .node:focus rect, .node:hover rect { fill: #fff0c7; stroke: #8b2532; }
+    a:focus { outline: none; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+  <g aria-hidden="true"><line x1="560" y1="300" x2="980.0" y2="300.0" /><line x1="560" y1="300" x2="899.8" y2="429.3" /><line x1="560" y1="300" x2="689.8" y2="509.2" /><line x1="560" y1="300" x2="430.2" y2="509.2" /><line x1="560" y1="300" x2="220.2" y2="429.3" /><line x1="560" y1="300" x2="140.0" y2="300.0" /><line x1="560" y1="300" x2="220.2" y2="170.7" /><line x1="560" y1="300" x2="430.2" y2="90.8" /><line x1="560" y1="300" x2="689.8" y2="90.8" /><line x1="560" y1="300" x2="899.8" y2="170.7" /></g>
+  <g>
+<a href="../../index.html#category-start" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Start and Build. 1 pages. Project orientation, build instructions, quick starts, and repository entry points.">
+    <title>Start and Build: 1 pages. Project orientation, build instructions, quick starts, and repository entry points.</title>
+    <rect x="880.0" y="256.0" width="200" height="88" />
+    <text class="label" x="980.0" y="283.0"><tspan x="980.0" dy="0">Start and Build</tspan></text>
+    <text class="detail" x="980.0" y="309.0"><tspan x="980.0" dy="0">1 pages. Project orientation,</tspan><tspan x="980.0" dy="14">build instructions, quick starts…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-architecture" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Architecture and Runtime. 6 pages. Editor architecture, runtime ownership, grammar semantics, and system integration.">
+    <title>Architecture and Runtime: 6 pages. Editor architecture, runtime ownership, grammar semantics, and system integration.</title>
+    <rect x="799.8" y="385.3" width="200" height="88" />
+    <text class="label" x="899.8" y="412.3"><tspan x="899.8" dy="0">Architecture and Runtime</tspan></text>
+    <text class="detail" x="899.8" y="438.3"><tspan x="899.8" dy="0">6 pages. Editor architecture,</tspan><tspan x="899.8" dy="14">runtime ownership, grammar…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-geometry-rendering" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Geometry and Rendering. 13 pages. Primitives, profiles, mesh conversion, cameras, preview rendering, and material pipelines.">
+    <title>Geometry and Rendering: 13 pages. Primitives, profiles, mesh conversion, cameras, preview rendering, and material pipelines.</title>
+    <rect x="589.8" y="465.2" width="200" height="88" />
+    <text class="label" x="689.8" y="492.2"><tspan x="689.8" dy="0">Geometry and Rendering</tspan></text>
+    <text class="detail" x="689.8" y="518.2"><tspan x="689.8" dy="0">13 pages. Primitives, profiles,</tspan><tspan x="689.8" dy="14">mesh conversion, cameras, preview…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-buildings" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Buildings and Object Models. 31 pages. Building grammars, spatial object models, furniture, placement, and architectural evidence.">
+    <title>Buildings and Object Models: 31 pages. Building grammars, spatial object models, furniture, placement, and architectural evidence.</title>
+    <rect x="330.2" y="465.2" width="200" height="88" />
+    <text class="label" x="430.2" y="492.2"><tspan x="430.2" dy="0">Buildings and Object</tspan><tspan x="430.2" dy="19">Models</tspan></text>
+    <text class="detail" x="430.2" y="529.2"><tspan x="430.2" dy="0">31 pages. Building grammars,</tspan><tspan x="430.2" dy="14">spatial object models, furniture…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-vehicles" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Vehicles and Automotive Models. 69 pages. Vehicle grammars, mathematical models, primitive coverage, fitting, and release packages.">
+    <title>Vehicles and Automotive Models: 69 pages. Vehicle grammars, mathematical models, primitive coverage, fitting, and release packages.</title>
+    <rect x="120.2" y="385.3" width="200" height="88" />
+    <text class="label" x="220.2" y="412.3"><tspan x="220.2" dy="0">Vehicles and Automotive</tspan><tspan x="220.2" dy="19">Models</tspan></text>
+    <text class="detail" x="220.2" y="449.3"><tspan x="220.2" dy="0">69 pages. Vehicle grammars,</tspan><tspan x="220.2" dy="14">mathematical models, primitive…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-vegetation" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Vegetation Systems. 8 pages. Vegetation grammars, building-integrated plants, rendering, and reconstruction evidence.">
+    <title>Vegetation Systems: 8 pages. Vegetation grammars, building-integrated plants, rendering, and reconstruction evidence.</title>
+    <rect x="40.0" y="256.0" width="200" height="88" />
+    <text class="label" x="140.0" y="283.0"><tspan x="140.0" dy="0">Vegetation Systems</tspan></text>
+    <text class="detail" x="140.0" y="309.0"><tspan x="140.0" dy="0">8 pages. Vegetation grammars,</tspan><tspan x="140.0" dy="14">building-integrated plants…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-validation" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Validation and Evidence. 2 pages. Verification reports, requirement audits, comparison reports, and deterministic evidence.">
+    <title>Validation and Evidence: 2 pages. Verification reports, requirement audits, comparison reports, and deterministic evidence.</title>
+    <rect x="120.2" y="126.7" width="200" height="88" />
+    <text class="label" x="220.2" y="153.7"><tspan x="220.2" dy="0">Validation and Evidence</tspan></text>
+    <text class="detail" x="220.2" y="179.7"><tspan x="220.2" dy="0">2 pages. Verification reports,</tspan><tspan x="220.2" dy="14">requirement audits, comparison…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-plans-research" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Plans and Research. 3 pages. Implementation plans, proposals, roadmaps, literature reviews, and unresolved research work.">
+    <title>Plans and Research: 3 pages. Implementation plans, proposals, roadmaps, literature reviews, and unresolved research work.</title>
+    <rect x="330.2" y="46.8" width="200" height="88" />
+    <text class="label" x="430.2" y="73.8"><tspan x="430.2" dy="0">Plans and Research</tspan></text>
+    <text class="detail" x="430.2" y="99.8"><tspan x="430.2" dy="0">3 pages. Implementation plans,</tspan><tspan x="430.2" dy="14">proposals, roadmaps, literature…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-governance" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Governance and Agent Work. 2 pages. Repository instructions, governed automation, authority boundaries, and refactor tracking.">
+    <title>Governance and Agent Work: 2 pages. Repository instructions, governed automation, authority boundaries, and refactor tracking.</title>
+    <rect x="589.8" y="46.8" width="200" height="88" />
+    <text class="label" x="689.8" y="73.8"><tspan x="689.8" dy="0">Governance and Agent</tspan><tspan x="689.8" dy="19">Work</tspan></text>
+    <text class="detail" x="689.8" y="110.8"><tspan x="689.8" dy="0">2 pages. Repository instructions,</tspan><tspan x="689.8" dy="14">governed automation, authority…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#category-examples-reference" target="_top">
+  <g class="node" tabindex="0" role="link" aria-label="Examples and Reference. 1 pages. Example corpora, source mappings, schemas, limitations, and focused reference material.">
+    <title>Examples and Reference: 1 pages. Example corpora, source mappings, schemas, limitations, and focused reference material.</title>
+    <rect x="799.8" y="126.7" width="200" height="88" />
+    <text class="label" x="899.8" y="153.7"><tspan x="899.8" dy="0">Examples and Reference</tspan></text>
+    <text class="detail" x="899.8" y="179.7"><tspan x="899.8" dy="0">1 pages. Example corpora, source</tspan><tspan x="899.8" dy="14">mappings, schemas, limitations…</tspan></text>
+  </g>
+</a>
+<a href="../../index.html#learning-paths" target="_top">
+  <g class="node node--emphasized" tabindex="0" role="link" aria-label="ProGen3D learning paths. 136 source-grounded lessons connected by category and concept.">
+    <title>ProGen3D learning paths: 136 source-grounded lessons connected by category and concept.</title>
+    <rect x="450.0" y="252.0" width="220" height="96" />
+    <text class="label" x="560.0" y="283.0"><tspan x="560.0" dy="0">ProGen3D learning paths</tspan></text>
+    <text class="detail" x="560.0" y="309.0"><tspan x="560.0" dy="0">136 source-grounded lessons</tspan><tspan x="560.0" dy="14">connected by category and concept.</tspan></text>
+  </g>
+</a></g>
+</svg>

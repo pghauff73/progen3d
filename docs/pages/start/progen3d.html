@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ProGen3D is a Linux desktop editor and runtime for procedural 3D grammars. It combines a source editor, structural diagnostics, deterministic scene regeneration, an interactive OpenGL preview, physically based materials, authored lighting and electrical controls, spatial object inspection…" name="description"/>
+<meta content="README.md" name="source-markdown"/>
+<meta content="99c99c14df7707c3687c0558d8674a2947e93df4f502de13b67793fddcfad6aa" name="source-sha256"/>
+<meta content="Documented" name="documentation-status"/>
+<title>ProGen3D · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-start">Start and Build</a></li>
+<li aria-current="page">ProGen3D</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D</h1>
+<p class="lead">ProGen3D is a Linux desktop editor and runtime for procedural 3D grammars. It combines a source editor, structural diagnostics, deterministic scene regeneration, an interactive OpenGL preview, physically based materials, authored lighting and electrical controls, spatial object inspection…</p>
+<div class="lesson-meta">
+<span class="status-badge status--documented">Documented</span>
+<span class="tag">Start and Build</span>
+<span class="tag">About 32 minutes at 200 words/minute</span>
+<span class="tag">Source updated: 2026-08-25</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/README.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="99c99c14df7707c3687c0558d8674a2947e93df4f502de13b67793fddcfad6aa" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D, Quick start, Supported desktop baseline, Build.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> — recommended orientation from the generated learning graph.</li><li><a href="../vehicles/mcsmv2-quick-start.html">MCSMv2 Quick Start</a> — recommended orientation from the generated learning graph.</li><li><a href="../vehicles/mcsmv2-1-build-notes.html">MCSMv2.1 Build Notes</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D</dfn></td><td>The phrase appears 26 times in the source and is retained as a learning-path concept.</td><td>ProGen3D</td></tr><tr><td><dfn title="Named by the source document">Quick start</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>Quick start</td></tr><tr><td><dfn title="Named by the source document">Supported desktop baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Supported desktop baseline</td></tr><tr><td><dfn title="Named by the source document">Build</dfn></td><td>The phrase appears 118 times in the source and is retained as a learning-path concept.</td><td>Build, Open a modern building, Spatial building declarations</td></tr><tr><td><dfn title="Named by the source document">Open a modern building</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Build, Open a modern building</td></tr><tr><td><dfn title="Named by the source document">Screenshot walkthrough</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>Screenshot walkthrough</td></tr><tr><td><dfn title="Named by the source document">First-session walkthrough</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>First-session walkthrough</td></tr><tr><td><dfn title="Named by the source document">Application header</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>1. Application header</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SMB-</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">OM20</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="publication harnesses">AI</dfn></td><td>publication harnesses</td></tr><tr><td><dfn title="OMv1, SMB-OMv2, and SMB-OMv2">SMB</dfn></td><td>OMv1, SMB-OMv2, and SMB-OMv2</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">ID</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">MSAA</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |">P0</dfn></td><td>P2 grammar acceptance log | P0, P1, and P2 syntax, semantic, temporal, and runtime harnesses passed |</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">XDG</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">BUILDING</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="Polygon File Format">PLY</dfn></td><td>Polygon File Format</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">L0-L5</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>ProGen3D is a Linux desktop editor and runtime for procedural 3D grammars. It combines a source editor, structural diagnostics, deterministic scene regeneration, an interactive OpenGL preview, physically based materials, authored lighting and electrical controls, spatial object inspection…</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D, Quick start, Supported desktop baseline, Build. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Contents, Quick start, Supported desktop baseline, Build, Open a modern building. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 9, failed: 10, pending: 9, proposed: 8, unresolved: 5.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 28 code blocks, 17 tables and the source SHA-256 <code>99c99c14df7707c3687c0558d8674a2947e93df4f502de13b67793fddcfad6aa</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-contents">Contents</a></li><li><a href="#source-quick-start">Quick start</a></li><li><a href="#source-supported-desktop-baseline">Supported desktop baseline</a></li><li><a href="#source-build">Build</a></li><li><a href="#source-open-a-modern-building">Open a modern building</a></li><li><a href="#source-screenshot-walkthrough">Screenshot walkthrough</a></li><li><a href="#source-first-session-walkthrough">First-session walkthrough</a></li><li><a href="#source-1-application-header">1. Application header</a></li><li><a href="#source-2-grammar-document-toolbar">2. Grammar document toolbar</a></li><li><a href="#source-3-workspace-tabs">3. Workspace tabs</a></li><li><a href="#source-4-smart-grammar-editor">4. Smart grammar editor</a></li><li><a href="#source-5-preview-toolbar">5. Preview toolbar</a></li><li><a href="#source-6-interactive-3d-viewport">6. Interactive 3D viewport</a></li><li><a href="#source-7-console">7. Console</a></li><li><a href="#source-8-resizable-layout">8. Resizable layout</a></li><li><a href="#source-9-pointer-and-keyboard-reference">9. Pointer and keyboard reference</a></li><li><a href="#source-10-popups-dialogs-and-transient-ui">10. Popups, dialogs, and transient UI</a></li><li><a href="#source-11-gui-state-and-failure-behavior">11. GUI state and failure behavior</a></li><li><a href="#source-complete-gui-reference">Complete GUI reference</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>9</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>10</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>9</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>8</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>5</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is README.md.</li><li>Learn the named concepts: ProGen3D, Quick start, Supported desktop baseline, Build.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Start the editor and choose Continue Offline if cloud and AI services are not required.</li><li>Select Open... and load examples/SMBOMv2InstanceSMB001SpatiallyAware.p3d.</li><li>Wait for the Preview status to return to Ready; the Console should report parsed rules, successful validation, and scene regeneration.</li><li>Drag inside the viewport to orbit the building, scroll to zoom, and use Fit if the model leaves the frame.</li><li>Click a visible primitive, then open Inspector to see its immutable primitive snapshot and associated SMB object.</li><li>Enable Overlay, open Overlay Options, and select the SMB object frames, interfaces, bounds, connections, constraints, contacts, or clearances needed for the review.</li><li>Return to Editor, make a small source change, and observe the automatic-run countdown in the editor status row.</li><li>Introduce a temporary syntax error to see Diagnostics and Console reject the candidate while the Preview retains the last valid scene.</li><li>Correct the error and press Run to regenerate immediately.</li><li>Use Save As... before modifying generated examples; regenerate source packages through their generator scripts when the example declares a generated authority.</li><li>Editor — source authoring and syntax assistance.</li><li>Diagnostics — navigable parser, semantic, and generation diagnostics.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> bash fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-bash">make clean
+make -j2 all</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D" data="../../assets/diagrams/pages/progen3d.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>README.md</code></p><p>SHA-256: <code>99c99c14df7707c3687c0558d8674a2947e93df4f502de13b67793fddcfad6aa</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>64 headings, 28 fenced code blocks, 17 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>new readers and developers preparing to use the project.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li><li>Silently converting pending or unknown work into an assumed default.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--warning"><p><strong>Safety boundary:</strong> these commands are source material, not commands executed by the documentation generator. Verify paths, dependencies, current state, and expected side effects before running them.</p></div><pre aria-label="Verification command from source" tabindex="0"><code>make clean</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>make -j2 all</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./progen3d-editor-gui</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./progen3d</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./p3d_to_3dtexmesh</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./p3d_to_3view</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>./progen3d-editor-gui</code></pre><pre aria-label="Verification command from source" tabindex="0"><code>make progen3d</code></pre>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>ProGen3D is a Linux desktop editor and runtime for procedural 3D grammars. It combines a source editor, structural diagnostics, deterministic scene regeneration, an interactive OpenGL preview, physically based materials, authored lighting and electrical controls, spatial object inspection…</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Documented; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D, Quick start, Supported desktop baseline, Build, Open a modern building</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="../buildings/building-progen3d-editor-gui.html">Building ProGen3D Editor GUI</a> <span class="status-badge status--documented">Documented</span><br/><small>The current desktop editor targets Linux with:</small></li><li><a href="../vehicles/mcsmv2-quick-start.html">MCSMv2 Quick Start</a> <span class="status-badge status--documented">Documented</span><br/><small>Generate one variant without image previews:</small></li><li><a href="../buildings/small-modern-building-three-view-comparison.html">Small Modern Building Three-View Comparison</a> <span class="status-badge status--evidence">Evidence</span><br/><small>ImageGen references are design targets. The comparison score is a deterministic shape metric and does not replace spatial, collision, or grammar validation.</small></li><li><a href="../buildings/validation.html">Validation</a> <span class="status-badge status--evidence">Evidence</span><br/><small>All L0-L5 taxonomy nodes use executable OMv2 Object scopes. L20 geometry is localized under L5 object frames. Linked runtime validation is performed by tests/runcourtyardomv2checks.sh; deterministic supervisor rendering is checked by tests/runcourtyardomv2visualchecks.sh.</small></li><li><a href="../vehicles/mcsmv2-1-build-notes.html">MCSMv2.1 Build Notes</a> <span class="status-badge status--documented">Documented</span><br/><small>The released medium-resolution artifacts were generated and validated one vehicle variant per clean Python process, then merged into the final release. This avoids retained native proximity-index caches that can accumulate when several registered-surface builds run in one long-lived process on…</small></li><li><a href="../buildings/modern-luxury-townhouse-v1-implementation-plan.html">Modern Luxury Townhouse V1 Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Replace the geometry-only townhouse draft with an executable, spatially aware building grammar whose static camera views and scripted walkthrough can be compared reproducibly with the ImageGen building and object references.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/README.md"><code>README.md</code></a></p>
+<p><strong>Source digest:</strong> <code>99c99c14df7707c3687c0558d8674a2947e93df4f502de13b67793fddcfad6aa</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d">ProGen3D</h2><p class="section-guide">Reading guide: this source section records “ProGen3D”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>ProGen3D is a Linux desktop editor and runtime for procedural 3D grammars. It combines a source editor, structural diagnostics, deterministic scene regeneration, an interactive OpenGL preview, physically based materials, authored lighting and electrical controls, spatial object inspection, collision-aware placement, and evidence-oriented validation.</p>
+<p>The repository includes examples ranging from a single cube to spatially aware modern buildings, a 20-level architectural taxonomy, chairs, vehicles, vegetation, temporal geometry, and advanced procedural primitives.</p>
+<p><img alt="ProGen3D editor displaying the SMB-OMv2 spatially aware modern building" loading="lazy" src="../../assets/images/source/docs/images/readme/progen3d-editor-smb-omv2-full.png"/></p>
+<h3 id="source-contents">Contents</h3><p class="section-guide">Reading guide: this source section records “Contents”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><a href="#source-quick-start">Quick start</a></li>
+<li><a href="#source-screenshot-walkthrough">Screenshot walkthrough</a></li>
+<li class="source-status--passed"><a href="#source-complete-gui-reference">Complete GUI reference</a></li>
+<li><a href="#source-grammar-primer">Grammar primer</a></li>
+<li><a href="#source-modern-buildings">Modern Buildings</a></li>
+<li><a href="#source-building-validation-workflow">Building validation workflow</a></li>
+<li><a href="#source-command-line-reference">Command-line reference</a></li>
+<li><a href="#source-repository-guide">Repository guide</a></li>
+<li><a href="#source-verification">Verification</a></li>
+</ul>
+<h3 id="source-quick-start">Quick start</h3><p class="section-guide">Reading guide: this source section records “Quick start”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-supported-desktop-baseline">Supported desktop baseline</h4><p class="section-guide">Reading guide: this source section records “Supported desktop baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Linux</li>
+<li>C++17</li>
+<li>GNU Make</li>
+<li>Dear ImGui 1.90.1</li>
+<li>GLFW and OpenGL</li>
+<li>GLM</li>
+<li>libcurl with OpenSSL</li>
+<li>D-Bus and the XDG Desktop Portal file chooser</li>
+</ul>
+<p>The expected third-party source layout is under <code>third_party/</code>. Native File Dialog Extended uses the XDG portal backend on Linux.</p>
+<h4 id="source-build">Build</h4><p class="section-guide">Reading guide: this source section records “Build”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">make clean
+make -j2 all
+</code></pre>
+<p class="source-status--passed">The complete build produces the editor, compatibility link, textured-mesh
+converter, and orthographic three-view converter:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">./progen3d-editor-gui
+./progen3d
+./p3d_to_3dtexmesh
+./p3d_to_3view
+</code></pre>
+<p>Run the editor:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui
+</code></pre>
+<p>The compatibility target creates the <code>progen3d</code> symbolic link:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">make progen3d
+./progen3d
+</code></pre>
+<p>Create the deterministic Linux binary bundle and its SHA-256 file with:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">make package
+./tests/run_conversion_package_checks.sh
+</code></pre>
+<p>The archive is written to
+<code>build/packages/progen3d-linux-x86_64.tar.gz</code>.</p>
+<p class="source-status--passed">See <a href="../buildings/building-progen3d-editor-gui.html">BUILDING.md</a> for the complete build, clean-state, and dependency notes.</p>
+<h4 id="source-open-a-modern-building">Open a modern building</h4><p class="section-guide">Reading guide: this source section records “Open a modern building”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Open the spatially aware Small Modern Building with its evidence overlays enabled:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui \
+  --spatial-overlays \
+  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+</code></pre>
+<p>Open the 20-level courtyard building:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui \
+  --spatial-overlays \
+  --open examples/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d
+</code></pre>
+<h3 id="source-screenshot-walkthrough">Screenshot walkthrough</h3><p class="section-guide">Reading guide: this source section records “Screenshot walkthrough”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The main window is deliberately arranged as a three-part authoring workspace: grammar source on the left, a live preview on the upper right, and generation/runtime messages on the lower right.</p>
+<p align="center">
+<a href="../../assets/images/source/docs/images/readme/progen3d-editor-smb-omv2-full.png">
+<img alt="Full ProGen3D editor workspace with grammar, preview, console, tabs, toolbars, and SMB-OMv2 overlays" loading="lazy" src="../../assets/images/source/docs/images/readme/progen3d-editor-smb-omv2-full.png" width="980"/>
+</a>
+</p>
+<p class="source-status--passed">The screenshot is a complete desktop session, not a preview-only render. Open it at full size and read the interface from top to bottom:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Where it appears</th>
+<th scope="col">What it owns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Application header</td>
+<td>Full-width top strip</td>
+<td>Current document identity, rule/token/material counts, authentication state, role, and credits.</td>
+</tr>
+<tr>
+<td>2. Grammar document toolbar</td>
+<td>Upper-left toolbar</td>
+<td>New/Open/Save, cloud lifecycle, publishing, immediate regeneration, and PLY export.</td>
+</tr>
+<tr>
+<td>3. Workspace tabs</td>
+<td>Below the Grammar toolbar</td>
+<td>Editor, Diagnostics, Inspector, AI, Materials, Lights, Electrical Controls, and Render Settings.</td>
+</tr>
+<tr>
+<td>4. Active left workspace</td>
+<td>Large left pane</td>
+<td>The controls and evidence for the selected workspace tab.</td>
+</tr>
+<tr>
+<td>5. Editor status row</td>
+<td>Bottom of the source editor</td>
+<td>Cursor position, source length, zoom, diagnostics, identifier matches, bracket state, and automatic-run countdown.</td>
+</tr>
+<tr>
+<td>6. Vertical splitter</td>
+<td>Between left and right columns</td>
+<td>Changes the relative width of authoring and preview work.</td>
+</tr>
+<tr>
+<td>7. Preview header and toolbar</td>
+<td>Upper-right header</td>
+<td>Playback, stepping, reset, fit, regeneration, full-screen, speed, camera, outline, and overlay controls.</td>
+</tr>
+<tr>
+<td>8. Interactive viewport</td>
+<td>Main upper-right surface</td>
+<td>The last accepted scene snapshot, picking, camera navigation, overlays, light gizmos, and view-cube orientation.</td>
+</tr>
+<tr>
+<td>9. View cube</td>
+<td>Viewport upper-right</td>
+<td>Front/back/left/right/top/bottom orientation selection and current axis feedback.</td>
+</tr>
+<tr>
+<td>10. Horizontal splitter</td>
+<td>Between Preview and Console</td>
+<td>Changes the relative height of visual output and logs.</td>
+</tr>
+<tr>
+<td>11. Console header</td>
+<td>Lower-right header</td>
+<td>Retained line count and log clearing.</td>
+</tr>
+<tr>
+<td>12. Console body</td>
+<td>Lower-right surface</td>
+<td>Parser, validation, regeneration, rendering, capture, backend, and runtime messages.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-first-session-walkthrough">First-session walkthrough</h4><p class="section-guide">Reading guide: this source section records “First-session walkthrough”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ol>
+<li>Start the editor and choose <code>Continue Offline</code> if cloud and AI services are not required.</li>
+<li>Select <code>Open...</code> and load <code>examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d</code>.</li>
+<li>Wait for the Preview status to return to <code>Ready</code>; the Console should report parsed rules, successful validation, and scene regeneration.</li>
+<li>Drag inside the viewport to orbit the building, scroll to zoom, and use <code>Fit</code> if the model leaves the frame.</li>
+<li>Click a visible primitive, then open <code>Inspector</code> to see its immutable primitive snapshot and associated SMB object.</li>
+<li>Enable <code>Overlay</code>, open <code>Overlay Options</code>, and select the SMB object frames, interfaces, bounds, connections, constraints, contacts, or clearances needed for the review.</li>
+<li>Return to <code>Editor</code>, make a small source change, and observe the automatic-run countdown in the editor status row.</li>
+<li>Introduce a temporary syntax error to see Diagnostics and Console reject the candidate while the Preview retains the last valid scene.</li>
+<li>Correct the error and press <code>Run</code> to regenerate immediately.</li>
+<li>Use <code>Save As...</code> before modifying generated examples; regenerate source packages through their generator scripts when the example declares a generated authority.</li>
+</ol>
+<h4 id="source-1-application-header">1. Application header</h4><p class="section-guide">Reading guide: this source section records “1. Application header”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The header identifies the current document and summarizes the active session:</p>
+<ul>
+<li>document name;</li>
+<li>rule count;</li>
+<li>token count;</li>
+<li>material count;</li>
+<li>authenticated role and credit status when a backend session is active;</li>
+<li><code>Sign In</code> or <code>Sign Out</code>.</li>
+</ul>
+<p>The header is informational. Document commands are grouped in the Grammar workspace immediately below it.</p>
+<h4 id="source-2-grammar-document-toolbar">2. Grammar document toolbar</h4><p class="section-guide">Reading guide: this source section records “2. Grammar document toolbar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Grammar toolbar owns the local and cloud document lifecycle:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Control</th>
+<th scope="col">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>New</code></td>
+<td>Starts a new grammar after the unsaved-changes guard is resolved.</td>
+</tr>
+<tr>
+<td><code>Open...</code></td>
+<td>Opens a local <code>.p3d</code> or <code>.grammar</code> file. Shortcut: <code>Ctrl+O</code>.</td>
+</tr>
+<tr>
+<td><code>Save</code></td>
+<td>Saves to the current local path. Shortcut: <code>Ctrl+S</code>.</td>
+</tr>
+<tr>
+<td><code>Save As...</code></td>
+<td>Saves to a new local path. Shortcut: <code>Ctrl+Shift+S</code>.</td>
+</tr>
+<tr>
+<td><code>Cloud Open</code></td>
+<td>Selects a grammar from authenticated cloud storage.</td>
+</tr>
+<tr>
+<td><code>Cloud Save</code></td>
+<td>Updates the linked cloud document or asks for a title on first save.</td>
+</tr>
+<tr>
+<td><code>Cloud Save As</code></td>
+<td>Creates another cloud document from the current source.</td>
+</tr>
+<tr>
+<td><code>Publish</code></td>
+<td>Publishes the linked cloud document.</td>
+</tr>
+<tr>
+<td><code>Depublish</code></td>
+<td>Removes the linked document from publication.</td>
+</tr>
+<tr>
+<td><code>Run</code></td>
+<td>Immediately parses, validates, expands, and regenerates the scene.</td>
+</tr>
+<tr>
+<td><code>Export PLY</code></td>
+<td>Exports the current generated mesh as a <code>.ply</code> file.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Status chips report <code>Webhost Backend</code>, <code>Cloud linked</code>, <code>Modified</code>, <code>Published</code>, <code>Regenerating</code>, <code>Queued update</code>, or the remaining automatic-run delay.</p>
+<h4 id="source-3-workspace-tabs">3. Workspace tabs</h4><p class="section-guide">Reading guide: this source section records “3. Workspace tabs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The tab row changes the left-hand workspace without hiding the preview:</p>
+<ol>
+<li><code>Editor</code> — source authoring and syntax assistance.</li>
+<li><code>Diagnostics</code> — navigable parser, semantic, and generation diagnostics.</li>
+<li><code>Inspector</code> — selected primitive and SMB spatial-object evidence.</li>
+<li><code>AI</code> — review-controlled assistant conversations and grammar proposals.</li>
+<li><code>Materials</code> — material vocabulary, PBR previews, and texture-library controls.</li>
+<li><code>Lights</code> — scene-light presets, authored lights, shadow settings, and evidence.</li>
+<li><code>Electrical Controls</code> — switches, dimmers, fixtures, and circuits.</li>
+<li><code>Render Settings</code> — anti-aliasing, textures, shadows, post-processing, environment, and tone mapping.</li>
+</ol>
+<h4 id="source-4-smart-grammar-editor">4. Smart grammar editor</h4><p class="section-guide">Reading guide: this source section records “4. Smart grammar editor”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Editor tab provides:</p>
+<ul>
+<li>syntax highlighting for rules, operators, expressions, materials, shapes, and spatial declarations;</li>
+<li>diagnostic underlines and hover messages;</li>
+<li>line and column status;</li>
+<li>matching identifier and bracket feedback;</li>
+<li>autocomplete for part classes, materials, shape options, and spatial declarations;</li>
+<li>automatic regeneration after an edit delay;</li>
+<li>explicit <code>Run</code> for immediate regeneration.</li>
+</ul>
+<p>The editor preserves the last valid scene when a new source revision fails. The Console and Diagnostics tabs explain why the candidate scene was rejected.</p>
+<h4 id="source-5-preview-toolbar">5. Preview toolbar</h4><p class="section-guide">Reading guide: this source section records “5. Preview toolbar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Preview toolbar controls simulation time, regeneration, framing, and navigation:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Control</th>
+<th scope="col">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Play</code> / <code>Pause</code></td>
+<td>Advances or pauses grammar time or the simulation.</td>
+</tr>
+<tr>
+<td><code>Step</code></td>
+<td>Advances one deterministic step.</td>
+</tr>
+<tr>
+<td><code>Reset Time</code> / <code>Reset Sim</code></td>
+<td>Resets grammar time or runtime simulation state.</td>
+</tr>
+<tr>
+<td><code>Reset View</code></td>
+<td>Restores the default camera orientation and distance.</td>
+</tr>
+<tr>
+<td><code>Fit</code></td>
+<td>Frames all visible generated geometry.</td>
+</tr>
+<tr>
+<td><code>Run</code></td>
+<td>Regenerates from the current editor source.</td>
+</tr>
+<tr>
+<td><code>Full Screen</code></td>
+<td>Expands the preview; <code>F11</code> provides the same toggle.</td>
+</tr>
+<tr>
+<td><code>Speed</code></td>
+<td>Scales temporal or simulation playback.</td>
+</tr>
+<tr>
+<td>Camera control</td>
+<td>Opens field-of-view and camera-motion settings.</td>
+</tr>
+<tr>
+<td><code>Overlay</code></td>
+<td>Enables the selected inspection overlays.</td>
+</tr>
+<tr>
+<td><code>Outline</code></td>
+<td>Draws selection and evidence outlines.</td>
+</tr>
+<tr>
+<td><code>Overlay Options</code></td>
+<td>Configures connection, profile, spatial, knowledge, and texture-debug overlays.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The camera menu provides <code>24 deg Telephoto</code>, <code>43 deg Standard</code>, <code>70 deg Wide</code>, a lens reset, and readouts or controls for camera distance and movement/rotation velocity.</p>
+<h4 id="source-6-interactive-3d-viewport">6. Interactive 3D viewport</h4><p class="section-guide">Reading guide: this source section records “6. Interactive 3D viewport”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The viewport renders the last accepted scene snapshot. It supports:</p>
+<ul>
+<li>left-drag orbit;</li>
+<li>right-drag pan;</li>
+<li>mouse-wheel zoom;</li>
+<li>click-to-pick primitives and lights;</li>
+<li><code>W</code> / <code>S</code> forward and backward movement;</li>
+<li><code>A</code> / <code>D</code> left and right movement;</li>
+<li><code>Q</code> / <code>E</code> downward and upward movement;</li>
+<li><code>Z</code> / <code>C</code> left and right camera rotation;</li>
+<li>view-cube face selection for orthographic views.</li>
+</ul>
+<p>Picking a primitive synchronizes the Inspector with its bound spatial object when the scene contains an SMB-OMv2 model.</p>
+<h4 id="source-7-console">7. Console</h4><p class="section-guide">Reading guide: this source section records “7. Console”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Console reports parser progress, validation, regeneration, runtime warnings, capture markers, and failures. Its header shows the number of retained lines, and <code>Clear</code> removes the displayed log history.</p>
+<h4 id="source-8-resizable-layout">8. Resizable layout</h4><p class="section-guide">Reading guide: this source section records “8. Resizable layout”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Drag the vertical splitter to resize the Grammar and Preview columns. Drag the horizontal splitter to resize Preview and Console. Preview full-screen mode temporarily hides the editor and console without changing the document.</p>
+<h4 id="source-9-pointer-and-keyboard-reference">9. Pointer and keyboard reference</h4><p class="section-guide">Reading guide: this source section records “9. Pointer and keyboard reference”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Input</th>
+<th scope="col">Scope</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Left click</td>
+<td>Viewport</td>
+<td>Selects a primitive or light gizmo when picking is available.</td>
+</tr>
+<tr>
+<td>Left drag</td>
+<td>Viewport</td>
+<td>Orbits the camera.</td>
+</tr>
+<tr>
+<td>Right drag</td>
+<td>Viewport</td>
+<td>Pans the camera.</td>
+</tr>
+<tr>
+<td>Mouse wheel</td>
+<td>Viewport</td>
+<td>Moves the camera closer to or farther from the scene.</td>
+</tr>
+<tr>
+<td><code>W</code> / <code>S</code></td>
+<td>Viewport</td>
+<td>Moves forward or backward.</td>
+</tr>
+<tr>
+<td><code>A</code> / <code>D</code></td>
+<td>Viewport</td>
+<td>Moves left or right.</td>
+</tr>
+<tr>
+<td><code>Q</code> / <code>E</code></td>
+<td>Viewport</td>
+<td>Moves down or up.</td>
+</tr>
+<tr>
+<td><code>Z</code> / <code>C</code></td>
+<td>Viewport</td>
+<td>Rotates left or right.</td>
+</tr>
+<tr>
+<td><code>Ctrl+O</code></td>
+<td>Application</td>
+<td>Opens a local grammar.</td>
+</tr>
+<tr>
+<td><code>Ctrl+S</code></td>
+<td>Application</td>
+<td>Saves to the current local path.</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+S</code></td>
+<td>Application</td>
+<td>Opens Save As.</td>
+</tr>
+<tr>
+<td><code>F11</code></td>
+<td>Application</td>
+<td>Toggles Preview full-screen mode.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Keyboard camera controls act on the Preview when the application is active. Text editing, autocomplete selection, modal dialogs, and other focused controls retain normal ImGui keyboard ownership.</p>
+<h4 id="source-10-popups-dialogs-and-transient-ui">10. Popups, dialogs, and transient UI</h4><p class="section-guide">Reading guide: this source section records “10. Popups, dialogs, and transient UI”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The permanent panels are supplemented by task-specific surfaces:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Surface</th>
+<th scope="col">When it appears</th>
+<th scope="col">Safe outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Startup loader</td>
+<td>During platform, renderer, font, catalog, workspace, and first-scene initialization</td>
+<td>Reports the active startup stage before the main workspace becomes interactive.</td>
+</tr>
+<tr>
+<td>Authentication panel</td>
+<td>At startup or after <code>Sign In</code></td>
+<td>Supports Google, email/password, registration, offline continuation, and backend configuration.</td>
+</tr>
+<tr>
+<td>Native file chooser</td>
+<td>After <code>Open...</code>, <code>Save As...</code>, <code>Export PLY</code>, or texture upload</td>
+<td>Uses the Linux XDG portal backend and returns control without changing the document when cancelled.</td>
+</tr>
+<tr>
+<td>Cloud document dialog</td>
+<td>During Cloud Open or Cloud Save As</td>
+<td class="source-status--failed">Lists accessible documents, supports refresh and double-click confirmation, and preserves the local document on cancel/failure.</td>
+</tr>
+<tr>
+<td>Unsaved Changes modal</td>
+<td>Before replacing or closing a modified document</td>
+<td>Requires <code>Save</code>, <code>Discard</code>, or <code>Cancel</code>; no implicit overwrite occurs.</td>
+</tr>
+<tr>
+<td>Part-class autocomplete</td>
+<td>While entering recognized part-class or STL-qualified prefixes</td>
+<td>Inserts the selected purpose/class token into the editor.</td>
+</tr>
+<tr>
+<td>Material autocomplete</td>
+<td>While entering an <code>I(...)</code> material argument</td>
+<td>Shows matching material names and swatches before insertion.</td>
+</tr>
+<tr>
+<td>Identifier inspector</td>
+<td>When a grammar identifier is selected</td>
+<td>Shows definition/reference information and navigates between occurrences.</td>
+</tr>
+<tr>
+<td>Camera options</td>
+<td>From the camera toolbar control</td>
+<td>Adjusts field of view, distance, and movement/rotation velocity.</td>
+</tr>
+<tr>
+<td>Overlay Options</td>
+<td>From the Preview toolbar</td>
+<td>Selects visual evidence layers without modifying the scene model.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-11-gui-state-and-failure-behavior">11. GUI state and failure behavior</h4><p class="section-guide">Reading guide: this source section records “11. GUI state and failure behavior”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">State</th>
+<th scope="col">Visible feedback</th>
+<th scope="col">Model behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading</td>
+<td>Startup stage and progress text</td>
+<td>The workspace is not published until platform and renderer initialization succeed.</td>
+</tr>
+<tr>
+<td>Editing</td>
+<td><code>Modified</code> chip and automatic-run countdown</td>
+<td>Source is dirty; the accepted scene remains unchanged until regeneration succeeds.</td>
+</tr>
+<tr>
+<td>Regenerating</td>
+<td><code>Regenerating</code> or <code>Queued update</code> chip</td>
+<td>A candidate scene is built separately from the displayed snapshot.</td>
+</tr>
+<tr>
+<td>Valid</td>
+<td>Preview returns to <code>Ready</code>; Console reports regeneration</td>
+<td class="source-status--passed">The complete candidate replaces the previous immutable scene snapshot.</td>
+</tr>
+<tr>
+<td>Invalid</td>
+<td>Diagnostics and Console show exact blocking messages</td>
+<td>The candidate is rejected and the last valid scene remains visible.</td>
+</tr>
+<tr>
+<td>Cloud unavailable</td>
+<td>Disabled cloud controls or an error message</td>
+<td>Local editing and offline operation remain available.</td>
+</tr>
+<tr>
+<td>Visual test</td>
+<td>Capture markers and pixel hash in Console</td>
+<td>A deterministic view is applied, rendered, written, and checked before exit.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="source-status--failed">The central safety rule is: <strong>source candidates may fail, but the Preview never becomes a partially generated scene</strong>.</p>
+<h3 id="source-complete-gui-reference">Complete GUI reference</h3><p class="section-guide">Reading guide: this source section records “Complete GUI reference”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-gui-ownership-map">GUI ownership map</h4><p class="section-guide">Reading guide: this source section records “GUI ownership map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The visible interface is divided into purpose-specific presentation objects. Each panel reads or edits an explicit workspace model or calls a service; the widgets themselves are not the canonical owners of grammar, scene, spatial, or cloud state.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Visible surface</th>
+<th scope="col">Presentation object</th>
+<th scope="col">Primary state or service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main desktop layout</td>
+<td><code>EditorWorkspaceWindow</code></td>
+<td><code>EditorWorkspaceSession</code> and <code>WorkspaceLayoutState</code></td>
+</tr>
+<tr>
+<td>Application identity and account summary</td>
+<td><code>ApplicationHeaderPanel</code></td>
+<td>grammar metrics, <code>GrammarSourceDocument</code>, and <code>AuthenticatedUserSession</code></td>
+</tr>
+<tr>
+<td>Source authoring</td>
+<td><code>GrammarEditorPanel</code></td>
+<td><code>GrammarSourceDocument</code>, <code>GrammarEditorInteractionState</code>, completion services, and diagnostic presentation</td>
+</tr>
+<tr>
+<td>Source and generation errors</td>
+<td><code>DiagnosticsPanel</code></td>
+<td><code>DocumentDiagnosticCollection</code></td>
+</tr>
+<tr>
+<td>Primitive selection</td>
+<td><code>SceneInspectorPanel</code></td>
+<td><code>EditorSelection</code> and immutable <code>ScenePrimitiveInspection</code></td>
+</tr>
+<tr>
+<td>Building-object selection</td>
+<td><code>SpatialObjectInspectorPanel</code></td>
+<td><code>SpatialObjectInspectionService</code> and immutable <code>SpatialObjectInspection</code></td>
+</tr>
+<tr>
+<td>Assistant conversations</td>
+<td><code>AiAssistantPanel</code></td>
+<td class="source-status--proposed"><code>AiAssistantSession</code> and the configured backend proposal service</td>
+</tr>
+<tr>
+<td class="source-status--proposed">Proposal review</td>
+<td><code>AiGrammarProposalPanel</code></td>
+<td><code>AiGrammarProposalReview</code>; source changes require explicit acceptance</td>
+</tr>
+<tr>
+<td>Material reference and textures</td>
+<td><code>MaterialLibraryPanel</code></td>
+<td>material catalog plus <code>TextureLibraryRepository</code></td>
+</tr>
+<tr>
+<td>Authored lighting</td>
+<td><code>LightingPanel</code></td>
+<td>scene-light model, lighting presets, and lighting evidence</td>
+</tr>
+<tr>
+<td>Operational light controls</td>
+<td><code>ElectricalControlsPanel</code></td>
+<td>electrical fixture, switch, dimmer, and circuit state</td>
+</tr>
+<tr>
+<td>Rendering quality</td>
+<td><code>RenderSettingsPanel</code></td>
+<td><code>RenderConfiguration</code></td>
+</tr>
+<tr>
+<td>Scene image and interaction</td>
+<td><code>ScenePreviewPanel</code></td>
+<td>immutable <code>GeneratedSceneSnapshot</code>, <code>ScenePreviewSession</code>, camera/selection controllers, and overlay evidence</td>
+</tr>
+<tr>
+<td>Playback timeline</td>
+<td><code>PreviewTimelinePanel</code></td>
+<td><code>PreviewTimelineState</code> and <code>PreviewTimelineController</code></td>
+</tr>
+<tr>
+<td>Runtime messages</td>
+<td><code>ConsolePanel</code></td>
+<td><code>ApplicationLog</code></td>
+</tr>
+<tr>
+<td>Sign-in and offline entry</td>
+<td><code>AuthenticationPanel</code></td>
+<td><code>AuthenticationService</code> and authenticated-session state</td>
+</tr>
+<tr>
+<td>Cloud open/save selection</td>
+<td><code>CloudDocumentDialog</code></td>
+<td><code>CloudGrammarRepository</code> and cloud-dialog workflow state</td>
+</tr>
+</tbody>
+</table></div>
+<p>At application scope, <code>Progen3dEditorApplication</code> composes the window, ImGui runtime, workspace session, scene-generation runtime, and local file-dialog service. <code>EditorApplicationRuntimeContext</code> exposes those dependencies to presentation code without making a panel a hidden service locator or semantic owner.</p>
+<h4 id="source-editor-tab">Editor tab</h4><p class="section-guide">Reading guide: this source section records “Editor tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use the Editor tab for normal grammar authoring. A source change schedules regeneration; <code>Run</code> bypasses the delay. If validation fails, ProGen3D keeps the last valid scene snapshot, places the exact errors in Diagnostics and Console, and does not publish a partial scene.</p>
+<p>Current instance syntax requires a material argument. For example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+[
+    S(1 1 1)
+    I(Cube material(warmwhitematteplaster) 1 0.5)
+]
+</code></pre>
+<h4 id="source-diagnostics-tab">Diagnostics tab</h4><p class="section-guide">Reading guide: this source section records “Diagnostics tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Diagnostics consolidates source ranges and messages from parsing, structural validation, semantic validation, expression checking, and scene generation. Selecting a diagnostic returns the Editor selection to its source location.</p>
+<p>Typical blocking diagnostics include:</p>
+<ul>
+<li>missing <code>-&gt;</code> production arrows;</li>
+<li>malformed brackets or argument lists;</li>
+<li>undefined rules or variables;</li>
+<li>unsupported functions;</li>
+<li>invalid instance/material syntax;</li>
+<li>invalid shape options;</li>
+<li class="source-status--pending">spatial declarations that reference unknown objects or interfaces.</li>
+</ul>
+<h4 id="source-inspector-tab">Inspector tab</h4><p class="section-guide">Reading guide: this source section records “Inspector tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Inspector has two related views.</p>
+<p><strong>Scene primitive inspection</strong> reports the selected preview instance, primitive type, material, transform, bounds, and aggregate preview statistics.</p>
+<p><strong>Spatial Object Inspector</strong> is available for SMB-OMv2 and later building scenes. Its object selector follows the containment hierarchy and marks geometry-free semantic objects. For the selected object it reports:</p>
+<ul>
+<li>stable ID, display name, class, taxonomy path, container, state, and parent frame;</li>
+<li>collision layer and mask;</li>
+<li>primitive bindings and boundary representations;</li>
+<li>translation and rotation uncertainty;</li>
+<li>authored local, resolution local, and resolved world transforms;</li>
+<li>typed interfaces, origins, normals, tangents, regions, state, and clearance;</li>
+<li>connections and constraints;</li>
+<li>contact, clearance, collision-query, and resolution evidence;</li>
+<li class="source-status--pending">SMB-OMv2.1 semantic profile, functions, services, requirements, scenarios, pending evidence, and deterministic hashes when published by the building model.</li>
+</ul>
+<p>Start directly on a known building object with:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui \
+  --building-knowledge-overlays \
+  --select-spatial-object SMB_001_Ground_Kitchen_Sink \
+  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+</code></pre>
+<h4 id="source-ai-tab">AI tab</h4><p class="section-guide">Reading guide: this source section records “AI tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The AI workspace is available when authentication and the configured backend permit it. It provides thread refresh/creation, conversation history, and task modes for active help, grammar drafting, grammar repair, grammar explanation, and tutoring.</p>
+<p>AI output is review-only. Grammar proposals do not silently replace source. The user must choose one of:</p>
+<ul>
+<li class="source-status--proposed"><code>Accept Full Proposal</code>;</li>
+<li><code>Accept Selected Changes</code>;</li>
+<li class="source-status--proposed"><code>Reject Proposal</code>.</li>
+</ul>
+<p>This keeps the document, parser, deterministic validation, and human approval authoritative.</p>
+<h4 id="source-materials-tab">Materials tab</h4><p class="section-guide">Reading guide: this source section records “Materials tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Materials tab documents and previews the grammar material vocabulary. It includes searchable material cards, color/opacity/finish/family guidance, PBR channel summaries, and material swatches.</p>
+<p>Recognized descriptive families include metal, glass, wood, board, floral, marble, stone, concrete, ceramic, plastic, plaster, grass, brick, and neon. Descriptors can express color, opacity, finish, pattern, emission, and wood species.</p>
+<p>The Texture Library provides:</p>
+<ul>
+<li><code>Refresh Library</code>;</li>
+<li>user slots <code>usertexture1</code> through <code>usertexture20</code>;</li>
+<li>selected-slot preview and alpha;</li>
+<li><code>Save Metadata</code>;</li>
+<li><code>Delete Texture</code>;</li>
+<li><code>Reload Preview</code>;</li>
+<li><code>Upload Texture File</code>;</li>
+<li><code>Generate Texture</code> when the configured service is available.</li>
+</ul>
+<p>Cloud texture operations depend on authentication and backend configuration.</p>
+<h4 id="source-lights-tab">Lights tab</h4><p class="section-guide">Reading guide: this source section records “Lights tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The Lights tab owns the authored scene-light model, which is stored beside the grammar document.</p>
+<p>Controls include:</p>
+<ul>
+<li><code>Lighting Preset</code> and preset description;</li>
+<li><code>Show Light Gizmos</code>;</li>
+<li><code>+ Point</code>, <code>+ Spot</code>, <code>+ Directional</code>, and <code>+ Area</code>;</li>
+<li>the selectable <code>Scene Lights</code> list;</li>
+<li>enabled/visible state, light type, position, and direction;</li>
+<li>color temperature or linear RGB color;</li>
+<li>intensity and photometric unit (<code>Lumens</code>, <code>Candela</code>, or <code>Lux</code>);</li>
+<li>exposure compensation;</li>
+<li>range, spot cones, area dimensions, and two-sided area emission where applicable;</li>
+<li>cast-shadow state, shadow resolution, and softness;</li>
+<li>removal of editor-created lights.</li>
+</ul>
+<p>The Evidence section reports scene/enabled/GPU light counts, SSBO upload size, shadow-budget assignment/deferment, lighting path, validation diagnostics, and the deterministic lighting-state hash.</p>
+<h4 id="source-electrical-controls-tab">Electrical Controls tab</h4><p class="section-guide">Reading guide: this source section records “Electrical Controls tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Electrical Controls connects the operational building model to scene lights:</p>
+<ul>
+<li><code>Activate Controls Mode</code> enables interactive control use;</li>
+<li>the summary reports fixture, switch, and circuit counts;</li>
+<li><code>Switches</code> exposes on/off state;</li>
+<li>dimmer, smart, and scene-controller switches expose a <code>Dimmer</code> slider;</li>
+<li>each switch reports its mount object and height;</li>
+<li><code>Circuits</code> reports fixture/control membership and always-on state;</li>
+<li>electrical validation reports invalid graph definitions.</li>
+</ul>
+<p>Changing a switch or dimmer re-evaluates the connected lighting state.</p>
+<h4 id="source-render-settings-tab">Render Settings tab</h4><p class="section-guide">Reading guide: this source section records “Render Settings tab”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Render Settings groups quality and effects into expandable sections:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Section</th>
+<th scope="col">Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anti-Aliasing</td>
+<td><code>Off</code>, <code>FXAA</code>, <code>MSAA 2x</code>, <code>MSAA 4x</code>, or <code>MSAA 8x</code>.</td>
+</tr>
+<tr>
+<td>Material Quality</td>
+<td>Procedural texture resolution: <code>256</code>, <code>512</code>, <code>1024</code>, or <code>2048</code>.</td>
+</tr>
+<tr>
+<td>Shadows</td>
+<td>Global real-time shadow enable.</td>
+</tr>
+<tr>
+<td>Lens Flare</td>
+<td>Lens-flare enable.</td>
+</tr>
+<tr>
+<td>Bloom</td>
+<td>Enable, threshold, and intensity.</td>
+</tr>
+<tr>
+<td>Ambient Occlusion</td>
+<td>Screen-space ambient occlusion enable.</td>
+</tr>
+<tr>
+<td>Environment Mapping</td>
+<td>Cubemap enable, resolution, intensity, environment selection, and procedural cubemap generation.</td>
+</tr>
+<tr>
+<td>Tone Mapping</td>
+<td>Exposure and gamma.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Higher texture, MSAA, shadow, and cubemap settings improve close-up captures but increase generation time, GPU memory use, or render cost.</p>
+<h4 id="source-overlay-options">Overlay Options</h4><p class="section-guide">Reading guide: this source section records “Overlay Options”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Overlay Options separates visual evidence from the model itself. Overlay choices do not mutate grammar source or object transforms.</p>
+<p><strong>Connection overlays</strong> can show axes, surfaces, features, bounds, and a semantic legend for motion, electrical power/data, heating/cooling, static positional relationships, planes, and input/output/bidirectional flow.</p>
+<p><strong>AxialProfile sections</strong> color interpolation behavior as <code>H Hold</code>, <code>L Linear</code>, and <code>S Step</code>.</p>
+<p><strong>SMB-OMv2 spatial evidence</strong> can show:</p>
+<ul>
+<li>object frame;</li>
+<li>interfaces;</li>
+<li>axis-aligned bounds (<code>AABB</code>);</li>
+<li>connections;</li>
+<li>constraints;</li>
+<li>contacts;</li>
+<li>clearances;</li>
+<li>validated/interface/connection/constraint/clearance/invalid legend colors.</li>
+</ul>
+<p><strong>SMB-OMv2.1 knowledge overlays</strong> add:</p>
+<ul>
+<li>function allocations;</li>
+<li>service flows;</li>
+<li>requirement status;</li>
+<li class="source-status--pending">pending evidence.</li>
+</ul>
+<p><strong>Texture mapping</strong> can be forced to <code>Material</code>, <code>UV</code>, or <code>Triplanar</code>, with <code>Shaded</code>, <code>UVs</code>, <code>Checker</code>, or <code>Blend Weights</code> debug views.</p>
+<h4 id="source-authentication-and-cloud-dialogs">Authentication and cloud dialogs</h4><p class="section-guide">Reading guide: this source section records “Authentication and cloud dialogs”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The authentication panel provides:</p>
+<ul>
+<li><code>Continue with Google</code>;</li>
+<li><code>Continue Offline</code>;</li>
+<li>email/password sign-in;</li>
+<li>password visibility;</li>
+<li><code>Sign In</code> and <code>Register</code>;</li>
+<li>configuration for Firebase API key, Firebase project ID, optional Google OAuth credentials, and backend URL;</li>
+<li><code>Reload Config</code> and <code>Save Config</code>.</li>
+</ul>
+<p>The cloud-document dialog lists accessible documents, supports refresh and selection/double-click confirmation, and can be cancelled without replacing the local document.</p>
+<p>The <code>Unsaved Changes</code> guard always offers <code>Save</code>, <code>Discard</code>, and <code>Cancel</code> before New, Open, Cloud Open, or application exit can replace a modified document.</p>
+<h3 id="source-grammar-primer">Grammar primer</h3><p class="section-guide">Reading guide: this source section records “Grammar primer”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-rules-and-the-entry-point">Rules and the entry point</h4><p class="section-guide">Reading guide: this source section records “Rules and the entry point”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A grammar is a set of named productions. <code>Start</code> is the preferred entry rule:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt; Building
+
+Building -&gt;
+[
+    S(8 0.25 6)
+    I(CubeY material(softgreyconcrete) 1 0.5)
+]
+</code></pre>
+<p>If no <code>Start</code> rule exists, the editor can use the first parsed rule, but production examples should define <code>Start</code> explicitly.</p>
+<h4 id="source-transforms-and-scopes">Transforms and scopes</h4><p class="section-guide">Reading guide: this source section records “Transforms and scopes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>T(x y z)</code> translates subsequent output.</li>
+<li><code>S(x y z)</code> scales subsequent output.</li>
+<li>rotation operators rotate the current transform.</li>
+<li><code>[...]</code> creates a scoped transform branch.</li>
+<li>rule arguments and expressions parameterize reusable assemblies.</li>
+</ul>
+<p>Example:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Start -&gt;
+[
+    T(2 0 -1)
+    S(3 1.5 2)
+    I(Cube material(softbeigemattesandstone) 1 0.6)
+]
+</code></pre>
+<h4 id="source-random-values-repetition-and-conditions">Random values, repetition, and conditions</h4><p class="section-guide">Reading guide: this source section records “Random values, repetition, and conditions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>R</code> declares a floating random variable.</li>
+<li><code>R*</code> declares an integer random variable.</li>
+<li>repeat productions expand start, body, and end sections.</li>
+<li>probability selects between alternate productions.</li>
+<li>conditions gate a production using the currently supported expression semantics.</li>
+<li>time functions support deterministic animated grammar evaluation.</li>
+</ul>
+<p>The maintained executable corpus at <a href="https://github.com/pghauff73/progen3d/tree/codex/educational-documentation-site/examples/Progen3D_Example_Grammar_Corpus" rel="noopener noreferrer">examples/Progen3D_Example_Grammar_Corpus</a> is the recommended language guide. Its <code>current/</code> directory contains accepted parser/runtime syntax; <code>diagnostic_fixtures/</code> contains intentionally invalid cases.</p>
+<h4 id="source-geometry-instances-and-materials">Geometry instances and materials</h4><p class="section-guide">Reading guide: this source section records “Geometry instances and materials”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Built-in and procedural families include boxes (<code>Cube</code>, <code>CubeX</code>, <code>CubeY</code>, <code>CubeZ</code>), cylinders, spheres, profile extrusion, curved primitives, sweeps, surface construction, <code>AxialProfile</code>, and domain-specific vehicle and vegetation primitives where implemented.</p>
+<p>An instance requires a material specification. The current form is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">I(Cube material(warmwhitematteplaster) 1 0.5)
+</code></pre>
+<p><code>!I(...)</code> creates a fixed/immovable instance. <code>I(...)</code> can participate in runtime positioning when the shape, mass, and collision policy support it.</p>
+<h4 id="source-spatial-building-declarations">Spatial building declarations</h4><p class="section-guide">Reading guide: this source section records “Spatial building declarations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Modern building object models add declarations for:</p>
+<ul>
+<li><code>Object(...)</code> — stable identity, class, containment, local frame, state, collision policy, and primitive ownership;</li>
+<li><code>Interface(...)</code> — typed object-local origin, normal, tangent, region, state, and clearance;</li>
+<li><code>Connect(...)</code> — typed relationships between interfaces;</li>
+<li><code>Position(...)</code> — deterministic placement constraints such as <code>Drop</code>, <code>Gap</code>, or <code>Touch</code> when supported.</li>
+</ul>
+<p>Geometry remains separate from semantic identity: semantic objects can participate in hierarchy, requirements, or services without manufacturing placeholder solids.</p>
+<h3 id="source-modern-buildings">Modern Buildings</h3><p class="section-guide">Reading guide: this source section records “Modern Buildings”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>ProGen3D contains a progression of modern-building examples rather than one monolithic scene. Each stage introduces a clearer object contract and stronger evidence.</p>
+<h4 id="source-architecture-at-a-glance">Architecture at a glance</h4><p class="section-guide">Reading guide: this source section records “Architecture at a glance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Modern Buildings separate authored appearance, spatial truth, operational knowledge, and validation evidence:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Executable grammar
+    |
+    +-- procedural geometry and materials
+    +-- Object(...) identity and containment
+    +-- Interface(...) typed attachment/service surfaces
+    +-- Connect(...) graph relationships
+    +-- Position(...) supported placement constraints
+    |
+    v
+Immutable generated scene snapshot
+    +-- primitive instances and meshes
+    +-- primitive-to-object bindings
+    +-- resolved world transforms and boundaries
+    +-- collision and placement evidence
+    |
+    v
+Additive building knowledge model
+    +-- classifications and roles
+    +-- functions and allocations
+    +-- service systems, ports, and flows
+    +-- requirements and evaluations
+    +-- scenarios, state, relationships, and evidence
+</code></pre>
+<p>No layer silently takes ownership from the layer below it. The grammar remains the executable source, SMB-OMv2 remains the spatial authority, SMB-OMv2.1 adds knowledge without changing the accepted spatial object set, and validation artifacts report evidence without becoming geometry.</p>
+<h4 id="source-modern-building-terminology">Modern-building terminology</h4><p class="section-guide">Reading guide: this source section records “Modern-building terminology”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Term</th>
+<th scope="col">Meaning in ProGen3D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical object</td>
+<td>A building object that owns one or more generated primitives, such as a slab, wall, window, door, fixture, cabinet, chair, light fitting, or external-work element.</td>
+</tr>
+<tr>
+<td>Semantic object</td>
+<td>A stable object used for containment, function, service, requirement, scenario, evidence, or relationship meaning without inventing placeholder geometry.</td>
+</tr>
+<tr>
+<td>Stable object ID</td>
+<td>The persistent identity used across grammar declarations, generated manifests, primitive bindings, Inspector selection, overlays, requirements, and validation records.</td>
+</tr>
+<tr>
+<td>Local frame</td>
+<td>An object's authored coordinate system relative to its parent. World transforms are derived rather than copied into every child.</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td>A typed, object-local attachment, support, service, control, flow, seal, inspection, or clearance surface/point with direction and state.</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>An explicit relationship between exact interface IDs. A connection does not imply that a placement constraint has been solved.</td>
+</tr>
+<tr>
+<td>Spatial constraint</td>
+<td>A requested relationship such as <code>Drop</code>, <code>Gap</code>, or <code>Touch</code>, evaluated only when the runtime supports the mode and has an exact target.</td>
+</tr>
+<tr>
+<td>Primitive binding</td>
+<td>The committed association from generated mesh/primitive identity back to the physical building object that owns it.</td>
+</tr>
+<tr>
+<td>Boundary representation</td>
+<td>Broad- or narrow-phase spatial evidence used for selection, collision, contact, clearance, and deterministic placement.</td>
+</tr>
+<tr>
+<td>Knowledge allocation</td>
+<td>An SMB-OMv2.1 association that assigns a role, function, service, requirement, scenario, state, or evidence record to an accepted spatial object.</td>
+</tr>
+<tr>
+<td>Accepted scene snapshot</td>
+<td class="source-status--failed">The immutable, fully generated scene displayed by the Preview. Failed candidates never partially overwrite it.</td>
+</tr>
+<tr>
+<td class="source-status--pending">Pending evidence</td>
+<td class="source-status--unresolved">A deliberately unresolved fact or constraint that remains visible and fail-closed instead of being inferred from names, proximity, or appearance.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-version-and-authority-map">Version and authority map</h4><p class="section-guide">Reading guide: this source section records “Version and authority map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Layer</th>
+<th scope="col">Canonical responsibility</th>
+<th scope="col">Primary artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modern-building grammar</td>
+<td>Shape generation, materials, stable object declarations, and executable entry rules</td>
+<td><code>.p3d</code> or <code>.grammar</code> file under <code>examples/</code></td>
+</tr>
+<tr>
+<td>SMB-OMv1</td>
+<td>Frozen five-level source hierarchy and baseline positioned building</td>
+<td><code>examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d</code></td>
+</tr>
+<tr>
+<td>SMB-OMv2</td>
+<td>Spatial identity, frames, interfaces, connections, constraints, collision participation, geometry ownership, and resolution evidence</td>
+<td><code>examples/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json</code> plus generated grammar</td>
+</tr>
+<tr>
+<td>SMB-OMv2.1</td>
+<td>Classification, roles, functions, services, requirements, state, scenarios, semantic relationships, coverage, and deterministic hashes</td>
+<td><code>examples/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json</code></td>
+</tr>
+<tr>
+<td>OM20</td>
+<td>Deep courtyard-building taxonomy, canonical L0-L5 runtime objects, L6-L20 semantic depth, detail levels, provenance, and deterministic package generation</td>
+<td><code>examples/Complex_Modern_Courtyard_Building_OM20/</code></td>
+</tr>
+<tr>
+<td>Editor evidence</td>
+<td>Human inspection of source, scene, objects, overlays, diagnostics, and hashes</td>
+<td>Inspector, Preview overlays, Console, and <code>tests/evidence/</code></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-building-object-model-in-uml-terms">Building object model in UML terms</h4><p class="section-guide">Reading guide: this source section records “Building object model in UML terms”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The native C++ model is intentionally divided by responsibility:</p>
+<ul>
+<li><code>SpatialBuildingModel</code> aggregates a <code>SpatialObjectRegistry</code>, <code>SpatialContainmentTree</code>, <code>SpatialConnectionGraph</code>, and <code>SpatialConstraintGraph</code>.</li>
+<li><code>SpatialBuildingObject</code> owns identity, class, taxonomy path, local frame, state, collision policy, interfaces, boundary representations, and geometry bindings.</li>
+<li><code>SpatialContainmentRelationship</code>, <code>SpatialConnection</code>, and <code>SpatialConstraint</code> are explicit relationship objects; they are not hidden inside geometry helpers.</li>
+<li><code>SmallModernBuildingModel</code> composes the additive building classification, function, service, requirement, scenario, relationship-assertion, state, and evidence models.</li>
+<li>Construction services build candidate aggregates; validation services reject invalid candidates; deterministic hash services publish stable evidence only after acceptance.</li>
+<li>Editor inspection services project immutable model information into <code>SpatialObjectInspectorPanel</code>; presentation code does not become the semantic owner.</li>
+</ul>
+<p>The relevant native source trees are <code>include/spatial/</code>, <code>src/spatial/</code>, <code>include/building/</code>, <code>src/building/</code>, and the editor inspection classes under <code>include/editor/</code> and <code>src/editor/</code>.</p>
+<h4 id="source-coordinate-placement-and-geometry-ownership-conventions">Coordinate, placement, and geometry ownership conventions</h4><p class="section-guide">Reading guide: this source section records “Coordinate, placement, and geometry ownership conventions”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Rectangular building solids use the bottom-anchored <code>CubeY</code> path. Existing SMB center coordinates are translated by <code>y - height / 2</code> before <code>CubeY</code> emission so the accepted baseline does not move.</li>
+<li>Each physical object authors geometry in its own local frame. World transforms are derived through containment and any accepted placement transaction.</li>
+<li>A physical leaf may own zero, one, or several primitive instances. An object ID is never duplicated merely because its geometry repeats.</li>
+<li>Containers, spaces, relationships, requirements, service systems, and other semantic objects may intentionally own no geometry.</li>
+<li>Interfaces are object-local typed frames or regions. Connections relate exact interface references; they do not substitute a whole-building bound for a missing surface.</li>
+<li>Collision-aware placement is transactional. Broad-phase queries, exact checks, travel limits, residual validation, commit, and rollback remain explicit evidence.</li>
+<li class="source-status--unresolved">Unsupported or unresolved placement stays documentary or <code>PendingEvidence</code>; it is not approximated into a passing result.</li>
+</ul>
+<h4 id="source-modern-building-repository-map">Modern-building repository map</h4><p class="section-guide">Reading guide: this source section records “Modern-building repository map”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Path</th>
+<th scope="col">Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>examples/Single_Floor_Modern_Building_Windows_Doors.p3d</code></td>
+<td>Small executable facade/floor/wall/window/door introduction.</td>
+</tr>
+<tr>
+<td><code>examples/Modern_Residence_Image_Derived_Facade.grammar</code></td>
+<td>Image-derived facade study using executable grammar constructs.</td>
+</tr>
+<tr>
+<td><code>examples/Modern_Luxury_Residence_From_Image_Set.grammar</code></td>
+<td>Larger residence, authored lighting sidecar, and front/rear visual study.</td>
+</tr>
+<tr>
+<td><code>examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d</code></td>
+<td>Frozen 124-object source authority.</td>
+</tr>
+<tr>
+<td><code>examples/SMB_OMv2_Instance_SMB_001/</code></td>
+<td>SMB-OMv2/2.1 generators, spatial manifest, knowledge manifest, coverage, and chair bindings.</td>
+</tr>
+<tr>
+<td><code>examples/Complex_Modern_Courtyard_Building_OM20/</code></td>
+<td>OM20 generator, grammar, taxonomy, registry, relationships, collision records, schema, validation, and error catalog.</td>
+</tr>
+<tr>
+<td><code>docs/SMB_OMv1_SMALL_MODERN_BUILDING.md</code></td>
+<td>OMv1 hierarchy, positioning, guards, and verification contract.</td>
+</tr>
+<tr>
+<td><code>docs/SMB_OMv2_SPATIALLY_AWARE_BUILDING.md</code></td>
+<td>OMv2 ownership, interfaces, connections, positioning, evidence, editor behavior, and limits.</td>
+</tr>
+<tr>
+<td><code>PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md</code></td>
+<td>Full all-object knowledge-model design and acceptance plan.</td>
+</tr>
+<tr>
+<td><code>SMB_OMV21_ALL_BUILDING_OBJECTS_VERIFICATION.md</code></td>
+<td>Accepted OMv2.1 requirement-to-evidence audit and deterministic hashes.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="source-visual-examples">Visual examples</h4><p class="section-guide">Reading guide: this source section records “Visual examples”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<tr>
+<td align="center"><img alt="Modern luxury residence front view with spatial overlays" loading="lazy" src="../../assets/images/source/docs/images/readme/modern-luxury-residence-front.png" width="420"/><br/><strong>Modern luxury residence — front</strong></td>
+<td align="center"><img alt="Modern luxury residence rear view with spatial overlays" loading="lazy" src="../../assets/images/source/docs/images/readme/modern-luxury-residence-rear.png" width="420"/><br/><strong>Modern luxury residence — rear</strong></td>
+</tr>
+<tr>
+<td align="center"><img alt="Complex modern courtyard building OM20 front view" loading="lazy" src="../../assets/images/source/docs/images/readme/modern-courtyard-om20-front.png" width="420"/><br/><strong>Complex courtyard building — OM20</strong></td>
+<td align="center"><img alt="SMB-OMv2.1 building knowledge overlay" loading="lazy" src="../../assets/images/source/docs/images/readme/smb-omv21-building-knowledge.png" width="420"/><br/><strong>SMB-OMv2.1 knowledge overlay</strong></td>
+</tr>
+</table></div>
+<h4 id="source-example-status-matrix">Example status matrix</h4><p class="section-guide">Reading guide: this source section records “Example status matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Example</th>
+<th scope="col">Status</th>
+<th scope="col">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/Single_Floor_Modern_Building_Windows_Doors.p3d">Single_Floor_Modern_Building_Windows_Doors.p3d</a></td>
+<td>Executable</td>
+<td>Compact introduction to floors, walls, windows, doors, materials, and repeated facade sections.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/Modern_Residence_Image_Derived_Facade.grammar">Modern_Residence_Image_Derived_Facade.grammar</a></td>
+<td>Executable example</td>
+<td>Image-derived modern facade composition using current grammar constructs.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/Modern_Luxury_Residence_From_Image_Set.grammar">Modern_Luxury_Residence_From_Image_Set.grammar</a></td>
+<td>Executable example</td>
+<td>Larger residence with front/rear architectural composition, authored lighting, and spatial-overlay captures.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d">SMB-OMv1</a></td>
+<td>Executable, frozen source authority</td>
+<td>Five-level, 124-object Small Modern Building hierarchy with guarded parameters and positioned geometry.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d">SMB-OMv2</a></td>
+<td>Executable, generated spatial authority</td>
+<td>Adds frames, interfaces, connections, constraints, primitive ownership, collision evidence, and editor inspection.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json">SMB-OMv2.1 knowledge model</a></td>
+<td>Executable native knowledge layer</td>
+<td>Adds object semantics, functions, services, requirements, scenarios, relationship assertions, coverage, and evidence.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM5.p3d">Complex Modern Courtyard Building OM5</a></td>
+<td>Executable compatibility baseline</td>
+<td>Coarser functional modern-courtyard building baseline.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d">Complex Modern Courtyard Building OM20</a></td>
+<td>Executable generated package</td>
+<td>Twenty-level taxonomy with canonical runtime objects, detailed geometry bindings, error policy, deterministic packaging, and spatial evidence.</td>
+</tr>
+<tr>
+<td><a href="../../assets/source-files/examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d">Modern Townhouse Advanced New Techniques</a></td>
+<td>Reference only</td>
+<td class="source-status--proposed">Roadmap grammar for proposed higher-order geometry and architectural reasoning operators. It is structurally documented but intentionally not compatible with the current parser.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The status column matters. A reference grammar must not be treated as executable validation evidence. See its <a href="../buildings/required-progen3d-operators.html">required-operator report</a> and <a href="../../assets/source-files/examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/VALIDATION.json">validation record</a>.</p>
+<h4 id="source-inspect-a-modern-building-in-the-gui">Inspect a Modern Building in the GUI</h4><p class="section-guide">Reading guide: this source section records “Inspect a Modern Building in the GUI”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use the spatially aware Small Modern Building for object-level inspection:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui \
+  --spatial-overlays \
+  --select-spatial-object SMB_001_Ground_Kitchen_Sink \
+  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+</code></pre>
+<p>Then follow this evidence path:</p>
+<ol>
+<li>Use <code>Fit</code> and the view cube to establish a repeatable view.</li>
+<li>Open <code>Inspector</code> and select an object by stable ID or pick one of its bound primitives.</li>
+<li>Confirm identity, class, taxonomy, parent, state, local/world transform, collision policy, primitive bindings, and boundary representations.</li>
+<li>Expand Interfaces, Connections, Constraints, Contacts, Clearances, and Resolution records.</li>
+<li>Enable <code>SMB-OMv2 spatial evidence</code> in <code>Overlay Options</code> and compare the visible frame/interface/boundary markers with the Inspector values.</li>
+<li class="source-status--pending">Enable <code>SMB-OMv2.1 knowledge overlays</code> to inspect function allocations, service flows, requirement status, and pending evidence.</li>
+<li>Check the Console for validation, regeneration, selected-object, and capture messages.</li>
+<li>Use a deterministic command-line capture when the view must become reproducible evidence rather than an interactive observation.</li>
+</ol>
+<p>The Inspector and overlays are projections of the accepted models. Editing the display, hiding an object for a capture, or changing a debug view does not rewrite the grammar or promote a requirement.</p>
+<h4 id="source-geometry-and-semantic-modeling-pattern">Geometry and semantic modeling pattern</h4><p class="section-guide">Reading guide: this source section records “Geometry and semantic modeling pattern”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>A typical executable building branch follows this pattern:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Building
+  -&gt; Storey or zone container
+     -&gt; Space, system, or assembly container
+        -&gt; Physical leaf Object(...)
+           -&gt; local transforms
+           -&gt; geometry instances with explicit materials
+           -&gt; Interface(...) declarations
+        -&gt; semantic leaf Object(...)
+           -&gt; no fake solid
+  -&gt; Connect(...) exact interface references
+  -&gt; Position(...) only when the runtime supports the mode and target
+</code></pre>
+<p>Use semantic leaves for ideas such as monitoring, relationships, requirements, service systems, scenarios, or containment facts. Use physical leaves for walls, slabs, windows, doors, fixtures, furniture, equipment, and external works that truly own geometry.</p>
+<h4 id="source-smb-omv1-five-level-building-object-hierarchy">SMB-OMv1: five-level building object hierarchy</h4><p class="section-guide">Reading guide: this source section records “SMB-OMv1: five-level building object hierarchy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The authoritative OMv1 grammar is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d
+</code></pre>
+<p>Its model contract is:</p>
+<ul>
+<li>124 supplied SMB object names, each defined exactly once;</li>
+<li>real direct-child decomposition for containers;</li>
+<li>48 reusable L1-L5 chains for physical and semantic leaves;</li>
+<li>geometry only under physical L5 atomic features;</li>
+<li>zero-repeat, no-geometry termination for semantic relationship leaves;</li>
+<li>fixed site, structure, envelope, services, and installed fixtures through <code>!I(...)</code>;</li>
+<li>loose furniture through collision-active <code>I(...)</code> with explicit mass/contact positioning;</li>
+<li>guarded width, depth, storey height, wall/slab thickness, contact allowance, and site dimensions;</li>
+<li class="source-status--failed">fail-closed invalid configuration with a visible validation marker instead of a partially expanded building.</li>
+</ul>
+<p>Detailed documentation: <a href="../buildings/smb-omv1-small-modern-building.html">docs/SMB_OMv1_SMALL_MODERN_BUILDING.md</a>.</p>
+<h4 id="source-smb-omv2-spatially-aware-building-authority">SMB-OMv2: spatially aware building authority</h4><p class="section-guide">Reading guide: this source section records “SMB-OMv2: spatially aware building authority”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>OMv2 is generated from the unchanged OMv1 source:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">python3 examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py
+</code></pre>
+<p>It writes:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+examples/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json
+</code></pre>
+<p>Authoritative model counts:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Evidence</th>
+<th scope="col" style="text-align:right">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stable spatial objects</td>
+<td style="text-align:right">124</td>
+</tr>
+<tr>
+<td>Containment relationships</td>
+<td style="text-align:right">123</td>
+</tr>
+<tr>
+<td>Primitive instances and object bindings</td>
+<td style="text-align:right">143</td>
+</tr>
+<tr>
+<td>Typed interfaces</td>
+<td style="text-align:right">178</td>
+</tr>
+<tr>
+<td>Interface-level connections</td>
+<td style="text-align:right">28</td>
+</tr>
+<tr>
+<td>Executable P0 constraints and resolution records</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td>Bottom-anchored <code>CubeY</code> instances</td>
+<td style="text-align:right">105</td>
+</tr>
+<tr>
+<td>Movable legacy instances</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td>Plain centered <code>Cube</code> instances</td>
+<td style="text-align:right">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every object, including a geometry-free semantic object, exposes an inspection interface. The generated grammar preserves geometry while localizing it below stable object frames.</p>
+<p>The positioning architecture is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Position = parent frame + interfaces + connections + constraints + collision evidence
+</code></pre>
+<p>The compiled runtime publishes authored and resolved transforms, broad-phase boundaries, query work, contact/clearance evidence, resolution hashes, and primitive binding commits. Unsupported or ambiguous placement does not receive invented evidence.</p>
+<p>Detailed documentation: <a href="../buildings/smb-omv2-spatially-aware-small-modern-building.html">docs/SMB_OMv2_SPATIALLY_AWARE_BUILDING.md</a>.</p>
+<h4 id="source-smb-omv2-1-all-building-object-knowledge-model">SMB-OMv2.1: all-building-object knowledge model</h4><p class="section-guide">Reading guide: this source section records “SMB-OMv2.1: all-building-object knowledge model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>OMv2.1 adds a knowledge layer while retaining OMv2 as spatial authority and OMv1 as the frozen source authority. The generated model and native catalog cover all 124 source objects.</p>
+<p>The knowledge model includes:</p>
+<ul>
+<li>semantic concepts and roles;</li>
+<li>per-object applicability profiles;</li>
+<li>function definitions and allocations;</li>
+<li>functional dependencies;</li>
+<li>service systems, ports, media, direction, and flows;</li>
+<li>canonical relationship assertions;</li>
+<li>hard and advisory requirements with requirement-to-evidence evaluation;</li>
+<li>operating scenarios and state snapshots;</li>
+<li>deterministic hashes for each knowledge domain and the aggregate model;</li>
+<li class="source-status--pending">explicit pending evidence rather than inferred continuity claims.</li>
+</ul>
+<p class="source-status--failed">The accepted model records 527 passed hard requirements, zero failed hard requirements, zero unknown hard requirements, 11 scenarios, and 3 evidence records. Two service ports remain explicitly <code>PendingEvidence</code>: bathroom exhaust air out and downpipe rainwater out.</p>
+<p>OMv2.1 does <strong>not</strong> infer building-code, energy, hydraulic, fire-engineering, structural-performance, or product-compliance certification. Visual output is supporting evidence only.</p>
+<p>Regenerate OMv2.1:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">python3 examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv21.py
+</code></pre>
+<p>Primary artifacts:</p>
+<ul>
+<li><a href="../../assets/source-files/examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json">SMB_OMv21_Building_Knowledge_Model.json</a></li>
+<li><a href="../../assets/source-files/examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Object_Coverage.csv">SMB_OMv21_Object_Coverage.csv</a></li>
+<li><a href="../buildings/smb-omv2-1-all-building-objects-verification.html">SMB_OMV21_ALL_BUILDING_OBJECTS_VERIFICATION.md</a></li>
+</ul>
+<h4 id="source-complex-modern-courtyard-building-om20">Complex Modern Courtyard Building OM20</h4><p class="section-guide">Reading guide: this source section records “Complex Modern Courtyard Building OM20”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>OM20 extends a modern courtyard residence to a twenty-level taxonomy without making every taxonomy node a fake piece of geometry.</p>
+<p>Its architecture combines:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Containment tree
++ typed connection graph
++ spatial constraint graph
++ geometry and boundary hierarchy
++ transactional diagnostics and evidence
+</code></pre>
+<p>Current generated scale:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Evidence</th>
+<th scope="col" style="text-align:right">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grammar lines</td>
+<td style="text-align:right">32,751</td>
+</tr>
+<tr>
+<td>Executable grammar rules</td>
+<td style="text-align:right">4,905</td>
+</tr>
+<tr>
+<td>Reachable rules</td>
+<td style="text-align:right">4,905</td>
+</tr>
+<tr>
+<td>L5 functional objects</td>
+<td style="text-align:right">280</td>
+</tr>
+<tr>
+<td>Additional L6-L20 nodes</td>
+<td style="text-align:right">4,200</td>
+</tr>
+<tr>
+<td>Deduplicated L0-L20 taxonomy nodes</td>
+<td style="text-align:right">4,866</td>
+</tr>
+<tr>
+<td>Canonical executable L0-L5 object records</td>
+<td style="text-align:right">666</td>
+</tr>
+<tr>
+<td>Runtime interfaces</td>
+<td style="text-align:right">291</td>
+</tr>
+<tr>
+<td>Geometry leaves</td>
+<td style="text-align:right">258</td>
+</tr>
+<tr>
+<td>Semantic leaves</td>
+<td style="text-align:right">22</td>
+</tr>
+<tr>
+<td>Estimated expanded primitive instances</td>
+<td style="text-align:right">274</td>
+</tr>
+<tr>
+<td>Executable P0 position constraints</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Executable typed connections</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Collision-positioning records</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td>Stable error codes</td>
+<td style="text-align:right">25</td>
+</tr>
+</tbody>
+</table></div>
+<p>All 280 functional leaves reach L20. L0-L5 nodes are executable <code>Object(...)</code> scopes; geometry is localized under the owning L5 object frame; semantic L20 leaves emit no fake solids.</p>
+<p>Geometry detail is explicit:</p>
+<ul>
+<li>LOD0 — bounds;</li>
+<li>LOD1 — coarse shape;</li>
+<li>LOD2 — assembly;</li>
+<li>LOD3 — component;</li>
+<li>LOD4 — construction detail;</li>
+<li>LOD5 — fasteners and seals.</li>
+</ul>
+<p>The detailed front window is the first LOD5 vertical slice and expands into double glazing, spacer seals, chamfered frame members, jamb anchors, head/sill flashings, and mullion seals using deterministic profile extrusion. Reference bindings retain exact dimensions, source locations, revisions, and SHA-256 provenance.</p>
+<p class="source-status--failed">Only the rear cabinet run and outdoor heat pump currently use executable P0 <code>Drop</code> constraints. Cabinet-wall <code>Gap</code>, sink <code>Seat</code>, window <code>CenterContact</code>, and grouped solar-array <code>Drop</code> remain documentary and fail closed until their exact targets can be resolved without aggregate or inferred substitutes.</p>
+<p>Package documentation:</p>
+<ul>
+<li><a href="../buildings/complex-modern-courtyard-building-om20.html">README</a></li>
+<li><a href="../buildings/om20-spatial-object-model-schema.html">Object model schema</a></li>
+<li><a href="../buildings/validation.html">Validation record</a></li>
+<li><a href="../buildings/om20-error-handling.html">Error handling</a></li>
+<li><a href="../../assets/source-files/examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OM20_Taxonomy_Manifest.csv">Taxonomy manifest</a></li>
+<li><a href="../../assets/source-files/examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OM20_Node_Registry.csv">Node registry</a></li>
+<li><a href="../../assets/source-files/examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OM20_Spatial_Object_Model.json">Spatial object model</a></li>
+</ul>
+<h4 id="source-editing-and-regeneration-ownership">Editing and regeneration ownership</h4><p class="section-guide">Reading guide: this source section records “Editing and regeneration ownership”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Modern-building packages contain both human-authored inputs and generated outputs. Edit the canonical owner, not every derivative:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Change</th>
+<th scope="col">Edit</th>
+<th scope="col">Regenerate or verify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple executable building grammar</td>
+<td>The target <code>.p3d</code> or <code>.grammar</code> file</td>
+<td>Open it in the editor and run the applicable grammar/GUI checks.</td>
+</tr>
+<tr>
+<td>SMB-OMv2 object/interface/constraint generation</td>
+<td><code>examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py</code> and its declared source inputs</td>
+<td>Run the generator, then <code>./tests/run_smb_omv2_checks.sh</code>.</td>
+</tr>
+<tr>
+<td>SMB-OMv2.1 concepts, roles, functions, services, requirements, relationships, or scenarios</td>
+<td>The purpose-specific <code>smb_omv21_*</code> catalog modules and <code>generate_smb_omv21.py</code></td>
+<td>Run the OMv2.1 generator and all-object checks; do not hand-edit generated JSON/C++ catalogs as the primary change.</td>
+</tr>
+<tr>
+<td>OM20 taxonomy, geometry templates, detail selection, interfaces, constraints, or package metadata</td>
+<td><code>examples/Complex_Modern_Courtyard_Building_OM20/generate_om20.py</code> and source-bound inputs</td>
+<td>Regenerate grammar, manifests, JSON, CSV files, and deterministic ZIP; run both courtyard gates.</td>
+</tr>
+<tr>
+<td>Screenshot evidence</td>
+<td>Accepted executable grammar plus deterministic launch options</td>
+<td>Capture twice, compare byte identity, and record the hash and command.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Before replacing a large known-good grammar, build and validate a temporary candidate, inspect its diff, and only then replace the authoritative file. This avoids converting a validated example into an unverified partial rewrite.</p>
+<h4 id="source-current-modern-buildings-boundaries">Current Modern Buildings boundaries</h4><p class="section-guide">Reading guide: this source section records “Current Modern Buildings boundaries”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Visual similarity supports review but does not certify structural, fire, hydraulic, electrical, energy, accessibility, product, or building-code compliance.</li>
+<li>SMB-OMv2 P0 placement is based on axis-aligned aggregate boundaries; orientation solving, insertion, seating depth, OBBs, convex boundaries, and triangle-boundary placement remain later work.</li>
+<li>Window opening interfaces do not claim Boolean wall cutouts unless the generated geometry explicitly implements them.</li>
+<li>Geometry-free semantic objects are intentional and must not be “fixed” by adding placeholder cubes.</li>
+<li class="source-status--proposed">Reference-only grammars may describe future operators and must remain clearly separated from executable examples.</li>
+<li class="source-status--unresolved">Pending evidence and unresolved constraints must stay visible and fail closed.</li>
+</ul>
+<h4 id="source-modern-building-development-workflow">Modern-building development workflow</h4><p class="section-guide">Reading guide: this source section records “Modern-building development workflow”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use this sequence when creating or extending a building:</p>
+<ol>
+<li><strong>Define authority boundaries.</strong> Choose the frozen source grammar, generated spatial model, knowledge model, and any reference-only design documents.</li>
+<li><strong>Assign stable identity.</strong> Give each functional object one canonical ID, class, taxonomy path, parent, and spatial frame.</li>
+<li><strong>Separate semantics from geometry.</strong> Bind primitives only to physical owners; keep relationship and knowledge leaves geometry-free.</li>
+<li><strong>Localize geometry.</strong> Author each physical object in its local frame and derive world position through containment and constraints.</li>
+<li><strong>Declare interfaces.</strong> Name support, seal, anchor, inspection, service, control, flow, optical, and spatial interfaces explicitly.</li>
+<li><strong>Connect exact interfaces.</strong> Do not substitute whole-building or aggregate bounds for a missing target surface.</li>
+<li><strong>Add collision policy.</strong> Define layers, masks, movable/fixed state, broad-phase bounds, exact boundaries, travel ceilings, and rollback behavior.</li>
+<li class="source-status--unresolved"><strong>Implement only supported constraints.</strong> Keep unresolved placement documentary and pending rather than fabricating a solution.</li>
+<li><strong>Publish evidence.</strong> Record source hashes, object/primitive bindings, residuals, clearances, query counts, resolution hashes, and visual hashes.</li>
+<li><strong>Validate twice.</strong> Regenerate artifacts twice for byte identity, then run native/runtime and visual gates.</li>
+</ol>
+<h3 id="source-building-validation-workflow">Building validation workflow</h3><p class="section-guide">Reading guide: this source section records “Building validation workflow”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-focused-small-modern-building-gates">Focused Small Modern Building gates</h4><p class="section-guide">Reading guide: this source section records “Focused Small Modern Building gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_smb_omv1_checks.sh
+./tests/run_smb_omv2_checks.sh
+./tests/run_smb_omv2_visual_checks.sh
+./tests/run_smb_omv2_supervisor_matrix.sh
+./tests/run_smb_omv21_all_objects_checks.sh
+./tests/run_smb_omv21_visual_checks.sh
+./tests/run_smb_omv21_supervisor_matrix.sh
+</code></pre>
+<p>These gates cover source identity, generation byte identity, native object-model behavior, grammar integration, spatial positioning, editor inspection, invalid fixtures, visual capture, hashes, and supervised launch evidence.</p>
+<h4 id="source-courtyard-om20-gates">Courtyard OM20 gates</h4><p class="section-guide">Reading guide: this source section records “Courtyard OM20 gates”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_courtyard_omv2_checks.sh
+./tests/run_courtyard_omv2_visual_checks.sh
+</code></pre>
+<p>The source gate regenerates both grammar entry points, the object model, manifests, registries, and deterministic package archive. The visual gate captures the building twice and rejects byte drift or a collapsed/missing silhouette.</p>
+<h4 id="source-deterministic-gui-capture">Deterministic GUI capture</h4><p class="section-guide">Reading guide: this source section records “Deterministic GUI capture”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./progen3d-editor-gui \
+  --visual-test \
+  --spatial-overlays \
+  --preview-view front \
+  --preview-fit-extents \
+  --capture-preview /tmp/building-front.ppm \
+  --open examples/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d
+</code></pre>
+<p><code>--visual-test</code> includes the GUI smoke gate. A successful run verifies field-of-view changes, renders the preview, applies the requested camera view, fits visible extents, writes a top-left-oriented binary PPM, reports its pixel hash, and exits cleanly.</p>
+<h3 id="source-command-line-reference">Command-line reference</h3><p class="section-guide">Reading guide: this source section records “Command-line reference”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Option</th>
+<th scope="col">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--open &lt;path&gt;</code></td>
+<td>Opens a local grammar at startup.</td>
+</tr>
+<tr>
+<td><code>--document &lt;path&gt;</code></td>
+<td>Compatibility spelling for <code>--open</code>.</td>
+</tr>
+<tr>
+<td><code>--smoke-test</code></td>
+<td>Generates and renders one deterministic editor/preview smoke cycle, then exits.</td>
+</tr>
+<tr>
+<td><code>--temporal-smoke-test</code></td>
+<td>Runs the smoke test at a deterministic grammar-time sample.</td>
+</tr>
+<tr>
+<td><code>--visual-test</code></td>
+<td>Enables deterministic visual-test behavior; requires a capture path.</td>
+</tr>
+<tr>
+<td><code>--capture-preview &lt;path&gt;</code></td>
+<td>Writes the preview framebuffer and implies visual/smoke testing.</td>
+</tr>
+<tr>
+<td><code>--spatial-overlays</code></td>
+<td>Enables SMB spatial overlays at startup.</td>
+</tr>
+<tr>
+<td><code>--building-knowledge-overlays</code></td>
+<td>Enables SMB-OMv2.1 knowledge overlays; use with a selected object.</td>
+</tr>
+<tr>
+<td><code>--select-spatial-object &lt;id&gt;</code></td>
+<td>Selects an SMB spatial object for inspection/evidence.</td>
+</tr>
+<tr>
+<td><code>--preview-view &lt;name&gt;</code></td>
+<td>Selects <code>front</code>, <code>back</code>, <code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code>, or <code>isometric</code>.</td>
+</tr>
+<tr>
+<td><code>--preview-isometric</code></td>
+<td>Compatibility option for an isometric preview.</td>
+</tr>
+<tr>
+<td><code>--preview-fit-extents</code></td>
+<td>Frames the visible scene before capture.</td>
+</tr>
+<tr>
+<td><code>--preview-hide-object &lt;id&gt;</code></td>
+<td>Hides one spatial object's bound preview geometry without mutating the model. Repeat for multiple IDs.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-repository-guide">Repository guide</h3><p class="section-guide">Reading guide: this source section records “Repository guide”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Path</th>
+<th scope="col">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/</code></td>
+<td>Current editor, parser/runtime integration, geometry, spatial, building, lighting, electrical, material, rendering, and application code.</td>
+</tr>
+<tr>
+<td><code>examples/</code></td>
+<td>Executable grammars, generated object-model packages, compatibility examples, and explicitly marked reference grammars.</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>Architecture and feature documentation, including SMB-OMv1 and SMB-OMv2.</td>
+</tr>
+<tr>
+<td><code>tests/</code></td>
+<td>Native harnesses, shell gates, GUI/visual checks, invalid fixtures, supervisor matrices, and evidence records.</td>
+</tr>
+<tr>
+<td><code>tools/</code></td>
+<td>Deterministic generators, exporters, fitting tools, and comparison utilities.</td>
+</tr>
+<tr>
+<td><code>assets/</code></td>
+<td>Runtime images, textures, and other application assets.</td>
+</tr>
+<tr>
+<td><code>third_party/</code></td>
+<td>Vendored or staged third-party dependencies.</td>
+</tr>
+<tr>
+<td><code>BUILDING.md</code></td>
+<td>Build and focused verification instructions.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-verification">Verification</h3><p class="section-guide">Reading guide: this source section records “Verification”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Run the inherited grammar suite:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_p2_checks.sh
+</code></pre>
+<p>Run the deterministic GUI startup check:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_gui_smoke_check.sh
+</code></pre>
+<p>Run focused editor architecture and document workflow checks:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_document_persistence_checks.sh
+./tests/run_local_file_dialog_workflow_checks.sh
+./tests/run_editor_architecture_checks.sh
+</code></pre>
+<p class="source-status--passed">Run the complete clean-build release gate used by CI:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-bash">./tests/run_release_checks.sh
+</code></pre>
+<p>Do not use retained object files as build evidence after changing public headers, source lists, compiler flags, or third-party linkage. Start those validations with <code>make clean</code>.</p>
+<h3 id="source-evidence-and-contribution-expectations">Evidence and contribution expectations</h3><p class="section-guide">Reading guide: this source section records “Evidence and contribution expectations”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li class="source-status--proposed">Keep executable syntax separate from proposed/reference syntax.</li>
+<li>Preserve stable object IDs and compatibility entry points when extending generated models.</li>
+<li>Treat generated artifacts as reproducible outputs: regenerate twice and compare hashes.</li>
+<li>Keep semantic facts owned by one canonical model; derive views and summaries from that owner.</li>
+<li class="source-status--unresolved">Keep unresolved constraints, requirements, and service continuity explicit and fail closed.</li>
+<li>Treat AI proposals and visual similarity as supporting input, not automatic approval or certification.</li>
+<li>Add native, grammar/runtime, editor, visual, and supervisor evidence when a feature crosses those layers.</li>
+<li>Avoid staging unrelated generated files or local build artifacts.</li>
+</ul>
+<h3 id="source-license">License</h3><p class="section-guide">Reading guide: this source section records “License”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use and redistribution are governed by the license and notices included with this repository and its vendored dependencies.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><span aria-hidden="true"></span><a href="../../index.html#learning-paths">Return to learning path</a><a href="../architecture/expected-invalid-diagnostic-fixtures.html" rel="next">Next: Expected-invalid diagnostic fixtures →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

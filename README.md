@@ -37,7 +37,17 @@ The expected third-party source layout is under `third_party/`. Native File Dial
 
 ```bash
 make clean
-make -j2 progen3d-editor-gui
+make -j2 all
+```
+
+The complete build produces the editor, compatibility link, textured-mesh
+converter, and orthographic three-view converter:
+
+```text
+./progen3d-editor-gui
+./progen3d
+./p3d_to_3dtexmesh
+./p3d_to_3view
 ```
 
 Run the editor:
@@ -52,6 +62,16 @@ The compatibility target creates the `progen3d` symbolic link:
 make progen3d
 ./progen3d
 ```
+
+Create the deterministic Linux binary bundle and its SHA-256 file with:
+
+```bash
+make package
+./tests/run_conversion_package_checks.sh
+```
+
+The archive is written to
+`build/packages/progen3d-linux-x86_64.tar.gz`.
 
 See [BUILDING.md](BUILDING.md) for the complete build, clean-state, and dependency notes.
 
@@ -76,6 +96,42 @@ Open the 20-level courtyard building:
 ## Screenshot walkthrough
 
 The main window is deliberately arranged as a three-part authoring workspace: grammar source on the left, a live preview on the upper right, and generation/runtime messages on the lower right.
+
+<p align="center">
+  <a href="docs/images/readme/progen3d-editor-smb-omv2-full.png">
+    <img src="docs/images/readme/progen3d-editor-smb-omv2-full.png" alt="Full ProGen3D editor workspace with grammar, preview, console, tabs, toolbars, and SMB-OMv2 overlays" width="980">
+  </a>
+</p>
+
+The screenshot is a complete desktop session, not a preview-only render. Open it at full size and read the interface from top to bottom:
+
+| Region | Where it appears | What it owns |
+|---|---|---|
+| 1. Application header | Full-width top strip | Current document identity, rule/token/material counts, authentication state, role, and credits. |
+| 2. Grammar document toolbar | Upper-left toolbar | New/Open/Save, cloud lifecycle, publishing, immediate regeneration, and PLY export. |
+| 3. Workspace tabs | Below the Grammar toolbar | Editor, Diagnostics, Inspector, AI, Materials, Lights, Electrical Controls, and Render Settings. |
+| 4. Active left workspace | Large left pane | The controls and evidence for the selected workspace tab. |
+| 5. Editor status row | Bottom of the source editor | Cursor position, source length, zoom, diagnostics, identifier matches, bracket state, and automatic-run countdown. |
+| 6. Vertical splitter | Between left and right columns | Changes the relative width of authoring and preview work. |
+| 7. Preview header and toolbar | Upper-right header | Playback, stepping, reset, fit, regeneration, full-screen, speed, camera, outline, and overlay controls. |
+| 8. Interactive viewport | Main upper-right surface | The last accepted scene snapshot, picking, camera navigation, overlays, light gizmos, and view-cube orientation. |
+| 9. View cube | Viewport upper-right | Front/back/left/right/top/bottom orientation selection and current axis feedback. |
+| 10. Horizontal splitter | Between Preview and Console | Changes the relative height of visual output and logs. |
+| 11. Console header | Lower-right header | Retained line count and log clearing. |
+| 12. Console body | Lower-right surface | Parser, validation, regeneration, rendering, capture, backend, and runtime messages. |
+
+### First-session walkthrough
+
+1. Start the editor and choose `Continue Offline` if cloud and AI services are not required.
+2. Select `Open...` and load `examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d`.
+3. Wait for the Preview status to return to `Ready`; the Console should report parsed rules, successful validation, and scene regeneration.
+4. Drag inside the viewport to orbit the building, scroll to zoom, and use `Fit` if the model leaves the frame.
+5. Click a visible primitive, then open `Inspector` to see its immutable primitive snapshot and associated SMB object.
+6. Enable `Overlay`, open `Overlay Options`, and select the SMB object frames, interfaces, bounds, connections, constraints, contacts, or clearances needed for the review.
+7. Return to `Editor`, make a small source change, and observe the automatic-run countdown in the editor status row.
+8. Introduce a temporary syntax error to see Diagnostics and Console reject the candidate while the Preview retains the last valid scene.
+9. Correct the error and press `Run` to regenerate immediately.
+10. Use `Save As...` before modifying generated examples; regenerate source packages through their generator scripts when the example declares a generated authority.
 
 ### 1. Application header
 
@@ -182,7 +238,83 @@ The Console reports parser progress, validation, regeneration, runtime warnings,
 
 Drag the vertical splitter to resize the Grammar and Preview columns. Drag the horizontal splitter to resize Preview and Console. Preview full-screen mode temporarily hides the editor and console without changing the document.
 
+### 9. Pointer and keyboard reference
+
+| Input | Scope | Result |
+|---|---|---|
+| Left click | Viewport | Selects a primitive or light gizmo when picking is available. |
+| Left drag | Viewport | Orbits the camera. |
+| Right drag | Viewport | Pans the camera. |
+| Mouse wheel | Viewport | Moves the camera closer to or farther from the scene. |
+| `W` / `S` | Viewport | Moves forward or backward. |
+| `A` / `D` | Viewport | Moves left or right. |
+| `Q` / `E` | Viewport | Moves down or up. |
+| `Z` / `C` | Viewport | Rotates left or right. |
+| `Ctrl+O` | Application | Opens a local grammar. |
+| `Ctrl+S` | Application | Saves to the current local path. |
+| `Ctrl+Shift+S` | Application | Opens Save As. |
+| `F11` | Application | Toggles Preview full-screen mode. |
+
+Keyboard camera controls act on the Preview when the application is active. Text editing, autocomplete selection, modal dialogs, and other focused controls retain normal ImGui keyboard ownership.
+
+### 10. Popups, dialogs, and transient UI
+
+The permanent panels are supplemented by task-specific surfaces:
+
+| Surface | When it appears | Safe outcome |
+|---|---|---|
+| Startup loader | During platform, renderer, font, catalog, workspace, and first-scene initialization | Reports the active startup stage before the main workspace becomes interactive. |
+| Authentication panel | At startup or after `Sign In` | Supports Google, email/password, registration, offline continuation, and backend configuration. |
+| Native file chooser | After `Open...`, `Save As...`, `Export PLY`, or texture upload | Uses the Linux XDG portal backend and returns control without changing the document when cancelled. |
+| Cloud document dialog | During Cloud Open or Cloud Save As | Lists accessible documents, supports refresh and double-click confirmation, and preserves the local document on cancel/failure. |
+| Unsaved Changes modal | Before replacing or closing a modified document | Requires `Save`, `Discard`, or `Cancel`; no implicit overwrite occurs. |
+| Part-class autocomplete | While entering recognized part-class or STL-qualified prefixes | Inserts the selected purpose/class token into the editor. |
+| Material autocomplete | While entering an `I(...)` material argument | Shows matching material names and swatches before insertion. |
+| Identifier inspector | When a grammar identifier is selected | Shows definition/reference information and navigates between occurrences. |
+| Camera options | From the camera toolbar control | Adjusts field of view, distance, and movement/rotation velocity. |
+| Overlay Options | From the Preview toolbar | Selects visual evidence layers without modifying the scene model. |
+
+### 11. GUI state and failure behavior
+
+| State | Visible feedback | Model behavior |
+|---|---|---|
+| Loading | Startup stage and progress text | The workspace is not published until platform and renderer initialization succeed. |
+| Editing | `Modified` chip and automatic-run countdown | Source is dirty; the accepted scene remains unchanged until regeneration succeeds. |
+| Regenerating | `Regenerating` or `Queued update` chip | A candidate scene is built separately from the displayed snapshot. |
+| Valid | Preview returns to `Ready`; Console reports regeneration | The complete candidate replaces the previous immutable scene snapshot. |
+| Invalid | Diagnostics and Console show exact blocking messages | The candidate is rejected and the last valid scene remains visible. |
+| Cloud unavailable | Disabled cloud controls or an error message | Local editing and offline operation remain available. |
+| Visual test | Capture markers and pixel hash in Console | A deterministic view is applied, rendered, written, and checked before exit. |
+
+The central safety rule is: **source candidates may fail, but the Preview never becomes a partially generated scene**.
+
 ## Complete GUI reference
+
+### GUI ownership map
+
+The visible interface is divided into purpose-specific presentation objects. Each panel reads or edits an explicit workspace model or calls a service; the widgets themselves are not the canonical owners of grammar, scene, spatial, or cloud state.
+
+| Visible surface | Presentation object | Primary state or service |
+|---|---|---|
+| Main desktop layout | `EditorWorkspaceWindow` | `EditorWorkspaceSession` and `WorkspaceLayoutState` |
+| Application identity and account summary | `ApplicationHeaderPanel` | grammar metrics, `GrammarSourceDocument`, and `AuthenticatedUserSession` |
+| Source authoring | `GrammarEditorPanel` | `GrammarSourceDocument`, `GrammarEditorInteractionState`, completion services, and diagnostic presentation |
+| Source and generation errors | `DiagnosticsPanel` | `DocumentDiagnosticCollection` |
+| Primitive selection | `SceneInspectorPanel` | `EditorSelection` and immutable `ScenePrimitiveInspection` |
+| Building-object selection | `SpatialObjectInspectorPanel` | `SpatialObjectInspectionService` and immutable `SpatialObjectInspection` |
+| Assistant conversations | `AiAssistantPanel` | `AiAssistantSession` and the configured backend proposal service |
+| Proposal review | `AiGrammarProposalPanel` | `AiGrammarProposalReview`; source changes require explicit acceptance |
+| Material reference and textures | `MaterialLibraryPanel` | material catalog plus `TextureLibraryRepository` |
+| Authored lighting | `LightingPanel` | scene-light model, lighting presets, and lighting evidence |
+| Operational light controls | `ElectricalControlsPanel` | electrical fixture, switch, dimmer, and circuit state |
+| Rendering quality | `RenderSettingsPanel` | `RenderConfiguration` |
+| Scene image and interaction | `ScenePreviewPanel` | immutable `GeneratedSceneSnapshot`, `ScenePreviewSession`, camera/selection controllers, and overlay evidence |
+| Playback timeline | `PreviewTimelinePanel` | `PreviewTimelineState` and `PreviewTimelineController` |
+| Runtime messages | `ConsolePanel` | `ApplicationLog` |
+| Sign-in and offline entry | `AuthenticationPanel` | `AuthenticationService` and authenticated-session state |
+| Cloud open/save selection | `CloudDocumentDialog` | `CloudGrammarRepository` and cloud-dialog workflow state |
+
+At application scope, `Progen3dEditorApplication` composes the window, ImGui runtime, workspace session, scene-generation runtime, and local file-dialog service. `EditorApplicationRuntimeContext` exposes those dependencies to presentation code without making a panel a hidden service locator or semantic owner.
 
 ### Editor tab
 
@@ -440,6 +572,103 @@ Geometry remains separate from semantic identity: semantic objects can participa
 
 ProGen3D contains a progression of modern-building examples rather than one monolithic scene. Each stage introduces a clearer object contract and stronger evidence.
 
+### Architecture at a glance
+
+Modern Buildings separate authored appearance, spatial truth, operational knowledge, and validation evidence:
+
+```text
+Executable grammar
+    |
+    +-- procedural geometry and materials
+    +-- Object(...) identity and containment
+    +-- Interface(...) typed attachment/service surfaces
+    +-- Connect(...) graph relationships
+    +-- Position(...) supported placement constraints
+    |
+    v
+Immutable generated scene snapshot
+    +-- primitive instances and meshes
+    +-- primitive-to-object bindings
+    +-- resolved world transforms and boundaries
+    +-- collision and placement evidence
+    |
+    v
+Additive building knowledge model
+    +-- classifications and roles
+    +-- functions and allocations
+    +-- service systems, ports, and flows
+    +-- requirements and evaluations
+    +-- scenarios, state, relationships, and evidence
+```
+
+No layer silently takes ownership from the layer below it. The grammar remains the executable source, SMB-OMv2 remains the spatial authority, SMB-OMv2.1 adds knowledge without changing the accepted spatial object set, and validation artifacts report evidence without becoming geometry.
+
+### Modern-building terminology
+
+| Term | Meaning in ProGen3D |
+|---|---|
+| Physical object | A building object that owns one or more generated primitives, such as a slab, wall, window, door, fixture, cabinet, chair, light fitting, or external-work element. |
+| Semantic object | A stable object used for containment, function, service, requirement, scenario, evidence, or relationship meaning without inventing placeholder geometry. |
+| Stable object ID | The persistent identity used across grammar declarations, generated manifests, primitive bindings, Inspector selection, overlays, requirements, and validation records. |
+| Local frame | An object's authored coordinate system relative to its parent. World transforms are derived rather than copied into every child. |
+| Interface | A typed, object-local attachment, support, service, control, flow, seal, inspection, or clearance surface/point with direction and state. |
+| Connection | An explicit relationship between exact interface IDs. A connection does not imply that a placement constraint has been solved. |
+| Spatial constraint | A requested relationship such as `Drop`, `Gap`, or `Touch`, evaluated only when the runtime supports the mode and has an exact target. |
+| Primitive binding | The committed association from generated mesh/primitive identity back to the physical building object that owns it. |
+| Boundary representation | Broad- or narrow-phase spatial evidence used for selection, collision, contact, clearance, and deterministic placement. |
+| Knowledge allocation | An SMB-OMv2.1 association that assigns a role, function, service, requirement, scenario, state, or evidence record to an accepted spatial object. |
+| Accepted scene snapshot | The immutable, fully generated scene displayed by the Preview. Failed candidates never partially overwrite it. |
+| Pending evidence | A deliberately unresolved fact or constraint that remains visible and fail-closed instead of being inferred from names, proximity, or appearance. |
+
+### Version and authority map
+
+| Layer | Canonical responsibility | Primary artifact |
+|---|---|---|
+| Modern-building grammar | Shape generation, materials, stable object declarations, and executable entry rules | `.p3d` or `.grammar` file under `examples/` |
+| SMB-OMv1 | Frozen five-level source hierarchy and baseline positioned building | `examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d` |
+| SMB-OMv2 | Spatial identity, frames, interfaces, connections, constraints, collision participation, geometry ownership, and resolution evidence | `examples/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json` plus generated grammar |
+| SMB-OMv2.1 | Classification, roles, functions, services, requirements, state, scenarios, semantic relationships, coverage, and deterministic hashes | `examples/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json` |
+| OM20 | Deep courtyard-building taxonomy, canonical L0-L5 runtime objects, L6-L20 semantic depth, detail levels, provenance, and deterministic package generation | `examples/Complex_Modern_Courtyard_Building_OM20/` |
+| Editor evidence | Human inspection of source, scene, objects, overlays, diagnostics, and hashes | Inspector, Preview overlays, Console, and `tests/evidence/` |
+
+### Building object model in UML terms
+
+The native C++ model is intentionally divided by responsibility:
+
+- `SpatialBuildingModel` aggregates a `SpatialObjectRegistry`, `SpatialContainmentTree`, `SpatialConnectionGraph`, and `SpatialConstraintGraph`.
+- `SpatialBuildingObject` owns identity, class, taxonomy path, local frame, state, collision policy, interfaces, boundary representations, and geometry bindings.
+- `SpatialContainmentRelationship`, `SpatialConnection`, and `SpatialConstraint` are explicit relationship objects; they are not hidden inside geometry helpers.
+- `SmallModernBuildingModel` composes the additive building classification, function, service, requirement, scenario, relationship-assertion, state, and evidence models.
+- Construction services build candidate aggregates; validation services reject invalid candidates; deterministic hash services publish stable evidence only after acceptance.
+- Editor inspection services project immutable model information into `SpatialObjectInspectorPanel`; presentation code does not become the semantic owner.
+
+The relevant native source trees are `include/spatial/`, `src/spatial/`, `include/building/`, `src/building/`, and the editor inspection classes under `include/editor/` and `src/editor/`.
+
+### Coordinate, placement, and geometry ownership conventions
+
+- Rectangular building solids use the bottom-anchored `CubeY` path. Existing SMB center coordinates are translated by `y - height / 2` before `CubeY` emission so the accepted baseline does not move.
+- Each physical object authors geometry in its own local frame. World transforms are derived through containment and any accepted placement transaction.
+- A physical leaf may own zero, one, or several primitive instances. An object ID is never duplicated merely because its geometry repeats.
+- Containers, spaces, relationships, requirements, service systems, and other semantic objects may intentionally own no geometry.
+- Interfaces are object-local typed frames or regions. Connections relate exact interface references; they do not substitute a whole-building bound for a missing surface.
+- Collision-aware placement is transactional. Broad-phase queries, exact checks, travel limits, residual validation, commit, and rollback remain explicit evidence.
+- Unsupported or unresolved placement stays documentary or `PendingEvidence`; it is not approximated into a passing result.
+
+### Modern-building repository map
+
+| Path | Use |
+|---|---|
+| `examples/Single_Floor_Modern_Building_Windows_Doors.p3d` | Small executable facade/floor/wall/window/door introduction. |
+| `examples/Modern_Residence_Image_Derived_Facade.grammar` | Image-derived facade study using executable grammar constructs. |
+| `examples/Modern_Luxury_Residence_From_Image_Set.grammar` | Larger residence, authored lighting sidecar, and front/rear visual study. |
+| `examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d` | Frozen 124-object source authority. |
+| `examples/SMB_OMv2_Instance_SMB_001/` | SMB-OMv2/2.1 generators, spatial manifest, knowledge manifest, coverage, and chair bindings. |
+| `examples/Complex_Modern_Courtyard_Building_OM20/` | OM20 generator, grammar, taxonomy, registry, relationships, collision records, schema, validation, and error catalog. |
+| `docs/SMB_OMv1_SMALL_MODERN_BUILDING.md` | OMv1 hierarchy, positioning, guards, and verification contract. |
+| `docs/SMB_OMv2_SPATIALLY_AWARE_BUILDING.md` | OMv2 ownership, interfaces, connections, positioning, evidence, editor behavior, and limits. |
+| `PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md` | Full all-object knowledge-model design and acceptance plan. |
+| `SMB_OMV21_ALL_BUILDING_OBJECTS_VERIFICATION.md` | Accepted OMv2.1 requirement-to-evidence audit and deterministic hashes. |
+
 ### Visual examples
 
 <table>
@@ -468,6 +697,50 @@ ProGen3D contains a progression of modern-building examples rather than one mono
 | [Modern Townhouse Advanced New Techniques](examples/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d) | Reference only | Roadmap grammar for proposed higher-order geometry and architectural reasoning operators. It is structurally documented but intentionally not compatible with the current parser. |
 
 The status column matters. A reference grammar must not be treated as executable validation evidence. See its [required-operator report](examples/Modern_Townhouse_Advanced_Grammar/REQUIRED_OPERATORS.md) and [validation record](examples/Modern_Townhouse_Advanced_Grammar/VALIDATION.json).
+
+### Inspect a Modern Building in the GUI
+
+Use the spatially aware Small Modern Building for object-level inspection:
+
+```bash
+./progen3d-editor-gui \
+  --spatial-overlays \
+  --select-spatial-object SMB_001_Ground_Kitchen_Sink \
+  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+```
+
+Then follow this evidence path:
+
+1. Use `Fit` and the view cube to establish a repeatable view.
+2. Open `Inspector` and select an object by stable ID or pick one of its bound primitives.
+3. Confirm identity, class, taxonomy, parent, state, local/world transform, collision policy, primitive bindings, and boundary representations.
+4. Expand Interfaces, Connections, Constraints, Contacts, Clearances, and Resolution records.
+5. Enable `SMB-OMv2 spatial evidence` in `Overlay Options` and compare the visible frame/interface/boundary markers with the Inspector values.
+6. Enable `SMB-OMv2.1 knowledge overlays` to inspect function allocations, service flows, requirement status, and pending evidence.
+7. Check the Console for validation, regeneration, selected-object, and capture messages.
+8. Use a deterministic command-line capture when the view must become reproducible evidence rather than an interactive observation.
+
+The Inspector and overlays are projections of the accepted models. Editing the display, hiding an object for a capture, or changing a debug view does not rewrite the grammar or promote a requirement.
+
+### Geometry and semantic modeling pattern
+
+A typical executable building branch follows this pattern:
+
+```text
+Building
+  -> Storey or zone container
+     -> Space, system, or assembly container
+        -> Physical leaf Object(...)
+           -> local transforms
+           -> geometry instances with explicit materials
+           -> Interface(...) declarations
+        -> semantic leaf Object(...)
+           -> no fake solid
+  -> Connect(...) exact interface references
+  -> Position(...) only when the runtime supports the mode and target
+```
+
+Use semantic leaves for ideas such as monitoring, relationships, requirements, service systems, scenarios, or containment facts. Use physical leaves for walls, slabs, windows, doors, fixtures, furniture, equipment, and external works that truly own geometry.
 
 ### SMB-OMv1: five-level building object hierarchy
 
@@ -623,6 +896,29 @@ Package documentation:
 - [Taxonomy manifest](examples/Complex_Modern_Courtyard_Building_OM20/OM20_Taxonomy_Manifest.csv)
 - [Node registry](examples/Complex_Modern_Courtyard_Building_OM20/OM20_Node_Registry.csv)
 - [Spatial object model](examples/Complex_Modern_Courtyard_Building_OM20/OM20_Spatial_Object_Model.json)
+
+### Editing and regeneration ownership
+
+Modern-building packages contain both human-authored inputs and generated outputs. Edit the canonical owner, not every derivative:
+
+| Change | Edit | Regenerate or verify |
+|---|---|---|
+| Simple executable building grammar | The target `.p3d` or `.grammar` file | Open it in the editor and run the applicable grammar/GUI checks. |
+| SMB-OMv2 object/interface/constraint generation | `examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py` and its declared source inputs | Run the generator, then `./tests/run_smb_omv2_checks.sh`. |
+| SMB-OMv2.1 concepts, roles, functions, services, requirements, relationships, or scenarios | The purpose-specific `smb_omv21_*` catalog modules and `generate_smb_omv21.py` | Run the OMv2.1 generator and all-object checks; do not hand-edit generated JSON/C++ catalogs as the primary change. |
+| OM20 taxonomy, geometry templates, detail selection, interfaces, constraints, or package metadata | `examples/Complex_Modern_Courtyard_Building_OM20/generate_om20.py` and source-bound inputs | Regenerate grammar, manifests, JSON, CSV files, and deterministic ZIP; run both courtyard gates. |
+| Screenshot evidence | Accepted executable grammar plus deterministic launch options | Capture twice, compare byte identity, and record the hash and command. |
+
+Before replacing a large known-good grammar, build and validate a temporary candidate, inspect its diff, and only then replace the authoritative file. This avoids converting a validated example into an unverified partial rewrite.
+
+### Current Modern Buildings boundaries
+
+- Visual similarity supports review but does not certify structural, fire, hydraulic, electrical, energy, accessibility, product, or building-code compliance.
+- SMB-OMv2 P0 placement is based on axis-aligned aggregate boundaries; orientation solving, insertion, seating depth, OBBs, convex boundaries, and triangle-boundary placement remain later work.
+- Window opening interfaces do not claim Boolean wall cutouts unless the generated geometry explicitly implements them.
+- Geometry-free semantic objects are intentional and must not be “fixed” by adding placeholder cubes.
+- Reference-only grammars may describe future operators and must remain clearly separated from executable examples.
+- Pending evidence and unresolved constraints must stay visible and fail closed.
 
 ### Modern-building development workflow
 

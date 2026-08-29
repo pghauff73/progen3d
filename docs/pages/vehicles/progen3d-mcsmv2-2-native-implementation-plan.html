@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Date: Monday, August 24, 2026" name="description"/>
+<meta content="examples/ModernVehicleModel/MCSMv2_2_0_NATIVE_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="965f3c9ae22b5ee0f1e8f0b33a9a9e73c8d681ddf418d6d4dd20b4586265012c" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D MCSMv2.2 Native Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vehicles">Vehicles and Automotive Models</a></li>
+<li aria-current="page">ProGen3D MCSMv2.2 Native Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D MCSMv2.2 Native Implementation Plan</h1>
+<p class="lead">Date: Monday, August 24, 2026</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Vehicles and Automotive Models</span>
+<span class="tag">About 22 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/ModernVehicleModel/MCSMv2_2_0_NATIVE_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="965f3c9ae22b5ee0f1e8f0b33a9a9e73c8d681ddf418d6d4dd20b4586265012c" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D MCSMv2.2 Native Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D MCSMv2.2 Native Implementation Plan, Current Baseline, Authoritative Source Release, Existing Native Foundation.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="mcsmv2-2-implementation-report.html">MCSMv2.2 Implementation Report</a> — recommended orientation from the generated learning graph.</li><li><a href="patch-note.html">Patch note</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D MCSMv2.2 Native Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D MCSMv2.2 Native Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Current Baseline</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Current Baseline</td></tr><tr><td><dfn title="Named by the source document">Authoritative Source Release</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1.1 Authoritative Source Release</td></tr><tr><td><dfn title="Named by the source document">Existing Native Foundation</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1.2 Existing Native Foundation</td></tr><tr><td><dfn title="Named by the source document">Existing Compatibility Boundary</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1.3 Existing Compatibility Boundary</td></tr><tr><td><dfn title="Named by the source document">Scope</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>2. Scope, 2.1 In Scope</td></tr><tr><td><dfn title="Named by the source document">In Scope</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.1 In Scope</td></tr><tr><td><dfn title="Named by the source document">Explicitly Deferred</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>2.2 Explicitly Deferred</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="named grammar derived from the accepted OMv2 grammar">V3</dfn></td><td>named grammar derived from the accepted OMv2 grammar</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V2</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="V5 engineering/physical assurance are not claimed">V4</dfn></td><td>V5 engineering/physical assurance are not claimed</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">V5</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="aware geometry while semantic sections, panel cuts, arches, and joints remain present">LOD</dfn></td><td>aware geometry while semantic sections, panel cuts, arches, and joints remain present</td></tr><tr class="source-status--clarification"><td><dfn title="Needs clarification: the source set uses this abbreviation without a single explicit expansion.">SHA-256</dfn></td><td>Needs clarification: the source set uses this abbreviation without a single explicit expansion.</td></tr><tr><td><dfn title="graphical user interface">GUI</dfn></td><td>graphical user interface</td></tr><tr><td><dfn title="domain Boolean panel extraction">UV</dfn></td><td>domain Boolean panel extraction</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Date: Monday, August 24, 2026</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D MCSMv2.2 Native Implementation Plan, Current Baseline, Authoritative Source Release, Existing Native Foundation. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Current Baseline, 1.1 Authoritative Source Release, 1.2 Existing Native Foundation, 1.3 Existing Compatibility Boundary, 2. Scope. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 17, failed: 6, proposed: 1, unresolved: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 4 code blocks, 3 tables and the source SHA-256 <code>965f3c9ae22b5ee0f1e8f0b33a9a9e73c8d681ddf418d6d4dd20b4586265012c</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-current-baseline">1. Current Baseline</a></li><li><a href="#source-1-1-authoritative-source-release">1.1 Authoritative Source Release</a></li><li><a href="#source-1-2-existing-native-foundation">1.2 Existing Native Foundation</a></li><li><a href="#source-1-3-existing-compatibility-boundary">1.3 Existing Compatibility Boundary</a></li><li><a href="#source-2-scope">2. Scope</a></li><li><a href="#source-2-1-in-scope">2.1 In Scope</a></li><li><a href="#source-2-2-explicitly-deferred">2.2 Explicitly Deferred</a></li><li><a href="#source-3-delivery-strategy">3. Delivery Strategy</a></li><li><a href="#source-efficiency-rules">Efficiency Rules</a></li><li><a href="#source-4-canonical-ownership-model">4. Canonical Ownership Model</a></li><li><a href="#source-5-required-object-model">5. Required Object Model</a></li><li><a href="#source-5-1-mcsmv2-2-source-and-family-models">5.1 MCSMv2.2 Source and Family Models</a></li><li><a href="#source-mcsmv220sourcerelease">McsMv220SourceRelease</a></li><li><a href="#source-mcsmv22kinematicfamilydefinition">McsMv22KinematicFamilyDefinition</a></li><li><a href="#source-mcsmv22kinematicvariantdefinition">McsMv22KinematicVariantDefinition</a></li><li><a href="#source-5-2-suspension-and-wheel-models">5.2 Suspension and Wheel Models</a></li><li><a href="#source-5-3-closure-and-glass-models">5.3 Closure and Glass Models</a></li><li><a href="#source-5-4-generated-geometry-and-assurance-models">5.4 Generated Geometry and Assurance Models</a></li><li><a href="#source-mcsmv22kinematicgeometry">McsMv22KinematicGeometry</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>17</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>6</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>1</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>1</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is examples/ModernVehicleModel/MCSMv2_2_0_NATIVE_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D MCSMv2.2 Native Implementation Plan, Current Baseline, Authoritative Source Release, Existing Native Foundation.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Verify the exact MCSMv2.2 source release.</li><li>Generate the reference kinematic catalog entry.</li><li>Reuse the accepted MCSMv2.1 reference semantic geometry.</li><li>Reproduce the 32 reference hardpoints and 36 reference wheel poses.</li><li>Render the reference nominal tyre and its four sweep envelopes.</li><li>Render the reference vehicle with all closures closed and fully open.</li><li>Validate the four parent-relative side-glass systems.</li><li>Emit a parser-compatible reference kinematics preview grammar.</li><li>exact four-variant order;</li><li>exactly 32 hardpoints per variant;</li><li>exactly 36 accepted wheel poses per variant;</li><li>front pose cardinality of 15 per side;</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">parent door world transform * door-local helical glass transform</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D MCSMv2.2 Native Implementation Plan" data="../../assets/diagrams/pages/progen3d-mcsmv2-2-native-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>examples/ModernVehicleModel/MCSMv2_2_0_NATIVE_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>965f3c9ae22b5ee0f1e8f0b33a9a9e73c8d681ddf418d6d4dd20b4586265012c</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>47 headings, 4 fenced code blocks, 3 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Date: Monday, August 24, 2026</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D MCSMv2.2 Native Implementation Plan, Current Baseline, Authoritative Source Release, Existing Native Foundation, Existing Compatibility Boundary</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="mcsmv2-2-implementation-report.html">MCSMv2.2 Implementation Report</a> <span class="status-badge status--documented">Documented</span><br/><small>MCSMv2.2 implements the concept-kinematics slice over the MCSMv2.0.1 integrity kernel and carries forward the MCSMv2.1 semantic-surface architecture.</small></li><li><a href="patch-note.html">Patch note</a> <span class="status-badge status--documented">Documented</span><br/><small>MCSMv201to22.patch is an architectural source diff. MCSMv2.2 deliberately retains the MCSMv2.0.1 implementation as mcsmv201base.py and imports it as the integrity/base layer, so the release must keep both files when using the patched architecture.</small></li><li><a href="mcsmv2-1-native-implementation-verification.html">MCSMv2.1 Native Implementation Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>Date: Monday, August 24, 2026 Implementation status: Complete Cross-version certification status: Blocked only by the inherited MCPOMv1 side-view baseline</small></li><li><a href="mcsmv2-2-generation-notes.html">MCSMv2.2 Generation Notes</a> <span class="status-badge status--documented">Documented</span><br/><small>The full release was generated with one isolated process per vehicle variant and merged afterward. This limits retained SciPy, trimesh and optional graphics state between high-density final-mesh validation runs.</small></li><li><a href="progen3d-mcsmv2-primitive-implementation-plan.html">ProGen3D MCSMv2 Primitive Implementation Plan</a> <span class="status-badge status--planned">Planned</span><br/><small>Status: Implemented and MCSMv2-validated; cross-version release certification retains one inherited MCPOMv1 visual exception.</small></li><li><a href="mcsmv2-2-release-verification.html">MCSMv2.2 Release Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>No release issue was detected.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/ModernVehicleModel/MCSMv2_2_0_NATIVE_IMPLEMENTATION_PLAN.md"><code>examples/ModernVehicleModel/MCSMv2_2_0_NATIVE_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>965f3c9ae22b5ee0f1e8f0b33a9a9e73c8d681ddf418d6d4dd20b4586265012c</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-mcsmv2-2-native-implementation-plan">ProGen3D MCSMv2.2 Native Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D MCSMv2.2 Native Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed"><strong>Status:</strong> Planned</p>
+<p><strong>Date:</strong> Monday, August 24, 2026</p>
+<p><strong>Source release:</strong> <code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/</code></p>
+<p><strong>Primary objective:</strong> Integrate the MCSMv2.2 source release into the native
+ProGen3D C++ object model, executable grammar, generated-mesh system, editor
+preview, and acceptance suite while preserving MCSMv2.0.1, MCSMv2.1,
+MCP_OMv1, MVPv1, MVPv2, MVPv2.5, and MVPv2.6 compatibility.</p>
+<p>This plan is intentionally stored adjacent to the immutable source release.
+The source release remains the signed 109-file package identified by
+<code>RELEASE_MANIFEST.json</code>; implementation planning and native evidence must not
+silently change that release contract.</p>
+<h3 id="source-1-current-baseline">1. Current Baseline</h3><p class="section-guide">Reading guide: this source section records “1. Current Baseline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-1-1-authoritative-source-release">1.1 Authoritative Source Release</h4><p class="section-guide">Reading guide: this source section records “1.1 Authoritative Source Release”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The native implementation must begin from the exact MCSMv2.2 source contract:</p>
+<ul>
+<li>version: <code>2.2.0</code>;</li>
+<li>model schema: <code>MCSMv2.2-uv-semantic-closure-suspension-kinematics</code>;</li>
+<li>release manifest schema: <code>MCSMv2.2.ReleaseManifest.v1</code>;</li>
+<li>release manifest SHA-256:
+<code>9053996bc0e8ba0017ad8eeffb616ab801b0b709dbe0fef93708daa93518882b</code>;</li>
+<li>signed artifact count: <code>109</code>;</li>
+<li>signed artifact size: <code>103068076</code> bytes;</li>
+<li>variants: <code>reference</code>, <code>track</code>, <code>aero</code>, and <code>crossover</code>;</li>
+<li>source frame: <code>+X</code> front, <code>+Y</code> right, <code>+Z</code> up;</li>
+<li>ProGen3D frame: <code>+X</code> right, <code>+Y</code> up, <code>+Z</code> forward;</li>
+<li>coordinate conversion:
+<code>progen3d(source_x, source_y, source_z) = (source_y, source_z, source_x)</code>.</li>
+</ul>
+<p>The source package currently passes all 34 Python tests. The native source
+contract gate must rerun those tests rather than trusting the recorded report.</p>
+<h4 id="source-1-2-existing-native-foundation">1.2 Existing Native Foundation</h4><p class="section-guide">Reading guide: this source section records “1.2 Existing Native Foundation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>MCSMv2.2 must extend, not replace, the following accepted implementations:</p>
+<ul>
+<li><code>McsMv21SemanticFamilyDefinition</code> owns the four-variant registered-surface
+catalog and MCSMv2.1 source identity.</li>
+<li><code>McsMv21SemanticGeometry</code> owns final-body geometry, registered semantic
+surface, exclusive domain partition, and static glass apertures.</li>
+<li><code>McsMv21SemanticGeometryGenerationService</code> generates native MCSMv2.1
+semantic geometry.</li>
+<li><code>McsMv21GeneratedMeshProvider</code> resolves body, fixed-body, panel-region, and
+glass mesh keys.</li>
+<li><code>McsMv21SemanticGrammarLoweringService</code> emits parser-supported
+<code>GeneratedMeshReference</code> grammar.</li>
+<li><code>SuspensionHardpointModel</code>, <code>WheelPoseState</code>, <code>SolvedWheelPose</code>,
+<code>WheelPoseFunction</code>, <code>TyreGeometry</code>, and <code>WheelSweptEnvelope</code> already provide
+reusable vehicle kinematic concepts.</li>
+<li><code>VehicleClosureKinematicsService</code> already evaluates hinge, four-bar, and
+parent-relative drop-glass transforms.</li>
+<li><code>VehicleJoint</code> and <code>VehicleJointGraph</code> already provide shared kinematic
+relationship ownership.</li>
+<li><code>ProceduralMeshRepository</code> and <code>GeneratedMeshProviderRegistry</code> already
+provide generated-mesh caching and grammar resolution.</li>
+</ul>
+<h4 id="source-1-3-existing-compatibility-boundary">1.3 Existing Compatibility Boundary</h4><p class="section-guide">Reading guide: this source section records “1.3 Existing Compatibility Boundary”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>MCSMv2.1 remains V2 static concept geometry. MCSMv2.2 is the additive V3 layer
+for sampled suspension, actual tyre geometry, moving closures, and moving side
+glass. Existing MCSMv2.1 classes must not be retroactively redefined as V3
+objects.</p>
+<p>The inherited MCP_OMv1 side-view visual exceptions remain a separate baseline
+issue. MCSMv2.2 must not worsen them, but implementation completion must not
+misrepresent that inherited exception as newly certified.</p>
+<h3 id="source-2-scope">2. Scope</h3><p class="section-guide">Reading guide: this source section records “2. Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-2-1-in-scope">2.1 In Scope</h4><p class="section-guide">Reading guide: this source section records “2.1 In Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Exact MCSMv2.2 source-contract verification.</li>
+<li>Deterministic generated C++ catalog data for all four variants.</li>
+<li>Explicit native ownership of 32 suspension hardpoints per variant.</li>
+<li>Deterministic front and rear sampled wheel-pose evaluation.</li>
+<li>Exact 36-pose cardinality per variant.</li>
+<li>Native elliptical-section tyre geometry.</li>
+<li>Transformed tyre samples and conservative sweep geometry.</li>
+<li>Native binding of six semantic closure surfaces to six hinge systems.</li>
+<li>Native binding of four side-glass surfaces to their parent doors.</li>
+<li>Parent-relative helical/barrel glass motion.</li>
+<li>Independent fixed-body distance, parity, containment, and intersection
+validation.</li>
+<li>Native V3 sampled concept-kinematic assurance aggregation.</li>
+<li>Executable closed, open, suspension, and family preview grammars.</li>
+<li>Bounded-LOD GUI preview and selected-state inspection.</li>
+<li>Deterministic hashes, source parity evidence, and compatibility evidence.</li>
+</ul>
+<h4 id="source-2-2-explicitly-deferred">2.2 Explicitly Deferred</h4><p class="section-guide">Reading guide: this source section records “2.2 Explicitly Deferred”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Measured production hardpoints.</li>
+<li>Exact constrained multi-link suspension solving.</li>
+<li>Compliance, bushing, force, caster-trail, scrub-radius, or load analysis.</li>
+<li>Continuous interval proof for tyre or closure motion.</li>
+<li>Production inner closure panels, hems, reinforcements, hinges, latches,
+seals, or gas struts.</li>
+<li>Production glass guides, regulators, channels, carriers, motors, and
+weatherstrip deformation.</li>
+<li>Manufacturing and structural V4 assurance.</li>
+<li>CFD, crash, homologation, and physical V5 assurance.</li>
+</ul>
+<p>Deferred features must remain explicit in the native assurance report. They
+must never be inferred from successful sampled V3 checks.</p>
+<h3 id="source-3-delivery-strategy">3. Delivery Strategy</h3><p class="section-guide">Reading guide: this source section records “3. Delivery Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use a reference-variant vertical slice, then expand through generated catalog
+data. Do not implement four variant-specific procedural branches.</p>
+<p>The first usable native milestone is:</p>
+<ol>
+<li>Verify the exact MCSMv2.2 source release.</li>
+<li>Generate the reference kinematic catalog entry.</li>
+<li>Reuse the accepted MCSMv2.1 reference semantic geometry.</li>
+<li>Reproduce the 32 reference hardpoints and 36 reference wheel poses.</li>
+<li>Render the reference nominal tyre and its four sweep envelopes.</li>
+<li>Render the reference vehicle with all closures closed and fully open.</li>
+<li>Validate the four parent-relative side-glass systems.</li>
+<li>Emit a parser-compatible reference kinematics preview grammar.</li>
+</ol>
+<p>Only after that slice passes should the same architecture be populated for
+<code>track</code>, <code>aero</code>, and <code>crossover</code>.</p>
+<h4 id="source-efficiency-rules">Efficiency Rules</h4><p class="section-guide">Reading guide: this source section records “Efficiency Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Reuse existing generic vehicle models whenever their semantics match.</li>
+<li>Extend existing enums and constructors compatibly rather than introducing a
+second <code>SuspensionHardpoint</code> or <code>VehicleJoint</code> hierarchy.</li>
+<li>Preserve MCSMv2.1 as the canonical owner of static surface geometry.</li>
+<li>Store one immutable base mesh plus transforms; do not duplicate a tyre,
+closure, or glass mesh for every state.</li>
+<li>Generate catalog data from JSON; do not hand-copy 128 hardpoints or 144 pose
+records into C++.</li>
+<li>Use <code>glm::dvec3</code> and <code>glm::dmat4</code> for source-parity calculations. Convert to
+float only at the renderer or mesh-buffer boundary.</li>
+<li>Run reference-only math and mesh tests during development.</li>
+<li>Run all-four-variant and visual checks only at milestone boundaries.</li>
+<li>Keep preview geometry below the 16-bit ImGui draw-list vertex limit per draw
+list by using bounded LOD and deterministic mesh splitting.</li>
+<li>Preserve the last valid scene when parsing or generated-mesh resolution
+fails.</li>
+<li class="source-status--failed">Fail closed on missing source records, unmatched semantic domains, invalid
+transforms, incomplete collision checks, or unsupported assurance claims.</li>
+</ul>
+<h3 id="source-4-canonical-ownership-model">4. Canonical Ownership Model</h3><p class="section-guide">Reading guide: this source section records “4. Canonical Ownership Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Concept</th>
+<th scope="col">Canonical owner</th>
+<th scope="col">Required action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static body and registered surface</td>
+<td><code>McsMv21SemanticGeometry</code></td>
+<td>Reuse unchanged</td>
+</tr>
+<tr>
+<td>Panel and aperture ownership</td>
+<td><code>VehicleSurfaceDomainPartition</code></td>
+<td>Reuse and bind 2.2 closure names</td>
+</tr>
+<tr>
+<td>Source release identity</td>
+<td><code>McsMv220SourceRelease</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>Variant V3 definitions</td>
+<td><code>McsMv22KinematicVariantDefinition</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>Hardpoint facts</td>
+<td>existing <code>SuspensionHardpoint</code></td>
+<td>Extend compatibly</td>
+</tr>
+<tr>
+<td>Corner mechanism definition</td>
+<td>existing <code>SuspensionHardpointModel</code></td>
+<td>Reuse with explicit policies</td>
+</tr>
+<tr>
+<td>Wheel state</td>
+<td>existing <code>WheelPoseState</code></td>
+<td>Reuse</td>
+</tr>
+<tr>
+<td>Solved wheel pose</td>
+<td>existing <code>SolvedWheelPose</code></td>
+<td>Extend with full transform if required</td>
+</tr>
+<tr>
+<td>Actual tyre state sample</td>
+<td><code>VehicleTyrePoseSample</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>Actual tyre sweep</td>
+<td><code>VehicleTyrePoseSweep</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>Closure-domain association</td>
+<td><code>VehicleClosureSurfaceBinding</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>Closure joint</td>
+<td>existing <code>VehicleJoint</code> plus closure relationship</td>
+<td>Reuse</td>
+</tr>
+<tr>
+<td>Moving side-glass association</td>
+<td><code>VehicleGlassSurfaceBinding</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>Generated V3 geometry</td>
+<td><code>McsMv22KinematicGeometry</code></td>
+<td>Add</td>
+</tr>
+<tr>
+<td>V3 assurance</td>
+<td><code>McsMv22KinematicAssuranceReport</code></td>
+<td>Add</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every source fact must have one native owner. Validation reports may reference
+facts, but must not become a second parameter store.</p>
+<h3 id="source-5-required-object-model">5. Required Object Model</h3><p class="section-guide">Reading guide: this source section records “5. Required Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-5-1-mcsmv2-2-source-and-family-models">5.1 MCSMv2.2 Source and Family Models</h4><p class="section-guide">Reading guide: this source section records “5.1 MCSMv2.2 Source and Family Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place MCSMv2.2-specific models under <code>include/vehicle/mcsmv2/model/</code>.</p>
+<h5 id="source-mcsmv220sourcerelease"><code>McsMv220SourceRelease</code></h5>
+<p>Owns:</p>
+<ul>
+<li>release version;</li>
+<li>model schema;</li>
+<li>manifest schema;</li>
+<li>release manifest SHA-256;</li>
+<li>signed artifact count and total bytes;</li>
+<li>source reference-frame schema;</li>
+<li>source-to-ProGen3D matrix;</li>
+<li>recorded Python acceptance count;</li>
+<li>source assurance boundary.</li>
+</ul>
+<p>This class is the MCSMv2.2 equivalent of <code>McsMv210SourceRelease</code>. It is not a
+subclass because the releases are immutable records rather than substitutable
+runtime polymorphic objects.</p>
+<h5 id="source-mcsmv22kinematicfamilydefinition"><code>McsMv22KinematicFamilyDefinition</code></h5>
+<p>Composes:</p>
+<ul>
+<li>one <code>McsMv220SourceRelease</code>;</li>
+<li>four <code>McsMv22KinematicVariantDefinition</code> objects.</li>
+</ul>
+<h5 id="source-mcsmv22kinematicvariantdefinition"><code>McsMv22KinematicVariantDefinition</code></h5>
+<p>Composes:</p>
+<ul>
+<li>variant identifier and display name;</li>
+<li>expected MCSMv2.1 semantic variant identifier;</li>
+<li>suspension corner definitions;</li>
+<li>sampled wheel-state grid;</li>
+<li>tyre definition and declared clearance;</li>
+<li>six closure surface bindings;</li>
+<li>six hinge or rising-revolute definitions;</li>
+<li>four glass surface bindings;</li>
+<li>four helical glass motion definitions;</li>
+<li>accepted V3 thresholds and source evidence;</li>
+<li>source release gate and achieved assurance level.</li>
+</ul>
+<p>It must not duplicate package, static body, UV surface, or domain meshes already
+owned by MCSMv2.1.</p>
+<h4 id="source-5-2-suspension-and-wheel-models">5.2 Suspension and Wheel Models</h4><p class="section-guide">Reading guide: this source section records “5.2 Suspension and Wheel Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Reuse <code>SuspensionHardpoint</code> and extend it without breaking existing MVPv2.5
+callers:</p>
+<ul>
+<li>retain identifier, role, corner, position, classification, and tolerance;</li>
+<li>add source role name where the generic enum is broader than the release role;</li>
+<li>add confidence with a backwards-compatible default;</li>
+<li>preserve <code>ConceptDerived</code> as evidence, mapped explicitly to the repository's
+evidence classification vocabulary.</li>
+</ul>
+<p>Extend <code>SuspensionHardpointRole</code> only where distinct MCSMv2.2 roles cannot be
+represented accurately. Required distinctions include:</p>
+<ul>
+<li><code>StrutTop</code>;</li>
+<li><code>LowerArmFrontInner</code>;</li>
+<li><code>LowerArmRearInner</code>;</li>
+<li><code>UpperLinkInner</code>;</li>
+<li><code>UpperLinkOuter</code>;</li>
+<li><code>LowerLinkOuter</code>;</li>
+<li><code>ToeLinkInner</code>;</li>
+<li><code>ToeLinkOuter</code>;</li>
+<li><code>DamperTop</code>.</li>
+</ul>
+<p>Do not collapse front/rear inner link locations into one vague mount role.</p>
+<p>Add <code>VehicleWheelPoseSolutionPolicy</code> as a value model containing the explicit
+travel, camber, toe, and steering gains used by the concept solver. The policy
+must be composed by <code>SuspensionHardpointModel</code>; it must not be hidden as
+hard-coded constants inside <code>WheelPoseSolver</code>.</p>
+<p>Add:</p>
+<ul>
+<li><code>VehicleTyrePoseSample</code>: associates one solved pose with one rigid transform;</li>
+<li><code>VehicleTyrePoseSweep</code>: composes the immutable tyre mesh, 3 or 15 pose
+samples, transformed sample evidence, conservative hull mesh, and validation;</li>
+<li><code>VehicleTyreSweepSet</code>: composes four corner sweeps and the exact total count
+of 36 poses.</li>
+</ul>
+<h4 id="source-5-3-closure-and-glass-models">5.3 Closure and Glass Models</h4><p class="section-guide">Reading guide: this source section records “5.3 Closure and Glass Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Reuse generic hinge and glass-motion relationships from
+<code>VehicleClosureAssembly.h</code> where their meaning matches the source release.</p>
+<p>Add:</p>
+<ul>
+<li><code>VehicleClosureSurfaceBinding</code>: associates one MCSMv2.1 semantic closure
+domain with one closure identifier and joint relationship;</li>
+<li class="source-status--passed"><code>VehicleClosurePoseSample</code>: owns normalized state, angle, rise, transform,
+minimum non-hinge distance, intersection result, and pass state;</li>
+<li><code>VehicleClosureSweep</code>: composes one surface binding and seven sampled poses;</li>
+<li><code>VehicleClosureSweepSet</code>: composes the six closure sweeps;</li>
+<li><code>VehicleGlassSurfaceBinding</code>: associates one aperture domain with its parent
+door and motion definition;</li>
+<li class="source-status--passed"><code>VehicleGlassPoseSample</code>: owns normalized state, drop, rotation, composed
+world transform, cavity containment, fixed-body distance, support-pose error,
+intersection result, and pass state;</li>
+<li><code>VehicleGlassMotionSet</code>: composes four glass systems with six states each.</li>
+</ul>
+<p>World glass motion must always be:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">parent door world transform * door-local helical glass transform
+</code></pre>
+<p>The glass system must not store an independent world transform that can drift
+from its parent closure.</p>
+<h4 id="source-5-4-generated-geometry-and-assurance-models">5.4 Generated Geometry and Assurance Models</h4><p class="section-guide">Reading guide: this source section records “5.4 Generated Geometry and Assurance Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h5 id="source-mcsmv22kinematicgeometry"><code>McsMv22KinematicGeometry</code></h5>
+<p>Composes:</p>
+<ul>
+<li>a shared immutable <code>McsMv21SemanticGeometry</code> reference;</li>
+<li>four suspension corner models;</li>
+<li>four tyre pose sweeps;</li>
+<li>six closure surface bindings and evaluated sweeps;</li>
+<li>four moving glass surface bindings and evaluated motions;</li>
+<li>generated preview meshes for hardpoints, links, sweep hulls, closure states,
+and glass states;</li>
+<li>one <code>McsMv22KinematicAssuranceReport</code>.</li>
+</ul>
+<h5 id="source-mcsmv22kinematicassurancereport"><code>McsMv22KinematicAssuranceReport</code></h5>
+<p>Owns explicit V0-V5 status and diagnostics. V3 passes only when:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">V2 static concept geometry passes
+and hardpoint validation passes
+and actual tyre pose sweep validation passes
+and closure sweep validation passes
+and helical glass validation passes
+</code></pre>
+<p>V4 and V5 must remain false with their source-declared boundaries.</p>
+<p>Do not reuse a legacy aggregate V2 flag blindly. MCSMv2.2 uses the registered
+open semantic exterior surface, so native V2 composition must explicitly reuse
+the accepted package, section, character-curve, body-in-white, projection,
+partition, and semantic/implicit alignment gates.</p>
+<h3 id="source-6-required-services">6. Required Services</h3><p class="section-guide">Reading guide: this source section records “6. Required Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-6-1-source-and-catalog-services">6.1 Source and Catalog Services</h4><p class="section-guide">Reading guide: this source section records “6.1 Source and Catalog Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>
+<p><code>McsMv22SourceContractVerificationService</code></p>
+<ul>
+<li>verifies the exact release manifest and all signed files;</li>
+<li>detects missing, changed, and unexpected release files;</li>
+<li>records the known verification-report self-accounting discrepancy without
+weakening file hashes;</li>
+<li>invokes the packaged 34-test Python suite.</li>
+</ul>
+</li>
+<li>
+<p><code>McsMv22KinematicCatalogFactory</code></p>
+<ul>
+<li>constructs the four generated variant definitions;</li>
+<li>joins each V3 definition to the matching MCSMv2.1 variant identifier;</li>
+<li>rejects missing or duplicate variants.</li>
+</ul>
+</li>
+<li class="source-status--unresolved">
+<p><code>McsMv22SemanticKinematicBindingService</code></p>
+<ul>
+<li>binds six closure names and six aperture names to the exact MCSMv2.1
+partition owners;</li>
+<li class="source-status--unresolved">requires 17 panel records, six aperture records, 23 exclusive owners, zero
+unassigned faces, and zero unresolved multiple owners;</li>
+<li>rejects a V3 catalog if static semantic ownership differs from the source
+release.</li>
+</ul>
+</li>
+</ul>
+<h4 id="source-6-2-suspension-and-tyre-services">6.2 Suspension and Tyre Services</h4><p class="section-guide">Reading guide: this source section records “6.2 Suspension and Tyre Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>
+<p><code>VehicleSuspensionKinematicEvaluationService</code></p>
+<ul>
+<li>evaluates the explicit policy associated with each corner;</li>
+<li>returns <code>glm::dmat4</code> transforms;</li>
+<li>preserves zero rear steer;</li>
+<li>validates finite centres, camber, toe, and rigid rotation determinants.</li>
+</ul>
+</li>
+<li>
+<p><code>VehicleTyreMeshGenerationService</code></p>
+<ul>
+<li>creates the elliptical-section torus used by MCSMv2.2;</li>
+<li>produces deterministic vertex ordering and topology;</li>
+<li>validates watertightness and outer radius.</li>
+</ul>
+</li>
+<li>
+<p><code>VehicleTyrePoseTransformationService</code></p>
+<ul>
+<li>applies every accepted pose transform to the immutable tyre mesh;</li>
+<li>records transformed point counts and deterministic hashes;</li>
+<li>does not retain 36 duplicate base meshes in long-lived runtime state.</li>
+</ul>
+</li>
+<li>
+<p><code>ConvexHullMeshGenerationService</code></p>
+<ul>
+<li>is a generic geometry service, not an MCSMv2-only procedural function;</li>
+<li>builds a deterministic conservative hull from transformed tyre vertices;</li>
+<li>uses deterministic quantization and tie-breaking;</li>
+<li>exposes topology and volume validation.</li>
+</ul>
+</li>
+<li>
+<p><code>VehicleTyreSweepValidationService</code></p>
+<ul>
+<li>uses final MCSMv2.1 body triangles rather than the generating field;</li>
+<li>computes nearest-surface distance;</li>
+<li>performs sparse parity checks;</li>
+<li>requires the declared clearance after tessellation tolerance;</li>
+<li>reports every corner separately and the family minimum.</li>
+</ul>
+</li>
+</ul>
+<h4 id="source-6-3-closure-and-glass-services">6.3 Closure and Glass Services</h4><p class="section-guide">Reading guide: this source section records “6.3 Closure and Glass Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>
+<p><code>VehicleClosurePoseEvaluationService</code></p>
+<ul>
+<li>delegates generic hinge and rising-revolute math to
+<code>VehicleClosureKinematicsService</code>;</li>
+<li>evaluates the exact seven source states;</li>
+<li>keeps the closed state as the identity transform.</li>
+</ul>
+</li>
+<li class="source-status--passed">
+<p><code>VehicleClosureSweepValidationService</code></p>
+<ul>
+<li>evaluates moving semantic surface triangles against retained fixed-body
+triangles;</li>
+<li>excludes only explicitly declared hinge/support adjacency;</li>
+<li class="source-status--passed">performs broad-phase candidate filtering and complete candidate
+intersection screening;</li>
+<li>reports minimum non-hinge distance and intersection completeness.</li>
+</ul>
+</li>
+<li>
+<p><code>VehicleHelicalGlassMotionService</code></p>
+<ul>
+<li>evaluates downward travel, inward shift, longitudinal shift, and
+barrel-following rotation;</li>
+<li>composes the result with the parent-door transform;</li>
+<li>evaluates the exact six source states.</li>
+</ul>
+</li>
+<li class="source-status--passed">
+<p><code>VehicleGlassMotionValidationService</code></p>
+<ul>
+<li>checks door-cavity containment;</li>
+<li>checks minimum distance to fixed-body triangles;</li>
+<li>checks support-pose composition error;</li>
+<li class="source-status--passed">checks complete broad-phase intersection candidates;</li>
+<li>rejects any system that loses its parent closure relationship.</li>
+</ul>
+</li>
+</ul>
+<h4 id="source-6-4-shared-geometry-validation-services">6.4 Shared Geometry Validation Services</h4><p class="section-guide">Reading guide: this source section records “6.4 Shared Geometry Validation Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add or extract reusable services rather than embedding collision logic in the
+MCSMv2.2 generator:</p>
+<ul>
+<li><code>MeshSurfaceDistanceEvaluationService</code>;</li>
+<li><code>MeshRayParityClassificationService</code>;</li>
+<li><code>MeshIntersectionScreeningService</code>;</li>
+<li><code>RigidTransformValidationService</code>.</li>
+</ul>
+<p>These services should reuse <code>Mesh</code> collision BVH data. They must be independent
+of the source generating field.</p>
+<h4 id="source-6-5-integration-services">6.5 Integration Services</h4><p class="section-guide">Reading guide: this source section records “6.5 Integration Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>
+<p><code>McsMv22KinematicGeometryGenerationService</code></p>
+<ul>
+<li>accepts one matching MCSMv2.1 geometry and MCSMv2.2 definition;</li>
+<li>generates all V3 systems through the services above;</li>
+<li>returns no geometry when any blocking diagnostic exists.</li>
+</ul>
+</li>
+<li>
+<p><code>McsMv22GeneratedMeshProvider</code></p>
+<ul>
+<li>resolves bounded-LOD state and engineering mesh keys;</li>
+<li>caches immutable base geometry and derived state snapshots;</li>
+<li>never regenerates expensive geometry inside the render loop.</li>
+</ul>
+</li>
+<li>
+<p><code>McsMv22KinematicGrammarLoweringService</code></p>
+<ul>
+<li>emits only current parser-supported syntax;</li>
+<li>always supplies a material for geometric instances;</li>
+<li>emits family, closed, open, suspension, and selected-state previews;</li>
+<li>emits generated mesh references rather than source target-grammar
+declarations that the current parser does not support.</li>
+</ul>
+</li>
+<li>
+<p><code>McsMv22DeterministicHashService</code></p>
+<ul>
+<li>hashes source identity, variant definitions, hardpoints, policies, sampled
+states, transforms, topology, semantic bindings, validation results, and
+assurance boundaries;</li>
+<li>uses stable ordering and explicit numeric quantization.</li>
+</ul>
+</li>
+</ul>
+<h3 id="source-7-generated-catalog-pipeline">7. Generated Catalog Pipeline</h3><p class="section-guide">Reading guide: this source section records “7. Generated Catalog Pipeline”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Add <code>tools/generate_mcsmv22_catalog.py</code>.</p>
+<p>Inputs:</p>
+<ul>
+<li><code>VERSION.json</code>;</li>
+<li><code>RELEASE_MANIFEST.json</code>;</li>
+<li><code>validation.json</code>;</li>
+<li><code>partitions/*_surface_partition.json</code>;</li>
+<li><code>kinematics/*_suspension_hardpoints.json</code>;</li>
+<li><code>kinematics/*_wheel_pose_sweeps.json</code>;</li>
+<li><code>kinematics/*_closure_system.json</code>;</li>
+<li>the matching MCSMv2.1 generated catalog identity.</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+<li><code>include/vehicle/mcsmv2/generated/GeneratedMcsMv22Catalog.h</code>;</li>
+<li><code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_NATIVE_CATALOG_MANIFEST.json</code>.</li>
+</ul>
+<p>The generated header should contain compact source facts and accepted sample
+records, not millions of mesh vertices. Runtime services generate mesh data
+from the accepted definitions.</p>
+<p>Required generation checks:</p>
+<ol>
+<li>exact four-variant order;</li>
+<li>exactly 32 hardpoints per variant;</li>
+<li>exactly 36 accepted wheel poses per variant;</li>
+<li>front pose cardinality of 15 per side;</li>
+<li>rear pose cardinality of 3 per side;</li>
+<li>exactly six closure definitions per variant;</li>
+<li>exactly four glass systems per variant;</li>
+<li>seven accepted states per closure;</li>
+<li>six accepted states per moving glass;</li>
+<li>exact closure-to-domain and glass-to-parent associations;</li>
+<li>finite source-to-ProGen3D conversion;</li>
+<li>two generated runs produce byte-identical outputs.</li>
+</ol>
+<h3 id="source-8-phased-implementation">8. Phased Implementation</h3><p class="section-guide">Reading guide: this source section records “8. Phased Implementation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-phase-0-freeze-and-verify-the-source-contract">Phase 0 - Freeze and Verify the Source Contract</h4><p class="section-guide">Reading guide: this source section records “Phase 0 - Freeze and Verify the Source Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Prevent native work from beginning on a changed or incomplete release.</p>
+<p>Tasks:</p>
+<ol>
+<li>Add <code>tools/verify_mcsmv220_source_contract.py</code>.</li>
+<li>Add <code>tests/run_mcsmv220_source_contract_checks.sh</code>.</li>
+<li>Verify all 109 signed file sizes and SHA-256 values.</li>
+<li>Reject unexpected files inside the signed release root.</li>
+<li>Run the packaged 34-test suite with bytecode generation disabled.</li>
+<li>Record Python, NumPy, scikit-image, and trimesh versions.</li>
+<li>Record the 45-byte <code>RELEASE_VERIFICATION.json</code> self-accounting difference
+as a known metadata defect while retaining the manifest as authoritative.</li>
+<li>Add an adjacent source-contract classification record; do not modify the
+source release to store native planning or evidence.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li class="source-status--passed">Exact manifest SHA and 109-file package pass.</li>
+<li class="source-status--passed">All 34 packaged tests pass.</li>
+<li>No <code>.pyc</code>, <code>__pycache__</code>, temporary regeneration, or editor files are added
+to the release directory.</li>
+</ul>
+<h4 id="source-phase-1-generate-the-native-catalog">Phase 1 - Generate the Native Catalog</h4><p class="section-guide">Reading guide: this source section records “Phase 1 - Generate the Native Catalog”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Create deterministic native source facts before adding runtime math.</p>
+<p>Tasks:</p>
+<ol>
+<li>Add <code>McsMv220SourceRelease</code>.</li>
+<li>Add the family and variant definition classes.</li>
+<li>Implement <code>tools/generate_mcsmv22_catalog.py</code>.</li>
+<li>Generate <code>GeneratedMcsMv22Catalog.h</code>.</li>
+<li>Implement <code>McsMv22KinematicCatalogFactory</code>.</li>
+<li>Add catalog and source-identity harnesses.</li>
+<li>Compare two generated catalog runs byte-for-byte.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Four deterministic variants exist.</li>
+<li>Every cardinality and schema listed in Section 7 passes.</li>
+<li>The MCSMv2.1 semantic variant identifier matches each MCSMv2.2 variant.</li>
+</ul>
+<h4 id="source-phase-2-implement-reference-suspension-parity">Phase 2 - Implement Reference Suspension Parity</h4><p class="section-guide">Reading guide: this source section records “Phase 2 - Implement Reference Suspension Parity”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Reproduce the source reference hardpoints and wheel transforms.</p>
+<p>Tasks:</p>
+<ol>
+<li>Extend generic hardpoint roles and evidence fields compatibly.</li>
+<li>Introduce the explicit wheel-pose solution policy.</li>
+<li>Implement double-precision source-frame and ProGen3D-frame evaluation.</li>
+<li>Reproduce all 32 reference hardpoints.</li>
+<li>Reproduce all 36 reference wheel poses.</li>
+<li>Compare centres, steer, travel, camber, toe, and matrices against source
+records.</li>
+<li>Validate left/right mirroring and rotation determinants.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Hardpoint positions agree within <code>1e-9 m</code> in double-precision source space.</li>
+<li>Pose scalar values agree within <code>1e-9</code> before renderer conversion.</li>
+<li>Transform rotations have determinant within <code>1e-9</code> of one.</li>
+<li>Source-to-ProGen3D conversion preserves grounding and orientation.</li>
+</ul>
+<h4 id="source-phase-3-implement-actual-tyre-pose-sweeps">Phase 3 - Implement Actual Tyre Pose Sweeps</h4><p class="section-guide">Reading guide: this source section records “Phase 3 - Implement Actual Tyre Pose Sweeps”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Replace analytic bounds-only wheel evidence with actual tyre geometry.</p>
+<p>Tasks:</p>
+<ol>
+<li>Implement deterministic elliptical tyre mesh generation.</li>
+<li>Validate watertight topology and expected outer radius.</li>
+<li>Transform the tyre through all reference states.</li>
+<li>Implement the deterministic convex-hull service.</li>
+<li>Construct four reference sweep hulls.</li>
+<li>Implement final-body distance and parity checks.</li>
+<li>Compare native minimum clearances with accepted source values.</li>
+<li>Add preview LOD for nominal tyres and sweep hulls.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Exactly 36 transformed poses are evaluated.</li>
+<li>Every transformed tyre sample is finite and outside the final body.</li>
+<li>Every corner passes its declared clearance and tessellation tolerance.</li>
+<li>Repeated runs produce identical topology and hashes.</li>
+</ul>
+<h4 id="source-phase-4-implement-reference-closure-motion">Phase 4 - Implement Reference Closure Motion</h4><p class="section-guide">Reading guide: this source section records “Phase 4 - Implement Reference Closure Motion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Bind the six source closures to native semantic surfaces and joints.</p>
+<p>Tasks:</p>
+<ol>
+<li>Bind four doors, bonnet, and rear hatch to exact partition domains.</li>
+<li>Reuse generic hinge and rising-revolute relationships.</li>
+<li>Evaluate seven states per closure.</li>
+<li>Generate closed and fully open snapshot meshes.</li>
+<li class="source-status--passed">Validate fixed-body distance and complete candidate intersections.</li>
+<li>Preserve the compound rear-hatch limitation explicitly.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Six unique surface bindings and six unique joint relationships exist.</li>
+<li>Closed transforms are identity transforms.</li>
+<li>Fully open transforms move every closure.</li>
+<li class="source-status--passed">All 42 sampled closure states pass complete intersection screening.</li>
+</ul>
+<h4 id="source-phase-5-implement-reference-helical-glass-motion">Phase 5 - Implement Reference Helical Glass Motion</h4><p class="section-guide">Reading guide: this source section records “Phase 5 - Implement Reference Helical Glass Motion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Add four parent-relative moving side-glass systems.</p>
+<p>Tasks:</p>
+<ol>
+<li>Bind front and rear side glass on both sides to their parent doors.</li>
+<li>Evaluate six glass states per system.</li>
+<li>Compose local glass motion with the evaluated parent-door transform.</li>
+<li>Validate drop direction, barrel rotation, cavity containment, fixed-body
+distance, support-pose error, and intersections.</li>
+<li>Generate closed and fully dropped snapshot meshes.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Four moving glass systems and 24 sampled states exist.</li>
+<li>State zero is identity relative to the parent door.</li>
+<li>Full state moves every glass downward.</li>
+<li>Parent-child transform composition error is within <code>1e-9</code> in double
+precision.</li>
+<li class="source-status--passed">All cavity and collision gates pass.</li>
+</ul>
+<h4 id="source-phase-6-compose-native-v3-assurance">Phase 6 - Compose Native V3 Assurance</h4><p class="section-guide">Reading guide: this source section records “Phase 6 - Compose Native V3 Assurance”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed"><strong>Goal:</strong> Make the assurance claim an explicit, fail-closed object model.</p>
+<p>Tasks:</p>
+<ol>
+<li>Implement <code>McsMv22KinematicAssuranceReport</code>.</li>
+<li>Reuse accepted MCSMv2.1 V2 semantic evidence.</li>
+<li>Add hardpoint, tyre, closure, and glass reports.</li>
+<li>Require every component gate before V3 passes.</li>
+<li>Preserve V4 and V5 as false with exact limitations.</li>
+<li>Include maximum alignment outliers as diagnostics even though the accepted
+source gate uses p95 distance and normal thresholds.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Reference reaches V3 only through explicit component evidence.</li>
+<li>Removing or failing any component demotes the result and emits a blocking
+diagnostic.</li>
+<li>No V4 or V5 claim can be produced by the V3 service.</li>
+</ul>
+<h4 id="source-phase-7-expand-through-the-four-variant-family">Phase 7 - Expand Through the Four-Variant Family</h4><p class="section-guide">Reading guide: this source section records “Phase 7 - Expand Through the Four-Variant Family”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Prove that the implementation is generated and parametric.</p>
+<p>Tasks:</p>
+<ol>
+<li>Populate <code>track</code>, <code>aero</code>, and <code>crossover</code> through the generated catalog.</li>
+<li>Use the same service graph for every variant.</li>
+<li>Generate all hardpoint, pose, tyre, closure, and glass systems.</li>
+<li>Compare native accepted sample records with the source package.</li>
+<li>Produce family-level minimum clearance and assurance summaries.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Four variants each have 32 hardpoints, 36 tyre poses, six closures, and four
+moving glass systems.</li>
+<li>Every variant reaches V3.</li>
+<li>No variant-specific procedural branch exists outside explicit policy data.</li>
+</ul>
+<h4 id="source-phase-8-add-generated-mesh-resolution-and-executable-grammar">Phase 8 - Add Generated Mesh Resolution and Executable Grammar</h4><p class="section-guide">Reading guide: this source section records “Phase 8 - Add Generated Mesh Resolution and Executable Grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Make the V3 model usable in the current editor without extending the
+grammar with unsupported source-target constructs.</p>
+<p>Tasks:</p>
+<ol>
+<li>Implement <code>McsMv22GeneratedMeshProvider</code>.</li>
+<li>Add bounded keys for fixed body, closure state snapshots, glass state
+snapshots, suspension hardpoints, nominal tyres, and sweep hulls.</li>
+<li>Implement <code>McsMv22KinematicGrammarLoweringService</code>.</li>
+<li>Generate one reference kinematics preview first.</li>
+<li>Generate closed and open previews for every variant.</li>
+<li>Generate a family closed preview and a family engineering preview.</li>
+<li>Run every grammar through the current parser and headless GUI smoke test.</li>
+<li>Check per-draw-list vertex counts and split generated meshes when required.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Every grammar starts with <code>Start -&gt;</code>.</li>
+<li>No fallback entry rule is used.</li>
+<li>No unsupported rule reference or function is emitted.</li>
+<li>Every <code>!I(...)</code> geometry instance has a material argument.</li>
+<li class="source-status--failed">No scene-generation failure or ImGui vertex-index assertion occurs.</li>
+<li>Direct-service and grammar-resolved component hashes agree.</li>
+</ul>
+<h4 id="source-phase-9-add-selected-state-editor-inspection">Phase 9 - Add Selected-State Editor Inspection</h4><p class="section-guide">Reading guide: this source section records “Phase 9 - Add Selected-State Editor Inspection”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Inspect kinematic state without duplicating geometry or bypassing
+existing relationship owners.</p>
+<p>Tasks:</p>
+<ol>
+<li>Add <code>McsMv22KinematicState</code> as a value model containing selected wheel,
+closure, and glass states.</li>
+<li>Add <code>McsMv22KinematicPoseEvaluationService</code>.</li>
+<li>Route closure state through <code>VehicleJointGraph</code> and existing kinematic
+services.</li>
+<li>Update preview transforms in place rather than rebuilding unrelated body
+geometry.</li>
+<li>Keep expensive tyre-hull construction cached and state-independent.</li>
+<li>Add closed, half-state, and full-state deterministic screenshots.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Changing state does not mutate canonical source definitions.</li>
+<li>Returning to a prior state restores the same transform and rendered hash.</li>
+<li>Parent-relative glass remains synchronized with its door.</li>
+<li>Scene vertex counts remain bounded across repeated state changes.</li>
+</ul>
+<h4 id="source-phase-10-native-visual-and-compatibility-audit">Phase 10 - Native, Visual, and Compatibility Audit</h4><p class="section-guide">Reading guide: this source section records “Phase 10 - Native, Visual, and Compatibility Audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed"><strong>Goal:</strong> Complete a requirement-to-evidence audit without overstating the V3
+boundary.</p>
+<p>Run focused MCSMv2.2 gates first, then all inherited compatibility gates.</p>
+<p>Required new scripts:</p>
+<ul>
+<li><code>tests/run_mcsmv220_source_contract_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_catalog_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_suspension_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_tyre_sweep_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_closure_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_glass_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_assurance_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_grammar_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_visual_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv22_compatibility_checks.sh</code>.</li>
+</ul>
+<p>Required inherited gates:</p>
+<ul>
+<li><code>tests/run_mcsmv210_source_contract_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv21_catalog_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv21_registration_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv21_semantic_geometry_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv21_grammar_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv21_silhouette_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv201_source_contract_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_source_contract_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_semantic_section_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_implicit_body_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_semantic_surface_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_engineering_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_grammar_checks.sh</code>;</li>
+<li><code>tests/run_mcsmv2_visual_checks.sh</code>;</li>
+<li><code>tests/run_mvpv25_hatchback_checks.sh</code>;</li>
+<li><code>tests/run_mvpv25_hatchback_visual_checks.sh</code>;</li>
+<li><code>tests/run_mvpv25_reference_collision_grammar_checks.sh</code>;</li>
+<li><code>tests/run_mvp26_parametric_integration_checks.sh</code>;</li>
+<li>MCP_OMv1 native, grammar, and visual gates;</li>
+<li>MVPv1 and MVPv2 native, grammar, fitting, and visual gates;</li>
+<li><code>make -j2 progen3d-editor-gui</code>;</li>
+<li>full <code>make -j2</code> after focused acceptance passes.</li>
+</ul>
+<p>Release evidence:</p>
+<ul>
+<li><code>tests/evidence/mcsmv22_acceptance_2026-08-24.json</code>;</li>
+<li><code>tests/evidence/mcsmv22_state_parity/</code>;</li>
+<li><code>tests/evidence/mcsmv22_three_view_silhouettes/</code>;</li>
+<li><code>tests/evidence/mcsmv22_headless_grammar_logs/</code>;</li>
+<li><code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_NATIVE_IMPLEMENTATION_VERIFICATION.md</code>.</li>
+</ul>
+<p>Exit gate:</p>
+<ul>
+<li>Every MCSMv2.2 checklist requirement maps to native and source evidence.</li>
+<li>Every new visualized feature also has a native source-level assertion.</li>
+<li>All compatibility changes are additive.</li>
+<li>Inherited failures are reported separately and are not promoted to passes.</li>
+<li>Exact source, generated catalog, grammar, mesh, image, and evidence hashes are
+recorded.</li>
+</ul>
+<h3 id="source-9-example-executable-grammar">9. Example Executable Grammar</h3><p class="section-guide">Reading guide: this source section records “9. Example Executable Grammar”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The signed release grammar is a target-language description and is explicitly
+not compatible with the current parser. Native lowering should emit compact,
+current syntax such as:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text"># MCSMv2.2 executable reference kinematics preview.
+# +X right, +Y up, +Z forward; origin is ground package centre.
+
+Start -&gt;
+    MCSMv22ReferenceKinematicsPreview
+
+MCSMv22ReferenceKinematicsPreview -&gt;
+[
+    Object(id(MCSMV22_REFERENCE)
+           name(ResearchMedianAWDHotHatchV22)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22ReferenceFixedBody
+        MCSMv22ReferenceClosuresOpen
+        MCSMv22ReferenceGlassOpen
+        MCSMv22ReferenceSuspension
+        MCSMv22ReferenceTyreSweeps
+    ]
+]
+
+MCSMv22ReferenceFixedBody -&gt;
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.16))
+]
+
+MCSMv22ReferenceClosuresOpen -&gt;
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceClosuresOpenMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.16))
+]
+
+MCSMv22ReferenceGlassOpen -&gt;
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceGlassOpenMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.10))
+]
+
+MCSMv22ReferenceSuspension -&gt;
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.08))
+]
+
+MCSMv22ReferenceTyreSweeps -&gt;
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceTyreSweepMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(0.45) texscale(0.10))
+]
+</code></pre>
+<p>The first grammar milestone is a deterministic snapshot, not a new grammar
+language for arbitrary kinematic expressions. Interactive state belongs to the
+native state and service model.</p>
+<h3 id="source-10-acceptance-matrix">10. Acceptance Matrix</h3><p class="section-guide">Reading guide: this source section records “10. Acceptance Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Release requirement</th>
+<th scope="col">Native owner</th>
+<th scope="col">Required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Persistent UV surface</td>
+<td>MCSMv2.1 geometry</td>
+<td>existing registration and silhouette gates</td>
+</tr>
+<tr>
+<td>Implicit scaffold projection</td>
+<td>MCSMv2.1 geometry</td>
+<td>existing projection and alignment gates</td>
+</tr>
+<tr>
+<td>Exclusive surface partition</td>
+<td>MCSMv2.1 partition plus 2.2 binding</td>
+<td>23-owner binding harness</td>
+</tr>
+<tr>
+<td>Six glass apertures</td>
+<td>MCSMv2.1 partition</td>
+<td>exact aperture-name assertions</td>
+</tr>
+<tr>
+<td>Six movable closures</td>
+<td>closure binding and sweep set</td>
+<td>source parity, native motion, grammar views</td>
+</tr>
+<tr>
+<td>32 hardpoints</td>
+<td>suspension models</td>
+<td>catalog and transform parity</td>
+</tr>
+<tr>
+<td>Front/rear pose solver</td>
+<td>explicit solution policy</td>
+<td>36-state parity harness</td>
+</tr>
+<tr>
+<td>Actual tyre sweeps</td>
+<td>tyre pose sweep set</td>
+<td>topology, clearance, hull, visual evidence</td>
+</tr>
+<tr>
+<td>Independent tyre clearance</td>
+<td>tyre validation service</td>
+<td>final-triangle distance and parity report</td>
+</tr>
+<tr>
+<td>Closure hinge transforms</td>
+<td>closure pose service</td>
+<td>identity, rigidity, seven-state parity</td>
+</tr>
+<tr>
+<td>Independent closure validation</td>
+<td>closure validation service</td>
+<td class="source-status--passed">complete intersection report</td>
+</tr>
+<tr>
+<td>Parent-relative helical glass</td>
+<td>glass motion service</td>
+<td>parent composition parity</td>
+</tr>
+<tr>
+<td>Glass cavity and collision</td>
+<td>glass validation service</td>
+<td>containment, distance, intersection report</td>
+</tr>
+<tr>
+<td>V3 assurance</td>
+<td>assurance report</td>
+<td class="source-status--failed">fail-closed component matrix</td>
+</tr>
+<tr>
+<td>Four variants</td>
+<td>generated family catalog</td>
+<td>all-four-variant acceptance summary</td>
+</tr>
+<tr>
+<td>Automated tests</td>
+<td>test scripts and harnesses</td>
+<td class="source-status--passed">complete command transcript</td>
+</tr>
+<tr>
+<td>Release manifest and hashes</td>
+<td>source contract service</td>
+<td>exact 109-file verification</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="source-11-performance-and-editor-safety">11. Performance and Editor Safety</h3><p class="section-guide">Reading guide: this source section records “11. Performance and Editor Safety”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Cache generated MCSMv2.1 geometry by semantic variant hash.</li>
+<li>Cache tyre base mesh by tyre-parameter hash.</li>
+<li>Cache pose transforms by variant, corner, and state-grid hash.</li>
+<li>Cache sweep hulls by tyre mesh and pose-transform hashes.</li>
+<li>Cache closure and glass state snapshots by base mesh and transform hash.</li>
+<li>Do not retain redundant transformed tyre meshes after hull and validation
+evidence are produced unless a selected state requires display.</li>
+<li>Keep <code>LOD1</code> engineering previews separate from evidence/export geometry.</li>
+<li>Split combined meshes deterministically before any draw list exceeds 65,535
+indexed vertices.</li>
+<li>Never put every full-resolution tyre pose, closure state, and glass state into
+one editor scene.</li>
+<li>Perform collision and hull generation outside the render loop.</li>
+<li>Make cache invalidation explicit through deterministic source hashes.</li>
+</ul>
+<h3 id="source-12-recommended-file-sequence">12. Recommended File Sequence</h3><p class="section-guide">Reading guide: this source section records “12. Recommended File Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Implement in this order to minimize blocked work:</p>
+<ol>
+<li><code>tools/verify_mcsmv220_source_contract.py</code></li>
+<li><code>tests/run_mcsmv220_source_contract_checks.sh</code></li>
+<li><code>include/vehicle/mcsmv2/model/McsMv220SourceRelease.h</code></li>
+<li>MCSMv2.2 family and variant definition headers.</li>
+<li><code>tools/generate_mcsmv22_catalog.py</code></li>
+<li><code>include/vehicle/mcsmv2/generated/GeneratedMcsMv22Catalog.h</code></li>
+<li><code>McsMv22KinematicCatalogFactory</code></li>
+<li>Compatible extensions to generic hardpoint and wheel-pose models.</li>
+<li><code>VehicleSuspensionKinematicEvaluationService</code></li>
+<li>Suspension parity harness.</li>
+<li><code>VehicleTyreMeshGenerationService</code></li>
+<li><code>VehicleTyrePoseTransformationService</code></li>
+<li><code>ConvexHullMeshGenerationService</code></li>
+<li>Shared mesh distance, parity, and intersection services.</li>
+<li>Tyre sweep generation and validation harnesses.</li>
+<li>Closure and glass surface-binding models.</li>
+<li>Closure and glass evaluation services.</li>
+<li>Closure and glass validation harnesses.</li>
+<li><code>McsMv22KinematicAssuranceReport</code></li>
+<li><code>McsMv22KinematicGeometryGenerationService</code></li>
+<li><code>McsMv22GeneratedMeshProvider</code></li>
+<li><code>McsMv22KinematicGrammarLoweringService</code></li>
+<li>Grammar generation tool and committed previews.</li>
+<li>State inspection integration.</li>
+<li>Four-variant visual and compatibility audit.</li>
+<li>Final native verification and exact-hash evidence.</li>
+</ol>
+<h3 id="source-13-planning-estimate">13. Planning Estimate</h3><p class="section-guide">Reading guide: this source section records “13. Planning Estimate”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>These estimates are sequencing guidance, not completion evidence.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Milestone</th>
+<th scope="col" style="text-align:right">Focused estimate</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source contract and catalog</td>
+<td style="text-align:right"><code>0.5-1 day</code></td>
+<td>deterministic native facts</td>
+</tr>
+<tr>
+<td>Reference suspension parity</td>
+<td style="text-align:right"><code>0.5-1 day</code></td>
+<td>32 hardpoints and 36 poses</td>
+</tr>
+<tr>
+<td>Actual tyre geometry and hulls</td>
+<td style="text-align:right"><code>1-1.5 days</code></td>
+<td>V3 wheel sweep evidence</td>
+</tr>
+<tr>
+<td>Closure and glass motion</td>
+<td style="text-align:right"><code>1-1.5 days</code></td>
+<td>six closures and four glass systems</td>
+</tr>
+<tr>
+<td>Independent validation and assurance</td>
+<td style="text-align:right"><code>1 day</code></td>
+<td>native V3 report</td>
+</tr>
+<tr>
+<td>Grammar and selected-state preview</td>
+<td style="text-align:right"><code>1 day</code></td>
+<td>executable editor views</td>
+</tr>
+<tr>
+<td>Four variants and compatibility audit</td>
+<td style="text-align:right"><code>1-1.5 days</code></td>
+<td>final evidence package</td>
+</tr>
+</tbody>
+</table></div>
+<p>The fastest safe critical path is approximately six focused development days,
+assuming the existing generic vehicle kinematic types require extension rather
+than replacement.</p>
+<h3 id="source-14-completion-definition">14. Completion Definition</h3><p class="section-guide">Reading guide: this source section records “14. Completion Definition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">MCSMv2.2 native implementation is complete only when:</p>
+<ol>
+<li class="source-status--passed">The exact 109-file source release and manifest hash pass current verification.</li>
+<li class="source-status--passed">The packaged 34 Python tests pass in the implementation environment.</li>
+<li>Generated native catalog output is deterministic.</li>
+<li>All four variants bind to their accepted MCSMv2.1 semantic geometry.</li>
+<li>Every variant owns exactly 32 hardpoints and 36 wheel poses.</li>
+<li>Actual tyre meshes are watertight and transformed through every accepted
+state.</li>
+<li>Every tyre sweep passes independent final-body clearance and parity checks.</li>
+<li>Six closure systems and four parent-relative glass systems exist per
+variant.</li>
+<li class="source-status--passed">Every sampled closure and glass state passes complete validation.</li>
+<li>V3 passes only through explicit V2, hardpoint, tyre, closure, and glass
+evidence.</li>
+<li>V4 and V5 remain explicitly unclaimed.</li>
+<li>Closed, open, suspension, and family grammars parse and regenerate without
+fallback or blocking diagnostics.</li>
+<li class="source-status--failed">GUI previews remain within draw-index limits and preserve the last valid
+scene on failure.</li>
+<li>Direct-service and grammar-resolved hashes agree.</li>
+<li>MCSMv2.0.1, MCSMv2.1, MCP_OMv1, MVPv1, MVPv2, MVPv2.5, and MVPv2.6
+compatibility results are recorded without hiding inherited exceptions.</li>
+<li>Every requirement has source, native, visual where applicable, and exact
+artifact evidence.</li>
+</ol>
+<h3 id="source-15-fastest-critical-path">15. Fastest Critical Path</h3><p class="section-guide">Reading guide: this source section records “15. Fastest Critical Path”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Immutable Source Contract
+    -&gt; Generated V3 Catalog
+    -&gt; Reference Suspension Parity
+    -&gt; Reference Actual Tyre Sweeps
+    -&gt; Reference Closures
+    -&gt; Reference Parent-Relative Glass
+    -&gt; Native V3 Assurance
+    -&gt; Generated Mesh Provider
+    -&gt; Executable Reference Grammar
+    -&gt; Four-Variant Expansion
+    -&gt; Selected-State GUI Inspection
+    -&gt; Compatibility and Exact-Hash Audit
+</code></pre>
+<p>This ordering produces visible, validated V3 behavior early while preserving
+the accepted MCSMv2.1 static geometry and the wider ProGen3D vehicle stack.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-mcsmv2-1-0-native-integration-implementation-plan.html" rel="prev">← Previous: ProGen3D MCSMv2.1.0 Native Integration Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-mvpv2-hatchback-fitting-implementation-plan.html" rel="next">Next: ProGen3D MVPv2 Hatchback Fitting Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

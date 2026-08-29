@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Status: Implemented and MCSMv2-validated; cross-version release certification retains one inherited MCPOMv1 visual exception." name="description"/>
+<meta content="examples/ModernVehicleModel/MCSMv2_Modern_Car_Complete/PROGEN3D_PRIMITIVES_IMPLEMENTATION_PLAN.md" name="source-markdown"/>
+<meta content="d5685b6bcccd4a484a66e14337f084ddc32fd33ee20c94138d93d2076a89d47f" name="source-sha256"/>
+<meta content="Planned" name="documentation-status"/>
+<title>ProGen3D MCSMv2 Primitive Implementation Plan · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vehicles">Vehicles and Automotive Models</a></li>
+<li aria-current="page">ProGen3D MCSMv2 Primitive Implementation Plan</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>ProGen3D MCSMv2 Primitive Implementation Plan</h1>
+<p class="lead">Status: Implemented and MCSMv2-validated; cross-version release certification retains one inherited MCPOMv1 visual exception.</p>
+<div class="lesson-meta">
+<span class="status-badge status--planned">Planned</span>
+<span class="tag">Vehicles and Automotive Models</span>
+<span class="tag">About 11 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/ModernVehicleModel/MCSMv2_Modern_Car_Complete/PROGEN3D_PRIMITIVES_IMPLEMENTATION_PLAN.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="d5685b6bcccd4a484a66e14337f084ddc32fd33ee20c94138d93d2076a89d47f" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of ProGen3D MCSMv2 Primitive Implementation Plan in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: ProGen3D MCSMv2 Primitive Implementation Plan, Fast Delivery Strategy, Efficiency Rules, Scope.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li><li>Follow the explicit procedure or phased sequence recorded by the source.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="mcsmv2-implementation-report--a5b824fc.html">MCSMv2 Implementation Report</a> — recommended orientation from the generated learning graph.</li><li><a href="mcsmv2-quick-start.html">MCSMv2 Quick Start</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">ProGen3D MCSMv2 Primitive Implementation Plan</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>ProGen3D MCSMv2 Primitive Implementation Plan</td></tr><tr><td><dfn title="Named by the source document">Fast Delivery Strategy</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>1. Fast Delivery Strategy</td></tr><tr><td><dfn title="Named by the source document">Efficiency Rules</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Efficiency Rules</td></tr><tr><td><dfn title="Named by the source document">Scope</dfn></td><td>The phrase appears 2 times in the source and is retained as a learning-path concept.</td><td>2. Scope, In Scope</td></tr><tr><td><dfn title="Named by the source document">In Scope</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>In Scope</td></tr><tr><td><dfn title="Named by the source document">Deferred Until the Core Slice Passes</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Deferred Until the Core Slice Passes</td></tr><tr><td><dfn title="Named by the source document">Required Object Model</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3. Required Object Model</td></tr><tr><td><dfn title="Named by the source document">Reused Canonical Models</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>3.1 Reused Canonical Models</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="aware geometry while semantic sections, panel cuts, arches, and joints remain present">LOD</dfn></td><td>aware geometry while semantic sections, panel cuts, arches, and joints remain present</td></tr><tr><td><dfn title="interpolated lower-body half-width, vertical centre, and half-height fields">PCHIP</dfn></td><td>interpolated lower-body half-width, vertical centre, and half-height fields</td></tr><tr><td><dfn title="generated observations with ProGen3D candidate views">MCP</dfn></td><td>generated observations with ProGen3D candidate views</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Status: Implemented and MCSMv2-validated; cross-version release certification retains one inherited MCPOMv1 visual exception.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes ProGen3D MCSMv2 Primitive Implementation Plan, Fast Delivery Strategy, Efficiency Rules, Scope. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: 1. Fast Delivery Strategy, Efficiency Rules, 2. Scope, In Scope, Deferred Until the Core Slice Passes. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: passed: 9, failed: 2.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves 4 code blocks, 2 tables and the source SHA-256 <code>d5685b6bcccd4a484a66e14337f084ddc32fd33ee20c94138d93d2076a89d47f</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-1-fast-delivery-strategy">1. Fast Delivery Strategy</a></li><li><a href="#source-efficiency-rules">Efficiency Rules</a></li><li><a href="#source-2-scope">2. Scope</a></li><li><a href="#source-in-scope">In Scope</a></li><li><a href="#source-deferred-until-the-core-slice-passes">Deferred Until the Core Slice Passes</a></li><li><a href="#source-3-required-object-model">3. Required Object Model</a></li><li><a href="#source-3-1-reused-canonical-models">3.1 Reused Canonical Models</a></li><li><a href="#source-3-2-new-model-classes">3.2 New Model Classes</a></li><li><a href="#source-family-and-variant-models">Family and Variant Models</a></li><li><a href="#source-semantic-section-models">Semantic Section Models</a></li><li><a href="#source-character-curve-models">Character Curve Models</a></li><li><a href="#source-scalar-field-models">Scalar Field Models</a></li><li><a href="#source-wheel-envelope-models">Wheel Envelope Models</a></li><li><a href="#source-surface-panel-and-engineering-models">Surface, Panel, and Engineering Models</a></li><li><a href="#source-4-required-services">4. Required Services</a></li><li><a href="#source-source-and-catalog-services">Source and Catalog Services</a></li><li><a href="#source-semantic-geometry-services">Semantic Geometry Services</a></li><li><a href="#source-implicit-geometry-services">Implicit Geometry Services</a></li><li><a href="#source-engineering-services">Engineering Services</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>9</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>2</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>0</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>0</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is examples/ModernVehicleModel/MCSMv2_Modern_Car_Complete/PROGEN3D_PRIMITIVES_IMPLEMENTATION_PLAN.md.</li><li>Learn the named concepts: ProGen3D MCSMv2 Primitive Implementation Plan, Fast Delivery Strategy, Efficiency Rules, Scope.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li><li>Compare the generated walkthrough with the explicit source procedure listed below.</li></ol><h3>Explicit source procedure</h3><ol><li>Load the reference variant parameters generated by moderncarmcsmv2.py.</li><li>Evaluate its semantic section field.</li><li>subtract its four swept wheel envelopes.</li><li>Generate one watertight native body mesh.</li><li>Render front, side, and top views.</li><li>Require deterministic output and silhouette IoU of at least 0.80.</li><li>Add a generator mode that emits a deterministic MCSMv2 native catalog artifact.</li><li>Record source hashes for the Python generator, variant data, station data, curve data, and target grammar.</li><li>Document the coordinate mapping:</li><li>Remove committed pycache directories and .pyc files.</li><li>Add a two-run generator determinism check.</li><li>Introduce ImplicitScalarField.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source example type:</strong> text fenced block.</p>
+<p>Read the example literally, then locate its surrounding source section before treating it as a command, expected output, schema, or pseudocode.</p>
+</div>
+<pre aria-label="First worked example from the source" tabindex="0"><code class="language-text">ImplicitScalarField
+  &lt;|-- SemanticSectionBodyField
+  &lt;|-- SuperellipsoidField
+  &lt;|-- PackageBoundaryField
+  &lt;|-- SmoothMaximumField
+  &lt;|-- DifferenceField</code></pre>
+<details class="solution"><summary>Worked interpretation</summary><ol><li>Identify inputs, flags, identifiers, units, or schema fields present in the block.</li><li>Read the immediately surrounding source paragraphs for prerequisites and status.</li><li>Do not infer that the example passed unless the source associates it with evidence.</li><li>Use the source SHA-256 to ensure the example has not drifted.</li></ol></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for ProGen3D MCSMv2 Primitive Implementation Plan" data="../../assets/diagrams/pages/progen3d-mcsmv2-primitive-implementation-plan.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>examples/ModernVehicleModel/MCSMv2_Modern_Car_Complete/PROGEN3D_PRIMITIVES_IMPLEMENTATION_PLAN.md</code></p><p>SHA-256: <code>d5685b6bcccd4a484a66e14337f084ddc32fd33ee20c94138d93d2076a89d47f</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>35 headings, 4 fenced code blocks, 2 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>implementers, architects, and reviewers planning future work.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li><li>Skipping recorded failures because the same document also contains successful evidence.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Status: Implemented and MCSMv2-validated; cross-version release certification retains one inherited MCPOMv1 visual exception.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Planned; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>ProGen3D MCSMv2 Primitive Implementation Plan, Fast Delivery Strategy, Efficiency Rules, Scope, In Scope</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="mcsmv2-implementation-report--a5b824fc.html">MCSMv2 Implementation Report</a> <span class="status-badge status--documented">Documented</span><br/><small>MCSMv2 is implemented as a working Python reference generator and a native C++ ProGen3D object model rather than only a paper architecture. It retains the MCSMv1 official-source package basis and adds:</small></li><li><a href="mcsmv2-1-native-implementation-verification.html">MCSMv2.1 Native Implementation Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>Date: Monday, August 24, 2026 Implementation status: Complete Cross-version certification status: Blocked only by the inherited MCPOMv1 side-view baseline</small></li><li><a href="mcsmv2-0-1-native-integration-verification.html">MCSMv2.0.1 Native Integration Verification</a> <span class="status-badge status--evidence">Evidence</span><br/><small>Date: Monday, August 24, 2026</small></li><li><a href="mcsmv2-validation-summary.html">MCSMv2 Validation Summary</a> <span class="status-badge status--evidence">Evidence</span><br/><small>The body mesh is a validated concept-level hybrid model. Class-A, CFD, crash and production manufacturing approval are outside this implementation.</small></li><li><a href="mcsmv2-implementation-report--baf95a48.html">MCSMv2 Implementation Report</a> <span class="status-badge status--evidence">Evidence</span><br/><small>MCSMv2 is implemented as a working Python reference generator rather than only a paper architecture. It retains the MCSMv1 official-source package basis and adds:</small></li><li><a href="mcsmv2-quick-start.html">MCSMv2 Quick Start</a> <span class="status-badge status--documented">Documented</span><br/><small>Generate one variant without image previews:</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/ModernVehicleModel/MCSMv2_Modern_Car_Complete/PROGEN3D_PRIMITIVES_IMPLEMENTATION_PLAN.md"><code>examples/ModernVehicleModel/MCSMv2_Modern_Car_Complete/PROGEN3D_PRIMITIVES_IMPLEMENTATION_PLAN.md</code></a></p>
+<p><strong>Source digest:</strong> <code>d5685b6bcccd4a484a66e14337f084ddc32fd33ee20c94138d93d2076a89d47f</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-progen3d-mcsmv2-primitive-implementation-plan">ProGen3D MCSMv2 Primitive Implementation Plan</h2><p class="section-guide">Reading guide: this source section records “ProGen3D MCSMv2 Primitive Implementation Plan”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Status:</strong> Implemented and MCSMv2-validated; cross-version release certification retains one inherited <code>MCP_OMv1</code> visual exception.</p>
+<p><strong>Date:</strong> 2026-08-24</p>
+<p class="source-status--passed"><strong>Target:</strong> <code>examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_Modern_Car_Complete/</code>
+<strong>Primary objective:</strong> Implement the smallest native ProGen3D primitive set that can reproduce the MCSMv2 reference vehicle first, then the complete four-variant family, without breaking MVPv1, MVPv2, MVPv2.5, MVPv2.6, or MCP_OMv1 behavior.</p>
+<p>Implementation evidence and the compatibility exception are recorded in
+<code>MCSMv2_NATIVE_IMPLEMENTATION_VERIFICATION.md</code> and
+<code>tests/evidence/mcsmv2_native_implementation_2026-08-24.json</code>.</p>
+<h3 id="source-1-fast-delivery-strategy">1. Fast Delivery Strategy</h3><p class="section-guide">Reading guide: this source section records “1. Fast Delivery Strategy”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Use a vertical slice rather than implementing every MCSMv2 concept simultaneously.</p>
+<p>The first usable milestone is:</p>
+<ol>
+<li>Load the reference variant parameters generated by <code>modern_car_mcsmv2.py</code>.</li>
+<li>Evaluate its semantic section field.</li>
+<li>subtract its four swept wheel envelopes.</li>
+<li>Generate one watertight native body mesh.</li>
+<li>Render front, side, and top views.</li>
+<li>Require deterministic output and silhouette IoU of at least <code>0.80</code>.</li>
+</ol>
+<p>Only after this slice passes should panel graphs, body-in-white members, occupant envelopes, and functional packages be added.</p>
+<h4 id="source-efficiency-rules">Efficiency Rules</h4><p class="section-guide">Reading guide: this source section records “Efficiency Rules”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Reuse existing <code>SurfaceLoft</code>, <code>CurveNetworkSurface</code>, <code>VariableSectionSweep</code>, <code>FormedPanel</code>, <code>PanelCut</code>, <code>EdgeFlange</code>, <code>CompoundShape</code>, and topology services.</li>
+<li>Extract the existing marching-tetrahedra implementation once; do not create a second MCSMv2-only mesher.</li>
+<li>Keep the Python generator as the source authority until native parity is proven.</li>
+<li>Generate native catalog data; do not manually duplicate the four variant definitions.</li>
+<li>Give every parameter and semantic fact one canonical owner.</li>
+<li>Run low-resolution focused tests during development and full-resolution visual gates only at milestone boundaries.</li>
+<li>Keep the editor preview at bounded LOD and export high-resolution meshes separately.</li>
+<li class="source-status--failed">Fail closed when source data, coordinate conversion, topology, or evidence is incomplete.</li>
+</ul>
+<h3 id="source-2-scope">2. Scope</h3><p class="section-guide">Reading guide: this source section records “2. Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h4 id="source-in-scope">In Scope</h4><p class="section-guide">Reading guide: this source section records “In Scope”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Native MCSMv2 semantic-section model.</li>
+<li>Typed implicit scalar-field graph.</li>
+<li>Swept wheel motion envelopes.</li>
+<li>Generic iso-surface generation.</li>
+<li>Semantic surface and character-curve extraction.</li>
+<li>Panel patch graph.</li>
+<li>Body-in-white assembly graph.</li>
+<li>Occupant and functional package envelopes.</li>
+<li>Executable grammar lowering.</li>
+<li>Deterministic hashes, validation reports, and three-view evidence.</li>
+<li>Four variants: <code>reference</code>, <code>track</code>, <code>aero</code>, and <code>crossover</code>.</li>
+</ul>
+<h4 id="source-deferred-until-the-core-slice-passes">Deferred Until the Core Slice Passes</h4><p class="section-guide">Reading guide: this source section records “Deferred Until the Core Slice Passes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Production Class-A surfacing.</li>
+<li>Manufacturing-grade panel thickness and hemming.</li>
+<li>Detailed suspension, drivetrain, interior, and closure animation.</li>
+<li>Arbitrary user-authored field expressions in the editor.</li>
+<li>Real-time full-resolution iso-surface regeneration on every editor keystroke.</li>
+</ul>
+<h3 id="source-3-required-object-model">3. Required Object Model</h3><p class="section-guide">Reading guide: this source section records “3. Required Object Model”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The implementation must remain UML-readable and separate model, relationship, context, and service responsibilities.</p>
+<h4 id="source-3-1-reused-canonical-models">3.1 Reused Canonical Models</h4><p class="section-guide">Reading guide: this source section records “3.1 Reused Canonical Models”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Reuse these existing concepts rather than introducing parallel parameter owners:</p>
+<ul>
+<li><code>ModernCarCoordinateFrame</code></li>
+<li><code>VehiclePackageParameters</code></li>
+<li><code>VehicleWheelParameters</code></li>
+<li><code>VehiclePowertrainIntent</code></li>
+<li><code>ParametricModelGenerationPolicy</code></li>
+<li><code>GeneratedBodyMesh</code></li>
+<li><code>MeshTopologyReport</code></li>
+</ul>
+<p>Add an explicit conversion service when MCSMv2 source values do not exactly match an existing type.</p>
+<h4 id="source-3-2-new-model-classes">3.2 New Model Classes</h4><p class="section-guide">Reading guide: this source section records “3.2 New Model Classes”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place MCSMv2 model classes under <code>include/vehicle/mcsmv2/model/</code>.</p>
+<h5 id="source-family-and-variant-models">Family and Variant Models</h5>
+<ul>
+<li><code>ModernCarSemanticFamily</code> composes the four supported variants.</li>
+<li><code>ModernCarSemanticVariant</code> composes package, platform, style, wheel, powertrain, closure, section, and evidence definitions.</li>
+<li><code>ModernCarSemanticSourceManifest</code> owns generator version, source hashes, coordinate convention, and artifact provenance.</li>
+<li><code>ModernCarGenerationContext</code> associates one variant with generation policy and evidence policy.</li>
+</ul>
+<h5 id="source-semantic-section-models">Semantic Section Models</h5>
+<ul>
+<li><code>VehicleSemanticSectionField</code> composes eleven ordered <code>VehicleSemanticSectionStation</code> objects.</li>
+<li><code>VehicleSemanticSectionStation</code> composes eight <code>VehicleSectionLandmark</code> objects.</li>
+<li><code>VehicleSectionLandmark</code> owns a semantic role and one source-space point.</li>
+<li><code>VehicleSemanticStationRole</code> enumerates tail, axle, door, pillar, hood, nose, and face roles.</li>
+<li><code>VehicleSectionLandmarkRole</code> enumerates underbody, rocker, lower body, shoulder, belt, glass shoulder, roof rail, and roof crown roles.</li>
+<li><code>ShapePreservingInterpolationPolicy</code> owns PCHIP interpolation settings.</li>
+</ul>
+<h5 id="source-character-curve-models">Character Curve Models</h5>
+<ul>
+<li><code>VehicleCharacterCurveNetwork</code> composes fourteen named <code>VehicleCharacterCurve</code> objects.</li>
+<li><code>VehicleCharacterCurve</code> owns its semantic role, sampled source points, and section provenance.</li>
+<li><code>VehicleCharacterCurveRole</code> identifies centre spine, roof, glass, belt, shoulder, rocker, and underbody curves.</li>
+</ul>
+<h5 id="source-scalar-field-models">Scalar Field Models</h5>
+<p>Introduce a real conceptual abstraction:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">ImplicitScalarField
+  &lt;|-- SemanticSectionBodyField
+  &lt;|-- SuperellipsoidField
+  &lt;|-- PackageBoundaryField
+  &lt;|-- SmoothMaximumField
+  &lt;|-- DifferenceField
+</code></pre>
+<p><code>ImplicitScalarField</code> declares:</p>
+<ul>
+<li><code>evaluateAt(const glm::dvec3 &amp;source_point)</code></li>
+<li><code>evaluationBounds()</code></li>
+<li><code>deterministicHash()</code></li>
+</ul>
+<p>Concrete fields own their inputs explicitly. Do not hide the field graph in anonymous lambdas.</p>
+<h5 id="source-wheel-envelope-models">Wheel Envelope Models</h5>
+<ul>
+<li><code>VehicleWheelMotionEnvelope</code> composes wheel centre, radius, width, steer range, suspension travel, and clearance.</li>
+<li><code>VehicleWheelPositionRelationship</code> associates an envelope with front/rear and left/right axle roles.</li>
+<li><code>VehicleWheelEnvelopeSet</code> composes exactly four wheel envelopes.</li>
+</ul>
+<h5 id="source-surface-panel-and-engineering-models">Surface, Panel, and Engineering Models</h5>
+<ul>
+<li><code>VehicleSemanticSurface</code> owns the generated semantic surface and section/curve provenance.</li>
+<li><code>VehiclePanelPatchGraph</code> composes <code>VehiclePanelPatch</code> and <code>VehiclePanelAdjacencyRelationship</code> objects.</li>
+<li><code>VehicleBodyInWhiteAssembly</code> composes purpose-specific structural members.</li>
+<li><code>BodyInWhiteJointRelationship</code> associates two structural members through a shared datum.</li>
+<li><code>VehicleOccupantEnvelopeSystem</code> composes seat, eye-point, head-clearance, and reach envelopes.</li>
+<li><code>VehicleFunctionalPackageSystem</code> composes powertrain and storage envelopes.</li>
+</ul>
+<h3 id="source-4-required-services">4. Required Services</h3><p class="section-guide">Reading guide: this source section records “4. Required Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Place MCSMv2 services under <code>include/vehicle/mcsmv2/service/</code> and <code>src/vehicle/mcsmv2/service/</code>.</p>
+<h4 id="source-source-and-catalog-services">Source and Catalog Services</h4><p class="section-guide">Reading guide: this source section records “Source and Catalog Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>ModernCarSemanticCatalogFactory</code></li>
+<li><code>ModernCarSemanticSourceValidationService</code></li>
+<li><code>ModernCarSemanticCoordinateConversionService</code></li>
+<li><code>ModernCarSemanticDeterministicHashService</code></li>
+</ul>
+<h4 id="source-semantic-geometry-services">Semantic Geometry Services</h4><p class="section-guide">Reading guide: this source section records “Semantic Geometry Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>VehicleSemanticSectionInterpolationService</code></li>
+<li><code>VehicleSemanticSectionValidationService</code></li>
+<li><code>VehicleCharacterCurveExtractionService</code></li>
+<li><code>VehicleSemanticSurfaceGenerationService</code></li>
+<li><code>VehicleSemanticSurfaceValidationService</code></li>
+</ul>
+<h4 id="source-implicit-geometry-services">Implicit Geometry Services</h4><p class="section-guide">Reading guide: this source section records “Implicit Geometry Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>ImplicitScalarFieldEvaluationService</code></li>
+<li><code>VehicleWheelMotionEnvelopeConstructionService</code></li>
+<li><code>ImplicitSurfaceMeshingService</code></li>
+<li><code>ImplicitSurfaceMeshingValidationService</code></li>
+</ul>
+<p><code>ImplicitSurfaceMeshingService</code> should be extracted from <code>ModernCarIsoSurfaceGenerationService</code>. The existing MCP service then becomes an adapter that supplies its own field and generation request. This preserves MCP_OMv1 behavior while avoiding duplicate marching-tetrahedra code.</p>
+<h4 id="source-engineering-services">Engineering Services</h4><p class="section-guide">Reading guide: this source section records “Engineering Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>VehiclePanelPatchExtractionService</code></li>
+<li><code>VehiclePanelPatchValidationService</code></li>
+<li><code>VehicleBodyInWhiteAssemblyService</code></li>
+<li><code>VehicleBodyInWhiteValidationService</code></li>
+<li><code>VehicleOccupantEnvelopeConstructionService</code></li>
+<li><code>VehicleFunctionalPackageConstructionService</code></li>
+</ul>
+<h4 id="source-grammar-services">Grammar Services</h4><p class="section-guide">Reading guide: this source section records “Grammar Services”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li><code>ModernCarSemanticGrammarParsingService</code></li>
+<li><code>ModernCarSemanticGrammarLoweringService</code></li>
+<li><code>ModernCarSemanticPreviewGenerationService</code></li>
+</ul>
+<p>The parser owns semantic declarations. The lowering service converts validated declarations into existing executable ProGen3D geometry operations.</p>
+<h3 id="source-5-implementation-phases">5. Implementation Phases</h3><p class="section-guide">Reading guide: this source section records “5. Implementation Phases”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>Indicative delivery targets assume one focused developer using the existing ProGen3D geometry stack:</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Milestone</th>
+<th scope="col" style="text-align:right">Target effort</th>
+<th scope="col">Cumulative result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source contract</td>
+<td style="text-align:right"><code>0.5 day</code></td>
+<td>deterministic native inputs</td>
+</tr>
+<tr>
+<td>Generic iso-surface kernel</td>
+<td style="text-align:right"><code>1 day</code></td>
+<td>reusable field meshing</td>
+</tr>
+<tr>
+<td>Reference vertical slice</td>
+<td style="text-align:right"><code>1.5 days</code></td>
+<td>first accepted native MCSMv2 vehicle</td>
+</tr>
+<tr>
+<td>Four-variant family</td>
+<td style="text-align:right"><code>1 day</code></td>
+<td>parametric family body generation</td>
+</tr>
+<tr>
+<td>Semantic curves and surface</td>
+<td style="text-align:right"><code>1 day</code></td>
+<td>semantic design structure</td>
+</tr>
+<tr>
+<td>Engineering object graphs</td>
+<td style="text-align:right"><code>1.5-2 days</code></td>
+<td>panels, body-in-white, occupants, packages</td>
+</tr>
+<tr>
+<td>Grammar and release audit</td>
+<td style="text-align:right"><code>1 day</code></td>
+<td>executable examples and compatibility evidence</td>
+</tr>
+</tbody>
+</table></div>
+<p>The first visible accepted vehicle should therefore be targeted within approximately three focused development days. These are planning estimates, not completion evidence.</p>
+<h4 id="source-phase-0-freeze-the-source-contract">Phase 0 - Freeze the Source Contract</h4><p class="section-guide">Reading guide: this source section records “Phase 0 - Freeze the Source Contract”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Establish an exact baseline before native implementation.</p>
+<p>Tasks:</p>
+<ol>
+<li>Add a generator mode that emits a deterministic MCSMv2 native catalog artifact.</li>
+<li>Record source hashes for the Python generator, variant data, station data, curve data, and target grammar.</li>
+<li>Document the coordinate mapping:
+<ul>
+<li>MCSMv2 source: <code>+X</code> longitudinal/front, <code>+Y</code> lateral/right, <code>+Z</code> up.</li>
+<li>ProGen3D: <code>+X</code> right, <code>+Y</code> up, <code>+Z</code> forward.</li>
+<li>Conversion: <code>progen(x,y,z) = source(y,z,x)</code>.</li>
+</ul>
+</li>
+<li>Remove committed <code>__pycache__</code> directories and <code>.pyc</code> files.</li>
+<li>Add a two-run generator determinism check.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Two generator runs produce identical hashes and artifact lists.</li>
+<li class="source-status--passed">All four variants have finite, complete, and ordered source data.</li>
+</ul>
+<h4 id="source-phase-1-extract-the-generic-iso-surface-kernel">Phase 1 - Extract the Generic Iso-Surface Kernel</h4><p class="section-guide">Reading guide: this source section records “Phase 1 - Extract the Generic Iso-Surface Kernel”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Reuse one meshing implementation for MCP_OMv1 and MCSMv2.</p>
+<p>Tasks:</p>
+<ol>
+<li>Introduce <code>ImplicitScalarField</code>.</li>
+<li>Introduce <code>ImplicitSurfaceGenerationRequest</code> with bounds, iso value, sample counts, smoothing, normalization, and LOD.</li>
+<li>Move marching-tetrahedra assembly from <code>ModernCarIsoSurfaceGenerationService</code> into <code>ImplicitSurfaceMeshingService</code>.</li>
+<li>Adapt <code>ModernCarIsoSurfaceGenerationService</code> to the generic service without changing output hashes unless a documented defect requires correction.</li>
+<li>Add field-independent sphere and box iso-surface tests.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li class="source-status--passed">MCP_OMv1 native generation tests still pass.</li>
+<li>Generic sphere and box fields generate finite, watertight meshes.</li>
+<li>Identical requests produce identical mesh hashes.</li>
+</ul>
+<h4 id="source-phase-2-build-the-reference-vertical-slice">Phase 2 - Build the Reference Vertical Slice</h4><p class="section-guide">Reading guide: this source section records “Phase 2 - Build the Reference Vertical Slice”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Produce the first native MCSMv2 body as quickly as possible.</p>
+<p>Tasks:</p>
+<ol>
+<li>Generate the reference variant catalog entry.</li>
+<li>Implement semantic station and landmark models.</li>
+<li>Implement PCHIP section interpolation.</li>
+<li>Implement <code>SemanticSectionBodyField</code>.</li>
+<li>Implement four <code>VehicleWheelMotionEnvelope</code> objects.</li>
+<li>Compose the body using <code>DifferenceField</code>.</li>
+<li>Generate the reference body at low development resolution.</li>
+<li>Convert the mesh into ProGen3D coordinates.</li>
+<li>Render front, side, and top evidence views.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Body is finite, watertight, manifold, grounded, and correctly oriented.</li>
+<li>Wheel-envelope clearance passes.</li>
+<li>Front, side, and top silhouette IoU are each at least <code>0.80</code>.</li>
+<li>A second run produces the same mesh and evidence hashes.</li>
+</ul>
+<p>This phase is the first releaseable development milestone.</p>
+<h4 id="source-phase-3-expand-to-the-four-variant-family">Phase 3 - Expand to the Four-Variant Family</h4><p class="section-guide">Reading guide: this source section records “Phase 3 - Expand to the Four-Variant Family”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Prove that the model is parametric rather than reference-specific.</p>
+<p>Tasks:</p>
+<ol>
+<li>Generate <code>track</code>, <code>aero</code>, and <code>crossover</code> catalog entries.</li>
+<li>Reuse the same field graph and services for every variant.</li>
+<li>Add variant-specific package-bound correction only through typed parameters.</li>
+<li>Generate low, preview, and evidence LOD policies.</li>
+<li>Compare native section samples and field samples against the Python reference.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li class="source-status--passed">All four variants pass topology, bounds, grounding, orientation, wheel-clearance, and deterministic-hash checks.</li>
+<li>All twelve front/side/top comparisons meet <code>IoU &gt;= 0.80</code>.</li>
+<li>No variant-specific procedural branch is added unless represented as an explicit style policy.</li>
+</ul>
+<h4 id="source-phase-4-add-semantic-curves-and-surface">Phase 4 - Add Semantic Curves and Surface</h4><p class="section-guide">Reading guide: this source section records “Phase 4 - Add Semantic Curves and Surface”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Preserve semantic design structure, not only the final implicit mesh.</p>
+<p>Tasks:</p>
+<ol>
+<li>Extract the fourteen character curves from the section field.</li>
+<li>Validate curve-to-section intersections within <code>0.002 m</code>.</li>
+<li>Generate <code>VehicleSemanticSurface</code> with existing surface-loft infrastructure.</li>
+<li>Preserve station, landmark, and curve provenance on generated mesh tags.</li>
+<li>Compare surface samples with Python outputs.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Curves are ordered, finite, and intersect their source sections.</li>
+<li>Surface normals and topology are valid.</li>
+<li>Semantic surface hashes are deterministic.</li>
+</ul>
+<h4 id="source-phase-5-add-panels-and-engineering-objects">Phase 5 - Add Panels and Engineering Objects</h4><p class="section-guide">Reading guide: this source section records “Phase 5 - Add Panels and Engineering Objects”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed"><strong>Goal:</strong> Complete the MCSMv2 semantic and engineering graph.</p>
+<p>Tasks:</p>
+<ol>
+<li>Implement panel patch selection using semantic tags before geometric cutting.</li>
+<li>Create hood, roof, doors, quarters, hatch, and bumper patches.</li>
+<li>Add adjacency relationships and panel validation.</li>
+<li>Build body-in-white members with <code>VariableSectionSweep</code>, <code>FormedPanel</code>, and <code>CompoundShape</code>.</li>
+<li>Add explicit body-in-white joint relationships.</li>
+<li>Add occupant and functional package envelopes.</li>
+</ol>
+<p>Exit gate:</p>
+<ul>
+<li>Required panels exist and have valid adjacency.</li>
+<li>Body-in-white graph is connected.</li>
+<li>Occupant envelopes remain contained.</li>
+<li>Functional envelopes fit inside the package without invalid intersections.</li>
+</ul>
+<h4 id="source-phase-6-make-the-grammar-executable">Phase 6 - Make the Grammar Executable</h4><p class="section-guide">Reading guide: this source section records “Phase 6 - Make the Grammar Executable”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Goal:</strong> Replace the descriptive target grammar with parser-supported, lowered geometry.</p>
+<p>Tasks:</p>
+<ol>
+<li>Add grammar symbols only after their model and service owners exist.</li>
+<li>Parse <code>SemanticSectionField</code>, <code>CharacterCurveNetwork</code>, <code>ImplicitScaffold</code>, <code>SweptWheelEnvelope</code>, <code>IsoSurface</code>, and validation declarations.</li>
+<li>Add <code>GeneratedMeshReference</code> as a compact grammar primitive that resolves an immutable <code>ProceduralMeshRepository</code> key.</li>
+<li>Lower compact semantic declarations into <code>GeneratedMeshReference</code> instances rather than embedding mesh vertices in grammar text.</li>
+<li>Require a material argument for every geometric <code>!I(...)</code> instance.</li>
+<li>Keep validation declarations outside geometry instance syntax.</li>
+<li>Generate one executable grammar per variant plus a family catalog grammar.</li>
+</ol>
+<p>Target semantic grammar:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">MCSMv2ReferenceBody -&gt;
+[
+    !I(
+        IsoSurface(
+            field(
+                DifferenceField(
+                    source(SemanticSectionBodyField(MCSMv2ReferenceSections))
+                    subtract(MCSMv2ReferenceWheelEnvelopes)
+                )
+            )
+            isoValue(0)
+            resolution(128 72 72)
+            detail(LOD2)
+        )
+        material(redmetallicpaint)
+        alpha(1)
+        texscale(0.16)
+    )
+]
+</code></pre>
+<p>Fast executable lowering:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">MCSMv2ReferenceBody -&gt;
+[
+    !I(
+        GeneratedMeshReference(
+            meshKey(MCSMv2ReferenceBodyMesh)
+            detail(LOD2)
+        )
+        material(redmetallicpaint)
+        alpha(1)
+        texscale(0.16)
+    )
+]
+</code></pre>
+<p>Exit gate:</p>
+<ul>
+<li>All generated grammars parse without fallback entry rules.</li>
+<li>No <code>Instance syntax requires a material argument</code> diagnostic occurs.</li>
+<li>Grammar-generated meshes match direct-service hashes.</li>
+</ul>
+<h4 id="source-phase-7-compatibility-and-release-audit">Phase 7 - Compatibility and Release Audit</h4><p class="section-guide">Reading guide: this source section records “Phase 7 - Compatibility and Release Audit”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed"><strong>Goal:</strong> Prove additive integration and complete the evidence package.</p>
+<p>Run focused MCSMv2 gates first, then existing compatibility gates.</p>
+<p>Required new scripts:</p>
+<ul>
+<li><code>tests/run_mcsmv2_source_contract_checks.sh</code></li>
+<li><code>tests/run_mcsmv2_semantic_section_checks.sh</code></li>
+<li><code>tests/run_mcsmv2_implicit_body_checks.sh</code></li>
+<li><code>tests/run_mcsmv2_grammar_checks.sh</code></li>
+<li><code>tests/run_mcsmv2_visual_checks.sh</code></li>
+<li><code>tests/run_mcsmv2_engineering_checks.sh</code></li>
+</ul>
+<p>Required existing gates:</p>
+<ul>
+<li><code>tests/run_mcp_omv1_checks.sh</code></li>
+<li><code>tests/run_mcp_omv1_grammar_checks.sh</code></li>
+<li><code>tests/run_mcp_omv1_visual_checks.sh</code></li>
+<li><code>tests/run_mvp26_parametric_integration_checks.sh</code></li>
+<li><code>tests/run_mvpv25_hatchback_checks.sh</code></li>
+<li><code>tests/run_mvpv25_hatchback_visual_checks.sh</code></li>
+<li><code>tests/run_mvpv2_hatchback_fitting_checks.sh</code></li>
+<li><code>tests/run_mvpv2_hatchback_visual_checks.sh</code></li>
+<li>MVPv1 red hatchback and AWD hatchback grammar/visual checks.</li>
+<li><code>make -j2 progen3d-editor-gui</code></li>
+</ul>
+<p>Release gate:</p>
+<ul>
+<li>Every requirement maps to a test or evidence artifact.</li>
+<li>No compatibility gate regresses.</li>
+<li>All generated artifacts have deterministic hashes.</li>
+<li>The package contains no <code>.pyc</code>, transient cache, or untracked temporary output.</li>
+</ul>
+<h3 id="source-6-fast-development-test-matrix">6. Fast Development Test Matrix</h3><p class="section-guide">Reading guide: this source section records “6. Fast Development Test Matrix”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<div aria-label="Scrollable table" class="table-scroll" tabindex="0"><table role="table">
+<thead>
+<tr>
+<th scope="col">Development loop</th>
+<th scope="col" style="text-align:right">Resolution</th>
+<th scope="col">Variants</th>
+<th scope="col">Required checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field math</td>
+<td style="text-align:right">sampled points only</td>
+<td>reference</td>
+<td>finite values, Python parity</td>
+</tr>
+<tr>
+<td>Mesh smoke</td>
+<td style="text-align:right"><code>32 x 20 x 20</code></td>
+<td>reference</td>
+<td>non-empty, finite, bounded</td>
+</tr>
+<tr>
+<td>Topology loop</td>
+<td style="text-align:right"><code>64 x 36 x 36</code></td>
+<td>reference</td>
+<td>watertight, manifold, clearance</td>
+</tr>
+<tr>
+<td>Family loop</td>
+<td style="text-align:right"><code>64 x 36 x 36</code></td>
+<td>all four</td>
+<td>deterministic hashes, package bounds</td>
+</tr>
+<tr>
+<td>Visual preview</td>
+<td style="text-align:right">LOD2</td>
+<td>all four</td>
+<td>front/side/top orientation and grounding</td>
+</tr>
+<tr>
+<td>Acceptance</td>
+<td style="text-align:right"><code>128 x 72 x 72</code> or approved equivalent</td>
+<td>all four</td>
+<td>topology and <code>IoU &gt;= 0.80</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Do not run full-resolution exports during ordinary unit-test iteration.</p>
+<h3 id="source-7-performance-and-editor-safety">7. Performance and Editor Safety</h3><p class="section-guide">Reading guide: this source section records “7. Performance and Editor Safety”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<ul>
+<li>Cache field samples by variant hash and generation policy hash.</li>
+<li>Cache generated meshes in <code>ProceduralMeshRepository</code>.</li>
+<li>Separate preview LOD from evidence and export LOD.</li>
+<li>Use bounded editor preview meshes below the 16-bit draw-index limit per draw list.</li>
+<li>Split large meshes into deterministic submeshes when necessary.</li>
+<li>Do not inline tens of thousands of vertices into grammar text.</li>
+<li>Perform expensive generation outside the render loop.</li>
+<li>Preserve the last valid scene when parsing or generation fails.</li>
+</ul>
+<h3 id="source-8-recommended-file-sequence">8. Recommended File Sequence</h3><p class="section-guide">Reading guide: this source section records “8. Recommended File Sequence”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--failed">Implement files in this order to minimize blocked work:</p>
+<ol>
+<li><code>include/geometry/model/ImplicitScalarField.h</code></li>
+<li><code>include/geometry/model/ImplicitSurfaceGenerationRequest.h</code></li>
+<li><code>include/geometry/service/ImplicitSurfaceMeshingService.h</code></li>
+<li><code>src/geometry/service/ImplicitSurfaceMeshingService.cpp</code></li>
+<li>MCP adapter changes and regression tests.</li>
+<li><code>include/vehicle/mcsmv2/model/VehicleSemanticSectionField.h</code></li>
+<li><code>include/vehicle/mcsmv2/model/VehicleWheelMotionEnvelope.h</code></li>
+<li>MCSMv2 field and interpolation services.</li>
+<li>MCSMv2 source-catalog generator and generated catalog.</li>
+<li>Reference vertical-slice harness.</li>
+<li>Four-variant expansion.</li>
+<li>Character curves and semantic surface.</li>
+<li>Panels, body-in-white, occupants, and packages.</li>
+<li><code>GeneratedMeshReference</code> grammar primitive and resolver.</li>
+<li>Grammar parsing and lowering.</li>
+<li>Visual evidence and compatibility audit.</li>
+</ol>
+<h3 id="source-9-completion-definition">9. Completion Definition</h3><p class="section-guide">Reading guide: this source section records “9. Completion Definition”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--passed">The implementation is complete only when:</p>
+<ol>
+<li>The target MCSMv2 grammar concepts have explicit native model or relationship owners.</li>
+<li>All four variants are generated through the same parametric architecture.</li>
+<li>Native field and section samples agree with the Python reference within documented tolerances.</li>
+<li>Bodies are finite, grounded, correctly oriented, watertight, manifold, and deterministic.</li>
+<li class="source-status--passed">Wheel, occupant, package, panel, and body-in-white validations pass.</li>
+<li>Front, side, and top silhouette IoU is at least <code>0.80</code> for every variant.</li>
+<li>Direct-service and grammar-generated output hashes agree.</li>
+<li class="source-status--passed">MCP_OMv1 and MVPv1 through MVPv2.6 compatibility gates pass.</li>
+<li>Documentation records source hashes, generated hashes, limitations, and evidence paths.</li>
+</ol>
+<h3 id="source-10-fastest-critical-path">10. Fastest Critical Path</h3><p class="section-guide">Reading guide: this source section records “10. Fastest Critical Path”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p>The shortest safe path is:</p>
+<pre aria-label="Source code or command example" tabindex="0"><code class="language-text">Source Contract
+    -&gt; Generic Implicit Mesher
+    -&gt; Reference Semantic Sections
+    -&gt; Reference Wheel Envelopes
+    -&gt; Reference Body Mesh
+    -&gt; Three-View Gate
+    -&gt; Four Variants
+    -&gt; Grammar Lowering
+    -&gt; Engineering Graphs
+    -&gt; Compatibility Audit
+</code></pre>
+<p>This ordering produces visible, testable geometry early while postponing non-blocking engineering detail. It also creates one reusable implicit-geometry foundation rather than adding another isolated vehicle generator.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="progen3d-mcpomv1-modern-car-parametric-object-model-implementation-plan.html" rel="prev">← Previous: ProGen3D MCPOMv1 Modern Car Parametric Object Model Implementation Plan</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="progen3d-mcsmv2-0-1-native-integration-implementation-plan.html" rel="next">Next: ProGen3D MCSMv2.0.1 Native Integration Implementation Plan →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

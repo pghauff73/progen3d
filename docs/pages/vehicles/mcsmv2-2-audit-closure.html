@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Implemented at concept level. Each vehicle exports 32 named hardpoints covering front MacPherson and rear multi-link hypotheses. Validation checks finite coordinates, exact left/right mirroring and rigid wheel-pose transforms." name="description"/>
+<meta content="examples/ModernVehicleModel/MCSMv2_2_0_RELEASE/AUDIT_CLOSURE.md" name="source-markdown"/>
+<meta content="dbec3887daaa97dd1b074060c3b54677f301a1fdfd584f05be2b5c1c1667df3a" name="source-sha256"/>
+<meta content="Evidence" name="documentation-status"/>
+<title>MCSMv2.2 Audit Closure · ProGen3D Learning Documentation</title>
+<link href="../../assets/css/documentation.css" rel="stylesheet"/>
+<script defer="" src="../../assets/js/navigation.js"></script>
+<script defer="" src="../../assets/js/diagrams.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to lesson content</a>
+<header class="site-header">
+<div class="site-header__inner">
+<a class="site-brand" href="../../index.html">ProGen3D <small>Learning Documentation</small></a>
+<button aria-controls="site-navigation" aria-expanded="false" class="navigation-toggle" data-navigation-toggle="" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="site-navigation" data-site-navigation="" id="site-navigation">
+<ul>
+<li><a href="../../index.html#start-here">Start here</a></li>
+<li><a href="../../index.html#learning-paths">Learning paths</a></li>
+<li><a href="../../index.html#page-index">Page index</a></li>
+<li><a href="../../glossary.html">Glossary</a></li>
+<li><a href="../../markdown-coverage.html">Coverage</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="page-shell" id="main-content">
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+<ol>
+<li><a href="../../index.html">Documentation home</a></li>
+<li><a href="../../index.html#category-vehicles">Vehicles and Automotive Models</a></li>
+<li aria-current="page">MCSMv2.2 Audit Closure</li>
+</ol>
+</nav>
+<header class="lesson-header">
+<p class="eyebrow">Source-grounded educational lesson</p>
+<h1>MCSMv2.2 Audit Closure</h1>
+<p class="lead">Implemented at concept level. Each vehicle exports 32 named hardpoints covering front MacPherson and rear multi-link hypotheses. Validation checks finite coordinates, exact left/right mirroring and rigid wheel-pose transforms.</p>
+<div class="lesson-meta">
+<span class="status-badge status--evidence">Evidence</span>
+<span class="tag">Vehicles and Automotive Models</span>
+<span class="tag">About 1 minutes at 200 words/minute</span>
+<span class="tag">Source updated: Working tree source</span>
+</div>
+<div aria-label="Available explanation levels" class="reading-levels">
+<span class="level-indicator">Beginner</span>
+<span class="level-indicator">Novice</span>
+<span class="level-indicator">Advanced</span>
+<span class="level-indicator">Expert</span>
+</div>
+<div class="hero-actions">
+<a class="button" href="#learning-objectives">Start lesson</a>
+<a class="button button--secondary" href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/ModernVehicleModel/MCSMv2_2_0_RELEASE/AUDIT_CLOSURE.md">View source Markdown</a>
+<a class="button button--quiet" href="../../markdown-coverage.html">Coverage report</a>
+</div>
+<div class="progress-control">
+<button aria-pressed="false" class="button button--quiet" data-progress-key="dbec3887daaa97dd1b074060c3b54677f301a1fdfd584f05be2b5c1c1667df3a" type="button">Mark lesson complete</button>
+<span aria-live="polite" class="progress-status" data-progress-status="">Not yet completed</span>
+</div>
+</header>
+<section class="section-block" id="learning-objectives">
+<h2>Learning objectives</h2>
+<p class="section-introduction">These objectives are derived from the document title, source sections, procedures, and evidence markers.</p>
+<ul><li>Explain the purpose of MCSMv2.2 Audit Closure in plain language.</li><li>Distinguish documented behavior and evidence from proposals, pending work, hypotheses, and unresolved questions.</li><li>Locate and interpret the source concepts: MCSMv2.2 Audit Closure, Roadmap item 1: suspension hardpoints, Roadmap item 2: actual tyre pose sweeps, Roadmap item 3: opening doors, bonnet and hatch.</li><li>Trace commands, equations, constraints, tables, and conclusions back to the source Markdown.</li></ul>
+</section>
+<section class="section-block" id="prerequisites">
+<h2>Prerequisites</h2>
+<p class="section-introduction">The source does not declare a machine-readable prerequisite graph. These are recommended orientation pages, not invented technical requirements.</p>
+<ul><li><a href="../start/progen3d.html">ProGen3D</a> — recommended orientation from the generated learning graph.</li><li><a href="mcsmv2-2-known-limitations.html">MCSMv2.2 Known Limitations</a> — recommended orientation from the generated learning graph.</li><li><a href="mcsmv2-2-generation-notes.html">MCSMv2.2 Generation Notes</a> — recommended orientation from the generated learning graph.</li></ul>
+</section>
+<section class="section-block" id="concept-overview">
+<h2>Concept overview</h2>
+<p class="section-introduction">The concepts below come from the document title and its substantive section headings. Occurrence and section evidence point back to the source.</p>
+<div aria-label="Concept evidence table" class="table-scroll" tabindex="0">
+<table class="concept-evidence-table">
+<thead><tr><th scope="col">Concept</th><th scope="col">Source-grounded role</th><th scope="col">Where to deepen</th></tr></thead>
+<tbody><tr><td><dfn title="Named by the source document">MCSMv2.2 Audit Closure</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>MCSMv2.2 Audit Closure</td></tr><tr><td><dfn title="Named by the source document">Roadmap item 1: suspension hardpoints</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Roadmap item 1: suspension hardpoints</td></tr><tr><td><dfn title="Named by the source document">Roadmap item 2: actual tyre pose sweeps</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Roadmap item 2: actual tyre pose sweeps</td></tr><tr><td><dfn title="Named by the source document">Roadmap item 3: opening doors, bonnet and hatch</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Roadmap item 3: opening doors, bonnet and hatch</td></tr><tr><td><dfn title="Named by the source document">Roadmap item 4: helical moving side glass</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Roadmap item 4: helical moving side glass</td></tr><tr><td><dfn title="Named by the source document">Roadmap item 5: independent collision validation</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Roadmap item 5: independent collision validation</td></tr><tr><td><dfn title="Named by the source document">Assurance conclusion</dfn></td><td>The phrase appears 1 time in the source and is retained as a learning-path concept.</td><td>Assurance conclusion</td></tr></tbody>
+</table>
+</div>
+<h3>Terminology and abbreviations</h3>
+<p>Definitions are extracted from the source set where available. Unexpanded terms are visibly marked as needing clarification.</p>
+<div aria-label="Terminology table" class="table-scroll" tabindex="0">
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody><tr><td><dfn title="named grammar derived from the accepted OMv2 grammar">V3</dfn></td><td>named grammar derived from the accepted OMv2 grammar</td></tr></tbody>
+</table>
+</div>
+<p><a href="../../glossary.html">Open the complete generated glossary</a>.</p>
+</section>
+<section class="section-block" id="explanation-levels">
+<h2>Four-level explanation</h2>
+<p class="section-introduction">Each level adds detail without replacing the source. The expert level points to exact algorithms, equations, constraints, and evidence when the document contains them.</p>
+<div class="level-grid">
+<article class="level-card level-card--beginner explanation-level" data-level="beginner">
+<h3>Beginner</h3>
+<p>Implemented at concept level. Each vehicle exports 32 named hardpoints covering front MacPherson and rear multi-link hypotheses. Validation checks finite coordinates, exact left/right mirroring and rigid wheel-pose transforms.</p>
+<p><strong>Why this matters:</strong> this page gives a safe route from the project idea to the exact source wording, so a new reader does not have to infer implementation status from a filename alone.</p>
+</article>
+<details class="level-card level-card--novice explanation-level" data-level="novice" open="">
+<summary>Novice explanation</summary>
+<p>The source introduces or emphasizes MCSMv2.2 Audit Closure, Roadmap item 1: suspension hardpoints, Roadmap item 2: actual tyre pose sweeps, Roadmap item 3: opening doors, bonnet and hatch. Read the terminology table first, then follow the source headings in order. A status such as <em>Proposed</em> or <em>Pending</em> is not equivalent to implemented behavior.</p>
+</details>
+<details class="level-card level-card--advanced explanation-level" data-level="advanced">
+<summary>Advanced explanation</summary>
+<p>The document structure exposes its architecture or process through these early sections: Roadmap item 1: suspension hardpoints, Roadmap item 2: actual tyre pose sweeps, Roadmap item 3: opening doors, bonnet and hatch, Roadmap item 4: helical moving side glass, Roadmap item 5: independent collision validation. Study the transitions between them, then inspect code, commands, tables, and acceptance gates in the complete source lesson.</p>
+<p>Detected status evidence: proposed: 6, experimental: 1.</p>
+</details>
+<details class="level-card level-card--expert explanation-level" data-level="expert">
+<summary>Expert explanation</summary>
+<p>The expert reading preserves prose and list evidence and the source SHA-256 <code>dbec3887daaa97dd1b074060c3b54677f301a1fdfd584f05be2b5c1c1667df3a</code>. Treat formal definitions, algorithms, mathematical reasoning, edge cases, limitations, and research implications as authoritative only where the rendered source states them.</p>
+<p>Use the source digest and section anchors to review any generated interpretation against the exact document snapshot.</p>
+</details></div>
+</section>
+<section class="section-block" id="architecture-process">
+<h2>Architecture or process</h2>
+<p class="section-introduction">The source outline is treated as the authoritative process order. It is not reclassified as implemented unless the source states and evidences that status.</p>
+<ol class="source-outline"><li><a href="#source-roadmap-item-1-suspension-hardpoints">Roadmap item 1: suspension hardpoints</a></li><li><a href="#source-roadmap-item-2-actual-tyre-pose-sweeps">Roadmap item 2: actual tyre pose sweeps</a></li><li><a href="#source-roadmap-item-3-opening-doors-bonnet-and-hatch">Roadmap item 3: opening doors, bonnet and hatch</a></li><li><a href="#source-roadmap-item-4-helical-moving-side-glass">Roadmap item 4: helical moving side glass</a></li><li><a href="#source-roadmap-item-5-independent-collision-validation">Roadmap item 5: independent collision validation</a></li><li><a href="#source-assurance-conclusion">Assurance conclusion</a></li></ol><p><small>Outline links are resolved by the page script-free anchor repair performed during composition.</small></p>
+<h3>Source status signals</h3>
+<div aria-label="Source status signal counts" class="table-scroll" tabindex="0">
+<table><thead><tr><th scope="col">Signal</th><th scope="col">Occurrences</th><th scope="col">How to read it</th></tr></thead><tbody><tr><td>Passed</td><td>0</td><td>The source states a positive result. Confirm the associated command, artifact, or scope before generalizing it.</td></tr><tr><td>Failed</td><td>0</td><td>The source records failure or a blocker. Do not hide it behind nearby successful checks.</td></tr><tr><td>Pending</td><td>0</td><td>The source leaves work unevaluated, unknown, or pending.</td></tr><tr><td>Proposed</td><td>6</td><td>The source describes planned, proposed, roadmap, or future work rather than current behavior.</td></tr><tr><td>Unresolved</td><td>0</td><td>The source explicitly identifies missing implementation or clarification.</td></tr><tr><td>Experimental</td><td>1</td><td>The source marks a hypothesis or experimental statement that requires evidence.</td></tr></tbody></table>
+</div>
+</section>
+<section class="section-block" id="walkthrough">
+<h2>Step-by-step walkthrough</h2>
+<p class="section-introduction">Use this sequence to move from orientation to exact source evidence.</p>
+<ol><li>Read the summary and confirm that the source identity is examples/ModernVehicleModel/MCSMv2_2_0_RELEASE/AUDIT_CLOSURE.md.</li><li>Learn the named concepts: MCSMv2.2 Audit Closure, Roadmap item 1: suspension hardpoints, Roadmap item 2: actual tyre pose sweeps, Roadmap item 3: opening doors, bonnet and hatch.</li><li>Open the four explanation levels in order, stopping at the depth needed for the current task.</li><li>Follow the architecture/process outline into the complete source-grounded lesson.</li><li>Check every proposed, pending, failed, passed, experimental, or unresolved statement against its surrounding source context.</li><li>Use the verification section only as a guide to source-recorded commands; run commands separately in an appropriate checkout.</li></ol>
+</section>
+<section class="section-block" id="worked-example">
+<h2>Worked example</h2>
+<p class="section-introduction">The example is quoted or extracted from this document rather than invented.</p>
+<div class="callout callout--evidence">
+<p><strong>Source prose example:</strong> Implemented at concept level. Each vehicle exports 32 named hardpoints covering front MacPherson and rear multi-link hypotheses. Validation checks finite coordinates, exact left/right mirroring and rigid wheel-pose transforms.</p>
+</div>
+<details class="solution"><summary>Worked interpretation</summary><p>Separate the nouns that name project entities from verbs that state behavior. Then classify each behavior as documented, proposed, evidenced, or unresolved using the source status signals. The source contains no fenced code block, so no executable example is invented.</p></details>
+</section>
+<section class="section-block" id="visual-explanation">
+<h2>Visual explanation</h2>
+<p class="section-introduction">This diagram shows the reading flow for this source: purpose, concepts, exact source evidence, and verification/status interpretation.</p>
+<div class="diagram-panel">
+<object aria-label="Learning map for MCSMv2.2 Audit Closure" data="../../assets/diagrams/pages/mcsmv2-2-audit-closure.svg" data-learning-diagram="" type="image/svg+xml">
+          Diagram fallback: purpose leads to concepts, concepts lead to source evidence, and source evidence leads to verification and status interpretation.
+        </object>
+<p class="diagram-text-equivalent"><strong>Text equivalent:</strong> Begin with the source purpose, learn the named concepts, inspect the complete rendered source, then evaluate its commands, evidence, limitations, and status signals.</p>
+<p aria-live="polite" class="visually-hidden" data-diagram-live-region=""></p>
+</div>
+</section>
+<section class="section-block" id="implementation-notes">
+<h2>Implementation notes</h2>
+<div class="dashboard-grid">
+<article class="dashboard-card"><h3>Source identity</h3><p><code>examples/ModernVehicleModel/MCSMv2_2_0_RELEASE/AUDIT_CLOSURE.md</code></p><p>SHA-256: <code>dbec3887daaa97dd1b074060c3b54677f301a1fdfd584f05be2b5c1c1667df3a</code></p></article>
+<article class="dashboard-card"><h3>Document structure</h3><p>7 headings, 0 fenced code blocks, 0 Markdown tables, and 0 display-equation blocks were detected.</p></article>
+<article class="dashboard-card"><h3>Audience</h3><p>maintainers, reviewers, and readers checking project evidence.</p></article>
+<article class="dashboard-card"><h3>Traceability</h3><p>The source is tracked by Git. The complete source content is rendered below so generated teaching text can be checked against it.</p></article>
+</div>
+</section>
+<section class="section-block" id="mistakes">
+<h2>Common mistakes and failure modes</h2>
+<ul><li>Treating the generated summary as a substitute for the complete source document.</li><li>Reading a plan, proposal, roadmap, or hypothesis as if it were implemented and verified behavior.</li><li>Generalizing a focused PASS result beyond the command, artifact, version, or scope named by the source.</li><li>Running copied commands without checking their working directory, prerequisites, destructive effects, and current repository state.</li><li>Ignoring units, hashes, version identifiers, limits, warnings, or unresolved constraints preserved in tables and code blocks.</li></ul>
+</section>
+<section class="section-block" id="verification-guidance">
+<h2>Testing or verification guidance</h2>
+<p class="section-introduction">Commands are preserved from the source. Their presence does not prove they were run in the current checkout.</p>
+<div class="callout callout--clarification"><p><strong>Needs clarification:</strong> no shell-like verification command was detected in fenced source blocks. Consult the source conclusions, tables, and related evidence pages instead of inventing a command.</p></div>
+</section>
+<section class="section-block" id="takeaways">
+<h2>Key takeaways</h2>
+<div class="takeaway-grid"><article class="content-card"><h3>Purpose</h3><p>Implemented at concept level. Each vehicle exports 32 named hardpoints covering front MacPherson and rear multi-link hypotheses. Validation checks finite coordinates, exact left/right mirroring and rigid wheel-pose transforms.</p></article><article class="content-card"><h3>Status</h3><p>The page-level classification is Evidence; finer proposed, pending, failed, passed, experimental, and unresolved signals remain visible in the source.</p></article><article class="content-card"><h3>Concepts</h3><p>MCSMv2.2 Audit Closure, Roadmap item 1: suspension hardpoints, Roadmap item 2: actual tyre pose sweeps, Roadmap item 3: opening doors, bonnet and hatch, Roadmap item 4: helical moving side glass</p></article><article class="content-card"><h3>Evidence boundary</h3><p>Technical meaning is traceable to the complete rendered Markdown and its SHA-256 digest.</p></article></div>
+</section>
+<section class="section-block" id="related-concepts">
+<h2>Related concepts</h2>
+<p class="section-introduction">Related pages are selected by shared category, title vocabulary, concepts, and repository path.</p>
+<ul><li><a href="mcsmv2-2-known-limitations.html">MCSMv2.2 Known Limitations</a> <span class="status-badge status--documented">Documented</span><br/><small>This source document records project material about KNOWN LIMITATIONS.</small></li><li><a href="mcsmv2-2-mathematical-model.html">MCSMv2.2 Mathematical Model</a> <span class="status-badge status--research">Research</span><br/><small>For semantic point \(p\), section interior centre \(c\), and ray \(d=p-c\), MCSMv2.2 finds \(t\) with a bracketed solve:</small></li><li><a href="mcsmv2-2-validation-and-assurance-summary.html">MCSMv2.2 Validation and Assurance Summary</a> <span class="status-badge status--evidence">Evidence</span><br/><small>V3 is sampled concept-kinematic assurance. V4-V5 are not claimed.</small></li><li><a href="mcsmv2-2-test-report.html">MCSMv2.2 Test Report</a> <span class="status-badge status--evidence">Evidence</span><br/><small>Runtime in the release environment was approximately 4 seconds for the test bodies and 5.6 seconds including interpreter startup and reporting.</small></li><li><a href="mcsmv2-2-generation-notes.html">MCSMv2.2 Generation Notes</a> <span class="status-badge status--documented">Documented</span><br/><small>The full release was generated with one isolated process per vehicle variant and merged afterward. This limits retained SciPy, trimesh and optional graphics state between high-density final-mesh validation runs.</small></li><li><a href="mcsmv2-2-implementation-report.html">MCSMv2.2 Implementation Report</a> <span class="status-badge status--documented">Documented</span><br/><small>MCSMv2.2 implements the concept-kinematics slice over the MCSMv2.0.1 integrity kernel and carries forward the MCSMv2.1 semantic-surface architecture.</small></li></ul>
+</section>
+<section class="section-block" id="source-reference">
+<h2>Source Markdown reference</h2>
+<div class="callout callout--evidence">
+<p><strong>Authoritative source:</strong> <a href="https://github.com/pghauff73/progen3d/blob/codex/educational-documentation-site/examples/ModernVehicleModel/MCSMv2_2_0_RELEASE/AUDIT_CLOSURE.md"><code>examples/ModernVehicleModel/MCSMv2_2_0_RELEASE/AUDIT_CLOSURE.md</code></a></p>
+<p><strong>Source digest:</strong> <code>dbec3887daaa97dd1b074060c3b54677f301a1fdfd584f05be2b5c1c1667df3a</code></p>
+<p><strong>Transformation boundary:</strong> educational summaries, guides, tags, and relationships are derived from source structure. Technical claims, commands, equations, tables, and status wording remain traceable to the rendered source below.</p>
+</div>
+</section>
+<section class="section-block" id="source-lesson">
+<h2>Complete source-grounded lesson</h2>
+<p class="section-introduction">This section preserves the complete Markdown document as semantic HTML, rewrites valid Markdown links to generated lessons, copies genuine referenced images into the published site, and visually marks proposed, pending, failed, passed, and unresolved statements.</p>
+<article aria-label="Rendered source Markdown" class="source-lesson">
+<h2 id="source-mcsmv2-2-audit-closure">MCSMv2.2 Audit Closure</h2><p class="section-guide">Reading guide: this source section records “MCSMv2.2 Audit Closure”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<h3 id="source-roadmap-item-1-suspension-hardpoints">Roadmap item 1: suspension hardpoints</h3><p class="section-guide">Reading guide: this source section records “Roadmap item 1: suspension hardpoints”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Implemented at concept level.</strong> Each vehicle exports 32 named hardpoints covering front MacPherson and rear multi-link hypotheses. Validation checks finite coordinates, exact left/right mirroring and rigid wheel-pose transforms.</p>
+<p><strong>Not closed at production level.</strong> Coordinates are derived from package geometry rather than measured vehicle data, and no compliance or link-length closure solution is claimed.</p>
+<h3 id="source-roadmap-item-2-actual-tyre-pose-sweeps">Roadmap item 2: actual tyre pose sweeps</h3><p class="section-guide">Reading guide: this source section records “Roadmap item 2: actual tyre pose sweeps”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Implemented.</strong> MCSMv2.2 creates an elliptical-section tyre mesh, applies 15 front poses and 3 rear poses per side, records 36 poses in total, constructs sweep hulls, and checks sampled tyre points against the final exported body triangles.</p>
+<p><strong>Boundary.</strong> The pose grid is discrete and the hull is conservative. Continuous interval proof is deferred.</p>
+<h3 id="source-roadmap-item-3-opening-doors-bonnet-and-hatch">Roadmap item 3: opening doors, bonnet and hatch</h3><p class="section-guide">Reading guide: this source section records “Roadmap item 3: opening doors, bonnet and hatch”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Implemented at semantic outer-surface level.</strong> Four doors, the bonnet and rear hatch have independent hinge systems, state transforms, open/closed scenes and sampled collision checks.</p>
+<p><strong>Boundary.</strong> Closure objects are exterior semantic skins. Inner panels, hems, hardware, seals and production aperture thickness are deferred.</p>
+<h3 id="source-roadmap-item-4-helical-moving-side-glass">Roadmap item 4: helical moving side glass</h3><p class="section-guide">Reading guide: this source section records “Roadmap item 4: helical moving side glass”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Implemented at guide-motion level.</strong> Four side-glass systems combine vertical drop, inward shift, longitudinal shift and barrel-following rotation in the parent door frame. Six states per glass are validated.</p>
+<p><strong>Boundary.</strong> No physical regulator, carrier, cable, scissor, motor or measured guide channel is claimed.</p>
+<h3 id="source-roadmap-item-5-independent-collision-validation">Roadmap item 5: independent collision validation</h3><p class="section-guide">Reading guide: this source section records “Roadmap item 5: independent collision validation”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p><strong>Implemented for the V3 concept claim.</strong> Closure and glass checks use final triangle meshes, nearest-surface distance, broad-phase candidate filtering, triangle-intersection screening and cavity containment rather than merely re-evaluating the generating field.</p>
+<h3 id="source-assurance-conclusion">Assurance conclusion</h3><p class="section-guide">Reading guide: this source section records “Assurance conclusion”. Distinguish stated behavior from proposed or pending work using the status styling.</p>
+<p class="source-status--proposed">MCSMv2.2 closes the planned <strong>V3 sampled concept-kinematic</strong> slice. It does not close V4 manufacturing/structural assurance or V5 CFD/crash/physical assurance.</p>
+</article>
+</section>
+<nav aria-label="Lesson sequence" class="lesson-navigation" id="lesson-navigation"><a href="mcsmv2-1-validation-summary.html" rel="prev">← Previous: MCSMv2.1 Validation Summary</a><a href="../../index.html#learning-paths">Return to learning path</a><a href="mcsmv2-2-generation-notes.html" rel="next">Next: MCSMv2.2 Generation Notes →</a></nav>
+</main>
+<footer class="site-footer">
+<p>Generated from project Markdown with source hashes and deterministic page mappings.</p>
+<p><a href="../../README.md">Documentation build instructions</a> · <a href="https://github.com/pghauff73/progen3d">Main repository</a></p>
+</footer>
+</body>
+</html>

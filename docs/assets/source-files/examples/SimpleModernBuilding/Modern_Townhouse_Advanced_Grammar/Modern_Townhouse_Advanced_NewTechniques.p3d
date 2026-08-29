@@ -1,0 +1,2382 @@
+# ============================================================================
+# MODERN TOWNHOUSE — ADVANCED PROGEN3D REFERENCE GRAMMAR
+# RBGv1 + ARBv1 + Vegetation Grammar + MVGv1 concepts
+#
+# IMPORTANT:
+# This file intentionally uses the PROPOSED higher-order operators discussed
+# in the design work. It is NOT executable by the current Progen3D parser yet.
+#
+# Required future operators include:
+#   Profile2D, ExtrudeProfile, ExtrudeProfileWithVoids, SweepProfile,
+#   SweepDisk, Revolve, SurfaceLoft, ShellLoft, LayerSet, HostedOpening,
+#   CurvedPanel, FoldedProfile, SurfaceTiling, PanelBox, PanelArray,
+#   InstanceArray, BranchGraph, TaperedSweep, LeafBlade, Phyllotaxis,
+#   SpaceColonization, VinePath, SurfaceAttachment, VehiclePackage,
+#   BodySection, GuideCurve, PanelCut, RadialArray, Joint.
+#
+# SOURCE BASIS
+# ------------
+# Supplied/generated townhouse views show:
+#   - front facade with white render and charcoal slatted/cladding zones
+#   - black sectional garage door
+#   - recessed timber entry
+#   - front lawn, driveway, road, footpath, letterbox and planted borders
+#   - rear garden with large glazed opening and small terrace
+#   - side/rear elevations with white walls, black fencing and windows
+#   - open-plan living
+#   - kitchen + dining
+#   - master bedroom
+#   - bathroom
+#
+# Inferred for coherence:
+#   - exact floor plan
+#   - hidden laundry/powder/stair/service areas
+#   - upper-floor bedroom arrangement
+#   - exact structure and services
+#
+# Coordinate convention:
+#   +X = right
+#   +Y = up
+#   +Z = rear
+#   front facade = Z -7.50
+#   rear facade  = Z +7.50
+# ============================================================================
+
+
+Start ->
+    ModernTownhouse()
+
+
+ModernTownhouse() ->
+    TownhouseProgram()
+    TownhouseStyle()
+    TownhouseDatums()
+    SiteAndStreet()
+    SpatialProgram()
+    StructuralSystem()
+    EnvelopeSystem()
+    OpeningSystem()
+    GroundFloorInterior()
+    UpperFloorInterior()
+    VerticalCirculation()
+    ElectricalAndLighting()
+    PlumbingAndWetAreas()
+    GarageSystem()
+    LandscapeSystem()
+    VehicleSystem()
+    SpatialRelationships()
+    ValidationModel()
+
+
+# ============================================================================
+# 1. PROGRAM / CONTROL GRAMMAR
+# ============================================================================
+
+TownhouseProgram() ->
+    Program(
+        buildingType(ModernTownhouse)
+        storeys(2)
+        bedrooms(3)
+        bathrooms(2.5)
+        garageSpaces(1)
+        occupants(4)
+        targetInternalArea(178)
+        targetSiteWidth(11.5)
+        targetSiteDepth(30.0)
+    )
+
+
+TownhouseStyle() ->
+    StyleState(
+        family(MinimalContemporary)
+        primaryMaterial(WarmWhiteRender)
+        secondaryMaterial(CharcoalVerticalCladding)
+        tertiaryMaterial(WarmOakTimber)
+        metal(CharcoalPowderCoat)
+        glazing(ClearLowIron)
+        roof(FlatParapet)
+        facadeRhythm(Vertical)
+        openingRatioFront(0.29)
+        openingRatioRear(0.48)
+        detailDensity(MediumHigh)
+        edgeLanguage(SharpRectilinear)
+        landscapeStyle(MinimalLush)
+    )
+
+
+TownhouseDatums() ->
+    Datum(GroundPlane Y 0.00)
+    Datum(GroundFloorFFL Y 0.20)
+    Datum(UpperFloorFFL Y 3.25)
+    Datum(RoofSlab Y 6.30)
+    Datum(ParapetTop Y 6.80)
+
+    Datum(FrontFacade Z -7.50)
+    Datum(RearFacade Z 7.50)
+
+    Datum(GridX_Left X -4.15)
+    Datum(GridX_Centre X 0.00)
+    Datum(GridX_Right X 4.15)
+
+    Datum(GarageCentre X -2.45)
+    Datum(EntryCentre X 0.55)
+    Datum(LivingWindowCentre X 2.35)
+
+    Datum(WindowSillGround Y 0.85)
+    Datum(WindowHeadGround Y 2.75)
+    Datum(WindowSillUpper Y 3.95)
+    Datum(WindowHeadUpper Y 5.80)
+
+
+# ============================================================================
+# 2. SITE + STREET
+# ============================================================================
+
+SiteAndStreet() ->
+    Road()
+    KerbAndGutter()
+    Footpath()
+    Driveway()
+    FrontPath()
+    FrontLawn()
+    SideAccess()
+    BoundaryFences()
+    Letterbox()
+    StreetPlanting()
+
+
+Road() ->
+[
+    Object(RoadSurface class(SiteSurface))
+    T(0 -0.10 -12.80)
+    SurfaceTiling(
+        boundary(Rect(18.0 7.2))
+        baseThickness(0.18)
+        material(darkasphalt)
+        pattern(Continuous)
+    )
+]
+
+
+KerbAndGutter() ->
+[
+    Object(FrontKerb class(SiteEdge))
+    SweepProfile(
+        profile(KerbAndGutterProfile)
+        path(Line3(-8.8 -0.02 -9.45, 8.8 -0.02 -9.45))
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+KerbAndGutterProfile() ->
+    Profile2D(
+        polygon(
+            0.00 0.00
+            0.45 0.00
+            0.45 0.14
+            0.27 0.14
+            0.18 0.28
+            0.00 0.28
+        )
+    )
+
+
+Footpath() ->
+[
+    Object(FrontFootpath class(SiteSurface))
+    T(0 0.02 -9.00)
+    SurfaceTiling(
+        boundary(Rect(11.2 1.25))
+        tile(Rect(1.20 1.20))
+        joint(0.012 0.008)
+        pattern(StackBond)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+Driveway() ->
+[
+    Object(DrivewaySlab class(SiteSurface))
+    T(-2.45 0.04 -8.35)
+    SurfaceTiling(
+        boundary(Rect(4.25 2.95))
+        tile(Rect(1.35 1.35))
+        joint(0.012 0.008)
+        border(0.12)
+        slopeTo(FrontKerb 0.025)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+FrontPath() ->
+[
+    Object(EntryPath class(SiteSurface))
+    T(0.55 0.05 -8.35)
+    SurfaceTiling(
+        boundary(Rect(1.25 3.00))
+        tile(Rect(0.60 0.60))
+        joint(0.010 0.006)
+        pattern(StackBond)
+        material(offwhiteceramic)
+    )
+]
+
+
+FrontLawn() ->
+[
+    Object(FrontLawn class(LandscapeSurface))
+    T(2.80 0.05 -8.15)
+    HeightField(
+        boundary(Rect(3.70 2.65))
+        nominalHeight(0.05)
+        variation(0.012)
+        material(grass)
+    )
+]
+
+
+SideAccess() ->
+[
+    Object(SideAccessPath class(SiteSurface))
+    T(-5.05 0.05 0.25)
+    SurfaceTiling(
+        boundary(Rect(1.05 13.4))
+        tile(Rect(0.50 0.50))
+        joint(0.010 0.006)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+BoundaryFences() ->
+    FrontFence()
+    LeftFence()
+    RightFence()
+    RearFence()
+
+
+FrontFence() ->
+[
+    Object(FrontFence class(FenceAssembly))
+    RepeatExtrusion(
+        profile(RectProfile(0.045 0.070))
+        along(Line3(-5.20 0.08 -9.55, 5.20 0.08 -9.55))
+        count(74)
+        height(1.35)
+        material(charcoalroughmetal)
+    )
+]
+
+
+LeftFence() ->
+[
+    Object(LeftFence class(FenceAssembly))
+    RepeatExtrusion(
+        profile(RectProfile(0.045 0.070))
+        along(Line3(-5.45 0.08 -7.6, -5.45 0.08 8.9))
+        count(100)
+        height(1.65)
+        material(charcoalroughmetal)
+    )
+]
+
+
+RightFence() ->
+[
+    Object(RightFence class(FenceAssembly))
+    RepeatExtrusion(
+        profile(RectProfile(0.045 0.070))
+        along(Line3(5.45 0.08 -7.6, 5.45 0.08 8.9))
+        count(100)
+        height(1.65)
+        material(charcoalroughmetal)
+    )
+]
+
+
+RearFence() ->
+[
+    Object(RearFence class(FenceAssembly))
+    RepeatExtrusion(
+        profile(RectProfile(0.045 0.070))
+        along(Line3(-5.45 0.08 9.0, 5.45 0.08 9.0))
+        count(68)
+        height(1.75)
+        material(charcoalroughmetal)
+    )
+]
+
+
+Letterbox() ->
+[
+    Object(FrontLetterbox class(SiteFixture))
+    T(2.45 0.08 -9.15)
+    PanelBox(
+        width(0.62)
+        height(1.02)
+        depth(0.34)
+        panelThickness(0.025)
+        material(charcoalroughmetal)
+        frontOpening(MailSlot 0.34 0.05 at(0 0.70))
+        rearDoor(0.48 0.58)
+    )
+]
+[
+    Object(MailSlotLiner class(Detail))
+    T(2.45 0.78 -9.34)
+    ExtrudeProfile(
+        profile(RoundedRect(0.34 0.05 0.012))
+        depth(0.055)
+        material(charcoalroughmetal)
+    )
+]
+
+
+StreetPlanting() ->
+    StreetTree(-6.5 -9.75)
+    StreetTree(6.9 -9.75)
+
+
+StreetTree(x z) ->
+[
+    Object(StreetTreeInstance class(Tree))
+    T(x 0 z)
+    BranchGraph(
+        trunk(
+            TaperedSweep(
+                path(Bezier3((0 0 0) (0.05 1.8 0) (-0.05 3.4 0) (0 4.4 0)))
+                radiusStart(0.20)
+                radiusEnd(0.085)
+                radialSegments(12)
+                material(amberwarmwood)
+            )
+        )
+        crown(
+            SpaceColonization(
+                volume(Ellipsoid(2.4 2.1 2.4 centre(0 4.0 0)))
+                attractionPoints(850)
+                influenceRadius(0.90)
+                killRadius(0.24)
+                step(0.28)
+                branchTaper(0.65)
+            )
+        )
+        leaves(
+            LeafBlade(
+                profile(Elliptic)
+                length(0.10)
+                width(0.042)
+                camber(0.006)
+                material(greenmattepaint)
+            )
+            OrganArray(
+                attachment(terminalBranches)
+                density(18)
+                phyllotaxis(Alternate divergence(137.5))
+                scaleVariation(0.85 1.12)
+            )
+        )
+    )
+]
+
+
+# ============================================================================
+# 3. SPATIAL PROGRAM
+# ============================================================================
+
+SpatialProgram() ->
+    GroundFloorSpaces()
+    UpperFloorSpaces()
+    SpaceRelations()
+
+
+GroundFloorSpaces() ->
+    Space(Garage        rect(-4.20 -7.10 3.45 6.35))
+    Space(Entry         rect(-0.45 -7.10 1.80 3.30))
+    Space(PowderRoom    rect(-0.45 -3.65 1.80 1.65))
+    Space(Laundry       rect(-4.20 -0.55 2.00 2.20))
+    Space(StairHall     rect(-2.05 -3.60 2.30 5.45))
+    Space(Kitchen       rect(-4.20  1.90 4.55 4.75))
+    Space(Dining        rect( 0.55  1.90 3.75 3.00))
+    Space(Living        rect( 0.55  5.10 3.75 2.10))
+
+
+UpperFloorSpaces() ->
+    Space(MasterBedroom rect( 0.10 -7.10 4.20 5.20))
+    Space(MasterWIR     rect(-1.95 -7.10 1.85 2.35))
+    Space(Ensuite       rect(-1.95 -4.55 1.85 2.65))
+    Space(Bedroom2      rect(-4.20  1.15 4.05 3.55))
+    Space(Bedroom3      rect( 0.10  1.15 4.20 3.55))
+    Space(MainBathroom  rect(-4.20 -1.85 2.50 2.80))
+    Space(UpperHall     rect(-1.45 -1.85 5.75 2.80))
+
+
+SpaceRelations() ->
+    Adjacent(Entry StairHall)
+    Adjacent(StairHall Kitchen)
+    Adjacent(Kitchen Dining)
+    Adjacent(Dining Living)
+    ConnectedToExterior(Living RearGarden)
+    ConnectedToExterior(Dining RearGarden)
+    Adjacent(MasterBedroom MasterWIR)
+    Adjacent(MasterWIR Ensuite)
+    Adjacent(UpperHall Bedroom2)
+    Adjacent(UpperHall Bedroom3)
+    Adjacent(UpperHall MainBathroom)
+
+
+# ============================================================================
+# 4. STRUCTURAL SYSTEM
+# ============================================================================
+
+StructuralSystem() ->
+    GroundSlab()
+    UpperSlab()
+    RoofSlab()
+    PrimaryWalls()
+    GarageLintel()
+    EntryLintel()
+
+
+GroundSlab() ->
+[
+    Object(GroundSlab class(StructuralSlab))
+    T(0 0.00 0)
+    ExtrudeProfileWithVoids(
+        outer(Rect(9.10 15.25))
+        depth(0.20)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+UpperSlab() ->
+[
+    Object(UpperSlab class(StructuralSlab))
+    T(0 3.05 0)
+    ExtrudeProfileWithVoids(
+        outer(Rect(9.10 15.25))
+        void(StairVoid rect(-1.75 -2.10 2.45 5.10))
+        depth(0.20)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+RoofSlab() ->
+[
+    Object(RoofSlab class(StructuralSlab))
+    T(0 6.10 0)
+    ExtrudeProfile(
+        profile(RectProfile(9.10 15.25))
+        depth(0.18)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+PrimaryWalls() ->
+    StructuralWall(LeftBoundaryWall  -4.55 0.20 0.00 0.20 6.00 15.10)
+    StructuralWall(RightBoundaryWall  4.55 0.20 0.00 0.20 6.00 15.10)
+    StructuralWall(FrontSpineWall     0.20 0.20 -7.40 0.20 3.00 2.40)
+    StructuralWall(StairCoreWall     -1.95 0.20 -0.90 0.18 6.00 5.40)
+    StructuralWall(ServiceWall       -4.00 0.20  0.85 0.18 3.00 4.20)
+
+
+StructuralWall(name x y z sx sy sz) ->
+[
+    Object(name class(StructuralWall))
+    T(x y z)
+    ExtrudeProfile(
+        profile(RectProfile(sx sz))
+        depth(sy)
+        axis(Y)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+GarageLintel() ->
+[
+    Object(GarageLintel class(StructuralBeam))
+    T(-2.48 2.75 -7.40)
+    ExtrudeProfile(
+        profile(RectProfile(3.65 0.30))
+        depth(0.30)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+EntryLintel() ->
+[
+    Object(EntryLintel class(StructuralBeam))
+    T(0.60 2.75 -7.40)
+    ExtrudeProfile(
+        profile(RectProfile(1.45 0.28))
+        depth(0.28)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+# ============================================================================
+# 5. ENVELOPE SYSTEM
+# ============================================================================
+
+EnvelopeSystem() ->
+    FrontEnvelope()
+    RearEnvelope()
+    SideEnvelopes()
+    FlatRoofAssembly()
+    CharcoalCladdingZones()
+    RenderedWallSystem()
+
+
+RenderedWallSystem() ->
+    LayerSet(
+        name(StandardRenderedWall)
+        reference(StructuralWallPlane)
+        layers(
+            Layer(InteriorPaint       0.002 warmwhitematteplaster)
+            Layer(Plasterboard        0.013 offwhiteceramic)
+            Layer(ServiceVoid         0.040 air)
+            Layer(StudInsulation      0.140 insulation)
+            Layer(StructuralSheathing 0.010 lightgreyroughconcrete)
+            Layer(AirWaterBarrier     0.002 membrane)
+            Layer(DrainageCavity      0.030 air)
+            Layer(RenderCarrier       0.012 lightgreyroughconcrete)
+            Layer(RenderFinish        0.010 warmwhitematteplaster)
+        )
+    )
+
+
+FrontEnvelope() ->
+    HostedWall(
+        FrontGroundWall
+        boundary(Rect(9.10 3.05))
+        plane(Z -7.50)
+        wallSystem(StandardRenderedWall)
+        openings(
+            GarageOpening
+            EntryOpening
+            LivingFrontWindowOpening
+        )
+    )
+
+    HostedWall(
+        FrontUpperWall
+        boundary(Rect(9.10 3.05))
+        plane(Z -7.50)
+        offsetY(3.25)
+        wallSystem(StandardRenderedWall)
+        openings(
+            MasterBalconyDoorOpening
+            MasterWindowOpening
+        )
+    )
+
+
+RearEnvelope() ->
+    HostedWall(
+        RearGroundWall
+        boundary(Rect(9.10 3.05))
+        plane(Z 7.50)
+        wallSystem(StandardRenderedWall)
+        openings(
+            RearSliderOpening
+        )
+    )
+
+    HostedWall(
+        RearUpperWall
+        boundary(Rect(9.10 3.05))
+        plane(Z 7.50)
+        offsetY(3.25)
+        wallSystem(StandardRenderedWall)
+        openings(
+            Bedroom2RearWindowOpening
+            Bedroom3RearWindowOpening
+        )
+    )
+
+
+SideEnvelopes() ->
+    HostedWall(
+        LeftSideWall
+        boundary(Rect(15.0 6.30))
+        plane(X -4.55)
+        wallSystem(StandardRenderedWall)
+        openings(
+            GarageSideWindowOpening
+            Bedroom2SideWindowOpening
+        )
+    )
+
+    HostedWall(
+        RightSideWall
+        boundary(Rect(15.0 6.30))
+        plane(X 4.55)
+        wallSystem(StandardRenderedWall)
+        openings(
+            LivingSideWindowOpening
+            StairSideWindowOpening
+            Bedroom3SideWindowOpening
+        )
+    )
+
+
+FlatRoofAssembly() ->
+[
+    Object(FlatRoof class(RoofAssembly))
+    T(0 6.10 0)
+    LayerSet(
+        referenceSurface(RectSurface(9.10 15.25))
+        slope(0.015 toward(RearRoofDrain))
+        layers(
+            Layer(StructuralSlab 0.180 lightgreyroughconcrete)
+            Layer(FallsScreed    0.050 lightgreyroughconcrete)
+            Layer(VapourLayer    0.002 membrane)
+            Layer(Insulation     0.090 insulation)
+            Layer(Waterproofing  0.006 charcoalroughmetal)
+            Layer(Protection     0.020 lightgreyroughconcrete)
+        )
+    )
+]
+
+
+RoofParapet() ->
+[
+    Object(Parapet class(RoofEdge))
+    SweepProfile(
+        profile(ParapetCopingProfile)
+        path(ClosedRectPath(9.10 15.25 atY(6.58)))
+        material(silverbluepolishedmetal)
+    )
+]
+
+
+ParapetCopingProfile() ->
+    FoldedProfile(
+        thickness(0.0012)
+        points(
+            0.00 0.00
+            0.05 0.03
+            0.30 0.05
+            0.34 0.02
+            0.34 -0.05
+            0.30 -0.06
+            0.28 0.00
+            0.06 0.00
+            0.04 -0.06
+            0.00 -0.05
+        )
+        dripEdges(true)
+    )
+
+
+CharcoalCladdingZones() ->
+    FrontCladdingFrame()
+    FrontVerticalScreen()
+    RearUpperCladding()
+
+
+FrontCladdingFrame() ->
+[
+    Object(FrontCladdingFrame class(CladdingAssembly))
+    T(-2.80 3.50 -7.58)
+    RepeatProfileOnSurface(
+        surface(RectSurface(3.25 2.40))
+        profile(RectProfile(0.045 0.085))
+        pitch(0.095)
+        orientation(Vertical)
+        backingBattens(0.035 0.035 pitch(0.60))
+        cavity(0.030)
+        material(charcoalroughmetal)
+    )
+]
+
+
+FrontVerticalScreen() ->
+[
+    Object(FrontPrivacyScreen class(ScreenAssembly))
+    T(-3.68 3.40 -7.72)
+    RepeatExtrusion(
+        profile(RectProfile(0.055 0.090))
+        axis(Y)
+        height(2.55)
+        count(13)
+        pitch(0.14)
+        material(charcoalroughmetal)
+        topRail(RectProfile(1.95 0.08))
+        bottomRail(RectProfile(1.95 0.08))
+    )
+]
+
+
+RearUpperCladding() ->
+[
+    Object(RearUpperCladding class(CladdingAssembly))
+    T(-2.70 3.50 7.58)
+    RepeatProfileOnSurface(
+        surface(RectSurface(3.10 2.25))
+        profile(RectProfile(0.045 0.080))
+        pitch(0.10)
+        orientation(Vertical)
+        material(charcoalroughmetal)
+    )
+]
+
+
+# ============================================================================
+# 6. OPENINGS + WINDOWS + DOORS
+# ============================================================================
+
+OpeningSystem() ->
+    GarageDoorAssembly()
+    MainEntryDoorAssembly()
+    FrontWindows()
+    RearSlidingDoorAssembly()
+    SideWindows()
+    UpperWindows()
+
+
+GarageDoorAssembly() ->
+[
+    Object(GarageOpening class(HostedOpening))
+    Host(FrontGroundWall)
+    Opening(rect(-4.20 0.20 -0.70 2.75))
+]
+[
+    Object(GarageDoor class(SectionalGarageDoor))
+    PositionIn(GarageOpening)
+    ArticulatedPanelSystem(
+        overallWidth(3.50)
+        overallHeight(2.42)
+        panelCount(5)
+        panelThickness(0.042)
+        stilePitch(0.75)
+        trackProfile(GarageTrackProfile)
+        trackRadius(0.32)
+        rollers(diameter(0.046))
+        hinges(intermediateAndEnd)
+        seals(perimeter bottom)
+        material(charcoalroughmetal)
+    )
+]
+
+
+MainEntryDoorAssembly() ->
+[
+    Object(EntryOpening class(HostedOpening))
+    Host(FrontGroundWall)
+    Opening(rect(-0.10 0.20 1.35 2.55))
+]
+[
+    Object(MainEntryDoor class(HingedDoorAssembly))
+    PositionIn(EntryOpening)
+    LayeredPanel(
+        width(1.05)
+        height(2.35)
+        thickness(0.055)
+        skins(amberwarmwood)
+        core(insulated)
+        edgeLipping(0.025)
+    )
+    Frame(
+        jambProfile(TimberDoorJambProfile)
+        headProfile(TimberDoorHeadProfile)
+        thresholdProfile(AluminiumThresholdProfile)
+    )
+    Hardware(
+        hinge(type(ConcealedPivot) count(2))
+        pullHandle(length(0.65) section(Round 0.026))
+        latch(Magnetic)
+    )
+    SealPath(perimeter EPDM 0.010)
+]
+
+
+FrontWindows() ->
+    FixedWindow(
+        LivingFrontWindow
+        host(FrontGroundWall)
+        opening(LivingFrontWindowOpening rect(1.25 0.45 3.95 2.65))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(1)
+    )
+
+
+UpperWindows() ->
+    SlidingWindow(
+        MasterBalconyDoor
+        host(FrontUpperWall)
+        opening(MasterBalconyDoorOpening rect(-3.40 3.72 -1.10 5.82))
+        panels(2)
+    )
+
+    FixedWindow(
+        MasterFrontWindow
+        host(FrontUpperWall)
+        opening(MasterWindowOpening rect(0.70 3.72 3.55 5.80))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(1)
+    )
+
+    FixedWindow(
+        Bedroom2RearWindow
+        host(RearUpperWall)
+        opening(Bedroom2RearWindowOpening rect(-3.75 3.85 -0.25 5.75))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(1)
+    )
+
+    FixedWindow(
+        Bedroom3RearWindow
+        host(RearUpperWall)
+        opening(Bedroom3RearWindowOpening rect(0.25 3.85 3.75 5.75))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(1)
+    )
+
+
+SideWindows() ->
+    FixedWindow(
+        GarageSideWindow
+        host(LeftSideWall)
+        opening(GarageSideWindowOpening rect(-2.50 1.10 0.10 2.25))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(0)
+    )
+
+    FixedWindow(
+        LivingSideWindow
+        host(RightSideWall)
+        opening(LivingSideWindowOpening rect(4.55 0.80 7.25 2.60))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(1)
+    )
+
+    FixedWindow(
+        StairSideWindow
+        host(RightSideWall)
+        opening(StairSideWindowOpening rect(4.55 2.00 7.25 5.25))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(0)
+    )
+
+    FixedWindow(
+        Bedroom2SideWindow
+        host(LeftSideWall)
+        opening(Bedroom2SideWindowOpening rect(-4.55 4.00 1.35 5.45))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(0)
+    )
+
+    FixedWindow(
+        Bedroom3SideWindow
+        host(RightSideWall)
+        opening(Bedroom3SideWindowOpening rect(4.55 4.00 1.35 5.45))
+        frameSystem(BlackThermalWindowSystem)
+        mullions(0)
+    )
+
+
+RearSlidingDoorAssembly() ->
+[
+    Object(RearSliderOpening class(HostedOpening))
+    Host(RearGroundWall)
+    Opening(rect(-3.95 0.28 3.95 2.75))
+]
+[
+    Object(RearSlider class(SlidingDoorAssembly))
+    PositionIn(RearSliderOpening)
+    ProfileLibrarySystem(BlackThermalSlidingDoorSystem)
+    TrackAssembly(
+        trackCount(3)
+        sillProfile(SlidingDoorSillProfile)
+        headProfile(SlidingDoorHeadProfile)
+        jambProfile(SlidingDoorJambProfile)
+        rollerDiameter(0.042)
+    )
+    Panels(
+        SlidingPanel(width(2.62) height(2.35))
+        SlidingPanel(width(2.62) height(2.35))
+        SlidingPanel(width(2.62) height(2.35))
+    )
+    GlazingUnit(
+        outerGlass(0.006)
+        cavity(0.014)
+        innerGlass(0.006)
+        gasket(EPDM)
+    )
+]
+
+
+FixedWindow(name host wallOpening frameSystem mullions) ->
+[
+    Object(name class(WindowAssembly))
+    Host(host)
+    HostedOpening(wallOpening)
+    FrameProfiles(
+        head(WindowHeadProfile)
+        sill(WindowSillProfile)
+        jambLeft(WindowJambProfile)
+        jambRight(WindowJambProfile)
+        mullion(WindowMullionProfile count(mullions))
+    )
+    GlazingUnit(
+        outerGlass(0.006)
+        cavity(0.014)
+        innerGlass(0.006)
+        spacer(0.012)
+        gaskets(EPDM)
+    )
+    Flashing(
+        head(HeadFlashingProfile)
+        sill(SillPanProfile slope(0.03))
+        jambSealant(0.010)
+    )
+    Anchors(spacing(0.450))
+]
+
+
+SlidingWindow(name host opening panels) ->
+[
+    Object(name class(SlidingDoorAssembly))
+    Host(host)
+    HostedOpening(opening)
+    TrackAssembly(
+        trackCount(2)
+        frameDepth(0.125)
+        interlockStile(0.055)
+        rollerDiameter(0.038)
+    )
+    PanelArray(
+        count(panels)
+        panelWidth(1.10)
+        panelHeight(2.10)
+        overlap(0.045)
+        glazing(IGU 6 14 6)
+    )
+]
+
+
+# ============================================================================
+# 7. GROUND FLOOR INTERIOR
+# ============================================================================
+
+GroundFloorInterior() ->
+    GroundFloorFinishes()
+    GroundInternalWalls()
+    LivingRoom()
+    Kitchen()
+    DiningRoom()
+    EntryHall()
+    PowderRoom()
+    Laundry()
+
+
+GroundFloorFinishes() ->
+[
+    Object(GroundFloorTimber class(FloorFinish))
+    T(0 0.21 1.0)
+    SurfaceTiling(
+        boundary(PolygonRoomUnion(Kitchen Dining Living Entry StairHall))
+        tile(Board 0.18 1.80)
+        joint(0.002 0.002)
+        pattern(RandomLength)
+        material(amberwarmwood)
+    )
+]
+
+
+GroundInternalWalls() ->
+    PartitionWall(EntryGarageWall  -0.65 -5.20 0.12 5.20)
+    PartitionWall(StairKitchenWall -1.95  0.60 0.12 5.40)
+    PartitionWall(LaundryWall     -3.15  0.65 2.00 0.12)
+    PartitionWall(PowderWall      -0.45 -2.80 1.85 0.12)
+
+
+PartitionWall(name x z length thickness) ->
+[
+    Object(name class(InteriorPartition))
+    T(x 0.22 z)
+    LayerSet(
+        referenceSurface(RectSurface(length 2.75))
+        layers(
+            Layer(PaintA 0.002 warmwhitematteplaster)
+            Layer(BoardA 0.013 offwhiteceramic)
+            Layer(StudCavity 0.090 air)
+            Layer(BoardB 0.013 offwhiteceramic)
+            Layer(PaintB 0.002 warmwhitematteplaster)
+        )
+    )
+]
+
+
+LivingRoom() ->
+    LivingSofa()
+    LivingCoffeeTable()
+    LivingRug()
+    LivingTVWall()
+    LivingCurtains()
+    LivingPlant()
+
+
+LivingSofa() ->
+[
+    Object(LivingSofa class(SofaAssembly))
+    T(2.45 0.24 5.55)
+    SofaAssembly(
+        frame(RectFrame 2.90 0.95)
+        seatHeight(0.43)
+        seatDepth(0.62)
+        cushions(
+            ShellLoft(RoundedRectSections 3 seatCushions)
+            ShellLoft(RoundedRectSections 3 backCushions)
+        )
+        arms(RoundedBox 0.18 0.72 0.62)
+        legs(SweepProfile(RectProfile(0.035 0.035)) count(4))
+        upholstery(offwhitefabric)
+    )
+]
+
+
+LivingCoffeeTable() ->
+[
+    Object(LivingCoffeeTable class(TableAssembly))
+    T(2.55 0.23 4.10)
+    ExtrudeProfile(
+        profile(RoundedRectProfile(1.35 0.72 0.18))
+        depth(0.045)
+        material(charcoalroughmetal)
+    )
+    Frame(
+        SweepProfile(
+            profile(RectProfile(0.05 0.05))
+            path(RectPath(0.85 0.35))
+            material(charcoalroughmetal)
+        )
+    )
+]
+
+
+LivingRug() ->
+[
+    Object(LivingRug class(SoftFinish))
+    T(2.40 0.225 4.65)
+    RoundedExtrude(
+        width(3.35)
+        depth(2.55)
+        radius(0.06)
+        thickness(0.018)
+        material(offwhitefabric)
+    )
+]
+
+
+LivingTVWall() ->
+[
+    Object(LivingTVWall class(FeatureWall))
+    T(4.35 0.25 4.25)
+    RepeatProfileOnSurface(
+        surface(RectSurface(2.75 2.35))
+        profile(RectProfile(0.028 0.045))
+        pitch(0.062)
+        orientation(Vertical)
+        material(amberwarmwood)
+    )
+]
+[
+    Object(LivingTV class(ElectronicEquipment))
+    T(4.15 1.10 4.05)
+    RoundedPanel(
+        width(1.75)
+        height(1.02)
+        depth(0.045)
+        radius(0.025)
+        material(charcoalroughmetal)
+        rearMount(VESA)
+    )
+]
+
+
+LivingCurtains() ->
+[
+    Object(RearCurtains class(TextileAssembly))
+    SweepProfile(
+        profile(CurtainTrackProfile)
+        path(Line3(-3.95 2.82 7.25, 3.95 2.82 7.25))
+        material(charcoalroughmetal)
+    )
+    PleatedSurface(
+        width(7.80)
+        height(2.48)
+        pleatPitch(0.11)
+        fullness(1.8)
+        material(whitefabric)
+    )
+]
+
+
+LivingPlant() ->
+    InteriorTree(3.85 6.65 1.55)
+
+
+InteriorTree(x z scale) ->
+[
+    Object(InteriorTreeInstance class(Plant))
+    T(x 0.22 z)
+    BranchGraph(
+        trunk(
+            TaperedSweep(
+                path(Bezier3((0 0 0) (0.05 0.60 0) (-0.03 1.25 0.02) (0 1.75 0)))
+                radiusStart(0.055)
+                radiusEnd(0.018)
+                radialSegments(10)
+                material(amberwarmwood)
+            )
+        )
+        branches(
+            LSystem(
+                axiom(A)
+                rule(A -> F[+A][-A]FA)
+                iterations(3)
+                angle(28)
+                segmentLength(0.28)
+            )
+        )
+        leaves(
+            LeafBlade(profile(Elliptic) length(0.085) width(0.034) camber(0.004))
+            OrganArray(density(14) phyllotaxis(Alternate divergence(137.5)))
+        )
+    )
+]
+
+
+Kitchen() ->
+    KitchenTallCabinets()
+    KitchenWallCabinets()
+    KitchenIsland()
+    KitchenSink()
+    KitchenCooktop()
+    KitchenStools()
+    KitchenPendant()
+
+
+KitchenTallCabinets() ->
+[
+    Object(KitchenTallRun class(CabinetAssembly))
+    T(-3.70 0.23 3.05)
+    PanelArray(
+        modules(
+            PanelBox(width(0.60) height(2.35) depth(0.60) panelThickness(0.018))
+            PanelBox(width(0.60) height(2.35) depth(0.60) panelThickness(0.018))
+            PanelBox(width(0.60) height(2.35) depth(0.60) panelThickness(0.018))
+        )
+        fronts(
+            HingedDoor(width(0.58) height(2.28) hingeCup(0.035) hinges(4))
+        )
+        toeKick(0.10 0.08)
+        material(offwhiteceramic)
+    )
+]
+
+
+KitchenWallCabinets() ->
+[
+    Object(KitchenWallRun class(CabinetAssembly))
+    T(-3.55 0.23 5.15)
+    PanelArray(
+        baseModules(4 width(0.72) height(0.78) depth(0.60))
+        upperModules(4 width(0.72) height(0.92) depth(0.34))
+        countertop(
+            ExtrudeProfileWithVoids(
+                outer(Rect(3.05 0.65))
+                depth(0.030)
+                material(offwhiteceramic)
+            )
+        )
+        backsplash(
+            SurfaceTiling(
+                boundary(Rect(3.05 0.62))
+                tile(Rect(0.60 0.60))
+                joint(0.002 0.003)
+                material(offwhiteceramic)
+            )
+        )
+        underCabinetLED(true)
+    )
+]
+
+
+KitchenIsland() ->
+[
+    Object(KitchenIsland class(CabinetAssembly))
+    T(-1.30 0.23 4.00)
+    PanelBox(
+        width(3.05)
+        height(0.90)
+        depth(1.05)
+        panelThickness(0.018)
+        back(0.012)
+        serviceVoid(0.12)
+        toeKick(0.09)
+        material(amberwarmwood)
+    )
+    Countertop(
+        ExtrudeProfileWithVoids(
+            outer(Rect(3.20 1.18))
+            void(SinkCutout RoundedRect(0.62 0.42 0.05))
+            depth(0.035)
+            edge(Bevel 0.004)
+            material(offwhiteceramic)
+        )
+    )
+    SlattedFront(
+        RepeatExtrusion(
+            profile(RectProfile(0.022 0.030))
+            count(64)
+            pitch(0.045)
+            height(0.70)
+            material(amberwarmwood)
+        )
+    )
+]
+
+
+KitchenSink() ->
+[
+    Object(KitchenSink class(PlumbingFixture))
+    PositionOn(KitchenIsland.Countertop)
+    ShellLoft(
+        outerSections(
+            RoundedRect(0.66 0.46 0.055 at(0.00))
+            RoundedRect(0.62 0.42 0.065 at(-0.10))
+            RoundedRect(0.52 0.34 0.080 at(-0.22))
+        )
+        innerOffset(0.012)
+        rimThickness(0.018)
+        drain(Revolve(profile(DrainProfile) diameter(0.090)))
+        material(silverbluepolishedmetal)
+    )
+    Faucet(
+        Revolve(profile(MixerBodyProfile))
+        SweepDisk(path(Bezier3((0 0 0) (0 0.25 0) (0.18 0.34 0) (0.22 0.20 0))) radius(0.012))
+    )
+]
+
+
+KitchenCooktop() ->
+[
+    Object(KitchenCooktop class(Appliance))
+    PositionOn(KitchenWallRun.Countertop)
+    RoundedPanel(
+        width(0.78)
+        depth(0.52)
+        thickness(0.008)
+        radius(0.012)
+        material(charcoalroughmetal)
+    )
+    RadialArray(
+        object(BurnerRing)
+        centres((-0.22 0) (0.22 0) (0 0.18) (0 -0.18))
+    )
+]
+
+
+KitchenStools() ->
+    BarStool(-2.15 3.30)
+    BarStool(-1.30 3.30)
+    BarStool(-0.45 3.30)
+
+
+BarStool(x z) ->
+[
+    Object(BarStoolInstance class(Chair))
+    T(x 0.24 z)
+    ShellLoft(
+        sections(
+            RoundedRect(0.42 0.36 0.07 at(0.00))
+            RoundedRect(0.46 0.39 0.09 at(0.07))
+            RoundedRect(0.42 0.36 0.07 at(0.13))
+        )
+        material(charcoalroughmetal)
+    )
+    SweepProfile(
+        profile(RoundProfile(0.018))
+        path(SledBasePath(0.38 0.44 0.63))
+        material(charcoalroughmetal)
+    )
+]
+
+
+KitchenPendant() ->
+[
+    Object(KitchenPendant class(LightingAssembly))
+    T(-1.30 2.85 4.00)
+    SweepDisk(path(Line3(0 0 0, 0 -0.45 0)) radius(0.004))
+    ExtrudeProfile(
+        profile(RectProfile(1.80 0.045))
+        depth(0.045)
+        material(charcoalroughmetal)
+    )
+    LightGuide(path(Line3(-0.82 -0.02 0, 0.82 -0.02 0)) section(Rect 0.010 0.010))
+]
+
+
+DiningRoom() ->
+    DiningTable()
+    DiningChairs()
+
+
+DiningTable() ->
+[
+    Object(DiningTable class(TableAssembly))
+    T(2.05 0.24 3.20)
+    ExtrudeProfile(
+        profile(RoundedRectProfile(2.20 1.05 0.10))
+        depth(0.055)
+        material(amberwarmwood)
+    )
+    SweepProfile(
+        profile(RectProfile(0.12 0.48))
+        path(Line3(-0.55 0 0, -0.55 0.72 0))
+        material(amberwarmwood)
+    )
+    SweepProfile(
+        profile(RectProfile(0.12 0.48))
+        path(Line3(0.55 0 0, 0.55 0.72 0))
+        material(amberwarmwood)
+    )
+]
+
+
+DiningChairs() ->
+    DiningChair(0.95 2.60)
+    DiningChair(1.70 2.60)
+    DiningChair(2.45 2.60)
+    DiningChair(3.20 2.60)
+    DiningChair(0.95 3.82)
+    DiningChair(1.70 3.82)
+    DiningChair(2.45 3.82)
+    DiningChair(3.20 3.82)
+
+
+DiningChair(x z) ->
+[
+    Object(DiningChairInstance class(Chair))
+    T(x 0.24 z)
+    ShellLoft(
+        sections(
+            RoundedRect(0.48 0.46 0.06 at(0.00))
+            RoundedRect(0.52 0.50 0.07 at(0.09))
+            RoundedRect(0.47 0.45 0.06 at(0.15))
+        )
+        material(charcoalroughmetal)
+    )
+    ShellLoft(
+        sections(
+            RoundedRect(0.48 0.10 0.05 at(0.50))
+            RoundedRect(0.50 0.11 0.06 at(0.75))
+            RoundedRect(0.45 0.10 0.05 at(0.96))
+        )
+        tilt(-8)
+        material(charcoalroughmetal)
+    )
+    SweepProfile(
+        profile(RoundProfile(0.014))
+        path(FourLegFrame(0.42 0.42 0.46))
+        material(charcoalroughmetal)
+    )
+]
+
+
+EntryHall() ->
+[
+    Object(EntryFloor class(FloorFinish))
+    T(0.55 0.21 -5.90)
+    SurfaceTiling(
+        boundary(Rect(1.65 2.60))
+        tile(Rect(0.60 0.60))
+        joint(0.003 0.003)
+        material(offwhiteceramic)
+    )
+]
+
+
+PowderRoom() ->
+    CompactVanity(PowderVanity 0.10 -3.15)
+    WallHungToilet(PowderToilet 0.55 -2.80)
+
+
+Laundry() ->
+[
+    Object(LaundryCabinet class(CabinetAssembly))
+    T(-3.45 0.23 0.20)
+    PanelArray(
+        modules(3 width(0.58) height(2.20) depth(0.62))
+        frontMaterial(warmwhitematteplaster)
+    )
+]
+[
+    Object(WasherDryerTower class(ApplianceAssembly))
+    T(-3.70 0.25 0.40)
+    GridArray(
+        object(RoundedPanel(width(0.56) height(0.82) depth(0.58)))
+        nx(1) ny(2)
+        spacingY(0.88)
+        material(charcoalroughmetal)
+    )
+]
+
+
+# ============================================================================
+# 8. UPPER FLOOR INTERIOR
+# ============================================================================
+
+UpperFloorInterior() ->
+    UpperFloorFinishes()
+    MasterBedroom()
+    Bedroom2()
+    Bedroom3()
+    Ensuite()
+    MainBathroom()
+    UpperHall()
+
+
+UpperFloorFinishes() ->
+[
+    Object(UpperTimberFloor class(FloorFinish))
+    T(0 3.26 -1.20)
+    SurfaceTiling(
+        boundary(PolygonRoomUnion(MasterBedroom MasterWIR UpperHall))
+        tile(Board 0.18 1.80)
+        joint(0.002 0.002)
+        pattern(RandomLength)
+        material(amberwarmwood)
+    )
+]
+[
+    Object(BedroomCarpet class(FloorFinish))
+    T(0 3.27 2.95)
+    RoundedExtrude(
+        width(8.00)
+        depth(3.40)
+        radius(0.02)
+        thickness(0.015)
+        material(offwhitefabric)
+    )
+]
+
+
+MasterBedroom() ->
+    BedAssembly()
+    MasterWardrobes()
+    MasterBedside()
+    MasterCurtains()
+    MasterPlant()
+
+
+BedAssembly() ->
+[
+    Object(MasterBed class(BedAssembly))
+    T(2.35 3.30 -3.75)
+    PanelBox(
+        width(2.10)
+        height(0.32)
+        depth(2.20)
+        panelThickness(0.040)
+        material(amberwarmwood)
+    )
+    ShellLoft(
+        name(Mattress)
+        sections(
+            RoundedRect(1.98 2.05 0.11 at(0.00))
+            RoundedRect(2.04 2.10 0.14 at(0.16))
+            RoundedRect(1.98 2.05 0.11 at(0.30))
+        )
+        material(offwhitefabric)
+    )
+    RoundedPanel(
+        name(Headboard)
+        width(2.25)
+        height(1.05)
+        depth(0.10)
+        radius(0.08)
+        material(offwhitefabric)
+    )
+    PillowArray(
+        count(4)
+        shell(InflatedLoft 0.62 0.42 0.14)
+        material(offwhitefabric)
+    )
+]
+
+
+MasterWardrobes() ->
+[
+    Object(MasterWardrobe class(CabinetAssembly))
+    T(-1.15 3.30 -5.55)
+    PanelArray(
+        modules(4 width(0.68) height(2.35) depth(0.62))
+        doors(HingedDoor flat)
+        handles(SweepProfile RoundProfile(0.010) length(0.42))
+        material(amberwarmwood)
+    )
+]
+
+
+MasterBedside() ->
+    BedsideTable(1.05 -3.75)
+    BedsideTable(3.65 -3.75)
+
+
+BedsideTable(x z) ->
+[
+    Object(BedsideTableInstance class(CabinetAssembly))
+    T(x 3.30 z)
+    PanelBox(
+        width(0.58)
+        height(0.50)
+        depth(0.46)
+        panelThickness(0.018)
+        drawers(2)
+        runnerSystem(Concealed)
+        material(amberwarmwood)
+    )
+]
+
+
+MasterCurtains() ->
+[
+    Object(MasterCurtains class(TextileAssembly))
+    T(2.35 3.30 -7.20)
+    PleatedSurface(
+        width(4.10)
+        height(2.45)
+        pleatPitch(0.10)
+        fullness(1.8)
+        material(whitefabric)
+    )
+]
+
+
+MasterPlant() ->
+    InteriorTree(3.65 -5.85 1.10)
+
+
+Bedroom2() ->
+    SingleBed(-2.80 3.10)
+    BedroomDesk(-3.20 4.05)
+    BedroomWardrobe(-3.90 2.10)
+
+
+Bedroom3() ->
+    SingleBed(2.55 3.10)
+    BedroomDesk(3.15 4.05)
+    BedroomWardrobe(3.95 2.10)
+
+
+SingleBed(x z) ->
+[
+    Object(SingleBedInstance class(BedAssembly))
+    T(x 3.30 z)
+    PanelBox(width(1.15) height(0.28) depth(2.05) panelThickness(0.035) material(amberwarmwood))
+    ShellLoft(
+        sections(
+            RoundedRect(1.05 1.95 0.08 at(0.00))
+            RoundedRect(1.10 2.00 0.10 at(0.14))
+            RoundedRect(1.05 1.95 0.08 at(0.25))
+        )
+        material(offwhitefabric)
+    )
+]
+
+
+BedroomDesk(x z) ->
+[
+    Object(BedroomDeskInstance class(TableAssembly))
+    T(x 3.30 z)
+    ExtrudeProfile(profile(RoundedRectProfile(1.30 0.58 0.05)) depth(0.035) material(amberwarmwood))
+    SweepProfile(profile(RectProfile(0.035 0.035)) path(FourLegFrame(1.15 0.48 0.72)) material(charcoalroughmetal))
+]
+
+
+BedroomWardrobe(x z) ->
+[
+    Object(BedroomWardrobeInstance class(CabinetAssembly))
+    T(x 3.30 z)
+    PanelArray(modules(2 width(0.62) height(2.25) depth(0.60)) material(amberwarmwood))
+]
+
+
+Ensuite() ->
+    DoubleVanity()
+    EnsuiteShower()
+    WallHungToilet(EnsuiteToilet -1.05 -3.65)
+
+
+MainBathroom() ->
+    CompactVanity(MainVanity -3.45 -0.90)
+    MainShower()
+    WallHungToilet(MainToilet -2.20 -0.85)
+
+
+DoubleVanity() ->
+[
+    Object(EnsuiteVanity class(CabinetAssembly))
+    T(-1.25 3.35 -4.20)
+    PanelBox(
+        width(1.65)
+        height(0.55)
+        depth(0.52)
+        panelThickness(0.018)
+        drawers(2)
+        material(amberwarmwood)
+    )
+    Countertop(
+        ExtrudeProfileWithVoids(
+            outer(Rect(1.72 0.58))
+            void(BasinCutout1 Ellipse(0.42 0.32))
+            void(BasinCutout2 Ellipse(0.42 0.32))
+            depth(0.025)
+            material(offwhiteceramic)
+        )
+    )
+]
+
+
+CompactVanity(name x z) ->
+[
+    Object(name class(CabinetAssembly))
+    T(x 0.85 z)
+    PanelBox(width(1.15) height(0.52) depth(0.50) panelThickness(0.018) drawers(2) material(amberwarmwood))
+    Countertop(ExtrudeProfile(profile(RectProfile(1.20 0.54)) depth(0.025) material(offwhiteceramic)))
+    Basin(
+        ShellLoft(
+            sections(
+                Ellipse(0.46 0.34 at(0.00))
+                Ellipse(0.42 0.30 at(-0.08))
+                Ellipse(0.28 0.20 at(-0.18))
+            )
+            innerOffset(0.010)
+            material(offwhiteceramic)
+        )
+    )
+]
+
+
+EnsuiteShower() ->
+[
+    Object(EnsuiteShower class(ShowerAssembly))
+    T(-0.65 3.30 -2.90)
+    ShowerBase(
+        ShellLoft(
+            outerSections(
+                RoundedRect(1.05 0.92 0.04 at(0))
+                RoundedRect(1.03 0.90 0.04 at(-0.06))
+            )
+            innerOffset(0.020)
+            slopeToDrain(0.020)
+            material(offwhiteceramic)
+        )
+    )
+    GlazingPanel(width(1.05) height(2.15) thickness(0.010))
+    GlazingPanel(width(0.92) height(2.15) thickness(0.010) perpendicular(true))
+    ShowerDrain(Revolve(profile(LinearDrainProfile)))
+    ShowerRail(SweepDisk(path(Line3(0 0 0, 0 1.15 0)) radius(0.010)))
+    ShowerHead(Revolve(profile(RainHeadProfile)))
+]
+
+
+MainShower() ->
+[
+    Object(MainShower class(ShowerAssembly))
+    T(-3.05 3.30 -0.35)
+    ShowerBase(Rectangular 1.15 0.90)
+    GlazingPanel(width(1.15) height(2.12) thickness(0.010))
+]
+
+
+WallHungToilet(name x z) ->
+[
+    Object(name class(PlumbingFixture))
+    T(x 0.24 z)
+    ShellLoft(
+        sections(
+            Ellipse(0.42 0.60 at(0.00))
+            Ellipse(0.46 0.62 at(0.18))
+            Ellipse(0.40 0.52 at(0.42))
+        )
+        innerVoid(ToiletBowlVoid)
+        material(offwhiteceramic)
+    )
+    HiddenCistern(
+        PanelFrame(width(0.50) height(1.15) depth(0.16))
+        flushPlate(0.22 0.14)
+        wastePort(diameter(0.110))
+    )
+]
+
+
+UpperHall() ->
+[
+    Object(UpperHallRail class(BalustradeAssembly))
+    T(-0.85 3.28 -0.55)
+    GlazingPanel(width(2.10) height(1.00) thickness(0.012))
+    BaseShoe(profile(GlassBaseShoeProfile))
+    Handrail(SweepProfile(profile(RectProfile(0.040 0.020)) path(Line3(-1.05 1.00 0, 1.05 1.00 0))))
+]
+
+
+# ============================================================================
+# 9. STAIR
+# ============================================================================
+
+VerticalCirculation() ->
+[
+    Object(MainStair class(StairAssembly))
+    T(-1.10 0.22 -2.15)
+
+    StairFlight(
+        rise(3.05)
+        going(0.26)
+        treadCount(15)
+        width(1.05)
+        stringerLeft(
+            SweepProfile(
+                profile(RectProfile(0.10 0.26))
+                path(StairPitchPath)
+                material(charcoalroughmetal)
+            )
+        )
+        stringerRight(
+            SweepProfile(
+                profile(RectProfile(0.10 0.26))
+                path(StairPitchPath)
+                material(charcoalroughmetal)
+            )
+        )
+        treads(
+            InstanceArray(
+                object(
+                    ExtrudeProfile(
+                        profile(RectProfile(1.05 0.28))
+                        depth(0.045)
+                        material(amberwarmwood)
+                    )
+                )
+                count(15)
+                transform(StairStepTransform)
+            )
+        )
+        glassBalustrade(
+            GlazingPanel(
+                path(StairBalustradePath)
+                height(0.95)
+                thickness(0.012)
+            )
+        )
+        handrail(
+            SweepProfile(
+                profile(RoundProfile(0.035))
+                path(StairHandrailPath)
+                material(charcoalroughmetal)
+            )
+        )
+    )
+]
+
+
+# ============================================================================
+# 10. ELECTRICAL + LIGHTING
+# ============================================================================
+
+ElectricalAndLighting() ->
+    GroundDownlights()
+    UpperDownlights()
+    FeatureLighting()
+
+
+GroundDownlights() ->
+    GridArray(
+        object(
+            RecessedLuminaire(
+                cutout(0.075)
+                recessDepth(0.095)
+                trimDiameter(0.085)
+                reflector(Conical)
+            )
+        )
+        nx(4) ny(5)
+        spacingX(1.90)
+        spacingZ(2.25)
+        origin(-2.85 2.94 -5.20)
+    )
+
+
+UpperDownlights() ->
+    GridArray(
+        object(RecessedLuminaire(cutout(0.075) recessDepth(0.095) trimDiameter(0.085)))
+        nx(4) ny(4)
+        spacingX(1.90)
+        spacingZ(2.25)
+        origin(-2.85 5.96 -5.20)
+    )
+
+
+FeatureLighting() ->
+    LEDStrip(KitchenUnderCabinet path(Line3(-4.05 1.55 4.85, -1.80 1.55 4.85)))
+    LEDStrip(BathMirror path(RectPath(1.00 1.30)))
+    WallLight(EntryWall 0.62 1.75 -7.72)
+
+
+# ============================================================================
+# 11. PLUMBING / SERVICE CONNECTIONS
+# ============================================================================
+
+PlumbingAndWetAreas() ->
+    ColdWaterGraph()
+    HotWaterGraph()
+    WasteGraph()
+
+
+ColdWaterGraph() ->
+    ServicePipe(
+        name(ColdMain)
+        path(Polyline3((-4.00 0.35 -0.20) (-3.20 0.35 4.20) (-1.30 0.35 4.20)))
+        diameter(0.020)
+        material(bluepipe)
+    )
+
+
+HotWaterGraph() ->
+    ServicePipe(
+        name(HotMain)
+        path(Polyline3((-4.00 0.42 -0.20) (-3.20 0.42 4.20) (-1.30 0.42 4.20)))
+        diameter(0.016)
+        material(redpipe)
+    )
+
+
+WasteGraph() ->
+    ServicePipe(
+        name(WasteMain)
+        path(Polyline3((-1.30 0.05 4.00) (-1.60 -0.10 1.00) (-1.60 -0.20 -8.00)))
+        diameter(0.100)
+        material(charcoalroughmetal)
+        slope(0.020)
+    )
+
+
+ServicePipe(name path diameter material) ->
+[
+    Object(name class(Service))
+    SweepDisk(
+        path(path)
+        radius(diameter/2)
+        radialSegments(10)
+        material(material)
+    )
+]
+
+
+# ============================================================================
+# 12. GARAGE
+# ============================================================================
+
+GarageSystem() ->
+    GarageFloor()
+    GarageStorage()
+    GarageLighting()
+
+
+GarageFloor() ->
+[
+    Object(GarageFloorFinish class(FloorFinish))
+    T(-2.45 0.21 -4.50)
+    SurfaceTiling(
+        boundary(Rect(3.75 5.90))
+        tile(Rect(1.20 1.20))
+        joint(0.004 0.004)
+        material(lightgreyroughconcrete)
+    )
+]
+
+
+GarageStorage() ->
+[
+    Object(GarageRearCabinet class(CabinetAssembly))
+    T(-3.85 0.23 -1.65)
+    PanelArray(
+        modules(3 width(0.62) height(2.10) depth(0.48))
+        material(charcoalroughmetal)
+    )
+]
+
+
+GarageLighting() ->
+    GridArray(
+        object(RecessedLuminaire(cutout(0.085) recessDepth(0.10)))
+        nx(2) ny(3)
+        spacingX(1.45)
+        spacingZ(1.75)
+        origin(-3.18 2.95 -6.00)
+    )
+
+
+# ============================================================================
+# 13. REAR GARDEN / VEGETATION
+# ============================================================================
+
+LandscapeSystem() ->
+    RearTerrace()
+    RearLawn()
+    PerimeterPlanting()
+    FrontPlanting()
+    BalconyVines()
+    RearFenceVines()
+
+
+RearTerrace() ->
+[
+    Object(RearTerrace class(SiteSurface))
+    T(0 0.06 8.05)
+    SurfaceTiling(
+        boundary(Rect(5.50 1.60))
+        tile(Rect(0.60 0.60))
+        joint(0.008 0.006)
+        material(offwhiteceramic)
+    )
+]
+
+
+RearLawn() ->
+[
+    Object(RearLawn class(LandscapeSurface))
+    T(0 0.05 10.20)
+    HeightField(
+        boundary(Rect(8.70 4.15))
+        nominalHeight(0.05)
+        variation(0.010)
+        material(grass)
+    )
+]
+
+
+PerimeterPlanting() ->
+    ShrubBorder(-4.45 9.60 17)
+    ShrubBorder( 4.45 9.60 17)
+    RearTree(2.95 10.40)
+    RearTree(-3.20 10.80)
+
+
+ShrubBorder(x z count) ->
+[
+    Object(ShrubBorderInstance class(PlantingAssembly))
+    T(x 0 z)
+    InstanceArray(
+        object(
+            Plant(
+                generator(
+                    SpaceColonization(
+                        volume(Ellipsoid(0.42 0.48 0.42))
+                        attractionPoints(95)
+                        step(0.10)
+                    )
+                )
+                stem(TaperedSweep(radiusStart(0.018) radiusEnd(0.006)))
+                leaves(
+                    LeafBlade(profile(Ovate) length(0.065) width(0.032) camber(0.003))
+                    OrganArray(density(34))
+                )
+            )
+        )
+        count(count)
+        along(Line3(0 0 -2.5, 0 0 2.5))
+        jitter(0.08)
+        scaleVariation(0.85 1.15)
+    )
+]
+
+
+RearTree(x z) ->
+[
+    Object(RearTreeInstance class(Tree))
+    T(x 0 z)
+    BranchGraph(
+        trunk(TaperedSweep(path(Bezier3((0 0 0) (0.03 1.2 0) (-0.08 2.4 0.02) (0 3.6 0))) radiusStart(0.14) radiusEnd(0.05)))
+        crown(
+            SpaceColonization(
+                volume(Ellipsoid(1.65 1.55 1.65 centre(0 3.25 0)))
+                attractionPoints(520)
+                influenceRadius(0.62)
+                killRadius(0.18)
+                step(0.20)
+            )
+        )
+        leaves(
+            LeafBlade(profile(Elliptic) length(0.085) width(0.036) camber(0.004))
+            OrganArray(density(15) phyllotaxis(Alternate divergence(137.5)))
+        )
+    )
+]
+
+
+FrontPlanting() ->
+    OrnamentalGrass(-4.65 -8.15 9)
+    OrnamentalGrass( 0.20 -8.15 7)
+    OrnamentalGrass( 3.80 -8.15 9)
+    FrontFeatureTree(2.90 -7.65)
+
+
+OrnamentalGrass(x z count) ->
+[
+    Object(GrassClump class(Plant))
+    T(x 0 z)
+    OrganArray(
+        object(
+            LeafBlade(
+                profile(Linear)
+                length(0.55)
+                width(0.018)
+                bend(0.22)
+                twistVariation(-5 5)
+                material(greenmattepaint)
+            )
+        )
+        count(count)
+        radial(true)
+        azimuthVariation(0 360)
+        tiltVariation(5 28)
+    )
+]
+
+
+FrontFeatureTree(x z) ->
+[
+    Object(FrontFeatureTree class(Tree))
+    T(x 0 z)
+    BranchGraph(
+        trunk(TaperedSweep(path(Bezier3((0 0 0) (0.02 0.8 0) (-0.03 1.8 0) (0 2.65 0))) radiusStart(0.085) radiusEnd(0.025)))
+        branches(
+            LSystem(
+                axiom(A)
+                rule(A -> F[+A][-A]FA)
+                iterations(3)
+                angle(31)
+                segmentLength(0.24)
+            )
+        )
+        leaves(
+            LeafBlade(profile(Ovate) length(0.075) width(0.034) camber(0.003))
+            OrganArray(density(18))
+        )
+    )
+]
+
+
+BalconyVines() ->
+[
+    Object(FrontBalconyVines class(VineAssembly))
+    VinePath(
+        start(-3.55 3.40 -7.65)
+        support(FrontUpperWall)
+        grow(direction(0.20 -0.08 0))
+        surfaceAttachment(distance(0.015) mode(WallClimbing))
+        branching(probability(0.16))
+        stem(TaperedSweep(radiusStart(0.010) radiusEnd(0.003)))
+        leaves(
+            LeafBlade(profile(Cordate) length(0.060) width(0.050) camber(0.003))
+            OrganArray(spacing(0.095) phyllotaxis(Alternate divergence(137.5)))
+        )
+    )
+]
+
+
+RearFenceVines() ->
+[
+    Object(RearFenceVines class(VineAssembly))
+    VinePath(
+        start(-5.20 0.10 8.95)
+        support(RearFence)
+        mode(TrellisClimbing)
+        surfaceAttachment(distance(0.010))
+        branchProbability(0.20)
+        stem(TaperedSweep(radiusStart(0.007) radiusEnd(0.002)))
+        leaves(LeafBlade(profile(Cordate) length(0.055) width(0.046)))
+    )
+]
+
+
+# ============================================================================
+# 14. VEHICLE — MVGv1 STYLE
+# ============================================================================
+
+VehicleSystem() ->
+    DrivewayVehicle()
+
+
+DrivewayVehicle() ->
+[
+    Object(DrivewayCar class(MotorVehicle))
+    T(-2.45 0.15 -8.10)
+
+    VehiclePackage(
+        bodyType(FastbackSedan)
+        length(4.62)
+        width(1.84)
+        height(1.42)
+        wheelbase(2.75)
+        frontTrack(1.58)
+        rearTrack(1.57)
+        groundClearance(0.145)
+        frontOverhang(0.92)
+        rearOverhang(0.95)
+        wheelRadius(0.335)
+    )
+
+    VehicleDatums(
+        centreline(X 0)
+        ground(Y 0)
+        frontAxle(Z 0.95)
+        rearAxle(Z -1.80)
+        beltLine(Y 0.92)
+        roofDatum(Y 1.38)
+    )
+
+    BodyShell(
+        SurfaceLoft(
+            symmetryPlane(X 0)
+            sections(
+                BodySection(Nose        Z  2.18 profile(CarSection_Nose))
+                BodySection(FrontArch   Z  1.22 profile(CarSection_FrontArch))
+                BodySection(APillar     Z  0.45 profile(CarSection_APillar))
+                BodySection(BPillar     Z -0.42 profile(CarSection_BPassenger))
+                BodySection(RearCabin   Z -1.10 profile(CarSection_RearCabin))
+                BodySection(RearArch    Z -1.72 profile(CarSection_RearArch))
+                BodySection(Tail        Z -2.28 profile(CarSection_Tail))
+            )
+            guides(
+                GuideCurve(RoofLine     CarRoofGuide)
+                GuideCurve(BeltLine     CarBeltGuide)
+                GuideCurve(ShoulderLine CarShoulderGuide)
+                GuideCurve(RockerLine   CarRockerGuide)
+            )
+            continuity(C1)
+        )
+        thickness(0.0012)
+        material(charcoalmetallicpaint)
+    )
+
+    WheelArch(frontLeft  wheelCentre(-0.79 0.335  0.95) radius(0.37) clearance(0.035))
+    WheelArch(frontRight wheelCentre( 0.79 0.335  0.95) radius(0.37) clearance(0.035))
+    WheelArch(rearLeft   wheelCentre(-0.785 0.335 -1.80) radius(0.37) clearance(0.035))
+    WheelArch(rearRight  wheelCentre( 0.785 0.335 -1.80) radius(0.37) clearance(0.035))
+
+    PanelCut(Hood       curve(HoodSeam)      gap(0.004))
+    PanelCut(DoorFL     curve(DoorFLSeam)    gap(0.004))
+    PanelCut(DoorFR     curve(DoorFRSeam)    gap(0.004))
+    PanelCut(DoorRL     curve(DoorRLSeam)    gap(0.004))
+    PanelCut(DoorRR     curve(DoorRRSeam)    gap(0.004))
+    PanelCut(Boot       curve(BootSeam)      gap(0.004))
+
+    CurvedPanel(Windshield source(CarBodySurface) boundary(WindshieldBoundary) thickness(0.005))
+    CurvedPanel(RearGlass  source(CarBodySurface) boundary(RearGlassBoundary)  thickness(0.005))
+
+    WheelAssembly(FrontLeft  position(-0.79 0.335  0.95))
+    WheelAssembly(FrontRight position( 0.79 0.335  0.95))
+    WheelAssembly(RearLeft   position(-0.785 0.335 -1.80))
+    WheelAssembly(RearRight  position( 0.785 0.335 -1.80))
+
+    HeadlampAssembly(left  position(-0.60 0.72 2.14))
+    HeadlampAssembly(right position( 0.60 0.72 2.14))
+]
+
+
+WheelAssembly(name position) ->
+[
+    Object(name class(WheelAssembly))
+    T(position)
+
+    Tire(
+        Revolve(
+            profile(TireProfile(width(0.225) aspect(0.45) rimDiameter(0.48)))
+            segments(48)
+            material(charcoalroughrubber)
+        )
+    )
+
+    Rim(
+        Revolve(profile(RimBarrelProfile(0.48 0.205)) segments(40) material(silverbluepolishedmetal))
+        RadialArray(
+            object(Spoke profile(RectProfile(0.055 0.020)) length(0.18))
+            count(10)
+            axis(WheelAxis)
+            material(silverbluepolishedmetal)
+        )
+    )
+
+    BrakeDisc(
+        Revolve(profile(BrakeRotorProfile) segments(40) material(silverbluepolishedmetal))
+        RadialArray(object(VentHole diameter(0.008)) count(24))
+    )
+
+    Caliper(
+        ShellLoft(
+            sections(
+                RoundedRect(0.12 0.05 0.02 at(0))
+                RoundedRect(0.15 0.07 0.025 at(0.05))
+                RoundedRect(0.12 0.05 0.02 at(0.11))
+            )
+            material(charcoalroughmetal)
+        )
+    )
+]
+
+
+HeadlampAssembly(side position) ->
+[
+    Object(Headlamp class(LightingAssembly))
+    T(position)
+    CurvedPanel(
+        boundary(RoundedRectBoundary(0.42 0.12))
+        curvature(0.025)
+        thickness(0.003)
+        material(bluewhiteglossysmoothglass)
+    )
+    Housing(
+        ShellLoft(
+            sections(
+                RoundedRect(0.38 0.10 0.02 at(0))
+                RoundedRect(0.32 0.08 0.02 at(-0.10))
+            )
+            material(charcoalroughmetal)
+        )
+    )
+    LightGuide(
+        path(Bezier3((-0.16 0 0) (-0.05 0.04 0) (0.07 0.04 0) (0.16 0 0)))
+        crossSection(Circle 0.009)
+    )
+]
+
+
+# ============================================================================
+# 15. RELATIONSHIPS + COLLISION POSITIONING
+# ============================================================================
+
+SpatialRelationships() ->
+    PositionConstraint(MainEntryDoor EntryOpening alignNormals touch clearance(0.004))
+    PositionConstraint(GarageDoor GarageOpening centreInOpening clearance(0.010))
+    PositionConstraint(RearSlider RearSliderOpening centreInOpening clearance(0.006))
+
+    PositionConstraint(KitchenIsland GroundFloorTimber supportedBy clearance(0.000))
+    PositionConstraint(KitchenIsland StairKitchenWall clearanceFrom 0.90)
+
+    PositionConstraint(LivingSofa GroundFloorTimber supportedBy clearance(0.000))
+    PositionConstraint(MasterBed UpperTimberFloor supportedBy clearance(0.000))
+
+    Connection(KitchenSink.wasteOutlet WasteMain branch)
+    Connection(KitchenSink.coldInlet ColdMain branch)
+    Connection(KitchenSink.hotInlet HotMain branch)
+
+    CollisionRule(DrivewayCar avoid(BuildingEnvelope FrontFence Letterbox))
+    CollisionRule(FrontFeatureTree avoid(BuildingEnvelope Footpath))
+    CollisionRule(FrontBalconyVines seek(FrontUpperWall))
+    CollisionRule(RearFenceVines seek(RearFence))
+
+
+# ============================================================================
+# 16. VALIDATION
+# ============================================================================
+
+ValidationModel() ->
+    ValidateUniqueObjectIds()
+    ValidateSpatialContainment()
+    ValidateRoomAdjacency()
+    ValidateCirculation()
+    ValidateSupportPaths()
+    ValidateHostedOpenings()
+    ValidateEnvelopeContinuity()
+    ValidateServiceConnectivity()
+    ValidateForbiddenCollisions()
+    ValidateClearances()
+    ValidateVehiclePackage()
+    ValidateVegetationAttachments()
+    ValidateProceduralMeshes()
+    CommitOnlyIfValid()
+
+
+ValidateCirculation() ->
+    RequireReachable(Street Entry)
+    RequireReachable(Entry Living)
+    RequireReachable(Entry Kitchen)
+    RequireReachable(Entry UpperHall)
+    RequireReachable(UpperHall MasterBedroom)
+    RequireReachable(UpperHall Bedroom2)
+    RequireReachable(UpperHall Bedroom3)
+
+
+ValidateSupportPaths() ->
+    RequireSupport(UpperSlab PrimaryWalls)
+    RequireSupport(RoofSlab PrimaryWalls)
+    RequireSupport(MainStair GroundSlab UpperSlab)
+
+
+ValidateHostedOpenings() ->
+    RequireContained(GarageOpening FrontGroundWall)
+    RequireContained(EntryOpening FrontGroundWall)
+    RequireContained(RearSliderOpening RearGroundWall)
+    RequireNoOpeningOverlap()
+
+
+ValidateEnvelopeContinuity() ->
+    RequireClosedEnvelopeExcept(Openings)
+    RequireLayerContinuity(StandardRenderedWall)
+    RequireRoofDrainage(FlatRoof RearRoofDrain)
+
+
+ValidateServiceConnectivity() ->
+    RequireConnected(KitchenSink WasteMain)
+    RequireConnected(KitchenSink ColdMain)
+    RequireConnected(KitchenSink HotMain)
+    RequireConnected(EnsuiteShower WasteMain)
+    RequireConnected(MainShower WasteMain)
+
+
+ValidateForbiddenCollisions() ->
+    RequireNoCollision(DrivewayCar BuildingEnvelope)
+    RequireNoCollision(DrivewayCar FrontFence)
+    RequireNoCollision(DrivewayCar Letterbox)
+    RequireNoCollision(MainEntryDoor MainEntryDoorSwingClearance)
+
+
+ValidateClearances() ->
+    RequireClearance(DrivewayCar GarageDoor 0.60)
+    RequireClearance(KitchenIsland DiningTable 1.00)
+    RequireClearance(MainStair UpperHallRail 0.05)
+
+
+ValidateVehiclePackage() ->
+    RequireWheelClearance(DrivewayCar 0.025)
+    RequireBodyGroundClearance(DrivewayCar 0.130)
+    RequireVehicleSymmetry(DrivewayCar tolerance(0.004))
+
+
+ValidateVegetationAttachments() ->
+    RequireAttached(FrontBalconyVines FrontUpperWall)
+    RequireAttached(RearFenceVines RearFence)
+    RequireVegetationAvoidance(FrontFeatureTree BuildingEnvelope 0.25)
+
+
+ValidateProceduralMeshes() ->
+    RequireFiniteVertices()
+    RequireValidIndices()
+    RequireNoDegenerateTriangles()
+    RequireManifoldWhereRequired()
+    RequireDeterministicMeshHash()
