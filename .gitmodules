@@ -1,0 +1,12 @@
+[submodule "companions/pghauff55/ProGen3d"]
+	path = companions/pghauff55/ProGen3d
+	url = https://github.com/pghauff55/ProGen3d.git
+[submodule "companions/pghauff55/ProGen3d-cmd"]
+	path = companions/pghauff55/ProGen3d-cmd
+	url = https://github.com/pghauff55/ProGen3d-cmd.git
+[submodule "companions/pghauff73/ProGen3d_js.html"]
+	path = companions/pghauff73/ProGen3d_js.html
+	url = https://github.com/pghauff73/ProGen3d_js.html.git
+[submodule "companions/pghauff73/progen3d-webhost"]
+	path = companions/pghauff73/progen3d-webhost
+	url = https://github.com/pghauff73/progen3d-webhost.git
