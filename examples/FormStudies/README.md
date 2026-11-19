@@ -2,17 +2,19 @@
 
 Five runnable desktop grammars explore four forms. Begin with a stack of straight slats. Work up to a moving lattice, then strip that lattice back to the three rules that determine its shape.
 
-![Four native ProGen3D meshes shown in studio lighting. The models are a twisted fan of turquoise slats, a copper and turquoise string saddle, a nine-bob pendulum rack, and an open crossed-rod lantern.](images/form-studies.jpg)
+![Five ProGen3D studio renders. The full lantern is shown beside the screw fan, string saddle, pendulum choir and reduced copper lantern.](images/studio/gallery.jpg)
 
 [Watch the 24-second motion study](images/motion.mp4). Both models share an on-screen clock. The pendulums complete one group cycle while the lantern completes three. The film uses native triangle buffers sampled at 16 frames per second. The stills use the same geometry with studio lighting.
 
-| Grammar | Technique to learn | Instances | Triangles |
-|---|---|---:|---:|
-| [Screw fan](01_screw_fan.p3d) | Give height and rotation the same repeat counter | 25 | 300 |
-| [String saddle](02_string_saddle.p3d) | Construct a surface from two families of straight lines | 38 | 1,280 |
-| [Pendulum choir](03_pendulum_choir.p3d) | Turn an integer frequency schedule into lengths and angles | 23 | 3,120 |
-| [Constant-length lantern](04_constant_length_lantern.p3d) | Solve one dimension from a constraint at each time sample | 74 | 7,296 |
-| [Lantern essence](05_lantern_essence.p3d) | Recover the full copper family with three rules | 24 | 768 |
+| Grammar | Technique to learn | Instances | Triangles | Studio still |
+|---|---|---:|---:|---|
+| [Screw fan](01_screw_fan.p3d) | Give height and rotation the same repeat counter | 25 | 300 | [View](images/studio/01-Screw-Fan.jpg) |
+| [String saddle](02_string_saddle.p3d) | Construct a surface from two families of straight lines | 38 | 1,280 | [View](images/studio/02-String-Saddle.jpg) |
+| [Pendulum choir](03_pendulum_choir.p3d) | Turn an integer frequency schedule into lengths and angles | 23 | 3,120 | [View](images/studio/03-Pendulum-Choir.jpg) |
+| [Constant-length lantern](04_constant_length_lantern.p3d) | Solve one dimension from a constraint at each time sample | 74 | 7,296 | [View](images/studio/04-Constant-Length-Lantern.jpg) |
+| [Lantern essence](05_lantern_essence.p3d) | Recover the full copper family with three rules | 24 | 768 | [View](images/studio/05-Lantern-Essence.jpg) |
+
+The studio stills show the pendulums at 12 seconds and both lanterns at 4 seconds. In the paired lantern view, identical camera position and scale make it possible to follow the same copper rod across both images. [Open the side-by-side comparison](images/studio/lantern-comparison.jpg).
 
 ## Run your first experiment
 
