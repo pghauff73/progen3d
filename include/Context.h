@@ -6,6 +6,7 @@
 #include "geometry/model/ResolvedPrimitiveGeometry.h"
 #include "physics/model/CollisionGeometry.h"
 #include "physics/model/BodyAirflow.h"
+#include "physics/model/FlexibleBody.h"
 
 #include <cstddef>
 #include <fstream>
@@ -90,6 +91,8 @@ class ScenePrimitiveInstance : public SceneRenderableState {
 public:
 	void restoreInitialState() override;
 
+	void refreshFlexibleGeometry();
+	std::optional<FlexibleBody> flexible_body;
 	std::shared_ptr<const BodyAirflow> airflow;
 	AirflowResult air_load;
 	PrimitiveDefinition *primitive = nullptr;
@@ -187,6 +190,8 @@ public:
 	void setPendingVelocity(const glm::vec3 &velocity);
 	void setPendingRotationalVelocity(const glm::vec3 &rotational_velocity);
 	void setPendingMass(float mass);
+	void setPendingFlexibleBody(FlexibleBody body);
+	bool hasFlexibleBodies() const { return has_flexible_bodies_; }
 	void setPendingAirflow(std::shared_ptr<const BodyAirflow> definition);
 	AirflowResult inspectAirflow(const ScenePrimitiveInstance &instance,
 	                            std::vector<AirLoadVector> *vectors = nullptr) const;
@@ -224,6 +229,9 @@ private:
 	glm::vec3 pending_velocity_{0.0f};
 	glm::vec3 pending_rotational_velocity_{0.0f};
 	float pending_mass_ = 1.0f;
+	bool has_pending_mass_ = false;
+	bool has_flexible_bodies_ = false;
+	std::optional<FlexibleBody> pending_flexible_body_;
 	std::shared_ptr<const BodyAirflow> pending_airflow_;
 	float pending_density_ = 0.0f;
 	bool has_pending_density_ = false;
