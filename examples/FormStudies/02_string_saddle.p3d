@@ -1,0 +1,26 @@
+# A framed patch of y = lift * (x/span) * (z/span).
+# Each colour is an entire family of straight rulings. The borders are separate.
+Start -> Saddle(17 1.7 0.78)
+
+Saddle(n span lift) ->
+    Interior(n span lift)
+    Border(span lift)
+
+Interior(n span lift) n ->
+    Pair(span lift lerp(-1,1,(Interior_count+1)/(n+1)))
+
+Pair(span lift u) ->
+    I(SweepDisk(path(-span -lift*u span*u  span lift*u span*u)
+                radius(0.026) segments(8) cap(all)) material(tealmattemetal) 1 1)
+    I(SweepDisk(path(span*u -lift*u -span  span*u lift*u span)
+                radius(0.026) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
+
+Border(span lift) ->
+    Edge(-span lift -span   span -lift -span)
+    Edge(span -lift -span   span lift span)
+    Edge(span lift span   -span -lift span)
+    Edge(-span -lift span   -span lift -span)
+
+Edge(x0 y0 z0 x1 y1 z1) ->
+    I(SweepDisk(path(x0 y0 z0 x1 y1 z1) radius(0.055) segments(12) cap(all))
+      material(charcoalmattemetal) 1 1)

@@ -537,3 +537,8 @@ clean:
 	rm -rf $(BUILD_DIR) $(TARGET) $(LEGACY_TARGET)
 
 -include $(OBJS:.o=.d)
+
+# Reuse the desktop runtime and its vertex templates for the form-study lessons.
+FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
+build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
