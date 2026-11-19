@@ -51,6 +51,7 @@ void PreviewCameraController::reset()
 	target_y_ = 0.0f;
 	target_z_ = 0.0f;
 	distance_ = 5.0f;
+	minimum_distance_ = kMinimumDistance;
 }
 
 void PreviewCameraController::orbitByPixels(float horizontal_pixels, float vertical_pixels)
@@ -86,7 +87,7 @@ void PreviewCameraController::zoomByWheel(float wheel_delta, float viewport_scal
 		return;
 	}
 	const float zoom_factor = std::pow(0.88f, wheel_delta);
-	distance_ = std::clamp(distance_ * zoom_factor, kMinimumDistance, kMaximumDistance);
+	distance_ = std::clamp(distance_ * zoom_factor, minimum_distance_, kMaximumDistance);
 }
 
 void PreviewCameraController::rollByDegrees(float degrees)
@@ -204,7 +205,7 @@ void PreviewCameraController::fitToBounds(float center_x,
 	                                      float half_extent_z,
 	                                      float viewport_width,
 	                                      float viewport_height,
-	                                      const PreviewProjectionConfiguration &projection)
+	                                      const PreviewProjectionConfiguration &projection, bool physical_scale)
 {
 	target_x_ = center_x;
 	target_y_ = center_y;
@@ -223,7 +224,9 @@ void PreviewCameraController::fitToBounds(float center_x,
 		2.0f * std::atan(std::tan(field_of_view_y * 0.5f) * std::max(aspect, 0.1f));
 	const float minimum_half_field_of_view =
 		std::max(0.18f, std::min(field_of_view_x, field_of_view_y) * 0.5f);
+	minimum_distance_ = physical_scale ? 0.025f : kMinimumDistance;
+	const float margin = physical_scale ? std::min(0.85f, 0.1f*bounding_radius) : 0.85f;
 	const float fitted_distance =
-		(bounding_radius / std::sin(minimum_half_field_of_view)) * 1.08f + 0.85f;
-	distance_ = std::clamp(fitted_distance, kMinimumDistance, kMaximumDistance);
+		(bounding_radius / std::sin(minimum_half_field_of_view)) * 1.08f + margin;
+	distance_ = std::clamp(fitted_distance, minimum_distance_, kMaximumDistance);
 }

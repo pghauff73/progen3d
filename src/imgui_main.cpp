@@ -4464,6 +4464,9 @@ void fit_preview_camera_to_scene(EditorWorkspaceSession *app_state, const ImVec2
 		current_preview_session().fit_camera_pending = false;
 		return;
 	}
+	const auto &parts = grammar->context->primitive_instances;
+	const bool physical_scale = std::any_of(parts.begin(),parts.end(),
+		[](const PrimitiveInstance &body) { return body.surface_material.enabled; });
 	current_preview_session().camera.fitToBounds(bounds.center.x,
 	                                         bounds.center.y,
 	                                         bounds.center.z,
@@ -4472,7 +4475,7 @@ void fit_preview_camera_to_scene(EditorWorkspaceSession *app_state, const ImVec2
 	                                         bounds.half_extents.z,
 	                                         viewport_size.x,
 	                                         viewport_size.y,
-	                                         current_preview_session().projection);
+	                                         current_preview_session().projection, physical_scale);
 	current_preview_session().fit_camera_pending = false;
 }
 
@@ -4822,6 +4825,16 @@ void upload_context_preview_buffers(EditorWorkspaceSession *app_state, Context *
 	upload_dynamic_preview_buffers(context);
 }
 
+void upload_simulated_preview_geometry(Context *context)
+{
+	const bool moving_mesh = std::any_of(context->primitive_instances.begin(), context->primitive_instances.end(),
+		[](const PrimitiveInstance &part) {
+			return part.surface_material.enabled && !part.immovable && !is_preview_dynamic_cube_instance(part);
+		});
+	if (moving_mesh) upload_static_preview_buffers(running_workspace_session, context);
+	upload_dynamic_preview_buffers(context);
+}
+
 void step_preview_simulation(float delta_time)
 {
 	if (grammar == nullptr || grammar->context == nullptr || delta_time <= 0.0f) {
@@ -4841,7 +4854,7 @@ void step_preview_simulation(float delta_time)
 		++step_count;
 	}
 	if (advanced_simulation) {
-		upload_dynamic_preview_buffers(grammar->context);
+		upload_simulated_preview_geometry(grammar->context);
 	}
 	preview_simulation_interpolation_alpha() =
 		std::clamp(preview_simulation_accumulated_time() / kPreviewSimulationStep, 0.0f, 1.0f);
@@ -4855,7 +4868,7 @@ void step_preview_simulation_once(float delta_time)
 
 	reset_preview_simulation_timing();
 	grammar->context->stepSimulation(delta_time);
-	upload_dynamic_preview_buffers(grammar->context);
+	upload_simulated_preview_geometry(grammar->context);
 	preview_simulation_interpolation_alpha() = 1.0f;
 }
 
@@ -5250,6 +5263,17 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 			destroy_grammar();
 			current_scene_snapshot() = std::move(candidate_snapshot);
 			grammar = current_scene_snapshot()->grammarDocument();
+			if (!result->time_sample && grammar->context) {
+				const auto &parts = grammar->context->primitive_instances;
+				auto &camera = current_preview_session().camera;
+				if (!parts.empty() && camera.azimuthDegrees() == 0 && camera.elevationDegrees() == 0 &&
+				    std::all_of(parts.begin(),parts.end(),[](const PrimitiveInstance &body) {
+					    return std::abs(body.surface_material.shaft_axis.z) > 0.999;
+				    })) {
+					camera.orientTo(PreviewOrientation::PositiveZ);
+					current_preview_session().fit_camera_pending = true;
+				}
+			}
 			active_grammar_design_nonce = current_scene_snapshot()->designNonce();
 			if (app_state != nullptr) {
 				app_state->document.recordSuccessfulGeneration(
@@ -6873,6 +6897,11 @@ std::string tooltip_for_keyword(const std::string &token)
 	if (token == "V") {
 		return "Assign initial linear velocity to the next instantiated primitive.";
 	}
+	if (token == "ContactSurface") return "Next solid: normal stiffness (N/m), shear stiffness (N/m), friction coefficient.";
+	if (token == "ElasticModulus") return "Next layer: Young's modulus (Pa), Poisson ratio and friction coefficient. Pair with ContactLayer.";
+	if (token == "ContactLayer") return "Effective surface patch area (m^2) and deformable thickness (m).";
+	if (token == "ContactShaft") return "Constrain the next solid to rotate about this world axis through its centre of mass.";
+	if (token == "ContactThermal") return "Next solid: initial temperature (K), specific heat (J/kg/K), layer conductance (W/K).";
 	if (token == "VR") {
 		return "Assign initial rotational velocity to the next instantiated primitive.";
 	}
@@ -10803,6 +10832,11 @@ ScenePrimitiveInspection build_scene_primitive_inspection()
 		inspection.duct_pressure = point.pressure;
 	}
 	inspection.mass = instance.mass;
+	inspection.surface_material = instance.surface_material;
+	if (inspection.surface_material.enabled) {
+		inspection.surface_state = instance.surface_state;
+		inspection.motion_balance = context->getSurfaceMotionBalance(instance);
+	}
 	inspection.immovable = instance.immovable;
 	if (instance.resolved_geometry) {
 		inspection.watertight = instance.resolved_geometry->isWatertight();

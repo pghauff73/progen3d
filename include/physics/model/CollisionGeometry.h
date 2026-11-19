@@ -21,6 +21,7 @@ struct CollisionGeometry {
 	AxisAlignedBounds bounds;
 	glm::vec3 centroid{0.0f};
 	glm::vec3 center_of_mass{0.0f};
+	float analytic_sphere_radius = 0.0f;
 	float average_radial_distance_to_vertex = 0.0f;
 	CollisionGeometryKind kind = CollisionGeometryKind::BoxHull;
 	const Mesh *source_mesh = nullptr;

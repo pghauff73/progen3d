@@ -55,7 +55,8 @@ public:
 	                 float half_extent_z,
 	                 float viewport_width,
 	                 float viewport_height,
-	                 const PreviewProjectionConfiguration &projection);
+	                 const PreviewProjectionConfiguration &projection,
+	                 bool physical_scale = false);
 
 private:
 	float scale_factor_ = 1.0f;
@@ -66,4 +67,5 @@ private:
 	float target_y_ = 0.0f;
 	float target_z_ = 0.0f;
 	float distance_ = 5.0f;
+	float minimum_distance_ = 1.25f;
 };

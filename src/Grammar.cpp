@@ -3981,6 +3981,21 @@ void GrammarActionToken::performAction(SceneGenerationContext *context){
 		}
 		context->setPendingVelocity(velocity);
 	}
+	else if(token_name=="ContactLayer"){
+		context->setPendingContactLayer(arguments[0], arguments[1]);
+	}
+	else if(token_name=="ElasticModulus"){
+		context->setPendingElasticModulus(arguments[0], arguments[1], arguments[2]);
+	}
+	else if(token_name=="ContactShaft"){
+		context->setPendingContactShaft(glm::dvec3(arguments[0],arguments[1],arguments[2]));
+	}
+	else if(token_name=="ContactSurface"){
+		context->setPendingContactSurface(arguments[0], arguments[1], arguments[2]);
+	}
+	else if(token_name=="ContactThermal"){
+		context->setPendingContactThermal(arguments[0], arguments[1], arguments[2]);
+	}
 	else if(token_name=="VR"){
 		glm::vec3 rotational_velocity(0.0f);
 		for(int i=0;i<3;i++){
@@ -4388,13 +4403,14 @@ static void parse_tokens_into(Grammar *grammar,
 		   token_str=="DSX" || token_str=="DSY" || token_str=="DSZ" ||
 		   token_str=="DTX" || token_str=="DTY" || token_str=="DTZ" ||
 		   token_str=="V" || token_str=="VR" || token_str=="Wind" || token_str=="AirProperties" ||
-		   AirflowDeclaration::recognizes(token_str)){
+		   token_str=="ContactSurface" || token_str=="ContactThermal" || token_str=="ContactShaft" ||
+		   token_str=="ElasticModulus" || token_str=="ContactLayer" || AirflowDeclaration::recognizes(token_str)){
 			token=std::make_unique<Token>(token_str);
 			if(*index >= raw_tokens.size() || raw_tokens[*index] != "("){
 				throw(1);
 			}
 			++(*index);
-			const int arity = token_str == "AirProperties" ? 2 : 3;
+			const int arity = (token_str == "AirProperties" || token_str == "ContactLayer") ? 2 : 3;
 			for(int i=0;i<arity;i++){
 				const std::string argument_expression =
 					parse_expression_argument(raw_tokens, index, ")");
@@ -5403,10 +5419,41 @@ void GrammarDocument::update_token(Token *check_token){
 	   check_token->token_name=="DSX" || check_token->token_name=="DSY" || check_token->token_name=="DSZ" ||
 	   check_token->token_name=="DTX" || check_token->token_name=="DTY" || check_token->token_name=="DTZ" ||
 	   check_token->token_name=="V" || check_token->token_name=="VR" ||
-	   check_token->token_name=="Wind" || check_token->token_name=="AirProperties" ||
-	   AirflowDeclaration::recognizes(check_token->token_name)){
+	   check_token->token_name=="ContactSurface" || check_token->token_name=="ContactThermal" ||
+	   check_token->token_name=="ContactShaft" || check_token->token_name=="ElasticModulus" ||
+	   check_token->token_name=="ContactLayer" || check_token->token_name=="Wind" ||
+	   check_token->token_name=="AirProperties" || AirflowDeclaration::recognizes(check_token->token_name)){
 		for(std::size_t index=0; index<check_token->arguments.size(); ++index){
 			if(!resolve_argument(index, index, check_token->token_name))return;
+		}
+		if(check_token->token_name=="ContactLayer" || check_token->token_name=="ElasticModulus"){
+			const auto &v = check_token->arguments;
+			const bool layer = check_token->token_name=="ContactLayer";
+			if (!std::all_of(v.begin(),v.end(),[](float x) { return std::isfinite(x); }) ||
+			    !(v[0]>0) || (layer ? !(v[1]>0) : (v[1]<=-1 || v[1]>=0.5 || v[2]<0))) {
+				abort_expansion(this,check_token,layer ? "ContactLayer requires positive area and thickness." :
+					"ElasticModulus requires E > 0, -1 < Poisson ratio < 0.5 and nonnegative friction.");
+				return;
+			}
+		}
+		if(check_token->token_name=="ContactShaft"){
+			const auto &v = check_token->arguments;
+			const double length = glm::length(glm::dvec3(v[0],v[1],v[2]));
+			if(!std::isfinite(length) || !(length > 0)){
+				abort_expansion(this, check_token, "ContactShaft requires a finite nonzero axis.");
+				return;
+			}
+		}
+		if(check_token->token_name=="ContactSurface" || check_token->token_name=="ContactThermal"){
+			const auto &v = check_token->arguments;
+			const bool surface = check_token->token_name=="ContactSurface";
+			if(!std::isfinite(v[0]) || !std::isfinite(v[1]) || !std::isfinite(v[2]) ||
+			   (surface ? (v[0]<=0 || v[1]<0) : (v[0]<0 || v[1]<=0)) || v[2]<0){
+				abort_expansion(this, check_token, surface ?
+					"ContactSurface requires positive normal stiffness and nonnegative shear stiffness and friction." :
+					"ContactThermal requires nonnegative kelvin, positive specific heat and nonnegative conductance.");
+				return;
+			}
 		}
 	}
 	else if(check_token->token_name=="A"){
@@ -6307,6 +6354,10 @@ void GrammarDocument::generateGeometry()
 		const auto air = body_airflow.find(token);
 		if (air != body_airflow.end()) context->setPendingAirflow(air->second);
 		token->performAction(context);
+		if (!context->surfaceCreationError().empty()) {
+			report_grammar_issue(this, make_action_token_diagnostic(token, context->surfaceCreationError()));
+			return;
+		}
 		if(!error_details.empty())return;
 	}
 	std::string spatial_diagnostic;
