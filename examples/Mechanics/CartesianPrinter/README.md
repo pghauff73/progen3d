@@ -2,7 +2,9 @@
 
 Open [CartesianPrinter.p3d](CartesianPrinter.p3d) with the desktop runtime from this branch and advance the preview from 0 to 28.5 seconds. The loaded printer deposits three 56 × 40 mm perimeters, raises the nozzle, parks at 26.5 s and spends two seconds relaxing pressure. To compare with the original kinematic mechanism, change the start production to `Start -> IdealPrinter`.
 
-The frame, two belt drives, two Z screws, six guide shafts and twelve linear bearings are shared geometry. The loaded assembly adds an 18-tooth input pinion and a 36-tooth gear fixed to the filament hob. The 28 interface connections include every bore-to-journal association, each screw and nut, the spur mesh and the hob coupling. Printer X maps to scene X and printer Z to scene Y. Positive printer Y moves the bed in positive scene Z. All deposited segments are built in bed coordinates.
+The frame, two belt drives, two Z screws, six guide shafts and twelve linear bearings are shared geometry. The loaded assembly adds an 18-tooth input pinion and a 36-tooth gear fixed to the filament hob. The 30 interface connections include the two frame-mounted Z thrust supports, every bore-to-journal association, each screw and nut, the spur mesh and the hob coupling. Printer X maps to scene X and printer Z to scene Y. Positive printer Y moves the bed in positive scene Z. All deposited segments are built in bed coordinates.
+
+The [drive mechanics review](DriveDetails.md) covers bearing fits, stepped couplings, motor torque and heating, bed inertia and a five-load feeder slip test. Use `Start -> BearingInspection` for a sectioned view of the component geometry.
 
 ## Flexible filament on the same toolpath
 

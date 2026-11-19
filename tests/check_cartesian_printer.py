@@ -104,7 +104,7 @@ def check(objects, links, t):
     area = .24*(.48-.24) + math.pi*.24**2/4
     feed = length*area/(math.pi*(1.75/2)**2)
     check_guides(objects, links)
-    assert len(links) == len(set(links)) == 26
+    assert len(links) == len(set(links)) == 28
     bed = bounds(objects["Bed"][1])
     near(bed[1][1], 60)
     near(sum(bed[2])/2, y)

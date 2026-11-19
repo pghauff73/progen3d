@@ -204,6 +204,7 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
         {"fffStockDensity",p.stock ? p.stock->densityKgM3 : 0.},{"fffDuration",duration()}, {"fffModule",p.gears.moduleMm}, {"fffPinionTeeth",p.gears.pinionTeeth},
         {"fffWheelTeeth",p.gears.wheelTeeth},{"fffCentreOffset",p.gears.centreOffsetMm},{"fffHobRadius",p.gears.hobRadiusMm},
         {"fffPinionThin",p.gears.pinionThinningMm},{"fffWheelThin",p.gears.wheelThinningMm},{"fffAngle",p.gears.pressureAngleDeg},{"fffGearGap",p.gears.backlashMm()},{"fffFilament",p.hotend.filamentDiameterMm},{"fffLayer",p.heightMm},{"fffWidth",p.widthMm},
+        {"fffXTeeth",p.xDrive.pulleyTeeth},{"fffYTeeth",p.yDrive.pulleyTeeth},
         {"fffXRev",p.xDrive.pitchMm*p.xDrive.pulleyTeeth},{"fffYRev",p.yDrive.pitchMm*p.yDrive.pulleyTeeth}};
 }
 
@@ -253,7 +254,7 @@ const std::map<std::string, Projection> channels = {
     {"fffYJumps", [](const PrinterSample &s) -> double { return s.y.jumps; }},
 };
 const std::set<std::string> constantNames = {"fffParkTime","fffStockE0", "fffStockDensity", "fffDuration", "fffModule", "fffPinionTeeth", "fffWheelTeeth",
-    "fffCentreOffset", "fffHobRadius", "fffGearGap", "fffFilament", "fffLayer", "fffWidth", "fffXRev", "fffYRev", "fffPinionThin", "fffWheelThin", "fffAngle"};
+    "fffCentreOffset", "fffHobRadius", "fffGearGap", "fffFilament", "fffLayer", "fffWidth", "fffXRev", "fffYRev", "fffXTeeth", "fffYTeeth", "fffPinionThin", "fffWheelThin", "fffAngle"};
 }
 bool PrinterResponse::recognizes(const std::string &name) {
     return channels.count(name) || constantNames.count(name);
