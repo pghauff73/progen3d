@@ -45,3 +45,20 @@ python3 tools/export_airflow_patches.py stand.obj stand.stl --patch-map examples
 ```
 
 Record the grammar revision, frame, origin, pressure reference, mesh and solver configuration with every surface field. Transform face centres, area vectors and tractions into the intended body's frame before importing.
+
+### Compare with independent flow data
+
+The optional reference study integrates published CFL3D and FUN3D wall-shear profiles with this project's face importer. Their finest-grid plate drag coefficients are recovered to 0.075% and 0.031% respectively. The script reports the three finest published meshes. Its moment check applies a known 0.25-unit offset to the published plate drag.
+
+It also compares the native assumed-transition law against 16 ERCOFTAC T3A stations, using the derivative of integrated native drag to obtain local skin friction. At local Reynolds number 309,300 the native coefficient is 0.001194 and the experiment reports 0.004861. This discrepancy limits use of the correlation for bypass transition and curved duct walls.
+
+```sh
+curl -fsSLO https://tmbwg.github.io/turbmodels/FlatPlate/SA/cf_plate.dat
+curl -fsSLO https://tmbwg.github.io/turbmodels/FlatPlate/SA/drag_convergence.dat
+curl -fsSLO 'https://web.tecnico.ulisboa.pt/~ist12278/Workshop_AVT_313_2D_cases/html_files/plate_grids/cf_rex_data_t3a.dat'
+python3 tests/airflow_reference_studies.py cf_plate.dat drag_convergence.dat cf_rex_data_t3a.dat
+```
+
+The native trace also records angular velocity in rad/s and the unique duct intersection in m³/s and Pa. Empty duct fields indicate that the body has no unique operating point.
+
+[Turbulence Modeling Resource, flat-plate verification](https://tmbwg.github.io/turbmodels/flatplate_sa.html) · [AVT workshop, ERCOFTAC experimental data](https://web.tecnico.ulisboa.pt/~ist12278/Workshop_AVT_313_2D_cases/html_files/Experimental_data_plate.htm)

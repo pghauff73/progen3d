@@ -156,7 +156,7 @@ int main(int argc, char **argv) {
             unsigned long steps=std::stoul(argv[3], &end);
             require(end==std::string(argv[3]).size() && steps<=7200,"expected 0..7200 ticks");
             auto &c=*g->context;
-            std::cout<<"time,instance,fx,fy,fz,mx,my,mz,vx,vy,vz,thrust,power,shaftTorque,inRange\n";
+            std::cout<<"time,instance,fx,fy,fz,mx,my,mz,vx,vy,vz,thrust,power,shaftTorque,inRange,omegaX,omegaY,omegaZ,ductFlow,ductPressure\n";
             for(unsigned long k=0;k<=steps;++k) {
                 for(std::size_t i=0;i<c.primitive_instances.size();++i) {
                     const auto &part=c.primitive_instances[i];
@@ -165,7 +165,13 @@ int main(int argc, char **argv) {
                     std::cout<<std::setprecision(9)<<c.time<<','<<i;
                     for(auto v : {load.force,load.moment,part.velocity})
                         std::cout<<','<<v.x<<','<<v.y<<','<<v.z;
-                    std::cout<<','<<load.thrust<<','<<load.shaftPower<<','<<load.shaftTorque<<','<<load.withinRange<<'\n';
+                    std::cout<<','<<load.thrust<<','<<load.shaftPower<<','<<load.shaftTorque<<','<<load.withinRange;
+                    const auto omega=glm::radians(part.rotational_velocity);
+                    std::cout<<','<<omega.x<<','<<omega.y<<','<<omega.z;
+                    const auto duct=part.airflow->ductOperatingPoint();
+                    if (duct.unique()) std::cout<<','<<duct.flow<<','<<duct.pressure;
+                    else std::cout<<",,";
+                    std::cout<<'\n';
                 }
                 if(k<steps)c.stepSimulation(1.f/120);
             }
