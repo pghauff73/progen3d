@@ -1,0 +1,444 @@
+# Cartesian FFF printer / millimetres, seconds, degrees
+# Printer X = scene X, printer Z = scene Y, printer Y = minus scene Z on the bed.
+# The upper belt strand is clamped to the carriage on each horizontal axis.
+# Start arguments: rectangle X/Y, layer height, bead width, filament diameter,
+# belt pitch, pulley teeth, screw pitch and number of screw starts.
+Start -> Job(56 40 0.24 0.48 1.75 2 20 2 4)
+
+Job(w d h bead filament pitch teeth screwPitch starts) ->
+    Clock(w d h bead filament pitch*teeth screwPitch*starts starts clamp(t-2,0,22))
+
+Clock(w d h bead filament beltRev lead starts jobTime) ->
+    Pass(w d h bead filament beltRev lead starts jobTime min(2,floor(jobTime/7.5)))
+
+Pass(w d h bead filament beltRev lead starts jobTime i) ->
+    Edges(w d h bead filament beltRev lead starts i jobTime-7.5*i)
+
+Edges(w d h bead filament beltRev lead starts i s) ->
+    PositionJob(w d h bead filament beltRev lead starts i ease(s/2)
+                ease((s-2)/1.5) ease((s-3.5)/2) ease((s-5.5)/1.5))
+
+PositionJob(w d h bead filament beltRev lead starts i a b c f) ->
+    Machine(w d h bead filament beltRev lead starts
+        1*(-w/2+w*(a-c)-14*(1-ease(t))+62*ease((t-25)/1.5))
+        1*(-d/2+d*(b-f)-12*(1-ease(t))+48*ease((t-25)/1.5))
+        1*(h+(10-h)*(1-ease(t-1))+h*(ease((t-9)/0.5)+ease((t-16.5)/0.5))+12*ease(t-24))
+        1*(((w+d)*2*i+w*(a+c)+d*(b+f))*(h*(bead-h)+radians(180)*h^2/4)/(radians(180)*filament^2/4)))
+
+Machine(w d h bead filament beltRev lead starts x y z feed) ->
+    Object(id(Printer) class(CartesianFFFPrinter) taxonomy(Machine CartesianFFFPrinter)) [
+        FixedFrame
+        BedDrive(y beltRev)
+        [ T(0 0 y) BedPlatform(w d h bead beltRev/(2*radians(180))) ]
+        LiftDrive(z lead starts)
+        [ T(0 60+z 0) Gantry(x beltRev) ]
+        FeedSystem(x z feed filament)
+    ]
+
+FixedFrame ->
+    [ Object(id(Frame) class(MachineFrame) taxonomy(Machine MachineFrame) container(Printer)) [
+        [ T(-121 12 0) FrameBlock(14 14 232) ]
+        [ T(121 12 0) FrameBlock(14 14 232) ]
+        [ T(0 12 -109) FrameBlock(242 14 14) ]
+        [ T(0 12 109) FrameBlock(242 14 14) ]
+        [ T(0 6 -39) FrameBlock(240 9 34) ]
+        [ T(-130 107 -37) FrameBlock(12 192 14) ]
+        [ T(130 107 -37) FrameBlock(12 192 14) ]
+        [ T(0 203 -37) FrameBlock(274 14 16) ]
+        [ T(-72 220 -37) FrameBlock(10 34 12) ]
+        [ T(-72 240 -23) FrameBlock(11 11 34) ]
+        [ T(-47 198 -19) FrameBlock(28 16 32) ]
+        [ T(-52 23 -112) TealBlock(17 20 11) ]
+        [ T(-52 23 112) TealBlock(17 20 11) ]
+        [ T(52 23 -112) TealBlock(17 20 11) ]
+        [ T(52 23 112) TealBlock(17 20 11) ]
+        [ T(-120 200 -25) TealBlock(16 7 33) ]
+        [ T(120 200 -25) TealBlock(16 7 33) ]
+        [ T(-120 28 -26) TealBlock(18 10 36) ]
+        [ T(120 28 -26) TealBlock(18 10 36) ]
+        [ T(-121 4 -103) RubberBlock(23 8 22) ]
+        [ T(-121 4 103) RubberBlock(23 8 22) ]
+        [ T(121 4 -103) RubberBlock(23 8 22) ]
+        [ T(121 4 103) RubberBlock(23 8 22) ]
+    ] ]
+
+BedDrive(y rev) ->
+    BedMechanics(y rev/(2*radians(180)) -360*y/rev)
+
+BedMechanics(travel radius ang) ->
+    [ T(-52 31 0) A(90 0) Object(id(YLeftGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Printer)) [
+        Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 226))
+        Shaft(226 4)
+    ] ]
+    [ T(52 31 0) A(90 0) Object(id(YRightGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Printer)) [
+        Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 226))
+        Shaft(226 4)
+    ] ]
+    [ T(0 27 0) A(-90 1) Object(id(YTransmission) class(BeltAxis) taxonomy(Machine BeltAxis) container(Printer)) [
+        [ T(-100 0 0) A(90 0) Object(id(YPulley) class(DrivePulley) taxonomy(Machine DrivePulley) container(YTransmission)) [
+        Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(Axle) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Connect(id(YPulley_Axle_YMotor) source(YPulley Axle) target(YMotor Axle) type(InsertedIn) clearance(0))
+        Pulley(radius ang)
+    ] ]
+        [ T(100 0 0) A(90 0) Object(id(YIdler) class(IdlerPulley) taxonomy(Machine IdlerPulley) container(YTransmission)) [
+        Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Pulley(radius ang)
+    ] ]
+        [ Object(id(YBelt) class(TimingBelt) taxonomy(Machine TimingBelt) container(YTransmission)) [
+        Interface(id(DriveWrap) type(Mate) origin(-100 0 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(ReturnWrap) type(Mate) origin(100 0 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(ClampFace) type(Mate) origin(travel radius 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Connect(id(YBelt_DriveWrap_YPulley) source(YBelt DriveWrap) target(YPulley Pitch) type(ConnectedTo) clearance(0))
+        Connect(id(YBelt_ReturnWrap_YIdler) source(YBelt ReturnWrap) target(YIdler Pitch) type(ConnectedTo) clearance(0))
+        BeltLoop(100 radius travel)
+    ] ]
+        [ T(travel radius 0) Object(id(YClamp) class(BeltClamp) taxonomy(Machine BeltClamp) container(YTransmission)) [
+        Interface(id(Jaw) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(Mount) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Connect(id(YClamp_Mount_Bed) source(YClamp Mount) target(Bed ClampMount) type(FixedTo) clearance(0))
+        Connect(id(YClamp_Jaw_YBelt) source(YClamp Jaw) target(YBelt ClampFace) type(FixedTo) clearance(0))
+        [ T(0 1 0) TealBlock(10 4 8) ]
+    ] ]
+        [ T(-100 0 0) A(90 0) Object(id(YMotor) class(StepperMotor) taxonomy(Machine StepperMotor) container(YTransmission)) [
+        Interface(id(Axle) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 12))
+        [ T(0 -12 0) FrameBlock(26 19 26) ]
+        [ T(0 -3 0) Shaft(12 2.5) ]
+    ] ]
+    ] ]
+    [ T(0 23 -100) FrameBlock(37 18 10) ]
+    [ T(0 21 100) FrameBlock(20 14 10) ]
+
+BedPlatform(w d h bead r) ->
+    [ Object(id(Bed) class(HeatedBedCarriage) taxonomy(Machine HeatedBedCarriage) container(Printer)) [
+        Interface(id(ClampMount) type(Mate) origin(0 27+r 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        [ T(0 51 0) FrameBlock(130 5 101) ]
+        [ T(0 57.5 0) BedBlock(151 5 124) ]
+        [ T(0 41.5 0) TealBlock(8 17 12) ]
+        [ T(-52 43 -29) TealBlock(19 12 16) ]
+        [ T(-52 43 29) TealBlock(19 12 16) ]
+        [ T(52 43 -29) TealBlock(19 12 16) ]
+        [ T(52 43 29) TealBlock(19 12 16) ]
+        [ T(-52 31 29) A(90 0) Object(id(YLeftFrontBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Bed)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(YLeftFrontBearing_Bore_YLeftGuide) source(YLeftFrontBearing Bore) target(YLeftGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(-52 31 -29) A(90 0) Object(id(YLeftRearBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Bed)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(YLeftRearBearing_Bore_YLeftGuide) source(YLeftRearBearing Bore) target(YLeftGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(52 31 29) A(90 0) Object(id(YRightFrontBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Bed)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(YRightFrontBearing_Bore_YRightGuide) source(YRightFrontBearing Bore) target(YRightGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(52 31 -29) A(90 0) Object(id(YRightRearBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Bed)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(YRightRearBearing_Bore_YRightGuide) source(YRightRearBearing Bore) target(YRightGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(0 60 0) Object(id(Print) class(DepositedPart) taxonomy(Machine DepositedPart) container(Bed)) [
+        Layers(w d h bead)
+    ] ]
+    ] ]
+
+LiftDrive(z lead starts) ->
+    [ T(-120 114 -16) Object(id(ZLeftGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Printer)) [
+        Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 177))
+        Shaft(177 4)
+    ] ]
+    [ T(120 114 -16) Object(id(ZRightGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Printer)) [
+        Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 177))
+        Shaft(177 4)
+    ] ]
+    [ T(-104 33 -39) Object(id(ZLeftMotor) class(StepperMotor) taxonomy(Machine StepperMotor) container(Printer)) [
+        Interface(id(Axle) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 8))
+        [ T(0 -16 0) FrameBlock(27 27 27) ]
+        [ T(0 0 0) Shaft(8 2.5) ]
+    ] ]
+    [ T(104 33 -39) Object(id(ZRightMotor) class(StepperMotor) taxonomy(Machine StepperMotor) container(Printer)) [
+        Interface(id(Axle) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 8))
+        [ T(0 -16 0) FrameBlock(27 27 27) ]
+        [ T(0 0 0) Shaft(8 2.5) ]
+    ] ]
+    [ T(-104 112 -39) A(-360*z/lead 1) Object(id(ZLeftScrew) class(LeadScrew) taxonomy(Machine LeadScrew) container(Printer)) [
+        Interface(id(Thread) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 152))
+        Interface(id(Coupling) type(Socket) origin(0 -79 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 8))
+        Connect(id(ZLeftScrew_Coupling_ZLeftMotor) source(ZLeftScrew Coupling) target(ZLeftMotor Axle) type(InsertedIn) clearance(0))
+        LeadScrew(lead starts)
+    ] ]
+    [ T(104 112 -39) A(-360*z/lead 1) Object(id(ZRightScrew) class(LeadScrew) taxonomy(Machine LeadScrew) container(Printer)) [
+        Interface(id(Thread) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 152))
+        Interface(id(Coupling) type(Socket) origin(0 -79 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 8))
+        Connect(id(ZRightScrew_Coupling_ZRightMotor) source(ZRightScrew Coupling) target(ZRightMotor Axle) type(InsertedIn) clearance(0))
+        LeadScrew(lead starts)
+    ] ]
+
+Gantry(x rev) ->
+    [ Object(id(Gantry) class(XGantry) taxonomy(Machine XGantry) container(Printer)) [
+        [ Object(id(ZLeftEnd) class(GantryEnd) taxonomy(Machine GantryEnd) container(Gantry)) [
+        [ T(-120 29 -26) TealBlock(19 46 12) ]
+        [ T(-112.0 29 -33) TealBlock(26 13 17) ]
+        [ T(-120 15 -16) Object(id(ZLeftLowerBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(ZLeftEnd)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(ZLeftLowerBearing_Bore_ZLeftGuide) source(ZLeftLowerBearing Bore) target(ZLeftGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(-120 43 -16) Object(id(ZLeftUpperBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(ZLeftEnd)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(ZLeftUpperBearing_Bore_ZLeftGuide) source(ZLeftUpperBearing Bore) target(ZLeftGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(-104 29 -39) Object(id(ZLeftNut) class(LeadNut) taxonomy(Machine LeadNut) container(ZLeftEnd)) [
+        Interface(id(Thread) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 12))
+        Connect(id(ZLeftNut_Thread_ZLeftScrew) source(ZLeftNut Thread) target(ZLeftScrew Thread) type(AlignedWith) clearance(0))
+        GoldRing(4.05 8 12)
+        GoldRing(4.05 11 3)
+    ] ]
+    ] ]
+        [ Object(id(ZRightEnd) class(GantryEnd) taxonomy(Machine GantryEnd) container(Gantry)) [
+        [ T(120 29 -26) TealBlock(19 46 12) ]
+        [ T(112.0 29 -33) TealBlock(26 13 17) ]
+        [ T(120 15 -16) Object(id(ZRightLowerBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(ZRightEnd)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(ZRightLowerBearing_Bore_ZRightGuide) source(ZRightLowerBearing Bore) target(ZRightGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(120 43 -16) Object(id(ZRightUpperBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(ZRightEnd)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(ZRightUpperBearing_Bore_ZRightGuide) source(ZRightUpperBearing Bore) target(ZRightGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(104 29 -39) Object(id(ZRightNut) class(LeadNut) taxonomy(Machine LeadNut) container(ZRightEnd)) [
+        Interface(id(Thread) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 12))
+        Connect(id(ZRightNut_Thread_ZRightScrew) source(ZRightNut Thread) target(ZRightScrew Thread) type(AlignedWith) clearance(0))
+        GoldRing(4.05 8 12)
+        GoldRing(4.05 11 3)
+    ] ]
+    ] ]
+        [ T(0 16 -16) A(-90 2) Object(id(XLowerGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Gantry)) [
+        Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 240))
+        Shaft(240 4)
+    ] ]
+        [ T(0 42 -16) A(-90 2) Object(id(XUpperGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Gantry)) [
+        Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 240))
+        Shaft(240 4)
+    ] ]
+        HeadDrive(x rev/(2*radians(180)) -360*x/rev)
+        [ T(x 0 0) Toolhead(rev/(2*radians(180))) ]
+    ] ]
+
+HeadDrive(travel radius ang) ->
+    [ T(0 28 -28) Object(id(XTransmission) class(BeltAxis) taxonomy(Machine BeltAxis) container(Gantry)) [
+        [ T(-109 0 0) A(90 0) Object(id(XPulley) class(DrivePulley) taxonomy(Machine DrivePulley) container(XTransmission)) [
+        Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(Axle) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Connect(id(XPulley_Axle_XMotor) source(XPulley Axle) target(XMotor Axle) type(InsertedIn) clearance(0))
+        Pulley(radius ang)
+    ] ]
+        [ T(109 0 0) A(90 0) Object(id(XIdler) class(IdlerPulley) taxonomy(Machine IdlerPulley) container(XTransmission)) [
+        Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Pulley(radius ang)
+    ] ]
+        [ Object(id(XBelt) class(TimingBelt) taxonomy(Machine TimingBelt) container(XTransmission)) [
+        Interface(id(DriveWrap) type(Mate) origin(-109 0 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(ReturnWrap) type(Mate) origin(109 0 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(ClampFace) type(Mate) origin(travel radius 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Connect(id(XBelt_DriveWrap_XPulley) source(XBelt DriveWrap) target(XPulley Pitch) type(ConnectedTo) clearance(0))
+        Connect(id(XBelt_ReturnWrap_XIdler) source(XBelt ReturnWrap) target(XIdler Pitch) type(ConnectedTo) clearance(0))
+        BeltLoop(109 radius travel)
+    ] ]
+        [ T(travel radius 0) Object(id(XClamp) class(BeltClamp) taxonomy(Machine BeltClamp) container(XTransmission)) [
+        Interface(id(Jaw) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Interface(id(Mount) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        Connect(id(XClamp_Mount_Head) source(XClamp Mount) target(Head ClampMount) type(FixedTo) clearance(0))
+        Connect(id(XClamp_Jaw_XBelt) source(XClamp Jaw) target(XBelt ClampFace) type(FixedTo) clearance(0))
+        [ T(0 1 0) TealBlock(10 4 8) ]
+    ] ]
+        [ T(-109 0 0) A(90 0) Object(id(XMotor) class(StepperMotor) taxonomy(Machine StepperMotor) container(XTransmission)) [
+        Interface(id(Axle) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 12))
+        [ T(0 -12 0) FrameBlock(26 19 26) ]
+        [ T(0 -3 0) Shaft(12 2.5) ]
+    ] ]
+    ] ]
+
+Toolhead(r) ->
+    [ Object(id(Head) class(HotendCarriage) taxonomy(Machine HotendCarriage) container(Gantry)) [
+        Interface(id(ClampMount) type(Mate) origin(0 28+r -28) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
+        [ T(-12 16 -16) A(-90 2) Object(id(XLowerLeftBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Head)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(XLowerLeftBearing_Bore_XLowerGuide) source(XLowerLeftBearing Bore) target(XLowerGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(12 16 -16) A(-90 2) Object(id(XLowerRightBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Head)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(XLowerRightBearing_Bore_XLowerGuide) source(XLowerRightBearing Bore) target(XLowerGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(-12 42 -16) A(-90 2) Object(id(XUpperLeftBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Head)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(XUpperLeftBearing_Bore_XUpperGuide) source(XUpperLeftBearing Bore) target(XUpperGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(12 42 -16) A(-90 2) Object(id(XUpperRightBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Head)) [
+        Interface(id(Bore) type(Socket) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 14))
+        Connect(id(XUpperRightBearing_Bore_XUpperGuide) source(XUpperRightBearing Bore) target(XUpperGuide Journal) type(AlignedWith) clearance(0))
+        Sleeve(4.04 7.5 14)
+    ] ]
+        [ T(0 30 -6) TealBlock(39 40 7) ]
+        [ T(0 34 -23) TealBlock(16 7 12) ]
+        [ T(0 11 0) HeaterBlock(15 8 12) ]
+        [ T(0 24 0) Shaft(22 3.5) ]
+        HeatSinkFins
+        [ T(0 47 0) Sleeve(1.1 4.5 10) ]
+        [ Object(id(Nozzle) class(Nozzle) taxonomy(Machine Nozzle) container(Head)) [
+        I(Revolve(profile(Polygon 0 0 0.2 0 3.8 4 3.8 8 0 8) angle(0 360) segments(16) cap(all)) material(goldbrushedmetal) 1 1)
+    ] ]
+    ] ]
+
+HeatSinkFins 5 ->
+    [ T(0 18+HeatSinkFins_count*3 0) Sleeve(3.4 7 1.5) ]
+
+FeedSystem(x z feed filament) ->
+    [ T(-72 240 0) A(90 0) Object(id(Spool) class(FilamentSpool) taxonomy(Machine FilamentSpool) container(Printer)) [
+        SpoolBody(feed)
+    ] ]
+    [ Object(id(Stock) class(IncomingFilament) taxonomy(Machine IncomingFilament) container(Printer)) [
+        StockLine(-47 240 0 -47 191 0 filament/2)
+    ] ]
+    [ T(-42 199 0) A(90 0) Object(id(Hob) class(ExtruderDriveWheel) taxonomy(Machine ExtruderDriveWheel) container(Printer)) [
+        FeedWheel(5 360*feed/(2*radians(180)*5))
+    ] ]
+    [ T(-50 199 0) A(90 0) Object(id(Pinch) class(ExtruderIdler) taxonomy(Machine ExtruderIdler) container(Printer)) [
+        FeedWheel(3 -360*feed/(2*radians(180)*3))
+    ] ]
+    [ Object(id(Tube) class(BowdenTube) taxonomy(Machine BowdenTube) container(Printer)) [
+        TubeRouting(x 112+z)
+    ] ]
+
+SpoolBody(feed) ->
+    [ A(-360*feed/(2*radians(180)*25) 1) WoundSpool ]
+
+WoundSpool ->
+    I(Revolve(profile(Polygon 5 -8 25 -8 25 1 5 1) angle(0 360) segments(48) cap(all)) material(copperbrushedmetal) 1 1)
+    [ T(0 -9 0) Sleeve(5 30 2) ]
+    [ T(0 2 0) Sleeve(5 30 2) ]
+    [ T(0 3.1 0) Spokes ]
+
+Spokes 3 ->
+    [ A(Spokes_count*120 1) T(15 0 0) TealBlock(20 0.8 3) ]
+
+FeedWheel(r ang) ->
+    [ A(ang 1) GoldRing(1.2 r 5) [ T(r*0.55 3 0) FrameBlock(r*0.72 1 1.1) ] ]
+
+TubeRouting(x u) ->
+    Bowden(x u 0.5*(x-47) 0.5*(190+u) -sqrt(78^2-((x+47)^2+(u-190)^2)/4))
+
+Bowden(x u mx mu mz) ->
+    I(SweepDisk(path(-47 190 0 mx mu mz x u 0) radius(1.65) segments(8) cap(all)) material(offwhiteceramic) 1 1)
+
+StockLine(ax ay az bx by bz r) ->
+    I(SweepDisk(path(ax ay az bx by bz) radius(r) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
+
+# Square perimeter history in bed coordinates. Each interval is clamped by ease().
+# The bead is swept along its straight section at its actual cross-section size.
+Layers(w d h bead) 3 ->
+    [ T(0 h*(Layers_count+0.5) 0) Layer(w d h bead t-2-7.5*Layers_count) ]
+
+Layer(w d h bead s) ->
+    [ T(-w/2 0 d/2) Strand(w*ease(s/2) h bead) ]
+    [ T(w/2 0 d/2) A(90 1) Strand(d*ease((s-2)/1.5) h bead) ]
+    [ T(w/2 0 -d/2) A(180 1) Strand(w*ease((s-3.5)/2) h bead) ]
+    [ T(-w/2 0 -d/2) A(-90 1) Strand(d*ease((s-5.5)/1.5) h bead) ]
+
+Strand(length h bead) ->
+    ?(length>0.00001) [ T(length/2 0 0) S(length h bead) BeadSection(h/bead) ] :
+
+BeadSection(ratio) ->
+    [ A(90 1) T(0 0 -0.5) I(Extrude(Polygon(
+        0.5-0.5000000*ratio -0.5000000  0.5-0.3086583*ratio -0.4619398  0.5-0.1464466*ratio -0.3535534
+        0.5-0.0380602*ratio -0.1913417  0.5+0.0000000*ratio 0.0000000  0.5-0.0380602*ratio 0.1913417
+        0.5-0.1464466*ratio 0.3535534  0.5-0.3086583*ratio 0.4619398  0.5-0.5000000*ratio 0.5000000
+        -0.5+0.5000000*ratio 0.5000000  -0.5+0.3086583*ratio 0.4619398  -0.5+0.1464466*ratio 0.3535534
+        -0.5+0.0380602*ratio 0.1913417  -0.5+0.0000000*ratio 0.0000000  -0.5+0.0380602*ratio -0.1913417
+        -0.5+0.1464466*ratio -0.3535534  -0.5+0.3086583*ratio -0.4619398  -0.5+0.5000000*ratio -0.5000000
+        ) 1 cap(all)) material(terracottaroughceramic) 1 1) ]
+
+LeadScrew(lead starts) ->
+    Shaft(152 3.3)
+    [ T(0 -76 0) ThreadStarts(lead starts) ]
+    [ T(0 -77 0) Sleeve(2.5 6 8) ]
+    [ T(4.9 -77 0) GoldBlock(2 5 2) ]
+
+ThreadStarts(lead starts) starts ->
+    [ A(360*ThreadStarts_count/starts 1) Turns(lead floor(152/lead)) ]
+
+Turns(lead n) n ->
+    [ T(0 Turns_count*lead 0) ThreadTurn(lead) ]
+
+ThreadTurn(lead) ->
+    I(SweepDisk(path(3.55000 lead*0/12 -0.00000  3.07439 lead*1/12 -1.77500  1.77500 lead*2/12 -3.07439
+            0.00000 lead*3/12 -3.55000  -1.77500 lead*4/12 -3.07439  -3.07439 lead*5/12 -1.77500
+            -3.55000 lead*6/12 -0.00000  -3.07439 lead*7/12 1.77500  -1.77500 lead*8/12 3.07439
+            -0.00000 lead*9/12 3.55000  1.77500 lead*10/12 3.07439  3.07439 lead*11/12 1.77500
+            3.55000 lead*12/12 0.00000) radius(0.45) segments(5) cap(none)) material(silverbluepolishedmetal) 1 1)
+
+Pulley(r ang) ->
+    [ A(ang 1) GoldRing(2 r-0.65 6) [ T(0 -3.5 0) GoldRing(2 r+1.3 1) ] [ T(0 3.5 0) GoldRing(2 r+1.3 1) ] [ T(r*0.50 4.3 0) FrameBlock(r*0.65 0.7 1.4) ] ]
+
+BeltLoop(span r travel) ->
+    [ T(0 r 0) RubberBlock(2*span 1.3 6) ]
+    [ T(0 -r 0) RubberBlock(2*span 1.3 6) ]
+    [ T(-span 0 0) A(90 0) Wrap(r 90) ]
+    [ T(span 0 0) A(90 0) Wrap(r -90) ]
+    Witnesses(span r travel)
+
+Wrap(r angle) ->
+    I(Revolve(profile(Polygon r-0.65 -3 r+0.65 -3 r+0.65 3 r-0.65 3) angle(angle 180) segments(18) cap(all)) material(charcoalroughmetal) 1 1)
+
+# Material marks follow both straight strands and both semicircular wraps.
+Witnesses(span r travel) 16 ->
+    BeltStation(span r wrap((4*span+2*radians(180)*r)*Witnesses_count/16+travel,0,4*span+2*radians(180)*r))
+
+BeltStation(span r s) ->
+    ?(s<2*span) [ T(-span+s r+0.73 0) BeltMark ]
+    : RightWrap(span r s-2*span)
+
+RightWrap(span r s) ->
+    ?(s<radians(180)*r) [ T(span 0 0) A(-degrees(s/r) 2) T(0 r+0.73 0) BeltMark ]
+    : ReturnStrand(span r s-radians(180)*r)
+
+ReturnStrand(span r s) ->
+    ?(s<2*span) [ T(span-s -r-0.73 0) BeltMark ]
+    : [ T(-span 0 0) A(-180-degrees((s-2*span)/r) 2) T(0 r+0.73 0) BeltMark ]
+
+BeltMark -> GoldBlock(1.2 0.25 5)
+
+Shaft(length r) ->
+    I(SweepDisk(path(0 -length/2 0 0 length/2 0) radius(r) segments(16) cap(all)) material(steelshinyroughmetal) 1 1)
+
+Sleeve(bore outer length) ->
+    I(Revolve(profile(Polygon bore -length/2 outer -length/2 outer length/2 bore length/2) angle(0 360) segments(24) cap(all)) material(silverbluepolishedmetal) 1 1)
+
+GoldRing(bore outer length) ->
+    I(Revolve(profile(Polygon bore -length/2 outer -length/2 outer length/2 bore length/2) angle(0 360) segments(24) cap(all)) material(goldbrushedmetal) 1 1)
+
+FrameBlock(w h d) ->
+    [ S(w h d) I(Cube material(charcoalmattemetal) 1 1) ]
+
+TealBlock(w h d) ->
+    [ S(w h d) I(Cube material(tealmattemetal) 1 1) ]
+
+RubberBlock(w h d) ->
+    [ S(w h d) I(Cube material(charcoalroughmetal) 1 1) ]
+
+BedBlock(w h d) ->
+    [ S(w h d) I(Cube material(darkslatesmoothstone) 1 1) ]
+
+HeaterBlock(w h d) ->
+    [ S(w h d) I(Cube material(copperbrushedmetal) 1 1) ]
+
+GoldBlock(w h d) ->
+    [ S(w h d) I(Cube material(goldbrushedmetal) 1 1) ]

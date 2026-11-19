@@ -3,6 +3,7 @@
 #include "GrammarRuntime.h"
 #include "geometry/model/SweepDiskShapeSpecification.h"
 #include "grammar.h"
+#include "spatial/model/SpatialBuildingModel.h"
 #include "imgui_render.h"
 
 #include <algorithm>
@@ -28,8 +29,21 @@ void writeScene(std::ostream &out, const SceneGenerationContext &scene)
     std::size_t firstVertex = 1;
     std::size_t index = 0;
     out << std::setprecision(std::numeric_limits<float>::max_digits10);
+    std::vector<std::string> owners(scene.primitive_instances.size());
+    if (const auto &model = scene.spatialBuildingModel()) {
+        for (const auto &binding : model->geometryBindings()) {
+            owners.at(binding.primitiveInstanceIndex()) = binding.objectId().value();
+        }
+        for (const auto &connection : model->connectionGraph().connections()) {
+            out << "# connection " << connection.sourceInterface().objectId().value() << ' '
+                << connection.sourceInterface().interfaceId().value() << ' '
+                << connection.targetInterface().objectId().value() << ' '
+                << connection.targetInterface().interfaceId().value() << '\n';
+        }
+    }
     for (const auto &part : scene.primitive_instances) {
         out << "o part_" << index++ << "\nusemtl " << part.material_name << '\n';
+        if (!owners[index - 1].empty()) out << "# owner " << owners[index - 1] << '\n';
         const auto *rod = dynamic_cast<const SweepDiskShapeSpecification *>(part.shape_specification.get());
         if (rod) {
             out << "# centreline ";
