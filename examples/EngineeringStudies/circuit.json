@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "model": "resistor_circuit",
+  "duration_s": 0.1,
+  "capacitance_F": 0.001,
+  "initial_V": 0,
+  "supply_V": 5,
+  "algebraic_nodes": 1,
+  "algebraic_initial_V": [2.5],
+  "resistors": [
+    {"a": 1, "b": 3, "resistance_ohm": 50},
+    {"a": 3, "b": 2, "resistance_ohm": 50}
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "evaluation_time_s": 0.0,
+  "objects": {
+    "primitive:0": {
+      "extent_scale": [
+        20.0,
+        20.0,
+        20.0
+      ],
+      "faces": [],
+      "initial_position": [
+        -10.0,
+        0.0,
+        0.0
+      ],
+      "initial_rotation_degrees": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "initial_rotational_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mass": 1.0,
+      "source_line": 1,
+      "topology_hash": "0",
+      "transform_column_major": [
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        -10.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "type": "Cube"
+    },
+    "primitive:1": {
+      "extent_scale": [
+        20.0,
+        20.0,
+        20.0
+      ],
+      "faces": [],
+      "initial_position": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "initial_rotation_degrees": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "initial_rotational_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mass": 1.0,
+      "source_line": 1,
+      "topology_hash": "0",
+      "transform_column_major": [
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        10.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "type": "Cube"
+    }
+  },
+  "revision": "a62edb0cad0197b0c56f64def59f7003b139a2d52a5499bef74b32c00b419912"
+}

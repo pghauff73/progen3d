@@ -1,0 +1,56 @@
+{
+  "evaluation_time_s": 0.0,
+  "objects": {
+    "primitive:0": {
+      "extent_scale": [
+        30.0,
+        30.0,
+        3.0
+      ],
+      "faces": [],
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_rotation_degrees": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "initial_rotational_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mass": 1.0,
+      "source_line": 0,
+      "topology_hash": "0",
+      "transform_column_major": [
+        30.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        30.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "type": "Cube"
+    }
+  },
+  "revision": "135080383c23bd39e79a7c1abe43003ddf38ebfb9e90441bb1f095e7861bad0a"
+}

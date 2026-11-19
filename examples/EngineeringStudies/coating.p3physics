@@ -1,0 +1,8 @@
+// An example of a recorded thickness evolving under a prescribed rate.
+study CoatingThicknessExample version 1 {
+  parameter growth : Velocity = 0.25 [um/s]
+  state thickness : project:CoatingThickness = 20 [um]
+  equation prescribed_rate : der(thickness) = growth
+  observe thickness every 0.5 [s] display [um]
+  integrate from 0 [s] to 8 [s] method RK4 step 0.125 [s]
+}

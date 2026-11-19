@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "model": "thermal_network",
+  "duration_s": 30,
+  "nodes": [
+    {"initial_K": 333.15, "capacity_J_K": 200},
+    {"initial_K": 298.15, "capacity_J_K": 80}
+  ],
+  "links": [{"a": 0, "b": 1, "conductance_W_K": 8}],
+  "coolant": {
+    "node": 1,
+    "inlet_K": 293.15,
+    "mass_flow_kg_s": 0.005,
+    "specific_heat_J_kg_K": 4180
+  }
+}

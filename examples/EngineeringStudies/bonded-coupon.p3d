@@ -1,0 +1,2 @@
+// Two 20 mm cubes share the plane x=0. The analytical cohesive interface is zero thickness.
+Start -> [ T(-10 0 0) S(20 20 20) I(Cube material(plaster)) ] [ T(10 0 0) S(20 20 20) I(Cube material(plaster)) ]
