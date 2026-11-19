@@ -1,44 +1,80 @@
-# Cartesian filament printer
+# Cartesian printer under load
 
-Open [CartesianPrinter.p3d](CartesianPrinter.p3d) in the ProGen3D desktop editor, fit the model and advance grammar time from 0 to 26.5 seconds. The machine approaches the bed, prints three stacked rectangular perimeters, lifts the nozzle and parks. Scrubbing backward reconstructs the earlier machine pose and the material deposited up to that instant.
+Open [CartesianPrinter.p3d](CartesianPrinter.p3d) with the desktop runtime from this branch and advance the preview from 0 to 28.5 seconds. The loaded printer deposits three 56 × 40 mm perimeters, raises the nozzle, parks at 26.5 s and spends two seconds relaxing pressure. To compare with the original kinematic mechanism, change the start production to `Start -> IdealPrinter`.
 
-## Mechanical object model
+The frame, two belt drives, two Z screws, six guide shafts and twelve linear bearings are shared geometry. The loaded assembly adds an 18-tooth input pinion and a 36-tooth gear fixed to the filament hob. The 28 interface connections include every bore-to-journal association, each screw and nut, the spur mesh and the hob coupling. Printer X maps to scene X and printer Z to scene Y. Positive printer Y moves the bed in positive scene Z. All deposited segments are built in bed coordinates.
 
-The example uses native `Object`, `Interface` and `Connect` declarations. Each shaft, linear bearing, lead nut, screw, belt, motor, drive pulley, idler and belt clamp has its own object identity. All lengths are millimetres. The printer uses its bed centre as the XY origin. ProGen3D scene Y points upward. The physical bed travels in the direction opposite to the programmed Y move, carrying all previously deposited material with it.
+## Results for the supplied assumptions
 
-| Assembly | Transmission | Guidance and load path |
+| Quantity | Simulated value |
+| --- | ---: |
+| Commanded filament travel | 24.6271 mm |
+| Hob surface travel after gear clearance and pitch error | 24.6164 mm |
+| Filament entering the hotend | 23.4476 mm |
+| Hob slip relative to the filament | 1.1688 mm |
+| Supported deposit | 55.0989 mm³ |
+| Ooze during travel, layer changes and dwell | 1.2991 mm³ |
+| Peak gauge melt pressure | 4.5275 MPa |
+| Peak XY tracking error sampled at 16 Hz | 0.1033 mm |
+| Belt tooth jumps in this run | 0 |
+
+A 1.75 mm filament has a cross-section of 2.4053 mm². At the end of the dwell, its accepted length accounts for 56.3980 mm³ of material. More than 97% of that volume lands during commanded deposition. The model also accounts for the small volume still stored under pressure. These are demonstration parameters. No values were fitted to a particular printer.
+
+## Mechanical and material response
+
+| Object | Constitutive rule | Effect on the print |
 | --- | --- | --- |
-| X carriage | X motor and 20-tooth drive pulley, 2 mm pitch belt, idler and clamp | Two horizontal 8 mm shafts on the lifting gantry. Two 14 mm long bushings slide on each shaft. The head carries the heater, heat sink and nozzle. |
-| Y bed | Independent motor, matching pulley, belt, idler and bed clamp | Two frame-mounted 8 mm shafts, each carrying a front and a rear bushing. The heated bed rides on the four bushings. |
-| Z gantry | Two synchronised motors and two four-start screws. Each screw has a 2 mm pitch and an 8 mm lead. A travelling nut on each end of the gantry converts rotation to lift. | Two vertical 8 mm guide shafts. Upper and lower bushings on each side carry the gantry's lateral loads. |
-| Filament feed | A 5 mm effective-radius hob and an opposing idler draw 1.75 mm filament from a spool with a 25 mm payout radius. | A two-span Bowden guide maintains a 156 mm centreline between the fixed feeder and moving hotend. The guide has a schematic bend at its midpoint. |
+| Timing belt and pulley | For tangential demand F, installed tension T₀ and single-span stiffness k, the two tensions are T₀ ± F/2 while both spans remain taut. Beyond that point the unloaded span carries zero tension and the other carries the full load. Belt displacement follows the matching piecewise spring law. | Elastic registration error follows load. In the optional overload regime a slack span and a crossed empirical force threshold produce one pitch of persistent phase loss per loading excursion. The model rearms below 80% of the threshold or when both strands carry tension. |
+| Belt teeth, shaft and mount | Effective tooth contact and mount shear give signed displacements F/k. For a circular motor shaft, twist at the pulley rim is F r² L/(GJ), where J = πd⁴/32. | All four deflections, including belt stretch, affect actual carriage position. The motor pulley follows its command. The belt and return pulley follow registered strand travel. |
+| Screw nut and transmission play | A stateful play operator holds the follower while the driver crosses the gap. The initial state is centred in the gap. | A direction reversal exposes the full lost motion. Z nut clearance is shared by the synchronised screws in this example. |
+| Spur tooth tolerances | Pitch-circle clearance is the sum of the two tooth-thinning allowances plus 2 Δa tan(α) for small centre-distance offsets. A deterministic periodic transmission error is sampled at tooth mesh phase. The gear flank applies the same play operator. | The pinion follows the input. The output gear and hob respond to the actual mesh. Tooth thinning changes rendered tooth widths, and centre distance changes the locations of the gear centres. The rendered flanks are trapezoidal approximations. |
+| Guide shafts | The carriage load is shared equally by two simply supported circular guides. For load coordinate a and b = L − a, the deflection at the load is P a² b²/(3 E I L), using the force on one shaft. | Deflection varies with X. The X journals use a curved centreline and the head follows the sag. |
+| Heated stack | Uniform free thermal expansion is α L ΔT relative to a reference height. | The nozzle extends downward relative to its carriage. The example supplies a constant temperature difference. |
+| Hob and hotend | The available drive force is μN and the corresponding pressure ceiling is μN divided by incoming filament area. Below the ceiling, C dP/dt = Qᵢₙ − P/R. The solver integrates a constant inlet rate exactly over each substep and splits the step at a traction-limit crossing. Rejected feed accumulates as hob slip. | The spool follows accepted stock. Outlet flow follows pressure and can continue after feed stops. Outflow is allocated to deposited material or travel ooze according to the active move. |
 
-The default model has 26 declared connections, including all 12 bore-to-journal associations and both nut-to-screw associations. Inspect `XLowerLeftBearing`, `YLeftFrontBearing` and `ZLeftNut` to trace examples. The spatial graph stores ownership and connectivity. Time-dependent rules impose the driving and following motions. The screw flank and bearing sleeves are simplified render geometry. The nominal radial running clearance in each linear bearing is 0.04 mm. Internal recirculating ball tracks are implicit.
+The demand on each horizontal axis uses commanded acceleration and a smoothed bearing drag. This is a quasi-static, lumped-parameter model. It resolves drive compliance, bending and thermal growth at part level. Contact stress fields, vibration modes, tooth fracture, permanent plastic set, non-Newtonian melt rheology and bead adhesion require additional material and boundary data. The overload law is a demonstrator for a measured skip threshold. A geared feed advance is assumed, with nonnegative commanded extrusion. Retraction and reverse flow would require a signed material-transport law.
 
-## Toolpath and production
+The deposited mesh is reconstructed in 0.125 s slices from the outlet volume and the loaded nozzle path. During print moves it uses a faceted, rounded cross-section with width derived from volume per unit length. Travel produces thin traces or drops. Small residual volumes are kept in the numerical balance even below the mesh rendering threshold. Coincident drops and corner joins can overlap. Read `fffDeposit`, `fffOoze` and `fffStored` for material accounting.
 
-`Start -> Job(56 40 0.24 0.48 1.75 2 20 2 4)` sets perimeter X and Y, layer height, deposited width, filament diameter, belt pitch, pulley tooth count, screw pitch and screw start count. The frame, travel and initial lead-screw envelope are fixed for this example. Keep proposed edits within their clearances. Each side uses cubic ease-in/out with zero endpoint velocity. The example has three layers and stops at every corner.
+## Author a printer program
 
-| Time (s) | Operation |
+The native parser recognises one printer program per document. Each `@fff` record occupies one line. All component records and a home position are required. Add one or more moves. Blank lines and trailing `#` comments are supported. A rebuild starts from the declared home and an unpressurised chamber. Seeking backwards reproduces the same state. Samples outside the program duration hold the endpoint state. Add a dwell move to simulate further discharge.
+
+| Record | Fields in order |
 | --- | --- |
-| 0–2 | Move to the start at clearance height, then lower to the first layer. |
-| 2–9, 9.5–16.5, 17–24 | Lay one 56 × 40 mm perimeter on each layer. |
-| 9–9.5, 16.5–17 | Raise the gantry 0.24 mm. Keep feed constant. |
-| 24–26.5 | Lift by 12 mm and park. The completed part rides with the bed. |
+| `beltX`, `beltY` | Moving mass (kg), drag (N), installed tension per span (N), one-span axial stiffness, tooth contact stiffness, mount shear stiffness (all N/mm), shaft radius and length (mm), shaft shear modulus (MPa), reversal gap (mm), ratchet threshold (N), belt pitch (mm), pulley teeth |
+| `gear` | Module (mm), pinion teeth, wheel teeth, pressure angle (degrees), pinion and wheel tooth-thinning allowances (mm each), signed centre-distance error (mm), pitch-line transmission-error amplitude (mm), hob working radius (mm) |
+| `guide` | Support span (mm), diameter (mm), Young modulus (MPa), shared carriage mass (kg). The example frame and journals use a nominal 240 mm span and 8 mm shafts. |
+| `thermal` | Effective hot length (mm), expansion coefficient (per kelvin), signed temperature rise (K) |
+| `nut` | Total axial reversal gap (mm) |
+| `hotend` | Filament diameter (mm), effective compressive compliance C (mm³/MPa), flow resistance R (MPa·s/mm³), normal nip force (N), traction coefficient |
+| `bead` | Nominal supported width and layer height (mm). Nominal area is h(w − h) + πh²/4. |
+| `home` | Initial X, Y, Z in bed coordinates (mm) |
+| `move` | Duration (s), target X, Y, Z (mm), nonnegative extrusion multiplier. Zero selects travel or dwell. One requests nominal bead volume along the move. |
 
-For belt pitch $p$ and tooth count $N$, pulley rotation magnitude is $2\pi |\Delta s|/(pN)$. Screw rotation magnitude is $2\pi |\Delta Z|/\ell$ for screw lead $\ell$. Index marks on the pulley faces and screw couplers expose the direction of rotation. Marks on the belt circulate over the two straights and both wraps. [Klipper rotation distance](https://www.klipper3d.org/Rotation_Distance.html)
+The expressions take a time argument in seconds. For example, `fffPressure(t)` reads MPa, `fffX(t)-fffCommandX(t)` gives signed X error, and `fffDeposit(t)-fffDeposit(a)` gives supported outflow since time a. The solver uses at most 5 ms per step and lands exactly on each move boundary.
 
-For supported extrusion of width $w$ and height $h$, the idealised rounded-rectangle area is $A=h(w-h)+\pi h^2/4$. A deposited centreline length $L$ consumes $E=LA/(\pi d^2/4)$ millimetres of round stock of diameter $d$. The unprinted travel and layer lifts add zero material. [Slic3r flow math](https://github.com/slic3r/Slic3r-Manual/blob/master/src/advanced/flow-math.md)
+| Channels, each prefixed with `fff` | Units |
+| --- | --- |
+| X, Y, Z, CommandX, CommandY, CommandZ, Lift, Sag, Expansion | mm |
+| XStrand, XStretch, XTooth, XShear, XTwist and Y equivalents | mm |
+| XTight, XSlack, YTight, YSlack | N |
+| XJumps, YJumps | Cumulative event count |
+| CommandFeed, HobFeed, Feed, Slip | mm of stock or equivalent surface travel |
+| Pressure, Flow | MPa, mm³/s |
+| Deposit, Ooze, Stored | mm³ |
 
-The default job lays **576 mm** of bead, giving **59.2352 mm³** of nominal deposited volume and **24.6271 mm** of stock consumed. The final nominal wall height is **0.72 mm**. The mesh uses eight facets per semicircle and butt-ended segments. Its individual segment volumes are approximately 1.12% below the smooth cross-section calculation. The model omits corner redistribution, melt pressure, temperature, drive slip and backlash. These quantities describe an ideal kinematic print.
+To isolate a low-grip feeder, reduce the nip force in `@fff hotend` while holding the motion program fixed. Slip increases when pressure reaches the lower cap. To exercise belt ratcheting in the regression, the test uses a 1 kg carriage, 4 N of installed tension and a 10 N jump threshold. A 12 N demand unloads one span and loses one tooth. Holding this demand causes one event, and reversing it can cause another. For measured inputs, belt span stiffness, direction-reversal travel, tooth fit, filament advance under load, and pressure/flow response constrain different terms in the model. A measured pressure-relaxation time alone constrains the product RC.
 
-## Reproduce the checks
-
-From the repository root, build the existing desktop mesh sampler and run the regression.
+## Reproduce the run
 
 ```sh
-make -j2 build/form-study-sample
+make -j2 build/form-study-sample build/printer-response-csv printer-response-check
 python3 tests/check_cartesian_printer.py
+python3 tests/check_loaded_printer.py
+build/printer-response-csv examples/Mechanics/CartesianPrinter/CartesianPrinter.p3d > response.csv
 ```
 
-The regression checks 25 native time samples against a separate sequence of commanded moves. It measures all bearing centre axes and bore radii, shaft travel limits, pulley and lead-screw angles, clamp and nut positions, nozzle height, deposited segment geometry in the moving bed frame, and feed-wheel rotation. After the final sample it rechecks the parked machine at 40 seconds.
+The C++ checks cover reversible play, gear fit, belt tension and re-engagement, shear, torsion scaling, elastic bending, thermal growth, slip, pressure decay, material conservation and timestep refinement. The native geometry checks cover the original 25 reference poses and the loaded mesh at print, reversal, travel and dwell times. The CSV exports the same solver channels read by the grammar.
+
+The engineering basis for the belt is the distinction between installed span tension, effective force and elastic registration error in the [Gates precision drive manual](https://www.gates.com/content/dam/documents-library/catalogs/light-power-and-precision-manual.pdf) and [Gates belt sizing guide](https://www.gates.com/content/dam/documents-library/installation-guides/BeltSizingGuide.pdf). The gear relation uses the small-change centre-distance approximation and tooth-thickness allowances described in [Elements of Metric Gear Technology](https://qtcgears.com/materials/catalogs/Tech.pdf). The nozzle law uses the linear compression and flow assumptions described in [Klipper’s kinematics notes](https://www.klipper3d.org/Kinematics.html#pressure-advance). Here those assumptions predict the uncompensated plant response.

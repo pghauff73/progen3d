@@ -75,6 +75,8 @@ DEPFLAGS = -MMD -MP
 APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 
 APP_CPP_SOURCES = \
+	$(SRC_DIR)/mechanics/service/PrinterResponse.cpp \
+	$(SRC_DIR)/mechanics/service/PrinterProgramReader.cpp \
 	$(SRC_DIR)/physics/model/BodyAirflow.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
@@ -554,3 +556,18 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+PRINTER_MODEL_SOURCES = src/mechanics/service/PrinterResponse.cpp src/mechanics/service/PrinterProgramReader.cpp
+PRINTER_MODEL_HEADERS = include/mechanics/model/PrinterDrive.h include/mechanics/service/PrinterResponse.h
+
+build/printer-response-csv: tools/printer_response_csv.cpp $(PRINTER_MODEL_SOURCES) $(PRINTER_MODEL_HEADERS)
+	@mkdir -p build
+	$(CXX) -O2 -std=c++17 -Iinclude $< $(PRINTER_MODEL_SOURCES) -o $@
+
+build/printer-response-test: tests/printer_response_test.cpp $(PRINTER_MODEL_SOURCES) $(PRINTER_MODEL_HEADERS)
+	@mkdir -p build
+	$(CXX) -O2 -std=c++17 -Iinclude $< $(PRINTER_MODEL_SOURCES) -o $@
+
+.PHONY: printer-response-check
+printer-response-check: build/printer-response-test
+	./build/printer-response-test examples/Mechanics/CartesianPrinter/CartesianPrinter.p3d

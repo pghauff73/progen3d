@@ -25,6 +25,7 @@
 #include "Scope.h"
 #include "grammar.h"
 #include "GrammarRuntime.h"
+#include "mechanics/service/PrinterResponse.h"
 #include "Solution.h"
 #include "grammar/model/AxialProfileDescriptorSyntax.h"
 #include "grammar/model/ExtrudeProfileDescriptorSyntax.h"
@@ -2271,7 +2272,8 @@ static bool token_begins_expression_continuation(const std::string &token)
 
 static bool is_supported_math_function_name(const std::string &token)
 {
-	return token == "sin" || token == "cos" || token == "tan" ||
+	return (token.rfind("fff", 0) == 0 && fff::PrinterResponse::recognizes(token)) ||
+	       token == "atan2" || token == "sin" || token == "cos" || token == "tan" ||
 	       token == "abs" || token == "sqrt" || token == "floor" ||
 	       token == "ceil" || token == "min" || token == "max" ||
 	       token == "clamp" || token == "wrap" || token == "lerp" ||
@@ -2627,6 +2629,12 @@ private:
 			     std::to_string(arguments.size()));
 			return 0.0;
 		};
+        if (name.rfind("fff",0)==0 && fff::PrinterResponse::recognizes(name)) {
+            if (!arity_is(1)) return fail_arity("1");
+            const auto *response = grammar_ ? grammar_->printerResponse() : nullptr;
+            if (!response) { fail("FFF query requires a printer program"); return 0; }
+            return response->value(name,arguments[0]);
+        }
 		const auto clamp01 = [](double value) {
 			return std::clamp(value, 0.0, 1.0);
 		};
@@ -2676,6 +2684,11 @@ private:
 			if(name == "ease")return x * x * (3.0 - (2.0 * x));
 			return x * x * x * (x * ((x * 6.0) - 15.0) + 10.0);
 		}
+
+		if (name == "atan2") {
+            if (!arity_is(2)) return fail_arity("2");
+            return std::atan2(arguments[0], arguments[1]);
+        }
 
 		if(name == "min" || name == "max"){
 			if(!arity_is(2))return fail_arity("2");
@@ -5214,6 +5227,7 @@ GrammarDocument::GrammarDocument(std::istream &input, const std::string &source_
 
 void GrammarDocument::clearParsedState()
 {
+    printer_response_.reset();
 	error_lines.clear();
 	error_details.clear();
 
@@ -5238,7 +5252,25 @@ void GrammarDocument::rebuildFromLines(const std::string &success_message)
 	// executable token stream, and certainly before recursive expansion begins.
 	const bool source_structure_valid = validate_source_structure_before_expansion(this);
 	if(source_structure_valid){
-		parse_rule_lines_into_grammar(this, build_logical_rules(lines));
+        std::vector<std::string> geometryLines;
+        const bool hasPrinter=std::any_of(lines.begin(),lines.end(),fff::PrinterProgramReader::isDirective);
+        if (hasPrinter) {
+            int sourceLine=0;
+            geometryLines=lines;
+            try {
+                auto program=fff::PrinterProgramReader::read(geometryLines,sourceLine);
+                printer_response_=std::make_shared<fff::PrinterResponse>(program);
+            } catch (const std::invalid_argument &error) {
+                GrammarDiagnostic issue;
+                issue.line=sourceLine;
+                issue.start_column=0;
+                issue.end_column=std::max(1,static_cast<int>(lines.at(sourceLine).size()));
+                issue.message=std::string("FFF program: ")+error.what();
+                report_grammar_issue(this,issue);
+                return;
+            }
+        }
+        parse_rule_lines_into_grammar(this, build_logical_rules(hasPrinter ? geometryLines : lines));
 
 		// Ensure "Start" rule is first if it exists.
 		ensure_start_rule_is_first();
@@ -6161,6 +6193,9 @@ void GrammarDocument::addContext(){
 
 void GrammarDocument::generateGeometry()
 {
+    // Deferred interface and geometry expressions evaluate in the owning document.
+    std::optional<ScopedGrammarRuntimeSession> printerSession;
+    if (printer_response_) printerSession.emplace(this);
 	if(context == NULL){
 		GrammarDiagnostic diagnostic;
 		diagnostic.message = "Scene generation was requested without a context.";

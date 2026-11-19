@@ -1,9 +1,69 @@
+# Cartesian FFF printer under load. Select IdealPrinter on the Start line for the reference.
+# Units: mm, s, N, kg, MPa. The parameter values are illustrative.
+# Belt: mass, guide drag, installed tension per span, span/tooth/mount stiffness,
+# shaft radius, shaft length, shaft shear modulus, total lash, jump threshold, pitch, teeth.
+@fff beltX 0.42 1.4 8 48 160 280 2.5 18 79000 0.055 17 2 20
+@fff beltY 0.88 2.1 9 45 150 250 2.5 22 79000 0.075 18 2 20
+# External spur pair: module, teeth in/out, pressure angle, tooth thinning in/out,
+# centre-distance offset, periodic pitch-line error amplitude and hob radius.
+@fff gear 0.8 18 36 20 0.025 0.035 0.035 0.012 5
+# Guide span, diameter, Young modulus, shared carriage mass.
+@fff guide 240 8 200000 0.42
+# Heated stack length, axial expansion per kelvin, temperature rise from the reference.
+@fff thermal 18 0.000019 150
+@fff nut 0.06
+# Filament diameter, effective compliance, flow resistance, nip load, friction.
+@fff hotend 1.75 0.20 1.3 33 0.33
+@fff bead 0.48 0.24
+@fff home -42 -32 10
+# Move: duration, target X Y Z in bed coordinates, extrusion multiplier.
+@fff move 1 -28 -20 10 0
+@fff move 1 -28 -20 0.24 0
+@fff move 2 28 -20 0.24 1
+@fff move 1.5 28 20 0.24 1
+@fff move 2 -28 20 0.24 1
+@fff move 1.5 -28 -20 0.24 1
+@fff move 0.5 -28 -20 0.48 0
+@fff move 2 28 -20 0.48 1
+@fff move 1.5 28 20 0.48 1
+@fff move 2 -28 20 0.48 1
+@fff move 1.5 -28 -20 0.48 1
+@fff move 0.5 -28 -20 0.72 0
+@fff move 2 28 -20 0.72 1
+@fff move 1.5 28 20 0.72 1
+@fff move 2 -28 20 0.72 1
+@fff move 1.5 -28 -20 0.72 1
+@fff move 1 -28 -20 12.72 0
+@fff move 1.5 34 28 12.72 0
+@fff move 2 34 28 12.72 0
+
+Start -> LoadedPrinter
+
+LoadedPrinter ->
+    LoadedPose(fffX(t) fffY(t) fffLift(t) fffSag(t) fffExpansion(t)
+               fffCommandX(t) fffCommandY(t) fffCommandZ(t) fffXStrand(t) fffYStrand(t)
+               fffCommandFeed(t) fffHobFeed(t) fffFeed(t) fffFilament(t)
+               fffXRev(t) fffYRev(t) fffWidth(t) fffLayer(t) fffHobRadius(t))
+
+LoadedPose(x y lift sag thermal motorX motorY motorZ strandX strandY input hob stock filament xRev yRev bead h hobR) ->
+    Object(id(Printer) class(CartesianFFFPrinter) taxonomy(Machine CartesianFFFPrinter)) [
+        FixedFrame
+        BedMechanics(y yRev/(2*radians(180)) -360*motorY/yRev strandY -360*strandY/yRev)
+        [ T(0 0 y) BedPlatform(0 0 h bead yRev/(2*radians(180)) 1) ]
+        LiftDrive(motorZ 8 4)
+        [ T(0 60+lift 0) Gantry(x xRev motorX strandX sag thermal) ]
+        FeedSystem(x lift-sag stock filament hob hobR)
+        ExtruderGears(input hob hobR fffModule(t) fffPinionTeeth(t) fffWheelTeeth(t) fffCentreOffset(t)
+                      fffPinionThin(t) fffWheelThin(t) fffAngle(t))
+    ]
+
+# The original kinematic reference uses the same component geometry.
 # Cartesian FFF printer / millimetres, seconds, degrees
 # Printer X = scene X, printer Z = scene Y, printer Y = minus scene Z on the bed.
 # The upper belt strand is clamped to the carriage on each horizontal axis.
 # Start arguments: rectangle X/Y, layer height, bead width, filament diameter,
 # belt pitch, pulley teeth, screw pitch and number of screw starts.
-Start -> Job(56 40 0.24 0.48 1.75 2 20 2 4)
+IdealPrinter -> Job(56 40 0.24 0.48 1.75 2 20 2 4)
 
 Job(w d h bead filament pitch teeth screwPitch starts) ->
     Clock(w d h bead filament pitch*teeth screwPitch*starts starts clamp(t-2,0,22))
@@ -29,10 +89,10 @@ Machine(w d h bead filament beltRev lead starts x y z feed) ->
     Object(id(Printer) class(CartesianFFFPrinter) taxonomy(Machine CartesianFFFPrinter)) [
         FixedFrame
         BedDrive(y beltRev)
-        [ T(0 0 y) BedPlatform(w d h bead beltRev/(2*radians(180))) ]
+        [ T(0 0 y) BedPlatform(w d h bead beltRev/(2*radians(180)) 0) ]
         LiftDrive(z lead starts)
-        [ T(0 60+z 0) Gantry(x beltRev) ]
-        FeedSystem(x z feed filament)
+        [ T(0 60+z 0) Gantry(x beltRev x x 0 0) ]
+        FeedSystem(x z feed filament feed 5)
     ]
 
 FixedFrame ->
@@ -63,9 +123,9 @@ FixedFrame ->
     ] ]
 
 BedDrive(y rev) ->
-    BedMechanics(y rev/(2*radians(180)) -360*y/rev)
+    BedMechanics(y rev/(2*radians(180)) -360*y/rev y -360*y/rev)
 
-BedMechanics(travel radius ang) ->
+BedMechanics(travel radius ang strand idlerAngle) ->
     [ T(-52 31 0) A(90 0) Object(id(YLeftGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Printer)) [
         Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 226))
         Shaft(226 4)
@@ -83,7 +143,7 @@ BedMechanics(travel radius ang) ->
     ] ]
         [ T(100 0 0) A(90 0) Object(id(YIdler) class(IdlerPulley) taxonomy(Machine IdlerPulley) container(YTransmission)) [
         Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
-        Pulley(radius ang)
+        Pulley(radius idlerAngle)
     ] ]
         [ Object(id(YBelt) class(TimingBelt) taxonomy(Machine TimingBelt) container(YTransmission)) [
         Interface(id(DriveWrap) type(Mate) origin(-100 0 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 1))
@@ -91,7 +151,7 @@ BedMechanics(travel radius ang) ->
         Interface(id(ClampFace) type(Mate) origin(travel radius 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
         Connect(id(YBelt_DriveWrap_YPulley) source(YBelt DriveWrap) target(YPulley Pitch) type(ConnectedTo) clearance(0))
         Connect(id(YBelt_ReturnWrap_YIdler) source(YBelt ReturnWrap) target(YIdler Pitch) type(ConnectedTo) clearance(0))
-        BeltLoop(100 radius travel)
+        BeltLoop(100 radius strand)
     ] ]
         [ T(travel radius 0) Object(id(YClamp) class(BeltClamp) taxonomy(Machine BeltClamp) container(YTransmission)) [
         Interface(id(Jaw) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
@@ -109,7 +169,7 @@ BedMechanics(travel radius ang) ->
     [ T(0 23 -100) FrameBlock(37 18 10) ]
     [ T(0 21 100) FrameBlock(20 14 10) ]
 
-BedPlatform(w d h bead r) ->
+BedPlatform(w d h bead r loaded) ->
     [ Object(id(Bed) class(HeatedBedCarriage) taxonomy(Machine HeatedBedCarriage) container(Printer)) [
         Interface(id(ClampMount) type(Mate) origin(0 27+r 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
         [ T(0 51 0) FrameBlock(130 5 101) ]
@@ -140,7 +200,7 @@ BedPlatform(w d h bead r) ->
         Sleeve(4.04 7.5 14)
     ] ]
         [ T(0 60 0) Object(id(Print) class(DepositedPart) taxonomy(Machine DepositedPart) container(Bed)) [
-        Layers(w d h bead)
+        PrintHistory(w d h bead loaded)
     ] ]
     ] ]
 
@@ -176,7 +236,7 @@ LiftDrive(z lead starts) ->
         LeadScrew(lead starts)
     ] ]
 
-Gantry(x rev) ->
+Gantry(x rev motor strand sag thermal) ->
     [ Object(id(Gantry) class(XGantry) taxonomy(Machine XGantry) container(Printer)) [
         [ Object(id(ZLeftEnd) class(GantryEnd) taxonomy(Machine GantryEnd) container(Gantry)) [
         [ T(-120 29 -26) TealBlock(19 46 12) ]
@@ -220,17 +280,17 @@ Gantry(x rev) ->
     ] ]
         [ T(0 16 -16) A(-90 2) Object(id(XLowerGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Gantry)) [
         Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 240))
-        Shaft(240 4)
+        FlexGuide(x sag)
     ] ]
         [ T(0 42 -16) A(-90 2) Object(id(XUpperGuide) class(GuideShaft) taxonomy(Machine GuideShaft) container(Gantry)) [
         Interface(id(Journal) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 240))
-        Shaft(240 4)
+        FlexGuide(x sag)
     ] ]
-        HeadDrive(x rev/(2*radians(180)) -360*x/rev)
-        [ T(x 0 0) Toolhead(rev/(2*radians(180))) ]
+        HeadDrive(x rev/(2*radians(180)) -360*motor/rev strand -360*strand/rev)
+        [ T(x -sag 0) Toolhead(rev/(2*radians(180)) thermal) ]
     ] ]
 
-HeadDrive(travel radius ang) ->
+HeadDrive(travel radius ang strand idlerAngle) ->
     [ T(0 28 -28) Object(id(XTransmission) class(BeltAxis) taxonomy(Machine BeltAxis) container(Gantry)) [
         [ T(-109 0 0) A(90 0) Object(id(XPulley) class(DrivePulley) taxonomy(Machine DrivePulley) container(XTransmission)) [
         Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
@@ -240,7 +300,7 @@ HeadDrive(travel radius ang) ->
     ] ]
         [ T(109 0 0) A(90 0) Object(id(XIdler) class(IdlerPulley) taxonomy(Machine IdlerPulley) container(XTransmission)) [
         Interface(id(Pitch) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
-        Pulley(radius ang)
+        Pulley(radius idlerAngle)
     ] ]
         [ Object(id(XBelt) class(TimingBelt) taxonomy(Machine TimingBelt) container(XTransmission)) [
         Interface(id(DriveWrap) type(Mate) origin(-109 0 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 1))
@@ -248,7 +308,7 @@ HeadDrive(travel radius ang) ->
         Interface(id(ClampFace) type(Mate) origin(travel radius 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
         Connect(id(XBelt_DriveWrap_XPulley) source(XBelt DriveWrap) target(XPulley Pitch) type(ConnectedTo) clearance(0))
         Connect(id(XBelt_ReturnWrap_XIdler) source(XBelt ReturnWrap) target(XIdler Pitch) type(ConnectedTo) clearance(0))
-        BeltLoop(109 radius travel)
+        BeltLoop(109 radius strand)
     ] ]
         [ T(travel radius 0) Object(id(XClamp) class(BeltClamp) taxonomy(Machine BeltClamp) container(XTransmission)) [
         Interface(id(Jaw) type(Mate) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
@@ -264,7 +324,7 @@ HeadDrive(travel radius ang) ->
     ] ]
     ] ]
 
-Toolhead(r) ->
+Toolhead(r thermal) ->
     [ Object(id(Head) class(HotendCarriage) taxonomy(Machine HotendCarriage) container(Gantry)) [
         Interface(id(ClampMount) type(Mate) origin(0 28+r -28) normal(0 1 0) tangent(1 0 0) region(AxisSegment 1))
         [ T(-12 16 -16) A(-90 2) Object(id(XLowerLeftBearing) class(LinearBallBearing) taxonomy(Machine LinearBallBearing) container(Head)) [
@@ -293,7 +353,7 @@ Toolhead(r) ->
         [ T(0 24 0) Shaft(22 3.5) ]
         HeatSinkFins
         [ T(0 47 0) Sleeve(1.1 4.5 10) ]
-        [ Object(id(Nozzle) class(Nozzle) taxonomy(Machine Nozzle) container(Head)) [
+        [ T(0 -thermal 0) Object(id(Nozzle) class(Nozzle) taxonomy(Machine Nozzle) container(Head)) [
         I(Revolve(profile(Polygon 0 0 0.2 0 3.8 4 3.8 8 0 8) angle(0 360) segments(16) cap(all)) material(goldbrushedmetal) 1 1)
     ] ]
     ] ]
@@ -301,15 +361,16 @@ Toolhead(r) ->
 HeatSinkFins 5 ->
     [ T(0 18+HeatSinkFins_count*3 0) Sleeve(3.4 7 1.5) ]
 
-FeedSystem(x z feed filament) ->
+FeedSystem(x z feed filament hob hobR) ->
     [ T(-72 240 0) A(90 0) Object(id(Spool) class(FilamentSpool) taxonomy(Machine FilamentSpool) container(Printer)) [
         SpoolBody(feed)
     ] ]
     [ Object(id(Stock) class(IncomingFilament) taxonomy(Machine IncomingFilament) container(Printer)) [
         StockLine(-47 240 0 -47 191 0 filament/2)
     ] ]
-    [ T(-42 199 0) A(90 0) Object(id(Hob) class(ExtruderDriveWheel) taxonomy(Machine ExtruderDriveWheel) container(Printer)) [
-        FeedWheel(5 360*feed/(2*radians(180)*5))
+    [ T(-47+hobR 199 0) A(90 0) Object(id(Hob) class(ExtruderDriveWheel) taxonomy(Machine ExtruderDriveWheel) container(Printer)) [
+        Interface(id(Axle) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 5))
+        FeedWheel(hobR 360*hob/(2*radians(180)*hobR))
     ] ]
     [ T(-50 199 0) A(90 0) Object(id(Pinch) class(ExtruderIdler) taxonomy(Machine ExtruderIdler) container(Printer)) [
         FeedWheel(3 -360*feed/(2*radians(180)*3))
@@ -442,3 +503,72 @@ HeaterBlock(w h d) ->
 
 GoldBlock(w h d) ->
     [ S(w h d) I(Cube material(goldbrushedmetal) 1 1) ]
+
+FlexGuide(x sag) ->
+    ?(sag>0.0000001) CurvedGuide(x 120+x 120-x sag) : Shaft(240 4)
+
+CurvedGuide(x a b sag) ->
+    I(SweepDisk(path(0 -120 0 sag*(57600-b*b-a*a/4)/(4*a*b) -120+a/2 0 sag x 0
+                     sag*(57600-a*a-b*b/4)/(4*a*b) 120-b/2 0 0 120 0)
+        radius(4) segments(16) cap(all)) material(steelshinyroughmetal) 1 1)
+
+ExtruderGears(input hob r m pin wheel da thinP thinW alpha) ->
+    [ T(-47+r 199 8) Object(id(FeedWheelGear) class(SpurGear) taxonomy(Machine SpurGear) container(Printer)) [
+        Interface(id(ToothFlank) type(Mate) origin(m*wheel/2 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+        Interface(id(Hub) type(Socket) origin(0 0 -8) normal(0 0 1) tangent(1 0 0) region(AxisSegment 5))
+        Connect(id(FeedGearOnHob) source(FeedWheelGear Hub) target(Hob Axle) type(InsertedIn) clearance(0))
+        [ A(degrees(hob/r) 2) GearBlank(wheel m thinW alpha) ]
+    ] ]
+    [ T(-47+r+m*(pin+wheel)/2+da 199 8) Object(id(FeedPinion) class(SpurPinion) taxonomy(Machine SpurPinion) container(Printer)) [
+        Interface(id(ToothFlank) type(Mate) origin(-m*pin/2 0 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+        Connect(id(FeedGearMesh) source(FeedPinion ToothFlank) target(FeedWheelGear ToothFlank) type(ConnectedTo) clearance(fffGearGap(t)))
+        [ A(180-180/pin-degrees(input/r)*wheel/pin 2) GearBlank(pin m thinP alpha) ]
+    ] ]
+
+GearBlank(n m thin alpha) ->
+    [ A(90 0) GoldRing(m m*(n/2-1.25) 4) ]
+    GearTeeth(n m m*n/2 radians(180)*m/4-thin/2 tan(radians(alpha)))
+
+GearTeeth(n m r half slope) n ->
+    [ A(360*GearTeeth_count/n 2) T(r 0 -2) I(Extrude(Polygon(
+        -1.32*m -half-1.25*m*slope  m -half+m*slope
+        m half-m*slope  -1.32*m half+1.25*m*slope) 4 cap(all)) material(goldbrushedmetal) 1 1) ]
+
+PrintHistory(w d h bead loaded) ->
+    ?(loaded>0) DepositIntervals(clamp(t,0,fffDuration(t)) h) : Layers(w d h bead)
+
+# Each interval carries actual discharged volume and follows the nozzle in bed coordinates.
+DepositIntervals(end h) -> Cells(end h ceil(end*8))
+
+Cells(end h n) n ->
+    Slice(Cells_count/8 min(end,(Cells_count+1)/8) h)
+
+Slice(a b h) ->
+    SliceEnds(fffX(a) fffY(a) fffZ(a) fffX(b) fffY(b) fffZ(b)
+              1*(fffDeposit(b)-fffDeposit(a)) 1*(fffOoze(b)-fffOoze(a)) h)
+
+SliceEnds(x y z bx by bz material spill h) ->
+    [ T(x z -y) OrientSlice(bx-x by-y bz-z material spill h) ]
+
+OrientSlice(dx dy dz material spill h) ->
+    [ A(degrees(atan2(dy,dx)) 1) A(degrees(atan2(dz,sqrt(dx*dx+dy*dy))) 2)
+      SliceGeometry(sqrt(dx*dx+dy*dy+dz*dz) material spill h) ]
+
+SliceGeometry(l material spill h) ->
+    [ Supported(l material h) ] [ Residue(l spill) ]
+
+Supported(l v h) ->
+    ?(v>0.0000001) BeadArea(l v/max(l,0.000001) h) :
+
+BeadArea(l area h) ->
+    SizedBead(l area min(h,0.99*sqrt(4*area/radians(180))))
+
+SizedBead(l area h) ->
+    [ T(0 -h/2 0) Strand(l h area/h+h*(1-radians(180)/4)) ]
+
+Residue(l v) ->
+    ?(v>0.0000001) ResidueVolume(l v) :
+
+ResidueVolume(l v) ->
+    ?(l>0.001) I(SweepDisk(path(0 0 0 l 0 0) radius(sqrt(v/(radians(180)*l))) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
+    : [ I(Sphere(radial(0 (6*v/radians(180))^(1/3)) segments(12 8)) material(copperbrushedmetal) 1 1) ]

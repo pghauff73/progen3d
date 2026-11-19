@@ -16,6 +16,7 @@
 #include <unordered_map>
 #include <vector>
 
+namespace fff { class PrinterResponse; }
 class SceneGenerationContext; // forward declaration to avoid include-order problems
 class ShapeSpecification;
 
@@ -720,6 +721,8 @@ public:
 	void addContext();
 	void ensure_start_rule_is_first();
 
+    const fff::PrinterResponse *printerResponse() const { return printer_response_.get(); }
+
     std::vector<GrammarRuleDefinition *> rule_list;
 	std::vector<GrammarActionToken *> tokens_new;
 	SceneGenerationContext *context=NULL;
@@ -731,6 +734,7 @@ public:
 	std::vector<GrammarDiagnostic> error_details;
 
 private:
+    std::shared_ptr<const fff::PrinterResponse> printer_response_;
 	void clearParsedState();
 	void rebuildFromLines(const std::string &success_message);
 };

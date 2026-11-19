@@ -161,7 +161,11 @@ if __name__ == "__main__":
     times = [0,.5,1.5,2,2.0625,3,4,4.75,5.5,6.5,8.25,9,9.25,9.5,12.25,16.5,16.75,17,20,23.25,24,24.5,25.75,26.5,40]
     with tempfile.TemporaryDirectory() as folder:
         path = Path(folder)/"frame.obj"
+        baseline = Path(folder)/"IdealPrinter.p3d"
+        source = GRAMMAR.read_text()
+        assert source.count("Start -> LoadedPrinter") == 1
+        baseline.write_text(source.replace("Start -> LoadedPrinter", "Start -> IdealPrinter"))
         for t in times:
-            subprocess.run([args.sampler.resolve(), GRAMMAR, str(t), path], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run([args.sampler.resolve(), baseline, str(t), path], check=True, stdout=subprocess.DEVNULL)
             result = check(*read_scene(path), t)
     print(f"{len(times)} native samples passed. Path {result[0]:.3f} mm, bead {result[1]:.4f} mm³, feed {result[2]:.4f} mm.")
