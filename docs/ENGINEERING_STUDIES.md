@@ -35,6 +35,22 @@ Run the desktop acceptance check using the bundled coupon fixture.
 
 The check exercises the rendered text editor. It reveals the instruction for `CouponLeft:+X`, types an invalid dimension and checks that the build retains the last valid scene. It then corrects the transverse dimension from 20 mm to 24 mm, rebuilds and checks that the same face still reveals its source. The test edits only the in-memory document. The successful run prints `PROGEN3D_GUI_ENGINEERING_SELECTION_PASSED` with the face and observed dimension.
 
+## Reference a compound part or curved surface
+
+Declare a named `Interface(...)` inside its owning `Object`. Bind it by the two authored IDs, for example `bind seat = object("Housing") interface "seatingPlane"`. The manifest records the declared type, region and resolved world origin, normal and tangent under `interface_details`. Region extents are authored in scene units. Curved and multi-primitive parts can use this selector. Changing primitive order or tessellation can preserve the named interface and still change the manifest revision.
+
+The cylindrical fit example uses two hollow collars under one housing ID and a cylindrical pin. The housing exports a `Socket` axis and a seating plane. The pin exports a `Shaft` axis. Both axes use an `AxisSegment` centred on the authored origin. The study binds the two axis IDs and expects the exact exported revision.
+
+```bash
+./progen3d-scene-manifest examples/EngineeringStudies/cylindrical-fit.p3d /tmp/cylindrical-fit.scene.json
+python3 -m tools.engineering analyse examples/EngineeringStudies/cylindrical-fit.json \
+  --scene /tmp/cylindrical-fit.scene.json
+```
+
+The study subtracts the largest shaft diameter from the smallest bore diameter for the minimum diametral clearance. It subtracts the smallest shaft diameter from the largest bore diameter for the maximum. A 10.00 ± 0.02 mm bore and a 9.95 ± 0.01 mm shaft give 20–80 µm of clearance. The result also reports the transverse offset at the shaft datum, axial deviation from a target offset and the smallest angle between the two undirected axes. Each alignment check uses its corresponding input limit.
+
+The diameter limits are synthetic inputs tied to the named datums. The analysis uses rigid object placements and requires a declared metres-per-scene-unit conversion. It evaluates diameter limits and nominal datum alignment independently. Verifying surface dimensions, engagement, collision during insertion or press-fit forces requires separate geometry or mechanical analysis.
+
 ## Author, observe and replay
 
 - Start with `coupon.p3physics`. Each declaration occupies a line. Units follow a number, such as `4 [W/K]`. Expressions support scalar literals, earlier parameters, states, derived quantities, arithmetic and the solver time `t`. Declare derived quantities in dependency order. The left side of each differential equation is `der(state)` or a constant parameter expression multiplied by that derivative. Each state needs one equation.

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "model": "cylindrical_fit",
+  "geometry": {
+    "revision": "750daf4fb689c006b65b83bcebff32e0bb86166f6a4f6180bc324afa51503e8b",
+    "metres_per_scene_unit": 0.001
+  },
+  "dimension_source": "Synthetic 10 mm bore and 9.95 mm shaft. Limits are prescribed for the exercise.",
+  "shaft": {
+    "object": "Pin",
+    "interface": "shaftAxis",
+    "min_diameter_m": 0.00994,
+    "max_diameter_m": 0.00996
+  },
+  "bore": {
+    "object": "Housing",
+    "interface": "boreAxis",
+    "min_diameter_m": 0.00998,
+    "max_diameter_m": 0.01002
+  },
+  "target_axial_offset_m": 0.004,
+  "max_axial_deviation_m": 0.00005,
+  "max_radial_offset_m": 0.00001,
+  "max_axis_angle_rad": 0.0005
+}

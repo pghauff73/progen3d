@@ -5,6 +5,8 @@
 #include "geometry/service/AffineCubeFaceQuery.h"
 #include "spatial/model/SpatialBuildingModel.h"
 #include "spatial/model/SpatialBuildingObject.h"
+#include "spatial/model/SpatialInterfaceTypeNames.h"
+#include "spatial/service/SpatialInterfaceQueryService.h"
 
 #include <jsoncpp/json/json.h>
 #include <openssl/sha.h>
@@ -30,6 +32,64 @@ Json::Value coordinates(const glm::vec3 &vector)
 		components.append(vector[axis]);
 	}
 	return components;
+}
+
+Json::Value authoredRegion(const SpatialInterfaceRegion &region)
+{
+	Json::Value result(Json::objectValue);
+	switch (region.kind()) {
+	case SpatialInterfaceRegionKind::Point:
+		result["kind"] = "Point";
+		break;
+	case SpatialInterfaceRegionKind::PlaneRectangle:
+		result["kind"] = "PlaneRectangle";
+		result["width"] = region.primaryExtent();
+		result["height"] = region.secondaryExtent();
+		break;
+	case SpatialInterfaceRegionKind::AxisSegment:
+		result["kind"] = "AxisSegment";
+		result["length"] = region.primaryExtent();
+		break;
+	case SpatialInterfaceRegionKind::ObjectBoundaryFace:
+		result["kind"] = "ObjectBoundaryFace";
+		result["boundary_face"] = region.boundaryFaceName();
+		break;
+	}
+	return result;
+}
+
+bool isRigidPlacement(const glm::mat4 &transform)
+{
+	const glm::mat3 linear(transform);
+	const glm::mat3 gram = glm::transpose(linear) * linear;
+	constexpr float tolerance = 1e-5f;
+	for (int column = 0; column < 3; ++column) {
+		for (int row = 0; row < 3; ++row) {
+			const float expected = column == row ? 1.0f : 0.0f;
+			if (!(std::fabs(gram[column][row] - expected) <= tolerance)) {
+				return false;
+			}
+		}
+	}
+	return glm::determinant(linear) > 0.0f;
+}
+
+Json::Value interfaceDetails(const SpatialInterface &interface, const glm::mat4 &placement)
+{
+	Json::Value details(Json::objectValue);
+	for (const auto &entry : spatialInterfaceTypeNames) {
+		if (entry.type == interface.type()) {
+			details["type"] = std::string(entry.name);
+			break;
+		}
+	}
+	const auto frame = SpatialInterfaceQueryService().resolveWorldFrame(interface, placement);
+	details["world_frame"]["origin"] = coordinates(frame.origin());
+	details["world_frame"]["normal"] = coordinates(frame.normal());
+	details["world_frame"]["tangent"] = coordinates(frame.tangent());
+	details["authored_region"] = authoredRegion(interface.region());
+	details["rigid_placement"] = isRigidPlacement(placement);
+	return details;
 }
 
 std::string sceneRevision(const std::string &source, const Json::Value &objects)
@@ -167,7 +227,10 @@ int main(int argument_count, char **arguments)
 				entry["name"] = object.identity().objectName();
 				entry["interfaces"] = Json::Value(Json::arrayValue);
 				for (const auto &interface : object.interfaces()) {
-					entry["interfaces"].append(interface.interfaceId().value());
+					const auto &interface_id = interface.interfaceId().value();
+					entry["interfaces"].append(interface_id);
+					entry["interface_details"][interface_id] =
+						interfaceDetails(interface, object.frameState().resolvedWorldTransform());
 				}
 				objects[identifier] = entry;
 			}

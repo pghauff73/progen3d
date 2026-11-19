@@ -175,6 +175,16 @@ def require_scene_face(object_id, obj, face):
         raise StudyError(f"missing face {face} on {object_id}")
 
 
+def require_scene_interface(object_id, obj, interface_id):
+    names = obj.get("interfaces")
+    if not isinstance(names, list) or interface_id not in names:
+        raise StudyError(f"missing interface {interface_id} on {object_id}")
+    details = obj.get("interface_details")
+    if not isinstance(details, dict) or not isinstance(details.get(interface_id), dict):
+        raise StudyError(f"missing interface details for {object_id}:{interface_id}; export a fresh manifest")
+    return details[interface_id]
+
+
 def parse_study(path, catalog=None, extensions=()):
     extensions = tuple(extensions)
     source = Path(path).read_text(encoding="utf-8")
@@ -206,17 +216,25 @@ def parse_study(path, catalog=None, extensions=()):
                 if study.geometry_length is not None or scale.dimensions != parse_unit("m").dimensions or scale.value <= 0:
                     raise StudyError("geometry_length requires one positive length")
                 study.geometry_length = scale.value
-            elif m := re.fullmatch(rf'bind\s+({IDENT})\s*=\s*object\("([^"]+)"\)(?:\s+revision\s+"([^"]+)")?(?:\s+face\s+"([^"]+)")?', line):
-                alias, object_id, expected, face = m.groups()
+            elif m := re.fullmatch(
+                rf'bind\s+({IDENT})\s*=\s*object\("([^"]+)"\)(?:\s+revision\s+"([^"]+)")?'
+                r'(?:\s+(face|interface)\s+"([^"]+)")?', line
+            ):
+                alias, object_id, expected, selector, reference = m.groups()
                 declare(alias)
                 if not catalog or object_id not in catalog["objects"]:
                     raise StudyError(f"unresolved scene object {object_id}")
                 obj = catalog["objects"][object_id]
                 if expected is not None and expected != catalog["revision"]:
                     raise StudyError(f"stale scene revision for {object_id}")
-                if face is not None:
-                    require_scene_face(object_id, obj, face)
-                study.bindings[alias] = {"object": object_id, "revision": catalog["revision"], "face": face}
+                binding = {"object": object_id, "revision": catalog["revision"], "face": None}
+                if selector == "face":
+                    require_scene_face(object_id, obj, reference)
+                    binding["face"] = reference
+                elif selector == "interface":
+                    require_scene_interface(object_id, obj, reference)
+                    binding["interface"] = reference
+                study.bindings[alias] = binding
             elif m := re.fullmatch(rf"(parameter|state|derived)\s+({IDENT})\s*:\s*({KIND})(?:\s+at\s+({IDENT}))?\s*=\s*(.+)", line):
                 role, name, kind, binding, text = m.groups()
                 declare(name)

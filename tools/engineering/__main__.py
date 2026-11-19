@@ -21,7 +21,7 @@ def main():
     domain = commands.add_parser("analyse", help="run a versioned JSON domain model")
     domain.add_argument("model")
     domain.add_argument("--output")
-    domain.add_argument("--scene", help="revisioned native scene manifest for a bound coupon")
+    domain.add_argument("--scene", help="revisioned native scene manifest for a geometry-bound model")
     compare = commands.add_parser("compare-measurements", help="compare recorded samples with a trace")
     compare.add_argument("trace")
     compare.add_argument("measurements")
