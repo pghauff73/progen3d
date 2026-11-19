@@ -2,6 +2,8 @@
 
 #include "editor/relationship/SourceRange.h"
 
+#include "mechanics/model/PinRollerMember.h"
+#include <optional>
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -84,6 +86,8 @@ public:
 	std::vector<SpatialConstraintInspection> constraints;
 	std::vector<SpatialResolutionInspection> resolution_records;
 	std::uint64_t aggregate_evidence_hash = 0;
+	std::optional<MemberServiceResponse> member_response;
+	std::string member_diagnostic, member_material, member_pin, member_roller;
 	bool building_knowledge_available = false;
 	std::string canonical_concept_id;
 	std::string canonical_concept_name;

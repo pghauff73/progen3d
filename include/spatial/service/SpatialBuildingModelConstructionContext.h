@@ -30,6 +30,7 @@ public:
 	                 CollisionParticipationPolicy collision_policy,
 	                 SpatialObjectState initial_state,
 	                 std::string *diagnostic);
+	bool setMemberStudy(PinRollerMember member, std::string *diagnostic);
 	bool addInterface(SpatialInterface interface, std::string *diagnostic);
 	bool bindPrimitive(std::size_t primitive_instance_index,
 	                   glm::mat4 primitive_local_to_object_transform,

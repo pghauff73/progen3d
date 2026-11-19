@@ -123,6 +123,8 @@ struct CollisionParticle {
 	float size = 0.0f;
 };
 
+struct PinRollerMember;
+
 class SceneGenerationContext
 {
 public:
@@ -164,6 +166,7 @@ public:
 	                        const std::string &container_object_id,
 	                        CollisionParticipationPolicy collision_policy,
 	                        std::string *diagnostic);
+	bool setMemberStudy(PinRollerMember member, std::string *diagnostic);
 	bool addSpatialInterface(SpatialInterface interface, std::string *diagnostic);
 	bool addSpatialConnection(SpatialConnection connection, std::string *diagnostic);
 	bool addSpatialConstraint(std::shared_ptr<const SpatialConstraint> constraint,

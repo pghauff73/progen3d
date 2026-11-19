@@ -16,6 +16,7 @@ public:
 		CollisionParticipationPolicy collision_policy;
 		SpatialObjectState state = SpatialObjectState::Unplaced;
 		std::vector<SpatialInterface> interfaces;
+		std::shared_ptr<const PinRollerMember> member;
 	};
 
 	struct OrderedObject {
@@ -66,7 +67,22 @@ bool SpatialBuildingModelConstructionContext::beginObject(
 		std::move(boundary_model),
 		collision_policy,
 		initial_state,
-		{}});
+		{}, {}});
+	return true;
+}
+
+bool SpatialBuildingModelConstructionContext::setMemberStudy(PinRollerMember member, std::string *diagnostic)
+{
+	if (state_->object_stack.empty()) {
+		if (diagnostic) *diagnostic = "PinRollerMember requires an active Object scope.";
+		return false;
+	}
+	auto &declaration = state_->object_stack.back();
+	if (declaration.member) {
+		if (diagnostic) *diagnostic = "An object may declare only one PinRollerMember study.";
+		return false;
+	}
+	declaration.member = std::make_shared<const PinRollerMember>(std::move(member));
 	return true;
 }
 
@@ -123,7 +139,7 @@ bool SpatialBuildingModelConstructionContext::endObject(std::string *diagnostic)
 			std::move(declaration.boundary_model),
 			std::move(declaration.interfaces),
 			declaration.collision_policy,
-			declaration.state)});
+			declaration.state, std::move(declaration.member))});
 	return true;
 }
 
