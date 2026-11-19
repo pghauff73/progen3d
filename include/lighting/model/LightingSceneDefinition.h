@@ -9,6 +9,7 @@
 class LightingSceneDefinition
 {
 public:
+	void replaceMachines(ElectricalMachineModel machines) { electrical_control_graph_.replaceMachines(std::move(machines)); }
 	bool addLight(SceneLight light, std::string *diagnostic);
 	bool addFixture(LightFixtureObject fixture, std::string *diagnostic);
 	bool addFixtureWithEmitter(SceneLight light,

@@ -3264,6 +3264,11 @@ bool SceneGenerationContext::addLightingCircuit(
 	       lighting_scene_definition_->addCircuit(std::move(circuit), diagnostic);
 }
 
+void SceneGenerationContext::replaceElectricalMachines(ElectricalMachineModel machines)
+{
+	lighting_scene_definition_->replaceMachines(std::move(machines));
+}
+
 const LightingSceneDefinition &SceneGenerationContext::lightingSceneDefinition() const
 {
 	return *lighting_scene_definition_;

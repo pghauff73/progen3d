@@ -1,0 +1,40 @@
+# Conductive rotor bars join two end rings. The supply is 50 Hz. Cutaway schematic, electrically equivalent winding.
+# The rotor angle follows the imposed shaft speed. North and south poles alternate in colour.
+Start -> Machine(2 12 1450)
+
+Machine(p slots rpm) ->
+    MagnetWire(PhaseWire material(Copper) insulation(Polyimide) diameter(0.0007) thickness(0.000025) temperature(60))
+    FieldCoil(Winding wire(PhaseWire) core(LaminatedSteel) turns(60) turnLength(0.064)
+              coreLength(0.085) area(0.00012) gap(0.001) current(2))
+    ElectricMotor(Drive type(InductionCage) connection(Wye) winding(Winding) polePairs(p) rpm(rpm)
+                  barMaterial(Aluminium) bars(24) barLength(0.05) barArea(0.000006)
+                  barTemperature(60) barLeakage(0.000005) barEmf(0.035) frequency(50))
+    IronRing(0.026 0.029 -0.012 0.012 280) Windings(slots 0.023)
+    [ A(rpm*6*t 1) Shaft RotorHub(0.018) Bars(24)
+      CageRing(0.016 0.019 -0.014 -0.012 360)
+      CageRing(0.016 0.019 0.012 0.014 360) ]
+
+Shaft -> [ T(0 -0.0225 0) S(0.006 0.045 0.006) !I(Cylinder material(silverbrushedmetal) 1 1) ]
+
+RotorHub(radius) -> IronRing(0.003 radius -0.010 0.010 360)
+
+Windings(n r) n ->
+    [ A(360*Windings_count/n 1) T(r 0 0) A(90 2)
+      [ T(0 -0.0034 0) S(0.0038 0.0068 0.0038) !I(Cylinder material(charcoalmattemetal) 1 1) ]
+      CoilBand(0.0020 0.0044 -0.0022 0.0022 360) ]
+
+Bars(n) n ->
+    [ A(360*Bars_count/n 1) T(0.0175 -0.013 0) S(0.0018 0.026 0.0018)
+      !I(Cylinder material(silverbrushedmetal) 1 1) ]
+
+CageRing(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(silverbrushedmetal) 1 1)
+
+CoilBand(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(copperbrushedmetal) 1 1)
+
+IronRing(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(charcoalmattemetal) 1 1)

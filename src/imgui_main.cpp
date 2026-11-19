@@ -4200,8 +4200,6 @@ void commit_editor_text(EditorWorkspaceSession *app_state, const std::string &te
 
 constexpr float kPreviewNearPlane = 0.01f;
 constexpr float kPreviewFarPlane = 100.0f;
-constexpr float kPreviewMinCameraDistance = 1.25f;
-constexpr float kPreviewMaxCameraDistance = 80.0f;
 
 glm::vec3 scaled_preview_target()
 {

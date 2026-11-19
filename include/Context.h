@@ -44,6 +44,7 @@ class SceneLight;
 class LightFixtureObject;
 class LightSwitch;
 class LightingCircuit;
+struct ElectricalMachineModel;
 class VehicleJoint;
 class VehicleJointGraph;
 
@@ -181,6 +182,7 @@ public:
 	                               std::string *diagnostic);
 	bool addLightSwitch(LightSwitch light_switch, std::string *diagnostic);
 	bool addLightingCircuit(LightingCircuit circuit, std::string *diagnostic);
+	void replaceElectricalMachines(ElectricalMachineModel machines);
 	const LightingSceneDefinition &lightingSceneDefinition() const;
 	bool addVehicleJoint(VehicleJoint joint, std::string *diagnostic);
 	const VehicleJointGraph &vehicleJointGraph() const;

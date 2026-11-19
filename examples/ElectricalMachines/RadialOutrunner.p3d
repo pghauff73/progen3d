@@ -1,0 +1,45 @@
+# A PM bell turns outside the stationary tooth windings. Cutaway schematic, electrically equivalent winding.
+# The rotor angle follows the imposed shaft speed. North and south poles alternate in colour.
+Start -> Machine(7 12 850)
+
+Machine(p slots rpm) ->
+    MagnetWire(PhaseWire material(Copper) insulation(Polyimide) diameter(0.0007) thickness(0.000025) temperature(60))
+    FieldCoil(Winding wire(PhaseWire) core(LaminatedSteel) turns(60) turnLength(0.064)
+              coreLength(0.085) area(0.00012) gap(0.001) current(2))
+    PermanentMagnet(Pole material(NdFeB35) returnCore(LaminatedSteel) length(0.003)
+                   returnLength(0.085) area(0.00012) gap(0.001))
+    ElectricMotor(Drive type(RadialOutrunner) connection(Delta) winding(Winding) magnet(Pole)
+                  polePairs(p) rpm(rpm) windingFactor(0.933))
+    RotorHub(0.014) Windings(slots 0.017)
+    [ A(rpm*6*t 1) Shaft IronRing(0.024 0.027 -0.012 0.012 300)
+      IronRing(0.003 0.027 -0.014 -0.012 300)
+      Poles(p 0.021 0.024 -0.010 0.010) ]
+
+Shaft -> [ T(0 -0.0225 0) S(0.006 0.045 0.006) !I(Cylinder material(silverbrushedmetal) 1 1) ]
+
+RotorHub(radius) -> IronRing(0.003 radius -0.010 0.010 360)
+
+Windings(n r) n ->
+    [ A(360*Windings_count/n 1) T(r 0 0) A(90 2)
+      [ T(0 -0.003 0) S(0.0038 0.006 0.0038) !I(Cylinder material(charcoalmattemetal) 1 1) ]
+      CoilBand(0.0020 0.0044 -0.0022 0.0022 360) ]
+
+Poles(p inside outside bottom top) p ->
+    [ A(360*Poles_count/p 1) NorthPole(inside outside bottom top 135/p) ]
+    [ A((360*Poles_count+180)/p 1) SouthPole(inside outside bottom top 135/p) ]
+
+NorthPole(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(tealmattemetal) 1 1)
+
+SouthPole(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(whitemattemetal) 1 1)
+
+CoilBand(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(copperbrushedmetal) 1 1)
+
+IronRing(inside outside bottom top sweep) ->
+    !I(Revolve(profile(Polygon inside bottom outside bottom outside top inside top)
+               angle(0 sweep) segments(48) cap(all)) material(charcoalmattemetal) 1 1)
