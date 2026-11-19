@@ -1,4 +1,9 @@
-# Pin and roller service analysis
+# Native mechanics examples
+
+- [Nested LED ring drive](CoaxialRingDisplay.md) covers coupled hoop motion, motor gearing and signed shaft power.
+- [Pin and roller members](#pin-and-roller-service-analysis) covers floor and shelf deflection.
+
+## Pin and roller service analysis
 
 Open **PinRollerMembers.p3d** in the native editor and build the grammar. Select **FloorMember** or **BookShelf** in the Spatial Object Inspector, or pick a primitive bound to that member. The inspector shows analytical section mass, span, loads, reactions, individual seat pressures, bending stress and midspan deflection. The centreline diagram overlays the unloaded line and the loaded shape. Its checkbox switches displacement magnification between 1× and 25×.
 

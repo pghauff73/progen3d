@@ -4,6 +4,7 @@
 #include "grammar/model/LightingDeclarationSyntax.h"
 #include "grammar/model/SpatialConnectionDeclarationSyntax.h"
 #include "grammar/model/SpatialConstraintDeclarationSyntax.h"
+#include "grammar/model/CoaxialDriveSyntax.h"
 #include "grammar/model/MemberStudySyntax.h"
 #include "grammar/model/SpatialInterfaceDeclarationSyntax.h"
 #include "grammar/model/SpatialObjectDescriptorSyntax.h"
@@ -387,6 +388,16 @@ public:
 	std::string print() override { return syntax ? syntax->canonicalText() + " " : "PinRollerMember() "; }
 	void performAction(SceneGenerationContext *context) override;
 	std::shared_ptr<const MemberStudySyntax> syntax;
+};
+
+class CoaxialDriveToken : public GrammarActionToken {
+public:
+	CoaxialDriveToken() : GrammarActionToken("CoaxialDrive") {}
+	GrammarActionToken *clone() const override { return new CoaxialDriveToken(*this); }
+	std::string isRule() override { return {}; }
+	std::string print() override { return syntax ? syntax->canonicalText() + " " : "CoaxialDrive() "; }
+	void performAction(SceneGenerationContext *context) override;
+	std::shared_ptr<const CoaxialDriveSyntax> syntax;
 };
 
 class SpatialInterfaceDeclarationToken : public GrammarActionToken {

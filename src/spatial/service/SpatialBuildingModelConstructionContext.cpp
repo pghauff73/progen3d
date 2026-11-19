@@ -17,6 +17,7 @@ public:
 		SpatialObjectState state = SpatialObjectState::Unplaced;
 		std::vector<SpatialInterface> interfaces;
 		std::shared_ptr<const PinRollerMember> member;
+		std::shared_ptr<const CoaxialDriveStage> drive;
 	};
 
 	struct OrderedObject {
@@ -67,7 +68,7 @@ bool SpatialBuildingModelConstructionContext::beginObject(
 		std::move(boundary_model),
 		collision_policy,
 		initial_state,
-		{}, {}});
+		{}, {}, {}});
 	return true;
 }
 
@@ -83,6 +84,21 @@ bool SpatialBuildingModelConstructionContext::setMemberStudy(PinRollerMember mem
 		return false;
 	}
 	declaration.member = std::make_shared<const PinRollerMember>(std::move(member));
+	return true;
+}
+
+bool SpatialBuildingModelConstructionContext::setCoaxialDrive(CoaxialDriveStage drive, std::string *diagnostic)
+{
+	if (state_->object_stack.empty()) {
+		if (diagnostic) *diagnostic = "CoaxialDrive requires an active Object scope.";
+		return false;
+	}
+	auto &declaration = state_->object_stack.back();
+	if (declaration.drive) {
+		if (diagnostic) *diagnostic = "An object may declare only one CoaxialDrive study.";
+		return false;
+	}
+	declaration.drive = std::make_shared<const CoaxialDriveStage>(std::move(drive));
 	return true;
 }
 
@@ -139,7 +155,7 @@ bool SpatialBuildingModelConstructionContext::endObject(std::string *diagnostic)
 			std::move(declaration.boundary_model),
 			std::move(declaration.interfaces),
 			declaration.collision_policy,
-			declaration.state, std::move(declaration.member))});
+			declaration.state, std::move(declaration.member), std::move(declaration.drive))});
 	return true;
 }
 

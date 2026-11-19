@@ -3,6 +3,7 @@
 #include <imgui.h>
 
 #include <algorithm>
+#include <cmath>
 #include <cstdio>
 
 namespace {
@@ -70,6 +71,27 @@ void draw_member_profile(const MemberServiceResponse &response)
 		previous = next;
 	}
 	ImGui::Dummy(ImVec2(width, 12 + static_cast<float>(response.midspanDeflectionM * pixels * amplification)));
+}
+
+void draw_coaxial_drive(const SpatialObjectInspection &inspection)
+{
+	if (!inspection.drive_response && inspection.drive_diagnostic.empty()) return;
+	if (!ImGui::CollapsingHeader("Coaxial ring drive", ImGuiTreeNodeFlags_DefaultOpen)) return;
+	if (!inspection.drive_response) {
+		ImGui::TextWrapped("%s", inspection.drive_diagnostic.c_str());
+		return;
+	}
+	const auto &r = *inspection.drive_response;
+	constexpr double degrees = 57.29577951308232;
+	ImGui::Text("Hoop inertia %.5g kg m^2", r.hoopInertiaKgM2);
+	ImGui::Text("Parent-relative %.5g deg/s  /  world %.5g deg/s", r.relativeRadPerS*degrees, r.worldRadPerS*degrees);
+	ImGui::Text("World acceleration %.5g deg/s^2", r.worldRadPerS2*degrees);
+	ImGui::Text("Bearing %.5g rpm  /  motor %.5g rpm", std::abs(r.relativeRadPerS)*degrees/6, r.motorRpm);
+	ImGui::Text("Hoop inertial torque %.5g N m", r.hoopJointTorqueNm);
+	ImGui::Text("Gearbox output %.5g N m  /  motor %.5g N m", r.gearboxOutputTorqueNm, r.motorTorqueNm);
+	ImGui::Text("Motor shaft power %.5g W", r.motorPowerW);
+	ImGui::Text("This hoop %.5g J  /  all hoops %.5g J", r.hoopEnergyJ, r.chainHoopEnergyJ);
+	ImGui::Text("All motor rotors %.5g J", r.chainRotorEnergyJ);
 }
 
 void draw_member_study(const SpatialObjectInspection &inspection)
@@ -151,6 +173,7 @@ void SpatialObjectInspectorPanel::draw(
 			ImGui::Text("%zu", inspection.primitive_instance_indices[index]);
 		}
 	}
+	draw_coaxial_drive(inspection);
 	draw_member_study(inspection);
 	draw_vector3("Translation uncertainty", inspection.translation_uncertainty);
 	draw_vector3("Rotation uncertainty", inspection.rotation_uncertainty_degrees);
