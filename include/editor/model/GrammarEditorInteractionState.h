@@ -104,6 +104,7 @@ public:
 	int selected_identifier_line = -1;
 	int selected_identifier_column = -1;
 	bool request_focus = false;
+	bool request_editor_tab = false;
 	bool request_cursor_sync = false;
 	bool request_selection_sync = false;
 	bool request_scroll = false;

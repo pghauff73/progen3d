@@ -230,6 +230,7 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/ProceduralGeometryEvidenceService.cpp \
 	$(SRC_DIR)/geometry/service/ProceduralMeshRepository.cpp \
 	$(SRC_DIR)/geometry/service/PrimitiveGeometryResolver.cpp \
+	$(SRC_DIR)/geometry/service/AffineCubeFaceQuery.cpp \
 	$(SRC_DIR)/vegetation/service/BranchGraphValidationService.cpp \
 	$(SRC_DIR)/vegetation/service/BranchRadiusConservationService.cpp \
 	$(SRC_DIR)/vegetation/service/OrganPlacementService.cpp \
@@ -547,4 +548,7 @@ clean:
 # Reuse the desktop runtime and its vertex templates for the form-study lessons.
 FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
 build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+build/engineering-selection-check: tests/engineering_selection_harness.cpp $(FORM_STUDY_OBJS)
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@

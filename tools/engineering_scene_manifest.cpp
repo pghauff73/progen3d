@@ -2,13 +2,13 @@
 #include "Context.h"
 #include "editor/service/GrammarCompilationService.h"
 #include "geometry/model/ResolvedPrimitiveGeometry.h"
+#include "geometry/service/AffineCubeFaceQuery.h"
 #include "spatial/model/SpatialBuildingModel.h"
 #include "spatial/model/SpatialBuildingObject.h"
 
 #include <jsoncpp/json/json.h>
 #include <openssl/sha.h>
 
-#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -30,21 +30,6 @@ Json::Value coordinates(const glm::vec3 &vector)
 		components.append(vector[axis]);
 	}
 	return components;
-}
-
-bool hasAffineCubeFaces(const PrimitiveInstance &primitive)
-{
-	if (primitive.type != "Cube" || !primitive.resolved_geometry ||
-	    !primitive.resolved_geometry->usesCubeVertexTemplate() ||
-	    primitive.primary_transform != primitive.secondary_transform) {
-		return false;
-	}
-	const float determinant = glm::determinant(glm::mat3(primitive.primary_transform));
-	return std::isfinite(determinant) && determinant != 0.0f &&
-	       std::all_of(primitive.dual_scales.begin(), primitive.dual_scales.end(),
-	                   [](const glm::vec3 &scale) { return scale == glm::vec3(1.0f); }) &&
-	       std::all_of(primitive.dual_translations.begin(), primitive.dual_translations.end(),
-	                   [](const glm::vec3 &offset) { return offset == glm::vec3(0.0f); });
 }
 
 std::string sceneRevision(const std::string &source, const Json::Value &objects)
@@ -173,8 +158,8 @@ int main(int argument_count, char **arguments)
 					// face identifiers with a stable geometric interpretation.
 					entry["faces"] = Json::Value(Json::arrayValue);
 					if (hasAffineCubeFaces(primitive)) {
-						for (const char *face : {"-X", "+X", "-Y", "+Y", "-Z", "+Z"}) {
-							entry["faces"].append(face);
+						for (const CubeFace face : cube_faces) {
+							entry["faces"].append(cubeFaceName(face));
 						}
 					}
 				}

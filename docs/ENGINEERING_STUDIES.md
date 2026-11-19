@@ -22,6 +22,10 @@ The manifest records the named part's primitive type, transform and source span 
 
 Author-defined IDs survive insertion or resequencing of other primitives. After a geometry edit, generate a fresh manifest and check the bound part and face before updating a pinned revision. `primitive:N` IDs and their `role:object-part:boundary` mesh groups remain valid within their exported revision. The optional `revision "…"` and `face "…"` selectors check the snapshot and requested surface. The sidecar fingerprints its source and manifest for result replay.
 
+In the desktop editor, open `bonded-coupon.p3d` and choose **Inspector**. Select `CouponLeft` in the **Object** list and **+X** in the **Face** list. You can also click a visible face in the preview. An exact edge click selects the part without choosing one of its adjoining faces. The Inspector shows `CouponLeft:+X`, and the preview outlines the selected face when visible. **Reveal source** opens the editor and selects the complete emitting `I(...)` instruction, including any continuation lines.
+
+Rebuilds and timeline samples look up named parts again by ID. An unrelated insertion can move a selected part to another primitive index while its named selection and face remain selected. A split part retains the spatial object selection and clears the face. A missing ID clears the selection. When the preview still shows a previous successful build, **Reveal source** becomes available again once the current text has built successfully.
+
 ## Author, observe and replay
 
 - Start with `coupon.p3physics`. Each declaration occupies a line. Units follow a number, such as `4 [W/K]`. Expressions support scalar literals, earlier parameters, states, derived quantities, arithmetic and the solver time `t`. Declare derived quantities in dependency order. The left side of each differential equation is `der(state)` or a constant parameter expression multiplied by that derivative. Each state needs one equation.

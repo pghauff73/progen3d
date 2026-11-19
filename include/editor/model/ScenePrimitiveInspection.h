@@ -1,10 +1,12 @@
 #pragma once
 
 #include "editor/relationship/SourceRange.h"
+#include "geometry/model/CubeFace.h"
 
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <optional>
 #include <string>
 
 class ScenePrimitiveInspection
@@ -13,6 +15,9 @@ public:
 	bool available = false;
 	int instance_index = -1;
 	std::string primitive_type;
+	std::string object_id;
+	bool named_cube_faces_available = false;
+	std::optional<CubeFace> selected_face;
 	std::string material_name;
 	std::array<float, 3> bounds_min{};
 	std::array<float, 3> bounds_max{};

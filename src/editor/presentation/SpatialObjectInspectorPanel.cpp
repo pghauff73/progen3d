@@ -51,28 +51,25 @@ void draw_text_records(
 void SpatialObjectInspectorPanel::draw(
 	const SpatialObjectInspection &inspection,
 	const std::vector<SpatialObjectSelectionEntry> &selection_entries,
-	std::string *selected_object_id,
-	int *selected_primitive_instance_index) const
+	const std::string &selected_object_id,
+	const std::function<void(const std::string &)> &select_object) const
 {
 	ImGui::Separator();
 	ImGui::TextUnformatted("Spatial Object Inspector");
-	if (selection_entries.empty() || selected_object_id == nullptr) {
-		ImGui::TextDisabled("The current scene has no SMB-OMv2 spatial model.");
+	if (selection_entries.empty()) {
+		ImGui::TextDisabled("The current scene has no spatial objects.");
 		return;
 	}
 
-	const char *preview = selected_object_id->empty()
+	const char *preview = selected_object_id.empty()
 		? "Select spatial object"
-		: selected_object_id->c_str();
+		: selected_object_id.c_str();
 	if (ImGui::BeginCombo("Object", preview)) {
 		for (const SpatialObjectSelectionEntry &entry : selection_entries) {
-			const bool selected = entry.object_id == *selected_object_id;
+			const bool selected = entry.object_id == selected_object_id;
 			const std::string label = hierarchy_label(entry);
 			if (ImGui::Selectable(label.c_str(), selected)) {
-				*selected_object_id = entry.object_id;
-				if (selected_primitive_instance_index != nullptr) {
-					*selected_primitive_instance_index = -1;
-				}
+				select_object(entry.object_id);
 			}
 			if (selected) ImGui::SetItemDefaultFocus();
 		}
