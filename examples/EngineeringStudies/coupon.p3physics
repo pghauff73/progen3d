@@ -1,0 +1,15 @@
+// Lumped heat-capacity benchmark bound to the coupon scene object.
+study CouponCooling version 1 {
+  geometry_length = 1 [mm]
+  bind substrate = object("primitive:0")
+  parameter C : HeatCapacity = 200 [J/K]
+  parameter H : ThermalConductance = 4 [W/K]
+  parameter ambient : ThermodynamicTemperature = 20 [degC]
+  state T : ThermodynamicTemperature at substrate = 60 [degC]
+  derived Qout : HeatFlowRate = H * (T - ambient)
+  equation energy_balance : C * der(T) = -Qout
+  observe T every 0.5 [s] display [degC]
+  event cool_enough when falling(T - 40 [degC]) { emit("threshold") }
+  integrate from 0 [s] to 100 [s] method BDF
+    rtol 1e-11 atol(T) 1e-10 [K]
+}

@@ -193,6 +193,7 @@ public:
 	                            const glm::vec3 &relative_velocity,
 	                            float impulse_magnitude);
 	void clearPendingPrimitiveState();
+	const std::vector<std::string> &executionErrors() const { return execution_errors_; }
 	void resetSimulation();
 	void stepSimulation(float delta_time);
 	float getTime() const;
@@ -213,6 +214,8 @@ public:
 	float time = 0.0f;
 
 private:
+	void recordExecutionError(std::string message);
+	std::vector<std::string> execution_errors_;
 	std::size_t resolveMaterialSlot(const std::string &material_name);
 	glm::vec3 pending_velocity_{0.0f};
 	glm::vec3 pending_rotational_velocity_{0.0f};

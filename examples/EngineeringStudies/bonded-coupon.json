@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "model": "bonded_coupon",
+  "area_m2": 0.0004,
+  "reference_K": 330,
+  "layers": [
+    {
+      "name": "left",
+      "length_m": 0.02,
+      "cells": 8,
+      "conductivity_W_m_K": 30,
+      "volumetric_capacity_J_m3_K": 2000000,
+      "young_modulus_Pa": 70000000000,
+      "alpha_per_K": 2.3e-05,
+      "parameter_source": "Synthetic reference layer A"
+    },
+    {
+      "name": "right",
+      "length_m": 0.02,
+      "cells": 8,
+      "conductivity_W_m_K": 12,
+      "volumetric_capacity_J_m3_K": 2800000,
+      "young_modulus_Pa": 100000000000,
+      "alpha_per_K": 1.1e-05,
+      "parameter_source": "Synthetic reference layer B"
+    }
+  ],
+  "bond": {
+    "stiffness_Pa_m": 60000000000,
+    "compression_stiffness_Pa_m": 120000000000,
+    "peak_traction_Pa": 2000000,
+    "fracture_energy_J_m2": 110,
+    "thermal_resistance_m2_K_W": 0.00025,
+    "parameter_source": "Synthetic bilinear reference, no measured adhesive"
+  },
+  "program": [
+    {
+      "time_s": 0,
+      "left_K": 330,
+      "right_K": 330,
+      "grip_extension_m": 0
+    },
+    {
+      "time_s": 40,
+      "left_K": 355,
+      "right_K": 352,
+      "grip_extension_m": 0
+    },
+    {
+      "time_s": 120,
+      "left_K": 265,
+      "right_K": 260,
+      "grip_extension_m": 0
+    },
+    {
+      "time_s": 190,
+      "left_K": 320,
+      "right_K": 315,
+      "grip_extension_m": 0
+    },
+    {
+      "time_s": 260,
+      "left_K": 220,
+      "right_K": 215,
+      "grip_extension_m": 4.5e-05
+    },
+    {
+      "time_s": 340,
+      "left_K": 335,
+      "right_K": 335,
+      "grip_extension_m": 0
+    }
+  ],
+  "observation_interval_s": 2,
+  "max_step_s": 2,
+  "geometry": {
+    "axis": "x",
+    "metres_per_scene_unit": 0.001,
+    "tolerance_m": 1e-08,
+    "layer_objects": [
+      "CouponLeft",
+      "CouponRight"
+    ],
+    "revision": "372b577d902571542534d2837ced400e4e2b98de2b6515192f326e096cf72dd1",
+    "layer_faces": [
+      "+X",
+      "-X"
+    ]
+  },
+  "convergence": {
+    "max_levels": 4,
+    "opening_tolerance_m": 5e-09,
+    "damage_tolerance": 2e-05,
+    "event_tolerance_s": 0.01
+  }
+}

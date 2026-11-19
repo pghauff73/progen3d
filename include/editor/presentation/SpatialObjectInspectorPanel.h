@@ -2,6 +2,7 @@
 
 #include "editor/model/SpatialObjectInspection.h"
 
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -10,6 +11,6 @@ class SpatialObjectInspectorPanel
 public:
 	void draw(const SpatialObjectInspection &inspection,
 	          const std::vector<SpatialObjectSelectionEntry> &selection_entries,
-	          std::string *selected_object_id,
-	          int *selected_primitive_instance_index) const;
+	          const std::string &selected_object_id,
+	          const std::function<void(const std::string &)> &select_object) const;
 };

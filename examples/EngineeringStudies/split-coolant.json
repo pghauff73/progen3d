@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "model": "split_wall_coolant",
+  "duration_s": 30,
+  "wall_K": 333.15,
+  "coolant_K": 298.15,
+  "inlet_K": 293.15,
+  "wall_capacity_J_K": 200,
+  "coolant_capacity_J_K": 80,
+  "conductance_W_K": 8,
+  "mass_flow_kg_s": 0.005,
+  "specific_heat_J_kg_K": 4180,
+  "exchange_step_s": 30,
+  "coolant_step_s": 0.1
+}

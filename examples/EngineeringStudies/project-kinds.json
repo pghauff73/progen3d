@@ -1,0 +1,8 @@
+[
+  {
+    "id": "project:CoatingThickness",
+    "label": "Measured coating thickness",
+    "dimensions": [0, 1, 0, 0, 0, 0, 0],
+    "source": "Project coating example, version 1"
+  }
+]

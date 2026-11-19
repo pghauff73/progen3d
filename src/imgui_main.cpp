@@ -58,6 +58,7 @@
 #include "editor/model/GrammarEditorInteractionState.h"
 #include "editor/model/PreviewTexturePresentation.h"
 #include "editor/model/ScenePrimitiveInspection.h"
+#include "geometry/service/AffineCubeFaceQuery.h"
 #include "editor/model/SpatialObjectInspection.h"
 #include "editor/model/GrammarSymbolIndex.h"
 #include "editor/model/ScenePreviewSession.h"
@@ -515,8 +516,9 @@ std::vector<ValidationRuleBlock> build_validation_rule_blocks(const std::vector<
 PreviewInteractionCameraState build_preview_camera_state(const ImVec2 &viewport_size);
 int pick_preview_instance_index(const PreviewInteractionCameraState &camera,
                                 const ImRect &viewport_rect,
-                                Context *context);
-void select_preview_instance_in_editor(EditorWorkspaceSession *app_state, Context *context, int instance_index);
+                                Context *context,
+                                std::optional<CubeFace> &face);
+void reveal_preview_selection(EditorWorkspaceSession *app_state, bool activate_editor_tab = false);
 void fit_preview_camera_to_scene(EditorWorkspaceSession *app_state, const ImVec2 &viewport_size);
 void sanitize_preview_selection(EditorWorkspaceSession *app_state);
 std::vector<PreviewOutlineBatch> build_preview_outline_batches(Context *context,
@@ -4323,8 +4325,10 @@ bool ray_intersects_triangle(const glm::vec3 &origin,
 bool ray_intersects_collision_geometry(const glm::vec3 &origin,
                                        const glm::vec3 &direction,
                                        const CollisionGeometry &geometry,
-                                       float *hit_distance)
+                                       float &hit_distance,
+                                       bool &hit_triangle)
 {
+	hit_triangle = false;
 	if (!geometry.valid) {
 		return false;
 	}
@@ -4340,7 +4344,6 @@ bool ray_intersects_collision_geometry(const glm::vec3 &origin,
 	}
 
 	float nearest_triangle_distance = std::numeric_limits<float>::max();
-	bool hit_triangle = false;
 	for (const CollisionTriangle &triangle : geometry.triangles) {
 		if (!triangle.valid) {
 			continue;
@@ -4353,9 +4356,7 @@ bool ray_intersects_collision_geometry(const glm::vec3 &origin,
 		hit_triangle = true;
 	}
 
-	if (hit_distance != nullptr) {
-		*hit_distance = hit_triangle ? nearest_triangle_distance : bounds_hit_distance;
-	}
+	hit_distance = hit_triangle ? nearest_triangle_distance : bounds_hit_distance;
 	return true;
 }
 
@@ -4369,8 +4370,10 @@ bool is_valid_preview_instance_index(Context *context, int index)
 
 int pick_preview_instance_index(const PreviewInteractionCameraState &camera,
                                 const ImRect &viewport_rect,
-                                Context *context)
+                                Context *context,
+                                std::optional<CubeFace> &face)
 {
+	face.reset();
 	if (context == nullptr || viewport_rect.GetWidth() <= 1.0f || viewport_rect.GetHeight() <= 1.0f) {
 		return -1;
 	}
@@ -4401,6 +4404,7 @@ int pick_preview_instance_index(const PreviewInteractionCameraState &camera,
 
 	int hovered_index = -1;
 	float nearest_distance = std::numeric_limits<float>::max();
+	bool nearest_hit_triangle = false;
 	for (std::size_t index = 0; index < context->primitive_instances.size(); ++index) {
 		const PrimitiveInstance &instance = context->primitive_instances[index];
 		if (instance.removed) {
@@ -4411,13 +4415,22 @@ int pick_preview_instance_index(const PreviewInteractionCameraState &camera,
 			continue;
 		}
 		float hit_distance = 0.0f;
-		if (!ray_intersects_collision_geometry(ray_origin, ray_direction, geometry, &hit_distance)) {
+		bool hit_triangle = false;
+		if (!ray_intersects_collision_geometry(ray_origin, ray_direction, geometry,
+		                                       hit_distance, hit_triangle)) {
 			continue;
 		}
 		if (hit_distance < nearest_distance) {
 			nearest_distance = hit_distance;
 			hovered_index = static_cast<int>(index);
+			nearest_hit_triangle = hit_triangle;
 		}
+	}
+	if (nearest_hit_triangle && preview_scale_factor() > 0.0f) {
+		const glm::vec3 world_point =
+			(ray_origin + ray_direction * nearest_distance) / preview_scale_factor();
+		face = cubeFaceAtWorldPoint(
+			context->primitive_instances[static_cast<std::size_t>(hovered_index)], world_point);
 	}
 	return hovered_index;
 }
@@ -4455,11 +4468,13 @@ void sanitize_preview_selection(EditorWorkspaceSession *app_state)
 		    context,
 		    current_preview_session().selection.selected_instance_index)) {
 		current_preview_session().selection.selected_instance_index = -1;
+		current_preview_session().selection.selected_face.reset();
 	}
 	if (!is_valid_preview_instance_index(
 		    context,
 		    current_preview_session().selection.hovered_instance_index)) {
 		current_preview_session().selection.hovered_instance_index = -1;
+		current_preview_session().selection.hovered_face.reset();
 	}
 }
 
@@ -5228,6 +5243,10 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 			current_preview_session().source_associations =
 				SceneSourceAssociationIndex::fromContext(
 					*current_scene_snapshot()->generationContext());
+			scene_selection_controller.rebindToScene(
+				current_preview_session().selection,
+				current_scene_snapshot()->generationContext(),
+				result->time_sample);
 			const LightingSceneDefinition &lighting_definition =
 				current_scene_snapshot()->generationContext()->lightingSceneDefinition();
 			current_preview_session().lighting.lights.replaceGrammarLights(
@@ -5260,7 +5279,6 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 				debugout("Regenerated scene");
 			}
 			if (app_state != nullptr && !result->time_sample) {
-				scene_selection_controller.clear(current_preview_session().selection);
 				app_state->document_diagnostics.clear();
 			}
 		}
@@ -5285,6 +5303,7 @@ void set_editor_document_internal(EditorWorkspaceSession *app_state,
 	}
 
 	app_state->document.replaceSourceText(text, dirty);
+	scene_selection_controller.clear(current_preview_session().selection);
 	if (scene_regeneration_coordinator != nullptr) {
 		scene_regeneration_coordinator->cancelScheduledRequest();
 	}
@@ -8345,10 +8364,8 @@ void jump_to_editor_location(const std::vector<std::string> &lines, int line_ind
 	smart_editor_state.scroll_target_line = line_index;
 }
 
-void select_editor_range(const std::vector<std::string> &lines, int line_index, int start_column, int end_column)
+void select_editor_offsets(int start_offset, int end_offset, int line_index)
 {
-	const int start_offset = document_offset_for_position(lines, line_index, start_column);
-	const int end_offset = document_offset_for_position(lines, line_index, end_column);
 	smart_editor_state.cursor_column = end_offset;
 	smart_editor_state.selection_start = start_offset;
 	smart_editor_state.selection_end = end_offset;
@@ -8362,39 +8379,30 @@ void select_editor_range(const std::vector<std::string> &lines, int line_index, 
 	smart_editor_state.scroll_target_line = line_index;
 }
 
-void select_preview_instance_in_editor(EditorWorkspaceSession *app_state, Context *context, int instance_index)
+void select_editor_range(const std::vector<std::string> &lines, int line_index, int start_column, int end_column)
 {
-	if (app_state == nullptr || context == nullptr ||
-	    !is_valid_preview_instance_index(context, instance_index)) {
-		return;
-	}
+	select_editor_offsets(document_offset_for_position(lines, line_index, start_column),
+	                      document_offset_for_position(lines, line_index, end_column),
+	                      line_index);
+}
 
+void reveal_preview_selection(EditorWorkspaceSession *app_state, bool activate_editor_tab)
+{
+	if (app_state == nullptr) return;
 	const std::optional<SourceRange> source_range =
-		current_preview_session().source_associations.sourceRangeForInstance(instance_index);
-	if (!source_range.has_value()) {
-		return;
-	}
+		scene_selection_controller.selectedSourceRange(
+			current_preview_session().selection, current_preview_session().source_associations,
+			current_scene_snapshot().get(), app_state->document.source_text);
+	if (!source_range.has_value()) return;
 
 	const std::vector<std::string> lines = current_editor_lines(app_state->document.source_text);
-	if (source_range->start_line >= static_cast<int>(lines.size())) {
-		return;
-	}
-
-	const int line_length =
-		static_cast<int>(lines[static_cast<std::size_t>(source_range->start_line)].size());
-	const int start_column = std::clamp(source_range->start_column, 0, line_length);
-	if (source_range->end_line == source_range->start_line &&
-	    source_range->end_column > source_range->start_column) {
-		select_editor_range(lines,
-		                    source_range->start_line,
-		                    start_column,
-		                    std::clamp(source_range->end_column,
-		                               start_column + 1,
-		                               line_length + 1));
-		return;
-	}
-
-	jump_to_editor_location(lines, source_range->start_line, start_column);
+	if (source_range->end_line >= static_cast<int>(lines.size())) return;
+	const int start_offset = document_offset_for_position(
+		lines, source_range->start_line, source_range->start_column);
+	const int end_offset = document_offset_for_position(
+		lines, source_range->end_line, source_range->end_column);
+	select_editor_offsets(start_offset, std::max(start_offset, end_offset), source_range->start_line);
+	if (activate_editor_tab) smart_editor_state.request_editor_tab = true;
 }
 
 EditorTokenMatch find_next_token_match(const std::vector<std::string> &lines,
@@ -10320,6 +10328,21 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 		if (connection_overlay_visible()) {
 			overlay_vertices = build_connection_overlay_vertices(context);
 		}
+		const EditorSelection &selection = current_preview_session().selection;
+		if (app_state->preview.interaction_settings.picking_and_highlighting_enabled &&
+		    selection.selected_face.has_value() &&
+		    scene_selection_controller.hasNamedCubeFaces(selection, context)) {
+			const auto &primitive =
+				context->primitive_instances[static_cast<std::size_t>(selection.selected_instance_index)];
+			const auto corners = cubeFaceWorldCorners(primitive, *selection.selected_face);
+			const glm::vec3 center = (corners[0] + corners[2]) * 0.5f;
+			for (std::size_t corner = 0; corner < corners.size(); ++corner) {
+				append_overlay_segment(&overlay_vertices,
+				                       glm::mix(center, corners[corner], 0.84f),
+				                       glm::mix(center, corners[(corner + 1) % corners.size()], 0.84f),
+				                       ImVec4(0.30f, 0.94f, 0.90f, 1.0f));
+			}
+		}
 		append_axial_profile_overlay_vertices(&overlay_vertices, context);
 		append_spatial_overlay_vertices(&overlay_vertices, context);
 		append_collision_particle_overlay_vertices(&overlay_vertices, context);
@@ -10421,13 +10444,16 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 			current_preview_session().lighting.selected_light_id =
 				current_preview_session().lighting.hovered_light_id;
 			current_preview_session().selection.hovered_instance_index = -1;
+			current_preview_session().selection.hovered_face.reset();
 			current_preview_session().selection.pointer_selection_armed = false;
 		}
 		if (interaction_settings.picking_and_highlighting_enabled && !light_gizmo_hovered) {
 			current_preview_session().selection.hovered_instance_index =
-				pick_preview_instance_index(camera, preview_rect, context);
+				pick_preview_instance_index(camera, preview_rect, context,
+				                            current_preview_session().selection.hovered_face);
 		} else {
 			current_preview_session().selection.hovered_instance_index = -1;
+			current_preview_session().selection.hovered_face.reset();
 			if (!interaction_settings.picking_and_highlighting_enabled || light_gizmo_hovered) {
 				current_preview_session().selection.pointer_selection_armed = false;
 			}
@@ -10464,14 +10490,16 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 				    io.MousePos.x,
 				    io.MousePos.y,
 				    5.0f)) {
-				select_preview_instance_in_editor(app_state,
-				                                 context,
-				                                 current_preview_session().selection.selected_instance_index);
+				EditorSelection &selection = current_preview_session().selection;
+				scene_selection_controller.selectPrimitive(
+					selection, context, selection.selected_instance_index, selection.hovered_face);
+				reveal_preview_selection(app_state);
 			}
 		}
 	} else {
 		if (!preview_hovered) {
 			current_preview_session().selection.hovered_instance_index = -1;
+			current_preview_session().selection.hovered_face.reset();
 			current_preview_session().lighting.hovered_light_id = LightId();
 		}
 		if (current_preview_session().selection.pointer_selection_armed &&
@@ -10520,8 +10548,13 @@ void draw_smart_editor(EditorWorkspaceSession *app_state)
 	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 4.0f));
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.0f);
 
+	constexpr const char *editor_label = "##smart_editor_document";
 	if (smart_editor_state.request_focus) {
-		ImGui::SetKeyboardFocusHere();
+		// Tab-input fields ignore tab-navigation activation. Queue a direct
+		// input activation so the next frame can apply the requested range.
+		ImGui::ActivateItemByID(ImGui::GetID(editor_label));
+		ImGui::GetCurrentContext()->NavNextActivateFlags =
+			ImGuiActivateFlags_PreferInput | ImGuiActivateFlags_TryToPreserveState;
 		smart_editor_state.request_focus = false;
 	}
 
@@ -10533,7 +10566,7 @@ void draw_smart_editor(EditorWorkspaceSession *app_state)
 	const ImGuiInputTextFlags input_flags = ImGuiInputTextFlags_CallbackResize |
 	                                        ImGuiInputTextFlags_CallbackAlways |
 	                                        ImGuiInputTextFlags_AllowTabInput;
-	const bool text_changed = ImGui::InputTextMultiline("##smart_editor_document",
+	const bool text_changed = ImGui::InputTextMultiline(editor_label,
 	                                                    app_state->document.source_text.data(),
 	                                                    app_state->document.source_text.capacity() + 1,
 	                                                    editor_size,
@@ -10705,6 +10738,10 @@ ScenePrimitiveInspection build_scene_primitive_inspection()
 	inspection.available = true;
 	inspection.instance_index = instance_index;
 	inspection.primitive_type = instance.type;
+	const EditorSelection &selection = current_preview_session().selection;
+	inspection.object_id = selection.selected_spatial_object_id;
+	inspection.named_cube_faces_available = scene_selection_controller.hasNamedCubeFaces(selection, context);
+	if (inspection.named_cube_faces_available) inspection.selected_face = selection.selected_face;
 	inspection.material_name = instance.material_name;
 	inspection.bounds_min = {bounds.min.x, bounds.min.y, bounds.min.z};
 	inspection.bounds_max = {bounds.max.x, bounds.max.y, bounds.max.z};
@@ -10936,7 +10973,7 @@ SpatialObjectInspection build_spatial_object_inspection()
 		snapshot != nullptr ? snapshot->smallModernBuildingModel() : nullptr;
 	if (model == nullptr) return {};
 
-	EditorSelection &selection = current_preview_session().selection;
+	const EditorSelection &selection = current_preview_session().selection;
 	if (selection.selected_instance_index >= 0) {
 		const SpatialObjectInspection primitive_object =
 			spatial_object_inspection_service.inspectPrimitive(
@@ -10944,19 +10981,16 @@ SpatialObjectInspection build_spatial_object_inspection()
 				building_model,
 				static_cast<std::size_t>(selection.selected_instance_index));
 		if (primitive_object.available) {
-			selection.selected_spatial_object_id = primitive_object.object_id;
 			return primitive_object;
 		}
 	}
 
-	if (selection.selected_spatial_object_id.empty()) {
-		selection.selected_spatial_object_id =
-			model->containmentTree().rootObjectId().value();
-	}
 	return spatial_object_inspection_service.inspectObject(
 		*model,
 		building_model,
-		SpatialObjectId(selection.selected_spatial_object_id));
+		selection.selected_spatial_object_id.empty()
+			? model->containmentTree().rootObjectId()
+			: SpatialObjectId(selection.selected_spatial_object_id));
 }
 
 void draw_editor(EditorWorkspaceSession *app_state)
@@ -11091,7 +11125,10 @@ void draw_editor(EditorWorkspaceSession *app_state)
 	}
 
 	if (ImGui::BeginTabBar("WorkspaceTabs", ImGuiTabBarFlags_FittingPolicyResizeDown)) {
-		if (ImGui::BeginTabItem("Editor")) {
+		const ImGuiTabItemFlags editor_tab_flags =
+			smart_editor_state.request_editor_tab ? ImGuiTabItemFlags_SetSelected : ImGuiTabItemFlags_None;
+		smart_editor_state.request_editor_tab = false;
+		if (ImGui::BeginTabItem("Editor", nullptr, editor_tab_flags)) {
 			draw_smart_editor(app_state);
 			ImGui::EndTabItem();
 		}
@@ -11115,14 +11152,25 @@ void draw_editor(EditorWorkspaceSession *app_state)
 		}
 
 		if (ImGui::BeginTabItem("Inspector")) {
+			const auto *snapshot = current_scene_snapshot().get();
+			const auto *context = snapshot != nullptr ? snapshot->generationContext() : nullptr;
 			scene_inspector_panel.draw(
 				build_scene_primitive_inspection(),
-				current_preview_session().statistics);
+				current_preview_session().statistics,
+				[](std::optional<CubeFace> face) {
+					current_preview_session().selection.selected_face = face;
+				},
+				[app_state]() { reveal_preview_selection(app_state, true); },
+				snapshot != nullptr && snapshot->sourceText() == app_state->document.source_text);
+			const auto spatial_inspection = build_spatial_object_inspection();
 			spatial_object_inspector_panel.draw(
-				build_spatial_object_inspection(),
+				spatial_inspection,
 				build_spatial_object_selection_entries(),
-				&current_preview_session().selection.selected_spatial_object_id,
-				&current_preview_session().selection.selected_instance_index);
+				spatial_inspection.object_id,
+				[context](const std::string &object_id) {
+					scene_selection_controller.selectSpatialObject(
+						current_preview_session().selection, context, object_id);
+				});
 			ImGui::EndTabItem();
 		}
 
@@ -11622,6 +11670,7 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 			"Picking",
 			&workspace_session.preview.interaction_settings.picking_and_highlighting_enabled)) {
 		workspace_session.preview.selection.hovered_instance_index = -1;
+		workspace_session.preview.selection.hovered_face.reset();
 		workspace_session.preview.selection.pointer_selection_armed = false;
 	}
 	if (ImGui::IsItemHovered()) {
@@ -12152,6 +12201,113 @@ Progen3dEditorApplication::Progen3dEditorApplication(ApplicationLaunchOptions la
 {
 }
 
+namespace {
+
+const char *check_engineering_selection_edit(
+	EditorWorkspaceSession &app_state, const std::function<void(float)> &render_editor_frame)
+{
+	const auto &preview = current_preview_session();
+	const std::string original_source = app_state.document.source_text;
+	const std::uint64_t original_generation =
+		app_state.document.last_successful_generation_request_id;
+	const auto *context = current_scene_snapshot()->generationContext();
+	EditorSelection &selection = current_preview_session().selection;
+	scene_selection_controller.selectSpatialObject(selection, context, "CouponLeft");
+	if (!scene_selection_controller.hasNamedCubeFaces(selection, context)) {
+		return "the startup grammar must contain the named CouponLeft cube";
+	}
+	selection.selected_face = CubeFace::PositiveX;
+	const auto source_range = preview.source_associations.sourceRangeForInstance(
+		selection.selected_instance_index);
+	if (!source_range.has_value()) return "the starting cube has no source association";
+	const auto lines = current_editor_lines(original_source);
+	const int source_line = source_range->start_line;
+	const auto scale_column = lines.at(static_cast<std::size_t>(source_line)).find("S(20 20 20)");
+	if (scale_column == std::string::npos) return "the starting coupon has no 20 mm scale instruction";
+	const int dimension_offset = document_offset_for_position(
+		lines, source_line, static_cast<int>(scale_column) + 5);
+
+	const auto editor_contains_selection = [&](std::string_view expected) {
+		const ImGuiInputTextState *input = ImGui::GetInputTextState(ImGui::GetActiveID());
+		const int start = smart_editor_state.selection_start;
+		const int end = smart_editor_state.selection_end;
+		const auto text = std::string_view(app_state.document.source_text);
+		const auto selected = start >= 0 && end >= start && static_cast<std::size_t>(end) <= text.size()
+			? text.substr(static_cast<std::size_t>(start), static_cast<std::size_t>(end - start))
+			: std::string_view();
+		if (input != nullptr && !smart_editor_state.request_selection_sync && selected == expected) {
+			return true;
+		}
+		std::cerr << "Engineering smoke editor selection: active=" << (input != nullptr)
+		          << " pending_sync=" << smart_editor_state.request_selection_sync
+		          << " offsets=" << start << ',' << end << " text=" << selected << '\n';
+		return false;
+	};
+	const auto focus_selection = [&]() {
+		render_editor_frame(1.0f / 60.0f);
+		render_editor_frame(1.0f / 60.0f);
+	};
+	const auto rebuild = [&]() {
+		clear_auto_run_timer(&app_state);
+		regenerate_scene(app_state.document.source_text);
+		const double deadline = glfwGetTime() + 20.0;
+		do {
+			render_editor_frame(1.0f / 60.0f);
+		} while ((scene_generation_in_progress() || scene_generation_queued()) &&
+		         glfwGetTime() < deadline);
+		render_editor_frame(1.0f / 60.0f);
+		return !scene_generation_in_progress() && !scene_generation_queued();
+	};
+	const auto edit_dimension = [&](int old_length, const char *replacement) {
+		select_editor_offsets(dimension_offset, dimension_offset + old_length, source_line);
+		focus_selection();
+		ImGui::GetIO().AddInputCharactersUTF8(replacement);
+		render_editor_frame(1.0f / 60.0f);
+	};
+	constexpr std::string_view instruction = "I(Cube material(plaster))";
+	focus_selection();
+	reveal_preview_selection(&app_state, true);
+	focus_selection();
+	if (!editor_contains_selection(instruction)) return "Reveal source did not select the full initial instruction";
+
+	edit_dimension(2, ")");
+	std::string invalid_source = original_source;
+	invalid_source.replace(static_cast<std::size_t>(dimension_offset), 2, ")");
+	if (app_state.document.source_text != invalid_source) return "the editor did not receive the invalid edit";
+	reveal_preview_selection(&app_state, true);
+	if (smart_editor_state.request_editor_tab) return "the edited draft could still reveal stale source";
+	if (!rebuild() || app_state.document.last_successful_generation_request_id != original_generation ||
+	    current_scene_snapshot()->sourceText() != original_source ||
+	    app_state.document_diagnostics.empty() ||
+	    selection.selected_spatial_object_id != "CouponLeft" ||
+	    selection.selected_face != CubeFace::PositiveX) {
+		return "the failed build did not retain the named selection and last valid scene";
+	}
+
+	edit_dimension(1, "24.0");
+	std::string edited_source = original_source;
+	edited_source.replace(static_cast<std::size_t>(dimension_offset), 2, "24.0");
+	if (app_state.document.source_text != edited_source || !rebuild() ||
+	    current_scene_snapshot()->sourceText() != edited_source ||
+	    app_state.document.last_successful_generation_request_id == original_generation) {
+		return "the corrected 24 mm dimension did not produce an accepted scene";
+	}
+	context = current_scene_snapshot()->generationContext();
+	if (selection.selected_spatial_object_id != "CouponLeft" ||
+	    selection.selected_face != CubeFace::PositiveX ||
+	    !scene_selection_controller.hasNamedCubeFaces(selection, context) ||
+	    std::fabs(context->primitive_instances.at(
+	                  static_cast<std::size_t>(selection.selected_instance_index)).size.y - 24.0f) > 0.0001f) {
+		return "the new geometry did not preserve the face anchor and update the dimension";
+	}
+	reveal_preview_selection(&app_state, true);
+	focus_selection();
+	if (!editor_contains_selection(instruction)) return "the rebuilt face did not reveal the instruction at its new position";
+	return nullptr;
+}
+
+} // namespace
+
 int Progen3dEditorApplication::run()
 {
 	EditorRuntimeEnvironment runtime_environment;
@@ -12209,8 +12365,6 @@ int Progen3dEditorApplication::run()
 		app_state.preview.overlays.building_requirement_status_visible = true;
 		app_state.preview.overlays.building_pending_evidence_visible = true;
 	}
-	app_state.preview.selection.selected_spatial_object_id =
-		launch_options_.selectedSpatialObjectId();
 	bool startup_document_load_failed = false;
 	std::string firebase_init_error;
 	if (!initialize_firebase_auth_support(&firebase_init_error) && !firebase_init_error.empty()) {
@@ -12315,6 +12469,8 @@ int Progen3dEditorApplication::run()
 	if (!glfwWindowShouldClose(window)) {
 		startup_progress.beginStage(ApplicationStartupStage::GenerateInitialScene);
 		show_startup_loader("Generating the initial scene preview.");
+		app_state.preview.selection.selected_spatial_object_id =
+			launch_options_.selectedSpatialObjectId();
 		regenerate_scene(app_state.document.source_text);
 		while (!glfwWindowShouldClose(window)) {
 			process_completed_regeneration(&app_state);
@@ -12377,6 +12533,16 @@ int Progen3dEditorApplication::run()
 		           !grammar->error_details.empty()) {
 			errorout("PROGEN3D_GUI_SMOKE_TEST_FAILED: initial scene generation did not produce a valid context");
 			application_exit_code = 2;
+		}
+
+		if (application_exit_code == 0 && launch_options_.engineeringSelectionSmokeTestRequested()) {
+			const char *failure = check_engineering_selection_edit(app_state, render_editor_frame);
+			if (failure != nullptr) {
+				errorout(std::string("PROGEN3D_GUI_ENGINEERING_SELECTION_FAILED: ") + failure);
+				application_exit_code = 4;
+			} else {
+				debugout("PROGEN3D_GUI_ENGINEERING_SELECTION_PASSED face=CouponLeft:+X dimension_y_mm=24");
+			}
 		}
 
 		if (application_exit_code == 0 && launch_options_.temporalSmokeTestRequested()) {

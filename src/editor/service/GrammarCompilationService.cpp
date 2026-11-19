@@ -55,7 +55,8 @@ std::unique_ptr<SceneGenerationResult> GrammarCompilationService::compile(
 		if (structure_succeeded && result->diagnostics.empty() &&
 		    grammar_document->context != nullptr) {
 			result->scene_snapshot = std::make_unique<GeneratedSceneSnapshot>(
-				std::move(grammar_document), request.design_nonce, request.evaluation_time);
+				std::move(grammar_document), request.design_nonce, request.evaluation_time,
+				request.source_text);
 		} else if (result->diagnostics.empty()) {
 			result->error = "Scene generation did not produce a complete scene context.";
 		}

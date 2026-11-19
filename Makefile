@@ -32,6 +32,7 @@ endif
 GLFW_PLATFORM_LIBS ?= $(shell pkg-config --static --libs x11 xrandr xi xinerama xcursor 2>/dev/null)
 DBUS_CFLAGS ?= $(shell pkg-config --cflags dbus-1 2>/dev/null)
 DBUS_LIBS ?= $(shell pkg-config --libs dbus-1 2>/dev/null)
+JSONCPP_CFLAGS ?= $(shell pkg-config --cflags jsoncpp 2>/dev/null)
 JSONCPP_LIBS ?= $(shell pkg-config --libs jsoncpp 2>/dev/null)
 LIBXML2_CFLAGS ?= $(shell pkg-config --cflags libxml-2.0 2>/dev/null)
 LIBXML2_LIBS ?= $(shell pkg-config --libs libxml-2.0 2>/dev/null)
@@ -62,6 +63,7 @@ COMMON_INCLUDE_FLAGS = \
 	-I$(GLAD_INCLUDE_DIR) \
 	-I$(NFD_DIR)/include \
 	$(DBUS_CFLAGS) \
+	$(JSONCPP_CFLAGS) \
 	$(LIBXML2_CFLAGS) \
 	$(EIGEN3_CFLAGS)
 
@@ -228,6 +230,7 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/ProceduralGeometryEvidenceService.cpp \
 	$(SRC_DIR)/geometry/service/ProceduralMeshRepository.cpp \
 	$(SRC_DIR)/geometry/service/PrimitiveGeometryResolver.cpp \
+	$(SRC_DIR)/geometry/service/AffineCubeFaceQuery.cpp \
 	$(SRC_DIR)/vegetation/service/BranchGraphValidationService.cpp \
 	$(SRC_DIR)/vegetation/service/BranchRadiusConservationService.cpp \
 	$(SRC_DIR)/vegetation/service/OrganPlacementService.cpp \
@@ -522,6 +525,9 @@ docs-check:
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
 
+progen3d-scene-manifest: $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS)) $(BUILD_DIR)/tools/engineering_scene_manifest.o
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+
 $(LEGACY_TARGET): $(TARGET)
 	ln -sfn $(TARGET) $(LEGACY_TARGET)
 
@@ -534,11 +540,15 @@ $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf $(BUILD_DIR) $(TARGET) $(LEGACY_TARGET)
+	rm -rf $(BUILD_DIR) $(TARGET) $(LEGACY_TARGET) progen3d-scene-manifest
 
 -include $(OBJS:.o=.d)
+-include $(BUILD_DIR)/tools/engineering_scene_manifest.d
 
 # Reuse the desktop runtime and its vertex templates for the form-study lessons.
 FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
 build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+build/engineering-selection-check: tests/engineering_selection_harness.cpp $(FORM_STUDY_OBJS)
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@

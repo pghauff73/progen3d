@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "model": "cohesive_opening",
+  "parameter_source": "Synthetic verification fixture, no measured material",
+  "stiffness_Pa_m": 10000000000,
+  "peak_traction_Pa": 1000000,
+  "fracture_energy_J_m2": 100,
+  "history": [
+    {"time_s": 0, "opening_m": 0},
+    {"time_s": 1, "opening_m": 0.0001},
+    {"time_s": 2, "opening_m": 0.00015},
+    {"time_s": 3, "opening_m": 0.00005},
+    {"time_s": 4, "opening_m": 0.00021},
+    {"time_s": 5, "opening_m": 0.00005}
+  ]
+}

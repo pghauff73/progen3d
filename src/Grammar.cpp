@@ -36,6 +36,7 @@
 #include "grammar/service/SpatialInterfaceDeclarationParser.h"
 #include "grammar/service/SpatialObjectSpecificationParser.h"
 #include "grammar/service/VehicleJointDeclarationParser.h"
+#include "spatial/model/SpatialInterfaceTypeNames.h"
 #include "spatial/model/CollisionPositionConstraint.h"
 #include "spatial/model/CollisionParticipationPolicy.h"
 #include "spatial/model/ConstraintDegreeOfFreedomState.h"
@@ -2934,28 +2935,13 @@ static bool parse_interface_type_name(const std::string &name,
 	                                  SpatialInterfaceType *type)
 {
 	if (type == nullptr) return false;
-	if (name == "Support") *type = SpatialInterfaceType::Support;
-	else if (name == "Bearing") *type = SpatialInterfaceType::Bearing;
-	else if (name == "Mate") *type = SpatialInterfaceType::Mate;
-	else if (name == "Seat") *type = SpatialInterfaceType::Seat;
-	else if (name == "Insert") *type = SpatialInterfaceType::Insert;
-	else if (name == "Socket") *type = SpatialInterfaceType::Socket;
-	else if (name == "Shaft") *type = SpatialInterfaceType::Shaft;
-	else if (name == "Seal") *type = SpatialInterfaceType::Seal;
-	else if (name == "Fastener") *type = SpatialInterfaceType::Fastener;
-	else if (name == "Anchor") *type = SpatialInterfaceType::Anchor;
-	else if (name == "Hinge") *type = SpatialInterfaceType::Hinge;
-	else if (name == "Slide") *type = SpatialInterfaceType::Slide;
-	else if (name == "PipePort") *type = SpatialInterfaceType::PipePort;
-	else if (name == "DuctPort") *type = SpatialInterfaceType::DuctPort;
-	else if (name == "ElectricalPort") *type = SpatialInterfaceType::ElectricalPort;
-	else if (name == "DataPort") *type = SpatialInterfaceType::DataPort;
-	else if (name == "ControlPort") *type = SpatialInterfaceType::ControlPort;
-	else if (name == "DrainPort") *type = SpatialInterfaceType::DrainPort;
-	else if (name == "ThermalInterface") *type = SpatialInterfaceType::ThermalInterface;
-	else if (name == "InspectionInterface") *type = SpatialInterfaceType::InspectionInterface;
-	else return false;
-	return true;
+	for (const auto &entry : spatialInterfaceTypeNames) {
+		if (entry.name == name) {
+			*type = entry.type;
+			return true;
+		}
+	}
+	return false;
 }
 
 static bool parse_connection_type_name(const std::string &name,

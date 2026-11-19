@@ -9,3 +9,5 @@ firebase_auth_session.json
 *.log
 __pycache__/
 *.pyc
+
+/progen3d-scene-manifest

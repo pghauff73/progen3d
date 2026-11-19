@@ -19,6 +19,10 @@ ApplicationLaunchOptions ApplicationLaunchOptions::parse(int argument_count, cha
 			options.smoke_test_requested_ = true;
 			options.temporal_smoke_test_requested_ = true;
 		} else if (std::string_view(argument_values[argument_index]) ==
+		           "--engineering-selection-smoke-test") {
+			options.smoke_test_requested_ = true;
+			options.engineering_selection_smoke_test_requested_ = true;
+		} else if (std::string_view(argument_values[argument_index]) ==
 		           "--visual-test") {
 			options.smoke_test_requested_ = true;
 			options.visual_test_requested_ = true;
@@ -90,6 +94,11 @@ bool ApplicationLaunchOptions::smokeTestRequested() const
 bool ApplicationLaunchOptions::temporalSmokeTestRequested() const
 {
 	return temporal_smoke_test_requested_;
+}
+
+bool ApplicationLaunchOptions::engineeringSelectionSmokeTestRequested() const
+{
+	return engineering_selection_smoke_test_requested_;
 }
 
 bool ApplicationLaunchOptions::visualTestRequested() const

@@ -12,7 +12,10 @@ void draw_vector3(const char *label, const std::array<float, 3> &value)
 }
 
 void SceneInspectorPanel::draw(const ScenePrimitiveInspection &inspection,
-	                           const PreviewStatistics &statistics) const
+	                           const PreviewStatistics &statistics,
+	                           const std::function<void(std::optional<CubeFace>)> &select_face,
+	                           const std::function<void()> &reveal_source,
+	                           bool source_is_current) const
 {
 	ImGui::TextUnformatted("Scene Inspector");
 	ImGui::Separator();
@@ -32,6 +35,34 @@ void SceneInspectorPanel::draw(const ScenePrimitiveInspection &inspection,
 		return;
 	}
 	ImGui::Text("Primitive #%d: %s", inspection.instance_index, inspection.primitive_type.c_str());
+	if (!inspection.object_id.empty()) {
+		const std::string reference = inspection.selected_face.has_value()
+			? inspection.object_id + ":" + cubeFaceName(*inspection.selected_face)
+			: inspection.object_id;
+		ImGui::TextUnformatted(reference.c_str());
+	}
+	if (inspection.named_cube_faces_available &&
+	    ImGui::BeginCombo("Face", inspection.selected_face.has_value()
+	                                   ? cubeFaceName(*inspection.selected_face) : "Whole part")) {
+		if (ImGui::Selectable("Whole part", !inspection.selected_face.has_value())) {
+			select_face(std::nullopt);
+		}
+		for (const CubeFace face : cube_faces) {
+			const bool selected = inspection.selected_face == face;
+			if (ImGui::Selectable(cubeFaceName(face), selected)) select_face(face);
+			if (selected) ImGui::SetItemDefaultFocus();
+		}
+		ImGui::EndCombo();
+	}
+	if (inspection.source_range.isValid()) {
+		ImGui::BeginDisabled(!source_is_current);
+		if (ImGui::Button("Reveal source")) reveal_source();
+		ImGui::EndDisabled();
+		if (!source_is_current) {
+			ImGui::SameLine();
+			ImGui::TextDisabled("Rebuild to update source locations.");
+		}
+	}
 	ImGui::Text("Material: %s",
 	            inspection.material_name.empty() ? "<none>" : inspection.material_name.c_str());
 	ImGui::Text("Mass: %.3f", inspection.mass);

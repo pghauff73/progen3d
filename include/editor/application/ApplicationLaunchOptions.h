@@ -21,6 +21,7 @@ public:
 
 	bool smokeTestRequested() const;
 	bool temporalSmokeTestRequested() const;
+	bool engineeringSelectionSmokeTestRequested() const;
 	bool visualTestRequested() const;
 	bool spatialOverlaysRequested() const;
 	bool buildingKnowledgeOverlaysRequested() const;
@@ -36,6 +37,7 @@ public:
 private:
 	bool smoke_test_requested_ = false;
 	bool temporal_smoke_test_requested_ = false;
+	bool engineering_selection_smoke_test_requested_ = false;
 	bool visual_test_requested_ = false;
 	bool spatial_overlays_requested_ = false;
 	bool building_knowledge_overlays_requested_ = false;

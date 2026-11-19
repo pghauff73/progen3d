@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProGen3D study traces</title>
+<style>
+body{margin:auto;max-width:65rem;padding:1.5rem;background:#faf9f3;color:#172d38;font:1rem system-ui}
+h1{font:2.3rem Georgia,serif} label{display:inline-grid;gap:.25rem;margin:.25rem 1rem .75rem 0}
+select,button{font:inherit;padding:.4rem;color:inherit;background:#fff;border:1px solid #566f77;border-radius:4px}
+canvas{width:100%;height:310px;background:#fff;border:1px solid #8fa0a1}
+input[type=range]{display:block;width:100%;margin-bottom:1rem}output{font-variant-numeric:tabular-nums}
+li{margin:.35rem 0}
+</style>
+</head>
+<body>
+<h1>ProGen3D study traces</h1>
+<label>Quantity and unit<select id="series"></select></label>
+<label>Compare run<select id="compare"></select></label>
+<canvas id="plot" width="900" height="310" aria-label="Observation plot"></canvas>
+<label for="instant">Observation sample</label><input id="instant" type="range" min="0" value="0" max="0">
+<output id="readout" for="instant"></output>
+<h2>Events</h2><ul id="events"></ul>
+<script type="application/json" id="studies">__RESULTS__</script>
+<script>
+const items = JSON.parse(document.getElementById('studies').textContent);
+const series = document.getElementById('series'), compare = document.getElementById('compare');
+const instant = document.getElementById('instant'), readout = document.getElementById('readout');
+const canvas = document.getElementById('plot'), context = canvas.getContext('2d');
+function option(select, label, value) {
+    const opt = document.createElement('option');
+    opt.textContent = label; opt.value = value; select.append(opt);
+}
+const observations = items.flatMap((item, run) =>
+    Object.entries(item.observations).map(([name, trace]) => ({run, name, trace})));
+observations.forEach(({run, name, trace}, i) =>
+    option(series, (run + 1) + '. ' + name + ' [' + trace.unit + ']', i));
+function reset() {
+    const selected = observations[Number(series.value)];
+    instant.value = 0;
+    instant.max = Math.max(0, (selected?.trace.samples.length || 1) - 1);
+    compare.replaceChildren();
+    option(compare, 'Single run', '');
+    if (selected) observations.forEach(({run, name, trace}, i) => {
+        if (run !== selected.run && name === selected.name && trace.unit === selected.trace.unit) {
+            option(compare, (run + 1) + '. ' + items[run].study, i);
+        }
+    });
+    draw();
+}
+function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    const selected = observations[Number(series.value)];
+    const events = document.getElementById('events');
+    events.replaceChildren();
+    if (!selected || selected.trace.samples.length === 0) {
+        readout.textContent = 'No sampled observations.';
+        return;
+    }
+    const lines = [selected.trace.samples];
+    if (compare.value !== '') lines.push(observations[Number(compare.value)].trace.samples);
+    let t0 = Infinity, t1 = -Infinity, v0 = Infinity, v1 = -Infinity;
+    for (const points of lines) for (const [time, value] of points) {
+        t0 = Math.min(t0,time); t1 = Math.max(t1,time);
+        v0 = Math.min(v0,value); v1 = Math.max(v1,value);
+    }
+    const x = t => 55 + (t-t0) * 817 / (t1-t0 || 1);
+    const y = v => 270 - (v-v0) * 239 / (v1-v0 || 1);
+    context.strokeStyle = '#a8b2ae';
+    context.strokeRect(54, 30, 819, 241);
+    context.fillStyle = '#172d38'; context.font = '15px system-ui';
+    context.fillText(v1.toPrecision(5), 6, 29); context.fillText(v0.toPrecision(5), 6, 272);
+    context.fillText(t0.toPrecision(4) + ' s', 54, 294);
+    context.fillText(t1.toPrecision(4) + ' s', 797, 294);
+    lines.forEach((points, i) => {
+        context.beginPath(); context.strokeStyle = i ? '#a84d2c' : '#24687d'; context.lineWidth = 2;
+        points.forEach(([t,v],j) => j ? context.lineTo(x(t), y(v)) : context.moveTo(x(t), y(v)));
+        context.stroke();
+    });
+    const [t, v] = selected.trace.samples[Number(instant.value)];
+    context.beginPath(); context.arc(x(t), y(v), 5, 0, Math.PI*2); context.fill();
+    readout.textContent = t.toPrecision(7) + ' s   ·   ' + v.toPrecision(8) + ' ' + selected.trace.unit;
+    for (const event of items[selected.run].events || []) {
+        const row = document.createElement('li');
+        row.textContent = event.time_s.toPrecision(9) + ' s   ·   ' + event.name + '   ·   ' + event.message;
+        events.append(row);
+    }
+}
+series.onchange = reset; instant.oninput = draw; compare.onchange = draw; reset();
+</script>
+</body></html>

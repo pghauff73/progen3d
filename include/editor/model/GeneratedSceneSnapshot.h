@@ -14,10 +14,12 @@ class GeneratedSceneSnapshot
 public:
 	GeneratedSceneSnapshot(std::unique_ptr<GrammarDocument> grammar_document,
 	                       std::uint64_t design_nonce,
-	                       double evaluation_time)
+	                       double evaluation_time,
+	                       std::string source_text = {})
 		: grammar_document_(std::move(grammar_document)),
 		  design_nonce_(design_nonce),
-		  evaluation_time_(evaluation_time)
+		  evaluation_time_(evaluation_time),
+		  source_text_(std::move(source_text))
 	{
 	}
 
@@ -54,8 +56,11 @@ public:
 		return evaluation_time_;
 	}
 
+	const std::string &sourceText() const { return source_text_; }
+
 private:
 	std::unique_ptr<GrammarDocument> grammar_document_;
 	std::uint64_t design_nonce_ = 0;
 	double evaluation_time_ = 0.0;
+	std::string source_text_;
 };

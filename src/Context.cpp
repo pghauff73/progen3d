@@ -2612,6 +2612,12 @@ void PrimitiveDefinition::draw(Scope *scope, int material_index, float alpha, fl
 	}
 }
 
+void SceneGenerationContext::recordExecutionError(std::string message)
+{
+	errorout("Grammar execution error: " + message);
+	execution_errors_.push_back(std::move(message));
+}
+
 void SceneGenerationContext::addPrimitive(std::string type,
                            Scope *scope,
 	                           const std::string &material_name,
@@ -2625,7 +2631,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	                           std::shared_ptr<const ShapeSpecification> shape_specification)
 {
 	if (primitive_instances.size() >= kMaxGeneratedPrimitiveCount) {
-		errorout("Grammar execution error: primitive budget of " +
+		recordExecutionError("primitive budget of " +
 		         std::to_string(kMaxGeneratedPrimitiveCount) +
 		         " was exceeded.");
 		clearPendingPrimitiveState();
@@ -2647,7 +2653,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 			type, shape_specification, &geometry_diagnostic);
 	if (!resolved_geometry || primitive == nullptr) {
 		if(!geometry_diagnostic.empty()){
-			errorout("Grammar execution error: " + geometry_diagnostic);
+			recordExecutionError(geometry_diagnostic);
 		}
 		clearPendingPrimitiveState();
 		return;
@@ -2684,7 +2690,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	                          has_pending_density_,
 	                          &resolved_mass,
 	                          &mass_diagnostic)){
-		errorout("Grammar execution error: " + mass_diagnostic);
+		recordExecutionError(mass_diagnostic);
 		clearPendingPrimitiveState();
 		return;
 	}
@@ -3188,6 +3194,7 @@ SceneGenerationContext::SceneGenerationContext()
 	  vehicle_joint_graph_(std::make_unique<VehicleJointGraph>())
 {
 	primitive_instances.clear();
+	execution_errors_.clear();
 	material_names_.clear();
 	collision_particles_.reserve(kMaxCollisionParticles);
 	if (current_scope == nullptr) {
@@ -3306,7 +3313,7 @@ void SceneGenerationContext::pushScope()
 Scope *SceneGenerationContext::popScope()
 {
 	if (scopes.empty()) {
-		errorout("Grammar execution error: attempted to pop an empty scope stack.");
+		recordExecutionError("attempted to pop an empty scope stack.");
 		if (current_scope == nullptr) {
 			current_scope = new Scope();
 		}

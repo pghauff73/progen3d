@@ -1,0 +1,1231 @@
+identifier,label,mass,length,time,current,temperature,substance,luminous_intensity,lifecycle,source_URI
+APIGravity,API Gravity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/APIGravity
+AbsoluteActivity,Absolute Activity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AbsoluteActivity
+AbsoluteHumidity,Absolute Humidity,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AbsoluteHumidity
+AbsoluteTypographicMeasurement,Absolute Typographic Measurement,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AbsoluteTypographicMeasurement
+AbsorbedDose,Absorbed Dose,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AbsorbedDose
+AbsorbedDoseRate,Absorbed Dose Rate,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AbsorbedDoseRate
+Absorptance,Absorptance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Absorptance
+Acceleration,Acceleration,0,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Acceleration
+AccelerationOfGravity,Acceleration of Gravity,0,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AccelerationOfGravity
+AcceptorDensity,Acceptor Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AcceptorDensity
+AcceptorIonizationEnergy,Acceptor Ionization Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AcceptorIonizationEnergy
+Acidity,Acidity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Acidity
+AcousticImpedance,Acoustic Impedance,1,-4,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AcousticImpedance
+Action,Action,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Action
+ActionTime,Action Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActionTime
+ActiveEnergy,Active Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActiveEnergy
+ActivePower,Active Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActivePower
+Activity,Activity,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Activity
+ActivityCoefficient,Activity Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActivityCoefficient
+ActivityConcentration,Activity Concentration,0,-3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActivityConcentration
+ActivityRelatedByMass,ActivityRelatedByMass,-1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActivityRelatedByMass
+ActivityThresholds,Activity Thresholds,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ActivityThresholds
+Adaptation,Adaptation,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Adaptation
+Admittance,Admittance,-1,-2,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Admittance
+AlphaDisintegrationEnergy,Alpha Disintegration Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AlphaDisintegrationEnergy
+Altitude,Altitude,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Altitude
+AmbientPressure,Ambient Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AmbientPressure
+AmountOfBiologicallyActiveSubstance,Amount of Biologically Active Substance,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AmountOfBiologicallyActiveSubstance
+AmountOfBiologicallyActiveSubstancePerMass,Amount of Biologically Active Substance per Mass,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AmountOfBiologicallyActiveSubstancePerMass
+AmountOfCloudCover,Amount of Cloud Cover,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AmountOfCloudCover
+AmountOfData,Amount of Data,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AmountOfData
+AmountOfOsmoticallyActiveEntities,Amount of Osmotically Active Entities,0,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfOsmoticallyActiveEntities
+AmountOfSubstance,Amount of Substance,0,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstance
+AmountOfSubstanceConcentration,Amount of Substance of Concentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstanceConcentration
+AmountOfSubstanceFraction,Fractional Amount of Substance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstanceFraction
+AmountOfSubstanceIonConcentration,Amount of Substance Ion Concentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstanceIonConcentration
+AmountOfSubstancePerMass,Amount of Substance per Mass,-1,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstancePerMass
+AmountOfSubstancePerMassPressure,Molar Mass Variation Due to Pressure,-2,1,2,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstancePerMassPressure
+AmountOfSubstancePerVolume,Amount of Substance per Volume,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/AmountOfSubstancePerVolume
+Angle,Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Angle
+AngleOfAttack,Angle of Attack,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngleOfAttack
+AngleOfOpticalRotation,Angle of Optical Rotation,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngleOfOpticalRotation
+AngularAcceleration,Angular Acceleration,0,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularAcceleration
+AngularCrossSection,Angular Cross-section,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularCrossSection
+AngularDistance,Angular Distance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularDistance
+AngularFrequency,Angular Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularFrequency
+AngularImpulse,Angular Impulse,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularImpulse
+AngularMomentum,Angular Momentum,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularMomentum
+AngularMomentumPerAngle,Angular Momentum per Angle,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularMomentumPerAngle
+AngularReciprocalLatticeVector,Angular Reciprocal Lattice Vector,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector
+AngularVelocity,Angular Velocity,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularVelocity
+AngularWavenumber,Angular Wavenumber,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AngularWavenumber
+ApogeeRadius,Apogee Radius,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ApogeeRadius
+ApparentEnergy,Apparent Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ApparentEnergy
+ApparentPower,Apparent Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ApparentPower
+ApparentThermalInertia,Measurement Unit for a Quantity Approximately Proportional to Thermal Inertia,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ApparentThermalInertia
+Area,Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Area
+AreaAngle,Area Angle,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaAngle
+AreaBitDensity,Areic Bit Density,0,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaBitDensity
+AreaChargeDensity,Areic Charge Density,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaChargeDensity
+AreaMass,Areic Mass,1,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaMass
+AreaPerLength,Area per Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaPerLength
+AreaPerPower,Area per Heating Load,-1,0,3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaPerPower
+AreaPerTime,Area per Time,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaPerTime
+AreaRatio,Area Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaRatio
+AreaTemperature,Area Temperature,0,2,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/AreaTemperature
+AreaThermalExpansion,Area Thermal Expansion,0,2,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/AreaThermalExpansion
+AreaTime,Area Time,0,2,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreaTime
+AreaTimeTemperature,Area Time Temperature,0,2,1,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/AreaTimeTemperature
+AreicChargeDensityOrElectricFluxDensityOrElectricPolarization,AreicChargeDensityOrElectricFluxDensityOrElectricPolarization,0,-2,1,1,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/AreicChargeDensityOrElectricFluxDensityOrElectricPolarization
+AreicDataVolume,AreicDataVolume,0,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreicDataVolume
+AreicEnergyFlow,AreicEnergyFlow,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreicEnergyFlow
+AreicHeatFlowRate,Aeric Heat Flow Rate,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreicHeatFlowRate
+AreicMass,AreicMass,1,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreicMass
+AreicTorque,AreicTorque,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AreicTorque
+Asset,Asset,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Asset
+AtmosphericHydroxylationRate,Atmospheric Hydroxylation Rate,0,3,-1,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/AtmosphericHydroxylationRate
+AtmosphericPressure,Atmospheric Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtmosphericPressure
+AtomScatteringFactor,Atom Scattering Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomScatteringFactor
+AtomicAttenuationCoefficient,Atomic Attenuation Coefficient,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomicAttenuationCoefficient
+AtomicCharge,Atomic Charge,0,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomicCharge
+AtomicEnergy,AtomicEnergy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomicEnergy
+AtomicMass,Atomic Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomicMass
+AtomicNumber,Atomic Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomicNumber
+AtomicStoppingPower,AtomicStoppingPower,1,4,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AtomicStoppingPower
+AttenuationCoefficient,Attenuation Coefficient,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AttenuationCoefficient
+AuditoryThresholds,Auditory Thresholds,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AuditoryThresholds
+AuxillaryMagneticField,Auxillary Magnetic Field,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/AuxillaryMagneticField
+AverageEnergyLossPerElementaryChargeProduced,Average Energy Loss per Elementary Charge Produced,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AverageEnergyLossPerElementaryChargeProduced
+AverageHeadEndPressure,Average Head End Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AverageHeadEndPressure
+AverageLogarithmicEnergyDecrement,Average Logarithmic Energy Decrement,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AverageLogarithmicEnergyDecrement
+AverageSpecificImpulse,Average Specific Impulse,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AverageSpecificImpulse
+AverageVacuumThrust,Average Vacuum Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/AverageVacuumThrust
+Azimuth,Azimuth,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Azimuth
+BandwidthDistanceProduct,Bandwidth Distance Product,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BandwidthDistanceProduct
+BandwidthLengthProduct,BandwidthLengthProduct,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BandwidthLengthProduct
+Basicity,Basicity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Basicity
+BatteryCapacity,BatteryCapacity,0,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/BatteryCapacity
+BendingMomentOfForce,Bending Moment of Force,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BendingMomentOfForce
+BetaDisintegrationEnergy,Beta Disintegration Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BetaDisintegrationEnergy
+BevelGearPitchAngle,Bevel Gear Pitch Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BevelGearPitchAngle
+BinaryLogarithmicMedianInformationFlow,BinaryLogarithmicMedianInformationFlow,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/BinaryLogarithmicMedianInformationFlow
+BindingFraction,Binding Fraction,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BindingFraction
+BioconcentrationFactor,Bioconcentration Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BioconcentrationFactor
+BiodegredationHalfLife,Biodegredation Half Life,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BiodegredationHalfLife
+BiogeochemicalRate,Biogeochemical Rate,-1,0,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/BiogeochemicalRate
+BitDataVolume,BitDataVolume,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BitDataVolume
+BitRate,Bit Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BitRate
+BitTransmissionRate,BitTransmissionRate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BitTransmissionRate
+BloodGlucoseLevel,Blood Glucose Level,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/BloodGlucoseLevel
+BloodGlucoseLevel_Mass,Blood Glucose Level by Mass,1,-3,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/BloodGlucoseLevel_Mass
+BodyMassIndex,Body Mass Index,1,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BodyMassIndex
+BoilingPoint,Boiling Point Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/BoilingPoint
+BraggAngle,Bragg Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BraggAngle
+Breadth,Breadth,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Breadth
+BucklingFactor,Buckling Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BucklingFactor
+BulkModulus,Bulk Modulus,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BulkModulus
+BurgersVector,Burgers Vector,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BurgersVector
+BurnRate,Burn Rate,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BurnRate
+BurnTime,Burn Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BurnTime
+BurstFactor,BurstFactor,0,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/BurstFactor
+ByteDataVolume,ByteDataVolume,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ByteDataVolume
+ByteRate,Byte Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ByteRate
+ByteTransmissionRate,ByteTransmissionRate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ByteTransmissionRate
+CENTER-OF-GRAVITY_X,Center of Gravity in the X axis,0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CENTER-OF-GRAVITY_X
+CENTER-OF-GRAVITY_Y,Center of Gravity in the Y axis,0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CENTER-OF-GRAVITY_Y
+CENTER-OF-GRAVITY_Z,Center of Gravity in the Z axis,0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CENTER-OF-GRAVITY_Z
+CENTER-OF-MASS,Center of Mass (CoM),0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CENTER-OF-MASS
+CO2Equivalent,CO2Equivalent,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CO2Equivalent
+CONTRACT-END-ITEM-SPECIFICATION-MASS,Contract End Item (CEI) Specification Mass.,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CONTRACT-END-ITEM-SPECIFICATION-MASS
+CONTROL-MASS,Control Mass.,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CONTROL-MASS
+CanonicalPartitionFunction,Canonical Partition Function,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CanonicalPartitionFunction
+Capacitance,Capacitance,-1,-2,4,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Capacitance
+Capacity,Capacity,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Capacity
+CarrierLifetime,Carrier Lifetime,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CarrierLifetime
+CartesianArea,Cartesian Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CartesianArea
+CartesianCoordinates,Cartesian Coordinates,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CartesianCoordinates
+CartesianVolume,Volume,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CartesianVolume
+CatalyticActivity,Catalytic Activity,0,0,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/CatalyticActivity
+CatalyticActivityConcentration,Catalytic Activity Concentration,0,-3,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/CatalyticActivityConcentration
+CationExchangeCapacity,Cation Exchange Capacity,-1,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/CationExchangeCapacity
+CelsiusTemperature,Celsius Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/CelsiusTemperature
+CenterOfGravity_X,Center of Gravity in the X Axis,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CenterOfGravity_X
+CenterOfGravity_Y,Center of Gravity in the Y Axis,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CenterOfGravity_Y
+CenterOfGravity_Z,Center of Gravity in the Z Axis,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CenterOfGravity_Z
+CharacteristicAcousticImpedance,Characteristic Acoustic Impedance,1,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CharacteristicAcousticImpedance
+CharacteristicNumber,CharacteristicNumber,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CharacteristicNumber
+CharacteristicVelocity,Characteristic Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CharacteristicVelocity
+ChargeNumber,Charge Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ChargeNumber
+ChemicalAffinity,Chemical Affinity,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/ChemicalAffinity
+ChemicalConsumptionPerMass,Chemical Consumption per Mass,-1,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ChemicalConsumptionPerMass
+ChemicalPotential,Chemical Potential,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/ChemicalPotential
+Chromaticity,Chromaticity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Chromaticity
+Circulation,Circulation,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Circulation
+ClosestApproachRadius,Closest Approach Radius,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ClosestApproachRadius
+CoefficientOfHeatTransfer,Coefficient of Heat Transfer,1,0,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/CoefficientOfHeatTransfer
+CoefficientOfPerformance,Coefficient of Performance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CoefficientOfPerformance
+Coercivity,Coercivity,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/Coercivity
+CoherenceLength,Coherence Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CoherenceLength
+ColdReceptorThreshold,Cold Receptor Threshold,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/ColdReceptorThreshold
+CombinedNonEvaporativeHeatTransferCoefficient,Combined Non Evaporative Heat Transfer Coefficient,1,0,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/CombinedNonEvaporativeHeatTransferCoefficient
+CommonLogarithmicMedianInformationFlow,CommonLogarithmicMedianInformationFlow,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/CommonLogarithmicMedianInformationFlow
+ComplexFrequency_Imaginary,Imaginary Part of Complex Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ComplexFrequency_Imaginary
+ComplexFrequency_Real,Real Part of Complex Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ComplexFrequency_Real
+ComplexPower,Complex Power,1,2,-3,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/ComplexPower
+CompoundPlaneAngle,Compound Plane Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CompoundPlaneAngle
+Compressibility,Compressibility,-1,1,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Compressibility
+CompressibilityFactor,Compressibility Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CompressibilityFactor
+Concentration,Concentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/Concentration
+Conductance,Conductance,-1,-2,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Conductance
+ConductionSpeed,Conduction Speed,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ConductionSpeed
+ConductiveHeatTransferRate,Conductive Heat Transfer Rate,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ConductiveHeatTransferRate
+Conductivity,Conductivity,-1,-3,3,2,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Conductivity
+ConductivityVariance,Conductivity Variance,-2,-6,6,4,0,0,0,listed,http://qudt.org/vocab/quantitykind/ConductivityVariance
+ConductivityVariance_NEON,"Conductivity Variance, NEON",-2,-6,6,4,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/ConductivityVariance_NEON
+Constringence,Constringence,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Constringence
+ConvectiveHeatTransfer,Convective Heat Transfer,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ConvectiveHeatTransfer
+CoolingPerformanceRatio,Cooling Performance Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CoolingPerformanceRatio
+CorrelatedColorTemperature,Correlated Colour Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/CorrelatedColorTemperature
+CostPerArea,Cost per Area,0,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CostPerArea
+CostPerEnergy,Energy Cost,-1,-2,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CostPerEnergy
+CostPerMass,Cost per Mass,-1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CostPerMass
+CostPerPower,Cost per Power,-1,-2,3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CostPerPower
+Count,Count,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Count
+CountRate,Count Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CountRate
+CouplingFactor,Coupling Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CouplingFactor
+CrossSection,Cross-section,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CrossSection
+CrossSectionalArea,Cross-sectional Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CrossSectionalArea
+CubicElectricDipoleMomentPerSquareEnergy,Cubic Electric Dipole Moment per Square Energy,-2,-3,7,3,0,0,0,listed,http://qudt.org/vocab/quantitykind/CubicElectricDipoleMomentPerSquareEnergy
+CubicExpansionCoefficient,Cubic Expansion Coefficient,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/CubicExpansionCoefficient
+CurieTemperature,Curie Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/CurieTemperature
+Currency,Currency,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Currency
+CurrencyPerFlight,Currency per Flight,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CurrencyPerFlight
+CurrencyPerTime,Currency per Time,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CurrencyPerTime
+CurrentLinkage,Current Linkage,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/CurrentLinkage
+CurrentOfTheAmountOfSubstance,CurrentOfTheAmountOfSubstance,0,0,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/CurrentOfTheAmountOfSubstance
+Curvature,Curvature,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Curvature
+CurvatureFromRadius,Curvature,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CurvatureFromRadius
+CutoffCurrentRating,CutoffCurrentRating,0,0,1,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/CutoffCurrentRating
+CyclotronAngularFrequency,Larmor Angular Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/CyclotronAngularFrequency
+DELTA-V,Delta-V,0,1,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/DELTA-V
+DRY-MASS,Dry Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/DRY-MASS
+DataCapacity,Data Capacity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DataCapacity
+DataRate,Data Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DataRate
+DataTransmissionRate,DataTransmissionRate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DataTransmissionRate
+DatasetOfBits,Dataset of Bits,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DatasetOfBits
+DatasetOfBytes,Dataset of Bytes,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DatasetOfBytes
+Debye-WallerFactor,Debye-Waller Factor,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Debye-WallerFactor
+DebyeAngularFrequency,Debye Angular Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DebyeAngularFrequency
+DebyeAngularWavenumber,Debye Angular Wavenumber,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DebyeAngularWavenumber
+DebyeTemperature,Debye Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/DebyeTemperature
+DebyeWallerFactor,Debye-Waller Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DebyeWallerFactor
+DecayConstant,Decay Constant,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DecayConstant
+DegreeOfDissociation,Degree of Dissociation,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DegreeOfDissociation
+Density,Density,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Density
+DensityInCombustionChamber,Density in Combustion Chamber,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DensityInCombustionChamber
+DensityOfStates,Density of states,0,-3,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/DensityOfStates
+Depth,Depth,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Depth
+DewPointTemperature,Dew Point Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/DewPointTemperature
+Diameter,Diameter,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Diameter
+DiastolicBloodPressure,Diastolic Blood Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DiastolicBloodPressure
+DiffusionArea,Diffusion Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DiffusionArea
+DiffusionCoefficient,Diffusion Coefficient,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DiffusionCoefficient
+DiffusionCoefficientForFluenceRate,Diffusion Coefficient for Fluence Rate,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DiffusionCoefficientForFluenceRate
+DiffusionLength,Diffusion Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DiffusionLength
+DigitRate,Digit Rate,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DigitRate
+Dimensionless,Dimensionless,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Dimensionless
+DimensionlessRatio,Dimensionless Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DimensionlessRatio
+Displacement,Displacement,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Displacement
+DisplacementCurrent,Displacement Current,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/DisplacementCurrent
+DisplacementCurrentDensity,Displacement Current Density,0,-2,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/DisplacementCurrentDensity
+DisplacementVectorOfIon,Displacement Vector of Ion,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DisplacementVectorOfIon
+Dissipance,Dissipance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Dissipance
+Distance,Distance,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Distance
+DistanceTraveledDuringBurn,Distance Traveled During a Burn,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DistanceTraveledDuringBurn
+DonorDensity,Donor Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DonorDensity
+DonorIonizationEnergy,Donor Ionization Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DonorIonizationEnergy
+DoseEquivalent,Dose Equivalent,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DoseEquivalent
+DoseEquivalentQualityFactor,Dose Equivalent Quality Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DoseEquivalentQualityFactor
+DoseEquivalentRate,Dose Equivalent Rate,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DoseEquivalentRate
+DotsPerInch,Dots per Inch,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DotsPerInch
+DragCoefficient,Drag Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DragCoefficient
+DragForce,Drag Force,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DragForce
+DryBulbTemperature,Dry Bulb Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/DryBulbTemperature
+DryVolume,Dry Volume,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DryVolume
+DutyCycle,Duty Cycle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DutyCycle
+Duv,"Delta u,v",0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Duv
+DynamicFriction,Dynamic Friction,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DynamicFriction
+DynamicFrictionCoefficient,Dynamic Friction Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DynamicFrictionCoefficient
+DynamicPressure,Dynamic Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DynamicPressure
+DynamicViscosity,Dynamic Viscosity,1,-1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/DynamicViscosity
+EarthquakeMagnitude,Earthquake Magnitude,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EarthquakeMagnitude
+EccentricityOfOrbit,Eccentricity of Orbit,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EccentricityOfOrbit
+EffectiveMass,Effective Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EffectiveMass
+EffectiveMultiplicationFactor,Effective Multiplication Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EffectiveMultiplicationFactor
+Efficiency,Efficiency,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Efficiency
+EinsteinCoefficients,Einstein Coefficients,-1,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EinsteinCoefficients
+EinsteinTransitionProbability,Einstein Transition Probability,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EinsteinTransitionProbability
+EinsteinTransitionProbabilityForSpontaneousOrInducedEmissionAndAbsorption,EinsteinTransitionProbabilityForSpontaneousOrInducedEmissionAndAbsorption,-1,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EinsteinTransitionProbabilityForSpontaneousOrInducedEmissionAndAbsorption
+ElectricCharge,Electric Charge,0,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCharge
+ElectricChargeDensity,Electric Charge Density,0,-3,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargeDensity
+ElectricChargeLineDensity,Electric Charge Line Density,0,-1,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargeLineDensity
+ElectricChargeLinearDensity,Electric Charge Linear Density,0,-1,1,1,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/ElectricChargeLinearDensity
+ElectricChargePerAmountOfSubstance,Electric Charge per Amount of Substance,0,0,1,1,0,-1,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargePerAmountOfSubstance
+ElectricChargePerArea,Electric Charge per Area,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargePerArea
+ElectricChargePerMass,Electric Charge per Mass,-1,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargePerMass
+ElectricChargeSurfaceDensity,Electric Charge Surface Density,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargeSurfaceDensity
+ElectricChargeVolumeDensity,Electric Charge Volume Density,0,-3,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricChargeVolumeDensity
+ElectricConductivity,Electric Conductivity,-1,-3,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricConductivity
+ElectricCurrent,Electric Current,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrent
+ElectricCurrentDensity,Electric Current Density,0,-2,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentDensity
+ElectricCurrentImbalance,Electric Current Imbalance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentImbalance
+ElectricCurrentPerAngle,Electric Current per Angle,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentPerAngle
+ElectricCurrentPerEnergy,Electric Current per Energy,-1,-2,2,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentPerEnergy
+ElectricCurrentPerLength,Electric Current per Length,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentPerLength
+ElectricCurrentPerTemperature,Electric Current per Temperature,0,0,0,1,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentPerTemperature
+ElectricCurrentPhasor,Electric Current Phasor,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricCurrentPhasor
+ElectricDipoleMoment,Electric Dipole Moment,0,1,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricDipoleMoment
+ElectricDipoleMoment_CubicPerEnergy_Squared,Cubic Electric Dipole Moment per Square Energy,-2,-3,7,3,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/ElectricDipoleMoment_CubicPerEnergy_Squared
+ElectricDipoleMoment_QuarticPerEnergy_Cubic,Quartic Electric Dipole Moment per Cubic Energy,-3,-2,10,4,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/ElectricDipoleMoment_QuarticPerEnergy_Cubic
+ElectricDisplacement,Electric Displacement,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricDisplacement
+ElectricDisplacementField,Electric Displacement Field,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricDisplacementField
+ElectricEnergy,Electric Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricEnergy
+ElectricField,Electric Field,1,1,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricField
+ElectricFieldStrength,Electric Field Strength,1,1,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricFieldStrength
+ElectricFlux,Electric Flux,1,3,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricFlux
+ElectricFluxDensity,Electric Flux Density,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricFluxDensity
+ElectricPolarizability,Electric Polarizability,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/ElectricPolarizability
+ElectricPolarization,Electric Polarization,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricPolarization
+ElectricPotential,Electric Potential,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricPotential
+ElectricPotentialDifference,Electric Potential Difference,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricPotentialDifference
+ElectricPower,Electric Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricPower
+ElectricQuadrupoleMoment,Electric Quadrupole Moment,0,2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricQuadrupoleMoment
+ElectricSusceptibility,Electric Susceptibility,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricSusceptibility
+ElectricalConductance,ElectricalConductance,-1,-2,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricalConductance
+ElectricalPowerToMassRatio,Electrical Power to Mass Ratio,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricalPowerToMassRatio
+ElectricalResistance,ElectricalResistance,1,2,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectricalResistance
+ElectrolyticConductivity,Electrolytic Conductivity,-1,-3,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectrolyticConductivity
+ElectromagneticEnergyDensity,Electromagnetic Energy Density,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectromagneticEnergyDensity
+ElectromagneticPermeability,Permeability,1,1,-2,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectromagneticPermeability
+ElectromagneticPermeabilityRatio,Electromagnetic Permeability Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectromagneticPermeabilityRatio
+ElectromagneticWavePhaseSpeed,Electromagnetic Wave Phase Speed,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectromagneticWavePhaseSpeed
+ElectromotiveForce,Electromotive Force,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectromotiveForce
+ElectronAffinity,Electron Affinity,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectronAffinity
+ElectronDensity,Electron Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectronDensity
+ElectronMeanFreePath,Electron Mean Free Path,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectronMeanFreePath
+ElectronMobility,Electron Mobility,-1,0,2,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectronMobility
+ElectronRadius,Electron Radius,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElectronRadius
+ElevationRelativeToNAP,Elevation Relative to NAP,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ElevationRelativeToNAP
+Emissivity,Emissivity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Emissivity
+Energy,Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Energy
+EnergyContent,EnergyContent,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyContent
+EnergyDensity,Energy Density,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyDensity
+EnergyDensityOfStates,Energy Density of States,-1,-5,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyDensityOfStates
+EnergyExpenditure,Energy Expenditure,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyExpenditure
+EnergyFluence,Energy Fluence,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyFluence
+EnergyFluenceRate,Energy Fluence Rate,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyFluenceRate
+EnergyImparted,Energy Imparted,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyImparted
+EnergyInternal,internal energy,1,2,-2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/EnergyInternal
+EnergyKinetic,kinetic energy,1,2,-2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/EnergyKinetic
+EnergyLevel,Energy Level,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyLevel
+EnergyPerArea,Energy per Area,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyPerArea
+EnergyPerAreaElectricCharge,Energy per Area Electric Charge,1,0,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyPerAreaElectricCharge
+EnergyPerElectricCharge,Energy per Electric Charge,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyPerElectricCharge
+EnergyPerMagneticFluxDensity_Squared,Energy Per Square Magnetic Flux Density,-1,2,2,2,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/EnergyPerMagneticFluxDensity_Squared
+EnergyPerMassAmountOfSubstance,Energy and Work per Mass Amount of Substance,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/EnergyPerMassAmountOfSubstance
+EnergyPerSquareMagneticFluxDensity,Energy per Square Magnetic Flux Density,-1,2,2,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyPerSquareMagneticFluxDensity
+EnergyPerTemperature,Energy per Temperature,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/EnergyPerTemperature
+Energy_Squared,Square Energy,2,4,-4,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Energy_Squared
+Enthalpy,Enthalpy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Enthalpy
+Entropy,Entropy,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/Entropy
+EquilibriumConstant,Equilibrium Constant,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquilibriumConstant
+EquilibriumConstantBasedOnConcentration,EquilibriumConstantBasedOnConcentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/EquilibriumConstantBasedOnConcentration
+EquilibriumConstantBasedOnPressure,EquilibriumConstantBasedOnPressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquilibriumConstantBasedOnPressure
+EquilibriumConstantOnConcentrationBasis,Equilibrium Constant On Concentration Basis,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquilibriumConstantOnConcentrationBasis
+EquilibriumConstantOnPressureBasis,Equilibrium Constant On Pressure Basis,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquilibriumConstantOnPressureBasis
+EquilibriumPositionVectorOfIon,Equilibrium Position Vector of Ion,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquilibriumPositionVectorOfIon
+EquivalenceDoseOutput,EquivalenceDoseOutput,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquivalenceDoseOutput
+EquivalentAbsorptionArea,Equivalent Absorption Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquivalentAbsorptionArea
+EquivalentConcentration,Equivalent Concentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/EquivalentConcentration
+EquivalentDensity,Equivalent Density,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EquivalentDensity
+Equivalent_Mass,Mass Equivalent,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Equivalent_Mass
+Equivalent_Molar,Molar Equivalent,0,0,0,0,0,1,0,deprecated,http://qudt.org/vocab/quantitykind/Equivalent_Molar
+EvaporativeHeatTransfer,Evaporative Heat Transfer,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EvaporativeHeatTransfer
+EvaporativeHeatTransferCoefficient,Evaporative Heat Transfer Coefficient,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/EvaporativeHeatTransferCoefficient
+ExchangeIntegral,Exchange Integral,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ExchangeIntegral
+ExpansionRatio,Expansion Ratio,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ExpansionRatio
+Exposure,Exposure,-1,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/Exposure
+ExposureOfIonizingRadiation,ExposureOfIonizingRadiation,-1,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ExposureOfIonizingRadiation
+ExposureRate,Exposure Rate,-1,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ExposureRate
+ExposureRateOfIonizingRadiation,ExposureRateOfIonizingRadiation,-1,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ExposureRateOfIonizingRadiation
+ExtentOfReaction,Extent of Reaction,0,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/ExtentOfReaction
+FLIGHT-PERFORMANCE-RESERVE-PROPELLANT-MASS,Flight Performance Reserve Propellant Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/FLIGHT-PERFORMANCE-RESERVE-PROPELLANT-MASS
+FUEL-BIAS,Fuel Bias,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/FUEL-BIAS
+FahrenheitTemperature,FahrenheitTemperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/FahrenheitTemperature
+FailureRate,FailureRate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FailureRate
+FastFissionFactor,Fast Fission Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FastFissionFactor
+FermiAngularWavenumber,Fermi Angular Wavenumber,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FermiAngularWavenumber
+FermiEnergy,Fermi Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FermiEnergy
+FermiTemperature,Fermi Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/FermiTemperature
+FinalOrCurrentVehicleMass,Final Or Current Vehicle Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/FinalOrCurrentVehicleMass
+FirstMomentOfArea,First Moment of Area,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FirstMomentOfArea
+FishBiotransformationHalfLife,Fish Biotransformation Half Life,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FishBiotransformationHalfLife
+FissionCoreRadiusToHeightRatio,Fission Core Radius to Height Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FissionCoreRadiusToHeightRatio
+FissionFuelUtilizationFactor,Fission Fuel Utilization Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FissionFuelUtilizationFactor
+FissionMultiplicationFactor,Fission Multiplication Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FissionMultiplicationFactor
+FlashPoint,Flash Point Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/FlashPoint
+FlightPathAngle,Flight Path Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FlightPathAngle
+FloatingPointCalculationCapability,Floating Point Calculation Capability,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FloatingPointCalculationCapability
+Fluidity,Fluidity,-1,1,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Fluidity
+Flux,Flux,0,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Flux
+Force,Force,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Force
+ForceConstant,Force Constant,1,1,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForceConstant
+ForceMagnitude,Force Magnitude,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForceMagnitude
+ForcePerAngle,Force per Angle,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForcePerAngle
+ForcePerArea,Force per Area,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForcePerArea
+ForcePerAreaTime,Force per Area Time,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForcePerAreaTime
+ForcePerElectricCharge,Force per Electric Charge,1,1,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForcePerElectricCharge
+ForcePerLength,Force per Length,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ForcePerLength
+Frequency,Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Frequency
+Friction,Friction,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Friction
+FrictionCoefficient,Friction Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FrictionCoefficient
+Fugacity,Fugacity,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Fugacity
+FundamentalLatticeVector,Fundamental Lattice Vector,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FundamentalLatticeVector
+FundamentalReciprocalLatticeVector,Fundamental Reciprocal Lattice Vector,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/FundamentalReciprocalLatticeVector
+GFactorOfNucleus,g-Factor of Nucleus,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GFactorOfNucleus
+GROSS-LIFT-OFF-WEIGHT,Gross Lift-Off Weight,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/GROSS-LIFT-OFF-WEIGHT
+Gain,Gain,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Gain
+GapEnergy,Gap Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GapEnergy
+GasLeakRate,GasLeakRate,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GasLeakRate
+GaugePressure,Gauge Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GaugePressure
+GeneFamilyAbundance,Gene Family Abundance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GeneFamilyAbundance
+GeneralizedCoordinate,Generalized Coordinate,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GeneralizedCoordinate
+GeneralizedForce,Generalized Force,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GeneralizedForce
+GeneralizedMomentum,Generalized Force,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GeneralizedMomentum
+GeneralizedVelocity,Generalized Velocity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GeneralizedVelocity
+GibbsEnergy,Gibbs Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GibbsEnergy
+Gradient,Gradient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Gradient
+GrandCanonicalPartitionFunction,Grand Canonical Partition Function,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GrandCanonicalPartitionFunction
+GravitationalAttraction,Gravitational Attraction,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GravitationalAttraction
+GravitationalConstant,Gravitational Constant,-1,3,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GravitationalConstant
+Gravity_API,API Gravity,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Gravity_API
+GrossTonnage,Gross Tonnage,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GrossTonnage
+GroupSpeedOfSound,Group Speed of Sound,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GroupSpeedOfSound
+GrowingDegreeDay,Growing Degree Days (Cereals),0,0,1,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/GrowingDegreeDay
+GrowingDegreeDay_Cereal,Growing Degree Days (Cereals),0,0,1,0,1,0,0,deprecated,http://qudt.org/vocab/quantitykind/GrowingDegreeDay_Cereal
+GruneisenParameter,Gruneisen Parameter,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/GruneisenParameter
+GustatoryThreshold,Gustatory Threshold,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/GustatoryThreshold
+GyromagneticRatio,Gyromagnetic Ratio,-1,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/GyromagneticRatio
+Half-Life,half-life,0,0,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Half-Life
+Half-ValueThickness,Half-Value Thickness,0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Half-ValueThickness
+HalfLife,Half-life,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HalfLife
+HalfValueThickness,Half-Value Thickness,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HalfValueThickness
+HallCoefficient,Hall Coefficient,0,3,-1,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/HallCoefficient
+HamiltonFunction,Hamilton Function,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HamiltonFunction
+HeadEndPressure,Head End Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeadEndPressure
+HeartRate,Heart Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeartRate
+Heat,Heat,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Heat
+HeatCapacity,Heat Capacity,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/HeatCapacity
+HeatCapacityRatio,Heat Capacity Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeatCapacityRatio
+HeatFlowRate,Heat Flow Rate,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeatFlowRate
+HeatFlowRatePerArea,Heat Flow Rate per Unit Area,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeatFlowRatePerArea
+HeatFluxDensity,Heat Flux Density,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeatFluxDensity
+HeatingValue,Calorific Value,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HeatingValue
+Height,Height,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Height
+HelmholtzEnergy,Helmholtz Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HelmholtzEnergy
+HenrysLawVolatilityConstant,Henry's Law Volatility Constant,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/HenrysLawVolatilityConstant
+HoleDensity,Hole Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HoleDensity
+HorizontalVelocity,Horizontal Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HorizontalVelocity
+HydraulicPermeability,Hydraulic Permeability,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HydraulicPermeability
+HyperfineStructureQuantumNumber,Hyperfine Structure Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/HyperfineStructureQuantumNumber
+INERT-MASS,Inert Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/INERT-MASS
+IgnitionIntervalTime,Ignition Interval Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IgnitionIntervalTime
+Illuminance,Illuminance,0,-2,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/Illuminance
+Impedance,Impedance,1,2,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Impedance
+Impulse,Impulse,1,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Impulse
+Incidence,Incidence,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Incidence
+IncidenceProportion,Incidence Proportion,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IncidenceProportion
+IncidenceRate,Incidence Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IncidenceRate
+Inductance,Inductance,1,2,-2,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Inductance
+InductanceBasedTimeConstant,Inductance Based Time Constant,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InductanceBasedTimeConstant
+InfiniteMultiplicationFactor,Infinite Multiplication Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InfiniteMultiplicationFactor
+InformationContent,Information Content,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InformationContent
+InformationContentExpressedAsALogarithmToBase10,InformationContentExpressedAsALogarithmToBase10,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/InformationContentExpressedAsALogarithmToBase10
+InformationContentExpressedAsALogarithmToBase2,InformationContentExpressedAsALogarithmToBase2,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/InformationContentExpressedAsALogarithmToBase2
+InformationContentExpressedAsALogarithmToBaseE,InformationContentExpressedAsALogarithmToBaseE,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/InformationContentExpressedAsALogarithmToBaseE
+InformationEntropy,Information Entropy,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InformationEntropy
+InformationFlowRate,Information Flow Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InformationFlowRate
+InitialExpansionRatio,Initial Expansion Ratio,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/InitialExpansionRatio
+InitialVehicleMass,Initial Vehicle Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InitialVehicleMass
+InitialVelocity,Initial Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InitialVelocity
+InstantaneousPower,Instantaneous Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InstantaneousPower
+InternalConversionFactor,Internal Conversion Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InternalConversionFactor
+InternalEnergy,Internal Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InternalEnergy
+IntinsicCarrierDensity,Intrinsic Carrier Density,0,-3,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/IntinsicCarrierDensity
+IntrinsicCarrierDensity,Intrinsic Carrier Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IntrinsicCarrierDensity
+InverseAmountOfSubstance,Inverse Amount of Substance,0,0,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/InverseAmountOfSubstance
+InverseArea,Inverse Area,0,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseArea
+InverseEnergy,Inverse Energy,-1,-2,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseEnergy
+InverseEnergy_Squared,Inverse Square Energy,-2,-4,4,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/InverseEnergy_Squared
+InverseLength,Inverse Length,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseLength
+InverseLengthTemperature,Inverse Length Temperature,0,-1,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/InverseLengthTemperature
+InverseMagneticFlux,Inverse Magnetic Flux,-1,-2,2,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseMagneticFlux
+InverseMass,Reciprocal Mass,-1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseMass
+InverseMass_Squared,Inverse Square Mass,-2,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/InverseMass_Squared
+InversePermittivity,Inverse Permittivity,1,3,-4,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/InversePermittivity
+InversePressure,Inverse Pressure,-1,1,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InversePressure
+InverseSquareEnergy,Inverse Square Energy,-2,-4,4,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseSquareEnergy
+InverseSquareMass,Inverse Square Mass,-2,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseSquareMass
+InverseSquareTime,Inverse Square Time,0,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseSquareTime
+InverseTemperature,Inverse Temperature,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/InverseTemperature
+InverseTime,Inverse Time,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseTime
+InverseTimeTemperature,Inverse Time Temperature,0,0,-1,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/InverseTimeTemperature
+InverseTime_Squared,Inverse Square Time,0,0,-2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/InverseTime_Squared
+InverseVolume,Inverse Volume,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/InverseVolume
+IonConcentration,Ion Concentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/IonConcentration
+IonCurrent,Ion Current,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/IonCurrent
+IonDensity,Ion Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IonDensity
+IonTransportNumber,Ion Transport Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IonTransportNumber
+IonicCharge,Ionic Charge,0,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/IonicCharge
+IonicStrength,Ionic Strength,-1,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/IonicStrength
+IonizationEnergy,Ionization Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IonizationEnergy
+Irradiance,Irradiance,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Irradiance
+IsentropicCompressibility,Isentropic Compressibility,-1,1,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IsentropicCompressibility
+IsentropicExponent,Isentropic Exponent,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IsentropicExponent
+IsothermalCompressibility,Isothermal Compressibility,-1,1,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IsothermalCompressibility
+IsothermalMoistureCapacity,Isothermal Moisture Capacity,-1,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/IsothermalMoistureCapacity
+Kerma,Kerma,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Kerma
+KermaRate,Kerma Rate,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/KermaRate
+KinematicViscosity,Kinematic Viscosity,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/KinematicViscosity
+KinematicViscosityOrDiffusionConstantOrThermalDiffusivity,KinematicViscosityOrDiffusionConstantOrThermalDiffusivity,0,2,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/KinematicViscosityOrDiffusionConstantOrThermalDiffusivity
+KineticEnergy,Kinetic Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/KineticEnergy
+KineticOrThermalEnergy,KineticOrThermalEnergy,1,2,-2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/KineticOrThermalEnergy
+LagrangeFunction,Lagrange Function,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LagrangeFunction
+Landau-GinzburgNumber,Landau-Ginzburg Number,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Landau-GinzburgNumber
+LandauGinzburgNumber,Landau-Ginzburg Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LandauGinzburgNumber
+LandeGFactor,Lande g-Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LandeGFactor
+LarmorAngularFrequency,Larmor Angular Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LarmorAngularFrequency
+LatticePlaneSpacing,Lattice Plane Spacing,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LatticePlaneSpacing
+LatticeVector,Lattice Vector,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LatticeVector
+LeakageFactor,Leakage Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LeakageFactor
+Length,Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Length
+LengthByForce,Length Force,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LengthByForce
+LengthEnergy,Length Energy,1,3,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LengthEnergy
+LengthMass,Length Mass,1,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LengthMass
+LengthMolarEnergy,Length Molar Energy,1,3,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/LengthMolarEnergy
+LengthPerElectricCurrent,Length per Electric Current,0,1,0,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LengthPerElectricCurrent
+LengthRatio,Length Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LengthRatio
+LengthTemperature,Length Temperature,0,1,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/LengthTemperature
+LengthTemperatureTime,Length Temperature Time,0,1,1,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/LengthTemperatureTime
+Lethargy,Lethargy,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Lethargy
+LevelWidth,Level Width,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LevelWidth
+LiftCoefficient,Lift Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LiftCoefficient
+LiftForce,Lift Force,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LiftForce
+LinearAbsorptionCoefficient,Linear Absorption Coefficient,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient
+LinearAcceleration,Linear Acceleration,0,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearAcceleration
+LinearAttenuationCoefficient,Linear Attenuation Coefficient,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient
+LinearBitDensity,Lineic Bit Density,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearBitDensity
+LinearCompressibility,Linear Compressibility,-1,0,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearCompressibility
+LinearDensity,Linear Density,1,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearDensity
+LinearElectricCharge,Lineic Electric Charge,0,-1,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearElectricCharge
+LinearElectricChargeDensity,Electric Charge Linear Density,0,-1,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearElectricChargeDensity
+LinearElectricCurrent,Linear Electric Current,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearElectricCurrent
+LinearElectricCurrentDensity,Linear Electric Current Density,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity
+LinearEnergyTransfer,Linear Energy Transfer,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearEnergyTransfer
+LinearExpansionCoefficient,Linear Expansion Coefficient,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/LinearExpansionCoefficient
+LinearForce,Linear Force,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearForce
+LinearIonization,Linear Ionization,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearIonization
+LinearLogarithmicRatio,Linear Logarithmic Ratio,0,-1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LinearLogarithmicRatio
+LinearMass,Lineic Mass,1,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearMass
+LinearMomentum,Linear Momentum,1,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearMomentum
+LinearNumberDensity,Linear Number Density,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearNumberDensity
+LinearPower,Lineic Power,1,1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearPower
+LinearResistance,Lineic Resistance,1,1,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearResistance
+LinearStiffness,Linear Force,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearStiffness
+LinearStrain,Linear Strain,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearStrain
+LinearThermalExpansion,Linear Thermal Expansion,0,1,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/LinearThermalExpansion
+LinearTorque,Lineic Torque,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearTorque
+LinearVelocity,Linear Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearVelocity
+LinearVoltageCoefficient,LinearVoltageCoefficient,1,1,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinearVoltageCoefficient
+LineicCharge,LineicCharge,0,-1,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicCharge
+LineicDataVolume,LineicDataVolume,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicDataVolume
+LineicLogarithmicRatio,LineicLogarithmicRatio,0,-1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LineicLogarithmicRatio
+LineicMass,LineicMass,1,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicMass
+LineicPower,LineicPower,1,1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicPower
+LineicQuantity,LineicQuantity,,,,,,,,listed,http://qudt.org/vocab/quantitykind/LineicQuantity
+LineicResistance,LineicResistance,1,1,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicResistance
+LineicResolution,LineicResolution,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicResolution
+LineicTorque,LineicTorque,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LineicTorque
+LinkedFlux,Linked Flux,1,2,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LinkedFlux
+LiquidLevel,Liquid Level,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LiquidLevel
+LiquidVolume,Liquid Volume,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LiquidVolume
+Log10FrequencyInterval,Logarithmic Frequency Interval to Base 10,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Log10FrequencyInterval
+Log10Ratio,Logarithmic Ratio to Base 10,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Log10Ratio
+Log10RatioPerLength,Logarithmic Ratio to Base 10 per Length,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Log10RatioPerLength
+Log2FrequencyInterval,Logarithmic Frequency Interval to Base 2,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Log2FrequencyInterval
+LogERatio,Logarithmic Ratio to Base e,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LogERatio
+LogOctanolAirPartitionCoefficient,Octanol Air Partition Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LogOctanolAirPartitionCoefficient
+LogOctanolWaterPartitionCoefficient,Logarithm of Octanol Water Partition Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LogOctanolWaterPartitionCoefficient
+LogarithmRatioToBase10,LogarithmRatioToBase10,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LogarithmRatioToBase10
+LogarithmRatioToBaseE,LogarithmRatioToBaseE,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LogarithmRatioToBaseE
+LogarithmicFrequencyInterval,Logarithmic Frequency Interval,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LogarithmicFrequencyInterval
+LogarithmicFrequencyIntervalToBase10,LogarithmicFrequencyIntervalToBase10,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LogarithmicFrequencyIntervalToBase10
+LogarithmicMedianInformationFlow_SourceToBase10,LogarithmicMedianInformationFlow_SourceToBase10,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LogarithmicMedianInformationFlow_SourceToBase10
+LogarithmicMedianInformationFlow_SourceToBase2,LogarithmicMedianInformationFlow_SourceToBase2,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LogarithmicMedianInformationFlow_SourceToBase2
+LogarithmicMedianInformationFlow_SourceToBaseE,LogarithmicMedianInformationFlow_SourceToBaseE,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/LogarithmicMedianInformationFlow_SourceToBaseE
+LondonPenetrationDepth,London Penetration Depth,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LondonPenetrationDepth
+Long-RangeOrderParameter,Long-Range Order Parameter,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Long-RangeOrderParameter
+LongRangeOrderParameter,Long-Range Order Parameter,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LongRangeOrderParameter
+LorenzCoefficient,Lorenz Coefficient,2,4,-6,-2,-2,0,0,listed,http://qudt.org/vocab/quantitykind/LorenzCoefficient
+LossAngle,Loss Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LossAngle
+LossFactor,Loss Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LossFactor
+Loudness,Loudness,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Loudness
+LoudnessLevel,LoudnessLevel,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LoudnessLevel
+LowerCriticalMagneticFluxDensity,Lower Critical Magnetic Flux Density,1,0,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/LowerCriticalMagneticFluxDensity
+Luminance,Luminance,0,-2,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/Luminance
+LuminousEfficacy,Luminous Efficacy,-1,-2,3,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousEfficacy
+LuminousEmittance,Luminous Emmitance,0,-2,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousEmittance
+LuminousEnergy,Luminous Energy,0,0,1,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousEnergy
+LuminousExitance,LuminousExitance,0,-2,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousExitance
+LuminousExposure,Luminous Exposure,0,-2,1,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousExposure
+LuminousFlux,Luminous Flux,0,0,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousFlux
+LuminousFluxPerArea,Luminous Flux per Area,0,-2,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousFluxPerArea
+LuminousFluxRatio,Luminous Flux Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LuminousFluxRatio
+LuminousIntensity,Luminous Intensity,0,0,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/LuminousIntensity
+LuminousIntensityDistribution,Ion Concentration,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/LuminousIntensityDistribution
+MASS-DELIVERED,Mass Delivered,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MASS-DELIVERED
+MASS-GROWTH-ALLOWANCE,Mass Growth Allowance,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MASS-GROWTH-ALLOWANCE
+MASS-MARGIN,Mass Margin,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MASS-MARGIN
+MASS-PROPERTY-UNCERTAINTY,Mass Property Uncertainty,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MASS-PROPERTY-UNCERTAINTY
+MOMENT-OF-INERTIA_Y,Moment of Inertia in the Y axis,1,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MOMENT-OF-INERTIA_Y
+MOMENT-OF-INERTIA_Z,Moment of Inertia in the Z axis,1,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MOMENT-OF-INERTIA_Z
+MachNumber,Mach Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MachNumber
+MacroscopicCrossSection,Macroscopic Cross-section,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MacroscopicCrossSection
+MacroscopicTotalCrossSection,Macroscopic Total Cross-section,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MacroscopicTotalCrossSection
+MadelungConstant,Madelung Constant,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MadelungConstant
+MagneticAreaMoment,Magnetic Area Moment,0,2,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticAreaMoment
+MagneticDipoleMoment,Magnetic Dipole Moment,1,3,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticDipoleMoment
+MagneticDipoleMomentOfAMolecule,MagneticDipoleMomentOfAMolecule,0,2,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticDipoleMomentOfAMolecule
+MagneticField,Magnetic Field,1,0,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticField
+MagneticFieldStrength,Magnetic Field Strength,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticFieldStrength
+MagneticFieldStrength_H,magnetic field strength,0,-1,0,1,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H
+MagneticFlux,Magnetic Flux,1,2,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticFlux
+MagneticFluxDensity,Magnetic Flux Density,1,0,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticFluxDensity
+MagneticFluxDensityOrMagneticPolarization,MagneticFluxDensityOrMagneticPolarization,1,0,-2,-1,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MagneticFluxDensityOrMagneticPolarization
+MagneticFluxPerLength,Magnetic Flux per Length,1,1,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticFluxPerLength
+MagneticMoment,Magnetic Moment,0,2,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticMoment
+MagneticPolarization,Magnetic Polarization,1,0,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticPolarization
+MagneticQuantumNumber,Magnetic Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticQuantumNumber
+MagneticReluctivity,Magnetic Reluctivity,-1,-1,2,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticReluctivity
+MagneticSusceptability,Magnetic Susceptability,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticSusceptability
+MagneticTension,Magnetic Tension,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticTension
+MagneticVectorPotential,Magnetic Vector Potential,1,1,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagneticVectorPotential
+Magnetization,Magnetization,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/Magnetization
+MagnetizationField,Magnetization Field,0,-1,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagnetizationField
+MagnetomotiveForce,Magnetomotive Force,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MagnetomotiveForce
+Mass,Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Mass
+MassAbsorptionCoefficient,Mass Absorption Coefficient,-1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassAbsorptionCoefficient
+MassAmountOfSubstance,Mass Amount of Substance,-1,0,0,0,0,1,0,deprecated,http://qudt.org/vocab/quantitykind/MassAmountOfSubstance
+MassAmountOfSubstanceTemperature,Mass Amount of Substance Temperature,0,0,0,0,1,1,0,listed,http://qudt.org/vocab/quantitykind/MassAmountOfSubstanceTemperature
+MassAttenuationCoefficient,Mass Attenuation Coefficient,-1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassAttenuationCoefficient
+MassBasedBloodGlucoseLevel,Blood Glucose Level by Mass,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassBasedBloodGlucoseLevel
+MassConcentration,Mass Concentration,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassConcentration
+MassConcentrationOfWater,Mass Concentration of Water,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassConcentrationOfWater
+MassConcentrationOfWaterVapour,Mass Concentration of Water Vapour,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassConcentrationOfWaterVapour
+MassConcentrationRateOfChange,Mass Concentration Rate of Change,1,-3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassConcentrationRateOfChange
+MassDefect,Mass Defect,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassDefect
+MassDensity,Mass Density,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassDensity
+MassEnergyTransferCoefficient,Mass Energy Transfer Coefficient,-1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassEnergyTransferCoefficient
+MassEquivalent,Mass Equivalent,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassEquivalent
+MassExcess,Mass Excess,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassExcess
+MassFlowRate,Mass Flow Rate,1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassFlowRate
+MassFluxDensity,MassFluxDensity,1,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassFluxDensity
+MassFraction,Mass Fraction,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassFraction
+MassFractionOfDryMatter,Mass Fraction of Dry Matter,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassFractionOfDryMatter
+MassFractionOfWater,Mass Fraction of Water,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassFractionOfWater
+MassNumber,Mass Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassNumber
+MassOfElectricalPowerSupply,Mass of Electrical Power Supply,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassOfElectricalPowerSupply
+MassOfSolidBooster,Mass of Solid Booster,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassOfSolidBooster
+MassOfTheEarth,Mass of the Earth,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassOfTheEarth
+MassPerArea,Mass per Area,1,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassPerArea
+MassPerAreaTime,Mass per Area Time,1,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassPerAreaTime
+MassPerElectricCharge,Mass per Electric Charge,1,0,-1,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassPerElectricCharge
+MassPerEnergy,Mass per Energy,0,-2,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassPerEnergy
+MassPerLength,Mass per Length,1,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassPerLength
+MassPerTime,Mass per Time,1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassPerTime
+MassRatio,Mass Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassRatio
+MassRatioOfWaterToDryMatter,Mass Concentration of Water to Dry Matter,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassRatioOfWaterToDryMatter
+MassRatioOfWaterVapourToDryGas,Mass Ratio of Water Vapour to Dry Gas,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassRatioOfWaterVapourToDryGas
+MassRelatedElectricalCurrent,MassRelatedElectricalCurrent,-1,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassRelatedElectricalCurrent
+MassSpecificBiogeochemicalRate,Mass Specific Biogeochemical Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassSpecificBiogeochemicalRate
+MassStoppingPower,Mass Stopping Power,1,4,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassStoppingPower
+MassTemperature,Mass Temperature,1,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/MassTemperature
+MassicActivity,Massic Activity,-1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassicActivity
+MassicElectricCurrent,Massic Electric Current,-1,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassicElectricCurrent
+MassicHeatCapacity,MassicHeatCapacity,0,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/MassicHeatCapacity
+MassicPower,MassicPower,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassicPower
+MassicTorque,MassicTorque,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MassicTorque
+MassieuFunction,Massieu Function,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/MassieuFunction
+MaxExpectedOperatingThrust,Maximum Expected Operating Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MaxExpectedOperatingThrust
+MaxOperatingThrust,Max Operating Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MaxOperatingThrust
+MaxSeaLevelThrust,Max Sea Level Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MaxSeaLevelThrust
+MaximumBeta-ParticleEnergy,Maximum Beta-Particle Energy,1,2,-2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MaximumBeta-ParticleEnergy
+MaximumBetaParticleEnergy,Maximum Beta-Particle Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MaximumBetaParticleEnergy
+MaximumExpectedOperatingPressure,Maximum Expected Operating Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MaximumExpectedOperatingPressure
+MaximumOperatingPressure,Maximum Operating Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MaximumOperatingPressure
+MeanEnergyImparted,Mean Energy Imparted,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MeanEnergyImparted
+MeanFreePath,Mean Free Path,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MeanFreePath
+MeanLifetime,Mean Lifetime,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MeanLifetime
+MeanLinearRange,Mean Linear Range,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MeanLinearRange
+MeanMassRange,Mean Mass Range,1,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MeanMassRange
+MechanicalEnergy,Mechanical Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MechanicalEnergy
+MechanicalImpedance,Mechanical Impedance,1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MechanicalImpedance
+MechanicalMobility,Mechanical Mobility,-1,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MechanicalMobility
+MechanicalSurfaceImpedance,Mechanical Surface Impedance,1,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MechanicalSurfaceImpedance
+MechanicalTension,MechanicalTension,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MechanicalTension
+MeltingPoint,Melting Point Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/MeltingPoint
+MicroCanonicalPartitionFunction,Micro Canonical Partition Function,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MicroCanonicalPartitionFunction
+MicrobialFormation,Microbial Formation,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/MicrobialFormation
+MigrationArea,Migration Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MigrationArea
+MigrationLength,Migration Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MigrationLength
+Mobility,Mobility,-1,0,2,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/Mobility
+MobilityRatio,Mobility Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MobilityRatio
+ModulusOfAdmittance,Modulus of Admittance,-1,-2,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ModulusOfAdmittance
+ModulusOfElasticity,Modulus of Elasticity,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ModulusOfElasticity
+ModulusOfImpedance,Modulus of Impedance,1,2,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ModulusOfImpedance
+ModulusOfLinearSubgradeReaction,Modulus of Linear Subgrade Reaction,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ModulusOfLinearSubgradeReaction
+ModulusOfRotationalSubgradeReaction,Modulus of Rotational Subgrade Reaction,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ModulusOfRotationalSubgradeReaction
+ModulusOfSubgradeReaction,Modulus of Subgrade Reaction,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ModulusOfSubgradeReaction
+MoistureDiffusivity,Moisture Diffusivity,0,3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MoistureDiffusivity
+MolalityOfSolute,Molality of Solute,-1,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/MolalityOfSolute
+MolarAbsorptionCoefficient,Molar Absorption Coefficient,0,2,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarAbsorptionCoefficient
+MolarAngularMomentum,Molar Angular Momentum,1,2,-1,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarAngularMomentum
+MolarAttenuationCoefficient,Molar Attenuation Coefficient,0,2,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarAttenuationCoefficient
+MolarConductivity,Molar Conductivity,-1,0,3,2,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarConductivity
+MolarDensity,MolarDensity,0,0,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarDensity
+MolarEnergy,Molar Energy,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarEnergy
+MolarEntropy,Molar Entropy,1,2,-2,0,-1,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarEntropy
+MolarEquivalent,Molar Equivalent,0,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/MolarEquivalent
+MolarFlowRate,Molar Flow Rate,0,0,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/MolarFlowRate
+MolarFluxDensity,Molar Flux Density,0,-2,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/MolarFluxDensity
+MolarFluxDensityVariance,Molar Flux Density Variance,0,-4,-2,0,0,2,0,listed,http://qudt.org/vocab/quantitykind/MolarFluxDensityVariance
+MolarFluxDensityVariance_NEON,"Molar Flux Density Variance, NEON",0,-4,-2,0,0,2,0,deprecated,http://qudt.org/vocab/quantitykind/MolarFluxDensityVariance_NEON
+MolarHeatCapacity,Molar Heat Capacity,1,2,-2,0,-1,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarHeatCapacity
+MolarInternalEnergy,Molar Internal Energy,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarInternalEnergy
+MolarMass,Molar Mass,1,0,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarMass
+MolarOpticalRotationalAbility,MolarOpticalRotationalAbility,0,2,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarOpticalRotationalAbility
+MolarOpticalRotatoryPower,Molar Optical Rotatory Power,0,2,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarOpticalRotatoryPower
+MolarRefractivity,Molar Refractivity,0,3,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarRefractivity
+MolarThermalCapacity,MolarThermalCapacity,1,2,-2,0,-1,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarThermalCapacity
+MolarThermodynamicEnergy,MolarThermodynamicEnergy,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarThermodynamicEnergy
+MolarVolume,Molar Volume,0,3,0,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/MolarVolume
+MoleFraction,Mole Fraction,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MoleFraction
+MolecularConcentration,Molecular Concentration,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MolecularConcentration
+MolecularMass,Molecular Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MolecularMass
+MolecularViscosity,Molecular Viscosity,1,-1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MolecularViscosity
+MomentOfForce,Moment of Force,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MomentOfForce
+MomentOfInertia,Moment of Inertia,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MomentOfInertia
+MomentOfInertia_Y,Moment of Inertia in the Y Axis,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MomentOfInertia_Y
+MomentOfInertia_Z,Moment of Inertia in the Z Axis,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MomentOfInertia_Z
+Momentum,Momentum,1,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Momentum
+MomentumPerAngle,Momentum per Angle,1,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MomentumPerAngle
+MorbidityRate,Morbidity Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MorbidityRate
+MortalityRate,Mortality Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MortalityRate
+MotorConstant,MotorConstant,1/2,1,-1/2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MotorConstant
+MultiplicationFactor,Multiplication Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/MultiplicationFactor
+MutualInductance,Mutual Inductance,1,2,-2,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/MutualInductance
+NOMINAL-ASCENT-PROPELLANT-MASS,Nominal Ascent Propellant Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/NOMINAL-ASCENT-PROPELLANT-MASS
+NapierianAbsorbance,Napierian Absorbance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NapierianAbsorbance
+NaturalLogarithmicMedianInformationFlow,NaturalLogarithmicMedianInformationFlow,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/NaturalLogarithmicMedianInformationFlow
+NeelTemperature,Neel Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/NeelTemperature
+NetTonnage,Net Tonnage,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NetTonnage
+NeutralRatio,NeutralRatio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NeutralRatio
+NeutronDiffusionCoefficient,Diffusion Coefficient,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NeutronDiffusionCoefficient
+NeutronDiffusionLength,Neutron Diffusion Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NeutronDiffusionLength
+NeutronNumber,Neutron Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NeutronNumber
+NeutronYieldPerAbsorption,Neutron Yield per Absorption,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NeutronYieldPerAbsorption
+NeutronYieldPerFission,Neutron Yield per Fission,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NeutronYieldPerFission
+Non-LeakageProbability,Non-Leakage Probability,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Non-LeakageProbability
+NonActivePower,Non-active Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NonActivePower
+NonLeakageProbability,Non-Leakage Probability,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NonLeakageProbability
+NonNegativeLength,Positive Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NonNegativeLength
+NormalStress,Normal Stress,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NormalStress
+NormalizedDimensionlessRatio,Positive Dimensionless Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NormalizedDimensionlessRatio
+NuclearEnergy,Nuclear Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NuclearEnergy
+NuclearQuadrupoleMoment,Nuclear Quadrupole Moment,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NuclearQuadrupoleMoment
+NuclearRadius,Nuclear Radius,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NuclearRadius
+NuclearSpinQuantumNumber,Spin Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NuclearSpinQuantumNumber
+NucleonNumber,Nucleon Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NucleonNumber
+NumberDensity,Number Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NumberDensity
+NumberOfElectricalPhases,Number of Electrical Phases,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NumberOfElectricalPhases
+NumberOfParticles,Number of Particles,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/NumberOfParticles
+OlfactoryThreshold,Olfactory Threshold,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/OlfactoryThreshold
+OpeningRatio,Opening Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OpeningRatio
+OrbitalAngularMomentumPerMass,Orbital Angular Momentum per Mass,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OrbitalAngularMomentumPerMass
+OrbitalAngularMomentumQuantumNumber,Orbital Angular Momentum Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OrbitalAngularMomentumQuantumNumber
+OrbitalRadialDistance,Orbital Radial Distance,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OrbitalRadialDistance
+OrderOfReflection,Order of Reflection,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OrderOfReflection
+Osmolality,Osmolality,-1,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/Osmolality
+OsmoticCoefficient,Osmotic Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OsmoticCoefficient
+OsmoticConcentration,Osmotic Concentration,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/OsmoticConcentration
+OsmoticPressure,Osmotic Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OsmoticPressure
+OverRangeDistance,Over-range Distance,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/OverRangeDistance
+PREDICTED-MASS,Predicted Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/PREDICTED-MASS
+PRODUCT-OF-INERTIA,Product of Inertia,1,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/PRODUCT-OF-INERTIA
+PRODUCT-OF-INERTIA_X,Product of Inertia in the X axis,1,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/PRODUCT-OF-INERTIA_X
+PRODUCT-OF-INERTIA_Y,Product of Inertia in the Y axis,1,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/PRODUCT-OF-INERTIA_Y
+PRODUCT-OF-INERTIA_Z,Product of Inertia in the Z axis,1,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/PRODUCT-OF-INERTIA_Z
+Pace,Pace,0,-1,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Pace
+PackingFraction,Packing Fraction,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PackingFraction
+PartialPressure,Partial Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PartialPressure
+ParticleCurrent,Particle Current,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticleCurrent
+ParticleCurrentDensity,ParticleCurrentDensity,0,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticleCurrentDensity
+ParticleFluence,Particle Fluence,0,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticleFluence
+ParticleFluenceRate,Particle Fluence Rate,0,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticleFluenceRate
+ParticleNumberDensity,Particle Number Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticleNumberDensity
+ParticlePositionVector,Particle Position Vector,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticlePositionVector
+ParticleSourceDensity,Particle Source Density,0,-3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ParticleSourceDensity
+PathLength,Path Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PathLength
+PayloadMass,Payload Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PayloadMass
+PayloadRatio,Payload Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PayloadRatio
+PeltierCoefficient,Peltier Coefficient,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/PeltierCoefficient
+Period,Period,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Period
+Permeability,Permeability,1,1,-2,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Permeability
+PermeabilityRatio,Permeability Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PermeabilityRatio
+Permeance,Permeance,1,2,-2,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Permeance
+Permittivity,Permittivity,-1,-3,4,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Permittivity
+PermittivityRatio,Permittivity Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PermittivityRatio
+PhaseCoefficient,Phase Coefficient,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhaseCoefficient
+PhaseDifference,Phase Difference,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhaseDifference
+PhaseSpeedOfSound,Phase Speed of Sound,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhaseSpeedOfSound
+PhononMeanFreePath,Phonon Mean Free Path,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhononMeanFreePath
+PhotoThresholdOfAwarenessFunction,Photo Threshold of Awareness Function,0,0,1,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/PhotoThresholdOfAwarenessFunction
+PhotonIntensity,Photon Intensity,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhotonIntensity
+PhotonLuminance,PhotonLuminance,0,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhotonLuminance
+PhotonRadiance,Photon Radiance,0,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PhotonRadiance
+PhotosyntheticPhotonFlux,Photosynthetic Photon Flux,0,0,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/PhotosyntheticPhotonFlux
+PhotosyntheticPhotonFluxDensity,Photosynthetic Photon Flux Density,0,-2,-1,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/PhotosyntheticPhotonFluxDensity
+PictureElement,PictureElement,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PictureElement
+Piece,Piece,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Piece
+PlanarForce,Planar Force,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PlanarForce
+PlanckFunction,Planck Function,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/PlanckFunction
+PlaneAngle,Plane Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PlaneAngle
+PlasmaLevel,Plasma Level,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PlasmaLevel
+PoissonRatio,Poisson Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PoissonRatio
+PolarMomentOfInertia,Polar Moment of Inertia,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PolarMomentOfInertia
+Polarizability,Polarisability,-1,0,4,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Polarizability
+PolarizationField,Polarization Field,0,-2,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/PolarizationField
+Population,Population,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Population
+PositionVector,Position Vector,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PositionVector
+PositiveDimensionlessRatio,Positive Dimensionless Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PositiveDimensionlessRatio
+PositiveLength,Positive Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PositiveLength
+PositivePlaneAngle,Positive Plane Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PositivePlaneAngle
+PotentialEnergy,Potential Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PotentialEnergy
+Power,Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Power
+PowerArea,Power Area,1,4,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerArea
+PowerAreaPerSolidAngle,Power Area per Solid Angle,1,4,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerAreaPerSolidAngle
+PowerConstant,PowerConstant,1,1,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerConstant
+PowerDensity,Power Density,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerDensity
+PowerFactor,Power Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerFactor
+PowerPerArea,Power per Area,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerPerArea
+PowerPerAreaAngle,Power per Area Angle,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerPerAreaAngle
+PowerPerAreaQuarticTemperature,Power per Area Quartic Temperature,1,0,-3,0,-4,0,0,listed,http://qudt.org/vocab/quantitykind/PowerPerAreaQuarticTemperature
+PowerPerElectricCharge,Power per Electric Charge,1,2,-4,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerPerElectricCharge
+PowerPerVolume,Power per Volume,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PowerPerVolume
+PoyntingVector,Poynting Vector,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PoyntingVector
+Pressure,Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Pressure
+PressureBasedAmountOfSubstanceConcentration,PressureBasedAmountOfSubstanceConcentration,-1,-2,2,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedAmountOfSubstanceConcentration
+PressureBasedDensity,PressureBasedDensity,0,-2,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedDensity
+PressureBasedDynamicViscosity,PressureBasedDynamicViscosity,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedDynamicViscosity
+PressureBasedElectricCurrent,PressureBasedElectricCurrent,-1,1,2,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedElectricCurrent
+PressureBasedElectricVoltage,PressureBasedElectricVoltage,0,3,-1,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedElectricVoltage
+PressureBasedKinematicViscosity,PressureBasedKinematicViscosity,-1,3,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedKinematicViscosity
+PressureBasedLength,PressureBasedLength,-1,2,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedLength
+PressureBasedMass,PressureBasedMass,0,1,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedMass
+PressureBasedMassFlow,PressureBasedMassFlow,0,1,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedMassFlow
+PressureBasedMolality,PressureBasedMolality,-2,1,2,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedMolality
+PressureBasedQuantity,PressureBasedQuantity,,,,,,,,listed,http://qudt.org/vocab/quantitykind/PressureBasedQuantity
+PressureBasedTemperature,PressureBasedTemperature,-1,1,2,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedTemperature
+PressureBasedVelocity,PressureBasedVelocity,-1,2,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedVelocity
+PressureBasedVolume,PressureBasedVolume,-1,4,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedVolume
+PressureBasedVolumeFlow,PressureBasedVolumeFlow,-1,4,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBasedVolumeFlow
+PressureBurningRateConstant,Pressure Burning Rate Constant,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBurningRateConstant
+PressureBurningRateIndex,Pressure Burning Rate Index,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureBurningRateIndex
+PressureCoefficient,Pressure Coefficient,1,-1,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/PressureCoefficient
+PressureGradient,PressureGradient,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureGradient
+PressureInRelationToVolumeFlow,PressureInRelationToVolumeFlow,1,-4,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureInRelationToVolumeFlow
+PressureInRelationToVolumeFlowRate,Pressure in Relation to Volume Flow Rate,1,-4,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureInRelationToVolumeFlowRate
+PressureLossPerLength,Pressure Loss per Length,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureLossPerLength
+PressureRatio,Pressure Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PressureRatio
+Prevalence,Prevalence,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Prevalence
+PrincipalQuantumNumber,Principal Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PrincipalQuantumNumber
+ProductOfInertia,Product of Inertia,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ProductOfInertia
+ProductOfInertia_X,Product of Inertia in the X Axis,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ProductOfInertia_X
+ProductOfInertia_Y,Product of Inertia in the Y Axis,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ProductOfInertia_Y
+ProductOfInertia_Z,Product of Inertia in the Z Axis,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ProductOfInertia_Z
+PropagationCoefficient,Propagation Coefficient,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/PropagationCoefficient
+QualityFactor,Quality Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/QualityFactor
+QuantityOfLight,QuantityOfLight,0,0,1,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/QuantityOfLight
+QuantumNumber,Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/QuantumNumber
+QuarticElectricDipoleMomentPerCubicEnergy,Quartic Electric Dipole Moment per Cubic Energy,-3,-2,10,4,0,0,0,listed,http://qudt.org/vocab/quantitykind/QuarticElectricDipoleMomentPerCubicEnergy
+RESERVE-MASS,Reserve Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/RESERVE-MASS
+RF-Power,RF-Power Level,1,1,-3,-1,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/RF-Power
+RFPower,RF-Power Level,1,1,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/RFPower
+RadialDistance,Radial Distance,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadialDistance
+Radiance,Radiance,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Radiance
+RadianceFactor,Radiance Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadianceFactor
+RadiantEmmitance,Radiant Emmitance,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantEmmitance
+RadiantEnergy,Radiant Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantEnergy
+RadiantEnergyDensity,Radiant Energy Density,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantEnergyDensity
+RadiantEnergyExposure,Radiant Energy Exposure,-1,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantEnergyExposure
+RadiantExposure,Radiant Exposure,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantExposure
+RadiantFluence,Radiant Fluence,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantFluence
+RadiantFluenceRate,Radiant Fluence Rate,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantFluenceRate
+RadiantFlux,Radiant Flux,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantFlux
+RadiantIntensity,Radiant Intensity,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiantIntensity
+RadiativeHeatTransfer,Radiative Heat Transfer,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiativeHeatTransfer
+RadioactiveDecay,Radioactive Decay,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadioactiveDecay
+Radioactivity,Radioactivity,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Radioactivity
+Radiosity,Radiosity,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Radiosity
+Radius,Radius,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Radius
+RadiusOfCurvature,Radius of Curvature,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadiusOfCurvature
+RadonExposure,Radon Exposure,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RadonExposure
+RankineTemperature,RankineTemperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/RankineTemperature
+RateOfChange,Rate of Change,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RateOfChange
+RateOfChangeOfFrequency,Rate of Change of Frequency,0,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RateOfChangeOfFrequency
+RateOfRiseOfOffStateVoltage,RateOfRiseOfOffStateVoltage,1,2,-4,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/RateOfRiseOfOffStateVoltage
+RateOfRiseOfVoltage,Rate of Rise of Voltage,1,2,-4,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/RateOfRiseOfVoltage
+Ratio,Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Ratio
+RatioOfSpecificHeatCapacities,Ratio of Specific Heat Capacities,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RatioOfSpecificHeatCapacities
+Reactance,Reactance,1,2,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Reactance
+ReactionEnergy,Reaction Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReactionEnergy
+ReactiveCharge,Reactive Charge,0,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/ReactiveCharge
+ReactiveChargePerMass,Reactive Charge per Mass,-1,0,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/ReactiveChargePerMass
+ReactiveEnergy,Reactive Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReactiveEnergy
+ReactivePower,Reactive Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReactivePower
+Reactivity,Reactivity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Reactivity
+ReactorTimeConstant,Reactor Time Constant,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReactorTimeConstant
+ReciprocalElectricResistance,ReciprocalElectricResistance,-1,-2,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReciprocalElectricResistance
+ReciprocalEnergy,ReciprocalEnergy,-1,-2,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReciprocalEnergy
+ReciprocalPlaneAngle,ReciprocalPlaneAngle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReciprocalPlaneAngle
+ReciprocalVoltage,ReciprocalVoltage,-1,-2,3,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReciprocalVoltage
+RecombinationCoefficient,Recombination Coefficient,0,3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RecombinationCoefficient
+Reflectance,Reflectance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Reflectance
+ReflectanceFactor,Reflectance Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReflectanceFactor
+Reflectivity,Reflectivity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Reflectivity
+RefractiveIndex,Refractive Index,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RefractiveIndex
+RelativeAtomicMass,Relative Atomic Mass,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeAtomicMass
+RelativeHumidity,Relative Humidity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeHumidity
+RelativeMassConcentrationOfVapour,Relative Mass Concentration of Vapour,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeMassConcentrationOfVapour
+RelativeMassDefect,Relative Mass Defect,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeMassDefect
+RelativeMassDensity,Relative Mass Density,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeMassDensity
+RelativeMassExcess,Relative Mass Excess,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeMassExcess
+RelativeMassRatioOfVapour,Relative Mass Ratio of Vapour,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeMassRatioOfVapour
+RelativeMolecularMass,Relative Molecular Mass,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativeMolecularMass
+RelativePartialPressure,Relative Partial Pressure,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelativePartialPressure
+RelativePressureCoefficient,Relative Pressure Coefficient,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/RelativePressureCoefficient
+RelaxationTIme,Relaxation Time,0,0,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/RelaxationTIme
+RelaxationTime,Relaxation Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RelaxationTime
+Reluctance,Reluctance,-1,-2,2,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Reluctance
+Repetency,Repetency,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Repetency
+ResidualResistivity,Residual Resistivity,1,3,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/ResidualResistivity
+Resistance,Resistance,1,2,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Resistance
+ResistanceBasedInductance,ResistanceBasedInductance,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ResistanceBasedInductance
+ResistanceRatio,Resistance Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ResistanceRatio
+Resistivity,Resistivity,1,3,-3,-2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Resistivity
+ResonanceEnergy,Resonance Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ResonanceEnergy
+ResonanceEscapeProbability,Resonance Escape Probability,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ResonanceEscapeProbability
+ResonanceEscapeProbabilityForFission,Resonance Escape Probability for Fission,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ResonanceEscapeProbabilityForFission
+RespiratoryRate,Respiratory Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RespiratoryRate
+RestEnergy,Rest Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RestEnergy
+RestMass,Rest Mass,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RestMass
+ReverberationTime,Reverberation Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReverberationTime
+ReynoldsNumber,Reynolds Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ReynoldsNumber
+RichardsonConstant,Richardson Constant,0,-2,0,1,-2,0,0,listed,http://qudt.org/vocab/quantitykind/RichardsonConstant
+RiseOfOffStateVoltage,RiseOfOffStateVoltage,1,2,-4,-1,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/RiseOfOffStateVoltage
+Rotary-TranslatoryMotionConversion,rotary-translatory motion conversion,0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Rotary-TranslatoryMotionConversion
+RotaryShock,RotaryShock,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RotaryShock
+RotaryTranslatoryMotionConversion,Rotary-translatory Motion Conversion,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RotaryTranslatoryMotionConversion
+RotationalFrequency,Rotational Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RotationalFrequency
+RotationalMass,Rotational Mass,1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RotationalMass
+RotationalStiffness,Rotational Stiffness,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RotationalStiffness
+RotationalVelocity,Rotational Frequency,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/RotationalVelocity
+ScalarMagneticPotential,Scalar Magnetic Potential,1,1,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ScalarMagneticPotential
+SecondAxialMomentOfArea,Second Axial Moment of Area,0,4,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SecondAxialMomentOfArea
+SecondMomentOfArea,Second Moment of Area,0,4,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SecondMomentOfArea
+SecondOrderReactionRateConstant,Reaction Rate Constant,0,3,-1,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/SecondOrderReactionRateConstant
+SecondPolarMomentOfArea,Second Polar Moment of Area,0,4,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SecondPolarMomentOfArea
+SecondRadiationConstant,SecondRadiationConstant,0,1,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/SecondRadiationConstant
+SectionAreaIntegral,Section Area Integral,0,5,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SectionAreaIntegral
+SectionModulus,Section Modulus,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SectionModulus
+SeebeckCoefficient,Seebeck Coefficient,1,2,-3,-1,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SeebeckCoefficient
+SerumLevel,Serum Level,1,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SerumLevel
+SerumOrPlasmaLevel,Serum or Plasma Level,0,-3,0,0,0,1,0,deprecated,http://qudt.org/vocab/quantitykind/SerumOrPlasmaLevel
+ServiceFactor,Service Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ServiceFactor
+ShannonDiversityIndex,Shannon Diversity Index,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ShannonDiversityIndex
+ShearModulus,Shear Modulus,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ShearModulus
+ShearStrain,Shear Strain,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ShearStrain
+ShearStress,Shear Stress,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ShearStress
+Short-RangeOrderParameter,Short-Range Order Parameter,0,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Short-RangeOrderParameter
+ShortRangeOrderParameter,Short-Range Order Parameter,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ShortRangeOrderParameter
+SignalDetectionThreshold,Signal Detection Threshold,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SignalDetectionThreshold
+SignalStrength,Signal Strength,1,1,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/SignalStrength
+Slowing-DownArea,Slowing-Down Area,0,2,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Slowing-DownArea
+Slowing-DownDensity,Slowing-Down Density,0,-3,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Slowing-DownDensity
+Slowing-DownLength,Slowing-Down Length,0,1,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Slowing-DownLength
+SlowingDownArea,Slowing-Down Area,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SlowingDownArea
+SlowingDownDensity,Slowing-Down Density,0,-3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SlowingDownDensity
+SlowingDownLength,Slowing-Down Length,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SlowingDownLength
+SoilAdsorptionCoefficient,Soil Adsorption Coefficient,-1,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient
+SolidAngle,Solid Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SolidAngle
+SolidStateDiffusionLength,Diffusion Length (Solid State Physics),0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SolidStateDiffusionLength
+Solubility_Water,Water Solubility,0,-3,0,0,0,1,0,deprecated,http://qudt.org/vocab/quantitykind/Solubility_Water
+SoundEnergyDensity,Sound Energy Density,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundEnergyDensity
+SoundExposure,Sound Exposure,2,-2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundExposure
+SoundExposureLevel,Sound Exposure Level,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundExposureLevel
+SoundIntensity,Sound Intensity,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundIntensity
+SoundParticleAcceleration,Sound Particle Acceleration,0,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundParticleAcceleration
+SoundParticleDisplacement,Sound Particle Displacement,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundParticleDisplacement
+SoundParticleVelocity,Sound Particle Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundParticleVelocity
+SoundPower,Sound Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundPower
+SoundPowerLevel,Sound Power Level,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundPowerLevel
+SoundPressure,Sound Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundPressure
+SoundPressureLevel,Sound Pressure Level,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundPressureLevel
+SoundReductionIndex,Sound Reduction Index,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundReductionIndex
+SoundVolumeVelocity,Sound Volume Velocity,0,3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SoundVolumeVelocity
+SourceVoltage,Source Voltage,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/SourceVoltage
+SourceVoltageBetweenSubstances,Source Voltage Between Substances,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/SourceVoltageBetweenSubstances
+SpatialSummationFunction,Spatial Summation Function,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpatialSummationFunction
+SpecificAcousticImpedance,Specific Acoustic Impedance,1,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificAcousticImpedance
+SpecificActivity,Specific Activity,-1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificActivity
+SpecificElectricCharge,Specific Electric Charge,-1,0,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificElectricCharge
+SpecificElectricCurrent,Specific Electrical Current,-1,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificElectricCurrent
+SpecificEnergy,Specific Energy,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificEnergy
+SpecificEnergyImparted,Specific Energy Imparted,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificEnergyImparted
+SpecificEnthalpy,Specific Enthalpy,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificEnthalpy
+SpecificEntropy,Specific Entropy,0,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificEntropy
+SpecificGibbsEnergy,Specific Gibbs Energy,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificGibbsEnergy
+SpecificHeatCapacity,Specific Heat Capacity,0,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatCapacity
+SpecificHeatCapacityAtConstantPressure,Specific Heat Capacity at Constant Pressure,0,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantPressure
+SpecificHeatCapacityAtConstantVolume,Specific Heat Capacity at Constant Volume,0,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantVolume
+SpecificHeatCapacityAtSaturation,Specific Heat Capacity at Saturation,0,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtSaturation
+SpecificHeatPressure,Specific Heat Pressure,-1,3,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatPressure
+SpecificHeatVolume,Specific Heat Volume,0,-1,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatVolume
+SpecificHeatsRatio,Specific Heats Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHeatsRatio
+SpecificHelmholtzEnergy,Specific Helmholtz Energy,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHelmholtzEnergy
+SpecificHumidity,Specific Humidity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificHumidity
+SpecificImpulse,Specific Impulse,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificImpulse
+SpecificImpulseByMass,Specific Impulse by Mass,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificImpulseByMass
+SpecificImpulseByWeight,Specific Impulse by Weight,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificImpulseByWeight
+SpecificInternalEnergy,Specific Internal Energy,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificInternalEnergy
+SpecificModulus,Specific Modulus,0,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificModulus
+SpecificOpticalRotationalAbility,SpecificOpticalRotationalAbility,-1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificOpticalRotationalAbility
+SpecificOpticalRotatoryPower,Specific Optical Rotatory Power,-1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificOpticalRotatoryPower
+SpecificPower,Specific Power,0,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificPower
+SpecificSurfaceArea,Specific Surface Area,-1,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificSurfaceArea
+SpecificThrust,Specific Thrust,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificThrust
+SpecificVolume,Specific Volume,-1,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificVolume
+SpecificWeight,Specific Weight,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpecificWeight
+SpectralAngularCrossSection,Spectral Angular Cross-section,-1,0,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralAngularCrossSection
+SpectralConcentrationOfRadiantEnergyDensity,SpectralConcentrationOfRadiantEnergyDensity,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralConcentrationOfRadiantEnergyDensity
+SpectralConcentrationOfVibrationalModes,SpectralConcentrationOfVibrationalModes,0,-3,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralConcentrationOfVibrationalModes
+SpectralCrossSection,Spectral Cross-section,-1,0,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralCrossSection
+SpectralDensityOfVibrationalModes,Spectral Density of Vibrational Modes,0,-3,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralDensityOfVibrationalModes
+SpectralEmittance,Measurement Unit of Spectral Emittance,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralEmittance
+SpectralIrradiance,Measurement Unit of Spectral Irradiance,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralIrradiance
+SpectralLuminousEfficiency,Spectral Luminous Efficiency,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralLuminousEfficiency
+SpectralRadiance,Measurement Unit of Spectral Radiance,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralRadiance
+SpectralRadiantEnergyDensity,Spectral Radiant Energy Density,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralRadiantEnergyDensity
+SpectralRadiantEnergyDensityInTermsOfWavelength,Spectral Radiant Energy Density in Terms of Wavelength,1,-2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpectralRadiantEnergyDensityInTermsOfWavelength
+Speed,Speed,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Speed
+SpeedOfLight,Speed of Light,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpeedOfLight
+SpeedOfSound,Speed of Sound,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpeedOfSound
+SpeedRatio,Speed Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpeedRatio
+SphericalIlluminance,Illuminance,0,-2,0,0,0,0,1,listed,http://qudt.org/vocab/quantitykind/SphericalIlluminance
+Spin,Spin,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Spin
+SpinQuantumNumber,Spin Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SpinQuantumNumber
+SquareEnergy,Square Energy,2,4,-4,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SquareEnergy
+SquareTime,Square Time,0,0,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SquareTime
+StandardAbsoluteActivity,Standard Absolute Activity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StandardAbsoluteActivity
+StandardChemicalPotential,Standard Chemical Potential,1,2,-2,0,0,-1,0,listed,http://qudt.org/vocab/quantitykind/StandardChemicalPotential
+StandardGravitationalParameter,Standard Gravitational Parameter,0,3,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StandardGravitationalParameter
+StateDensity,StateDensity,-1,-5,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StateDensity
+StateDensityAsExpressionOfAngularFrequency,State Density as Expression of Angular Frequency,0,-3,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StateDensityAsExpressionOfAngularFrequency
+StateOfCharge,State of Charge,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StateOfCharge
+StaticFriction,Static Friction,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StaticFriction
+StaticFrictionCoefficient,Static Friction Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StaticFrictionCoefficient
+StaticPressure,Static Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StaticPressure
+StatisticalWeight,Statistical Weight,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StatisticalWeight
+StochasticProcess,Stochastic Process,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StochasticProcess
+StoichiometricNumber,Stoichiometric Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StoichiometricNumber
+Strain,Strain,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Strain
+StrainEnergyDensity,Strain Energy Density,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StrainEnergyDensity
+StrainEnergyReleaseRate,Strain Energy Release Rate,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StrainEnergyReleaseRate
+Stress,Stress,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Stress
+StressIntensityFactor,Stress Intensity Factor,1,-1/2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StressIntensityFactor
+StressOpticCoefficient,Stress-Optic Coefficient,-1,1,2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StressOpticCoefficient
+StructuralEfficiency,Structural Efficiency,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StructuralEfficiency
+StructureFactor,Structure Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/StructureFactor
+SunProtectionFactorOfAProduct,Sun Protection Factor of a Product,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SunProtectionFactorOfAProduct
+SuperconductionTransitionTemperature,Superconduction Transition Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/SuperconductionTransitionTemperature
+SuperconductorEnergyGap,Superconductor Energy Gap,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SuperconductorEnergyGap
+SurfaceActivityDensity,Surface Activity Density,0,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SurfaceActivityDensity
+SurfaceCoefficientOfHeatTransfer,Surface Coefficient of Heat Transfer,1,0,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/SurfaceCoefficientOfHeatTransfer
+SurfaceDensity,Surface Density,1,-2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SurfaceDensity
+SurfaceRelatedVolumeFlow,SurfaceRelatedVolumeFlow,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SurfaceRelatedVolumeFlow
+SurfaceRelatedVolumeFlowRate,Surface‑related Volume Flow Rate,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SurfaceRelatedVolumeFlowRate
+SurfaceTension,Surface Tension,1,0,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SurfaceTension
+SurgeImpedanceOfTheMedium,SurgeImpedanceOfTheMedium,1,-2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SurgeImpedanceOfTheMedium
+Susceptance,Susceptance,-1,-2,3,2,0,0,0,listed,http://qudt.org/vocab/quantitykind/Susceptance
+SymbolTransmissionRate,SymbolTransmissionRate,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SymbolTransmissionRate
+SystolicBloodPressure,Systolic Blood Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/SystolicBloodPressure
+TARGET-BOGIE-MASS,Target Bogie Mass,1,0,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/TARGET-BOGIE-MASS
+Temperature,Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/Temperature
+TemperatureAmountOfSubstance,Temperature Amount of Substance,0,0,0,0,1,1,0,listed,http://qudt.org/vocab/quantitykind/TemperatureAmountOfSubstance
+TemperatureBasedAmountOfSubstanceConcentration,TemperatureBasedAmountOfSubstanceConcentration,0,-3,0,0,-1,1,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedAmountOfSubstanceConcentration
+TemperatureBasedDensity,TemperatureBasedDensity,1,-3,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedDensity
+TemperatureBasedDynamicViscosity,TemperatureBasedDynamicViscosity,1,-1,-1,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedDynamicViscosity
+TemperatureBasedKinematicViscosity,TemperatureBasedKinematicViscosity,0,2,-1,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedKinematicViscosity
+TemperatureBasedLength,TemperatureBasedLength,0,1,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedLength
+TemperatureBasedMass,TemperatureBasedMass,1,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedMass
+TemperatureBasedMassFlowRate,TemperatureBasedMassFlowRate,1,0,-1,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedMassFlowRate
+TemperatureBasedQuantity,TemperatureBasedQuantity,,,,,,,,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedQuantity
+TemperatureBasedVelocity,TemperatureBasedVelocity,0,1,-1,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedVelocity
+TemperatureBasedVolumeFlowRate,TemperatureBasedVolumeFlowRate,0,3,-1,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureBasedVolumeFlowRate
+TemperatureDifference,Temperature Difference,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureDifference
+TemperatureGradient,Temperature Gradient,0,-1,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureGradient
+TemperaturePerMagneticFluxDensity,Temperature per Magnetic Flux Density,-1,0,2,1,1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperaturePerMagneticFluxDensity
+TemperaturePerSquareTime,Temperature per Square Time,0,0,-2,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperaturePerSquareTime
+TemperaturePerTime,Temperature per Time,0,0,-1,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperaturePerTime
+TemperaturePerTime_Squared,Temperature per Time Squared,0,0,-2,0,1,0,0,deprecated,http://qudt.org/vocab/quantitykind/TemperaturePerTime_Squared
+TemperatureRateOfChange,Temperature Rate of Change,0,0,-1,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureRateOfChange
+TemperatureRatio,Temperature Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureRatio
+TemperatureRelatedMolarMass,TemperatureRelatedMolarMass,1,0,0,0,-1,-1,0,listed,http://qudt.org/vocab/quantitykind/TemperatureRelatedMolarMass
+TemperatureRelatedVolume,TemperatureRelatedVolume,0,3,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureRelatedVolume
+TemperatureVariance,Temperature Variance,0,0,0,0,2,0,0,listed,http://qudt.org/vocab/quantitykind/TemperatureVariance
+TemperatureVariance_NEON,"Temperature Variance, NEON",0,0,0,0,2,0,0,deprecated,http://qudt.org/vocab/quantitykind/TemperatureVariance_NEON
+TemporalSummationFunction,Temporal Summation Function,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TemporalSummationFunction
+Tension,Tension,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Tension
+ThermalAdmittance,Thermal Admittance,1,0,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalAdmittance
+ThermalCapacitance,ThermalCapacitance,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalCapacitance
+ThermalCoefficientOfLinearExpansion,ThermalCoefficientOfLinearExpansion,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalCoefficientOfLinearExpansion
+ThermalConductance,Thermal Conductance,1,2,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalConductance
+ThermalConductivity,Thermal Conductivity,1,1,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalConductivity
+ThermalDiffusionFactor,Thermal Diffusion Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalDiffusionFactor
+ThermalDiffusionRatio,Thermal Diffusion Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalDiffusionRatio
+ThermalDiffusionRatioCoefficient,Thermal Diffusion Coefficient,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalDiffusionRatioCoefficient
+ThermalDiffusivity,Thermal Diffusivity,0,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalDiffusivity
+ThermalEfficiency,Thermal Efficiency,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalEfficiency
+ThermalEnergy,Thermal Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalEnergy
+ThermalEnergyLength,Thermal Energy Length,1,3,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalEnergyLength
+ThermalExpansionCoefficient,Thermal Expansion Coefficient,0,0,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient
+ThermalInertia,Measurement Unit of Thermal Inertia,1,2,-5/2,-2,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalInertia
+ThermalInsulance,Thermal Insulance,-1,0,3,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalInsulance
+ThermalInsulation,ThermalInsulation,-1,0,3,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalInsulation
+ThermalPower,Thermal Power,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalPower
+ThermalResistance,Thermal Resistance,-1,-2,3,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalResistance
+ThermalResistivity,Thermal Resistivity,-1,-1,3,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalResistivity
+ThermalTransmittance,Thermal Transmittance,1,0,-3,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalTransmittance
+ThermalUtilizationFactor,Thermal Utilization Factor,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalUtilizationFactor
+ThermalUtilizationFactorForFission,Thermal Utilization Factor for Fission,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermalUtilizationFactorForFission
+ThermodynamicCriticalMagneticFluxDensity,Thermodynamic Critical Magnetic Flux Density,1,0,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermodynamicCriticalMagneticFluxDensity
+ThermodynamicEnergy,Thermodynamic Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThermodynamicEnergy
+ThermodynamicEntropy,Thermodynamic Entropy,1,2,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermodynamicEntropy
+ThermodynamicTemperature,Thermodynamic Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/ThermodynamicTemperature
+Thickness,Thickness,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Thickness
+ThomsonCoefficient,Thomson Coefficient,1,2,-3,-1,-1,0,0,listed,http://qudt.org/vocab/quantitykind/ThomsonCoefficient
+Thrust,Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Thrust
+ThrustCoefficient,Thrust Coefficient,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThrustCoefficient
+ThrustToMassRatio,Thrust to Mass Ratio,0,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThrustToMassRatio
+ThrustToWeightRatio,Thrust to Weight Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ThrustToWeightRatio
+Tilt,Tilt,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Tilt
+Time,Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Time
+TimeAveragedSoundIntensity,Time Averaged Sound Intensity,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TimeAveragedSoundIntensity
+TimeConstant_Inductance,time constant (inductance based),0,0,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/TimeConstant_Inductance
+TimePerCount,Time per Count,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TimePerCount
+TimeRatio,Time Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TimeRatio
+TimeRelatedLogERatio,TimeRelatedLogERatio,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TimeRelatedLogERatio
+TimeRelatedLogarithmicRatio,TimeRelatedLogarithmicRatio,0,0,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/TimeRelatedLogarithmicRatio
+TimeTemperature,Time Temperature,0,0,1,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/TimeTemperature
+Time_Squared,Time Squared,0,0,2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/Time_Squared
+Torque,Torque,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Torque
+TorqueConstant,TorqueConstant,1,2,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/TorqueConstant
+TorquePerAngle,Torque per Angle,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TorquePerAngle
+TorquePerLength,Torque per Length,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TorquePerLength
+TorsionalRigidity,Torsional Rigidity,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TorsionalRigidity
+TorsionalSpringConstant,Torsional Spring Constant,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TorsionalSpringConstant
+TotalAngularMomentum,Total Angular Momentum,1,2,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalAngularMomentum
+TotalAngularMomentumQuantumNumber,Total Angular Momentum Quantum Number,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalAngularMomentumQuantumNumber
+TotalAtomicStoppingPower,Total Atomic Stopping Power,1,4,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalAtomicStoppingPower
+TotalCrossSection,Total Cross-section,0,2,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalCrossSection
+TotalCurrent,Total Current,0,0,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalCurrent
+TotalCurrentDensity,Total Current Density,0,-2,0,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalCurrentDensity
+TotalIonization,Total Ionization,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalIonization
+TotalLinearStoppingPower,Total Linear Stopping Power,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalLinearStoppingPower
+TotalMassStoppingPower,Total Mass Stopping Power,0,4,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalMassStoppingPower
+TotalPressure,Total Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalPressure
+TotalRadiance,TotalRadiance,1,0,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TotalRadiance
+TouchThresholds,Touch Thresholds,,,,,,,,listed,http://qudt.org/vocab/quantitykind/TouchThresholds
+ToxicEquivalent,Toxic Equivalent,1,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ToxicEquivalent
+ToxicEquivalentFlowRate,Toxic Equivalent Flow Rate,1,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ToxicEquivalentFlowRate
+TrafficIntensity,TrafficIntensity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TrafficIntensity
+TransmissionRatioBetweenRotationAndTranslation,TransmissionRatioBetweenRotationAndTranslation,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TransmissionRatioBetweenRotationAndTranslation
+Transmittance,Transmittance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Transmittance
+TransmittanceDensity,Transmittance Density,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/TransmittanceDensity
+Turbidity,Turbidity,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Turbidity
+Turns,Turns,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Turns
+Unbalance,Unbalance,1,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Unbalance
+Unknown,Unknown,,,,,,,,listed,http://qudt.org/vocab/quantitykind/Unknown
+UpperCriticalMagneticFluxDensity,Upper Critical Magnetic Flux Density,1,0,-2,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/UpperCriticalMagneticFluxDensity
+VacuumThrust,Vacuum Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VacuumThrust
+VaporPermeability,Vapour Permeability,0,0,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/VaporPermeability
+VaporPermeance,Vapour Permeance,0,-1,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/VaporPermeance
+VaporPressure,Vapour Pressure,1,-1,-2,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/VaporPressure
+VapourPermeability,Vapour Permeability,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VapourPermeability
+VapourPermeance,Vapour Permeance,0,-1,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VapourPermeance
+VapourPressure,Vapour Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VapourPressure
+Velocity,Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Velocity
+VentilationRatePerFloorArea,Ventilation Rate per Floor Area,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VentilationRatePerFloorArea
+VerticalVelocity,Vertical Velocity,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VerticalVelocity
+VibrationalDensityOfStates,Vibrational Density of States,0,-3,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VibrationalDensityOfStates
+VideoFrameRate,Video Frame Rate,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VideoFrameRate
+Viscosity,Viscosity,1,-1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Viscosity
+VisibleRadiantEnergy,Visible Radiant Energy,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VisibleRadiantEnergy
+VisionThresholds,Vision Thresholds,,,,,,,,listed,http://qudt.org/vocab/quantitykind/VisionThresholds
+Voltage,Voltage,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/Voltage
+VoltageImbalance,Voltage Imbalance,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VoltageImbalance
+VoltagePhasor,Voltage Phasor,1,2,-3,-1,0,0,0,listed,http://qudt.org/vocab/quantitykind/VoltagePhasor
+VoltageRatio,Voltage Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VoltageRatio
+Volume,Volume,0,3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Volume
+VolumeDensityOfCharge,VolumeDensityOfCharge,0,-3,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumeDensityOfCharge
+VolumeFlowRate,Volume Flow Rate,0,3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumeFlowRate
+VolumeFlowRate_SurfaceRelated,Surface Related Volume Flow Rate,0,1,-1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/VolumeFlowRate_SurfaceRelated
+VolumeFlowRatio,Volume Flow Ratio,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumeFlowRatio
+VolumeFraction,Volume Fraction,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumeFraction
+VolumeOrSectionModulus,VolumeOrSectionModulus,0,3,0,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/VolumeOrSectionModulus
+VolumePerArea,Volume per Unit Area,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumePerArea
+VolumePerTime,Volume per Time,0,3,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumePerTime
+VolumeStrain,Volume Strain,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumeStrain
+VolumeThermalExpansion,Volume Thermal Expansion,0,3,0,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/VolumeThermalExpansion
+VolumetricBitDensity,Volumic Bit Density,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumetricBitDensity
+VolumetricElectricCharge,Volumic Electric Charge,0,-3,1,1,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumetricElectricCharge
+VolumetricEntityDensity,VolumetricEntityDensity,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumetricEntityDensity
+VolumetricFlux,Volumetric Flux,0,1,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumetricFlux
+VolumetricHeatCapacity,Volumetric Heat Capacity,1,-1,-2,0,-1,0,0,listed,http://qudt.org/vocab/quantitykind/VolumetricHeatCapacity
+VolumetricOutputPower,Volumic Output Power,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumetricOutputPower
+VolumicAmountOfSubstance,VolumicAmountOfSubstance,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/VolumicAmountOfSubstance
+VolumicDataQuantity,VolumicDataQuantity,0,-3,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumicDataQuantity
+VolumicElectromagneticEnergy,Volumic Electromagnetic Energy,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumicElectromagneticEnergy
+VolumicOutput,VolumicOutput,1,-1,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/VolumicOutput
+Vorticity,Vorticity,0,0,-1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Vorticity
+WarmReceptorThreshold,Warm Receptor Threshold,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/WarmReceptorThreshold
+WarpingConstant,Warping Constant,0,6,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WarpingConstant
+WarpingMoment,Warping Moment,1,3,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WarpingMoment
+WaterHorsepower,Water Horsepower,1,2,-3,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WaterHorsepower
+WaterSolubility,Water Solubility,0,-3,0,0,0,1,0,listed,http://qudt.org/vocab/quantitykind/WaterSolubility
+WaterVaporDiffusionCoefficient,Water vapour diffusion coefficient,0,0,1,0,0,0,0,deprecated,http://qudt.org/vocab/quantitykind/WaterVaporDiffusionCoefficient
+WaterVapourDiffusionCoefficient,Water Vapour Diffusion Coefficient,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WaterVapourDiffusionCoefficient
+WaterVapourPermeability,WaterVapourPermeability,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WaterVapourPermeability
+Wavelength,Wavelength,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Wavelength
+Wavenumber,Wavenumber,0,-1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Wavenumber
+WebTime,Web Time,0,0,1,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WebTime
+WebTimeAveragePressure,Web Time Average Pressure,1,-1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WebTimeAveragePressure
+WebTimeAverageThrust,Web Time Average Thrust,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WebTimeAverageThrust
+Weight,Weight,1,1,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Weight
+WetBulbTemperature,Wet Bulb Temperature,0,0,0,0,1,0,0,listed,http://qudt.org/vocab/quantitykind/WetBulbTemperature
+Width,Width,0,1,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Width
+Work,Work,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/Work
+WorkFunction,Work Function,1,2,-2,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/WorkFunction
+ZenithAngle,Zenith Angle,0,0,0,0,0,0,0,listed,http://qudt.org/vocab/quantitykind/ZenithAngle
