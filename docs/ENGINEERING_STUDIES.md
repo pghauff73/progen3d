@@ -26,6 +26,15 @@ In the desktop editor, open `bonded-coupon.p3d` and choose **Inspector**. Select
 
 Rebuilds and timeline samples look up named parts again by ID. An unrelated insertion can move a selected part to another primitive index while its named selection and face remain selected. A split part retains the spatial object selection and clears the face. A missing ID clears the selection. When the preview still shows a previous successful build, **Reveal source** becomes available again once the current text has built successfully.
 
+Run the desktop acceptance check using the bundled coupon fixture.
+
+```bash
+./progen3d-editor-gui --engineering-selection-smoke-test \
+  --open examples/EngineeringStudies/bonded-coupon.p3d
+```
+
+The check exercises the rendered text editor. It reveals the instruction for `CouponLeft:+X`, types an invalid dimension and checks that the build retains the last valid scene. It then corrects the transverse dimension from 20 mm to 24 mm, rebuilds and checks that the same face still reveals its source. The test edits only the in-memory document. The successful run prints `PROGEN3D_GUI_ENGINEERING_SELECTION_PASSED` with the face and observed dimension.
+
 ## Author, observe and replay
 
 - Start with `coupon.p3physics`. Each declaration occupies a line. Units follow a number, such as `4 [W/K]`. Expressions support scalar literals, earlier parameters, states, derived quantities, arithmetic and the solver time `t`. Declare derived quantities in dependency order. The left side of each differential equation is `der(state)` or a constant parameter expression multiplied by that derivative. Each state needs one equation.

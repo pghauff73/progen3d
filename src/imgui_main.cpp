@@ -10548,8 +10548,13 @@ void draw_smart_editor(EditorWorkspaceSession *app_state)
 	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 4.0f));
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.0f);
 
+	constexpr const char *editor_label = "##smart_editor_document";
 	if (smart_editor_state.request_focus) {
-		ImGui::SetKeyboardFocusHere();
+		// Tab-input fields ignore tab-navigation activation. Queue a direct
+		// input activation so the next frame can apply the requested range.
+		ImGui::ActivateItemByID(ImGui::GetID(editor_label));
+		ImGui::GetCurrentContext()->NavNextActivateFlags =
+			ImGuiActivateFlags_PreferInput | ImGuiActivateFlags_TryToPreserveState;
 		smart_editor_state.request_focus = false;
 	}
 
@@ -10561,7 +10566,7 @@ void draw_smart_editor(EditorWorkspaceSession *app_state)
 	const ImGuiInputTextFlags input_flags = ImGuiInputTextFlags_CallbackResize |
 	                                        ImGuiInputTextFlags_CallbackAlways |
 	                                        ImGuiInputTextFlags_AllowTabInput;
-	const bool text_changed = ImGui::InputTextMultiline("##smart_editor_document",
+	const bool text_changed = ImGui::InputTextMultiline(editor_label,
 	                                                    app_state->document.source_text.data(),
 	                                                    app_state->document.source_text.capacity() + 1,
 	                                                    editor_size,
@@ -12196,6 +12201,113 @@ Progen3dEditorApplication::Progen3dEditorApplication(ApplicationLaunchOptions la
 {
 }
 
+namespace {
+
+const char *check_engineering_selection_edit(
+	EditorWorkspaceSession &app_state, const std::function<void(float)> &render_editor_frame)
+{
+	const auto &preview = current_preview_session();
+	const std::string original_source = app_state.document.source_text;
+	const std::uint64_t original_generation =
+		app_state.document.last_successful_generation_request_id;
+	const auto *context = current_scene_snapshot()->generationContext();
+	EditorSelection &selection = current_preview_session().selection;
+	scene_selection_controller.selectSpatialObject(selection, context, "CouponLeft");
+	if (!scene_selection_controller.hasNamedCubeFaces(selection, context)) {
+		return "the startup grammar must contain the named CouponLeft cube";
+	}
+	selection.selected_face = CubeFace::PositiveX;
+	const auto source_range = preview.source_associations.sourceRangeForInstance(
+		selection.selected_instance_index);
+	if (!source_range.has_value()) return "the starting cube has no source association";
+	const auto lines = current_editor_lines(original_source);
+	const int source_line = source_range->start_line;
+	const auto scale_column = lines.at(static_cast<std::size_t>(source_line)).find("S(20 20 20)");
+	if (scale_column == std::string::npos) return "the starting coupon has no 20 mm scale instruction";
+	const int dimension_offset = document_offset_for_position(
+		lines, source_line, static_cast<int>(scale_column) + 5);
+
+	const auto editor_contains_selection = [&](std::string_view expected) {
+		const ImGuiInputTextState *input = ImGui::GetInputTextState(ImGui::GetActiveID());
+		const int start = smart_editor_state.selection_start;
+		const int end = smart_editor_state.selection_end;
+		const auto text = std::string_view(app_state.document.source_text);
+		const auto selected = start >= 0 && end >= start && static_cast<std::size_t>(end) <= text.size()
+			? text.substr(static_cast<std::size_t>(start), static_cast<std::size_t>(end - start))
+			: std::string_view();
+		if (input != nullptr && !smart_editor_state.request_selection_sync && selected == expected) {
+			return true;
+		}
+		std::cerr << "Engineering smoke editor selection: active=" << (input != nullptr)
+		          << " pending_sync=" << smart_editor_state.request_selection_sync
+		          << " offsets=" << start << ',' << end << " text=" << selected << '\n';
+		return false;
+	};
+	const auto focus_selection = [&]() {
+		render_editor_frame(1.0f / 60.0f);
+		render_editor_frame(1.0f / 60.0f);
+	};
+	const auto rebuild = [&]() {
+		clear_auto_run_timer(&app_state);
+		regenerate_scene(app_state.document.source_text);
+		const double deadline = glfwGetTime() + 20.0;
+		do {
+			render_editor_frame(1.0f / 60.0f);
+		} while ((scene_generation_in_progress() || scene_generation_queued()) &&
+		         glfwGetTime() < deadline);
+		render_editor_frame(1.0f / 60.0f);
+		return !scene_generation_in_progress() && !scene_generation_queued();
+	};
+	const auto edit_dimension = [&](int old_length, const char *replacement) {
+		select_editor_offsets(dimension_offset, dimension_offset + old_length, source_line);
+		focus_selection();
+		ImGui::GetIO().AddInputCharactersUTF8(replacement);
+		render_editor_frame(1.0f / 60.0f);
+	};
+	constexpr std::string_view instruction = "I(Cube material(plaster))";
+	focus_selection();
+	reveal_preview_selection(&app_state, true);
+	focus_selection();
+	if (!editor_contains_selection(instruction)) return "Reveal source did not select the full initial instruction";
+
+	edit_dimension(2, ")");
+	std::string invalid_source = original_source;
+	invalid_source.replace(static_cast<std::size_t>(dimension_offset), 2, ")");
+	if (app_state.document.source_text != invalid_source) return "the editor did not receive the invalid edit";
+	reveal_preview_selection(&app_state, true);
+	if (smart_editor_state.request_editor_tab) return "the edited draft could still reveal stale source";
+	if (!rebuild() || app_state.document.last_successful_generation_request_id != original_generation ||
+	    current_scene_snapshot()->sourceText() != original_source ||
+	    app_state.document_diagnostics.empty() ||
+	    selection.selected_spatial_object_id != "CouponLeft" ||
+	    selection.selected_face != CubeFace::PositiveX) {
+		return "the failed build did not retain the named selection and last valid scene";
+	}
+
+	edit_dimension(1, "24.0");
+	std::string edited_source = original_source;
+	edited_source.replace(static_cast<std::size_t>(dimension_offset), 2, "24.0");
+	if (app_state.document.source_text != edited_source || !rebuild() ||
+	    current_scene_snapshot()->sourceText() != edited_source ||
+	    app_state.document.last_successful_generation_request_id == original_generation) {
+		return "the corrected 24 mm dimension did not produce an accepted scene";
+	}
+	context = current_scene_snapshot()->generationContext();
+	if (selection.selected_spatial_object_id != "CouponLeft" ||
+	    selection.selected_face != CubeFace::PositiveX ||
+	    !scene_selection_controller.hasNamedCubeFaces(selection, context) ||
+	    std::fabs(context->primitive_instances.at(
+	                  static_cast<std::size_t>(selection.selected_instance_index)).size.y - 24.0f) > 0.0001f) {
+		return "the new geometry did not preserve the face anchor and update the dimension";
+	}
+	reveal_preview_selection(&app_state, true);
+	focus_selection();
+	if (!editor_contains_selection(instruction)) return "the rebuilt face did not reveal the instruction at its new position";
+	return nullptr;
+}
+
+} // namespace
+
 int Progen3dEditorApplication::run()
 {
 	EditorRuntimeEnvironment runtime_environment;
@@ -12421,6 +12533,16 @@ int Progen3dEditorApplication::run()
 		           !grammar->error_details.empty()) {
 			errorout("PROGEN3D_GUI_SMOKE_TEST_FAILED: initial scene generation did not produce a valid context");
 			application_exit_code = 2;
+		}
+
+		if (application_exit_code == 0 && launch_options_.engineeringSelectionSmokeTestRequested()) {
+			const char *failure = check_engineering_selection_edit(app_state, render_editor_frame);
+			if (failure != nullptr) {
+				errorout(std::string("PROGEN3D_GUI_ENGINEERING_SELECTION_FAILED: ") + failure);
+				application_exit_code = 4;
+			} else {
+				debugout("PROGEN3D_GUI_ENGINEERING_SELECTION_PASSED face=CouponLeft:+X dimension_y_mm=24");
+			}
 		}
 
 		if (application_exit_code == 0 && launch_options_.temporalSmokeTestRequested()) {
