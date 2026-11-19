@@ -1,4 +1,5 @@
 #include "imgui_render.h"
+#include "editor/model/PreviewProjectionConfiguration.h"
 #include "lighting/rendering/PreviewLightBuffer.h"
 #include "lighting/service/PreviewLightingFrameFactory.h"
 
@@ -981,7 +982,7 @@ CameraMatrices build_camera_matrices(int width,
 {
 	const float angle_radians = -angle_view * static_cast<float>(M_PI) / 180.0f;
 	const float elevation_radians = elevation_view * static_cast<float>(M_PI) / 180.0f;
-	const float radius = std::max(camera_distance, 0.25f);
+	const float radius = std::max(camera_distance, PreviewProjectionConfiguration::minimum_orbit_distance);
 	const vec3 scaled_target = target * scene_scale;
 
 	CameraMatrices camera;

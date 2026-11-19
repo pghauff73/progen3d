@@ -3,6 +3,7 @@
 class PreviewProjectionConfiguration
 {
 public:
+	static constexpr float minimum_orbit_distance = 0.03f;
 	static constexpr float minimum_vertical_field_of_view_degrees = 15.0f;
 	static constexpr float default_vertical_field_of_view_degrees = 43.0f;
 	static constexpr float maximum_vertical_field_of_view_degrees = 100.0f;

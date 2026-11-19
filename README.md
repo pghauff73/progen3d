@@ -4,6 +4,8 @@ ProGen3D is a Linux desktop editor and runtime for procedural 3D grammars. It co
 
 The repository includes examples ranging from a single cube to spatially aware modern buildings, a 20-level architectural taxonomy, chairs, vehicles, vegetation, temporal geometry, and advanced procedural primitives.
 
+[Electrical machines](examples/ElectricalMachines/README.md) includes an inspectable gapped field coil, permanent magnets, and six motor configurations. The reaction-wheel and induction spin-up examples couple motor torque to rigid-body acceleration.
+
 [Airflow studies](examples/Airflow/README.md) include a force-at-a-point test, a cart with a measured propeller map and a ducted fan on a fixed stand.
 
 ![ProGen3D editor displaying the SMB-OMv2 spatially aware modern building](docs/images/readme/progen3d-editor-smb-omv2-full.png)

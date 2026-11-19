@@ -59,6 +59,7 @@ const LightingCircuit *ElectricalControlGraph::findCircuit(const LightingCircuit
 
 void ElectricalControlGraph::clear()
 {
+	machines_ = {};
 	fixtures_.clear();
 	switches_.clear();
 	circuits_.clear();
