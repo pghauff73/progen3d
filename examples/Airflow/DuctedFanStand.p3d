@@ -1,0 +1,29 @@
+# Synthetic pressure curves. Select the inlet shroud to see the operating point.
+# Authoring dimensions are metres. Rotor axis is +Y at the inlet.
+Start ->
+    [ BodyInertia(0.01 0.01 0.01)
+      DuctStation(0 120 0) DuctStation(0.2 108 18)
+      DuctStation(0.4 72 72) DuctStation(0.6 12 162)
+      !I(Revolve(profile(Polygon 0.115 -0.050 0.133 -0.050 0.129 -0.034
+                      0.127 0.046 0.115 0.046) angle(0 360) segments(48) cap(all))
+         material(charcoalmattemetal) 1 1) ]
+    [ S(0.047 0.056 0.047) !I(Cylinder material(copperbrushedmetal) 1 1) ]
+    Blades(7)
+    Elbow(18 0.24 35)
+
+Blades(n) n ->
+    [ A(360*Blades_count/n 1) T(0.061 0.005 0) A(19 0)
+      S(0.093 0.007 0.027) !I(Cube material(tealmattemetal) 1 1) ]
+
+Elbow(n bendRadius bendDegrees) n ->
+    Section(radians(bendDegrees)*(Elbow_count+0.5)/n bendRadius bendDegrees/n)
+
+Section(theta bendRadius increment) ->
+    [ T(bendRadius*(1-cos(theta)) 0.046+bendRadius*sin(theta) 0)
+      A(-theta*180/3.14159265 2)
+      Sleeve(bendRadius*radians(increment)/2) ]
+
+Sleeve(halfLength) ->
+    !I(Revolve(profile(Polygon 0.115 -halfLength 0.127 -halfLength
+                               0.127 halfLength 0.115 halfLength)
+               angle(0 360) segments(48) cap(all)) material(charcoalmattemetal) 1 1)

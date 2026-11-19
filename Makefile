@@ -32,6 +32,7 @@ endif
 GLFW_PLATFORM_LIBS ?= $(shell pkg-config --static --libs x11 xrandr xi xinerama xcursor 2>/dev/null)
 DBUS_CFLAGS ?= $(shell pkg-config --cflags dbus-1 2>/dev/null)
 DBUS_LIBS ?= $(shell pkg-config --libs dbus-1 2>/dev/null)
+JSONCPP_CFLAGS ?= $(shell pkg-config --cflags jsoncpp 2>/dev/null)
 JSONCPP_LIBS ?= $(shell pkg-config --libs jsoncpp 2>/dev/null)
 LIBXML2_CFLAGS ?= $(shell pkg-config --cflags libxml-2.0 2>/dev/null)
 LIBXML2_LIBS ?= $(shell pkg-config --libs libxml-2.0 2>/dev/null)
@@ -62,6 +63,7 @@ COMMON_INCLUDE_FLAGS = \
 	-I$(GLAD_INCLUDE_DIR) \
 	-I$(NFD_DIR)/include \
 	$(DBUS_CFLAGS) \
+	$(JSONCPP_CFLAGS) \
 	$(LIBXML2_CFLAGS) \
 	$(EIGEN3_CFLAGS)
 
@@ -73,6 +75,7 @@ DEPFLAGS = -MMD -MP
 APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 
 APP_CPP_SOURCES = \
+	$(SRC_DIR)/physics/model/BodyAirflow.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationBiologicalProfileValidationService.cpp \
@@ -542,3 +545,12 @@ clean:
 FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
 build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: airflow-check
+airflow-check: build/airflow-test
+	./build/airflow-test
+	python3 tests/airflow_faces_test.py

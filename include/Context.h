@@ -5,6 +5,7 @@
 #include "geometry/model/AxisAlignedBounds.h"
 #include "geometry/model/ResolvedPrimitiveGeometry.h"
 #include "physics/model/CollisionGeometry.h"
+#include "physics/model/BodyAirflow.h"
 
 #include <cstddef>
 #include <fstream>
@@ -89,6 +90,8 @@ class ScenePrimitiveInstance : public SceneRenderableState {
 public:
 	void restoreInitialState() override;
 
+	std::shared_ptr<const BodyAirflow> airflow;
+	AirflowResult air_load;
 	PrimitiveDefinition *primitive = nullptr;
 	std::string type;
 	glm::mat4 primary_transform{1.0f};
@@ -184,6 +187,10 @@ public:
 	void setPendingVelocity(const glm::vec3 &velocity);
 	void setPendingRotationalVelocity(const glm::vec3 &rotational_velocity);
 	void setPendingMass(float mass);
+	void setPendingAirflow(std::shared_ptr<const BodyAirflow> definition);
+	AirflowResult inspectAirflow(const ScenePrimitiveInstance &instance,
+	                            std::vector<AirLoadVector> *vectors = nullptr) const;
+	AirEnvironment air_environment;
 	void setPendingDensity(float density);
 	void setGravity(float magnitude, const glm::vec3 &direction);
 	const glm::vec3 &getGravity() const;
@@ -217,6 +224,7 @@ private:
 	glm::vec3 pending_velocity_{0.0f};
 	glm::vec3 pending_rotational_velocity_{0.0f};
 	float pending_mass_ = 1.0f;
+	std::shared_ptr<const BodyAirflow> pending_airflow_;
 	float pending_density_ = 0.0f;
 	bool has_pending_density_ = false;
 	glm::vec3 gravity_acceleration_{0.0f};
