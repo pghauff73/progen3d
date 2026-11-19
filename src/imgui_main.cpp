@@ -11115,6 +11115,22 @@ void draw_editor(EditorWorkspaceSession *app_state)
 		}
 
 		if (ImGui::BeginTabItem("Inspector")) {
+			if (grammar && grammar->context) {
+				const auto& devices = grammar->context->devicePhysics();
+				if (!devices.empty() && ImGui::CollapsingHeader("Device physics")) {
+					ImGui::Text("Scene time %.3f s", devices.timeSeconds());
+					for (const auto& reading : devices.readings()) {
+						const auto& name = reading.first.first;
+						if (name == "crawlerStation") {
+							ImGui::Text("Crawler station %.0f   %.5g m", reading.first.second.front(), reading.second);
+						} else if (name == "thermalClosed") {
+							ImGui::Text("Thermal contact   %s", reading.second ? "closed" : "open");
+						} else {
+							ImGui::Text("%s   %.5g %s", name.c_str(), reading.second, EngineeringDevicePhysics::unit(name));
+						}
+					}
+				}
+			}
 			scene_inspector_panel.draw(
 				build_scene_primitive_inspection(),
 				current_preview_session().statistics);

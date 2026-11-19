@@ -3518,6 +3518,7 @@ void SceneGenerationContext::clearPendingPrimitiveState()
 
 void SceneGenerationContext::resetSimulation()
 {
+	device_physics_.reset();
 	for (PrimitiveInstance &instance : primitive_instances) {
 		instance.restoreInitialState();
 		invalidate_collision_geometry(&instance);
@@ -3529,9 +3530,10 @@ void SceneGenerationContext::resetSimulation()
 
 void SceneGenerationContext::stepSimulation(float delta_time)
 {
-	if (delta_time <= 0.0f) {
+	if (!std::isfinite(delta_time) || delta_time <= 0.0f) {
 		return;
 	}
+	device_physics_.advance(delta_time);
 	stepCollisionParticles(delta_time);
 	if (primitive_instances.empty()) {
 		time += delta_time;

@@ -8,6 +8,8 @@
 #include "grammar/model/SpatialObjectDescriptorSyntax.h"
 #include "grammar/model/VehicleJointDeclarationSyntax.h"
 
+#include "physics/model/EngineeringDevicePhysics.h"
+
 #include <array>
 #include <istream>
 #include <memory>
@@ -717,6 +719,7 @@ public:
 	void ReadTokens(GrammarRuleDefinition *rule,std::string token_str,int i, int line_number = -1);
 	void ReadTokens(GrammarRuleDefinition *rule,const std::vector<SourceTokenSpan> &token_spans,int i, int line_number = -1);
 	void ReadTokens2(GrammarRuleDefinition *rule,std::string rule_str,int index_k);
+	double bindDeviceQuantity(const std::string& name, const EngineeringDevicePhysics::Parameters& parameters);
 	void addContext();
 	void ensure_start_rule_is_first();
 
@@ -731,6 +734,7 @@ public:
 	std::vector<GrammarDiagnostic> error_details;
 
 private:
+	EngineeringDevicePhysics authored_device_physics_;
 	void clearParsedState();
 	void rebuildFromLines(const std::string &success_message);
 };

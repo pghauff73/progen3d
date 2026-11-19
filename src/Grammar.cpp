@@ -1469,7 +1469,8 @@ static void validate_expression_symbols(Grammar *grammar,
 	if(grammar == NULL || trim_copy(expression).empty())return;
 	std::unordered_set<std::string> reported;
 	for(const ExpressionIdentifierUse &use : expression_identifier_uses(expression)){
-		if(!use.function_call && use.name == "t"){
+		if((!use.function_call && use.name == "t") ||
+		   (use.function_call && EngineeringDevicePhysics::recognizes(use.name))){
 			set_grammar_uses_time(grammar, true);
 		}
 		if(use.function_call){
@@ -2271,7 +2272,7 @@ static bool token_begins_expression_continuation(const std::string &token)
 
 static bool is_supported_math_function_name(const std::string &token)
 {
-	return token == "sin" || token == "cos" || token == "tan" ||
+	return EngineeringDevicePhysics::recognizes(token) || token == "sin" || token == "cos" || token == "tan" ||
 	       token == "abs" || token == "sqrt" || token == "floor" ||
 	       token == "ceil" || token == "min" || token == "max" ||
 	       token == "clamp" || token == "wrap" || token == "lerp" ||
@@ -2613,6 +2614,19 @@ private:
 					fail("function '" + name + "' requires comma-separated arguments");
 					return 0.0;
 				}
+			}
+		}
+
+		if (EngineeringDevicePhysics::recognizes(name)) {
+			if (grammar_ == nullptr) {
+				fail("device quantity requires a grammar clock");
+				return 0.0;
+			}
+			try {
+				return grammar_->bindDeviceQuantity(name, arguments);
+			} catch (const std::invalid_argument& error) {
+				fail(name + ": " + error.what());
+				return 0.0;
 			}
 		}
 
@@ -5232,6 +5246,7 @@ void GrammarDocument::rebuildFromLines(const std::string &success_message)
 {
 	const bool quiet_diagnostics = grammarEvaluationDiagnosticsQuiet(this);
 	set_grammar_uses_time(this, false);
+	authored_device_physics_ = EngineeringDevicePhysics(getGrammarEvaluationTime(this));
 	// P0 gate: malformed delimiters must be rejected before parsing can build an
 	// executable token stream, and certainly before recursive expansion begins.
 	const bool source_structure_valid = validate_source_structure_before_expansion(this);
@@ -6146,6 +6161,11 @@ int GrammarDocument::findRule(std::string rule_name){
 }
 
 
+double GrammarDocument::bindDeviceQuantity(const std::string& name, const EngineeringDevicePhysics::Parameters& parameters)
+{
+	return authored_device_physics_.bind(name, parameters);
+}
+
 void GrammarDocument::addContext(){
 	if(context!=NULL){
 		delete context;
@@ -6264,6 +6284,7 @@ void GrammarDocument::generateGeometry()
 		token->performAction(context);
 		if(!error_details.empty())return;
 	}
+	context->setDevicePhysics(authored_device_physics_);
 	std::string spatial_diagnostic;
 	if(!context->finalizeSpatialBuildingModel(&spatial_diagnostic)){
 		GrammarDiagnostic diagnostic;

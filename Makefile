@@ -32,6 +32,7 @@ endif
 GLFW_PLATFORM_LIBS ?= $(shell pkg-config --static --libs x11 xrandr xi xinerama xcursor 2>/dev/null)
 DBUS_CFLAGS ?= $(shell pkg-config --cflags dbus-1 2>/dev/null)
 DBUS_LIBS ?= $(shell pkg-config --libs dbus-1 2>/dev/null)
+JSONCPP_CFLAGS ?= $(shell pkg-config --cflags jsoncpp 2>/dev/null)
 JSONCPP_LIBS ?= $(shell pkg-config --libs jsoncpp 2>/dev/null)
 LIBXML2_CFLAGS ?= $(shell pkg-config --cflags libxml-2.0 2>/dev/null)
 LIBXML2_LIBS ?= $(shell pkg-config --libs libxml-2.0 2>/dev/null)
@@ -62,6 +63,7 @@ COMMON_INCLUDE_FLAGS = \
 	-I$(GLAD_INCLUDE_DIR) \
 	-I$(NFD_DIR)/include \
 	$(DBUS_CFLAGS) \
+	$(JSONCPP_CFLAGS) \
 	$(LIBXML2_CFLAGS) \
 	$(EIGEN3_CFLAGS)
 
@@ -370,6 +372,7 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/vehicle/service/RedAwdHatchbackMvpv2Builder.cpp \
 	$(SRC_DIR)/vehicle/service/RedAwdHatchbackMvp25Builder.cpp \
 	$(SRC_DIR)/vehicle/service/ModernCarMvp26FamilyBuilder.cpp \
+	$(SRC_DIR)/physics/model/EngineeringDevicePhysics.cpp \
 	$(SRC_DIR)/physics/service/ConvexCollisionDetector.cpp \
 	$(SRC_DIR)/spatial/graph/SpatialObjectRegistry.cpp \
 	$(SRC_DIR)/spatial/graph/SpatialContainmentTree.cpp \
@@ -542,3 +545,10 @@ clean:
 FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
 build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+build/engineering-device-check: tests/engineering_device_physics.cpp $(FORM_STUDY_OBJS)
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: check-engineering-devices
+check-engineering-devices: build/engineering-device-check
+	./build/engineering-device-check examples/EngineeringDevices/RecentEngineeringDevices.p3d
