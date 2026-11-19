@@ -78,10 +78,14 @@
     "metres_per_scene_unit": 0.001,
     "tolerance_m": 1e-08,
     "layer_objects": [
-      "primitive:0",
-      "primitive:1"
+      "CouponLeft",
+      "CouponRight"
     ],
-    "revision": "a62edb0cad0197b0c56f64def59f7003b139a2d52a5499bef74b32c00b419912"
+    "revision": "372b577d902571542534d2837ced400e4e2b98de2b6515192f326e096cf72dd1",
+    "layer_faces": [
+      "+X",
+      "-X"
+    ]
   },
   "convergence": {
     "max_levels": 4,

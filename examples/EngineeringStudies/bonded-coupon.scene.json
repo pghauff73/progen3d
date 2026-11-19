@@ -1,6 +1,143 @@
 {
   "evaluation_time_s": 0.0,
   "objects": {
+    "BondedCoupon": {
+      "geometry_primitive_count": 0,
+      "interfaces": [],
+      "name": "BondedCoupon"
+    },
+    "CouponLeft": {
+      "extent_scale": [
+        20.0,
+        20.0,
+        20.0
+      ],
+      "faces": [
+        "-X",
+        "+X",
+        "-Y",
+        "+Y",
+        "-Z",
+        "+Z"
+      ],
+      "geometry_primitive_count": 1,
+      "initial_position": [
+        -10.0,
+        0.0,
+        0.0
+      ],
+      "initial_rotation_degrees": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "initial_rotational_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interfaces": [],
+      "mass": 1.0,
+      "name": "CouponLeft",
+      "source_line": 4,
+      "source_span": {
+        "end_column": 60,
+        "end_line": 4,
+        "start_column": 35,
+        "start_line": 4
+      },
+      "topology_hash": "0",
+      "transform_column_major": [
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        -10.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "type": "Cube"
+    },
+    "CouponRight": {
+      "extent_scale": [
+        20.0,
+        20.0,
+        20.0
+      ],
+      "faces": [
+        "-X",
+        "+X",
+        "-Y",
+        "+Y",
+        "-Z",
+        "+Z"
+      ],
+      "geometry_primitive_count": 1,
+      "initial_position": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "initial_rotation_degrees": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "initial_rotational_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interfaces": [],
+      "mass": 1.0,
+      "name": "CouponRight",
+      "source_line": 7,
+      "source_span": {
+        "end_column": 59,
+        "end_line": 7,
+        "start_column": 34,
+        "start_line": 7
+      },
+      "topology_hash": "0",
+      "transform_column_major": [
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0,
+        10.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "type": "Cube"
+    },
     "primitive:0": {
       "extent_scale": [
         20.0,
@@ -29,7 +166,7 @@
         0.0
       ],
       "mass": 1.0,
-      "source_line": 1,
+      "source_line": 4,
       "topology_hash": "0",
       "transform_column_major": [
         20.0,
@@ -79,7 +216,7 @@
         0.0
       ],
       "mass": 1.0,
-      "source_line": 1,
+      "source_line": 7,
       "topology_hash": "0",
       "transform_column_major": [
         20.0,
@@ -102,5 +239,5 @@
       "type": "Cube"
     }
   },
-  "revision": "a62edb0cad0197b0c56f64def59f7003b139a2d52a5499bef74b32c00b419912"
+  "revision": "372b577d902571542534d2837ced400e4e2b98de2b6515192f326e096cf72dd1"
 }

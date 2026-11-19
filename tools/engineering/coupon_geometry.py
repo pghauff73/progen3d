@@ -3,6 +3,7 @@ import math
 
 from .domain_inputs import positive, scalar
 from .quantities import StudyError
+from .study import require_scene_face
 
 
 def validate_coupon_geometry(data, scene):
@@ -30,11 +31,21 @@ def validate_coupon_geometry(data, scene):
     if (not isinstance(ids, list) or len(ids) != 2
             or any(not isinstance(name, str) for name in ids) or ids[0] == ids[1]):
         raise StudyError("coupon geometry requires two distinct object IDs")
+    faces = binding.get("layer_faces")
+    if "layer_faces" in binding and (not isinstance(faces, list) or len(faces) != 2
+                                     or any(not isinstance(face, str) or not face for face in faces)):
+        raise StudyError("coupon geometry requires two layer faces in layer order")
     boxes = []
-    for name, layer in zip(ids, data["layers"], strict=True):
+    for layer_index, (name, layer) in enumerate(zip(ids, data["layers"], strict=True)):
         item = scene["objects"].get(name)
-        if not item or item.get("type") != "Cube":
+        if item is None:
+            raise StudyError(f"unresolved scene object {name}")
+        if faces is not None:
+            require_scene_face(name, item, faces[layer_index])
+        if item.get("type") != "Cube":
             raise StudyError(f"{name} must be a native Cube object")
+        if "geometry_primitive_count" in item and not item.get("faces"):
+            raise StudyError(f"{name} must be a single affine Cube with available faces")
         transform = item.get("transform_column_major")
         if not isinstance(transform, list) or len(transform) != 16:
             raise StudyError(f"missing 4 by 4 transform for {name}")
@@ -47,6 +58,11 @@ def validate_coupon_geometry(data, scene):
         center = [t[12+i]*scale for i in range(3)]
         if min(lengths) <= 0 or abs(lengths[axis]-positive(layer, "length_m")) > tolerance:
             raise StudyError(f"{name} length does not match its thermal layer")
+        if faces is not None:
+            local_positive = (t[5*axis] > 0) == (layer_index == 0)
+            mating_face = ("+" if local_positive else "-") + axis_name.upper()
+            if faces[layer_index] != mating_face:
+                raise StudyError(f"{name} face {faces[layer_index]} is not its adjoining face {mating_face}")
         area = math.prod(lengths[i] for i in transverse)
         area_tolerance = tolerance * (sum(lengths[i] for i in transverse)+tolerance)
         if abs(area-positive(data, "area_m2")) > area_tolerance:
@@ -58,4 +74,7 @@ def validate_coupon_geometry(data, scene):
         abs(a_pos[i]-b_pos[i]) > tolerance or abs(a_size[i]-b_size[i]) > tolerance for i in transverse
     ):
         raise StudyError("coupon objects require aligned, adjoining faces in layer order")
-    return {"revision": revision, "axis": axis_name, "layer_objects": ids, "initial_bond_gap_m": gap}
+    result = {"revision": revision, "axis": axis_name, "layer_objects": ids, "initial_bond_gap_m": gap}
+    if faces is not None:
+        result["layer_faces"] = faces
+    return result

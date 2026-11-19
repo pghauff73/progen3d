@@ -12,7 +12,15 @@ python3 -m tools.engineering run examples/EngineeringStudies/coupon.p3physics --
 python3 -m tools.engineering view /tmp/coupon.trace.json --output /tmp/coupon.html
 ```
 
-A reproducible native manifest for this coupon is included as `examples/EngineeringStudies/coupon.scene.json`. This makes the example runnable on systems without a C++ build. Generate a fresh manifest when editing the geometry. It stores spatial object IDs, interface IDs, revision-local primitive IDs, transforms and available face groups. A face group ID has the form `role:object-part:boundary`. Optional `revision "…"` and `face "…"` selectors enforce a particular snapshot and face. The sidecar records source and manifest information in an input fingerprint. The coupon solves a lumped model using authored heat capacity and conductance. Its geometry binding identifies the body whose temperature is reported.
+A reproducible native manifest is included as `examples/EngineeringStudies/coupon.scene.json`. This makes the example runnable without a C++ build. The coupon solves a lumped model using authored heat capacity and conductance. Its geometry binding identifies the body whose temperature is reported.
+
+## Bind named parts and cube faces
+
+Use the existing `Object(id(...) class(...) taxonomy(...))` grammar to name a part. In the bonded coupon, `CouponLeft` and `CouponRight` each directly own one `Cube` inside the assembly object. A sidecar can bind the left part and its mating face with `bind substrate = object("CouponLeft") face "+X"`.
+
+The manifest records the named part's primitive type, transform and source span when it owns exactly one emitted primitive. The names `-X`, `+X`, `-Y`, `+Y`, `-Z` and `+Z` identify faces in an affine cube's local coordinates. Rotation and reflection can change where a face is in the world while preserving its name. A compound object needs a named child for an individual face. Deformed cubes and other geometries can still have object IDs. They currently have no stable named cube faces.
+
+Author-defined IDs survive insertion or resequencing of other primitives. After a geometry edit, generate a fresh manifest and check the bound part and face before updating a pinned revision. `primitive:N` IDs and their `role:object-part:boundary` mesh groups remain valid within their exported revision. The optional `revision "…"` and `face "…"` selectors check the snapshot and requested surface. The sidecar fingerprints its source and manifest for result replay.
 
 ## Author, observe and replay
 
@@ -70,7 +78,7 @@ python3 -m tools.engineering analyse examples/EngineeringStudies/bonded-coupon.j
 python3 -m tools.engineering view /tmp/bonded.json --output /tmp/bonded.html
 ```
 
-The included `bonded-coupon.scene.json` reproduces the native binding. It contains two adjoining axis-aligned cube bodies on the x axis. A geometry-bound study must declare the exact manifest revision in `geometry.revision`. The geometry check also compares the axis, body lengths, common cross-section and spacing to the study declaration. If the native grammar changes, export and inspect a fresh manifest and update the pinned revision after checking the dimensions.
+The included `bonded-coupon.scene.json` reproduces the native binding. It contains two adjoining axis-aligned cube bodies on the x axis. A geometry-bound study must declare the exact manifest revision in `geometry.revision`. In the example, `layer_objects` names the two parts and `layer_faces` names their contacting local faces in layer order. The solver checks that the specified faces adjoin, including sign changes from reflection. Older studies may omit `layer_faces` to infer the faces from the layer order and axis. The geometry check also compares body lengths, common cross-section and spacing to the study declaration.
 
 The example is a synthetic two-layer end-bonded stack with a common cross-section. Piecewise-linear temperature programs act at the outer faces. Heat flows through each layer and through a specified area-specific bond resistance. For the joint between adjacent cells, use the sum of both half-cell resistances and the bond resistance. The thermal ledger integrates the heat entering each end and checks that against the change in thermal energy stored in both layers.
 

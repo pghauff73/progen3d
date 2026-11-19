@@ -164,6 +164,17 @@ def scene_catalog(path):
         raise StudyError(f"cannot read scene catalog: {exc}") from exc
 
 
+def require_scene_face(object_id, obj, face):
+    count = obj.get("geometry_primitive_count", 0)
+    if type(count) is not int or count < 0:
+        raise StudyError(f"invalid primitive count on {object_id}")
+    if count > 1:
+        raise StudyError(f"ambiguous face {face} on {object_id}: object binds multiple primitives")
+    faces = obj.get("faces", [])
+    if not isinstance(faces, list) or face not in faces:
+        raise StudyError(f"missing face {face} on {object_id}")
+
+
 def parse_study(path, catalog=None, extensions=()):
     extensions = tuple(extensions)
     source = Path(path).read_text(encoding="utf-8")
@@ -203,8 +214,8 @@ def parse_study(path, catalog=None, extensions=()):
                 obj = catalog["objects"][object_id]
                 if expected is not None and expected != catalog["revision"]:
                     raise StudyError(f"stale scene revision for {object_id}")
-                if face is not None and face not in obj.get("faces", []):
-                    raise StudyError(f"missing face {face} on {object_id}")
+                if face is not None:
+                    require_scene_face(object_id, obj, face)
                 study.bindings[alias] = {"object": object_id, "revision": catalog["revision"], "face": face}
             elif m := re.fullmatch(rf"(parameter|state|derived)\s+({IDENT})\s*:\s*({KIND})(?:\s+at\s+({IDENT}))?\s*=\s*(.+)", line):
                 role, name, kind, binding, text = m.groups()

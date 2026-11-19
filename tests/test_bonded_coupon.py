@@ -1,10 +1,12 @@
 """Checks against analytic and independently constructed bonded-coupon cases."""
 import json
 from pathlib import Path
+from copy import deepcopy
 import tempfile
 import unittest
 
 from tools.engineering.cohesive import CohesiveLaw
+from tools.engineering.coupon_geometry import validate_coupon_geometry
 from tools.engineering.coupon_measurements import compare_measurements, fit_cohesive
 from tools.engineering.domains import analyse
 from tools.engineering.quantities import StudyError
@@ -65,6 +67,7 @@ class TestBondedCoupon(unittest.TestCase):
         scene = scene_catalog(EXAMPLES / "bonded-coupon.scene.json")
         result = analyse(case, scene)
         self.assertEqual(result["geometry_binding"]["initial_bond_gap_m"], 0)
+        self.assertEqual(result["geometry_binding"]["layer_faces"], ["+X", "-X"])
         self.assertTrue(result["convergence"]["converged"])
         self.assertEqual(len(result["convergence"]["levels"]), 4)
         self.assertEqual(result["thermal_cells"], 128)
@@ -92,7 +95,7 @@ class TestBondedCoupon(unittest.TestCase):
             analyse(missing_pin, scene)
         with self.assertRaisesRegex(StudyError, "revision is stale"):
             analyse(bound, dict(scene, revision="changed"))
-        scene["objects"]["primitive:1"]["transform_column_major"][12] += 1
+        scene["objects"]["CouponRight"]["transform_column_major"][12] += 1
         with self.assertRaisesRegex(StudyError, "adjoining faces"):
             analyse(bound, scene)
         case = input_case()
@@ -101,6 +104,22 @@ class TestBondedCoupon(unittest.TestCase):
                            for t, u in ((0, 0), (2, .001))]
         with self.assertRaisesRegex(StudyError, "snap-back"):
             analyse(case)
+
+    def test_adjoining_faces_use_local_axes_with_reflection(self):
+        case = json.loads((EXAMPLES / "bonded-coupon.json").read_text())
+        scene = scene_catalog(EXAMPLES / "bonded-coupon.scene.json")
+        wrong_face = deepcopy(case)
+        wrong_face["geometry"]["layer_faces"][0] = "+Y"
+        with self.assertRaisesRegex(StudyError, r"not its adjoining face \+X"):
+            validate_coupon_geometry(wrong_face, scene)
+        scene["objects"]["CouponLeft"]["transform_column_major"][0] *= -1
+        with self.assertRaisesRegex(StudyError, "not its adjoining face -X"):
+            validate_coupon_geometry(case, scene)
+        case["geometry"]["layer_faces"][0] = "-X"
+        self.assertEqual(validate_coupon_geometry(case, scene)["layer_faces"], ["-X", "-X"])
+        del case["geometry"]["layer_faces"]
+        case["geometry"]["layer_objects"] = ["primitive:0", "primitive:1"]
+        self.assertEqual(validate_coupon_geometry(case, scene)["initial_bond_gap_m"], 0)
 
     def test_monitor_sampling_does_not_control_damage(self):
         case = input_case()
