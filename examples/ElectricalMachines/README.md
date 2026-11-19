@@ -1,6 +1,6 @@
 # Electrical machines
 
-Open a study in the desktop editor, choose **Fit Extents**, then open **Electrical Controls** and expand a wire, coil, magnet or motor. Each file contains the complete grammar. Dimensions are in metres. The rotor angle follows the prescribed shaft speed through the grammar time variable `t`.
+Open a study in the desktop editor, choose **Fit**, then open **Electrical Controls** and expand a wire, coil, magnet or motor. Each file contains the complete grammar. Dimensions are in metres. The six construction studies animate the rotor at a prescribed speed. The reaction wheel and induction spin-up studies use **Play** or **Step** to accelerate rigid bodies from rest.
 
 ![Native renders of the gapped field coil and six motor assemblies](assemblies.jpg)
 
@@ -13,6 +13,8 @@ Open a study in the desktop editor, choose **Fit Extents**, then open **Electric
 | [Six-step BLDC outrunner](SixStepOutrunner.p3d) | Wye-connected fan motor with 120-degree conduction, two active phases and trapezoidal back EMF | Change the conducting current. Double it to double torque and quadruple winding loss. |
 | [Axial-flux PM](AxialFlux.p3d) | Disc rotor, axial gap, laminated return and aluminium phase windings | Substitute copper in `PhaseWire` and compare winding loss at fixed current. |
 | [Induction cage](InductionCage.p3d) | Copper stator and 24 aluminium cage paths, 50 Hz, two pole pairs | Set shaft speed to 0, 1450, 1500 and 1600 rpm to inspect starting, motoring, synchronous and generating operation. |
+| [Reaction wheel](ReactionWheel.p3d) | Six-step BLDC rotor and a movable housing | Double the housing's Y inertia. Its initial angular acceleration halves while the rotor's stays the same. |
+| [Induction spin-up](InductionSpinUp.p3d) | Cage motor, elliptical flywheel and grounded housing | Set `VR(0 12000 0)` on the rotor to start at 2000 rpm. Step the simulation to see negative slip and braking torque above 1500 rpm. |
 
 The field-coil mesh resolves every turn. Motor meshes use winding envelopes, cutaway return paths, steel teeth, and representative poles or bars. The numeric winding is the equivalent series path per phase, or the equivalent armature for DC. Its turns need not equal the number of visible envelopes. The material selected by a grammar declaration sets its electrical characteristics. The `material(...)` attached to a mesh sets its appearance.
 
@@ -41,6 +43,7 @@ This minimal grammar declares inspectable objects. Add normal geometry rules to 
 | `PermanentMagnet` | `material`, `returnCore`, magnet `length` along magnetisation (m), `returnLength` (m), common pole `area` (m²), total `gap` (m) | `polarity(1)`, either +1 or −1 |
 | `ElectricMotor`, PM | `type`, `winding`, `magnet`, `connection`, integer `polePairs`, signed mechanical `rpm` | `windingFactor(1)` in (0,1] |
 | `ElectricMotor`, induction | `type(InductionCage)`, `winding`, `connection`, `polePairs`, `rpm`, `barMaterial`, integer `bars`, `barLength` (m), `barArea` (m²), `barLeakage` (H), `barEmf` (standstill V RMS per equivalent path), `frequency` (Hz) | `barTemperature(20)` °C |
+| `MotorShaft` | Motor ID and `role(Rotor)` or `role(Stator)`; applies to the next primitive | `axis(0 1 0)` in the rotor's local frame. Omit the stator to ground the motor. |
 
 `BrushedDC` takes `Armature`. The three sinusoidal PM layouts and the induction model accept `Wye` and `Delta`. `SixStepOutrunner` models two conducting phases in `Wye`. DC current denotes signed armature current, six-step current denotes signed conducting plateau current, and sinusoidal current denotes signed peak phase current (q-axis for PM). For induction the supplied current specifies stator copper loss independently of the supplied standstill rotor EMF.
 
@@ -74,11 +77,29 @@ Let p denote pole pairs, Φ the PM flux per pole, ψ = N k_w Φ, and ω signed m
 | Six-step BLDC | Ideal 120° flat-top trapezoid with linear 60° transitions and instantaneous commutation. For a peak-to-peak linkage swing of 2ψ, k_flat = 12pψ/(5π). T = 2k_flat I_on and active-pair EMF = 2k_flat ω. RMS line current = √(2/3) times the current magnitude. | 2 I_on² R |
 | Induction cage | Synchronous speed n_s = 60f/p and slip s = 1 − rpm/n_s. Each equivalent rotor path has R_b = ρl/A and X₀ = 2πfL_b. Its current magnitude is abs(s) E₀ / √(R_b² + s²X₀²). Torque = bars × s E₀² R_b / [(R_b² + s²X₀²)ω_s]. The formula is continuous through zero slip. | Stator 3 I_peak² R/2. Rotor bars × I_b² R_b. |
 
-The inspector reports electromagnetic converted power Tω at the imposed speed. Bearing loss, windage, thermal transients, inverter switching ripple, leakage and fringing in the field circuits, eddy currents, hysteresis and irreversible demagnetisation are outside this implementation. The induction model uses effective independent cage paths. End-ring effects must be reflected in the input path parameters. These are steady operating points and one-dimensional fields. Torque does not automatically drive a rigid body, and `t` samples the prescribed motion.
+The inspector reports electromagnetic converted power Tω. Unbound motors use their authored `rpm`. The field estimates are one-dimensional. Bearing loss, thermal transients, inverter switching ripple, field leakage and fringing, eddy currents, hysteresis and irreversible demagnetisation are outside these electrical models. The induction model uses effective independent cage paths. Include end-ring effects in the path parameters.
+
+## Drive a rigid body
+
+For a motor named `Drive`, put the shaft and the body's principal moments of inertia (kg m²) before the primitive. This rotor spins about its local Y axis against a grounded support.
+
+```text
+[ M(0.8) BodyInertia(0.0004 0.002 0.0018)
+  MotorShaft(Drive role(Rotor) axis(0 1 0))
+  S(0.160 0.014 0.025) I(Cube material(copperbrushedmetal) 1 1) ]
+```
+
+To model housing recoil, bind a second movable primitive with `MotorShaft(Drive role(Stator))` and give it its own `BodyInertia`. An omitted stator or a stator bound to a fixed `!I` provides a grounded reaction. Each endpoint is one rigid body. The binding transmits torque. Bearing constraints and connected mesh assemblies must be modelled separately.
+
+The rotor takes its initial angular velocity from `VR(x y z)` in world degrees per second, defaulting to rest. Each physics step measures rotor speed relative to the stator along the shaft, evaluates the motor at that speed and applies equal and opposite angular impulses. **Electrical Controls** shows the live relative rpm, torque, converted power, and either back EMF or induction slip. A PM drive holds the authored winding current. An induction drive updates torque as slip changes. Use `BodyTorque` to apply an external load. **Reset Sim** restores the authored poses and velocities.
+
+In a scene with a shaft binding, **Play** advances rigid-body physics. Expressions using grammar time `t` are sampled when the geometry is generated. This preserves accumulated rotor momentum between frames.
+
+In the reaction-wheel example, 0.09554 N·m gives a rotor acceleration of +47.77 rad/s² at 0.002 kg m² and a housing acceleration of −11.94 rad/s² at 0.008 kg m². Their angular momenta sum to zero. Converted power uses the difference in angular velocities, so it includes work done on both bodies.
 
 ## Verification and sources
 
-Run `make electrical-check` from the repository root. The native tests load all seven grammars and check geometry, lexical variables, forward references, malformed definitions, material substitution, Ampère's law, PM recoil, zero-current inductance, polarity, connection conversions, commutation, and induction power balance at and across synchronous speed.
+Run `make electrical-check` from the repository root. The native tests load all nine grammars and check geometry, declarations, field equations, polarity, winding connections, commutation and induction power balance. Rigid-body checks cover all six motor types, rotor and housing accelerations, angular momentum and energy, shaft orientation, external load, initial speeds above synchronism, reset and disconnection.
 
 - Annealed conductor resistivities and temperature coefficients. [Copper Development Association, High Conductivity Copper](https://help.leonardo-energy.org/hc/en-us/article_attachments/360025632579)
 - Ferrite permeability, flux density, and test conditions. [TDK SIFERRIT N87](https://www.tdk-electronics.tdk.com/download/528882/990c299b916e9f3eb7e44ad563b7f0b9/pdf-n87.pdf)

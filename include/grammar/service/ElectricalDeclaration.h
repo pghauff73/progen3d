@@ -8,7 +8,7 @@
 // References are linked in scene preflight so source order is immaterial.
 class ElectricalDeclaration : public GrammarActionToken {
 public:
-    enum class Kind { Wire, Coil, Magnet, Motor };
+    enum class Kind { Wire, Coil, Magnet, Motor, Shaft };
     static std::optional<Kind> recognize(const std::string &name, const std::vector<std::string> &tokens, std::size_t index);
     ElectricalDeclaration(const std::string &name, Kind kind) : GrammarActionToken(name), kind(kind) {}
     GrammarActionToken *clone() const override { return new ElectricalDeclaration(*this); }
@@ -19,6 +19,9 @@ public:
                const SpatialDeclarationParserTypes::ExpressionArgumentParser &parseExpression, std::string &diagnostic);
     std::string addTo(ElectricalMachineModel &scene) const;
 
+    std::string attachShaft(ElectricalMachineModel &scene, std::size_t bodyIndex,
+                            bool fixed, bool hasInertia) const;
+    const std::string &objectId() const { return id_; }
     Kind kind;
     std::map<std::string, std::string> expressions;
     std::map<std::string, double> values;

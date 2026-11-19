@@ -6,6 +6,7 @@
 #include "geometry/model/ResolvedPrimitiveGeometry.h"
 #include "physics/model/CollisionGeometry.h"
 #include "physics/model/BodyAirflow.h"
+#include "electrical/service/ElectricalFieldEvaluator.h"
 
 #include <cstddef>
 #include <fstream>
@@ -183,13 +184,14 @@ public:
 	bool addLightSwitch(LightSwitch light_switch, std::string *diagnostic);
 	bool addLightingCircuit(LightingCircuit circuit, std::string *diagnostic);
 	void replaceElectricalMachines(ElectricalMachineModel machines);
+	std::optional<MotorShaftSample> inspectMotorShaft(const std::string &motorId) const;
 	const LightingSceneDefinition &lightingSceneDefinition() const;
 	bool addVehicleJoint(VehicleJoint joint, std::string *diagnostic);
 	const VehicleJointGraph &vehicleJointGraph() const;
 	void setPendingVelocity(const glm::vec3 &velocity);
 	void setPendingRotationalVelocity(const glm::vec3 &rotational_velocity);
 	void setPendingMass(float mass);
-	void setPendingAirflow(std::shared_ptr<const BodyAirflow> definition);
+	void setPendingAirflow(std::shared_ptr<const BodyAirflow> definition, bool motor_shaft = false);
 	AirflowResult inspectAirflow(const ScenePrimitiveInstance &instance,
 	                            std::vector<AirLoadVector> *vectors = nullptr) const;
 	AirEnvironment air_environment;
@@ -227,6 +229,8 @@ private:
 	glm::vec3 pending_rotational_velocity_{0.0f};
 	float pending_mass_ = 1.0f;
 	std::shared_ptr<const BodyAirflow> pending_airflow_;
+	bool pending_motor_shaft_ = false;
+	std::vector<glm::vec3> motorAngularImpulses(float seconds) const;
 	float pending_density_ = 0.0f;
 	bool has_pending_density_ = false;
 	glm::vec3 gravity_acceleration_{0.0f};

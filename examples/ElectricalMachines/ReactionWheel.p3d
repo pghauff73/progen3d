@@ -1,0 +1,17 @@
+# Free rotor and housing on a common Y axis. Play advances rigid-body physics.
+# The two bars make equal-and-opposite rotation visible. The axial clearance
+# avoids contact so motor angular momentum and energy can be checked directly.
+Start ->
+    MagnetWire(PhaseWire material(Copper) insulation(Polyimide) diameter(0.0007) thickness(0.000025) temperature(60))
+    FieldCoil(Winding wire(PhaseWire) core(LaminatedSteel) turns(60) turnLength(0.064)
+              coreLength(0.085) area(0.00012) gap(0.001) current(1.5))
+    PermanentMagnet(Pole material(NdFeB35) returnCore(LaminatedSteel) length(0.003)
+                   returnLength(0.085) area(0.00012) gap(0.001))
+    ElectricMotor(Drive type(SixStepOutrunner) connection(Wye) winding(Winding) magnet(Pole)
+                  polePairs(7) rpm(0) windingFactor(0.933))
+    [ T(0 0.035 0) M(0.8) BodyInertia(0.0004 0.002 0.0018)
+      MotorShaft(Drive role(Rotor) axis(0 1 0))
+      S(0.160 0.014 0.025) I(Cube material(copperbrushedmetal) 1 1) ]
+    [ T(0 -0.035 0) M(1.6) BodyInertia(0.0012 0.008 0.0076)
+      MotorShaft(Drive role(Stator))
+      S(0.195 0.020 0.050) I(Cube material(tealmattemetal) 1 1) ]

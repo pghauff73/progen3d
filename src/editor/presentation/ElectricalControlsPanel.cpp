@@ -5,10 +5,12 @@
 
 #include "electrical/service/ElectricalFieldEvaluator.h"
 
+#include "Context.h"
+
 #include <imgui.h>
 
 namespace {
-void drawMachineFields(const ElectricalMachineModel &scene) {
+void drawMachineFields(const ElectricalMachineModel &scene, const SceneGenerationContext *context) {
     if (scene.wires.empty() && scene.coils.empty() && scene.magnets.empty() && scene.motors.empty()) return;
     ImGui::SeparatorText("Electrical machines");
     for (const auto &[id, wire] : scene.wires) {
@@ -43,9 +45,17 @@ void drawMachineFields(const ElectricalMachineModel &scene) {
     }
     for (const auto &[id, motor] : scene.motors) {
         if (!ImGui::TreeNode(id.c_str(), "%s | motor", id.c_str())) continue;
-        const auto point = ElectricalFieldEvaluator::motor(motor, scene);
+        const bool coupled = scene.shafts.count(id) != 0;
+        const auto shaft = coupled && context ? context->inspectMotorShaft(id) : std::nullopt;
+        if (coupled && !shaft) {
+            ImGui::TextDisabled("Shaft body inactive");
+            ImGui::TreePop();
+            continue;
+        }
+        const auto point = shaft ? shaft->electrical : ElectricalFieldEvaluator::motor(motor, scene);
+        if (shaft) ImGui::Text("Simulated shaft | %s stator", scene.shafts.at(id).statorBody ? "bound" : "grounded");
         ImGui::Text("%s | %s", motorTopologyName(motor.topology), windingConnectionName(motor.connection));
-        ImGui::Text("%u pole pairs | %.4g rpm | winding %s", motor.polePairs, motor.rpm, motor.windingId.c_str());
+        ImGui::Text("%u pole pairs | %.4g rpm | winding %s", motor.polePairs, shaft ? shaft->relativeRpm : motor.rpm, motor.windingId.c_str());
         ImGui::Text("Torque %.5g N m | converted power %.5g W", point.torque, point.convertedPower);
         ImGui::Text("Winding loss %.5g W | line current %.5g A | %.5g Hz", point.windingLoss, point.lineCurrent, point.electricalFrequency);
         if (motor.cage) {
@@ -63,14 +73,14 @@ void drawMachineFields(const ElectricalMachineModel &scene) {
 }
 
 
-void ElectricalControlsPanel::draw(LightingSceneState *lighting_state) const
+void ElectricalControlsPanel::draw(LightingSceneState *lighting_state, const SceneGenerationContext *context) const
 {
 	if (lighting_state == nullptr) return;
 	ElectricalControlGraph &graph = lighting_state->electrical_control_graph;
 	ImGui::Checkbox("Activate Controls Mode", &lighting_state->activate_controls_mode);
 	ImGui::Text("%zu fixtures, %zu switches, %zu circuits",
 	            graph.fixtures().size(), graph.switches().size(), graph.circuits().size());
-	drawMachineFields(graph.machines());
+	drawMachineFields(graph.machines(), context);
 	bool changed = false;
 	ImGui::SeparatorText("Switches");
 	if (graph.switches().empty()) ImGui::TextDisabled("No switches are defined in this scene.");

@@ -43,9 +43,14 @@ MagnetFieldSample ElectricalFieldEvaluator::magnet(const PermanentMagnet &magnet
 }
 
 MotorOperatingPoint ElectricalFieldEvaluator::motor(const ElectricMotor &motor, const ElectricalMachineModel &scene) {
+    return motorAtSpeed(motor, scene, motor.rpm);
+}
+
+MotorOperatingPoint ElectricalFieldEvaluator::motorAtSpeed(const ElectricMotor &motor,
+        const ElectricalMachineModel &scene, double rpm) {
     const auto &coil = scene.coils.at(motor.windingId);
     const auto phase = winding(coil, scene.wires.at(coil.wireId));
-    const double omega = motor.rpm * 2 * pi / 60;
+    const double omega = rpm * 2 * pi / 60;
     MotorOperatingPoint point{};
     const bool dc = motor.topology == MotorTopology::BrushedDC;
     const bool sixStep = motor.topology == MotorTopology::SixStepOutrunner;
@@ -59,7 +64,7 @@ MotorOperatingPoint ElectricalFieldEvaluator::motor(const ElectricMotor &motor, 
         const auto &cage = *motor.cage;
         point.electricalFrequency = cage.supplyFrequency;
         point.synchronousRpm = 60 * cage.supplyFrequency / motor.polePairs;
-        const double slip = 1 - motor.rpm / *point.synchronousRpm;
+        const double slip = 1 - rpm / *point.synchronousRpm;
         point.slip = slip;
         point.rotorFrequency = std::abs(slip) * cage.supplyFrequency;
         const double resistance = cage.conductor->resistivityAt(cage.temperature) * cage.pathLength / cage.barArea;
@@ -72,7 +77,7 @@ MotorOperatingPoint ElectricalFieldEvaluator::motor(const ElectricMotor &motor, 
     } else {
         const auto field = magnet(scene.magnets.at(motor.magnetId));
         point.beyondCoreLimit = point.beyondCoreLimit || field.beyondCoreLimit;
-        point.electricalFrequency = std::abs(motor.rpm) * motor.polePairs / 60;
+        point.electricalFrequency = std::abs(rpm) * motor.polePairs / 60;
         const double linkage = coil.turns * motor.windingFactor * field.flux;
         double emfConstant = motor.polePairs * linkage;
         if (dc) emfConstant *= 2 / pi;
@@ -94,4 +99,33 @@ MotorOperatingPoint ElectricalFieldEvaluator::motor(const ElectricMotor &motor, 
     }
     point.convertedPower = point.torque * omega;
     return point;
+}
+
+// For the induction cage, integrate ds/dt proportional to -s/(1 + (s X/R)^2)
+// over the torque substep. Inertia and the shaft direction are frozen for this
+// substep. This stays on the correct side of synchronous speed even for a light rotor.
+double ElectricalFieldEvaluator::shaftAngularImpulse(const ElectricMotor &motor,
+        const MotorShaftSample &sample, double seconds) {
+    const double constantImpulse = sample.electrical.torque * seconds;
+    if (!motor.cage || constantImpulse == 0) return constantImpulse;
+    const auto &cage = *motor.cage;
+    const double slip = *sample.electrical.slip;
+    const double omegaSync = 2 * pi * cage.supplyFrequency / motor.polePairs;
+    const double impulseToSync = omegaSync * slip / sample.inverseInertia;
+    const double fraction = constantImpulse / impulseToSync;
+    if (fraction < 1e-9) return constantImpulse;
+    const double resistance = cage.conductor->resistivityAt(cage.temperature) * cage.pathLength / cage.barArea;
+    const double reactance = 2 * pi * cage.supplyFrequency * cage.leakageInductance;
+    const double ratio = slip * reactance / resistance;
+    const double weightR = 1 / (1 + ratio * ratio);
+    const double weightX = 1 - weightR;
+    // q = 1 - s_end/s_start. The left side is strictly increasing for 0 <= q < 1.
+    double lo = 0, hi = 1;
+    for (int i = 0; i < 52; ++i) {
+        const double q = (lo + hi) * 0.5;
+        const double elapsed = -weightR * std::log1p(-q) + weightX * q * (1 - q * 0.5);
+        if (elapsed < fraction) lo = q;
+        else hi = q;
+    }
+    return impulseToSync * ((lo + hi) * 0.5);
 }

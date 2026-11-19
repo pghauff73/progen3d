@@ -26,7 +26,9 @@ const DeclarationFields &fieldsFor(Kind kind) {
         {"polePairs", "rpm", "windingFactor", "bars", "barLength", "barArea", "barTemperature",
          "barLeakage", "barEmf", "frequency"},
         {"type", "connection", "winding", "polePairs", "rpm"}};
+    static const DeclarationFields shaft{{"role"}, {"axis"}, {"role"}};
     switch (kind) {
+    case Kind::Shaft: return shaft;
     case Kind::Wire: return wire;
     case Kind::Coil: return coil;
     case Kind::Magnet: return magnet;
@@ -56,6 +58,7 @@ std::optional<Kind> ElectricalDeclaration::recognize(const std::string &name, co
     else if (name == "FieldCoil") kind = Kind::Coil;
     else if (name == "PermanentMagnet") kind = Kind::Magnet;
     else if (name == "ElectricMotor") kind = Kind::Motor;
+    else if (name == "MotorShaft") kind = Kind::Shaft;
     else return std::nullopt;
     const auto &field = tokens[index + 2];
     const auto &fields = fieldsFor(kind);
@@ -66,7 +69,11 @@ std::optional<Kind> ElectricalDeclaration::recognize(const std::string &name, co
 std::string ElectricalDeclaration::print() {
     std::string text = token_name + "(" + id_;
     for (const auto &[name, value] : identifiers_) text += " " + name + "(" + value + ")";
-    for (const auto &[name, expr] : expressions) text += " " + name + "(" + expr + ")";
+    if (kind == Kind::Shaft && expressions.count("axisX")) {
+        text += " axis(" + expressions.at("axisX") + " " + expressions.at("axisY") + " " + expressions.at("axisZ") + ")";
+    } else {
+        for (const auto &[name, expr] : expressions) text += " " + name + "(" + expr + ")";
+    }
     return text + ") ";
 }
 
@@ -87,6 +94,12 @@ bool ElectricalDeclaration::parse(const std::vector<std::string> &tokens, std::s
         }
         if (schema.names.count(field)) {
             if (!Reader::readIdentifier(tokens, index, field, &identifiers_[field], &diagnostic)) return false;
+        } else if (kind == Kind::Shaft && field == "axis") {
+            for (const char *component : {"axisX", "axisY", "axisZ"}) {
+                GeometryExpression expression("");
+                if (!Reader::readExpression(tokens, index, field, parseExpression, &expression, &diagnostic)) return false;
+                expressions[component] = expression.sourceText();
+            }
         } else if (schema.numbers.count(field)) {
             GeometryExpression expr("");
             if (!Reader::readExpression(tokens, index, field, parseExpression, &expr, &diagnostic)) return false;
@@ -195,6 +208,7 @@ std::string ElectricalDeclaration::addTo(ElectricalMachineModel &scene) const {
         error = "duplicate machine object ID";
     else {
         switch (kind) {
+        case Kind::Shaft: return "MotorShaft must be attached to a rigid body.";
         case Kind::Wire: error = addWire(scene); break;
         case Kind::Coil: error = addCoil(scene); break;
         case Kind::Magnet: error = addMagnet(scene); break;
@@ -202,4 +216,25 @@ std::string ElectricalDeclaration::addTo(ElectricalMachineModel &scene) const {
         }
     }
     return error.empty() ? error : token_name + " '" + id_ + "': " + error + ".";
+}
+
+std::string ElectricalDeclaration::attachShaft(ElectricalMachineModel &scene, std::size_t bodyIndex,
+                                               bool fixed, bool hasInertia) const {
+    if (!scene.motors.count(id_)) return "MotorShaft references unknown motor '" + id_ + "'.";
+    const auto &role = identifiers_.at("role");
+    if (role != "Rotor" && role != "Stator") return "MotorShaft role must be Rotor or Stator.";
+    if (role == "Rotor" && fixed) return "MotorShaft rotor requires a movable I primitive.";
+    if (!fixed && !hasInertia) return "A movable MotorShaft body requires BodyInertia.";
+    auto &shaft = scene.shafts[id_];
+    auto &body = role == "Rotor" ? shaft.rotorBody : shaft.statorBody;
+    if (body) return "Motor '" + id_ + "' already has a " + role + " body.";
+    if (values.count("axisX")) {
+        if (role != "Rotor") return "Specify the MotorShaft axis on the rotor.";
+        const double x = values.at("axisX"), y = values.at("axisY"), z = values.at("axisZ");
+        const double length = std::hypot(x, y, z);
+        if (!(length > 0 && std::isfinite(length))) return "MotorShaft axis must be finite and nonzero.";
+        shaft.rotorAxis = glm::vec3(x / length, y / length, z / length);
+    }
+    body = bodyIndex;
+    return {};
 }

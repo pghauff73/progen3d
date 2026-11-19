@@ -1,0 +1,14 @@
+# A two-pole-pair motor drives an elliptical flywheel against a grounded housing.
+# The oval silhouette reveals shaft rotation. Change VR to study generating operation.
+Start ->
+    MagnetWire(PhaseWire material(Copper) insulation(Polyimide) diameter(0.0007) thickness(0.000025) temperature(60))
+    FieldCoil(Winding wire(PhaseWire) core(LaminatedSteel) turns(60) turnLength(0.064)
+              coreLength(0.085) area(0.00012) gap(0.001) current(2))
+    ElectricMotor(Drive type(InductionCage) connection(Wye) winding(Winding) polePairs(2) rpm(0)
+                  barMaterial(Aluminium) bars(24) barLength(0.05) barArea(0.000006)
+                  barTemperature(60) barLeakage(0.000005) barEmf(0.035) frequency(50))
+    [ T(0 0.012 0) M(0.12) VR(0 0 0) BodyInertia(0.00006 0.00009 0.00008)
+      MotorShaft(Drive role(Rotor) axis(0 1 0))
+      S(0.084 0.014 0.048) I(Cylinder material(copperbrushedmetal) 1 1) ]
+    [ T(0 -0.012 0) MotorShaft(Drive role(Stator))
+      S(0.1 0.012 0.065) !I(Cube material(charcoalmattemetal) 1 1) ]

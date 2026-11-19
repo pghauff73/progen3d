@@ -6204,6 +6204,13 @@ void GrammarDocument::generateGeometry()
 	std::vector<Token *> scope_stack;
 	std::vector<Token *> spatial_object_stack;
 	std::map<ElectricalDeclaration::Kind, std::vector<const ElectricalDeclaration *>> electricalDeclarations;
+	const ElectricalDeclaration *pendingShaft = nullptr;
+	struct ShaftAttachment {
+		const ElectricalDeclaration *declaration;
+		Token *primitive;
+		std::size_t ordinal;
+	};
+	std::vector<ShaftAttachment> shaftAttachments;
 	AirflowDeclaration airflow;
 	Token *last_airflow_token = nullptr;
 	std::unordered_map<Token *, std::shared_ptr<const BodyAirflow>> body_airflow;
@@ -6219,8 +6226,21 @@ void GrammarDocument::generateGeometry()
 					    std::to_string(kMaxExpandedActionCount) + "."));
 			return;
 		}
-		if (auto *declaration = dynamic_cast<const ElectricalDeclaration *>(token))
-			electricalDeclarations[declaration->kind].push_back(declaration);
+		if (auto *declaration = dynamic_cast<const ElectricalDeclaration *>(token)) {
+			if (declaration->kind == ElectricalDeclaration::Kind::Shaft) {
+				if (pendingShaft) {
+					report_grammar_issue(this, make_action_token_diagnostic(token, "Only one MotorShaft can bind the next primitive."));
+					return;
+				}
+				pendingShaft = declaration;
+			} else {
+				electricalDeclarations[declaration->kind].push_back(declaration);
+			}
+		}
+		if (pendingShaft && token->token_name == "I") {
+			shaftAttachments.push_back({pendingShaft, token, primitive_count});
+			pendingShaft = nullptr;
+		}
 		std::string airflow_error;
 		const std::string &action = token->token_name;
 		if (AirflowDeclaration::recognizes(action)) {
@@ -6329,6 +6349,10 @@ void GrammarDocument::generateGeometry()
 			"Airflow declaration has no following primitive."));
 		return;
 	}
+	if (pendingShaft) {
+		report_grammar_issue(this, make_action_token_diagnostic(pendingShaft, "MotorShaft requires a following I primitive."));
+		return;
+	}
 	ElectricalMachineModel machines;
 	// Enum order links wires before coils, then magnets before motors.
 	for (const auto &group : electricalDeclarations) {
@@ -6340,15 +6364,38 @@ void GrammarDocument::generateGeometry()
 			}
 		}
 	}
-	context->replaceElectricalMachines(std::move(machines));
+	const std::size_t firstBody = context->primitive_instances.size();
+	std::unordered_set<Token *> shaftPrimitives;
+	for (const auto &attachment : shaftAttachments) {
+		shaftPrimitives.insert(attachment.primitive);
+		const auto diagnostic = attachment.declaration->attachShaft(machines, firstBody + attachment.ordinal,
+			attachment.primitive->immovable, body_airflow.count(attachment.primitive) != 0);
+		if (!diagnostic.empty()) {
+			report_grammar_issue(this, make_action_token_diagnostic(attachment.declaration, diagnostic));
+			return;
+		}
+	}
+	for (const auto &attachment : shaftAttachments) {
+		if (!machines.shafts.at(attachment.declaration->objectId()).rotorBody) {
+			report_grammar_issue(this, make_action_token_diagnostic(attachment.declaration, "MotorShaft stator requires a rotor."));
+			return;
+		}
+	}
+	std::size_t expectedBodies = firstBody;
 	context->air_environment = air_environment;
 	for(Token *token : tokens_new){
 		if(token == NULL)continue;
 		const auto air = body_airflow.find(token);
-		if (air != body_airflow.end()) context->setPendingAirflow(air->second);
+		if (air != body_airflow.end()) context->setPendingAirflow(air->second, shaftPrimitives.count(token) != 0);
 		token->performAction(context);
 		if(!error_details.empty())return;
+		if (!shaftAttachments.empty() && token->token_name == "I" &&
+		    context->primitive_instances.size() != ++expectedBodies) {
+			report_grammar_issue(this, make_action_token_diagnostic(token, "Rigid-body geometry could not be generated for the coupled scene."));
+			return;
+		}
 	}
+	context->replaceElectricalMachines(std::move(machines));
 	std::string spatial_diagnostic;
 	if(!context->finalizeSpatialBuildingModel(&spatial_diagnostic)){
 		GrammarDiagnostic diagnostic;

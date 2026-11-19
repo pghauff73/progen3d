@@ -4729,7 +4729,7 @@ PreviewDynamicCubeMode preview_dynamic_cube_mode_for_instance(const PrimitiveIns
 	return PreviewDynamicCubeMode::Default;
 }
 
-void upload_static_preview_buffers(EditorWorkspaceSession *app_state, Context *context)
+void upload_static_preview_buffers(Context *context)
 {
 	if (context == nullptr) {
 		upload_render_buffers(std::vector<std::vector<GLfloat>>{},
@@ -4739,7 +4739,6 @@ void upload_static_preview_buffers(EditorWorkspaceSession *app_state, Context *c
 		return;
 	}
 
-	sync_active_materials(app_state, context->getMaterialNames());
 	const auto base_vertices = build_base_vertex_data();
 	std::vector<std::vector<GLfloat>> buffers(active_materials.size());
 	std::vector<int> counts(active_materials.size(), 0);
@@ -4816,8 +4815,28 @@ void upload_dynamic_preview_buffers(Context *context)
 
 void upload_context_preview_buffers(EditorWorkspaceSession *app_state, Context *context)
 {
-	upload_static_preview_buffers(app_state, context);
+	if (context) sync_active_materials(app_state, context->getMaterialNames());
+	upload_static_preview_buffers(context);
 	upload_dynamic_preview_buffers(context);
+}
+
+void upload_simulated_preview_buffers(Context *context)
+{
+    // Transformed mesh vertices share material batches. Refresh those batches
+    // when a shaft moves a non-cube mesh; cubes already have instanced draws.
+    const auto &shafts = context->lightingSceneDefinition().electricalControlGraph().machines().shafts;
+    for (const auto &entry : shafts) {
+        const auto isBatchedBody = [&](std::optional<std::size_t> index) {
+            if (!index || *index >= context->primitive_instances.size()) return false;
+            const auto &body = context->primitive_instances[*index];
+            return !body.immovable && !is_preview_dynamic_cube_instance(body);
+        };
+        if (isBatchedBody(entry.second.rotorBody) || isBatchedBody(entry.second.statorBody)) {
+            upload_static_preview_buffers(context);
+            break;
+        }
+    }
+    upload_dynamic_preview_buffers(context);
 }
 
 void step_preview_simulation(float delta_time)
@@ -4839,7 +4858,7 @@ void step_preview_simulation(float delta_time)
 		++step_count;
 	}
 	if (advanced_simulation) {
-		upload_dynamic_preview_buffers(grammar->context);
+		upload_simulated_preview_buffers(grammar->context);
 	}
 	preview_simulation_interpolation_alpha() =
 		std::clamp(preview_simulation_accumulated_time() / kPreviewSimulationStep, 0.0f, 1.0f);
@@ -4853,7 +4872,7 @@ void step_preview_simulation_once(float delta_time)
 
 	reset_preview_simulation_timing();
 	grammar->context->stepSimulation(delta_time);
-	upload_dynamic_preview_buffers(grammar->context);
+	upload_simulated_preview_buffers(grammar->context);
 	preview_simulation_interpolation_alpha() = 1.0f;
 }
 
@@ -10344,7 +10363,11 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 		// No regeneration needed - render settings apply to existing geometry
 	}
 
-	const bool grammar_time_driven = grammar != nullptr && grammarUsesTime(grammar);
+	Context *context = grammar != nullptr ? grammar->context : nullptr;
+	const bool has_motor_shaft = context != nullptr &&
+		!context->lightingSceneDefinition().electricalControlGraph().machines().shafts.empty();
+	// Resampling a grammar would replace its bodies and discard accumulated shaft momentum.
+	const bool grammar_time_driven = grammar != nullptr && !has_motor_shaft && grammarUsesTime(grammar);
 	const PreviewTimelineAdvance timeline_advance = preview_timeline_controller.advance(
 		current_preview_session().timeline,
 		delta_seconds,
@@ -10361,7 +10384,6 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 		step_preview_simulation(timeline_advance.physics_delta_seconds);
 	}
 
-	Context *context = grammar != nullptr ? grammar->context : nullptr;
 	sanitize_preview_selection(app_state);
 	const float current_simulation_time = grammar_time_driven
 		? static_cast<float>(getGrammarEvaluationTime(grammar))
@@ -11250,7 +11272,7 @@ void draw_editor(EditorWorkspaceSession *app_state)
 
 		if (ImGui::BeginTabItem("Electrical Controls")) {
 			ImGui::BeginChild("ElectricalControlsTabBody", ImVec2(0.0f, 0.0f), false);
-			electrical_controls_panel.draw(&current_preview_session().lighting);
+			electrical_controls_panel.draw(&current_preview_session().lighting, grammar ? grammar->context : nullptr);
 			ImGui::EndChild();
 			ImGui::EndTabItem();
 		}

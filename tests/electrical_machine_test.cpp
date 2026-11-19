@@ -160,6 +160,19 @@ void checkMotors() {
                 near(delta.lineCurrent / wye.lineCurrent, std::sqrt(3.0), "delta/wye current");
             }
         }
+        auto coupledSource = example(name);
+        const auto startEnd = coupledSource.find('\n', coupledSource.find("Start ->"));
+        coupledSource.insert(startEnd, "\n    [ T(1 0 0) BodyInertia(0.02 0.02 0.02) "
+                                     "MotorShaft(Drive role(Rotor)) S(0.01 0.01 0.01) I(Cube material(tealmattemetal) 1 1) ]");
+        auto coupled = build(coupledSource);
+        auto &context = *coupled->context;
+        const auto shaft = context.inspectMotorShaft("Drive").value();
+        near(shaft.relativeRpm, 0, name + " starts from the body's actual speed");
+        const float dt = .001f;
+        context.stepSimulation(dt);
+        const double liveRpm = context.inspectMotorShaft("Drive")->relativeRpm;
+        require(liveRpm > 0, name + " accelerates a rigid body");
+        if (!motor.cage) near(liveRpm*2*pi/60/dt, shaft.electrical.torque/.02, name + " acceleration");
         std::cout << name << " " << point.torque << " N m, " << point.convertedPower << " W converted\n";
     }
 }
@@ -197,9 +210,147 @@ void checkAuthoring() {
     require(legacy->context->primitive_instances.size() == 1, "legacy positional rule collision");
     build("Start ->" + cube);
 }
+
+std::string replaceOnce(std::string source, const std::string &from, const std::string &to) {
+    const auto pos = source.find(from);
+    require(pos != std::string::npos, "fixture field missing: " + from);
+    return source.replace(pos, from.size(), to);
+}
+
+void checkReactionWheel() {
+    const auto doc = build(example("ReactionWheel"));
+    auto &context = *doc->context;
+    auto &rotor = context.primitive_instances.at(0);
+    auto &stator = context.primitive_instances.at(1);
+    const auto shaft = context.inspectMotorShaft("Drive").value();
+    require(!grammarUsesTime(doc.get()), "example must use physical playback");
+    const double torque = shaft.electrical.torque;
+    const float dt = .01f;
+    rotor.sleeping = stator.sleeping = true;
+    context.stepSimulation(dt);
+    require(!rotor.sleeping && !stator.sleeping, "motor wakes both bodies");
+    near(glm::radians(rotor.rotational_velocity.y)/dt, torque/.002, "rotor acceleration");
+    near(glm::radians(stator.rotational_velocity.y)/dt, -torque/.008, "housing recoil");
+    near(rotor.velocity.y, 0, "no linear rotor impulse");
+    near(stator.velocity.y, 0, "no linear stator impulse");
+    const double wRotor = glm::radians(rotor.rotational_velocity.y);
+    const double wStator = glm::radians(stator.rotational_velocity.y);
+    near(.002*wRotor, -.008*wStator, "pair angular momentum");
+    near(.5*.002*wRotor*wRotor + .5*.008*wStator*wStator,
+         torque*.5*(wRotor-wStator)*dt, "motor work becomes kinetic energy");
+    const auto live = context.inspectMotorShaft("Drive").value();
+    near(live.relativeRpm,(rotor.rotational_velocity.y-stator.rotational_velocity.y)/6, "live shaft RPM");
+    near(live.electrical.convertedPower, torque*(wRotor-wStator), "relative-speed power");
+    require(*live.electrical.lineBackEmf > 0, "back EMF rises from rest");
+    near(std::abs(rotor.primary_transform[0][2] / glm::length(glm::vec3(rotor.primary_transform[0]))),
+         std::sin(.5*torque/.002*dt*dt), "rotor orientation follows integrated acceleration");
+    context.resetSimulation();
+    near(context.inspectMotorShaft("Drive")->relativeRpm, 0, "reset speed");
+    context.stepSimulation(dt);
+    near(context.inspectMotorShaft("Drive")->relativeRpm, live.relativeRpm, "replay");
+    stator.removed = true;
+    require(!context.inspectMotorShaft("Drive"), "removed housing disconnects drive");
+    const double before = rotor.rotational_velocity.y;
+    context.stepSimulation(dt);
+    near(rotor.rotational_velocity.y, before, "disconnected rotor coasts");
+    context.resetSimulation();
+    require(bool(context.inspectMotorShaft("Drive")), "reset reconnects housing");
+
+    auto loaded = build(replaceOnce(example("ReactionWheel"), "MotorShaft(Drive role(Rotor)",
+                                    "BodyTorque(0 -0.04 0) MotorShaft(Drive role(Rotor)"));
+    loaded->context->stepSimulation(dt);
+    near(glm::radians(loaded->context->primitive_instances[0].rotational_velocity.y)/dt,
+         (torque-.04)/.002, "motor plus external load");
+    auto tilted = build(replaceOnce(example("ReactionWheel"), "M(0.8)", "A(90 2) M(0.8)"));
+    tilted->context->stepSimulation(dt);
+    near(glm::radians(tilted->context->primitive_instances[0].rotational_velocity.x)/dt,
+         -torque/.002, "rotated local shaft");
+    near(glm::radians(tilted->context->primitive_instances[1].rotational_velocity.x)/dt,
+         torque/.0012, "world reaction with different principal axis");
+    auto reversed = build(replaceOnce(example("ReactionWheel"), "current(1.5)", "current(-1.5)"));
+    reversed->context->stepSimulation(dt);
+    near(reversed->context->primitive_instances[0].rotational_velocity.y, -before, "reverse current");
+    std::cout << "Shaft test: torque " << torque << " N m; rotor " << wRotor/dt
+              << " rad/s^2; housing " << wStator/dt << " rad/s^2\n";
+}
+
+void checkInductionDynamics() {
+    const std::string source = example("InductionSpinUp");
+    auto doc = build(source);
+    auto &ctx = *doc->context;
+    const double startTorque = ctx.inspectMotorShaft("Drive")->electrical.torque;
+    require(startTorque > 0, "start torque");
+    double previous = 0;
+    for (int i=0; i<120; ++i) {
+        ctx.stepSimulation(1.f/120);
+        const double rpm = ctx.inspectMotorShaft("Drive")->relativeRpm;
+        require(rpm >= previous-1e-3 && rpm < 1500.01, "induction acceleration approaches synchronous speed");
+        previous = rpm;
+    }
+    require(previous > 100 && ctx.inspectMotorShaft("Drive")->electrical.torque < startTorque, "live slip feedback");
+    near(ctx.primitive_instances[1].rotational_velocity.y, 0, "grounded support");
+    // Zero leakage gives exact exponential slip decay. Check a stiff, finite step
+    // against that analytic solution, then repeat with the rotor above synchronism.
+    const auto resistive = replaceOnce(source, "barLeakage(0.000005)", "barLeakage(0)");
+    for (const double rpm : {0., 1500., 2000.}) {
+        auto rig = build(replaceOnce(resistive, "VR(0 0 0)", "VR(0 "+std::to_string(6*rpm)+" 0)"));
+        auto &r = *rig->context;
+        near(r.inspectMotorShaft("Drive")->relativeRpm, rpm, "authored rotor speed");
+        const double rate = r.inspectMotorShaft("Drive")->electrical.torque;
+        if (rpm == 2000.) require(rate < 0, "generator braking torque");
+        const double seconds = .1f;
+        double expected = rpm;
+        if (rpm != 1500.) {
+            const double inertia = r.primitive_instances[0].airflow->principalInertia.y;
+            const double decay = rate / (inertia * (1500-rpm)*2*pi/60);
+            expected = 1500 - (1500-rpm)*std::exp(-seconds*decay);
+        }
+        r.stepSimulation(seconds);
+        near(r.inspectMotorShaft("Drive")->relativeRpm, expected, "exact resistive-cage transient");
+        r.resetSimulation();
+        near(r.inspectMotorShaft("Drive")->relativeRpm, rpm, "restore authored rotor speed");
+    }
+    std::cout << "Induction spin-up: " << previous << " rpm at 1 s; synchronous speed 1500 rpm\n";
+}
+
+void checkShaftBindings() {
+    const std::string source = example("ReactionWheel");
+    const std::string rotor = "MotorShaft(Drive role(Rotor) axis(0 1 0))";
+    const std::string stator = "MotorShaft(Drive role(Stator))";
+    for (const auto &bad : {
+            replaceOnce(source, rotor, "MotorShaft(Missing role(Rotor))"),
+            replaceOnce(source, rotor, "MotorShaft(Drive role(Other))"),
+            replaceOnce(source, rotor, "MotorShaft(Drive role(Rotor) axis(0 0 0))"),
+            replaceOnce(source, stator, rotor),
+            replaceOnce(source, rotor, ""),
+            replaceOnce(source, rotor, rotor+" "+stator),
+            replaceOnce(source, stator, "MotorShaft(Drive role(Stator) axis(0 1 0))"),
+            replaceOnce(source, "BodyInertia(0.0004 0.002 0.0018)", ""),
+            replaceOnce(source, "I(Cube material(copperbrushedmetal)", "!I(Cube material(copperbrushedmetal)"),
+            source+"    "+rotor+"\n"}) build(bad, false);
+    auto single = build(replaceOnce(source, stator, ""));
+    auto &ctx = *single->context;
+    ctx.stepSimulation(.01f);
+    require(ctx.primitive_instances[0].rotational_velocity.y > 0, "grounded by omission");
+    near(ctx.primitive_instances[1].rotational_velocity.y, 0, "unbound body unaffected");
+
+    const auto split = source.find("    [ T(0 0.035");
+    const auto housing = source.find("    [ T(0 -0.035");
+    const auto decl = source.find("    MagnetWire");
+    const auto forward = source.substr(0, decl) + source.substr(housing) +
+                         source.substr(split,housing-split) + source.substr(decl,split-decl);
+    auto reordered = build(forward);
+    reordered->context->stepSimulation(.01f);
+    near(reordered->context->primitive_instances[1].rotational_velocity.y,
+         ctx.primitive_instances[0].rotational_velocity.y, "forward reference and ordering");
+    require(!build(example("SixStepOutrunner"))->context->inspectMotorShaft("Drive"),
+            "prescribed-speed examples remain uncoupled");
+    auto legacy = build("Start -> VR(0 12000 0) I(Cube material(charcoalmattemetal) 1 1)");
+    near(legacy->context->primitive_instances.at(0).rotational_velocity.y, 720, "legacy speed limit");
+}
 }
 int main() {
-    try { checkFields(); checkMotors(); checkAuthoring(); }
+    try { checkFields(); checkMotors(); checkAuthoring(); checkReactionWheel(); checkInductionDynamics(); checkShaftBindings(); }
     catch (const std::exception &e) { std::cerr << e.what() << '\n'; return 1; }
     std::cout << "Electrical machine checks passed.\n";
 }

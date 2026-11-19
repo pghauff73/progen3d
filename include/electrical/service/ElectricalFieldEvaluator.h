@@ -18,9 +18,17 @@ struct MotorOperatingPoint {
     bool beyondCoreLimit;
 };
 
+struct MotorShaftSample {
+    glm::vec3 worldAxis;
+    double relativeRpm, inverseInertia;
+    MotorOperatingPoint electrical;
+};
+
 class ElectricalFieldEvaluator {
 public:
     static WindingFieldSample winding(const FieldCoil &coil, const MagnetWire &wire);
     static MagnetFieldSample magnet(const PermanentMagnet &magnet);
+    static MotorOperatingPoint motorAtSpeed(const ElectricMotor &motor, const ElectricalMachineModel &scene, double rpm);
+    static double shaftAngularImpulse(const ElectricMotor &motor, const MotorShaftSample &sample, double seconds);
     static MotorOperatingPoint motor(const ElectricMotor &motor, const ElectricalMachineModel &scene);
 };

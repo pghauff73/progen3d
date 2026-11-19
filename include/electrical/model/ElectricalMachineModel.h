@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/vec3.hpp>
+#include <cstddef>
 #include <map>
 #include <optional>
 #include <string>
@@ -71,10 +73,16 @@ struct ElectricMotor {
     std::optional<RotorCage> cage;
 };
 
+struct MotorShaftBinding {
+    std::optional<std::size_t> rotorBody, statorBody;
+    glm::vec3 rotorAxis{0, 1, 0}; // Unit direction in the rotor's principal axes.
+};
+
 // Stored by value in each generated scene. Relationships use stable scene IDs.
 struct ElectricalMachineModel {
     std::map<std::string, MagnetWire> wires;
     std::map<std::string, FieldCoil> coils;
     std::map<std::string, PermanentMagnet> magnets;
     std::map<std::string, ElectricMotor> motors;
+    std::map<std::string, MotorShaftBinding> shafts;
 };
