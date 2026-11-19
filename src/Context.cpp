@@ -251,7 +251,7 @@ float normalized_transform_angle(float angle)
 	return angle < 0.0f ? angle + 360.0f : angle;
 }
 
-glm::vec3 transform_euler_degrees(const glm::mat4 &transform)
+glm::quat transform_orientation(const glm::mat4 &transform)
 {
 	constexpr float epsilon = 1.0e-7f;
 	const glm::vec3 raw_x(transform[0]);
@@ -282,10 +282,14 @@ glm::vec3 transform_euler_degrees(const glm::mat4 &transform)
 	glm::quat orientation = glm::quat_cast(glm::mat3(x_axis, y_axis, z_axis));
 	const float orientation_length = glm::length(orientation);
 	if(!std::isfinite(orientation_length) || orientation_length <= epsilon){
-		return glm::vec3(0.0f);
+		return glm::quat(1, 0, 0, 0);
 	}
-	orientation /= orientation_length;
-	const glm::vec3 euler = glm::degrees(glm::eulerAngles(orientation));
+	return orientation / orientation_length;
+}
+
+glm::vec3 transform_euler_degrees(const glm::mat4 &transform)
+{
+	const glm::vec3 euler = glm::degrees(glm::eulerAngles(transform_orientation(transform)));
 	return glm::vec3(normalized_transform_angle(euler.x),
 	                 normalized_transform_angle(euler.y),
 	                 normalized_transform_angle(euler.z));
@@ -973,14 +977,8 @@ void apply_world_translation(PrimitiveInstance *instance, const vec3 &delta)
 	invalidate_collision_geometry(instance);
 }
 
-void apply_world_rotation(PrimitiveInstance *instance, const vec3 &delta_degrees, const vec3 &pivot)
+void rotate_about_pivot(PrimitiveInstance *instance, const mat4 &rotation, const vec3 &pivot)
 {
-	if (instance == nullptr ||
-	    glm::dot(delta_degrees, delta_degrees) <= (kMinDelta * kMinDelta)) {
-		return;
-	}
-
-	const mat4 rotation = build_rotation_delta(delta_degrees);
 	const mat4 around_pivot =
 		glm::translate(mat4(1.0f), pivot) *
 		rotation *
@@ -990,6 +988,29 @@ void apply_world_rotation(PrimitiveInstance *instance, const vec3 &delta_degrees
 	instance->position = glm::vec3(instance->primary_transform[3]);
 	instance->rotation_degrees = transform_euler_degrees(instance->primary_transform);
 	invalidate_collision_geometry(instance);
+}
+
+// World angular momentum is the integrated quantity. The midpoint orientation
+// converts it back to angular velocity for a body with unequal principal moments.
+glm::quat spin_increment(vec3 omega, float seconds)
+{
+	const float speed = glm::length(omega);
+	return speed > 0 ? glm::angleAxis(speed * seconds, omega / speed) : glm::quat(1, 0, 0, 0);
+}
+
+void advance_airflow_rotation(PrimitiveInstance &body, const glm::mat3 &basis, float dt, vec3 centre)
+{
+	const vec3 omega = glm::radians(body.rotational_velocity);
+	const vec3 inertia = body.airflow->principalInertia;
+	const vec3 momentum = basis * (inertia * (glm::transpose(basis) * omega));
+	const vec3 impulse = body.air_load.moment * dt;
+	const glm::mat3 mid = glm::mat3_cast(spin_increment(omega, dt * 0.5f)) * basis;
+	const vec3 mid_omega = mid * ((glm::transpose(mid) * (momentum + 0.5f * impulse)) / inertia);
+	const glm::quat change = spin_increment(mid_omega, dt);
+	const glm::mat3 end = glm::mat3_cast(change) * basis;
+	body.rotational_velocity = glm::degrees(end * ((glm::transpose(end) * (momentum + impulse)) / inertia));
+	if (glm::dot(mid_omega, mid_omega) > 0)
+		rotate_about_pivot(&body, glm::mat4_cast(change), centre);
 }
 
 void capture_previous_render_state(PrimitiveInstance *instance)
@@ -2134,7 +2155,7 @@ void remove_from_scene(PrimitiveInstance *instance)
 
 bool stop_simulation_if_outside_bounds(PrimitiveInstance *instance, const CollisionGeometry &geometry)
 {
-	if (instance == nullptr || !is_dynamic_simulation_active(*instance)) {
+	if (instance == nullptr || instance->airflow || !is_dynamic_simulation_active(*instance)) {
 		return false;
 	}
 	if (!is_outside_simulation_bounds(geometry.bounds)) {
@@ -2149,7 +2170,7 @@ bool remove_dynamic_cube_if_outside_scene_bounds(PrimitiveInstance *instance,
                                                  const CollisionGeometry &geometry,
                                                  const PrimitiveBounds &scene_bounds)
 {
-	if (instance == nullptr || !is_dynamic_simulation_active(*instance)) {
+	if (instance == nullptr || instance->airflow || !is_dynamic_simulation_active(*instance)) {
 		return false;
 	}
 	if (!is_cube_like(instance->type)) {
@@ -2174,6 +2195,13 @@ void apply_rotational_impulse(PrimitiveInstance *instance,
 
 	const vec3 offset = contact_point - geometry.center_of_mass;
 	const vec3 angular_impulse = glm::cross(offset, impulse);
+	if (instance->airflow) {
+		const glm::mat3 basis = glm::mat3_cast(transform_orientation(instance->primary_transform));
+		const vec3 change = basis * ((glm::transpose(basis) * angular_impulse) /
+		                             instance->airflow->principalInertia);
+		instance->rotational_velocity += glm::degrees(change);
+		return;
+	}
 	const vec3 inverse_inertia =
 		inverse_inertia_for_box(geometry.bounds, instance->mass, instance->immovable);
 	instance->rotational_velocity += glm::degrees(angular_impulse * inverse_inertia);
@@ -2571,6 +2599,7 @@ void SceneRenderableState::restoreInitialState()
 void ScenePrimitiveInstance::restoreInitialState()
 {
 	SceneRenderableState::restoreInitialState();
+	air_load = {};
 	primary_transform = initial_primary_transform;
 	secondary_transform = initial_secondary_transform;
 	dual_scales = initial_dual_scales;
@@ -2690,6 +2719,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	}
 	instance.mass = immovable ? kDefaultMass : resolved_mass;
 	instance.initial_mass = instance.mass;
+	instance.airflow = pending_airflow_;
 	instance.source_start_line = source_start_line;
 	instance.source_start_column = source_start_column;
 	instance.source_end_line = source_end_line;
@@ -3363,6 +3393,19 @@ void SceneGenerationContext::setPendingMass(float mass)
 	pending_mass_ = std::max(mass, kMinimumMass);
 }
 
+AirflowResult SceneGenerationContext::inspectAirflow(const ScenePrimitiveInstance &instance,
+                                                     std::vector<AirLoadVector> *vectors) const
+{
+	if (!instance.airflow) return {};
+	return instance.airflow->evaluate(air_environment, glm::mat3_cast(transform_orientation(instance.primary_transform)),
+	                                  instance.velocity, glm::radians(instance.rotational_velocity), time, vectors);
+}
+
+void SceneGenerationContext::setPendingAirflow(std::shared_ptr<const BodyAirflow> definition)
+{
+	pending_airflow_ = std::move(definition);
+}
+
 void SceneGenerationContext::setPendingDensity(float density)
 {
 	pending_density_ = std::max(density, 0.0f);
@@ -3509,6 +3552,7 @@ void SceneGenerationContext::stepCollisionParticles(float delta_time)
 
 void SceneGenerationContext::clearPendingPrimitiveState()
 {
+	pending_airflow_.reset();
 	pending_velocity_ = glm::vec3(0.0f);
 	pending_rotational_velocity_ = glm::vec3(0.0f);
 	pending_mass_ = kDefaultMass;
@@ -3529,7 +3573,7 @@ void SceneGenerationContext::resetSimulation()
 
 void SceneGenerationContext::stepSimulation(float delta_time)
 {
-	if (delta_time <= 0.0f) {
+	if (!std::isfinite(delta_time) || delta_time <= 0.0f) {
 		return;
 	}
 	stepCollisionParticles(delta_time);
@@ -3553,11 +3597,19 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 	}
 	for (std::size_t index = 0; index < primitive_instances.size(); ++index) {
 		PrimitiveInstance &instance = primitive_instances[index];
-		if (!is_dynamic_simulation_active(instance)) {
-			continue;
+		glm::mat3 body_basis(1);
+		if (instance.airflow && !instance.removed && (instance.immovable || instance.simulation_active)) {
+			body_basis = glm::mat3_cast(transform_orientation(instance.primary_transform));
+			instance.air_load = instance.airflow->evaluate(air_environment, body_basis,
+				instance.velocity, glm::radians(instance.rotational_velocity), time);
+			if (instance.sleeping && (glm::length(instance.air_load.force) > 0 ||
+			                          glm::length(instance.air_load.moment) > 0))
+				wake_instance(&instance);
 		}
+		if (!is_dynamic_simulation_active(instance)) continue;
 		instance.velocity += gravity_acceleration_for_instance(instance, gravity_acceleration_) * delta_time;
-		clamp_rotational_velocity(&instance);
+		if (instance.airflow) instance.velocity += instance.air_load.force * (delta_time / instance.mass);
+		else clamp_rotational_velocity(&instance);
 		apply_world_translation(&instance, instance.velocity * delta_time);
 		const CollisionGeometry *geometry = &collision_geometry_for_instance(instance);
 		if (remove_dynamic_cube_if_outside_scene_bounds(&instance, *geometry, scene_bounds)) {
@@ -3568,10 +3620,13 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 			collision_geometries[index] = nullptr;
 			continue;
 		}
+		if (instance.airflow) {
+			advance_airflow_rotation(instance, body_basis, delta_time, geometry->center_of_mass);
+			continue;
+		}
 		if (glm::dot(instance.rotational_velocity, instance.rotational_velocity) > (kMinDelta * kMinDelta)) {
-			apply_world_rotation(&instance,
-			                    instance.rotational_velocity * delta_time,
-			                    geometry->center_of_mass);
+			rotate_about_pivot(&instance, build_rotation_delta(instance.rotational_velocity * delta_time),
+			                   geometry->center_of_mass);
 			collision_geometries[index] = nullptr;
 			continue;
 		}

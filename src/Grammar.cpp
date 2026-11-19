@@ -4387,13 +4387,15 @@ static void parse_tokens_into(Grammar *grammar,
 		if(token_str=="S" || token_str=="T" || token_str=="D" ||
 		   token_str=="DSX" || token_str=="DSY" || token_str=="DSZ" ||
 		   token_str=="DTX" || token_str=="DTY" || token_str=="DTZ" ||
-		   token_str=="V" || token_str=="VR" ){
+		   token_str=="V" || token_str=="VR" || token_str=="Wind" || token_str=="AirProperties" ||
+		   AirflowDeclaration::recognizes(token_str)){
 			token=std::make_unique<Token>(token_str);
 			if(*index >= raw_tokens.size() || raw_tokens[*index] != "("){
 				throw(1);
 			}
 			++(*index);
-			for(int i=0;i<3;i++){
+			const int arity = token_str == "AirProperties" ? 2 : 3;
+			for(int i=0;i<arity;i++){
 				const std::string argument_expression =
 					parse_expression_argument(raw_tokens, index, ")");
 				if(!isnumber(argument_expression)){
@@ -5400,8 +5402,10 @@ void GrammarDocument::update_token(Token *check_token){
 	if(check_token->token_name=="D" || check_token->token_name=="S" || check_token->token_name=="T" ||
 	   check_token->token_name=="DSX" || check_token->token_name=="DSY" || check_token->token_name=="DSZ" ||
 	   check_token->token_name=="DTX" || check_token->token_name=="DTY" || check_token->token_name=="DTZ" ||
-	   check_token->token_name=="V" || check_token->token_name=="VR"){
-		for(std::size_t index=0; index<3; ++index){
+	   check_token->token_name=="V" || check_token->token_name=="VR" ||
+	   check_token->token_name=="Wind" || check_token->token_name=="AirProperties" ||
+	   AirflowDeclaration::recognizes(check_token->token_name)){
+		for(std::size_t index=0; index<check_token->arguments.size(); ++index){
 			if(!resolve_argument(index, index, check_token->token_name))return;
 		}
 	}
@@ -6174,6 +6178,10 @@ void GrammarDocument::generateGeometry()
 	std::size_t primitive_count = 0;
 	std::vector<Token *> scope_stack;
 	std::vector<Token *> spatial_object_stack;
+	AirflowDeclaration airflow;
+	Token *last_airflow_token = nullptr;
+	std::unordered_map<Token *, std::shared_ptr<const BodyAirflow>> body_airflow;
+	AirEnvironment air_environment;
 	for(Token *token : tokens_new){
 		if(token == NULL)continue;
 		if(++action_count > kMaxExpandedActionCount){
@@ -6183,6 +6191,35 @@ void GrammarDocument::generateGeometry()
 					token,
 					"Scene execution exceeded the action budget of " +
 					    std::to_string(kMaxExpandedActionCount) + "."));
+			return;
+		}
+		std::string airflow_error;
+		const std::string &action = token->token_name;
+		if (AirflowDeclaration::recognizes(action)) {
+			last_airflow_token = token;
+			airflow_error = airflow.append(action, resolve_vec3_arguments(token));
+		} else if (action == "Wind") {
+			air_environment.wind = resolve_vec3_arguments(token);
+			const auto &wind = air_environment.wind;
+			if (!std::isfinite(wind.x) || !std::isfinite(wind.y) || !std::isfinite(wind.z))
+				airflow_error = "Wind requires finite velocities.";
+		} else if (action == "AirProperties") {
+			const auto values = resolve_vec3_arguments(token);
+			if (!(values.x > 0 && values.y > 0 && std::isfinite(values.x) && std::isfinite(values.y)))
+				airflow_error = "AirProperties requires positive density and dynamic viscosity.";
+			else {
+				air_environment.density = values.x;
+				air_environment.dynamicViscosity = values.y;
+			}
+		} else if (action == "I" && airflow.active) {
+			airflow_error = airflow.checkBody();
+			if (airflow_error.empty()) {
+				body_airflow.emplace(token, std::make_shared<const BodyAirflow>(std::move(airflow.body)));
+				airflow = {};
+			}
+		}
+		if (!airflow_error.empty()) {
+			report_grammar_issue(this, make_action_token_diagnostic(token, airflow_error));
 			return;
 		}
 		if(token->token_name == "I" && ++primitive_count > kMaxGeneratedPrimitiveCount){
@@ -6259,8 +6296,16 @@ void GrammarDocument::generateGeometry()
 		return;
 	}
 
+	if (airflow.active) {
+		report_grammar_issue(this, make_action_token_diagnostic(last_airflow_token,
+			"Airflow declaration has no following primitive."));
+		return;
+	}
+	context->air_environment = air_environment;
 	for(Token *token : tokens_new){
 		if(token == NULL)continue;
+		const auto air = body_airflow.find(token);
+		if (air != body_airflow.end()) context->setPendingAirflow(air->second);
 		token->performAction(context);
 		if(!error_details.empty())return;
 	}

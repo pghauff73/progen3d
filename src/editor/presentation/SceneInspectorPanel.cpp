@@ -134,6 +134,21 @@ void SceneInspectorPanel::draw(const ScenePrimitiveInspection &inspection,
 			            inspection.scatter_obstacle_count);
 		}
 	}
+	if (inspection.has_airflow) {
+		ImGui::Separator();
+		ImGui::TextUnformatted("Air loads (world axes)");
+		draw_vector3("Net force (N)", inspection.air_force);
+		draw_vector3("Moment about centre of mass (N m)", inspection.air_moment);
+		ImGui::Text("Rotor thrust %.3f N, shaft power %.3f W, shaft torque %.4f N m",
+		            inspection.thrust, inspection.shaft_power, inspection.shaft_torque);
+		if (!inspection.air_data_in_range)
+			ImGui::TextWrapped("Outside coefficient range. The displayed total omits the affected load.");
+		if (inspection.has_duct) {
+			if (inspection.unique_duct_flow)
+				ImGui::Text("Duct %.4f m3/s at %.2f Pa", inspection.duct_flow, inspection.duct_pressure);
+			else ImGui::TextUnformatted("Duct curves have no unique operating point.");
+		}
+	}
 	draw_vector3("Position", inspection.position);
 	draw_vector3("Velocity", inspection.velocity);
 	draw_vector3("Rotational velocity", inspection.rotational_velocity);

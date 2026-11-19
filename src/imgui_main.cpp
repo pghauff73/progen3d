@@ -3573,6 +3573,37 @@ const StlCatalogEntry *catalog_entry_for_instance_type(const std::string &instan
 	return nullptr;
 }
 
+void append_selected_airflow_overlay(std::vector<PreviewOverlayVertex> *vertices, Context *context, int index)
+{
+	if (index < 0 || static_cast<std::size_t>(index) >= context->primitive_instances.size()) return;
+	const auto &body = context->primitive_instances[index];
+	if (!body.airflow || body.removed) return;
+	const auto centre = context->getInstanceCollisionGeometry(body).center_of_mass;
+	const auto extent = context->getInstanceBounds(body).half_extents;
+	const float scale = std::max(glm::length(extent), 0.05f);
+	const auto marker = color_from_hex(0xffbd40, 1.0f);
+	for (int axis = 0; axis < 3; ++axis) {
+		glm::vec3 stroke(0);
+		stroke[axis] = 0.07f * scale;
+		append_overlay_segment(vertices, centre-stroke, centre+stroke, marker);
+	}
+	std::vector<AirLoadVector> forces;
+	context->inspectAirflow(body, &forces);
+	float largest = 0;
+	for (const auto &load : forces) largest = std::max(largest, glm::length(load.forceWorld));
+	if (largest == 0) return;
+	for (const auto &load : forces) {
+		const auto point = centre + load.offsetWorld;
+		const auto arrow = (load.forceWorld / largest) * scale;
+		const float length = glm::length(arrow);
+		if (length == 0) continue;
+		const ImVec4 color = color_from_hex(0x42d8ca, 1.0f);
+		append_overlay_segment(vertices, centre, point, marker);
+		append_overlay_segment(vertices, point, point+arrow, color);
+		append_overlay_arrowhead(vertices, point+arrow, arrow/length, glm::vec3(0,1,0), length*0.18f, color);
+	}
+}
+
 std::vector<PreviewOverlayVertex> build_connection_overlay_vertices(Context *context)
 {
 	std::vector<PreviewOverlayVertex> vertices;
@@ -10323,6 +10354,7 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 		append_axial_profile_overlay_vertices(&overlay_vertices, context);
 		append_spatial_overlay_vertices(&overlay_vertices, context);
 		append_collision_particle_overlay_vertices(&overlay_vertices, context);
+		append_selected_airflow_overlay(&overlay_vertices, context, current_preview_session().selection.selected_instance_index);
 	}
 	append_light_gizmo_overlay_vertices(&overlay_vertices, camera);
 			// Clear any pending OpenGL errors before upload_overlay_lines
@@ -10719,6 +10751,21 @@ ScenePrimitiveInspection build_scene_primitive_inspection()
 		instance.rotation_degrees.x,
 		instance.rotation_degrees.y,
 		instance.rotation_degrees.z};
+	if (instance.airflow) {
+		const auto air = context->inspectAirflow(instance);
+		inspection.has_airflow = true;
+		inspection.air_data_in_range = air.withinRange;
+		inspection.air_force = {air.force.x, air.force.y, air.force.z};
+		inspection.air_moment = {air.moment.x, air.moment.y, air.moment.z};
+		inspection.thrust = air.thrust;
+		inspection.shaft_power = air.shaftPower;
+		inspection.shaft_torque = air.shaftTorque;
+		inspection.has_duct = !instance.airflow->ductStations.empty();
+		const auto point = instance.airflow->ductOperatingPoint();
+		inspection.unique_duct_flow = point.unique();
+		inspection.duct_flow = point.flow;
+		inspection.duct_pressure = point.pressure;
+	}
 	inspection.mass = instance.mass;
 	inspection.immovable = instance.immovable;
 	if (instance.resolved_geometry) {

@@ -21,6 +21,12 @@ public:
 	std::array<float, 3> velocity{};
 	std::array<float, 3> rotational_velocity{};
 	std::array<float, 3> rotation_degrees{};
+	bool has_airflow = false;
+	bool air_data_in_range = true;
+	std::array<float, 3> air_force{}, air_moment{};
+	float thrust = 0, shaft_power = 0, shaft_torque = 0;
+	bool has_duct = false, unique_duct_flow = false;
+	float duct_flow = 0, duct_pressure = 0;
 	float mass = 0.0f;
 	float estimated_density = 0.0f;
 	bool immovable = false;
