@@ -3,6 +3,7 @@
 #include "editor/relationship/SourceRange.h"
 
 #include "mechanics/model/PinRollerMember.h"
+#include "mechanics/model/CoaxialDriveStage.h"
 #include <optional>
 #include <array>
 #include <cstddef>
@@ -86,6 +87,8 @@ public:
 	std::vector<SpatialConstraintInspection> constraints;
 	std::vector<SpatialResolutionInspection> resolution_records;
 	std::uint64_t aggregate_evidence_hash = 0;
+	std::optional<CoaxialDriveResponse> drive_response;
+	std::string drive_diagnostic;
 	std::optional<MemberServiceResponse> member_response;
 	std::string member_diagnostic, member_material, member_pin, member_roller;
 	bool building_knowledge_available = false;

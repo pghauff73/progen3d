@@ -8,6 +8,7 @@
 #include "spatial/model/SpatialObjectState.h"
 
 #include "mechanics/model/PinRollerMember.h"
+#include "mechanics/model/CoaxialDriveStage.h"
 #include <memory>
 #include <vector>
 
@@ -21,16 +22,18 @@ public:
 	                      std::vector<SpatialInterface> interfaces,
 	                      CollisionParticipationPolicy collision_policy,
 	                      SpatialObjectState state,
-	                      std::shared_ptr<const PinRollerMember> member = {})
+	                      std::shared_ptr<const PinRollerMember> member = {},
+	                      std::shared_ptr<const CoaxialDriveStage> drive = {})
 		: identity_(std::move(identity)),
 		  frame_state_(std::move(frame_state)),
 		  boundary_model_(std::move(boundary_model)),
 		  interfaces_(std::move(interfaces)),
 		  collision_policy_(collision_policy),
 		  state_(state),
-		  member_(std::move(member)) {}
+		  member_(std::move(member)), drive_(std::move(drive)) {}
 
 	const std::shared_ptr<const PinRollerMember> &pinRollerMember() const { return member_; }
+	const std::shared_ptr<const CoaxialDriveStage> &coaxialDrive() const { return drive_; }
 	const SpatialObjectIdentity &identity() const { return identity_; }
 	const SpatialFrameState &frameState() const { return frame_state_; }
 	const SpatialBoundaryModel &boundaryModel() const { return boundary_model_; }
@@ -55,7 +58,7 @@ public:
 			boundary_model_,
 			interfaces_,
 			collision_policy_,
-			state, member_);
+			state, member_, drive_);
 	}
 
 	SpatialBuildingObject withBoundaryModel(SpatialBoundaryModel boundary_model) const
@@ -66,7 +69,7 @@ public:
 			std::move(boundary_model),
 			interfaces_,
 			collision_policy_,
-			state_, member_);
+			state_, member_, drive_);
 	}
 
 	SpatialBuildingObject withInterfaces(std::vector<SpatialInterface> interfaces) const
@@ -77,7 +80,7 @@ public:
 			boundary_model_,
 			std::move(interfaces),
 			collision_policy_,
-			state_, member_);
+			state_, member_, drive_);
 	}
 
 private:
@@ -89,4 +92,5 @@ private:
 		CollisionLayer::Temporary, CollisionLayerMask()};
 	SpatialObjectState state_ = SpatialObjectState::Unplaced;
 	std::shared_ptr<const PinRollerMember> member_;
+	std::shared_ptr<const CoaxialDriveStage> drive_;
 };

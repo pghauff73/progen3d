@@ -35,6 +35,8 @@
 #include "grammar/service/SpatialConstraintDeclarationParser.h"
 #include "grammar/service/SpatialInterfaceDeclarationParser.h"
 #include "grammar/service/SpatialObjectSpecificationParser.h"
+#include "grammar/service/CoaxialDriveParser.h"
+#include "mechanics/model/CoaxialDriveStage.h"
 #include "grammar/service/MemberStudyParser.h"
 #include "mechanics/model/PinRollerMember.h"
 #include "grammar/service/VehicleJointDeclarationParser.h"
@@ -3120,6 +3122,33 @@ void SpatialObjectEndActionToken::performAction(SceneGenerationContext *context)
 	}
 }
 
+void CoaxialDriveToken::performAction(SceneGenerationContext *context)
+{
+	if (!context || !syntax || !context->hasActiveSpatialObject()) {
+		errorout("Grammar execution error: CoaxialDrive requires an active Object scope.");
+		return;
+	}
+	auto read = [&](const GeometryExpression &expression, const char *field, double &destination) {
+		float value;
+		if (!evaluate_spatial_expression(this, expression, field, &value)) return false;
+		destination = value;
+		return true;
+	};
+	CoaxialDriveStage stage{};
+	if (!read(syntax->hoop[0], "hoop mass", stage.hoopMassKg) ||
+	    !read(syntax->hoop[1], "hoop effective radius", stage.effectiveRadiusM) ||
+	    !read(syntax->motion[0], "relative angular speed", stage.relativeDegreesPerS) ||
+	    !read(syntax->motion[1], "relative angular acceleration", stage.relativeDegreesPerS2) ||
+	    !read(syntax->transmission[0], "signed speed ratio", stage.signedSpeedRatio) ||
+	    !read(syntax->transmission[1], "driving efficiency", stage.drivingEfficiency) ||
+	    !read(syntax->transmission[2], "backdrive efficiency", stage.backdriveEfficiency) ||
+	    !read(syntax->motor[0], "rotor inertia", stage.rotorInertiaKgM2) ||
+	    !read(syntax->motor[1], "running drag", stage.runningDragNm)) return;
+	std::string diagnostic;
+	if (!context->setCoaxialDrive(std::move(stage), &diagnostic))
+		errorout("Grammar execution error: " + diagnostic);
+}
+
 void MemberStudyToken::performAction(SceneGenerationContext *context)
 {
 	if (!context || !syntax || !context->hasActiveSpatialObject()) {
@@ -4216,6 +4245,18 @@ static void parse_tokens_into(Grammar *grammar,
 				throw(1);
 			}
 			append_owned_token(std::move(member));
+			continue;
+		}
+		else if(token_str=="CoaxialDrive"){
+			auto drive = std::make_unique<CoaxialDriveToken>();
+			std::string diagnostic;
+			drive->syntax = CoaxialDriveParser().parse(raw_tokens, index, parse_expression_argument, &diagnostic);
+			assign_token_source_range(drive.get(), raw_token_spans, token_start_index, *index);
+			if (!drive->syntax) {
+				report_grammar_issue(grammar, make_action_token_diagnostic(drive.get(), diagnostic));
+				throw(1);
+			}
+			append_owned_token(std::move(drive));
 			continue;
 		}
 		else if(token_str=="Interface"){
@@ -6214,6 +6255,7 @@ void GrammarDocument::generateGeometry()
 	std::vector<Token *> scope_stack;
 	std::vector<Token *> spatial_object_stack;
 	std::unordered_set<Token *> objects_with_member_studies;
+	std::unordered_set<Token *> objects_with_drives;
 	AirflowDeclaration airflow;
 	Token *last_airflow_token = nullptr;
 	std::unordered_map<Token *, std::shared_ptr<const BodyAirflow>> body_airflow;
@@ -6270,15 +6312,16 @@ void GrammarDocument::generateGeometry()
 		if(token->token_name == "ObjectBegin"){
 			spatial_object_stack.push_back(token);
 		}
-		else if (action == "PinRollerMember") {
+		else if (action == "PinRollerMember" || action == "CoaxialDrive") {
 			if (spatial_object_stack.empty()) {
 				report_grammar_issue(this, make_action_token_diagnostic(token,
-					"PinRollerMember requires an active Object scope."));
+					action + " requires an active Object scope."));
 				return;
 			}
-			if (!objects_with_member_studies.insert(spatial_object_stack.back()).second) {
+			auto &owners = action == "CoaxialDrive" ? objects_with_drives : objects_with_member_studies;
+			if (!owners.insert(spatial_object_stack.back()).second) {
 				report_grammar_issue(this, make_action_token_diagnostic(token,
-					"An object may declare only one PinRollerMember study."));
+					"An object may declare only one " + action + " study."));
 				return;
 			}
 		}

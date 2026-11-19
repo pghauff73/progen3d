@@ -2888,6 +2888,15 @@ bool SceneGenerationContext::setMemberStudy(PinRollerMember member, std::string 
 	return spatial_scene_construction_state_->construction_context.setMemberStudy(std::move(member), diagnostic);
 }
 
+bool SceneGenerationContext::setCoaxialDrive(CoaxialDriveStage drive, std::string *diagnostic)
+{
+	if (!spatial_scene_construction_state_) {
+		if (diagnostic) *diagnostic = "Spatial construction state is unavailable.";
+		return false;
+	}
+	return spatial_scene_construction_state_->construction_context.setCoaxialDrive(std::move(drive), diagnostic);
+}
+
 bool SceneGenerationContext::addSpatialInterface(
 	SpatialInterface interface,
 	std::string *diagnostic)

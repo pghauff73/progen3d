@@ -124,6 +124,7 @@ struct CollisionParticle {
 };
 
 struct PinRollerMember;
+struct CoaxialDriveStage;
 
 class SceneGenerationContext
 {
@@ -166,6 +167,7 @@ public:
 	                        const std::string &container_object_id,
 	                        CollisionParticipationPolicy collision_policy,
 	                        std::string *diagnostic);
+	bool setCoaxialDrive(CoaxialDriveStage drive, std::string *diagnostic);
 	bool setMemberStudy(PinRollerMember member, std::string *diagnostic);
 	bool addSpatialInterface(SpatialInterface interface, std::string *diagnostic);
 	bool addSpatialConnection(SpatialConnection connection, std::string *diagnostic);

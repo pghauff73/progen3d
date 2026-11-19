@@ -1,6 +1,7 @@
 #include "editor/service/SpatialObjectInspectionService.h"
 
 #include "mechanics/service/MemberServiceAnalysis.h"
+#include "mechanics/service/CoaxialDriveAnalysis.h"
 #include "editor/service/BuildingKnowledgeInspectionService.h"
 #include "editor/relationship/SpatialObjectPrimitiveAssociationIndex.h"
 #include "spatial/model/CollisionPositionConstraint.h"
@@ -269,6 +270,11 @@ SpatialObjectInspection SpatialObjectInspectionService::inspectObject(
 
 	inspection.available = true;
 	inspection.object_id = object_id.value();
+	if (object->coaxialDrive()) {
+		const CoaxialDriveAnalysis drive(model, *object);
+		inspection.drive_diagnostic = drive.diagnostic();
+		inspection.drive_response = drive.response();
+	}
 	if (const auto &member = object->pinRollerMember()) {
 		const MemberServiceAnalysis study(*object);
 		inspection.member_response = study.response();

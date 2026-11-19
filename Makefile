@@ -76,7 +76,9 @@ APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 
 APP_CPP_SOURCES = \
 	$(SRC_DIR)/grammar/service/MemberStudyParser.cpp \
+	$(SRC_DIR)/grammar/service/CoaxialDriveParser.cpp \
 	$(SRC_DIR)/mechanics/service/MemberServiceAnalysis.cpp \
+	$(SRC_DIR)/mechanics/service/CoaxialDriveAnalysis.cpp \
 	$(SRC_DIR)/physics/model/BodyAirflow.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
@@ -559,6 +561,14 @@ build/member-service-test: tests/member_service_test.cpp $(FORM_STUDY_OBJS)
 .PHONY: member-check
 member-check: build/member-service-test
 	./build/member-service-test
+
+build/coaxial-drive-test: tests/coaxial_drive_test.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: drive-check
+drive-check: build/coaxial-drive-test
+	./build/coaxial-drive-test
 
 .PHONY: airflow-check
 airflow-check: build/airflow-test
