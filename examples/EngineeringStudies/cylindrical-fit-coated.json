@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "model": "cylindrical_fit",
+  "geometry": {
+    "revision": "91401bb7691b98a6b478a149282808dcbaf433a798414b2d6b9d62c4972f5ba9",
+    "metres_per_scene_unit": 0.001
+  },
+  "dimension_source": "Synthetic 10 mm bore and 9.95 mm shaft. Limits apply before coating.",
+  "materials": {
+    "Primer": {
+      "properties": {
+        "ThermalConductivity": {
+          "value": 0.2, "unit": "W/m/K", "source": "Analytical example",
+          "uncertainty": 0.01,
+          "temperature_range": {"min": 15, "max": 40, "unit": "degC"}
+        },
+        "MassDensity": {"value": 1.4, "unit": "g/cm^3", "source": "Synthetic training data"},
+        "SpecificHeatCapacity": {"value": 0.9, "unit": "kJ/kg/K", "source": "Synthetic training data"},
+        "ModulusOfElasticity": {"value": 1.8, "unit": "GPa", "source": "Synthetic training data"},
+        "ThermalCoefficientOfLinearExpansion": {
+          "value": 0.00004, "unit": "1/K", "source": "Synthetic training data"
+        }
+      },
+      "appearance": {"colour": "grey", "roughness": 0.5}
+    },
+    "Topcoat": {
+      "properties": {
+        "ThermalConductivity": {"value": 0.4, "unit": "W/m/K", "source": "Analytical example"}
+      },
+      "appearance": {"colour": "blue", "roughness": 0.2}
+    }
+  },
+  "shaft": {
+    "object": "Pin",
+    "interface": "shaftAxis",
+    "nominal_diameter_m": 0.00995,
+    "min_diameter_m": 0.00994,
+    "max_diameter_m": 0.00996,
+    "coating": {
+      "area": {"value": 100, "unit": "cm^2", "source": "Prescribed 1-D heat-flow area"},
+      "temperature_difference": {"value": 1, "unit": "K", "source": "Prescribed temperature difference"},
+      "layers": [
+        {
+          "material": "Primer",
+          "thickness": {"value": 5, "unit": "um", "source": "Synthetic application target"},
+          "affects_fit": true,
+          "affects_thermal": true
+        },
+        {
+          "material": "Topcoat",
+          "thickness": {"value": 0.01, "unit": "mm", "source": "Synthetic application target"},
+          "affects_fit": true,
+          "affects_thermal": true,
+          "interface_resistance": {"value": 0.00005, "unit": "m^2*K/W", "source": "Analytical example"}
+        }
+      ]
+    }
+  },
+  "bore": {
+    "object": "Housing",
+    "interface": "boreAxis",
+    "nominal_diameter_m": 0.01000,
+    "min_diameter_m": 0.00998,
+    "max_diameter_m": 0.01002
+  },
+  "target_axial_offset_m": 0.004,
+  "max_axial_deviation_m": 0.00005,
+  "max_radial_offset_m": 0.00001,
+  "max_axis_angle_rad": 0.0005
+}

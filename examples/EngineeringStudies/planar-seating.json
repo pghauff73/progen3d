@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "model": "planar_seating",
+  "geometry": {
+    "revision": "91401bb7691b98a6b478a149282808dcbaf433a798414b2d6b9d62c4972f5ba9",
+    "metres_per_scene_unit": 0.001
+  },
+  "seat": {"object": "Housing", "interface": "seatingPlane"},
+  "mate": {"object": "Retainer", "interface": "contactPlane"},
+  "target_gap_m": 0.00025,
+  "max_gap_deviation_m": 0.00005,
+  "max_lateral_offset_m": 0.00005,
+  "max_normal_deviation_rad": 0.001
+}

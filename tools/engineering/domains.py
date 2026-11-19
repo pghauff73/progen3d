@@ -9,6 +9,7 @@ from .coupon_geometry import validate_coupon_geometry
 from .cohesive import cohesive_opening
 from .cylindrical_fit import cylindrical_fit
 from .domain_inputs import positive, scalar
+from .planar_seating import planar_seating
 
 
 def thermal_network(data):
@@ -322,7 +323,7 @@ MODELS = {
     "expansion": expansion, "laminar_pipe": laminar_pipe, "resistor_circuit": resistor_circuit,
     "surface_flux_transfer": surface_flux_transfer, "split_wall_coolant": split_wall_coolant,
     "cohesive_opening": cohesive_opening, "bonded_coupon": bonded_coupon,
-    "cylindrical_fit": cylindrical_fit,
+    "cylindrical_fit": cylindrical_fit, "planar_seating": planar_seating,
 }
 
 
@@ -336,8 +337,8 @@ def analyse(data, scene=None):
         geometry = None
         if name == "bonded_coupon":
             geometry = validate_coupon_geometry(data, scene)
-        elif name == "cylindrical_fit":
-            return {"study": name, **cylindrical_fit(data, scene)}
+        elif name in ("cylindrical_fit", "planar_seating"):
+            return {"study": name, **MODELS[name](data, scene)}
         elif scene is not None:
             raise StudyError(f"{name} does not accept a scene manifest")
         result = {"study": name, **MODELS[name](data)}

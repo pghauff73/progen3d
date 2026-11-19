@@ -80,6 +80,10 @@ test ! -e "$temp/stale-result.json"
 fit=examples/EngineeringStudies/cylindrical-fit
 "$manifest" "$fit.p3d" "$temp/fit.json"
 python3 -m tools.engineering analyse "$fit.json" --scene "$temp/fit.json" --output "$temp/fit-result.json"
+python3 -m tools.engineering analyse examples/EngineeringStudies/planar-seating.json \
+    --scene "$temp/fit.json" --output "$temp/seating-result.json"
+python3 -m tools.engineering analyse "$fit-coated.json" --scene "$temp/fit.json" \
+    --output "$temp/coated-result.json"
 sed '/^        FitHousing$/ { N; s/FitHousing\n        FitShaft/FitShaft\n        FitHousing/; }' "$fit.p3d" \
     | sed 's/I(Cylinder material/I(Cylinder(segments(32 1)) material/' > "$temp/fit-reordered.p3d"
 "$manifest" "$temp/fit-reordered.p3d" "$temp/fit-reordered.json"
@@ -92,6 +96,12 @@ sed 's/T(0 0 0)/S(2 1 1)/' "$fit.p3d" > "$temp/fit-scaled.p3d"
 sed 's/^    Object(id(FitAssembly)/    T(100 200 300) A(35 2) Object(id(FitAssembly)/' \
     "$fit.p3d" > "$temp/fit-rigid.p3d"
 "$manifest" "$temp/fit-rigid.p3d" "$temp/fit-rigid.json"
+sed 's/T(0 16.25 0)/T(0.08 16.5 0)/' "$fit.p3d" > "$temp/seat-offset.p3d"
+"$manifest" "$temp/seat-offset.p3d" "$temp/seat-offset.json"
+sed 's/T(0 16.25 0)/T(0 16.25 0) A(5 0)/' "$fit.p3d" > "$temp/seat-tilted.p3d"
+"$manifest" "$temp/seat-tilted.p3d" "$temp/seat-tilted.json"
+sed '/id(contactPlane)/s/normal(0 -1 0)/normal(0 1 0)/' "$fit.p3d" > "$temp/seat-flipped.p3d"
+"$manifest" "$temp/seat-flipped.p3d" "$temp/seat-flipped.json"
 
 python3 - "$temp" <<'PY'
 from pathlib import Path
@@ -204,7 +214,7 @@ def rejects(data, scene, message):
     except StudyError as error:
         assert message in str(error), str(error)
     else:
-        raise AssertionError(f"expected cylindrical fit rejection: {message}")
+        raise AssertionError(f"expected study rejection: {message}")
 
 rejects(fit_case, reordered, "geometry revision is stale")
 rejects(fit_case, None, "requires a native scene manifest")
@@ -256,4 +266,69 @@ assert analyse(fit_case, fit_scene)["fit_class"] == "line_to_line"
 fit_case["shaft"]["min_diameter_m"] = 0.03
 rejects(fit_case, fit_scene, "minimum diameter exceeds maximum")
 print("Authored interface anchors and cylindrical fit passed native export, remeshing, alignment, and tolerance checks.")
+
+seating_case = json.loads((examples / "planar-seating.json").read_text())
+seating = read("seating-result")
+assert seating["geometry_binding"]["mate"] == {"object": "Retainer", "interface": "contactPlane"}
+assert seating["seating_within_limits"] and seating["normal_deviation_rad"] == 0
+assert seating["center_gap_m"] == seating["minimum_gap_m"] == seating["maximum_gap_m"] == 0.00025
+rejects(seating_case, reordered, "planar seating geometry revision is stale")
+for scene_name in ("fit-rigid", "seat-offset", "seat-tilted", "seat-flipped"):
+    catalog = read(scene_name)
+    seating_case["geometry"]["revision"] = catalog["revision"]
+    result = analyse(seating_case, catalog)
+    checks = result["seating_checks"]
+    if scene_name == "fit-rigid":
+        assert result["seating_within_limits"]
+        for key in ("center_gap_m", "minimum_gap_m", "maximum_gap_m",
+                    "lateral_offset_m", "normal_deviation_rad"):
+            assert math.isclose(result[key], seating[key], abs_tol=1e-7)
+    elif scene_name == "seat-offset":
+        assert checks == {"gap": False, "lateral": False, "opposed_normals": True}
+        assert math.isclose(result["center_gap_m"], 0.0005)
+        assert math.isclose(result["lateral_offset_m"], 80e-6, rel_tol=1e-7)
+    elif scene_name == "seat-tilted":
+        assert checks == {"gap": False, "lateral": True, "opposed_normals": False}
+        assert math.isclose(result["normal_deviation_rad"], math.radians(5), rel_tol=1e-6)
+        edge = 0.01 * math.sin(math.radians(5))
+        assert math.isclose(result["minimum_gap_m"], 0.00025 - edge, abs_tol=1e-9)
+        assert math.isclose(result["maximum_gap_m"], 0.00025 + edge, abs_tol=1e-9)
+    else:
+        assert checks == {"gap": True, "lateral": True, "opposed_normals": False}
+        assert result["normal_deviation_rad"] == math.pi
+seating_case["geometry"]["revision"] = fit_scene["revision"]
+seating_case["mate"]["interface"] = "missing"
+rejects(seating_case, fit_scene, "missing interface missing on Retainer")
+print("Planar seating passed gap range, lateral offset, tilt, same-facing normals, and rigid-motion checks.")
+
+coated = read("coated-result")
+assert coated["geometry_binding"] == fit_result["geometry_binding"]
+assert coated["fit_class"] == "transition"
+assert math.isclose(coated["nominal_diametral_clearance_m"], 20e-6)
+assert math.isclose(coated["uncoated_nominal_clearance_m"], 50e-6)
+for label, expected in (("uncoated_clearance_min_m", 20e-6), ("uncoated_clearance_max_m", 80e-6),
+                        ("diametral_clearance_min_m", -10e-6), ("diametral_clearance_max_m", 50e-6)):
+    assert math.isclose(coated[label], expected, abs_tol=1e-12)
+shaft_coating = coated["coatings"]["shaft"]
+assert [layer["material"] for layer in shaft_coating["layers"]] == ["Primer", "Topcoat"]
+assert math.isclose(shaft_coating["thermal_resistance_K_W"], 0.01)
+assert math.isclose(shaft_coating["heat_flow_W"], 100)
+assert math.isclose(shaft_coating["materials"]["Primer"]["MassDensity"]["si_value"], 1400)
+coated_case = json.loads((examples / "cylindrical-fit-coated.json").read_text())
+shaft_spec = coated_case["shaft"]["coating"]
+first_layer = shaft_spec["layers"][0]
+first_layer["thickness"].update(value=0.000005, unit="m")
+equivalent = analyse(coated_case, fit_scene)
+assert equivalent["fit_class"] == coated["fit_class"]
+assert math.isclose(equivalent["nominal_diametral_clearance_m"], coated["nominal_diametral_clearance_m"])
+assert math.isclose(equivalent["coatings"]["shaft"]["heat_flow_W"], shaft_coating["heat_flow_W"])
+shaft_spec["layers"][1]["affects_fit"] = False
+bore_layer = {**first_layer, "affects_thermal": False}
+coated_case["bore"]["coating"] = {"layers": [bore_layer]}
+line_to_line = analyse(coated_case, fit_scene)
+assert line_to_line["fit_class"] == "clearance" and line_to_line["line_to_line_possible"]
+assert line_to_line["diametral_clearance_min_m"] == 0
+bore_layer["thickness"] = {**bore_layer["thickness"], "value": 0.005}
+rejects(coated_case, fit_scene, "coating closes the minimum bore diameter")
+print("Revision-bound coating stack passed geometry, clearance, and heat-flow checks.")
 PY

@@ -51,6 +51,30 @@ The study subtracts the largest shaft diameter from the smallest bore diameter f
 
 The diameter limits are synthetic inputs tied to the named datums. The analysis uses rigid object placements and requires a declared metres-per-scene-unit conversion. It evaluates diameter limits and nominal datum alignment independently. Verifying surface dimensions, engagement, collision during insertion or press-fit forces requires separate geometry or mechanical analysis.
 
+## Check planar seating
+
+Open the same native scene manifest with the planar study.
+
+```bash
+python3 -m tools.engineering analyse examples/EngineeringStudies/planar-seating.json \
+  --scene /tmp/cylindrical-fit.scene.json
+```
+
+The study measures `Retainer:contactPlane` against `Housing:seatingPlane`. Positive gap points outward from the seat. It reports the signed gap at the mate origin and its extrema over the mate's authored rectangle. A 0.25 mm gap, zero lateral offset and exactly opposed normals pass the example limits. The range is measured against the seat datum plane. Negative projected distances describe which side of the plane the authored datum crosses. Checking overlap, collision or mechanical retention requires contact geometry.
+
+## Evaluate an ordered coating stack
+
+```bash
+python3 -m tools.engineering analyse examples/EngineeringStudies/cylindrical-fit-coated.json \
+  --scene /tmp/cylindrical-fit.scene.json
+```
+
+Declare `coating.layers` under the bound shaft or bore, ordered from substrate to exposed surface. Each layer names a member of the study's `materials` catalogue and supplies a thickness with value, unit and source. Its two flags select the effects included in the calculation. Fit-active layers grow the shaft diameter or shrink the bore diameter by twice their thickness. The example's 15 µm stack changes nominal clearance from 50 µm to 20 µm and changes the worst-case interval from 20–80 µm to −10–50 µm. A positive nominal clearance can still allow interference.
+
+Thermal-active layers use the declared common heat-flow area and their material's through-thickness conductivity. Their resistances sum in series. A layer can include area-specific interface resistance at its inner boundary. For steady one-dimensional conduction, a layer of thickness $t$ and conductivity $k$ over area $A$ contributes $t/(kA)$. At 1 mm, 0.2 W/(m·K) and 0.01 m², that adds 0.5 K/W. An optional temperature difference produces the signed heat rate through that stack alone. This calculation assumes uniform area, constant conductivity and negligible curvature for heat transfer. For radial conduction through thick cylindrical walls, use a cylindrical resistance model.
+
+Material property kinds are checked against the engineering quantity catalogue. Source values and units are retained alongside their SI values. Optional uncertainty uses the same unit as the measurement. Optional temperature applicability is recorded with its original bounds and kelvin conversions. Use constant properties within their stated range. The study records density, specific heat, elastic modulus and expansion data when supplied. The reference calculations use conductivity and thickness. Appearance fields can be edited independently. Tolerance uncertainty, temperature-dependent laws, coupled contact and paired friction remain separate modelling tasks.
+
 ## Author, observe and replay
 
 - Start with `coupon.p3physics`. Each declaration occupies a line. Units follow a number, such as `4 [W/K]`. Expressions support scalar literals, earlier parameters, states, derived quantities, arithmetic and the solver time `t`. Declare derived quantities in dependency order. The left side of each differential equation is `der(state)` or a constant parameter expression multiplied by that derivative. Each state needs one equation.

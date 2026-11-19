@@ -1,43 +1,19 @@
 """Worst-case diameter fit and nominal axis alignment at authored references."""
 import math
 
+from .coating_stack import fit_coatings
 from .domain_inputs import nonnegative, positive, scalar
+from .interface_geometry import (
+    cross, dot, interface_offset, rigid_interface, transverse_offset, unit_vector, vector,
+)
 from .quantities import StudyError
-from .study import require_scene_interface
-
-
-def vector(values, label):
-    if not isinstance(values, list) or len(values) != 3:
-        raise StudyError(f"{label} requires three coordinates")
-    return tuple(scalar(value, label) for value in values)
-
-
-def dot(a, b):
-    return math.fsum(x * y for x, y in zip(a, b))
 
 
 def read_axis(part, scene, interface_type):
-    object_id = part["object"]
-    interface_id = part["interface"]
-    if not isinstance(object_id, str) or not isinstance(interface_id, str):
-        raise StudyError(f"{interface_type} requires object and interface IDs")
-    obj = scene["objects"].get(object_id)
-    if obj is None:
-        raise StudyError(f"unresolved scene object {object_id}")
-    anchor = require_scene_interface(object_id, obj, interface_id)
-    label = f"{object_id}:{interface_id}"
-    if anchor["type"] != interface_type or anchor["authored_region"]["kind"] != "AxisSegment":
-        raise StudyError(f"{label} requires a {interface_type} AxisSegment interface")
+    anchor, label = rigid_interface(part, scene, interface_type, "AxisSegment")
     positive(anchor["authored_region"], "length")
-    if anchor["rigid_placement"] is not True:
-        raise StudyError(f"{label} requires rigid object placement")
     frame = anchor["world_frame"]
-    center = vector(frame["origin"], f"{label} origin")
-    axis = vector(frame["normal"], f"{label} axis")
-    norm = math.hypot(*axis)
-    if abs(norm - 1.0) > 1e-5:
-        raise StudyError(f"{label} requires a unit axis")
-    return center, tuple(value / norm for value in axis)
+    return vector(frame["origin"], f"{label} origin"), unit_vector(frame["normal"], f"{label} axis")
 
 
 def diameter_limits(part):
@@ -45,7 +21,18 @@ def diameter_limits(part):
     upper = positive(part, "max_diameter_m")
     if lower > upper:
         raise StudyError("minimum diameter exceeds maximum diameter")
-    return lower, upper
+    nominal = None
+    if "nominal_diameter_m" in part:
+        nominal = positive(part, "nominal_diameter_m")
+        if not lower <= nominal <= upper:
+            raise StudyError("nominal diameter must be within its declared limits")
+    return lower, upper, nominal
+
+
+def subtract_coating(clearance, reduction, roundoff):
+    value = clearance - reduction
+    # A result within arithmetic precision of zero is treated as line-to-line.
+    return 0.0 if reduction and abs(value) <= roundoff else value
 
 
 def cylindrical_fit(data, scene=None):
@@ -63,9 +50,23 @@ def cylindrical_fit(data, scene=None):
         raise StudyError("cylindrical fit requires two distinct objects")
     shaft_center, shaft_axis = read_axis(shaft, scene, "Shaft")
     bore_center, bore_axis = read_axis(bore, scene, "Socket")
-    shaft_min, shaft_max = diameter_limits(shaft)
-    bore_min, bore_max = diameter_limits(bore)
-    clearance_min, clearance_max = bore_min - shaft_max, bore_max - shaft_min
+    shaft_min, shaft_max, shaft_nominal = diameter_limits(shaft)
+    bore_min, bore_max, bore_nominal = diameter_limits(bore)
+    if (shaft_nominal is None) != (bore_nominal is None):
+        raise StudyError("nominal clearance requires both nominal diameters")
+    uncoated_min, uncoated_max = bore_min - shaft_max, bore_max - shaft_min
+    coatings = fit_coatings(data)
+    if coatings:
+        shaft_growth = 2 * coatings.get("shaft", {}).get("fit_thickness_m", 0.0)
+        bore_reduction = 2 * coatings.get("bore", {}).get("fit_thickness_m", 0.0)
+        if bore_reduction >= bore_min:
+            raise StudyError("coating closes the minimum bore diameter")
+        reduction = scalar(shaft_growth + bore_reduction, "coating diameter change")
+    else:
+        reduction = 0.0
+    roundoff = 2 * math.ulp(max(shaft_max, bore_max))
+    clearance_min = subtract_coating(uncoated_min, reduction, roundoff)
+    clearance_max = subtract_coating(uncoated_max, reduction, roundoff)
     if clearance_min == clearance_max == 0:
         fit = "line_to_line"
     elif clearance_min >= 0:
@@ -75,15 +76,10 @@ def cylindrical_fit(data, scene=None):
     else:
         fit = "transition"
 
-    offset = tuple(scalar((shaft_point - bore_point) * scene_scale, "offset")
-                   for shaft_point, bore_point in zip(shaft_center, bore_center))
+    offset = interface_offset(shaft_center, bore_center, scene_scale)
     axial_offset = dot(offset, bore_axis)
-    radial_offset = math.hypot(*(value - axial_offset * direction
-                                 for value, direction in zip(offset, bore_axis)))
-    a, b, c = shaft_axis
-    x, y, z = bore_axis
-    cross_norm = math.hypot(b * z - c * y, c * x - a * z, a * y - b * x)
-    axis_angle = math.atan2(cross_norm, abs(dot(shaft_axis, bore_axis)))
+    radial_offset = transverse_offset(offset, bore_axis, axial_offset)
+    axis_angle = math.atan2(math.hypot(*cross(shaft_axis, bore_axis)), abs(dot(shaft_axis, bore_axis)))
     axial_target = scalar(data["target_axial_offset_m"], "target_axial_offset_m")
     axial_limit = nonnegative(data, "max_axial_deviation_m")
     radial_limit = nonnegative(data, "max_radial_offset_m")
@@ -97,7 +93,7 @@ def cylindrical_fit(data, scene=None):
         "angular": axis_angle <= angular_limit,
     }
 
-    return {
+    result = {
         "geometry_binding": {
             "revision": scene["revision"],
             "metres_per_scene_unit": scene_scale,
@@ -116,3 +112,13 @@ def cylindrical_fit(data, scene=None):
         "alignment_checks": alignment,
         "alignment_within_limits": all(alignment.values()),
     }
+    if coatings:
+        result["coatings"] = coatings
+        result["uncoated_clearance_min_m"] = uncoated_min
+        result["uncoated_clearance_max_m"] = uncoated_max
+    if shaft_nominal is not None:
+        nominal = bore_nominal - shaft_nominal
+        result["nominal_diametral_clearance_m"] = subtract_coating(nominal, reduction, roundoff)
+        if coatings:
+            result["uncoated_nominal_clearance_m"] = nominal
+    return result

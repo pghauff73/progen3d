@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tools.engineering.coating_stack import coating_stack
 from tools.engineering.desktop import run_project
 from tools.engineering.domains import analyse
 from tools.engineering.quantities import (
@@ -56,6 +57,65 @@ class EngineeringStudies(unittest.TestCase):
         self.assertEqual(literal(313.15, "K").add(room, subtract=True).kind, INTERVAL)
         with self.assertRaisesRegex(StudyError, "absolute temperatures"):
             room.add(room)
+
+    def test_coating_units_provenance_and_layer_order(self):
+        fixture = json.loads((EXAMPLES / "cylindrical-fit-coated.json").read_text())
+        materials = fixture["materials"]
+        registry = QuantityRegistry()
+        spec = fixture["shaft"]["coating"]
+        primer = spec["layers"][0]
+        spec["layers"] = [primer]
+        primer["thickness"].update(value=1, unit="mm")
+        result = coating_stack(spec, materials, registry)
+        self.assertAlmostEqual(result["thermal_resistance_K_W"], 0.5)
+        self.assertAlmostEqual(result["heat_flow_W"], 2.0)
+        conductivity = result["materials"]["Primer"]["ThermalConductivity"]
+        self.assertEqual(conductivity["source"], "Analytical example")
+        self.assertEqual(conductivity["si_uncertainty"], 0.01)
+        self.assertAlmostEqual(conductivity["temperature_range"]["min_K"], 288.15)
+        self.assertAlmostEqual(conductivity["temperature_range"]["max_K"], 313.15)
+
+        primer["thickness"].update(value=0.001, unit="m")
+        spec["area"].update(value=0.01, unit="m^2")
+        spec["temperature_difference"]["unit"] = "delta_degC"
+        equivalent = coating_stack(spec, materials, registry)
+        for key in ("fit_thickness_m", "thermal_resistance_K_W", "heat_flow_W"):
+            self.assertAlmostEqual(equivalent[key], result[key])
+        materials["Primer"]["appearance"] = {"colour": "red", "roughness": 0.9}
+        self.assertEqual(coating_stack(spec, materials, registry), equivalent)
+
+        base = json.loads((EXAMPLES / "cylindrical-fit-coated.json").read_text())["shaft"]["coating"]
+        base["layers"].reverse()
+        saved = json.loads(json.dumps(base))
+        report = coating_stack(saved, materials, registry)
+        self.assertEqual([layer["material"] for layer in report["layers"]], ["Topcoat", "Primer"])
+        self.assertAlmostEqual(report["thermal_resistance_K_W"], 0.01)
+        saved["layers"][0]["affects_fit"] = False
+        self.assertAlmostEqual(coating_stack(saved, materials, registry)["fit_thickness_m"], 5e-6)
+
+    def test_coating_rejects_missing_and_invalid_physical_inputs(self):
+        fixture = json.loads((EXAMPLES / "cylindrical-fit-coated.json").read_text())
+        materials = fixture["materials"]
+        registry = QuantityRegistry()
+        spec = fixture["shaft"]["coating"]
+        for changes, message in (
+            ({"unit": "s"}, "dimension mismatch for Thickness"),
+            ({"source": " "}, "requires a source"),
+            ({"value": 0}, "coating thickness must be positive"),
+            ({"uncertainty": -0.01}, "must be nonnegative"),
+        ):
+            with self.subTest(changes=changes), self.assertRaisesRegex(StudyError, message):
+                edited = copy.deepcopy(spec)
+                edited["layers"][0]["thickness"].update(changes)
+                coating_stack(edited, materials, registry)
+        del materials["Primer"]["properties"]["ThermalConductivity"]
+        with self.assertRaisesRegex(StudyError, "needs ThermalConductivity"):
+            coating_stack(spec, materials, registry)
+        del spec["temperature_difference"]
+        del spec["layers"][1]["interface_resistance"]
+        for layer in spec["layers"]:
+            layer["affects_thermal"] = False
+        self.assertNotIn("thermal_resistance_K_W", coating_stack(spec, materials, registry))
 
     def test_semantic_rejections(self):
         replacements = [

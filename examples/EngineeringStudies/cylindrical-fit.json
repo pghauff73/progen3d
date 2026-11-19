@@ -2,7 +2,7 @@
   "version": 1,
   "model": "cylindrical_fit",
   "geometry": {
-    "revision": "750daf4fb689c006b65b83bcebff32e0bb86166f6a4f6180bc324afa51503e8b",
+    "revision": "91401bb7691b98a6b478a149282808dcbaf433a798414b2d6b9d62c4972f5ba9",
     "metres_per_scene_unit": 0.001
   },
   "dimension_source": "Synthetic 10 mm bore and 9.95 mm shaft. Limits are prescribed for the exercise.",
