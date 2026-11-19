@@ -248,8 +248,8 @@ bool ear_clip(std::vector<glm::vec2> polygon,
 	          std::vector<ProfileTriangle2D> *triangles,
 	          std::string *diagnostic)
 {
-	std::size_t guard = 0;
-	while (polygon.size() > 3 && guard++ < polygon.size() * polygon.size() * 4u) {
+	// Each iteration removes a vertex or returns a diagnostic.
+	while (polygon.size() > 3) {
 		bool removed_ear = false;
 		for (std::size_t index = 0; index < polygon.size(); ++index) {
 			const std::size_t previous_index =

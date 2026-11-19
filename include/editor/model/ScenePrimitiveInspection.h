@@ -2,6 +2,7 @@
 
 #include "editor/relationship/SourceRange.h"
 
+#include "physics/model/SurfaceContactState.h"
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -28,6 +29,9 @@ public:
 	bool has_duct = false, unique_duct_flow = false;
 	float duct_flow = 0, duct_pressure = 0;
 	float mass = 0.0f;
+	SurfaceContactMaterial surface_material;
+	SurfaceBodyState surface_state;
+	SurfaceMotionBalance motion_balance;
 	float estimated_density = 0.0f;
 	bool immovable = false;
 	bool watertight = false;
