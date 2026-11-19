@@ -123,6 +123,8 @@ std::vector<EditorToken> GrammarSyntaxPresentation::tokenizeLine(
 	static const std::unordered_set<std::string> keywords = {
 		"R", "R*", "S", "T", "I", "!I", "V", "VR", "M", "P", "G", "A", "D",
 		"DSX", "DSY", "DSZ", "DTX", "DTY", "DTZ",
+		"AirProperties", "Wind", "BodyInertia", "LoadPoint", "LoadAxis", "BodyForce", "BodyTorque",
+		"ForceRamp", "DragSurface", "LiftSurface", "PropSample", "Propeller", "DuctStation", "PlateFriction",
 		"Object", "Interface", "Connect", "Position",
 		"id", "name", "class", "taxonomy", "container", "layer", "mask",
 		"type", "origin", "normal", "tangent", "region", "tolerance", "clearance",

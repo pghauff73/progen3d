@@ -1,6 +1,6 @@
 # Airflow studies
 
-Open a .p3d file in the native editor. Select the loaded primitive and run the physics timeline. The inspector reports the world force and moment about its centre of mass. The cross marks that centre, and arrow lengths show the relative magnitudes of component forces on the selected body. Dynamics use metres, kilograms, seconds, newtons and radians internally. The existing VR action and rotational-velocity inspector use degrees per second.
+Choose **Examples** in the desktop editor toolbar and select an airflow study. It opens as an editable copy. Select the loaded primitive and run the physics timeline. The inspector reports the world force and moment about its centre of mass. The cross marks that centre, and arrow lengths show the relative magnitudes of component forces on the selected body. Dynamics use metres, kilograms, seconds, newtons and radians internally. The existing VR action and rotational-velocity inspector use degrees per second.
 
 | Example | Experiment |
 |---|---|

@@ -6131,6 +6131,20 @@ void perform_document_replacement_action(EditorWorkspaceSession *app_state,
 	case DocumentReplacementAction::OpenLocalDocument:
 		request_local_file_dialog(app_state, LocalFileDialogPurpose::OpenGrammar);
 		break;
+	case DocumentReplacementAction::OpenBundledExample: {
+		const auto path = std::exchange(app_state->local_document_workflow.selected_example, {});
+		DocumentPersistenceService persistence;
+		std::string source, error;
+		if (!persistence.loadGrammarSource(path, &source, &error)) {
+			set_local_document_feedback(app_state, error, true);
+			break;
+		}
+		// Open an editable copy. Save uses the standard Save As workflow.
+		set_editor_document_internal(app_state, source, false);
+		set_local_document_feedback(app_state, "Opened example " + path.stem().string(), false);
+		request_scene_regeneration_internal(source);
+		break;
+	}
 	case DocumentReplacementAction::OpenCloudDocument:
 		open_cloud_dialog(app_state, CloudDialogAction::Open);
 		break;
@@ -6166,6 +6180,8 @@ const char *document_replacement_description(DocumentReplacementAction action)
 		return "create a new grammar";
 	case DocumentReplacementAction::OpenLocalDocument:
 		return "open another local grammar";
+	case DocumentReplacementAction::OpenBundledExample:
+		return "open an example";
 	case DocumentReplacementAction::OpenCloudDocument:
 		return "open another cloud grammar";
 	case DocumentReplacementAction::ExitApplication:
@@ -6816,6 +6832,26 @@ std::string tooltip_for_expression_function(const std::string &token)
 
 std::string tooltip_for_keyword(const std::string &token)
 {
+	static const std::unordered_map<std::string, const char *> airflow_help = {
+		{"AirProperties", "AirProperties(rho mu) sets scene density in kg/m³ and dynamic viscosity in Pa·s."},
+		{"Wind", "Wind(x y z) sets the world air velocity in m/s."},
+		{"BodyInertia", "BodyInertia(Ix Iy Iz) sets principal moments in kg·m² for the next primitive."},
+		{"LoadPoint", "LoadPoint(x y z) sets a body-frame offset in metres from the centre of mass."},
+		{"LoadAxis", "LoadAxis(x y z) sets the body-frame direction for following components."},
+		{"BodyForce", "BodyForce(x y z) applies a force in newtons at the current load point."},
+		{"BodyTorque", "BodyTorque(x y z) adds a free body-frame torque in N·m."},
+		{"ForceRamp", "ForceRamp(start end gain) ramps prescribed loads over physics time in seconds."},
+		{"DragSurface", "DragSurface(Cd A L) adds drag using relative speed, area in m² and length in m."},
+		{"LiftSurface", "LiftSurface(Cl A L) projects the load axis normal to the local relative velocity."},
+		{"PropSample", "PropSample(J CT CP) adds one measured advance-ratio, thrust and power coefficient row."},
+		{"Propeller", "Propeller(D rpm spin) applies the measured propeller map, with diameter in metres and spin +1 or -1."},
+		{"DuctStation", "DuctStation(Q fanPa systemPa) adds a pressure-rise and system-loss sample at Q in m³/s."},
+		{"PlateFriction", "PlateFriction(A L regime) adds smooth-plate friction. Use 0 for laminar, 1 for assumed transition or 2 for tripped flow."},
+	};
+	const auto help = airflow_help.find(token);
+	if (help != airflow_help.end()) {
+		return help->second;
+	}
 	if (token == "R") {
 		return "Random variable declaration. Assigns a sampled value into a named symbol.";
 	}
@@ -11069,6 +11105,26 @@ void draw_editor(EditorWorkspaceSession *app_state)
 	}
 	if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayNormal)) {
 		ImGui::SetTooltip("Open a local .p3d or .grammar file (Ctrl+O)");
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Examples")) {
+		ImGui::OpenPopup("Bundled examples");
+	}
+	if (ImGui::BeginPopup("Bundled examples")) {
+		ImGui::TextDisabled("Airflow");
+		const auto directory = progen3d_resource_path(std::filesystem::path("examples") / "Airflow");
+		const struct { const char *title; const char *file; } studies[] = {
+			{"Offset fan mount", "OffsetFan.p3d"},
+			{"Measured propeller cart", "FanCart.p3d"},
+			{"Ducted fan stand", "DuctedFanStand.p3d"},
+		};
+		for (const auto &study : studies) {
+			if (ImGui::MenuItem(study.title)) {
+				app_state->local_document_workflow.selected_example = directory / study.file;
+				request_document_replacement(app_state, DocumentReplacementAction::OpenBundledExample);
+			}
+		}
+		ImGui::EndPopup();
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Save") || save_shortcut) {

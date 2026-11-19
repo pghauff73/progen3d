@@ -13,6 +13,7 @@ public:
 	std::string status_message;
 	bool status_is_error = false;
 	std::filesystem::path last_successful_directory;
+	std::filesystem::path selected_example;
 	std::optional<LocalFileDialogRequest> pending_dialog_request;
 
 	void requestDialog(LocalFileDialogRequest request)
