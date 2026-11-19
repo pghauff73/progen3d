@@ -1,5 +1,6 @@
 #include "editor/service/SpatialObjectInspectionService.h"
 
+#include "mechanics/service/MemberServiceAnalysis.h"
 #include "editor/service/BuildingKnowledgeInspectionService.h"
 #include "editor/relationship/SpatialObjectPrimitiveAssociationIndex.h"
 #include "spatial/model/CollisionPositionConstraint.h"
@@ -268,6 +269,14 @@ SpatialObjectInspection SpatialObjectInspectionService::inspectObject(
 
 	inspection.available = true;
 	inspection.object_id = object_id.value();
+	if (const auto &member = object->pinRollerMember()) {
+		const MemberServiceAnalysis study(*object);
+		inspection.member_response = study.response();
+		inspection.member_diagnostic = study.diagnostic();
+		inspection.member_material = member->materialId;
+		inspection.member_pin = member->pinInterface;
+		inspection.member_roller = member->rollerInterface;
+	}
 	inspection.object_name = object->identity().objectName();
 	inspection.object_class = object->identity().objectClass().value();
 	inspection.taxonomy_path = join_taxonomy(object->identity().taxonomyPath());
