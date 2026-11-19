@@ -2159,7 +2159,7 @@ static bool is_identifier_token_string(const std::string &text)
 static bool is_supported_instance_type_name(const std::string &text)
 {
 	return text == "Cube" || text == "CubeX" || text == "CubeY" ||
-	       text == "CubeZ" ||
+	       text == "CubeZ" || FlexibleBodySpecification::topologyOf(text).has_value() ||
 	       ShapeSpecificationParser::isSupportedShapeName(text);
 }
 
@@ -4401,13 +4401,14 @@ static void parse_tokens_into(Grammar *grammar,
 		   token_str=="DSX" || token_str=="DSY" || token_str=="DSZ" ||
 		   token_str=="DTX" || token_str=="DTY" || token_str=="DTZ" ||
 		   token_str=="V" || token_str=="VR" || token_str=="Wind" || token_str=="AirProperties" ||
-		   AirflowDeclaration::recognizes(token_str)){
+		   AirflowDeclaration::recognizes(token_str) || FlexibleBodySpecification::argumentCount(token_str)){
 			token=std::make_unique<Token>(token_str);
 			if(*index >= raw_tokens.size() || raw_tokens[*index] != "("){
 				throw(1);
 			}
 			++(*index);
-			const int arity = token_str == "AirProperties" ? 2 : 3;
+			const int flexible_arity = FlexibleBodySpecification::argumentCount(token_str);
+			const int arity = flexible_arity ? flexible_arity : (token_str == "AirProperties" ? 2 : 3);
 			for(int i=0;i<arity;i++){
 				const std::string argument_expression =
 					parse_expression_argument(raw_tokens, index, ")");
@@ -5436,7 +5437,7 @@ void GrammarDocument::update_token(Token *check_token){
 	   check_token->token_name=="DTX" || check_token->token_name=="DTY" || check_token->token_name=="DTZ" ||
 	   check_token->token_name=="V" || check_token->token_name=="VR" ||
 	   check_token->token_name=="Wind" || check_token->token_name=="AirProperties" ||
-	   AirflowDeclaration::recognizes(check_token->token_name)){
+	   AirflowDeclaration::recognizes(check_token->token_name) || FlexibleBodySpecification::argumentCount(check_token->token_name)){
 		for(std::size_t index=0; index<check_token->arguments.size(); ++index){
 			if(!resolve_argument(index, index, check_token->token_name))return;
 		}
@@ -6217,6 +6218,11 @@ void GrammarDocument::generateGeometry()
 	Token *last_airflow_token = nullptr;
 	std::unordered_map<Token *, std::shared_ptr<const BodyAirflow>> body_airflow;
 	AirEnvironment air_environment;
+	std::unordered_map<Token *, FlexibleBodySpecification> flexible_specs;
+	FlexibleBodySpecification flexible_spec;
+	Token *last_flexible_token = nullptr;
+	std::optional<float> density_override;
+	std::size_t flexible_particle_count = 0;
 	for(Token *token : tokens_new){
 		if(token == NULL)continue;
 		if(++action_count > kMaxExpandedActionCount){
@@ -6230,6 +6236,35 @@ void GrammarDocument::generateGeometry()
 		}
 		std::string airflow_error;
 		const std::string &action = token->token_name;
+		std::string flex_error;
+		if (action == "P") density_override = resolve_vec3_arguments(token).x;
+		if (FlexibleBodySpecification::argumentCount(action)) {
+			last_flexible_token = token;
+			flex_error = flexible_spec.configure(action, resolve_vec3_arguments(token));
+		} else if (action == "I") {
+			const auto topology = FlexibleBodySpecification::topologyOf(token->instance_type);
+			if (topology) {
+				if (density_override) flexible_spec.material.density = *density_override;
+				flex_error = flexible_spec.validate(*topology);
+				if (airflow.active) flex_error = "Rigid airflow loads cannot be assigned to flexible objects.";
+				if (flex_error.empty()) {
+					flexible_particle_count += flexible_spec.particleCount(*topology);
+					if (flexible_particle_count > 65536) flex_error = "Scene exceeds the 65536 flexible particle budget.";
+				}
+				flexible_specs.emplace(token, std::move(flexible_spec));
+				flexible_spec = {};
+				last_flexible_token = nullptr;
+			} else if (last_flexible_token) {
+				flex_error = "Flexible declarations require FlexibleWire, FlexibleBelt or ElasticSheet.";
+			}
+			density_override.reset();
+		} else if (last_flexible_token && (action == "]" || action == "}" || action == "ObjectEnd")) {
+			flex_error = "Flexible declarations must be consumed before leaving their scope.";
+		}
+		if (!flex_error.empty()) {
+			report_grammar_issue(this, make_action_token_diagnostic(token, flex_error));
+			return;
+		}
 		if (AirflowDeclaration::recognizes(action)) {
 			last_airflow_token = token;
 			airflow_error = airflow.append(action, resolve_vec3_arguments(token));
@@ -6336,9 +6371,45 @@ void GrammarDocument::generateGeometry()
 			"Airflow declaration has no following primitive."));
 		return;
 	}
+	if (last_flexible_token) {
+		report_grammar_issue(this, make_action_token_diagnostic(last_flexible_token,
+			"Flexible declaration has no following primitive."));
+		return;
+	}
+	// Use the VM's scope operations to validate placement before emitting any geometry.
+	std::unordered_map<Token *, double> flexible_scales;
+	if (!flexible_specs.empty()) {
+		Context placements;
+		*placements.getCurrentScope() = *context->getCurrentScope();
+		for (Token *token : tokens_new) {
+			if (!token) continue;
+			const auto &action = token->token_name;
+			if (action == "[" || action == "]" || action == "{" || action == "}" ||
+				action == "T" || action == "A" || action == "S")
+				token->performAction(&placements);
+			if (!flexible_specs.count(token)) continue;
+			const glm::dmat3 basis(placements.getCurrentScope()->getTransform());
+			const double scale = glm::length(basis[0]);
+			const auto metric = glm::transpose(basis)*basis/(scale*scale);
+			double error = 0;
+			for (int i=0; i<3; ++i) for (int j=0; j<3; ++j)
+				error = std::max(error, std::abs(metric[i][j] - (i == j ? 1. : 0.)));
+			if (!(scale >= 1e-6 && scale <= 1e6 && error < 1e-5 && glm::determinant(basis) > 0)) {
+				report_grammar_issue(this, make_action_token_diagnostic(token,
+					"Flexible objects require rigid placement and positive uniform scale. Set proportions with FlexDimensions."));
+				return;
+			}
+			flexible_scales.emplace(token, scale);
+		}
+	}
 	context->air_environment = air_environment;
 	for(Token *token : tokens_new){
 		if(token == NULL)continue;
+		const auto flex = flexible_specs.find(token);
+		if (flex != flexible_specs.end()) {
+			context->setPendingFlexibleBody(FlexibleBody(*FlexibleBodySpecification::topologyOf(token->instance_type),
+				flex->second, flexible_scales.at(token)));
+		}
 		const auto air = body_airflow.find(token);
 		if (air != body_airflow.end()) context->setPendingAirflow(air->second);
 		token->performAction(context);

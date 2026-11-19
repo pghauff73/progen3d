@@ -15,9 +15,10 @@ bool PrinterProgramReader::isDirective(const std::string &line) {
 }
 PrinterProgram PrinterProgramReader::read(std::vector<std::string> &lines, int &where) {
     const std::map<std::string,size_t> arities={{"beltX",13},{"beltY",13},{"gear",9},{"guide",4},
-        {"thermal",3},{"nut",1},{"hotend",5},{"bead",2},{"home",3},{"move",5}};
+        {"stockMaterial",5},{"beltCreep",4},{"thermal",3},{"nut",1},{"hotend",5},{"bead",2},{"home",3},{"move",5}};
     PrinterProgram p;
     std::set<std::string> seen;
+    std::vector<double> creep;
     for (size_t i=0;i<lines.size();++i) {
         if (!isDirective(lines[i])) continue;
         where=static_cast<int>(i);
@@ -40,13 +41,20 @@ PrinterProgram PrinterProgramReader::read(std::vector<std::string> &lines, int &
         else if (kind=="guide") p.guides={a[0],a[1],a[2],a[3]};
         else if (kind=="thermal") p.thermal={a[0],a[1],a[2]};
         else if (kind=="hotend") p.hotend={a[0],a[1],a[2],a[3],a[4]};
+        else if (kind=="stockMaterial") p.stock=StockMaterial{a[0],a[1],a[2],a[3],a[4]};
+        else if (kind=="beltCreep") creep=a;
         else if (kind=="nut") p.nutBacklashMm=a[0];
         else if (kind=="bead") { p.widthMm=a[0]; p.heightMm=a[1]; }
         else if (kind=="home") p.home={a[0],a[1],a[2]};
         else p.moves.push_back({a[0],{a[1],a[2],a[3]},a[4]});
         lines[i].clear();
     }
-    for (const auto &entry:arities) if (!seen.count(entry.first))
+    if (!creep.empty()) {
+        p.xDrive.creepFraction=creep[0]; p.xDrive.retardationS=creep[1];
+        p.yDrive.creepFraction=creep[2]; p.yDrive.retardationS=creep[3];
+    }
+    for (const auto &entry:arities)
+        if (entry.first!="stockMaterial" && entry.first!="beltCreep" && !seen.count(entry.first))
         throw std::invalid_argument("missing "+entry.first+" record");
     return p;
 }

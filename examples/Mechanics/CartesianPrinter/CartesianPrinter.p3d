@@ -14,6 +14,11 @@
 @fff nut 0.06
 # Filament diameter, effective compliance, flow resistance, nip load, friction.
 @fff hotend 1.75 0.20 1.3 33 0.33
+# Flexible stock: density kg/m3, instantaneous and relaxed axial moduli MPa,
+# retardation time s, confined Bowden length mm. Illustrative effective properties.
+@fff stockMaterial 1200 180 105 0.45 156
+# Delayed/instantaneous belt strain ratio and retardation time (s), first X then Y.
+@fff beltCreep 0.16 0.22 0.12 0.32
 @fff bead 0.48 0.24
 @fff home -42 -32 10
 # Move: duration, target X Y Z in bed coordinates, extrusion multiplier.
@@ -40,7 +45,7 @@
 Start -> LoadedPrinter
 
 LoadedPrinter ->
-    LoadedPose(fffX(t) fffY(t) fffLift(t) fffSag(t) fffExpansion(t)
+    G(9.80665 0 -1 0) LoadedPose(fffX(t) fffY(t) fffLift(t) fffSag(t) fffExpansion(t)
                fffCommandX(t) fffCommandY(t) fffCommandZ(t) fffXStrand(t) fffYStrand(t)
                fffCommandFeed(t) fffHobFeed(t) fffFeed(t) fffFilament(t)
                fffXRev(t) fffYRev(t) fffWidth(t) fffLayer(t) fffHobRadius(t))
@@ -52,7 +57,7 @@ LoadedPose(x y lift sag thermal motorX motorY motorZ strandX strandY input hob s
         [ T(0 0 y) BedPlatform(0 0 h bead yRev/(2*radians(180)) 1) ]
         LiftDrive(motorZ 8 4)
         [ T(0 60+lift 0) Gantry(x xRev motorX strandX sag thermal) ]
-        FeedSystem(x lift-sag stock filament hob hobR)
+        FeedSystem(x lift-sag stock filament hob hobR fffStockE0(t) fffStockDensity(t))
         ExtruderGears(input hob hobR fffModule(t) fffPinionTeeth(t) fffWheelTeeth(t) fffCentreOffset(t)
                       fffPinionThin(t) fffWheelThin(t) fffAngle(t))
     ]
@@ -92,7 +97,7 @@ Machine(w d h bead filament beltRev lead starts x y z feed) ->
         [ T(0 0 y) BedPlatform(w d h bead beltRev/(2*radians(180)) 0) ]
         LiftDrive(z lead starts)
         [ T(0 60+z 0) Gantry(x beltRev x x 0 0) ]
-        FeedSystem(x z feed filament feed 5)
+        FeedSystem(x z feed filament feed 5 0 0)
     ]
 
 FixedFrame ->
@@ -354,19 +359,19 @@ Toolhead(r thermal) ->
         HeatSinkFins
         [ T(0 47 0) Sleeve(1.1 4.5 10) ]
         [ T(0 -thermal 0) Object(id(Nozzle) class(Nozzle) taxonomy(Machine Nozzle) container(Head)) [
-        I(Revolve(profile(Polygon 0 0 0.2 0 3.8 4 3.8 8 0 8) angle(0 360) segments(16) cap(all)) material(goldbrushedmetal) 1 1)
+        !I(Revolve(profile(Polygon 0 0 0.2 0 3.8 4 3.8 8 0 8) angle(0 360) segments(16) cap(all)) material(goldbrushedmetal) 1 1)
     ] ]
     ] ]
 
 HeatSinkFins 5 ->
     [ T(0 18+HeatSinkFins_count*3 0) Sleeve(3.4 7 1.5) ]
 
-FeedSystem(x z feed filament hob hobR) ->
+FeedSystem(x z feed filament hob hobR modulus density) ->
     [ T(-72 240 0) A(90 0) Object(id(Spool) class(FilamentSpool) taxonomy(Machine FilamentSpool) container(Printer)) [
         SpoolBody(feed)
     ] ]
     [ Object(id(Stock) class(IncomingFilament) taxonomy(Machine IncomingFilament) container(Printer)) [
-        StockLine(-47 240 0 -47 191 0 filament/2)
+        SupplyStock(filament modulus density)
     ] ]
     [ T(-47+hobR 199 0) A(90 0) Object(id(Hob) class(ExtruderDriveWheel) taxonomy(Machine ExtruderDriveWheel) container(Printer)) [
         Interface(id(Axle) type(Shaft) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(AxisSegment 5))
@@ -379,11 +384,23 @@ FeedSystem(x z feed filament hob hobR) ->
         TubeRouting(x 112+z)
     ] ]
 
+# Upstream exposed strand ends at the hob nip. The straight continuation lies below the nip.
+# FlexSceneUnits converts the SI particle mesh to millimetres for this assembly.
+SupplyStock(diameter modulus density) ->
+    ?(modulus>0) FlexibleSupply(diameter modulus density) : StockLine(-47 240 0 -47 191 0 diameter/2)
+
+FlexibleSupply(diameter modulus density) ->
+    [ T(-47 240 0) A(-90 2) FlexSceneUnits(1000)
+      FlexDimensions(0.041 diameter/1000 0.0015) FlexGrid(20 0)
+      FlexMaterial(density modulus*1000000 2) FlexPin(0 0) FlexPin(20 0)
+      I(FlexibleWire material(copperbrushedmetal) 1 1) ]
+    StockLine(-47 199 0 -47 191 0 diameter/2)
+
 SpoolBody(feed) ->
     [ A(-360*feed/(2*radians(180)*25) 1) WoundSpool ]
 
 WoundSpool ->
-    I(Revolve(profile(Polygon 5 -8 25 -8 25 1 5 1) angle(0 360) segments(48) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(Revolve(profile(Polygon 5 -8 25 -8 25 1 5 1) angle(0 360) segments(48) cap(all)) material(copperbrushedmetal) 1 1)
     [ T(0 -9 0) Sleeve(5 30 2) ]
     [ T(0 2 0) Sleeve(5 30 2) ]
     [ T(0 3.1 0) Spokes ]
@@ -398,10 +415,10 @@ TubeRouting(x u) ->
     Bowden(x u 0.5*(x-47) 0.5*(190+u) -sqrt(78^2-((x+47)^2+(u-190)^2)/4))
 
 Bowden(x u mx mu mz) ->
-    I(SweepDisk(path(-47 190 0 mx mu mz x u 0) radius(1.65) segments(8) cap(all)) material(offwhiteceramic) 1 1)
+    !I(SweepDisk(path(-47 190 0 mx mu mz x u 0) radius(1.65) segments(8) cap(all)) material(offwhiteceramic) 1 1)
 
 StockLine(ax ay az bx by bz r) ->
-    I(SweepDisk(path(ax ay az bx by bz) radius(r) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(SweepDisk(path(ax ay az bx by bz) radius(r) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
 
 # Square perimeter history in bed coordinates. Each interval is clamped by ease().
 # The bead is swept along its straight section at its actual cross-section size.
@@ -418,7 +435,7 @@ Strand(length h bead) ->
     ?(length>0.00001) [ T(length/2 0 0) S(length h bead) BeadSection(h/bead) ] :
 
 BeadSection(ratio) ->
-    [ A(90 1) T(0 0 -0.5) I(Extrude(Polygon(
+    [ A(90 1) T(0 0 -0.5) !I(Extrude(Polygon(
         0.5-0.5000000*ratio -0.5000000  0.5-0.3086583*ratio -0.4619398  0.5-0.1464466*ratio -0.3535534
         0.5-0.0380602*ratio -0.1913417  0.5+0.0000000*ratio 0.0000000  0.5-0.0380602*ratio 0.1913417
         0.5-0.1464466*ratio 0.3535534  0.5-0.3086583*ratio 0.4619398  0.5-0.5000000*ratio 0.5000000
@@ -440,7 +457,7 @@ Turns(lead n) n ->
     [ T(0 Turns_count*lead 0) ThreadTurn(lead) ]
 
 ThreadTurn(lead) ->
-    I(SweepDisk(path(3.55000 lead*0/12 -0.00000  3.07439 lead*1/12 -1.77500  1.77500 lead*2/12 -3.07439
+    !I(SweepDisk(path(3.55000 lead*0/12 -0.00000  3.07439 lead*1/12 -1.77500  1.77500 lead*2/12 -3.07439
             0.00000 lead*3/12 -3.55000  -1.77500 lead*4/12 -3.07439  -3.07439 lead*5/12 -1.77500
             -3.55000 lead*6/12 -0.00000  -3.07439 lead*7/12 1.77500  -1.77500 lead*8/12 3.07439
             -0.00000 lead*9/12 3.55000  1.77500 lead*10/12 3.07439  3.07439 lead*11/12 1.77500
@@ -457,7 +474,7 @@ BeltLoop(span r travel) ->
     Witnesses(span r travel)
 
 Wrap(r angle) ->
-    I(Revolve(profile(Polygon r-0.65 -3 r+0.65 -3 r+0.65 3 r-0.65 3) angle(angle 180) segments(18) cap(all)) material(charcoalroughmetal) 1 1)
+    !I(Revolve(profile(Polygon r-0.65 -3 r+0.65 -3 r+0.65 3 r-0.65 3) angle(angle 180) segments(18) cap(all)) material(charcoalroughmetal) 1 1)
 
 # Material marks follow both straight strands and both semicircular wraps.
 Witnesses(span r travel) 16 ->
@@ -478,37 +495,37 @@ ReturnStrand(span r s) ->
 BeltMark -> GoldBlock(1.2 0.25 5)
 
 Shaft(length r) ->
-    I(SweepDisk(path(0 -length/2 0 0 length/2 0) radius(r) segments(16) cap(all)) material(steelshinyroughmetal) 1 1)
+    !I(SweepDisk(path(0 -length/2 0 0 length/2 0) radius(r) segments(16) cap(all)) material(steelshinyroughmetal) 1 1)
 
 Sleeve(bore outer length) ->
-    I(Revolve(profile(Polygon bore -length/2 outer -length/2 outer length/2 bore length/2) angle(0 360) segments(24) cap(all)) material(silverbluepolishedmetal) 1 1)
+    !I(Revolve(profile(Polygon bore -length/2 outer -length/2 outer length/2 bore length/2) angle(0 360) segments(24) cap(all)) material(silverbluepolishedmetal) 1 1)
 
 GoldRing(bore outer length) ->
-    I(Revolve(profile(Polygon bore -length/2 outer -length/2 outer length/2 bore length/2) angle(0 360) segments(24) cap(all)) material(goldbrushedmetal) 1 1)
+    !I(Revolve(profile(Polygon bore -length/2 outer -length/2 outer length/2 bore length/2) angle(0 360) segments(24) cap(all)) material(goldbrushedmetal) 1 1)
 
 FrameBlock(w h d) ->
-    [ S(w h d) I(Cube material(charcoalmattemetal) 1 1) ]
+    [ S(w h d) !I(Cube material(charcoalmattemetal) 1 1) ]
 
 TealBlock(w h d) ->
-    [ S(w h d) I(Cube material(tealmattemetal) 1 1) ]
+    [ S(w h d) !I(Cube material(tealmattemetal) 1 1) ]
 
 RubberBlock(w h d) ->
-    [ S(w h d) I(Cube material(charcoalroughmetal) 1 1) ]
+    [ S(w h d) !I(Cube material(charcoalroughmetal) 1 1) ]
 
 BedBlock(w h d) ->
-    [ S(w h d) I(Cube material(darkslatesmoothstone) 1 1) ]
+    [ S(w h d) !I(Cube material(darkslatesmoothstone) 1 1) ]
 
 HeaterBlock(w h d) ->
-    [ S(w h d) I(Cube material(copperbrushedmetal) 1 1) ]
+    [ S(w h d) !I(Cube material(copperbrushedmetal) 1 1) ]
 
 GoldBlock(w h d) ->
-    [ S(w h d) I(Cube material(goldbrushedmetal) 1 1) ]
+    [ S(w h d) !I(Cube material(goldbrushedmetal) 1 1) ]
 
 FlexGuide(x sag) ->
     ?(sag>0.0000001) CurvedGuide(x 120+x 120-x sag) : Shaft(240 4)
 
 CurvedGuide(x a b sag) ->
-    I(SweepDisk(path(0 -120 0 sag*(57600-b*b-a*a/4)/(4*a*b) -120+a/2 0 sag x 0
+    !I(SweepDisk(path(0 -120 0 sag*(57600-b*b-a*a/4)/(4*a*b) -120+a/2 0 sag x 0
                      sag*(57600-a*a-b*b/4)/(4*a*b) 120-b/2 0 0 120 0)
         radius(4) segments(16) cap(all)) material(steelshinyroughmetal) 1 1)
 
@@ -530,7 +547,7 @@ GearBlank(n m thin alpha) ->
     GearTeeth(n m m*n/2 radians(180)*m/4-thin/2 tan(radians(alpha)))
 
 GearTeeth(n m r half slope) n ->
-    [ A(360*GearTeeth_count/n 2) T(r 0 -2) I(Extrude(Polygon(
+    [ A(360*GearTeeth_count/n 2) T(r 0 -2) !I(Extrude(Polygon(
         -1.32*m -half-1.25*m*slope  m -half+m*slope
         m half-m*slope  -1.32*m half+1.25*m*slope) 4 cap(all)) material(goldbrushedmetal) 1 1) ]
 
@@ -538,7 +555,13 @@ PrintHistory(w d h bead loaded) ->
     ?(loaded>0) DepositIntervals(clamp(t,0,fffDuration(t)) h) : Layers(w d h bead)
 
 # Each interval carries actual discharged volume and follows the nozzle in bed coordinates.
-DepositIntervals(end h) -> Cells(end h ceil(end*8))
+DepositIntervals(end h) ->
+    Cells(min(end,fffParkTime(t)) h ceil(min(end,fffParkTime(t))*8))
+    ParkDrop(end fffParkTime(t))
+
+# Collect discharge after parking as one growing drop at the stopped nozzle.
+ParkDrop(end park) ->
+    ?(end>park) [ T(fffX(park) fffZ(park) -fffY(park)) Residue(0 1*(fffOoze(end)-fffOoze(park))) ] :
 
 Cells(end h n) n ->
     Slice(Cells_count/8 min(end,(Cells_count+1)/8) h)
@@ -570,5 +593,8 @@ Residue(l v) ->
     ?(v>0.0000001) ResidueVolume(l v) :
 
 ResidueVolume(l v) ->
-    ?(l>0.001) I(SweepDisk(path(0 0 0 l 0 0) radius(sqrt(v/(radians(180)*l))) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
-    : [ I(Sphere(radial(0 (6*v/radians(180))^(1/3)) segments(12 8)) material(copperbrushedmetal) 1 1) ]
+    ?(l^3>6*v/radians(180)) !I(SweepDisk(path(0 0 0 l 0 0) radius(sqrt(v/(radians(180)*l))) segments(24) cap(all)) material(copperbrushedmetal) 1 1)
+    : HangingDrop((6*v/radians(180))^(1/3))
+
+HangingDrop(d) ->
+    [ T(0 -d/2 0) S(d d d) !I(Sphere(radial(0 1) segments(32 20)) material(copperbrushedmetal) 1 1) ]

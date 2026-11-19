@@ -15,7 +15,8 @@ int main(int argc,char **argv) {
         fff::PrinterResponse response(fff::PrinterProgramReader::read(lines,where));
         const std::vector<std::string> channels={"CommandX","CommandY","CommandZ","X","Y","Z",
             "XTight","XSlack","YTight","YSlack","XStretch","XTooth","XShear","XTwist","Sag","Expansion",
-            "Pressure","Flow","CommandFeed","HobFeed","Feed","Slip","Deposit","Ooze","Stored","XJumps","YJumps","GearGap"};
+            "Pressure","Flow","CommandFeed","HobFeed","Feed","Slip","Deposit","Ooze","Stored","XJumps","YJumps","GearGap",
+            "Compression","DelayedCompression","InletFeed","FeedForce","MeltStored","XCreep","YCreep"};
         std::cout<<"seconds";
         for (const auto &c:channels) std::cout<<','<<c;
         std::cout<<'\n'<<std::setprecision(12);

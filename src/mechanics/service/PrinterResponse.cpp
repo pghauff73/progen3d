@@ -22,6 +22,7 @@ void validateBelt(const BeltDrive &b) {
         && positive(b.spanNPerMm) && positive(b.toothNPerMm) && positive(b.mountNPerMm)
         && positive(b.shaftRadiusMm) && positive(b.shaftLengthMm) && positive(b.shearMPa)
         && nonnegative(b.backlashMm) && positive(b.jumpN) && positive(b.pitchMm)
+        && nonnegative(b.creepFraction) && positive(b.retardationS)
         && b.pulleyTeeth >= 3 && std::floor(b.pulleyTeeth)==b.pulleyTeeth, "invalid belt drive values");
 }
 void validate(const PrinterProgram &p, double step) {
@@ -41,6 +42,14 @@ void validate(const PrinterProgram &p, double step) {
     require(positive(h.filamentDiameterMm) && nonnegative(h.complianceMm3PerMPa)
         && positive(h.resistanceMPaSPerMm3) && nonnegative(h.nipN) && nonnegative(h.friction)
         && positive(p.heightMm) && p.widthMm>=p.heightMm, "invalid melt chamber or bead");
+    if (p.stock) {
+        const auto &s = *p.stock;
+        require(positive(s.guidedLengthMm) && positive(s.retardationS) &&
+            positive(s.relaxedMPa) && std::isfinite(s.instantaneousMPa) &&
+            s.instantaneousMPa >= s.relaxedMPa && s.instantaneousMPa <= 1e7 &&
+            s.instantaneousMPa >= 1e-6 && s.densityKgM3 >= .001 && s.densityKgM3 <= 1e6,
+            "invalid stockMaterial: require positive L, tau, density and E0 >= Einf > 0");
+    }
     auto inTravel = [&](Point q) { return std::isfinite(q.x) && std::isfinite(q.y) && std::isfinite(q.z)
         && std::abs(q.x)<=p.guides.spanMm/2; };
     require(inTravel(p.home) && !p.moves.empty() && positive(step), "invalid home, step or empty toolpath");
@@ -65,13 +74,17 @@ double GuideShaftPair::sagMm(double x) const {
     const double inertia=pi*std::pow(diameterMm,4)/64;
     return (carriageKg*9.80665/2)*a*a*b*b/(3*modulusMPa*inertia*spanMm);
 }
-AxisResponse BeltTransmission::transmit(double command, double velocity, double acceleration) {
+AxisResponse BeltTransmission::transmit(double command, double velocity, double acceleration, double seconds) {
     const auto &b=model_;
     // Smooth bearing drag through zero speed; each taut span changes tension by k*u.
     const double force=b.massKg*acceleration/1000 + b.dragN*std::tanh(velocity/0.5);
     const double load=std::abs(force);
     const double stretch=std::copysign(load<=2*b.pretensionN ? load/(2*b.spanNPerMm)
                                         : (load-b.pretensionN)/b.spanNPerMm,force);
+    // Additional displacement of the reinforced belt at the current span load.
+    // The instantaneous branch determines tension; the retarded branch relaxes at rest.
+    require(nonnegative(seconds), "invalid belt interval");
+    creepMm_ += (b.creepFraction*stretch-creepMm_)*(-std::expm1(-seconds/b.retardationS));
     const double tight=b.pretensionN+b.spanNPerMm*std::abs(stretch);
     const double slack=std::max(0.,b.pretensionN-b.spanNPerMm*std::abs(stretch));
     const bool unloaded=load<.8*b.jumpN || slack>1e-9;
@@ -87,14 +100,33 @@ AxisResponse BeltTransmission::transmit(double command, double velocity, double 
     const double polarMoment=pi*std::pow(b.shaftRadiusMm,4)/2;
     const double twist=force*radius*radius*b.shaftLengthMm/(b.shearMPa*polarMoment);
     const double tooth=force/b.toothNPerMm, shear=force/b.mountNPerMm;
-    return {contact_.transmit(strand,b.backlashMm)-stretch-tooth-shear-twist,
-            strand,tight,slack,stretch,tooth,shear,twist,events_};
+    return {contact_.transmit(strand,b.backlashMm)-stretch-creepMm_-tooth-shear-twist,
+            strand,tight,slack,stretch+creepMm_,tooth,shear,twist,events_,creepMm_};
+}
+
+MeltChamber::MeltChamber(Hotend model, std::optional<StockMaterial> stock) : model_(model) {
+    if (!stock) return;
+    const double stockVolume = area(model.filamentDiameterMm)*stock->guidedLengthMm;
+    immediateCompliance_ = stockVolume/stock->instantaneousMPa;
+    delayedCompliance_ = stockVolume/stock->relaxedMPa-immediateCompliance_;
+    retardationS_ = stock->retardationS;
 }
 
 MeltIncrement MeltChamber::advance(double attempted, double dt) {
     require(nonnegative(attempted) && positive(dt), "invalid feed increment or duration");
-    const double rate=attempted/dt, r=model_.resistanceMPaSPerMm3, c=model_.complianceMm3PerMPa;
+    const double rate=attempted/dt, r=model_.resistanceMPaSPerMm3, c=model_.complianceMm3PerMPa+immediateCompliance_;
     const double limit=model_.nipN*model_.friction/area(model_.filamentDiameterMm);
+    if (delayedCompliance_ > 0) {
+        // Backward Euler for delayed solid volume W and linear nozzle discharge.
+        // W'=(Cd*P-W)/tau and Qin=(Cm+Ci)*P'+W'+P/R.
+        const double weight = dt/(retardationS_+dt);
+        const double compliance = c + weight*delayedCompliance_ + dt/r;
+        const double freePressure = (attempted+c*pressure_+weight*delayedVolume_)/compliance;
+        pressure_ = std::min(freePressure,limit);
+        const double slip = std::clamp((freePressure-pressure_)*compliance,0.,attempted);
+        delayedVolume_ += weight*(delayedCompliance_*pressure_-delayedVolume_);
+        return {attempted-slip,dt*pressure_/r,slip};
+    }
     if (c==0) {
         pressure_=std::min(rate*r,limit);
         const double out=dt*pressure_/r;
@@ -117,7 +149,7 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
     validate(p,step);
     BeltTransmission xDrive(p.xDrive,p.home.x), yDrive(p.yDrive,p.home.y);
     BacklashContact nut(p.home.z), gear;
-    MeltChamber chamber(p.hotend);
+    MeltChamber chamber(p.hotend,p.stock);
     PrinterSample state;
     state.command=p.home;
     state.x=xDrive.transmit(p.home.x,0,0); state.y=yDrive.transmit(p.home.y,0,0);
@@ -127,10 +159,12 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
     times_.push_back(0); samples_.push_back(state);
     const double stockArea=area(p.hotend.filamentDiameterMm);
     const double beadArea=p.heightMm*(p.widthMm-p.heightMm)+pi*p.heightMm*p.heightMm/4;
+    double lastMotionEnd=0;
     for (const auto &move:p.moves) {
         const Point start=state.command;
         const Point delta{move.target.x-start.x,move.target.y-start.y,move.target.z-start.z};
         const double startTime=times_.back(), startFeed=state.commandFeed;
+        if (delta.x!=0 || delta.y!=0 || delta.z!=0) lastMotionEnd=startTime+move.seconds;
         const double volume=std::hypot(std::hypot(delta.x,delta.y),delta.z)*beadArea*move.extrusionMultiplier;
         const int steps=static_cast<int>(std::ceil(move.seconds/step));
         const double dt=move.seconds/steps;
@@ -138,8 +172,8 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
             const double u=double(i)/steps, fraction=u*u*(3-2*u);
             const double speed=6*u*(1-u)/move.seconds, accel=(6-12*u)/(move.seconds*move.seconds);
             state.command={start.x+delta.x*fraction,start.y+delta.y*fraction,start.z+delta.z*fraction};
-            state.x=xDrive.transmit(state.command.x,delta.x*speed,delta.x*accel);
-            state.y=yDrive.transmit(state.command.y,delta.y*speed,delta.y*accel);
+            state.x=xDrive.transmit(state.command.x,delta.x*speed,delta.x*accel,dt);
+            state.y=yDrive.transmit(state.command.y,delta.y*speed,delta.y*accel,dt);
             state.lift=nut.transmit(state.command.z,p.nutBacklashMm);
             state.sag=p.guides.sagMm(state.x.position);
             state.nozzle={state.x.position,state.y.position,state.lift-state.sag-state.expansion};
@@ -153,7 +187,12 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
             state.acceptedFeed+=material.feedMm3/stockArea;
             state.slip+=material.slipMm3/stockArea;
             state.pressure=chamber.pressureMPa();
-            state.stored=p.hotend.complianceMm3PerMPa*state.pressure;
+            state.meltStored=p.hotend.complianceMm3PerMPa*state.pressure;
+            state.lineCompression=chamber.lineStoredMm3()/stockArea;
+            state.delayedCompression=chamber.delayedStoredMm3()/stockArea;
+            state.inletFeed=state.acceptedFeed-state.lineCompression;
+            state.feedForce=state.pressure*stockArea;
+            state.stored=state.meltStored+chamber.lineStoredMm3();
             state.flow=state.pressure/p.hotend.resistanceMPaSPerMm3;
             if (volume>0) state.deposited+=material.outMm3;
             else state.ooze+=material.outMm3;
@@ -161,7 +200,8 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
             samples_.push_back(state);
         }
     }
-    constants_={{"fffDuration",duration()}, {"fffModule",p.gears.moduleMm}, {"fffPinionTeeth",p.gears.pinionTeeth},
+    constants_={{"fffParkTime",lastMotionEnd},{"fffStockE0",p.stock ? p.stock->instantaneousMPa : 0.},
+        {"fffStockDensity",p.stock ? p.stock->densityKgM3 : 0.},{"fffDuration",duration()}, {"fffModule",p.gears.moduleMm}, {"fffPinionTeeth",p.gears.pinionTeeth},
         {"fffWheelTeeth",p.gears.wheelTeeth},{"fffCentreOffset",p.gears.centreOffsetMm},{"fffHobRadius",p.gears.hobRadiusMm},
         {"fffPinionThin",p.gears.pinionThinningMm},{"fffWheelThin",p.gears.wheelThinningMm},{"fffAngle",p.gears.pressureAngleDeg},{"fffGearGap",p.gears.backlashMm()},{"fffFilament",p.hotend.filamentDiameterMm},{"fffLayer",p.heightMm},{"fffWidth",p.widthMm},
         {"fffXRev",p.xDrive.pitchMm*p.xDrive.pulleyTeeth},{"fffYRev",p.yDrive.pitchMm*p.yDrive.pulleyTeeth}};
@@ -170,6 +210,13 @@ PrinterResponse::PrinterResponse(const PrinterProgram &p, double step) {
 namespace {
 using Projection = double (*)(const PrinterSample &);
 const std::map<std::string, Projection> channels = {
+    {"fffCompression", [](const PrinterSample &s) -> double { return s.lineCompression; }},
+    {"fffDelayedCompression", [](const PrinterSample &s) -> double { return s.delayedCompression; }},
+    {"fffMeltStored", [](const PrinterSample &s) -> double { return s.meltStored; }},
+    {"fffInletFeed", [](const PrinterSample &s) -> double { return s.inletFeed; }},
+    {"fffFeedForce", [](const PrinterSample &s) -> double { return s.feedForce; }},
+    {"fffXCreep", [](const PrinterSample &s) -> double { return s.x.creepMm; }},
+    {"fffYCreep", [](const PrinterSample &s) -> double { return s.y.creepMm; }},
     {"fffX", [](const PrinterSample &s) -> double { return s.nozzle.x; }},
     {"fffY", [](const PrinterSample &s) -> double { return s.nozzle.y; }},
     {"fffZ", [](const PrinterSample &s) -> double { return s.nozzle.z; }},
@@ -205,7 +252,7 @@ const std::map<std::string, Projection> channels = {
     {"fffYTwist", [](const PrinterSample &s) -> double { return s.y.torsionMm; }},
     {"fffYJumps", [](const PrinterSample &s) -> double { return s.y.jumps; }},
 };
-const std::set<std::string> constantNames = {"fffDuration", "fffModule", "fffPinionTeeth", "fffWheelTeeth",
+const std::set<std::string> constantNames = {"fffParkTime","fffStockE0", "fffStockDensity", "fffDuration", "fffModule", "fffPinionTeeth", "fffWheelTeeth",
     "fffCentreOffset", "fffHobRadius", "fffGearGap", "fffFilament", "fffLayer", "fffWidth", "fffXRev", "fffYRev", "fffPinionThin", "fffWheelThin", "fffAngle"};
 }
 bool PrinterResponse::recognizes(const std::string &name) {

@@ -77,6 +77,7 @@ APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 APP_CPP_SOURCES = \
 	$(SRC_DIR)/mechanics/service/PrinterResponse.cpp \
 	$(SRC_DIR)/mechanics/service/PrinterProgramReader.cpp \
+	$(SRC_DIR)/physics/model/FlexibleBody.cpp \
 	$(SRC_DIR)/physics/model/BodyAirflow.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
@@ -571,3 +572,10 @@ build/printer-response-test: tests/printer_response_test.cpp $(PRINTER_MODEL_SOU
 .PHONY: printer-response-check
 printer-response-check: build/printer-response-test
 	./build/printer-response-test examples/Mechanics/CartesianPrinter/CartesianPrinter.p3d
+build/flexible-body-test: tests/flexible_body_test.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: flexible-body-check
+flexible-body-check: build/flexible-body-test
+	./build/flexible-body-test
