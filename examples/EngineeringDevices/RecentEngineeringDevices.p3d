@@ -1,0 +1,276 @@
+# Engineering device physics | ProGen3D native desktop
+# 0 = all four, 1 = thermal switch, 2 = water harvester, 3 = pipe robot, 4 = lattice.
+# Open in the desktop editor, select Run and Fit, then press Play. Time t is in seconds.
+# Edit the number here to isolate a device. All dimensions are illustrative scene units.
+# Solver inputs use SI units. Display dimensions and model coefficients are illustrative.
+# Device functions read the native scene clock. See README.md for equations and limits.
+Start -> Study(0)
+
+Study(choice) -> ?(choice==0) Collection : SingleStudy(choice)
+SingleStudy(choice) -> ?(choice==1) ThermalSwitch : OtherStudy(choice)
+OtherStudy(choice) -> ?(choice==2) WaterHarvester : MovingStudy(choice)
+MovingStudy(choice) -> ?(choice==3) PipeRobot : ScissorLattice
+
+Collection ->
+    [ T(-2.6 0 1.7) ThermalSwitch ]
+    [ T(-2.6 0 -1.9) WaterHarvester ]
+    [ T(1.6 0 1.7) PipeRobot ]
+    [ T(1.5 0 -1.9) ScissorLattice ]
+
+# 1 | Thermal switch | Tan et al., Nature Communications (2026)
+# DOI 10.1038/s41467-026-69956-2
+# Five chiral arms rotate and lift a pentagonal contact carrier. Gold identifies the
+# folded arms, red the actuator traces, steel the return elements. The finned sink
+# is a display fixture. Heat input, thermal capacity, two conductances and
+# separate closing/opening temperatures determine when the contact changes.
+# Change the 10 W input to 1 W to keep the contact open.
+ThermalSwitch -> HeatedContact(293.15 10 2 0.1 1 315.15 308.15)
+
+HeatedContact(ambient watts capacity offG onG closeK openK) ->
+    ContactDisplay(thermalClosed(ambient,watts,capacity,offG,onG,closeK,openK)
+                   (thermalKelvin(ambient,watts,capacity,offG,onG,closeK,openK)-ambient))
+
+ContactDisplay(closed rise) ->
+    SwitchPose(0.55*(1-closed) 24*(1-closed))
+    [ T(-1.22 0.25+0.009*rise 0.88) S(0.04 0.04+0.018*rise 0.04)
+      !I(Cube material(redmattemetal) 1 1) ]
+
+SwitchPose(gap twist) ->
+    HeatSink
+    [ T(0 0.33 0) FixedContact ]
+    [ T(0 0.39+gap 0) A(twist 1) MovingContact ]
+    [ T(0 0.48 0) FiveArms(gap radians(twist)) ]
+
+HeatSink ->
+    [ T(0 0.285 0) S(2.4 0.09 2.20) !I(Cube material(charcoalmattemetal) 1 1) ]
+    SinkFins(11)
+    [ T(0 0.33 0)
+      !I(Revolve(profile(Polygon 0.96 0 1.12 0 1.12 0.15 0.96 0.15)
+          angle(0 360) segments(5) cap(all)) material(charcoalmattemetal) 1 1) ]
+
+SinkFins(count) count ->
+    [ T((SinkFins_count-(count-1)/2)*0.21 0.12 0)
+      S(0.062 0.24 2.05) !I(Cube material(silverbrushedmetal) 1 1) ]
+
+FixedContact ->
+    !I(Revolve(profile(Polygon 0 0 0.30 0 0.30 0.06 0 0.06)
+        angle(0 360) segments(32) cap(all)) material(copperbrushedmetal) 1 1)
+
+MovingContact ->
+    !I(Revolve(profile(Polygon 0 0 0.30 0 0.30 0.06 0 0.06)
+        angle(0 360) segments(32) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(Revolve(profile(Polygon 0 0.06 0.49 0.06 0.49 0.12 0 0.12)
+        angle(0 360) segments(5) cap(all)) material(goldbrushedmetal) 1 1)
+
+FiveArms(gap twist) 5 ->
+    [ A(72*FiveArms_count 1)
+      FoldArm(gap 0.44*cos(twist) -0.44*sin(twist)) ]
+
+FoldArm(gap tipX tipZ) ->
+    !I(SweepProfile(profile(Rect 0.030 0.13)
+        path(1.03 0 0 0.75 gap*0.36 -0.11 tipX gap tipZ)
+        up(0 0 1) cap(all)) material(ambermatteplastic) 1 1)
+    !I(SweepDisk(path(1.015 0.038 0.032 0.75 gap*0.36+0.038 -0.080 tipX gap+0.038 tipZ+0.032)
+        radius(0.012) segments(8) cap(all)) material(redmattemetal) 1 1)
+    !I(SweepDisk(path(1.01 0.024 -0.045 0.94 gap*0.08+0.032 -0.085
+        0.885 gap*0.14+0.032 -0.037 0.83 gap*0.22+0.032 -0.11
+        0.775 gap*0.29+0.032 -0.069 0.75 gap*0.36+0.032 -0.15)
+        radius(0.012) segments(8) cap(all)) material(silverbrushedmetal) 1 1)
+
+# 2 | Water-harvesting window | Liu et al., Nature Water (2025)
+# DOI 10.1038/s44221-025-00447-2
+# The hydrogel absorbs vapour at night and releases it on daytime warming. Water
+# condenses on the glazing and drains. Only a strip of the front pane is shown.
+# The test window collected 57.0 to 161.5 mL/day in Death Valley at 21 to 88% RH.
+# Change DomeRows(7 6 ...) to change the layout. The field fits the same opening.
+# A model day takes 12 playback seconds. The gel starts on a periodic cycle.
+# Capacity is the wet equilibrium mass in kg. Set capture to zero to test collection losses.
+WaterHarvester -> SorptionCycle(43200 43200 18000 16000 0.14 0.8 7200)
+
+SorptionCycle(wet dry uptake release capacity capture speed) ->
+    WindowState((gelMass(wet,dry,uptake,release,capacity,capture,speed)/max(capacity,0.000001))
+                collectedMass(wet,dry,uptake,release,capacity,capture,speed))
+
+WindowState(saturation collected) ->
+    WindowFrame
+    [ T(0 1.405 -0.12) S(1.79 2.15 0.07) !I(Cube material(charcoalmatteplastic) 1 1) ]
+    DomeRows(7 6 saturation)
+    [ T(-0.74 1.40 0.22) S(0.30 2.14 0.018) !I(Cube material(softblueglossyceramic) 1 1) ]
+    Collector
+    [ T(1.08 -0.42 0.245) Reservoir(min(collected/0.35,1)) ]
+
+Reservoir(fill) ->
+    !I(Revolve(profile(Polygon 0 0 0.22 0 0.22 0.025 0 0.025)
+        angle(0 360) segments(20) cap(all)) material(silverbrushedmetal) 1 1)
+    !I(Revolve(profile(Polygon 0.20 0.025 0.22 0.025 0.22 0.44 0.20 0.44)
+        angle(0 220) segments(20) cap(all)) material(silverbrushedmetal) 1 1)
+    WaterLevel(fill)
+
+WaterLevel(fill) -> ?(fill>0.0001) StoredWater(fill) : EmptyVessel
+StoredWater(fill) ->
+    !I(Revolve(profile(Polygon 0 0.025 0.195 0.025 0.195 0.025+0.40*fill 0 0.025+0.40*fill)
+        angle(0 360) segments(24) cap(all)) material(tealglossyceramic) 1 1)
+EmptyVessel -> [ ]
+
+WindowFrame ->
+    Jamb(-0.94)
+    Jamb(0.94)
+    [ T(0 2.52 0) S(1.98 0.10 0.49) !I(Cube material(silverbrushedmetal) 1 1) ]
+    [ T(0 0.29 0) S(1.98 0.10 0.49) !I(Cube material(silverbrushedmetal) 1 1) ]
+
+Jamb(x) ->
+    [ T(x 1.37 0) S(0.10 2.20 0.49) !I(Cube material(silverbrushedmetal) 1 1) ]
+    [ T(x 0.135 0.015) S(0.15 0.27 0.64) !I(Cube material(charcoalmattemetal) 1 1) ]
+
+DomeRows(rows cols swelling) rows ->
+    [ T(0 0.34+(DomeRows_count+0.5)*2.12/rows -0.085)
+      DomeColumns(cols min(1.76/cols,2.12/rows)*0.85 swelling) ]
+
+DomeColumns(cols diameter swelling) cols ->
+    [ T(-0.88+(DomeColumns_count+0.5)*1.76/cols 0 0)
+      A(90 0) S(diameter diameter*(0.22+0.70*swelling) diameter)
+      !I(Sphere(polar(0 90) segments(16 6) close(all)) material(graphiteglossyplastic) 1 1) ]
+
+Collector ->
+    !I(SweepProfile(profile(Polygon -0.080 0 0.080 0 0.080 0.070 0.062 0.070
+            0.062 0.018 -0.062 0.018 -0.062 0.070 -0.080 0.070)
+        path(-0.92 0.33 0.245 0.92 0.245 0.245) up(0 1 0) cap(all))
+        material(tealmattemetal) 1 1)
+    !I(SweepDisk(path(0.92 0.25 0.245 1.02 0.24 0.245 1.08 0.18 0.245 1.08 0.055 0.245)
+        radius(0.032) segments(12) cap(all)) material(tealmattemetal) 1 1)
+
+# 3 | Pipe-inspection robot | Zhang et al., Advanced Science (2026)
+# DOI 10.1002/advs.75500
+# Eight pneumatic crawling modules, two six-flap rolling frames and a waterbomb
+# gripper are represented. Copper collars separate the triangulated teal shells.
+# A pressure wave drives elastic cell length. Phase-dependent longitudinal
+# drag produces forward travel. Zero grip removes drift. Negative grip reverses it.
+# One metre is displayed as ten scene units. Frames and gripper follow the end stations.
+PipeRobot ->
+    [ T(-2.1 0.60 0) A(-90 2) RobotBody(8 0.048 6 0.45 22000 0.00006 120 0.55) ]
+
+RobotBody(n pitch period tau pressure area spring grip) ->
+    EndFrames(10*crawlerStation(0,n,pitch,period,tau,pressure,area,spring,grip)
+              10*crawlerStation(n,n,pitch,period,tau,pressure,area,spring,grip))
+    RobotCells(n pitch period tau pressure area spring grip)
+
+EndFrames(first last) ->
+    [ T(0 first-0.03 0) RollingFrame ]
+    [ T(0 last+0.03 0) A(180 0) RollingFrame ]
+    [ T(0 last+0.07 0) GripperSpokes ]
+    [ T(0 last+0.12 0) Gripper ]
+
+RobotCells(n pitch period tau pressure area spring grip) n ->
+    CellBounds(RobotCells_count
+        10*crawlerStation(RobotCells_count,n,pitch,period,tau,pressure,area,spring,grip)
+        10*crawlerStation(RobotCells_count+1,n,pitch,period,tau,pressure,area,spring,grip))
+
+CellBounds(index bottom top) ->
+    [ T(0 bottom 0) RobotCell(index top-bottom) ]
+
+RobotCell(index length) ->
+    RobotSkin(index length 0.36+0.12*(0.48-length))
+    Ring(0.31 0.345 0.028 6)
+
+# One cutaway cell exposes a representative pneumatic actuator. The number and
+# arrangement of internal muscles have been abstracted into this single marker.
+RobotSkin(index length middle) -> ?(index==3) OpenCell(length middle) : Facets(6 0 length 0.34 middle)
+
+OpenCell(length middle) ->
+    Facets(4 2 length 0.34 middle)
+    [ T(0 0.012 0.08)
+      !I(Revolve(profile(Polygon 0 0 0.040 0 0.062 0.04 0.070 length/2
+                0.062 length-0.064 0.040 length-0.024 0 length-0.024)
+                angle(0 360) segments(18) cap(all)) material(redmatteplastic) 1 1) ]
+
+# Two triangular families tile each half-cell. The middle ring is rotated 30 degrees.
+# Each triangle is constructed on a 45-degree reference plane, scaled to its apex.
+Facets(count first length endR midR) count ->
+    [ A((first+Facets_count)*60 1)
+      HalfSkin(endR midR length/2)
+      [ T(0 length 0) S(1 -1 1) HalfSkin(endR midR length/2) ] ]
+
+HalfSkin(endR midR rise) ->
+    [ T(0 0 endR*cos(radians(30)))
+      S(1 rise midR-endR*cos(radians(30))) A(45 0)
+      FoldTriangle(endR/2) ]
+    [ A(30 1) T(0 rise midR*cos(radians(30)))
+      S(1 -rise endR-midR*cos(radians(30))) A(45 0)
+      FoldTriangle(midR/2) ]
+
+FoldTriangle(halfwidth) ->
+    !I(Extrude(Polygon(-halfwidth 0 halfwidth 0 0 1.41421356) 0.006 cap(all))
+        material(tealmatteplastic) 1 1)
+
+Ring(inside outside thick sides) ->
+    !I(Revolve(profile(Polygon inside -thick/2 outside -thick/2 outside thick/2 inside thick/2)
+        angle(0 360) segments(sides) cap(all)) material(copperbrushedmetal) 1 1)
+
+RollingFrame ->
+    Ring(0.33 0.51 0.11 6)
+    Flaps
+
+Flaps 6 ->
+    [ A(60*Flaps_count 1) T(0 0 0.51*cos(radians(30)))
+      [ T(0 -0.075 0) S(0.37 0.15 0.035) !I(Cube material(charcoalmattemetal) 1 1) ]
+      !I(SweepDisk(path(-0.19 0 0 0.19 0 0) radius(0.025) segments(10) cap(all))
+        material(silverbrushedmetal) 1 1) ]
+
+GripperSpokes 3 ->
+    [ A(120*GripperSpokes_count 1)
+      !I(SweepDisk(path(0.155 0.014 0 0.36 0 0) radius(0.018) segments(8) cap(all))
+        material(silverbrushedmetal) 1 1) ]
+
+Gripper ->
+    Ring(0.11 0.19 0.10 6)
+    GripperPetals
+
+GripperPetals 6 ->
+    [ A(60*GripperPetals_count 1)
+      !I(SweepProfile(profile(Rect 0.029 0.105)
+        path(0 0 0.14 0 0.21 0.24 0 0.34 0.14) up(1 0 0) cap(all))
+        material(goldbrushedmetal) 1 1) ]
+
+# 4 | Collapsible scissored surfaces | Toyonaga et al., PNAS (2026)
+# DOI 10.1073/pnas.2605221123
+# The paper's method produces surfaces of single and double curvature. This
+# example develops a regular three-tier cylindrical sleeve using straight links.
+# Each face is a planar X. Paired rails have a small radial offset for the pivot.
+# For bar length L, tilt a from vertical and N bays, H=L*cos(a), chord=L*sin(a)
+# and ring radius=chord/(2*sin(pi/N)). Change 12 to 8 in LatticePose for a
+# coarser ring, keeping bar length and tilt fixed.
+# An applied 0.42 N m step drives a torsional spring, viscous damper and inertia.
+# Increase damping from 0.17 to 0.60 N m s/rad to suppress overshoot.
+ScissorLattice -> LatticePose(12 3 1.08 latticeAngle(radians(25),radians(25),0.10,0.17,0.80,0.42))
+
+LatticePose(bays tiers bar angle) ->
+    LatticeTiers(bays tiers bar*sin(angle)/(2*sin(radians(180)/bays)) bar*cos(angle))
+
+LatticeTiers(bays tiers radius height) ->
+    BuildTiers(bays tiers radius height)
+    [ T(0 tiers*height 0) TopPivots(bays radius) ]
+
+TopPivots(bays radius) bays ->
+    [ A(360*(TopPivots_count+0.5)/bays 1) T(radius 0 0) PivotBall ]
+
+BuildTiers(bays tiers radius height) tiers ->
+    [ T(0 BuildTiers_count*height 0)
+      LatticeBays(bays radius height) ]
+
+LatticeBays(bays radius height) bays ->
+    [ A(360*LatticeBays_count/bays 1)
+      ScissorBay(radius*cos(radians(180)/bays) radius*sin(radians(180)/bays) height)
+      [ A(180/bays 1) T(radius 0 0) PivotBall ] ]
+
+ScissorBay(apothem halfChord height) ->
+    !I(SweepProfile(profile(Rect 0.082 0.026)
+        path(apothem+0.018 0 -halfChord apothem+0.018 height halfChord)
+        up(1 0 0) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(SweepProfile(profile(Rect 0.082 0.026)
+        path(apothem-0.018 0 halfChord apothem-0.018 height -halfChord)
+        up(1 0 0) cap(all)) material(tealmattemetal) 1 1)
+    !I(SweepDisk(path(apothem-0.052 height/2 0 apothem+0.052 height/2 0)
+        radius(0.049) segments(12) cap(all)) material(goldbrushedmetal) 1 1)
+
+PivotBall ->
+    S(0.105 0.105 0.105) !I(Sphere(segments(12 6)) material(goldbrushedmetal) 1 1)

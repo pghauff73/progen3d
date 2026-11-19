@@ -1,5 +1,6 @@
 #pragma once
 
+#include "physics/model/EngineeringDevicePhysics.h"
 #include "Scope.h"
 #include "Mesh.h"
 #include "geometry/model/AxisAlignedBounds.h"
@@ -193,6 +194,8 @@ public:
 	                            const glm::vec3 &relative_velocity,
 	                            float impulse_magnitude);
 	void clearPendingPrimitiveState();
+	void setDevicePhysics(const EngineeringDevicePhysics& physics) { device_physics_ = physics; }
+	const EngineeringDevicePhysics& devicePhysics() const { return device_physics_; }
 	void resetSimulation();
 	void stepSimulation(float delta_time);
 	float getTime() const;
@@ -213,6 +216,7 @@ public:
 	float time = 0.0f;
 
 private:
+	EngineeringDevicePhysics device_physics_;
 	std::size_t resolveMaterialSlot(const std::string &material_name);
 	glm::vec3 pending_velocity_{0.0f};
 	glm::vec3 pending_rotational_velocity_{0.0f};
