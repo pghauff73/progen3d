@@ -2,6 +2,8 @@
 
 Five runnable desktop grammars explore four forms. Begin with a stack of straight slats. Work up to a moving lattice, then strip that lattice back to the three rules that determine its shape.
 
+Investigate how two rules reproduce the same screen and respond differently when you edit it. The [grammar authoring lab](authoring/README.md) includes five runnable grammars, measured renders and a native geometry checker.
+
 ![Five ProGen3D studio renders. The full lantern is shown beside the screw fan, string saddle, pendulum choir and reduced copper lantern.](images/studio/gallery.jpg)
 
 [Watch the 24-second motion study](images/motion.mp4). Both models share an on-screen clock. The pendulums complete one group cycle while the lantern completes three. The film uses native triangle buffers sampled at 16 frames per second. The stills use the same geometry with studio lighting.

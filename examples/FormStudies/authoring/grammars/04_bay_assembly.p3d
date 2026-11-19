@@ -1,0 +1,24 @@
+# Three framed bays with a fixed outer width each. Heights vary within the opening.
+Start -> Wall(3 1.5 0.10 7)
+
+Wall(bays width seam blades) bays ->
+    [ T(Wall_count*(width+seam) 0 0)
+      Bay(width blades 0.08) ]
+
+Bay(width n border) ->
+    [ T(border/2 0.6 0) Block(border 1.2 0.16) ]
+    [ T(width-border/2 0.6 0) Block(border 1.2 0.16) ]
+    [ T(width/2 border/2 0) Block(width-2*border border 0.16) ]
+    [ T(width/2 1.2-border/2 0) Block(width-2*border border 0.16) ]
+    [ T(border border 0) Infill(n width-2*border 0.065 1.2-2*border) ]
+
+Block(w h d) ->
+    [ S(w h d) I(Cube material(copperbrushedmetal) 1 1) ]
+
+Infill(n clear blade headroom) n ->
+    Vary((Infill_count+0.5)*clear/n blade headroom)
+
+Vary(x w headroom) ->
+    R fraction(0.68 1.0)
+    [ T(x headroom*fraction/2 0) S(w headroom*fraction 0.08)
+      I(Cube material(tealmattemetal) 1 1) ]

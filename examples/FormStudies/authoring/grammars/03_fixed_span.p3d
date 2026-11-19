@@ -1,0 +1,12 @@
+# Count, blade width, outer width. One blade sits at the centre.
+Start -> Screen(9 0.12 3)
+
+Screen(n blade span) ->
+    ?(n==1) Slat(span/2 blade) : Stations(n blade span)
+
+Stations(n blade span) n ->
+    Slat(blade/2+Stations_count*(span-blade)/(n-1) blade)
+
+Slat(x blade) ->
+    [ T(x 0.6 0) S(blade 1.2 0.08)
+      I(Cube material(tealmattemetal) 1 1) ]
