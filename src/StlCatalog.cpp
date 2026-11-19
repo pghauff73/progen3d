@@ -1394,6 +1394,9 @@ void generate_stl_part_catalog(const std::string &stls_dir,
                                const std::string &tree_path,
                                const StartupProgressCallback &progress_callback)
 {
+#if defined(_WIN32)
+	(void)tree_path;
+#else
 	const std::filesystem::path script_path =
 		progen3d_resource_path(std::filesystem::path("scripts") / "build_stl_catalog.py");
 	const std::filesystem::path libraries_dir = progen3d_resource_path("libraries");
@@ -1446,6 +1449,7 @@ void generate_stl_part_catalog(const std::string &stls_dir,
 		}
 		debugout("Metadata STL catalog builder failed, falling back to basic catalog generation");
 	}
+#endif
 
 	if (progress_callback) {
 		progress_callback(0.2f, "Metadata builder unavailable. Scanning STL files for a fallback catalog.");

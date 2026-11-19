@@ -12180,7 +12180,7 @@ int Progen3dEditorApplication::run()
 	std::string local_file_dialog_error;
 	if (local_file_dialog_service.initialize(&local_file_dialog_error)) {
 		running_local_file_dialog_service = &local_file_dialog_service;
-		debugout("Native local file dialog service initialized with the XDG portal backend");
+		debugout("Native local file dialog service initialized");
 	} else {
 		errorout(local_file_dialog_error);
 	}

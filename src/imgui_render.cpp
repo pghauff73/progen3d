@@ -979,8 +979,9 @@ CameraMatrices build_camera_matrices(int width,
                                      const vec3 &target,
                                      float scene_scale)
 {
-	const float angle_radians = -angle_view * static_cast<float>(M_PI) / 180.0f;
-	const float elevation_radians = elevation_view * static_cast<float>(M_PI) / 180.0f;
+	constexpr float kDegreesToRadians = 0.01745329251994329577f;
+	const float angle_radians = -angle_view * kDegreesToRadians;
+	const float elevation_radians = elevation_view * kDegreesToRadians;
 	const float radius = std::max(camera_distance, 0.25f);
 	const vec3 scaled_target = target * scene_scale;
 
