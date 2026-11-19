@@ -4,7 +4,9 @@
 #include <cstdlib>
 #include <system_error>
 
-#if defined(__linux__)
+#if defined(_WIN32)
+#include <windows.h>
+#elif defined(__linux__)
 #include <unistd.h>
 #endif
 
@@ -26,7 +28,13 @@ std::filesystem::path normalized_absolute_path(const std::filesystem::path &path
 
 std::filesystem::path detect_executable_path(const char *argv0)
 {
-#if defined(__linux__)
+#if defined(_WIN32)
+    std::array<wchar_t, 32768> buffer{};
+    const DWORD length = GetModuleFileNameW(nullptr, buffer.data(), static_cast<DWORD>(buffer.size()));
+    if (length > 0 && length < buffer.size()) {
+        return normalized_absolute_path(std::filesystem::path(buffer.data()));
+    }
+#elif defined(__linux__)
     std::array<char, 4096> buffer{};
     const ssize_t length = readlink("/proc/self/exe", buffer.data(), buffer.size() - 1);
     if (length > 0) {
@@ -93,6 +101,14 @@ std::filesystem::path ProgenyApplicationPathLocator::stateDirectory()
         return normalized_absolute_path(std::filesystem::path(override_dir));
     }
 
+#if defined(_WIN32)
+    for (const wchar_t *name : {L"LOCALAPPDATA", L"APPDATA"}) {
+        const wchar_t *directory = _wgetenv(name);
+        if (directory != nullptr && directory[0] != L'\0') {
+            return normalized_absolute_path(std::filesystem::path(directory) / "ProGen3d");
+        }
+    }
+#endif
     const char *xdg_config_home = std::getenv("XDG_CONFIG_HOME");
     if (xdg_config_home != nullptr && xdg_config_home[0] != '\0') {
         return normalized_absolute_path(std::filesystem::path(xdg_config_home) / "progen3d");

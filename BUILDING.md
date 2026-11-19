@@ -1,6 +1,40 @@
 # Building ProGen3D Editor GUI
 
-## Supported Baseline
+## Windows (MSYS2 UCRT64)
+
+Open the **MSYS2 UCRT64** shell and install the native Windows build dependencies:
+
+```sh
+pacman -S --needed \
+  mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake \
+  mingw-w64-ucrt-x86_64-ninja mingw-w64-ucrt-x86_64-pkgconf \
+  mingw-w64-ucrt-x86_64-glfw mingw-w64-ucrt-x86_64-glm \
+  mingw-w64-ucrt-x86_64-stb mingw-w64-ucrt-x86_64-curl \
+  mingw-w64-ucrt-x86_64-openssl mingw-w64-ucrt-x86_64-jsoncpp \
+  mingw-w64-ucrt-x86_64-libxml2 mingw-w64-ucrt-x86_64-eigen3 \
+  mingw-w64-ucrt-x86_64-ca-certificates
+```
+
+From the repository root, configure and build the editor:
+
+```sh
+cmake -S . -B build/ucrt64 -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build/ucrt64 --parallel 1
+```
+
+The build stages `progen3d.exe`, its DLLs, a CA bundle, and available editor
+resources in `build/ucrt64`. Keep the staged files together when moving the
+app. The preview requires a Windows graphics driver with OpenGL 4.6 support.
+The editor stores per-user state in `%LOCALAPPDATA%\ProGen3d` by default.
+
+Launch `build/ucrt64/progen3d.exe` from Explorer or run the deterministic
+GUI startup check from the UCRT64 shell:
+
+```sh
+./build/ucrt64/progen3d.exe --smoke-test
+```
+
+## Linux Supported Baseline
 
 The current desktop editor targets Linux with:
 

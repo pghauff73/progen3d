@@ -17,13 +17,19 @@
 #include <unordered_map>
 #include <vector>
 
-#include <curl/curl.h>
-
+#if defined(_WIN32)
+#include <winsock2.h>
+#include <windows.h>
+#include <shellapi.h>
+#else
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/select.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#endif
+
+#include <curl/curl.h>
 
 namespace {
 
@@ -722,7 +728,42 @@ std::string random_url_safe_string(std::size_t length)
 	return value;
 }
 
-bool create_loopback_listener(int *listener_fd, int *port, std::string *error)
+#if defined(_WIN32)
+using LoopbackSocket = SOCKET;
+using LoopbackSocketLength = int;
+constexpr LoopbackSocket kInvalidLoopbackSocket = INVALID_SOCKET;
+
+class WinsockRuntime {
+public:
+	WinsockRuntime()
+	{
+		WSADATA data{};
+		status = WSAStartup(MAKEWORD(2, 2), &data);
+	}
+	~WinsockRuntime()
+	{
+		if (status == 0) {
+			WSACleanup();
+		}
+	}
+	int status;
+};
+#else
+using LoopbackSocket = int;
+using LoopbackSocketLength = socklen_t;
+constexpr LoopbackSocket kInvalidLoopbackSocket = -1;
+#endif
+
+void close_loopback_socket(LoopbackSocket socket_fd)
+{
+#if defined(_WIN32)
+	closesocket(socket_fd);
+#else
+	close(socket_fd);
+#endif
+}
+
+bool create_loopback_listener(LoopbackSocket *listener_fd, int *port, std::string *error)
 {
 	if (listener_fd == nullptr || port == nullptr) {
 		if (error != nullptr) {
@@ -731,30 +772,45 @@ bool create_loopback_listener(int *listener_fd, int *port, std::string *error)
 		return false;
 	}
 
-	const int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
-	if (socket_fd < 0) {
+#if defined(_WIN32)
+	static const WinsockRuntime winsock;
+	if (winsock.status != 0) {
+		if (error != nullptr) {
+			*error = "Google sign-in could not initialize Winsock.";
+		}
+		return false;
+	}
+#endif
+	const LoopbackSocket socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+	if (socket_fd == kInvalidLoopbackSocket) {
 		if (error != nullptr) {
 			*error = "Google sign-in could not open a local callback socket.";
 		}
 		return false;
 	}
 
-	int reuse_address = 1;
+#if defined(_WIN32)
+	const int exclusive_address = 1;
+	setsockopt(socket_fd, SOL_SOCKET, SO_EXCLUSIVEADDRUSE,
+	           reinterpret_cast<const char *>(&exclusive_address), sizeof(exclusive_address));
+#else
+	const int reuse_address = 1;
 	setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &reuse_address, sizeof(reuse_address));
+#endif
 
 	sockaddr_in address{};
 	address.sin_family = AF_INET;
 	address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 	address.sin_port = htons(0);
 	if (bind(socket_fd, reinterpret_cast<sockaddr *>(&address), sizeof(address)) != 0) {
-		close(socket_fd);
+		close_loopback_socket(socket_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in could not bind the local callback socket.";
 		}
 		return false;
 	}
 	if (listen(socket_fd, 1) != 0) {
-		close(socket_fd);
+		close_loopback_socket(socket_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in could not listen for the browser callback.";
 		}
@@ -762,9 +818,9 @@ bool create_loopback_listener(int *listener_fd, int *port, std::string *error)
 	}
 
 	sockaddr_in bound_address{};
-	socklen_t bound_length = sizeof(bound_address);
+	LoopbackSocketLength bound_length = sizeof(bound_address);
 	if (getsockname(socket_fd, reinterpret_cast<sockaddr *>(&bound_address), &bound_length) != 0) {
-		close(socket_fd);
+		close_loopback_socket(socket_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in could not determine the local callback port.";
 		}
@@ -776,9 +832,9 @@ bool create_loopback_listener(int *listener_fd, int *port, std::string *error)
 	return true;
 }
 
-void send_loopback_browser_response(int client_fd, bool success)
+void send_loopback_browser_response(LoopbackSocket client_fd, bool success)
 {
-	if (client_fd < 0) {
+	if (client_fd == kInvalidLoopbackSocket) {
 		return;
 	}
 	const std::string body =
@@ -792,15 +848,15 @@ void send_loopback_browser_response(int client_fd, bool success)
 	         << "Connection: close\r\n\r\n"
 	         << body;
 	const std::string payload = response.str();
-	send(client_fd, payload.data(), payload.size(), 0);
+	send(client_fd, payload.data(), static_cast<int>(payload.size()), 0);
 }
 
-bool wait_for_google_browser_callback(int listener_fd,
+bool wait_for_google_browser_callback(LoopbackSocket listener_fd,
                                       const std::string &expected_state,
                                       std::string *authorization_code,
                                       std::string *error)
 {
-	if (listener_fd < 0) {
+	if (listener_fd == kInvalidLoopbackSocket) {
 		if (error != nullptr) {
 			*error = "Google sign-in listener is invalid.";
 		}
@@ -813,7 +869,11 @@ bool wait_for_google_browser_callback(int listener_fd,
 	timeval timeout{};
 	timeout.tv_sec = 180;
 	timeout.tv_usec = 0;
+#if defined(_WIN32)
+	const int select_result = select(0, &read_set, nullptr, nullptr, &timeout);
+#else
 	const int select_result = select(listener_fd + 1, &read_set, nullptr, nullptr, &timeout);
+#endif
 	if (select_result <= 0) {
 		if (error != nullptr) {
 			*error = select_result == 0
@@ -824,10 +884,10 @@ bool wait_for_google_browser_callback(int listener_fd,
 	}
 
 	sockaddr_in client_address{};
-	socklen_t client_length = sizeof(client_address);
-	const int client_fd =
+	LoopbackSocketLength client_length = sizeof(client_address);
+	const LoopbackSocket client_fd =
 		accept(listener_fd, reinterpret_cast<sockaddr *>(&client_address), &client_length);
-	if (client_fd < 0) {
+	if (client_fd == kInvalidLoopbackSocket) {
 		if (error != nullptr) {
 			*error = "Google sign-in could not accept the browser callback.";
 		}
@@ -835,10 +895,10 @@ bool wait_for_google_browser_callback(int listener_fd,
 	}
 
 	char buffer[8192];
-	const ssize_t bytes_read = recv(client_fd, buffer, sizeof(buffer) - 1, 0);
+	const auto bytes_read = recv(client_fd, buffer, static_cast<int>(sizeof(buffer) - 1), 0);
 	if (bytes_read <= 0) {
 		send_loopback_browser_response(client_fd, false);
-		close(client_fd);
+		close_loopback_socket(client_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in received an empty browser callback.";
 		}
@@ -863,7 +923,7 @@ bool wait_for_google_browser_callback(int listener_fd,
 	const auto state_it = query_pairs.find("state");
 	if (state_it == query_pairs.end() || state_it->second != expected_state) {
 		send_loopback_browser_response(client_fd, false);
-		close(client_fd);
+		close_loopback_socket(client_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in callback state did not match.";
 		}
@@ -872,7 +932,7 @@ bool wait_for_google_browser_callback(int listener_fd,
 	const auto error_it = query_pairs.find("error");
 	if (error_it != query_pairs.end() && !error_it->second.empty()) {
 		send_loopback_browser_response(client_fd, false);
-		close(client_fd);
+		close_loopback_socket(client_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in was cancelled or denied: " + error_it->second;
 		}
@@ -881,7 +941,7 @@ bool wait_for_google_browser_callback(int listener_fd,
 	const auto code_it = query_pairs.find("code");
 	if (code_it == query_pairs.end() || code_it->second.empty()) {
 		send_loopback_browser_response(client_fd, false);
-		close(client_fd);
+		close_loopback_socket(client_fd);
 		if (error != nullptr) {
 			*error = "Google sign-in callback did not include an authorization code.";
 		}
@@ -889,7 +949,7 @@ bool wait_for_google_browser_callback(int listener_fd,
 	}
 
 	send_loopback_browser_response(client_fd, true);
-	close(client_fd);
+	close_loopback_socket(client_fd);
 	if (authorization_code != nullptr) {
 		*authorization_code = code_it->second;
 	}
@@ -1314,12 +1374,20 @@ bool open_url_in_browser(const std::string &url, std::string *error)
 		}
 		return false;
 	}
+#if defined(_WIN32)
+	const std::wstring wide_url = std::filesystem::u8path(url).wstring();
+	const HINSTANCE result = ShellExecuteW(nullptr, L"open", wide_url.c_str(),
+	                                       nullptr, nullptr, SW_SHOWNORMAL);
+	if (reinterpret_cast<INT_PTR>(result) <= 32) {
+		if (error != nullptr) {
+			*error = "Unable to open the browser.";
+		}
+		return false;
+	}
+#else
 #if defined(__APPLE__)
 	const std::string command =
 		"open '" + shell_escape_single_quoted(url) + "' >/dev/null 2>&1 &";
-#elif defined(_WIN32)
-	const std::string command =
-		"start \"\" \"" + url + "\"";
 #else
 	const std::string command =
 		"xdg-open '" + shell_escape_single_quoted(url) + "' >/dev/null 2>&1 &";
@@ -1331,6 +1399,7 @@ bool open_url_in_browser(const std::string &url, std::string *error)
 		}
 		return false;
 	}
+#endif
 	return true;
 }
 
@@ -1391,7 +1460,7 @@ bool firebase_auth_sign_in_with_google(const FirebaseAuthConfig &config,
 		return false;
 	}
 
-	int listener_fd = -1;
+	LoopbackSocket listener_fd = kInvalidLoopbackSocket;
 	int callback_port = 0;
 	if (!create_loopback_listener(&listener_fd, &callback_port, error)) {
 		return false;
@@ -1414,7 +1483,7 @@ bool firebase_auth_sign_in_with_google(const FirebaseAuthConfig &config,
 
 	std::string browser_error;
 	if (!open_url_in_browser(auth_url, &browser_error)) {
-		close(listener_fd);
+		close_loopback_socket(listener_fd);
 		if (error != nullptr) {
 			*error = browser_error;
 		}
@@ -1424,7 +1493,7 @@ bool firebase_auth_sign_in_with_google(const FirebaseAuthConfig &config,
 	std::string authorization_code;
 	const bool received_callback =
 		wait_for_google_browser_callback(listener_fd, state, &authorization_code, error);
-	close(listener_fd);
+	close_loopback_socket(listener_fd);
 	if (!received_callback) {
 		return false;
 	}
