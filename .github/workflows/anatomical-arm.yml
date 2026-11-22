@@ -98,5 +98,6 @@ jobs:
             build/milestone1/body/validation.json
             build/milestone1/spatial/validation.json
             build/milestone1/body-cycle.json
+            build/milestone1/junction-sweep.json
             build/milestone1/sleeve/simulation.json
           if-no-files-found: ignore
