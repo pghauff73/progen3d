@@ -20,6 +20,17 @@ from render_study import FacialStudyRenderScene
 class FacialShellStudyRenderScene(FacialStudyRenderScene):
     """A matched comparison of native geometry, with measured force evidence."""
 
+    def add_parallel_light(self, name, direction, energy, color):
+        # Directional illumination gives every translated panel the same
+        # incident light. Nearby area lights would confound row comparisons.
+        light = bpy.data.lights.new(name, "SUN")
+        light.energy = energy
+        light.angle = 0.28
+        light.color = color
+        obj = bpy.data.objects.new(name, light)
+        bpy.context.collection.objects.link(obj)
+        obj.rotation_euler = (-Vector(direction)).to_track_quat("-Z", "Y").to_euler()
+
     def add_equilibrium_panel(self, study, identifier, reference_id, title, x, y):
         path = study / "samples" / (identifier + ".obj")
         reference_path = study / "samples" / (reference_id + ".obj")
@@ -68,9 +79,15 @@ class FacialShellStudyRenderScene(FacialStudyRenderScene):
         self.add_text("precision", "Reported force residuals use the authoritative double-precision state. The viewer records mesh precision separately.",
                       (-0.395, -0.349, 0.08), 0.0066, (0.25, 0.22, 0.30))
         bpy.ops.mesh.primitive_plane_add(size=2, location=(0, 0, -0.09))
-        bpy.context.object.data.materials.append(self.material("paper", (0.92, 0.90, 0.87), 0.75))
-        self.add_area_light("key", (-0.30, 0.36, 0.52), 2.8, 0.45, (1.0, 0.91, 0.83))
-        self.add_area_light("fill", (0.32, 0.15, 0.40), 1.0, 0.50, (0.81, 0.87, 1.0))
+        paper = bpy.context.object
+        paper.data.materials.append(self.material("paper_ink", (0.92, 0.90, 0.87)))
+        # A camera-only backdrop keeps the explanatory text clear and prevents
+        # the panel layout from introducing different reflected illumination.
+        paper.visible_diffuse = False
+        paper.visible_glossy = False
+        paper.visible_shadow = False
+        self.add_parallel_light("key", (-0.3, 0.5, 1.0), 1.2, (1.0, 0.91, 0.83))
+        self.add_parallel_light("fill", (0.35, -0.1, 1.0), 0.35, (0.81, 0.87, 1.0))
         camera = bpy.data.cameras.new("shell_study_camera")
         camera.type = "ORTHO"
         camera.ortho_scale = 0.90
