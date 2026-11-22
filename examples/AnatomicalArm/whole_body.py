@@ -12,7 +12,7 @@ from arm_milestone_a import mesh_tube, write_obj
 from body_skeleton import skeleton
 from joint_collars import collar_from_ring
 from surface_stitch import stitch_limb_collar
-from body_render_layers import render_subset,check_duplicate_geometry
+from body_render_layers import render_subset,check_duplicate_geometry,boundary_audit
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def scale(a,k): return tuple(k*x for x in a)
@@ -202,6 +202,8 @@ if __name__=="__main__":
     report=validate(selected)
     report["render_layer"]=args.render_layer
     report["duplicate_geometry"]=check_duplicate_geometry(selected)
+    report["boundary_audit"]=boundary_audit(selected)
+    report["globally_watertight"]=all(v["watertight"] for v in report["boundary_audit"].values())
     write_obj(out/"whole_body.obj",selected)
     (out/"validation.json").write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps(report))
