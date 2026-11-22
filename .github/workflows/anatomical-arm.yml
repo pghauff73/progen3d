@@ -50,6 +50,8 @@ jobs:
               assert report['passed'], (name, report)
               print(name, 'PASS')
           PY
+      - name: Validate four-substep elbow animation
+        run: python examples/AnatomicalArm/coupled_animation.py --out build/arm-substeps --frames 3 --fps 30 --substeps 4
       - name: Audit deterministic arm motion
         run: python examples/AnatomicalArm/regression_audit.py --out build/arm-regression.json --frames 6
       - name: Upload diagnostics on failure
@@ -63,4 +65,5 @@ jobs:
             build/arm-coupled/simulation.json
             build/arm-triangle/simulation.json
             build/arm-regression.json
+            build/arm-substeps/simulation.json
           if-no-files-found: ignore
