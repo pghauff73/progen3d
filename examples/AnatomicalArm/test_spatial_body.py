@@ -11,7 +11,7 @@ class SpatialBodyTests(unittest.TestCase):
             "left_hip_xyz":(20,-10,25),
             "left_elbow_flex":110,
             "right_knee_flex":125})
-        self.assertEqual(len(meshes),24)
+        self.assertEqual(len(meshes),30)
         self.assertTrue(audit()["passed"])
         for name,mesh in meshes.items():
             with self.subTest(name=name):
@@ -19,6 +19,8 @@ class SpatialBodyTests(unittest.TestCase):
                     expected=(33*32,32*32*2)
                 elif name.endswith("_continuous_skin"):
                     expected=(61*20,60*20*2)
+                elif name.endswith(("_humeral_trochlea","_ulnar_notch","_radial_head")):
+                    expected=(12*28,11*28*2)
                 elif name.endswith(("_radius_bone","_ulna_bone")):
                     expected=(24*20,23*20*2)
                 elif name.split("_",1)[-1] in ("deltoid","trapezius","pectoralis"):
