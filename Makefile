@@ -552,6 +552,22 @@ FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
 build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
 
+build/grammar-time-resampling-test: tests/grammar_time_resampling_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: grammar-time-resampling-check
+grammar-time-resampling-check: build/grammar-time-resampling-test
+	./build/grammar-time-resampling-test
+
+build/curve-network-surface-test: tests/curve_network_surface_harness.cpp $(BUILD_DIR)/src/geometry/model/CurveNetworkSurface.o $(BUILD_DIR)/src/geometry/model/Curve3D.o $(BUILD_DIR)/src/geometry/model/Surface3D.o $(BUILD_DIR)/src/geometry/model/CurveArcLengthTable.o $(BUILD_DIR)/src/geometry/service/CurveArcLengthService.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+.PHONY: curve-network-surface-check
+curve-network-surface-check: build/curve-network-surface-test
+	./build/curve-network-surface-test
+
 build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 	@mkdir -p build
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
@@ -596,3 +612,29 @@ facial-skin-check: build/facial-skin-test build/form-study-sample build/facial-e
 	python3 examples/FacialSkin/face_study.py --sampler build/form-study-sample --out build/facial-skin-check --timeline-frames 0
 	python3 examples/FacialSkin/elastic_study.py --sampler build/form-study-sample --out build/facial-elastic-check --timeline-frames 0
 	python3 examples/FacialSkin/shell_study.py --sampler build/form-study-sample --out build/facial-shell-check
+
+# The integrated Lyra uses the same native sampler as the standalone mechanics.
+# CI checks a bounded set; the full target evaluates all 35 clip sample times.
+.PHONY: lyra-facial-build lyra-facial-check lyra-facial-full-check
+lyra-facial-build: build/form-study-sample grammar-time-resampling-check curve-network-surface-check
+	python3 examples/LyraFacialIntegration/build_character.py --sampler build/form-study-sample --output build/lyra-facial-integration
+
+build/lyra-facial-editor-test: tests/lyra_facial_editor_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+lyra-facial-check: lyra-facial-build build/lyra-facial-editor-test
+	python3 examples/LyraFacialIntegration/integration_check.py --sampler build/form-study-sample --integration-dir build/lyra-facial-integration --mode smoke
+	./build/lyra-facial-editor-test build/lyra-facial-integration/Lyra_Procedural_Facial_Elastic.p3d build/lyra-facial-integration/editor_validation.json
+
+lyra-facial-full-check: lyra-facial-build build/lyra-facial-editor-test
+	python3 examples/LyraFacialIntegration/integration_check.py --sampler build/form-study-sample --integration-dir build/lyra-facial-integration --mode full
+	./build/lyra-facial-editor-test build/lyra-facial-integration/Lyra_Procedural_Facial_Elastic.p3d build/lyra-facial-integration/editor_validation.json
+
+build/lyra-facial-timing-test: tests/lyra_facial_timing_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: lyra-facial-timing
+lyra-facial-timing: lyra-facial-build build/lyra-facial-timing-test
+	python3 examples/LyraFacialIntegration/timing_study.py --timing-harness build/lyra-facial-timing-test --integration-dir build/lyra-facial-integration

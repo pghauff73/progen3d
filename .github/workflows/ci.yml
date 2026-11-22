@@ -19,4 +19,16 @@ jobs:
             libjsoncpp-dev libxml2-dev libx11-dev libxi-dev libxrandr-dev libxext-dev \
             libxrender-dev libxinerama-dev libxcursor-dev
       - name: Build editor and check airflow and procedural facial skin
-        run: make -j2 all airflow-check facial-skin-check
+        run: make -j2 all airflow-check facial-skin-check grammar-time-resampling-check
+      - name: Build and check integrated Lyra facial smoke cases
+        run: make lyra-facial-check
+      - name: Upload Lyra integration diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lyra-facial-integration-diagnostics
+          path: |
+            build/lyra-facial-integration/fit_manifest.json
+            build/lyra-facial-integration/validation.json
+            build/lyra-facial-integration/editor_validation.json
+          if-no-files-found: ignore
