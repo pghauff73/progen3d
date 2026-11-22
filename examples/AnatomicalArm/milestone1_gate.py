@@ -56,8 +56,8 @@ def run(out,timeout=300):
                               "from spatial_body import spatial_body;"
                               "from mesh_diagnostics import inspect_mesh;"
                               "meshes,_=spatial_body();"
-                              "bad={name:inspect_mesh(*mesh) for name,mesh in meshes.items() "
-                              "if not inspect_mesh(*mesh)['passed']};"
+                              "reports={name:inspect_mesh(*mesh) for name,mesh in meshes.items()};"
+                              "bad={name:r for name,r in reports.items() if not r['passed']};"
                               "assert not bad,bad"]),
         ("sleeve_animation", [sys.executable,str(PACKAGE/"coupled_animation.py"),
                               "--frames","3","--substeps","4",
