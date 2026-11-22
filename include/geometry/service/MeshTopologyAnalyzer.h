@@ -11,5 +11,6 @@ class MeshTopologyAnalyzer
 public:
 	MeshTopologyReport analyze(
 		const Mesh &mesh,
-		const std::vector<MeshSurfaceTag> &face_surface_tags) const;
+		const std::vector<MeshSurfaceTag> &face_surface_tags,
+		float characteristic_length = 1.0f) const;
 };

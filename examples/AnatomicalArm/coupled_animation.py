@@ -87,7 +87,10 @@ class CoupledArm:
 
         def project_index(i, point):
             if self.contact_mode=='triangle':
-                return project_triangle(i,point)
+                point=project_triangle(i,point)
+                # Keep the correspondence envelope as a conservative guard.
+                # A nearby triangle may lie inside the radial clearance that
+                # the sequence report checks, especially near the elbow.
             u=(i//SIDES)/(RINGS-1)
             center=centerline(angle,u)
             sv=skin[i]
@@ -112,23 +115,25 @@ class CoupledArm:
                 p[:]=target[i]
                 cloth.previous[i][:]=target[i]
                 continue
-            old=cloth.previous[i][:]
+            position_before_prediction=p[:]
             for k in range(3):
-                velocity=(p[k]-old[k])*cloth.damping*(1-self.friction)
+                velocity=(p[k]-cloth.previous[i][k])*cloth.damping*(1-self.friction)
                 p[k]+=velocity
-            cloth.previous[i]=old
+            # Both position histories have already followed the pose change.
+            # Preserve the current start so only residual motion carries on.
+            cloth.previous[i]=position_before_prediction
         for _ in range(iterations):
             for e,(i,j) in enumerate(cloth.edges):
                 wi,wj=cloth.inverse_mass[i],cloth.inverse_mass[j]
                 if wi+wj==0: continue
                 p,q=cloth.positions[i],cloth.positions[j]
                 d=[p[k]-q[k] for k in range(3)]
-                length=math.sqrt(sum(x*x for x in d))
-                if length<1e-12: continue
-                dl=(-(length-cloth.rest[e])-alpha*lambdas[e])/(wi+wj+alpha)
+                edge_length=math.sqrt(sum(x*x for x in d))
+                if edge_length<1e-12: continue
+                dl=(-(edge_length-cloth.rest[e])-alpha*lambdas[e])/(wi+wj+alpha)
                 lambdas[e]+=dl
                 for k in range(3):
-                    grad=d[k]/length
+                    grad=d[k]/edge_length
                     p[k]+=wi*dl*grad
                     q[k]-=wj*dl*grad
             # Opposite-vertex bending proxy, solved in the same XPBD step.
@@ -179,7 +184,14 @@ class CoupledArm:
         elbow_ring=(RINGS-1)//2
         crease_band=[gap for ring,gap in ring_gaps if abs(ring-elbow_ring)<=5]
         min_crease_gap=min(crease_band) if crease_band else None
-        # Measure stretch residuals after the final projection. These metrics\n        # are diagnostics, not proof of constitutive accuracy.\n        edge_strains=[abs(math.dist(cloth.positions[i],cloth.positions[j])-rest)/rest\n                      for (i,j),rest in zip(cloth.edges,cloth.rest) if rest>1e-12]\n        maximum_edge_strain=max(edge_strains,default=0.0)\n        mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0\n        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,\n                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
+        # Measure stretch residuals after the final projection. These metrics
+        # are diagnostics, not proof of constitutive accuracy.
+        edge_strains=[abs(math.dist(cloth.positions[i],cloth.positions[j])-rest)/rest
+                      for (i,j),rest in zip(cloth.edges,cloth.rest) if rest>1e-12]
+        maximum_edge_strain=max(edge_strains,default=0.0)
+        mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0
+        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,
+                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
                 "worst_clearance_ring":worst_ring,"minimum_elbow_band_gap_m":min_crease_gap,
                 "passed":min_gap>=self.clearance-1e-7}
 
@@ -214,7 +226,8 @@ def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction
             "passed":all(r["passed"] for r in step_records),
             "minimum_clearance_m":min(r["minimum_radial_gap_m"] for r in step_records),
             "minimum_elbow_band_gap_m":min(r["minimum_elbow_band_gap_m"] for r in step_records),
-            "worst_clearance_step":min(range(len(step_records)),key=lambda i:step_records[i]["minimum_radial_gap_m"]),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in step_records),
+            "worst_clearance_step":min(range(len(step_records)),key=lambda i:step_records[i]["minimum_radial_gap_m"]),
+            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in step_records),
             "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","bending uses opposite-vertex distance proxy, not dihedral angles",
                            "no mesh self collision","no native renderer integration"],
             "records":records,"step_records":step_records}

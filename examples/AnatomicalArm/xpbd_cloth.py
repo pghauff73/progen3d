@@ -32,11 +32,13 @@ class XPBDCloth:
         # Verlet prediction.
         for i,p in enumerate(self.positions):
             if self.inverse_mass[i]==0: continue
-            old=self.previous[i][:]
+            position_before_prediction=p[:]
             for k in range(3):
-                vel=(p[k]-old[k])*self.damping
+                vel=(p[k]-self.previous[i][k])*self.damping
                 p[k]+=vel+gravity[k]*dt*dt
-            self.previous[i]=old
+            # The next step measures velocity from this step's starting point,
+            # not from an older position that would amplify motion each step.
+            self.previous[i]=position_before_prediction
         # XPBD Lagrange multipliers reset each time step.
         lambdas=[0.0]*len(self.edges)
         alpha=self.compliance/(dt*dt)

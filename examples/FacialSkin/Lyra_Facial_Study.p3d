@@ -1,0 +1,29 @@
+# Native ProGen3D FacialSkin milestone A: procedural geometric rig.
+# Units: metres; +Y up; +Z forward; +X anatomical left.
+# Connected open front-face patch. No imported mesh or tissue physics.
+# Animated version returns to neutral at t=6 seconds.
+Start -> [  Face(0.75*(0.5-0.5*cos(radians(60)*t)) 0.75*(0.5-0.5*cos(radians(60)*t)) 0.65*(0.5-0.5*cos(radians(120)*t)) (0.5-0.5*cos(radians(120)*t))^12 (0.5-0.5*cos(radians(120)*t))^12 0.35*(0.5-0.5*cos(radians(60)*t)) 0.35*(0.5-0.5*cos(radians(60)*t))) ]
+
+Face(smileL smileR jaw blinkL blinkR browL browR) ->
+    I(FacialSkin(size(0.16 0.21 0.045) segments(48 64)
+      smile(smileL smileR) jawOpen(jaw) blink(blinkL blinkR)
+      browRaise(browL browR)) material(softpinkmatteplaster) 1 1)
+    [ T(0.0333333313 0.0328124985 0.0275976155) S(0.0412800014 0.0412800014 0.0412800014)
+      I(Sphere(segments(32 24)) material(warmwhitematteplaster) 1 1) ]
+    # Iris and pupil follow the globe as concentric surface caps.
+    # A(90 0) rotates the native +Y pole toward the +Z front.
+    [ T(0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412840014 0.0412840014 0.0412840014)
+      I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]
+    [ T(0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412880014 0.0412880014 0.0412880014)
+      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]
+    [ T(-0.0333333313 0.0328124985 0.0275976155) S(0.0412800014 0.0412800014 0.0412800014)
+      I(Sphere(segments(32 24)) material(warmwhitematteplaster) 1 1) ]
+    # Iris and pupil follow the globe as concentric surface caps.
+    # A(90 0) rotates the native +Y pole toward the +Z front.
+    [ T(-0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412840014 0.0412840014 0.0412840014)
+      I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]
+    [ T(-0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412880014 0.0412880014 0.0412880014)
+      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]
+    # Dark recessed mouth proxy, not a complete oral cavity.
+    [ T(0 -0.0391649976-0.004-jaw*0.006 0.005) S(0.075 0.055 0.016)
+      I(Sphere(segments(28 18)) material(blackmattepaint) 1 1) ]
