@@ -160,7 +160,7 @@ class CoupledArm:
                         for k in range(3))/
                     math.dist(skin[i],centerline(angle,(i//SIDES)/(RINGS-1)))
                     for i in range(len(skin)) if cloth.inverse_mass[i])
-        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,
+        # Measure stretch residuals after the final projection. These metrics\n        # are diagnostics, not proof of constitutive accuracy.\n        edge_strains=[abs(math.dist(cloth.positions[i],cloth.positions[j])-rest)/rest\n                      for (i,j),rest in zip(cloth.edges,cloth.rest) if rest>1e-12]\n        maximum_edge_strain=max(edge_strains,default=0.0)\n        mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0\n        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,\n                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
                 "passed":min_gap>=self.clearance-1e-7}
 
     def meshes(self):
@@ -181,7 +181,7 @@ def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction
         records.append(result)
         write_obj(out/f"frame_{frame:04d}.obj",arm.meshes())
     report={"schema":"progen3d.arm-coupled-xpbd.v1",
-            "frames":frames,"fps":fps,"passed":all(r["passed"] for r in records),
+            "frames":frames,"fps":fps,"passed":all(r["passed"] for r in records),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in records),
             "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","bending uses opposite-vertex distance proxy, not dihedral angles",
                            "no mesh self collision","no native renderer integration"],
             "records":records}
