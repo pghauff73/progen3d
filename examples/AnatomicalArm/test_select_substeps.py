@@ -25,6 +25,13 @@ class SubstepSelectionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             select({"results":[row(2,3),row(2,4)]})
 
+    def test_invalid_thresholds_rejected(self):
+        for limits in ((-1,0.0003,33.333),(0.25,-1,33.333),
+                       (0.25,0.0003,0),(0.25,0.0003,float("nan"))):
+            with self.subTest(limits=limits):
+                with self.assertRaises(ValueError):
+                    select({"results":[row(1,1)]},*limits)
+
     def test_failed_run_rejected(self):
         result=select({"results":[row(1,1,passed=False),row(2,5)]})
         self.assertEqual(result["recommended_substeps"],2)
