@@ -21,3 +21,18 @@ The skin is sampled as one longitudinal swept mesh, with interpolation of ring f
 
 ## Next
 Milestone B: skin sliding, tissue elasticity and attachment maps. Milestone C: close-fitting garment with cloth contact and wrinkles. Neither is implemented here.
+
+## Milestones B/C: reduced-order skin and sleeve prototype
+
+The `arm_soft_sleeve.py` reference implementation extends the original arm with a denser continuous skin surface, a separate fitted sleeve mesh, elbow-local skin creasing, and compression-side sleeve folds. It preserves the Milestone A bones and muscle geometry. Sleeve and skin are independent objects with a bounded radial gap; this is **not** a physically solved cloth/contact simulation.
+
+Generate six poses and a machine-readable validation report:
+
+```sh
+python3 examples/AnatomicalArm/arm_soft_sleeve.py --out build/anatomical-arm-sleeve
+python3 -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
+```
+
+Each OBJ includes named objects for skin, sleeve, humerus, radius, ulna, biceps and triceps. The validation checks landmark lengths, finite vertices, triangle indices, ring counts and radial skin-to-sleeve clearance. The nominal 5% garment circumferential prestrain is metadata; it is not yet enforced by a strain-energy solver.
+
+**Limitations:** the elbow centerline remains piecewise linear; interpolation of normals is smoothed, but this does not guarantee a globally non-self-intersecting surface at extreme flexion. Tissue material laws, frictional sliding, external contact, shell bending energy, volume preservation, collision response, mesh interchange to the native renderer and anatomical accuracy require further work. The tests are committed but must be executed in a Python environment before claiming a validated release.
