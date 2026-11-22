@@ -17,6 +17,10 @@ class CoupledArmTests(unittest.TestCase):
                 self.assertTrue(result["passed"],result)
                 self.assertGreaterEqual(result["maximum_edge_strain"],0)
                 self.assertGreaterEqual(result["mean_edge_strain"],0)
+                self.assertIsInstance(result["worst_clearance_ring"],int)
+                self.assertGreaterEqual(result["worst_clearance_ring"],1)
+                self.assertIsNotNone(result["minimum_elbow_band_gap_m"])
+                self.assertGreaterEqual(result["minimum_elbow_band_gap_m"],result["minimum_radial_gap_m"]-1e-9)
 
     def test_export(self):
         with tempfile.TemporaryDirectory() as directory:
