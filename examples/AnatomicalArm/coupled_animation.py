@@ -195,22 +195,29 @@ def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction
     out=Path(out);out.mkdir(parents=True,exist_ok=True)
     arm=CoupledArm(contact_mode=contact_mode,friction=friction)
     records=[]
+    step_records=[]
     for frame in range(frames):
         if frame==0:
             result=arm.step(angle_at(0,period),dt=1/(fps*substeps),iterations=8)
+            step_records.append({"frame":frame,"substep":0,**result})
         else:
             for substep in range(substeps):
                 t=((frame-1)+(substep+1)/substeps)/fps
                 result=arm.step(angle_at(t,period),dt=1/(fps*substeps),iterations=8)
-        angle=result["angle"]
-        result["frame"]=frame
+                step_records.append({"frame":frame,"substep":substep,**result})
+        result={**result,"frame":frame}
         records.append(result)
         write_obj(out/f"frame_{frame:04d}.obj",arm.meshes())
     report={"schema":"progen3d.arm-coupled-xpbd.v1",
-            "frames":frames,"fps":fps,"substeps":substeps,"passed":all(r["passed"] for r in records),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in records),
+            "frames":frames,"fps":fps,"substeps":substeps,
+            "solver_steps":len(step_records),
+            "passed":all(r["passed"] for r in step_records),
+            "minimum_clearance_m":min(r["minimum_radial_gap_m"] for r in step_records),
+            "minimum_elbow_band_gap_m":min(r["minimum_elbow_band_gap_m"] for r in step_records),
+            "worst_clearance_step":min(range(len(step_records)),key=lambda i:step_records[i]["minimum_radial_gap_m"]),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in step_records),
             "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","bending uses opposite-vertex distance proxy, not dihedral angles",
                            "no mesh self collision","no native renderer integration"],
-            "records":records}
+            "records":records,"step_records":step_records}
     (out/"simulation.json").write_text(json.dumps(report,indent=2)+"\n")
     return report
 
