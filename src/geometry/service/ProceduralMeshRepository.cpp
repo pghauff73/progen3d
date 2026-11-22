@@ -4,6 +4,7 @@
 #include "geometry/model/CompoundShapeSpecification.h"
 #include "geometry/model/FormedPanelShapeSpecification.h"
 #include "geometry/model/GeneratedMeshReferenceShapeSpecification.h"
+#include "geometry/model/FacialSkinShapeSpecification.h"
 #include "geometry/model/InstanceArrayShapeSpecification.h"
 #include "geometry/model/MirrorShapeSpecification.h"
 #include "geometry/model/ShellOffsetShapeSpecification.h"
@@ -15,6 +16,7 @@
 #include "geometry/service/CurvedPanelMeshGenerator.h"
 #include "geometry/service/CurveNetworkSurfaceMeshGenerator.h"
 #include "geometry/service/ExtrudeProfileMeshGenerator.h"
+#include "geometry/service/FacialSkinMeshGenerator.h"
 #include "geometry/service/FoldedProfileMeshGenerator.h"
 #include "geometry/service/GeneratedMeshComposer.h"
 #include "geometry/service/GeneratedMeshReferenceResolutionService.h"
@@ -57,6 +59,7 @@ ProceduralMeshRepository::ProceduralMeshRepository()
 		  std::make_unique<CurveNetworkSurfaceMeshGenerator>()),
 	  extrude_profile_mesh_generator_(
 		  std::make_unique<ExtrudeProfileMeshGenerator>()),
+	  facial_skin_mesh_generator_(std::make_unique<FacialSkinMeshGenerator>()),
 	  folded_profile_mesh_generator_(std::make_unique<FoldedProfileMeshGenerator>()),
 	  generated_mesh_reference_resolution_service_(
 		  std::make_unique<GeneratedMeshReferenceResolutionService>()),
@@ -101,6 +104,9 @@ ProceduralMeshRepository::resolve(
 		break;
 	case ShapeFamily::ExtrudeProfile:
 		generated = extrude_profile_mesh_generator_->generate(specification, diagnostic);
+		break;
+	case ShapeFamily::FacialSkin:
+		generated = facial_skin_mesh_generator_->generate(specification, diagnostic);
 		break;
 	case ShapeFamily::SweepProfile:
 	case ShapeFamily::PanelCut:
@@ -385,8 +391,10 @@ ProceduralMeshRepository::resolve(
 	}
 
 	MeshTopologyAnalyzer analyzer;
+	const float characteristic_length = specification.family() == ShapeFamily::FacialSkin
+		? static_cast<const FacialSkinShapeSpecification &>(specification).size().x : 1.0f;
 	const MeshTopologyReport topology = analyzer.analyze(
-		*generated.mesh(), generated.faceSurfaceTags());
+		*generated.mesh(), generated.faceSurfaceTags(), characteristic_length);
 	if (topology.degenerate_triangle_count != 0) {
 		if (diagnostic != nullptr) {
 			*diagnostic = "Generated shape contains degenerate triangles.";
@@ -413,7 +421,13 @@ ProceduralMeshRepository::resolve(
 		geometry_evidence_service_->chooseCollisionPolicy(
 			specification, topology.isWatertight()),
 		topology.topology_hash);
-	resolved_shapes_.emplace(cache_key, resolved);
+	// Facial controls may change every deterministic time sample. Retaining every
+	// evaluated pose in the shape cache would grow without bound during playback.
+	// The first milestone rebuilds this small surface and keeps its rest topology
+	// deterministic; a persistent deformation buffer can replace this later.
+	if (specification.family() != ShapeFamily::FacialSkin) {
+		resolved_shapes_.emplace(cache_key, resolved);
+	}
 	return resolved;
 }
 

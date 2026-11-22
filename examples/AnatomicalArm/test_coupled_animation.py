@@ -9,6 +9,52 @@ class CoupledArmTests(unittest.TestCase):
         self.assertAlmostEqual(angle_at(1),145)
         self.assertAlmostEqual(angle_at(2),0)
 
+    def test_free_sleeve_keeps_axial_velocity_in_stationary_pose(self):
+        # At zero flexion, translation along Y preserves every edge/bend
+        # length and the radial contact gap. No constraint should accelerate it.
+        arm=CoupledArm()
+        arm.cloth.inverse_mass=[100.0]*len(arm.cloth.positions)
+        arm.cloth.damping=1.0
+        origin=[position[:] for position in arm.cloth.positions]
+        dt=1/120
+        velocity=0.03
+        for previous in arm.cloth.previous:
+            previous[1]-=velocity*dt
+        for step in range(1,7):
+            result=arm.step(0,dt=dt,iterations=2)
+            self.assertTrue(result["passed"],result)
+            for initial,position in zip(origin,arm.cloth.positions):
+                self.assertAlmostEqual(position[1],initial[1]+velocity*dt*step,places=10)
+
+    def test_free_sleeve_damps_axial_motion_without_energy_growth(self):
+        arm=CoupledArm()
+        arm.cloth.inverse_mass=[100.0]*len(arm.cloth.positions)
+        arm.cloth.damping=0.8
+        dt=1/120
+        initial_velocity=0.03
+        initial_y=arm.cloth.positions[-1][1]
+        for previous in arm.cloth.previous:
+            previous[1]-=initial_velocity*dt
+        previous_speed=initial_velocity
+        for step in range(1,9):
+            previous_position=arm.cloth.positions[-1][1]
+            arm.step(0,dt=dt,iterations=2)
+            speed=(arm.cloth.positions[-1][1]-previous_position)/dt
+            self.assertAlmostEqual(speed,initial_velocity*0.8**step,places=10)
+            self.assertLessEqual(abs(speed),previous_speed+1e-10)
+            previous_speed=abs(speed)
+        expected_distance=initial_velocity*dt*0.8*(1-0.8**8)/(1-0.8)
+        self.assertAlmostEqual(arm.cloth.positions[-1][1]-initial_y,expected_distance,places=10)
+
+    def test_stationary_unloaded_sleeve_has_no_drift(self):
+        arm=CoupledArm()
+        origin=[position[:] for position in arm.cloth.positions]
+        for _ in range(6):
+            arm.step(0,iterations=2)
+        for initial,position in zip(origin,arm.cloth.positions):
+            for expected,actual in zip(initial,position):
+                self.assertAlmostEqual(actual,expected,places=12)
+
     def test_moving_contact(self):
         arm=CoupledArm()
         for angle in (0,30,60,90,120,145,120,60,0):

@@ -15,6 +15,7 @@ class CylinderMeshGenerator;
 class CurvedPanelMeshGenerator;
 class CurveNetworkSurfaceMeshGenerator;
 class ExtrudeProfileMeshGenerator;
+class FacialSkinMeshGenerator;
 class FoldedProfileMeshGenerator;
 class GeneratedMeshReferenceResolutionService;
 class LoftMeshGenerator;
@@ -50,6 +51,7 @@ private:
 	std::unique_ptr<CurveNetworkSurfaceMeshGenerator>
 		curve_network_surface_mesh_generator_;
 	std::unique_ptr<ExtrudeProfileMeshGenerator> extrude_profile_mesh_generator_;
+	std::unique_ptr<FacialSkinMeshGenerator> facial_skin_mesh_generator_;
 	std::unique_ptr<FoldedProfileMeshGenerator> folded_profile_mesh_generator_;
 	std::unique_ptr<GeneratedMeshReferenceResolutionService>
 		generated_mesh_reference_resolution_service_;

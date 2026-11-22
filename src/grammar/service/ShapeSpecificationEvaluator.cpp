@@ -31,6 +31,7 @@
 #include "geometry/service/BotanicalBladeSpecificationValidator.h"
 #include "geometry/service/BranchJunctionSpecificationValidator.h"
 #include "geometry/service/ExtrudeProfileSpecificationValidator.h"
+#include "geometry/service/FacialSkinSpecificationValidator.h"
 #include "geometry/service/GeneratedMeshReferenceSpecificationValidator.h"
 #include "geometry/service/CurvedPanelSpecificationValidator.h"
 #include "geometry/service/CurveNetworkSurfaceSpecificationValidator.h"
@@ -4153,6 +4154,134 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 	}
 	if (descriptor.shapeName() == "SurfaceLoft") {
 		return evaluate_surface_loft(descriptor, expression_evaluator);
+	}
+	if (descriptor.shapeName() == "FacialSkin") {
+		FacialSkinShapeSpecificationCandidate candidate;
+		ShapeSpecificationEvaluationResult result;
+		for (const ShapeOptionSyntax &option : descriptor.options()) {
+			const auto &arguments = option.arguments();
+			if (option.optionName() == "response") {
+				if (arguments.size() != 1) {
+					result.diagnostic = "FacialSkin response requires analytic or elastic.";
+					return result;
+				}
+				const std::string response = lowercase_copy(arguments[0].sourceText());
+				if (response == "analytic") candidate.response_mode = FacialSkinResponseMode::Analytic;
+				else if (response == "elastic") candidate.response_mode = FacialSkinResponseMode::Elastic;
+				else {
+					result.diagnostic = "FacialSkin response must be analytic or elastic.";
+					return result;
+				}
+				continue;
+			}
+			if (option.optionName() == "mouthMesh") {
+				if (arguments.size() != 1) {
+					result.diagnostic = "FacialSkin mouthMesh requires legacy or quality.";
+					return result;
+				}
+				candidate.has_mouth_mesh_option = true;
+				const std::string mode = lowercase_copy(arguments[0].sourceText());
+				if (mode == "legacy") candidate.mouth_mesh_mode = FacialMouthMeshMode::Legacy;
+				else if (mode == "quality") candidate.mouth_mesh_mode = FacialMouthMeshMode::Quality;
+				else {
+					result.diagnostic = "FacialSkin mouthMesh must be legacy or quality.";
+					return result;
+				}
+				continue;
+			}
+			if (option.optionName() == "solve") {
+				if (arguments.size() != 2) {
+					result.diagnostic = "FacialSkin solve requires maximum iterations and relative force tolerance.";
+					return result;
+				}
+				candidate.has_solve_option = true;
+				if (!evaluate_integer(arguments[0], "FacialSkin maximum solve iterations", expression_evaluator,
+					&candidate.elastic_solve_settings.maximum_iterations, &result.diagnostic) ||
+				    !evaluate_number(arguments[1], "FacialSkin relative force tolerance", expression_evaluator,
+					&candidate.elastic_solve_settings.relative_force_tolerance)) {
+					if (result.diagnostic.empty()) result.diagnostic = "FacialSkin solve values must be finite numbers.";
+					return result;
+				}
+				continue;
+			}
+			if (option.optionName() == "muscle" || option.optionName() == "attachment" ||
+			    option.optionName() == "tissueRegion") {
+				const std::size_t expected_count = option.optionName() == "muscle" ? 10u :
+					option.optionName() == "attachment" ? 6u : 7u;
+				if (arguments.size() != expected_count) {
+					result.diagnostic = "FacialSkin " + option.optionName() + " has an incorrect argument count.";
+					return result;
+				}
+				const std::string name = arguments[0].sourceText();
+				std::vector<float> values(expected_count - 1u, 0.0f);
+				for (std::size_t index = 1; index < arguments.size(); ++index) {
+					if (!evaluate_number(arguments[index], "FacialSkin " + option.optionName() + " " + name,
+						expression_evaluator, &values[index - 1])) {
+						result.diagnostic = "FacialSkin " + option.optionName() + " '" + name + "' requires finite numeric parameters.";
+						return result;
+					}
+				}
+				if (option.optionName() == "muscle") {
+					candidate.has_muscle_option = true;
+					candidate.muscles.push_back({name, {values[0], values[1]}, {values[2], values[3]},
+						{values[4], values[5]}, values[6], values[7], values[8]});
+				} else if (option.optionName() == "attachment") {
+					candidate.has_attachment_option = true;
+					candidate.attachments.push_back({name, {values[0], values[1]}, {values[2], values[3]}, values[4]});
+				} else {
+					candidate.has_tissue_region_option = true;
+					candidate.tissue_regions.push_back({name, {values[0], values[1]}, {values[2], values[3]}, values[4], values[5]});
+				}
+				continue;
+			}
+			if (option.optionName() == "segments") {
+				if (arguments.size() != 2) {
+					result.diagnostic = "FacialSkin segments requires two arguments.";
+					return result;
+				}
+				if (!evaluate_integer(arguments[0], "FacialSkin horizontal segments", expression_evaluator,
+					&candidate.horizontal_segments, &result.diagnostic) ||
+				    !evaluate_integer(arguments[1], "FacialSkin vertical segments", expression_evaluator,
+					&candidate.vertical_segments, &result.diagnostic)) return result;
+				continue;
+			}
+			std::vector<float *> destinations;
+			if (option.optionName() == "size") {
+				destinations = {&candidate.size.x, &candidate.size.y, &candidate.size.z};
+			} else if (option.optionName() == "skinMaterial") {
+				candidate.has_skin_material_option = true;
+				destinations = {&candidate.elastic_material.young_modulus_pa,
+					&candidate.elastic_material.poisson_ratio, &candidate.elastic_material.thickness_m,
+					&candidate.elastic_material.support_stiffness_n_per_m3};
+			} else if (option.optionName() == "bending") {
+				candidate.has_bending_option = true;
+				destinations = {&candidate.bending_settings.stiffness_scale};
+			} else if (option.optionName() == "smile") {
+				destinations = {&candidate.controls.smile_left, &candidate.controls.smile_right};
+			} else if (option.optionName() == "jawOpen") {
+				destinations = {&candidate.controls.jaw_open};
+			} else if (option.optionName() == "blink") {
+				destinations = {&candidate.controls.blink_left, &candidate.controls.blink_right};
+			} else if (option.optionName() == "browRaise") {
+				destinations = {&candidate.controls.brow_raise_left, &candidate.controls.brow_raise_right};
+			} else {
+				result.diagnostic = "Unsupported FacialSkin option '" + option.optionName() + "'.";
+				return result;
+			}
+			if (arguments.size() != destinations.size()) {
+				result.diagnostic = "FacialSkin option has an incorrect argument count.";
+				return result;
+			}
+			for (std::size_t index = 0; index < arguments.size(); ++index) {
+				if (!evaluate_number(arguments[index], "FacialSkin " + option.optionName(),
+					expression_evaluator, destinations[index])) {
+					result.diagnostic = "FacialSkin option '" + option.optionName() + "' must evaluate to finite numbers.";
+					return result;
+				}
+			}
+		}
+		result.specification = FacialSkinSpecificationValidator().validate(candidate, &result.diagnostic);
+		return result;
 	}
 	if (descriptor.shapeName() == "CurveNetworkSurface") {
 		return evaluate_curve_network_surface(descriptor, expression_evaluator);
