@@ -19,6 +19,8 @@ def shoulder_corrective(mesh,shoulder,elbow,elevation=0,amplitude=0.006,
     # Raised-arm activation ramps smoothly from 30 to 120 degrees.
     t=max(0.,min(1.,(elevation-30)/90))
     activation=t*t*(3-2*t)
+    if activation==0 or amplitude==0:
+        return list(vertices),list(faces)
     result=[]
     for i,p in enumerate(vertices):
         u=(i//sides)/(rings-1)
