@@ -20,7 +20,10 @@ def audit(directory):
             syntax_errors[name]=str(exc)
             continue
         deps=set()
-        for node in ast.walk(tree):
+        # Only imports executed at module initialization are dependencies
+        # for import-time cycle detection. Deferred function imports are
+        # deliberately excluded from this graph.
+        for node in tree.body:
             if isinstance(node,ast.Import):
                 deps.update(alias.name.split(".")[0] for alias in node.names)
             elif isinstance(node,ast.ImportFrom) and node.level==0 and node.module:
