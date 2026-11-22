@@ -36,3 +36,13 @@ python3 -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
 Each OBJ includes named objects for skin, sleeve, humerus, radius, ulna, biceps and triceps. The validation checks landmark lengths, finite vertices, triangle indices, ring counts and radial skin-to-sleeve clearance. The nominal 5% garment circumferential prestrain is metadata; it is not yet enforced by a strain-energy solver.
 
 **Limitations:** the elbow centerline remains piecewise linear; interpolation of normals is smoothed, but this does not guarantee a globally non-self-intersecting surface at extreme flexion. Tissue material laws, frictional sliding, external contact, shell bending energy, volume preservation, collision response, mesh interchange to the native renderer and anatomical accuracy require further work. The tests are committed but must be executed in a Python environment before claiming a validated release.
+
+## Experimental XPBD cloth constraints
+
+`xpbd_cloth.py` now supplies a dependency-free iterative distance-constraint solver, pinning, damping and a generic collision-projection hook. Its tests cover edge deduplication, anchored vertices, constraint convergence and a spherical obstacle. Run:
+
+```sh
+python3 -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
+```
+
+This is a **physics foundation**, not the completed coupled sleeve. The garment currently uses prescribed surface geometry. Integration with elbow-driven skin contact, moving attachment constraints, bending resistance, calibrated cloth material, continuous-time simulation and native ProGen3D rendering remains outstanding. Do not interpret the presence of the XPBD module as evidence that the sleeve already simulates frictional sliding or skin contact.
