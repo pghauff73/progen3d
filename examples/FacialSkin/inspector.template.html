@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>ProGen3D · Facial skin study</title>
+<style>
+  :root{--paper:#f5f2ec;--card:#fffdf9;--ink:#28283b;--muted:#727180;--border:#e3ded8;--purple:#7153ac;--purple-soft:#ece5f6;--green:#346d5c;--green-soft:#e0eee7;--shadow:0 12px 40px #39303909}
+  *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #a68aca;outline-offset:3px}button:disabled{opacity:.45;cursor:default}button{color:inherit}h1,h2,h3,p{margin:0}a{color:var(--purple)}
+  .page{max-width:1440px;margin:0 auto;padding:34px 38px 28px}.masthead{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:30px}.brand{font-size:12px;letter-spacing:.16em;font-weight:760;text-transform:uppercase;display:flex;align-items:center;gap:11px}.brand-mark{height:28px;width:28px;border:1.7px solid var(--purple);border-radius:9px;transform:rotate(-9deg);position:relative}.brand-mark:before,.brand-mark:after{content:"";position:absolute;border:1.2px solid var(--purple);border-radius:5px;inset:5px}.brand-mark:after{inset:9px;border-color:var(--green)}.pill{border:1px solid #d9dfd7;background:#edf2e9;color:#50614d;border-radius:20px;padding:6px 12px;font-size:11px;letter-spacing:.025em;white-space:nowrap}.intro{margin-bottom:26px;max-width:770px}.eyebrow{color:var(--purple);font-size:11px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}h1{font-size:clamp(28px,3vw,43px);font-weight:630;line-height:1.14;letter-spacing:-.035em;margin-bottom:12px}.intro p{font-size:15px;color:var(--muted);max-width:660px;line-height:1.7}.study{display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:20px;align-items:start}.viewer-card{border:1px solid var(--border);border-radius:20px;background:var(--card);overflow:hidden;box-shadow:var(--shadow)}.viewer-head{min-height:67px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 20px;border-bottom:1px solid #e8e3dc}.sample-title{font-weight:650;font-size:15px}.subtle{color:var(--muted);font-size:11px}.sample-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#67a18b;margin-right:7px;vertical-align:1px}.view-tabs{display:flex;gap:3px;background:#f0ece6;padding:3px;border-radius:9px}.view-tabs button{border:0;border-radius:7px;background:none;padding:5px 9px;font-size:11px;white-space:nowrap}.view-tabs button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 4px #392e3310;color:var(--purple)}.viewport{height:min(62vw,590px);min-height:410px;position:relative;background:radial-gradient(ellipse at 47% 40%,#fffdf8 0%,#f1eee8 65%,#eae6df 100%);overflow:hidden}canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}canvas:active{cursor:grabbing}.viewport-tag{position:absolute;left:20px;top:17px;color:#807a82;font-size:10px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}.axis-key{position:absolute;bottom:18px;left:20px;font-size:10px;letter-spacing:.035em;color:#8c858b;pointer-events:none}.viewer-tip{position:absolute;bottom:18px;right:20px;color:#8c858b;font-size:10px;pointer-events:none}.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}.landmark-label{position:absolute;left:0;top:0;background:#fffcf1e8;border:1px solid #dbd0ab;border-radius:4px;padding:2px 5px;color:#6e5931;font-size:9px;white-space:nowrap;transform:translate(0,0);box-shadow:0 1px 4px #332e3210}.error-panel{position:absolute;inset:16%;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:12px;color:#695e6e;font-size:13px}.error-panel strong{font-size:18px;color:var(--ink)}
+  .timeline{padding:15px 20px 17px;border-top:1px solid var(--border);background:#fffdf9}.timeline-top{display:flex;align-items:center;gap:13px}.play{border:0;border-radius:10px;background:var(--green-soft);color:var(--green);min-width:79px;padding:9px 12px;font-size:12px;font-weight:650}.timeline-track{flex:1;min-width:0}.timeline-meta{display:flex;justify-content:space-between;gap:6px;font-size:10px;color:var(--muted);margin-bottom:3px}.timeline-meta strong{font-weight:550;color:var(--green);font-variant-numeric:tabular-nums}input[type=range]{width:100%;height:18px;margin:0;accent-color:var(--green);cursor:pointer}.timeline-note{font-size:10px;color:#8b838c;margin-top:7px}.side{display:flex;flex-direction:column;gap:15px}.panel{border:1px solid var(--border);border-radius:16px;background:var(--card);padding:19px;box-shadow:var(--shadow)}.panel h2{font-size:14px;font-weight:650;letter-spacing:-.01em;margin-bottom:4px}.panel-note{color:var(--muted);font-size:11px;line-height:1.6;margin-bottom:15px}.pose-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.pose{background:#f6f2ec;border:1px solid #e8e1d8;border-radius:10px;text-align:left;padding:10px 11px;font-size:11px;line-height:1.35;min-height:39px;transition:background .15s,border-color .15s}.pose:hover{border-color:#c3afd8}.pose[aria-pressed="true"]{background:var(--purple-soft);border-color:#bea8d5;color:#62419b;font-weight:650}.pose-index{display:block;font-size:9px;color:#a095a6;letter-spacing:.06em;margin-bottom:3px}.pose[aria-pressed="true"] .pose-index{color:#a087bb}.control-values{border-top:1px solid #ebe5de;margin-top:16px;padding-top:14px;display:grid;gap:8px}.control-row{display:grid;grid-template-columns:83px 1fr 30px;gap:9px;align-items:center;font-size:10px;color:#777080}.control-bar{height:4px;background:#eee8f0;border-radius:8px;overflow:hidden}.control-bar span{display:block;height:100%;background:#ac94c6;border-radius:8px}.control-value{text-align:right;font-variant-numeric:tabular-nums;font-size:10px;color:#7c648d}.toggle-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;cursor:pointer;font-size:12px}.toggle-row+.toggle-row{border-top:1px solid #eee8e1}.toggle-label{display:flex;align-items:center;gap:8px}.swatch{height:7px;width:7px;border-radius:50%;background:#7b6c96}.swatch.gold{background:#c29845}.swatch.green{background:#588477}.toggle-row input{width:31px;height:17px;appearance:none;background:#ddd7df;border-radius:15px;margin:0;position:relative;transition:background .15s;flex-shrink:0;cursor:pointer}.toggle-row input:before{content:"";position:absolute;top:3px;left:3px;height:11px;width:11px;border-radius:50%;background:white;box-shadow:0 1px 2px #332e331c;transition:transform .15s}.toggle-row input:checked{background:#8969b4}.toggle-row input:checked:before{transform:translateX(14px)}.guide-note{padding-top:9px;color:#9a859f;font-size:10px;line-height:1.6}.diagnostic-list{display:grid;gap:8px;margin:13px 0 0}.diagnostic-row{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted)}.diagnostic-row strong{font-weight:550;color:#4b4756;text-align:right;font-variant-numeric:tabular-nums}.diagnostic-foot{border-top:1px solid #eee8e1;padding-top:11px;margin-top:13px;font-size:10px;color:#918791;line-height:1.6}.details{margin-top:16px;border-top:1px solid var(--border);padding-top:12px}.details summary{cursor:pointer;font-size:11px;color:var(--purple)}.details pre{font:10px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;word-break:break-word;color:#6d6376;background:#f6f2f7;border-radius:9px;padding:10px;margin:10px 0 0;max-height:240px;overflow:auto}.footer{display:flex;justify-content:space-between;gap:20px;align-items:start;color:#968d96;font-size:10px;padding:20px 2px 0}.footer p{max-width:740px}.footer-mark{letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;font-size:9px;color:#8a789a}
+  @media(min-width:1280px){.study{grid-template-columns:minmax(0,1fr) 322px}.viewport{height:620px}.page{padding-top:38px}}
+  @media(max-width:900px){.page{padding:24px}.study{grid-template-columns:minmax(0,1fr) 270px;gap:14px}.panel{padding:15px}.viewer-head{padding:13px 15px}.view-tabs button{padding:5px 7px}.viewport{min-height:430px}.viewer-tip{max-width:130px;text-align:right}.control-row{grid-template-columns:76px 1fr 28px;gap:6px}}
+  @media(max-width:720px){.page{padding:20px 15px 22px}.masthead{margin-bottom:26px}.brand{font-size:10px;letter-spacing:.13em}.pill{font-size:9px;padding:5px 8px}.intro{margin-bottom:20px}.intro p{font-size:13px}.study{display:flex;flex-direction:column;gap:15px}.viewer-card{width:100%;border-radius:16px}.viewer-head{align-items:flex-start;padding:13px 14px;gap:8px}.sample-title{font-size:13px}.view-tabs{gap:0}.view-tabs button{font-size:10px;padding:5px 6px}.viewport{height:108vw;min-height:360px;max-height:550px}.viewport-tag,.axis-key{left:15px}.viewer-tip{right:15px;font-size:9px}.timeline{padding:13px 14px}.side{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px}.poses-panel{grid-column:1/-1}.pose-grid{grid-template-columns:repeat(4,1fr)}.pose{padding:9px;font-size:10px}.control-values{grid-template-columns:1fr 1fr;column-gap:22px;row-gap:9px}.control-row{grid-template-columns:70px 1fr 27px}.panel h2{font-size:13px}.panel-note{font-size:10px;margin-bottom:10px}.toggle-row{font-size:11px}.diagnostic-row{font-size:10px}.diagnostic-foot,.guide-note{font-size:9px}.footer{font-size:9px}.footer-mark{display:none}}
+  @media(max-width:380px){.page{padding:16px 11px}.pill{max-width:135px;white-space:normal;text-align:center;line-height:1.3}.brand{max-width:145px;font-size:9px}.pose-grid{grid-template-columns:repeat(3,1fr)}.side{grid-template-columns:1fr}.control-values{column-gap:12px}.view-tabs button{padding:5px}.control-row{grid-template-columns:66px 1fr 24px;font-size:9px}.overlay-panel,.diagnostics-panel{padding:16px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>ProGen3D / Face lab</span></div><span class="pill" id="prototype-badge">Native geometric prototype</span></header>
+  <section class="intro"><div class="eyebrow" id="study-eyebrow">Facial deformation · Study 01</div><h1 id="study-title">Facial skin &amp; expression</h1><p id="study-intro">Inspect the surface generated by the native grammar. Compare sampled poses, then reveal the landmarks and muscle guide paths.</p></section>
+  <div class="study">
+    <section class="viewer-card" aria-label="Interactive native face viewer">
+      <div class="viewer-head"><div><div class="sample-title" id="sample-title">Loading native sample</div><div class="subtle"><span class="sample-dot" aria-hidden="true"></span><span id="sample-subtitle">Evaluated grammar geometry</span></div></div><nav class="view-tabs" aria-label="Camera views"><button type="button" data-view="front" aria-pressed="true">Front</button><button type="button" data-view="quarter" aria-pressed="false">¾ view</button><button type="button" data-view="profile" aria-pressed="false">Profile</button><button type="button" data-view="fit" aria-label="Fit face in view">Fit</button></nav></div>
+      <div class="viewport" id="viewport"><canvas id="face-canvas" tabindex="0" aria-label="3D facial surface. Drag to orbit, scroll or pinch to zoom. Arrow keys rotate; plus and minus zoom."></canvas><div class="labels" id="labels" aria-hidden="true"></div><div class="viewport-tag">Native surface · <span id="viewport-label">neutral</span></div><div class="axis-key">+Y UP &nbsp; / &nbsp; +Z FRONT</div><div class="viewer-tip">Drag to orbit · Scroll / pinch to zoom</div></div>
+      <div class="timeline"><div class="timeline-top"><button type="button" class="play" id="play" disabled aria-pressed="false">▶ Play</button><div class="timeline-track"><div class="timeline-meta"><span id="timeline-label">Native sample sequence</span><strong id="timeline-time">—</strong></div><input type="range" id="timeline" min="0" max="0" value="0" step="1" disabled aria-label="Select native timeline sample"></div></div><p class="timeline-note" id="timeline-note">Each displayed pose is an evaluated native sample; the viewer does not interpolate the skin.</p></div>
+    </section>
+    <aside class="side" aria-label="Face study controls and diagnostics">
+      <section class="panel poses-panel"><h2>Explore an expression</h2><p class="panel-note">Select a native pose to compare its surface and control values.</p><div class="pose-grid" id="poses"></div><div class="control-values" id="control-values" aria-label="Sampled control values"></div></section>
+      <section class="panel overlay-panel"><h2>Look beneath the pose</h2><p class="panel-note">Inspect the structure behind the visible surface.</p><label class="toggle-row"><span class="toggle-label"><span class="swatch green" aria-hidden="true"></span>Triangle edges</span><input type="checkbox" id="wireframe"></label><label class="toggle-row"><span class="toggle-label"><span class="swatch gold" aria-hidden="true"></span>Landmarks</span><input type="checkbox" id="landmarks"></label><label class="toggle-row"><span class="toggle-label"><span class="swatch" aria-hidden="true"></span>Muscle paths</span><input type="checkbox" id="muscles"></label><p class="guide-note">Muscle paths are authored guides. They do not represent simulated fibers or measured forces.</p></section>
+      <section class="panel diagnostics-panel"><h2>Native sample evidence</h2><p class="panel-note">Counts from the geometry loaded for this pose.</p><div class="diagnostic-list" id="diagnostics"></div><p class="diagnostic-foot">Triangle vertices retain the native surface normals. Exported vertices are stored per triangle; their count is not a count of unique surface nodes.</p><details class="details" id="details"><summary>Supplied diagnostic record</summary><pre id="diagnostic-record"></pre></details></section>
+    </aside>
+  </div>
+  <footer class="footer"><p id="scope-note">Geometric facial prototype: these samples demonstrate procedural deformation. The viewer does not establish physiological accuracy, elastic material behavior, or biomechanical validation.</p><span class="footer-mark">Geometry → evidence → refinement</span></footer>
+</main>
+<script>
+'use strict';
+const STUDY = __FACIAL_STUDY_DATA__;
+
+class FacialStudyInspector {
+  constructor(study) {
+    this.study = study;
+    this.cases = Array.isArray(study.cases) ? study.cases : [];
+    this.meshAssets = Array.isArray(study.meshAssets) ? study.meshAssets : [];
+    this.meshTopologies = Array.isArray(study.meshTopologies) ? study.meshTopologies : [];
+    if (!this.cases.length) throw new Error('No native facial samples were supplied.');
+    this.canvas = document.getElementById('face-canvas');
+    this.viewport = document.getElementById('viewport');
+    this.gl = this.canvas.getContext('webgl2', {antialias:true, alpha:true, preserveDrawingBuffer:true});
+    this.activeIndex = 0;
+    this.meshes = [];
+    this.overlays = [];
+    this.activeObjects = [];
+    this.labels = [];
+    this.pointers = new Map();
+    this.camera = {yaw:0, pitch:.025, zoom:1};
+    this.playing = false;
+    this.timelineIndices = this.cases.map((sample,index)=>({sample,index}))
+      .filter(entry=>String(entry.sample.id || '').startsWith('timeline_'))
+      .sort((a,b)=>(Number(a.sample.time)||0)-(Number(b.sample.time)||0)).map(entry=>entry.index);
+    this.timelineTimes = this.timelineIndices.map((index,order)=>Number.isFinite(Number(this.cases[index].time)) ? Number(this.cases[index].time) : order/12);
+    this.fitBounds();
+    this.configureInterface();
+    if (!this.gl) {
+      this.showProblem('WebGL2 is unavailable', 'The native sample information remains available below. Open this file in a browser with WebGL2 enabled to inspect the 3D surface.');
+      this.selectCase(0);
+      return;
+    }
+    this.configureRenderer();
+    this.configureCameraInput();
+    this.selectCase(0);
+    this.resizeObserver = new ResizeObserver(()=>this.render());
+    this.resizeObserver.observe(this.viewport);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden) this.pause();});
+  }
+
+  resolveObject(reference) {
+    if (!Object.prototype.hasOwnProperty.call(reference,'asset')) return reference;
+    const index=reference.asset;
+    if (!Number.isInteger(index)||index<0||!this.meshAssets[index]) throw new Error('A native mesh asset reference is invalid.');
+    return this.meshAssets[index];
+  }
+
+  expandObject(reference) {
+    const asset=this.resolveObject(reference);
+    if (!Object.prototype.hasOwnProperty.call(asset,'topology')&&!Array.isArray(asset.indices)) return asset;
+    const topology=asset.topology;
+    const indices=Array.isArray(asset.indices)?asset.indices:
+      (Number.isInteger(topology)&&topology>=0?this.meshTopologies[topology]:null);
+    const sourcePositions=asset.positions||[],sourceNormals=asset.normals||[];
+    if (!Array.isArray(indices)||indices.length%3!==0||sourcePositions.length%3!==0||sourceNormals.length!==sourcePositions.length) throw new Error('A native indexed surface is incomplete.');
+    // Expansion is restricted to the selected sample. JavaScript numbers keep
+    // the supplied values; Float32 conversion occurs only at the existing GPU
+    // upload boundary, exactly as it does for the legacy triangle-soup schema.
+    const positions=new Array(indices.length*3),normals=new Array(indices.length*3);
+    for(let corner=0;corner<indices.length;corner++){
+      const index=indices[corner];
+      if(!Number.isInteger(index)||index<0||index*3+2>=sourcePositions.length)throw new Error('A native topology index is outside its position/normal tuples.');
+      for(let axis=0;axis<3;axis++){positions[corner*3+axis]=sourcePositions[index*3+axis];normals[corner*3+axis]=sourceNormals[index*3+axis];}
+    }
+    return {...asset,positions,normals};
+  }
+
+  fitBounds() {
+    const low = [Infinity,Infinity,Infinity], high = [-Infinity,-Infinity,-Infinity];
+    let vertices = 0;const visitedAssets=new Set();
+    for (const sample of this.cases) for (const reference of sample.objects || []) {
+      if(Object.prototype.hasOwnProperty.call(reference,'asset')){
+        if(visitedAssets.has(reference.asset))continue;
+        visitedAssets.add(reference.asset);
+      }
+      const object=this.resolveObject(reference);
+      if (/floor|ground|platform|backdrop/i.test(String(object.name || ''))) continue;
+      const positions = object.positions || [];
+      if(positions.length%3!==0)throw new Error('A native surface contains an incomplete position.');
+      for (let offset=0;offset+2<positions.length;offset+=3) {
+        for (let axis=0;axis<3;axis++) {const value=positions[offset+axis];if(!Number.isFinite(value))throw new Error('A native surface contains a non-finite position.');low[axis]=Math.min(low[axis],value);high[axis]=Math.max(high[axis],value);}
+        vertices++;
+      }
+    }
+    if (!vertices) throw new Error('No face geometry was found in the supplied samples.');
+    this.center = low.map((value,axis)=>(value+high[axis])/2);
+    this.radius = Math.max(.0001,Math.hypot(...high.map((value,axis)=>(value-low[axis])/2)));
+  }
+
+  configureInterface() {
+    if (this.study.title) {document.getElementById('study-title').textContent=this.study.title;document.title='ProGen3D · '+this.study.title;}
+    for(const [key,id] of [['badge','prototype-badge'],['eyebrow','study-eyebrow'],['intro','study-intro'],['scopeNote','scope-note']]){
+      if(typeof this.study[key]==='string')document.getElementById(id).textContent=this.study[key];
+    }
+    if(typeof this.study.overlayMeaning==='string')document.querySelector('.guide-note').textContent=this.study.overlayMeaning;
+    const posePanel = document.getElementById('poses');
+    let staticCases = this.cases.map((sample,index)=>({sample,index})).filter(entry=>!String(entry.sample.id||'').startsWith('timeline_'));
+    if (!staticCases.length) staticCases = [{sample:this.cases[0],index:0}];
+    this.poseButtons = staticCases.map(({sample,index},order)=>{
+      const button = document.createElement('button');
+      button.type='button';button.className='pose';button.dataset.caseIndex=String(index);button.setAttribute('aria-pressed','false');
+      const number=document.createElement('span');number.className='pose-index';number.textContent=String(order+1).padStart(2,'0');
+      button.append(number,document.createTextNode(sample.label||sample.id||'Pose '+(order+1)));
+      button.addEventListener('click',()=>{this.pause();this.selectCase(index);});posePanel.append(button);return button;
+    });
+    for (const control of ['wireframe','landmarks','muscles']) document.getElementById(control).addEventListener('change',()=>this.render());
+    for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click',()=>{
+      const view=button.dataset.view;
+      if(view==='front') {this.camera.yaw=0;this.camera.pitch=.025;}
+      if(view==='quarter') {this.camera.yaw=.57;this.camera.pitch=.10;}
+      if(view==='profile') {this.camera.yaw=Math.PI/2;this.camera.pitch=.025;}
+      this.camera.zoom=1;this.markView(view==='fit'?null:view);this.render();
+    });
+    this.playButton=document.getElementById('play');this.timelineSlider=document.getElementById('timeline');
+    this.playButton.disabled=this.timelineIndices.length<2;
+    this.timelineSlider.disabled=!this.timelineIndices.length;this.timelineSlider.max=String(Math.max(0,this.timelineIndices.length-1));
+    this.playButton.addEventListener('click',()=>this.playing?this.pause():this.play());
+    this.timelineSlider.addEventListener('input',()=>{this.pause();this.selectCase(this.timelineIndices[Number(this.timelineSlider.value)]);});
+    if (!this.timelineIndices.length) {document.getElementById('timeline-label').textContent='Static native pose samples';document.getElementById('timeline-note').textContent='Select an expression above or below. This file contains no native timeline sequence.';}
+  }
+
+  configureRenderer() {
+    const gl=this.gl;
+    this.surfaceProgram=this.createProgram(`#version 300 es
+      precision highp float;
+      layout(location=0) in vec3 aPosition;
+      layout(location=1) in vec3 aNormal;
+      uniform mat4 uViewProjection;
+      out vec3 vPosition;out vec3 vNormal;
+      void main(){vPosition=aPosition;vNormal=aNormal;gl_Position=uViewProjection*vec4(aPosition,1.0);}`,
+      `#version 300 es
+      precision highp float;
+      in vec3 vPosition;in vec3 vNormal;
+      uniform vec3 uColor;uniform vec3 uEye;
+      out vec4 fragColor;
+      void main(){
+        vec3 normal=normalize(vNormal);if(!gl_FrontFacing) normal=-normal;
+        vec3 key=normalize(vec3(-.65,.85,1.1));vec3 fill=normalize(vec3(.85,.15,.5));
+        float diffuse=max(dot(normal,key),0.0), bounce=max(dot(normal,fill),0.0);
+        vec3 view=normalize(uEye-vPosition);float highlight=pow(max(dot(normal,normalize(key+view)),0.0),38.0);
+        float sky=.5+.5*normal.y;
+        vec3 color=uColor*(.49+.40*diffuse+.13*bounce+.09*sky)+vec3(.11,.10,.09)*highlight;
+        fragColor=vec4(color,1.0);
+      }`);
+    this.overlayProgram=this.createProgram(`#version 300 es
+      precision highp float;
+      layout(location=0) in vec3 aPosition;
+      uniform mat4 uViewProjection;uniform float uPointSize;
+      void main(){gl_Position=uViewProjection*vec4(aPosition,1.0);gl_PointSize=uPointSize;}`,
+      `#version 300 es
+      precision highp float;
+      uniform vec4 uColor;uniform bool uRoundPoint;
+      out vec4 fragColor;
+      void main(){if(uRoundPoint && distance(gl_PointCoord,vec2(.5))>.5) discard;fragColor=uColor;}`);
+    gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.disable(gl.CULL_FACE);
+    gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);
+  }
+
+  createProgram(vertexSource,fragmentSource) {
+    const gl=this.gl;
+    const compile=(type,source)=>{const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){const message=gl.getShaderInfoLog(shader);gl.deleteShader(shader);throw new Error(message);}return shader;};
+    const vertexShader=compile(gl.VERTEX_SHADER,vertexSource),fragmentShader=compile(gl.FRAGMENT_SHADER,fragmentSource);
+    const program=gl.createProgram();gl.attachShader(program,vertexShader);gl.attachShader(program,fragmentShader);gl.linkProgram(program);gl.deleteShader(vertexShader);gl.deleteShader(fragmentShader);
+    if(!gl.getProgramParameter(program,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program));return program;
+  }
+
+  makeGeometry(positions,normals=null) {
+    const gl=this.gl,vao=gl.createVertexArray(),buffers=[];gl.bindVertexArray(vao);
+    const upload=(values,location)=>{const buffer=gl.createBuffer();buffers.push(buffer);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,3,gl.FLOAT,false,0,0);};
+    upload(positions,0);if(normals) upload(normals,1);gl.bindVertexArray(null);return {vao,buffers,count:positions.length/3};
+  }
+
+  clearGeometry() {
+    if(!this.gl)return;
+    for(const geometry of [...this.meshes,...this.overlays]) {this.gl.deleteVertexArray(geometry.vao);for(const buffer of geometry.buffers)this.gl.deleteBuffer(buffer);}
+    this.meshes=[];this.overlays=[];
+  }
+
+  selectCase(index) {
+    if(!Number.isInteger(index)||!this.cases[index])return;
+    this.activeIndex=index;const sample=this.cases[index];this.clearGeometry();
+    this.activeObjects=(sample.objects||[]).map(reference=>this.expandObject(reference));
+    document.getElementById('sample-title').textContent=sample.label||sample.id||'Native pose';
+    document.getElementById('viewport-label').textContent=sample.label||sample.id||'sample';
+    document.getElementById('sample-subtitle').textContent=Number.isFinite(Number(sample.time))?'Grammar time '+Number(sample.time).toFixed(3)+' s':'Evaluated grammar geometry';
+    for(const button of this.poseButtons)button.setAttribute('aria-pressed',String(Number(button.dataset.caseIndex)===index));
+    let triangleCount=0,vertexCount=0,objectCount=0;
+    for(const object of this.activeObjects) {
+      const positions=object.positions||[],normals=object.normals||[];if(!positions.length)continue;
+      if(positions.length%9!==0||normals.length!==positions.length||!normals.every(Number.isFinite))throw new Error('Invalid native triangle or normal data for '+(object.name||'surface'));
+      triangleCount+=positions.length/9;vertexCount+=positions.length/3;objectCount++;
+      if(this.gl){
+        const color=object.color||[.77,.57,.49];const scale=color.some(value=>value>1)?255:1;
+        this.meshes.push({...this.makeGeometry(positions,normals),color:color.slice(0,3).map(value=>value/scale)});
+        const edges=[];for(let offset=0;offset<positions.length;offset+=9)for(const [a,b] of [[0,3],[3,6],[6,0]])edges.push(...positions.slice(offset+a,offset+a+3),...positions.slice(offset+b,offset+b+3));
+        this.overlays.push({...this.makeGeometry(edges),kind:'wire',color:[.21,.37,.32,.30]});
+      }
+    }
+    if(this.gl){
+      const points=[];for(const landmark of sample.landmarks||[])if(Array.isArray(landmark.position)&&landmark.position.length===3)points.push(...landmark.position);
+      if(points.length)this.overlays.push({...this.makeGeometry(points),kind:'landmarks',color:[.71,.49,.16,1]});
+      for(const muscle of sample.muscles||[]){const points=(muscle.points||[]).flat();if(points.length>=6)this.overlays.push({...this.makeGeometry(points),kind:'muscles',color:[.48,.32,.67,.91]});}
+    }
+    this.buildLandmarkLabels(sample);
+    this.updateControls(sample.controls||{});
+    const diagnosticPanel=document.getElementById('diagnostics');diagnosticPanel.replaceChildren();
+    for(const [label,value] of [['Scene triangles',triangleCount.toLocaleString()],['Triangle vertices',vertexCount.toLocaleString()],['Native objects',objectCount.toLocaleString()],['Coordinates',this.study.units==='m'?'Metres':this.study.units||'Unspecified']]){
+      const row=document.createElement('div');row.className='diagnostic-row';const name=document.createElement('span');name.textContent=label;const number=document.createElement('strong');number.textContent=value;row.append(name,number);diagnosticPanel.append(row);
+    }
+    for(const evidence of sample.diagnosticRows||[]){
+      const row=document.createElement('div');row.className='diagnostic-row';const label=document.createElement('span');label.textContent=String(evidence.label);const value=document.createElement('strong');value.textContent=String(evidence.value);row.append(label,value);diagnosticPanel.append(row);
+    }
+    document.getElementById('diagnostic-record').textContent=JSON.stringify(sample.diagnostics||{},null,2);
+    document.getElementById('details').hidden=!sample.diagnostics||!Object.keys(sample.diagnostics).length;
+    const timelineIndex=this.timelineIndices.indexOf(index);
+    if(timelineIndex>=0){this.timelineSlider.value=String(timelineIndex);document.getElementById('timeline-time').textContent=this.timelineTimes[timelineIndex].toFixed(3)+' s';document.getElementById('timeline-label').textContent='Native sample '+(timelineIndex+1)+' / '+this.timelineIndices.length;}
+    else if(this.timelineIndices.length){document.getElementById('timeline-time').textContent='Pose';document.getElementById('timeline-label').textContent='Native sample sequence';}
+    this.render();
+  }
+
+  buildLandmarkLabels(sample) {
+    const layer=document.getElementById('labels');layer.replaceChildren();this.labels=[];
+    for(const landmark of sample.landmarks||[]){if(!Array.isArray(landmark.position)||landmark.position.length!==3)continue;const element=document.createElement('span');element.className='landmark-label';element.hidden=true;element.textContent=String(landmark.name||'Landmark').replaceAll('_',' ');layer.append(element);this.labels.push({element,position:landmark.position});}
+  }
+
+  updateControls(controls) {
+    const panel=document.getElementById('control-values');panel.replaceChildren();
+    const labels=this.study.controlLabels||[['smileLeft','Smile L'],['smileRight','Smile R'],['jawOpen','Jaw open'],['blinkLeft','Blink L'],['blinkRight','Blink R'],['browLeft','Brow L'],['browRight','Brow R']];
+    for(const [key,label] of labels){
+      if(!Number.isFinite(Number(controls[key])))continue;
+      const value=Number(controls[key]),row=document.createElement('div');row.className='control-row';
+      const name=document.createElement('span');name.textContent=label;
+      const bar=document.createElement('span');bar.className='control-bar';bar.setAttribute('aria-hidden','true');const fill=document.createElement('span');fill.style.width=Math.max(0,Math.min(1,value))*100+'%';bar.append(fill);
+      const amount=document.createElement('span');amount.className='control-value';amount.textContent=value.toFixed(2);row.append(name,bar,amount);panel.append(row);
+    }
+    panel.hidden=!panel.children.length;
+  }
+
+  play() {
+    if(this.timelineIndices.length<2)return;
+    this.playing=true;this.playButton.textContent='Ⅱ Pause';this.playButton.setAttribute('aria-pressed','true');
+    const firstTime=this.timelineTimes[0],lastTime=this.timelineTimes.at(-1),lastInterval=Math.max(.04,lastTime-this.timelineTimes.at(-2));
+    const period=Math.max(.1,lastTime-firstTime+lastInterval),current=Math.max(0,this.timelineIndices.indexOf(this.activeIndex));
+    this.playStart=performance.now()-1000*(this.timelineTimes[current]-firstTime);
+    const advance=now=>{
+      if(!this.playing)return;
+      const time=firstTime+((now-this.playStart)/1000)%period;
+      let selected=0;for(let index=1;index<this.timelineTimes.length;index++){if(this.timelineTimes[index]>time)break;selected=index;}
+      if(this.activeIndex!==this.timelineIndices[selected])this.selectCase(this.timelineIndices[selected]);
+      this.animationFrame=requestAnimationFrame(advance);
+    };
+    this.animationFrame=requestAnimationFrame(advance);
+  }
+
+  pause() {this.playing=false;if(this.animationFrame)cancelAnimationFrame(this.animationFrame);if(this.playButton){this.playButton.textContent='▶ Play';this.playButton.setAttribute('aria-pressed','false');}}
+  markView(name) {for(const button of document.querySelectorAll('[data-view]'))if(button.dataset.view!=='fit')button.setAttribute('aria-pressed',String(button.dataset.view===name));}
+  zoomBy(factor) {this.camera.zoom=Math.max(.33,Math.min(4,this.camera.zoom*factor));}
+
+  configureCameraInput() {
+    const canvas=this.canvas;
+    canvas.addEventListener('pointerdown',event=>{canvas.setPointerCapture(event.pointerId);this.pointers.set(event.pointerId,[event.clientX,event.clientY]);});
+    canvas.addEventListener('pointermove',event=>{
+      if(!this.pointers.has(event.pointerId))return;
+      const previous=this.pointers.get(event.pointerId),before=[...this.pointers.values()];
+      this.pointers.set(event.pointerId,[event.clientX,event.clientY]);
+      if(this.pointers.size===1){this.camera.yaw-=(event.clientX-previous[0])*.008;this.camera.pitch=Math.max(-1.25,Math.min(1.25,this.camera.pitch+(event.clientY-previous[1])*.008));this.markView(null);}
+      else if(this.pointers.size===2){const after=[...this.pointers.values()];const oldDistance=Math.hypot(before[0][0]-before[1][0],before[0][1]-before[1][1]),newDistance=Math.hypot(after[0][0]-after[1][0],after[0][1]-after[1][1]);if(oldDistance>1&&newDistance>1)this.zoomBy(oldDistance/newDistance);}
+      this.render();
+    });
+    const release=event=>this.pointers.delete(event.pointerId);canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
+    canvas.addEventListener('wheel',event=>{event.preventDefault();this.zoomBy(Math.exp(Math.max(-500,Math.min(500,event.deltaY))*.001));this.render();},{passive:false});
+    canvas.addEventListener('keydown',event=>{let handled=true;switch(event.key){case'ArrowLeft':this.camera.yaw-=.10;break;case'ArrowRight':this.camera.yaw+=.10;break;case'ArrowUp':this.camera.pitch=Math.min(1.25,this.camera.pitch+.10);break;case'ArrowDown':this.camera.pitch=Math.max(-1.25,this.camera.pitch-.10);break;case'+':case'=':this.zoomBy(.9);break;case'-':this.zoomBy(1.1);break;default:handled=false;}if(handled){event.preventDefault();this.markView(null);this.render();}});
+  }
+
+  render() {
+    if(!this.gl||!this.surfaceProgram)return;
+    const gl=this.gl,width=Math.max(1,this.viewport.clientWidth),height=Math.max(1,this.viewport.clientHeight),ratio=Math.min(2,window.devicePixelRatio||1);
+    const pixelWidth=Math.round(width*ratio),pixelHeight=Math.round(height*ratio);
+    if(this.canvas.width!==pixelWidth||this.canvas.height!==pixelHeight){this.canvas.width=pixelWidth;this.canvas.height=pixelHeight;}
+    gl.viewport(0,0,pixelWidth,pixelHeight);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    const aspect=width/height,fieldOfView=34*Math.PI/180,halfAngle=Math.atan(Math.tan(fieldOfView/2)*Math.min(1,aspect));
+    const distance=this.radius/Math.sin(halfAngle)*1.10*this.camera.zoom;
+    const {yaw,pitch}=this.camera,eye=[this.center[0]+distance*Math.sin(yaw)*Math.cos(pitch),this.center[1]+distance*Math.sin(pitch),this.center[2]+distance*Math.cos(yaw)*Math.cos(pitch)];
+    const projection=FacialStudyInspector.perspective(fieldOfView,aspect,this.radius*.005,distance+this.radius*20),view=FacialStudyInspector.lookAt(eye,this.center),matrix=FacialStudyInspector.multiply(projection,view);
+    gl.enable(gl.DEPTH_TEST);gl.enable(gl.POLYGON_OFFSET_FILL);gl.polygonOffset(1,1);gl.useProgram(this.surfaceProgram);
+    gl.uniformMatrix4fv(gl.getUniformLocation(this.surfaceProgram,'uViewProjection'),false,matrix);gl.uniform3fv(gl.getUniformLocation(this.surfaceProgram,'uEye'),eye);
+    for(const mesh of this.meshes){gl.uniform3fv(gl.getUniformLocation(this.surfaceProgram,'uColor'),mesh.color);gl.bindVertexArray(mesh.vao);gl.drawArrays(gl.TRIANGLES,0,mesh.count);}
+    gl.disable(gl.POLYGON_OFFSET_FILL);gl.useProgram(this.overlayProgram);gl.uniformMatrix4fv(gl.getUniformLocation(this.overlayProgram,'uViewProjection'),false,matrix);
+    gl.uniform1f(gl.getUniformLocation(this.overlayProgram,'uPointSize'),7*ratio);
+    for(const overlay of this.overlays){
+      const visible=overlay.kind==='wire'?document.getElementById('wireframe').checked:document.getElementById(overlay.kind).checked;if(!visible)continue;
+      if(overlay.kind==='wire')gl.enable(gl.DEPTH_TEST);else gl.disable(gl.DEPTH_TEST);
+      gl.uniform4fv(gl.getUniformLocation(this.overlayProgram,'uColor'),overlay.color);gl.uniform1i(gl.getUniformLocation(this.overlayProgram,'uRoundPoint'),overlay.kind==='landmarks'?1:0);gl.bindVertexArray(overlay.vao);
+      gl.drawArrays(overlay.kind==='landmarks'?gl.POINTS:overlay.kind==='muscles'?gl.LINE_STRIP:gl.LINES,0,overlay.count);
+    }
+    gl.bindVertexArray(null);gl.enable(gl.DEPTH_TEST);
+    const showLabels=document.getElementById('landmarks').checked;
+    for(const {element,position} of this.labels){const point=FacialStudyInspector.project(matrix,position);const visible=showLabels&&point[3]>0&&Math.abs(point[0]/point[3])<1.1&&Math.abs(point[1]/point[3])<1.1;element.hidden=!visible;if(visible){const x=(point[0]/point[3]*.5+.5)*width,y=(.5-point[1]/point[3]*.5)*height;element.style.transform='translate('+Math.max(2,Math.min(width-element.offsetWidth-2,x+8))+'px,'+Math.max(2,Math.min(height-element.offsetHeight-2,y-10))+'px)';}}
+  }
+
+  showProblem(title,message) {const panel=document.createElement('div');panel.className='error-panel';const heading=document.createElement('strong');heading.textContent=title;const detail=document.createElement('p');detail.textContent=message;panel.append(heading,detail);this.viewport.append(panel);}
+  static normalize(vector){const length=Math.hypot(...vector)||1;return vector.map(value=>value/length);}
+  static cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
+  static dot(a,b){return a.reduce((sum,value,index)=>sum+value*b[index],0);}
+  static lookAt(eye,center){const z=this.normalize(eye.map((value,index)=>value-center[index])),x=this.normalize(this.cross([0,1,0],z)),y=this.cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-this.dot(x,eye),-this.dot(y,eye),-this.dot(z,eye),1]);}
+  static perspective(fov,aspect,near,far){const factor=1/Math.tan(fov/2);return new Float32Array([factor/aspect,0,0,0,0,factor,0,0,0,0,(far+near)/(near-far),-1,0,0,2*far*near/(near-far),0]);}
+  static multiply(a,b){const result=new Float32Array(16);for(let column=0;column<4;column++)for(let row=0;row<4;row++)for(let index=0;index<4;index++)result[column*4+row]+=a[index*4+row]*b[column*4+index];return result;}
+  static project(matrix,point){return[0,1,2,3].map(row=>matrix[row]*point[0]+matrix[4+row]*point[1]+matrix[8+row]*point[2]+matrix[12+row]);}
+}
+
+try {window.facialStudyInspector=new FacialStudyInspector(STUDY);}
+catch(error){console.error('Facial study viewer:',error);const viewport=document.getElementById('viewport'),panel=document.createElement('div');panel.className='error-panel';const heading=document.createElement('strong');heading.textContent='The native study could not be displayed';const detail=document.createElement('p');detail.textContent=error.message||String(error);panel.append(heading,detail);viewport.append(panel);}
+</script>
+</body>
+</html>

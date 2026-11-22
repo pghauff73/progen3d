@@ -110,15 +110,22 @@ glm::dvec3 CurveNetworkSurface::evaluatePosition(double u, double v) const
 
 	glm::dvec3 position(0.0);
 	for (std::size_t u_index = 0u; u_index < constant_u_curves_.size(); ++u_index) {
+		if (u_weights[u_index] == 0.0) continue;
 		position += u_weights[u_index] *
 			constant_u_curves_[u_index].evaluatePosition(clamped_v);
 	}
 	for (std::size_t v_index = 0u; v_index < constant_v_curves_.size(); ++v_index) {
+		if (v_weights[v_index] == 0.0) continue;
 		position += v_weights[v_index] *
 			constant_v_curves_[v_index].evaluatePosition(clamped_u);
 	}
 	for (std::size_t u_index = 0u; u_index < constant_u_curves_.size(); ++u_index) {
+		// A local linear basis has at most two active curves in each direction.
+		// Keep their original summation order while avoiding evaluation of the
+		// many intersections with exactly zero contribution to this sample.
+		if (u_weights[u_index] == 0.0) continue;
 		for (std::size_t v_index = 0u; v_index < constant_v_curves_.size(); ++v_index) {
+			if (v_weights[v_index] == 0.0) continue;
 			position -= u_weights[u_index] * v_weights[v_index] *
 				intersectionPoint(u_index, v_index);
 		}

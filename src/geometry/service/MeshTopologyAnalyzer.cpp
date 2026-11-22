@@ -41,18 +41,18 @@ struct QuantizedEdge
 	}
 };
 
-QuantizedPosition quantize(const glm::vec3 &position)
+QuantizedPosition quantize(const glm::vec3 &position, double characteristic_length)
 {
 	return {
-		static_cast<std::int64_t>(std::llround(position.x * kPositionQuantization)),
-		static_cast<std::int64_t>(std::llround(position.y * kPositionQuantization)),
-		static_cast<std::int64_t>(std::llround(position.z * kPositionQuantization))};
+		static_cast<std::int64_t>(std::llround(position.x * kPositionQuantization / characteristic_length)),
+		static_cast<std::int64_t>(std::llround(position.y * kPositionQuantization / characteristic_length)),
+		static_cast<std::int64_t>(std::llround(position.z * kPositionQuantization / characteristic_length))};
 }
 
-QuantizedEdge edge_for(const glm::vec3 &a, const glm::vec3 &b)
+QuantizedEdge edge_for(const glm::vec3 &a, const glm::vec3 &b, double characteristic_length)
 {
-	QuantizedPosition first = quantize(a);
-	QuantizedPosition second = quantize(b);
+	QuantizedPosition first = quantize(a, characteristic_length);
+	QuantizedPosition second = quantize(b, characteristic_length);
 	if (second < first) std::swap(first, second);
 	return {first, second};
 }
@@ -70,9 +70,14 @@ void hash_bytes(std::uint64_t *hash, const void *data, std::size_t size)
 
 MeshTopologyReport MeshTopologyAnalyzer::analyze(
 	const Mesh &mesh,
-	const std::vector<MeshSurfaceTag> &face_surface_tags) const
+	const std::vector<MeshSurfaceTag> &face_surface_tags,
+	float characteristic_length) const
 {
 	MeshTopologyReport report;
+	if (!std::isfinite(characteristic_length) || characteristic_length <= 0.0f) {
+		report.degenerate_triangle_count = mesh.faces.size();
+		return report;
+	}
 	std::map<QuantizedEdge, std::size_t> edge_incidents;
 	std::uint64_t hash = 1469598103934665603ull;
 
@@ -109,15 +114,19 @@ MeshTopologyReport MeshTopologyAnalyzer::analyze(
 		const glm::vec3 &b = mesh.vertices[static_cast<std::size_t>(face.y)];
 		const glm::vec3 &c = mesh.vertices[static_cast<std::size_t>(face.z)];
 		const glm::vec3 cross = glm::cross(b - a, c - a);
+		// The default retains the existing unit-scale tolerance. Small anatomical
+		// features may supply their model width so valid lid/lip triangles are
+		// tested relative to that model, while volume and hashes stay in original units.
+		const glm::vec3 relative_cross = cross / (characteristic_length * characteristic_length);
 		if (!std::isfinite(cross.x) || !std::isfinite(cross.y) ||
-		    !std::isfinite(cross.z) || glm::dot(cross, cross) <= 1.0e-16f) {
+		    !std::isfinite(cross.z) || glm::dot(relative_cross, relative_cross) <= 1.0e-16f) {
 			++report.degenerate_triangle_count;
 			continue;
 		}
 		report.signed_volume += glm::dot(a, glm::cross(b, c)) / 6.0f;
-		++edge_incidents[edge_for(a, b)];
-		++edge_incidents[edge_for(b, c)];
-		++edge_incidents[edge_for(c, a)];
+		++edge_incidents[edge_for(a, b, characteristic_length)];
+		++edge_incidents[edge_for(b, c, characteristic_length)];
+		++edge_incidents[edge_for(c, a, characteristic_length)];
 	}
 
 	for (const auto &incident : edge_incidents) {

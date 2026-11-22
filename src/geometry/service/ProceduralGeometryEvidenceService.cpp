@@ -104,6 +104,7 @@ PrimitiveVolumeEvidence ProceduralGeometryEvidenceService::createVolumeEvidence(
 	case ShapeFamily::Loft:
 	case ShapeFamily::SurfaceLoft:
 	case ShapeFamily::CurveNetworkSurface:
+	case ShapeFamily::FacialSkin:
 	case ShapeFamily::ShellLoft:
 	case ShapeFamily::ShellOffset:
 	case ShapeFamily::MirrorShape:
@@ -214,6 +215,7 @@ PrimitiveCollisionPolicy ProceduralGeometryEvidenceService::chooseCollisionPolic
 	case ShapeFamily::Loft:
 	case ShapeFamily::SurfaceLoft:
 	case ShapeFamily::CurveNetworkSurface:
+	case ShapeFamily::FacialSkin:
 	case ShapeFamily::ShellLoft:
 	case ShapeFamily::ShellOffset:
 	case ShapeFamily::MirrorShape:

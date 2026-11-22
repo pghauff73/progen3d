@@ -30,7 +30,7 @@ def proximity(a,b,stride=4):
             "maximum_nearest_distance_m":maximum,
             "worst_sample_index":worst_sample}
 
-def junction_report(model,stride=8):
+def junction_report(model,stride=1):
     result={}
     for side in ("left","right"):
         for region,torso_name,collar_name in (

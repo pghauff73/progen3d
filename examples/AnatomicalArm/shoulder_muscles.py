@@ -5,7 +5,6 @@ landmarks. These are visualization proxies, not anatomically validated
 muscle attachment maps or force-producing actuators.
 """
 import math
-from spatial_body import segment_surface
 
 def spindle(a,b,belly=0.025,end_radius=0.006,rings=21,sides=16):
     if belly<=0 or end_radius<=0 or rings<3 or sides<8:

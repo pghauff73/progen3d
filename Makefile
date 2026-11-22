@@ -216,6 +216,12 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/CurvedPanelSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/CurvedPanelMeshGenerator.cpp \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceMeshGenerator.cpp \
+	$(SRC_DIR)/geometry/service/FacialSkinMeshGenerator.cpp \
+	$(SRC_DIR)/geometry/service/FacialSkinSpecificationValidator.cpp \
+	$(SRC_DIR)/geometry/service/FacialElasticModelAssembler.cpp \
+	$(SRC_DIR)/geometry/service/FacialBendingStencilAssembler.cpp \
+	$(SRC_DIR)/geometry/service/FacialElasticSolver.cpp \
+	$(SRC_DIR)/geometry/service/FacialSkinAdmissibility.cpp \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/GeneratedMeshComposer.cpp \
 	$(SRC_DIR)/geometry/service/MirroredShapeGeometryBuilder.cpp \
@@ -546,6 +552,22 @@ FORM_STUDY_OBJS = $(filter-out $(BUILD_DIR)/src/main.o,$(OBJS))
 build/form-study-sample: tests/form_study_sample.cpp $(FORM_STUDY_OBJS)
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
 
+build/grammar-time-resampling-test: tests/grammar_time_resampling_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: grammar-time-resampling-check
+grammar-time-resampling-check: build/grammar-time-resampling-test
+	./build/grammar-time-resampling-test
+
+build/curve-network-surface-test: tests/curve_network_surface_harness.cpp $(BUILD_DIR)/src/geometry/model/CurveNetworkSurface.o $(BUILD_DIR)/src/geometry/model/Curve3D.o $(BUILD_DIR)/src/geometry/model/Surface3D.o $(BUILD_DIR)/src/geometry/model/CurveArcLengthTable.o $(BUILD_DIR)/src/geometry/service/CurveArcLengthService.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+.PHONY: curve-network-surface-check
+curve-network-surface-check: build/curve-network-surface-test
+	./build/curve-network-surface-test
+
 build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 	@mkdir -p build
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
@@ -554,3 +576,69 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+build/facial-skin-test: tests/facial_skin_geometry_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+build/facial-elastic-kernel-test: tests/facial_elastic_kernel_harness.cpp $(BUILD_DIR)/src/geometry/service/FacialElasticSolver.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+build/facial-bending-kernel-test: tests/facial_bending_kernel_harness.cpp $(BUILD_DIR)/src/geometry/service/FacialElasticSolver.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+build/facial-bending-assembly-test: tests/facial_bending_assembly_harness.cpp $(BUILD_DIR)/src/geometry/service/FacialElasticSolver.o $(BUILD_DIR)/src/geometry/service/FacialBendingStencilAssembler.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+build/facial-shell-geometry-test: tests/facial_shell_geometry_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+build/facial-elastic-geometry-test: tests/facial_elastic_geometry_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: facial-skin-check
+facial-skin-check: build/facial-skin-test build/form-study-sample build/facial-elastic-kernel-test build/facial-elastic-geometry-test build/facial-bending-kernel-test build/facial-bending-assembly-test build/facial-shell-geometry-test
+	./build/facial-skin-test
+	./build/facial-elastic-kernel-test
+	./build/facial-bending-kernel-test
+	./build/facial-bending-assembly-test
+	./build/facial-shell-geometry-test
+	./build/facial-elastic-geometry-test
+	python3 examples/FacialSkin/face_study.py --sampler build/form-study-sample --out build/facial-skin-check --timeline-frames 0
+	python3 examples/FacialSkin/elastic_study.py --sampler build/form-study-sample --out build/facial-elastic-check --timeline-frames 0
+	python3 examples/FacialSkin/shell_study.py --sampler build/form-study-sample --out build/facial-shell-check
+
+# The integrated Lyra uses the same native sampler as the standalone mechanics.
+# CI checks a bounded set; the full target evaluates all 35 clip sample times.
+.PHONY: lyra-facial-build lyra-facial-check lyra-facial-full-check
+lyra-facial-build: build/form-study-sample grammar-time-resampling-check curve-network-surface-check
+	python3 examples/LyraFacialIntegration/build_character.py --sampler build/form-study-sample --output build/lyra-facial-integration
+
+build/lyra-facial-editor-test: tests/lyra_facial_editor_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+lyra-facial-check: lyra-facial-build build/lyra-facial-editor-test
+	python3 examples/LyraFacialIntegration/integration_check.py --sampler build/form-study-sample --integration-dir build/lyra-facial-integration --mode smoke
+	./build/lyra-facial-editor-test build/lyra-facial-integration/Lyra_Procedural_Facial_Elastic.p3d build/lyra-facial-integration/editor_validation.json
+
+lyra-facial-full-check: lyra-facial-build build/lyra-facial-editor-test
+	python3 examples/LyraFacialIntegration/integration_check.py --sampler build/form-study-sample --integration-dir build/lyra-facial-integration --mode full
+	./build/lyra-facial-editor-test build/lyra-facial-integration/Lyra_Procedural_Facial_Elastic.p3d build/lyra-facial-integration/editor_validation.json
+
+build/lyra-facial-timing-test: tests/lyra_facial_timing_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: lyra-facial-timing
+lyra-facial-timing: build/lyra-facial-timing-test
+	python3 examples/LyraFacialIntegration/timing_study.py --timing-harness build/lyra-facial-timing-test --integration-dir build/lyra-facial-integration
+
+.PHONY: lyra-facial-silhouette
+lyra-facial-silhouette:
+	python3 examples/LyraFacialIntegration/measure_skin_envelope.py --integration-dir build/lyra-facial-integration --output build/lyra-facial-integration/skin_silhouette_sections.json

@@ -160,6 +160,7 @@ public:
 	                  int source_end_line = -1,
 	                  int source_end_column = 0,
 	                  std::shared_ptr<const ShapeSpecification> shape_specification = {});
+	const std::string &lastPrimitiveDiagnostic() const { return last_primitive_diagnostic_; }
 	bool beginSpatialObject(SpatialObjectIdentity identity,
 	                        const std::string &container_object_id,
 	                        CollisionParticipationPolicy collision_policy,
@@ -220,6 +221,7 @@ public:
 	float time = 0.0f;
 
 private:
+	std::string last_primitive_diagnostic_;
 	std::size_t resolveMaterialSlot(const std::string &material_name);
 	glm::vec3 pending_velocity_{0.0f};
 	glm::vec3 pending_rotational_velocity_{0.0f};

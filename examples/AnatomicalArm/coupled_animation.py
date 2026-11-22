@@ -87,7 +87,10 @@ class CoupledArm:
 
         def project_index(i, point):
             if self.contact_mode=='triangle':
-                return project_triangle(i,point)
+                point=project_triangle(i,point)
+                # Keep the correspondence envelope as a conservative guard.
+                # A nearby triangle may lie inside the radial clearance that
+                # the sequence report checks, especially near the elbow.
             u=(i//SIDES)/(RINGS-1)
             center=centerline(angle,u)
             sv=skin[i]
@@ -112,23 +115,25 @@ class CoupledArm:
                 p[:]=target[i]
                 cloth.previous[i][:]=target[i]
                 continue
-            old=cloth.previous[i][:]
+            position_before_prediction=p[:]
             for k in range(3):
-                velocity=(p[k]-old[k])*cloth.damping*(1-self.friction)
+                velocity=(p[k]-cloth.previous[i][k])*cloth.damping*(1-self.friction)
                 p[k]+=velocity
-            cloth.previous[i]=old
+            # Both position histories have already followed the pose change.
+            # Preserve the current start so only residual motion carries on.
+            cloth.previous[i]=position_before_prediction
         for _ in range(iterations):
             for e,(i,j) in enumerate(cloth.edges):
                 wi,wj=cloth.inverse_mass[i],cloth.inverse_mass[j]
                 if wi+wj==0: continue
                 p,q=cloth.positions[i],cloth.positions[j]
                 d=[p[k]-q[k] for k in range(3)]
-                length=math.sqrt(sum(x*x for x in d))
-                if length<1e-12: continue
-                dl=(-(length-cloth.rest[e])-alpha*lambdas[e])/(wi+wj+alpha)
+                edge_length=math.sqrt(sum(x*x for x in d))
+                if edge_length<1e-12: continue
+                dl=(-(edge_length-cloth.rest[e])-alpha*lambdas[e])/(wi+wj+alpha)
                 lambdas[e]+=dl
                 for k in range(3):
-                    grad=d[k]/length
+                    grad=d[k]/edge_length
                     p[k]+=wi*dl*grad
                     q[k]-=wj*dl*grad
             # Opposite-vertex bending proxy, solved in the same XPBD step.
