@@ -53,6 +53,19 @@ def torso_surface(rings=32,sides=32,garment=False):
     return vertices,faces
 
 def leg_mesh(hip,knee,ankle,garment=False,rings=61,sides=20):
+    """Continuous thigh-knee-calf envelope with smoothed knee tangent.
+
+    A single indexed mesh avoids a hard topological seam at the knee.
+    The bend zone is kinematic and is not a tissue constitutive model.
+    """
+    if rings<9 or sides<8:raise ValueError("insufficient leg tessellation")
+    upper=tuple(knee[k]-hip[k] for k in range(3))
+    lower=tuple(ankle[k]-knee[k] for k in range(3))
+    upper_len=math.sqrt(sum(x*x for x in upper))
+    lower_len=math.sqrt(sum(x*x for x in lower))
+    if min(upper_len,lower_len)<1e-9:raise ValueError("degenerate leg segment")
+    upper=tuple(x/upper_len for x in upper)
+    lower=tuple(x/lower_len for x in lower)
     vertices=[];faces=[]
     for i in range(rings):
         u=i/(rings-1)
@@ -63,9 +76,31 @@ def leg_mesh(hip,knee,ankle,garment=False,rings=61,sides=20):
             t=(u-0.5)*2;p=add(knee,scale(tuple(ankle[k]-knee[k] for k in range(3)),t))
             radius=0.055-0.021*t+0.010*math.sin(math.pi*t)**2
         if garment:radius+=0.004
-        vertices.append((p,radius))
-    points=[p for p,r in vertices]
-    return mesh_tube(points,[(r,r*0.94) for p,r in vertices],sides)
+        # Smooth orientation in a narrow band while preserving segment endpoints.
+        blend=max(0.0,min(1.0,(u-0.43)/0.14))
+        blend=blend*blend*(3-2*blend)
+        direction=tuple((1-blend)*upper[k]+blend*lower[k] for k in range(3))
+        magnitude=math.sqrt(sum(x*x for x in direction))
+        if magnitude<1e-8:
+            # Extreme folds are not supported by this reduced-order envelope.
+            direction=upper if u<=0.5 else lower
+            magnitude=1.0
+        tangent=tuple(x/magnitude for x in direction)
+        normal=(-tangent[1],tangent[0],0)
+        nlen=math.hypot(normal[0],normal[1])
+        if nlen<1e-8:raise ValueError("leg tangent parallel to Z axis")
+        normal=(normal[0]/nlen,normal[1]/nlen,0)
+        for j in range(sides):
+            theta=2*math.pi*j/sides
+            vertices.append((p[0]+radius*math.cos(theta)*normal[0],
+                             p[1]+radius*math.cos(theta)*normal[1],
+                             p[2]+radius*0.94*math.sin(theta)))
+    for i in range(rings-1):
+        for j in range(sides):
+            a=i*sides+j;b=i*sides+(j+1)%sides
+            c=(i+1)*sides+j;d=(i+1)*sides+(j+1)%sides
+            faces.extend(((a,c,b),(b,c,d)))
+    return vertices,faces
 
 def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
           hip_left=0,hip_right=0,knee_left=15,knee_right=15,torso_lean=0,pelvis_tilt=0):
