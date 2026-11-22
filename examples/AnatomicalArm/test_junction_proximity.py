@@ -9,12 +9,16 @@ class JunctionProximityTests(unittest.TestCase):
         result=proximity(points,tri,stride=1)
         self.assertAlmostEqual(result["minimum_distance_m"],0.1)
         self.assertEqual(result["samples"],1)
+        self.assertEqual(result["worst_sample_index"],0)
 
     def test_body_junction_distances(self):
         result=junction_report(scene(shoulder_left=45,hip_right=30))
         self.assertEqual(set(result),{"left_shoulder","right_shoulder",
                                       "left_hip","right_hip"})
         for item in result.values():
+            self.assertEqual(item["samples"],20)
+            self.assertGreaterEqual(item["worst_sample_index"],0)
+            self.assertLess(item["worst_sample_index"],20)
             self.assertGreaterEqual(item["minimum_distance_m"],0)
             self.assertGreaterEqual(item["maximum_nearest_distance_m"],
                                     item["minimum_distance_m"])
