@@ -43,3 +43,38 @@ def check_duplicate_geometry(model):
                 owners[key]=name
     return {"duplicate_triangles":len(duplicates),
             "example_pairs":duplicates[:10]}
+
+def boundary_audit(model):
+    """Report open boundary loops for each selected render object.
+
+    An open rim is not automatically a defect (wrists and ankles are open).
+    This audit makes unfinished shoulder/hip connections measurable.
+    """
+    from surface_stitch import edge_incidence
+    report={}
+    for name,(vertices,faces) in model.items():
+        incidence=edge_incidence(faces)
+        boundary=[edge for edge,n in incidence.items() if n==1]
+        degree={}
+        for a,b in boundary:
+            degree[a]=degree.get(a,0)+1
+            degree[b]=degree.get(b,0)+1
+        unseen=set(degree)
+        components=0
+        adjacency={v:set() for v in degree}
+        for a,b in boundary:
+            adjacency[a].add(b);adjacency[b].add(a)
+        while unseen:
+            components+=1
+            stack=[unseen.pop()]
+            while stack:
+                for neighbor in adjacency[stack.pop()]:
+                    if neighbor in unseen:
+                        unseen.remove(neighbor)
+                        stack.append(neighbor)
+        report[name]={"boundary_edges":len(boundary),
+                      "boundary_components":components,
+                      "nonmanifold_edges":sum(n>2 for n in incidence.values()),
+                      "closed_boundary_loops":components if all(d==2 for d in degree.values()) else None,
+                      "watertight":bool(incidence) and all(n==2 for n in incidence.values())}
+    return report
