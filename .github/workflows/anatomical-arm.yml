@@ -28,6 +28,18 @@ jobs:
         run: python examples/AnatomicalArm/arm_soft_sleeve.py --out build/anatomical-arm-sleeve
       - name: Run short continuous animation
         run: python examples/AnatomicalArm/coupled_animation.py --out build/arm-coupled --frames 3 --fps 30 --contact radial
+      - name: Run triangle-contact integration smoke test
+        run: python examples/AnatomicalArm/coupled_animation.py --out build/arm-triangle --frames 2 --fps 30 --contact triangle --friction 0.15
+      - name: Validate JSON reports
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for name in ('build/anatomical-arm/validation.json', 'build/anatomical-arm-sleeve/validation.json', 'build/arm-coupled/simulation.json', 'build/arm-triangle/simulation.json'):
+              report=json.loads(Path(name).read_text())
+              assert report['passed'], (name, report)
+              print(name, 'PASS')
+          PY
       - name: Upload diagnostics on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -37,4 +49,5 @@ jobs:
             build/anatomical-arm/validation.json
             build/anatomical-arm-sleeve/validation.json
             build/arm-coupled/simulation.json
+            build/arm-triangle/simulation.json
           if-no-files-found: ignore
