@@ -10,6 +10,7 @@ from pathlib import Path
 from arm_soft_sleeve import assembly as arm_assembly, surface as arm_surface
 from arm_milestone_a import mesh_tube, write_obj
 from body_skeleton import skeleton
+from joint_collars import collar_from_ring
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def scale(a,k): return tuple(k*x for x in a)
@@ -127,12 +128,25 @@ def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
         shoulder_origin=joints[side+"_shoulder"].origin
         for part,mesh in arm_assembly(elbow).items():
             emit(side+"_arm_"+part,mesh,shoulder_origin,joints[side+"_shoulder"].angle,mirror)
+        # Collars share the first limb ring exactly, but remain separate
+        # surfaces at their torso/pelvis ends pending a watertight skin union.
+        for layer in ("skin","sleeve"):
+            limb=model[side+"_arm_"+layer]
+            model[side+"_shoulder_"+("garment" if layer=="sleeve" else "skin")+"_collar"]=(
+                collar_from_ring(limb,shoulder_origin,
+                                 inward=(-sign*0.045,0.018,0),
+                                 radius_scale=1.55))
         # Leg hip pivot is below torso; knee and ankle preserve segment lengths.
         hip_origin=joints[side+"_hip"].origin
         knee_point=joints[side+"_knee"].origin
         ankle=joints[side+"_ankle"].origin
         emit(side+"_leg_skin",leg_mesh(hip_origin,knee_point,ankle))
         emit(side+"_leg_garment",leg_mesh(hip_origin,knee_point,ankle,garment=True))
+        for layer in ("skin","garment"):
+            limb=model[side+"_leg_"+layer]
+            model[side+"_hip_"+layer+"_collar"]=collar_from_ring(
+                limb,hip_origin,inward=(-sign*0.04,0.035,0),
+                radius_scale=1.4)
         emit(side+"_femur",tube_between(hip_origin,knee_point,0.019,0.015))
         emit(side+"_tibia",tube_between(knee_point,ankle,0.014,0.010))
         emit(side+"_shoulder_joint",tube_between(shoulder_origin,
@@ -152,7 +166,7 @@ def validate(model):
             "triangles":sum(len(f) for v,f in model.values()),
             "limitations":["kinematic tubes, not calibrated anatomy",
                            "no inter-limb collision or muscle force model",
-                           "torso lean does not drive pelvis dynamics",
+                           "joint collars are not watertight torso/limb unions",
                            "garments are static envelopes, not coupled XPBD cloth"]}
 
 if __name__=="__main__":
