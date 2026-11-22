@@ -42,3 +42,24 @@ def junction_report(model,stride=8):
             rim=vertices[-sides:]
             result[side+"_"+region]=proximity((rim,[]),model[torso_name],stride)
     return result
+
+def audit_junctions(model,threshold_m=0.015,stride=1):
+    """Screen shoulder/hip junctions for large geometric gaps.
+
+    A failing gap is actionable, but a passing gap does not imply watertight
+    topology or absence of penetration.
+    """
+    if not math.isfinite(threshold_m) or threshold_m<0:
+        raise ValueError("invalid junction gap threshold")
+    measured=junction_report(model,stride)
+    results={}
+    for name,measurement in measured.items():
+        gap=measurement["maximum_nearest_distance_m"]
+        results[name]={**measurement,"gap_limit_m":threshold_m,
+                       "within_gap_limit":gap<=threshold_m}
+    return {"schema":"progen3d.junction-gap-audit.v1",
+            "passed":all(v["within_gap_limit"] for v in results.values()),
+            "junctions":results,
+            "limitations":["unsigned distance cannot identify penetration",
+                           "vertex-to-triangle proximity does not weld topology",
+                           "gap limit is provisional, not anatomically validated"]}
