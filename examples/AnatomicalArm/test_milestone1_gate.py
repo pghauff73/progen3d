@@ -5,6 +5,14 @@ import unittest
 from milestone1_gate import execute
 
 class Milestone1GateTests(unittest.TestCase):
+    def test_junction_gap_is_advisory_not_proof_of_watertightness(self):
+        result=junction_advisory({"passed":False,
+                                  "threshold_m":0.015,
+                                  "worst_gap":{"gap_m":0.021}})
+        self.assertFalse(result["within_provisional_gap_threshold"])
+        self.assertFalse(result["is_release_blocking"])
+        self.assertEqual(result["worst_gap"]["gap_m"],0.021)
+
     def test_evidence_summary_does_not_invent_hours(self):
         checks=[
             {"name":"compile","passed":True,"returncode":0,"elapsed_seconds":0.4},
