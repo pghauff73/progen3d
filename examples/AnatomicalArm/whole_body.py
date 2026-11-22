@@ -11,6 +11,7 @@ from arm_soft_sleeve import assembly as arm_assembly, surface as arm_surface
 from arm_milestone_a import mesh_tube, write_obj
 from body_skeleton import skeleton
 from joint_collars import collar_from_ring
+from surface_stitch import stitch_limb_collar
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def scale(a,k): return tuple(k*x for x in a)
@@ -160,6 +161,17 @@ def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
         emit(side+"_tibia",tube_between(knee_point,ankle,0.014,0.010))
         emit(side+"_shoulder_joint",tube_between(shoulder_origin,
              joints[side+"_shoulder"].apply((0,-0.045,0)),0.048,0.048))
+    # Create welded alternatives while retaining the original components
+    # for backwards compatibility with the gallery and diagnostic tools.
+    for side in ("left","right"):
+        for region,limb_layer,collar_layer in (
+            ("shoulder","arm_skin","shoulder_skin_collar"),
+            ("shoulder","arm_sleeve","shoulder_garment_collar"),
+            ("hip","leg_skin","hip_skin_collar"),
+            ("hip","leg_garment","hip_garment_collar")):
+            key=side+"_"+region+"_"+("clothed" if "garment" in collar_layer else "skin")+"_patch"
+            model[key]=stitch_limb_collar(model[side+"_"+limb_layer],
+                                         model[side+"_"+collar_layer])
     return model
 
 def validate(model):
