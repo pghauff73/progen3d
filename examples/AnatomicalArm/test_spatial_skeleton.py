@@ -31,6 +31,21 @@ class SpatialSkeletonTests(unittest.TestCase):
         self.assertNotEqual(a["left_shoulder"].origin,b["left_shoulder"].origin)
         self.assertEqual(a["left_hip"].origin,b["left_hip"].origin)
 
+    def test_scapular_coupling_preserves_bone_lengths(self):
+        neutral=spatial_skeleton()
+        raised=spatial_skeleton({"left_arm_elevation":150,
+                                 "right_arm_elevation":90})
+        self.assertIn("left_scapula",raised)
+        self.assertIn("right_scapula",raised)
+        self.assertNotEqual(neutral["left_shoulder"].origin,
+                            raised["left_shoulder"].origin)
+        self.assertLess(max(length_errors(raised).values()),1e-10)
+
+    def test_scapula_neutral_under_30_degrees(self):
+        a=spatial_skeleton({"left_arm_elevation":0})
+        b=spatial_skeleton({"left_arm_elevation":25})
+        self.assertEqual(a["left_scapula"],b["left_scapula"])
+
     def test_invalid_pose(self):
         for pose in ({"left_knee_flex":145},{"right_elbow_flex":-1},
                      {"torso_xyz":(0,float("nan"),0)},
