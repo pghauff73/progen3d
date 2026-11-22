@@ -60,10 +60,16 @@ def spatial_body(pose=None):
         for label,a,b,c,radii in (
             ("arm","shoulder","elbow","wrist",(0.047,0.037,0.022)),
             ("leg","hip","knee","ankle",(0.083,0.055,0.031))):
-            mesh[side+"_"+label+"_continuous_skin"]=joint_envelope(
+            envelope=joint_envelope(
                 joints[side+"_"+a].origin,
                 joints[side+"_"+b].origin,
                 joints[side+"_"+c].origin,*radii)
+            if label=="arm":
+                elevation=(pose or {}).get(side+"_arm_elevation",0.0)
+                envelope=shoulder_corrective(
+                    envelope,joints[side+"_shoulder"].origin,
+                    joints[side+"_elbow"].origin,elevation=elevation)
+            mesh[side+"_"+label+"_continuous_skin"]=envelope
     mesh.update(shoulder_muscles(joints))
     return mesh,joints
 
