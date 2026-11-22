@@ -155,12 +155,32 @@ class CoupledArm:
         self.time+=dt
         if any(not all(math.isfinite(x) for x in p) for p in cloth.positions):
             raise FloatingPointError("nonfinite sleeve position")
-        min_gap=min(sum((cloth.positions[i][k]-skin[i][k])*
-                        (skin[i][k]-centerline(angle,(i//SIDES)/(RINGS-1))[k])
-                        for k in range(3))/
-                    math.dist(skin[i],centerline(angle,(i//SIDES)/(RINGS-1)))
-                    for i in range(len(skin)) if cloth.inverse_mass[i])
+        # Signed correspondence clearance per ring; this detects localized
+        # elbow-crease failures hidden by a global minimum alone.
+        ring_gaps=[]
+        for ring in range(RINGS):
+            u=ring/(RINGS-1)
+            center=centerline(angle,u)
+            gaps=[]
+            for sector in range(SIDES):
+                i=ring*SIDES+sector
+                if not cloth.inverse_mass[i]:
+                    continue
+                radial=sub(skin[i],center)
+                radial_length=length(radial)
+                if radial_length<=1e-12:
+                    raise FloatingPointError("degenerate skin radial vector")
+                gaps.append(dot(sub(cloth.positions[i],skin[i]),radial)/radial_length)
+            if gaps:
+                ring_gaps.append((ring,min(gaps)))
+        if not ring_gaps:
+            raise ValueError("no unpinned sleeve vertices to inspect")
+        worst_ring,min_gap=min(ring_gaps,key=lambda entry:entry[1])
+        elbow_ring=(RINGS-1)//2
+        crease_band=[gap for ring,gap in ring_gaps if abs(ring-elbow_ring)<=5]
+        min_crease_gap=min(crease_band) if crease_band else None
         # Measure stretch residuals after the final projection. These metrics\n        # are diagnostics, not proof of constitutive accuracy.\n        edge_strains=[abs(math.dist(cloth.positions[i],cloth.positions[j])-rest)/rest\n                      for (i,j),rest in zip(cloth.edges,cloth.rest) if rest>1e-12]\n        maximum_edge_strain=max(edge_strains,default=0.0)\n        mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0\n        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,\n                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
+                "worst_clearance_ring":worst_ring,"minimum_elbow_band_gap_m":min_crease_gap,
                 "passed":min_gap>=self.clearance-1e-7}
 
     def meshes(self):
