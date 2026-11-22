@@ -119,8 +119,17 @@ def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
     model={}
     def emit(name,mesh,origin=(0,0,0),angle=0,mirror=False):
         model[name]=transform(mesh,origin,angle,mirror)
-    emit("torso_skin",torso_surface(),origin=(0,0,0),angle=torso_lean)
-    emit("torso_garment",torso_surface(garment=True),angle=torso_lean)
+    # Torso geometry is authored around the pelvis origin (y=0.05).
+    # Rotate about that pivot rather than the world origin so the lower
+    # torso stays attached to the articulated pelvis.
+    torso_pivot=(0.0,0.05,0.0)
+    def articulated_torso(mesh):
+        vertices,faces=mesh
+        root=joints["torso"]
+        return ([root.apply(tuple(p[k]-torso_pivot[k] for k in range(3)))
+                 for p in vertices],list(faces))
+    model["torso_skin"]=articulated_torso(torso_surface())
+    model["torso_garment"]=articulated_torso(torso_surface(garment=True))
     for side,mirror,shoulder,elbow,hip,knee in (
         ("left",True,shoulder_left,elbow_left,hip_left,knee_left),
         ("right",False,shoulder_right,elbow_right,hip_right,knee_right)):
