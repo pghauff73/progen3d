@@ -1,6 +1,7 @@
 import unittest
 from whole_body import scene
 from surface_stitch import stitch_limb_collar,stitch_report
+from mesh_diagnostics import inspect_mesh
 
 class SurfaceStitchTests(unittest.TestCase):
     def test_shared_rim_topology(self):
@@ -12,6 +13,8 @@ class SurfaceStitchTests(unittest.TestCase):
         self.assertEqual(len(merged[1]),len(limb[1])+len(collar[1]))
         report=stitch_report(merged)
         self.assertEqual(report["nonmanifold_edges"],0)
+        quality=inspect_mesh(*merged)
+        self.assertEqual(quality["winding_errors"],0,quality)
         self.assertFalse(report["watertight"])
 
     def test_bilateral_joint_patches(self):
