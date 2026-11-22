@@ -169,19 +169,25 @@ class CoupledArm:
         model["sleeve"]=([tuple(p) for p in self.cloth.positions],faces)
         return model
 
-def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction=0.0):
-    if frames<1 or fps<=0: raise ValueError("invalid frame settings")
+def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction=0.0, substeps=1):
+    if frames<1 or fps<=0 or not isinstance(substeps,int) or not 1<=substeps<=32:
+        raise ValueError("invalid frame settings or substeps")
     out=Path(out);out.mkdir(parents=True,exist_ok=True)
     arm=CoupledArm(contact_mode=contact_mode,friction=friction)
     records=[]
     for frame in range(frames):
-        angle=angle_at(frame/fps,period)
-        result=arm.step(angle,dt=1/fps,iterations=8)
+        if frame==0:
+            result=arm.step(angle_at(0,period),dt=1/(fps*substeps),iterations=8)
+        else:
+            for substep in range(substeps):
+                t=((frame-1)+(substep+1)/substeps)/fps
+                result=arm.step(angle_at(t,period),dt=1/(fps*substeps),iterations=8)
+        angle=result["angle"]
         result["frame"]=frame
         records.append(result)
         write_obj(out/f"frame_{frame:04d}.obj",arm.meshes())
     report={"schema":"progen3d.arm-coupled-xpbd.v1",
-            "frames":frames,"fps":fps,"passed":all(r["passed"] for r in records),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in records),
+            "frames":frames,"fps":fps,"substeps":substeps,"passed":all(r["passed"] for r in records),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in records),
             "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","bending uses opposite-vertex distance proxy, not dihedral angles",
                            "no mesh self collision","no native renderer integration"],
             "records":records}
@@ -195,7 +201,8 @@ if __name__=="__main__":
     p.add_argument("--fps",type=int,default=30)
     p.add_argument("--contact",choices=("radial","triangle"),default="radial")
     p.add_argument("--friction",type=float,default=0.0)
+    p.add_argument("--substeps",type=int,default=1)
     args=p.parse_args()
-    report=simulate(args.out,args.frames,args.fps,contact_mode=args.contact,friction=args.friction)
+    report=simulate(args.out,args.frames,args.fps,contact_mode=args.contact,friction=args.friction,substeps=args.substeps)
     print(json.dumps({"passed":report["passed"],"frames":report["frames"]}))
     raise SystemExit(0 if report["passed"] else 1)
