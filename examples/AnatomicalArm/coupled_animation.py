@@ -179,7 +179,15 @@ class CoupledArm:
         elbow_ring=(RINGS-1)//2
         crease_band=[gap for ring,gap in ring_gaps if abs(ring-elbow_ring)<=5]
         min_crease_gap=min(crease_band) if crease_band else None
-        # Measure stretch residuals after the final projection. These metrics\n        # are diagnostics, not proof of constitutive accuracy.\n        edge_strains=[abs(math.dist(cloth.positions[i],cloth.positions[j])-rest)/rest\n                      for (i,j),rest in zip(cloth.edges,cloth.rest) if rest>1e-12]\n        maximum_edge_strain=max(edge_strains,default=0.0)\n        mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0\n        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,\n                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
+        # Measure stretch residuals after final contact projection.
+        # These are diagnostics, not constitutive tissue stress.
+        edge_strains=[
+            abs(math.dist(cloth.positions[i],cloth.positions[j])-rest)/rest
+            for (i,j),rest in zip(cloth.edges,cloth.rest) if rest>1e-12
+        ]
+        maximum_edge_strain=max(edge_strains,default=0.0)
+        mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0
+        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,\n                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
                 "worst_clearance_ring":worst_ring,"minimum_elbow_band_gap_m":min_crease_gap,
                 "passed":min_gap>=self.clearance-1e-7}
 
