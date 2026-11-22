@@ -14,6 +14,7 @@ from spatial_torso import torso_envelope
 from shoulder_skin_corrective import shoulder_corrective
 from muscle_volume import corrected_shoulders
 from forearm_articulation import forearm_bone_meshes
+from elbow_articular import elbow_articular_meshes,elbow_landmark_clearance
 
 def segment_surface(start,end,radius_start,radius_end,rings=24,sides=20):
     if rings<2 or sides<3 or min(radius_start,radius_end)<=0:
@@ -76,6 +77,7 @@ def spatial_body(pose=None):
     for side in ("left","right"):
         angle=(pose or {}).get(side+"_forearm_pronation",0.0)
         mesh.update(forearm_bone_meshes(joints,side,angle))
+        mesh.update(elbow_articular_meshes(joints,side))
     neutral_joints=spatial_skeleton()
     corrected_muscles,_=corrected_shoulders(joints,neutral_joints)
     mesh.update(corrected_muscles)
@@ -95,6 +97,8 @@ def audit(pose=None):
     return {"schema":"progen3d.spatial-body.v1",
             "passed":max(errors.values())<1e-9,
             "max_segment_length_error_m":max(errors.values()),
+            "elbow_landmarks":{side:elbow_landmark_clearance(joints,side)
+                               for side in ("left","right")},
             "objects":len(meshes),
             "vertices":sum(len(v) for v,f in meshes.values()),
             "triangles":sum(len(f) for v,f in meshes.values()),
@@ -103,6 +107,7 @@ def audit(pose=None):
                            "muscle volume preservation is approximate and clamped",
                            "muscle proxies are not force-producing actuators",
                            "radius and ulna are simplified visual bone proxies",
+                           "articular surfaces are not calibrated or contact-constrained",
                            "no soft tissue or garment dynamics"]}
 
 if __name__=="__main__":
