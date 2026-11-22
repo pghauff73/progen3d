@@ -46,3 +46,16 @@ python3 -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
 ```
 
 This is a **physics foundation**, not the completed coupled sleeve. The garment currently uses prescribed surface geometry. Integration with elbow-driven skin contact, moving attachment constraints, bending resistance, calibrated cloth material, continuous-time simulation and native ProGen3D rendering remains outstanding. Do not interpret the presence of the XPBD module as evidence that the sleeve already simulates frictional sliding or skin contact.
+
+## Browser animation scene inspector
+
+Export a versioned scene and open the local standalone viewer:
+
+```sh
+python3 examples/AnatomicalArm/scene_interchange.py --out build/arm-scene.json --frames 60 --fps 30
+python3 -m http.server 8000
+```
+
+Open `http://localhost:8000/examples/AnatomicalArm/scene_inspector.html` and select `build/arm-scene.json` using the file picker. The inspector supports frame scrubbing, playback, yaw/pitch and object visibility. It is a diagnostic wireframe renderer and does not replace native C++ runtime integration.
+
+The inspector is client-side only: it does not upload the selected JSON. Very large scenes may render slowly because each triangle edge is drawn on a 2D canvas.
