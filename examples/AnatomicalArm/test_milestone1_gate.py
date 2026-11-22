@@ -5,6 +5,20 @@ import unittest
 from milestone1_gate import execute
 
 class Milestone1GateTests(unittest.TestCase):
+    def test_evidence_summary_does_not_invent_hours(self):
+        checks=[
+            {"name":"compile","passed":True,"returncode":0,"elapsed_seconds":0.4},
+            {"name":"mesh","passed":False,"returncode":2,
+             "elapsed_seconds":1.2,"stderr_tail":"invalid winding"}
+        ]
+        report=summarize(checks)
+        self.assertEqual(report["total_checks"],2)
+        self.assertEqual(report["passed_checks"],1)
+        self.assertEqual(report["failed_checks"][0]["check"],"mesh")
+        self.assertIn("invalid winding",report["failed_checks"][0]["error_excerpt"])
+        self.assertAlmostEqual(report["measured_process_seconds"],1.6)
+        self.assertIsNone(report["engineering_hours_verified"])
+
     def test_successful_command(self):
         result=execute("success",[sys.executable,"-c","print('verified')"])
         self.assertTrue(result["passed"],result)
