@@ -139,7 +139,9 @@ class FacialStudyRenderScene:
         scene.render.engine = "CYCLES"
         scene.cycles.device = "CPU"
         scene.cycles.samples = samples
-        scene.cycles.use_denoising = elastic
+        # CPU-only Blender packages may omit OpenImageDenoise. Sampling remains
+        # portable and preserves the actual native surface without that add-on.
+        scene.cycles.use_denoising = False
         if elastic:
             scene.view_settings.exposure = 1.0
         scene.render.resolution_x = width
