@@ -64,6 +64,7 @@ def spatial_body(pose=None):
                 joints[side+"_"+a].origin,
                 joints[side+"_"+b].origin,
                 joints[side+"_"+c].origin,*radii)
+    mesh.update(shoulder_muscles(joints))
     return mesh,joints
 
 def render_meshes(meshes,layer="skin"):
@@ -85,6 +86,7 @@ def audit(pose=None):
             "triangles":sum(len(f) for v,f in meshes.values()),
             "limitations":["continuous limb skins remain open at torso and distal ends",
                            "torso is an open envelope, not welded to limbs",
+                           "muscle proxies are not force-producing actuators",
                            "no soft tissue or garment dynamics"]}
 
 if __name__=="__main__":
