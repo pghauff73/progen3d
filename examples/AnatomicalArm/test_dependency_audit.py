@@ -20,6 +20,16 @@ class DependencyAuditTests(unittest.TestCase):
             self.assertTrue(result["passed"])
             self.assertEqual(result["dependencies"]["a"],["b"])
 
+    def test_deferred_import_does_not_create_initialization_cycle(self):
+        with tempfile.TemporaryDirectory() as folder:
+            Path(folder,"a.py").write_text(
+                "def later():\n    import b\n")
+            Path(folder,"b.py").write_text("import a\n")
+            result=audit(folder)
+            self.assertTrue(result["passed"],result)
+            self.assertEqual(result["dependencies"]["a"],[])
+            self.assertEqual(result["dependencies"]["b"],["a"])
+
     def test_syntax_error(self):
         with tempfile.TemporaryDirectory() as folder:
             Path(folder,"bad.py").write_text("def invalid(:\n")
