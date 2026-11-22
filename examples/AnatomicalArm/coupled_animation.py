@@ -11,6 +11,7 @@ from arm_soft_sleeve import RINGS, SIDES, centerline, surface, assembly
 from arm_milestone_a import write_obj
 from xpbd_cloth import XPBDCloth
 from triangle_contact import closest_triangle, sub, dot, cross, length
+from cloth_bending import opposite_vertex_bends
 
 def angle_at(time, period=2.0, maximum=145.0):
     if period <= 0: raise ValueError("period must be positive")
@@ -28,6 +29,9 @@ class CoupledArm:
             raise ValueError('friction outside [0,1]')
         self.contact_mode=contact_mode
         self.friction=friction
+        self.bend_pairs=opposite_vertex_bends(faces)
+        self.bend_rest=[math.dist(verts[i],verts[j]) for i,j in self.bend_pairs]
+        self.bend_compliance=1e-5
         self.clearance=clearance
         self.angle=initial_angle
         self.time=0.0
@@ -101,6 +105,8 @@ class CoupledArm:
         if dt<=0 or iterations<1: raise ValueError("invalid solver settings")
         alpha=cloth.compliance/(dt*dt)
         lambdas=[0.0]*len(cloth.edges)
+        bend_lambdas=[0.0]*len(self.bend_pairs)
+        bend_alpha=self.bend_compliance/(dt*dt)
         for i,p in enumerate(cloth.positions):
             if cloth.inverse_mass[i]==0:
                 p[:]=target[i]
@@ -125,6 +131,20 @@ class CoupledArm:
                     grad=d[k]/length
                     p[k]+=wi*dl*grad
                     q[k]-=wj*dl*grad
+            # Opposite-vertex bending proxy, solved in the same XPBD step.
+            for e,(i,j) in enumerate(self.bend_pairs):
+                wi,wj=cloth.inverse_mass[i],cloth.inverse_mass[j]
+                if wi+wj==0: continue
+                p,q=cloth.positions[i],cloth.positions[j]
+                d=[p[k]-q[k] for k in range(3)]
+                magnitude=math.sqrt(sum(x*x for x in d))
+                if magnitude<1e-12: continue
+                dl=(-(magnitude-self.bend_rest[e])-bend_alpha*bend_lambdas[e])/(wi+wj+bend_alpha)
+                bend_lambdas[e]+=dl
+                for k in range(3):
+                    g=d[k]/magnitude
+                    p[k]+=wi*dl*g
+                    q[k]-=wj*dl*g
             for i,p in enumerate(cloth.positions):
                 if cloth.inverse_mass[i]:
                     p[:]=project_index(i,p)
@@ -162,7 +182,7 @@ def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction
         write_obj(out/f"frame_{frame:04d}.obj",arm.meshes())
     report={"schema":"progen3d.arm-coupled-xpbd.v1",
             "frames":frames,"fps":fps,"passed":all(r["passed"] for r in records),
-            "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","no bending constraints",
+            "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","bending uses opposite-vertex distance proxy, not dihedral angles",
                            "no mesh self collision","no native renderer integration"],
             "records":records}
     (out/"simulation.json").write_text(json.dumps(report,indent=2)+"\n")
