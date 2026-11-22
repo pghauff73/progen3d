@@ -82,7 +82,7 @@ class FacialStudyGrammar:
                     f"    [ T({x:.9g} {y:.9g} {z:.9g}) A(90 0) S({2*(radius+0.000002):.9g} {2*(radius+0.000002):.9g} {2*(radius+0.000002):.9g})",
                     "      I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]",
                     f"    [ T({x:.9g} {y:.9g} {z:.9g}) A(90 0) S({2*(radius+0.000004):.9g} {2*(radius+0.000004):.9g} {2*(radius+0.000004):.9g})",
-                    "      I(Sphere(polar(0 12) topology(surface) close(none) segments(24 12)) material(blackmattepaint) 1 1) ]",
+                    "      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]",
                 ])
             x, y, z = eyes["mouth_upper_margin"]
             lines.extend([

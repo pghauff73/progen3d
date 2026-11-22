@@ -15,7 +15,7 @@ Face(smileL smileR jaw blinkL blinkR browL browR) ->
     [ T(0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412840014 0.0412840014 0.0412840014)
       I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]
     [ T(0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412880014 0.0412880014 0.0412880014)
-      I(Sphere(polar(0 12) topology(surface) close(none) segments(24 12)) material(blackmattepaint) 1 1) ]
+      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]
     [ T(-0.0333333313 0.0328124985 0.0275976155) S(0.0412800014 0.0412800014 0.0412800014)
       I(Sphere(segments(32 24)) material(warmwhitematteplaster) 1 1) ]
     # Iris and pupil follow the globe as concentric surface caps.
@@ -23,7 +23,7 @@ Face(smileL smileR jaw blinkL blinkR browL browR) ->
     [ T(-0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412840014 0.0412840014 0.0412840014)
       I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]
     [ T(-0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412880014 0.0412880014 0.0412880014)
-      I(Sphere(polar(0 12) topology(surface) close(none) segments(24 12)) material(blackmattepaint) 1 1) ]
+      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]
     # Dark recessed mouth proxy, not a complete oral cavity.
     [ T(0 -0.0391649976-0.004-jaw*0.006 0.005) S(0.075 0.055 0.016)
       I(Sphere(segments(28 18)) material(blackmattepaint) 1 1) ]
