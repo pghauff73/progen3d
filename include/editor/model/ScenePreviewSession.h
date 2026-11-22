@@ -6,6 +6,7 @@
 #include "editor/model/PreviewProjectionConfiguration.h"
 #include "editor/model/PreviewInteractionSettings.h"
 #include "editor/model/PreviewTimelineState.h"
+#include "editor/model/PreviewGenerationStatus.h"
 #include "editor/model/PreviewStatistics.h"
 #include "editor/model/RenderConfiguration.h"
 #include "editor/model/SceneOverlayConfiguration.h"
@@ -19,6 +20,7 @@ class ScenePreviewSession
 public:
 	std::unique_ptr<GeneratedSceneSnapshot> last_valid_scene_snapshot;
 	PreviewTimelineState timeline;
+	PreviewGenerationStatus generation_status;
 	PreviewCameraController camera;
 	PreviewProjectionConfiguration projection;
 	PreviewInteractionSettings interaction_settings;

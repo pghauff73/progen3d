@@ -5209,6 +5209,13 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 	if (!scene_regeneration_coordinator->isLatestRequest(result->request_id)) {
 		debugout("Discarded stale regeneration result");
 	} else if (!result->succeeded()) {
+		std::string rejection_reason = result->error;
+		if (rejection_reason.empty() && !result->diagnostics.empty()) {
+			rejection_reason = result->diagnostics.front().message;
+		}
+		current_preview_session().generation_status.reject(
+			result->evaluation_time,
+			rejection_reason.empty() ? "Scene generation failed." : rejection_reason);
 		if (result->time_sample) {
 			preview_playback_active() = false;
 		}
@@ -5238,13 +5245,18 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 		}
 		catch (const std::exception &exception) {
 			errorout(std::string("Preview upload failed: ") + exception.what());
+			current_preview_session().generation_status.reject(
+				result->evaluation_time, std::string("Preview upload failed: ") + exception.what());
 			preview_upload_succeeded = false;
 		}
 		catch (...) {
 			errorout("Preview upload failed");
+			current_preview_session().generation_status.reject(
+				result->evaluation_time, "Preview upload failed.");
 			preview_upload_succeeded = false;
 		}
 		if (preview_upload_succeeded) {
+			current_preview_session().generation_status.accept();
 			ElectricalControlGraph previous_control_graph =
 				current_preview_session().lighting.electrical_control_graph;
 			destroy_grammar();
@@ -5290,10 +5302,14 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 			if (!result->time_sample) {
 				debugout("Regenerated scene");
 			}
-			if (app_state != nullptr && !result->time_sample) {
-				scene_selection_controller.clear(current_preview_session().selection);
+			if (app_state != nullptr) {
 				app_state->document_diagnostics.clear();
+				if (!result->time_sample) {
+					scene_selection_controller.clear(current_preview_session().selection);
+				}
 			}
+		} else if (result->time_sample) {
+			preview_playback_active() = false;
 		}
 	}
 
@@ -11610,7 +11626,18 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 
 	draw_section_heading("Preview");
 	ImGui::SameLine();
+	if (workspace_session.preview.generation_status.hasRejectedRequest()) {
+		preview_status = workspace_session.preview.last_valid_scene_snapshot != nullptr
+			? "Stale preview" : "Generation failed";
+		preview_status_fill = 0xca7f7f;
+		preview_status_text = 0x7f4848;
+	}
 	draw_status_chip(preview_status, preview_status_fill, preview_status_text);
+	if (workspace_session.preview.generation_status.hasRejectedRequest() && ImGui::IsItemHovered()) {
+		ImGui::SetTooltip("Request at %.3fs was rejected. %s",
+		                  workspace_session.preview.generation_status.rejectedTime(),
+		                  workspace_session.preview.generation_status.reason().c_str());
+	}
 	if (!preview_material_status.empty()) {
 		ImGui::SameLine();
 		draw_status_chip(preview_material_status, 0x7ea88e, 0x527564);
