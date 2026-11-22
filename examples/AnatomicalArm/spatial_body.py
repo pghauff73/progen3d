@@ -10,6 +10,7 @@ from pathlib import Path
 from spatial_skeleton import spatial_skeleton,length_errors
 from arm_milestone_a import write_obj
 from spatial_joint_skin import joint_envelope
+from spatial_torso import torso_envelope
 
 def segment_surface(start,end,radius_start,radius_end,rings=24,sides=20):
     if rings<2 or sides<3 or min(radius_start,radius_end)<=0:
@@ -45,7 +46,8 @@ def segment_surface(start,end,radius_start,radius_end,rings=24,sides=20):
 
 def spatial_body(pose=None):
     joints=spatial_skeleton(pose)
-    mesh={}
+    mesh={"torso_skin":torso_envelope(joints),
+          "torso_garment":torso_envelope(joints,clearance=0.006)}
     segments=(("shoulder","elbow",0.047,0.037),
               ("elbow","wrist",0.037,0.022),
               ("hip","knee",0.083,0.053),
@@ -64,6 +66,14 @@ def spatial_body(pose=None):
                 joints[side+"_"+c].origin,*radii)
     return mesh,joints
 
+def render_meshes(meshes,layer="skin"):
+    if layer=="diagnostic":return dict(meshes)
+    if layer not in ("skin","clothed"):
+        raise ValueError("invalid spatial body render layer")
+    torso="torso_skin" if layer=="skin" else "torso_garment"
+    return {name:mesh for name,mesh in meshes.items()
+            if name==torso or name.endswith("_continuous_skin")}
+
 def audit(pose=None):
     meshes,joints=spatial_body(pose)
     errors=length_errors(joints)
@@ -74,16 +84,17 @@ def audit(pose=None):
             "vertices":sum(len(v) for v,f in meshes.values()),
             "triangles":sum(len(f) for v,f in meshes.values()),
             "limitations":["continuous limb skins remain open at torso and distal ends",
-                           "no torso surface in spatial mode",
+                           "torso is an open envelope, not welded to limbs",
                            "no soft tissue or garment dynamics"]}
 
 if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("--out",default="build/spatial-body")
+    p.add_argument("--render-layer",choices=("skin","clothed","diagnostic"),default="skin")
     args=p.parse_args()
     target=Path(args.out);target.mkdir(parents=True,exist_ok=True)
     meshes,joints=spatial_body()
-    write_obj(target/"spatial_limbs.obj",meshes)
+    write_obj(target/"spatial_limbs.obj",render_meshes(meshes,args.render_layer))
     report=audit()
     (target/"validation.json").write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps(report))
