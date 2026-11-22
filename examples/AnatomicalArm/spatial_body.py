@@ -11,6 +11,9 @@ from spatial_skeleton import spatial_skeleton,length_errors
 from arm_milestone_a import write_obj
 from spatial_joint_skin import joint_envelope
 from spatial_torso import torso_envelope
+from shoulder_skin_corrective import shoulder_corrective
+from muscle_volume import corrected_shoulders
+from forearm_articulation import forearm_bone_meshes
 
 def segment_surface(start,end,radius_start,radius_end,rings=24,sides=20):
     if rings<2 or sides<3 or min(radius_start,radius_end)<=0:
@@ -70,6 +73,9 @@ def spatial_body(pose=None):
                     envelope,joints[side+"_shoulder"].origin,
                     joints[side+"_elbow"].origin,elevation=elevation)
             mesh[side+"_"+label+"_continuous_skin"]=envelope
+    for side in ("left","right"):
+        angle=(pose or {}).get(side+"_forearm_pronation",0.0)
+        mesh.update(forearm_bone_meshes(joints,side,angle))
     neutral_joints=spatial_skeleton()
     corrected_muscles,_=corrected_shoulders(joints,neutral_joints)
     mesh.update(corrected_muscles)
@@ -96,6 +102,7 @@ def audit(pose=None):
                            "torso is an open envelope, not welded to limbs",
                            "muscle volume preservation is approximate and clamped",
                            "muscle proxies are not force-producing actuators",
+                           "radius and ulna are simplified visual bone proxies",
                            "no soft tissue or garment dynamics"]}
 
 if __name__=="__main__":
