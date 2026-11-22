@@ -22,6 +22,16 @@ jobs:
         run: python -m compileall -q examples/AnatomicalArm
       - name: Run full anatomical-arm tests
         run: python -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
+      - name: Verify mesh quality at six elbow angles
+        run: |
+          PYTHONPATH=examples/AnatomicalArm python - <<'PY'
+          from arm_soft_sleeve import assembly
+          from mesh_diagnostics import inspect_assembly
+          for angle in (0,30,60,90,120,145):
+              result=inspect_assembly(assembly(angle))
+              assert result['passed'], (angle,result)
+              print('mesh quality',angle,'PASS')
+          PY
       - name: Validate six-pose static geometry
         run: python examples/AnatomicalArm/validate_sequence.py --out build/anatomical-arm
       - name: Validate six-pose skin and sleeve geometry
