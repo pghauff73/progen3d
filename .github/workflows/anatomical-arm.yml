@@ -72,6 +72,9 @@ jobs:
           if [ "${status:-0}" -ne 0 ]; then
             echo 'No substep setting met provisional limits; inspect arm-substep-selection.json'
           fi
+      - name: Run milestone 1 evidence gate
+        if: always()
+        run: python examples/AnatomicalArm/milestone1_gate.py --out build/milestone1 --timeout 240
       - name: Upload diagnostics on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -91,4 +94,9 @@ jobs:
             build/arm-substep-benchmark/benchmark.json
             build/arm-substep-benchmark/benchmark.csv
             build/arm-substep-selection.json
+            build/milestone1/milestone1-report.json
+            build/milestone1/body/validation.json
+            build/milestone1/spatial/validation.json
+            build/milestone1/body-cycle.json
+            build/milestone1/sleeve/simulation.json
           if-no-files-found: ignore
