@@ -24,6 +24,8 @@ jobs:
         run: python -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
       - name: Export and validate bilateral anatomical body
         run: python examples/AnatomicalArm/whole_body.py --out build/anatomical-body
+      - name: Audit full-body flexion and extension
+        run: python examples/AnatomicalArm/body_cycle_audit.py --frames 5 --out build/body-cycle-audit.json
       - name: Verify mesh quality at six elbow angles
         run: |
           PYTHONPATH=examples/AnatomicalArm python - <<'PY'
@@ -73,6 +75,7 @@ jobs:
           name: anatomical-arm-diagnostics
           path: |
             build/anatomical-body/validation.json
+            build/body-cycle-audit.json
             build/anatomical-arm/validation.json
             build/anatomical-arm-sleeve/validation.json
             build/arm-coupled/simulation.json
