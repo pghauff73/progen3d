@@ -40,6 +40,9 @@ def build_fixtures(integration, destination):
         raise ValueError('Expected exactly one pinned body-to-head call.')
     body_source = source.replace('LyraHead ]', ']')
     ordinary_path = integration / 'Lyra_Procedural_Facial_Elastic.p3d'
+    ordinary_hash = digest(ordinary_path)
+    if ordinary_hash != manifest['generated']['ordinaryGrammarSha256']:
+        raise ValueError('Timing grammar does not match its generated fit manifest; rebuild and revalidate first.')
     ordinary = ordinary_path.read_text()
     rules = list(re.finditer(r'^(\w+)(?:\([^\n]*\))?\s*->', ordinary, re.MULTILINE))
     face_rules = [ordinary[match.start():rules[index+1].start() if index+1 < len(rules) else len(ordinary)]
@@ -52,7 +55,7 @@ def build_fixtures(integration, destination):
     body_path.write_text(body_source)
     face_path.write_text(face_source)
     return body_path, face_path, {'sourceSha256': digest(source_path),
-        'ordinaryGrammarSha256': digest(ordinary_path),
+        'ordinaryGrammarSha256': ordinary_hash,
         'manifestSha256': digest(integration / 'fit_manifest.json'),
         'bodyFixtureChange': 'Remove exactly the original LyraHead call inside its existing scope; all other source bytes remain.',
         'facialFixtureChange': 'Use the exact delivered LyraFacialSkin wrapper with bilateral0.5 activation; no other geometry.'}

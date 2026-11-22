@@ -636,5 +636,9 @@ build/lyra-facial-timing-test: tests/lyra_facial_timing_harness.cpp $(FORM_STUDY
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
 
 .PHONY: lyra-facial-timing
-lyra-facial-timing: lyra-facial-build build/lyra-facial-timing-test
+lyra-facial-timing: build/lyra-facial-timing-test
 	python3 examples/LyraFacialIntegration/timing_study.py --timing-harness build/lyra-facial-timing-test --integration-dir build/lyra-facial-integration
+
+.PHONY: lyra-facial-silhouette
+lyra-facial-silhouette:
+	python3 examples/LyraFacialIntegration/measure_skin_envelope.py --integration-dir build/lyra-facial-integration --output build/lyra-facial-integration/skin_silhouette_sections.json

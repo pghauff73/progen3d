@@ -53,10 +53,17 @@ Run from the repository root after installing the normal native build
 dependencies:
 
 ```sh
-make lyra-facial-build
-make lyra-facial-check
 make lyra-facial-full-check
+make lyra-facial-silhouette
+make lyra-facial-timing
 ```
+
+The full check rebuilds the derived grammar/reference metadata before
+validation. The next two targets consume that accepted snapshot without
+rebuilding it. Run them in this order so the silhouette and timing receipts
+refer to the manifest and native program that validation approved. To perform
+only the bounded CI check, use `make lyra-facial-check`; to generate the native
+character without validation, use `make lyra-facial-build`.
 
 The build target invokes the grammar builder with the actual native sampler:
 
@@ -75,6 +82,30 @@ The bounded `smoke` mode is used by `lyra-facial-check`. The full mode also
 evaluates all 35 selected clip times. The validation JSON is the acceptance
 record; a rendered image is not a substitute for its geometry, mechanics,
 provenance, and deterministic-evaluation checks.
+
+The silhouette target reads the accepted native captures; it performs no new
+geometry generation or mechanical solve. Its equivalent command is:
+
+```sh
+python3 examples/LyraFacialIntegration/measure_skin_envelope.py \
+  --integration-dir build/lyra-facial-integration
+```
+
+This writes the separate `skin_silhouette_sections.json` receipt. It requires
+passed `validation.json`, verifies the current manifest and ordinary grammar
+hashes, then verifies the exact `source_head_reference.p3d` and
+`head_neutral.p3d` source/request/report receipts recorded by that validation.
+It measures the actual native triangles and leaves the approved manifest
+unchanged. The receipt retains its validation binding and both native buffer
+inventories.
+
+For a deliberately prepared **pre-validation** snapshot, the same tool still
+accepts explicit `--source-head-report`, `--integrated-head-report`, `--manifest`
+and `--output` paths. Only the additional `--attach-to-manifest` flag embeds the
+measurement into that manifest; run validation afterward. That flag cannot be
+combined with `--integration-dir`. Rebuilding refreshes derived metadata and
+does not preserve an optional previously attached measurement. Run validation
+again before producing new bound silhouette or timing receipts.
 
 ## Render exactly the exported geometry
 
@@ -279,7 +310,7 @@ component contact. Every intersection witness must lie on that measured seam
 within 0.1 µm. This is not an exemption for an entire pair of adjacent parts.
 Hair carriers and refitted strands must be clear of the new face/collars.
 
-The original right earpiece has a separately declared **revised mounting
+The original positive-X earpiece (source line 239) has a separately declared **revised mounting
 interface**. Its native position/normal buffers remain exact; the allowed
 mounting triangles are 385, 438, 439, 440, 441 and 494. The current 20 triangle
 contacts may shift up to an explicitly selected **0.25 mm assembly allowance**
