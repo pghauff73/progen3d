@@ -41,6 +41,8 @@ def run(out,timeout=300):
     out.mkdir(parents=True,exist_ok=True)
     checks=[
         ("compile", [sys.executable,"-m","compileall","-q",str(PACKAGE)]),
+        ("dependency_audit", [sys.executable,str(PACKAGE/"dependency_audit.py"),
+                              "--out",str(out/"dependencies.json")]),
         ("unittest", [sys.executable,"-m","unittest","discover",
                        "-s",str(PACKAGE),"-p","test_*.py","-v"]),
         ("body_export", [sys.executable,str(PACKAGE/"whole_body.py"),
