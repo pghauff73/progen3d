@@ -1,0 +1,40 @@
+name: Anatomical arm Python regression
+on:
+  push:
+    paths:
+      - 'examples/AnatomicalArm/**'
+      - '.github/workflows/anatomical-arm.yml'
+  pull_request:
+    paths:
+      - 'examples/AnatomicalArm/**'
+      - '.github/workflows/anatomical-arm.yml'
+  workflow_dispatch:
+jobs:
+  anatomical-arm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile all anatomical-arm modules
+        run: python -m compileall -q examples/AnatomicalArm
+      - name: Run full anatomical-arm tests
+        run: python -m unittest discover -s examples/AnatomicalArm -p 'test_*.py' -v
+      - name: Validate six-pose static geometry
+        run: python examples/AnatomicalArm/validate_sequence.py --out build/anatomical-arm
+      - name: Validate six-pose skin and sleeve geometry
+        run: python examples/AnatomicalArm/arm_soft_sleeve.py --out build/anatomical-arm-sleeve
+      - name: Run short continuous animation
+        run: python examples/AnatomicalArm/coupled_animation.py --out build/arm-coupled --frames 3 --fps 30 --contact radial
+      - name: Upload diagnostics on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: anatomical-arm-diagnostics
+          path: |
+            build/anatomical-arm/validation.json
+            build/anatomical-arm-sleeve/validation.json
+            build/arm-coupled/simulation.json
+          if-no-files-found: ignore
