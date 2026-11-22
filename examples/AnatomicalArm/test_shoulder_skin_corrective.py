@@ -11,6 +11,13 @@ class ShoulderSkinCorrectiveTests(unittest.TestCase):
         corrected=shoulder_corrective(mesh,(0,0,0),(0,-0.3,0),elevation=0)
         self.assertEqual(corrected,mesh)
 
+    def test_zero_amplitude_is_identity(self):
+        meshes,_=spatial_body()
+        mesh=meshes["right_arm_continuous_skin"]
+        corrected=shoulder_corrective(mesh,(0,0,0),(0,-0.3,0),
+                                      elevation=150,amplitude=0)
+        self.assertEqual(corrected,mesh)
+
     def test_elevation_changes_proximal_skin(self):
         neutral,_=spatial_body()
         raised,_=spatial_body({"left_arm_elevation":150})
