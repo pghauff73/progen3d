@@ -62,7 +62,7 @@ def spatial_skeleton(pose=None):
     allowed={"torso_xyz","pelvis_xyz"}
     for side in ("left","right"):
         allowed.update((side+"_shoulder_xyz",side+"_hip_xyz",
-                        side+"_elbow_flex",side+"_knee_flex"))
+                        side+"_elbow_flex",side+"_knee_flex",side+"_arm_elevation"))
     unknown=set(pose)-allowed
     if unknown:raise ValueError("unknown joints: "+", ".join(sorted(unknown)))
     def xyz(key,limit):
@@ -79,13 +79,22 @@ def spatial_skeleton(pose=None):
     torso=pelvis.child((0.,0.,0.),xyz("torso_xyz",35))
     joints={"pelvis":pelvis,"torso":torso}
     for side,sign in (("left",-1),("right",1)):
-        shoulder=torso.child((sign*0.22,0.50,0.),xyz(side+"_shoulder_xyz",110))
+        # Illustrative scapulohumeral coupling, not clinical calibration.
+        elevation=flex(side+"_arm_elevation",180)
+        scapular_rotation=max(0.0,min(50.0,(elevation-30.0)/3.0))
+        fraction=scapular_rotation/50.0
+        scapula=torso.child(
+            (sign*(0.16+0.018*fraction),0.46+0.012*fraction,-0.035),
+            euler_xyz(rz=-sign*scapular_rotation))
+        shoulder=scapula.child((sign*0.06,0.04,0.035),
+                               xyz(side+"_shoulder_xyz",110))
         elbow=shoulder.child((0.,-0.30,0.),euler_xyz(rz=sign*flex(side+"_elbow_flex",145)))
         wrist=elbow.child((0.,-0.26,0.))
         hip=pelvis.child((sign*0.105,0.,0.),xyz(side+"_hip_xyz",110))
         knee=hip.child((0.,-0.43,0.),euler_xyz(rz=-sign*flex(side+"_knee_flex",140)))
         ankle=knee.child((0.,-0.43,0.))
-        joints.update({side+"_shoulder":shoulder,side+"_elbow":elbow,
+        joints.update({side+"_scapula":scapula,
+                       side+"_shoulder":shoulder,side+"_elbow":elbow,
                        side+"_wrist":wrist,side+"_hip":hip,
                        side+"_knee":knee,side+"_ankle":ankle})
     return joints
