@@ -83,11 +83,27 @@ def run(out,timeout=300):
         result=execute(name,command,timeout)
         results.append(result)
         print(("PASS" if result["passed"] else "FAIL")+" "+name,flush=True)
+    # Junction gap thresholds are explicitly advisory. Record their measured
+    # status without treating the CLI's zero exit code as proof of clearance.
+    advisory={}
+    sweep_path=out/"junction-sweep.json"
+    if sweep_path.exists():
+        try:
+            sweep=json.loads(sweep_path.read_text(encoding="utf-8"))
+            advisory["junction_sweep"]={
+                "within_provisional_gap_threshold":bool(sweep["passed"]),
+                "worst_gap":sweep.get("worst_gap"),
+                "threshold_m":sweep.get("threshold_m"),
+                "is_release_blocking":False}
+        except (ValueError,KeyError,TypeError) as exc:
+            advisory["junction_sweep"]={"parse_error":str(exc),
+                                        "is_release_blocking":False}
     report={"schema":"progen3d.anatomical-milestone1-gate.v1",
             "timestamp_utc":datetime.now(timezone.utc).isoformat(),
             "python":sys.version,"platform":platform.platform(),
             "repository_root":str(ROOT),"passed":all(r["passed"] for r in results),
             "checks":results,
+            "advisory_metrics":advisory,
             **summarize(results),
             "known_limitations":["whole-body skin is not globally watertight",
                                  "joint bridges are visual, not manifold unions",
