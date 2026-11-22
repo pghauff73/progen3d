@@ -70,7 +70,9 @@ def spatial_body(pose=None):
                     envelope,joints[side+"_shoulder"].origin,
                     joints[side+"_elbow"].origin,elevation=elevation)
             mesh[side+"_"+label+"_continuous_skin"]=envelope
-    mesh.update(shoulder_muscles(joints))
+    neutral_joints=spatial_skeleton()
+    corrected_muscles,_=corrected_shoulders(joints,neutral_joints)
+    mesh.update(corrected_muscles)
     return mesh,joints
 
 def render_meshes(meshes,layer="skin"):
@@ -92,6 +94,7 @@ def audit(pose=None):
             "triangles":sum(len(f) for v,f in meshes.values()),
             "limitations":["continuous limb skins remain open at torso and distal ends",
                            "torso is an open envelope, not welded to limbs",
+                           "muscle volume preservation is approximate and clamped",
                            "muscle proxies are not force-producing actuators",
                            "no soft tissue or garment dynamics"]}
 
