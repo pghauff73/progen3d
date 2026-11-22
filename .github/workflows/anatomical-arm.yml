@@ -94,6 +94,7 @@ jobs:
             build/arm-substep-benchmark/benchmark.json
             build/arm-substep-benchmark/benchmark.csv
             build/arm-substep-selection.json
+            build/milestone1/dependencies.json
             build/milestone1/milestone1-report.json
             build/milestone1/body/validation.json
             build/milestone1/spatial/validation.json
