@@ -54,6 +54,8 @@ jobs:
         run: python examples/AnatomicalArm/coupled_animation.py --out build/arm-substeps --frames 3 --fps 30 --substeps 4
       - name: Audit deterministic arm motion
         run: python examples/AnatomicalArm/regression_audit.py --out build/arm-regression.json --frames 6
+      - name: Benchmark real solver substep configurations
+        run: python examples/AnatomicalArm/substep_benchmark.py --out build/arm-substep-benchmark --frames 6
       - name: Upload diagnostics on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -66,4 +68,6 @@ jobs:
             build/arm-triangle/simulation.json
             build/arm-regression.json
             build/arm-substeps/simulation.json
+            build/arm-substep-benchmark/benchmark.json
+            build/arm-substep-benchmark/benchmark.csv
           if-no-files-found: ignore
