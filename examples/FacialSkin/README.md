@@ -1,5 +1,24 @@
 # Native facial skin: milestone A
 
+The original analytic study below remains supported. The later native studies
+are documented separately:
+
+- [Membrane material, attachments and tensile cables](ELASTIC.md), with
+  [Facial_Elastic_Study.p3d](Facial_Elastic_Study.p3d).
+- [Shell bending and independent mouth discretization](SHELL.md), with
+  [Facial_Shell_Study.p3d](Facial_Shell_Study.p3d). This study compares bending
+  off/on on both meshes and retains rejected diagnostic trials.
+
+Generate the shell study and its native four-panel comparison with:
+
+```sh
+python3 examples/FacialSkin/shell_study.py \
+  --sampler build/form-study-sample --out build/facial-shell-study
+blender -b --python examples/FacialSkin/render_shell_study.py -- \
+  --study build/facial-shell-study \
+  --output build/facial-shell-study/Facial_Shell_Study.png
+```
+
 This example introduces the native `FacialSkin` primitive. It constructs one
 connected, procedurally authored front-face surface with separate eye and mouth
 openings, then evaluates localized expression fields from immutable rest

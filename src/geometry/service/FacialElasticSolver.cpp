@@ -27,6 +27,151 @@ void require(bool condition, const char *message)
     if (!condition) throw std::invalid_argument(message);
 }
 
+void validateBendingStencil(const FacialElasticBendingStencil &stencil,
+                            const Positions &rest_positions)
+{
+    for (std::size_t index : stencil.normal_vertex_indices)
+        require(index < rest_positions.size(), "Facial bending normal index outside the position array.");
+    const auto &indices = stencil.normal_vertex_indices;
+    require(indices[0] != indices[1] && indices[1] != indices[2] && indices[2] != indices[0],
+            "Facial bending normal triangle repeats a vertex.");
+    require(std::isfinite(stencil.rest_area_m2) && stencil.rest_area_m2 > 0.0,
+            "Facial bending stencil requires positive finite rest area.");
+    require(std::isfinite(stencil.bending_rigidity_n_m) && stencil.bending_rigidity_n_m >= 0.0,
+            "Facial bending rigidity must be finite and nonnegative.");
+    require(std::isfinite(stencil.poisson_ratio) && stencil.poisson_ratio > -1.0 &&
+            stencil.poisson_ratio < 0.5, "Facial bending Poisson ratio must be in (-1, 0.5).");
+    require(finiteVector(stencil.rest_curvature_per_m), "Nonfinite facial rest curvature.");
+    require(!stencil.curvature_weights.empty(), "Facial bending stencil requires curvature weights.");
+    std::unordered_set<std::size_t> unique_vertices;
+    for (const auto &weight : stencil.curvature_weights) {
+        require(weight.vertex_index < rest_positions.size() && finiteVector(weight.weights_per_m2),
+                "Invalid facial curvature reconstruction weight.");
+        require(unique_vertices.insert(weight.vertex_index).second,
+                "Facial curvature reconstruction repeats a vertex.");
+    }
+    const double twice_area = glm::length(glm::cross(rest_positions[indices[1]] - rest_positions[indices[0]],
+                                                    rest_positions[indices[2]] - rest_positions[indices[0]]));
+    require(std::isfinite(twice_area) && twice_area > 0.0, "Degenerate facial bending rest normal.");
+}
+
+struct FacialBendingStencilGeometry
+{
+    glm::dvec3 first_edge{0.0};
+    glm::dvec3 second_edge{0.0};
+    glm::dvec3 normal{0.0};
+    double twice_area = 0.0;
+    std::array<glm::dvec3, 3> quadratic_derivatives{};
+    glm::dvec3 curvature_per_m{0.0};
+};
+
+bool evaluateBendingGeometry(const FacialElasticBendingStencil &stencil,
+                             const Positions &positions, FacialBendingStencilGeometry &geometry)
+{
+    const auto &indices = stencil.normal_vertex_indices;
+    const glm::dvec3 &anchor = positions[indices[0]];
+    geometry.first_edge = positions[indices[1]] - anchor;
+    geometry.second_edge = positions[indices[2]] - anchor;
+    const glm::dvec3 cross = glm::cross(geometry.first_edge, geometry.second_edge);
+    geometry.twice_area = glm::length(cross);
+    if (!std::isfinite(geometry.twice_area) || geometry.twice_area <= 0.0) return false;
+    geometry.normal = cross / geometry.twice_area;
+    for (auto &derivative : geometry.quadratic_derivatives) derivative = glm::dvec3(0.0);
+    for (const auto &weight : stencil.curvature_weights) {
+        const glm::dvec3 offset = positions[weight.vertex_index] - anchor;
+        for (int component = 0; component < 3; ++component)
+            geometry.quadratic_derivatives[component] += weight.weights_per_m2[component] * offset;
+    }
+    for (int component = 0; component < 3; ++component)
+        geometry.curvature_per_m[component] = glm::dot(geometry.normal,
+                                                       geometry.quadratic_derivatives[component]);
+    return finiteVector(geometry.curvature_per_m);
+}
+
+// Exact derivative of n(x) dot projection_vector, holding projection_vector
+// constant. The normal comes only from the central triangle, so these three
+// entries supplement the direct reconstruction derivatives at patch vertices.
+std::array<glm::dvec3, 3> normalProjectionGradient(
+    const FacialBendingStencilGeometry &geometry, const glm::dvec3 &projection_vector)
+{
+    const glm::dvec3 tangent = (projection_vector - geometry.normal *
+        glm::dot(geometry.normal, projection_vector)) / geometry.twice_area;
+    const glm::dvec3 second = glm::cross(geometry.second_edge, tangent);
+    const glm::dvec3 third = glm::cross(tangent, geometry.first_edge);
+    return {{-second - third, second, third}};
+}
+
+bool addBendingEnergy(const FacialElasticBendingStencil &stencil, const Positions &positions,
+                      FacialElasticEnergyEvaluation &evaluation)
+{
+    if (stencil.bending_rigidity_n_m == 0.0) return true;
+    FacialBendingStencilGeometry geometry;
+    if (!evaluateBendingGeometry(stencil, positions, geometry)) return false;
+    const glm::dvec3 change = geometry.curvature_per_m - stencil.rest_curvature_per_m;
+    const double poisson = stencil.poisson_ratio;
+    const double coefficient = stencil.rest_area_m2 * stencil.bending_rigidity_n_m;
+    evaluation.bending_energy_j += 0.5 * coefficient *
+        (change.x * change.x + change.y * change.y + 2.0 * poisson * change.x * change.y +
+         2.0 * (1.0 - poisson) * change.z * change.z);
+    const glm::dvec3 curvature_gradient = coefficient * glm::dvec3(
+        change.x + poisson * change.y, change.y + poisson * change.x,
+        2.0 * (1.0 - poisson) * change.z);
+    double anchor_coefficient = 0.0;
+    for (const auto &weight : stencil.curvature_weights) {
+        const double contribution = glm::dot(weight.weights_per_m2, curvature_gradient);
+        evaluation.gradient_n[weight.vertex_index] += contribution * geometry.normal;
+        anchor_coefficient += contribution;
+    }
+    evaluation.gradient_n[stencil.normal_vertex_indices[0]] -= anchor_coefficient * geometry.normal;
+    glm::dvec3 normal_projection(0.0);
+    for (int component = 0; component < 3; ++component)
+        normal_projection += curvature_gradient[component] * geometry.quadratic_derivatives[component];
+    const auto normal_gradient = normalProjectionGradient(geometry, normal_projection);
+    for (int corner = 0; corner < 3; ++corner)
+        evaluation.gradient_n[stencil.normal_vertex_indices[corner]] += normal_gradient[corner];
+    const double mean = 0.5 * (change.x + change.y);
+    const double radius = std::hypot(0.5 * (change.x - change.y), change.z);
+    evaluation.maximum_bending_curvature_change_per_m = std::max(
+        evaluation.maximum_bending_curvature_change_per_m,
+        std::max(std::fabs(mean + radius), std::fabs(mean - radius)));
+    return true;
+}
+
+struct FacialBendingCurvatureDerivative
+{
+    std::size_t vertex_index = 0;
+    // Columns correspond to x/y/z variations; rows are xx/yy/xy curvature.
+    glm::dmat3 derivative_per_m2{0.0};
+};
+
+std::vector<FacialBendingCurvatureDerivative> bendingCurvatureDerivatives(
+    const FacialElasticBendingStencil &stencil, const FacialBendingStencilGeometry &geometry)
+{
+    std::vector<FacialBendingCurvatureDerivative> derivatives;
+    derivatives.reserve(stencil.curvature_weights.size() + 3);
+    const auto derivativeForVertex = [&derivatives](std::size_t vertex) -> glm::dmat3 & {
+        for (auto &entry : derivatives)
+            if (entry.vertex_index == vertex) return entry.derivative_per_m2;
+        derivatives.push_back({vertex, glm::dmat3(0.0)});
+        return derivatives.back().derivative_per_m2;
+    };
+    glm::dvec3 anchor_weights(0.0);
+    for (const auto &weight : stencil.curvature_weights) {
+        derivativeForVertex(weight.vertex_index) += glm::outerProduct(weight.weights_per_m2, geometry.normal);
+        anchor_weights += weight.weights_per_m2;
+    }
+    derivativeForVertex(stencil.normal_vertex_indices[0]) -= glm::outerProduct(anchor_weights, geometry.normal);
+    for (int component = 0; component < 3; ++component) {
+        const auto normal_gradient = normalProjectionGradient(geometry, geometry.quadratic_derivatives[component]);
+        for (int corner = 0; corner < 3; ++corner) {
+            auto &derivative = derivativeForVertex(stencil.normal_vertex_indices[corner]);
+            for (int axis = 0; axis < 3; ++axis)
+                derivative[axis][component] += normal_gradient[corner][axis];
+        }
+    }
+    return derivatives;
+}
+
 void validateSystem(const FacialElasticSystem &system)
 {
     const std::size_t count = system.rest_positions.size();
@@ -71,6 +216,8 @@ void validateSystem(const FacialElasticSystem &system)
         require(std::isfinite(determinant) && determinant != 0.0,
                 "Singular facial material frame.");
     }
+    for (const auto &stencil : system.bending_stencils)
+        validateBendingStencil(stencil, system.rest_positions);
     std::unordered_set<std::string> muscle_names;
     for (const auto &muscle : system.muscles) {
         require(!muscle.name.empty() && muscle_names.insert(muscle.name).second,
@@ -196,14 +343,24 @@ FacialElasticEnergyEvaluation evaluateEnergy(const FacialElasticSystem &system,
                                                 positions[index] - system.rest_positions[index]);
         result.gradient_n[index] -= system.external_forces_n[index];
     }
+    for (const auto &stencil : system.bending_stencils) {
+        if (!addBendingEnergy(stencil, positions, result)) {
+            // A collapsed trial normal is not a zero-curvature configuration.
+            // The line search rejects this nonfinite trial without projection.
+            result.bending_energy_j = std::numeric_limits<double>::infinity();
+            result.total_energy_j = std::numeric_limits<double>::infinity();
+            return result;
+        }
+    }
     result.total_energy_j = result.membrane_energy_j + result.support_energy_j +
-                            result.muscle_energy_j + result.external_potential_j;
+                            result.muscle_energy_j + result.external_potential_j + result.bending_energy_j;
     return result;
 }
 
 bool finiteEvaluation(const FacialElasticEnergyEvaluation &evaluation)
 {
-    if (!std::isfinite(evaluation.total_energy_j) || !std::isfinite(evaluation.maximum_green_strain)) return false;
+    if (!std::isfinite(evaluation.total_energy_j) || !std::isfinite(evaluation.maximum_green_strain) ||
+        !std::isfinite(evaluation.maximum_bending_curvature_change_per_m)) return false;
     return std::all_of(evaluation.gradient_n.begin(), evaluation.gradient_n.end(), finiteVector);
 }
 
@@ -243,6 +400,26 @@ Positions stiffnessDiagonal(const FacialElasticSystem &system)
         for (const auto &insertion : muscle.insertions)
             diagonal[insertion.vertex_index] += glm::dvec3(
                 muscle.stiffness_n_per_m * insertion.weight * insertion.weight);
+    for (const auto &stencil : system.bending_stencils) {
+        if (stencil.bending_rigidity_n_m == 0.0) continue;
+        FacialBendingStencilGeometry geometry;
+        if (!evaluateBendingGeometry(stencil, system.rest_positions, geometry))
+            throw std::invalid_argument("Invalid facial bending rest reconstruction.");
+        const double coefficient = stencil.rest_area_m2 * stencil.bending_rigidity_n_m;
+        const double poisson = stencil.poisson_ratio;
+        // J^T C J is the exact bending Hessian at its neutral state and a
+        // positive semidefinite metric elsewhere. It changes only numerical
+        // preconditioning, never the objective or reported force residual.
+        for (const auto &entry : bendingCurvatureDerivatives(stencil, geometry)) {
+            for (int axis = 0; axis < 3; ++axis) {
+                const glm::dvec3 derivative = entry.derivative_per_m2[axis];
+                diagonal[entry.vertex_index][axis] += coefficient *
+                    (derivative.x * derivative.x + derivative.y * derivative.y +
+                     2.0 * poisson * derivative.x * derivative.y +
+                     2.0 * (1.0 - poisson) * derivative.z * derivative.z);
+            }
+        }
+    }
     return diagonal;
 }
 
@@ -334,6 +511,29 @@ FacialElasticTriangle FacialElasticSolver::makeRestTriangle(
     result.young_modulus_pa = young_modulus_pa;
     result.poisson_ratio = poisson_ratio;
     result.thickness_m = thickness_m;
+    return result;
+}
+
+FacialElasticBendingStencil FacialElasticSolver::makeRestBendingStencil(
+    std::array<std::size_t, 3> normal_vertex_indices,
+    std::vector<FacialElasticCurvatureWeight> curvature_weights,
+    const Positions &rest_positions, double bending_rigidity_n_m, double poisson_ratio)
+{
+    for (std::size_t index : normal_vertex_indices)
+        require(index < rest_positions.size(), "Facial bending normal index outside the position array.");
+    FacialElasticBendingStencil result;
+    result.normal_vertex_indices = normal_vertex_indices;
+    result.curvature_weights = std::move(curvature_weights);
+    result.rest_area_m2 = 0.5 * glm::length(glm::cross(
+        rest_positions[normal_vertex_indices[1]] - rest_positions[normal_vertex_indices[0]],
+        rest_positions[normal_vertex_indices[2]] - rest_positions[normal_vertex_indices[0]]));
+    result.bending_rigidity_n_m = bending_rigidity_n_m;
+    result.poisson_ratio = poisson_ratio;
+    validateBendingStencil(result, rest_positions);
+    FacialBendingStencilGeometry geometry;
+    require(evaluateBendingGeometry(result, rest_positions, geometry),
+            "Invalid facial bending rest reconstruction.");
+    result.rest_curvature_per_m = geometry.curvature_per_m;
     return result;
 }
 

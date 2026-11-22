@@ -41,6 +41,8 @@ bool declares_elastic_configuration(const FacialSkinShapeSpecificationCandidate 
 	const FacialElasticSolveSettings default_settings;
 	return candidate.has_skin_material_option || candidate.has_solve_option ||
 	       candidate.has_muscle_option || candidate.has_attachment_option || candidate.has_tissue_region_option ||
+	       candidate.has_bending_option || candidate.bending_settings.stiffness_scale != 0.0f ||
+	       candidate.has_mouth_mesh_option || candidate.mouth_mesh_mode != FacialMouthMeshMode::Legacy ||
 	       !candidate.muscles.empty() || !candidate.attachments.empty() || !candidate.tissue_regions.empty() ||
 	       candidate.elastic_material.young_modulus_pa != default_material.young_modulus_pa ||
 	       candidate.elastic_material.poisson_ratio != default_material.poisson_ratio ||
@@ -59,6 +61,13 @@ bool validate_elastic_configuration(const FacialSkinShapeSpecificationCandidate 
 	};
 	if (candidate.horizontal_segments > 96 || candidate.vertical_segments > 128) {
 		return fail("FacialSkin elastic response supports at most segments(96 128); the analytic response retains higher detail levels.");
+	}
+	if (!finite_in_range(candidate.bending_settings.stiffness_scale, 0.0f, 100.0f)) {
+		return fail("FacialSkin bending requires a finite dimensionless stiffness scale in [0,100]; zero retains membrane-only response.");
+	}
+	if (candidate.mouth_mesh_mode != FacialMouthMeshMode::Legacy &&
+	    candidate.mouth_mesh_mode != FacialMouthMeshMode::Quality) {
+		return fail("FacialSkin mouthMesh must be legacy or quality.");
 	}
 	const FacialElasticMaterial &material = candidate.elastic_material;
 	if (!finite_in_range(material.young_modulus_pa, 100.0f, 1.0e7f) ||
@@ -171,7 +180,7 @@ FacialSkinSpecificationValidator::validate(
 	const bool elastic_response = candidate.response_mode == FacialSkinResponseMode::Elastic;
 	if (!elastic_response && declares_elastic_configuration(candidate)) {
 		if (diagnostic != nullptr) {
-			*diagnostic = "FacialSkin skinMaterial, solve, muscle, attachment and tissueRegion options require response(elastic); they are not applied to response(analytic).";
+			*diagnostic = "FacialSkin skinMaterial, solve, muscle, attachment, tissueRegion, bending and mouthMesh options require response(elastic); they are not applied to response(analytic).";
 		}
 		return {};
 	}
@@ -186,8 +195,11 @@ FacialSkinSpecificationValidator::validate(
 		}
 		if (!validate_elastic_configuration(candidate, diagnostic)) return {};
 	}
+	const bool extended_elastic_response = elastic_response &&
+		(candidate.bending_settings.stiffness_scale > 0.0f || candidate.mouth_mesh_mode == FacialMouthMeshMode::Quality);
 	std::ostringstream key;
-	key << (elastic_response ? "FacialSkin:v2:elastic:" : "FacialSkin:v1:") << std::hexfloat
+	key << (extended_elastic_response ? "FacialSkin:v3:elastic:" :
+	        elastic_response ? "FacialSkin:v2:elastic:" : "FacialSkin:v1:") << std::hexfloat
 	    << candidate.size.x << ',' << candidate.size.y << ',' << candidate.size.z
 	    << ':' << candidate.horizontal_segments << ',' << candidate.vertical_segments;
 	for (float value : values) key << ':' << value;
@@ -210,6 +222,11 @@ FacialSkinSpecificationValidator::validate(
 		canonical << " response(elastic) skinMaterial(" << material.young_modulus_pa << ' '
 		          << material.poisson_ratio << ' ' << material.thickness_m << ' ' << material.support_stiffness_n_per_m3
 		          << ") solve(" << settings.maximum_iterations << ' ' << settings.relative_force_tolerance << ')';
+		if (extended_elastic_response) {
+			const char *mouth_mesh = candidate.mouth_mesh_mode == FacialMouthMeshMode::Quality ? "quality" : "legacy";
+			key << ":bending:" << candidate.bending_settings.stiffness_scale << ":mouthMesh:" << mouth_mesh;
+			canonical << " bending(" << candidate.bending_settings.stiffness_scale << ") mouthMesh(" << mouth_mesh << ')';
+		}
 		for (const FacialMuscleSpecification &muscle : candidate.muscles) {
 			key << ":muscle:" << muscle.name << ':' << muscle.origin_uv.x << ':' << muscle.origin_uv.y
 			    << ':' << muscle.insertion_uv.x << ':' << muscle.insertion_uv.y
@@ -239,5 +256,6 @@ FacialSkinSpecificationValidator::validate(
 	return std::make_shared<const FacialSkinShapeSpecification>(
 		candidate.size, candidate.horizontal_segments, candidate.vertical_segments,
 		controls, ShapeSpecificationKey(key.str()), canonical.str(), candidate.response_mode,
-		candidate.elastic_material, candidate.elastic_solve_settings, candidate.muscles, candidate.attachments, candidate.tissue_regions);
+		candidate.elastic_material, candidate.elastic_solve_settings, candidate.muscles, candidate.attachments,
+		candidate.tissue_regions, candidate.bending_settings, candidate.mouth_mesh_mode);
 }

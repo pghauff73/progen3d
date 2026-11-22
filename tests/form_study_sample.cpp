@@ -59,6 +59,13 @@ private:
 		report["relativeFreeForce"] = solve.relative_free_force;
 		report["freeForceL2N"] = solve.free_force_l2_n;
 		report["forceScaleN"] = solve.force_scale_n;
+		const auto initial_evaluation = FacialElasticSolver().evaluate(state.system, state.system.rest_positions);
+		double initial_free_force_squared = 0.0;
+		for (std::size_t index = 0; index < state.system.rest_positions.size(); ++index) {
+			if (!state.system.fixed_vertices[index]) initial_free_force_squared +=
+				glm::dot(initial_evaluation.gradient_n[index], initial_evaluation.gradient_n[index]);
+		}
+		report["initialFreeForceL2N"] = std::sqrt(initial_free_force_squared);
 		const std::vector<glm::dvec3> mesh_positions(mesh.vertices.begin(), mesh.vertices.end());
 		const auto mesh_energy = FacialElasticSolver().evaluate(state.system, mesh_positions);
 		double mesh_force_squared = 0.0, maximum_quantization = 0.0;
@@ -78,6 +85,21 @@ private:
 		report["membraneEnergyJ"] = energy.membrane_energy_j;
 		report["supportEnergyJ"] = energy.support_energy_j;
 		report["muscleEnergyJ"] = energy.muscle_energy_j;
+		report["bendingEnergyJ"] = energy.bending_energy_j;
+		report["maximumBendingCurvatureChangePerM"] = energy.maximum_bending_curvature_change_per_m;
+		report["bendingScale"] = specification.bendingSettings().stiffness_scale;
+		report["mouthMeshMode"] = specification.mouthMeshMode() == FacialMouthMeshMode::Quality ? "quality" : "legacy";
+		const auto &bending = state.bending_assembly;
+		report["bendingAssembly"]["activeStencils"] = Json::UInt64(bending.active_stencils);
+		report["bendingAssembly"]["fixedOnlyTriangles"] = Json::UInt64(bending.fixed_only_triangles);
+		report["bendingAssembly"]["fixedOnlyUnreconstructableTriangles"] = Json::UInt64(bending.fixed_only_unreconstructable_triangles);
+		report["bendingAssembly"]["expandedStencils"] = Json::UInt64(bending.expanded_stencils);
+		report["bendingAssembly"]["maximumPatchVertices"] = Json::UInt64(bending.maximum_patch_vertices);
+		report["bendingAssembly"]["maximumNeighborhoodRings"] = Json::UInt64(bending.maximum_neighborhood_rings);
+		report["bendingAssembly"]["maximumReconstructionCondition"] = bending.maximum_reconstruction_condition;
+		report["bendingAssembly"]["maximumPolynomialReproductionError"] = bending.maximum_polynomial_reproduction_error;
+		report["bendingAssembly"]["maximumRestCurvaturePerM"] = bending.maximum_rest_curvature_per_m;
+		report["bendingAssembly"]["maximumPatchHeightRatio"] = bending.maximum_patch_height_ratio;
 		report["maximumGreenStrain"] = energy.maximum_green_strain;
 		report["mechanicalFrame"] = "head-local SI; displayed points include scene transforms";
 		double total_area = 0.0;
@@ -235,8 +257,9 @@ void NativeSceneObjWriter::writeScene(std::ostream &out, const SceneGenerationCo
 
 int main(int argc, char **argv)
 {
-    if (argc != 4) {
-        std::cerr << "Usage: form-study-sample grammar.p3d seconds output.obj\n";
+    const bool require_facial_skin = argc == 5 && std::string(argv[4]) == "--require-facial-skin";
+    if (argc != 4 && !require_facial_skin) {
+        std::cerr << "Usage: form-study-sample grammar.p3d seconds output.obj [--require-facial-skin]\n";
         return 2;
     }
     try {
@@ -263,6 +286,21 @@ int main(int argc, char **argv)
         }
         if (!grammar.error_details.empty() || !grammar.context || grammar.context->primitive_instances.empty()) {
             return 1;
+        }
+
+        // A failed procedural face can leave valid eye/oral props in the scene.
+        // Shell studies require the requested native skin before treating that
+        // partial scene as a successful export. The generic sampler keeps its
+        // existing behavior unless this explicit contract is requested.
+        if (require_facial_skin) {
+            const bool has_facial_skin = std::any_of(grammar.context->primitive_instances.begin(),
+                grammar.context->primitive_instances.end(), [](const auto &part) {
+                    return !part.removed && part.resolved_geometry && part.resolved_geometry->hasTriangleMesh() &&
+                        dynamic_cast<const FacialSkinMesh *>(&part.resolved_geometry->triangleMesh()) != nullptr;
+                });
+            if (!has_facial_skin) {
+                throw std::runtime_error("Required native FacialSkin sample is absent; see grammar execution diagnostics.");
+            }
         }
 
         std::ofstream output;

@@ -2,9 +2,11 @@
 
 #include "geometry/model/FacialExpressionControls.h"
 #include "geometry/model/FacialAttachmentPatch.h"
+#include "geometry/model/FacialBendingSettings.h"
 #include "geometry/model/FacialElasticMaterial.h"
 #include "geometry/model/FacialElasticSolveSettings.h"
 #include "geometry/model/FacialMuscleSpecification.h"
+#include "geometry/model/FacialMouthMeshMode.h"
 #include "geometry/model/FacialSkinResponseMode.h"
 #include "geometry/model/FacialTissueRegion.h"
 #include "geometry/model/ShapeSpecification.h"
@@ -14,7 +16,7 @@
 
 // An open, continuous front-face surface with three anatomical apertures.
 // The default analytic rig remains independent of the optional neutral-reference
-// elastic membrane and explicit tensile-muscle specifications.
+// elastic membrane, optional rest-curvature bending, and tensile muscles.
 class FacialSkinShapeSpecification : public ShapeSpecification
 {
 public:
@@ -29,7 +31,9 @@ public:
 	                            FacialElasticSolveSettings elastic_solve_settings = {},
 	                            std::vector<FacialMuscleSpecification> muscles = {},
 	                            std::vector<FacialAttachmentPatch> attachments = {},
-	                            std::vector<FacialTissueRegion> tissue_regions = {})
+	                            std::vector<FacialTissueRegion> tissue_regions = {},
+	                            FacialBendingSettings bending_settings = {},
+	                            FacialMouthMeshMode mouth_mesh_mode = FacialMouthMeshMode::Legacy)
 		: ShapeSpecification(ShapeFamily::FacialSkin, std::move(key)),
 		  size_(size),
 		  horizontal_segments_(horizontal_segments),
@@ -41,7 +45,9 @@ public:
 		  elastic_solve_settings_(elastic_solve_settings),
 		  muscles_(std::move(muscles)),
 		  attachments_(std::move(attachments)),
-		  tissue_regions_(std::move(tissue_regions))
+		  tissue_regions_(std::move(tissue_regions)),
+		  bending_settings_(bending_settings),
+		  mouth_mesh_mode_(mouth_mesh_mode)
 	{
 	}
 
@@ -55,6 +61,8 @@ public:
 	const std::vector<FacialMuscleSpecification> &muscles() const { return muscles_; }
 	const std::vector<FacialAttachmentPatch> &attachments() const { return attachments_; }
 	const std::vector<FacialTissueRegion> &tissueRegions() const { return tissue_regions_; }
+	const FacialBendingSettings &bendingSettings() const { return bending_settings_; }
+	FacialMouthMeshMode mouthMeshMode() const { return mouth_mesh_mode_; }
 	std::string canonicalText() const override { return canonical_text_; }
 	bool isDefaultFamilyShape() const override { return false; }
 	bool requestsClosedGeometry() const override { return false; }
@@ -71,4 +79,6 @@ private:
 	std::vector<FacialMuscleSpecification> muscles_;
 	std::vector<FacialAttachmentPatch> attachments_;
 	std::vector<FacialTissueRegion> tissue_regions_;
+	FacialBendingSettings bending_settings_;
+	FacialMouthMeshMode mouth_mesh_mode_ = FacialMouthMeshMode::Legacy;
 };
