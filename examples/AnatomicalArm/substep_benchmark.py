@@ -30,6 +30,9 @@ def measure(substeps,frames=12,fps=30,iterations=8,contact="radial"):
             "ms_per_frame":elapsed*1000/frames,
             "minimum_clearance_m":min(r["minimum_radial_gap_m"] for r in rows),
             "maximum_edge_strain":max(r["maximum_edge_strain"] for r in rows),
+            "minimum_elbow_band_gap_m":min(r["minimum_elbow_band_gap_m"] for r in rows),
+            "worst_clearance_frame":min(range(len(rows)),key=lambda i:rows[i]["minimum_radial_gap_m"]),
+            "worst_clearance_ring":min(rows,key=lambda r:r["minimum_radial_gap_m"])["worst_clearance_ring"],
             "mean_edge_strain":sum(r["mean_edge_strain"] for r in rows)/len(rows),
             "passed":all(r["passed"] for r in rows)}
 
@@ -40,7 +43,8 @@ def benchmark(out,frames=12,fps=30,contact="radial",substeps=(1,2,4,8)):
             "results":results,"passed":all(r["passed"] for r in results),
             "notes":["timing depends on hardware and system load",
                      "strain is a geometric edge residual, not a tissue stress",
-                     "a pass indicates sampled radial clearance only"]}
+                     "a pass indicates sampled radial clearance only",
+                     "elbow band is five rings either side of the midpoint"]}
     (out/"benchmark.json").write_text(json.dumps(report,indent=2)+"\n")
     with (out/"benchmark.csv").open("w",newline="") as f:
         writer=csv.DictWriter(f,fieldnames=list(results[0]))
