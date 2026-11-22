@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ProGen3D Anatomical Arm Scene Inspector</title>
+<style>
+body{font:15px system-ui,sans-serif;background:#101923;color:#edf2f8;margin:0}
+header,footer{padding:14px 20px;background:#1b2939}main{padding:16px;max-width:1200px;margin:auto}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:10px 0}
+canvas{width:100%;height:min(68vh,660px);display:block;background:#0a121b;border:1px solid #456;border-radius:8px}
+button,input{accent-color:#80c8f4}button{padding:7px 13px}label{display:flex;gap:6px;align-items:center}
+#status{white-space:pre-wrap;color:#bcd0df}small{color:#a8bfd2}
+</style>
+</head>
+<body>
+<header><strong>ProGen3D · Anatomical Arm Scene Inspector</strong></header>
+<main>
+<p>Load a <code>progen3d.anatomical-arm.scene.v1</code> JSON export. This is a standalone wireframe diagnostic viewer, not the native ProGen3D renderer.</p>
+<div class="controls">
+<label>Scene JSON <input id="file" type="file" accept=".json,application/json"></label>
+<button id="play" disabled>Play</button>
+<label>Frame <input id="frame" type="range" min="0" max="0" value="0" disabled></label>
+<label>Yaw <input id="yaw" type="range" min="-180" max="180" value="30"></label>
+<label>Pitch <input id="pitch" type="range" min="-80" max="80" value="15"></label>
+<label><input id="skin" type="checkbox" checked>Skin</label>
+<label><input id="sleeve" type="checkbox" checked>Sleeve</label>
+<label><input id="bones" type="checkbox" checked>Bones/muscles</label>
+</div>
+<canvas id="view" width="1100" height="660" aria-label="Arm wireframe preview"></canvas>
+<pre id="status">Choose an exported scene JSON file.</pre>
+</main>
+<footer><small>Units: metres · Diagnostic projection · No material, collision or physical accuracy claims</small></footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const canvas=$("view"),ctx=canvas.getContext("2d");
+let scene=null,index=0,playing=false,last=0,accumulator=0;
+const colors={skin:"#e4a38f",sleeve:"#7fc3ed",humerus:"#f2e6cc",radius:"#f2e6cc",ulna:"#f2e6cc",biceps:"#ec6b79",triceps:"#c64f60"};
+function validate(data){
+ if(!data||data.schema!=="progen3d.anatomical-arm.scene.v1"||!Array.isArray(data.frames)||!data.frames.length)
+   throw Error("Unsupported or empty scene schema");
+ if(!Number.isFinite(data.simulation?.fps)||data.simulation.fps<=0)throw Error("Invalid FPS");
+ for(const frame of data.frames){
+   if(!Array.isArray(frame.objects))throw Error("Missing objects");
+   for(const object of frame.objects){
+     if(!Array.isArray(object.vertices_m)||!Array.isArray(object.triangles))throw Error("Invalid mesh arrays");
+     const n=object.vertices_m.length;
+     if(n>250000||object.triangles.length>500000)throw Error("Mesh exceeds viewer safety limits");
+     for(const v of object.vertices_m)if(!Array.isArray(v)||v.length!==3||!v.every(Number.isFinite))throw Error("Invalid vertex");
+     for(const f of object.triangles)if(!Array.isArray(f)||f.length!==3||!f.every(i=>Number.isInteger(i)&&i>=0&&i<n))throw Error("Invalid triangle index");
+   }
+ }
+ return data;
+}
+function project(p){
+ const yaw=Number($("yaw").value)*Math.PI/180,pitch=Number($("pitch").value)*Math.PI/180;
+ const x=p[0]*Math.cos(yaw)-p[2]*Math.sin(yaw);
+ const z=p[0]*Math.sin(yaw)+p[2]*Math.cos(yaw);
+ const y=p[1]*Math.cos(pitch)-z*Math.sin(pitch);
+ return [canvas.width/2+x*760,canvas.height/2-y*760];
+}
+function visible(name){
+ return name==="skin"?$("skin").checked:name==="sleeve"?$("sleeve").checked:$("bones").checked;
+}
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle="#0a121b";ctx.fillRect(0,0,canvas.width,canvas.height);
+ if(!scene)return;
+ const frame=scene.frames[index],objects=frame.objects.filter(o=>visible(o.name));
+ for(const o of objects){
+   ctx.strokeStyle=colors[o.name]||"#ccd6e2";
+   ctx.globalAlpha=o.name==="skin"?.36:o.name==="sleeve"?.55:.9;
+   ctx.lineWidth=o.name==="sleeve"?.7:1;
+   const pts=o.vertices_m.map(project);
+   // Draw each unique edge once.
+   const edges=new Set();
+   for(const tri of o.triangles){
+     for(let j=0;j<3;j++){
+       const a=tri[j],b=tri[(j+1)%3],lo=Math.min(a,b),hi=Math.max(a,b);
+       edges.add(lo+","+hi);
+     }
+   }
+   ctx.beginPath();
+   for(const edge of edges){
+     const [a,b]=edge.split(",").map(Number);
+     ctx.moveTo(pts[a][0],pts[a][1]);ctx.lineTo(pts[b][0],pts[b][1]);
+   }
+   ctx.stroke();
+ }
+ ctx.globalAlpha=1;
+ $("status").textContent="Frame "+(index+1)+"/"+scene.frames.length+
+   " · t="+Number(frame.time_s).toFixed(3)+" s · elbow="+Number(frame.elbow_degrees).toFixed(1)+"°"+
+   " · "+objects.length+" visible objects";
+}
+$("file").addEventListener("change",async e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(file.size>80*1024*1024){$("status").textContent="File exceeds 80 MB limit";return;}
+ try{
+   const data=validate(JSON.parse(await file.text()));
+   scene=data;index=0;playing=false;$("play").textContent="Play";
+   $("frame").max=data.frames.length-1;$("frame").value=0;
+   $("frame").disabled=false;$("play").disabled=false;draw();
+ }catch(err){scene=null;playing=false;$("play").disabled=true;$("frame").disabled=true;$("status").textContent="Load failed: "+err.message;draw();}
+});
+$("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";};
+$("frame").oninput=e=>{index=Number(e.target.value);draw();};
+for(const id of ["yaw","pitch","skin","sleeve","bones"])$(id).addEventListener("input",draw);
+function tick(ts){
+ if(playing&&scene){
+   if(last)accumulator+=(ts-last)/1000;
+   const dt=1/scene.simulation.fps;
+   if(accumulator>=dt){index=(index+Math.floor(accumulator/dt))%scene.frames.length;accumulator%=dt;$("frame").value=index;draw();}
+ }
+ last=ts;requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);draw();
+</script>
+</body></html>
