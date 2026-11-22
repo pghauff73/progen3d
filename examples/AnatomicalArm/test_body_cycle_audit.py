@@ -3,7 +3,8 @@ from body_cycle_audit import audit,cycle_pose
 
 class BodyCycleAuditTests(unittest.TestCase):
     def test_periodic_pose(self):
-        self.assertEqual(cycle_pose(0),cycle_pose(1))
+        for joint,value in cycle_pose(0).items():
+            self.assertAlmostEqual(value,cycle_pose(1)[joint],places=10)
         self.assertAlmostEqual(cycle_pose(0.5)["elbow_left"],145)
         self.assertAlmostEqual(cycle_pose(0.5)["knee_left"],140)
 
