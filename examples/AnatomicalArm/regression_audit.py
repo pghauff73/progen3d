@@ -4,7 +4,6 @@ Runs the same prescribed motion twice, checks reproducibility and tracks
 contact clearance, edge strain and frame-to-frame vertex displacement.
 """
 import argparse
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -32,12 +31,15 @@ def audit(frames=12,fps=30,contact="radial"):
     first=sample(frames,fps,contact)
     second=sample(frames,fps,contact)
     stable=first==second
+    # Record a reproducible digest for comparing runs across machines.
+    import hashlib
+    digest=hashlib.sha256(json.dumps(first,sort_keys=True,separators=(",",":")).encode()).hexdigest()
     maximum_strain=max(r["max_edge_strain"] for r in first)
     max_step=max(r["max_vertex_step_m"] for r in first)
     min_gap=min(r["clearance_m"] for r in first)
     return {"schema":"progen3d.arm-regression.v1",
             "contact":contact,"frames":frames,"fps":fps,
-            "deterministic":stable,
+            "deterministic":stable,"sha256":digest,
             "minimum_clearance_m":min_gap,
             "maximum_edge_strain":maximum_strain,
             "maximum_frame_displacement_m":max_step,
