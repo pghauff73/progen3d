@@ -705,6 +705,9 @@ public:
 		void loadFromFile(const std::string &filePath);
 		void loadFromStream(std::istream &input, const std::string &source_name = "");
 		void loadFromSourceText(const std::string &source_text, const std::string &source_name = "");
+		// Reuse validated parsed rules for another time sample. This replaces the
+		// expanded action stream; callers generate a new scene context afterward.
+		bool reexpandAtTime(double time_seconds);
 		std::string ruleAlternate(GrammarRuleDefinition *rule,std::string line, int line_number = -1, const std::vector<SourceTokenSpan> *body_token_spans = nullptr);
 		std::string ruleBody(GrammarRuleDefinition *,std::istringstream &lin,std::string line, int line_number = -1, const std::string &header_text = "", const std::vector<SourceTokenSpan> *body_token_spans = nullptr);
 		void update_token(GrammarActionToken *check_token);
@@ -731,6 +734,7 @@ public:
 	std::vector<GrammarDiagnostic> error_details;
 
 private:
+	bool parsed_semantics_valid_ = false;
 	void clearParsedState();
 	void rebuildFromLines(const std::string &success_message);
 };

@@ -2653,10 +2653,11 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	                           int source_end_column,
 	                           std::shared_ptr<const ShapeSpecification> shape_specification)
 {
+	last_primitive_diagnostic_.clear();
 	if (primitive_instances.size() >= kMaxGeneratedPrimitiveCount) {
-		errorout("Grammar execution error: primitive budget of " +
-		         std::to_string(kMaxGeneratedPrimitiveCount) +
-		         " was exceeded.");
+		last_primitive_diagnostic_ = "Primitive budget of " +
+			std::to_string(kMaxGeneratedPrimitiveCount) + " was exceeded.";
+		errorout("Grammar execution error: " + last_primitive_diagnostic_);
 		clearPendingPrimitiveState();
 		return;
 	}
@@ -2666,6 +2667,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 		primitive = ProceduralShape;
 	}
 	if (scope == nullptr) {
+		last_primitive_diagnostic_ = "Primitive construction requires a transform scope.";
 		clearPendingPrimitiveState();
 		return;
 	}
@@ -2675,9 +2677,10 @@ void SceneGenerationContext::addPrimitive(std::string type,
 		primitive_geometry_resolver_->resolvePrimitive(
 			type, shape_specification, &geometry_diagnostic);
 	if (!resolved_geometry || primitive == nullptr) {
-		if(!geometry_diagnostic.empty()){
-			errorout("Grammar execution error: " + geometry_diagnostic);
-		}
+		last_primitive_diagnostic_ = geometry_diagnostic.empty()
+			? "Primitive '" + type + "' did not resolve to native geometry."
+			: geometry_diagnostic;
+		errorout("Grammar execution error: " + last_primitive_diagnostic_);
 		clearPendingPrimitiveState();
 		return;
 	}
@@ -2713,7 +2716,8 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	                          has_pending_density_,
 	                          &resolved_mass,
 	                          &mass_diagnostic)){
-		errorout("Grammar execution error: " + mass_diagnostic);
+		last_primitive_diagnostic_ = mass_diagnostic;
+		errorout("Grammar execution error: " + last_primitive_diagnostic_);
 		clearPendingPrimitiveState();
 		return;
 	}

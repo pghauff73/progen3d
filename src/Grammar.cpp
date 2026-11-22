@@ -1500,6 +1500,13 @@ static bool is_symbolic_shape_argument(const ShapeOptionSyntax &option,
 	                                   const std::string &shape_name)
 {
 	const std::string &option_name = option.optionName();
+	if(shape_name == "CurveNetworkSurface" && argument_index == 0 &&
+	   (option_name == "uCurve" || option_name == "vCurve" || option_name == "method")){
+		// The first curve argument names its documented interpolation type;
+		// method names the surface construction. Remaining arguments are
+		// numerical expressions and still require normal symbol validation.
+		return true;
+	}
 	if(shape_name == "FacialSkin"){
 		// Facial attachment(...) is a named numeric patch, unlike the
 		// entirely symbolic attachment mode used by some other shapes.
@@ -5224,6 +5231,7 @@ GrammarDocument::GrammarDocument(std::istream &input, const std::string &source_
 
 void GrammarDocument::clearParsedState()
 {
+	parsed_semantics_valid_ = false;
 	error_lines.clear();
 	error_details.clear();
 
@@ -5238,6 +5246,78 @@ void GrammarDocument::clearParsedState()
 	rule_list.clear();
 
 	clearGrammarRuntimeVariableSnapshots(this);
+}
+
+class GrammarParsedRuleExpansion
+{
+public:
+	static bool expand(GrammarDocument &grammar, GrammarSemanticTables semantic_tables)
+	{
+		ExpansionBudgetState expansion_state;
+		GrammarRuntimeState runtime_state;
+		runtime_state.grammar = &grammar;
+		runtime_state.symbols = std::move(semantic_tables);
+		RuntimeVariableValue time_value;
+		time_value.name = "t";
+		time_value.value = static_cast<float>(getGrammarEvaluationTime(&grammar));
+		time_value.min = time_value.value;
+		time_value.max = time_value.value;
+		time_value.resampleable = false;
+		runtime_state.environment.defineCurrent(time_value);
+		clearGrammarRuntimeVariableSnapshots(&grammar);
+		GrammarRuntimeVariableSnapshot time_snapshot;
+		time_snapshot.name = "t";
+		time_snapshot.value = time_value.value;
+		time_snapshot.min = time_value.value;
+		time_snapshot.max = time_value.value;
+		time_snapshot.defining_rule = "<builtin-time>";
+		store_runtime_variable_snapshot(&grammar, time_snapshot);
+		{
+			ScopedGrammarRuntimeSession runtime_session(&grammar, &runtime_state);
+			ScopedExpansionBudgetSession expansion_session(&grammar, &expansion_state);
+			grammar.tokens_new = grammar.Recurse(grammar.rule_list.front());
+		}
+		if(expansion_state.aborted || !grammar.error_details.empty()){
+			for(Token *token : grammar.tokens_new) delete token;
+			grammar.tokens_new.clear();
+			clearGrammarRuntimeVariableSnapshots(&grammar);
+			errorout("Grammar expansion was aborted; no partial action stream or runtime snapshot will be published.");
+			return false;
+		}
+		return true;
+	}
+};
+
+bool GrammarDocument::reexpandAtTime(double time_seconds)
+{
+	// Every failed resample invalidates the previous action stream and lexical
+	// snapshots, including rejection of a publicly mutated or emptied rule list.
+	for(Token *token : tokens_new) delete token;
+	tokens_new.clear();
+	clearGrammarRuntimeVariableSnapshots(this);
+	if(!parsed_semantics_valid_ || rule_list.empty()){
+		GrammarDiagnostic diagnostic;
+		diagnostic.message = "Time resampling requires successfully parsed and validated rules.";
+		report_grammar_issue(this, diagnostic);
+		return false;
+	}
+	error_lines.clear();
+	error_details.clear();
+	if(!setGrammarEvaluationTime(this, time_seconds)){
+		GrammarDiagnostic diagnostic;
+		diagnostic.message = "Time resampling requires a finite, representable time.";
+		report_grammar_issue(this, diagnostic);
+		return false;
+	}
+	// Rule definitions are public for existing editor callers. Revalidate their
+	// semantics before expansion even though no source text is parsed again.
+	GrammarSemanticTables semantic_tables;
+	build_and_validate_semantic_tables(this, &semantic_tables);
+	if(!error_details.empty()){
+		parsed_semantics_valid_ = false;
+		return false;
+	}
+	return GrammarParsedRuleExpansion::expand(*this, std::move(semantic_tables));
 }
 
 void GrammarDocument::rebuildFromLines(const std::string &success_message)
@@ -5268,39 +5348,8 @@ void GrammarDocument::rebuildFromLines(const std::string &success_message)
 		}
 
 		if(error_details.empty() && !rule_list.empty()){
-			ExpansionBudgetState expansion_state;
-			GrammarRuntimeState runtime_state;
-			runtime_state.grammar = this;
-			runtime_state.symbols = std::move(semantic_tables);
-			RuntimeVariableValue time_value;
-			time_value.name = "t";
-			time_value.value = static_cast<float>(getGrammarEvaluationTime(this));
-			time_value.min = time_value.value;
-			time_value.max = time_value.value;
-			time_value.resampleable = false;
-			runtime_state.environment.defineCurrent(time_value);
-			clearGrammarRuntimeVariableSnapshots(this);
-			GrammarRuntimeVariableSnapshot time_snapshot;
-			time_snapshot.name = "t";
-			time_snapshot.value = time_value.value;
-			time_snapshot.min = time_value.value;
-			time_snapshot.max = time_value.value;
-			time_snapshot.defining_rule = "<builtin-time>";
-			store_runtime_variable_snapshot(this, time_snapshot);
-			{
-				ScopedGrammarRuntimeSession runtime_session(this, &runtime_state);
-				ScopedExpansionBudgetSession expansion_session(this, &expansion_state);
-				tokens_new = Recurse(rule_list[0]);
-			}
-
-			if(expansion_state.aborted || !error_details.empty()){
-				for(Token *token : tokens_new){
-					delete token;
-				}
-				tokens_new.clear();
-				clearGrammarRuntimeVariableSnapshots(this);
-				errorout("Grammar expansion was aborted; no partial action stream or runtime snapshot will be published.");
-			}
+			parsed_semantics_valid_ = true;
+			GrammarParsedRuleExpansion::expand(*this, std::move(semantic_tables));
 		}
 		else if(!quiet_diagnostics){
 			debugout("Grammar expansion skipped because semantic validation failed.");
@@ -6319,8 +6368,16 @@ void GrammarDocument::generateGeometry()
 		if(token == NULL)continue;
 		const auto air = body_airflow.find(token);
 		if (air != body_airflow.end()) context->setPendingAirflow(air->second);
+		const std::size_t primitives_before = context->primitive_instances.size();
 		token->performAction(context);
 		if(!error_details.empty())return;
+		if(token->token_name == "I" && context->primitive_instances.size() == primitives_before){
+			const std::string message = context->lastPrimitiveDiagnostic().empty()
+				? "Primitive construction failed without native geometry."
+				: context->lastPrimitiveDiagnostic();
+			report_grammar_issue(this, make_action_token_diagnostic(token, message));
+			return;
+		}
 	}
 	std::string spatial_diagnostic;
 	if(!context->finalizeSpatialBuildingModel(&spatial_diagnostic)){
