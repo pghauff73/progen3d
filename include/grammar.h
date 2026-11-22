@@ -733,6 +733,7 @@ public:
 private:
 	void clearParsedState();
 	void rebuildFromLines(const std::string &success_message);
+	void parseCurrentLines(const std::string &success_message);
 };
 
 using Variable = GrammarVariableDefinition;

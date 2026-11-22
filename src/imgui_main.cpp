@@ -43,6 +43,7 @@
 #include <imgui_impl_opengl3.h>
 
 #include "AppPaths.h"
+#include "grammar/reuse/GrammarReuseCatalogue.h"
 #include "BackendApiClient.h"
 #include "CloudAuthWorkflow.h"
 #include "Context.h"
@@ -5023,7 +5024,14 @@ bool validate_grammar(Grammar *gram, EditorWorkspaceSession *app_state, bool qui
 		return matching_delimiter(open) == close;
 	};
 
-	const std::vector<std::string> &source_lines = gram->lines;
+	// The native parser already resolved and checked the import declarations.
+    // This secondary editor check sees authored rule lines with their original numbers.
+    std::vector<std::string> authored_rules;
+    if (std::any_of(gram->lines.begin(), gram->lines.end(), GrammarReuseCatalogue::isImportLine)) {
+        authored_rules = gram->lines;
+        for (auto& line : authored_rules) if (GrammarReuseCatalogue::isImportLine(line)) line.clear();
+    }
+    const auto& source_lines = authored_rules.empty() ? gram->lines : authored_rules;
 	if (source_lines.empty()) {
 		GrammarDiagnostic diagnostic;
 		diagnostic.message = "Document is empty.";
@@ -6131,7 +6139,19 @@ void perform_document_replacement_action(EditorWorkspaceSession *app_state,
 	case DocumentReplacementAction::OpenLocalDocument:
 		request_local_file_dialog(app_state, LocalFileDialogPurpose::OpenGrammar);
 		break;
-	case DocumentReplacementAction::OpenBundledExample: {
+	case DocumentReplacementAction::OpenReuseGrammar: {
+        const auto ref = std::exchange(app_state->local_document_workflow.selected_reuse_ref, {});
+        try {
+            const auto source = GrammarReuseCatalogue::readStandalone(ref);
+            set_editor_document_internal(app_state, source, false);
+            set_local_document_feedback(app_state, "Opened " + ref, false);
+            request_scene_regeneration_internal(source);
+        } catch (const std::exception& error) {
+            set_local_document_feedback(app_state, error.what(), true);
+        }
+        break;
+    }
+    case DocumentReplacementAction::OpenBundledExample: {
 		const auto path = std::exchange(app_state->local_document_workflow.selected_example, {});
 		DocumentPersistenceService persistence;
 		std::string source, error;
@@ -6181,7 +6201,9 @@ const char *document_replacement_description(DocumentReplacementAction action)
 	case DocumentReplacementAction::OpenLocalDocument:
 		return "open another local grammar";
 	case DocumentReplacementAction::OpenBundledExample:
-		return "open an example";
+        return "open an example";
+    case DocumentReplacementAction::OpenReuseGrammar:
+        return "open a reusable grammar";
 	case DocumentReplacementAction::OpenCloudDocument:
 		return "open another cloud grammar";
 	case DocumentReplacementAction::ExitApplication:
@@ -11199,7 +11221,48 @@ void draw_editor(EditorWorkspaceSession *app_state)
 			ImGui::EndTabItem();
 		}
 
-		if (ImGui::BeginTabItem("Diagnostics")) {
+        if (ImGui::BeginTabItem("Reuse")) {
+            static ImGuiTextFilter filter;
+            static std::vector<GrammarReuseListing> entries;
+            static std::string error;
+            if (ImGui::IsItemActivated() || (entries.empty() && error.empty())) {
+                try {
+                    entries = GrammarReuseCatalogue::listEntries();
+                    error.clear();
+                } catch (const std::exception& failure) {
+                    error = failure.what();
+                }
+            }
+            if (!error.empty()) {
+                ImGui::TextWrapped("%s", error.c_str());
+                if (ImGui::Button("Retry catalogue")) error.clear();
+            } else {
+                filter.Draw("Search entries");
+                ImGui::TextDisabled("%zu reusable grammars", entries.size());
+                ImGui::BeginChild("ReuseEntries");
+                for (const auto& entry : entries) {
+                    if (!filter.PassFilter(entry.searchText.c_str())) continue;
+                    ImGui::PushID(entry.reference.c_str());
+                    ImGui::TextUnformatted(entry.title.c_str());
+                    ImGui::TextWrapped("%s", entry.reference.c_str());
+                    if (ImGui::SmallButton("Open grammar")) {
+                        app_state->local_document_workflow.selected_reuse_ref = entry.reference;
+                        request_document_replacement(app_state, DocumentReplacementAction::OpenReuseGrammar);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::SmallButton("Copy import")) {
+                        const auto example = "@use Part = \"" + entry.reference + "\"";
+                        ImGui::SetClipboardText(example.c_str());
+                    }
+                    ImGui::Separator();
+                    ImGui::PopID();
+                }
+                ImGui::EndChild();
+            }
+            ImGui::EndTabItem();
+        }
+
+        if (ImGui::BeginTabItem("Diagnostics")) {
 			const std::vector<std::string> source_lines = current_editor_lines(app_state->document.source_text);
 			const std::vector<EditorDiagnostic> diagnostics =
 				build_editor_diagnostics(source_lines, app_state);
