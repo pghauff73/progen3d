@@ -62,7 +62,8 @@ def spatial_skeleton(pose=None):
     allowed={"torso_xyz","pelvis_xyz"}
     for side in ("left","right"):
         allowed.update((side+"_shoulder_xyz",side+"_hip_xyz",
-                        side+"_elbow_flex",side+"_knee_flex",side+"_arm_elevation"))
+                        side+"_elbow_flex",side+"_knee_flex",side+"_arm_elevation",
+                        side+"_forearm_pronation"))
     unknown=set(pose)-allowed
     if unknown:raise ValueError("unknown joints: "+", ".join(sorted(unknown)))
     def xyz(key,limit):
@@ -80,6 +81,9 @@ def spatial_skeleton(pose=None):
     joints={"pelvis":pelvis,"torso":torso}
     for side,sign in (("left",-1),("right",1)):
         # Illustrative scapulohumeral coupling, not clinical calibration.
+        pronation=pose.get(side+"_forearm_pronation",0.0)
+        if not math.isfinite(pronation) or not -85<=pronation<=85:
+            raise ValueError("invalid forearm pronation for "+side)
         elevation=flex(side+"_arm_elevation",180)
         scapular_rotation=max(0.0,min(50.0,(elevation-30.0)/3.0))
         fraction=scapular_rotation/50.0
