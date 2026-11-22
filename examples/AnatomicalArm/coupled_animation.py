@@ -187,7 +187,8 @@ class CoupledArm:
         ]
         maximum_edge_strain=max(edge_strains,default=0.0)
         mean_edge_strain=sum(edge_strains)/len(edge_strains) if edge_strains else 0.0
-        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,\n                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
+        return {"angle":angle,"time":self.time,"minimum_radial_gap_m":min_gap,"contact_mode":self.contact_mode,
+                "maximum_edge_strain":maximum_edge_strain,"mean_edge_strain":mean_edge_strain,
                 "worst_clearance_ring":worst_ring,"minimum_elbow_band_gap_m":min_crease_gap,
                 "passed":min_gap>=self.clearance-1e-7}
 
@@ -222,7 +223,8 @@ def simulate(out, frames=60, fps=30, period=2.0, contact_mode='radial', friction
             "passed":all(r["passed"] for r in step_records),
             "minimum_clearance_m":min(r["minimum_radial_gap_m"] for r in step_records),
             "minimum_elbow_band_gap_m":min(r["minimum_elbow_band_gap_m"] for r in step_records),
-            "worst_clearance_step":min(range(len(step_records)),key=lambda i:step_records[i]["minimum_radial_gap_m"]),\n            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in step_records),
+            "worst_clearance_step":min(range(len(step_records)),key=lambda i:step_records[i]["minimum_radial_gap_m"]),
+            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in step_records),
             "limitations":["local correspondence contact, not global collision","friction is velocity damping, not Coulomb friction","bending uses opposite-vertex distance proxy, not dihedral angles",
                            "no mesh self collision","no native renderer integration"],
             "records":records,"step_records":step_records}
