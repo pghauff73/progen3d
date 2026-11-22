@@ -1,6 +1,7 @@
 import math
 import unittest
 from arm_milestone_a import FOREARM, UPPER, landmarks, parts
+from validate_sequence import validate_pose
 
 class ArmMilestoneATests(unittest.TestCase):
     def test_lengths(self):
@@ -19,6 +20,12 @@ class ArmMilestoneATests(unittest.TestCase):
 
     def test_components_present(self):
         self.assertEqual(set(parts(90)),{"skin","humerus","radius","ulna","biceps","triceps"})
+
+    def test_pose_sweep_validation(self):
+        for angle in (0,30,60,90,120,145):
+            result=validate_pose(angle)
+            self.assertTrue(result['passed'], result['errors'])
+            self.assertGreater(result['minimum_triangle_area_m2'],1e-12)
 
     def test_limits(self):
         for angle in (-1,146):
