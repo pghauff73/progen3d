@@ -7,6 +7,9 @@ class SubstepBenchmarkTests(unittest.TestCase):
     def test_measure_real_solver(self):
         result=measure(2,frames=3)
         self.assertEqual(result["substeps"],2)
+        self.assertEqual(result["solver_steps"],1+(3-1)*2)
+        self.assertGreaterEqual(result["worst_clearance_step"],0)
+        self.assertLess(result["worst_clearance_step"],result["solver_steps"])
         self.assertGreaterEqual(result["maximum_edge_strain"],0)
         self.assertGreater(result["elapsed_s"],0)
         self.assertTrue(result["passed"],result)
