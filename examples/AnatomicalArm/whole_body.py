@@ -196,12 +196,20 @@ if __name__=="__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument("--out",default="build/anatomical-body")
     parser.add_argument("--render-layer",choices=("skin","clothed","diagnostic"),default="skin")
+    parser.add_argument("--bridge-junctions",action="store_true",help="include provisional visual torso junction bridges")
     args=parser.parse_args()
     out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     model=scene()
     selected=render_subset(model,args.render_layer)
+    bridge_reports={}
+    if args.bridge_junctions:
+        if args.render_layer=="diagnostic":
+            parser.error("--bridge-junctions requires skin or clothed render layer")
+        bridges,bridge_reports=make_bridges(model,args.render_layer)
+        selected.update(bridges)
     report=validate(selected)
     report["render_layer"]=args.render_layer
+    report["junction_bridges"]=bridge_reports
     report["duplicate_geometry"]=check_duplicate_geometry(selected)
     report["boundary_audit"]=boundary_audit(selected)
     report["globally_watertight"]=all(v["watertight"] for v in report["boundary_audit"].values())
