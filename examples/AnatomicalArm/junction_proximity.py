@@ -16,7 +16,7 @@ def proximity(a,b,stride=4):
     minimum=float("inf")
     maximum=0.0
     count=0
-    worst_sample=None
+    worst_sample=0
     for sample_index in range(0,len(av),stride):
         p=av[sample_index]
         best=min(math.dist(p,closest_triangle(p,bv[i],bv[j],bv[k]))
