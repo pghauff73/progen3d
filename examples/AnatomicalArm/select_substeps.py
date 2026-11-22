@@ -9,6 +9,11 @@ import math
 from pathlib import Path
 
 def select(report, max_strain=0.25, min_clearance=0.0003, max_ms_per_frame=33.333):
+    limits=(max_strain,min_clearance,max_ms_per_frame)
+    if any(not isinstance(v,(int,float)) or isinstance(v,bool) or not math.isfinite(v) for v in limits):
+        raise ValueError("acceptance thresholds must be finite numbers")
+    if max_strain<0 or min_clearance<0 or max_ms_per_frame<=0:
+        raise ValueError("acceptance thresholds outside valid range")
     results=report.get("results")
     if not isinstance(results,list) or not results:
         raise ValueError("benchmark results missing")
