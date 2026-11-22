@@ -15,26 +15,33 @@ def measure(substeps,frames=12,fps=30,iterations=8,contact="radial"):
         raise ValueError("invalid benchmark configuration")
     arm=CoupledArm(contact_mode=contact)
     rows=[]
+    all_steps=[]
     start=time.perf_counter()
     for frame in range(frames):
         if frame==0:
             result=arm.step(0.0,dt=1/(fps*substeps),iterations=iterations)
+            all_steps.append(result)
         else:
             for step in range(substeps):
                 t=(frame-1+(step+1)/substeps)/fps
                 result=arm.step(angle_at(t),dt=1/(fps*substeps),iterations=iterations)
+                all_steps.append(result)
         rows.append(result)
     elapsed=time.perf_counter()-start
+    # Analyze every integration step: transient penetration may recover before
+    # the exported frame and must not disappear from benchmark diagnostics.
     return {"substeps":substeps,"frames":frames,"fps":fps,
             "contact":contact,"elapsed_s":elapsed,
             "ms_per_frame":elapsed*1000/frames,
-            "minimum_clearance_m":min(r["minimum_radial_gap_m"] for r in rows),
-            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in rows),
-            "minimum_elbow_band_gap_m":min(r["minimum_elbow_band_gap_m"] for r in rows),
+            "minimum_clearance_m":min(r["minimum_radial_gap_m"] for r in all_steps),
+            "maximum_edge_strain":max(r["maximum_edge_strain"] for r in all_steps),
+            "minimum_elbow_band_gap_m":min(r["minimum_elbow_band_gap_m"] for r in all_steps),
             "worst_clearance_frame":min(range(len(rows)),key=lambda i:rows[i]["minimum_radial_gap_m"]),
-            "worst_clearance_ring":min(rows,key=lambda r:r["minimum_radial_gap_m"])["worst_clearance_ring"],
+            "worst_clearance_step":min(range(len(all_steps)),key=lambda i:all_steps[i]["minimum_radial_gap_m"]),
+            "solver_steps":len(all_steps),
+            "worst_clearance_ring":min(all_steps,key=lambda r:r["minimum_radial_gap_m"])["worst_clearance_ring"],
             "mean_edge_strain":sum(r["mean_edge_strain"] for r in rows)/len(rows),
-            "passed":all(r["passed"] for r in rows)}
+            "passed":all(r["passed"] for r in all_steps)}
 
 def benchmark(out,frames=12,fps=30,contact="radial",substeps=(1,2,4,8)):
     out=Path(out);out.mkdir(parents=True,exist_ok=True)
