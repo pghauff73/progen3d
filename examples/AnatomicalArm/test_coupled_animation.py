@@ -15,6 +15,8 @@ class CoupledArmTests(unittest.TestCase):
             with self.subTest(angle=angle):
                 result=arm.step(angle,dt=1/60,iterations=8)
                 self.assertTrue(result["passed"],result)
+                self.assertGreaterEqual(result["maximum_edge_strain"],0)
+                self.assertGreaterEqual(result["mean_edge_strain"],0)
 
     def test_export(self):
         with tempfile.TemporaryDirectory() as directory:
