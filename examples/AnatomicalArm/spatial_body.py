@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 from spatial_skeleton import spatial_skeleton,length_errors
 from arm_milestone_a import write_obj
+from spatial_joint_skin import joint_envelope
 
 def segment_surface(start,end,radius_start,radius_end,rings=24,sides=20):
     if rings<2 or sides<3 or min(radius_start,radius_end)<=0:
@@ -53,6 +54,14 @@ def spatial_body(pose=None):
         for start,end,r0,r1 in segments:
             mesh[side+"_"+start+"_"+end+"_skin"]=segment_surface(
                 joints[side+"_"+start].origin,joints[side+"_"+end].origin,r0,r1)
+    for side in ("left","right"):
+        for label,a,b,c,radii in (
+            ("arm","shoulder","elbow","wrist",(0.047,0.037,0.022)),
+            ("leg","hip","knee","ankle",(0.083,0.055,0.031))):
+            mesh[side+"_"+label+"_continuous_skin"]=joint_envelope(
+                joints[side+"_"+a].origin,
+                joints[side+"_"+b].origin,
+                joints[side+"_"+c].origin,*radii)
     return mesh,joints
 
 def audit(pose=None):
@@ -64,7 +73,7 @@ def audit(pose=None):
             "objects":len(meshes),
             "vertices":sum(len(v) for v,f in meshes.values()),
             "triangles":sum(len(f) for v,f in meshes.values()),
-            "limitations":["separate open tubes, not unified skin",
+            "limitations":["continuous limb skins remain open at torso and distal ends",
                            "no torso surface in spatial mode",
                            "no soft tissue or garment dynamics"]}
 
