@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 from arm_soft_sleeve import assembly as arm_assembly, surface as arm_surface
 from arm_milestone_a import mesh_tube, write_obj
+from body_skeleton import skeleton
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def scale(a,k): return tuple(k*x for x in a)
@@ -67,33 +68,34 @@ def leg_mesh(hip,knee,ankle,garment=False,rings=61,sides=20):
     return mesh_tube(points,[(r,r*0.94) for p,r in vertices],sides)
 
 def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
-          hip_left=0,hip_right=0,knee_left=15,knee_right=15,torso_lean=0):
+          hip_left=0,hip_right=0,knee_left=15,knee_right=15,torso_lean=0,pelvis_tilt=0):
     values=(shoulder_left,shoulder_right,elbow_left,elbow_right,
-            hip_left,hip_right,knee_left,knee_right,torso_lean)
+            hip_left,hip_right,knee_left,knee_right,torso_lean,pelvis_tilt)
     if not all(math.isfinite(v) for v in values):raise ValueError("nonfinite pose")
     if not all(0<=v<=145 for v in (elbow_left,elbow_right)):raise ValueError("elbow limit")
     if not all(0<=v<=140 for v in (knee_left,knee_right)):raise ValueError("knee limit")
     if not all(-75<=v<=110 for v in (shoulder_left,shoulder_right,hip_left,hip_right)):
         raise ValueError("shoulder/hip limit")
     if not -35<=torso_lean<=35:raise ValueError("torso lean limit")
+    if not -25<=pelvis_tilt<=25:raise ValueError("pelvis tilt limit")
+    joints=skeleton(torso_lean,pelvis_tilt,shoulder_left,shoulder_right,
+                    hip_left,hip_right,knee_left,knee_right)
     model={}
     def emit(name,mesh,origin=(0,0,0),angle=0,mirror=False):
         model[name]=transform(mesh,origin,angle,mirror)
-    emit("torso_skin",torso_surface(),angle=torso_lean)
+    emit("torso_skin",torso_surface(),origin=(0,0,0),angle=torso_lean)
     emit("torso_garment",torso_surface(garment=True),angle=torso_lean)
     for side,mirror,shoulder,elbow,hip,knee in (
         ("left",True,shoulder_left,elbow_left,hip_left,knee_left),
         ("right",False,shoulder_right,elbow_right,hip_right,knee_right)):
         sign=-1 if mirror else 1
-        shoulder_origin=rotate_z((sign*0.22,0.55,0),torso_lean)
+        shoulder_origin=joints[side+"_shoulder"].origin
         for part,mesh in arm_assembly(elbow).items():
             emit(side+"_arm_"+part,mesh,shoulder_origin,shoulder,mirror)
         # Leg hip pivot is below torso; knee and ankle preserve segment lengths.
-        hip_origin=(sign*0.105,0.05,0)
-        thigh=(0,-0.43,0)
-        shin=(0,-0.43,0)
-        knee_point=add(hip_origin,rotate_z(thigh,sign*hip))
-        ankle=add(knee_point,rotate_z(shin,sign*(hip-knee)))
+        hip_origin=joints[side+"_hip"].origin
+        knee_point=joints[side+"_knee"].origin
+        ankle=joints[side+"_ankle"].origin
         emit(side+"_leg_skin",leg_mesh(hip_origin,knee_point,ankle))
         emit(side+"_leg_garment",leg_mesh(hip_origin,knee_point,ankle,garment=True))
         emit(side+"_femur",tube_between(hip_origin,knee_point,0.019,0.015))
