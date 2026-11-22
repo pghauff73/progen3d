@@ -80,7 +80,7 @@ def surface(angle, garment=False, rings=RINGS, sides=SIDES):
             elbow_weight=math.exp(-((u-0.5)/0.085)**2)
             if garment:
                 # Visible compressive folds; amplitude grows with flexion.
-                wrinkle=0.0015*elbow_weight*inside*math.sin(a/2)**2
+                wrinkle=0.00065*elbow_weight*inside*math.sin(a/2)**2
                 wrinkle*=math.cos(12*math.pi*u)
                 rr=base+wrinkle
             else:
