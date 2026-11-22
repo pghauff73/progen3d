@@ -49,6 +49,16 @@ def run(out,timeout=300):
                             "--out",str(out/"spatial"),"--render-layer","skin"]),
         ("body_cycle", [sys.executable,str(PACKAGE/"body_cycle_audit.py"),
                         "--frames","5","--out",str(out/"body-cycle.json")]),
+        ("junction_sweep", [sys.executable,str(PACKAGE/"junction_sweep.py"),
+                            "--steps","3","--out",str(out/"junction-sweep.json")]),
+        ("spatial_geometry", [sys.executable,"-c",
+                              "import sys;sys.path.insert(0, 'examples/AnatomicalArm');"
+                              "from spatial_body import spatial_body;"
+                              "from mesh_diagnostics import inspect_mesh;"
+                              "meshes,_=spatial_body();"
+                              "bad={name:inspect_mesh(*mesh) for name,mesh in meshes.items() "
+                              "if not inspect_mesh(*mesh)['passed']};"
+                              "assert not bad,bad"]),
         ("sleeve_animation", [sys.executable,str(PACKAGE/"coupled_animation.py"),
                               "--frames","3","--substeps","4",
                               "--out",str(out/"sleeve")]),
