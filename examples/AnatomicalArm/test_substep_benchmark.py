@@ -10,6 +10,9 @@ class SubstepBenchmarkTests(unittest.TestCase):
         self.assertGreaterEqual(result["maximum_edge_strain"],0)
         self.assertGreater(result["elapsed_s"],0)
         self.assertTrue(result["passed"],result)
+        self.assertIn("worst_clearance_frame",result)
+        self.assertIn("worst_clearance_ring",result)
+        self.assertGreaterEqual(result["minimum_elbow_band_gap_m"],result["minimum_clearance_m"]-1e-9)
 
     def test_outputs(self):
         with tempfile.TemporaryDirectory() as folder:
