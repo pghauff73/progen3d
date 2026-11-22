@@ -50,6 +50,8 @@ jobs:
               assert report['passed'], (name, report)
               print(name, 'PASS')
           PY
+      - name: Audit deterministic arm motion
+        run: python examples/AnatomicalArm/regression_audit.py --out build/arm-regression.json --frames 6
       - name: Upload diagnostics on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -60,4 +62,5 @@ jobs:
             build/anatomical-arm-sleeve/validation.json
             build/arm-coupled/simulation.json
             build/arm-triangle/simulation.json
+            build/arm-regression.json
           if-no-files-found: ignore
