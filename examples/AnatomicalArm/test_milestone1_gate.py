@@ -2,7 +2,7 @@
 import sys
 import tempfile
 import unittest
-from milestone1_gate import execute
+from milestone1_gate import execute,junction_advisory,summarize
 
 class Milestone1GateTests(unittest.TestCase):
     def test_junction_gap_is_advisory_not_proof_of_watertightness(self):

@@ -6,6 +6,21 @@ still requires a torso/pelvis junction for a globally watertight body.
 """
 import math
 
+def ring_edge_directions(faces,sides):
+    """Return the directed boundary edges of the shared first ring."""
+    expected={(min(i,(i+1)%sides),max(i,(i+1)%sides)) for i in range(sides)}
+    directions={}
+    for face in faces:
+        for a,b in zip(face,face[1:]+face[:1]):
+            edge=(min(a,b),max(a,b))
+            if edge in expected:
+                if edge in directions:
+                    raise ValueError("attachment ring is not a boundary")
+                directions[edge]=(a,b)
+    if directions.keys()!=expected:
+        raise ValueError("incomplete attachment ring")
+    return directions
+
 def stitch_limb_collar(limb,collar,sides=20,tolerance=1e-8):
     lv,lf=limb
     cv,cf=collar
@@ -18,10 +33,16 @@ def stitch_limb_collar(limb,collar,sides=20,tolerance=1e-8):
     vertices=list(lv)+list(cv[sides:])
     mapping={i:i for i in range(sides)}
     mapping.update({i:len(lv)+(i-sides) for i in range(sides,len(cv))})
-    # Both patches are parameterized away from their first ring.
-    # Reverse the collar winding so shared rim edges have opposite directions.
+    # Match the actual boundary winding. Existing limb and collar producers
+    # may already have opposite rim directions; a blanket reversal breaks it.
+    limb_edges=ring_edge_directions(lf,sides)
+    collar_edges=ring_edge_directions(cf,sides)
+    same={limb_edges[edge]==collar_edges[edge] for edge in limb_edges}
+    if len(same)!=1:
+        raise ValueError("inconsistent attachment ring winding")
+    reverse=same.pop()
     faces=list(lf)+[
-        tuple(mapping[i] for i in (face[0],face[2],face[1]))
+        tuple(mapping[i] for i in ((face[0],face[2],face[1]) if reverse else face))
         for face in cf
     ]
     return vertices,faces

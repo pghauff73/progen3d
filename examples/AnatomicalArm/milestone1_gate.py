@@ -123,30 +123,4 @@ if __name__=="__main__":
     if args.timeout<1:parser.error("--timeout must be positive")
     report=run(args.out,args.timeout)
     print("Milestone 1:", "PASS" if report["passed"] else "FAIL")
-    raise SystemExit(0 if report["passed"] else 1)    report={"schema":"progen3d.anatomical-milestone1-gate.v1",
-            "timestamp_utc":datetime.now(timezone.utc).isoformat(),
-            "python":sys.version,"platform":platform.platform(),
-            "repository_root":str(ROOT),"passed":all(r["passed"] for r in results),
-            "checks":results,
-            "failed_checks":failures,
-            "passed_checks":sum(r["passed"] for r in results),
-            "total_checks":len(results),
-            "measured_process_seconds":round(sum(r["elapsed_seconds"] for r in results),3),
-            "engineering_hours_verified":None,
-            "timing_note":"Process runtime is not human engineering effort.",
-            "known_limitations":["whole-body skin is not globally watertight",
-                                 "joint bridges are visual, not manifold unions",
-                                 "full-body self-collision is not implemented",
-                                 "XPBD cloth is a reduced-order prototype"]}
-    (out/"milestone1-report.json").write_text(json.dumps(report,indent=2)+"\n")
-    return report
-
-if __name__=="__main__":
-    parser=argparse.ArgumentParser()
-    parser.add_argument("--out",default="build/milestone1")
-    parser.add_argument("--timeout",type=int,default=300)
-    args=parser.parse_args()
-    if args.timeout<1:parser.error("--timeout must be positive")
-    report=run(args.out,args.timeout)
-    print("Milestone 1:", "PASS" if report["passed"] else "FAIL")
     raise SystemExit(0 if report["passed"] else 1)

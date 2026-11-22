@@ -34,5 +34,22 @@ class SurfaceStitchTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             stitch_limb_collar(limb,collar,sides=3)
 
+    def test_reversed_collar_winding_still_matches_limb(self):
+        model=scene()
+        limb=model["left_arm_skin"]
+        vertices,faces=model["left_shoulder_skin_collar"]
+        reversed_collar=(vertices,[(a,c,b) for a,b,c in faces])
+        merged=stitch_limb_collar(limb,reversed_collar)
+        self.assertEqual(inspect_mesh(*merged)["winding_errors"],0)
+
+    def test_reject_mixed_attachment_winding(self):
+        model=scene()
+        vertices,faces=model["left_shoulder_skin_collar"]
+        faces=list(faces)
+        a,b,c=faces[0]
+        faces[0]=(a,c,b)
+        with self.assertRaisesRegex(ValueError,"inconsistent attachment ring winding"):
+            stitch_limb_collar(model["left_arm_skin"],(vertices,faces))
+
 if __name__=="__main__":
     unittest.main()
