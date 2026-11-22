@@ -1,13 +1,22 @@
 #include "geometry/service/FacialSkinMeshGenerator.h"
 
 #include "geometry/model/FacialSkinShapeSpecification.h"
+#include "geometry/model/FacialSkinMesh.h"
+#include "geometry/service/FacialElasticModelAssembler.h"
+#include "geometry/service/FacialElasticSolver.h"
+#include "geometry/service/FacialSkinAdmissibility.h"
 
 #include <algorithm>
 #include <array>
 #include <cmath>
 #include <memory>
+#include <limits>
+#include <sstream>
+#include <stdexcept>
 #include <utility>
 #include <vector>
+
+static FacialSkinLandmarks evaluateAnalyticalLandmarks(const FacialSkinShapeSpecification &specification);
 
 namespace {
 
@@ -222,7 +231,7 @@ class FacialSkinMeshConstruction
 {
 public:
 	explicit FacialSkinMeshConstruction(const FacialSkinShapeSpecification &specification)
-		: specification_(specification), surface_(specification), mesh_(std::make_shared<Mesh>())
+		: specification_(specification), surface_(specification), mesh_(std::make_shared<FacialSkinMesh>())
 	{
 	}
 
@@ -230,12 +239,67 @@ public:
 	{
 		addSkinGrid();
 		for (const FacialApertureDomain &aperture : surface_.apertures()) addApertureMargin(aperture);
+		mesh_->landmarks = evaluateAnalyticalLandmarks(specification_);
+		if (specification_.responseMode() == FacialSkinResponseMode::Elastic) applyElasticResponse();
 		recomputeNormals();
 		mesh_->buildCollisionAccel();
 		return GeneratedPrimitiveMesh(mesh_, std::move(surface_tags_));
 	}
 
 private:
+	void applyElasticResponse()
+	{
+		auto state = std::make_shared<FacialSkinMechanicalState>(
+			FacialElasticModelAssembler().assemble(specification_, *mesh_, surface_tags_));
+		FacialSkinAdmissibility admissibility(*mesh_, surface_tags_, mesh_->landmarks,
+			state->system.fixed_vertices, specification_.size().x);
+		if (admissibility.minimumGlobeClearance(state->system.rest_positions) < 0.0)
+			throw std::runtime_error("Neutral FacialSkin geometry intersects an eye globe at these proportions.");
+		FacialElasticSolverSettings settings;
+		settings.max_iterations = specification_.elasticSolveSettings().maximum_iterations;
+		settings.relative_force_tolerance = specification_.elasticSolveSettings().relative_force_tolerance;
+		state->solve_result = FacialElasticSolver().solve(state->system, settings,
+			[&admissibility](const auto &positions) { return admissibility.accepts(positions); });
+		const auto &result = state->solve_result;
+		if (!result.converged) {
+			std::ostringstream message;
+			message << "FacialSkin elastic equilibrium did not converge: " << result.termination_reason
+			        << "; iterations=" << result.iterations
+			        << "; relative free force=" << result.relative_free_force;
+			if (!admissibility.lastRejection().empty()) message << "; " << admissibility.lastRejection();
+			throw std::runtime_error(message.str());
+		}
+		if (result.final_evaluation.maximum_green_strain > 0.35)
+			throw std::runtime_error("FacialSkin elastic result exceeds the prototype Green-strain bound of 0.35; reduce actuation.");
+		for (std::size_t index = 0; index < mesh_->vertices.size(); ++index)
+			mesh_->vertices[index] = glm::vec3(result.positions[index]);
+		const std::vector<glm::dvec3> rendered_positions(mesh_->vertices.begin(), mesh_->vertices.end());
+		if (!admissibility.accepts(rendered_positions) || admissibility.minimumGlobeClearance(rendered_positions) < 0.0)
+			throw std::runtime_error("FacialSkin float mesh failed post-solve geometry/contact checks.");
+		// Landmarks refer to actual solved material vertices. Eye centres remain
+		// fixed skull-frame references, and no second solve is needed to export.
+		glm::vec3 FacialSkinLandmarks::* points[] = {
+			&FacialSkinLandmarks::left_eye_outer_corner, &FacialSkinLandmarks::left_eye_inner_corner,
+			&FacialSkinLandmarks::left_eye_upper_margin, &FacialSkinLandmarks::left_eye_lower_margin,
+			&FacialSkinLandmarks::right_eye_outer_corner, &FacialSkinLandmarks::right_eye_inner_corner,
+			&FacialSkinLandmarks::right_eye_upper_margin, &FacialSkinLandmarks::right_eye_lower_margin,
+			&FacialSkinLandmarks::mouth_left_corner, &FacialSkinLandmarks::mouth_right_corner,
+			&FacialSkinLandmarks::mouth_upper_margin, &FacialSkinLandmarks::mouth_lower_margin};
+		for (auto member : points) {
+			auto &landmark = mesh_->landmarks.*member;
+			std::size_t closest = 0;
+			double minimum = std::numeric_limits<double>::infinity();
+			for (std::size_t index = 0; index < state->system.rest_positions.size(); ++index) {
+				const double distance = glm::length(state->system.rest_positions[index] - glm::dvec3(landmark));
+				if (distance < minimum) { minimum = distance; closest = index; }
+			}
+			if (minimum > specification_.size().x * 1.0e-5)
+				throw std::runtime_error("FacialSkin semantic landmark has no rest material vertex.");
+			landmark = mesh_->vertices[closest];
+		}
+		mesh_->mechanical_state = std::move(state);
+	}
+
 	int gridOffset(int column, int row) const
 	{
 		return row * (specification_.horizontalSegments() + 1) + column;
@@ -345,7 +409,7 @@ private:
 
 	const FacialSkinShapeSpecification &specification_;
 	FacialSkinSurfaceEvaluation surface_;
-	std::shared_ptr<Mesh> mesh_;
+	std::shared_ptr<FacialSkinMesh> mesh_;
 	std::vector<int> grid_indices_;
 	std::vector<MeshSurfaceTag> surface_tags_;
 };
@@ -360,11 +424,16 @@ GeneratedPrimitiveMesh FacialSkinMeshGenerator::generate(
 		if (diagnostic != nullptr) *diagnostic = "FacialSkinMeshGenerator requires a FacialSkinShapeSpecification.";
 		return GeneratedPrimitiveMesh(std::make_shared<Mesh>(), {});
 	}
-	return FacialSkinMeshConstruction(*face).build();
+	try {
+		return FacialSkinMeshConstruction(*face).build();
+	} catch (const std::exception &error) {
+		if (diagnostic != nullptr) *diagnostic = error.what();
+		return GeneratedPrimitiveMesh(std::make_shared<Mesh>(), {});
+	}
 }
 
-FacialSkinLandmarks FacialSkinMeshGenerator::evaluateLandmarks(
-	const FacialSkinShapeSpecification &specification) const
+static FacialSkinLandmarks evaluateAnalyticalLandmarks(
+	const FacialSkinShapeSpecification &specification)
 {
 	FacialSkinSurfaceEvaluation surface(specification);
 	FacialSkinLandmarks landmarks;
@@ -391,4 +460,16 @@ FacialSkinLandmarks FacialSkinMeshGenerator::evaluateLandmarks(
 	landmarks.mouth_upper_margin = margin(mouth, 0, 1);
 	landmarks.mouth_lower_margin = margin(mouth, 0, -1);
 	return landmarks;
+}
+
+FacialSkinLandmarks FacialSkinMeshGenerator::evaluateLandmarks(
+	const FacialSkinShapeSpecification &specification) const
+{
+	if (specification.responseMode() == FacialSkinResponseMode::Analytic)
+		return evaluateAnalyticalLandmarks(specification);
+	std::string diagnostic;
+	const auto generated = generate(specification, &diagnostic);
+	const auto *face_mesh = dynamic_cast<const FacialSkinMesh *>(generated.mesh().get());
+	if (face_mesh == nullptr) throw std::runtime_error(diagnostic);
+	return face_mesh->landmarks;
 }

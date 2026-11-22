@@ -218,6 +218,9 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceMeshGenerator.cpp \
 	$(SRC_DIR)/geometry/service/FacialSkinMeshGenerator.cpp \
 	$(SRC_DIR)/geometry/service/FacialSkinSpecificationValidator.cpp \
+	$(SRC_DIR)/geometry/service/FacialElasticModelAssembler.cpp \
+	$(SRC_DIR)/geometry/service/FacialElasticSolver.cpp \
+	$(SRC_DIR)/geometry/service/FacialSkinAdmissibility.cpp \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/GeneratedMeshComposer.cpp \
 	$(SRC_DIR)/geometry/service/MirroredShapeGeometryBuilder.cpp \
@@ -561,7 +564,18 @@ build/facial-skin-test: tests/facial_skin_geometry_harness.cpp $(FORM_STUDY_OBJS
 	@mkdir -p build
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
 
+build/facial-elastic-kernel-test: tests/facial_elastic_kernel_harness.cpp $(BUILD_DIR)/src/geometry/service/FacialElasticSolver.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+build/facial-elastic-geometry-test: tests/facial_elastic_geometry_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
 .PHONY: facial-skin-check
-facial-skin-check: build/facial-skin-test build/form-study-sample
+facial-skin-check: build/facial-skin-test build/form-study-sample build/facial-elastic-kernel-test build/facial-elastic-geometry-test
 	./build/facial-skin-test
+	./build/facial-elastic-kernel-test
+	./build/facial-elastic-geometry-test
 	python3 examples/FacialSkin/face_study.py --sampler build/form-study-sample --out build/facial-skin-check --timeline-frames 0
+	python3 examples/FacialSkin/elastic_study.py --sampler build/form-study-sample --out build/facial-elastic-check --timeline-frames 0

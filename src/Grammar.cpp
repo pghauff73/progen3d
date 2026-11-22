@@ -1496,9 +1496,17 @@ static void validate_expression_symbols(Grammar *grammar,
 }
 
 static bool is_symbolic_shape_argument(const ShapeOptionSyntax &option,
-	                                   std::size_t argument_index)
+	                                   std::size_t argument_index,
+	                                   const std::string &shape_name)
 {
 	const std::string &option_name = option.optionName();
+	if(shape_name == "FacialSkin"){
+		// Facial attachment(...) is a named numeric patch, unlike the
+		// entirely symbolic attachment mode used by some other shapes.
+		return argument_index == 0 &&
+		       (option_name == "response" || option_name == "muscle" ||
+		        option_name == "attachment" || option_name == "tissueRegion");
+	}
 	if(option_name == "topology" || option_name == "close" ||
 	   option_name == "mapping" || option_name == "axis" ||
 	   option_name == "side" || option_name == "cap" ||
@@ -1598,7 +1606,8 @@ static void validate_shape_descriptor_expressions(
 		for(std::size_t argument_index = 0;
 		    argument_index < option.arguments().size();
 		    ++argument_index){
-			if(is_symbolic_shape_argument(option, argument_index))continue;
+			if(is_symbolic_shape_argument(option, argument_index,
+			                              token->shape_descriptor_syntax->shapeName()))continue;
 			validate_expression_symbols(
 				grammar,
 				token,

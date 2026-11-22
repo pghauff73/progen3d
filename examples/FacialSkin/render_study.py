@@ -4,6 +4,8 @@ blender -b --python examples/FacialSkin/render_study.py -- \
     --study build/facial-skin-study --output build/facial-skin-study/Facial_Study.png
 """
 import argparse
+import json
+import math
 from pathlib import Path
 import sys
 
@@ -78,20 +80,49 @@ class FacialStudyRenderScene:
         obj.location = position
         obj.rotation_euler = (-obj.location).to_track_quat("-Z", "Y").to_euler()
 
-    def render(self, study, output, width=1800, samples=96):
-        for x, filename, title, caption in (
+    def render(self, study, output, width=1800, samples=96, elastic=False):
+        panels = (
             (-0.23, "neutral", "01  NEUTRAL", "Connected skin and open boundaries"),
             (0.0, "smile", "02  SMILE", "Paired cheek and mouth-corner fields"),
             (0.23, "combined", "03  COMBINED", "Smile + jaw opening + blink"),
-        ):
+        )
+        heading = "ProGen3D  /  Facial skin"
+        subtitle = "Native grammar milestone A  |  Procedural geometry  |  Independent expression controls"
+        footnote = "Actual native samples. Open front-face prototype; elastic tissue and full Lyra integration remain future work."
+        if elastic:
+            reference = NativeSceneObjReader().read(study/"samples"/"neutral.obj")
+            panels = []
+            for offset, filename, title, activation in (
+                (-0.23, "neutral", "01  NEUTRAL", 0.0),
+                (0.0, "smile_left", "02  LEFT CABLE", 0.5),
+                (0.23, "smile", "03  BOTH CABLES", 0.5),
+            ):
+                path = study/"samples"/(filename+".obj")
+                native = NativeSceneObjReader().read(path)
+                prefix = "# facial_elastic "
+                record = next(json.loads(line[len(prefix):]) for line in path.read_text().splitlines()
+                              if line.startswith(prefix))
+                if not record["converged"]:
+                    raise ValueError("Cannot render an unconverged elastic sample")
+                displacement = 1000*math.dist(native["landmarks"]["mouth_left_corner"],
+                                             reference["landmarks"]["mouth_left_corner"])
+                caption = f"Activation {activation:.2f}  |  Left corner {displacement:.2f} mm"
+                panels.append((offset, filename, title, caption))
+            heading = "ProGen3D  /  Elastic facial skin"
+            subtitle = "Native grammar milestone B  |  Supported membrane + tensile cables  |  Neutral material reference"
+            footnote = "Native equilibria at true scale. Synthetic material and cable paths; no bending, dynamics or lip-contact solve."
+        for x, filename, title, caption in panels:
             self.add_native_sample(study/"samples"/(filename+".obj"), x)
             self.add_text(title, title, (x, -0.141, 0.075), 0.012, (0.15, 0.12, 0.23), "CENTER")
-            self.add_text(title+"_caption", caption, (x, -0.158, 0.075), 0.0075, (0.30, 0.28, 0.35), "CENTER")
-        self.add_text("heading", "ProGen3D  /  Facial skin", (-0.355, 0.170, 0.08), 0.025, (0.15, 0.12, 0.23))
-        self.add_text("subtitle", "Native grammar milestone A  |  Procedural geometry  |  Independent expression controls",
-                      (-0.354, 0.147, 0.08), 0.0088, (0.32, 0.29, 0.37))
-        self.add_text("footnote", "Actual native samples. Open front-face prototype; elastic tissue and full Lyra integration remain future work.",
-                      (-0.354, -0.188, 0.08), 0.0077, (0.35, 0.32, 0.40))
+            caption_color = (0.16, 0.14, 0.22) if elastic else (0.30, 0.28, 0.35)
+            self.add_text(title+"_caption", caption, (x, -0.158, 0.075), 0.0075, caption_color, "CENTER")
+        self.add_text("heading", heading, (-0.355, 0.170, 0.08), 0.025, (0.15, 0.12, 0.23))
+        self.add_text("subtitle", subtitle,
+                      (-0.354, 0.147, 0.08), 0.0088,
+                      (0.20, 0.17, 0.25) if elastic else (0.32, 0.29, 0.37))
+        self.add_text("footnote", footnote,
+                      (-0.354, -0.188, 0.08), 0.0077,
+                      (0.22, 0.19, 0.27) if elastic else (0.35, 0.32, 0.40))
         bpy.ops.mesh.primitive_plane_add(size=2, location=(0, 0, -0.09))
         bpy.context.object.data.materials.append(self.material("paper", (0.92, 0.90, 0.87), 0.75))
         self.add_area_light("key", (-0.26, 0.30, 0.48), 2.2, 0.38, (1.0, 0.91, 0.83))
@@ -108,7 +139,9 @@ class FacialStudyRenderScene:
         scene.render.engine = "CYCLES"
         scene.cycles.device = "CPU"
         scene.cycles.samples = samples
-        scene.cycles.use_denoising = False
+        scene.cycles.use_denoising = elastic
+        if elastic:
+            scene.view_settings.exposure = 1.0
         scene.render.resolution_x = width
         scene.render.resolution_y = round(width*960/1800)
         scene.render.resolution_percentage = 100
@@ -128,5 +161,6 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--width", type=int, default=1800)
     parser.add_argument("--samples", type=int, default=96)
+    parser.add_argument("--elastic", action="store_true", help="Render the native elastic comparison")
     args = parser.parse_args(sys.argv[sys.argv.index("--")+1:])
-    FacialStudyRenderScene().render(args.study, args.output, args.width, args.samples)
+    FacialStudyRenderScene().render(args.study, args.output, args.width, args.samples, args.elastic)

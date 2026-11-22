@@ -86,6 +86,18 @@ std::vector<ProceduralShapeParameterDocumentation> facial_skin_parameters()
 			"Independent finite [0,1] eyelid closure expressions. This milestone closes upper/lower margins symmetrically and retains a small contact clearance."),
 		parameter("browRaise", "browRaise(left right)", "0 0",
 			"Independent finite [0,1] brow elevation expressions. Full blink takes priority at the eyelid margins."),
+		parameter("response", "response(analytic|elastic)", "analytic",
+			"Default analytic deformation is unchanged. Elastic selects a static neutral-reference plane-stress membrane with explicit tensile muscles and skull attachments; all legacy expression controls must be zero."),
+		parameter("skinMaterial", "skinMaterial(youngPa poisson thicknessM supportNPerM3)", "50000 0.35 0.001 1000000",
+			"Elastic mode only. Synthetic, uncalibrated defaults. Young's modulus [100,10000000] Pa; Poisson ratio [0,0.49]; thickness [0.00001,0.02] m; distributed support [1,100000000] N/m^3."),
+		parameter("solve", "solve(maxIterations relativeForceTolerance)", "500 0.0001",
+			"Elastic mode only. Integer iteration bound [8,2000] and normalized equilibrium-force tolerance [0.0000001,0.01]. Elastic tessellation is limited to segments(96 128). No time integration or damping is implied."),
+		parameter("muscle", "muscle(name originU originV insertionU insertionV radiusU radiusV activation maxShortening stiffnessNPerM)", "none",
+			"Repeatable elastic tensile cable, up to 16 unique names. Origin/insertion are distinct rest texture UV coordinates in [0,1]; compact insertion radii [0.01,0.5]; activation [0,1]; maximum fractional shortening [0,0.25]; stiffness [0,10000] N/m. Zero stiffness disables its force."),
+		parameter("attachment", "attachment(name u v radiusU radiusV stiffnessNPerM)", "none",
+			"Repeatable elastic patch attached to the neutral skull reference, up to 16 unique names. Rest texture UV center [0,1]; compact radii [0.01,0.5]; spring stiffness [0,1000000] N/m."),
+		parameter("tissueRegion", "tissueRegion(name u v radiusU radiusV youngScale supportScale)", "none",
+			"Repeatable elastic material map, up to 16 unique names. Rest texture UV center [0,1]; compact radii [0.01,0.5]; Young's modulus and support multipliers [0.1,10]. Names are 1 to 64 letters, digits or underscores and start with a letter or underscore."),
 	};
 }
 
@@ -447,7 +459,7 @@ const std::vector<ProceduralShapeCatalogEntry> &catalog_entries()
 		 sphere_parameters()},
 		{"FacialSkin", "Facial Skin", ShapeFamily::FacialSkin, false,
 		 "FacialSkin(size(0.16 0.21 0.045) segments(48 64) smile(0 0) jawOpen(0) blink(0 0) browRaise(0 0))",
-		 "Open analytical front-face patch with connected lip/eyelid margins and three apertures; no cranium or calibrated tissue physics. Local +X is character-left, +Y up, +Z front. Controls accept t expressions and must be finite in [0,1]. Size dimensions are in (0.00001,1000], height/width in [0.5,2], depth/width in [0.05,1]. Horizontal segments are multiples of 48 in [48,192]; vertical segments are multiples of 64 in [64,256].",
+		 "Open front-face patch with connected lip/eyelid margins and three apertures. Default response(analytic) retains the original rig. response(elastic) adds a static neutral-reference plane-stress membrane, explicit tensile muscles, skull attachments and material maps; it requires all legacy expression controls to be zero. Synthetic material defaults are not calibrated human tissue; no cranium, bending or dynamics are included. Local +X is character-left, +Y up, +Z front. Numeric controls support t expressions. Size dimensions are in (0.00001,1000], height/width in [0.5,2], depth/width in [0.05,1]. Horizontal segments are multiples of 48 in [48,192]; vertical segments are multiples of 64 in [64,256]; elastic response is limited to 96 by 128. Each named elastic declaration kind permits 16 entries in rest texture UV space [0,1].",
 		 facial_skin_parameters()},
 			{"AxialProfile", "Axial Profile", ShapeFamily::AxialProfile, false,
 		 "AxialProfile(axis(y) profile(Name polygon(x z ...)) at(position Name) hold(position) cap(all))",

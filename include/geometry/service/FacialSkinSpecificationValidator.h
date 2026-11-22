@@ -11,6 +11,17 @@ struct FacialSkinShapeSpecificationCandidate
 	int horizontal_segments = 48;
 	int vertical_segments = 64;
 	FacialExpressionControls controls;
+	FacialSkinResponseMode response_mode = FacialSkinResponseMode::Analytic;
+	FacialElasticMaterial elastic_material;
+	FacialElasticSolveSettings elastic_solve_settings;
+	std::vector<FacialMuscleSpecification> muscles;
+	std::vector<FacialAttachmentPatch> attachments;
+	std::vector<FacialTissueRegion> tissue_regions;
+	bool has_skin_material_option = false;
+	bool has_solve_option = false;
+	bool has_muscle_option = false;
+	bool has_attachment_option = false;
+	bool has_tissue_region_option = false;
 };
 
 class FacialSkinSpecificationValidator
