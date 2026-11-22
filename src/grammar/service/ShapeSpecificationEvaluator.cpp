@@ -31,6 +31,7 @@
 #include "geometry/service/BotanicalBladeSpecificationValidator.h"
 #include "geometry/service/BranchJunctionSpecificationValidator.h"
 #include "geometry/service/ExtrudeProfileSpecificationValidator.h"
+#include "geometry/service/FacialSkinSpecificationValidator.h"
 #include "geometry/service/GeneratedMeshReferenceSpecificationValidator.h"
 #include "geometry/service/CurvedPanelSpecificationValidator.h"
 #include "geometry/service/CurveNetworkSurfaceSpecificationValidator.h"
@@ -4153,6 +4154,52 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 	}
 	if (descriptor.shapeName() == "SurfaceLoft") {
 		return evaluate_surface_loft(descriptor, expression_evaluator);
+	}
+	if (descriptor.shapeName() == "FacialSkin") {
+		FacialSkinShapeSpecificationCandidate candidate;
+		ShapeSpecificationEvaluationResult result;
+		for (const ShapeOptionSyntax &option : descriptor.options()) {
+			const auto &arguments = option.arguments();
+			if (option.optionName() == "segments") {
+				if (arguments.size() != 2) {
+					result.diagnostic = "FacialSkin segments requires two arguments.";
+					return result;
+				}
+				if (!evaluate_integer(arguments[0], "FacialSkin horizontal segments", expression_evaluator,
+					&candidate.horizontal_segments, &result.diagnostic) ||
+				    !evaluate_integer(arguments[1], "FacialSkin vertical segments", expression_evaluator,
+					&candidate.vertical_segments, &result.diagnostic)) return result;
+				continue;
+			}
+			std::vector<float *> destinations;
+			if (option.optionName() == "size") {
+				destinations = {&candidate.size.x, &candidate.size.y, &candidate.size.z};
+			} else if (option.optionName() == "smile") {
+				destinations = {&candidate.controls.smile_left, &candidate.controls.smile_right};
+			} else if (option.optionName() == "jawOpen") {
+				destinations = {&candidate.controls.jaw_open};
+			} else if (option.optionName() == "blink") {
+				destinations = {&candidate.controls.blink_left, &candidate.controls.blink_right};
+			} else if (option.optionName() == "browRaise") {
+				destinations = {&candidate.controls.brow_raise_left, &candidate.controls.brow_raise_right};
+			} else {
+				result.diagnostic = "Unsupported FacialSkin option '" + option.optionName() + "'.";
+				return result;
+			}
+			if (arguments.size() != destinations.size()) {
+				result.diagnostic = "FacialSkin option has an incorrect argument count.";
+				return result;
+			}
+			for (std::size_t index = 0; index < arguments.size(); ++index) {
+				if (!evaluate_number(arguments[index], "FacialSkin " + option.optionName(),
+					expression_evaluator, destinations[index])) {
+					result.diagnostic = "FacialSkin option '" + option.optionName() + "' must evaluate to finite numbers.";
+					return result;
+				}
+			}
+		}
+		result.specification = FacialSkinSpecificationValidator().validate(candidate, &result.diagnostic);
+		return result;
 	}
 	if (descriptor.shapeName() == "CurveNetworkSurface") {
 		return evaluate_curve_network_surface(descriptor, expression_evaluator);

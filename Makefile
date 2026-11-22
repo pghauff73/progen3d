@@ -216,6 +216,8 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/CurvedPanelSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/CurvedPanelMeshGenerator.cpp \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceMeshGenerator.cpp \
+	$(SRC_DIR)/geometry/service/FacialSkinMeshGenerator.cpp \
+	$(SRC_DIR)/geometry/service/FacialSkinSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/GeneratedMeshComposer.cpp \
 	$(SRC_DIR)/geometry/service/MirroredShapeGeometryBuilder.cpp \
@@ -554,3 +556,12 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+build/facial-skin-test: tests/facial_skin_geometry_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: facial-skin-check
+facial-skin-check: build/facial-skin-test build/form-study-sample
+	./build/facial-skin-test
+	python3 examples/FacialSkin/face_study.py --sampler build/form-study-sample --out build/facial-skin-check --timeline-frames 0

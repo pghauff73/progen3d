@@ -44,7 +44,8 @@ enum class ShapeFamily
 	GlazingPanel,
 	SurfaceTiling,
 	InstanceArray,
-	GeneratedMeshReference
+	GeneratedMeshReference,
+	FacialSkin
 };
 
 class ShapeSpecification

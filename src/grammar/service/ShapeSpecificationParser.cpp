@@ -63,6 +63,19 @@ const std::unordered_map<std::string, OptionArity> &sphere_option_arities()
 	return arities;
 }
 
+const std::unordered_map<std::string, OptionArity> &facial_skin_option_arities()
+{
+	static const std::unordered_map<std::string, OptionArity> arities = {
+		{"size", {3, 3}},
+		{"segments", {2, 2}},
+		{"smile", {2, 2}},
+		{"jawOpen", {1, 1}},
+		{"blink", {2, 2}},
+		{"browRaise", {2, 2}},
+	};
+	return arities;
+}
+
 const std::unordered_map<std::string, OptionArity> &tapered_sweep_option_arities()
 {
 	static const std::unordered_map<std::string, OptionArity> arities = {
@@ -1240,6 +1253,11 @@ const OptionArity *find_option_arity(
 		const auto found = arities.find(option_name);
 		return found == arities.end() ? nullptr : &found->second;
 	}
+	if (shape_name == "FacialSkin") {
+		const auto &arities = facial_skin_option_arities();
+		const auto found = arities.find(option_name);
+		return found == arities.end() ? nullptr : &found->second;
+	}
 	if (shape_name == "ShellLoft") {
 		const auto &arities = shell_loft_option_arities();
 		const auto found = arities.find(option_name);
@@ -1489,6 +1507,7 @@ std::shared_ptr<const ShapeDescriptorSyntax> create_descriptor(
 	    shape_name == "SweepDisk" ||
 	    shape_name == "Revolve" || shape_name == "Loft" ||
 	    shape_name == "SurfaceLoft" || shape_name == "CurveNetworkSurface" ||
+	    shape_name == "FacialSkin" ||
 	    shape_name == "CurvedPanel" ||
 	    shape_name == "FormedPanel" || shape_name == "HostedOpening" ||
 	    shape_name == "EmbossedBead" || shape_name == "EdgeFlange" ||
@@ -1519,6 +1538,7 @@ bool ShapeSpecificationParser::isCanonicalShapeName(
 	const std::string &shape_name)
 {
 	return shape_name == "Cylinder" || shape_name == "Sphere" ||
+	       shape_name == "FacialSkin" ||
 	       shape_name == "AxialProfile" || shape_name == "Extrude" ||
 	       shape_name == "SweepProfile" || shape_name == "VariableSectionSweep" ||
 	       shape_name == "SweepDisk" ||

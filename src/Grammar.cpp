@@ -5547,6 +5547,9 @@ void GrammarDocument::update_token(Token *check_token){
 				case ShapeFamily::CurveNetworkSurface:
 					check_token->instance_type = "CurveNetworkSurface";
 					break;
+				case ShapeFamily::FacialSkin:
+					check_token->instance_type = "FacialSkin";
+					break;
 				case ShapeFamily::ShellLoft:
 					check_token->instance_type = "ShellLoft";
 					break;

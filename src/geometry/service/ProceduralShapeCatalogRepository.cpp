@@ -71,6 +71,24 @@ std::vector<ProceduralShapeParameterDocumentation> axial_profile_parameters()
 	};
 }
 
+std::vector<ProceduralShapeParameterDocumentation> facial_skin_parameters()
+{
+	return {
+		parameter("size", "size(width height depth)", "0.16 0.21 0.045",
+			"Local dimensions, with metre-scale defaults. Each dimension must be finite and in (0.00001,1000]; height/width must be in [0.5,2] and depth/width in [0.05,1]."),
+		parameter("segments", "segments(horizontal vertical)", "48 64",
+			"Horizontal multiples of 48 in [48,192]; vertical multiples of 64 in [64,256]. Counts remain fixed while expression controls change."),
+		parameter("smile", "smile(left right)", "0 0",
+			"Independent mouth-corner and cheek activation expressions, each finite in [0,1]. Character-left is +X."),
+		parameter("jawOpen", "jawOpen(amount)", "0",
+			"Finite [0,1] analytic jaw-opening control. Changes the connected mouth aperture and lower-face surface."),
+		parameter("blink", "blink(left right)", "0 0",
+			"Independent finite [0,1] eyelid closure expressions. This milestone closes upper/lower margins symmetrically and retains a small contact clearance."),
+		parameter("browRaise", "browRaise(left right)", "0 0",
+			"Independent finite [0,1] brow elevation expressions. Full blink takes priority at the eyelid margins."),
+	};
+}
+
 std::vector<ProceduralShapeParameterDocumentation> tapered_sweep_parameters()
 {
 	return {
@@ -427,6 +445,10 @@ const std::vector<ProceduralShapeCatalogEntry> &catalog_entries()
 		 "Sphere(radial(0 1) polar(0 180) azimuth(0 360) topology(solid) close(all) segments(40 20))",
 		 "Canonical normalized sphere family; nonuniform S(...) creates ellipsoids.",
 		 sphere_parameters()},
+		{"FacialSkin", "Facial Skin", ShapeFamily::FacialSkin, false,
+		 "FacialSkin(size(0.16 0.21 0.045) segments(48 64) smile(0 0) jawOpen(0) blink(0 0) browRaise(0 0))",
+		 "Open analytical front-face patch with connected lip/eyelid margins and three apertures; no cranium or calibrated tissue physics. Local +X is character-left, +Y up, +Z front. Controls accept t expressions and must be finite in [0,1]. Size dimensions are in (0.00001,1000], height/width in [0.5,2], depth/width in [0.05,1]. Horizontal segments are multiples of 48 in [48,192]; vertical segments are multiples of 64 in [64,256].",
+		 facial_skin_parameters()},
 			{"AxialProfile", "Axial Profile", ShapeFamily::AxialProfile, false,
 		 "AxialProfile(axis(y) profile(Name polygon(x z ...)) at(position Name) hold(position) cap(all))",
 		 "Deterministic profile-driven extrusion, loft, and contained step primitive.",
