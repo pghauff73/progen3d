@@ -30,6 +30,22 @@ class BodySkeletonTests(unittest.TestCase):
                     shoulder_left=35,hip_left=25,knee_left=90)
         self.assertTrue(validate(model)["passed"])
 
+    def test_torso_pelvis_pivot_attachment(self):
+        from whole_body import torso_surface
+        from body_skeleton import skeleton
+        from whole_body import scene
+        # The first torso ring is centered at the pelvis pivot.
+        rest=scene(torso_lean=0,pelvis_tilt=0)
+        tilted=scene(torso_lean=25,pelvis_tilt=15)
+        for layer in ("skin","garment"):
+            a=rest["torso_"+layer][0]
+            b=tilted["torso_"+layer][0]
+            # A ring center is the arithmetic mean of its 32 vertices.
+            center=lambda verts:tuple(sum(p[k] for p in verts[:32])/32 for k in range(3))
+            self.assertAlmostEqual(center(a)[0],center(b)[0],places=9)
+            self.assertAlmostEqual(center(a)[1],center(b)[1],places=9)
+            self.assertAlmostEqual(center(b)[1],0.05,places=9)
+
     def test_invalid_joint_values(self):
         for kwargs in ({"torso_lean":40},{"pelvis_tilt":30},
                        {"knee_left":float("nan")}):
