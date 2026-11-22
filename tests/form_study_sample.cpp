@@ -3,7 +3,9 @@
 #include "GrammarRuntime.h"
 #include "geometry/model/SweepDiskShapeSpecification.h"
 #include "geometry/model/FacialSkinShapeSpecification.h"
+#include "geometry/model/FacialSkinMesh.h"
 #include "geometry/service/FacialSkinMeshGenerator.h"
+#include "geometry/service/FacialElasticSolver.h"
 #include "grammar.h"
 #include "imgui_render.h"
 
@@ -16,6 +18,7 @@
 #include <locale>
 #include <stdexcept>
 #include <vector>
+#include <json/json.h>
 
 namespace {
 
@@ -25,6 +28,114 @@ public:
     void writeScene(std::ostream &out, const SceneGenerationContext &scene) const;
 
 private:
+	static Json::Value pointValue(const glm::dvec3 &point)
+	{
+		Json::Value result(Json::arrayValue);
+		for (int axis = 0; axis < 3; ++axis) result.append(point[axis]);
+		return result;
+	}
+
+	static Json::Value uvValue(const glm::vec2 &point)
+	{
+		Json::Value result(Json::arrayValue);
+		result.append(point.x); result.append(point.y);
+		return result;
+	}
+
+	static void writeElasticEvidence(std::ostream &out,
+		const FacialSkinShapeSpecification &specification,
+		const FacialSkinMesh &mesh, const glm::mat4 &transform)
+	{
+		if (!mesh.mechanical_state) return;
+		const auto &state = *mesh.mechanical_state;
+		const auto &solve = state.solve_result;
+		const auto &energy = solve.final_evaluation;
+		Json::Value report(Json::objectValue);
+		report["shapeKey"] = specification.key().canonicalValue();
+		report["canonicalText"] = specification.canonicalText();
+		report["converged"] = solve.converged;
+		report["iterations"] = Json::UInt64(solve.iterations);
+		report["terminationReason"] = solve.termination_reason;
+		report["relativeFreeForce"] = solve.relative_free_force;
+		report["freeForceL2N"] = solve.free_force_l2_n;
+		report["forceScaleN"] = solve.force_scale_n;
+		const std::vector<glm::dvec3> mesh_positions(mesh.vertices.begin(), mesh.vertices.end());
+		const auto mesh_energy = FacialElasticSolver().evaluate(state.system, mesh_positions);
+		double mesh_force_squared = 0.0, maximum_quantization = 0.0;
+		for (std::size_t index = 0; index < mesh_positions.size(); ++index) {
+			if (!state.system.fixed_vertices[index])
+				mesh_force_squared += glm::dot(mesh_energy.gradient_n[index], mesh_energy.gradient_n[index]);
+			maximum_quantization = std::max(maximum_quantization,
+				glm::length(mesh_positions[index] - solve.positions[index]));
+		}
+		report["meshFreeForceL2N"] = std::sqrt(mesh_force_squared);
+		report["meshRelativeFreeForce"] = std::sqrt(mesh_force_squared) / solve.force_scale_n;
+		report["maximumPositionQuantizationM"] = maximum_quantization;
+		report["solverPrecision"] = "float64; authoritative mechanical state";
+		report["meshPrecision"] = "float32; presentation geometry, separately re-evaluated";
+		report["initialEnergyJ"] = solve.accepted_energies_j.front();
+		report["finalEnergyJ"] = energy.total_energy_j;
+		report["membraneEnergyJ"] = energy.membrane_energy_j;
+		report["supportEnergyJ"] = energy.support_energy_j;
+		report["muscleEnergyJ"] = energy.muscle_energy_j;
+		report["maximumGreenStrain"] = energy.maximum_green_strain;
+		report["mechanicalFrame"] = "head-local SI; displayed points include scene transforms";
+		double total_area = 0.0;
+		std::size_t fixed_count = 0;
+		for (std::size_t index = 0; index < state.system.rest_positions.size(); ++index) {
+			total_area += state.rest_vertex_areas_m2[index];
+			if (state.system.fixed_vertices[index]) ++fixed_count;
+		}
+		report["totalRestAreaM2"] = total_area;
+		report["hardAttachmentVertices"] = Json::UInt64(fixed_count);
+		const auto &material = specification.elasticMaterial();
+		report["material"]["youngModulusPa"] = material.young_modulus_pa;
+		report["material"]["poissonRatio"] = material.poisson_ratio;
+		report["material"]["thicknessM"] = material.thickness_m;
+		report["material"]["supportNPerM3"] = material.support_stiffness_n_per_m3;
+		report["muscles"] = Json::Value(Json::arrayValue);
+		for (std::size_t index = 0; index < state.system.muscles.size(); ++index) {
+			const auto &muscle = state.system.muscles[index];
+			const auto &resolved = energy.muscle_states[index];
+			Json::Value item(Json::objectValue);
+			item["name"] = muscle.name;
+			item["activation"] = muscle.activation;
+			item["maximumShortening"] = muscle.maximum_shortening;
+			item["stiffnessNPerM"] = muscle.stiffness_n_per_m;
+			item["origin"] = pointValue(glm::dvec3(transform * glm::vec4(glm::vec3(muscle.origin), 1)));
+			item["insertion"] = pointValue(glm::dvec3(transform * glm::vec4(glm::vec3(resolved.insertion_position), 1)));
+			item["restLengthM"] = muscle.rest_length_m;
+			item["targetLengthM"] = resolved.target_length_m;
+			item["lengthM"] = resolved.length_m;
+			item["tensionN"] = resolved.tension_n;
+			item["energyJ"] = resolved.energy_j;
+			item["insertionVertices"] = Json::UInt64(muscle.insertions.size());
+			report["muscles"].append(item);
+		}
+		report["attachments"] = Json::Value(Json::arrayValue);
+		for (const auto &attachment : specification.attachments()) {
+			Json::Value item(Json::objectValue);
+			item["name"] = attachment.name;
+			item["centerUv"] = uvValue(attachment.center_uv);
+			item["radiusUv"] = uvValue(attachment.influence_radius_uv);
+			item["stiffnessNPerM"] = attachment.stiffness_n_per_m;
+			report["attachments"].append(item);
+		}
+		report["tissueRegions"] = Json::Value(Json::arrayValue);
+		for (const auto &region : specification.tissueRegions()) {
+			Json::Value item(Json::objectValue);
+			item["name"] = region.name;
+			item["centerUv"] = uvValue(region.center_uv);
+			item["radiusUv"] = uvValue(region.influence_radius_uv);
+			item["youngScale"] = region.young_modulus_scale;
+			item["supportScale"] = region.support_stiffness_scale;
+			report["tissueRegions"].append(item);
+		}
+		Json::StreamWriterBuilder writer;
+		writer["indentation"] = "";
+		out << "# facial_elastic " << Json::writeString(writer, report) << '\n';
+	}
+
     static void writePoint(std::ostream &out, const glm::vec3 &point)
     {
         out << point.x << ' ' << point.y << ' ' << point.z;
@@ -50,7 +161,10 @@ void NativeSceneObjWriter::writeScene(std::ostream &out, const SceneGenerationCo
         }
         out << "o part_" << index++ << "\nusemtl " << part.material_name << '\n';
         if (const auto *face = dynamic_cast<const FacialSkinShapeSpecification *>(part.shape_specification.get())) {
-            const auto landmarks = FacialSkinMeshGenerator().evaluateLandmarks(*face);
+            const auto *native_face = part.resolved_geometry && part.resolved_geometry->hasTriangleMesh()
+                ? dynamic_cast<const FacialSkinMesh *>(&part.resolved_geometry->triangleMesh()) : nullptr;
+            const auto landmarks = native_face ? native_face->landmarks : FacialSkinMeshGenerator().evaluateLandmarks(*face);
+            if (native_face) writeElasticEvidence(out, *face, *native_face, part.primary_transform);
             const auto write_landmark = [&](const char *name, const glm::vec3 &point) {
                 out << "# facial_landmark " << name << ' ';
                 writePoint(out, part.primary_transform * glm::vec4(point, 1.0f));

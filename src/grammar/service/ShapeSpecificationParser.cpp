@@ -72,6 +72,12 @@ const std::unordered_map<std::string, OptionArity> &facial_skin_option_arities()
 		{"jawOpen", {1, 1}},
 		{"blink", {2, 2}},
 		{"browRaise", {2, 2}},
+		{"response", {1, 1}},
+		{"skinMaterial", {4, 4}},
+		{"solve", {2, 2}},
+		{"muscle", {10, 10}},
+		{"attachment", {6, 6}},
+		{"tissueRegion", {7, 7}},
 	};
 	return arities;
 }
@@ -1682,7 +1688,9 @@ ShapeSpecificationParser::parseNestedDescriptor(
 		if (!validateOption(shape_name, option, diagnostic)) {
 			return {};
 		}
-		if (option_name != "clip" && option_name != "obstacle" &&
+		const bool repeatable_facial_option = shape_name == "FacialSkin" &&
+			(option_name == "muscle" || option_name == "attachment" || option_name == "tissueRegion");
+		if (!repeatable_facial_option && option_name != "clip" && option_name != "obstacle" &&
 		    option_name != "section" && option_name != "station" &&
 		    option_name != "uCurve" && option_name != "vCurve" &&
 		    option_name != "stationTransform" && option_name != "nominalSection" &&

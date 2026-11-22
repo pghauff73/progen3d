@@ -4160,6 +4160,65 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 		ShapeSpecificationEvaluationResult result;
 		for (const ShapeOptionSyntax &option : descriptor.options()) {
 			const auto &arguments = option.arguments();
+			if (option.optionName() == "response") {
+				if (arguments.size() != 1) {
+					result.diagnostic = "FacialSkin response requires analytic or elastic.";
+					return result;
+				}
+				const std::string response = lowercase_copy(arguments[0].sourceText());
+				if (response == "analytic") candidate.response_mode = FacialSkinResponseMode::Analytic;
+				else if (response == "elastic") candidate.response_mode = FacialSkinResponseMode::Elastic;
+				else {
+					result.diagnostic = "FacialSkin response must be analytic or elastic.";
+					return result;
+				}
+				continue;
+			}
+			if (option.optionName() == "solve") {
+				if (arguments.size() != 2) {
+					result.diagnostic = "FacialSkin solve requires maximum iterations and relative force tolerance.";
+					return result;
+				}
+				candidate.has_solve_option = true;
+				if (!evaluate_integer(arguments[0], "FacialSkin maximum solve iterations", expression_evaluator,
+					&candidate.elastic_solve_settings.maximum_iterations, &result.diagnostic) ||
+				    !evaluate_number(arguments[1], "FacialSkin relative force tolerance", expression_evaluator,
+					&candidate.elastic_solve_settings.relative_force_tolerance)) {
+					if (result.diagnostic.empty()) result.diagnostic = "FacialSkin solve values must be finite numbers.";
+					return result;
+				}
+				continue;
+			}
+			if (option.optionName() == "muscle" || option.optionName() == "attachment" ||
+			    option.optionName() == "tissueRegion") {
+				const std::size_t expected_count = option.optionName() == "muscle" ? 10u :
+					option.optionName() == "attachment" ? 6u : 7u;
+				if (arguments.size() != expected_count) {
+					result.diagnostic = "FacialSkin " + option.optionName() + " has an incorrect argument count.";
+					return result;
+				}
+				const std::string name = arguments[0].sourceText();
+				std::vector<float> values(expected_count - 1u, 0.0f);
+				for (std::size_t index = 1; index < arguments.size(); ++index) {
+					if (!evaluate_number(arguments[index], "FacialSkin " + option.optionName() + " " + name,
+						expression_evaluator, &values[index - 1])) {
+						result.diagnostic = "FacialSkin " + option.optionName() + " '" + name + "' requires finite numeric parameters.";
+						return result;
+					}
+				}
+				if (option.optionName() == "muscle") {
+					candidate.has_muscle_option = true;
+					candidate.muscles.push_back({name, {values[0], values[1]}, {values[2], values[3]},
+						{values[4], values[5]}, values[6], values[7], values[8]});
+				} else if (option.optionName() == "attachment") {
+					candidate.has_attachment_option = true;
+					candidate.attachments.push_back({name, {values[0], values[1]}, {values[2], values[3]}, values[4]});
+				} else {
+					candidate.has_tissue_region_option = true;
+					candidate.tissue_regions.push_back({name, {values[0], values[1]}, {values[2], values[3]}, values[4], values[5]});
+				}
+				continue;
+			}
 			if (option.optionName() == "segments") {
 				if (arguments.size() != 2) {
 					result.diagnostic = "FacialSkin segments requires two arguments.";
@@ -4174,6 +4233,11 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 			std::vector<float *> destinations;
 			if (option.optionName() == "size") {
 				destinations = {&candidate.size.x, &candidate.size.y, &candidate.size.z};
+			} else if (option.optionName() == "skinMaterial") {
+				candidate.has_skin_material_option = true;
+				destinations = {&candidate.elastic_material.young_modulus_pa,
+					&candidate.elastic_material.poisson_ratio, &candidate.elastic_material.thickness_m,
+					&candidate.elastic_material.support_stiffness_n_per_m3};
 			} else if (option.optionName() == "smile") {
 				destinations = {&candidate.controls.smile_left, &candidate.controls.smile_right};
 			} else if (option.optionName() == "jawOpen") {
