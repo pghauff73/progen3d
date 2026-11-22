@@ -48,6 +48,13 @@ def summarize(results):
             "engineering_hours_verified":None,
             "timing_note":"Process runtime is not human engineering effort."}
 
+def junction_advisory(sweep):
+    """Interpret a junction sweep without asserting global watertightness."""
+    return {"within_provisional_gap_threshold":bool(sweep["passed"]),
+            "worst_gap":sweep.get("worst_gap"),
+            "threshold_m":sweep.get("threshold_m"),
+            "is_release_blocking":False}
+
 def run(out,timeout=300):
     out=Path(out)
     if not out.is_absolute():out=ROOT/out
@@ -90,11 +97,7 @@ def run(out,timeout=300):
     if sweep_path.exists():
         try:
             sweep=json.loads(sweep_path.read_text(encoding="utf-8"))
-            advisory["junction_sweep"]={
-                "within_provisional_gap_threshold":bool(sweep["passed"]),
-                "worst_gap":sweep.get("worst_gap"),
-                "threshold_m":sweep.get("threshold_m"),
-                "is_release_blocking":False}
+            advisory["junction_sweep"]=junction_advisory(sweep)
         except (ValueError,KeyError,TypeError) as exc:
             advisory["junction_sweep"]={"parse_error":str(exc),
                                         "is_release_blocking":False}
