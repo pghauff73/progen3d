@@ -29,6 +29,19 @@ class WholeBodyTests(unittest.TestCase):
         self.assertEqual(model["left_arm_skin"][1][0][1],
                          model["right_arm_skin"][1][0][2])
 
+    def test_knee_mesh_continuity(self):
+        from whole_body import leg_mesh
+        for knee_angle in (0,30,60,90,120,140):
+            a=(0.0,0.0,0.0)
+            b=(0.0,-0.43,0.0)
+            rad=math.radians(knee_angle)
+            c=(0.43*math.sin(rad),-0.43-0.43*math.cos(rad),0.0)
+            verts,faces=leg_mesh(a,b,c)
+            self.assertEqual(len(verts),61*20)
+            self.assertEqual(len(faces),60*20*2)
+            self.assertTrue(all(math.isfinite(v) for p in verts for v in p))
+            self.assertTrue(all(0<=i<len(verts) for f in faces for i in f))
+
     def test_invalid_limits(self):
         for kwargs in ({"elbow_left":146},{"knee_right":141},
                        {"torso_lean":36},{"hip_left":111},
