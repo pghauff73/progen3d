@@ -12,6 +12,7 @@ def spindle(a,b,belly=0.025,end_radius=0.006,rings=21,sides=16):
         raise ValueError("invalid muscle envelope parameters")
     # Generate a variable-radius tube along a line segment. The reference
     # radial frame is obtained from the existing spatial segment generator.
+    from spatial_body import segment_surface
     vertices,faces=segment_surface(a,b,1.0,1.0,rings,sides)
     center_delta=tuple(b[k]-a[k] for k in range(3))
     output=[]
