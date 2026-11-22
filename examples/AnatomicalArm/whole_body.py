@@ -91,7 +91,7 @@ def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
         sign=-1 if mirror else 1
         shoulder_origin=joints[side+"_shoulder"].origin
         for part,mesh in arm_assembly(elbow).items():
-            emit(side+"_arm_"+part,mesh,shoulder_origin,shoulder,mirror)
+            emit(side+"_arm_"+part,mesh,shoulder_origin,joints[side+"_shoulder"].angle,mirror)
         # Leg hip pivot is below torso; knee and ankle preserve segment lengths.
         hip_origin=joints[side+"_hip"].origin
         knee_point=joints[side+"_knee"].origin
@@ -101,7 +101,7 @@ def scene(shoulder_left=20,shoulder_right=20,elbow_left=30,elbow_right=30,
         emit(side+"_femur",tube_between(hip_origin,knee_point,0.019,0.015))
         emit(side+"_tibia",tube_between(knee_point,ankle,0.014,0.010))
         emit(side+"_shoulder_joint",tube_between(shoulder_origin,
-             add(shoulder_origin,(0,-0.045,0)),0.048,0.048))
+             joints[side+"_shoulder"].apply((0,-0.045,0)),0.048,0.048))
     return model
 
 def validate(model):
