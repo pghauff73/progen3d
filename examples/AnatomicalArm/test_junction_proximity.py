@@ -1,5 +1,5 @@
 import unittest
-from junction_proximity import proximity,junction_report
+from junction_proximity import proximity,junction_report,audit_junctions
 from whole_body import scene
 
 class JunctionProximityTests(unittest.TestCase):
@@ -22,6 +22,18 @@ class JunctionProximityTests(unittest.TestCase):
             self.assertGreaterEqual(item["minimum_distance_m"],0)
             self.assertGreaterEqual(item["maximum_nearest_distance_m"],
                                     item["minimum_distance_m"])
+
+    def test_gap_audit_reports_all_junctions(self):
+        result=audit_junctions(scene(),threshold_m=0.015)
+        self.assertEqual(len(result["junctions"]),4)
+        for value in result["junctions"].values():
+            self.assertEqual(value["samples"],20)
+            self.assertEqual(value["within_gap_limit"],
+                             value["maximum_nearest_distance_m"]<=0.015)
+
+    def test_invalid_gap_threshold(self):
+        with self.assertRaises(ValueError):
+            audit_junctions(scene(),threshold_m=-0.001)
 
     def test_invalid_stride(self):
         tri=([(0,0,0),(1,0,0),(0,1,0)],[(0,1,2)])
