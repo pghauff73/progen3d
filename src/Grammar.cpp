@@ -1505,7 +1505,8 @@ static bool is_symbolic_shape_argument(const ShapeOptionSyntax &option,
 		// entirely symbolic attachment mode used by some other shapes.
 		return argument_index == 0 &&
 		       (option_name == "response" || option_name == "muscle" ||
-		        option_name == "attachment" || option_name == "tissueRegion");
+		        option_name == "attachment" || option_name == "tissueRegion" ||
+		        option_name == "mouthMesh");
 	}
 	if(option_name == "topology" || option_name == "close" ||
 	   option_name == "mapping" || option_name == "axis" ||

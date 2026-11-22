@@ -1,6 +1,7 @@
 #include "geometry/service/FacialElasticModelAssembler.h"
 
 #include "geometry/service/FacialElasticSolver.h"
+#include "geometry/service/FacialBendingStencilAssembler.h"
 
 #include <algorithm>
 #include <cmath>
@@ -191,6 +192,12 @@ FacialSkinMechanicalState FacialElasticModelAssembler::assemble(
 		muscle.maximum_shortening = definition.maximum_shortening;
 		muscle.stiffness_n_per_m = definition.stiffness_n_per_m;
 		system.muscles.push_back(std::move(muscle));
+	}
+	// Leave the original membrane-only path untouched, including meshes whose
+	// sharp neutral folds are unsuitable for a curvature reconstruction.
+	if (specification.bendingSettings().stiffness_scale > 0.0f) {
+		state.bending_assembly = FacialBendingStencilAssembler().assemble(
+			system, specification.bendingSettings().stiffness_scale);
 	}
 	return state;
 }

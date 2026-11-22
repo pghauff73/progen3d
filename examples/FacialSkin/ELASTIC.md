@@ -1,5 +1,9 @@
 # Native facial membrane and muscle-cable study
 
+This document describes the default membrane-only elastic response. Optional
+`bending(...)` and `mouthMesh(...)` extensions are covered separately in
+[SHELL.md](SHELL.md); omitting them preserves the behavior documented here.
+
 `elastic_study.py` exercises `FacialSkin(response(elastic))` through the actual
 ProGen3D grammar evaluator. It supplies two named tensile cables, changes the
 skin material or a local attachment, and records the resulting equilibria. The

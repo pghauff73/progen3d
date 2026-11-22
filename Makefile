@@ -219,6 +219,7 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/FacialSkinMeshGenerator.cpp \
 	$(SRC_DIR)/geometry/service/FacialSkinSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/FacialElasticModelAssembler.cpp \
+	$(SRC_DIR)/geometry/service/FacialBendingStencilAssembler.cpp \
 	$(SRC_DIR)/geometry/service/FacialElasticSolver.cpp \
 	$(SRC_DIR)/geometry/service/FacialSkinAdmissibility.cpp \
 	$(SRC_DIR)/geometry/service/CurveNetworkSurfaceSpecificationValidator.cpp \
@@ -568,14 +569,30 @@ build/facial-elastic-kernel-test: tests/facial_elastic_kernel_harness.cpp $(BUIL
 	@mkdir -p build
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+build/facial-bending-kernel-test: tests/facial_bending_kernel_harness.cpp $(BUILD_DIR)/src/geometry/service/FacialElasticSolver.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+build/facial-bending-assembly-test: tests/facial_bending_assembly_harness.cpp $(BUILD_DIR)/src/geometry/service/FacialElasticSolver.o $(BUILD_DIR)/src/geometry/service/FacialBendingStencilAssembler.o
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+build/facial-shell-geometry-test: tests/facial_shell_geometry_harness.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
 build/facial-elastic-geometry-test: tests/facial_elastic_geometry_harness.cpp $(FORM_STUDY_OBJS)
 	@mkdir -p build
 	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
 
 .PHONY: facial-skin-check
-facial-skin-check: build/facial-skin-test build/form-study-sample build/facial-elastic-kernel-test build/facial-elastic-geometry-test
+facial-skin-check: build/facial-skin-test build/form-study-sample build/facial-elastic-kernel-test build/facial-elastic-geometry-test build/facial-bending-kernel-test build/facial-bending-assembly-test build/facial-shell-geometry-test
 	./build/facial-skin-test
 	./build/facial-elastic-kernel-test
+	./build/facial-bending-kernel-test
+	./build/facial-bending-assembly-test
+	./build/facial-shell-geometry-test
 	./build/facial-elastic-geometry-test
 	python3 examples/FacialSkin/face_study.py --sampler build/form-study-sample --out build/facial-skin-check --timeline-frames 0
 	python3 examples/FacialSkin/elastic_study.py --sampler build/form-study-sample --out build/facial-elastic-check --timeline-frames 0
+	python3 examples/FacialSkin/shell_study.py --sampler build/form-study-sample --out build/facial-shell-check

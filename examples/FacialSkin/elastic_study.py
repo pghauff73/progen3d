@@ -133,6 +133,8 @@ class NativeElasticSampleService(NativeFaceSampleService):
 class NativeElasticDiagnosticService:
     """Combine exported geometric checks with actual equilibrium evidence."""
 
+    ENERGY_TERMS = ("membraneEnergyJ", "supportEnergyJ", "muscleEnergyJ")
+
     def __init__(self, neutral: dict):
         self.neutral = neutral
         self.geometry = NativeFacialDiagnosticService()
@@ -199,13 +201,13 @@ class NativeElasticDiagnosticService:
             name: 1000*(muscle["restLengthM"]-muscle["lengthM"])
             for name, muscle in muscles.items()}
         result["energyPartitionErrorJ"] = abs(elastic["finalEnergyJ"]-sum(
-            elastic[name] for name in ("membraneEnergyJ", "supportEnergyJ", "muscleEnergyJ")))
+            elastic[name] for name in self.ENERGY_TERMS))
         result["relativeForceTolerance"] = 1.0e-4
         result["passed"] = bool(
             geometry_passed and elastic["converged"]
             and 0 <= elastic["relativeFreeForce"] <= 1.0001e-4
             and elastic["finalEnergyJ"] <= elastic["initialEnergyJ"]+1.0e-12
-            and min(elastic[name] for name in ("membraneEnergyJ", "supportEnergyJ", "muscleEnergyJ")) >= -1.0e-12
+            and min(elastic[name] for name in self.ENERGY_TERMS) >= -1.0e-12
             and elastic["maximumGreenStrain"] <= 0.35000001
             and result["maximumActivationError"] < 2.0e-6
             and result["energyPartitionErrorJ"] < 1.0e-10)

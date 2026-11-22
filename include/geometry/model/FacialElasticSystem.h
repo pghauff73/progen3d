@@ -19,6 +19,26 @@ struct FacialElasticTriangle
     double thickness_m = 0.0;
 };
 
+// A constant rest-chart quadratic reconstruction row. Components represent
+// kappa_xx, kappa_yy and kappa_xy, not the doubled Voigt shear component.
+struct FacialElasticCurvatureWeight
+{
+    std::size_t vertex_index = 0;
+    glm::dvec3 weights_per_m2{0.0};
+};
+
+struct FacialElasticBendingStencil
+{
+    std::array<std::size_t, 3> normal_vertex_indices{};
+    std::vector<FacialElasticCurvatureWeight> curvature_weights;
+    glm::dvec3 rest_curvature_per_m{0.0};
+    double rest_area_m2 = 0.0;
+    // Includes the authored dimensionless scale. For an isotropic sheet,
+    // D = scale * E * h^3 / (12 * (1 - nu^2)), in newton metres.
+    double bending_rigidity_n_m = 0.0;
+    double poisson_ratio = 0.0;
+};
+
 struct FacialElasticInsertionWeight
 {
     std::size_t vertex_index = 0;
@@ -40,6 +60,8 @@ struct FacialElasticSystem
 {
     std::vector<glm::dvec3> rest_positions;
     std::vector<FacialElasticTriangle> triangles;
+    // Empty preserves the membrane-only model and solver path.
+    std::vector<FacialElasticBendingStencil> bending_stencils;
     // Empty arrays disable the corresponding term. Otherwise they match the
     // number of positions. Fixed vertices remain exactly at rest_positions.
     std::vector<double> support_stiffness_n_per_m;
@@ -72,11 +94,14 @@ struct FacialElasticEnergyEvaluation
 {
     double total_energy_j = 0.0;
     double membrane_energy_j = 0.0;
+    double bending_energy_j = 0.0;
     double support_energy_j = 0.0;
     double muscle_energy_j = 0.0;
     double external_potential_j = 0.0;
     // Maximum absolute eigenvalue of the 2x2 Green strain over all triangles.
     double maximum_green_strain = 0.0;
+    // Maximum absolute eigenvalue of the reference-chart curvature change.
+    double maximum_bending_curvature_change_per_m = 0.0;
     // Derivative of total potential with respect to world-coordinate positions.
     // Entries at fixed vertices are retained so reactions can be inspected.
     std::vector<glm::dvec3> gradient_n;

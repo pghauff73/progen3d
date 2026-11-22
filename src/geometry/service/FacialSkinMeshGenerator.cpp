@@ -227,17 +227,274 @@ private:
 	std::array<FacialApertureDomain, 3> apertures_;
 };
 
+// A neutral material-space annulus. Sampling changes discretization only:
+// every front point is evaluated by the unchanged facial surface function.
+class FacialMouthAnnulusSampling
+{
+public:
+	FacialMouthAnnulusSampling(const FacialSkinShapeSpecification &specification,
+		const FacialSkinSurfaceEvaluation &surface)
+		: specification_(specification), surface_(surface)
+	{
+		const int horizontal_scale = specification.horizontalSegments() / 48;
+		const int vertical_scale = specification.verticalSegments() / 64;
+		first_column_ = 10 * horizontal_scale;
+		last_column_ = 38 * horizontal_scale;
+		first_row_ = 12 * vertical_scale;
+		last_row_ = 28 * vertical_scale;
+		middle_column_ = 24 * horizontal_scale;
+		middle_row_ = 20 * vertical_scale;
+		radial_bands_ = 6 * std::max(horizontal_scale, vertical_scale);
+		rim_strips_ = 2 * std::max(horizontal_scale, vertical_scale);
+		buildOuterPerimeter();
+		buildMaterialRings();
+	}
+
+	bool containsInteriorVertex(int column, int row) const
+	{
+		return column > first_column_ && column < last_column_ &&
+			row > first_row_ && row < last_row_;
+	}
+
+	bool containsCell(int column, int row) const
+	{
+		return column >= first_column_ && column < last_column_ &&
+			row >= first_row_ && row < last_row_;
+	}
+
+	int radialBands() const { return radial_bands_; }
+	int rimStrips() const { return rim_strips_; }
+	const std::vector<glm::ivec2> &outerGridCoordinates() const { return outer_grid_coordinates_; }
+	const std::vector<std::vector<glm::vec2>> &materialRings() const { return material_rings_; }
+
+private:
+	static constexpr double pi_ = 3.1415926535897932384626433832795;
+	static constexpr int arc_samples_ = 256;
+
+	glm::dvec2 center() const { return glm::dvec2(0.5, 20.0 / 64.0); }
+	glm::dvec2 innerHalfExtents() const { return glm::dvec2(10.0 / 48.0, 4.0 / 64.0); }
+	glm::dvec2 outerHalfExtents() const { return glm::dvec2(14.0 / 48.0, 8.0 / 64.0); }
+
+	static double rectangleRadius(const glm::dvec2 &direction, const glm::dvec2 &half_extents)
+	{
+		const double horizontal = std::fabs(direction.x) > 1.0e-15
+			? half_extents.x / std::fabs(direction.x) : std::numeric_limits<double>::infinity();
+		const double vertical = std::fabs(direction.y) > 1.0e-15
+			? half_extents.y / std::fabs(direction.y) : std::numeric_limits<double>::infinity();
+		return std::min(horizontal, vertical);
+	}
+
+	glm::vec2 boundaryCoordinate(double angle) const
+	{
+		const glm::dvec2 direction(std::cos(angle), std::sin(angle));
+		return glm::vec2(center() + rectangleRadius(direction, innerHalfExtents()) * direction);
+	}
+
+	glm::dvec3 surfacePosition(const glm::vec2 &uv) const
+	{
+		return glm::dvec3(surface_.evaluatePosition(2.0f * uv.x - 1.0f, 2.0f * uv.y - 1.0f));
+	}
+
+	static double parameterAtArcFraction(const std::vector<double> &lengths, double fraction)
+	{
+		if (fraction <= 0.0) return 0.0;
+		if (fraction >= 1.0) return 1.0;
+		if (!(lengths.back() > 0.0)) throw std::runtime_error("Facial mouth sampling encountered a zero-length arc.");
+		const double target = fraction * lengths.back();
+		const auto after = std::lower_bound(lengths.begin(), lengths.end(), target);
+		const std::size_t index = static_cast<std::size_t>(after - lengths.begin());
+		const double interval = lengths[index] - lengths[index - 1];
+		const double local = interval > 0.0 ? (target - lengths[index - 1]) / interval : 0.0;
+		return (static_cast<double>(index - 1) + local) / static_cast<double>(lengths.size() - 1);
+	}
+
+	void buildOuterPerimeter()
+	{
+		// Counterclockwise from the right cardinal. Each quadrant contains the
+		// same number of existing grid edges, including anisotropic detail levels.
+		for (int row = middle_row_; row < last_row_; ++row) outer_grid_coordinates_.emplace_back(last_column_, row);
+		for (int column = last_column_; column > middle_column_; --column) outer_grid_coordinates_.emplace_back(column, last_row_);
+		for (int column = middle_column_; column > first_column_; --column) outer_grid_coordinates_.emplace_back(column, last_row_);
+		for (int row = last_row_; row > middle_row_; --row) outer_grid_coordinates_.emplace_back(first_column_, row);
+		for (int row = middle_row_; row > first_row_; --row) outer_grid_coordinates_.emplace_back(first_column_, row);
+		for (int column = first_column_; column < middle_column_; ++column) outer_grid_coordinates_.emplace_back(column, first_row_);
+		for (int column = middle_column_; column < last_column_; ++column) outer_grid_coordinates_.emplace_back(column, first_row_);
+		for (int row = first_row_; row < middle_row_; ++row) outer_grid_coordinates_.emplace_back(last_column_, row);
+	}
+
+	glm::vec2 radialCoordinate(double inner_angle, double outer_angle,
+		const glm::vec2 &inner, const glm::vec2 &outer, double fraction) const
+	{
+		if (fraction <= 0.0) return inner;
+		if (fraction >= 1.0) return outer;
+		const double angle = (1.0 - fraction) * inner_angle + fraction * outer_angle;
+		const glm::dvec2 direction(std::cos(angle), std::sin(angle));
+		// Nested rectangle-intersection radii keep the material path outside the
+		// aperture. Straight interpolation between differently distributed loop
+		// points can cut through a corner of the hole.
+		const double radius = (1.0 - fraction) * rectangleRadius(direction, innerHalfExtents()) +
+			fraction * rectangleRadius(direction, outerHalfExtents());
+		return glm::vec2(center() + radius * direction);
+	}
+
+	void buildMaterialRings()
+	{
+		const std::size_t count = outer_grid_coordinates_.size();
+		std::vector<double> inner_angles(count, 0.0);
+		std::vector<glm::vec2> inner_coordinates(count);
+		const int horizontal_half = last_column_ - middle_column_;
+		const int vertical_half = last_row_ - middle_row_;
+		const std::array<int, 8> segment_counts{{vertical_half, horizontal_half, horizontal_half, vertical_half,
+			vertical_half, horizontal_half, horizontal_half, vertical_half}};
+		const double corner = std::atan2(innerHalfExtents().y, innerHalfExtents().x);
+		const std::array<double, 9> angles{{0.0, corner, 0.5 * pi_, pi_ - corner, pi_,
+			pi_ + corner, 1.5 * pi_, 2.0 * pi_ - corner, 2.0 * pi_}};
+		const std::array<glm::vec2, 8> anchors{{
+			{34.0f / 48.0f, 20.0f / 64.0f}, {34.0f / 48.0f, 24.0f / 64.0f},
+			{24.0f / 48.0f, 24.0f / 64.0f}, {14.0f / 48.0f, 24.0f / 64.0f},
+			{14.0f / 48.0f, 20.0f / 64.0f}, {14.0f / 48.0f, 16.0f / 64.0f},
+			{24.0f / 48.0f, 16.0f / 64.0f}, {34.0f / 48.0f, 16.0f / 64.0f}}};
+		std::size_t offset = 0;
+		for (std::size_t segment = 0; segment < segment_counts.size(); ++segment) {
+			const double start = angles[segment];
+			const double span = angles[segment + 1] - start;
+			std::vector<double> lengths(arc_samples_ + 1, 0.0);
+			glm::dvec3 previous = surfacePosition(boundaryCoordinate(start));
+			for (int sample = 1; sample <= arc_samples_; ++sample) {
+				const glm::dvec3 next = surfacePosition(boundaryCoordinate(start +
+					span * static_cast<double>(sample) / arc_samples_));
+				lengths[sample] = lengths[sample - 1] + glm::length(next - previous);
+				previous = next;
+			}
+			for (int point = 0; point < segment_counts[segment]; ++point) {
+				const std::size_t index = offset + point;
+				const double fraction = static_cast<double>(point) / segment_counts[segment];
+				inner_angles[index] = start + span * parameterAtArcFraction(lengths, fraction);
+				inner_coordinates[index] = boundaryCoordinate(inner_angles[index]);
+			}
+			// Pin both semantic cardinals and material rectangle corners. Omitting
+			// the latter would make a straight UV boundary edge cut into the hole.
+			inner_coordinates[offset] = anchors[segment];
+			offset += segment_counts[segment];
+		}
+		material_rings_.assign(radial_bands_ + 1, std::vector<glm::vec2>(count));
+		for (std::size_t index = 0; index < count; ++index) {
+			const glm::ivec2 grid = outer_grid_coordinates_[index];
+			const glm::vec2 outer(static_cast<float>(grid.x) / specification_.horizontalSegments(),
+				static_cast<float>(grid.y) / specification_.verticalSegments());
+			const glm::dvec2 offset = glm::dvec2(outer) - center();
+			double outer_angle = std::atan2(offset.y, offset.x);
+			if (outer_angle < 0.0) outer_angle += 2.0 * pi_;
+			std::vector<double> lengths(arc_samples_ + 1, 0.0);
+			glm::dvec3 previous = surfacePosition(inner_coordinates[index]);
+			for (int sample = 1; sample <= arc_samples_; ++sample) {
+				const glm::vec2 uv = radialCoordinate(inner_angles[index], outer_angle,
+					inner_coordinates[index], outer, static_cast<double>(sample) / arc_samples_);
+				const glm::dvec3 next = surfacePosition(uv);
+				lengths[sample] = lengths[sample - 1] + glm::length(next - previous);
+				previous = next;
+			}
+			for (int band = 0; band <= radial_bands_; ++band) {
+				const double fraction = parameterAtArcFraction(lengths, static_cast<double>(band) / radial_bands_);
+				material_rings_[band][index] = radialCoordinate(inner_angles[index], outer_angle,
+					inner_coordinates[index], outer, fraction);
+			}
+		}
+	}
+
+	const FacialSkinShapeSpecification &specification_;
+	const FacialSkinSurfaceEvaluation &surface_;
+	int first_column_ = 0;
+	int last_column_ = 0;
+	int first_row_ = 0;
+	int last_row_ = 0;
+	int middle_column_ = 0;
+	int middle_row_ = 0;
+	int radial_bands_ = 0;
+	int rim_strips_ = 0;
+	std::vector<glm::ivec2> outer_grid_coordinates_;
+	std::vector<std::vector<glm::vec2>> material_rings_;
+};
+
+// A single smooth vertex normal must lie in the common hemisphere of its
+// incident facets. At a sharp lip cardinal, an angle-weighted average can
+// point behind one bank even when a compatible normal exists. This service
+// changes shading only; positions, connectivity and mechanical normals stay
+// untouched. The finite candidate set finds the centre of the smallest
+// spherical cap containing the incident unit normals.
+class FacialCompatibleShadingNormalSelection
+{
+public:
+	glm::vec3 select(const glm::vec3 &preferred_normal,
+		const std::vector<glm::dvec3> &incident_normals, std::size_t vertex_index) const
+	{
+		const glm::dvec3 preferred = glm::normalize(glm::dvec3(preferred_normal));
+		const double preferred_margin = minimumDot(preferred, incident_normals);
+		if (preferred_margin > 1.0e-5) return preferred_normal;
+		glm::dvec3 best = preferred;
+		double best_margin = preferred_margin;
+		const auto consider = [&](const glm::dvec3 &candidate) {
+			const double magnitude = glm::length(candidate);
+			if (magnitude < 1.0e-12) return;
+			const glm::dvec3 direction = candidate / magnitude;
+			const double margin = minimumDot(direction, incident_normals);
+			if (margin > best_margin + 1.0e-12 ||
+				(std::fabs(margin - best_margin) <= 1.0e-12 && glm::dot(direction, preferred) > glm::dot(best, preferred))) {
+				best = direction;
+				best_margin = margin;
+			}
+		};
+		for (std::size_t first = 0; first < incident_normals.size(); ++first) {
+			consider(incident_normals[first]);
+			for (std::size_t second = first + 1; second < incident_normals.size(); ++second) {
+				consider(incident_normals[first] + incident_normals[second]);
+				for (std::size_t third = second + 1; third < incident_normals.size(); ++third) {
+					const glm::dvec3 intersection = glm::cross(incident_normals[first] - incident_normals[second],
+						incident_normals[first] - incident_normals[third]);
+					consider(intersection);
+					consider(-intersection);
+				}
+			}
+		}
+		if (best_margin <= 1.0e-7)
+			throw std::runtime_error("Facial quality mesh vertex " + std::to_string(vertex_index) +
+				" has no stable common shading-normal hemisphere.");
+		// Keep as much of the usual angle-weighted direction as possible while
+		// retaining a positive margin after conversion back to float normals.
+		const double required_margin = std::min(1.0e-3, 0.25 * best_margin);
+		double fraction = 0.0;
+		for (const auto &normal : incident_normals) {
+			const double before = glm::dot(preferred, normal);
+			if (before >= required_margin) continue;
+			fraction = std::max(fraction, (required_margin - before) / (glm::dot(best, normal) - before));
+		}
+		const glm::dvec3 selected = glm::normalize((1.0 - fraction) * preferred + fraction * best);
+		return glm::normalize(glm::vec3(selected));
+	}
+
+private:
+	static double minimumDot(const glm::dvec3 &direction, const std::vector<glm::dvec3> &normals)
+	{
+		double minimum = 1.0;
+		for (const auto &normal : normals) minimum = std::min(minimum, glm::dot(direction, normal));
+		return minimum;
+	}
+};
+
 class FacialSkinMeshConstruction
 {
 public:
 	explicit FacialSkinMeshConstruction(const FacialSkinShapeSpecification &specification)
 		: specification_(specification), surface_(specification), mesh_(std::make_shared<FacialSkinMesh>())
 	{
+		if (specification.mouthMeshMode() == FacialMouthMeshMode::Quality)
+			mouth_annulus_ = std::make_unique<FacialMouthAnnulusSampling>(specification, surface_);
 	}
 
 	GeneratedPrimitiveMesh build()
 	{
 		addSkinGrid();
+		if (mouth_annulus_) addQualityMouthAnnulus();
 		for (const FacialApertureDomain &aperture : surface_.apertures()) addApertureMargin(aperture);
 		mesh_->landmarks = evaluateAnalyticalLandmarks(specification_);
 		if (specification_.responseMode() == FacialSkinResponseMode::Elastic) applyElasticResponse();
@@ -318,6 +575,88 @@ private:
 		surface_tags_.emplace_back(MeshSurfaceRole::Outer, boundary);
 	}
 
+	double triangleQuality(int first, int second, int third, unsigned boundary) const
+	{
+		if (boundary == 0) {
+			const glm::dvec2 edge_one = glm::dvec2(mesh_->texcoords[second]) - glm::dvec2(mesh_->texcoords[first]);
+			const glm::dvec2 edge_two = glm::dvec2(mesh_->texcoords[third]) - glm::dvec2(mesh_->texcoords[first]);
+			if (edge_one.x * edge_two.y - edge_one.y * edge_two.x <= 0.0) return -1.0;
+		}
+		const glm::dvec3 first_edge = glm::dvec3(mesh_->vertices[second]) - glm::dvec3(mesh_->vertices[first]);
+		const glm::dvec3 second_edge = glm::dvec3(mesh_->vertices[third]) - glm::dvec3(mesh_->vertices[first]);
+		const double denominator = glm::dot(first_edge, first_edge) + glm::dot(second_edge, second_edge) +
+			glm::dot(second_edge - first_edge, second_edge - first_edge);
+		return denominator > 0.0 ? 2.0 * std::sqrt(3.0) * glm::length(glm::cross(first_edge, second_edge)) / denominator : -1.0;
+	}
+
+	void addQualityQuadrilateral(int first, int second, int third, int fourth,
+		unsigned boundary, std::size_t parity)
+	{
+		const double first_diagonal = std::min(triangleQuality(first, second, third, boundary),
+			triangleQuality(first, third, fourth, boundary));
+		const double second_diagonal = std::min(triangleQuality(first, second, fourth, boundary),
+			triangleQuality(second, third, fourth, boundary));
+		if (std::max(first_diagonal, second_diagonal) <= 0.0)
+			throw std::runtime_error("Facial quality mouth mesh has an invalid material quadrilateral.");
+		const bool choose_first = std::fabs(first_diagonal - second_diagonal) <= 1.0e-8
+			? parity % 2 == 0 : first_diagonal > second_diagonal;
+		if (choose_first) {
+			addTriangle(first, second, third, boundary);
+			addTriangle(first, third, fourth, boundary);
+		} else {
+			addTriangle(first, second, fourth, boundary);
+			addTriangle(second, third, fourth, boundary);
+		}
+	}
+
+	void addQualityMouthAnnulus()
+	{
+		const auto &material_rings = mouth_annulus_->materialRings();
+		const std::size_t count = mouth_annulus_->outerGridCoordinates().size();
+		std::vector<std::vector<int>> rings(material_rings.size(), std::vector<int>(count));
+		for (std::size_t band = 0; band < material_rings.size(); ++band) {
+			for (std::size_t index = 0; index < count; ++index) {
+				if (band + 1 == material_rings.size()) {
+					const glm::ivec2 coordinate = mouth_annulus_->outerGridCoordinates()[index];
+					rings[band][index] = grid_indices_[gridOffset(coordinate.x, coordinate.y)];
+				} else {
+					const glm::vec2 uv = material_rings[band][index];
+					rings[band][index] = addVertex(surface_.evaluatePosition(2.0f * uv.x - 1.0f, 2.0f * uv.y - 1.0f),
+						glm::vec3(uv, 0.0f));
+				}
+			}
+		}
+		for (std::size_t band = 0; band + 1 < rings.size(); ++band) {
+			for (std::size_t index = 0; index < count; ++index) {
+				const std::size_t next = (index + 1) % count;
+				addQualityQuadrilateral(rings[band][index], rings[band + 1][index],
+					rings[band + 1][next], rings[band][next], 0, band + index);
+			}
+		}
+		quality_mouth_margin_ = std::move(rings.front());
+	}
+
+	void addQualityMouthMargin()
+	{
+		std::vector<int> previous = quality_mouth_margin_;
+		const float depth = specification_.size().z * 0.035f;
+		const int strips = mouth_annulus_->rimStrips();
+		for (int strip = 1; strip <= strips; ++strip) {
+			std::vector<int> next;
+			for (int outer_index : quality_mouth_margin_) {
+				glm::vec3 position = mesh_->vertices[outer_index];
+				position.z -= depth * static_cast<float>(strip) / strips;
+				next.push_back(addVertex(position, mesh_->texcoords[outer_index]));
+			}
+			for (std::size_t index = 0; index < previous.size(); ++index) {
+				const std::size_t following = (index + 1) % previous.size();
+				addQualityQuadrilateral(previous[index], previous[following], next[following], next[index],
+					3, index + static_cast<std::size_t>(strip));
+			}
+			previous = std::move(next);
+		}
+	}
+
 	void addSkinGrid()
 	{
 		const int horizontal = specification_.horizontalSegments();
@@ -329,6 +668,7 @@ private:
 				for (const auto &aperture : surface_.apertures()) {
 					inside_aperture |= aperture.containsInteriorVertex(column, row);
 				}
+				if (mouth_annulus_) inside_aperture |= mouth_annulus_->containsInteriorVertex(column, row);
 				if (inside_aperture) continue;
 				const float texture_u = static_cast<float>(column) / horizontal;
 				const float texture_v = static_cast<float>(row) / vertical;
@@ -343,6 +683,7 @@ private:
 				for (const auto &aperture : surface_.apertures()) {
 					inside_aperture |= aperture.containsCell(column, row);
 				}
+				if (mouth_annulus_) inside_aperture |= mouth_annulus_->containsCell(column, row);
 				if (inside_aperture) continue;
 				const int first = grid_indices_[gridOffset(column, row)];
 				const int second = grid_indices_[gridOffset(column + 1, row)];
@@ -356,6 +697,10 @@ private:
 
 	void addApertureMargin(const FacialApertureDomain &aperture)
 	{
+		if (mouth_annulus_ && aperture.purpose == FacialAperturePurpose::Mouth) {
+			addQualityMouthMargin();
+			return;
+		}
 		std::vector<int> outer_margin;
 		for (int column = aperture.first_column; column < aperture.last_column; ++column)
 			outer_margin.push_back(grid_indices_[gridOffset(column, aperture.first_row)]);
@@ -405,11 +750,28 @@ private:
 			const float magnitude = glm::length(normal);
 			normal = magnitude > 0.0f ? normal / magnitude : glm::vec3(0, 0, 1);
 		}
+		if (mouth_annulus_) enforceCompatibleQualityNormals();
+	}
+
+	void enforceCompatibleQualityNormals()
+	{
+		std::vector<std::vector<glm::dvec3>> incident_normals(mesh_->vertices.size());
+		for (const auto &face : mesh_->faces) {
+			const glm::dvec3 normal = glm::normalize(glm::cross(
+				glm::dvec3(mesh_->vertices[face.y]) - glm::dvec3(mesh_->vertices[face.x]),
+				glm::dvec3(mesh_->vertices[face.z]) - glm::dvec3(mesh_->vertices[face.x])));
+			for (int vertex : {face.x, face.y, face.z}) incident_normals[vertex].push_back(normal);
+		}
+		const FacialCompatibleShadingNormalSelection selection;
+		for (std::size_t index = 0; index < mesh_->normals.size(); ++index)
+			mesh_->normals[index] = selection.select(mesh_->normals[index], incident_normals[index], index);
 	}
 
 	const FacialSkinShapeSpecification &specification_;
 	FacialSkinSurfaceEvaluation surface_;
 	std::shared_ptr<FacialSkinMesh> mesh_;
+	std::unique_ptr<FacialMouthAnnulusSampling> mouth_annulus_;
+	std::vector<int> quality_mouth_margin_;
 	std::vector<int> grid_indices_;
 	std::vector<MeshSurfaceTag> surface_tags_;
 };

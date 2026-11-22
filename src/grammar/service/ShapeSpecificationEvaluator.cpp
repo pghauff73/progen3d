@@ -4174,6 +4174,21 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 				}
 				continue;
 			}
+			if (option.optionName() == "mouthMesh") {
+				if (arguments.size() != 1) {
+					result.diagnostic = "FacialSkin mouthMesh requires legacy or quality.";
+					return result;
+				}
+				candidate.has_mouth_mesh_option = true;
+				const std::string mode = lowercase_copy(arguments[0].sourceText());
+				if (mode == "legacy") candidate.mouth_mesh_mode = FacialMouthMeshMode::Legacy;
+				else if (mode == "quality") candidate.mouth_mesh_mode = FacialMouthMeshMode::Quality;
+				else {
+					result.diagnostic = "FacialSkin mouthMesh must be legacy or quality.";
+					return result;
+				}
+				continue;
+			}
 			if (option.optionName() == "solve") {
 				if (arguments.size() != 2) {
 					result.diagnostic = "FacialSkin solve requires maximum iterations and relative force tolerance.";
@@ -4238,6 +4253,9 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 				destinations = {&candidate.elastic_material.young_modulus_pa,
 					&candidate.elastic_material.poisson_ratio, &candidate.elastic_material.thickness_m,
 					&candidate.elastic_material.support_stiffness_n_per_m3};
+			} else if (option.optionName() == "bending") {
+				candidate.has_bending_option = true;
+				destinations = {&candidate.bending_settings.stiffness_scale};
 			} else if (option.optionName() == "smile") {
 				destinations = {&candidate.controls.smile_left, &candidate.controls.smile_right};
 			} else if (option.optionName() == "jawOpen") {
