@@ -37,6 +37,21 @@ class CoupledArmTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             CoupledArm(friction=1.1)
 
+    def test_substep_animation_export(self):
+        with tempfile.TemporaryDirectory() as directory:
+            result=simulate(directory,frames=3,fps=30,substeps=4)
+            self.assertEqual(result["substeps"],4)
+            self.assertEqual(len(result["records"]),3)
+            self.assertAlmostEqual(result["records"][-1]["angle"],angle_at(2/30))
+            self.assertTrue(result["passed"],result["records"])
+
+    def test_invalid_substeps(self):
+        with tempfile.TemporaryDirectory() as directory:
+            for value in (0,-1,33,1.5):
+                with self.subTest(value=value):
+                    with self.assertRaises(ValueError):
+                        simulate(directory,frames=2,substeps=value)
+
     def test_invalid_angle(self):
         with self.assertRaises(ValueError):
             CoupledArm().step(150)
