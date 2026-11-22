@@ -12,6 +12,7 @@ from arm_milestone_a import mesh_tube, write_obj
 from body_skeleton import skeleton
 from joint_collars import collar_from_ring
 from surface_stitch import stitch_limb_collar
+from body_render_layers import render_subset,check_duplicate_geometry
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def scale(a,k): return tuple(k*x for x in a)
@@ -193,11 +194,15 @@ def validate(model):
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument("--out",default="build/anatomical-body")
+    parser.add_argument("--render-layer",choices=("skin","clothed","diagnostic"),default="skin")
     args=parser.parse_args()
     out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     model=scene()
-    report=validate(model)
-    write_obj(out/"whole_body.obj",model)
+    selected=render_subset(model,args.render_layer)
+    report=validate(selected)
+    report["render_layer"]=args.render_layer
+    report["duplicate_geometry"]=check_duplicate_geometry(selected)
+    write_obj(out/"whole_body.obj",selected)
     (out/"validation.json").write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps(report))
     raise SystemExit(0 if report["passed"] else 1)
