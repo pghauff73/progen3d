@@ -45,6 +45,11 @@ class CoupledArmTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             result=simulate(directory,frames=3,fps=30,substeps=4)
             self.assertEqual(result["substeps"],4)
+            self.assertEqual(result["solver_steps"],9)
+            self.assertEqual(len(result["step_records"]),9)
+            self.assertGreaterEqual(result["worst_clearance_step"],0)
+            self.assertLess(result["worst_clearance_step"],9)
+            self.assertLessEqual(result["minimum_clearance_m"],min(r["minimum_radial_gap_m"] for r in result["records"])+1e-9)
             self.assertEqual(len(result["records"]),3)
             self.assertAlmostEqual(result["records"][-1]["angle"],angle_at(2/30))
             self.assertTrue(result["passed"],result["records"])
