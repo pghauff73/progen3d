@@ -23,6 +23,18 @@ class CoupledArmTests(unittest.TestCase):
             self.assertTrue((Path(directory)/"simulation.json").exists())
             self.assertTrue((Path(directory)/"frame_0002.obj").exists())
 
+    def test_triangle_contact_mode(self):
+        arm=CoupledArm(contact_mode='triangle',friction=0.15)
+        result=arm.step(15,dt=1/60,iterations=2)
+        self.assertEqual(result['contact_mode'],'triangle')
+        self.assertTrue(result['passed'],result)
+
+    def test_invalid_contact_parameters(self):
+        with self.assertRaises(ValueError):
+            CoupledArm(contact_mode='unsupported')
+        with self.assertRaises(ValueError):
+            CoupledArm(friction=1.1)
+
     def test_invalid_angle(self):
         with self.assertRaises(ValueError):
             CoupledArm().step(150)
