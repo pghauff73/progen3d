@@ -18,7 +18,12 @@ def stitch_limb_collar(limb,collar,sides=20,tolerance=1e-8):
     vertices=list(lv)+list(cv[sides:])
     mapping={i:i for i in range(sides)}
     mapping.update({i:len(lv)+(i-sides) for i in range(sides,len(cv))})
-    # Limb and collar are both parameterized away from their first ring.\n    # Their shared rim edges therefore have the same directed winding.\n    # Reverse the collar faces to make shared-edge orientations opposite.\n    faces=list(lf)+[tuple(mapping[i] for i in (f[0],f[2],f[1])) for f in cf]
+    # Both patches are parameterized away from their first ring.
+    # Reverse the collar winding so shared rim edges have opposite directions.
+    faces=list(lf)+[
+        tuple(mapping[i] for i in (face[0],face[2],face[1]))
+        for face in cf
+    ]
     return vertices,faces
 
 def edge_incidence(faces):
