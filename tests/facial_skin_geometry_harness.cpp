@@ -1,3 +1,4 @@
+#include "geometry/model/FacialSkinMesh.h"
 #include "geometry/service/FacialSkinMeshGenerator.h"
 #include "geometry/service/FacialSkinSpecificationValidator.h"
 #include "geometry/service/MeshTopologyAnalyzer.h"
@@ -305,6 +306,34 @@ int main()
         require(same_vertices(*id_mesh.mesh(), *generator.generate(*id_spec, nullptr).mesh()),
                 "identity geometry was not deterministic");
         verify_globe_clearance(id_mesh, generator.evaluateLandmarks(*id_spec));
+        // Exact conservative synthetic-image candidate. Native neutral shell acceptance.
+        {
+            FacialSkinShapeSpecificationCandidate image_case;
+            image_case.size = glm::vec3(0.147856752f, 0.190053555f, 0.041584712f);
+            image_case.response_mode = FacialSkinResponseMode::Elastic;
+            image_case.mouth_mesh_mode = FacialMouthMeshMode::Quality;
+            image_case.bending_settings.stiffness_scale = 1.0f;
+            image_case.elastic_solve_settings.maximum_iterations = 2000;
+            image_case.identity_shape.coefficients = {{
+               -0.318377907f, -0.396077859f, -0.11000334f, 0.026361894f,
+                0.0334482388f, 0.00607827553f, -0.0785442325f, -0.19507461f,
+               -0.0323726589f, 0.0101081618f, 0.0281101268f, 0.0212656997f,
+                0.00895506312f, -0.00280620794f, -0.010567688f, -0.0165941254f,
+               -0.00728710912f, -0.00728710912f, 0.0985430625f, -0.0669824484f,
+                0.092219893f, 0.0381805303f, -0.0471011509f, -0.08508488f
+            }};
+            const auto image_spec = validated(image_case);
+            std::string image_diagnostic;
+            const auto image_mesh = generator.generate(*image_spec, &image_diagnostic);
+            const auto *image_face = dynamic_cast<const FacialSkinMesh *>(image_mesh.mesh().get());
+            require(image_face && image_face->mechanical_state,
+                    "Image-derived native rest face rejected: " + image_diagnostic);
+            verify_geometry(image_mesh, image_case.size.x);
+            require(image_face->mechanical_state->solve_result.converged &&
+                    image_face->mechanical_state->solve_result.iterations == 0,
+                    "Image-derived native neutral shell has prestress");
+            verify_globe_clearance(image_mesh, generator.evaluateLandmarks(*image_spec));
+        }
         candidate.identity_shape.coefficients[0] = std::numeric_limits<float>::quiet_NaN();
         std::string identity_diagnostic;
         require(!FacialSkinSpecificationValidator().validate(candidate, &identity_diagnostic),
