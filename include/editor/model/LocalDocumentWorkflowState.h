@@ -14,6 +14,7 @@ public:
 	bool status_is_error = false;
 	std::filesystem::path last_successful_directory;
 	std::filesystem::path selected_example;
+	std::string selected_reuse_ref;
 	std::optional<LocalFileDialogRequest> pending_dialog_request;
 
 	void requestDialog(LocalFileDialogRequest request)

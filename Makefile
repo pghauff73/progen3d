@@ -38,6 +38,7 @@ LIBXML2_CFLAGS ?= $(shell pkg-config --cflags libxml-2.0 2>/dev/null)
 LIBXML2_LIBS ?= $(shell pkg-config --libs libxml-2.0 2>/dev/null)
 EIGEN3_CFLAGS ?= $(shell pkg-config --cflags eigen3 2>/dev/null)
 CRYPTO_LIBS ?= -lcrypto
+SQLITE3_LIBS ?= -lsqlite3
 
 ifeq ($(strip $(JSONCPP_LIBS)),)
 JSONCPP_LIBS = -ljsoncpp
@@ -69,12 +70,13 @@ COMMON_INCLUDE_FLAGS = \
 
 IMGUI_USER_CONFIG_DEFINE = -DIMGUI_USER_CONFIG=\"imgui_user_config.h\"
 NFD_BACKEND_DEFINE = -DNFD_PORTAL
-CXXFLAGS = -g -O3 -std=c++17 $(COMMON_INCLUDE_FLAGS) $(IMGUI_USER_CONFIG_DEFINE) $(NFD_BACKEND_DEFINE)
+CXXFLAGS = -g -O3 -DPROGEN3D_REUSE_DATABASE -std=c++17 $(COMMON_INCLUDE_FLAGS) $(IMGUI_USER_CONFIG_DEFINE) $(NFD_BACKEND_DEFINE)
 CFLAGS = -g -O3 $(COMMON_INCLUDE_FLAGS)
 DEPFLAGS = -MMD -MP
 APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 
 APP_CPP_SOURCES = \
+	$(SRC_DIR)/grammar/reuse/GrammarReuseCatalogue.cpp \
 	$(SRC_DIR)/physics/model/BodyAirflow.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
@@ -509,11 +511,14 @@ OBJS = $(APP_OBJS) $(IMGUI_OBJS) $(C_OBJS)
 $(APP_OBJS): CXXFLAGS += $(APPLICATION_WARNING_FLAGS)
 
 LDFLAGS =
-LIBS = $(GLFW_LIB) $(GLFW_PLATFORM_LIBS) -ldl -lm -lpthread $(CURL_LIBS) $(DBUS_LIBS) $(JSONCPP_LIBS) $(LIBXML2_LIBS) $(CRYPTO_LIBS)
+LIBS = $(GLFW_LIB) $(GLFW_PLATFORM_LIBS) -ldl -lm -lpthread $(CURL_LIBS) $(DBUS_LIBS) $(JSONCPP_LIBS) $(LIBXML2_LIBS) $(CRYPTO_LIBS) $(SQLITE3_LIBS)
 
 .PHONY: all clean docs docs-check
 
-all: $(TARGET) $(LEGACY_TARGET)
+all: $(TARGET) $(LEGACY_TARGET) p3d-reuse
+
+p3d-reuse: tools/reuse_catalogue_cli.cpp $(BUILD_DIR)/src/AppPaths.o $(BUILD_DIR)/src/grammar/reuse/GrammarReuseCatalogue.o
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(SQLITE3_LIBS)
 
 docs:
 	python3 tools/generate_educational_docs.py
@@ -537,7 +542,7 @@ $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf $(BUILD_DIR) $(TARGET) $(LEGACY_TARGET)
+	rm -rf $(BUILD_DIR) $(TARGET) $(LEGACY_TARGET) p3d-reuse
 
 -include $(OBJS:.o=.d)
 
@@ -554,3 +559,11 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+build/reuse-catalogue-test: tests/reuse_catalogue_test.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: reuse-check
+reuse-check: build/reuse-catalogue-test
+	PROGEN3D_APPDIR="$(CURDIR)" ./build/reuse-catalogue-test

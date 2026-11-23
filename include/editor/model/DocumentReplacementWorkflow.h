@@ -5,6 +5,7 @@ enum class DocumentReplacementAction {
 	CreateNewDocument,
 	OpenLocalDocument,
 	OpenBundledExample,
+	OpenReuseGrammar,
 	OpenCloudDocument,
 	ExitApplication
 };

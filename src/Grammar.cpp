@@ -24,6 +24,9 @@
 #include "Context.h"
 #include "Scope.h"
 #include "grammar.h"
+#ifdef PROGEN3D_REUSE_DATABASE
+#include "grammar/reuse/GrammarReuseCatalogue.h"
+#endif
 #include "GrammarRuntime.h"
 #include "Solution.h"
 #include "grammar/model/AxialProfileDescriptorSyntax.h"
@@ -5231,6 +5234,56 @@ void GrammarDocument::clearParsedState()
 }
 
 void GrammarDocument::rebuildFromLines(const std::string &success_message)
+{
+#ifdef PROGEN3D_REUSE_DATABASE
+    std::optional<ExpandedGrammarSource> expanded;
+    try {
+        expanded = GrammarReuseCatalogue::expandImports(lines);
+    } catch (const GrammarImportError& error) {
+        set_grammar_uses_time(this, false);
+        report_grammar_issue(this, error.line, error.what());
+        return;
+    }
+    if (expanded) {
+        const std::size_t authored_count = lines.size();
+        lines.swap(expanded->lines);
+        try {
+            parseCurrentLines(success_message);
+        } catch (...) {
+            lines.swap(expanded->lines);
+            throw;
+        }
+        lines.swap(expanded->lines);
+        const auto declaration = [&](int generated) {
+            if (generated < 0 || static_cast<std::size_t>(generated) < authored_count) return -1;
+            const auto index = static_cast<std::size_t>(generated) - authored_count;
+            return index < expanded->declarationLines.size() ? expanded->declarationLines[index] : -1;
+        };
+        for (auto* token : tokens_new) {
+            const int line = declaration(token->source_start_line);
+            if (line < 0) continue;
+            token->source_start_line = token->source_end_line = line;
+            token->source_start_column = 0;
+            token->source_end_column = static_cast<int>(lines[line].size());
+        }
+        for (auto& diagnostic : error_details) {
+            const int line = declaration(diagnostic.line);
+            if (line < 0) continue;
+            diagnostic.line = line;
+            diagnostic.start_column = 0;
+            diagnostic.end_column = static_cast<int>(lines[line].size());
+        }
+        for (int& line : error_lines) {
+            const int mapped = declaration(line);
+            if (mapped >= 0) line = mapped;
+        }
+        return;
+    }
+#endif
+    parseCurrentLines(success_message);
+}
+
+void GrammarDocument::parseCurrentLines(const std::string &success_message)
 {
 	const bool quiet_diagnostics = grammarEvaluationDiagnosticsQuiet(this);
 	set_grammar_uses_time(this, false);

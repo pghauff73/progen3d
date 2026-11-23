@@ -158,3 +158,31 @@ Application sources compile with `-Wall -Wextra -Wpedantic`. Vendored Dear ImGui
 ## Clean-State Requirement
 
 Do not use retained object files as build evidence. Run `make clean` before validating changes to public headers, source lists, compiler flags, or third-party linkage.
+
+## Reusable grammar catalogue
+
+Install the SQLite 3 development library (Debian package `libsqlite3-dev`) before running `make`.
+The desktop editor reads catalogue 1.4.0 from `resources/reuse/catalogue.sqlite3` beside the executable.
+You can select another compatible database with `PROGEN3D_REUSE_DB`.
+The **Reuse** tab searches titles and references, opens editable copies and copies import declarations.
+An import can be used anywhere a grammar rule is called:
+
+```text
+@use Idler = "mechanics/bearing-family@1.0.0#model" with front=1 rear=1
+Start -> [ Idler ] [ T(0.04 0 0) Idler ]
+```
+
+Both `progen3d-editor-gui` and the lightweight `p3d-reuse` executable accept these headless commands:
+
+```bash
+./p3d-reuse --list-reuse bearing
+./p3d-reuse --export-reuse 'mechanics/bearing-family@1.0.0#625zz' > bearing.p3d
+./p3d-reuse --expand-reuse assembly.p3d > standalone.p3d
+```
+
+Run `make reuse-check` to compare every standalone and imported mesh with the native scene generator.
+
+To refresh the compact runtime database from your complete SQLite catalogue, run
+`python3 tools/sync_reuse_catalogue.py /path/to/ProGen3D_Grammar_Database.sqlite3`.
+The sync checks each standalone grammar's SHA-256 and carries over its search text,
+parameter ranges, integer constraints and catalogue revision.
