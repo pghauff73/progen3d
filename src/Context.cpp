@@ -2596,10 +2596,23 @@ void SceneRenderableState::restoreInitialState()
 	SceneObjectState::restoreInitialState();
 }
 
+void ScenePrimitiveInstance::refreshFlexibleGeometry()
+{
+	resolved_geometry = ResolvedPrimitiveGeometry::createTriangleMesh(
+		std::make_shared<Mesh>(flexible_body->surfaceMesh()), {}, true,
+		PrimitiveVolumeEvidence::createUndefined(), PrimitiveCollisionPolicy::Disabled);
+	collision_geometry_cache = {};
+	collision_geometry_dirty = true;
+}
+
 void ScenePrimitiveInstance::restoreInitialState()
 {
 	SceneRenderableState::restoreInitialState();
 	air_load = {};
+	if (flexible_body) {
+		flexible_body->reset();
+		refreshFlexibleGeometry();
+	}
 	primary_transform = initial_primary_transform;
 	secondary_transform = initial_secondary_transform;
 	dual_scales = initial_dual_scales;
@@ -2662,7 +2675,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	}
 
 	Primitive *primitive = primitive_for_type(this, type);
-	if (primitive == nullptr && shape_specification) {
+	if (primitive == nullptr && (shape_specification || pending_flexible_body_)) {
 		primitive = ProceduralShape;
 	}
 	if (scope == nullptr) {
@@ -2671,10 +2684,15 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	}
 
 	std::string geometry_diagnostic;
-	const std::shared_ptr<const ResolvedPrimitiveGeometry> resolved_geometry =
-		primitive_geometry_resolver_->resolvePrimitive(
+	PrimitiveInstance instance;
+	if (pending_flexible_body_) {
+		instance.flexible_body = std::move(pending_flexible_body_);
+		instance.refreshFlexibleGeometry();
+	} else {
+		instance.resolved_geometry = primitive_geometry_resolver_->resolvePrimitive(
 			type, shape_specification, &geometry_diagnostic);
-	if (!resolved_geometry || primitive == nullptr) {
+	}
+	if (!instance.resolved_geometry || primitive == nullptr) {
 		if(!geometry_diagnostic.empty()){
 			errorout("Grammar execution error: " + geometry_diagnostic);
 		}
@@ -2682,10 +2700,8 @@ void SceneGenerationContext::addPrimitive(std::string type,
 		return;
 	}
 
-	PrimitiveInstance instance;
 	instance.primitive = primitive;
 	instance.type = std::move(type);
-	instance.resolved_geometry = resolved_geometry;
 	instance.shape_specification = std::move(shape_specification);
 	instance.primary_transform = scope->getTransform();
 	instance.secondary_transform = scope->getTransform2();
@@ -2707,7 +2723,14 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	instance.initial_rotational_velocity = instance.rotational_velocity;
 	float resolved_mass = kDefaultMass;
 	std::string mass_diagnostic;
-	if(!resolve_instance_mass(instance,
+	if (instance.flexible_body) {
+		auto &body = *instance.flexible_body;
+		if (has_pending_mass_ && !has_pending_density_) body.setTotalMass(pending_mass_);
+		const auto toLocal = glm::transpose(glm::mat3_cast(transform_orientation(instance.primary_transform)));
+		body.setInitialMotion(toLocal * instance.velocity, toLocal * glm::radians(instance.rotational_velocity));
+		resolved_mass = static_cast<float>(body.totalMass());
+		has_flexible_bodies_ = true;
+	} else if(!resolve_instance_mass(instance,
 	                          pending_mass_,
 	                          pending_density_,
 	                          has_pending_density_,
@@ -2717,7 +2740,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 		clearPendingPrimitiveState();
 		return;
 	}
-	instance.mass = immovable ? kDefaultMass : resolved_mass;
+	instance.mass = immovable && !instance.flexible_body ? kDefaultMass : resolved_mass;
 	instance.initial_mass = instance.mass;
 	instance.airflow = pending_airflow_;
 	instance.source_start_line = source_start_line;
@@ -2736,7 +2759,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	instance.removed = false;
 	instance.initial_removed = false;
 	instance.sleeping = false;
-	primitive_instances.push_back(instance);
+	primitive_instances.push_back(std::move(instance));
 
 	PrimitiveInstance &stored_instance = primitive_instances.back();
 	if (hasActiveSpatialObject()) {
@@ -3388,8 +3411,14 @@ void SceneGenerationContext::setPendingRotationalVelocity(const glm::vec3 &rotat
 		clamp_vector_magnitude(rotational_velocity, kMaxRotationalSpeed);
 }
 
+void SceneGenerationContext::setPendingFlexibleBody(FlexibleBody body)
+{
+	pending_flexible_body_ = std::move(body);
+}
+
 void SceneGenerationContext::setPendingMass(float mass)
 {
+	has_pending_mass_ = true;
 	pending_mass_ = std::max(mass, kMinimumMass);
 }
 
@@ -3552,6 +3581,8 @@ void SceneGenerationContext::stepCollisionParticles(float delta_time)
 
 void SceneGenerationContext::clearPendingPrimitiveState()
 {
+	pending_flexible_body_.reset();
+	has_pending_mass_ = false;
 	pending_airflow_.reset();
 	pending_velocity_ = glm::vec3(0.0f);
 	pending_rotational_velocity_ = glm::vec3(0.0f);
@@ -3597,6 +3628,14 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 	}
 	for (std::size_t index = 0; index < primitive_instances.size(); ++index) {
 		PrimitiveInstance &instance = primitive_instances[index];
+		if (instance.flexible_body) {
+			if (is_dynamic_simulation_active(instance)) {
+				const auto rotation = glm::mat3_cast(transform_orientation(instance.primary_transform));
+				instance.flexible_body->advance(delta_time, glm::transpose(rotation) * gravity_acceleration_);
+				instance.refreshFlexibleGeometry();
+			}
+			continue;
+		}
 		glm::mat3 body_basis(1);
 		if (instance.airflow && !instance.removed && (instance.immovable || instance.simulation_active)) {
 			body_basis = glm::mat3_cast(transform_orientation(instance.primary_transform));

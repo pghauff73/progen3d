@@ -6,6 +6,8 @@ The repository includes examples ranging from a single cube to spatially aware m
 
 [Airflow studies](examples/Airflow/README.md) include a force-at-a-point test, a cart with a measured propeller map and a ducted fan on a fixed stand.
 
+Simulate a pinned wire, a circulating belt on two guides and a deforming membrane on the native physics timeline. [Flexible object grammar and examples](examples/FlexibleBodies/README.md)
+
 ![ProGen3D editor displaying the SMB-OMv2 spatially aware modern building](docs/images/readme/progen3d-editor-smb-omv2-full.png)
 
 ## Contents

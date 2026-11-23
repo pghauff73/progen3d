@@ -4822,6 +4822,13 @@ void upload_context_preview_buffers(EditorWorkspaceSession *app_state, Context *
 	upload_dynamic_preview_buffers(context);
 }
 
+void upload_simulated_preview_buffers(Context *context)
+{
+	if (context->hasFlexibleBodies())
+		upload_static_preview_buffers(&current_workspace_session(), context);
+	upload_dynamic_preview_buffers(context);
+}
+
 void step_preview_simulation(float delta_time)
 {
 	if (grammar == nullptr || grammar->context == nullptr || delta_time <= 0.0f) {
@@ -4841,7 +4848,7 @@ void step_preview_simulation(float delta_time)
 		++step_count;
 	}
 	if (advanced_simulation) {
-		upload_dynamic_preview_buffers(grammar->context);
+		upload_simulated_preview_buffers(grammar->context);
 	}
 	preview_simulation_interpolation_alpha() =
 		std::clamp(preview_simulation_accumulated_time() / kPreviewSimulationStep, 0.0f, 1.0f);
@@ -4855,7 +4862,7 @@ void step_preview_simulation_once(float delta_time)
 
 	reset_preview_simulation_timing();
 	grammar->context->stepSimulation(delta_time);
-	upload_dynamic_preview_buffers(grammar->context);
+	upload_simulated_preview_buffers(grammar->context);
 	preview_simulation_interpolation_alpha() = 1.0f;
 }
 

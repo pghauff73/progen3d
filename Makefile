@@ -75,6 +75,7 @@ DEPFLAGS = -MMD -MP
 APPLICATION_WARNING_FLAGS = -Wall -Wextra -Wpedantic
 
 APP_CPP_SOURCES = \
+	$(SRC_DIR)/physics/model/FlexibleBody.cpp \
 	$(SRC_DIR)/physics/model/BodyAirflow.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationTriangleDistributionService.cpp \
 	$(SRC_DIR)/vegetation/service/VegetationRepresentationFidelityEvaluationService.cpp \
@@ -554,3 +555,11 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+build/flexible-body-test: tests/flexible_body_test.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: flexible-body-check
+flexible-body-check: build/flexible-body-test
+	./build/flexible-body-test
