@@ -149,6 +149,9 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/lighting/service/PreviewLightingFrameFactory.cpp \
 	$(SRC_DIR)/lighting/service/LightingValidationService.cpp \
 	$(SRC_DIR)/lighting/service/LightingEvidenceHashService.cpp \
+	$(SRC_DIR)/electrical/model/ElectricalMachineModel.cpp \
+	$(SRC_DIR)/electrical/service/ElectricalFieldEvaluator.cpp \
+	$(SRC_DIR)/grammar/service/ElectricalDeclaration.cpp \
 	$(SRC_DIR)/electrical/model/ElectricalControlGraph.cpp \
 	$(SRC_DIR)/electrical/service/LightingStateEvaluator.cpp \
 	$(SRC_DIR)/electrical/service/ElectricalControlValidationService.cpp \
@@ -554,3 +557,11 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+build/electrical-machine-test: tests/electrical_machine_test.cpp $(FORM_STUDY_OBJS)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@
+
+.PHONY: electrical-check
+electrical-check: build/electrical-machine-test
+	./build/electrical-machine-test

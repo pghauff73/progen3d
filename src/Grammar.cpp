@@ -30,6 +30,7 @@
 #include "grammar/model/ExtrudeProfileDescriptorSyntax.h"
 #include "grammar/service/ShapeSpecificationEvaluator.h"
 #include "grammar/service/ShapeSpecificationParser.h"
+#include "grammar/service/ElectricalDeclaration.h"
 #include "grammar/service/LightingDeclarationParser.h"
 #include "grammar/service/SpatialConnectionDeclarationParser.h"
 #include "grammar/service/SpatialConstraintDeclarationParser.h"
@@ -1788,6 +1789,10 @@ static void validate_semantic_tokens(Grammar *grammar,
 			continue;
 		}
 
+		if (auto *declaration = dynamic_cast<ElectricalDeclaration *>(token)) {
+			for (const auto &[field, expression] : declaration->expressions)
+				validate_expression_symbols(grammar, token, expression, field, visible_names);
+		}
 		resolve_deferred_material(grammar, token, visible_names);
 		validate_shape_descriptor_expressions(grammar, token, visible_names);
 		for(const std::string &expression : token->var_names){
@@ -4283,6 +4288,18 @@ static void parse_tokens_into(Grammar *grammar,
 			append_owned_token(std::move(constraint_token));
 			continue;
 		}
+		else if (const auto kind = ElectricalDeclaration::recognize(token_str, raw_tokens, *index)) {
+			auto declaration = std::make_unique<ElectricalDeclaration>(token_str, *kind);
+			std::string diagnostic;
+			const bool valid = declaration->parse(raw_tokens, index, parse_expression_argument, diagnostic);
+			assign_token_source_range(declaration.get(), raw_token_spans, token_start_index, *index);
+			if (!valid) {
+				report_grammar_issue(grammar, make_action_token_diagnostic(declaration.get(), diagnostic));
+				throw(1);
+			}
+			append_owned_token(std::move(declaration));
+			continue;
+		}
 		else if(token_str=="Light"){
 			std::unique_ptr<SceneLightDeclarationToken> light_token(
 				new SceneLightDeclarationToken());
@@ -5373,6 +5390,14 @@ void GrammarDocument::Reread()
 
 void GrammarDocument::update_token(Token *check_token){
 	if(check_token == NULL)return;
+	if (auto *declaration = dynamic_cast<ElectricalDeclaration *>(check_token)) {
+		for (const auto &[field, expression] : declaration->expressions) {
+			float value = 0;
+			if (!evaluate_expression_checked(this, check_token, expression, field, &value)) return;
+			declaration->values[field] = value;
+		}
+		return;
+	}
 	const auto resolve_argument = [&](std::size_t argument_index,
 	                                  std::size_t expression_index,
 	                                  const std::string &purpose) -> bool {
@@ -6178,6 +6203,14 @@ void GrammarDocument::generateGeometry()
 	std::size_t primitive_count = 0;
 	std::vector<Token *> scope_stack;
 	std::vector<Token *> spatial_object_stack;
+	std::map<ElectricalDeclaration::Kind, std::vector<const ElectricalDeclaration *>> electricalDeclarations;
+	const ElectricalDeclaration *pendingShaft = nullptr;
+	struct ShaftAttachment {
+		const ElectricalDeclaration *declaration;
+		Token *primitive;
+		std::size_t ordinal;
+	};
+	std::vector<ShaftAttachment> shaftAttachments;
 	AirflowDeclaration airflow;
 	Token *last_airflow_token = nullptr;
 	std::unordered_map<Token *, std::shared_ptr<const BodyAirflow>> body_airflow;
@@ -6192,6 +6225,21 @@ void GrammarDocument::generateGeometry()
 					"Scene execution exceeded the action budget of " +
 					    std::to_string(kMaxExpandedActionCount) + "."));
 			return;
+		}
+		if (auto *declaration = dynamic_cast<const ElectricalDeclaration *>(token)) {
+			if (declaration->kind == ElectricalDeclaration::Kind::Shaft) {
+				if (pendingShaft) {
+					report_grammar_issue(this, make_action_token_diagnostic(token, "Only one MotorShaft can bind the next primitive."));
+					return;
+				}
+				pendingShaft = declaration;
+			} else {
+				electricalDeclarations[declaration->kind].push_back(declaration);
+			}
+		}
+		if (pendingShaft && token->token_name == "I") {
+			shaftAttachments.push_back({pendingShaft, token, primitive_count});
+			pendingShaft = nullptr;
 		}
 		std::string airflow_error;
 		const std::string &action = token->token_name;
@@ -6301,14 +6349,53 @@ void GrammarDocument::generateGeometry()
 			"Airflow declaration has no following primitive."));
 		return;
 	}
+	if (pendingShaft) {
+		report_grammar_issue(this, make_action_token_diagnostic(pendingShaft, "MotorShaft requires a following I primitive."));
+		return;
+	}
+	ElectricalMachineModel machines;
+	// Enum order links wires before coils, then magnets before motors.
+	for (const auto &group : electricalDeclarations) {
+		for (const auto *declaration : group.second) {
+			const std::string diagnostic = declaration->addTo(machines);
+			if (!diagnostic.empty()) {
+				report_grammar_issue(this, make_action_token_diagnostic(declaration, diagnostic));
+				return;
+			}
+		}
+	}
+	const std::size_t firstBody = context->primitive_instances.size();
+	std::unordered_set<Token *> shaftPrimitives;
+	for (const auto &attachment : shaftAttachments) {
+		shaftPrimitives.insert(attachment.primitive);
+		const auto diagnostic = attachment.declaration->attachShaft(machines, firstBody + attachment.ordinal,
+			attachment.primitive->immovable, body_airflow.count(attachment.primitive) != 0);
+		if (!diagnostic.empty()) {
+			report_grammar_issue(this, make_action_token_diagnostic(attachment.declaration, diagnostic));
+			return;
+		}
+	}
+	for (const auto &attachment : shaftAttachments) {
+		if (!machines.shafts.at(attachment.declaration->objectId()).rotorBody) {
+			report_grammar_issue(this, make_action_token_diagnostic(attachment.declaration, "MotorShaft stator requires a rotor."));
+			return;
+		}
+	}
+	std::size_t expectedBodies = firstBody;
 	context->air_environment = air_environment;
 	for(Token *token : tokens_new){
 		if(token == NULL)continue;
 		const auto air = body_airflow.find(token);
-		if (air != body_airflow.end()) context->setPendingAirflow(air->second);
+		if (air != body_airflow.end()) context->setPendingAirflow(air->second, shaftPrimitives.count(token) != 0);
 		token->performAction(context);
 		if(!error_details.empty())return;
+		if (!shaftAttachments.empty() && token->token_name == "I" &&
+		    context->primitive_instances.size() != ++expectedBodies) {
+			report_grammar_issue(this, make_action_token_diagnostic(token, "Rigid-body geometry could not be generated for the coupled scene."));
+			return;
+		}
 	}
+	context->replaceElectricalMachines(std::move(machines));
 	std::string spatial_diagnostic;
 	if(!context->finalizeSpatialBuildingModel(&spatial_diagnostic)){
 		GrammarDiagnostic diagnostic;

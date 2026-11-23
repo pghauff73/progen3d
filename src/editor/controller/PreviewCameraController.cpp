@@ -6,7 +6,7 @@
 namespace {
 
 constexpr float kPi = 3.14159265358979323846f;
-constexpr float kMinimumDistance = 1.25f;
+constexpr float kMinimumDistance = PreviewProjectionConfiguration::minimum_orbit_distance;
 constexpr float kMaximumDistance = 80.0f;
 
 glm::vec3 rotate_around_axis(const glm::vec3 &vector,
@@ -224,6 +224,6 @@ void PreviewCameraController::fitToBounds(float center_x,
 	const float minimum_half_field_of_view =
 		std::max(0.18f, std::min(field_of_view_x, field_of_view_y) * 0.5f);
 	const float fitted_distance =
-		(bounding_radius / std::sin(minimum_half_field_of_view)) * 1.08f + 0.85f;
+		(bounding_radius / std::sin(minimum_half_field_of_view)) * 1.08f + std::min(0.85f, bounding_radius * 0.5f);
 	distance_ = std::clamp(fitted_distance, kMinimumDistance, kMaximumDistance);
 }

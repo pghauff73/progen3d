@@ -4,6 +4,8 @@
 #include "electrical/model/LightSwitch.h"
 #include "electrical/model/LightingCircuit.h"
 
+#include "electrical/model/ElectricalMachineModel.h"
+
 #include <vector>
 
 class ElectricalControlGraph
@@ -27,9 +29,12 @@ public:
 	std::vector<LightingCircuit> &circuits() { return circuits_; }
 	const std::vector<LightingCircuit> &circuits() const { return circuits_; }
 
+	const ElectricalMachineModel &machines() const { return machines_; }
+	void replaceMachines(ElectricalMachineModel machines) { machines_ = std::move(machines); }
 	void clear();
 
 private:
+	ElectricalMachineModel machines_;
 	std::vector<LightFixtureObject> fixtures_;
 	std::vector<LightSwitch> switches_;
 	std::vector<LightingCircuit> circuits_;

@@ -998,12 +998,12 @@ glm::quat spin_increment(vec3 omega, float seconds)
 	return speed > 0 ? glm::angleAxis(speed * seconds, omega / speed) : glm::quat(1, 0, 0, 0);
 }
 
-void advance_airflow_rotation(PrimitiveInstance &body, const glm::mat3 &basis, float dt, vec3 centre)
+void advance_body_rotation(PrimitiveInstance &body, const glm::mat3 &basis, float dt,
+                           vec3 centre, vec3 impulse)
 {
 	const vec3 omega = glm::radians(body.rotational_velocity);
 	const vec3 inertia = body.airflow->principalInertia;
 	const vec3 momentum = basis * (inertia * (glm::transpose(basis) * omega));
-	const vec3 impulse = body.air_load.moment * dt;
 	const glm::mat3 mid = glm::mat3_cast(spin_increment(omega, dt * 0.5f)) * basis;
 	const vec3 mid_omega = mid * ((glm::transpose(mid) * (momentum + 0.5f * impulse)) / inertia);
 	const glm::quat change = spin_increment(mid_omega, dt);
@@ -2704,6 +2704,9 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	instance.velocity = immovable ? vec3(0.0f) : pending_velocity_;
 	instance.initial_velocity = instance.velocity;
 	instance.rotational_velocity = immovable ? vec3(0.0f) : pending_rotational_velocity_;
+	if (!pending_motor_shaft_) {
+		instance.rotational_velocity = clamp_vector_magnitude(instance.rotational_velocity, kMaxRotationalSpeed);
+	}
 	instance.initial_rotational_velocity = instance.rotational_velocity;
 	float resolved_mass = kDefaultMass;
 	std::string mass_diagnostic;
@@ -3264,6 +3267,11 @@ bool SceneGenerationContext::addLightingCircuit(
 	       lighting_scene_definition_->addCircuit(std::move(circuit), diagnostic);
 }
 
+void SceneGenerationContext::replaceElectricalMachines(ElectricalMachineModel machines)
+{
+	lighting_scene_definition_->replaceMachines(std::move(machines));
+}
+
 const LightingSceneDefinition &SceneGenerationContext::lightingSceneDefinition() const
 {
 	return *lighting_scene_definition_;
@@ -3384,8 +3392,7 @@ void SceneGenerationContext::setPendingVelocity(const glm::vec3 &velocity)
 
 void SceneGenerationContext::setPendingRotationalVelocity(const glm::vec3 &rotational_velocity)
 {
-	pending_rotational_velocity_ =
-		clamp_vector_magnitude(rotational_velocity, kMaxRotationalSpeed);
+	pending_rotational_velocity_ = rotational_velocity;
 }
 
 void SceneGenerationContext::setPendingMass(float mass)
@@ -3401,9 +3408,60 @@ AirflowResult SceneGenerationContext::inspectAirflow(const ScenePrimitiveInstanc
 	                                  instance.velocity, glm::radians(instance.rotational_velocity), time, vectors);
 }
 
-void SceneGenerationContext::setPendingAirflow(std::shared_ptr<const BodyAirflow> definition)
+std::optional<MotorShaftSample> SceneGenerationContext::inspectMotorShaft(const std::string &motorId) const
+{
+    const auto &machines = lightingSceneDefinition().electricalControlGraph().machines();
+    const auto binding = machines.shafts.find(motorId);
+    if (binding == machines.shafts.end()) return std::nullopt;
+    const auto &shaft = binding->second;
+    if (!shaft.rotorBody || *shaft.rotorBody >= primitive_instances.size()) return std::nullopt;
+    const auto &rotor = primitive_instances[*shaft.rotorBody];
+    if (rotor.removed || rotor.immovable || !rotor.simulation_active || !rotor.airflow) return std::nullopt;
+    const auto basis = glm::mat3_cast(transform_orientation(rotor.primary_transform));
+    const vec3 worldAxis = glm::normalize(basis * shaft.rotorAxis);
+    vec3 relativeVelocity = rotor.rotational_velocity; // world degrees/s
+    const auto projectedInverseInertia = [](const vec3 &axis, const vec3 &inertia) {
+        const glm::dvec3 direction(axis);
+        return glm::dot(direction, direction / glm::dvec3(inertia));
+    };
+    double inverseInertia = projectedInverseInertia(shaft.rotorAxis, rotor.airflow->principalInertia);
+    if (shaft.statorBody) {
+        if (*shaft.statorBody >= primitive_instances.size()) return std::nullopt;
+        const auto &stator = primitive_instances[*shaft.statorBody];
+        if (stator.removed || (!stator.immovable && !stator.simulation_active)) return std::nullopt;
+        if (!stator.immovable) {
+            if (!stator.airflow) return std::nullopt;
+            relativeVelocity -= stator.rotational_velocity;
+            const auto statorBasis = glm::mat3_cast(transform_orientation(stator.primary_transform));
+            inverseInertia += projectedInverseInertia(glm::transpose(statorBasis) * worldAxis, stator.airflow->principalInertia);
+        }
+    }
+    const double rpm = glm::dot(glm::dvec3(relativeVelocity), glm::dvec3(worldAxis)) / 6.0;
+    return MotorShaftSample{worldAxis, rpm, inverseInertia,
+        ElectricalFieldEvaluator::motorAtSpeed(machines.motors.at(motorId), machines, rpm)};
+}
+
+std::vector<glm::vec3> SceneGenerationContext::motorAngularImpulses(float seconds) const
+{
+    const auto &machines = lightingSceneDefinition().electricalControlGraph().machines();
+    if (machines.shafts.empty()) return {};
+    std::vector<vec3> impulses(primitive_instances.size(), vec3(0));
+    // Sample every shaft before advancing any body, independent of declaration order.
+    for (const auto &[motorId, shaft] : machines.shafts) {
+        const auto sample = inspectMotorShaft(motorId);
+        if (!sample) continue;
+        const double impulse = ElectricalFieldEvaluator::shaftAngularImpulse(machines.motors.at(motorId), *sample, seconds);
+        const vec3 worldImpulse = sample->worldAxis * static_cast<float>(impulse);
+        impulses[*shaft.rotorBody] += worldImpulse;
+        if (shaft.statorBody) impulses[*shaft.statorBody] -= worldImpulse;
+    }
+    return impulses;
+}
+
+void SceneGenerationContext::setPendingAirflow(std::shared_ptr<const BodyAirflow> definition, bool motor_shaft)
 {
 	pending_airflow_ = std::move(definition);
+	pending_motor_shaft_ = motor_shaft;
 }
 
 void SceneGenerationContext::setPendingDensity(float density)
@@ -3553,6 +3611,7 @@ void SceneGenerationContext::stepCollisionParticles(float delta_time)
 void SceneGenerationContext::clearPendingPrimitiveState()
 {
 	pending_airflow_.reset();
+	pending_motor_shaft_ = false;
 	pending_velocity_ = glm::vec3(0.0f);
 	pending_rotational_velocity_ = glm::vec3(0.0f);
 	pending_mass_ = kDefaultMass;
@@ -3591,19 +3650,21 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 		scene_bounds.valid = true;
 	}
 
+	const auto shaftImpulses = motorAngularImpulses(delta_time);
 	std::vector<const CollisionGeometry *> collision_geometries(primitive_instances.size(), nullptr);
 	for (PrimitiveInstance &instance : primitive_instances) {
 		capture_previous_render_state(&instance);
 	}
 	for (std::size_t index = 0; index < primitive_instances.size(); ++index) {
 		PrimitiveInstance &instance = primitive_instances[index];
+		const vec3 shaftImpulse = shaftImpulses.empty() ? vec3(0) : shaftImpulses[index];
 		glm::mat3 body_basis(1);
 		if (instance.airflow && !instance.removed && (instance.immovable || instance.simulation_active)) {
 			body_basis = glm::mat3_cast(transform_orientation(instance.primary_transform));
 			instance.air_load = instance.airflow->evaluate(air_environment, body_basis,
 				instance.velocity, glm::radians(instance.rotational_velocity), time);
 			if (instance.sleeping && (glm::length(instance.air_load.force) > 0 ||
-			                          glm::length(instance.air_load.moment) > 0))
+			                          glm::length(instance.air_load.moment) > 0 || shaftImpulse != vec3(0)))
 				wake_instance(&instance);
 		}
 		if (!is_dynamic_simulation_active(instance)) continue;
@@ -3621,7 +3682,8 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 			continue;
 		}
 		if (instance.airflow) {
-			advance_airflow_rotation(instance, body_basis, delta_time, geometry->center_of_mass);
+			advance_body_rotation(instance, body_basis, delta_time, geometry->center_of_mass,
+                                  instance.air_load.moment * delta_time + shaftImpulse);
 			continue;
 		}
 		if (glm::dot(instance.rotational_velocity, instance.rotational_velocity) > (kMinDelta * kMinDelta)) {
