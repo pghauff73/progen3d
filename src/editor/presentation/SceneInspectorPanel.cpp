@@ -36,7 +36,33 @@ void SceneInspectorPanel::draw(const ScenePrimitiveInspection &inspection,
 	            inspection.material_name.empty() ? "<none>" : inspection.material_name.c_str());
 	ImGui::Text("Mass: %.3f", inspection.mass);
 	ImGui::SameLine();
-	ImGui::Text("Estimated density: %.3f", inspection.estimated_density);
+	if (inspection.surface_material.enabled) {
+		const auto &state = inspection.surface_state;
+		const auto &balance = inspection.motion_balance;
+		ImGui::Text("Density %.6g kg/m^3 | volume %.6g m^3", inspection.mass / state.volume, state.volume);
+		auto vector = [](const char *name, const glm::dvec3 &v) {
+			ImGui::Text("%s: %.5g, %.5g, %.5g", name, v.x, v.y, v.z);
+		};
+		vector("Contact force (N)", state.force);
+		vector("Contact torque (N m)", state.torque);
+		vector("Momentum (kg m/s)", balance.linear_momentum);
+		vector("Spin momentum (kg m^2/s)", balance.spin_momentum);
+		ImGui::Text("Kinetic energy (J): translation %.6g, rotation %.6g", balance.translation_energy, balance.rotation_energy);
+		ImGui::Text("Potential energy (J): gravity %.6g, contact %.6g", balance.gravity_potential, state.elastic_energy);
+		ImGui::Text("Peak local deformation (m): normal %.5g, shear %.5g", state.normal_compression, state.shear_displacement);
+		const auto &layer = inspection.surface_material;
+		if (layer.patch_area > 0 && layer.layer_thickness > 0) {
+			ImGui::Text("Peak layer strain: normal %.5g, shear %.5g",
+			            state.normal_compression/layer.layer_thickness, state.shear_displacement/layer.layer_thickness);
+			ImGui::Text("Peak layer stress (Pa): normal %.5g, shear %.5g",
+			            state.normal_compression*layer.normal_stiffness/layer.patch_area,
+			            state.shear_displacement*layer.shear_stiffness/layer.patch_area);
+		}
+		ImGui::Text("Temperature %.8g K | generated heat %.6g J | conducted heat %+.6g J",
+		            state.temperature, state.friction_heat, state.conducted_heat);
+	} else {
+		ImGui::Text("Estimated density: %.3f", inspection.estimated_density);
+	}
 	ImGui::Text("Mobility: %s", inspection.immovable ? "Immovable" : "Dynamic");
 	ImGui::Text("Watertight: %s", inspection.watertight ? "Yes" : "No");
 	ImGui::Text("Volume evidence: %s", inspection.volume_evidence.c_str());

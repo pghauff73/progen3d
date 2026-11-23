@@ -1,0 +1,10 @@
+# Oblique impact in SI units. Play the physics timeline and select either sphere.
+# The hot sphere enters from the left. Both bodies are free to move and spin.
+Start ->
+    G(0 0 -1 0)
+    [ T(-0.55 0.14 0) S(1 1 1) P(4) V(1.8 0.75 0)
+      Surface(330) I(Sphere material(copperpolishedmetal) 1 0.25) ]
+    [ T(0.55 0 0) S(1 1 1) P(4)
+      Surface(295) I(Sphere material(bluepaintmatte) 1 0.25) ]
+
+Surface(kelvin) -> ElasticModulus(400000 0.25 0.30) ContactLayer(0.001 0.1) ContactThermal(kelvin 80 120)

@@ -15,6 +15,7 @@ The repository includes examples ranging from a single cube to spatially aware m
 - [Complete GUI reference](#complete-gui-reference)
 - [Grammar primer](#grammar-primer)
 - [Hands-on form studies — from a two-rule fan to a constant-length lantern](examples/FormStudies/README.md)
+- [Surface contact physics and gear examples](docs/SURFACE_CONTACT.md)
 - [Modern Buildings](#modern-buildings)
 - [Building validation workflow](#building-validation-workflow)
 - [Command-line reference](#command-line-reference)

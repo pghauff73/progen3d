@@ -373,6 +373,8 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/vehicle/service/RedAwdHatchbackMvpv2Builder.cpp \
 	$(SRC_DIR)/vehicle/service/RedAwdHatchbackMvp25Builder.cpp \
 	$(SRC_DIR)/vehicle/service/ModernCarMvp26FamilyBuilder.cpp \
+	$(SRC_DIR)/physics/service/ExtrudedProfileContact.cpp \
+	$(SRC_DIR)/physics/service/SurfaceContactSolver.cpp \
 	$(SRC_DIR)/physics/service/ConvexCollisionDetector.cpp \
 	$(SRC_DIR)/spatial/graph/SpatialObjectRegistry.cpp \
 	$(SRC_DIR)/spatial/graph/SpatialContainmentTree.cpp \
@@ -554,3 +556,10 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+.PHONY: check-surface-contact
+check-surface-contact: build/surface-contact-checks
+	./build/surface-contact-checks
+
+build/surface-contact-checks: tests/surface_contact_checks.cpp $(FORM_STUDY_OBJS)
+	$(CXX) $(CXXFLAGS) $< $(FORM_STUDY_OBJS) $(LIBS) -o $@

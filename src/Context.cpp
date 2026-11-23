@@ -20,6 +20,8 @@
 #include "geometry/service/PrimitiveGeometryResolver.h"
 #include "physics/model/ConvexCollisionShape.h"
 #include "physics/service/ConvexCollisionDetector.h"
+#include "physics/service/SurfaceContactSolver.h"
+#include "physics/service/ExtrudedProfileContact.h"
 #include "vehicle/model/VehicleJointGraph.h"
 #include "vehicle/service/VehicleKinematicValidationService.h"
 
@@ -338,7 +340,7 @@ bool can_collide(const PrimitiveInstance &instance)
 	case PrimitiveCollisionPolicy::Disabled:
 		return false;
 	case PrimitiveCollisionPolicy::StaticTriangleMesh:
-		return instance.immovable;
+		return instance.immovable || ExtrudedProfileContact::accepts(instance);
 	case PrimitiveCollisionPolicy::ConvexMesh:
 		return true;
 	}
@@ -641,7 +643,7 @@ PrimitiveBounds bounds_for_vertices(const std::array<vec3, N> &vertices)
 	return bounds;
 }
 
-CollisionTriangle build_collision_triangle(const vec3 &a, const vec3 &b, const vec3 &c)
+CollisionTriangle build_collision_triangle(const vec3 &a, const vec3 &b, const vec3 &c, float minimum_area_vector = kMinDelta)
 {
 	CollisionTriangle triangle;
 	triangle.vertices = {a, b, c};
@@ -649,7 +651,7 @@ CollisionTriangle build_collision_triangle(const vec3 &a, const vec3 &b, const v
 	triangle.centroid = (a + b + c) / 3.0f;
 	const vec3 raw_normal = glm::cross(b - a, c - a);
 	const float normal_length = glm::length(raw_normal);
-	if (normal_length > kMinDelta) {
+	if (normal_length > minimum_area_vector) {
 		triangle.normal = raw_normal / normal_length;
 		triangle.valid = true;
 	}
@@ -905,7 +907,7 @@ CollisionGeometry build_collision_geometry(const PrimitiveInstance &instance)
 			const vec3 &a = transformed_vertices[static_cast<std::size_t>(face.x)];
 			const vec3 &b = transformed_vertices[static_cast<std::size_t>(face.y)];
 			const vec3 &c = transformed_vertices[static_cast<std::size_t>(face.z)];
-			CollisionTriangle triangle = build_collision_triangle(a, b, c);
+			CollisionTriangle triangle = build_collision_triangle(a, b, c, instance.surface_material.enabled ? 0.0f : kMinDelta);
 			geometry.triangles[face_index] = triangle;
 			if (!triangle.valid) {
 				continue;
@@ -924,6 +926,24 @@ CollisionGeometry build_collision_geometry(const PrimitiveInstance &instance)
 		geometry.centroid = geometry.bounds.center;
 		geometry.center_of_mass =
 			center_of_mass_for_triangles(geometry.triangles, geometry.bounds.center);
+		if (instance.surface_material.enabled && instance.type == "Sphere" &&
+		    (!instance.shape_specification || instance.shape_specification->isDefaultFamilyShape())) {
+			const glm::mat3 axes(cache.primary_transform);
+			const vec3 scale(glm::length(axes[0]), glm::length(axes[1]), glm::length(axes[2]));
+			const float length_tolerance = 1e-5f * scale.x;
+			const float dot_tolerance = length_tolerance * scale.x;
+			if (scale.x > 0 && std::abs(scale.x-scale.y) <= length_tolerance &&
+			    std::abs(scale.x-scale.z) <= length_tolerance &&
+			    std::abs(glm::dot(axes[0],axes[1])) <= dot_tolerance &&
+			    std::abs(glm::dot(axes[0],axes[2])) <= dot_tolerance &&
+			    std::abs(glm::dot(axes[1],axes[2])) <= dot_tolerance) {
+				geometry.analytic_sphere_radius = scale.x * 0.5f;
+				geometry.center_of_mass = geometry.bounds.center = vec3(cache.primary_transform[3]);
+				geometry.bounds.half_extents = vec3(geometry.analytic_sphere_radius);
+				geometry.bounds.min = geometry.bounds.center-geometry.bounds.half_extents;
+				geometry.bounds.max = geometry.bounds.center+geometry.bounds.half_extents;
+			}
+		}
 		geometry.average_radial_distance_to_vertex =
 			average_radial_distance_to_vertices(transformed_vertices, geometry.center_of_mass);
 		geometry.valid = true;
@@ -966,7 +986,7 @@ mat4 build_rotation_delta(const vec3 &delta_degrees)
 
 void apply_world_translation(PrimitiveInstance *instance, const vec3 &delta)
 {
-	if (instance == nullptr || glm::dot(delta, delta) <= (kMinDelta * kMinDelta)) {
+	if (instance == nullptr || glm::dot(delta, delta) <= (instance->surface_material.enabled ? 0.0f : kMinDelta * kMinDelta)) {
 		return;
 	}
 
@@ -996,6 +1016,34 @@ glm::quat spin_increment(vec3 omega, float seconds)
 {
 	const float speed = glm::length(omega);
 	return speed > 0 ? glm::angleAxis(speed * seconds, omega / speed) : glm::quat(1, 0, 0, 0);
+}
+
+// Integrate world angular momentum, including an applied aerodynamic moment.
+// A shaft projects both the driving moment and angular velocity onto its axis.
+void advance_surface_rotation(PrimitiveInstance &body, double dt, const vec3 &centre)
+{
+	auto &inertia = body.surface_state.inertia;
+	const glm::dvec3 omega = glm::radians(glm::dvec3(body.rotational_velocity));
+	const glm::dvec3 impulse = glm::dvec3(body.air_load.moment) * dt;
+	const glm::dvec3 momentum = inertia * omega;
+	const glm::dvec3 axis = body.surface_material.shaft_axis;
+	glm::dvec3 mid_omega;
+	if (body.surface_material.onShaft()) {
+		mid_omega = axis * glm::dot(axis, momentum + 0.5 * impulse) / glm::dot(axis, inertia * axis);
+	} else {
+		const glm::dmat3 half_basis(glm::mat3_cast(spin_increment(vec3(omega), float(dt * 0.5))));
+		const glm::dmat3 mid_inertia = half_basis * inertia * glm::transpose(half_basis);
+		mid_omega = glm::inverse(mid_inertia) * (momentum + 0.5 * impulse);
+	}
+	if (glm::dot(mid_omega, mid_omega) > 0.0) {
+		const glm::quat rotation = spin_increment(vec3(mid_omega), float(dt));
+		const glm::dmat3 basis(glm::mat3_cast(rotation));
+		rotate_about_pivot(&body, glm::mat4_cast(rotation), centre);
+		inertia = basis * inertia * glm::transpose(basis);
+	}
+	body.rotational_velocity = glm::degrees(body.surface_material.onShaft() ?
+		axis * glm::dot(axis, momentum + impulse) / glm::dot(axis, inertia * axis) :
+		glm::inverse(inertia) * (momentum + impulse));
 }
 
 void advance_airflow_rotation(PrimitiveInstance &body, const glm::mat3 &basis, float dt, vec3 centre)
@@ -1133,7 +1181,8 @@ std::vector<BroadPhasePair> build_broad_phase_pairs(const std::vector<PrimitiveI
 								continue;
 							}
 						if (!is_dynamic_simulation_active(instances[index]) &&
-						    !is_dynamic_simulation_active(instances[other_index])) {
+						    !is_dynamic_simulation_active(instances[other_index]) &&
+						    !(instances[index].surface_material.enabled && instances[other_index].surface_material.enabled)) {
 							continue;
 						}
 						const BroadPhasePairKey key{
@@ -1420,6 +1469,7 @@ bool compute_obb_overlap(const CollisionGeometry &a,
 bool is_default_uniform_sphere(const PrimitiveInstance &instance,
 	                           const CollisionGeometry &geometry)
 {
+	if (instance.surface_material.enabled) return geometry.analytic_sphere_radius > 0;
 	const bool is_legacy_default_sphere = instance.type == "Sphere";
 	const bool is_procedural_default_sphere =
 		instance.shape_specification &&
@@ -1927,8 +1977,8 @@ bool compute_triangle_triangle_overlap(const CollisionTriangle &a,
 		*penetration = minimum_overlap;
 	}
 	if (contact_point != nullptr) {
-		const vec3 point_a = support_feature_center(a.vertices, minimum_axis);
-		const vec3 point_b = support_feature_center(b.vertices, -minimum_axis);
+		const vec3 point_a = support_vertex(a.vertices, minimum_axis);
+		const vec3 point_b = support_vertex(b.vertices, -minimum_axis);
 		*contact_point = (point_a + point_b) * 0.5f;
 	}
 	return true;
@@ -2173,7 +2223,7 @@ bool remove_dynamic_cube_if_outside_scene_bounds(PrimitiveInstance *instance,
 	if (instance == nullptr || instance->airflow || !is_dynamic_simulation_active(*instance)) {
 		return false;
 	}
-	if (!is_cube_like(instance->type)) {
+	if (instance->surface_material.enabled || !is_cube_like(instance->type)) {
 		return false;
 	}
 	if (!is_outside_bounds(geometry.bounds, scene_bounds)) {
@@ -2195,6 +2245,15 @@ void apply_rotational_impulse(PrimitiveInstance *instance,
 
 	const vec3 offset = contact_point - geometry.center_of_mass;
 	const vec3 angular_impulse = glm::cross(offset, impulse);
+	if (instance->surface_material.enabled) {
+		const auto &inertia = instance->surface_state.inertia;
+		const auto &axis = instance->surface_material.shaft_axis;
+		const glm::dvec3 impulse(angular_impulse);
+		const glm::dvec3 change = instance->surface_material.onShaft() ?
+			axis * glm::dot(axis, impulse) / glm::dot(axis, inertia * axis) : glm::inverse(inertia) * impulse;
+		instance->rotational_velocity += glm::degrees(change);
+		return;
+	}
 	if (instance->airflow) {
 		const glm::mat3 basis = glm::mat3_cast(transform_orientation(instance->primary_transform));
 		const vec3 change = basis * ((glm::transpose(basis) * angular_impulse) /
@@ -2212,15 +2271,16 @@ bool resolve_collision(Context *context,
                        PrimitiveInstance *a,
                        PrimitiveInstance *b,
                        const CollisionGeometry &geometry_a,
-                       const CollisionGeometry &geometry_b)
+                       const CollisionGeometry &geometry_b,
+                       SurfaceContactPatch *surface_patch, float seconds)
 {
 	if (a == nullptr || b == nullptr || !is_collision_candidate(*a) || !is_collision_candidate(*b)) {
 		return false;
 	}
-	if (a->immovable && b->immovable) {
+	if (!surface_patch && a->immovable && b->immovable) {
 		return false;
 	}
-	if (!passes_distance_rejection_test(geometry_a, geometry_b)) {
+	if (!surface_patch && !passes_distance_rejection_test(geometry_a, geometry_b)) {
 		return false;
 	}
 	const PrimitiveBounds &bounds_a = geometry_a.bounds;
@@ -2235,7 +2295,14 @@ bool resolve_collision(Context *context,
 	bool overlaps = false;
 	const bool a_is_uniform_sphere = is_default_uniform_sphere(*a, geometry_a);
 	const bool b_is_uniform_sphere = is_default_uniform_sphere(*b, geometry_b);
-	if (a_is_uniform_sphere && b_is_uniform_sphere) {
+	if (surface_patch && ExtrudedProfileContact::accepts(*a) && ExtrudedProfileContact::accepts(*b)) {
+		const auto contact = ExtrudedProfileContact::detect(*a,*b);
+		if (!contact.intersects()) return false;
+		overlaps = true;
+		normal = contact.normal();
+		penetration = contact.penetration();
+		contact_point = contact.point();
+	} else if (a_is_uniform_sphere && b_is_uniform_sphere) {
 		overlaps = compute_sphere_sphere_overlap(
 			geometry_a, geometry_b, relative_velocity, &normal, &penetration, &contact_point);
 	} else if (a_is_uniform_sphere && geometry_b.kind == CollisionGeometryKind::BoxHull) {
@@ -2283,8 +2350,15 @@ bool resolve_collision(Context *context,
 		return false;
 	}
 
-	const float inverse_mass_a = a->immovable ? 0.0f : 1.0f / std::max(a->mass, kMinimumMass);
-	const float inverse_mass_b = b->immovable ? 0.0f : 1.0f / std::max(b->mass, kMinimumMass);
+	if (surface_patch != nullptr) {
+		const glm::dvec3 unit_normal = glm::normalize(glm::dvec3(normal));
+		SurfaceContactSolver::advance(*a, *b, geometry_a.center_of_mass, geometry_b.center_of_mass,
+		                              contact_point, unit_normal, penetration, seconds, *surface_patch);
+		return true;
+	}
+
+	const float inverse_mass_a = a->immovable || a->surface_material.onShaft() ? 0.0f : 1.0f / std::max(a->mass, kMinimumMass);
+	const float inverse_mass_b = b->immovable || b->surface_material.onShaft() ? 0.0f : 1.0f / std::max(b->mass, kMinimumMass);
 	const float inverse_mass_sum = inverse_mass_a + inverse_mass_b;
 	if (inverse_mass_sum <= 0.0f) {
 		return true;
@@ -2534,6 +2608,23 @@ float cube_like_instance_volume(const PrimitiveInstance &instance)
 	return static_cast<float>(std::fabs(signed_volume));
 }
 
+float transformed_volume(const PrimitiveInstance &instance)
+{
+	float volume = 0.0f;
+	if (is_cube_like(instance.type)) {
+		volume = cube_like_instance_volume(instance);
+	}
+	else if (instance.resolved_geometry &&
+	         instance.resolved_geometry->volumeEvidence().hasVolume()) {
+		const float local_volume =
+			instance.resolved_geometry->volumeEvidence().localVolume();
+		const float transform_volume_scale =
+			std::fabs(glm::determinant(glm::mat3(instance.primary_transform)));
+		volume = local_volume * transform_volume_scale;
+	}
+	return volume;
+}
+
 bool resolve_instance_mass(const PrimitiveInstance &instance,
                            float pending_mass,
                            float pending_density,
@@ -2547,19 +2638,8 @@ bool resolve_instance_mass(const PrimitiveInstance &instance,
 		return true;
 	}
 
-	float volume = 0.0f;
-	if (is_cube_like(instance.type)) {
-		volume = cube_like_instance_volume(instance);
-	}
-	else if (instance.resolved_geometry &&
-	         instance.resolved_geometry->volumeEvidence().hasVolume()) {
-		const float local_volume =
-			instance.resolved_geometry->volumeEvidence().localVolume();
-		const float transform_volume_scale =
-			std::fabs(glm::determinant(glm::mat3(instance.primary_transform)));
-		volume = local_volume * transform_volume_scale;
-	}
-	else {
+	const float volume = transformed_volume(instance);
+	if (volume == 0.0f) {
 		if(diagnostic != nullptr){
 			*diagnostic = "Density-derived mass is undefined for an open or non-watertight primitive.";
 		}
@@ -2605,6 +2685,10 @@ void ScenePrimitiveInstance::restoreInitialState()
 	dual_scales = initial_dual_scales;
 	dual_translations = initial_dual_translations;
 	rotation_degrees = initial_rotation_degrees;
+	surface_state.clearContactLoads();
+	surface_state.inertia = surface_state.initial_inertia;
+	surface_state.temperature = surface_material.initial_temperature;
+	surface_state.friction_heat = surface_state.conducted_heat = 0;
 }
 
 PrimitiveDefinition::PrimitiveDefinition(std::string type, GLuint texId, bool x, bool y, bool z)
@@ -2653,6 +2737,7 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	                           int source_end_column,
 	                           std::shared_ptr<const ShapeSpecification> shape_specification)
 {
+	surface_creation_error_.clear();
 	if (primitive_instances.size() >= kMaxGeneratedPrimitiveCount) {
 		errorout("Grammar execution error: primitive budget of " +
 		         std::to_string(kMaxGeneratedPrimitiveCount) +
@@ -2704,6 +2789,8 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	instance.velocity = immovable ? vec3(0.0f) : pending_velocity_;
 	instance.initial_velocity = instance.velocity;
 	instance.rotational_velocity = immovable ? vec3(0.0f) : pending_rotational_velocity_;
+	if (!pending_surface_.enabled)
+		instance.rotational_velocity = clamp_vector_magnitude(instance.rotational_velocity, kMaxRotationalSpeed);
 	instance.initial_rotational_velocity = instance.rotational_velocity;
 	float resolved_mass = kDefaultMass;
 	std::string mass_diagnostic;
@@ -2717,7 +2804,56 @@ void SceneGenerationContext::addPrimitive(std::string type,
 		clearPendingPrimitiveState();
 		return;
 	}
-	instance.mass = immovable ? kDefaultMass : resolved_mass;
+	if (pending_surface_.young_modulus > 0) {
+		if (!(pending_surface_.patch_area > 0 && pending_surface_.layer_thickness > 0)) {
+			surface_creation_error_ = "ElasticModulus requires ContactLayer(area thickness) for the same primitive.";
+			clearPendingPrimitiveState();
+			return;
+		}
+		pending_surface_.normal_stiffness = pending_surface_.young_modulus *
+		                                    pending_surface_.patch_area / pending_surface_.layer_thickness;
+		pending_surface_.shear_stiffness = pending_surface_.normal_stiffness /
+		                                   (2*(1 + pending_surface_.poisson_ratio));
+	}
+	instance.surface_material = pending_surface_;
+	instance.immovable = immovable;
+	instance.mass = immovable && !pending_surface_.enabled ? kDefaultMass : resolved_mass;
+	if (pending_surface_.enabled) {
+		if (pending_surface_.onShaft() &&
+		    (glm::length(instance.velocity) > 1e-7 ||
+		     glm::length(glm::cross(glm::dvec3(instance.rotational_velocity),pending_surface_.shaft_axis)) > 1e-5)) {
+			surface_creation_error_ = "ContactShaft requires zero linear velocity and initial spin parallel to the shaft.";
+			clearPendingPrimitiveState();
+			return;
+		}
+		instance.surface_state.volume = transformed_volume(instance);
+		const CollisionGeometry &geometry = collision_geometry_for_instance(instance);
+		if (!can_collide(instance) || !(instance.surface_state.volume > 0) ||
+		    !std::isfinite(instance.surface_state.volume) || !std::isfinite(instance.mass) ||
+		    !SurfaceContactSolver::initializeInertia(instance, geometry)) {
+			surface_creation_error_ = "ContactSurface requires a supported collidable solid with finite volume and inertia.";
+			clearPendingPrimitiveState();
+			return;
+		}
+	}
+	if (pending_surface_.enabled && pending_airflow_) {
+		// Aerodynamic declarations supply the measured principal moments in body axes.
+		const glm::dmat3 axes(glm::mat3_cast(transform_orientation(instance.primary_transform)));
+		glm::dmat3 principal(0.0);
+		for (int i = 0; i < 3; ++i) principal[i][i] = pending_airflow_->principalInertia[i];
+		instance.surface_state.inertia = instance.surface_state.initial_inertia =
+			axes * principal * glm::transpose(axes);
+	}
+	if (pending_surface_.enabled && !immovable) {
+		const auto &geometry = collision_geometry_for_instance(instance);
+		const glm::dmat3 inverse = glm::inverse(instance.surface_state.inertia);
+		const double inverse_bound = glm::length(inverse[0])+glm::length(inverse[1])+glm::length(inverse[2]);
+		const double r = glm::length(glm::dvec3(geometry.bounds.half_extents)) +
+		                 glm::length(glm::dvec3(geometry.bounds.center-geometry.center_of_mass));
+		const double mobility_bound = 1.0 / instance.mass + r*r*inverse_bound;
+		const double stiffness = pending_surface_.normal_stiffness + pending_surface_.shear_stiffness;
+		instance.surface_state.step_limit = std::min(1.0/480.0, 0.075/std::sqrt(2.0*stiffness*mobility_bound));
+	}
 	instance.initial_mass = instance.mass;
 	instance.airflow = pending_airflow_;
 	instance.source_start_line = source_start_line;
@@ -2729,7 +2865,6 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	instance.alpha = alpha;
 	instance.texscale = texscale;
 	instance.sleep_timer = 0.0f;
-	instance.immovable = immovable;
 	instance.initial_immovable = immovable;
 	instance.simulation_active = !immovable;
 	instance.initial_simulation_active = instance.simulation_active;
@@ -3100,6 +3235,20 @@ void SceneGenerationContext::buildInstanceBuffer(const PrimitiveInstance &instan
 	append_instance_vertices(instance, vertex_data, buffer);
 }
 
+SurfaceMotionBalance SceneGenerationContext::getSurfaceMotionBalance(const ScenePrimitiveInstance &instance) const
+{
+	SurfaceMotionBalance balance;
+	const glm::dvec3 velocity(instance.velocity);
+	const glm::dvec3 spin = glm::radians(glm::dvec3(instance.rotational_velocity));
+	balance.linear_momentum = static_cast<double>(instance.mass) * velocity;
+	balance.spin_momentum = instance.surface_state.inertia * spin;
+	balance.translation_energy = 0.5 * glm::dot(balance.linear_momentum, velocity);
+	balance.rotation_energy = 0.5 * glm::dot(balance.spin_momentum, spin);
+	const glm::dvec3 center(getInstanceCollisionGeometry(instance).center_of_mass);
+	balance.gravity_potential = -instance.mass * glm::dot(glm::dvec3(getGravity()), center);
+	return balance;
+}
+
 glm::vec3 SceneGenerationContext::getInstanceCenter(const PrimitiveInstance &instance) const
 {
 	const PrimitiveBounds bounds = collision_geometry_for_instance(instance).bounds;
@@ -3384,8 +3533,7 @@ void SceneGenerationContext::setPendingVelocity(const glm::vec3 &velocity)
 
 void SceneGenerationContext::setPendingRotationalVelocity(const glm::vec3 &rotational_velocity)
 {
-	pending_rotational_velocity_ =
-		clamp_vector_magnitude(rotational_velocity, kMaxRotationalSpeed);
+	pending_rotational_velocity_ = rotational_velocity;
 }
 
 void SceneGenerationContext::setPendingMass(float mass)
@@ -3550,11 +3698,50 @@ void SceneGenerationContext::stepCollisionParticles(float delta_time)
 	collision_particles_.resize(write_index);
 }
 
+void SceneGenerationContext::setPendingElasticModulus(double young, double poisson, double friction)
+{
+	pending_surface_.enabled = true;
+	pending_surface_.young_modulus = young;
+	pending_surface_.poisson_ratio = poisson;
+	pending_surface_.friction = friction;
+}
+
+void SceneGenerationContext::setPendingContactLayer(double area, double thickness)
+{
+	pending_surface_.enabled = true;
+	pending_surface_.patch_area = area;
+	pending_surface_.layer_thickness = thickness;
+}
+
+void SceneGenerationContext::setPendingContactShaft(const glm::dvec3 &axis)
+{
+	pending_surface_.enabled = true;
+	pending_surface_.shaft_axis = glm::normalize(axis);
+}
+
+void SceneGenerationContext::setPendingContactSurface(double normal_stiffness, double shear_stiffness, double friction)
+{
+	pending_surface_.enabled = true;
+	pending_surface_.young_modulus = 0;
+	pending_surface_.normal_stiffness = normal_stiffness;
+	pending_surface_.shear_stiffness = shear_stiffness;
+	pending_surface_.friction = friction;
+}
+
+void SceneGenerationContext::setPendingContactThermal(double temperature, double specific_heat, double conductance)
+{
+	pending_surface_.enabled = true;
+	pending_surface_.initial_temperature = temperature;
+	pending_surface_.specific_heat = specific_heat;
+	pending_surface_.conductance = conductance;
+}
+
 void SceneGenerationContext::clearPendingPrimitiveState()
 {
 	pending_airflow_.reset();
 	pending_velocity_ = glm::vec3(0.0f);
 	pending_rotational_velocity_ = glm::vec3(0.0f);
+	pending_surface_ = {};
 	pending_mass_ = kDefaultMass;
 	pending_density_ = 0.0f;
 	has_pending_density_ = false;
@@ -3567,18 +3754,47 @@ void SceneGenerationContext::resetSimulation()
 		invalidate_collision_geometry(&instance);
 		capture_previous_render_state(&instance);
 	}
+	surface_contacts_.clear();
 	collision_particles_.clear();
 	time = 0.0f;
 }
 
 void SceneGenerationContext::stepSimulation(float delta_time)
 {
-	if (!std::isfinite(delta_time) || delta_time <= 0.0f) {
-		return;
+	if (!(delta_time > 0.0f) || !std::isfinite(delta_time)) return;
+	for (auto &instance : primitive_instances) capture_previous_render_state(&instance);
+	double limit = delta_time;
+	for (const auto &part : primitive_instances) {
+		if (part.surface_material.enabled && !part.removed) limit = std::min(limit, part.surface_state.step_limit);
 	}
+	const double count = std::ceil(delta_time / limit - 1e-6);
+	const int intervals = static_cast<int>(std::clamp(count, 1.0, 4096.0));
+	if (intervals == 1) {
+		stepPhysicsInterval(delta_time, time);
+	} else {
+		struct ContactImpulse { glm::dvec3 linear{0}, angular{0}; };
+		std::vector<ContactImpulse> sums(primitive_instances.size());
+		for (int i = 0; i < intervals; ++i) {
+			stepPhysicsInterval(delta_time / intervals, time + double(i) * delta_time / intervals);
+			for (std::size_t j = 0; j < sums.size(); ++j) {
+				const auto &state = primitive_instances[j].surface_state;
+				sums[j].linear += state.force;
+				sums[j].angular += state.torque;
+			}
+		}
+		for (std::size_t j = 0; j < sums.size(); ++j) {
+			auto &state = primitive_instances[j].surface_state;
+			state.force = sums[j].linear / double(intervals);
+			state.torque = sums[j].angular / double(intervals);
+		}
+	}
+	time += delta_time;
+}
+
+void SceneGenerationContext::stepPhysicsInterval(float delta_time, double interval_start)
+{
 	stepCollisionParticles(delta_time);
 	if (primitive_instances.empty()) {
-		time += delta_time;
 		return;
 	}
 
@@ -3592,25 +3808,27 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 	}
 
 	std::vector<const CollisionGeometry *> collision_geometries(primitive_instances.size(), nullptr);
-	for (PrimitiveInstance &instance : primitive_instances) {
-		capture_previous_render_state(&instance);
-	}
+	for (auto &instance : primitive_instances) instance.surface_state.clearContactLoads();
 	for (std::size_t index = 0; index < primitive_instances.size(); ++index) {
 		PrimitiveInstance &instance = primitive_instances[index];
 		glm::mat3 body_basis(1);
 		if (instance.airflow && !instance.removed && (instance.immovable || instance.simulation_active)) {
 			body_basis = glm::mat3_cast(transform_orientation(instance.primary_transform));
 			instance.air_load = instance.airflow->evaluate(air_environment, body_basis,
-				instance.velocity, glm::radians(instance.rotational_velocity), time);
+				instance.velocity, glm::radians(instance.rotational_velocity), interval_start);
 			if (instance.sleeping && (glm::length(instance.air_load.force) > 0 ||
 			                          glm::length(instance.air_load.moment) > 0))
 				wake_instance(&instance);
 		}
 		if (!is_dynamic_simulation_active(instance)) continue;
-		instance.velocity += gravity_acceleration_for_instance(instance, gravity_acceleration_) * delta_time;
-		if (instance.airflow) instance.velocity += instance.air_load.force * (delta_time / instance.mass);
-		else clamp_rotational_velocity(&instance);
-		apply_world_translation(&instance, instance.velocity * delta_time);
+		vec3 acceleration = instance.surface_material.enabled ? gravity_acceleration_ :
+		                    gravity_acceleration_for_instance(instance, gravity_acceleration_);
+		if (instance.airflow) acceleration += instance.air_load.force / instance.mass;
+		if (instance.surface_material.onShaft()) acceleration = vec3(0.0f);
+		const float position_weight = instance.surface_material.enabled ? 0.5f : 1.0f;
+		apply_world_translation(&instance, (instance.velocity + position_weight * acceleration * delta_time) * delta_time);
+		instance.velocity += acceleration * delta_time;
+		if (!instance.surface_material.enabled && !instance.airflow) clamp_rotational_velocity(&instance);
 		const CollisionGeometry *geometry = &collision_geometry_for_instance(instance);
 		if (remove_dynamic_cube_if_outside_scene_bounds(&instance, *geometry, scene_bounds)) {
 			collision_geometries[index] = nullptr;
@@ -3618,6 +3836,10 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 		}
 		if (stop_simulation_if_outside_bounds(&instance, *geometry)) {
 			collision_geometries[index] = nullptr;
+			continue;
+		}
+		if (instance.surface_material.enabled) {
+			advance_surface_rotation(instance, delta_time, geometry->center_of_mass);
 			continue;
 		}
 		if (instance.airflow) {
@@ -3658,6 +3880,7 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 
 	std::vector<bool> had_collision_contact(primitive_instances.size(), false);
 
+	std::map<SurfacePair, SurfaceContactPatch> next_contacts;
 	for (int iteration = 0; iteration < 3; ++iteration) {
 			const std::vector<BroadPhasePair> candidate_pairs =
 				build_broad_phase_pairs(primitive_instances,
@@ -3682,11 +3905,21 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 				if (collision_geometries[i] == nullptr || collision_geometries[j] == nullptr) {
 					continue;
 				}
+				const bool compliant = primitive_instances[i].surface_material.enabled &&
+				                       primitive_instances[j].surface_material.enabled;
+				if (compliant && iteration != 0) continue;
+				SurfaceContactPatch patch;
+				const SurfacePair key{i, j};
+				if (compliant) {
+					const auto previous = surface_contacts_.find(key);
+					if (previous != surface_contacts_.end()) patch = previous->second;
+				}
 				if (resolve_collision(this,
 				                     &primitive_instances[i],
 				                     &primitive_instances[j],
 				                     *collision_geometries[i],
-				                     *collision_geometries[j])) {
+				                     *collision_geometries[j], compliant ? &patch : nullptr, delta_time)) {
+					if (compliant) next_contacts.emplace(key, patch);
 					had_collision = true;
 					had_collision_contact[i] = true;
 					had_collision_contact[j] = true;
@@ -3714,7 +3947,7 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 			}
 			continue;
 		}
-		if (had_collision_contact[index] && is_below_sleep_threshold(instance)) {
+		if (!instance.surface_material.enabled && had_collision_contact[index] && is_below_sleep_threshold(instance)) {
 			instance.sleep_timer += delta_time;
 			if (instance.sleep_timer >= kSleepDelay) {
 				put_instance_to_sleep(&instance);
@@ -3724,7 +3957,12 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 		instance.sleep_timer = 0.0f;
 	}
 
-	time += delta_time;
+	for (const auto &previous : surface_contacts_) {
+		const auto &key = previous.first;
+		if (!next_contacts.count(key) && key.second < primitive_instances.size())
+			SurfaceContactSolver::release(primitive_instances[key.first], primitive_instances[key.second], previous.second);
+	}
+	surface_contacts_.swap(next_contacts);
 }
 
 float SceneGenerationContext::getTime() const

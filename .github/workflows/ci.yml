@@ -18,5 +18,5 @@ jobs:
             libglm-dev libeigen3-dev libcurl4-openssl-dev libssl-dev libdbus-1-dev \
             libjsoncpp-dev libxml2-dev libx11-dev libxi-dev libxrandr-dev libxext-dev \
             libxrender-dev libxinerama-dev libxcursor-dev
-      - name: Build editor and check airflow
-        run: make -j2 all airflow-check
+      - name: Build editor and check airflow and surface contact
+        run: make -j2 all airflow-check check-surface-contact

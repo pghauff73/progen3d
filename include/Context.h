@@ -7,6 +7,9 @@
 #include "physics/model/CollisionGeometry.h"
 #include "physics/model/BodyAirflow.h"
 
+#include "physics/model/SurfaceContactState.h"
+#include <map>
+
 #include <cstddef>
 #include <fstream>
 #include <memory>
@@ -92,6 +95,9 @@ public:
 
 	std::shared_ptr<const BodyAirflow> airflow;
 	AirflowResult air_load;
+
+	SurfaceContactMaterial surface_material;
+	SurfaceBodyState surface_state;
 	PrimitiveDefinition *primitive = nullptr;
 	std::string type;
 	glm::mat4 primary_transform{1.0f};
@@ -148,6 +154,8 @@ public:
 	PrimitiveBounds getInstanceBounds(const ScenePrimitiveInstance &instance) const;
 	const CollisionGeometry &getInstanceCollisionGeometry(const ScenePrimitiveInstance &instance) const;
 	PrimitiveBounds getSceneBounds() const;
+	const std::string &surfaceCreationError() const { return surface_creation_error_; }
+	SurfaceMotionBalance getSurfaceMotionBalance(const ScenePrimitiveInstance &instance) const;
 	void PLY(const GLfloat *, const std::string &filename);
 	void addPrimitive(std::string type,
 	                  Scope *scope,
@@ -192,6 +200,11 @@ public:
 	                            std::vector<AirLoadVector> *vectors = nullptr) const;
 	AirEnvironment air_environment;
 	void setPendingDensity(float density);
+	void setPendingElasticModulus(double young, double poisson, double friction);
+	void setPendingContactLayer(double area, double thickness);
+	void setPendingContactShaft(const glm::dvec3 &axis);
+	void setPendingContactSurface(double normal_stiffness, double shear_stiffness, double friction);
+	void setPendingContactThermal(double temperature, double specific_heat, double conductance);
 	void setGravity(float magnitude, const glm::vec3 &direction);
 	const glm::vec3 &getGravity() const;
 	const std::vector<CollisionParticle> &getCollisionParticles() const;
@@ -223,6 +236,11 @@ private:
 	std::size_t resolveMaterialSlot(const std::string &material_name);
 	glm::vec3 pending_velocity_{0.0f};
 	glm::vec3 pending_rotational_velocity_{0.0f};
+	SurfaceContactMaterial pending_surface_;
+	std::string surface_creation_error_;
+	using SurfacePair = std::pair<std::size_t, std::size_t>;
+	std::map<SurfacePair, SurfaceContactPatch> surface_contacts_;
+	void stepPhysicsInterval(float seconds, double interval_start);
 	float pending_mass_ = 1.0f;
 	std::shared_ptr<const BodyAirflow> pending_airflow_;
 	float pending_density_ = 0.0f;
