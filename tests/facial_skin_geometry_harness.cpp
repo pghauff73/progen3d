@@ -285,6 +285,33 @@ int main()
 		verify_geometry(miniature, candidate.size.x);
 		verify_globe_clearance(miniature, generator.evaluateLandmarks(*miniature_specification));
 		verify_invalid_input();
+        // Zero identity explicitly retains every legacy vertex, canonical key and landmark.
+        candidate = {};
+        const auto old_zero = validated(candidate);
+        candidate.identity_shape.coefficients.fill(0.0f);
+        const auto explicit_zero = validated(candidate);
+        require(old_zero->canonicalText() == explicit_zero->canonicalText(), "explicit zero identity changed canonical text");
+        require(old_zero->key() == explicit_zero->key(), "explicit zero identity changed cache key");
+        require(same_vertices(*neutral.mesh(), *generator.generate(*explicit_zero, nullptr).mesh()),
+                "explicit zero identity changed historical positions");
+        candidate.identity_shape.coefficients[0] = -.055f;
+        candidate.identity_shape.coefficients[3] = .02f;
+        candidate.identity_shape.coefficients[18] = .035f;
+        candidate.identity_shape.coefficients[21] = .025f;
+        const auto id_spec = validated(candidate);
+        const auto id_mesh = generator.generate(*id_spec, nullptr);
+        verify_geometry(id_mesh);
+        require(!same_vertices(*neutral.mesh(), *id_mesh.mesh()), "nonzero identity changed no vertices");
+        require(same_vertices(*id_mesh.mesh(), *generator.generate(*id_spec, nullptr).mesh()),
+                "identity geometry was not deterministic");
+        verify_globe_clearance(id_mesh, generator.evaluateLandmarks(*id_spec));
+        candidate.identity_shape.coefficients[0] = std::numeric_limits<float>::quiet_NaN();
+        std::string identity_diagnostic;
+        require(!FacialSkinSpecificationValidator().validate(candidate, &identity_diagnostic),
+                "nonfinite identity coefficient accepted");
+        candidate.identity_shape.coefficients[0] = .9f;
+        require(!FacialSkinSpecificationValidator().validate(candidate, &identity_diagnostic),
+                "out-of-range identity coefficient accepted");
 		std::cout << "FacialSkin geometry PASS: 128 extreme-control combinations, 1 connected skin, "
 		          << "4 boundary loops, stable topology, normals, landmarks, input bounds, deterministic replay.\n"
 		          << "vertices=" << neutral.mesh()->vertices.size() << " triangles=" << neutral.mesh()->faces.size()

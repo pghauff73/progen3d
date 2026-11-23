@@ -77,6 +77,7 @@ const std::unordered_map<std::string, OptionArity> &facial_skin_option_arities()
 		{"solve", {2, 2}},
 		{"bending", {1, 1}},
 		{"mouthMesh", {1, 1}},
+		{"identityShape", {24, 24}},
 		{"muscle", {10, 10}},
 		{"attachment", {6, 6}},
 		{"tissueRegion", {7, 7}},
