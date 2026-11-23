@@ -195,10 +195,28 @@ FacialSkinSpecificationValidator::validate(
 		}
 		if (!validate_elastic_configuration(candidate, diagnostic)) return {};
 	}
+	// Separate identity keys from the legacy analytic/v2/v3 cache families.
+    // Optional explicit all-zero identity remains bit-identical to the legacy shape.
+    const std::array<float, 24> identity_lower{{
+        -.72f,-.72f,-.72f,-.72f,-.72f,-.72f,-.72f,-.72f,
+        -.35f,-.35f,-.35f,-.35f,-.35f,-.35f,-.35f,-.35f,
+        -.35f,-.35f,-.42f,-.42f,-.38f,-.25f,-.25f,-.25f}};
+    const std::array<float, 24> identity_upper{{
+        .62f,.62f,.62f,.62f,.62f,.62f,.62f,.62f,
+        .35f,.35f,.35f,.35f,.35f,.35f,.35f,.35f,
+        .35f,.35f,.42f,.42f,.38f,.25f,.25f,.25f}};
+    for (unsigned k = 0; k < 24; ++k) {
+        if (!finite_in_range(candidate.identity_shape.coefficients[k], identity_lower[k], identity_upper[k])) {
+            if (diagnostic != nullptr) *diagnostic = "FacialSkin identityShape has an invalid or out-of-range coefficient at index " + std::to_string(k) + ".";
+            return {};
+        }
+    }
+	const bool identity_active = candidate.identity_shape.active();
 	const bool extended_elastic_response = elastic_response &&
 		(candidate.bending_settings.stiffness_scale > 0.0f || candidate.mouth_mesh_mode == FacialMouthMeshMode::Quality);
 	std::ostringstream key;
-	key << (extended_elastic_response ? "FacialSkin:v3:elastic:" :
+	key << (identity_active ? (elastic_response ? "FacialSkin:v4:elastic:" : "FacialSkin:v4:analytic:") :
+	        extended_elastic_response ? "FacialSkin:v3:elastic:" :
 	        elastic_response ? "FacialSkin:v2:elastic:" : "FacialSkin:v1:") << std::hexfloat
 	    << candidate.size.x << ',' << candidate.size.y << ',' << candidate.size.z
 	    << ':' << candidate.horizontal_segments << ',' << candidate.vertical_segments;
@@ -213,6 +231,16 @@ FacialSkinSpecificationValidator::validate(
 	          << controls.blink_left << ' ' << controls.blink_right
 	          << ") browRaise(" << controls.brow_raise_left << ' '
 	          << controls.brow_raise_right << ")";
+	if (identity_active) {
+        canonical << " identityShape(";
+        key << ":identity:";
+        for (std::size_t index = 0; index < 24; ++index) {
+            if (index) canonical << ' ';
+            canonical << candidate.identity_shape.coefficients[index];
+            key << ':' << candidate.identity_shape.coefficients[index];
+        }
+        canonical << ')';
+    }
 	if (elastic_response) {
 		const FacialElasticMaterial &material = candidate.elastic_material;
 		const FacialElasticSolveSettings &settings = candidate.elastic_solve_settings;
@@ -257,5 +285,5 @@ FacialSkinSpecificationValidator::validate(
 		candidate.size, candidate.horizontal_segments, candidate.vertical_segments,
 		controls, ShapeSpecificationKey(key.str()), canonical.str(), candidate.response_mode,
 		candidate.elastic_material, candidate.elastic_solve_settings, candidate.muscles, candidate.attachments,
-		candidate.tissue_regions, candidate.bending_settings, candidate.mouth_mesh_mode);
+		candidate.tissue_regions, candidate.bending_settings, candidate.mouth_mesh_mode, candidate.identity_shape);
 }

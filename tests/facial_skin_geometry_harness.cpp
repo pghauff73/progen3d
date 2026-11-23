@@ -1,3 +1,4 @@
+#include "geometry/model/FacialSkinMesh.h"
 #include "geometry/service/FacialSkinMeshGenerator.h"
 #include "geometry/service/FacialSkinSpecificationValidator.h"
 #include "geometry/service/MeshTopologyAnalyzer.h"
@@ -285,6 +286,61 @@ int main()
 		verify_geometry(miniature, candidate.size.x);
 		verify_globe_clearance(miniature, generator.evaluateLandmarks(*miniature_specification));
 		verify_invalid_input();
+        // Zero identity explicitly retains every legacy vertex, canonical key and landmark.
+        candidate = {};
+        const auto old_zero = validated(candidate);
+        candidate.identity_shape.coefficients.fill(0.0f);
+        const auto explicit_zero = validated(candidate);
+        require(old_zero->canonicalText() == explicit_zero->canonicalText(), "explicit zero identity changed canonical text");
+        require(old_zero->key() == explicit_zero->key(), "explicit zero identity changed cache key");
+        require(same_vertices(*neutral.mesh(), *generator.generate(*explicit_zero, nullptr).mesh()),
+                "explicit zero identity changed historical positions");
+        candidate.identity_shape.coefficients[0] = -.055f;
+        candidate.identity_shape.coefficients[3] = .02f;
+        candidate.identity_shape.coefficients[18] = .035f;
+        candidate.identity_shape.coefficients[21] = .025f;
+        const auto id_spec = validated(candidate);
+        const auto id_mesh = generator.generate(*id_spec, nullptr);
+        verify_geometry(id_mesh);
+        require(!same_vertices(*neutral.mesh(), *id_mesh.mesh()), "nonzero identity changed no vertices");
+        require(same_vertices(*id_mesh.mesh(), *generator.generate(*id_spec, nullptr).mesh()),
+                "identity geometry was not deterministic");
+        verify_globe_clearance(id_mesh, generator.evaluateLandmarks(*id_spec));
+        // Exact conservative synthetic-image candidate. Native neutral shell acceptance.
+        {
+            FacialSkinShapeSpecificationCandidate image_case;
+            image_case.size = glm::vec3(0.147856752f, 0.190053555f, 0.041584712f);
+            image_case.response_mode = FacialSkinResponseMode::Elastic;
+            image_case.mouth_mesh_mode = FacialMouthMeshMode::Quality;
+            image_case.bending_settings.stiffness_scale = 1.0f;
+            image_case.elastic_solve_settings.maximum_iterations = 2000;
+            image_case.identity_shape.coefficients = {{
+               -0.272945231f, -0.150623235f, -0.0294468571f, 0.0618273184f,
+                0.0815727852f, 0.0590141325f, 0.0270323869f, -0.00463863847f,
+               -0.0323730885f, 0.010107812f, 0.0281099028f, 0.0212655756f,
+                0.0089550498f, -0.00280605359f, -0.0105674288f, -0.0165937993f,
+               -0.00728729513f, -0.00728729513f, 0.0985426073f, -0.0669832687f,
+                0.0922199487f, 0.0410975483f, -0.0674130963f, -0.130063255f
+            }};
+            const auto image_spec = validated(image_case);
+            std::string image_diagnostic;
+            const auto image_mesh = generator.generate(*image_spec, &image_diagnostic);
+            const auto *image_face = dynamic_cast<const FacialSkinMesh *>(image_mesh.mesh().get());
+            require(image_face && image_face->mechanical_state,
+                    "Image-derived native rest face rejected: " + image_diagnostic);
+            verify_geometry(image_mesh, image_case.size.x);
+            require(image_face->mechanical_state->solve_result.converged &&
+                    image_face->mechanical_state->solve_result.iterations == 0,
+                    "Image-derived native neutral shell has prestress");
+            verify_globe_clearance(image_mesh, generator.evaluateLandmarks(*image_spec));
+        }
+        candidate.identity_shape.coefficients[0] = std::numeric_limits<float>::quiet_NaN();
+        std::string identity_diagnostic;
+        require(!FacialSkinSpecificationValidator().validate(candidate, &identity_diagnostic),
+                "nonfinite identity coefficient accepted");
+        candidate.identity_shape.coefficients[0] = .9f;
+        require(!FacialSkinSpecificationValidator().validate(candidate, &identity_diagnostic),
+                "out-of-range identity coefficient accepted");
 		std::cout << "FacialSkin geometry PASS: 128 extreme-control combinations, 1 connected skin, "
 		          << "4 boundary loops, stable topology, normals, landmarks, input bounds, deterministic replay.\n"
 		          << "vertices=" << neutral.mesh()->vertices.size() << " triangles=" << neutral.mesh()->faces.size()

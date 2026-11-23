@@ -19,6 +19,7 @@ struct FacialSkinShapeSpecificationCandidate
 	std::vector<FacialTissueRegion> tissue_regions;
 	FacialBendingSettings bending_settings;
 	FacialMouthMeshMode mouth_mesh_mode = FacialMouthMeshMode::Legacy;
+	FacialIdentityShape identity_shape;
 	bool has_skin_material_option = false;
 	bool has_solve_option = false;
 	bool has_muscle_option = false;

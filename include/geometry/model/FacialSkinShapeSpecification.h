@@ -5,6 +5,7 @@
 #include "geometry/model/FacialBendingSettings.h"
 #include "geometry/model/FacialElasticMaterial.h"
 #include "geometry/model/FacialElasticSolveSettings.h"
+#include "geometry/model/FacialIdentityShape.h"
 #include "geometry/model/FacialMuscleSpecification.h"
 #include "geometry/model/FacialMouthMeshMode.h"
 #include "geometry/model/FacialSkinResponseMode.h"
@@ -33,7 +34,8 @@ public:
 	                            std::vector<FacialAttachmentPatch> attachments = {},
 	                            std::vector<FacialTissueRegion> tissue_regions = {},
 	                            FacialBendingSettings bending_settings = {},
-	                            FacialMouthMeshMode mouth_mesh_mode = FacialMouthMeshMode::Legacy)
+	                            FacialMouthMeshMode mouth_mesh_mode = FacialMouthMeshMode::Legacy,
+	                            FacialIdentityShape identity_shape = {})
 		: ShapeSpecification(ShapeFamily::FacialSkin, std::move(key)),
 		  size_(size),
 		  horizontal_segments_(horizontal_segments),
@@ -47,7 +49,8 @@ public:
 		  attachments_(std::move(attachments)),
 		  tissue_regions_(std::move(tissue_regions)),
 		  bending_settings_(bending_settings),
-		  mouth_mesh_mode_(mouth_mesh_mode)
+		  mouth_mesh_mode_(mouth_mesh_mode),
+		  identity_shape_(identity_shape)
 	{
 	}
 
@@ -63,6 +66,7 @@ public:
 	const std::vector<FacialTissueRegion> &tissueRegions() const { return tissue_regions_; }
 	const FacialBendingSettings &bendingSettings() const { return bending_settings_; }
 	FacialMouthMeshMode mouthMeshMode() const { return mouth_mesh_mode_; }
+	const FacialIdentityShape &identityShape() const { return identity_shape_; }
 	std::string canonicalText() const override { return canonical_text_; }
 	bool isDefaultFamilyShape() const override { return false; }
 	bool requestsClosedGeometry() const override { return false; }
@@ -81,4 +85,5 @@ private:
 	std::vector<FacialTissueRegion> tissue_regions_;
 	FacialBendingSettings bending_settings_;
 	FacialMouthMeshMode mouth_mesh_mode_ = FacialMouthMeshMode::Legacy;
+	FacialIdentityShape identity_shape_;
 };

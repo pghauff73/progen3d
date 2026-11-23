@@ -88,12 +88,17 @@ public:
 		                       0.5f * size.y * 0.125f * 0.70f);
 	}
 
-	glm::vec3 eyeballCenter(const FacialApertureDomain &aperture) const
-	{
-		return glm::vec3(0.5f * specification_.size().x * aperture.center_u,
+	glm::vec3 rawEyeballCenter(const FacialApertureDomain &aperture) const
+    {
+        return glm::vec3(0.5f * specification_.size().x * aperture.center_u,
 		                 0.5f * specification_.size().y * aperture.center_v,
 		                 restDepth(aperture.center_u, aperture.center_v) - 0.55f * eyeballRadius());
 	}
+    glm::vec3 eyeballCenter(const FacialApertureDomain &aperture) const
+    {
+        return applyFacialIdentityShape(rawEyeballCenter(aperture), aperture.center_u,
+            aperture.center_v, specification_.size(), specification_.identityShape());
+    }
 
 	glm::vec3 evaluatePosition(float rest_u, float rest_v) const
 	{
@@ -178,7 +183,7 @@ public:
 			if (active_aperture->purpose == FacialAperturePurpose::Mouth) {
 				position.z += size.z * 0.055f * aperture_weight;
 			} else {
-				const glm::vec3 center = eyeballCenter(*active_aperture);
+				const glm::vec3 center = rawEyeballCenter(*active_aperture);
 				const float radius = eyeballRadius();
 				const float horizontal = position.x - center.x;
 				const float vertical = position.y - center.y;
@@ -188,6 +193,10 @@ public:
 				position.z += aperture_weight * (sphere_depth + clearance - position.z);
 			}
 		}
+		// Identity changes the neutral material reference BEFORE elastic assembly.
+        // Globe centers and final clearance must use the same identity transform.
+        position = applyFacialIdentityShape(position, rest_u, rest_v,
+            specification_.size(), specification_.identityShape());
 		// A blended target alone can leave the surrounding eyelid under the
 		// eyeball. Apply a final one-sided geometric clearance to all skin points
 		// in either globe's projected footprint, including the aperture collar.
@@ -496,6 +505,22 @@ public:
 		addSkinGrid();
 		if (mouth_annulus_) addQualityMouthAnnulus();
 		for (const FacialApertureDomain &aperture : surface_.apertures()) addApertureMargin(aperture);
+        if (specification_.identityShape().active()) {
+            const float minimum_area_z=1.0e-12f *
+                specification_.size().x * specification_.size().x;
+            for (std::size_t face_id=0; face_id<mesh_->faces.size(); ++face_id) {
+                if (surface_tags_[face_id].boundaryIndex()!=0) continue;
+                const glm::ivec3 f=mesh_->faces[face_id];
+                const auto area=glm::cross(mesh_->vertices[f.y]-mesh_->vertices[f.x],
+                                           mesh_->vertices[f.z]-mesh_->vertices[f.x]);
+                if (!(area.z>minimum_area_z)) {
+                    std::ostringstream error;
+                    error << "FacialSkin identity rest front facet flipped/collapsed: triangle "
+                          << face_id << "; reduce identityShape deformation.";
+                    throw std::runtime_error(error.str());
+                }
+            }
+        }
 		mesh_->landmarks = evaluateAnalyticalLandmarks(specification_);
 		if (specification_.responseMode() == FacialSkinResponseMode::Elastic) applyElasticResponse();
 		recomputeNormals();

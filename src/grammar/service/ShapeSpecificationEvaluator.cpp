@@ -4174,6 +4174,20 @@ ShapeSpecificationEvaluationResult ShapeSpecificationEvaluator::evaluate(
 				}
 				continue;
 			}
+			if (option.optionName() == "identityShape") {
+                if (arguments.size() != candidate.identity_shape.coefficients.size()) {
+                    result.diagnostic = "FacialSkin identityShape requires exactly 24 finite values.";
+                    return result;
+                }
+                for (std::size_t index = 0; index < arguments.size(); ++index) {
+                    if (!evaluate_number(arguments[index], "FacialSkin identityShape", expression_evaluator,
+                            &candidate.identity_shape.coefficients[index])) {
+                        result.diagnostic = "FacialSkin identityShape contains a nonfinite or invalid numeric coefficient.";
+                        return result;
+                    }
+                }
+                continue;
+            }
 			if (option.optionName() == "mouthMesh") {
 				if (arguments.size() != 1) {
 					result.diagnostic = "FacialSkin mouthMesh requires legacy or quality.";
