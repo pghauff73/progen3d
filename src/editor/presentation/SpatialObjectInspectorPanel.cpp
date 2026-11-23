@@ -46,6 +46,53 @@ void draw_text_records(
 	ImGui::TreePop();
 }
 
+// Same screen scale on both axes before the optional displacement magnification.
+void draw_member_profile(const MemberServiceResponse &response)
+{
+	const ImGuiID id = ImGui::GetID("MagnifyMemberDeflection");
+	ImGuiStorage *settings = ImGui::GetStateStorage();
+	bool magnify = settings->GetBool(id, true);
+	if (ImGui::Checkbox("Magnify displacement (25x)", &magnify)) settings->SetBool(id, magnify);
+	const double amplification = magnify ? 25.0 : 1.0;
+	const ImVec2 start = ImGui::GetCursorScreenPos();
+	const float width = std::max(10.f, ImGui::GetContentRegionAvail().x - 4);
+	const double pixels = std::min(width / response.spanM, 60.0 / (amplification * response.midspanDeflectionM));
+	const auto point = [&](double fraction) {
+		return ImVec2(start.x + 2 + static_cast<float>(fraction * response.spanM * pixels),
+		              start.y + 4 + static_cast<float>(response.deflectionM(fraction) * pixels * amplification));
+	};
+	ImDrawList *lines = ImGui::GetWindowDrawList();
+	lines->AddLine(point(0), point(1), ImGui::GetColorU32(ImGuiCol_TextDisabled));
+	ImVec2 previous = point(0);
+	for (int i = 1; i <= 48; ++i) {
+		const ImVec2 next = point(i / 48.0);
+		lines->AddLine(previous, next, ImGui::GetColorU32(ImGuiCol_PlotLines), 2);
+		previous = next;
+	}
+	ImGui::Dummy(ImVec2(width, 12 + static_cast<float>(response.midspanDeflectionM * pixels * amplification)));
+}
+
+void draw_member_study(const SpatialObjectInspection &inspection)
+{
+	if (!inspection.member_response && inspection.member_diagnostic.empty()) return;
+	if (!ImGui::CollapsingHeader("Member service analysis", ImGuiTreeNodeFlags_DefaultOpen)) return;
+	ImGui::Text("Pin %s  /  roller %s", inspection.member_pin.c_str(), inspection.member_roller.c_str());
+	ImGui::Text("Material: %s", inspection.member_material.c_str());
+	if (!inspection.member_response) {
+		ImGui::TextWrapped("Study unavailable: %s", inspection.member_diagnostic.c_str());
+		return;
+	}
+	const auto &r = *inspection.member_response;
+	ImGui::Text("Span %.5g m  /  mass %.5g kg", r.spanM, r.massKg);
+	ImGui::Text("Line load %.5g N/m  /  centre load %.5g N", r.totalLineLoadNPerM, r.centreLoadN);
+	ImGui::Text("Reaction at each seat: %.5g N", r.reactionPerSeatN);
+	ImGui::Text("Pin pressure %.5g MPa  /  roller %.5g MPa", r.pinPressurePa / 1e6, r.rollerPressurePa / 1e6);
+	ImGui::Text("Peak moment %.5g N m  /  bending stress %.5g MPa", r.peakMomentNm, r.bendingStressPa / 1e6);
+	ImGui::Text("Midspan deflection: %.5g mm", 1000 * r.midspanDeflectionM);
+	ImGui::TextDisabled("Undeformed and loaded centreline");
+	draw_member_profile(r);
+}
+
 } // namespace
 
 void SpatialObjectInspectorPanel::draw(
@@ -104,6 +151,7 @@ void SpatialObjectInspectorPanel::draw(
 			ImGui::Text("%zu", inspection.primitive_instance_indices[index]);
 		}
 	}
+	draw_member_study(inspection);
 	draw_vector3("Translation uncertainty", inspection.translation_uncertainty);
 	draw_vector3("Rotation uncertainty", inspection.rotation_uncertainty_degrees);
 	draw_matrix("Authored local transform", inspection.authored_local_transform);

@@ -7,6 +7,8 @@
 #include "spatial/model/SpatialObjectIdentity.h"
 #include "spatial/model/SpatialObjectState.h"
 
+#include "mechanics/model/PinRollerMember.h"
+#include <memory>
 #include <vector>
 
 #include <utility>
@@ -18,14 +20,17 @@ public:
 	                      SpatialBoundaryModel boundary_model,
 	                      std::vector<SpatialInterface> interfaces,
 	                      CollisionParticipationPolicy collision_policy,
-	                      SpatialObjectState state)
+	                      SpatialObjectState state,
+	                      std::shared_ptr<const PinRollerMember> member = {})
 		: identity_(std::move(identity)),
 		  frame_state_(std::move(frame_state)),
 		  boundary_model_(std::move(boundary_model)),
 		  interfaces_(std::move(interfaces)),
 		  collision_policy_(collision_policy),
-		  state_(state) {}
+		  state_(state),
+		  member_(std::move(member)) {}
 
+	const std::shared_ptr<const PinRollerMember> &pinRollerMember() const { return member_; }
 	const SpatialObjectIdentity &identity() const { return identity_; }
 	const SpatialFrameState &frameState() const { return frame_state_; }
 	const SpatialBoundaryModel &boundaryModel() const { return boundary_model_; }
@@ -50,7 +55,7 @@ public:
 			boundary_model_,
 			interfaces_,
 			collision_policy_,
-			state);
+			state, member_);
 	}
 
 	SpatialBuildingObject withBoundaryModel(SpatialBoundaryModel boundary_model) const
@@ -61,7 +66,7 @@ public:
 			std::move(boundary_model),
 			interfaces_,
 			collision_policy_,
-			state_);
+			state_, member_);
 	}
 
 	SpatialBuildingObject withInterfaces(std::vector<SpatialInterface> interfaces) const
@@ -72,7 +77,7 @@ public:
 			boundary_model_,
 			std::move(interfaces),
 			collision_policy_,
-			state_);
+			state_, member_);
 	}
 
 private:
@@ -83,4 +88,5 @@ private:
 	CollisionParticipationPolicy collision_policy_{
 		CollisionLayer::Temporary, CollisionLayerMask()};
 	SpatialObjectState state_ = SpatialObjectState::Unplaced;
+	std::shared_ptr<const PinRollerMember> member_;
 };

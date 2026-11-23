@@ -35,6 +35,8 @@
 #include "grammar/service/SpatialConstraintDeclarationParser.h"
 #include "grammar/service/SpatialInterfaceDeclarationParser.h"
 #include "grammar/service/SpatialObjectSpecificationParser.h"
+#include "grammar/service/MemberStudyParser.h"
+#include "mechanics/model/PinRollerMember.h"
 #include "grammar/service/VehicleJointDeclarationParser.h"
 #include "spatial/model/CollisionPositionConstraint.h"
 #include "spatial/model/CollisionParticipationPolicy.h"
@@ -3118,6 +3120,27 @@ void SpatialObjectEndActionToken::performAction(SceneGenerationContext *context)
 	}
 }
 
+void MemberStudyToken::performAction(SceneGenerationContext *context)
+{
+	if (!context || !syntax || !context->hasActiveSpatialObject()) {
+		errorout("Grammar execution error: PinRollerMember requires an active Object scope.");
+		return;
+	}
+	float metres, modulus, density;
+	glm::vec3 section, load;
+	if (!evaluate_spatial_expression(this, syntax->metresPerUnit, "metres per unit", &metres) ||
+	    !evaluate_spatial_expression(this, syntax->modulus, "member modulus", &modulus) ||
+	    !evaluate_spatial_expression(this, syntax->density, "member density", &density) ||
+	    !evaluate_spatial_vector(this, syntax->section, "member section", &section) ||
+	    !evaluate_spatial_vector(this, syntax->load, "member service load", &load)) return;
+	PinRollerMember member{syntax->pin, syntax->roller, syntax->material,
+	                      metres, section.x, section.y, section.z, modulus, density,
+	                      load.x, load.y, load.z};
+	std::string diagnostic;
+	if (!context->setMemberStudy(std::move(member), &diagnostic))
+		errorout("Grammar execution error: " + diagnostic);
+}
+
 void SpatialInterfaceDeclarationToken::performAction(SceneGenerationContext *context)
 {
 	if (context == nullptr || !declaration_syntax || !context->hasActiveSpatialObject()) {
@@ -4181,6 +4204,18 @@ static void parse_tokens_into(Grammar *grammar,
 			assign_token_source_range(
 				object_token.get(), raw_token_spans, token_start_index, *index);
 			append_owned_token(std::move(object_token));
+			continue;
+		}
+		else if(token_str=="PinRollerMember"){
+			auto member = std::make_unique<MemberStudyToken>();
+			std::string diagnostic;
+			member->syntax = MemberStudyParser().parse(raw_tokens, index, parse_expression_argument, &diagnostic);
+			assign_token_source_range(member.get(), raw_token_spans, token_start_index, *index);
+			if (!member->syntax) {
+				report_grammar_issue(grammar, make_action_token_diagnostic(member.get(), diagnostic));
+				throw(1);
+			}
+			append_owned_token(std::move(member));
 			continue;
 		}
 		else if(token_str=="Interface"){
@@ -6178,6 +6213,7 @@ void GrammarDocument::generateGeometry()
 	std::size_t primitive_count = 0;
 	std::vector<Token *> scope_stack;
 	std::vector<Token *> spatial_object_stack;
+	std::unordered_set<Token *> objects_with_member_studies;
 	AirflowDeclaration airflow;
 	Token *last_airflow_token = nullptr;
 	std::unordered_map<Token *, std::shared_ptr<const BodyAirflow>> body_airflow;
@@ -6233,6 +6269,18 @@ void GrammarDocument::generateGeometry()
 		}
 		if(token->token_name == "ObjectBegin"){
 			spatial_object_stack.push_back(token);
+		}
+		else if (action == "PinRollerMember") {
+			if (spatial_object_stack.empty()) {
+				report_grammar_issue(this, make_action_token_diagnostic(token,
+					"PinRollerMember requires an active Object scope."));
+				return;
+			}
+			if (!objects_with_member_studies.insert(spatial_object_stack.back()).second) {
+				report_grammar_issue(this, make_action_token_diagnostic(token,
+					"An object may declare only one PinRollerMember study."));
+				return;
+			}
 		}
 		else if(token->token_name == "ObjectEnd"){
 			if(spatial_object_stack.empty()){

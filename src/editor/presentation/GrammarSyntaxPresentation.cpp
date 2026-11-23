@@ -125,7 +125,7 @@ std::vector<EditorToken> GrammarSyntaxPresentation::tokenizeLine(
 		"DSX", "DSY", "DSZ", "DTX", "DTY", "DTZ",
 		"AirProperties", "Wind", "BodyInertia", "LoadPoint", "LoadAxis", "BodyForce", "BodyTorque",
 		"ForceRamp", "DragSurface", "LiftSurface", "PropSample", "Propeller", "DuctStation", "PlateFriction",
-		"Object", "Interface", "Connect", "Position",
+		"Object", "Interface", "Connect", "Position", "PinRollerMember",
 		"id", "name", "class", "taxonomy", "container", "layer", "mask",
 		"type", "origin", "normal", "tangent", "region", "tolerance", "clearance",
 		"source", "target", "insertionDepth", "moving", "mode", "direction",

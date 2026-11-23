@@ -4,6 +4,7 @@
 #include "grammar/model/LightingDeclarationSyntax.h"
 #include "grammar/model/SpatialConnectionDeclarationSyntax.h"
 #include "grammar/model/SpatialConstraintDeclarationSyntax.h"
+#include "grammar/model/MemberStudySyntax.h"
 #include "grammar/model/SpatialInterfaceDeclarationSyntax.h"
 #include "grammar/model/SpatialObjectDescriptorSyntax.h"
 #include "grammar/model/VehicleJointDeclarationSyntax.h"
@@ -376,6 +377,16 @@ public:
 	std::string isRule() override { return {}; }
 	std::string print() override { return "ObjectEnd "; }
 	void performAction(SceneGenerationContext *context) override;
+};
+
+class MemberStudyToken : public GrammarActionToken {
+public:
+	MemberStudyToken() : GrammarActionToken("PinRollerMember") {}
+	GrammarActionToken *clone() const override { return new MemberStudyToken(*this); }
+	std::string isRule() override { return {}; }
+	std::string print() override { return syntax ? syntax->canonicalText() + " " : "PinRollerMember() "; }
+	void performAction(SceneGenerationContext *context) override;
+	std::shared_ptr<const MemberStudySyntax> syntax;
 };
 
 class SpatialInterfaceDeclarationToken : public GrammarActionToken {
