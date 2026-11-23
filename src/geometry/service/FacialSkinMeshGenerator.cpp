@@ -505,6 +505,22 @@ public:
 		addSkinGrid();
 		if (mouth_annulus_) addQualityMouthAnnulus();
 		for (const FacialApertureDomain &aperture : surface_.apertures()) addApertureMargin(aperture);
+        if (specification_.identityShape().active()) {
+            const float minimum_area_z=1.0e-12f *
+                specification_.size().x * specification_.size().x;
+            for (std::size_t face_id=0; face_id<mesh_->faces.size(); ++face_id) {
+                if (surface_tags_[face_id].boundaryIndex()!=0) continue;
+                const glm::ivec3 f=mesh_->faces[face_id];
+                const auto area=glm::cross(mesh_->vertices[f.y]-mesh_->vertices[f.x],
+                                           mesh_->vertices[f.z]-mesh_->vertices[f.x]);
+                if (!(area.z>minimum_area_z)) {
+                    std::ostringstream error;
+                    error << "FacialSkin identity rest front facet flipped/collapsed: triangle "
+                          << face_id << "; reduce identityShape deformation.";
+                    throw std::runtime_error(error.str());
+                }
+            }
+        }
 		mesh_->landmarks = evaluateAnalyticalLandmarks(specification_);
 		if (specification_.responseMode() == FacialSkinResponseMode::Elastic) applyElasticResponse();
 		recomputeNormals();
