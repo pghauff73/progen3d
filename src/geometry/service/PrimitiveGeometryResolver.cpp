@@ -26,9 +26,9 @@ std::shared_ptr<const Mesh> share_static_mesh(const Mesh &mesh)
 
 }
 
-PrimitiveGeometryResolver::PrimitiveGeometryResolver()
+PrimitiveGeometryResolver::PrimitiveGeometryResolver(std::shared_ptr<const GeneratedMeshProvider> document_meshes)
 	: cube_vertex_template_(ResolvedPrimitiveGeometry::createCubeVertexTemplate()),
-	  procedural_mesh_repository_(std::make_unique<ProceduralMeshRepository>())
+	  procedural_mesh_repository_(std::make_unique<ProceduralMeshRepository>(std::move(document_meshes)))
 {
 }
 

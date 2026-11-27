@@ -34,6 +34,20 @@ GUI startup check from the UCRT64 shell:
 ./build/ucrt64/progen3d.exe --smoke-test
 ```
 
+### Open Lyra on Windows
+
+Double-click **Open Lyra.cmd** next to `progen3d.exe`, then select **Play**
+in the Preview panel to run Lyra’s four-second projection greeting.
+From a running editor, use **Open...** (Ctrl+O) and select
+`examples/Characters/Lyra/Lyra_Greeting.p3d` inside the app folder.
+The grammar embeds the character meshes and animation. To slow the greeting
+to eight seconds, change `Start -> Speed(1)` to `Start -> Speed(0.5)` and
+select **Run**.
+
+The body is based on MakeHuman core assets. The rig and motion derive from
+Kay Lousberg’s KayKit Adventurers. [MakeHuman](https://www.makehumancommunity.org/about/license.html)
+and [KayKit](https://kaylousberg.itch.io/kaykit-adventurers) publish these assets under CC0.
+
 ## Linux Supported Baseline
 
 The current desktop editor targets Linux with:

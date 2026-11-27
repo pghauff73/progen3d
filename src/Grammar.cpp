@@ -24,6 +24,7 @@
 #include "Context.h"
 #include "Scope.h"
 #include "grammar.h"
+#include "geometry/service/DocumentMeshLibrary.h"
 #include "GrammarRuntime.h"
 #include "Solution.h"
 #include "grammar/model/AxialProfileDescriptorSyntax.h"
@@ -5212,6 +5213,10 @@ GrammarDocument::GrammarDocument(std::istream &input, const std::string &source_
 
 void GrammarDocument::clearParsedState()
 {
+	if (document_meshes_) {
+		document_meshes_.reset();
+		if (context) context->setDocumentMeshProvider(nullptr);
+	}
 	error_lines.clear();
 	error_details.clear();
 
@@ -5234,6 +5239,17 @@ void GrammarDocument::rebuildFromLines(const std::string &success_message)
 	set_grammar_uses_time(this, false);
 	// P0 gate: malformed delimiters must be rejected before parsing can build an
 	// executable token stream, and certainly before recursive expansion begins.
+	int mesh_line = 0;
+	try {
+		auto library = DocumentMeshLibrary::read(lines, mesh_line);
+		if (!library->empty()) {
+			document_meshes_ = std::move(library);
+			if (context) context->setDocumentMeshProvider(document_meshes_);
+		}
+	} catch (const std::invalid_argument &error) {
+		report_grammar_issue(this, mesh_line, error.what());
+		return;
+	}
 	const bool source_structure_valid = validate_source_structure_before_expansion(this);
 	if(source_structure_valid){
 		parse_rule_lines_into_grammar(this, build_logical_rules(lines));
@@ -6151,7 +6167,7 @@ void GrammarDocument::addContext(){
 		delete context;
 		context=NULL;
 	}
-	this->context=new Context();
+	this->context=new Context(document_meshes_);
 }
 
 
