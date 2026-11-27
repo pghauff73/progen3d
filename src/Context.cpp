@@ -3210,8 +3210,8 @@ void SceneGenerationContext::genPrimitives()
 	Sphere = new Primitive("Sphere", 0, false, false, false);
 }
 
-SceneGenerationContext::SceneGenerationContext()
-	: primitive_geometry_resolver_(std::make_unique<PrimitiveGeometryResolver>()),
+SceneGenerationContext::SceneGenerationContext(std::shared_ptr<const GeneratedMeshProvider> document_meshes)
+	: primitive_geometry_resolver_(std::make_unique<PrimitiveGeometryResolver>(std::move(document_meshes))),
 	  spatial_scene_construction_state_(
 		  std::make_unique<SpatialSceneConstructionState>()),
 	  lighting_scene_definition_(std::make_unique<LightingSceneDefinition>()),
@@ -3224,6 +3224,13 @@ SceneGenerationContext::SceneGenerationContext()
 		current_scope = new Scope();
 	}
 	clearPendingPrimitiveState();
+}
+
+void SceneGenerationContext::setDocumentMeshProvider(
+	std::shared_ptr<const GeneratedMeshProvider> document_meshes)
+{
+	// Resolution caches include document-local keys and belong to this source revision.
+	primitive_geometry_resolver_ = std::make_unique<PrimitiveGeometryResolver>(std::move(document_meshes));
 }
 
 bool SceneGenerationContext::addSceneLight(SceneLight light, std::string *diagnostic)

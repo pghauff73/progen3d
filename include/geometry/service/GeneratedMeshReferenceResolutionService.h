@@ -14,11 +14,13 @@ public:
 
 	GeneratedMeshResolutionResult resolve(
 		const std::string &mesh_key,
-		GeometryDetailLevel detail_level) const
+		GeometryDetailLevel detail_level,
+		const GeneratedMeshProvider *document_provider = nullptr) const
 	{
 		const auto &providers = GeneratedMeshProviderRegistry::accessProcessRegistry()
 			.listRegisteredProviders();
-		const GeneratedMeshProvider *recognized_provider = nullptr;
+		const GeneratedMeshProvider *recognized_provider =
+			document_provider && document_provider->recognizes(mesh_key) ? document_provider : nullptr;
 		for (const std::shared_ptr<const GeneratedMeshProvider> &provider : providers) {
 			if (!provider->recognizes(mesh_key)) continue;
 			if (recognized_provider != nullptr) {

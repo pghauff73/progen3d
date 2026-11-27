@@ -167,6 +167,7 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/geometry/service/ProceduralShapeCatalogRepository.cpp \
 	$(SRC_DIR)/geometry/service/ShapeSpecificationValidator.cpp \
 	$(SRC_DIR)/geometry/service/GeneratedMeshReferenceSpecificationValidator.cpp \
+	$(SRC_DIR)/geometry/service/DocumentMeshLibrary.cpp \
 	$(SRC_DIR)/geometry/service/GeneratedMeshReferenceResolutionService.cpp \
 	$(SRC_DIR)/geometry/service/ClosedSurfaceFaceOrientationService.cpp \
 	$(SRC_DIR)/geometry/service/MeshTopologyAnalyzer.cpp \

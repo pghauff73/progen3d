@@ -16,6 +16,7 @@
 #include <unordered_map>
 #include <vector>
 
+class GeneratedMeshProvider;
 class SceneGenerationContext; // forward declaration to avoid include-order problems
 class ShapeSpecification;
 
@@ -731,6 +732,7 @@ public:
 	std::vector<GrammarDiagnostic> error_details;
 
 private:
+	std::shared_ptr<const GeneratedMeshProvider> document_meshes_;
 	void clearParsedState();
 	void rebuildFromLines(const std::string &success_message);
 };

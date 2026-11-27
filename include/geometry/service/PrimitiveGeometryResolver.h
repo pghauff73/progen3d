@@ -9,10 +9,12 @@
 class ShapeSpecification;
 class ProceduralMeshRepository;
 
+class GeneratedMeshProvider;
+
 class PrimitiveGeometryResolver
 {
 public:
-	PrimitiveGeometryResolver();
+	explicit PrimitiveGeometryResolver(std::shared_ptr<const GeneratedMeshProvider> document_meshes = nullptr);
 	~PrimitiveGeometryResolver();
 
 	std::shared_ptr<const ResolvedPrimitiveGeometry> resolvePrimitiveType(

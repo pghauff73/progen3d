@@ -29,10 +29,12 @@ class TaperedSweepMeshGenerator;
 class VariableSectionSweepMeshGenerator;
 class VineMeshGenerator;
 
+class GeneratedMeshProvider;
+
 class ProceduralMeshRepository
 {
 public:
-	ProceduralMeshRepository();
+	explicit ProceduralMeshRepository(std::shared_ptr<const GeneratedMeshProvider> document_meshes = nullptr);
 	~ProceduralMeshRepository();
 
 	std::shared_ptr<const ResolvedPrimitiveGeometry> resolve(
@@ -42,6 +44,7 @@ public:
 	std::size_t cachedShapeCount() const;
 
 private:
+	std::shared_ptr<const GeneratedMeshProvider> document_meshes_;
 	std::unique_ptr<AxialProfileMeshGenerator> axial_profile_mesh_generator_;
 	std::unique_ptr<BotanicalBladeMeshGenerator> botanical_blade_mesh_generator_;
 	std::unique_ptr<BranchJunctionMeshGenerator> branch_junction_mesh_generator_;

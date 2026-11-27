@@ -123,11 +123,14 @@ struct CollisionParticle {
 	float size = 0.0f;
 };
 
+class GeneratedMeshProvider;
+
 class SceneGenerationContext
 {
 public:
-	SceneGenerationContext();
+	explicit SceneGenerationContext(std::shared_ptr<const GeneratedMeshProvider> document_meshes = nullptr);
 	~SceneGenerationContext();
+	void setDocumentMeshProvider(std::shared_ptr<const GeneratedMeshProvider> document_meshes);
 	void pushScope();
 	Scope *popScope();
 	void newScope();

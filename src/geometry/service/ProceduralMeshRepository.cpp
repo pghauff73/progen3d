@@ -47,8 +47,9 @@ ShapeSpecificationKey cache_key_for(const ShapeSpecification &specification)
 
 }
 
-ProceduralMeshRepository::ProceduralMeshRepository()
-	: axial_profile_mesh_generator_(std::make_unique<AxialProfileMeshGenerator>()),
+ProceduralMeshRepository::ProceduralMeshRepository(std::shared_ptr<const GeneratedMeshProvider> document_meshes)
+	: document_meshes_(std::move(document_meshes)),
+	  axial_profile_mesh_generator_(std::make_unique<AxialProfileMeshGenerator>()),
 	  botanical_blade_mesh_generator_(std::make_unique<BotanicalBladeMeshGenerator>()),
 	  branch_junction_mesh_generator_(std::make_unique<BranchJunctionMeshGenerator>()),
 	  cylinder_mesh_generator_(std::make_unique<CylinderMeshGenerator>()),
@@ -357,7 +358,8 @@ ProceduralMeshRepository::resolve(
 		const GeneratedMeshResolutionResult resolution =
 			generated_mesh_reference_resolution_service_->resolve(
 				generated_mesh_reference->meshKey(),
-				generated_mesh_reference->detailLevel());
+				generated_mesh_reference->detailLevel(),
+				document_meshes_.get());
 		if (!resolution.succeeded() || !resolution.generatedMesh().has_value()) {
 			if (diagnostic != nullptr) *diagnostic = resolution.diagnostic();
 			return {};
