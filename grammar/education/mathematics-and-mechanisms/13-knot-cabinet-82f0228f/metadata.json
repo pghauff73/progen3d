@@ -1,0 +1,61 @@
+{
+  "title": "13 knot cabinet",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/13-knot-cabinet-82f0228f",
+  "source_file": "13-knot-cabinet.p3d",
+  "git_blob_sha": "82f0228f97e69ba201ef0878db924d81cf5c0a6d",
+  "bytes": 2408,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "13-knot-cabinet.p3d"
+  ],
+  "description": "Knot cabinet. Knot(oddMeridianTurns lift). Illustrated edits: (3 0.55), (5 0.55).",
+  "features": [
+    "Revolve",
+    "Cylinder",
+    "Cube",
+    "Sphere",
+    "TaperedSweep"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Knot cabinet. Knot(oddMeridianTurns lift). Illustrated edits: (3 0.55), (5 0.55). · Two azimuthal turns. Use q=3 or 5 and lift between 0.32 and 0.80. · Brass joints at the extrema mark the overpasses and their matching underpasses. · A low stepped walnut drum and two concentric brass wires. · Each length of enamel fattens between its two spherical couplings. · A turned foot meets each absolute minimum, independently of lift."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Plinth, Strand, Sockets"
+    ],
+    [
+      "Object classes",
+      "KnotCabinet, DisplayBase, ArticulatedKnot, Supports"
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, Cylinder, Cube, Sphere, TaperedSweep"
+    ],
+    [
+      "Material identifiers",
+      "amberwarmwood, charcoalmattemetal, goldbrushedmetal, bluegreymattepaint, copperpolishedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Knot, Base, Inlay, Interval, Endpoints, Link, Socket (8 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "43"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

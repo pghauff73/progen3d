@@ -3,7 +3,7 @@
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
   "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 204,
+  "distinct_sources": 224,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -6004,6 +6004,66 @@
       }
     },
     {
+      "title": "Pro Gen3D Ducted Fan",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-ducted-fan-db19de77",
+      "source_file": "ProGen3D_Ducted_Fan.p3d",
+      "git_blob_sha": "db19de77824a15a5c72f7dbbefcd76f20ee76440",
+      "bytes": 34166,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_Ducted_Fan.p3d"
+      ],
+      "description": "Ducted fan with a steerable internal passage",
+      "features": [
+        "Revolve",
+        "Loft",
+        "Cube",
+        "ShellLoft"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Ducted fan with a steerable internal passage · Native ProGen3D grammar. One model unit represents one millimetre. · Edit Start: bore radius, nominal tip gap, blade count, outlet angle (degrees), · outside radius, minimum radial wall, show casing (1 or 0). · Try a straight duct with angle 0, reverse the bend with -18, or widen the bore to 55. · Admitted envelope: bore 40..60 mm, gap 0.25..3 mm, 3..10 whole blades, · bend -30..30 degrees, positive minimum wall. The outer radius must clear the passage. · Rotor animation: t in seconds, one illustrative revolution every 6 seconds. · The casing's inscribed radius bounds the wall even between polygon vertices. · The largest bore extent occurs at the inlet lip or at the far side of the exit."
+        ],
+        [
+          "Named objects",
+          "Fan, Casing, Rotor, MotorMount, InvalidDimensions, InsufficientWall"
+        ],
+        [
+          "Object classes",
+          "AxialDuctedFan, DuctCasing, AxialImpeller, ThreeArmSupport, InputError, EnvelopeError"
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve, Loft, Cube, ShellLoft"
+        ],
+        [
+          "Material identifiers",
+          "charcoalroughmetal, silverbrushedmetal, copperpolishedmetal, goldbrushedmetal, redpaintmatte, orangebrownmattepaint, bluepaintmatte"
+        ],
+        [
+          "Production rules",
+          "Start, DuctedFan, CheckGap, CheckCount, CheckInteger, CheckBend, CheckWall, Envelope, Assembly, Mount, Hub, Blade, InvalidDimensions, ThinWall, RedCross, OrangeCross, Passage, WallSections (18 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "315"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Pro Gen3D Kinetic Assembly Pair",
       "group": "education/grammar-showcases",
       "directory": "education/grammar-showcases/progen3d-kinetic-assembly-pair-68ec7e69",
@@ -6051,6 +6111,63 @@
         [
           "Source lines",
           "308"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Pro Gen3D Spur Gear Pair",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-spur-gear-pair-7191aa76",
+      "source_file": "ProGen3D_Spur_Gear_Pair.p3d",
+      "git_blob_sha": "7191aa76f9e6d7acdd57a08a93d7d87cc4a5798a",
+      "bytes": 2568,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_Spur_Gear_Pair.p3d"
+      ],
+      "description": "ProGen3D | 20:40 external involute spur gears",
+      "features": [
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D | 20:40 external involute spur gears · Open this file in the native grammar editor. Play or scrub 0 to 4 seconds. · Start sets pinion rpm (signed). Each scene unit represents 10 mm. · Module 2 mm, pressure angle 20 deg, face 8 mm, zero profile shift. · Closed tooth sectors tile each wheel. Straight root extensions approximate · the region below the base circle. The shaft angles are prescribed. · Bright radial mark on each front face makes the full shaft revolution visible."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude"
+        ],
+        [
+          "Material identifiers",
+          "warmwhitematteplaster, copperpolishedmetal, bluepaintmatte"
+        ],
+        [
+          "Production rules",
+          "Start, Drive, Assembly, Pinion, Wheel, Marker, PinionSector, WheelSector (8 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "47"
         ]
       ],
       "render_assets": [],
@@ -6300,6 +6417,747 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 55,
         "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "01 meridian orrery",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/01-meridian-orrery-2b4216c9",
+      "source_file": "01-meridian-orrery.p3d",
+      "git_blob_sha": "2b4216c9b63f6fd1c3cf4c631d5aa6e924c66f8a",
+      "bytes": 6351,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "01-meridian-orrery.p3d"
+      ],
+      "description": "Meridian orrery | native ProGen3D | Y up | studio model units",
+      "features": [
+        "Sphere",
+        "Revolve",
+        "Cylinder",
+        "Cube",
+        "TaperedSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Meridian orrery | native ProGen3D | Y up | studio model units · Start takes the length in seconds of an Earth year. Try 12, then time 0..12. · Display radii and ball sizes are compressed independently of orbital periods. · Turned pedestal, moulded foot and stepped lip, as a single radial section. · One engraved division per degree; the 5-degree and 30-degree divisions have their own lengths. · Exposed illustration pair: common pitch; 32:16 teeth; equal and opposite pitch-line speeds."
+        ],
+        [
+          "Named objects",
+          "Orrery, footprint, Pedestal, CalendarDial, Drive, SolarSpindle, Mercury, Venus, EarthMoon, Mars, Jupiter, Saturn"
+        ],
+        [
+          "Object classes",
+          "AstronomicalInstrument, Stand, Dial, Clockwork, Bearing, OrbitCarrier"
+        ],
+        [
+          "Instantiated primitives",
+          "Sphere, Revolve, Cylinder, Cube, TaperedSweep"
+        ],
+        [
+          "Material identifiers",
+          "silverbluepolishedmetal, amberwarmwood, redglossymetal, charcoalroughmetal, warmwhitematteplaster, goldbrushedmetal, copperpolishedmetal, bluepaintmatte"
+        ],
+        [
+          "Production rules",
+          "Start, Instrument, Stand, Foot, Dial, Ring, Tick, MinorTick, Column, Clockwork, Wheel, Spindle, Carrier, EarthSystem, JupiterGlobe, SaturnGlobe (16 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "88"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "02 two shaft loom",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/02-two-shaft-loom-03538dc6",
+      "source_file": "02-two-shaft-loom.p3d",
+      "git_blob_sha": "03538dc6418d86da98b774e141e9e9c88564b9e6",
+      "bytes": 9513,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "02-two-shaft-loom.p3d"
+      ],
+      "description": "Two-shaft study loom | two shafts, plain-weave swatch | Y up, front +Z",
+      "features": [
+        "Cube",
+        "Cylinder",
+        "Sphere",
+        "TaperedSweep",
+        "AxialProfile"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Two-shaft study loom | two shafts, plain-weave swatch | Y up, front +Z · Set the beat period in seconds in Start. Try t=0, 1, 2, 3 with period 4. · Front cloth is shown as individual yarns at a deliberately enlarged gauge. · Cylinder is based at local y=0. Rotate to run beam axes along X. · Each heddle has separate upper and lower straight lengths and a closed eye. · Each pair enters opposite sheds. cos(pi*i) yields exact alternating parity. · Half-turn at each selvedge joins adjacent picks; colour transitions represent joined yarns. · Loft the boat from five hexagonal transverse sections. The bobbin is visible above the hull."
+        ],
+        [
+          "Named objects",
+          "Loom, floor, OakFrame, BeamSet, FrontReed, HarnessA, HarnessB, WarpEnds, WeftPicks, BoatShuttle, Treadles"
+        ],
+        [
+          "Object classes",
+          "TextileMachine, LoomFrame, WarpStorage, Beater, HeddleFrame, LongitudinalYarn, TransverseYarn, Shuttle, FootControl"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder, Sphere, TaperedSweep, AxialProfile"
+        ],
+        [
+          "Material identifiers",
+          "amberwarmwood, charcoalroughmetal, goldpolishedmetal, beigebrownpinewood, beigegreywhitemattepolyester, silverbluepolishedmetal, redmattepaint, bluepaintmatte"
+        ],
+        [
+          "Production rules",
+          "Start, Loom, Oak, Iron, Pin, SideFrame, Crossrails, Beams, Reed, Shaft, WarpYarn, Pick, EdgeTurn, BluePick, RustPick, Shuttle, Treadle (17 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "152"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "03 orchid shadehouse",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/03-orchid-shadehouse-73628eb9",
+      "source_file": "03-orchid-shadehouse.p3d",
+      "git_blob_sha": "73628eb95496cb5a0af453cc50e9538eba14de67",
+      "bytes": 10976,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "03-orchid-shadehouse.p3d"
+      ],
+      "description": "Orchid shadehouse | open-front exhibition section | native ProGen3D, Y up",
+      "features": [
+        "Cube",
+        "SweepProfile",
+        "Cylinder",
+        "TaperedSweep",
+        "SweepDisk",
+        "Revolve",
+        "LeafBlade",
+        "Sphere",
+        "PetalBlade",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Orchid shadehouse | open-front exhibition section | native ProGen3D, Y up · Bay(n pitch) places the roof stations. ShadeFins covers the rear half of the roof. · Edit the five OrchidPot(scale yaw) calls for the specimen groups or change the editor seed. · Five continuous arch ribs. At the eaves the tangent changes gradually into the roof. · Sample one quadrant of an ellipse. Rotate each longitudinal blade to its local tangent. · A section revolved about the Y axis contains the pot wall, lip and foot ring. · Three outer sepals, two broad lateral petals and a lower, cupped lip. · Lighting bars fixed to the arch rail. Local XY reflector cross-section is extruded · along Z and turned onto X. The hanging spacers are closed solid aluminium · cylinders, 0.050 m diameter x 0.065 m long at an assumed 2700 kg/m3."
+        ],
+        [
+          "Named objects",
+          "Shadehouse, slabBearing, Terrace, Arcade, MistLine, waterFeed, LampWest, ceilingMate, LampEast, Staging, SpecimenWest, SpecimenAmber, SpecimenCrown, SpecimenIvory, SpecimenEast, westFixtureMount, eastFixtureMount, westMate, eastMate"
+        ],
+        [
+          "Object classes",
+          "PlantExhibit, TiledFloor, StructuralFrame, IrrigationLine, DisplayLuminaire, SlattedBench, OrchidDisplay"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, SweepProfile, Cylinder, TaperedSweep, SweepDisk, Revolve, LeafBlade, Sphere, PetalBlade, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "beigebrownpinewood, charcoalmattemetal, charcoalroughmetal, warmwhitematteplaster, silverbrushedmetal, sagegreenmattepaint, copperpolishedmetal, goldbrushedmetal, orangeroughceramic, darkbrownmattepaint, olivegreenmattepaint, greenlimebeigemattepaint, goldorangemattepaint, offwhiteceramic, redmattepaint, whitebeigeblueemissivepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Shadehouse, Wood, Metal, Paving, Arch, Foot, Gusset, LongRails, Louver, Manifold, Bench, OrchidPot, PotBody, Leaf, MainSpike, Pedicel, Bud, Bloom, Sepal (25 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "162"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "04 volute pump",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/04-volute-pump-299dab9e",
+      "source_file": "04-volute-pump.p3d",
+      "git_blob_sha": "299dab9e6ccdb795b5ca0aa9c32a7d33bba7a102",
+      "bytes": 18764,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "04-volute-pump.p3d"
+      ],
+      "description": "Scroll and runner | single-stage radial pump | sectioned teaching model",
+      "features": [
+        "SweepProfile",
+        "Extrude",
+        "HostedOpening",
+        "Revolve",
+        "TaperedSweep",
+        "Cylinder",
+        "Cube",
+        "Loft",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Scroll and runner | single-stage radial pump | sectioned teaching model · Parameters in Start: number of vanes, seconds per display revolution, exploded pose (0..1). · Coordinates are illustrative model units. The shaft points toward +Z and the outlet toward +Y. · ----- Collector and casing ----- · The rectangular wall section has radial thickness 0.09 and axial depth 0.48. · The axial centre plane is z=0.12. The extra straight reach forms the outer discharge wall. · r(u) = 1.17 + 0.55 * (u - sin(2*pi*u)/(2*pi)), 0 <= u <= 1. · BEGIN scroll_path · END scroll_path · The two skins share this profile in XY. The holes are modelled through the full depth."
+        ],
+        [
+          "Named objects",
+          "Pump, Bed, Scroll, Bearings, Impeller, Cover, outlet, inlet"
+        ],
+        [
+          "Object classes",
+          "CentrifugalPump, MountingBed, VoluteCasing, BearingHousing, RadialRunner, SuctionCover"
+        ],
+        [
+          "Instantiated primitives",
+          "SweepProfile, Extrude, HostedOpening, Revolve, TaperedSweep, Cylinder, Cube, Loft, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "bluepaintmatte, silverbrushedmetal, copperpolishedmetal, goldbrushedmetal, charcoalroughmetal, charcoalmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, Pump, ScrollWall, TongueWall, BackPlate, FacePlate, Plate, Discharge, OutletStud, InletNeck, InletFlange, RearShroud, Hub, Blade, BearingHousing, Bed, CasingFoot, Anchors, Anchor, HexNut (23 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "256"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "05 miura solar blanket",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/05-miura-solar-blanket-f8b5a278",
+      "source_file": "05-miura-solar-blanket.p3d",
+      "git_blob_sha": "f8b5a2789bc172cf890bc5ca9e8178acc63afec2",
+      "bytes": 2186,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "05-miura-solar-blanket.p3d"
+      ],
+      "description": "Miura solar blanket | rigid-fold kinematics, eight by six facets, Y vertical.",
+      "features": [
+        "Loft",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Miura solar blanket | rigid-fold kinematics, eight by six facets, Y vertical. · Array(columns rows periodSeconds); even counts give complete repeating cells. · Edge lengths a=0.82, b=0.74; acute sector angle=64 degrees. · U=(p,+/-h,0), V=(+/-q,0,bz). Each face is the parallelogram U+V. · Gold foil shares its full boundary with neighbours. Thin decorative layers sit above it."
+        ],
+        [
+          "Named objects",
+          "Blanket"
+        ],
+        [
+          "Object classes",
+          "DeployableSheet"
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "goldbrushedmetal, copperpolishedmetal, bluepaintmatte, silverbrushedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, Array, Fold, Dimensions, Facet, Cell (6 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "44"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "06 sunflower capitulum",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/06-sunflower-capitulum-965eb282",
+      "source_file": "06-sunflower-capitulum.p3d",
+      "git_blob_sha": "965eb2822073140920694b16468ccbd320739c12",
+      "bytes": 5400,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "06-sunflower-capitulum.p3d"
+      ],
+      "description": "Sunflower head | botanical display model, Y up, display front +Z.",
+      "features": [
+        "TaperedSweep",
+        "LeafBlade",
+        "Sphere",
+        "PetalBlade",
+        "Cylinder",
+        "ShellLoft"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Sunflower head | botanical display model, Y up, display front +Z. · Specimen(count divergenceDegrees) controls disk florets; edit the second number to 135 for a comparison. · Square-root radius gives equal area per index on the projected disk. · Constant-radius test markers are unnecessary: the floret footprints carry the positions. · The corolla is a thin shell with a five-lobed lip and a through-opening."
+        ],
+        [
+          "Named objects",
+          "Sunflower, Stalk, Receptacle, Rays, InnerDisc, OuterDisc"
+        ],
+        [
+          "Object classes",
+          "FloweringSpecimen, Stem, FlowerHead, RayFlorets, DiscFlorets"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, LeafBlade, Sphere, PetalBlade, Cylinder, ShellLoft"
+        ],
+        [
+          "Material identifiers",
+          "olivegreenmattepaint, sagegreenmattepaint, darkbrownmattepaint, goldorangemattepaint, ambermattepaint, orangebrownmattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Specimen, Stem, Foliage, FoliageLeaf, Cushion, PlaceFloret, Floret, Corolla (9 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "87"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "07 three cross wheel",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/07-three-cross-wheel-c4501e1a",
+      "source_file": "07-three-cross-wheel.p3d",
+      "git_blob_sha": "c4501e1a9c1816df991834634ad3a19341280ddf",
+      "bytes": 4164,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "07-three-cross-wheel.p3d"
+      ],
+      "description": "Rear wheel on a truing stand. Axis Z, positive Y up. Dimensions are display units.",
+      "features": [
+        "TaperedSweep",
+        "SweepDisk",
+        "Sphere",
+        "Revolve",
+        "Cube",
+        "Cylinder",
+        "SweepProfile"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Rear wheel on a truing stand. Axis Z, positive Y up. Dimensions are display units. · Wheel(crosses revolutionSeconds). Try 0, 1, 2 or 3 crossings, with a positive period. · Two interleaved 18-hole flanges. Every other spoke leads; its neighbour trails."
+        ],
+        [
+          "Named objects",
+          "WheelExhibit, TruingStand, RimAndTyre, Hub, WideFlange, NarrowFlange"
+        ],
+        [
+          "Object classes",
+          "CycleExhibit, BenchFixture, WheelRim, RearHub, SpokeSet"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, SweepDisk, Sphere, Revolve, Cube, Cylinder, SweepProfile"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, goldbrushedmetal, copperpolishedmetal, charcoalroughrubber, ambermatterubber, bluepaintmatte, bluegreymattepaint, charcoalmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, Wheel, Spoke, SpokeEnds, Hoop, Stripe, Lug, Valve, HubShell, Stand, Arm (11 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "63"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "08 pendulum wave",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/08-pendulum-wave-21d103b7",
+      "source_file": "08-pendulum-wave.p3d",
+      "git_blob_sha": "21d103b77fdc02a6b443595392657bbc7ad94863",
+      "bytes": 2894,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "08-pendulum-wave.p3d"
+      ],
+      "description": "Pendulum wave | fifteen independent bobs on bifilar suspensions.",
+      "features": [
+        "Cylinder",
+        "Sphere",
+        "Revolve",
+        "SweepDisk",
+        "Cube",
+        "SweepProfile"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Pendulum wave | fifteen independent bobs on bifilar suspensions. · Wave(recurrenceSeconds amplitudeDegrees elapsedOffsetSeconds). · Model coordinates are decimetres. Gravity is 98.0665 dm/s^2. · L is pivot-to-centre length; the brass collar and cables terminate above the bob."
+        ],
+        [
+          "Named objects",
+          "WaveExhibit, Bench, Beam, Bobs"
+        ],
+        [
+          "Object classes",
+          "PendulumExhibit, DisplayBench, PivotRail, PendulumArray"
+        ],
+        [
+          "Instantiated primitives",
+          "Cylinder, Sphere, Revolve, SweepDisk, Cube, SweepProfile"
+        ],
+        [
+          "Material identifiers",
+          "copperpolishedmetal, goldpolishedmetal, silverbrushedmetal, amberwarmwood, goldbrushedmetal, charcoalmattemetal, bluegreymattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Wave, Station, Oscillator, Line, Bench, EndFrame, Brace, Beam, Pivot (10 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "54"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "09 hyperboloid pavilion",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/09-hyperboloid-pavilion-4e6e306e",
+      "source_file": "09-hyperboloid-pavilion.p3d",
+      "git_blob_sha": "4e6e306e1caeda77b3766b54af19dac18801d5a2",
+      "bytes": 4045,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "09-hyperboloid-pavilion.p3d"
+      ],
+      "description": "Ruled-surface belvedere. The shell consists of two families of straight members.",
+      "features": [
+        "TaperedSweep",
+        "Revolve",
+        "Sphere",
+        "Cylinder",
+        "Cube",
+        "Extrude",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Ruled-surface belvedere. The shell consists of two families of straight members. · Pavilion(barsPerFamily twistDegrees). Try 18 100, then 18 60. · From base to top one family advances by twist, the other retreats by twist. · A third collinear section at the actual waist makes its centre independently measurable. · Each step is a wedge extruded upwards. The uppermost tread lands on the inner deck edge."
+        ],
+        [
+          "Named objects",
+          "Belvedere, Foundations, Ascending, Descending, Hoops, Stair, Lookout"
+        ],
+        [
+          "Object classes",
+          "ObservationPavilion, Foundation, StraightBars, RingBeams, HelicalStair, ObservationDeck"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, Revolve, Sphere, Cylinder, Cube, Extrude, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "bluegreymattepaint, copperpolishedmetal, goldbrushedmetal, offwhiteceramic, amberwarmwood, charcoalmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, Pavilion, Bar, Level, Belt, Foundation, Anchor, Flight, Tread, RailLink, Gallery (11 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "74"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "10 truchet tracing board",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/10-truchet-tracing-board-758a9dd8",
+      "source_file": "10-truchet-tracing-board.p3d",
+      "git_blob_sha": "758a9dd88c86f9875c6cee339a478c5e5ab7667e",
+      "bytes": 2167,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "10-truchet-tracing-board.p3d"
+      ],
+      "description": "Truchet tracing board. Edit Board(columns rows patternDivisor).",
+      "features": [
+        "Cube",
+        "Cylinder",
+        "Revolve"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Truchet tracing board. Edit Board(columns rows patternDivisor). · Use positive integer dimensions and divisor. Illustration: 8 x 6, divisor 3."
+        ],
+        [
+          "Named objects",
+          "Cabinet, Mosaic, Ports"
+        ],
+        [
+          "Object classes",
+          "FramedBoard, TurnTiles, BoundaryMarks"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder, Revolve"
+        ],
+        [
+          "Material identifiers",
+          "amberwarmwood, goldbrushedmetal, charcoalmattemetal, copperpolishedmetal, offwhiteceramic, bluegreymattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Board, Case, Corner, Tile, CornerArc (6 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "42"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "11 scotch yoke",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/11-scotch-yoke-4709a5d0",
+      "source_file": "11-scotch-yoke.p3d",
+      "git_blob_sha": "4709a5d0a036adb375183894dd363bead71c3e36",
+      "bytes": 3878,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "11-scotch-yoke.p3d"
+      ],
+      "description": "Scotch yoke demonstration. Yoke(crankRadius periodSeconds).",
+      "features": [
+        "Cylinder",
+        "Cube",
+        "Revolve",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Scotch yoke demonstration. Yoke(crankRadius periodSeconds). · Suggested radius 0.40 to 1.05 model units, positive period."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Stand, Flywheel, CrankPin, Slider, Slipper"
+        ],
+        [
+          "Object classes",
+          "Mechanism, Bench, Rotor, Journal, Yoke, SlidingBlock"
+        ],
+        [
+          "Instantiated primitives",
+          "Cylinder, Cube, Revolve, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "silverbluepolishedmetal, amberwarmwood, charcoalmattemetal, goldbrushedmetal, bluegreymattepaint, silverbrushedmetal, copperpolishedmetal, redmattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Yoke, Bed, Bearing, Cheek, Stud, Wheel, Carriage, CrossSide, EndBar, Shoe, ShoeHalf (12 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "60"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "13 knot cabinet",
+      "group": "education/mathematics-and-mechanisms",
+      "directory": "education/mathematics-and-mechanisms/13-knot-cabinet-82f0228f",
+      "source_file": "13-knot-cabinet.p3d",
+      "git_blob_sha": "82f0228f97e69ba201ef0878db924d81cf5c0a6d",
+      "bytes": 2408,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "13-knot-cabinet.p3d"
+      ],
+      "description": "Knot cabinet. Knot(oddMeridianTurns lift). Illustrated edits: (3 0.55), (5 0.55).",
+      "features": [
+        "Revolve",
+        "Cylinder",
+        "Cube",
+        "Sphere",
+        "TaperedSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Knot cabinet. Knot(oddMeridianTurns lift). Illustrated edits: (3 0.55), (5 0.55). · Two azimuthal turns. Use q=3 or 5 and lift between 0.32 and 0.80. · Brass joints at the extrema mark the overpasses and their matching underpasses. · A low stepped walnut drum and two concentric brass wires. · Each length of enamel fattens between its two spherical couplings. · A turned foot meets each absolute minimum, independently of lift."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Plinth, Strand, Sockets"
+        ],
+        [
+          "Object classes",
+          "KnotCabinet, DisplayBase, ArticulatedKnot, Supports"
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve, Cylinder, Cube, Sphere, TaperedSweep"
+        ],
+        [
+          "Material identifiers",
+          "amberwarmwood, charcoalmattemetal, goldbrushedmetal, bluegreymattepaint, copperpolishedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, Knot, Base, Inlay, Interval, Endpoints, Link, Socket (8 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "43"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -6960,6 +7818,116 @@
         [
           "Source lines",
           "288"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "MCSMv1 Modern Car Family",
+      "group": "engineering/automotive/exported-models",
+      "directory": "engineering/automotive/exported-models/mcsmv1-modern-car-family-4048deeb",
+      "source_file": "MCSMv1_Modern_Car_Family.p3d",
+      "git_blob_sha": "4048deeb78f4e8be104443bd91b08ba005449ebd",
+      "bytes": 5195,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "MCSMv1_Modern_Car_Family.p3d"
+      ],
+      "description": "============================================================================",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          "============================================================================ · MCSMv1 / MVPv2.5 MODERN CAR FAMILY · Research-informed target grammar generated by modern_car_parametric_model.py ·  · This is target syntax for FGKv1. It uses an implicit section field resolved · to a zero-isosurface, separate greenhouse glass, wheel assemblies and · analytic character curves. It is not compatible with the current parser. · ============================================================================"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start, ModernCarFamily, ModernCarModel, MCSM_reference, MCSM_track, MCSM_aero, MCSM_crossover, ValidateModernCar (8 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "197"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "MCSMv2 Modern Car Family",
+      "group": "engineering/automotive/exported-models",
+      "directory": "engineering/automotive/exported-models/mcsmv2-modern-car-family-669d6bf5",
+      "source_file": "MCSMv2_Modern_Car_Family.p3d",
+      "git_blob_sha": "669d6bf559df31f280dce2a01cc7cb7df78f7da5",
+      "bytes": 10639,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "MCSMv2_Modern_Car_Family.p3d"
+      ],
+      "description": "============================================================================",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          "============================================================================ · MCSMv2.3 RESEARCH-ENRICHED MODERN-CAR FAMILY · FGKv1/MVPv2.5 target grammar generated by the MCSMv2.3 Python reference. ·  · Geometry assurance carried forward: · MCSMv2.2 persistent UV semantic surface and V3 sampled kinematics. ·  · Research enrichment: · ResearchEvidenceRegistry · PublishedVehicleReferenceDataset"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start, MCSMv2Family, ModernCarV23, MCSMv2_reference, MCSMv2_track, MCSMv2_aero, MCSMv2_crossover, ValidateMCSMv23 (8 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "344"
         ]
       ],
       "render_assets": [],
@@ -8735,6 +9703,67 @@
       }
     },
     {
+      "title": "Popular Objects Collection",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/popular-objects-collection-2098023b",
+      "source_file": "Popular_Objects_Collection.p3d",
+      "git_blob_sha": "2098023bfde8fbe1524ccdcc13b22072775f80cf",
+      "bytes": 36499,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Popular_Objects_Collection.p3d"
+      ],
+      "description": "Popular objects collection. Six native procedural studies.",
+      "features": [
+        "Cube",
+        "AxialProfile",
+        "CubeY",
+        "Cylinder",
+        "TaperedSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Popular objects collection. Six native procedural studies. · The layout scales the objects for viewing. Open the individual files for true metre dimensions. · 20 mm XYZ calibration cube, dimensions in metres. · Reference geometry: Innerscene's independently authored CC0 20 mm XYZ cube. · https://www.innerscene.com/tools/library/3d-parts/20-mm-xyz-calibration-cube-eb88de5c · The block-letter faces here are rebuilt with strips around real 0.8 mm recesses. · On this Y-up model, the letter Z is on top to match the conventional print axes. · Cali Cat, from Dezign's original calibration figure. · Original page: https://www.thingiverse.com/thing:1545913 · Reference dimensions: 20 mm body width/depth, 35 mm total height, 5 mm tail section."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, AxialProfile, CubeY, Cylinder, TaperedSweep"
+        ],
+        [
+          "Material identifiers",
+          "tealmatteplastic, darkbluegreenmatteplastic, orangeyellowmatteplastic, tealbluematteplastic, goldorangeceramic, charcoalbluematteplastic, bluegreymatteplastic, goldorangemetal, lightbluesmoothmetal, charcoalbluemattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, Collection, Cube_Start, Cube_CubeModel, Cube_Body, Cube_XSkin, Cube_YSkin, Cube_ZSkin, Cat_Start, Cat_Cat, Cat_Body, Cat_Head, Cat_AngularHead, Cat_EarPair, Cat_Ear, Cat_Tail, Cat_TailRise, Phone_Start, Phone_PhoneStand, Phone_BackSupport (37 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "572"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Procedural Material Catalogue",
       "group": "engineering/exported-studies",
       "directory": "engineering/exported-studies/procedural-material-catalogue-bfbb45d8",
@@ -8779,6 +9808,68 @@
         [
           "Source lines",
           "129"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Recent Engineering Inventions",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/recent-engineering-inventions-ccee3d84",
+      "source_file": "Recent_Engineering_Inventions.p3d",
+      "git_blob_sha": "ccee3d843e694a5957ffdb97d20d1f2cb6056518",
+      "bytes": 11390,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Recent_Engineering_Inventions.p3d"
+      ],
+      "description": "Recent engineering inventions | ProGen3D desktop | November 2026",
+      "features": [
+        "Cube",
+        "Revolve",
+        "SweepProfile",
+        "SweepDisk",
+        "Sphere",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Recent engineering inventions | ProGen3D desktop | November 2026 · 0 = all four, 1 = thermal switch, 2 = water harvester, 3 = pipe robot, 4 = lattice. · Open in the desktop editor, select Run and Fit, then press Play. Time t is in seconds. · Edit the number here to isolate a device. All dimensions are illustrative scene units. · The four device scales and cycle times are independent. Each section cites its paper. · 1 | Thermal switch | Tan et al., Nature Communications (2026) · DOI 10.1038/s41467-026-69956-2 · Five chiral arms rotate and lift a pentagonal contact carrier. Gold identifies the · folded arms, red the actuator traces, steel the return elements. The finned sink · is a display fixture. The flat and elevated poses are keyed to a six-second cycle."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Revolve, SweepProfile, SweepDisk, Sphere, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "charcoalmattemetal, silverbrushedmetal, copperbrushedmetal, goldbrushedmetal, ambermatteplastic, redmattemetal, charcoalmatteplastic, softblueglossyceramic, graphiteglossyplastic, tealmattemetal, tealglossyceramic, redmatteplastic, tealmatteplastic"
+        ],
+        [
+          "Production rules",
+          "Start, Study, SingleStudy, OtherStudy, MovingStudy, Collection, ThermalSwitch, SwitchPose, HeatSink, FixedContact, MovingContact, FoldArm, WaterHarvester, WindowFrame, Jamb, Collector, DrainTracer, Condensate, DryPane, PipeRobot (35 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "250"
         ]
       ],
       "render_assets": [],
@@ -8908,6 +9999,66 @@
       }
     },
     {
+      "title": "Sage Childrens Bedroom",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/sage-childrens-bedroom-914b840e",
+      "source_file": "Sage_Childrens_Bedroom.p3d",
+      "git_blob_sha": "914b840e48793636c1daac4f56bc59c63e4cfae6",
+      "bytes": 18986,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Sage_Childrens_Bedroom.p3d"
+      ],
+      "description": "Sage children's bedroom",
+      "features": [
+        "Cube",
+        "Sphere",
+        "Cylinder",
+        "AxialProfile"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Sage children's bedroom · Reconstructed from the final elevated concept image. Dimensions are inferred, in metres. · Local axes: +X toward the window, +Y up, +Z toward the entrance. · Bedroom(0) opens two walls for inspection. Bedroom(1) restores both walls and the door. · The north wall, east window, and furniture positions are shared by both modes. · Architecture. One opening in the window wall and a separate entrance wall. · Shallow silhouettes suggest the tree beyond the glass. · Oak bed, rounded headboard, padded mattress and patterned textiles. · Three bays by two rows, complete with baskets, books and the top display. · Window-side desk. Positive local Z is the chair-facing side."
+        ],
+        [
+          "Named objects",
+          "BedroomScene, SingleBed, LowBookcase, WindowDesk, BlueSpindleChair, RoundJuteRug, SageToyChest"
+        ],
+        [
+          "Object classes",
+          "Room, Furniture, Furnishing"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Sphere, Cylinder, AxialProfile"
+        ],
+        [
+          "Material identifiers",
+          "bluewhiteglossysmoothglass, whitebeigeblueemissivepaint, greenlimebeigemattepaint, offwhiteceramic, goldenoakwood, orangeroughceramic, goldorangemattepaint, sagegreenmattepaint, greybluetealmattepaint, palegreenglossyglass, beigebrownroughfabric, goldbeigeroughfabric, beigeoakwood, warmwhitematteplaster, whitebeigemattefabric, offwhitemattefabric, sagegreenmattefabric, olivegreenmattefabric, orangebrownmattefabric, darkbrownmattefabric, goldbrushedmetal, darkbrownmattepaint, olivegreenmattepaint, bluepaintmatte"
+        ],
+        [
+          "Production rules",
+          "Start, Bedroom, Shell, WindowDaylight, WindowWall, PictureWindow, OutsideView, OutsideLeaves, LightLeaf, EntranceWalls, WhiteDoor, Bed, BedLeg, Headboard, Fox, Bookcase, Books, Basket, Bunny, WoodenHouse (68 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "463"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "speech 48x64",
       "group": "engineering/exported-studies",
       "directory": "engineering/exported-studies/speech-48x64-9a79be88",
@@ -8952,6 +10103,63 @@
         [
           "Source lines",
           "4"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Tesseract 4D",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/tesseract-4d-0cad6c22",
+      "source_file": "Tesseract_4D.p3d",
+      "git_blob_sha": "0cad6c224c963173de43b7b6f850c33ca58266a0",
+      "bytes": 3590,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Tesseract_4D.p3d"
+      ],
+      "description": "Tesseract in four spatial coordinates, projected to a 3D scene.",
+      "features": [
+        "TaperedSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Tesseract in four spatial coordinates, projected to a 3D scene. · t is elapsed time. w is an independent spatial coordinate. · Set each speed to zero to hold its plane angle. Angles are in radians. · The half-side in 4D is 1. Keep the 4D eye distance above sqrt(2). · xyz radius and w radius set the display thickness of the projected edges. · Eight edges vary only in x. · Eight edges vary only in y. · Eight edges vary only in z. · Eight edges vary only in w. · Rotate each endpoint in two independent planes."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep"
+        ],
+        [
+          "Material identifiers",
+          "galvanizedsteel"
+        ],
+        [
+          "Production rules",
+          "Start, Hypercube, Frame, ProjectEdge, ViewEdge, DrawEdge (6 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "73"
         ]
       ],
       "render_assets": [],
@@ -11956,7 +13164,7 @@
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 89,
+  "library_exports_imported": 109,
   "library_export_inventory_count": 251,
-  "library_export_names_transferred": 90
+  "library_export_names_transferred": 110
 }

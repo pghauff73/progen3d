@@ -1,0 +1,59 @@
+# Scotch yoke demonstration. Yoke(crankRadius periodSeconds).
+# Suggested radius 0.40 to 1.05 model units, positive period.
+Start -> Yoke(0.90 4)
+
+Yoke(r period) ->
+ [ Object(id(Exhibit) class(Mechanism) taxonomy(Study Mechanical Demonstrator) layer(Equipment)) [
+ [ Object(id(Stand) class(Bench) taxonomy(Study Mechanical Demonstrator) layer(Structure)) [ Bed ] [ Bearing(-1) ] [ Bearing(1) ] ]
+ [ Object(id(Flywheel) class(Rotor) taxonomy(Study Mechanical Demonstrator) layer(Equipment)) [ A(360*t/period 1) Wheel(r) ] ]
+ [ Object(id(CrankPin) class(Journal) taxonomy(Study Mechanical Demonstrator) layer(Equipment))
+   [ A(360*t/period 1) T(r 0.435 0) S(0.19 0.32 0.19) !I(Cylinder material(silverbluepolishedmetal) 1 0.21) ] ]
+ [ Object(id(Slider) class(Yoke) taxonomy(Study Mechanical Demonstrator) layer(Equipment))
+   [ T(r*cos(6.28318530718*t/period) 0 0) Carriage ] ]
+ [ Object(id(Slipper) class(SlidingBlock) taxonomy(Study Mechanical Demonstrator) layer(Equipment))
+   [ T(r*cos(6.28318530718*t/period) 0.595 0-r*sin(6.28318530718*t/period)) Shoe ] ]
+
+ ] ]
+
+Bed ->
+ [ T(0 0.07 0) S(8.0 0.14 3.35) !I(Cube material(amberwarmwood) 1 0.31) ]
+ [ T(0 0.152 0) S(7.86 0.024 3.21) !I(Cube material(charcoalmattemetal) 1 0.31) ]
+ [ T(0 0.16 0) S(0.66 0.135 0.66) !I(Cylinder material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0.17 1.49) ScaleMarks(25) ]
+ScaleMarks(n) n ->
+ [ T((ScaleMarks_count-12)*0.1 0 0) S(0.014 0.009 0.065+0.07*(1-wrap(ScaleMarks_count,0,2))) !I(Cube material(goldbrushedmetal) 1 0.22) ]
+Bearing(side) ->
+ [ T(2.33*side 0 0)
+   [ T(0 0.212 0) S(0.64 0.096 0.89) !I(Cube material(bluegreymattepaint) 1 0.32) ]
+   [ T(0 0.373 0) S(0.48 0.23 0.46) !I(Cube material(bluegreymattepaint) 1 0.31) ]
+   [ T(0 0.526 0) S(0.52 0.076 0.42) !I(Cube material(goldbrushedmetal) 1 0.27) ]
+   [ Cheek(-1) ] [ Cheek(1) ]
+   [ T(0 0.806 0) S(0.52 0.064 0.42) !I(Cube material(goldbrushedmetal) 1 0.27) ]
+   [ Stud(-1) ] [ Stud(1) ] ]
+Cheek(side) ->
+ [ T(0 0.669 side*0.157) S(0.52 0.21 0.106) !I(Cube material(bluegreymattepaint) 1 0.31) ]
+Stud(side) ->
+ [ T(0 0.261 side*0.34) S(0.112 0.045 0.112) !I(Cylinder material(silverbrushedmetal) 1 0.24) ]
+Wheel(r) ->
+ [ !I(Revolve(profile(Polygon 1.06 0.28 1.25 0.28 1.27 0.32 1.27 0.405 1.24 0.432 1.06 0.432) angle(0 360) segments(80)) material(bluegreymattepaint) 1 0.28) ]
+ [ !I(Revolve(profile(Polygon 1.20 0.432 1.235 0.432 1.235 0.439 1.20 0.439) angle(0 360) segments(80)) material(goldbrushedmetal) 1 0.26) ]
+ [ Spokes(6) ]
+ [ T(0 0.27 0) S(0.47 0.162 0.47) !I(Cylinder material(goldbrushedmetal) 1 0.26) ]
+ [ T(r/2 0.44 0) S(r+0.24 0.056 0.22) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+Spokes(n) n ->
+ [ A(Spokes_count*360/n 1) T(0.64 0.35 0) S(0.99 0.105 0.116) !I(Cube material(bluegreymattepaint) 1 0.30) ]
+Carriage ->
+ [ CrossSide(-1) ] [ CrossSide(1) ]
+ [ EndBar(-1) ] [ EndBar(1) ]
+ [ T(0 0.628 1.437) S(0.032 0.059 0.151) !I(Cube material(redmattepaint) 1 0.28) ]
+CrossSide(side) ->
+ [ T(side*0.217 0.669 0) S(0.12 0.19 2.56) !I(Cube material(silverbrushedmetal) 1 0.26) ]
+ [ T(side*1.9885 0.669 0) S(3.423 0.176 0.176) !I(Cube material(silverbluepolishedmetal) 1 0.24) ]
+EndBar(side) ->
+ [ T(0 0.669 side*1.328) S(0.554 0.19 0.096) !I(Cube material(copperpolishedmetal) 1 0.26) ]
+Shoe ->
+ [ ShoeHalf ] [ A(180 1) ShoeHalf ]
+ [ T(0 0.16 0) S(0.238 0.045 0.238) !I(Cylinder material(copperpolishedmetal) 1 0.23) ]
+ [ T(0 0.206 0) S(0.105 0.004 0.022) !I(Cube material(charcoalmattemetal) 1 0.28) ]
+ShoeHalf ->
+ [ A(-90 0) !I(Extrude(Polygon(-0.15 0 -0.10100 0.00000 -0.09906 0.01970 -0.09331 0.03865 -0.08398 0.05611 -0.07142 0.07142 -0.05611 0.08398 -0.03865 0.09331 -0.01970 0.09906 0.00000 0.10100 0.01970 0.09906 0.03865 0.09331 0.05611 0.08398 0.07142 0.07142 0.08398 0.05611 0.09331 0.03865 0.09906 0.01970 0.10100 0.00000 0.15 0 0.15 0.16 -0.15 0.16) 0.15 cap(all)) material(goldbrushedmetal) 1 0.24) ]

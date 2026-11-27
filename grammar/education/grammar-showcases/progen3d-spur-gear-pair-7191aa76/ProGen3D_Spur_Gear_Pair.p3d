@@ -1,0 +1,46 @@
+# ProGen3D | 20:40 external involute spur gears
+# Open this file in the native grammar editor. Play or scrub 0 to 4 seconds.
+# Start sets pinion rpm (signed). Each scene unit represents 10 mm.
+# Module 2 mm, pressure angle 20 deg, face 8 mm, zero profile shift.
+# Closed tooth sectors tile each wheel. Straight root extensions approximate
+# the region below the base circle. The shaft angles are prescribed.
+Start -> Drive(30)
+Drive(rpm) -> Assembly(spin(t,rpm*6))
+Assembly(inputAngle) ->
+    [ T(-3 0 0) A(wrap(inputAngle,-180,180) 2) Pinion ]
+    [ T(3 0 0) A(wrap(4.5-inputAngle/2,-180,180) 2) Wheel ]
+
+Pinion -> PinionTeeth(20) [ Marker(0.62 1.45) ]
+Wheel -> WheelTeeth(40) [ Marker(0.96 3.22) ]
+PinionTeeth(n) n -> [ A(PinionTeeth_count*360/n 2) PinionSector ]
+WheelTeeth(n) n -> [ A(WheelTeeth_count*360/n 2) WheelSector ]
+
+# Bright radial mark on each front face makes the full shaft revolution visible.
+Marker(inner outer) ->
+    [ T(0 0 0.8) !I(Extrude(Polygon(inner -0.055 outer -0.055 outer+0.10 0 outer 0.055 inner 0.055) 0.025 cap(all)) material(warmwhitematteplaster) 1 0.25) ]
+
+PinionSector ->
+    [ !I(Extrude(Polygon(
+        0.3950753 -0.0625738   1.7284546 -0.2737603   1.7423652 -0.1632895
+        1.8711860 -0.1753622   1.8766171 -0.1755944   1.8929190 -0.1751888
+        1.9199633 -0.1724957   1.9574341 -0.1658862   2.0048307 -0.1537710
+        2.0614720 -0.1346187   2.1265030 -0.1069743   2.1989027 -0.0694764
+        2.2000000 0.0000000   2.1989027 0.0694764   2.1265030 0.1069743
+        2.0614720 0.1346187   2.0048307 0.1537710   1.9574341 0.1658862
+        1.9199633 0.1724957   1.8929190 0.1751888   1.8766171 0.1755944
+        1.8711860 0.1753622   1.7423652 0.1632895   1.7284546 0.2737603
+        0.3950753 0.0625738   0.4000000 0.0000000
+    ) 0.8 cap(all)) material(copperpolishedmetal) 1 0.25) ]
+
+WheelSector ->
+    [ !I(Extrude(Polygon(
+        0.6479963 -0.0509984   3.7384400 -0.2942216   3.7444985 -0.2030542
+        3.7532561 -0.2035291   3.7605536 -0.2036213   3.7824267 -0.2026853
+        3.8187192 -0.1989082   3.8691056 -0.1904961   3.9330936 -0.1756882
+        4.0100270 -0.1527701   4.0990898 -0.1200883   4.1993112 -0.0760623
+        4.2000000 0.0000000   4.1993112 0.0760623   4.0990898 0.1200883
+        4.0100270 0.1527701   3.9330936 0.1756882   3.8691056 0.1904961
+        3.8187192 0.1989082   3.7824267 0.2026853   3.7605536 0.2036213
+        3.7532561 0.2035291   3.7444985 0.2030542   3.7384400 0.2942216
+        0.6479963 0.0509984   0.6500000 0.0000000
+    ) 0.8 cap(all)) material(bluepaintmatte) 1 0.25) ]

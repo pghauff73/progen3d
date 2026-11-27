@@ -1,0 +1,62 @@
+{
+  "title": "08 pendulum wave",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/08-pendulum-wave-21d103b7",
+  "source_file": "08-pendulum-wave.p3d",
+  "git_blob_sha": "21d103b77fdc02a6b443595392657bbc7ad94863",
+  "bytes": 2894,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "08-pendulum-wave.p3d"
+  ],
+  "description": "Pendulum wave | fifteen independent bobs on bifilar suspensions.",
+  "features": [
+    "Cylinder",
+    "Sphere",
+    "Revolve",
+    "SweepDisk",
+    "Cube",
+    "SweepProfile"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Pendulum wave | fifteen independent bobs on bifilar suspensions. · Wave(recurrenceSeconds amplitudeDegrees elapsedOffsetSeconds). · Model coordinates are decimetres. Gravity is 98.0665 dm/s^2. · L is pivot-to-centre length; the brass collar and cables terminate above the bob."
+    ],
+    [
+      "Named objects",
+      "WaveExhibit, Bench, Beam, Bobs"
+    ],
+    [
+      "Object classes",
+      "PendulumExhibit, DisplayBench, PivotRail, PendulumArray"
+    ],
+    [
+      "Instantiated primitives",
+      "Cylinder, Sphere, Revolve, SweepDisk, Cube, SweepProfile"
+    ],
+    [
+      "Material identifiers",
+      "copperpolishedmetal, goldpolishedmetal, silverbrushedmetal, amberwarmwood, goldbrushedmetal, charcoalmattemetal, bluegreymattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Wave, Station, Oscillator, Line, Bench, EndFrame, Brace, Beam, Pivot (10 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "54"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

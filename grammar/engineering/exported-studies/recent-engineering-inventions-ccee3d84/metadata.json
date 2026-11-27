@@ -1,0 +1,62 @@
+{
+  "title": "Recent Engineering Inventions",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/recent-engineering-inventions-ccee3d84",
+  "source_file": "Recent_Engineering_Inventions.p3d",
+  "git_blob_sha": "ccee3d843e694a5957ffdb97d20d1f2cb6056518",
+  "bytes": 11390,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Recent_Engineering_Inventions.p3d"
+  ],
+  "description": "Recent engineering inventions | ProGen3D desktop | November 2026",
+  "features": [
+    "Cube",
+    "Revolve",
+    "SweepProfile",
+    "SweepDisk",
+    "Sphere",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Recent engineering inventions | ProGen3D desktop | November 2026 · 0 = all four, 1 = thermal switch, 2 = water harvester, 3 = pipe robot, 4 = lattice. · Open in the desktop editor, select Run and Fit, then press Play. Time t is in seconds. · Edit the number here to isolate a device. All dimensions are illustrative scene units. · The four device scales and cycle times are independent. Each section cites its paper. · 1 | Thermal switch | Tan et al., Nature Communications (2026) · DOI 10.1038/s41467-026-69956-2 · Five chiral arms rotate and lift a pentagonal contact carrier. Gold identifies the · folded arms, red the actuator traces, steel the return elements. The finned sink · is a display fixture. The flat and elevated poses are keyed to a six-second cycle."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Revolve, SweepProfile, SweepDisk, Sphere, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "charcoalmattemetal, silverbrushedmetal, copperbrushedmetal, goldbrushedmetal, ambermatteplastic, redmattemetal, charcoalmatteplastic, softblueglossyceramic, graphiteglossyplastic, tealmattemetal, tealglossyceramic, redmatteplastic, tealmatteplastic"
+    ],
+    [
+      "Production rules",
+      "Start, Study, SingleStudy, OtherStudy, MovingStudy, Collection, ThermalSwitch, SwitchPose, HeatSink, FixedContact, MovingContact, FoldArm, WaterHarvester, WindowFrame, Jamb, Collector, DrainTracer, Condensate, DryPane, PipeRobot (35 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "250"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

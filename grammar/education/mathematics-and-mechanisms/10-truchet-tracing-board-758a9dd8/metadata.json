@@ -1,0 +1,59 @@
+{
+  "title": "10 truchet tracing board",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/10-truchet-tracing-board-758a9dd8",
+  "source_file": "10-truchet-tracing-board.p3d",
+  "git_blob_sha": "758a9dd88c86f9875c6cee339a478c5e5ab7667e",
+  "bytes": 2167,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "10-truchet-tracing-board.p3d"
+  ],
+  "description": "Truchet tracing board. Edit Board(columns rows patternDivisor).",
+  "features": [
+    "Cube",
+    "Cylinder",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Truchet tracing board. Edit Board(columns rows patternDivisor). · Use positive integer dimensions and divisor. Illustration: 8 x 6, divisor 3."
+    ],
+    [
+      "Named objects",
+      "Cabinet, Mosaic, Ports"
+    ],
+    [
+      "Object classes",
+      "FramedBoard, TurnTiles, BoundaryMarks"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Cylinder, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "amberwarmwood, goldbrushedmetal, charcoalmattemetal, copperpolishedmetal, offwhiteceramic, bluegreymattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Board, Case, Corner, Tile, CornerArc (6 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "42"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

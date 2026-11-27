@@ -1,0 +1,62 @@
+# Rear wheel on a truing stand. Axis Z, positive Y up. Dimensions are display units.
+# Wheel(crosses revolutionSeconds). Try 0, 1, 2 or 3 crossings, with a positive period.
+Start -> Wheel(3 12)
+
+Wheel(k period) ->
+ [ Object(id(WheelExhibit) class(CycleExhibit) taxonomy(Science Exhibit) layer(Equipment)) [
+ [ Object(id(TruingStand) class(BenchFixture) taxonomy(Tool Wheelbuilding Stand) layer(Structure)) [ Stand ] ]
+ [ T(0 1.92 0) A(360*t/period 2)
+   [ Object(id(RimAndTyre) class(WheelRim) taxonomy(Cycle Wheel Rim) layer(Equipment)) [ Hoop Treads(72) Valve ] ]
+   [ Object(id(Hub) class(RearHub) taxonomy(Cycle Wheel Hub) layer(Equipment)) [ HubShell ] ]
+   [ Object(id(WideFlange) class(SpokeSet) taxonomy(Cycle Wheel LeftSpokes) layer(Equipment))
+     [ Lacing(18 k -0.30 -0.022) ] ]
+   [ Object(id(NarrowFlange) class(SpokeSet) taxonomy(Cycle Wheel RightSpokes) layer(Equipment))
+     [ A(10 2) Lacing(18 k 0.17 0.022) ] ] ]
+ ] ]
+
+# Two interleaved 18-hole flanges. Every other spoke leads; its neighbour trails.
+Lacing(n k zf zr) n ->
+ [ A(360*Lacing_count/n 2) Spoke(radians(360*k*cos(3.141592654*Lacing_count)/n) zf zr min(1,k)*cos(3.141592654*Lacing_count)) ]
+Spoke(a zf zr hand) -> SpokeEnds(1.43*cos(a) 1.43*sin(a) zf zr hand)
+SpokeEnds(x y zf zr hand) ->
+ [ !I(TaperedSweep(samples(0.26 0 zf 0.014
+    0.26+0.028*(x-0.26) 0.028*y (zf+0.028*(zr-zf)+0.027*hand) 0.012
+    0.26+0.17*(x-0.26) 0.17*y (zf+0.17*(zr-zf)+0.027*hand) 0.011
+    0.26+0.32*(x-0.26) 0.32*y (zf+0.32*(zr-zf)-0.019*hand) 0.010
+    0.26+0.50*(x-0.26) 0.50*y (zf+0.50*(zr-zf)-0.019*hand) 0.010
+    0.26+0.88*(x-0.26) 0.88*y zf+0.88*(zr-zf) 0.010
+    x y zr 0.014) up(0 0 1) segments(8) cap(all)) material(silverbrushedmetal) 1 0.23) ]
+ [ !I(SweepDisk(path(0.26+0.94*(x-0.26) 0.94*y zf+0.94*(zr-zf) x y zr) up(0 0 1) radius(0.023) radialSegments(6) cap(all)) material(goldbrushedmetal) 1 0.26) ]
+ [ T(0.26 0 zf) S(0.052 0.052 0.066) !I(Sphere material(copperpolishedmetal) 1 0.24) ]
+
+Hoop ->
+ [ A(90 0)
+   [ !I(Revolve(profile(Polygon 1.41 -0.027 1.446 -0.085 1.518 -0.089 1.53 -0.067 1.495 0 1.53 0.067 1.518 0.089 1.446 0.085 1.41 0.027) angle(0 360) segments(120)) material(silverbrushedmetal) 1 0.24) ]
+   [ !I(Revolve(profile(Polygon 1.51 -0.070 1.546 -0.108 1.603 -0.111 1.649 -0.081 1.672 -0.037 1.678 0 1.672 0.037 1.649 0.081 1.603 0.111 1.546 0.108 1.51 0.070) angle(0 360) segments(120)) material(charcoalroughrubber) 1 0.35) ]
+   [ Stripe(1) ] [ Stripe(-1) ] ]
+Stripe(s) ->
+ [ !I(Revolve(profile(Polygon 1.547 0.108*s 1.553 0.112*s 1.592 0.114*s 1.602 0.111*s) angle(0 360) segments(120)) material(ambermatterubber) 1 0.33) ]
+Treads(n) n ->
+ [ A(360*Treads_count/n 2) [ Lug(1) ] [ Lug(-1) ] ]
+Lug(s) -> [ T(1.661 0 s*0.048) A(s*30 0) S(0.023 0.065 0.069) !I(Cube material(charcoalroughrubber) 1 0.35) ]
+Valve ->
+ [ A(85 2) T(1.29 0 0) A(-90 2)
+   [ S(0.035 0.14 0.035) !I(Cylinder material(goldbrushedmetal) 1 0.24) ]
+   [ T(0 -0.029 0) S(0.043 0.039 0.043) !I(Cylinder material(bluepaintmatte) 1 0.31) ] ]
+
+HubShell ->
+ [ A(90 0)
+   [ !I(Revolve(profile(Polygon 0.088 -0.40 0.145 -0.40 0.15 -0.335 0.296 -0.324 0.298 -0.289 0.134 -0.265 0.113 -0.19 0.111 0.085 0.135 0.132 0.299 0.146 0.299 0.179 0.15 0.202 0.134 0.365 0.088 0.365) angle(0 360) segments(80)) material(bluegreymattepaint) 1 0.22) ]
+   [ T(0 -0.67 0) S(0.155 1.34 0.155) !I(Cylinder material(silverbrushedmetal) 1 0.21) ]
+   [ Splines(12) ] ]
+Splines(n) n ->
+ [ A(360*Splines_count/n 1) T(0.133 0.283 0) S(0.026 0.14 0.029) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+
+Stand ->
+ [ T(0 0.055 0) S(1.75 0.11 1.70) !I(Cube material(bluegreymattepaint) 1 0.33) ]
+ [ Arm(1) ] [ Arm(-1) ]
+ [ T(0.71 0.15 0) S(0.088 0.73 0.088) !I(Cylinder material(copperpolishedmetal) 1 0.25) ]
+ [ !I(SweepDisk(path(0.71 0.86 0 0.78 0.86 0.22 0.895 0.80 0.094) up(0 1 0) radius(0.023) radialSegments(10) cap(all)) material(goldbrushedmetal) 1 0.24) ]
+Arm(s) ->
+ [ !I(SweepProfile(profile(Rect 0.115 0.14) path(-0.53 0.12 s*0.70 -0.40 0.50 s*0.70 -0.08 1.25 s*0.59 0 1.92 s*0.56) up(1 0 0) cap(all)) material(bluegreymattepaint) 1 0.28) ]
+ [ T(0 1.92 s*0.56) S(0.24 0.24 0.12) !I(Sphere material(goldbrushedmetal) 1 0.26) ]

@@ -1,0 +1,73 @@
+# Ruled-surface belvedere. The shell consists of two families of straight members.
+# Pavilion(barsPerFamily twistDegrees). Try 18 100, then 18 60.
+# From base to top one family advances by twist, the other retreats by twist.
+Start -> Pavilion(18 100)
+
+Pavilion(n twist) ->
+ [ Object(id(Belvedere) class(ObservationPavilion) taxonomy(Building Pavilion Belvedere) layer(Structure))
+   [ [ Object(id(Foundations) class(Foundation) taxonomy(Building Footing Plinth) layer(Structure)) [ Foundation(n) ] ]
+     [ T(0 0.32 0)
+       [ Object(id(Ascending) class(StraightBars) taxonomy(Building Shell Generators) layer(Structure))
+         [ Family(n twist 1) ] ]
+       [ Object(id(Descending) class(StraightBars) taxonomy(Building Shell Generators) layer(Structure))
+         [ Family(n twist -1) ] ]
+       [ Object(id(Hoops) class(RingBeams) taxonomy(Building Shell RingBeams) layer(Structure))
+         [ Levels(5 twist) WaistNodes(n twist) ] ]
+       [ Object(id(Stair) class(HelicalStair) taxonomy(Building Circulation Stair) layer(Structure))
+         [ Flight(32) ] ]
+       [ Object(id(Lookout) class(ObservationDeck) taxonomy(Building Circulation Gallery) layer(Structure))
+         [ T(0 4.64 0) Gallery(n) ] ] ] ] ]
+
+# A third collinear section at the actual waist makes its centre independently measurable.
+Family(n twist hand) n ->
+ [ A(360*Family_count/n 1) Bar(2.07*cos(radians(twist)) 0-hand*2.07*sin(radians(twist))) ]
+Bar(x z) ->
+ [ !I(TaperedSweep(samples(2.07 0 0 0.056 (2.07+x)/2 2.32 z/2 0.056 x 4.64 z 0.056)
+   up(0 1 0) segments(8) cap(all)) material(bluegreymattepaint) 1 0.26) ]
+Levels(n twist) n ->
+ [ Level(Levels_count/(n-1) twist) ]
+Level(u twist) ->
+ [ T(0 u*4.64 0) Belt(2.07*sqrt(1-4*u*(1-u)*sin(radians(twist/2))*sin(radians(twist/2)))) ]
+Belt(r) ->
+ [ !I(Revolve(profile(Polygon r-0.032 -0.032 r+0.052 -0.032 r+0.052 0.032 r-0.032 0.032) angle(0 360) segments(108)) material(copperpolishedmetal) 1 0.24) ]
+WaistNodes(n twist) n ->
+ [ A(360*WaistNodes_count/n+twist/2 1) T(2.07*cos(radians(twist/2)) 2.32 0)
+   [ S(0.16 0.20 0.17) !I(Sphere material(goldbrushedmetal) 1 0.27) ] ]
+
+Foundation(n) ->
+ [ S(4.72 0.18 4.72) !I(Cylinder material(offwhiteceramic) 1 0.34) ]
+ [ T(0 0.18 0) S(4.42 0.13 4.42) !I(Cylinder material(amberwarmwood) 1 0.30) ]
+ [ Shoes(n) ]
+Shoes(n) n ->
+ [ A(360*Shoes_count/n 1) T(2.07 0.308 0)
+   [ S(0.26 0.065 0.26) !I(Cube material(charcoalmattemetal) 1 0.27) ]
+   [ Anchor(1) ] [ Anchor(-1) ] ]
+Anchor(s) -> [ T(0.091 0.031 0.084*s) S(0.036 0.026 0.036) !I(Cylinder material(goldbrushedmetal) 1 0.23) ]
+
+# Each step is a wedge extruded upwards. The uppermost tread lands on the inner deck edge.
+Flight(n) ->
+ [ S(0.23 4.64 0.23) !I(Cylinder material(charcoalmattemetal) 1 0.27) ]
+ [ Steps(n) Rails(n-1 n) ]
+Steps(n) n ->
+ [ A(17*Steps_count 1) T(0 (Steps_count+1)*4.64/n 0) Tread
+   [ T(0.845 0 0) S(0.030 0.47 0.030) !I(Cylinder material(copperpolishedmetal) 1 0.24) ]
+ ]
+Rails(count n) count ->
+ [ A(17*Rails_count 1) T(0 (Rails_count+1)*4.64/n 0) RailLink(17 4.64/n) ]
+Tread ->
+ [ T(0 -0.058 0) A(-90 0)
+   !I(Extrude(Polygon(0.095 -0.012 0.893 -0.124 0.906 0.123 0.098 0.013) 0.058 cap(all)) material(amberwarmwood) 1 0.29) ]
+RailLink(a rise) ->
+ [ !I(SweepDisk(path(0.845 0.47 0 0.845*cos(radians(a/2)) 0.47+rise/2 0-0.845*sin(radians(a/2))
+   0.845*cos(radians(a)) 0.47+rise 0-0.845*sin(radians(a))) up(0 1 0) radius(0.028) radialSegments(8) cap(all)) material(goldbrushedmetal) 1 0.21) ]
+
+Gallery(n) ->
+ [ !I(Revolve(profile(Polygon 0.872 -0.07 2.20 -0.07 2.22 0.001 0.872 0.001) angle(0 360) segments(108)) material(amberwarmwood) 1 0.32) ]
+ [ Posts(n) DeckBands(3) ]
+Posts(n) n ->
+ [ A(360*Posts_count/n 1) T(2.12 0 0)
+   [ S(0.052 0.46 0.052) !I(Cylinder material(bluegreymattepaint) 1 0.24) ]
+   [ T(0 0.46 0) S(0.069 0.065 0.069) !I(Sphere material(goldbrushedmetal) 1 0.25) ] ]
+DeckBands(n) n ->
+ [ T(0 0.13+0.165*DeckBands_count 0)
+   !I(Revolve(profile(Polygon 2.10 -0.011 2.136 -0.011 2.136 0.012 2.10 0.012) angle(0 360) segments(108)) material(goldbrushedmetal) 1 0.24) ]

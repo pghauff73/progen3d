@@ -1,0 +1,255 @@
+# Scroll and runner | single-stage radial pump | sectioned teaching model
+# Parameters in Start: number of vanes, seconds per display revolution, exploded pose (0..1).
+# Coordinates are illustrative model units. The shaft points toward +Z and the outlet toward +Y.
+Start -> Pump(7 8 1)
+
+Pump(vanes period opened) ->
+ [ Object(id(Pump) class(CentrifugalPump) taxonomy(Machine FluidHandling Pump Radial) layer(Equipment))
+   [ [ Object(id(Bed) class(MountingBed) taxonomy(Machine Structure Bed) layer(Structure)) [ Bed ] ]
+     [ T(0 1.82 0)
+       [ Object(id(Scroll) class(VoluteCasing) taxonomy(Machine Stationary Collector) layer(Equipment)) [ ScrollWall TongueWall BackPlate Discharge CaseLugs(12) ] ]
+       [ Object(id(Bearings) class(BearingHousing) taxonomy(Machine Transmission Bearing) layer(Equipment)) [ BearingHousing SealStack ] ]
+       [ Object(id(Impeller) class(RadialRunner) taxonomy(Machine Rotating Impeller) layer(Equipment))
+         [ A(360*t/period 2) RearShroud Hub Vanes(vanes) ] ]
+       [ T(-3.30*opened 0 0.36+0.64*opened)
+         Object(id(Cover) class(SuctionCover) taxonomy(Machine Stationary SuctionCover) layer(Equipment))
+         [ FacePlate InletNeck InletFlange CoverRibs(7) CoverLugs(12) ] ]
+     ]
+   ] ]
+
+# ----- Collector and casing -----
+# The rectangular wall section has radial thickness 0.09 and axial depth 0.48.
+# The axial centre plane is z=0.12. The extra straight reach forms the outer discharge wall.
+# r(u) = 1.17 + 0.55 * (u - sin(2*pi*u)/(2*pi)), 0 <= u <= 1.
+ScrollWall ->
+ [ T(0 0 0.12) !I(SweepProfile(profile(Rect 0.09 0.48)
+# BEGIN scroll_path
+   path(
+     1.17 0 0   1.168399 0.061233 0   1.163607 0.1223 0   1.155651 0.183037 0   1.144564 0.243284 0
+     1.130385 0.302886 0   1.113164 0.361689 0   1.092955 0.419546 0   1.069819 0.476314 0   1.043823 0.531854 0
+     1.015039 0.586033 0   0.983544 0.638721 0   0.94942 0.689794 0   0.912755 0.739134 0   0.873637 0.786626 0
+     0.832161 0.832161 0   0.788425 0.875634 0   0.742528 0.916946 0   0.694576 0.956001 0   0.644673 0.992709 0
+     0.592929 1.026984 0   0.539457 1.058743 0   0.484369 1.08791 0   0.427782 1.114411 0   0.369816 1.138176 0
+     0.310591 1.159141 0   0.250231 1.177244 0   0.188862 1.192429 0   0.126613 1.204642 0   0.063614 1.213836 0
+     0 1.219965 0   -0.064094 1.22299 0   -0.128529 1.222875 0   -0.193164 1.21959 0   -0.257854 1.213109 0
+     -0.322453 1.203412 0   -0.386812 1.190484 0   -0.450777 1.174315 0   -0.514196 1.154903 0   -0.576911 1.132251 0
+     -0.638763 1.10637 0   -0.699591 1.077275 0   -0.759232 1.044993 0   -0.817522 1.009556 0   -0.874296 0.971004 0
+     -0.929388 0.929388 0   -0.982631 0.884765 0   -1.03386 0.837203 0   -1.082908 0.786779 0   -1.129612 0.733579 0
+     -1.17381 0.6777 0   -1.215342 0.619248 0   -1.254051 0.558339 0   -1.289785 0.495102 0   -1.322397 0.429673 0
+     -1.351743 0.362199 0   -1.377689 0.292837 0   -1.400104 0.221755 0   -1.418868 0.149129 0   -1.433868 0.075146 0
+     -1.445 0 0   -1.452172 -0.076105 0   -1.4553 -0.152958 0   -1.454315 -0.230341 0   -1.449158 -0.308028 0
+     -1.439782 -0.385789 0   -1.426157 -0.463386 0   -1.408262 -0.540581 0   -1.386096 -0.617129 0   -1.359667 -0.692785 0
+     -1.329003 -0.7673 0   -1.294146 -0.840428 0   -1.255151 -0.911921 0   -1.212092 -0.981533 0   -1.165057 -1.049022 0
+     -1.11415 -1.11415 0   -1.059491 -1.176684 0   -1.001214 -1.236396 0   -0.939467 -1.293066 0   -0.874416 -1.346483 0
+     -0.806237 -1.396444 0   -0.735122 -1.442757 0   -0.661273 -1.485243 0   -0.584906 -1.523732 0   -0.506247 -1.558069 0
+     -0.425534 -1.588113 0   -0.34301 -1.613737 0   -0.258932 -1.634829 0   -0.173558 -1.651293 0   -0.087157 -1.66305 0
+     0 -1.670035 0   0.087636 -1.672204 0   0.175474 -1.669526 0   0.263233 -1.661991 0   0.350634 -1.649603 0
+     0.437396 -1.632385 0   0.523243 -1.610377 0   0.607901 -1.583637 0   0.6911 -1.552236 0   0.772576 -1.516265 0
+     0.852071 -1.475829 0   0.929334 -1.431049 0   1.004124 -1.382058 0   1.076208 -1.329006 0   1.145363 -1.272054 0
+     1.211378 -1.211378 0   1.274052 -1.147161 0   1.333197 -1.079602 0   1.388639 -1.008905 0   1.440214 -0.935286 0
+     1.487775 -0.858967 0   1.531186 -0.780178 0   1.570327 -0.699155 0   1.605092 -0.616137 0   1.635389 -0.53137 0
+     1.66114 -0.445101 0   1.682283 -0.35758 0   1.698768 -0.269058 0   1.710561 -0.179787 0   1.717641 -0.090018 0
+     1.72 0 0   1.72 1.96 0
+   )
+# END scroll_path
+   up(0 0 1) cap(all)) material(bluepaintmatte) 1 0.22) ]
+
+TongueWall ->
+ [ T(0 0 -0.12) !I(Extrude(Polygon(1.143 0.035 1.177 0.032 1.196 0.068 1.183 0.163
+     1.183 1.96 1.093 1.96 1.093 0.72 1.105 0.42 1.131 0.16) 0.48 cap(all)) material(bluepaintmatte) 1 0.23) ]
+
+# The two skins share this profile in XY. The holes are modelled through the full depth.
+BackPlate -> [ T(0 0 -0.19) Plate(0.19 0.07) ]
+FacePlate -> [ Plate(0.405 0.075) ]
+Plate(eye thick) ->
+ [ !I(Extrude(Polygon(
+# BEGIN cast_top
+     1.776 0   1.776 1.96   1.088 1.96   1.088 0.72   1.063536 0.614033
+     0.975827 0.748779   0.871759 0.871759   0.752893 0.981189   0.620929 1.075481   0.477686 1.153235
+     0.325085 1.213233   0.165149 1.254431   0 1.275965   -0.16814 1.277152   -0.336947 1.257504
+     -0.503995 1.216752   -0.666763 1.154867   -0.822647 1.072094   -0.968986 0.968986   -1.103095 0.846434
+     -1.222307 0.7057   -1.324036 0.548434   -1.405835 0.376692   -1.465471 0.192933   -1.501 0
+     -1*eye 0*eye   -0.996917*eye 0.078459*eye   -0.987688*eye 0.156434*eye   -0.97237*eye 0.233445*eye
+     -0.951057*eye 0.309017*eye   -0.92388*eye 0.382683*eye   -0.891007*eye 0.45399*eye   -0.85264*eye 0.522499*eye
+     -0.809017*eye 0.587785*eye   -0.760406*eye 0.649448*eye   -0.707107*eye 0.707107*eye   -0.649448*eye 0.760406*eye
+     -0.587785*eye 0.809017*eye   -0.522499*eye 0.85264*eye   -0.45399*eye 0.891007*eye   -0.382683*eye 0.92388*eye
+     -0.309017*eye 0.951057*eye   -0.233445*eye 0.97237*eye   -0.156434*eye 0.987688*eye   -0.078459*eye 0.996917*eye
+     0*eye 1*eye   0.078459*eye 0.996917*eye   0.156434*eye 0.987688*eye   0.233445*eye 0.97237*eye
+     0.309017*eye 0.951057*eye   0.382683*eye 0.92388*eye   0.45399*eye 0.891007*eye   0.522499*eye 0.85264*eye
+     0.587785*eye 0.809017*eye   0.649448*eye 0.760406*eye   0.707107*eye 0.707107*eye   0.760406*eye 0.649448*eye
+     0.809017*eye 0.587785*eye   0.85264*eye 0.522499*eye   0.891007*eye 0.45399*eye   0.92388*eye 0.382683*eye
+     0.951057*eye 0.309017*eye   0.97237*eye 0.233445*eye   0.987688*eye 0.156434*eye   0.996917*eye 0.078459*eye
+     1*eye 0*eye
+# END cast_top
+   ) thick cap(all)) material(bluepaintmatte) 1 0.28) ]
+ [ !I(Extrude(Polygon(
+# BEGIN cast_bottom
+     -1.501 0   -1.510847 -0.198907   -1.493874 -0.400282   -1.44945 -0.600382   -1.377501 -0.7953
+     -1.278552 -0.981068   -1.153748 -1.153748   -1.004855 -1.309552   -0.834237 -1.444941   -0.64482 -1.556734
+     -0.440028 -1.642205   -0.223699 -1.699166   0 -1.726035   0.226691 -1.721887   0.45189 -1.686477
+     0.67113 -1.620251   0.880071 -1.524327   1.074609 -1.400457   1.250976 -1.250976   1.405819 -1.078723
+     1.536272 -0.886967   1.64 -0.67931   1.715232 -0.459595   1.760774 -0.23181   1.776 0
+     1*eye 0*eye   0.996917*eye -0.078459*eye   0.987688*eye -0.156434*eye   0.97237*eye -0.233445*eye
+     0.951057*eye -0.309017*eye   0.92388*eye -0.382683*eye   0.891007*eye -0.45399*eye   0.85264*eye -0.522499*eye
+     0.809017*eye -0.587785*eye   0.760406*eye -0.649448*eye   0.707107*eye -0.707107*eye   0.649448*eye -0.760406*eye
+     0.587785*eye -0.809017*eye   0.522499*eye -0.85264*eye   0.45399*eye -0.891007*eye   0.382683*eye -0.92388*eye
+     0.309017*eye -0.951057*eye   0.233445*eye -0.97237*eye   0.156434*eye -0.987688*eye   0.078459*eye -0.996917*eye
+     0*eye -1*eye   -0.078459*eye -0.996917*eye   -0.156434*eye -0.987688*eye   -0.233445*eye -0.97237*eye
+     -0.309017*eye -0.951057*eye   -0.382683*eye -0.92388*eye   -0.45399*eye -0.891007*eye   -0.522499*eye -0.85264*eye
+     -0.587785*eye -0.809017*eye   -0.649448*eye -0.760406*eye   -0.707107*eye -0.707107*eye   -0.760406*eye -0.649448*eye
+     -0.809017*eye -0.587785*eye   -0.85264*eye -0.522499*eye   -0.891007*eye -0.45399*eye   -0.92388*eye -0.382683*eye
+     -0.951057*eye -0.309017*eye   -0.97237*eye -0.233445*eye   -0.987688*eye -0.156434*eye   -0.996917*eye -0.078459*eye
+     -1*eye 0*eye
+# END cast_bottom
+   ) thick cap(all)) material(bluepaintmatte) 1 0.28) ]
+
+Discharge ->
+ [ Interface(id(outlet) type(ServiceConnection) origin(1.4065 2.06 0.12) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001)) ]
+ [ T(1.4065 1.955 0.12) A(-90 0)
+   !I(HostedOpening(host(RoundedRect 0.805 0.780 0.12 6) opening(Rect 0.492 0.480) depth(0.105) cap(all)) material(bluepaintmatte) 1 0.28) ]
+ [ T(1.4065 2.04 0.12) OutletStud(-1 -1) OutletStud(-1 1) OutletStud(1 -1) OutletStud(1 1) ]
+OutletStud(sx sz) ->
+ [ T(sx*0.302 0 sz*0.270) HexNut(0.094 0.043) ]
+
+# ----- Removable suction side -----
+# The front bore and flange surround a real opening. Each of the six bolt holes is cut through.
+InletNeck ->
+ [ T(0 0 0.075) A(90 0)
+   !I(Revolve(profile(Polygon 0.398 0 0.65 0 0.63 0.045 0.54 0.090 0.492 0.160
+       0.474 0.300 0.474 0.52 0.402 0.52 0.399 0.24) angle(0 360) segments(80))
+       material(bluepaintmatte) 1 0.30) ]
+InletFlange ->
+ [ T(0 0 0.588) FlangeSectors(6) ]
+ [ Interface(id(inlet) type(ServiceConnection) origin(0 0 0.688) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001)) ]
+FlangeSectors(n) n ->
+ [ A(FlangeSectors_count*360/n 2) !I(Extrude(Polygon(
+# BEGIN flange_sector
+     0.665 0   0.663576 0.043493   0.659311 0.0868   0.652222 0.129735   0.642341 0.172115
+     0.629709 0.213757   0.61438 0.254484   0.59642 0.294122   0.575907 0.3325   0.552927 0.369454
+     0.52758 0.404826   0.499973 0.438465   0.470226 0.470226   0.438465 0.499973   0.404826 0.52758
+     0.369454 0.552927   0.3325 0.575907   0.299 0.517883   0.311644 0.507645   0.320504 0.494
+     0.324715 0.478285   0.323864 0.462038   0.318033 0.44685   0.307795 0.434206   0.29415 0.425346
+     0.278435 0.421135   0.262189 0.421986   0.247 0.427817   0.199 0.344678   0.221117 0.330925
+     0.242287 0.315755   0.26242 0.299232   0.281428 0.281428   0.299232 0.26242   0.315755 0.242287
+     0.330925 0.221117   0.344678 0.199   0.356955 0.176031   0.367704 0.152308   0.376878 0.127933
+     0.384438 0.10301   0.390353 0.077646   0.394595 0.051949   0.397148 0.02603   0.398 0
+     0.494 0   0.496545 0.016069   0.503931 0.030565   0.515435 0.042069   0.529931 0.049455
+     0.546 0.052   0.562069 0.049455   0.576565 0.042069   0.588069 0.030565   0.595455 0.016069
+     0.598 0
+# END flange_sector
+   ) 0.10 cap(all)) material(silverbrushedmetal) 1 0.28) ]
+CoverRibs(n) n ->
+ [ A(32+CoverRibs_count*296/(n-1) 2)
+   !I(TaperedSweep(samples(0.492 0 0.245 0.034  0.61 0 0.130 0.049
+      0.84 0 0.103 0.040  1.02 0 0.086 0.017) up(0 1 0) segments(12) cap(all)) material(bluepaintmatte) 1 0.29) ]
+
+# ----- Rotating assembly -----
+# Back shroud, vanes and nut share a single t-driven scope. One loft defines every vane.
+RearShroud ->
+ [ T(0 0 -0.075) A(90 0) S(2.094 0.085 2.094)
+   !I(Cylinder(segments(96 1)) material(copperpolishedmetal) 1 0.30) ]
+ [ T(0 0 -0.076) A(90 0) S(2.12 0.022 2.12)
+   !I(Cylinder(radial(0.969 1) topology(shell) close(all) segments(96 1)) material(goldbrushedmetal) 1 0.27) ]
+Hub ->
+ [ A(90 0) !I(Revolve(profile(Polygon 0.063 0 0.343 0 0.328 0.055 0.265 0.116
+      0.230 0.204 0.202 0.269 0.158 0.300 0.063 0.300) angle(0 360) segments(64)) material(copperpolishedmetal) 1 0.31) ]
+ [ T(0 0 0.290) A(90 0) S(0.26 0.077 0.26) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.22) ]
+ [ T(0.059 0 0.371) S(0.048 0.014 0.008) !I(Cube material(charcoalroughmetal) 1 0.2) ]
+Vanes(n) n -> [ A(360*Vanes_count/n 2) Blade ]
+Blade ->
+ [ !I(Loft(
+# BEGIN blade_sections
+    section(0.009 Polygon
+     0.31103 0.066214   0.341933 0.064697   0.372705 0.06305   0.403585 0.059856   0.434567 0.054731
+     0.465595 0.047384   0.496582 0.037553   0.527408 0.024994   0.55792 0.009472   0.587927 -0.009236
+     0.617205 -0.031341   0.645485 -0.057041   0.672458 -0.08651   0.697773 -0.119902   0.721033 -0.157338
+     0.741797 -0.198901   0.759579 -0.244631   0.773852 -0.294512   0.784049 -0.348469   0.789572 -0.406349
+     0.789796 -0.467917   0.784082 -0.53284   0.771806 -0.600665   0.752416 -0.670771   0.726158 -0.741714
+     0.741714 -0.726158   0.772465 -0.647582   0.793375 -0.571874   0.806059 -0.498971   0.811383 -0.429397
+     0.810142 -0.363613   0.8031 -0.301983   0.790992 -0.244777   0.774515 -0.192174   0.754327 -0.144273
+     0.731042 -0.101099   0.705226 -0.062617   0.677391 -0.028738   0.648 0.00067   0.617462 0.025775
+     0.586137 0.046773   0.554331 0.063884   0.522305 0.077338   0.490274 0.087379   0.458411 0.09425
+     0.426851 0.098194   0.395697 0.099439   0.365026 0.098184   0.334915 0.094529   0.305709 0.087556
+    )
+    section(0.135 Polygon
+     0.314187 0.105728   0.345297 0.105099   0.376281 0.103947   0.407506 0.100905   0.438961 0.095599
+     0.470576 0.087748   0.502242 0.077099   0.533809 0.063416   0.565092 0.046475   0.595868 0.026067
+     0.625872 0.001995   0.6548 -0.025915   0.682305 -0.057817   0.707997 -0.093831   0.731444 -0.134043
+     0.752174 -0.178495   0.769673 -0.227178   0.783396 -0.28002   0.792766 -0.336881   0.797188 -0.397541
+     0.796056 -0.461687   0.788778 -0.528901   0.774806 -0.598633   0.753731 -0.67014   0.726158 -0.741714
+     0.741714 -0.726158   0.773749 -0.646924   0.796274 -0.569766   0.810545 -0.494896   0.817286 -0.422969
+     0.817216 -0.354549   0.811057 -0.290091   0.799527 -0.229948   0.783326 -0.174373   0.763129 -0.12353
+     0.739575 -0.077502   0.713264 -0.036303   0.68475 0.000115   0.654538 0.03185   0.623084 0.059044
+     0.590791 0.081875   0.558014 0.100545   0.525057 0.115276   0.492177 0.126304   0.459587 0.133871
+     0.427459 0.138217   0.395932 0.139572   0.365119 0.138134   0.335137 0.134012   0.306484 0.126331
+    )
+    section(0.265 Polygon
+     0.312234 0.146748   0.343803 0.146907   0.375294 0.146158   0.407182 0.143189   0.43945 0.137638
+     0.472005 0.129226   0.504706 0.117706   0.537371 0.102848   0.569778 0.084435   0.601661 0.062268
+     0.632717 0.036166   0.662598 0.005974   0.690915 -0.028436   0.717238 -0.067154   0.741097 -0.110229
+     0.761986 -0.157657   0.779365 -0.209377   0.792669 -0.265261   0.801313 -0.325101   0.804706 -0.388605
+     0.802269 -0.455381   0.793455 -0.524923   0.777801 -0.596586   0.755045 -0.669507   0.726158 -0.741714
+     0.741714 -0.726158   0.775032 -0.646265   0.799168 -0.567645   0.815012 -0.490785   0.82314 -0.416469
+     0.82419 -0.345363   0.818839 -0.278019   0.807785 -0.214873   0.791728 -0.156255   0.771358 -0.102399
+     0.747341 -0.053448   0.720313 -0.009467   0.690868 0.029547   0.65956 0.06366   0.626891 0.092986
+     0.593317 0.117682   0.55924 0.137938   0.525013 0.15397   0.490942 0.166009   0.457283 0.174298
+     0.424252 0.179083   0.392026 0.180598   0.360759 0.179054   0.330616 0.174572   0.302248 0.166347
+    )
+# END blade_sections
+    cap(all)) material(goldbrushedmetal) 1 0.26) ]
+
+# ----- Bearings, coupling and mounting bed -----
+BearingHousing ->
+ [ T(0 0 -1.57) A(90 0)
+   !I(Revolve(profile(Polygon 0.147 0 0.28 0 0.31 0.052 0.31 0.13 0.36 0.22
+     0.36 0.55 0.418 0.64 0.418 0.71 0.32 0.75 0.32 1.12 0.475 1.20
+     0.475 1.32 0.147 1.32) angle(0 360) segments(64)) material(bluepaintmatte) 1 0.25) ]
+ [ T(0 0 -1.84) A(90 0) S(0.29 1.93 0.29) !I(Cylinder(segments(40 1)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(0 0 -1.83) A(90 0) S(0.50 0.19 0.50) !I(Cylinder(segments(32 1)) material(charcoalmattemetal) 1 0.3) ]
+ Fins(8) GlandBolts(6)
+Fins(n) n ->
+ [ T(0 0 -1.32+Fins_count*0.075) A(90 0) S(0.83 0.021 0.83)
+   !I(Cylinder(radial(0.78 1) topology(shell) close(all) segments(48 1)) material(bluepaintmatte) 1 0.26) ]
+GlandBolts(n) n -> [ A(GlandBolts_count*360/n 2) T(0.372 0 -0.385) A(-90 0) HexNut(0.096 0.045) ]
+
+Bed ->
+ [ T(0 0.094 -0.60) S(2.61 0.18 2.36) !I(Cube material(charcoalmattemetal) 1 0.35) ]
+ [ T(0.06 0.265 0.00) S(1.65 0.17 0.64) !I(Cube material(bluepaintmatte) 1 0.30) ]
+ CasingFoot(-1) CasingFoot(1)
+ [ T(0 0.182 -1.13) !I(Extrude(Polygon(-0.48 0 0.48 0 0.48 0.12 0.26 0.23 0.21 1.35 -0.21 1.35 -0.26 0.23 -0.48 0.12) 0.27 cap(all))
+       material(bluepaintmatte) 1 0.30) ]
+ Anchors(-1) Anchors(1) PlateLine(3)
+ [ T(0 0.283 0.405) S(0.75 0.125 0.02) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(-0.316 0.280 0.422) S(0.035 0.035 0.016) !I(Sphere material(silverbrushedmetal) 1 0.25) ]
+ [ T(0.316 0.280 0.422) S(0.035 0.035 0.016) !I(Sphere material(silverbrushedmetal) 1 0.25) ]
+PlateLine(n) n -> [ T(-0.21 0.26+PlateLine_count*0.024 0.424) S(0.34-PlateLine_count*0.04 0.007 0.008) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+CasingFoot(side) ->
+ [ T(side*0.68 0.26 -0.56) !I(Extrude(Polygon(-0.16 0 0.16 0 0.15 0.19 0.09 0.50 -0.09 0.50 -0.15 0.19) 0.37 cap(all)) material(bluepaintmatte) 1 0.30) ]
+Anchors(side) ->
+ [ T(side*1.068 0.182 -1.48) Anchor ]
+ [ T(side*1.068 0.182 0.318) Anchor ]
+Anchor ->
+ [ S(0.209 0.024 0.209) !I(Cylinder(segments(20 1)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(0 0.024 0) HexNut(0.158 0.072) ]
+ [ T(0 0.095 0) S(0.079 0.033 0.079) !I(Cylinder(segments(16 1)) material(charcoalroughmetal) 1 0.25) ]
+HexNut(d h) -> [ S(d h d) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.26) ]
+
+# Twelve matching lug centres follow the scroll. Casing seats and cover hardware share the same radius law.
+CaseLugs(n) n -> [ CaseLugAt(42+CaseLugs_count*288/(n-1)) ]
+CaseLugAt(a) ->
+ [ A(a 2) T(1.245+0.55*(a/360-sin(radians(a))/6.283185307) 0 -0.12)
+   A(90 0) S(0.235 0.48 0.235)
+   !I(Cylinder(radial(0.37 1) topology(shell) close(all) segments(24 1)) material(bluepaintmatte) 1 0.27) ]
+CoverLugs(n) n -> [ CoverLugAt(42+CoverLugs_count*288/(n-1)) ]
+CoverLugAt(a) ->
+ [ A(a 2) T(1.245+0.55*(a/360-sin(radians(a))/6.283185307) 0 0) A(90 0)
+   [ S(0.235 0.076 0.235) !I(Cylinder(radial(0.37 1) topology(shell) close(all) segments(24 1)) material(bluepaintmatte) 1 0.27) ]
+   [ T(0 0.076 0) S(0.160 0.017 0.160) !I(Cylinder(radial(0.52 1) topology(shell) close(all) segments(20 1)) material(silverbrushedmetal) 1 0.27) ]
+   [ T(0 0.093 0) HexNut(0.141 0.058) ]
+   [ T(0 -0.120 0) S(0.078 0.220 0.078) !I(Cylinder(segments(16 1)) material(charcoalroughmetal) 1 0.25) ]
+ ]
+SealStack ->
+ [ T(0 0 -0.295) A(90 0) S(0.57 0.095 0.57)
+   !I(Cylinder(radial(0.53 1) topology(shell) close(all) segments(48 1)) material(charcoalroughmetal) 1 0.24) ]
+ [ T(0 0 -0.205) A(90 0) S(0.51 0.03 0.51)
+   !I(Cylinder(radial(0.59 1) topology(shell) close(all) segments(48 1)) material(silverbrushedmetal) 1 0.24) ]

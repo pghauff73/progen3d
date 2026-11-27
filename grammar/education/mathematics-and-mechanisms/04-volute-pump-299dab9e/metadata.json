@@ -1,0 +1,65 @@
+{
+  "title": "04 volute pump",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/04-volute-pump-299dab9e",
+  "source_file": "04-volute-pump.p3d",
+  "git_blob_sha": "299dab9e6ccdb795b5ca0aa9c32a7d33bba7a102",
+  "bytes": 18764,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "04-volute-pump.p3d"
+  ],
+  "description": "Scroll and runner | single-stage radial pump | sectioned teaching model",
+  "features": [
+    "SweepProfile",
+    "Extrude",
+    "HostedOpening",
+    "Revolve",
+    "TaperedSweep",
+    "Cylinder",
+    "Cube",
+    "Loft",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Scroll and runner | single-stage radial pump | sectioned teaching model · Parameters in Start: number of vanes, seconds per display revolution, exploded pose (0..1). · Coordinates are illustrative model units. The shaft points toward +Z and the outlet toward +Y. · ----- Collector and casing ----- · The rectangular wall section has radial thickness 0.09 and axial depth 0.48. · The axial centre plane is z=0.12. The extra straight reach forms the outer discharge wall. · r(u) = 1.17 + 0.55 * (u - sin(2*pi*u)/(2*pi)), 0 <= u <= 1. · BEGIN scroll_path · END scroll_path · The two skins share this profile in XY. The holes are modelled through the full depth."
+    ],
+    [
+      "Named objects",
+      "Pump, Bed, Scroll, Bearings, Impeller, Cover, outlet, inlet"
+    ],
+    [
+      "Object classes",
+      "CentrifugalPump, MountingBed, VoluteCasing, BearingHousing, RadialRunner, SuctionCover"
+    ],
+    [
+      "Instantiated primitives",
+      "SweepProfile, Extrude, HostedOpening, Revolve, TaperedSweep, Cylinder, Cube, Loft, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "bluepaintmatte, silverbrushedmetal, copperpolishedmetal, goldbrushedmetal, charcoalroughmetal, charcoalmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Pump, ScrollWall, TongueWall, BackPlate, FacePlate, Plate, Discharge, OutletStud, InletNeck, InletFlange, RearShroud, Hub, Blade, BearingHousing, Bed, CasingFoot, Anchors, Anchor, HexNut (23 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "256"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "title": "Pro Gen3D Ducted Fan",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-ducted-fan-db19de77",
+  "source_file": "ProGen3D_Ducted_Fan.p3d",
+  "git_blob_sha": "db19de77824a15a5c72f7dbbefcd76f20ee76440",
+  "bytes": 34166,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_Ducted_Fan.p3d"
+  ],
+  "description": "Ducted fan with a steerable internal passage",
+  "features": [
+    "Revolve",
+    "Loft",
+    "Cube",
+    "ShellLoft"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Ducted fan with a steerable internal passage · Native ProGen3D grammar. One model unit represents one millimetre. · Edit Start: bore radius, nominal tip gap, blade count, outlet angle (degrees), · outside radius, minimum radial wall, show casing (1 or 0). · Try a straight duct with angle 0, reverse the bend with -18, or widen the bore to 55. · Admitted envelope: bore 40..60 mm, gap 0.25..3 mm, 3..10 whole blades, · bend -30..30 degrees, positive minimum wall. The outer radius must clear the passage. · Rotor animation: t in seconds, one illustrative revolution every 6 seconds. · The casing's inscribed radius bounds the wall even between polygon vertices. · The largest bore extent occurs at the inlet lip or at the far side of the exit."
+    ],
+    [
+      "Named objects",
+      "Fan, Casing, Rotor, MotorMount, InvalidDimensions, InsufficientWall"
+    ],
+    [
+      "Object classes",
+      "AxialDuctedFan, DuctCasing, AxialImpeller, ThreeArmSupport, InputError, EnvelopeError"
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, Loft, Cube, ShellLoft"
+    ],
+    [
+      "Material identifiers",
+      "charcoalroughmetal, silverbrushedmetal, copperpolishedmetal, goldbrushedmetal, redpaintmatte, orangebrownmattepaint, bluepaintmatte"
+    ],
+    [
+      "Production rules",
+      "Start, DuctedFan, CheckGap, CheckCount, CheckInteger, CheckBend, CheckWall, Envelope, Assembly, Mount, Hub, Blade, InvalidDimensions, ThinWall, RedCross, OrangeCross, Passage, WallSections (18 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "315"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

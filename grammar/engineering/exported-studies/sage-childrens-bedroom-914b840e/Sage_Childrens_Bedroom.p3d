@@ -1,0 +1,462 @@
+# Sage children's bedroom
+# Reconstructed from the final elevated concept image. Dimensions are inferred, in metres.
+# Local axes: +X toward the window, +Y up, +Z toward the entrance.
+# Bedroom(0) opens two walls for inspection. Bedroom(1) restores both walls and the door.
+# The north wall, east window, and furniture positions are shared by both modes.
+
+Start ->
+    [ A(90 1)
+      Object(id(BedroomScene) class(Room) taxonomy(Interior Bedroom) layer(Temporary))
+      [ Bedroom(0) ] ]
+
+Bedroom(enclosed) ->
+    Shell(enclosed)
+    [ T(-1.10 0 -0.91)
+      Object(id(SingleBed) class(Furniture) taxonomy(Furniture Sleeping SingleBed) layer(Furniture))
+      [ Bed ] ]
+    [ T(-0.05 0 -1.76)
+      Object(id(LowBookcase) class(Furniture) taxonomy(Furniture Storage Bookcase) layer(Furniture))
+      [ Bookcase ] ]
+    [ T(1.39 0 -0.26) A(-90 1)
+      Object(id(WindowDesk) class(Furniture) taxonomy(Furniture WorkSurface Desk) layer(Furniture))
+      [ Desk ] ]
+    [ T(0.96 0 -0.23) A(-90 1)
+      Object(id(BlueSpindleChair) class(Furniture) taxonomy(Furniture Seating DeskChair) layer(Furniture))
+      [ Chair ] ]
+    [ T(0.20 0 0.33)
+      Object(id(RoundJuteRug) class(Furnishing) taxonomy(Furnishing Textile Rug) layer(Furniture))
+      [ Rug ] ]
+    [ T(1.12 0 1.65)
+      Object(id(SageToyChest) class(Furniture) taxonomy(Furniture Storage ToyChest) layer(Furniture))
+      [ ToyChest ] ]
+
+# Architecture. One opening in the window wall and a separate entrance wall.
+Shell(enclosed) ->
+    [ T(0 -0.070 0) S(3.52 0.12 4.02) Oak ]
+    FloorRows
+    [ T(0 1.25 -2.01) S(3.64 2.50 0.12) SageWall ]
+    [ T(0 0.043 -1.939) S(3.40 0.086 0.020) WhitePlaster ]
+    [ T(-1.42 1.47 -1.933) MoonPicture ]
+    [ T(-0.96 1.47 -1.933) StarPicture ]
+    WindowWall
+    WindowDaylight
+    EntranceWalls(enclosed)
+
+WindowDaylight ->
+    Light(MorningWindow type(RectangularArea)
+          position(1.63 1.64 -0.20) direction(-1 -0.40 0.25)
+          area(1.4 0.76) temperature(5200) lumens(1650)
+          range(6) shadow(off))
+
+FloorRows 20 ->
+    [ T(-1.615+0.17*FloorRows_count -0.009 0)
+      S(0.168 0.018 3.90) FloorOak ]
+
+WindowWall ->
+    [ T(1.76 0.47 0) S(0.12 0.94 4.02) WhitePlaster ]
+    [ T(1.76 2.315 0) S(0.12 0.37 4.02) WhitePlaster ]
+    [ T(1.76 1.54 -1.56) S(0.12 1.20 0.90) WhitePlaster ]
+    [ T(1.76 1.54 1.358) S(0.12 1.20 1.304) WhitePlaster ]
+    [ T(1.691 0.045 0) S(0.020 0.09 3.90) WhitePlaster ]
+    [ T(1.72 0.94 -0.20) A(-90 1) PictureWindow ]
+
+PictureWindow ->
+    OutsideView
+    [ T(0 0.60 -0.035) S(1.78 1.15 0.012)
+      !I(Cube material(bluewhiteglossysmoothglass) 0.26 0.45) ]
+    [ T(0 0.60 0) S(0.038 1.20 0.058) WhitePlaster ]
+    [ T(-0.883 0.60 0) S(0.044 1.20 0.065) WhitePlaster ]
+    [ T(0.883 0.60 0) S(0.044 1.20 0.065) WhitePlaster ]
+    [ T(0 1.174 0) S(1.80 0.050 0.065) WhitePlaster ]
+    [ T(0 0.012 0.028) S(1.86 0.044 0.16) WhitePlaster ]
+    [ T(0 1.02 0.064) S(1.84 0.37 0.021) Linen ]
+    [ T(0 0.835 0.079) BlindFolds ]
+
+# Shallow silhouettes suggest the tree beyond the glass.
+OutsideView ->
+    [ T(0 0.64 -0.164) S(1.77 1.16 0.020)
+      !I(Cube material(whitebeigeblueemissivepaint) 1 0.5) ]
+    [ T(-0.56 0.55 -0.139) OutsideLeaves ]
+    [ T(0 0.68 -0.127) A(12 2) S(1.28 1.04 1) OutsideLeaves ]
+    [ T(0.51 0.46 -0.138) A(-24 2) OutsideLeaves ]
+
+OutsideLeaves ->
+    [ T(0 0.028 0) S(0.67 0.47 0.021) LightLeaf ]
+    [ T(-0.132 0.203 0.003) A(-20 2) S(0.27 0.29 0.022) LightLeaf ]
+    [ T(0.139 0.103 0.008) A(28 2) S(0.39 0.33 0.022) LightLeaf ]
+    [ T(-0.175 -0.113 0.009) A(-23 2) S(0.32 0.26 0.022) LightLeaf ]
+
+LightLeaf -> !I(Sphere material(greenlimebeigemattepaint) 1 0.5)
+
+BlindFolds 3 ->
+    [ T(0 0.063*BlindFolds_count 0) S(1.84 0.026 0.031) Linen ]
+
+EntranceWalls(enclosed) ->
+    ?(enclosed>0)
+    [
+      [ T(-1.76 1.25 0) S(0.12 2.50 4.02) WhitePlaster ]
+      [ T(-1.691 0.045 0) S(0.020 0.09 3.90) WhitePlaster ]
+      [ T(-1.49 1.25 2.01) S(0.42 2.50 0.12) WhitePlaster ]
+      [ T(0.63 1.25 2.01) S(2.14 2.50 0.12) WhitePlaster ]
+      [ T(-0.85 2.275 2.01) S(0.86 0.45 0.12) WhitePlaster ]
+      [ T(-0.85 0 1.958) A(180 1) WhiteDoor ]
+      [ T(0 2.39 -0.03) S(0.32 0.11 0.32)
+        !I(Cylinder material(offwhiteceramic) 1 0.4) ]
+    ]
+    :
+    [ T(0 0 0) ]
+
+WhiteDoor ->
+    [ T(0 1.01 0) S(0.825 2.02 0.047) WhitePlaster ]
+    [ T(-0.426 1.02 0.025) S(0.055 2.04 0.055) WhitePlaster ]
+    [ T(0.426 1.02 0.025) S(0.055 2.04 0.055) WhitePlaster ]
+    [ T(0 2.043 0.025) S(0.91 0.055 0.055) WhitePlaster ]
+    [ T(-0.17 0.575 0.026) S(0.25 0.68 0.009) Linen ]
+    [ T(0.17 0.575 0.026) S(0.25 0.68 0.009) Linen ]
+    [ T(-0.17 1.49 0.026) S(0.25 0.69 0.009) Linen ]
+    [ T(0.17 1.49 0.026) S(0.25 0.69 0.009) Linen ]
+    [ T(0.327 1.00 0.062) S(0.053 0.053 0.058) BrassBubble ]
+
+# Oak bed, rounded headboard, padded mattress and patterned textiles.
+Bed ->
+    [ T(-0.454 0 -0.899) BedLeg ] [ T(0.454 0 -0.899) BedLeg ]
+    [ T(-0.454 0 0.899) BedLeg ] [ T(0.454 0 0.899) BedLeg ]
+    [ T(0 0.205 0) S(1.04 0.156 1.968) Oak ]
+    [ T(0 0.320 0.009) S(1.003 0.126 1.932) Ivory ]
+    [ T(0 0.398 0.085) S(1.022 0.062 1.808) Quilt ]
+    [ T(-0.506 0.339 0.128) S(0.023 0.175 1.73) Quilt ]
+    [ T(0.506 0.339 0.128) S(0.023 0.175 1.73) Quilt ]
+    [ T(0 0.353 0.979) S(1.026 0.142 0.023) Quilt ]
+    [ T(0 0.09 -0.957) Headboard ]
+    [ T(0 0.510 -0.757) A(-12 0) S(0.70 0.36 0.18) IvorySoft ]
+    [ T(0 0.430 -0.695) Fox ]
+    [ T(0 0.431 0.110) QuiltChannels ]
+    [ T(0 0.447 0.639) S(1.067 0.037 0.403) Linen ]
+    [ T(-0.524 0.38 0.639) S(0.032 0.143 0.403) Linen ]
+    [ T(0.524 0.38 0.639) S(0.032 0.143 0.403) Linen ]
+    [ T(0 0.438 0.845) ThrowFringe ]
+
+BedLeg -> S(0.073 0.257 0.073) OakRound
+
+Headboard ->
+    !I(AxialProfile(
+      axis(y)
+      profile(Corners polygon(
+        -0.47 -0.038 0.47 -0.038 0.52 -0.018 0.52 0.018
+         0.47 0.038 -0.47 0.038 -0.52 0.018 -0.52 -0.018
+      ))
+      at(0 Corners)
+      hold(0.611)
+      linear(0.667 Corners scale(0.97 1))
+      linear(0.709 Corners scale(0.885 1))
+      linear(0.723 Corners scale(0.766 0.94))
+      cap(all)
+    ) material(goldenoakwood) 1 0.55)
+
+QuiltChannels 15 ->
+    [ T(-0.45+0.064*QuiltChannels_count 0 -0.035) S(0.004 0.003 1.625) QuiltSeam ]
+
+ThrowFringe 32 ->
+    [ T(-0.508+0.0325*ThrowFringe_count -0.027 0.016)
+      A(-11 0) S(0.015 0.047 0.012) IvorySoft ]
+
+Fox ->
+    [ T(0 0.092 0) S(0.130 0.181 0.102) RustSoft ]
+    [ T(0 0.102 0.046) S(0.065 0.105 0.028) IvorySoft ]
+    [ T(0 0.201 0.012) S(0.150 0.124 0.111) RustSoft ]
+    [ T(-0.050 0.257 0.003) A(17 2) S(0.049 0.081 0.042) RustSoft ]
+    [ T(0.050 0.257 0.003) A(-17 2) S(0.049 0.081 0.042) RustSoft ]
+    [ T(-0.046 0.201 0.065) S(0.052 0.038 0.025) IvorySoft ]
+    [ T(0.046 0.201 0.065) S(0.052 0.038 0.025) IvorySoft ]
+    [ T(0 0.182 0.076) S(0.072 0.037 0.038) IvorySoft ]
+    [ T(0 0.193 0.097) S(0.021 0.016 0.012) DarkSoft ]
+    [ T(-0.037 0.218 0.068) S(0.011 0.013 0.009) DarkSoft ]
+    [ T(0.037 0.218 0.068) S(0.011 0.013 0.009) DarkSoft ]
+    [ T(-0.041 0.023 0.047) S(0.043 0.044 0.060) DarkSoft ]
+    [ T(0.041 0.023 0.047) S(0.043 0.044 0.060) DarkSoft ]
+    [ T(-0.093 0.037 0.007) A(-21 1) S(0.147 0.063 0.065) RustSoft ]
+    [ T(-0.159 0.034 0.031) S(0.064 0.057 0.058) IvorySoft ]
+
+# Three bays by two rows, complete with baskets, books and the top display.
+Bookcase ->
+    [ T(0 0.333 -0.126) S(1.105 0.62 0.019) Oak ]
+    [ T(0 0.046 0) S(1.105 0.066 0.302) Oak ]
+    [ T(0 0.349 0) S(1.105 0.023 0.302) Oak ]
+    [ T(0 0.670 0) S(1.129 0.031 0.319) Oak ]
+    BookcaseDividers
+    [ T(-0.361 0.37 0.005) Books(1) ]
+    [ T(0 0.37 0.005) Books(0.96) ]
+    [ T(0.361 0.37 0.005) Books(1.04) ]
+    [ T(-0.361 0.080 0.020) Basket ]
+    [ T(0.361 0.080 0.020) Basket ]
+    [ T(0 0.079 0.047) Bunny ]
+    [ T(-0.396 0.687 0) TrailingPlant ]
+    [ T(0.005 0.687 -0.005) WoodenHouse ]
+    [ T(0.368 0.687 0.044) Rainbow ]
+
+BookcaseDividers 4 ->
+    [ T(-0.540+0.360*BookcaseDividers_count 0.366 0)
+      S(0.021 0.588 0.295) Oak ]
+
+Books(heightFactor) ->
+    [ T(-0.105 0.111*heightFactor 0.008) S(0.039 0.222*heightFactor 0.185) BlueBook ]
+    [ T(-0.061 0.129*heightFactor 0.004) S(0.041 0.258*heightFactor 0.187) OchreBook ]
+    [ T(-0.018 0.098*heightFactor 0.021) S(0.039 0.196*heightFactor 0.188) RustBook ]
+    [ T(0.024 0.117*heightFactor 0) S(0.039 0.234*heightFactor 0.18) GreenBook ]
+    [ T(0.062 0.099*heightFactor 0.002) S(0.033 0.198*heightFactor 0.173) Linen ]
+    [ T(0.112 0.106*heightFactor 0.012) A(-15 2) S(0.032 0.210*heightFactor 0.187) OchreBook ]
+
+Basket ->
+    [ T(0 0.102 0) S(0.289 0.197 0.214) Wicker ]
+    [ T(0 0.195 0.001) S(0.303 0.020 0.226) WickerLight ]
+    [ T(0 0.157 0.110) S(0.083 0.023 0.006) ChestShadow ]
+    BasketWeave
+
+BasketWeave 8 ->
+    [ T(0 0.017+0.023*BasketWeave_count 0.109)
+      S(0.283 0.005 0.008) WickerLight ]
+
+Bunny ->
+    [ T(0 0.068 0) S(0.098 0.126 0.103) IvorySoft ]
+    [ T(0 0.142 0.028) S(0.086 0.079 0.086) IvorySoft ]
+    [ T(-0.026 0.196 0.018) A(16 2) S(0.030 0.090 0.026) IvorySoft ]
+    [ T(0.026 0.195 0.018) A(-17 2) S(0.029 0.091 0.026) IvorySoft ]
+    [ T(-0.019 0.150 0.066) S(0.011 0.010 0.011) DarkSoft ]
+    [ T(0.020 0.150 0.066) S(0.011 0.010 0.011) DarkSoft ]
+    [ T(-0.031 0.014 0.043) S(0.044 0.032 0.058) IvorySoft ]
+    [ T(0.031 0.014 0.043) S(0.044 0.032 0.058) IvorySoft ]
+
+WoodenHouse ->
+    [ T(0 0.078 0) S(0.139 0.156 0.090) Oak ]
+    [ T(-0.037 0.174 0) A(40 2) S(0.101 0.018 0.104) Oak ]
+    [ T(0.037 0.174 0) A(-40 2) S(0.101 0.018 0.104) Oak ]
+    [ T(-0.034 0.086 0.048) S(0.020 0.028 0.005) ChestShadow ]
+    [ T(0.034 0.086 0.048) S(0.020 0.028 0.005) ChestShadow ]
+    [ T(0 0.037 0.048) S(0.026 0.051 0.005) ChestShadow ]
+
+Rainbow ->
+    [ A(90 0) S(0.250 0.040 0.250)
+      !I(Cylinder(radial(0.82 1) azimuth(180 180) topology(shell) close(all) segments(32 1)) material(orangeroughceramic) 1 0.42) ]
+    [ A(90 0) S(0.204 0.041 0.204)
+      !I(Cylinder(radial(0.79 1) azimuth(180 180) topology(shell) close(all) segments(32 1)) material(goldorangemattepaint) 1 0.42) ]
+    [ A(90 0) S(0.159 0.042 0.159)
+      !I(Cylinder(radial(0.74 1) azimuth(180 180) topology(shell) close(all) segments(32 1)) material(sagegreenmattepaint) 1 0.42) ]
+    [ A(90 0) S(0.114 0.043 0.114)
+      !I(Cylinder(radial(0.66 1) azimuth(180 180) topology(shell) close(all) segments(32 1)) material(greybluetealmattepaint) 1 0.42) ]
+
+TrailingPlant ->
+    [ S(0.135 0.110 0.135) !I(Cylinder material(offwhiteceramic) 1 0.42) ]
+    [ T(0 0.104 0) S(0.107 0.009 0.107) WickerRound ]
+    [ T(-0.022 0.114 0.019) LeafPair ]
+    [ T(0.022 0.141 -0.016) A(58 1) LeafPair ]
+    [ T(-0.038 0.132 -0.018) A(-69 1) LeafPair ]
+    [ T(-0.070 0.090 0.039) A(68 2) LeafPair ]
+    [ T(-0.116 0.040 0.101) TrailingLeaves ]
+
+LeafPair ->
+    [ T(0.036 0.026 0.018) A(24 2) S(0.082 0.029 0.043) GreenLeaf ]
+    [ T(-0.030 0.034 -0.010) A(-28 2) S(0.085 0.026 0.041) GreenLeaf ]
+
+TrailingLeaves 5 ->
+    [ T(-0.008*TrailingLeaves_count -0.057*TrailingLeaves_count 0.011*TrailingLeaves_count)
+      A(23*TrailingLeaves_count 1) S(0.76 0.76 0.76) LeafPair ]
+
+# Window-side desk. Positive local Z is the chair-facing side.
+Desk ->
+    [ T(0 0.723 0) S(1.35 0.043 0.50) Oak ]
+    [ T(0 0.659 0.198) S(1.227 0.087 0.030) Oak ]
+    [ T(0 0.659 -0.202) S(1.227 0.087 0.030) Oak ]
+    [ T(-0.602 0.659 0) S(0.031 0.087 0.407) Oak ]
+    [ T(0.602 0.659 0) S(0.031 0.087 0.407) Oak ]
+    [ T(-0.615 0 -0.197) DeskLeg ] [ T(0.615 0 -0.197) DeskLeg ]
+    [ T(-0.615 0 0.197) DeskLeg ] [ T(0.615 0 0.197) DeskLeg ]
+    [ T(-0.615 0.21 0) S(0.029 0.028 0.397) Oak ]
+    [ T(0.615 0.21 0) S(0.029 0.028 0.397) Oak ]
+    [ T(-0.49 0.745 -0.124) PencilCup ]
+    [ T(-0.21 0.745 -0.046) BookStack ]
+    [ T(0.171 0.745 -0.055) MushroomLamp ]
+    [ T(0.480 0.745 -0.120) FlowerVase ]
+
+DeskLeg -> T(0 0.351 0) S(0.045 0.702 0.045) Oak
+
+PencilCup ->
+    [ T(0 0.041 0) S(0.083 0.082 0.078) Oak ]
+    [ T(0 0.083 0) S(0.068 0.002 0.064) ChestShadow ]
+    [ T(-0.024 0.069 0.018) A(13 2) S(0.008 0.112 0.008) OchreRound ]
+    [ T(-0.008 0.067 -0.014) A(-12 0) S(0.008 0.145 0.008) BlueRound ]
+    [ T(0.021 0.068 0.014) A(-15 2) S(0.008 0.108 0.008) RustRound ]
+    [ T(0.011 0.070 -0.008) A(4 2) S(0.008 0.122 0.008) GreenRound ]
+
+BookStack ->
+    [ T(0 0.012 0) S(0.212 0.024 0.154) Linen ]
+    [ T(0 0.034 -0.007) A(5 1) S(0.199 0.021 0.147) Oak ]
+    [ T(0 0.054 -0.013) A(-4 1) S(0.187 0.019 0.137) GreenBook ]
+    [ T(0 0.065 -0.014) S(0.055 0.002 0.049) Ivory ]
+
+MushroomLamp ->
+    [ T(0 0.046 0) S(0.071 0.092 0.066) IvorySoft ]
+    [ T(0 0.096 0) S(0.155 0.127 0.155)
+      !I(Sphere(polar(0 90) topology(solid) close(all) segments(32 12)) material(offwhiteceramic) 1 0.42) ]
+    [ T(-0.044 0.125 0.046) S(0.014 0.012 0.013) RustSoft ]
+    [ T(0.008 0.150 0.035) S(0.014 0.012 0.013) RustSoft ]
+    [ T(0.049 0.129 0.039) S(0.013 0.012 0.013) RustSoft ]
+    [ T(-0.002 0.111 0.073) S(0.013 0.011 0.011) RustSoft ]
+    [ T(0.041 0.082 0.032) S(0.011 0.011 0.010) RustSoft ]
+
+FlowerVase ->
+    [ S(0.090 0.101 0.090)
+      !I(Cylinder(radial(0.87 1) topology(shell) close(all) segments(28 1)) material(palegreenglossyglass) 0.47 0.42) ]
+    [ T(0 0.015 0) A(-14 2) FlowerStem(0.23) ]
+    [ T(0.012 0.020 0.014) A(-17 0) FlowerStem(0.26) ]
+    [ T(-0.007 0.020 -0.004) A(18 2) FlowerStem(0.28) ]
+    [ T(0.015 0.018 -0.012) A(13 0) FlowerStem(0.22) ]
+
+FlowerStem(len) ->
+    [ S(0.005 len 0.005) GreenRound ]
+    [ T(0 len 0) S(0.021 0.016 0.025) IvorySoft ]
+    [ T(0.018 len-0.016 0.006) S(0.014 0.015 0.014) IvorySoft ]
+    [ T(-0.013 len-0.038 0.009) S(0.014 0.013 0.014) IvorySoft ]
+
+# Chair faces the desk (negative local Z).
+Chair ->
+    [ T(0 0.423 0) S(0.430 0.049 0.415) BluePaint ]
+    [ T(-0.179 0 -0.158) A(-7 2) A(-7 0) ChairLeg ]
+    [ T(0.179 0 -0.158) A(7 2) A(-7 0) ChairLeg ]
+    [ T(-0.181 0 0.157) A(-7 2) A(7 0) ChairLeg ]
+    [ T(0.181 0 0.157) A(7 2) A(7 0) ChairLeg ]
+    [ T(0 0.178 0.154) S(0.330 0.023 0.025) BluePaint ]
+    [ T(0 0.205 -0.142) S(0.330 0.023 0.025) BluePaint ]
+    [ T(-0.155 0.17 0) S(0.022 0.022 0.294) BluePaint ]
+    [ T(0.155 0.17 0) S(0.022 0.022 0.294) BluePaint ]
+    [ T(0 0.784 0.202) A(7 0) S(0.412 0.092 0.058) BluePaint ]
+    ChairSpindles
+
+ChairLeg -> S(0.034 0.426 0.034) BlueRound
+ChairSpindles 5 ->
+    [ T(-0.161+0.0805*ChairSpindles_count 0.442 0.162)
+      A(7 0) S(0.019 0.337 0.019) BlueRound ]
+
+ToyChest ->
+    [ T(0 0.224 0) S(0.760 0.364 0.397) SageWall ]
+    [ T(0 0.412 0) S(0.788 0.034 0.425) SageWall ]
+    [ T(-0.176 0.372 -0.201) S(0.081 0.025 0.006) ChestShadow ]
+    [ T(0.176 0.372 -0.201) S(0.081 0.025 0.006) ChestShadow ]
+    [ T(-0.343 0.030 -0.162) ChestFoot ] [ T(0.343 0.030 -0.162) ChestFoot ]
+    [ T(-0.343 0.030 0.162) ChestFoot ] [ T(0.343 0.030 0.162) ChestFoot ]
+
+ChestFoot -> S(0.058 0.060 0.059) SageWall
+
+Rug ->
+    [ S(1.52 0.014 1.52)
+      !I(Cylinder(segments(64 1)) material(beigebrownroughfabric) 1 0.45) ]
+    [ T(0 0.014 0) RugRings ]
+
+RugRings 19 ->
+    [ S(0.104+0.076*RugRings_count 0.003 0.104+0.076*RugRings_count)
+      !I(Cylinder(radial(0.969 1) topology(shell) close(all) segments(64 1)) material(goldbeigeroughfabric) 1 0.45) ]
+
+# The picture artwork is modelled in geometry, including the crescent and star silhouettes.
+MoonPicture ->
+    PrintFrame
+    [ T(-0.030 0.003 0.031) A(90 0) CrescentShape ]
+    [ T(0.067 0.072 0.033) S(0.36 0.36 0.36) StarMark ]
+    [ T(0.065 -0.062 0.033) S(0.25 0.25 0.25) StarMark ]
+
+StarPicture ->
+    PrintFrame
+    [ T(-0.032 0.056 0.035) S(1.0 1.0 1.0) StarMark ]
+    [ T(0.080 0.012 0.035) S(0.72 0.72 0.72) StarMark ]
+    [ T(-0.073 -0.069 0.035) S(0.61 0.61 0.61) StarMark ]
+    [ T(0.036 -0.090 0.035) S(0.53 0.53 0.53) StarMark ]
+    [ T(0.083 0.102 0.035) S(0.28 0.28 0.28) StarMark ]
+
+PrintFrame ->
+    [ T(0 0 0.015) S(0.289 0.355 0.025) Ivory ]
+    [ T(-0.152 0 0.019) S(0.015 0.377 0.035) Oak ]
+    [ T(0.152 0 0.019) S(0.015 0.377 0.035) Oak ]
+    [ T(0 0.181 0.019) S(0.29 0.015 0.035) Oak ]
+    [ T(0 -0.181 0.019) S(0.29 0.015 0.035) Oak ]
+
+StarMark -> A(90 0) StarShape
+
+# Surface rules keep the palette in one place.
+Oak -> !I(Cube material(goldenoakwood) 1 0.65)
+OakRound -> !I(Cylinder material(goldenoakwood) 1 0.55)
+FloorOak -> !I(Cube material(beigeoakwood) 1 0.75)
+WhitePlaster -> !I(Cube material(warmwhitematteplaster) 1 0.70)
+SageWall -> !I(Cube material(sagegreenmattepaint) 1 0.62)
+BluePaint -> !I(Cube material(greybluetealmattepaint) 1 0.45)
+BlueRound -> !I(Cylinder material(greybluetealmattepaint) 1 0.42)
+Linen -> !I(Cube material(whitebeigemattefabric) 1 0.40)
+Ivory -> !I(Cube material(offwhitemattefabric) 1 0.45)
+IvorySoft -> !I(Sphere material(whitebeigemattefabric) 1 0.35)
+Quilt -> !I(Cube material(sagegreenmattefabric) 1 0.40)
+QuiltSeam -> !I(Cube material(olivegreenmattefabric) 1 0.40)
+RustSoft -> !I(Sphere material(orangebrownmattefabric) 1 0.38)
+DarkSoft -> !I(Sphere material(darkbrownmattefabric) 1 0.38)
+BrassBubble -> !I(Sphere material(goldbrushedmetal) 1 0.38)
+ChestShadow -> !I(Cube material(darkbrownmattepaint) 1 0.42)
+Wicker -> !I(Cube material(beigebrownroughfabric) 1 0.30)
+WickerLight -> !I(Cube material(goldbeigeroughfabric) 1 0.30)
+WickerRound -> !I(Cylinder material(beigebrownroughfabric) 1 0.30)
+GreenLeaf -> !I(Sphere material(olivegreenmattepaint) 1 0.38)
+GreenRound -> !I(Cylinder material(olivegreenmattepaint) 1 0.40)
+OchreRound -> !I(Cylinder material(goldorangemattepaint) 1 0.40)
+RustRound -> !I(Cylinder material(orangeroughceramic) 1 0.40)
+BlueBook -> !I(Cube material(bluepaintmatte) 1 0.40)
+OchreBook -> !I(Cube material(goldorangemattepaint) 1 0.40)
+RustBook -> !I(Cube material(orangeroughceramic) 1 0.40)
+GreenBook -> !I(Cube material(sagegreenmattepaint) 1 0.40)
+
+CrescentShape ->
+    !I(AxialProfile(
+      axis(y)
+      profile(Silhouette polygon(
+        0.034569 -0.088487
+        0.006974 -0.094744
+        -0.021240 -0.092595
+        -0.047569 -0.082232
+        -0.069679 -0.064574
+        -0.085607 -0.041188
+        -0.093941 -0.014148
+        -0.093941 0.014148
+        -0.085607 0.041188
+        -0.069679 0.064574
+        -0.047569 0.082232
+        -0.021240 0.092595
+        0.006974 0.094744
+        0.034569 0.088487
+        0.010961 0.080603
+        -0.009585 0.066554
+        -0.025497 0.047416
+        -0.035558 0.024650
+        -0.039000 -0.000000
+        -0.035558 -0.024650
+        -0.025497 -0.047416
+        -0.009585 -0.066554
+        0.010961 -0.080603
+      ))
+      at(0 Silhouette)
+      hold(0.005)
+      cap(all)
+    ) material(goldorangemattepaint) 1 0.40)
+
+StarShape ->
+    !I(AxialProfile(
+      axis(y)
+      profile(Silhouette polygon(
+        0.000000 -0.053000
+        -0.012931 -0.017798
+        -0.050406 -0.016378
+        -0.020923 0.006798
+        -0.031153 0.042878
+        -0.000000 0.022000
+        0.031153 0.042878
+        0.020923 0.006798
+        0.050406 -0.016378
+        0.012931 -0.017798
+      ))
+      at(0 Silhouette)
+      hold(0.005)
+      cap(all)
+    ) material(goldorangemattepaint) 1 0.40)

@@ -1,0 +1,53 @@
+# Pendulum wave | fifteen independent bobs on bifilar suspensions.
+# Wave(recurrenceSeconds amplitudeDegrees elapsedOffsetSeconds).
+# Model coordinates are decimetres. Gravity is 98.0665 dm/s^2.
+Start -> Wave(60 16 0)
+
+Wave(period amp offset) ->
+ [ Object(id(WaveExhibit) class(PendulumExhibit) taxonomy(Science Exhibit) layer(Equipment)) [
+ [ Object(id(Bench) class(DisplayBench) taxonomy(Science Mechanics Support) layer(Structure)) [ Bench ] ]
+ [ Object(id(Beam) class(PivotRail) taxonomy(Science Mechanics PivotRail) layer(Structure)) [ Beam Hangers(15) ] ]
+ [ Object(id(Bobs) class(PendulumArray) taxonomy(Science Mechanics Oscillator) layer(Equipment))
+   [ Stations(15 period amp offset) ] ]
+ ] ]
+
+Stations(n period amp offset) n ->
+ [ T((Stations_count-7)*0.42 4.25 0)
+   Station(51+Stations_count period amp t+offset) ]
+Station(q period amp clock) ->
+ [ A(amp*cos(6.283185307*q*clock/period) 0)
+   Oscillator(98.0665*(period/(6.283185307*q))*(period/(6.283185307*q))) ]
+# L is pivot-to-centre length; the brass collar and cables terminate above the bob.
+Oscillator(L) ->
+ [ Line(1 L) ] [ Line(-1 L) ]
+ [ T(0 0.172-L 0) S(0.070 0.049 0.070) !I(Cylinder material(copperpolishedmetal) 1 0.21) ]
+ [ T(0 0-L 0) S(0.36 0.36 0.36) !I(Sphere material(goldpolishedmetal) 1 0.2) ]
+ [ T(0 0-L 0) !I(Revolve(profile(Polygon 0.178 -0.016 0.183 -0.012 0.183 0.012 0.178 0.016) angle(0 360) segments(36)) material(copperpolishedmetal) 1 0.21) ]
+Line(s L) ->
+ [ !I(SweepDisk(path(s*0.128 0 0 s*0.028 0.210-L 0) up(0 0 1) radius(0.008) radialSegments(6) cap(all)) material(silverbrushedmetal) 1 0.32) ]
+
+Bench ->
+ [ T(0 0.16 0) S(7.26 0.22 2.53) !I(Cube material(amberwarmwood) 1 0.34) ]
+ [ EndFrame(-1) ] [ EndFrame(1) ]
+ [ T(0 0.274 0) S(6.38 0.010 0.026) !I(Cube material(goldbrushedmetal) 1 0.23) ]
+ [ Ruler(61) ]
+EndFrame(s) ->
+ [ T(3.44*s 0 0) [ Brace(1) ] [ Brace(-1) ]
+   [ T(0 0.09 0) S(0.25 0.16 2.60) !I(Cube material(charcoalmattemetal) 1 0.3) ] ]
+Brace(s) ->
+ [ !I(SweepProfile(profile(Rect 0.16 0.13) path(0 0.27 1.09*s 0 1.02 0.93*s 0 4.32 0.11*s) up(1 0 0) cap(all)) material(bluegreymattepaint) 1 0.29) ]
+ [ T(0 0.28 s*1.09) S(0.28 0.036 0.35) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+Beam ->
+ [ T(0 4.43 0) S(7.18 0.22 0.30) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0 4.335 0.157) S(7.10 0.033 0.018) !I(Cube material(goldbrushedmetal) 1 0.22) ]
+Hangers(n) n ->
+ [ T((Hangers_count-7)*0.42 4.25 0)
+   [ Pivot(1) ] [ Pivot(-1) ]
+   [ T(0 0.059 0) S(0.327 0.050 0.124) !I(Cube material(bluegreymattepaint) 1 0.26) ] ]
+Pivot(s) ->
+ [ T(0.128*s 0.026 0) S(0.051 0.059 0.078) !I(Cube material(copperpolishedmetal) 1 0.22) ]
+ [ T(0.128*s 0 0) S(0.057 0.045 0.047) !I(Sphere material(goldbrushedmetal) 1 0.21) ]
+Ruler(n) n ->
+ [ T((Ruler_count-30)*0.10 0.275 1.00)
+   S(0.011 0.013 0.062+0.08*(1-floor(wrap(Ruler_count,0,5)/5+0.8)))
+   !I(Cube material(goldbrushedmetal) 1 0.23) ]

@@ -1,0 +1,86 @@
+# Sunflower head | botanical display model, Y up, display front +Z.
+# Specimen(count divergenceDegrees) controls disk florets; edit the second number to 135 for a comparison.
+Start -> Specimen(377 137.507764)
+
+Specimen(n angle) ->
+ [ Object(id(Sunflower) class(FloweringSpecimen) taxonomy(Plant Asteraceae Helianthus Capitulum) layer(Terrain))
+   [ [ Object(id(Stalk) class(Stem) taxonomy(Plant Stem Peduncle) layer(Terrain)) [ Stem Foliage ] ]
+     [ T(0 2.60 0) A(-15 0)
+       [ Object(id(Receptacle) class(FlowerHead) taxonomy(Plant FlowerHead Receptacle) layer(Terrain)) [ Cushion Bracts(34) ] ]
+       [ Object(id(Rays) class(RayFlorets) taxonomy(Plant FlowerHead RayFloret) layer(Terrain)) [ Rays(34) BackRays(34) ] ]
+       [ Object(id(InnerDisc) class(DiscFlorets) taxonomy(Plant FlowerHead DiscFloret) layer(Terrain)) [ SeedHead(0 floor(n/2) n angle) ] ]
+       [ Object(id(OuterDisc) class(DiscFlorets) taxonomy(Plant FlowerHead DiscFloret) layer(Terrain)) [ SeedHead(floor(n/2) n-floor(n/2) n angle) ] ]
+     ]
+   ] ]
+
+Stem ->
+ [ !I(TaperedSweep(samples(-0.14 0 -0.19 0.071 -0.16 0.36 -0.18 0.067 -0.11 0.88 -0.17 0.061
+     -0.03 1.32 -0.16 0.057 0.075 1.80 -0.17 0.052 0.11 2.17 -0.19 0.049
+     0.09 2.43 -0.14 0.045 0 2.60 -0.075 0.052) up(1 0 0) segments(18) cap(all)) material(olivegreenmattepaint) 1 0.24) ]
+Foliage ->
+ [ T(-0.12 0.90 -0.17) A(36 1) A(68 2) FoliageLeaf(0.85 0.42) ]
+ [ T(0.012 1.50 -0.16) A(-21 1) A(-76 2) FoliageLeaf(0.94 0.51) ]
+ [ T(0.106 2.11 -0.18) A(-42 1) A(116 2) FoliageLeaf(0.60 0.35) ]
+FoliageLeaf(h w) ->
+ [ !I(TaperedSweep(samples(0 0 0 0.016 0 0.12 0.008 0.013 0 0.225 0.015 0.008)
+     up(1 0 0) segments(8) cap(all)) material(olivegreenmattepaint) 1 0.28) ]
+ [ T(0 0.215 0.015)
+   [ !I(LeafBlade(profile(Cordate) length(h) width(w) curvature(0.09) camber(0.035)
+        thickness(0.008) twist(10) widthPower(0.85) segments(22 8)) material(olivegreenmattepaint) 1 0.27) ]
+   [ !I(TaperedSweep(samples(0 0 0.005 0.011 0 h*0.25 0.092 0.009 0 h*0.5 0.131 0.005 0 h*0.78 0.083 0.003 0 h 0.005 0.0015)
+      up(1 0 0) segments(7) cap(all)) material(sagegreenmattepaint) 1 0.24) ]
+ ]
+Cushion ->
+ [ S(1.84 1.84 0.28) !I(Sphere(segments(64 24)) material(darkbrownmattepaint) 1 0.29) ]
+ [ T(0 0 -0.065) S(1.87 1.87 0.25) !I(Sphere(segments(56 20)) material(olivegreenmattepaint) 1 0.23) ]
+Bracts(n) n ->
+ [ A(Bracts_count*360/n 2) T(0 0.75 -0.085) A(-20 0)
+   !I(LeafBlade(profile(Lanceolate) length(0.36) width(0.12) curvature(-0.026) camber(0.018)
+   thickness(0.008) twist(7) widthPower(0.94) segments(12 4)) material(olivegreenmattepaint) 1 0.24) ]
+Rays(n) n ->
+ [ R Len(0.48 0.57) R Twist(-12 12) A(Rays_count*360/n 2) T(0 0.858 0.042) A(4 0)
+   !I(PetalBlade(profile(Lanceolate) length(Len) width(0.193) curvature(0.068) camber(0.024) twist(Twist)
+       thickness(0.005) widthPower(0.64) segments(18 6)) material(goldorangemattepaint) 1 0.25) ]
+BackRays(n) n ->
+ [ R Len(0.46 0.54) A(5.294118+BackRays_count*360/n 2) T(0 0.874 0.011) A(-12 0)
+   !I(PetalBlade(profile(Lanceolate) length(Len) width(0.18) curvature(0.048) camber(0.018) twist(-8)
+       thickness(0.005) widthPower(0.67) segments(16 5)) material(ambermattepaint) 1 0.25) ]
+
+# Square-root radius gives equal area per index on the projected disk.
+# Constant-radius test markers are unnecessary: the floret footprints carry the positions.
+SeedHead(first count n divergence) count ->
+ [ PlaceFloret(first+SeedHead_count n divergence) ]
+PlaceFloret(i n divergence) ->
+ [ A(i*divergence 2) Floret(0.89*sqrt((i+0.5)/n) sqrt(377/n) i n) ]
+Floret(r k i n) ->
+ [ T(r 0 0.144*sqrt(1-(r/0.92)*(r/0.92)))
+   [ A(90 0) S(k*0.071 0.033 k*0.071) !I(Cylinder(segments(8 1)) material(darkbrownmattepaint) 1 0.24) ]
+   [ T(0 0 0.028) S(0.04*k 0.04*k 0.04) Corolla ]
+   ?(i>0.70*n)
+   [ T(0 0 0.061) S(k*0.028 k*0.028 0.026) !I(Sphere(segments(8 4)) material(goldorangemattepaint) 1 0.21) ]
+   :
+   [ T(0 0 0.044) S(k*0.023 k*0.023 0.018) !I(Sphere(segments(8 4)) material(darkbrownmattepaint) 1 0.21) ]
+ ]
+
+# The corolla is a thin shell with a five-lobed lip and a through-opening.
+Corolla ->
+ [ !I(ShellLoft(
+   section(0 10
+     0.52000 0.00000   0.42069 0.30565   0.16069 0.49455   -0.16069 0.49455   -0.42069 0.30565
+     -0.52000 0.00000   -0.42069 -0.30565   -0.16069 -0.49455   0.16069 -0.49455   0.42069 -0.30565
+     0.30000 0.00000   0.24271 0.17634   0.09271 0.28532   -0.09271 0.28532   -0.24271 0.17634
+     -0.30000 0.00000   -0.24271 -0.17634   -0.09271 -0.28532   0.09271 -0.28532   0.24271 -0.17634
+   )
+   section(0.42 10
+     0.64000 0.00000   0.44496 0.32328   0.19777 0.60868   -0.16996 0.52308   -0.51777 0.37618
+     -0.55000 0.00000   -0.51777 -0.37618   -0.16996 -0.52308   0.19777 -0.60868   0.44496 -0.32328
+     0.45000 0.00000   0.29125 0.21160   0.13906 0.42798   -0.11125 0.34238   -0.36406 0.26450
+     -0.36000 0.00000   -0.36406 -0.26450   -0.11125 -0.34238   0.13906 -0.42798   0.29125 -0.21160
+   )
+   section(0.86 10
+     0.95000 0.00000   0.44496 0.32328   0.29357 0.90350   -0.16996 0.52308   -0.76857 0.55840
+     -0.55000 0.00000   -0.76857 -0.55840   -0.16996 -0.52308   0.29357 -0.90350   0.44496 -0.32328
+     0.77000 0.00000   0.32361 0.23511   0.23794 0.73231   -0.12361 0.38042   -0.62294 0.45259
+     -0.40000 0.00000   -0.62294 -0.45259   -0.12361 -0.38042   0.23794 -0.73231   0.32361 -0.23511
+   )
+   cap(all)) material(orangebrownmattepaint) 1 0.22) ]

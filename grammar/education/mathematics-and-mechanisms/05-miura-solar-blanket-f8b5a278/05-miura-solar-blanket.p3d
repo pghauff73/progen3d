@@ -1,0 +1,43 @@
+# Miura solar blanket | rigid-fold kinematics, eight by six facets, Y vertical.
+# Array(columns rows periodSeconds); even counts give complete repeating cells.
+Start -> Array(8 6 8)
+
+Array(cols rows period) ->
+ [ Object(id(Blanket) class(DeployableSheet) taxonomy(Structure Origami Miura SolarBlanket) layer(Equipment))
+   [ Fold(cols rows radians(32+22*cos(6.283185307*t/period))) ] ]
+
+# Edge lengths a=0.82, b=0.74; acute sector angle=64 degrees.
+# U=(p,+/-h,0), V=(+/-q,0,bz). Each face is the parallelogram U+V.
+Fold(cols rows beta) ->
+ Dimensions(cols rows 0.82*cos(beta) 0.82*sin(beta) 0.74*cos(radians(64))/cos(beta))
+Dimensions(cols rows p h q) ->
+ [ T(-0.5*(cols*p+q) 0 -0.5*rows*sqrt(0.74*0.74-q*q))
+   Rows(rows cols p h q sqrt(0.74*0.74-q*q)) ]
+Rows(rows cols p h q bz) rows ->
+ [ T(wrap(Rows_count,0,2)*q 0 Rows_count*bz)
+   Columns(cols p h q*cos(Rows_count*3.141592654) bz) ]
+Columns(n p h q bz) n ->
+ [ T(Columns_count*p wrap(Columns_count,0,2)*h 0)
+   Facet(p h*cos(Columns_count*3.141592654) q bz) ]
+
+# Gold foil shares its full boundary with neighbours. Thin decorative layers sit above it.
+Facet(p h q bz) ->
+ [ !I(Loft(section(0 Polygon 0 0 p h p h+0.006 0 0.006)
+           section(bz Polygon q 0 p+q h p+q h+0.006 q 0.006) cap(all))
+   material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.006 0) CellRows(2 p h q bz) ]
+ [ T(0 0.006 0) !I(SweepDisk(path(0 0 0 p h 0) up(0 0 1) radius(0.009) radialSegments(8) cap(all)) material(copperpolishedmetal) 1 0.27) ]
+
+CellRows(n p h q bz) n ->
+ [ T(q*(0.045+0.50*CellRows_count) 0 bz*(0.045+0.50*CellRows_count)) CellColumns(3 p h q bz) ]
+CellColumns(n p h q bz) n ->
+ [ T(p*(0.025+CellColumns_count/3) h*(0.025+CellColumns_count/3) 0)
+   Cell(p*0.279 h*0.279 q*0.412 bz*0.412) ]
+Cell(p h q bz) ->
+ [ !I(Loft(section(0 Polygon 0 0 p h p h+0.003 0 0.003)
+           section(bz Polygon q 0 p+q h p+q h+0.003 q 0.003) cap(all))
+   material(bluepaintmatte) 1 0.28) ]
+ [ T(0 0.004 0) Conductors(2 p h q bz) ]
+Conductors(n p h q bz) n ->
+ [ T(q*(0.30+0.40*Conductors_count) 0 bz*(0.30+0.40*Conductors_count))
+   !I(SweepDisk(path(0 0 0 p h 0) up(0 0 1) radius(0.0026) radialSegments(6) cap(all)) material(silverbrushedmetal) 1 0.28) ]

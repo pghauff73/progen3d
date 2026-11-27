@@ -1,0 +1,61 @@
+{
+  "title": "01 meridian orrery",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/01-meridian-orrery-2b4216c9",
+  "source_file": "01-meridian-orrery.p3d",
+  "git_blob_sha": "2b4216c9b63f6fd1c3cf4c631d5aa6e924c66f8a",
+  "bytes": 6351,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "01-meridian-orrery.p3d"
+  ],
+  "description": "Meridian orrery | native ProGen3D | Y up | studio model units",
+  "features": [
+    "Sphere",
+    "Revolve",
+    "Cylinder",
+    "Cube",
+    "TaperedSweep"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian orrery | native ProGen3D | Y up | studio model units · Start takes the length in seconds of an Earth year. Try 12, then time 0..12. · Display radii and ball sizes are compressed independently of orbital periods. · Turned pedestal, moulded foot and stepped lip, as a single radial section. · One engraved division per degree; the 5-degree and 30-degree divisions have their own lengths. · Exposed illustration pair: common pitch; 32:16 teeth; equal and opposite pitch-line speeds."
+    ],
+    [
+      "Named objects",
+      "Orrery, footprint, Pedestal, CalendarDial, Drive, SolarSpindle, Mercury, Venus, EarthMoon, Mars, Jupiter, Saturn"
+    ],
+    [
+      "Object classes",
+      "AstronomicalInstrument, Stand, Dial, Clockwork, Bearing, OrbitCarrier"
+    ],
+    [
+      "Instantiated primitives",
+      "Sphere, Revolve, Cylinder, Cube, TaperedSweep"
+    ],
+    [
+      "Material identifiers",
+      "silverbluepolishedmetal, amberwarmwood, redglossymetal, charcoalroughmetal, warmwhitematteplaster, goldbrushedmetal, copperpolishedmetal, bluepaintmatte"
+    ],
+    [
+      "Production rules",
+      "Start, Instrument, Stand, Foot, Dial, Ring, Tick, MinorTick, Column, Clockwork, Wheel, Spindle, Carrier, EarthSystem, JupiterGlobe, SaturnGlobe (16 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "88"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

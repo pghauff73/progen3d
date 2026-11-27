@@ -1,0 +1,42 @@
+# Knot cabinet. Knot(oddMeridianTurns lift). Illustrated edits: (3 0.55), (5 0.55).
+# Two azimuthal turns. Use q=3 or 5 and lift between 0.32 and 0.80.
+# Brass joints at the extrema mark the overpasses and their matching underpasses.
+Start -> Knot(3 0.55)
+
+Knot(q lift) ->
+ [ Object(id(Exhibit) class(KnotCabinet) taxonomy(Study Geometry Knot) layer(Equipment)) [
+ [ Object(id(Plinth) class(DisplayBase) taxonomy(Study Geometry Knot) layer(Structure))
+   [ Base [ Inlay(1.50) ] [ Inlay(2.34) ] [ Marks(12*q) ] ] ]
+ [ Object(id(Strand) class(ArticulatedKnot) taxonomy(Study Geometry Knot) layer(Equipment))
+   [ Stations(24*q q lift) ] ]
+ [ Object(id(Sockets) class(Supports) taxonomy(Study Geometry Knot) layer(Structure))
+   [ Feet(q) ] ]
+ ] ]
+
+# A low stepped walnut drum and two concentric brass wires.
+Base ->
+ [ !I(Revolve(profile(Polygon 0.01 0 2.30 0 2.42 0.06 2.42 0.14 2.37 0.18 0.01 0.18) angle(0 360) segments(120)) material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.18 0) S(4.72 0.035 4.72) !I(Cylinder material(charcoalmattemetal) 1 0.28) ]
+Inlay(r) ->
+ [ !I(Revolve(profile(Polygon r-0.008 0.214 r+0.008 0.214 r+0.006 0.220 r-0.006 0.220) angle(0 360) segments(120)) material(goldbrushedmetal) 1 0.26) ]
+Marks(n) n ->
+ [ A(360*Marks_count/n 1) T(2.27 0.220 0) S(0.079 0.008 0.012) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+
+# Each length of enamel fattens between its two spherical couplings.
+Stations(n q h) n ->
+ [ Interval(360*Stations_count/n 360*(Stations_count+1)/n q h) ]
+Interval(a b q h) ->
+ [ Endpoints(radians(2*a) radians(2*b) radians(q*a) radians(q*b) h) ]
+Endpoints(a b c d h) ->
+ [ Link((1.5+0.64*cos(c))*cos(a) 0.58+h*(1+sin(c)) (1.5+0.64*cos(c))*sin(a)
+        (1.5+0.64*cos(d))*cos(b) 0.58+h*(1+sin(d)) (1.5+0.64*cos(d))*sin(b)) ]
+Link(x y z X Y Z) ->
+ [ T(x y z) S(0.173 0.173 0.173) !I(Sphere material(goldbrushedmetal) 1 0.24) ]
+ [ !I(TaperedSweep(samples(x y z 0.061 (3*x+X)/4 (3*y+Y)/4 (3*z+Z)/4 0.102
+        (x+3*X)/4 (y+3*Y)/4 (z+3*Z)/4 0.102 X Y Z 0.061) up(0 1 0) segments(12) cap(all)) material(bluegreymattepaint) 1 0.24) ]
+
+# A turned foot meets each absolute minimum, independently of lift.
+Feet(q) q ->
+ [ A(-2*(270+360*Feet_count)/q 1) T(1.5 0.215 0) Socket ]
+Socket ->
+ [ !I(Revolve(profile(Polygon 0.012 0 0.16 0 0.16 0.037 0.115 0.060 0.066 0.096 0.050 0.244 0.09 0.274 0.091 0.308 0.012 0.308) angle(0 360) segments(32)) material(copperpolishedmetal) 1 0.25) ]

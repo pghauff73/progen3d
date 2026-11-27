@@ -1,0 +1,60 @@
+{
+  "title": "11 scotch yoke",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/11-scotch-yoke-4709a5d0",
+  "source_file": "11-scotch-yoke.p3d",
+  "git_blob_sha": "4709a5d0a036adb375183894dd363bead71c3e36",
+  "bytes": 3878,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "11-scotch-yoke.p3d"
+  ],
+  "description": "Scotch yoke demonstration. Yoke(crankRadius periodSeconds).",
+  "features": [
+    "Cylinder",
+    "Cube",
+    "Revolve",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Scotch yoke demonstration. Yoke(crankRadius periodSeconds). · Suggested radius 0.40 to 1.05 model units, positive period."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Stand, Flywheel, CrankPin, Slider, Slipper"
+    ],
+    [
+      "Object classes",
+      "Mechanism, Bench, Rotor, Journal, Yoke, SlidingBlock"
+    ],
+    [
+      "Instantiated primitives",
+      "Cylinder, Cube, Revolve, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "silverbluepolishedmetal, amberwarmwood, charcoalmattemetal, goldbrushedmetal, bluegreymattepaint, silverbrushedmetal, copperpolishedmetal, redmattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Yoke, Bed, Bearing, Cheek, Stud, Wheel, Carriage, CrossSide, EndBar, Shoe, ShoeHalf (12 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "60"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

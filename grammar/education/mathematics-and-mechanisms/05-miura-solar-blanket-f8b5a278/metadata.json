@@ -1,0 +1,58 @@
+{
+  "title": "05 miura solar blanket",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/05-miura-solar-blanket-f8b5a278",
+  "source_file": "05-miura-solar-blanket.p3d",
+  "git_blob_sha": "f8b5a2789bc172cf890bc5ca9e8178acc63afec2",
+  "bytes": 2186,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "05-miura-solar-blanket.p3d"
+  ],
+  "description": "Miura solar blanket | rigid-fold kinematics, eight by six facets, Y vertical.",
+  "features": [
+    "Loft",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Miura solar blanket | rigid-fold kinematics, eight by six facets, Y vertical. · Array(columns rows periodSeconds); even counts give complete repeating cells. · Edge lengths a=0.82, b=0.74; acute sector angle=64 degrees. · U=(p,+/-h,0), V=(+/-q,0,bz). Each face is the parallelogram U+V. · Gold foil shares its full boundary with neighbours. Thin decorative layers sit above it."
+    ],
+    [
+      "Named objects",
+      "Blanket"
+    ],
+    [
+      "Object classes",
+      "DeployableSheet"
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "goldbrushedmetal, copperpolishedmetal, bluepaintmatte, silverbrushedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Array, Fold, Dimensions, Facet, Cell (6 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "44"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

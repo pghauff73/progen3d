@@ -1,0 +1,314 @@
+# Ducted fan with a steerable internal passage
+# Native ProGen3D grammar. One model unit represents one millimetre.
+# Edit Start: bore radius, nominal tip gap, blade count, outlet angle (degrees),
+#             outside radius, minimum radial wall, show casing (1 or 0).
+# Try a straight duct with angle 0, reverse the bend with -18, or widen the bore to 55.
+# Admitted envelope: bore 40..60 mm, gap 0.25..3 mm, 3..10 whole blades,
+# bend -30..30 degrees, positive minimum wall. The outer radius must clear the passage.
+# Rotor animation: t in seconds, one illustrative revolution every 6 seconds.
+Start -> DuctedFan(50 1 7 18 75 3 1)
+
+DuctedFan(bore gap blades angle outside wall cover) ->
+ [ ?(min(bore-40,60-bore)>=0)
+   [ CheckGap(bore gap blades angle outside wall cover) ] : [ InvalidDimensions ] ]
+CheckGap(bore gap blades angle outside wall cover) ->
+ [ ?(min(gap-0.25,3-gap)>=0)
+   [ CheckCount(bore gap blades angle outside wall cover) ] : [ InvalidDimensions ] ]
+CheckCount(bore gap blades angle outside wall cover) ->
+ [ ?(min(blades-3,10-blades)>=0)
+   [ CheckInteger(bore gap blades angle outside wall cover) ] : [ InvalidDimensions ] ]
+CheckInteger(bore gap blades angle outside wall cover) ->
+ [ ?(blades==floor(blades))
+   [ CheckBend(bore gap blades angle outside wall cover) ] : [ InvalidDimensions ] ]
+CheckBend(bore gap blades angle outside wall cover) ->
+ [ ?(abs(angle)<=30) [ CheckWall(bore gap blades angle outside wall cover) ] : [ InvalidDimensions ] ]
+CheckWall(bore gap blades angle outside wall cover) ->
+ [ ?(wall>0) [ Envelope(bore gap blades angle outside wall cover tan(radians(angle))) ] : [ InvalidDimensions ] ]
+
+# The casing's inscribed radius bounds the wall even between polygon vertices.
+# The largest bore extent occurs at the inlet lip or at the far side of the exit.
+Envelope(bore gap blades angle outside wall cover slope) ->
+ [ ?(outside*cos(radians(180/32))-max(1.07*bore/cos(radians(180/32)),abs(36*slope)+bore*sqrt(1+slope*slope)/cos(radians(180/32)))>=wall)
+   [ Assembly(bore gap blades angle outside cover slope) ] : [ ThinWall ] ]
+
+Assembly(bore gap blades angle outside cover slope) ->
+ [ Object(id(Fan) class(AxialDuctedFan) taxonomy(Machine Ventilation AxialDuctedFan) layer(Equipment))
+   [ [ ?(cover>0)
+       [ Object(id(Casing) class(DuctCasing) taxonomy(Machine Ventilation DuctCasing) layer(Structure))
+         [ Passage(bore/cos(radians(180/32)) outside slope) ] ] : [ T(0 0 0) ] ]
+     [ Object(id(Rotor) class(AxialImpeller) taxonomy(Machine Ventilation AxialImpeller) layer(Equipment))
+       [ T(0 0 -12) A(60*t 2) Hub(bore) Blades(blades bore-gap) ] ]
+     [ Object(id(MotorMount) class(ThreeArmSupport) taxonomy(Machine Ventilation ThreeArmSupport) layer(Structure))
+       [ Mount(bore) ] ]
+   ] ]
+
+# Three streamlined arms support the motor just behind the moving blades.
+Mount(bore) ->
+ [ T(0 0 -4) A(90 0)
+   !I(Revolve(profile(Polygon 0 0 0.24*bore 0 0.24*bore 8 0.18*bore 11 0 12)
+      angle(0 360) segments(64)) material(charcoalroughmetal) 1 0.25) ]
+ [ Arms(3 bore) ]
+Arms(n bore) n ->
+ [ A(30+360*Arms_count/n 2)
+   !I(Loft(section(2 Polygon 0.18*bore -1.2 bore+0.5 -0.5 bore+0.5 0.5 0.18*bore 1.2)
+           section(5 Polygon 0.18*bore -1.7 bore+0.5 -0.8 bore+0.5 0.8 0.18*bore 1.7)
+           section(8 Polygon 0.18*bore -0.4 bore+0.5 -0.2 bore+0.5 0.2 0.18*bore 0.4) cap(all))
+      material(silverbrushedmetal) 1 0.25) ]
+
+# Spinner and blade roots overlap. The blade envelope follows bore minus clearance.
+Hub(bore) ->
+ [ A(90 0)
+   !I(Revolve(profile(Polygon 0 -13 0.09*bore -12 0.20*bore -9 0.28*bore -5
+                              0.32*bore -2 0.32*bore 5 0.25*bore 7 0.06*bore 7 0.06*bore 9 0 9)
+      angle(0 360) segments(80)) material(copperpolishedmetal) 1 0.28) ]
+Blades(n tip) n ->
+ [ A(360*Blades_count/n 2) A(90 1) S(tip tip tip) Blade ]
+
+# Each closed section lists the axial and tangential offsets in a radial blade frame.
+# The outboard station is set so the most distant tip point lies on the unit circle.
+Blade ->
+ [ !I(Loft(
+   section(0.255 Polygon
+     0.0831143 -0.1463815  0.0648428 -0.1400986  0.0309588 -0.0980447  -0.0136305 -0.0335176  -0.0557463 0.0260894  -0.0839654 0.0657165  -0.0822632 0.0670464  -0.0313445 0.0211697  0.0211967 -0.0302921  0.0584052 -0.0766012  0.081518 -0.1202178)
+   section(0.44 Polygon
+     0.0847871 -0.1636877  0.064029 -0.1540186  0.0293 -0.1002522  -0.0152631 -0.0186706  -0.0575202 0.0568052  -0.0858726 0.1070094  -0.0837016 0.108366  -0.0293675 0.0479834  0.026187 -0.0191833  0.0643075 -0.0783771  0.0861468 -0.1326511)
+   section(0.67 Polygon
+     0.0745231 -0.148795  0.0536623 -0.1362724  0.0229363 -0.0756015  -0.0150921 0.0155533  -0.0513619 0.1000002  -0.0757455 0.1561988  -0.0733007 0.1573912  -0.0225932 0.0875517  0.0286505 0.0104081  0.0623574 -0.0563746  0.0794068 -0.1161502)
+   section(0.86 Polygon
+     0.0537552 -0.0960371  0.0363817 -0.0834255  0.0140394 -0.0277332  -0.0123774 0.0553159  -0.0377642 0.1323336  -0.0548755 0.183607  -0.0526349 0.1844671  -0.013434 0.119179  0.0256764 0.0474294  0.0501689 -0.0138644  0.0605584 -0.0677181)
+   section(0.9793352 Polygon
+     0.0336227 -0.017975  0.02101 -0.0074006  0.006901 0.0363877  -0.008861 0.1013164  -0.024158 0.1615771  -0.0345025 0.2017061  -0.0327429 0.202244  -0.0062538 0.1502153  0.0198207 0.0932496  0.0352746 0.0450623  0.0403404 0.0033195)
+   cap(all)) material(goldbrushedmetal) 1 0.27) ]
+
+# The red cross identifies an input outside the admitted dimensions. The orange cross
+# identifies a casing thinner than the requested radial wall. Neither pose generates a fan.
+InvalidDimensions -> [ Object(id(InvalidDimensions) class(InputError) taxonomy(Machine Ventilation InputError)) [ RedCross ] ]
+ThinWall -> [ Object(id(InsufficientWall) class(EnvelopeError) taxonomy(Machine Ventilation EnvelopeError)) [ OrangeCross ] ]
+RedCross ->
+ [ A(45 2) S(48 5 5) !I(Cube material(redpaintmatte) 1 0.25) ]
+ [ A(-45 2) S(48 5 5) !I(Cube material(redpaintmatte) 1 0.25) ]
+OrangeCross ->
+ [ A(45 2) S(48 5 5) !I(Cube material(orangebrownmattepaint) 1 0.25) ]
+ [ A(-45 2) S(48 5 5) !I(Cube material(orangebrownmattepaint) 1 0.25) ]
+
+# One continuous annular mesh. Each section contains an outer loop, then its bore.
+# The 32-sided inner loops circumscribe the nominal bore, preserving blade clearance.
+# Flow-axis convention is +Z. The bend begins at z=12. For d=z-12 in [0,48],
+# the centre offset is slope*d*d/96 and the local gradient is slope*d/48.
+# The final 12 mm follows a straight tangent. The exit cuts the flat rear face.
+# For a tilted circular passage the horizontal semiaxis at a station is
+# bore*sqrt(1+localGradient^2). All outer loops remain coaxial.
+Passage(bore outside slope) ->
+ WallSections(bore outside slope bore*sqrt(1+0.0277778*slope*slope) bore*sqrt(1+0.1111111*slope*slope) bore*sqrt(1+0.25*slope*slope) bore*sqrt(1+0.4444444*slope*slope) bore*sqrt(1+0.6944444*slope*slope) bore*sqrt(1+1*slope*slope))
+WallSections(bore outside slope rx8 rx16 rx24 rx32 rx40 rx48) ->
+ [ !I(ShellLoft(
+   # z = -31 mm
+   section(-31 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     1.07*bore 0   1.0494403*bore 0.2087466*bore   0.9885511*bore 0.4094713*bore   0.8896725*bore 0.5944601*bore
+     0.7566043*bore 0.7566043*bore   0.5944601*bore 0.8896725*bore   0.4094713*bore 0.9885511*bore   0.2087466*bore 1.0494403*bore
+     0 1.07*bore   -0.2087466*bore 1.0494403*bore   -0.4094713*bore 0.9885511*bore   -0.5944601*bore 0.8896725*bore
+     -0.7566043*bore 0.7566043*bore   -0.8896725*bore 0.5944601*bore   -0.9885511*bore 0.4094713*bore   -1.0494403*bore 0.2087466*bore
+     -1.07*bore 0   -1.0494403*bore -0.2087466*bore   -0.9885511*bore -0.4094713*bore   -0.8896725*bore -0.5944601*bore
+     -0.7566043*bore -0.7566043*bore   -0.5944601*bore -0.8896725*bore   -0.4094713*bore -0.9885511*bore   -0.2087466*bore -1.0494403*bore
+     0 -1.07*bore   0.2087466*bore -1.0494403*bore   0.4094713*bore -0.9885511*bore   0.5944601*bore -0.8896725*bore
+     0.7566043*bore -0.7566043*bore   0.8896725*bore -0.5944601*bore   0.9885511*bore -0.4094713*bore   1.0494403*bore -0.2087466*bore
+   )
+   # z = -29 mm
+   section(-29 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     1.035*bore 0   1.0151128*bore 0.2019185*bore   0.9562153*bore 0.3960774*bore   0.860571*bore 0.5750152*bore
+     0.7318555*bore 0.7318555*bore   0.5750152*bore 0.860571*bore   0.3960774*bore 0.9562153*bore   0.2019185*bore 1.0151128*bore
+     0 1.035*bore   -0.2019185*bore 1.0151128*bore   -0.3960774*bore 0.9562153*bore   -0.5750152*bore 0.860571*bore
+     -0.7318555*bore 0.7318555*bore   -0.860571*bore 0.5750152*bore   -0.9562153*bore 0.3960774*bore   -1.0151128*bore 0.2019185*bore
+     -1.035*bore 0   -1.0151128*bore -0.2019185*bore   -0.9562153*bore -0.3960774*bore   -0.860571*bore -0.5750152*bore
+     -0.7318555*bore -0.7318555*bore   -0.5750152*bore -0.860571*bore   -0.3960774*bore -0.9562153*bore   -0.2019185*bore -1.0151128*bore
+     0 -1.035*bore   0.2019185*bore -1.0151128*bore   0.3960774*bore -0.9562153*bore   0.5750152*bore -0.860571*bore
+     0.7318555*bore -0.7318555*bore   0.860571*bore -0.5750152*bore   0.9562153*bore -0.3960774*bore   1.0151128*bore -0.2019185*bore
+   )
+   # z = -25 mm
+   section(-25 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     1*bore 0   0.9807853*bore 0.1950903*bore   0.9238795*bore 0.3826834*bore   0.8314696*bore 0.5555702*bore
+     0.7071068*bore 0.7071068*bore   0.5555702*bore 0.8314696*bore   0.3826834*bore 0.9238795*bore   0.1950903*bore 0.9807853*bore
+     0 1*bore   -0.1950903*bore 0.9807853*bore   -0.3826834*bore 0.9238795*bore   -0.5555702*bore 0.8314696*bore
+     -0.7071068*bore 0.7071068*bore   -0.8314696*bore 0.5555702*bore   -0.9238795*bore 0.3826834*bore   -0.9807853*bore 0.1950903*bore
+     -1*bore 0   -0.9807853*bore -0.1950903*bore   -0.9238795*bore -0.3826834*bore   -0.8314696*bore -0.5555702*bore
+     -0.7071068*bore -0.7071068*bore   -0.5555702*bore -0.8314696*bore   -0.3826834*bore -0.9238795*bore   -0.1950903*bore -0.9807853*bore
+     0 -1*bore   0.1950903*bore -0.9807853*bore   0.3826834*bore -0.9238795*bore   0.5555702*bore -0.8314696*bore
+     0.7071068*bore -0.7071068*bore   0.8314696*bore -0.5555702*bore   0.9238795*bore -0.3826834*bore   0.9807853*bore -0.1950903*bore
+   )
+   # z = 12 mm
+   section(12 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     1*bore 0   0.9807853*bore 0.1950903*bore   0.9238795*bore 0.3826834*bore   0.8314696*bore 0.5555702*bore
+     0.7071068*bore 0.7071068*bore   0.5555702*bore 0.8314696*bore   0.3826834*bore 0.9238795*bore   0.1950903*bore 0.9807853*bore
+     0 1*bore   -0.1950903*bore 0.9807853*bore   -0.3826834*bore 0.9238795*bore   -0.5555702*bore 0.8314696*bore
+     -0.7071068*bore 0.7071068*bore   -0.8314696*bore 0.5555702*bore   -0.9238795*bore 0.3826834*bore   -0.9807853*bore 0.1950903*bore
+     -1*bore 0   -0.9807853*bore -0.1950903*bore   -0.9238795*bore -0.3826834*bore   -0.8314696*bore -0.5555702*bore
+     -0.7071068*bore -0.7071068*bore   -0.5555702*bore -0.8314696*bore   -0.3826834*bore -0.9238795*bore   -0.1950903*bore -0.9807853*bore
+     0 -1*bore   0.1950903*bore -0.9807853*bore   0.3826834*bore -0.9238795*bore   0.5555702*bore -0.8314696*bore
+     0.7071068*bore -0.7071068*bore   0.8314696*bore -0.5555702*bore   0.9238795*bore -0.3826834*bore   0.9807853*bore -0.1950903*bore
+   )
+   # z = 20 mm
+   section(20 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     0.6666667*slope+1*rx8 0   0.6666667*slope+0.9807853*rx8 0.1950903*bore   0.6666667*slope+0.9238795*rx8 0.3826834*bore   0.6666667*slope+0.8314696*rx8 0.5555702*bore
+     0.6666667*slope+0.7071068*rx8 0.7071068*bore   0.6666667*slope+0.5555702*rx8 0.8314696*bore   0.6666667*slope+0.3826834*rx8 0.9238795*bore   0.6666667*slope+0.1950903*rx8 0.9807853*bore
+     0.6666667*slope+0 1*bore   0.6666667*slope-0.1950903*rx8 0.9807853*bore   0.6666667*slope-0.3826834*rx8 0.9238795*bore   0.6666667*slope-0.5555702*rx8 0.8314696*bore
+     0.6666667*slope-0.7071068*rx8 0.7071068*bore   0.6666667*slope-0.8314696*rx8 0.5555702*bore   0.6666667*slope-0.9238795*rx8 0.3826834*bore   0.6666667*slope-0.9807853*rx8 0.1950903*bore
+     0.6666667*slope-1*rx8 0   0.6666667*slope-0.9807853*rx8 -0.1950903*bore   0.6666667*slope-0.9238795*rx8 -0.3826834*bore   0.6666667*slope-0.8314696*rx8 -0.5555702*bore
+     0.6666667*slope-0.7071068*rx8 -0.7071068*bore   0.6666667*slope-0.5555702*rx8 -0.8314696*bore   0.6666667*slope-0.3826834*rx8 -0.9238795*bore   0.6666667*slope-0.1950903*rx8 -0.9807853*bore
+     0.6666667*slope+0 -1*bore   0.6666667*slope+0.1950903*rx8 -0.9807853*bore   0.6666667*slope+0.3826834*rx8 -0.9238795*bore   0.6666667*slope+0.5555702*rx8 -0.8314696*bore
+     0.6666667*slope+0.7071068*rx8 -0.7071068*bore   0.6666667*slope+0.8314696*rx8 -0.5555702*bore   0.6666667*slope+0.9238795*rx8 -0.3826834*bore   0.6666667*slope+0.9807853*rx8 -0.1950903*bore
+   )
+   # z = 28 mm
+   section(28 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     2.6666667*slope+1*rx16 0   2.6666667*slope+0.9807853*rx16 0.1950903*bore   2.6666667*slope+0.9238795*rx16 0.3826834*bore   2.6666667*slope+0.8314696*rx16 0.5555702*bore
+     2.6666667*slope+0.7071068*rx16 0.7071068*bore   2.6666667*slope+0.5555702*rx16 0.8314696*bore   2.6666667*slope+0.3826834*rx16 0.9238795*bore   2.6666667*slope+0.1950903*rx16 0.9807853*bore
+     2.6666667*slope+0 1*bore   2.6666667*slope-0.1950903*rx16 0.9807853*bore   2.6666667*slope-0.3826834*rx16 0.9238795*bore   2.6666667*slope-0.5555702*rx16 0.8314696*bore
+     2.6666667*slope-0.7071068*rx16 0.7071068*bore   2.6666667*slope-0.8314696*rx16 0.5555702*bore   2.6666667*slope-0.9238795*rx16 0.3826834*bore   2.6666667*slope-0.9807853*rx16 0.1950903*bore
+     2.6666667*slope-1*rx16 0   2.6666667*slope-0.9807853*rx16 -0.1950903*bore   2.6666667*slope-0.9238795*rx16 -0.3826834*bore   2.6666667*slope-0.8314696*rx16 -0.5555702*bore
+     2.6666667*slope-0.7071068*rx16 -0.7071068*bore   2.6666667*slope-0.5555702*rx16 -0.8314696*bore   2.6666667*slope-0.3826834*rx16 -0.9238795*bore   2.6666667*slope-0.1950903*rx16 -0.9807853*bore
+     2.6666667*slope+0 -1*bore   2.6666667*slope+0.1950903*rx16 -0.9807853*bore   2.6666667*slope+0.3826834*rx16 -0.9238795*bore   2.6666667*slope+0.5555702*rx16 -0.8314696*bore
+     2.6666667*slope+0.7071068*rx16 -0.7071068*bore   2.6666667*slope+0.8314696*rx16 -0.5555702*bore   2.6666667*slope+0.9238795*rx16 -0.3826834*bore   2.6666667*slope+0.9807853*rx16 -0.1950903*bore
+   )
+   # z = 36 mm
+   section(36 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     6*slope+1*rx24 0   6*slope+0.9807853*rx24 0.1950903*bore   6*slope+0.9238795*rx24 0.3826834*bore   6*slope+0.8314696*rx24 0.5555702*bore
+     6*slope+0.7071068*rx24 0.7071068*bore   6*slope+0.5555702*rx24 0.8314696*bore   6*slope+0.3826834*rx24 0.9238795*bore   6*slope+0.1950903*rx24 0.9807853*bore
+     6*slope+0 1*bore   6*slope-0.1950903*rx24 0.9807853*bore   6*slope-0.3826834*rx24 0.9238795*bore   6*slope-0.5555702*rx24 0.8314696*bore
+     6*slope-0.7071068*rx24 0.7071068*bore   6*slope-0.8314696*rx24 0.5555702*bore   6*slope-0.9238795*rx24 0.3826834*bore   6*slope-0.9807853*rx24 0.1950903*bore
+     6*slope-1*rx24 0   6*slope-0.9807853*rx24 -0.1950903*bore   6*slope-0.9238795*rx24 -0.3826834*bore   6*slope-0.8314696*rx24 -0.5555702*bore
+     6*slope-0.7071068*rx24 -0.7071068*bore   6*slope-0.5555702*rx24 -0.8314696*bore   6*slope-0.3826834*rx24 -0.9238795*bore   6*slope-0.1950903*rx24 -0.9807853*bore
+     6*slope+0 -1*bore   6*slope+0.1950903*rx24 -0.9807853*bore   6*slope+0.3826834*rx24 -0.9238795*bore   6*slope+0.5555702*rx24 -0.8314696*bore
+     6*slope+0.7071068*rx24 -0.7071068*bore   6*slope+0.8314696*rx24 -0.5555702*bore   6*slope+0.9238795*rx24 -0.3826834*bore   6*slope+0.9807853*rx24 -0.1950903*bore
+   )
+   # z = 44 mm
+   section(44 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     10.6666667*slope+1*rx32 0   10.6666667*slope+0.9807853*rx32 0.1950903*bore   10.6666667*slope+0.9238795*rx32 0.3826834*bore   10.6666667*slope+0.8314696*rx32 0.5555702*bore
+     10.6666667*slope+0.7071068*rx32 0.7071068*bore   10.6666667*slope+0.5555702*rx32 0.8314696*bore   10.6666667*slope+0.3826834*rx32 0.9238795*bore   10.6666667*slope+0.1950903*rx32 0.9807853*bore
+     10.6666667*slope+0 1*bore   10.6666667*slope-0.1950903*rx32 0.9807853*bore   10.6666667*slope-0.3826834*rx32 0.9238795*bore   10.6666667*slope-0.5555702*rx32 0.8314696*bore
+     10.6666667*slope-0.7071068*rx32 0.7071068*bore   10.6666667*slope-0.8314696*rx32 0.5555702*bore   10.6666667*slope-0.9238795*rx32 0.3826834*bore   10.6666667*slope-0.9807853*rx32 0.1950903*bore
+     10.6666667*slope-1*rx32 0   10.6666667*slope-0.9807853*rx32 -0.1950903*bore   10.6666667*slope-0.9238795*rx32 -0.3826834*bore   10.6666667*slope-0.8314696*rx32 -0.5555702*bore
+     10.6666667*slope-0.7071068*rx32 -0.7071068*bore   10.6666667*slope-0.5555702*rx32 -0.8314696*bore   10.6666667*slope-0.3826834*rx32 -0.9238795*bore   10.6666667*slope-0.1950903*rx32 -0.9807853*bore
+     10.6666667*slope+0 -1*bore   10.6666667*slope+0.1950903*rx32 -0.9807853*bore   10.6666667*slope+0.3826834*rx32 -0.9238795*bore   10.6666667*slope+0.5555702*rx32 -0.8314696*bore
+     10.6666667*slope+0.7071068*rx32 -0.7071068*bore   10.6666667*slope+0.8314696*rx32 -0.5555702*bore   10.6666667*slope+0.9238795*rx32 -0.3826834*bore   10.6666667*slope+0.9807853*rx32 -0.1950903*bore
+   )
+   # z = 52 mm
+   section(52 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     16.6666667*slope+1*rx40 0   16.6666667*slope+0.9807853*rx40 0.1950903*bore   16.6666667*slope+0.9238795*rx40 0.3826834*bore   16.6666667*slope+0.8314696*rx40 0.5555702*bore
+     16.6666667*slope+0.7071068*rx40 0.7071068*bore   16.6666667*slope+0.5555702*rx40 0.8314696*bore   16.6666667*slope+0.3826834*rx40 0.9238795*bore   16.6666667*slope+0.1950903*rx40 0.9807853*bore
+     16.6666667*slope+0 1*bore   16.6666667*slope-0.1950903*rx40 0.9807853*bore   16.6666667*slope-0.3826834*rx40 0.9238795*bore   16.6666667*slope-0.5555702*rx40 0.8314696*bore
+     16.6666667*slope-0.7071068*rx40 0.7071068*bore   16.6666667*slope-0.8314696*rx40 0.5555702*bore   16.6666667*slope-0.9238795*rx40 0.3826834*bore   16.6666667*slope-0.9807853*rx40 0.1950903*bore
+     16.6666667*slope-1*rx40 0   16.6666667*slope-0.9807853*rx40 -0.1950903*bore   16.6666667*slope-0.9238795*rx40 -0.3826834*bore   16.6666667*slope-0.8314696*rx40 -0.5555702*bore
+     16.6666667*slope-0.7071068*rx40 -0.7071068*bore   16.6666667*slope-0.5555702*rx40 -0.8314696*bore   16.6666667*slope-0.3826834*rx40 -0.9238795*bore   16.6666667*slope-0.1950903*rx40 -0.9807853*bore
+     16.6666667*slope+0 -1*bore   16.6666667*slope+0.1950903*rx40 -0.9807853*bore   16.6666667*slope+0.3826834*rx40 -0.9238795*bore   16.6666667*slope+0.5555702*rx40 -0.8314696*bore
+     16.6666667*slope+0.7071068*rx40 -0.7071068*bore   16.6666667*slope+0.8314696*rx40 -0.5555702*bore   16.6666667*slope+0.9238795*rx40 -0.3826834*bore   16.6666667*slope+0.9807853*rx40 -0.1950903*bore
+   )
+   # z = 60 mm
+   section(60 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     24*slope+1*rx48 0   24*slope+0.9807853*rx48 0.1950903*bore   24*slope+0.9238795*rx48 0.3826834*bore   24*slope+0.8314696*rx48 0.5555702*bore
+     24*slope+0.7071068*rx48 0.7071068*bore   24*slope+0.5555702*rx48 0.8314696*bore   24*slope+0.3826834*rx48 0.9238795*bore   24*slope+0.1950903*rx48 0.9807853*bore
+     24*slope+0 1*bore   24*slope-0.1950903*rx48 0.9807853*bore   24*slope-0.3826834*rx48 0.9238795*bore   24*slope-0.5555702*rx48 0.8314696*bore
+     24*slope-0.7071068*rx48 0.7071068*bore   24*slope-0.8314696*rx48 0.5555702*bore   24*slope-0.9238795*rx48 0.3826834*bore   24*slope-0.9807853*rx48 0.1950903*bore
+     24*slope-1*rx48 0   24*slope-0.9807853*rx48 -0.1950903*bore   24*slope-0.9238795*rx48 -0.3826834*bore   24*slope-0.8314696*rx48 -0.5555702*bore
+     24*slope-0.7071068*rx48 -0.7071068*bore   24*slope-0.5555702*rx48 -0.8314696*bore   24*slope-0.3826834*rx48 -0.9238795*bore   24*slope-0.1950903*rx48 -0.9807853*bore
+     24*slope+0 -1*bore   24*slope+0.1950903*rx48 -0.9807853*bore   24*slope+0.3826834*rx48 -0.9238795*bore   24*slope+0.5555702*rx48 -0.8314696*bore
+     24*slope+0.7071068*rx48 -0.7071068*bore   24*slope+0.8314696*rx48 -0.5555702*bore   24*slope+0.9238795*rx48 -0.3826834*bore   24*slope+0.9807853*rx48 -0.1950903*bore
+   )
+   # z = 72 mm
+   section(72 32
+     1*outside 0   0.9807853*outside 0.1950903*outside   0.9238795*outside 0.3826834*outside   0.8314696*outside 0.5555702*outside
+     0.7071068*outside 0.7071068*outside   0.5555702*outside 0.8314696*outside   0.3826834*outside 0.9238795*outside   0.1950903*outside 0.9807853*outside
+     0 1*outside   -0.1950903*outside 0.9807853*outside   -0.3826834*outside 0.9238795*outside   -0.5555702*outside 0.8314696*outside
+     -0.7071068*outside 0.7071068*outside   -0.8314696*outside 0.5555702*outside   -0.9238795*outside 0.3826834*outside   -0.9807853*outside 0.1950903*outside
+     -1*outside 0   -0.9807853*outside -0.1950903*outside   -0.9238795*outside -0.3826834*outside   -0.8314696*outside -0.5555702*outside
+     -0.7071068*outside -0.7071068*outside   -0.5555702*outside -0.8314696*outside   -0.3826834*outside -0.9238795*outside   -0.1950903*outside -0.9807853*outside
+     0 -1*outside   0.1950903*outside -0.9807853*outside   0.3826834*outside -0.9238795*outside   0.5555702*outside -0.8314696*outside
+     0.7071068*outside -0.7071068*outside   0.8314696*outside -0.5555702*outside   0.9238795*outside -0.3826834*outside   0.9807853*outside -0.1950903*outside
+     36*slope+1*rx48 0   36*slope+0.9807853*rx48 0.1950903*bore   36*slope+0.9238795*rx48 0.3826834*bore   36*slope+0.8314696*rx48 0.5555702*bore
+     36*slope+0.7071068*rx48 0.7071068*bore   36*slope+0.5555702*rx48 0.8314696*bore   36*slope+0.3826834*rx48 0.9238795*bore   36*slope+0.1950903*rx48 0.9807853*bore
+     36*slope+0 1*bore   36*slope-0.1950903*rx48 0.9807853*bore   36*slope-0.3826834*rx48 0.9238795*bore   36*slope-0.5555702*rx48 0.8314696*bore
+     36*slope-0.7071068*rx48 0.7071068*bore   36*slope-0.8314696*rx48 0.5555702*bore   36*slope-0.9238795*rx48 0.3826834*bore   36*slope-0.9807853*rx48 0.1950903*bore
+     36*slope-1*rx48 0   36*slope-0.9807853*rx48 -0.1950903*bore   36*slope-0.9238795*rx48 -0.3826834*bore   36*slope-0.8314696*rx48 -0.5555702*bore
+     36*slope-0.7071068*rx48 -0.7071068*bore   36*slope-0.5555702*rx48 -0.8314696*bore   36*slope-0.3826834*rx48 -0.9238795*bore   36*slope-0.1950903*rx48 -0.9807853*bore
+     36*slope+0 -1*bore   36*slope+0.1950903*rx48 -0.9807853*bore   36*slope+0.3826834*rx48 -0.9238795*bore   36*slope+0.5555702*rx48 -0.8314696*bore
+     36*slope+0.7071068*rx48 -0.7071068*bore   36*slope+0.8314696*rx48 -0.5555702*bore   36*slope+0.9238795*rx48 -0.3826834*bore   36*slope+0.9807853*rx48 -0.1950903*bore
+   )
+   cap(all)) material(bluepaintmatte) 1 0.27) ]

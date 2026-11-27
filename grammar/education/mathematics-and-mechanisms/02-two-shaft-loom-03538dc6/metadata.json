@@ -1,0 +1,61 @@
+{
+  "title": "02 two shaft loom",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/02-two-shaft-loom-03538dc6",
+  "source_file": "02-two-shaft-loom.p3d",
+  "git_blob_sha": "03538dc6418d86da98b774e141e9e9c88564b9e6",
+  "bytes": 9513,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "02-two-shaft-loom.p3d"
+  ],
+  "description": "Two-shaft study loom | two shafts, plain-weave swatch | Y up, front +Z",
+  "features": [
+    "Cube",
+    "Cylinder",
+    "Sphere",
+    "TaperedSweep",
+    "AxialProfile"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Two-shaft study loom | two shafts, plain-weave swatch | Y up, front +Z · Set the beat period in seconds in Start. Try t=0, 1, 2, 3 with period 4. · Front cloth is shown as individual yarns at a deliberately enlarged gauge. · Cylinder is based at local y=0. Rotate to run beam axes along X. · Each heddle has separate upper and lower straight lengths and a closed eye. · Each pair enters opposite sheds. cos(pi*i) yields exact alternating parity. · Half-turn at each selvedge joins adjacent picks; colour transitions represent joined yarns. · Loft the boat from five hexagonal transverse sections. The bobbin is visible above the hull."
+    ],
+    [
+      "Named objects",
+      "Loom, floor, OakFrame, BeamSet, FrontReed, HarnessA, HarnessB, WarpEnds, WeftPicks, BoatShuttle, Treadles"
+    ],
+    [
+      "Object classes",
+      "TextileMachine, LoomFrame, WarpStorage, Beater, HeddleFrame, LongitudinalYarn, TransverseYarn, Shuttle, FootControl"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Cylinder, Sphere, TaperedSweep, AxialProfile"
+    ],
+    [
+      "Material identifiers",
+      "amberwarmwood, charcoalroughmetal, goldpolishedmetal, beigebrownpinewood, beigegreywhitemattepolyester, silverbluepolishedmetal, redmattepaint, bluepaintmatte"
+    ],
+    [
+      "Production rules",
+      "Start, Loom, Oak, Iron, Pin, SideFrame, Crossrails, Beams, Reed, Shaft, WarpYarn, Pick, EdgeTurn, BluePick, RustPick, Shuttle, Treadle (17 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "152"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Pro Gen3D Spur Gear Pair",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-spur-gear-pair-7191aa76",
+  "source_file": "ProGen3D_Spur_Gear_Pair.p3d",
+  "git_blob_sha": "7191aa76f9e6d7acdd57a08a93d7d87cc4a5798a",
+  "bytes": 2568,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_Spur_Gear_Pair.p3d"
+  ],
+  "description": "ProGen3D | 20:40 external involute spur gears",
+  "features": [
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ProGen3D | 20:40 external involute spur gears · Open this file in the native grammar editor. Play or scrub 0 to 4 seconds. · Start sets pinion rpm (signed). Each scene unit represents 10 mm. · Module 2 mm, pressure angle 20 deg, face 8 mm, zero profile shift. · Closed tooth sectors tile each wheel. Straight root extensions approximate · the region below the base circle. The shaft angles are prescribed. · Bright radial mark on each front face makes the full shaft revolution visible."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude"
+    ],
+    [
+      "Material identifiers",
+      "warmwhitematteplaster, copperpolishedmetal, bluepaintmatte"
+    ],
+    [
+      "Production rules",
+      "Start, Drive, Assembly, Pinion, Wheel, Marker, PinionSector, WheelSector (8 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "47"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

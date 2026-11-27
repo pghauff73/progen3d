@@ -1,0 +1,63 @@
+{
+  "title": "07 three cross wheel",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/07-three-cross-wheel-c4501e1a",
+  "source_file": "07-three-cross-wheel.p3d",
+  "git_blob_sha": "c4501e1a9c1816df991834634ad3a19341280ddf",
+  "bytes": 4164,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "07-three-cross-wheel.p3d"
+  ],
+  "description": "Rear wheel on a truing stand. Axis Z, positive Y up. Dimensions are display units.",
+  "features": [
+    "TaperedSweep",
+    "SweepDisk",
+    "Sphere",
+    "Revolve",
+    "Cube",
+    "Cylinder",
+    "SweepProfile"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Rear wheel on a truing stand. Axis Z, positive Y up. Dimensions are display units. · Wheel(crosses revolutionSeconds). Try 0, 1, 2 or 3 crossings, with a positive period. · Two interleaved 18-hole flanges. Every other spoke leads; its neighbour trails."
+    ],
+    [
+      "Named objects",
+      "WheelExhibit, TruingStand, RimAndTyre, Hub, WideFlange, NarrowFlange"
+    ],
+    [
+      "Object classes",
+      "CycleExhibit, BenchFixture, WheelRim, RearHub, SpokeSet"
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep, SweepDisk, Sphere, Revolve, Cube, Cylinder, SweepProfile"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, goldbrushedmetal, copperpolishedmetal, charcoalroughrubber, ambermatterubber, bluepaintmatte, bluegreymattepaint, charcoalmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Wheel, Spoke, SpokeEnds, Hoop, Stripe, Lug, Valve, HubShell, Stand, Arm (11 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "63"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

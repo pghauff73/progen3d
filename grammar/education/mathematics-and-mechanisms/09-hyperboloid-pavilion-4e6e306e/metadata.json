@@ -1,0 +1,63 @@
+{
+  "title": "09 hyperboloid pavilion",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/09-hyperboloid-pavilion-4e6e306e",
+  "source_file": "09-hyperboloid-pavilion.p3d",
+  "git_blob_sha": "4e6e306e1caeda77b3766b54af19dac18801d5a2",
+  "bytes": 4045,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "09-hyperboloid-pavilion.p3d"
+  ],
+  "description": "Ruled-surface belvedere. The shell consists of two families of straight members.",
+  "features": [
+    "TaperedSweep",
+    "Revolve",
+    "Sphere",
+    "Cylinder",
+    "Cube",
+    "Extrude",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Ruled-surface belvedere. The shell consists of two families of straight members. · Pavilion(barsPerFamily twistDegrees). Try 18 100, then 18 60. · From base to top one family advances by twist, the other retreats by twist. · A third collinear section at the actual waist makes its centre independently measurable. · Each step is a wedge extruded upwards. The uppermost tread lands on the inner deck edge."
+    ],
+    [
+      "Named objects",
+      "Belvedere, Foundations, Ascending, Descending, Hoops, Stair, Lookout"
+    ],
+    [
+      "Object classes",
+      "ObservationPavilion, Foundation, StraightBars, RingBeams, HelicalStair, ObservationDeck"
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep, Revolve, Sphere, Cylinder, Cube, Extrude, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, copperpolishedmetal, goldbrushedmetal, offwhiteceramic, amberwarmwood, charcoalmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Pavilion, Bar, Level, Belt, Foundation, Anchor, Flight, Tread, RailLink, Gallery (11 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "74"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

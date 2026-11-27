@@ -1,0 +1,72 @@
+# Tesseract in four spatial coordinates, projected to a 3D scene.
+# t is elapsed time. w is an independent spatial coordinate.
+# Set each speed to zero to hold its plane angle. Angles are in radians.
+# The half-side in 4D is 1. Keep the 4D eye distance above sqrt(2).
+# xyz radius and w radius set the display thickness of the projected edges.
+Start -> Hypercube(4.2 0.017 0.029 0.32+0.65*t 0.23-0.31*t)
+
+Hypercube(eye xyzRadius wRadius angleXW angleYZ) ->
+    Frame(eye xyzRadius wRadius cos(angleXW) sin(angleXW) cos(angleYZ) sin(angleYZ))
+
+Frame(eye xyzRadius wRadius cXW sXW cYZ sYZ) ->
+
+    # Eight edges vary only in x.
+    ProjectEdge(-1 -1 -1 -1 1 -1 -1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 -1 1 1 -1 -1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 1 -1 1 -1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 1 1 1 -1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 -1 -1 1 1 -1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 -1 1 1 1 -1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 1 -1 1 1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 1 1 1 1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+
+    # Eight edges vary only in y.
+    ProjectEdge(-1 -1 -1 -1 -1 1 -1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 -1 1 -1 1 -1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 1 -1 -1 1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 1 1 -1 1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 -1 -1 1 1 -1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 -1 1 1 1 -1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 1 -1 1 1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 1 1 1 1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+
+    # Eight edges vary only in z.
+    ProjectEdge(-1 -1 -1 -1 -1 -1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 -1 1 -1 -1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 -1 -1 -1 1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 -1 1 -1 1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 -1 -1 1 -1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 -1 1 1 -1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 1 -1 -1 1 1 1 -1 eye xyzRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 1 -1 1 1 1 1 1 eye xyzRadius cXW sXW cYZ sYZ)
+
+    # Eight edges vary only in w.
+    ProjectEdge(-1 -1 -1 -1 -1 -1 -1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 -1 1 -1 -1 -1 1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 -1 -1 -1 1 -1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(-1 1 1 -1 -1 1 1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 -1 -1 1 -1 -1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 -1 1 -1 1 -1 1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 1 -1 -1 1 1 -1 1 eye wRadius cXW sXW cYZ sYZ)
+    ProjectEdge(1 1 1 -1 1 1 1 1 eye wRadius cXW sXW cYZ sYZ)
+
+# Rotate each endpoint in two independent planes.
+ProjectEdge(ax ay az aw bx by bz bw eye radius cXW sXW cYZ sYZ) ->
+    ViewEdge(
+        cXW*ax-sXW*aw cYZ*ay-sYZ*az sYZ*ay+cYZ*az sXW*ax+cXW*aw
+        cXW*bx-sXW*bw cYZ*by-sYZ*bz sYZ*by+cYZ*bz sXW*bx+cXW*bw
+        eye radius
+    )
+
+# Perspective from (0, 0, 0, eye) onto the w=0 plane.
+ViewEdge(ax ay az aw bx by bz bw eye radius) ->
+    DrawEdge(ax ay az eye/(eye-aw) bx by bz eye/(eye-bw) radius)
+
+DrawEdge(ax ay az scaleA bx by bz scaleB radius) ->
+    !I(TaperedSweep(
+        samples(
+            ax*scaleA ay*scaleA az*scaleA radius
+            bx*scaleB by*scaleB bz*scaleB radius
+        )
+        up(0 1 0) segments(10) cap(all)
+    ) material(galvanizedsteel) 1 0.5)

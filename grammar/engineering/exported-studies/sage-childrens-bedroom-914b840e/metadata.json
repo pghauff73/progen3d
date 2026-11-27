@@ -1,0 +1,60 @@
+{
+  "title": "Sage Childrens Bedroom",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/sage-childrens-bedroom-914b840e",
+  "source_file": "Sage_Childrens_Bedroom.p3d",
+  "git_blob_sha": "914b840e48793636c1daac4f56bc59c63e4cfae6",
+  "bytes": 18986,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Sage_Childrens_Bedroom.p3d"
+  ],
+  "description": "Sage children's bedroom",
+  "features": [
+    "Cube",
+    "Sphere",
+    "Cylinder",
+    "AxialProfile"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Sage children's bedroom · Reconstructed from the final elevated concept image. Dimensions are inferred, in metres. · Local axes: +X toward the window, +Y up, +Z toward the entrance. · Bedroom(0) opens two walls for inspection. Bedroom(1) restores both walls and the door. · The north wall, east window, and furniture positions are shared by both modes. · Architecture. One opening in the window wall and a separate entrance wall. · Shallow silhouettes suggest the tree beyond the glass. · Oak bed, rounded headboard, padded mattress and patterned textiles. · Three bays by two rows, complete with baskets, books and the top display. · Window-side desk. Positive local Z is the chair-facing side."
+    ],
+    [
+      "Named objects",
+      "BedroomScene, SingleBed, LowBookcase, WindowDesk, BlueSpindleChair, RoundJuteRug, SageToyChest"
+    ],
+    [
+      "Object classes",
+      "Room, Furniture, Furnishing"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, Cylinder, AxialProfile"
+    ],
+    [
+      "Material identifiers",
+      "bluewhiteglossysmoothglass, whitebeigeblueemissivepaint, greenlimebeigemattepaint, offwhiteceramic, goldenoakwood, orangeroughceramic, goldorangemattepaint, sagegreenmattepaint, greybluetealmattepaint, palegreenglossyglass, beigebrownroughfabric, goldbeigeroughfabric, beigeoakwood, warmwhitematteplaster, whitebeigemattefabric, offwhitemattefabric, sagegreenmattefabric, olivegreenmattefabric, orangebrownmattefabric, darkbrownmattefabric, goldbrushedmetal, darkbrownmattepaint, olivegreenmattepaint, bluepaintmatte"
+    ],
+    [
+      "Production rules",
+      "Start, Bedroom, Shell, WindowDaylight, WindowWall, PictureWindow, OutsideView, OutsideLeaves, LightLeaf, EntranceWalls, WhiteDoor, Bed, BedLeg, Headboard, Fox, Bookcase, Books, Basket, Bunny, WoodenHouse (68 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "463"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

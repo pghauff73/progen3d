@@ -1,0 +1,41 @@
+# Truchet tracing board. Edit Board(columns rows patternDivisor).
+# Use positive integer dimensions and divisor. Illustration: 8 x 6, divisor 3.
+Start -> Board(8 6 3)
+
+Board(w h k) ->
+ [ Object(id(Cabinet) class(FramedBoard) taxonomy(Study Geometry Tiling) layer(Equipment))
+   [ [ Case(w h) ]
+     [ Object(id(Mosaic) class(TurnTiles) taxonomy(Study Surface Tiles) layer(Equipment))
+       [ T((1-w)/2 0.20 (1-h)/2) Rows(h w k) ] ]
+     [ Object(id(Ports) class(BoundaryMarks) taxonomy(Study Edge Terminals) layer(Equipment))
+       [ Edge(w h) ] [ A(180 1) Edge(w h) ]
+       [ A(90 1) Edge(h w) ] [ A(-90 1) Edge(h w) ] ] ] ]
+
+Case(w h) ->
+ [ T(0 0.07 0) S(w+0.77 0.14 h+0.77) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.156 0) S(w+0.65 0.032 h+0.65) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.18 0) S(w+0.61 0.028 h+0.61) !I(Cube material(charcoalmattemetal) 1 0.34) ]
+ [ Corner(w h) ] [ A(180 1) Corner(w h) ]
+ [ A(90 1) Corner(h w) ] [ A(-90 1) Corner(h w) ]
+Corner(w h) ->
+ [ T(w/2+0.18 0.194 h/2+0.18)
+   [ S(0.14 0.026 0.14) !I(Cylinder material(copperpolishedmetal) 1 0.23) ]
+   [ A(40 1) T(0 0.027 0) S(0.079 0.004 0.014) !I(Cube material(charcoalmattemetal) 1 0.3) ] ]
+
+Rows(n w k) n ->
+ [ T(0 0 Rows_count) Columns(w Rows_count k) ]
+Columns(n row k) n ->
+ [ T(Columns_count 0 0) Tile(90*wrap(Columns_count+row+floor(Columns_count*row/k),0,2)) ]
+Tile(turn) ->
+ [ T(0 0 0) S(0.986 0.042 0.986) !I(Cube material(offwhiteceramic) 1 0.34) ]
+ [ A(turn 1) [ CornerArc ] [ A(180 1) CornerArc ] ]
+CornerArc ->
+ [ T(-0.5 0.021 -0.5)
+   [ !I(Revolve(profile(Polygon 0.397 0 0.603 0 0.592 0.026 0.408 0.026) angle(0 90) segments(20)) material(bluegreymattepaint) 1 0.3) ]
+   [ !I(Revolve(profile(Polygon 0.483 0.026 0.517 0.026 0.513 0.036 0.487 0.036) angle(0 90) segments(20)) material(goldbrushedmetal) 1 0.23) ] ]
+
+Edge(n depth) n ->
+ [ T(Edge_count-(n-1)/2 0.194 depth/2)
+   [ T(0 0.027 0.084) S(0.16 0.054 0.168) !I(Cube material(bluegreymattepaint) 1 0.30) ]
+   [ T(0 0.058 0.084) S(0.026 0.008 0.168) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+   [ T(0 0.041 0.178) S(0.125 0.024 0.125) !I(Cylinder material(goldbrushedmetal) 1 0.24) ] ]

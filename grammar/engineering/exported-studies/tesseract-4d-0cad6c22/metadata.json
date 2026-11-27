@@ -1,0 +1,57 @@
+{
+  "title": "Tesseract 4D",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/tesseract-4d-0cad6c22",
+  "source_file": "Tesseract_4D.p3d",
+  "git_blob_sha": "0cad6c224c963173de43b7b6f850c33ca58266a0",
+  "bytes": 3590,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Tesseract_4D.p3d"
+  ],
+  "description": "Tesseract in four spatial coordinates, projected to a 3D scene.",
+  "features": [
+    "TaperedSweep"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Tesseract in four spatial coordinates, projected to a 3D scene. · t is elapsed time. w is an independent spatial coordinate. · Set each speed to zero to hold its plane angle. Angles are in radians. · The half-side in 4D is 1. Keep the 4D eye distance above sqrt(2). · xyz radius and w radius set the display thickness of the projected edges. · Eight edges vary only in x. · Eight edges vary only in y. · Eight edges vary only in z. · Eight edges vary only in w. · Rotate each endpoint in two independent planes."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep"
+    ],
+    [
+      "Material identifiers",
+      "galvanizedsteel"
+    ],
+    [
+      "Production rules",
+      "Start, Hypercube, Frame, ProjectEdge, ViewEdge, DrawEdge (6 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "73"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

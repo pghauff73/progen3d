@@ -1,0 +1,62 @@
+{
+  "title": "06 sunflower capitulum",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/06-sunflower-capitulum-965eb282",
+  "source_file": "06-sunflower-capitulum.p3d",
+  "git_blob_sha": "965eb2822073140920694b16468ccbd320739c12",
+  "bytes": 5400,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "06-sunflower-capitulum.p3d"
+  ],
+  "description": "Sunflower head | botanical display model, Y up, display front +Z.",
+  "features": [
+    "TaperedSweep",
+    "LeafBlade",
+    "Sphere",
+    "PetalBlade",
+    "Cylinder",
+    "ShellLoft"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Sunflower head | botanical display model, Y up, display front +Z. · Specimen(count divergenceDegrees) controls disk florets; edit the second number to 135 for a comparison. · Square-root radius gives equal area per index on the projected disk. · Constant-radius test markers are unnecessary: the floret footprints carry the positions. · The corolla is a thin shell with a five-lobed lip and a through-opening."
+    ],
+    [
+      "Named objects",
+      "Sunflower, Stalk, Receptacle, Rays, InnerDisc, OuterDisc"
+    ],
+    [
+      "Object classes",
+      "FloweringSpecimen, Stem, FlowerHead, RayFlorets, DiscFlorets"
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep, LeafBlade, Sphere, PetalBlade, Cylinder, ShellLoft"
+    ],
+    [
+      "Material identifiers",
+      "olivegreenmattepaint, sagegreenmattepaint, darkbrownmattepaint, goldorangemattepaint, ambermattepaint, orangebrownmattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Specimen, Stem, Foliage, FoliageLeaf, Cushion, PlaceFloret, Floret, Corolla (9 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "87"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

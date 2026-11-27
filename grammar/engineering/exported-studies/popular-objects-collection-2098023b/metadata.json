@@ -1,0 +1,61 @@
+{
+  "title": "Popular Objects Collection",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/popular-objects-collection-2098023b",
+  "source_file": "Popular_Objects_Collection.p3d",
+  "git_blob_sha": "2098023bfde8fbe1524ccdcc13b22072775f80cf",
+  "bytes": 36499,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Popular_Objects_Collection.p3d"
+  ],
+  "description": "Popular objects collection. Six native procedural studies.",
+  "features": [
+    "Cube",
+    "AxialProfile",
+    "CubeY",
+    "Cylinder",
+    "TaperedSweep"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Popular objects collection. Six native procedural studies. · The layout scales the objects for viewing. Open the individual files for true metre dimensions. · 20 mm XYZ calibration cube, dimensions in metres. · Reference geometry: Innerscene's independently authored CC0 20 mm XYZ cube. · https://www.innerscene.com/tools/library/3d-parts/20-mm-xyz-calibration-cube-eb88de5c · The block-letter faces here are rebuilt with strips around real 0.8 mm recesses. · On this Y-up model, the letter Z is on top to match the conventional print axes. · Cali Cat, from Dezign's original calibration figure. · Original page: https://www.thingiverse.com/thing:1545913 · Reference dimensions: 20 mm body width/depth, 35 mm total height, 5 mm tail section."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, AxialProfile, CubeY, Cylinder, TaperedSweep"
+    ],
+    [
+      "Material identifiers",
+      "tealmatteplastic, darkbluegreenmatteplastic, orangeyellowmatteplastic, tealbluematteplastic, goldorangeceramic, charcoalbluematteplastic, bluegreymatteplastic, goldorangemetal, lightbluesmoothmetal, charcoalbluemattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Collection, Cube_Start, Cube_CubeModel, Cube_Body, Cube_XSkin, Cube_YSkin, Cube_ZSkin, Cat_Start, Cat_Cat, Cat_Body, Cat_Head, Cat_AngularHead, Cat_EarPair, Cat_Ear, Cat_Tail, Cat_TailRise, Phone_Start, Phone_PhoneStand, Phone_BackSupport (37 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "572"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

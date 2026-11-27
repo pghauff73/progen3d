@@ -1,0 +1,161 @@
+# Orchid shadehouse | open-front exhibition section | native ProGen3D, Y up
+# Bay(n pitch) places the roof stations. ShadeFins covers the rear half of the roof.
+# Edit the five OrchidPot(scale yaw) calls for the specimen groups or change the editor seed.
+Start -> Shadehouse DisplayLighting
+
+Shadehouse ->
+ [ Object(id(Shadehouse) class(PlantExhibit) taxonomy(Building Horticulture Display Shadehouse) layer(Structure))
+   [ Interface(id(slabBearing) type(Support) origin(0 0 0) normal(0 -1 0) tangent(1 0 0) region(Point) tolerance(0.005))
+     [ Object(id(Terrace) class(TiledFloor) taxonomy(Building Ground Paving) layer(Terrain)) [ Paving ] ]
+     [ Object(id(Arcade) class(StructuralFrame) taxonomy(Building Frame Arches) layer(Structure)) [ Bay(5 1.48) LongRails ShadeFins(10) LightRail ] ]
+     [ Object(id(MistLine) class(IrrigationLine) taxonomy(Building Services Irrigation) layer(Plumbing)) [
+       Interface(id(waterFeed) type(ServiceConnection) origin(-3.00 0.19 -1.26) normal(0 -1 0) tangent(1 0 0) region(Point) tolerance(0.005))
+       Manifold Nozzles(7) ] ]
+     [ Object(id(LampWest) class(DisplayLuminaire) taxonomy(Building Services Lighting LinearLuminaire) layer(Electrical)) [
+       Interface(id(ceilingMate) type(Mate) origin(-1.5 2.756 -0.85) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+       [ T(-1.5 2.66 -0.85) LightBar ] ] ]
+     [ Object(id(LampEast) class(DisplayLuminaire) taxonomy(Building Services Lighting LinearLuminaire) layer(Electrical)) [
+       Interface(id(ceilingMate) type(Mate) origin(1.5 2.756 -0.85) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+       [ T(1.5 2.66 -0.85) LightBar ] ] ]
+     [ Object(id(Staging) class(SlattedBench) taxonomy(Furniture Bench PlantDisplay) layer(Furniture)) [ Bench ] ]
+     [ Object(id(SpecimenWest) class(OrchidDisplay) taxonomy(Plant Orchid Exhibit) layer(Terrain)) [ T(-2.42 0.92 0.08) OrchidPot(0.97 17) ] ]
+     [ Object(id(SpecimenAmber) class(OrchidDisplay) taxonomy(Plant Orchid Exhibit) layer(Terrain)) [ T(-1.26 0.92 -0.05) OrchidPot(0.76 -7) ] ]
+     [ Object(id(SpecimenCrown) class(OrchidDisplay) taxonomy(Plant Orchid Exhibit) layer(Terrain)) [ T(-0.06 0.92 0.03) OrchidPot(1.12 3) ] ]
+     [ Object(id(SpecimenIvory) class(OrchidDisplay) taxonomy(Plant Orchid Exhibit) layer(Terrain)) [ T(1.18 0.92 -0.02) OrchidPot(0.86 -16) ] ]
+     [ Object(id(SpecimenEast) class(OrchidDisplay) taxonomy(Plant Orchid Exhibit) layer(Terrain)) [ T(2.42 0.92 0.05) OrchidPot(0.95 9) ] ]
+     Connect(id(westFixtureMount) source(LampWest ceilingMate) target(Arcade westMate) type(FixedTo) clearance(0 0 0.0003) insertionDepth(0))
+     Connect(id(eastFixtureMount) source(LampEast ceilingMate) target(Arcade eastMate) type(FixedTo) clearance(0 0 0.0003) insertionDepth(0))
+   ] ]
+Wood(x y z dx dy dz) -> [ T(x y z) S(dx dy dz) !I(Cube material(beigebrownpinewood) 1 0.30) ]
+Metal(x y z dx dy dz) -> [ T(x y z) S(dx dy dz) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+
+Paving ->
+ [ T(0 0.04 0) S(6.60 0.08 3.43) !I(Cube material(charcoalroughmetal) 1 0.50) ]
+ Courses(6)
+Courses(n) n -> [ T(0 0.095 -1.42+Courses_count*0.565) Tiles(10) ]
+Tiles(n) n -> [ T(-2.95+Tiles_count*0.656 0 0) S(0.646 0.055 0.554) !I(Cube material(warmwhitematteplaster) 1 0.5) ]
+
+# Five continuous arch ribs. At the eaves the tangent changes gradually into the roof.
+Bay(n pitch) n ->
+ [ T((Bay_count-(n-1)/2)*pitch 0 0) Arch Foot(-1.39) Foot(1.39) Gusset(-1) Gusset(1) ]
+Arch ->
+ !I(SweepProfile(profile(Rect 0.085 0.110)
+    path(0 0.13 -1.39   0 2.00 -1.39   0 2.24 -1.36   0 2.46 -1.25
+         0 2.67 -1.08   0 2.85 -0.86   0 2.98 -0.60   0 3.06 -0.31   0 3.09 0
+         0 3.06 0.31   0 2.98 0.60   0 2.85 0.86   0 2.67 1.08
+         0 2.46 1.25   0 2.24 1.36   0 2.00 1.39   0 0.13 1.39)
+    up(1 0 0) cap(all)) material(charcoalmattemetal) 1 0.32)
+Foot(z) ->
+ [ T(0 0.155 z) S(0.27 0.06 0.22) !I(Cube material(charcoalmattemetal) 1 0.35) ]
+ [ T(-0.091 0.185 z) S(0.035 0.027 0.035) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.22) ]
+ [ T(0.091 0.185 z) S(0.035 0.027 0.035) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.22) ]
+Gusset(side) ->
+ [ !I(TaperedSweep(samples(0 1.83 side*1.39 0.026 0 2.10 side*1.23 0.024 0 2.32 side*1.07 0.022 0 2.66 side*1.08 0.026) up(1 0 0) segments(10) cap(all)) material(sagegreenmattepaint) 1 0.28) ]
+LongRails ->
+ Metal(0 3.085 0 6.13 0.065 0.075) Metal(0 2.02 -1.39 6.13 0.085 0.075)
+ Metal(0 2.02 1.39 6.13 0.065 0.075) Metal(0 0.55 -1.39 6.13 0.055 0.065)
+# Sample one quadrant of an ellipse. Rotate each longitudinal blade to its local tangent.
+ShadeFins(n) n -> [ Louver(6+ShadeFins_count*78/(n-1)) ]
+Louver(a) ->
+ [ T(0 2.04+1.10*cos(radians(a)) -1.42*sin(radians(a))) A(0-a 0)
+   S(6.16 0.032 0.080) !I(Cube material(beigebrownpinewood) 1 0.26) ]
+
+Manifold ->
+ [ !I(SweepDisk(path(-3.00 0.19 -1.26  -3.00 2.31 -1.26  -2.98 2.38 -1.26  -2.91 2.43 -1.26  3.02 2.43 -1.26)
+      radius(0.027) radialSegments(12) up(0 0 1) cap(all)) material(copperpolishedmetal) 1 0.3) ]
+Nozzles(n) n ->
+ [ T(-2.70+Nozzles_count*0.90 2.43 -1.26)
+   [ T(0 -0.12 0) S(0.035 0.12 0.035) !I(Cylinder(segments(10 1)) material(copperpolishedmetal) 1 0.22) ]
+   [ T(0 -0.15 0) S(0.081 0.040 0.081) !I(Cylinder(segments(8 1)) material(goldbrushedmetal) 1 0.23) ] ]
+
+Bench ->
+ Deck(8) BenchBent(3) Metal(0 0.32 -0.34 5.97 0.082 0.06)
+ Metal(0 0.82 -0.34 5.97 0.095 0.065) Metal(0 0.82 0.39 5.97 0.095 0.065)
+Deck(n) n -> Wood(0 0.889 -0.49+0.15*Deck_count 6.08 0.062 0.135)
+BenchBent(n) n ->
+ [ T(-2.72+2.72*BenchBent_count 0 0)
+   Metal(0 0.48 -0.34 0.095 0.72 0.095) Metal(0 0.48 0.39 0.095 0.72 0.095)
+   Metal(0 0.82 0.03 0.13 0.08 1.13) ]
+
+# A section revolved about the Y axis contains the pot wall, lip and foot ring.
+OrchidPot(scale yaw) ->
+ [ S(scale scale scale) A(yaw 1)
+   PotBody Bark(13) Rosette(7)
+   R SpurAngle(-15 15)
+   [ A(SpurAngle 1) MainSpike ] ]
+PotBody ->
+ [ !I(Revolve(profile(Polygon 0.01 0.015 0.265 0.015 0.280 0.040 0.272 0.075
+      0.360 0.39 0.378 0.395 0.380 0.44 0.370 0.455 0.332 0.455
+      0.328 0.407 0.239 0.095 0.010 0.095) angle(0 360) segments(48)) material(orangeroughceramic) 1 0.23) ]
+ [ T(0 0.389 0) S(0.665 0.019 0.665) !I(Cylinder(segments(40 1)) material(darkbrownmattepaint) 1 0.25) ]
+Bark(n) n ->
+ [ R Rad(0.08 0.28) R Chip(0.041 0.085) A(Bark_count*137.50776 1)
+   T(Rad 0.414 0) A(19 2) S(Chip 0.029 0.044) !I(Cube material(darkbrownmattepaint) 1 0.22) ]
+Rosette(n) n ->
+ [ R Lean(52 76) R LeafLength(0.43 0.62) A(Rosette_count*137.50776 1)
+   T(0 0.42 0) A(Lean 0) Leaf(LeafLength) ]
+Leaf(h) ->
+ [ !I(LeafBlade(profile(Elliptic) length(h) width(0.185) curvature(0.12) camber(0.036) twist(13)
+      thickness(0.008) widthPower(0.82) segments(16 5)) material(olivegreenmattepaint) 1 0.3) ]
+ [ !I(TaperedSweep(samples(0 0 0.005 0.008  0 h*0.25 0.116 0.006  0 h*0.5 0.161 0.005
+      0 h*0.75 0.116 0.0035  0 h 0.005 0.002) up(1 0 0) segments(7) cap(all)) material(sagegreenmattepaint) 1 0.23) ]
+
+MainSpike ->
+ [ !I(TaperedSweep(samples(0 0.41 0 0.027  -0.055 0.60 -0.01 0.022  -0.085 0.85 0 0.019
+      -0.07 1.06 0.015 0.016  0.015 1.27 0.045 0.014  0.15 1.42 0.085 0.012
+      0.33 1.50 0.12 0.009   0.52 1.48 0.14 0.006) up(0 0 1) segments(12) cap(all)) material(olivegreenmattepaint) 1 0.25) ]
+ [ T(-0.07 1.06 0.015) Pedicel(-0.16 0.10 0.13) T(-0.16 0.10 0.13) A(-19 1) Bloom(0.85) ]
+ [ T(0.015 1.27 0.045) Pedicel(-0.04 0.10 0.14) T(-0.04 0.10 0.14) A(8 1) Bloom(1.0) ]
+ [ T(0.15 1.42 0.085) Pedicel(0.11 0.11 0.13) T(0.11 0.11 0.13) A(24 1) Bloom(0.93) ]
+ [ T(0.33 1.50 0.12) Pedicel(0.075 0.08 0.045) T(0.075 0.08 0.045) A(-27 2) Bud(0.12) ]
+ [ T(0.52 1.48 0.14) A(-66 2) Bud(0.095) ]
+Pedicel(x y z) ->
+ [ !I(TaperedSweep(samples(0 0 0 0.010 x*0.55 y*0.8 z*0.30 0.008 x y z 0.006)
+      up(0 0 1) segments(9) cap(all)) material(olivegreenmattepaint) 1 0.25) ]
+Bud(h) ->
+ [ S(h*0.66 h h*0.68) !I(Sphere(segments(16 8)) material(greenlimebeigemattepaint) 1 0.26) ]
+
+# Three outer sepals, two broad lateral petals and a lower, cupped lip.
+Bloom(size) ->
+ [ S(size size size)
+   [ Sepal(0) ] [ Sepal(126) ] [ Sepal(-126) ]
+   [ T(0 0 0.014) A(70 2) Petal ] [ T(0 0 0.014) A(-70 2) Petal ]
+   [ T(0 -0.013 0.05) A(180 2) A(29 0) Lip ]
+   [ T(0 0.026 0.065) S(0.049 0.082 0.064) !I(Sphere(segments(16 8)) material(goldorangemattepaint) 1 0.20) ]
+   [ T(0 0.054 0.093) S(0.032 0.024 0.026) !I(Sphere(segments(12 6)) material(warmwhitematteplaster) 1 0.2) ] ]
+Sepal(a) ->
+ [ A(a 2) !I(PetalBlade(profile(Lanceolate) length(0.198) width(0.078) curvature(-0.034) camber(0.014)
+      twist(6) thickness(0.005) widthPower(0.85) segments(18 6)) material(sagegreenmattepaint) 1 0.26) ]
+Petal ->
+ [ !I(PetalBlade(profile(Obovate) length(0.195) width(0.170) curvature(0.026) camber(0.015)
+      twist(5) thickness(0.006) widthPower(0.80) segments(26 10)) material(offwhiteceramic) 1 0.25) ]
+ [ !I(TaperedSweep(samples(0 0 0.006 0.0036 0 0.05 0.032 0.003 0 0.10 0.045 0.002 0 0.16 0.026 0.0015)
+      up(1 0 0) segments(6) cap(all)) material(goldorangemattepaint) 1 0.2) ]
+Lip ->
+ [ !I(PetalBlade(profile(Obovate) length(0.135) width(0.116) curvature(0.055) camber(0.035)
+      twist(0) thickness(0.008) widthPower(0.8) segments(22 8)) material(redmattepaint) 1 0.25) ]
+ [ T(-0.014 0.043 0.080) S(0.016 0.039 0.016) !I(Sphere(segments(12 6)) material(goldorangemattepaint) 1 0.22) ]
+ [ T(0.014 0.043 0.080) S(0.016 0.039 0.016) !I(Sphere(segments(12 6)) material(goldorangemattepaint) 1 0.22) ]
+
+
+# Lighting bars fixed to the arch rail. Local XY reflector cross-section is extruded
+# along Z and turned onto X. The hanging spacers are closed solid aluminium
+# cylinders, 0.050 m diameter x 0.065 m long at an assumed 2700 kg/m3.
+LightRail ->
+ Interface(id(westMate) type(Mate) origin(-1.50 2.756 -0.85) normal(0 -1 0) tangent(-1 0 0) region(Point) tolerance(0.001))
+ Interface(id(eastMate) type(Mate) origin(1.50 2.756 -0.85) normal(0 -1 0) tangent(-1 0 0) region(Point) tolerance(0.001))
+ Metal(0 2.805 -0.85 6.02 0.098 0.092)
+LightBar ->
+ [ T(-1.04 0 0) A(90 1)
+   !I(Extrude(Polygon(-0.105 -0.048 -0.049 0.032 0.049 0.032 0.105 -0.048 0.090 -0.048 0.040 0.014 -0.040 0.014 -0.090 -0.048) 2.08 cap(all)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(-0.77 0.031 0) S(0.050 0.065 0.050) P(2700) I(Cylinder(segments(24 1)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(0.77 0.031 0) S(0.050 0.065 0.050) P(2700) I(Cylinder(segments(24 1)) material(silverbrushedmetal) 1 0.25) ]
+ Emitters(18)
+Emitters(n) n ->
+ [ T(-0.935+1.870*Emitters_count/(n-1) 0.004 0) S(0.064 0.018 0.058)
+   !I(Cube material(whitebeigeblueemissivepaint) 1 0.20) ]
+DisplayLighting ->
+ Light(WestDisplay type(RectangularArea) position(-1.50 2.655 -0.85) direction(0 -0.91 0.41) area(1.94 0.075)
+       temperature(4200) lumens(690) range(4.2) shadow(off))
+ Light(EastDisplay type(RectangularArea) position(1.50 2.655 -0.85) direction(0 -0.91 0.41) area(1.94 0.075)
+       temperature(4200) lumens(690) range(4.2) shadow(off))
