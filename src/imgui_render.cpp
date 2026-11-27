@@ -110,9 +110,9 @@ vec3 rotate_around_axis(const vec3 &vector, const vec3 &axis, float radians)
 
 const GLchar *VERTEX_SOURCE =
 "#version 460 core\n"
-"in vec3 position;\n"
-"in vec3 normal;\n"
-"in vec2 texture;\n"
+"layout (location = 0) in vec3 position;\n"
+"layout (location = 1) in vec3 normal;\n"
+"layout (location = 2) in vec2 texture;\n"
 "out vec3 v_world_normal;\n"
 "out vec3 v_world_pos;\n"
 "out vec2 v_tex_coord;\n"
@@ -593,9 +593,9 @@ const GLchar *FRAGMENT_SOURCE =
 
 const GLchar *DYNAMIC_CUBE_VERTEX_SOURCE =
 "#version 460 core\n"
-"in vec3 position;\n"
-"in vec3 normal;\n"
-"in vec2 texture;\n"
+"layout (location = 0) in vec3 position;\n"
+"layout (location = 1) in vec3 normal;\n"
+"layout (location = 2) in vec2 texture;\n"
 "out vec3 v_world_normal;\n"
 "out vec3 v_world_pos;\n"
 "out vec2 v_tex_coord;\n"
@@ -727,7 +727,7 @@ const GLchar *DYNAMIC_CUBE_VERTEX_SOURCE =
 
 const GLchar *SHADOW_VERTEX_SOURCE =
 "#version 460 core\n"
-"in vec3 position;\n"
+"layout (location = 0) in vec3 position;\n"
 "uniform mat4 model;\n"
 "uniform mat4 light_view_projection;\n"
 "void main(){\n"
@@ -736,7 +736,7 @@ const GLchar *SHADOW_VERTEX_SOURCE =
 
 const GLchar *SHADOW_DYNAMIC_VERTEX_SOURCE =
 "#version 460 core\n"
-"in vec3 position;\n"
+"layout (location = 0) in vec3 position;\n"
 "uniform mat4 scene_model;\n"
 "uniform mat4 light_view_projection;\n"
 "uniform mat4 prev_primary_transform;\n"
