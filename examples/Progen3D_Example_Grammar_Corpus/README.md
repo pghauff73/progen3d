@@ -11,14 +11,16 @@ This directory is a partial archive of grammar documentation, diagnostic fixture
 - `proposed_future_curved/` — design notes for curved shape families, not current executable examples.
 - `reference/` — the parser-oriented grammar writing guide.
 
-## Current language highlights represented here
+## Language coverage described by the guide
 
 The source grammar includes the built-in box names `Cube`, `CubeX`, `CubeY`, and `CubeZ`, `Cylinder` and `Sphere`, and additional shape specifications recognized by the parser. Other implemented syntax includes rule parameters and repetition, up to three `|` sections, one alternate production, `R` and `R*`, expression-level `&name` resampling, conditionals, bracket scopes, transforms, time functions, materials, and physics actions. Parser recognition of a shape name does not guarantee complete geometry, rendering, collision, or physics support for that family; check the current implementation.
 
-### Important current-source caveats
+### Historical corpus notes
 
-1. `{...}` is not used as source-level scoping in this corpus. Use `[...]`.
-2. Every intended-valid example contains runtime `I()` geometry. `!I()` is reserved for one explicit support such as a floor, wall, foundation, slab, plaza, or anchor.
+The following caveats describe the 2026-08-21 validation corpus, not examples included in this checkout:
+
+1. `{...}` was not used as source-level scoping in that corpus; use `[...]`.
+2. Every intended-valid example in that historical corpus contained runtime `I()` geometry. `!I()` was reserved for one explicit support such as a floor, wall, foundation, slab, plaza, or anchor.
 3. Cube uses box collision geometry. Closed convex Cylinder and Sphere forms use generated convex collision geometry. Open, concave, and AxialProfile procedural meshes remain immovable triangle-mesh collision targets, so their `I()` examples demonstrate runtime geometry but not dynamic contact response.
 4. Preview, export, picking, bounds, and collision all resolve Cylinder, Sphere, and AxialProfile through the shared procedural geometry path.
 5. `P()` density-derived mass requires closed watertight geometry. Open surfaces reject density-derived mass with a diagnostic.

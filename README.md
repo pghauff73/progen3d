@@ -85,7 +85,7 @@ Open the spatially aware Small Modern Building with its evidence overlays enable
 ```bash
 ./progen3d-editor-gui \
   --spatial-overlays \
-  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+  --open examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
 ```
 
 Open the 20-level courtyard building:
@@ -93,7 +93,7 @@ Open the 20-level courtyard building:
 ```bash
 ./progen3d-editor-gui \
   --spatial-overlays \
-  --open examples/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d
+  --open examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d
 ```
 
 ## Screenshot walkthrough
@@ -126,7 +126,7 @@ The screenshot is a complete desktop session, not a preview-only render. Open it
 ### First-session walkthrough
 
 1. Start the editor and choose `Continue Offline` if cloud and AI services are not required.
-2. Select `Open...` and load `examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d`.
+2. Select `Open...` and load `examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d`.
 3. Wait for the Preview status to return to `Ready`; the Console should report parsed rules, successful validation, and scene regeneration.
 4. Drag inside the viewport to orbit the building, scroll to zoom, and use `Fit` if the model leaves the frame.
 5. Click a visible primitive, then open `Inspector` to see its immutable primitive snapshot and associated SMB object.
@@ -371,7 +371,7 @@ Start directly on a known building object with:
 ./progen3d-editor-gui \
   --building-knowledge-overlays \
   --select-spatial-object SMB_001_Ground_Kitchen_Sink \
-  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+  --open examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
 ```
 
 ### AI tab
@@ -516,7 +516,7 @@ Building ->
 ]
 ```
 
-If no `Start` rule exists, the editor can use the first parsed rule, but production examples should define `Start` explicitly.
+The parser selects the first exact `Start` or `start` rule as the entry point. If neither exists, it uses the first parsed rule. Entry rules receive no arguments, so they must have zero parameters.
 
 ### Transforms and scopes
 
@@ -546,11 +546,11 @@ Start ->
 - conditions gate a production using the currently supported expression semantics.
 - time functions support deterministic animated grammar evaluation.
 
-The maintained executable corpus at [examples/Progen3D_Example_Grammar_Corpus](examples/Progen3D_Example_Grammar_Corpus/) is the recommended language guide. Its `current/` directory contains accepted parser/runtime syntax; `diagnostic_fixtures/` contains intentionally invalid cases.
+The [grammar corpus](examples/Progen3D_Example_Grammar_Corpus/) contains diagnostic fixtures, proposed shape examples, and a parser-oriented writing guide. The former `current/` example directory is not present in this checkout; verify syntax against the current parser.
 
 ### Geometry instances and materials
 
-Built-in and procedural families include boxes (`Cube`, `CubeX`, `CubeY`, `CubeZ`), cylinders, spheres, profile extrusion, curved primitives, sweeps, surface construction, `AxialProfile`, and domain-specific vehicle and vegetation primitives where implemented.
+The parser recognizes box names (`Cube`, `CubeX`, `CubeY`, `CubeZ`), `Cylinder`, `Sphere`, and additional shape-specification names. Recognition does not imply every family has complete geometry, rendering, collision, or physics support; check the shape specification and runtime implementation for the specific family.
 
 An instance requires a material specification. The current form is:
 
@@ -628,10 +628,10 @@ No layer silently takes ownership from the layer below it. The grammar remains t
 | Layer | Canonical responsibility | Primary artifact |
 |---|---|---|
 | Modern-building grammar | Shape generation, materials, stable object declarations, and executable entry rules | `.p3d` or `.grammar` file under `examples/` |
-| SMB-OMv1 | Frozen five-level source hierarchy and baseline positioned building | `examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d` |
-| SMB-OMv2 | Spatial identity, frames, interfaces, connections, constraints, collision participation, geometry ownership, and resolution evidence | `examples/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json` plus generated grammar |
-| SMB-OMv2.1 | Classification, roles, functions, services, requirements, state, scenarios, semantic relationships, coverage, and deterministic hashes | `examples/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json` |
-| OM20 | Deep courtyard-building taxonomy, canonical L0-L5 runtime objects, L6-L20 semantic depth, detail levels, provenance, and deterministic package generation | `examples/Complex_Modern_Courtyard_Building_OM20/` |
+| SMB-OMv1 | Frozen five-level source hierarchy and baseline positioned building | `examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d` |
+| SMB-OMv2 | Spatial identity, frames, interfaces, connections, constraints, collision participation, geometry ownership, and resolution evidence | `examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json` plus generated grammar |
+| SMB-OMv2.1 | Classification, roles, functions, services, requirements, state, scenarios, semantic relationships, coverage, and deterministic hashes | `examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json` |
+| OM20 | Deep courtyard-building taxonomy, canonical L0-L5 runtime objects, L6-L20 semantic depth, detail levels, provenance, and deterministic package generation | `examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/` |
 | Editor evidence | Human inspection of source, scene, objects, overlays, diagnostics, and hashes | Inspector, Preview overlays, Console, and `tests/evidence/` |
 
 ### Building object model in UML terms
@@ -661,12 +661,12 @@ The relevant native source trees are `include/spatial/`, `src/spatial/`, `includ
 
 | Path | Use |
 |---|---|
-| `examples/Single_Floor_Modern_Building_Windows_Doors.p3d` | Small executable facade/floor/wall/window/door introduction. |
-| `examples/Modern_Residence_Image_Derived_Facade.grammar` | Image-derived facade study using executable grammar constructs. |
-| `examples/Modern_Luxury_Residence_From_Image_Set.grammar` | Larger residence, authored lighting sidecar, and front/rear visual study. |
-| `examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d` | Frozen 124-object source authority. |
-| `examples/SMB_OMv2_Instance_SMB_001/` | SMB-OMv2/2.1 generators, spatial manifest, knowledge manifest, coverage, and chair bindings. |
-| `examples/Complex_Modern_Courtyard_Building_OM20/` | OM20 generator, grammar, taxonomy, registry, relationships, collision records, schema, validation, and error catalog. |
+| `examples/SimpleModernBuilding/Single_Floor_Modern_Building_Windows_Doors.p3d` | Small executable facade/floor/wall/window/door introduction. |
+| `examples/SimpleModernBuilding/Modern_Residence_Image_Derived_Facade.grammar` | Image-derived facade study using executable grammar constructs. |
+| `examples/SimpleModernBuilding/Modern_Luxury_Residence_From_Image_Set.grammar` | Larger residence, authored lighting sidecar, and front/rear visual study. |
+| `examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d` | Frozen 124-object source authority. |
+| `examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/` | SMB-OMv2/2.1 generators, spatial manifest, knowledge manifest, coverage, and chair bindings. |
+| `examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/` | OM20 generator, grammar, taxonomy, registry, relationships, collision records, schema, validation, and error catalog. |
 | `docs/SMB_OMv1_SMALL_MODERN_BUILDING.md` | OMv1 hierarchy, positioning, guards, and verification contract. |
 | `docs/SMB_OMv2_SPATIALLY_AWARE_BUILDING.md` | OMv2 ownership, interfaces, connections, positioning, evidence, editor behavior, and limits. |
 | `PROGEN3D_SMB_OMV21_ALL_BUILDING_OBJECTS_IMPLEMENTATION_PLAN.md` | Full all-object knowledge-model design and acceptance plan. |
@@ -689,17 +689,17 @@ The relevant native source trees are `include/spatial/`, `src/spatial/`, `includ
 
 | Example | Status | Purpose |
 |---|---|---|
-| [Single_Floor_Modern_Building_Windows_Doors.p3d](examples/Single_Floor_Modern_Building_Windows_Doors.p3d) | Executable | Compact introduction to floors, walls, windows, doors, materials, and repeated facade sections. |
-| [Modern_Residence_Image_Derived_Facade.grammar](examples/Modern_Residence_Image_Derived_Facade.grammar) | Executable example | Image-derived modern facade composition using current grammar constructs. |
-| [Modern_Luxury_Residence_From_Image_Set.grammar](examples/Modern_Luxury_Residence_From_Image_Set.grammar) | Executable example | Larger residence with front/rear architectural composition, authored lighting, and spatial-overlay captures. |
-| [SMB-OMv1](examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d) | Executable, frozen source authority | Five-level, 124-object Small Modern Building hierarchy with guarded parameters and positioned geometry. |
-| [SMB-OMv2](examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d) | Executable, generated spatial authority | Adds frames, interfaces, connections, constraints, primitive ownership, collision evidence, and editor inspection. |
-| [SMB-OMv2.1 knowledge model](examples/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json) | Executable native knowledge layer | Adds object semantics, functions, services, requirements, scenarios, relationship assertions, coverage, and evidence. |
-| [Complex Modern Courtyard Building OM5](examples/Complex_Modern_Courtyard_Building_OM5.p3d) | Executable compatibility baseline | Coarser functional modern-courtyard building baseline. |
-| [Complex Modern Courtyard Building OM20](examples/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d) | Executable generated package | Twenty-level taxonomy with canonical runtime objects, detailed geometry bindings, error policy, deterministic packaging, and spatial evidence. |
-| [Modern Townhouse Advanced New Techniques](examples/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d) | Reference only | Roadmap grammar for proposed higher-order geometry and architectural reasoning operators. It is structurally documented but intentionally not compatible with the current parser. |
+| [Single_Floor_Modern_Building_Windows_Doors.p3d](examples/SimpleModernBuilding/Single_Floor_Modern_Building_Windows_Doors.p3d) | Executable | Compact introduction to floors, walls, windows, doors, materials, and repeated facade sections. |
+| [Modern_Residence_Image_Derived_Facade.grammar](examples/SimpleModernBuilding/Modern_Residence_Image_Derived_Facade.grammar) | Executable example | Image-derived modern facade composition using executable grammar constructs. |
+| [Modern_Luxury_Residence_From_Image_Set.grammar](examples/SimpleModernBuilding/Modern_Luxury_Residence_From_Image_Set.grammar) | Executable example | Larger residence with front/rear architectural composition, authored lighting, and spatial-overlay captures. |
+| [SMB-OMv1](examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d) | Executable, frozen source authority | Five-level, 124-object Small Modern Building hierarchy with guarded parameters and positioned geometry. |
+| [SMB-OMv2](examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d) | Executable, generated spatial authority | Adds frames, interfaces, connections, constraints, primitive ownership, collision evidence, and editor inspection. |
+| [SMB-OMv2.1 knowledge model](examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json) | Executable native knowledge layer | Adds object semantics, functions, services, requirements, scenarios, relationship assertions, coverage, and evidence. |
+| [Complex Modern Courtyard Building OM5](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM5.p3d) | Executable compatibility baseline | Coarser functional modern-courtyard building baseline. |
+| [Complex Modern Courtyard Building OM20](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d) | Executable generated package | Twenty-level taxonomy with canonical runtime objects, detailed geometry bindings, error policy, deterministic packaging, and spatial evidence. |
+| [Modern Townhouse Advanced New Techniques](examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d) | Reference only | Roadmap grammar for proposed higher-order geometry and architectural reasoning operators. It is structurally documented but intentionally not compatible with the current parser. |
 
-The status column matters. A reference grammar must not be treated as executable validation evidence. See its [required-operator report](examples/Modern_Townhouse_Advanced_Grammar/REQUIRED_OPERATORS.md) and [validation record](examples/Modern_Townhouse_Advanced_Grammar/VALIDATION.json).
+The status column matters. A reference grammar must not be treated as executable validation evidence. See its [required-operator report](examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/REQUIRED_OPERATORS.md) and [validation record](examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/VALIDATION.json).
 
 ### Inspect a Modern Building in the GUI
 
@@ -709,7 +709,7 @@ Use the spatially aware Small Modern Building for object-level inspection:
 ./progen3d-editor-gui \
   --spatial-overlays \
   --select-spatial-object SMB_001_Ground_Kitchen_Sink \
-  --open examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+  --open examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
 ```
 
 Then follow this evidence path:
@@ -750,7 +750,7 @@ Use semantic leaves for ideas such as monitoring, relationships, requirements, s
 The authoritative OMv1 grammar is:
 
 ```text
-examples/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d
+examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d
 ```
 
 Its model contract is:
@@ -772,14 +772,14 @@ Detailed documentation: [docs/SMB_OMv1_SMALL_MODERN_BUILDING.md](docs/SMB_OMv1_S
 OMv2 is generated from the unchanged OMv1 source:
 
 ```bash
-python3 examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py
+python3 examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py
 ```
 
 It writes:
 
 ```text
-examples/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
-examples/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json
+examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d
+examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv2_Spatial_Object_Model.json
 ```
 
 Authoritative model counts:
@@ -832,13 +832,13 @@ OMv2.1 does **not** infer building-code, energy, hydraulic, fire-engineering, st
 Regenerate OMv2.1:
 
 ```bash
-python3 examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv21.py
+python3 examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/generate_smb_omv21.py
 ```
 
 Primary artifacts:
 
-- [SMB_OMv21_Building_Knowledge_Model.json](examples/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json)
-- [SMB_OMv21_Object_Coverage.csv](examples/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Object_Coverage.csv)
+- [SMB_OMv21_Building_Knowledge_Model.json](examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Building_Knowledge_Model.json)
+- [SMB_OMv21_Object_Coverage.csv](examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/SMB_OMv21_Object_Coverage.csv)
 - [SMB_OMV21_ALL_BUILDING_OBJECTS_VERIFICATION.md](SMB_OMV21_ALL_BUILDING_OBJECTS_VERIFICATION.md)
 
 ### Complex Modern Courtyard Building OM20
@@ -892,13 +892,13 @@ Only the rear cabinet run and outdoor heat pump currently use executable P0 `Dro
 
 Package documentation:
 
-- [README](examples/Complex_Modern_Courtyard_Building_OM20/README.md)
-- [Object model schema](examples/Complex_Modern_Courtyard_Building_OM20/OBJECT_MODEL_SCHEMA.md)
-- [Validation record](examples/Complex_Modern_Courtyard_Building_OM20/VALIDATION.md)
-- [Error handling](examples/Complex_Modern_Courtyard_Building_OM20/ERROR_HANDLING.md)
-- [Taxonomy manifest](examples/Complex_Modern_Courtyard_Building_OM20/OM20_Taxonomy_Manifest.csv)
-- [Node registry](examples/Complex_Modern_Courtyard_Building_OM20/OM20_Node_Registry.csv)
-- [Spatial object model](examples/Complex_Modern_Courtyard_Building_OM20/OM20_Spatial_Object_Model.json)
+- [README](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/README.md)
+- [Object model schema](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OBJECT_MODEL_SCHEMA.md)
+- [Validation record](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/VALIDATION.md)
+- [Error handling](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/ERROR_HANDLING.md)
+- [Taxonomy manifest](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OM20_Taxonomy_Manifest.csv)
+- [Node registry](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OM20_Node_Registry.csv)
+- [Spatial object model](examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/OM20_Spatial_Object_Model.json)
 
 ### Editing and regeneration ownership
 
@@ -907,9 +907,9 @@ Modern-building packages contain both human-authored inputs and generated output
 | Change | Edit | Regenerate or verify |
 |---|---|---|
 | Simple executable building grammar | The target `.p3d` or `.grammar` file | Open it in the editor and run the applicable grammar/GUI checks. |
-| SMB-OMv2 object/interface/constraint generation | `examples/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py` and its declared source inputs | Run the generator, then `./tests/run_smb_omv2_checks.sh`. |
+| SMB-OMv2 object/interface/constraint generation | `examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001/generate_smb_omv2.py` and its declared source inputs | Run the generator, then `./tests/run_smb_omv2_checks.sh`. |
 | SMB-OMv2.1 concepts, roles, functions, services, requirements, relationships, or scenarios | The purpose-specific `smb_omv21_*` catalog modules and `generate_smb_omv21.py` | Run the OMv2.1 generator and all-object checks; do not hand-edit generated JSON/C++ catalogs as the primary change. |
-| OM20 taxonomy, geometry templates, detail selection, interfaces, constraints, or package metadata | `examples/Complex_Modern_Courtyard_Building_OM20/generate_om20.py` and source-bound inputs | Regenerate grammar, manifests, JSON, CSV files, and deterministic ZIP; run both courtyard gates. |
+| OM20 taxonomy, geometry templates, detail selection, interfaces, constraints, or package metadata | `examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/generate_om20.py` and source-bound inputs | Regenerate grammar, manifests, JSON, CSV files, and deterministic ZIP; run both courtyard gates. |
 | Screenshot evidence | Accepted executable grammar plus deterministic launch options | Capture twice, compare byte identity, and record the hash and command. |
 
 Before replacing a large known-good grammar, build and validate a temporary candidate, inspect its diff, and only then replace the authoritative file. This avoids converting a validated example into an unverified partial rewrite.
@@ -972,7 +972,7 @@ The source gate regenerates both grammar entry points, the object model, manifes
   --preview-view front \
   --preview-fit-extents \
   --capture-preview /tmp/building-front.ppm \
-  --open examples/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d
+  --open examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d
 ```
 
 `--visual-test` includes the GUI smoke gate. A successful run verifies field-of-view changes, renders the preview, applies the requested camera view, fits visible extents, writes a top-left-oriented binary PPM, reports its pixel hash, and exits cleanly.
