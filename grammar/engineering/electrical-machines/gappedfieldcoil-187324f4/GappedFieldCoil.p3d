@@ -1,0 +1,28 @@
+# Closed ferrite return with a gap in the right limb. Dimensions in metres.
+Start -> Bench(40 0.008 0.00066 0.00060 0.001 1.6)
+
+Bench(n radius pitch diameter gap amps) ->
+    MagnetWire(Wire material(Copper) insulation(Polyimide) diameter(diameter) thickness(0.000025))
+    FieldCoil(Pickup wire(Wire) core(FerriteN87) turns(n)
+              turnLength(sqrt((2*3.14159265*radius)^2+pitch^2)) coreLength(0.12-gap)
+              gap(gap) area(0.0001) current(amps) insulationVoltage(2))
+    [ T(-0.015 0 0) Bar(0.01 0.04 0.01) ]
+    [ T(0 0.015 0) Bar(0.02 0.01 0.01) ]
+    [ T(0 -0.015 0) Bar(0.02 0.01 0.01) ]
+    [ T(0.015 (0.04+gap)/4 0) Bar(0.01 (0.04-gap)/2 0.01) ]
+    [ T(0.015 (-0.04-gap)/4 0) Bar(0.01 (0.04-gap)/2 0.01) ]
+    [ T(-0.015 -n*pitch/2 0) Turns(n radius pitch diameter) ]
+
+Bar(x y z) -> [ S(x y z) !I(Cube material(charcoalmattemetal) 1 1) ]
+
+Turns(n radius pitch diameter) n ->
+    [ T(0 Turns_count*pitch 0) S(0.001 0.001 0.001) Turn(radius*1000 pitch*1000 diameter*1000) ]
+
+Turn(radius pitch diameter) ->
+    !I(SweepDisk(path(radius 0 0   0.923880*radius 0.062500*pitch 0.382683*radius   0.707107*radius 0.125000*pitch 0.707107*radius
+            0.382683*radius 0.187500*pitch 0.923880*radius   0 0.250000*pitch radius   -0.382683*radius 0.312500*pitch 0.923880*radius
+            -0.707107*radius 0.375000*pitch 0.707107*radius   -0.923880*radius 0.437500*pitch 0.382683*radius   -radius 0.500000*pitch 0
+            -0.923880*radius 0.562500*pitch -0.382683*radius   -0.707107*radius 0.625000*pitch -0.707107*radius   -0.382683*radius 0.687500*pitch -0.923880*radius
+            0 0.750000*pitch -radius   0.382683*radius 0.812500*pitch -0.923880*radius   0.707107*radius 0.875000*pitch -0.707107*radius
+            0.923880*radius 0.937500*pitch -0.382683*radius   radius pitch 0)
+        radius(diameter/2) segments(8) cap(all)) material(copperbrushedmetal) 1 1)

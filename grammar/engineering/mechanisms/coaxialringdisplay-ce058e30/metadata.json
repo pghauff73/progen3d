@@ -1,0 +1,27 @@
+{
+  "title": "Coaxial Ring Display",
+  "group": "engineering/mechanisms",
+  "directory": "engineering/mechanisms/coaxialringdisplay-ce058e30",
+  "source_file": "CoaxialRingDisplay.p3d",
+  "git_blob_sha": "ce058e30ea1a251f1738bd73a887d442a6358e18",
+  "bytes": 38780,
+  "source_commit": "bfd7815c2765f99c55e68f18979c088a2cd5080d",
+  "source_branch": "mechanics/coaxial-ring-drives",
+  "original_paths": [
+    "examples/Mechanics/CoaxialRingDisplay.p3d"
+  ],
+  "description": "Coaxial-ring drive display assembly for inspecting nested ring rotation and transmission.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/Mechanics/CoaxialRingDisplay.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

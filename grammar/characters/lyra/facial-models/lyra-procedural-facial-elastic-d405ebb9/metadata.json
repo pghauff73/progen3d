@@ -1,0 +1,27 @@
+{
+  "title": "Lyra Procedural Facial Elastic",
+  "group": "characters/lyra/facial-models",
+  "directory": "characters/lyra/facial-models/lyra-procedural-facial-elastic-d405ebb9",
+  "source_file": "Lyra_Procedural_Facial_Elastic.p3d",
+  "git_blob_sha": "d405ebb9aae73c678d1cced843d9c3080ed7b365",
+  "bytes": 2323081,
+  "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+  "source_branch": "codex/lyra-face-identity-milestone-e",
+  "original_paths": [
+    "examples/LyraFacialIntegration/Lyra_Procedural_Facial_Elastic.p3d"
+  ],
+  "description": "Procedural elastic Lyra facial integration model; inspect identity, skin continuity and animation separately.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/LyraFacialIntegration/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "test 1",
+  "group": "education/legacy",
+  "directory": "education/legacy/test-1-cc1cc0d2",
+  "source_file": "test-1.grammar",
+  "git_blob_sha": "cc1cc0d23771f842817d0c4a1d84e1bbeb1cdac5",
+  "bytes": 1677,
+  "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+  "source_branch": "codex/educational-documentation-site",
+  "original_paths": [
+    "test-1.grammar"
+  ],
+  "description": "Legacy grammar test fixture 1; intended for compatibility testing, not a production design.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

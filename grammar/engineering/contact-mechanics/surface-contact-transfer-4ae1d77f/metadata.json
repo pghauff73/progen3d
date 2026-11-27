@@ -1,0 +1,25 @@
+{
+  "title": "surface contact transfer",
+  "group": "engineering/contact-mechanics",
+  "directory": "engineering/contact-mechanics/surface-contact-transfer-4ae1d77f",
+  "source_file": "surface_contact_transfer.p3d",
+  "git_blob_sha": "4ae1d77f16902a1e82ad9eda8513ce915522e6fe",
+  "bytes": 505,
+  "source_commit": "cd117bf960033edf590b002717ce8708d7febad8",
+  "source_branch": "physics/surface-contact-transfer",
+  "original_paths": [
+    "examples/surface_contact_transfer.p3d"
+  ],
+  "description": "Minimal surface-contact transfer test grammar.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

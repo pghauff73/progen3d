@@ -1,0 +1,35 @@
+// Scene units are mm. The two collars share one authored bore datum.
+Start ->
+    Object(id(FitAssembly) class(EngineeringAssembly) taxonomy(Engineering Fit)) [
+        FitHousing
+        FitShaft
+        FitRetainer
+    ]
+
+FitRetainer ->
+    [ T(0 16.25 0)
+      Object(id(Retainer) class(EngineeringPart) taxonomy(Engineering Fit Retainer)) [
+          Interface(id(contactPlane) type(Mate) origin(0 0 0) normal(0 -1 0)
+                    tangent(1 0 0) region(PlaneRectangle 20 20) tolerance(0.001))
+          S(20 3 20) I(Tube(inner(0.5)) material(plaster))
+      ]
+    ]
+
+FitHousing ->
+    Object(id(Housing) class(EngineeringPart) taxonomy(Engineering Fit Housing)) [
+        Interface(id(boreAxis) type(Socket) origin(0 8 0) normal(0 1 0)
+                  tangent(1 0 0) region(AxisSegment 16) tolerance(0.001))
+        Interface(id(seatingPlane) type(Seat) origin(0 16 0) normal(0 1 0)
+                  tangent(1 0 0) region(PlaneRectangle 28 28) tolerance(0.001))
+        [ S(32 8 32) I(Tube(inner(0.3125)) material(plaster)) ]
+        [ T(0 8 0) S(28 8 28) I(Tube(inner(0.357142857)) material(plaster)) ]
+    ]
+
+FitShaft ->
+    [ T(0 0 0)
+      Object(id(Pin) class(EngineeringPart) taxonomy(Engineering Fit Shaft)) [
+          Interface(id(shaftAxis) type(Shaft) origin(0 12 0) normal(0 -1 0)
+                    tangent(1 0 0) region(AxisSegment 24) tolerance(0.001))
+          S(9.95 24 9.95) I(Cylinder material(plaster))
+      ]
+    ]

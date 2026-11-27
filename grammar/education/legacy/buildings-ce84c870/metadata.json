@@ -1,0 +1,25 @@
+{
+  "title": "buildings",
+  "group": "education/legacy",
+  "directory": "education/legacy/buildings-ce84c870",
+  "source_file": "buildings.grammar",
+  "git_blob_sha": "ce84c870bab40e1664fedbaa1546c92105672742",
+  "bytes": 741,
+  "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+  "source_branch": "codex/educational-documentation-site",
+  "original_paths": [
+    "buildings.grammar"
+  ],
+  "description": "Legacy building construction grammar for procedural architectural layouts.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

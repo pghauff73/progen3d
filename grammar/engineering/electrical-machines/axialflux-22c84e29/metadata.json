@@ -1,0 +1,27 @@
+{
+  "title": "Axial Flux",
+  "group": "engineering/electrical-machines",
+  "directory": "engineering/electrical-machines/axialflux-22c84e29",
+  "source_file": "AxialFlux.p3d",
+  "git_blob_sha": "22c84e29558e6e4c31307268ee4ad1a59ed3ba3b",
+  "bytes": 2379,
+  "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+  "source_branch": "feature/electrical-machines",
+  "original_paths": [
+    "examples/ElectricalMachines/AxialFlux.p3d"
+  ],
+  "description": "Axial-flux machine example for studying rotor/stator arrangement and axial magnetic topology.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/ElectricalMachines/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

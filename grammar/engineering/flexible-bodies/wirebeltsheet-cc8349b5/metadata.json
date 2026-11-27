@@ -1,0 +1,27 @@
+{
+  "title": "Wire Belt Sheet",
+  "group": "engineering/flexible-bodies",
+  "directory": "engineering/flexible-bodies/wirebeltsheet-cc8349b5",
+  "source_file": "WireBeltSheet.p3d",
+  "git_blob_sha": "cc8349b513418fa35317dfa5b6cd2c0ed9fbceae",
+  "bytes": 785,
+  "source_commit": "dfe936291d9a65a2aa9c9cd76caec7f4cc61b152",
+  "source_branch": "flexible-bodies-all-targets",
+  "original_paths": [
+    "examples/FlexibleBodies/WireBeltSheet.p3d"
+  ],
+  "description": "Flexible-body examples of wire, belt and sheet representations.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FlexibleBodies/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "groundscape",
+  "group": "education/legacy",
+  "directory": "education/legacy/groundscape-8889deaa",
+  "source_file": "groundscape.grammar",
+  "git_blob_sha": "8889deaab50c5077632c89ea6d871c48894c069b",
+  "bytes": 2175,
+  "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+  "source_branch": "codex/educational-documentation-site",
+  "original_paths": [
+    "groundscape.grammar"
+  ],
+  "description": "Legacy groundscape grammar for site and terrain composition.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "gear surface transfer",
+  "group": "engineering/contact-mechanics",
+  "directory": "engineering/contact-mechanics/gear-surface-transfer-798dee1c",
+  "source_file": "gear_surface_transfer.p3d",
+  "git_blob_sha": "798dee1c7c74af796710952814033b2113b9e894",
+  "bytes": 21649,
+  "source_commit": "cd117bf960033edf590b002717ce8708d7febad8",
+  "source_branch": "physics/surface-contact-transfer",
+  "original_paths": [
+    "examples/gear_surface_transfer.p3d"
+  ],
+  "description": "Gear surface-contact and motion transfer demonstration.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "bonded coupon",
+  "group": "engineering/materials-and-tolerances",
+  "directory": "engineering/materials-and-tolerances/bonded-coupon-94e329c3",
+  "source_file": "bonded-coupon.p3d",
+  "git_blob_sha": "94e329c30907314c4d0a2cbf4b9e332497092fdf",
+  "bytes": 519,
+  "source_commit": "62a249e8e3cd6b4f29c9b691c582962b9b1766c2",
+  "source_branch": "roadmap/engineering-study-integration",
+  "original_paths": [
+    "examples/EngineeringStudies/bonded-coupon.p3d"
+  ],
+  "description": "Bonded coupon study for material/interface inspection.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

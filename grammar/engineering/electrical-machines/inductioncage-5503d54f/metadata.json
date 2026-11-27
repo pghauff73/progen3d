@@ -1,0 +1,27 @@
+{
+  "title": "Induction Cage",
+  "group": "engineering/electrical-machines",
+  "directory": "engineering/electrical-machines/inductioncage-5503d54f",
+  "source_file": "InductionCage.p3d",
+  "git_blob_sha": "5503d54f497cc8be548991c74f5c2bb4244dca0f",
+  "bytes": 2176,
+  "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+  "source_branch": "feature/electrical-machines",
+  "original_paths": [
+    "examples/ElectricalMachines/InductionCage.p3d"
+  ],
+  "description": "Induction machine cage geometry study.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/ElectricalMachines/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "coupon",
+  "group": "engineering/materials-and-tolerances",
+  "directory": "engineering/materials-and-tolerances/coupon-0bfc94ea",
+  "source_file": "coupon.p3d",
+  "git_blob_sha": "0bfc94ea27a72f6a664a00fe9870ddab1b26b59b",
+  "bytes": 46,
+  "source_commit": "62a249e8e3cd6b4f29c9b691c582962b9b1766c2",
+  "source_branch": "roadmap/engineering-study-integration",
+  "original_paths": [
+    "examples/EngineeringStudies/coupon.p3d"
+  ],
+  "description": "Minimal material coupon geometry example.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

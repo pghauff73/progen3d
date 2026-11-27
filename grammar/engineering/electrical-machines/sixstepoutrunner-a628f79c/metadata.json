@@ -1,0 +1,27 @@
+{
+  "title": "Six Step Outrunner",
+  "group": "engineering/electrical-machines",
+  "directory": "engineering/electrical-machines/sixstepoutrunner-a628f79c",
+  "source_file": "SixStepOutrunner.p3d",
+  "git_blob_sha": "a628f79c1fcb5655d465689ed94608dcf50a26ab",
+  "bytes": 2484,
+  "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+  "source_branch": "feature/electrical-machines",
+  "original_paths": [
+    "examples/ElectricalMachines/SixStepOutrunner.p3d"
+  ],
+  "description": "Six-step commutated outrunner example for electrical-machine operation.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/ElectricalMachines/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

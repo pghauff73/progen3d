@@ -1,0 +1,25 @@
+{
+  "title": "fence",
+  "group": "education/legacy",
+  "directory": "education/legacy/fence-5b0b5d8c",
+  "source_file": "fence.grammar",
+  "git_blob_sha": "5b0b5d8c0fa41165a612986d88a01bb04d35fb70",
+  "bytes": 422,
+  "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+  "source_branch": "codex/educational-documentation-site",
+  "original_paths": [
+    "fence.grammar"
+  ],
+  "description": "Legacy fence construction example for repeating boundary components.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

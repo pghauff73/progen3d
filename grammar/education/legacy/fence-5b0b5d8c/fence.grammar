@@ -1,0 +1,7 @@
+X -> R* fencen ( 6  9  ) R fenceratio ( 0.100000  0.150000  ) R fenceh ( 0.500000  0.650000  ) Y 
+
+Y 1 fencen fenceratio fenceh -> fence
+fence fencen ->  [ T ( 0 fenceh 0 ) S ( 1.0 (1/(fenceratio+fencen-1))*fenceratio (1/(fenceratio+fencen-1))*fenceratio ) I ( CubeX 10 ) ] |  [ S ( (1/(fenceratio+fencen-1))*fenceratio fenceh (1/(fenceratio+fencen-1))*fenceratio ) I ( CubeX 10 ) ] T ( 1/(fenceratio+fencen-1) 0  0  )
+
+
+

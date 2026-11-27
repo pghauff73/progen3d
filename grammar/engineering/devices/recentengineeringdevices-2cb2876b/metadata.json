@@ -1,0 +1,25 @@
+{
+  "title": "Recent Engineering Devices",
+  "group": "engineering/devices",
+  "directory": "engineering/devices/recentengineeringdevices-2cb2876b",
+  "source_file": "RecentEngineeringDevices.p3d",
+  "git_blob_sha": "2cb2876b9f17769795ba061081fbf3177c4a19ca",
+  "bytes": 12757,
+  "source_commit": "5e6e664d28b53b8af7df2f6a3ae06696525091ee",
+  "source_branch": "physics/recent-engineering-devices",
+  "original_paths": [
+    "examples/EngineeringDevices/RecentEngineeringDevices.p3d"
+  ],
+  "description": "Engineering-device demonstration collection; inspect individual device configurations in the matching runtime.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

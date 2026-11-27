@@ -1,0 +1,36 @@
+{
+  "title": "Cartesian Printer",
+  "group": "engineering/additive-manufacturing",
+  "directory": "engineering/additive-manufacturing/cartesianprinter-26d9f982",
+  "source_file": "CartesianPrinter.p3d",
+  "git_blob_sha": "26d9f982f4e88066f35e42d327f252f2ea5071f6",
+  "bytes": 38997,
+  "source_commit": "e9926bb9c17c3f7b13e771a4330843ce7b51f0ee",
+  "source_branch": "mechanics/cartesian-printer-deposition",
+  "original_paths": [
+    "examples/Mechanics/CartesianPrinter/CartesianPrinter.p3d"
+  ],
+  "description": "Cartesian printer model including drive geometry and deposition-related engineering studies.",
+  "features": [],
+  "detail": [],
+  "render_assets": [
+    {
+      "path": "renders/DriveSection.png",
+      "original": "examples/Mechanics/CartesianPrinter/DriveSection.png",
+      "sha": "28dc4dbe629913f1f7c1960b204ea380031a7bc7",
+      "label": "Drive section",
+      "kind": "Published printer drive-section evidence; exact render correspondence not independently checked"
+    }
+  ],
+  "documentation": [
+    "examples/Mechanics/CartesianPrinter/README.md",
+    "examples/Mechanics/CartesianPrinter/DriveDetails.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

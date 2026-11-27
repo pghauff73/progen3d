@@ -1,0 +1,27 @@
+{
+  "title": "Facial Elastic Study",
+  "group": "characters/lyra/facial-models",
+  "directory": "characters/lyra/facial-models/facial-elastic-study-89c08b65",
+  "source_file": "Facial_Elastic_Study.p3d",
+  "git_blob_sha": "89c08b65f5e80c76ef635ad50bd2062181ebd155",
+  "bytes": 2125,
+  "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+  "source_branch": "codex/lyra-face-identity-milestone-e",
+  "original_paths": [
+    "examples/FacialSkin/Facial_Elastic_Study.p3d"
+  ],
+  "description": "Facial skin elasticity study for controlled deformation and motion.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FacialSkin/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

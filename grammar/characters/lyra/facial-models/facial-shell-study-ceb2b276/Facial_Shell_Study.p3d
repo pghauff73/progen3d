@@ -1,0 +1,27 @@
+# Native ProGen3D FacialSkin: independent mouth mesh and rest-curvature bending.
+# Metres, newtons, pascals. +X character left, +Y up, +Z forward.
+# Synthetic material and attachment choices; not calibrated human anatomy.
+# Legacy analytic controls remain zero. Time selects independent equilibria.
+Start -> [ Face(0.5 0) ]
+
+Face(leftActivation rightActivation) ->
+    I(FacialSkin(size(0.16 0.21 0.045) segments(48 64) response(elastic) bending(1) mouthMesh(quality)
+      skinMaterial(50000 .35 .001 1000000) solve(2000 .0001)
+      smile(0 0) jawOpen(0) blink(0 0) browRaise(0 0)
+      muscle(left_smile .87 .56 34/48 20/64 .055 .08 leftActivation 0.04 40)
+      muscle(right_smile .13 .56 14/48 20/64 .055 .08 rightActivation 0.04 40)) material(softpinkmatteplaster) 1 1)
+    [ T(0.0333333313 0.0328124985 0.0275976155) S(0.0412800014 0.0412800014 0.0412800014)
+      I(Sphere(segments(32 24)) material(warmwhitematteplaster) 1 1) ]
+    [ T(0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412840014 0.0412840014 0.0412840014)
+      I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]
+    [ T(0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412880014 0.0412880014 0.0412880014)
+      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]
+    [ T(-0.0333333313 0.0328124985 0.0275976155) S(0.0412800014 0.0412800014 0.0412800014)
+      I(Sphere(segments(32 24)) material(warmwhitematteplaster) 1 1) ]
+    [ T(-0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412840014 0.0412840014 0.0412840014)
+      I(Sphere(polar(0 27) topology(surface) close(none) segments(32 16)) material(tealmattemetal) 1 1) ]
+    [ T(-0.0333333313 0.0328124985 0.0275976155) A(90 0) S(0.0412880014 0.0412880014 0.0412880014)
+      I(Sphere(polar(0 11.8125) topology(surface) close(none) segments(32 7)) material(blackmattepaint) 1 1) ]
+    # Recessed dark oral proxy; not a physical oral cavity.
+    [ T(0 -0.0431649976 0.005) S(0.075 0.055 0.016)
+      I(Sphere(segments(28 18)) material(blackmattepaint) 1 1) ]

@@ -1,0 +1,27 @@
+{
+  "title": "Gapped Field Coil",
+  "group": "engineering/electrical-machines",
+  "directory": "engineering/electrical-machines/gappedfieldcoil-187324f4",
+  "source_file": "GappedFieldCoil.p3d",
+  "git_blob_sha": "187324f4cdffa40ed1d4ace7fed8f2724ba9c283",
+  "bytes": 1893,
+  "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+  "source_branch": "feature/electrical-machines",
+  "original_paths": [
+    "examples/ElectricalMachines/GappedFieldCoil.p3d"
+  ],
+  "description": "Field-coil example with a gapped magnetic circuit.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/ElectricalMachines/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

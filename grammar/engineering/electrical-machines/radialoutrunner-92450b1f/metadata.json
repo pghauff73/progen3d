@@ -1,0 +1,27 @@
+{
+  "title": "Radial Outrunner",
+  "group": "engineering/electrical-machines",
+  "directory": "engineering/electrical-machines/radialoutrunner-92450b1f",
+  "source_file": "RadialOutrunner.p3d",
+  "git_blob_sha": "92450b1fa7b36c2a3638346d0d474328f96ef4b8",
+  "bytes": 2456,
+  "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+  "source_branch": "feature/electrical-machines",
+  "original_paths": [
+    "examples/ElectricalMachines/RadialOutrunner.p3d"
+  ],
+  "description": "Radial-flux outrunner machine, with rotor outside the stator.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/ElectricalMachines/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

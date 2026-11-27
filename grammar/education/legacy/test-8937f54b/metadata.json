@@ -1,0 +1,25 @@
+{
+  "title": "test",
+  "group": "education/legacy",
+  "directory": "education/legacy/test-8937f54b",
+  "source_file": "test.grammar",
+  "git_blob_sha": "8937f54b671c0b07bed482f4977d7cf6f6cfb381",
+  "bytes": 6050,
+  "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+  "source_branch": "codex/educational-documentation-site",
+  "original_paths": [
+    "test.grammar"
+  ],
+  "description": "Legacy grammar language test fixture; compare parser output with historical branch.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

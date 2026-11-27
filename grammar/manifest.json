@@ -1,9 +1,9 @@
 {
   "schema": "progen3d.grammar-catalogue.v1",
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
-  "scope": "Main-branch .p3d/.grammar source inventory; other branches, embedded grammars, archives and external library exports are not included in this initial snapshot",
+  "scope": "All standalone .p3d/.grammar source blobs found on the enumerated 21 repository branches at their recorded snapshots; excludes external library exports and embedded/archived grammars",
   "source_path_count": 90,
-  "distinct_sources": 82,
+  "distinct_sources": 115,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -5093,6 +5093,195 @@
       }
     },
     {
+      "title": "Facial Elastic Study",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/facial-elastic-study-89c08b65",
+      "source_file": "Facial_Elastic_Study.p3d",
+      "git_blob_sha": "89c08b65f5e80c76ef635ad50bd2062181ebd155",
+      "bytes": 2125,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/FacialSkin/Facial_Elastic_Study.p3d"
+      ],
+      "description": "Facial skin elasticity study for controlled deformation and motion.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/FacialSkin/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Facial Shell Study",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/facial-shell-study-ceb2b276",
+      "source_file": "Facial_Shell_Study.p3d",
+      "git_blob_sha": "ceb2b276b6f32712dd1091e8492050cb1dc85c2f",
+      "bytes": 2104,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/FacialSkin/Facial_Shell_Study.p3d"
+      ],
+      "description": "Facial shell construction study; inspect skin geometry, topology and continuity.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/FacialSkin/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Lyra Active Hologram",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/lyra-active-hologram-3f885653",
+      "source_file": "Lyra_Active_Hologram.p3d",
+      "git_blob_sha": "3f885653728495b0944cd6eb56d7a0b639e88dfc",
+      "bytes": 1240244,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/LyraFacialIntegration/reference/Lyra_Active_Hologram.p3d"
+      ],
+      "description": "Historical active-hologram reference grammar used by the Lyra integration work.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/LyraFacialIntegration/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Lyra Facial Hologram",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/lyra-facial-hologram-657fb06f",
+      "source_file": "Lyra_Facial_Hologram.p3d",
+      "git_blob_sha": "657fb06fd1fd6f5f650a244eeee4617a04130ca9",
+      "bytes": 2323398,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/LyraFacialIntegration/Lyra_Facial_Hologram.p3d"
+      ],
+      "description": "Integrated Lyra facial hologram variant for character appearance and deformation study.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/LyraFacialIntegration/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Lyra Facial Study",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/lyra-facial-study-2eb880a3",
+      "source_file": "Lyra_Facial_Study.p3d",
+      "git_blob_sha": "2eb880a385045f598e4163989c3bc6cc1693e25b",
+      "bytes": 2343,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/FacialSkin/Lyra_Facial_Study.p3d"
+      ],
+      "description": "Lyra facial study fixture for facial surface construction and inspection.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/FacialSkin/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Lyra Procedural Facial Elastic",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/lyra-procedural-facial-elastic-d405ebb9",
+      "source_file": "Lyra_Procedural_Facial_Elastic.p3d",
+      "git_blob_sha": "d405ebb9aae73c678d1cced843d9c3080ed7b365",
+      "bytes": 2323081,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/LyraFacialIntegration/Lyra_Procedural_Facial_Elastic.p3d"
+      ],
+      "description": "Procedural elastic Lyra facial integration model; inspect identity, skin continuity and animation separately.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/LyraFacialIntegration/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Lyra Procedural No Mesh",
+      "group": "characters/lyra/facial-models",
+      "directory": "characters/lyra/facial-models/lyra-procedural-nomesh-db56b380",
+      "source_file": "Lyra_Procedural_NoMesh.p3d",
+      "git_blob_sha": "db56b38092e9efe3c787b706399ec844c50ad0e5",
+      "bytes": 1239719,
+      "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+      "source_branch": "codex/lyra-face-identity-milestone-e",
+      "original_paths": [
+        "examples/LyraFacialIntegration/reference/Lyra_Procedural_NoMesh.p3d"
+      ],
+      "description": "Historical procedural no-mesh Lyra reference model; retain as comparison baseline.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/LyraFacialIntegration/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "01 measured layout",
       "group": "education/form-studies/authoring",
       "directory": "education/form-studies/authoring/01-measured-layout-6bd2a40f",
@@ -5389,6 +5578,217 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 80,
         "validation_status": "Not independently validated",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "buildings",
+      "group": "education/legacy",
+      "directory": "education/legacy/buildings-ce84c870",
+      "source_file": "buildings.grammar",
+      "git_blob_sha": "ce84c870bab40e1664fedbaa1546c92105672742",
+      "bytes": 741,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "buildings.grammar"
+      ],
+      "description": "Legacy building construction grammar for procedural architectural layouts.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "fence",
+      "group": "education/legacy",
+      "directory": "education/legacy/fence-5b0b5d8c",
+      "source_file": "fence.grammar",
+      "git_blob_sha": "5b0b5d8c0fa41165a612986d88a01bb04d35fb70",
+      "bytes": 422,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "fence.grammar"
+      ],
+      "description": "Legacy fence construction example for repeating boundary components.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "groundscape",
+      "group": "education/legacy",
+      "directory": "education/legacy/groundscape-8889deaa",
+      "source_file": "groundscape.grammar",
+      "git_blob_sha": "8889deaab50c5077632c89ea6d871c48894c069b",
+      "bytes": 2175,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "groundscape.grammar"
+      ],
+      "description": "Legacy groundscape grammar for site and terrain composition.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "test",
+      "group": "education/legacy",
+      "directory": "education/legacy/test-8937f54b",
+      "source_file": "test.grammar",
+      "git_blob_sha": "8937f54b671c0b07bed482f4977d7cf6f6cfb381",
+      "bytes": 6050,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "test.grammar"
+      ],
+      "description": "Legacy grammar language test fixture; compare parser output with historical branch.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "test 1",
+      "group": "education/legacy",
+      "directory": "education/legacy/test-1-cc1cc0d2",
+      "source_file": "test-1.grammar",
+      "git_blob_sha": "cc1cc0d23771f842817d0c4a1d84e1bbeb1cdac5",
+      "bytes": 1677,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "test-1.grammar"
+      ],
+      "description": "Legacy grammar test fixture 1; intended for compatibility testing, not a production design.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "test 2",
+      "group": "education/legacy",
+      "directory": "education/legacy/test-2-0018a0c1",
+      "source_file": "test-2.grammar",
+      "git_blob_sha": "0018a0c1c57eacebbf618462b7230a694d996cb8",
+      "bytes": 2158,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "test-2.grammar"
+      ],
+      "description": "Legacy grammar test fixture 2; intended for compatibility testing.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "test 3",
+      "group": "education/legacy",
+      "directory": "education/legacy/test-3-c3c5e0c2",
+      "source_file": "test-3.grammar",
+      "git_blob_sha": "c3c5e0c22ab06ee8742999f496ce8d5bba3c830e",
+      "bytes": 8572,
+      "source_commit": "9a23422a4351c5bc0100905bee4440a484483695",
+      "source_branch": "codex/educational-documentation-site",
+      "original_paths": [
+        "test-3.grammar"
+      ],
+      "description": "Legacy grammar test fixture 3; intended for compatibility testing.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Cartesian Printer",
+      "group": "engineering/additive-manufacturing",
+      "directory": "engineering/additive-manufacturing/cartesianprinter-26d9f982",
+      "source_file": "CartesianPrinter.p3d",
+      "git_blob_sha": "26d9f982f4e88066f35e42d327f252f2ea5071f6",
+      "bytes": 38997,
+      "source_commit": "e9926bb9c17c3f7b13e771a4330843ce7b51f0ee",
+      "source_branch": "mechanics/cartesian-printer-deposition",
+      "original_paths": [
+        "examples/Mechanics/CartesianPrinter/CartesianPrinter.p3d"
+      ],
+      "description": "Cartesian printer model including drive geometry and deposition-related engineering studies.",
+      "features": [],
+      "detail": [],
+      "render_assets": [
+        {
+          "path": "renders/DriveSection.png",
+          "original": "examples/Mechanics/CartesianPrinter/DriveSection.png",
+          "sha": "28dc4dbe629913f1f7c1960b204ea380031a7bc7",
+          "label": "Drive section",
+          "kind": "Published printer drive-section evidence; exact render correspondence not independently checked"
+        }
+      ],
+      "documentation": [
+        "examples/Mechanics/CartesianPrinter/README.md",
+        "examples/Mechanics/CartesianPrinter/DriveDetails.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 80,
+        "validation_status": "Not independently validated; historical development branch",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -5816,6 +6216,351 @@
       }
     },
     {
+      "title": "gear surface transfer",
+      "group": "engineering/contact-mechanics",
+      "directory": "engineering/contact-mechanics/gear-surface-transfer-798dee1c",
+      "source_file": "gear_surface_transfer.p3d",
+      "git_blob_sha": "798dee1c7c74af796710952814033b2113b9e894",
+      "bytes": 21649,
+      "source_commit": "cd117bf960033edf590b002717ce8708d7febad8",
+      "source_branch": "physics/surface-contact-transfer",
+      "original_paths": [
+        "examples/gear_surface_transfer.p3d"
+      ],
+      "description": "Gear surface-contact and motion transfer demonstration.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "surface contact transfer",
+      "group": "engineering/contact-mechanics",
+      "directory": "engineering/contact-mechanics/surface-contact-transfer-4ae1d77f",
+      "source_file": "surface_contact_transfer.p3d",
+      "git_blob_sha": "4ae1d77f16902a1e82ad9eda8513ce915522e6fe",
+      "bytes": 505,
+      "source_commit": "cd117bf960033edf590b002717ce8708d7febad8",
+      "source_branch": "physics/surface-contact-transfer",
+      "original_paths": [
+        "examples/surface_contact_transfer.p3d"
+      ],
+      "description": "Minimal surface-contact transfer test grammar.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Recent Engineering Devices",
+      "group": "engineering/devices",
+      "directory": "engineering/devices/recentengineeringdevices-2cb2876b",
+      "source_file": "RecentEngineeringDevices.p3d",
+      "git_blob_sha": "2cb2876b9f17769795ba061081fbf3177c4a19ca",
+      "bytes": 12757,
+      "source_commit": "5e6e664d28b53b8af7df2f6a3ae06696525091ee",
+      "source_branch": "physics/recent-engineering-devices",
+      "original_paths": [
+        "examples/EngineeringDevices/RecentEngineeringDevices.p3d"
+      ],
+      "description": "Engineering-device demonstration collection; inspect individual device configurations in the matching runtime.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Axial Flux",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/axialflux-22c84e29",
+      "source_file": "AxialFlux.p3d",
+      "git_blob_sha": "22c84e29558e6e4c31307268ee4ad1a59ed3ba3b",
+      "bytes": 2379,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/AxialFlux.p3d"
+      ],
+      "description": "Axial-flux machine example for studying rotor/stator arrangement and axial magnetic topology.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Brushed DC",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/brusheddc-3996c818",
+      "source_file": "BrushedDC.p3d",
+      "git_blob_sha": "3996c81812814bec55000a6dd6b5d9309d16e066",
+      "bytes": 2891,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/BrushedDC.p3d"
+      ],
+      "description": "Brushed DC machine model for inspecting rotor, stator and commutation arrangement.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Gapped Field Coil",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/gappedfieldcoil-187324f4",
+      "source_file": "GappedFieldCoil.p3d",
+      "git_blob_sha": "187324f4cdffa40ed1d4ace7fed8f2724ba9c283",
+      "bytes": 1893,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/GappedFieldCoil.p3d"
+      ],
+      "description": "Field-coil example with a gapped magnetic circuit.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Induction Cage",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/inductioncage-5503d54f",
+      "source_file": "InductionCage.p3d",
+      "git_blob_sha": "5503d54f497cc8be548991c74f5c2bb4244dca0f",
+      "bytes": 2176,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/InductionCage.p3d"
+      ],
+      "description": "Induction machine cage geometry study.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Induction Spin Up",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/inductionspinup-dd7d9a1c",
+      "source_file": "InductionSpinUp.p3d",
+      "git_blob_sha": "dd7d9a1ce9a5861c2648945c8faf692b98c304a8",
+      "bytes": 1036,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/InductionSpinUp.p3d"
+      ],
+      "description": "Induction motor spin-up demonstration; inspect transient response in the matching runtime.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Radial Inrunner",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/radialinrunner-dececddc",
+      "source_file": "RadialInrunner.p3d",
+      "git_blob_sha": "dececddc943ad9e0074b07505067a58fdf6c7f3c",
+      "bytes": 2407,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/RadialInrunner.p3d"
+      ],
+      "description": "Radial-flux inrunner machine, with rotor inside the stator.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Radial Outrunner",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/radialoutrunner-92450b1f",
+      "source_file": "RadialOutrunner.p3d",
+      "git_blob_sha": "92450b1fa7b36c2a3638346d0d474328f96ef4b8",
+      "bytes": 2456,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/RadialOutrunner.p3d"
+      ],
+      "description": "Radial-flux outrunner machine, with rotor outside the stator.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Reaction Wheel",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/reactionwheel-635d4d4f",
+      "source_file": "ReactionWheel.p3d",
+      "git_blob_sha": "635d4d4ff4e2c61ceeb0fa1c993dab4d924aaa08",
+      "bytes": 1162,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/ReactionWheel.p3d"
+      ],
+      "description": "Reaction-wheel example for angular momentum transfer studies.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Six Step Outrunner",
+      "group": "engineering/electrical-machines",
+      "directory": "engineering/electrical-machines/sixstepoutrunner-a628f79c",
+      "source_file": "SixStepOutrunner.p3d",
+      "git_blob_sha": "a628f79c1fcb5655d465689ed94608dcf50a26ab",
+      "bytes": 2484,
+      "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+      "source_branch": "feature/electrical-machines",
+      "original_paths": [
+        "examples/ElectricalMachines/SixStepOutrunner.p3d"
+      ],
+      "description": "Six-step commutated outrunner example for electrical-machine operation.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/ElectricalMachines/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Wire Belt Sheet",
+      "group": "engineering/flexible-bodies",
+      "directory": "engineering/flexible-bodies/wirebeltsheet-cc8349b5",
+      "source_file": "WireBeltSheet.p3d",
+      "git_blob_sha": "cc8349b513418fa35317dfa5b6cd2c0ed9fbceae",
+      "bytes": 785,
+      "source_commit": "dfe936291d9a65a2aa9c9cd76caec7f4cc61b152",
+      "source_branch": "flexible-bodies-all-targets",
+      "original_paths": [
+        "examples/FlexibleBodies/WireBeltSheet.p3d"
+      ],
+      "description": "Flexible-body examples of wire, belt and sheet representations.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/FlexibleBodies/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Ducted Fan Stand",
       "group": "engineering/fluid-dynamics/airflow",
       "directory": "engineering/fluid-dynamics/airflow/ductedfanstand-9640958e",
@@ -5893,6 +6638,137 @@
         "validation_status": "Not independently validated",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
+    },
+    {
+      "title": "bonded coupon",
+      "group": "engineering/materials-and-tolerances",
+      "directory": "engineering/materials-and-tolerances/bonded-coupon-94e329c3",
+      "source_file": "bonded-coupon.p3d",
+      "git_blob_sha": "94e329c30907314c4d0a2cbf4b9e332497092fdf",
+      "bytes": 519,
+      "source_commit": "62a249e8e3cd6b4f29c9b691c582962b9b1766c2",
+      "source_branch": "roadmap/engineering-study-integration",
+      "original_paths": [
+        "examples/EngineeringStudies/bonded-coupon.p3d"
+      ],
+      "description": "Bonded coupon study for material/interface inspection.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "coupon",
+      "group": "engineering/materials-and-tolerances",
+      "directory": "engineering/materials-and-tolerances/coupon-0bfc94ea",
+      "source_file": "coupon.p3d",
+      "git_blob_sha": "0bfc94ea27a72f6a664a00fe9870ddab1b26b59b",
+      "bytes": 46,
+      "source_commit": "62a249e8e3cd6b4f29c9b691c582962b9b1766c2",
+      "source_branch": "roadmap/engineering-study-integration",
+      "original_paths": [
+        "examples/EngineeringStudies/coupon.p3d"
+      ],
+      "description": "Minimal material coupon geometry example.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "cylindrical fit",
+      "group": "engineering/materials-and-tolerances",
+      "directory": "engineering/materials-and-tolerances/cylindrical-fit-06ef295a",
+      "source_file": "cylindrical-fit.p3d",
+      "git_blob_sha": "06ef295affa42aa0ae5bfcb23f7ee3a774e8d151",
+      "bytes": 1454,
+      "source_commit": "62a249e8e3cd6b4f29c9b691c582962b9b1766c2",
+      "source_branch": "roadmap/engineering-study-integration",
+      "original_paths": [
+        "examples/EngineeringStudies/cylindrical-fit.p3d"
+      ],
+      "description": "Cylindrical fit study for examining mating geometry and clearances.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Coaxial Ring Display",
+      "group": "engineering/mechanisms",
+      "directory": "engineering/mechanisms/coaxialringdisplay-ce058e30",
+      "source_file": "CoaxialRingDisplay.p3d",
+      "git_blob_sha": "ce058e30ea1a251f1738bd73a887d442a6358e18",
+      "bytes": 38780,
+      "source_commit": "bfd7815c2765f99c55e68f18979c088a2cd5080d",
+      "source_branch": "mechanics/coaxial-ring-drives",
+      "original_paths": [
+        "examples/Mechanics/CoaxialRingDisplay.p3d"
+      ],
+      "description": "Coaxial-ring drive display assembly for inspecting nested ring rotation and transmission.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/Mechanics/CoaxialRingDisplay.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Pin Roller Members",
+      "group": "engineering/mechanisms",
+      "directory": "engineering/mechanisms/pinrollermembers-61e82586",
+      "source_file": "PinRollerMembers.p3d",
+      "git_blob_sha": "61e825867e63d5b4b9ad409be102d1ec686bc37d",
+      "bytes": 1790,
+      "source_commit": "bfd7815c2765f99c55e68f18979c088a2cd5080d",
+      "source_branch": "mechanics/coaxial-ring-drives",
+      "original_paths": [
+        "examples/Mechanics/PinRollerMembers.p3d"
+      ],
+      "description": "Pin-and-roller member example for service-load and mechanical member inspection.",
+      "features": [],
+      "detail": [],
+      "render_assets": [],
+      "documentation": [
+        "examples/Mechanics/README.md"
+      ],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
     }
-  ]
+  ],
+  "development_branch_sources_added": 33,
+  "enumerated_branches": 21
 }

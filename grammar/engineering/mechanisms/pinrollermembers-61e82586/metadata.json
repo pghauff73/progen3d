@@ -1,0 +1,27 @@
+{
+  "title": "Pin Roller Members",
+  "group": "engineering/mechanisms",
+  "directory": "engineering/mechanisms/pinrollermembers-61e82586",
+  "source_file": "PinRollerMembers.p3d",
+  "git_blob_sha": "61e825867e63d5b4b9ad409be102d1ec686bc37d",
+  "bytes": 1790,
+  "source_commit": "bfd7815c2765f99c55e68f18979c088a2cd5080d",
+  "source_branch": "mechanics/coaxial-ring-drives",
+  "original_paths": [
+    "examples/Mechanics/PinRollerMembers.p3d"
+  ],
+  "description": "Pin-and-roller member example for service-load and mechanical member inspection.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/Mechanics/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

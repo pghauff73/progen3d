@@ -1,0 +1,36 @@
+X -> R CenterHeight ( 4 10 ) R Xlength ( 6 8 ) R Ylength ( 4 6 ) R TowerHeight ( 6 14 ) R BaseHeight ( 2 3 ) Y
+
+
+Y -> [ Floor ] T ( -50 0 -50 ) [  City ]
+City ->  Street Street Street Street Street Street
+Street ->  T ( 0 0 15 ) StreetBlocks 
+Floor -> S ( 120 0.1 120 ) I ( Cube )
+StreetBlocks ->  [ AddBuilding ] [ MoreBlocks ] 
+MoreBlocks 8 ->    T ( 10 0 0 )  [ AddBuilding ]  
+
+
+
+AddBuilding ; 0.6 -> T ( 0 0 3 ) [ Center ]  T ( 0 0 -2 )  [ SectionX  ] [ SectionY ]
+
+Center 1 TowerHeight ->   S ( 2 TowerHeight 2 ) I ( Cube )  Top 
+Top ->  T ( 0 1 0 ) [ S ( 1 0.1 1 ) I ( Sphere ) ] T ( 0 -1 0 )  
+
+
+
+
+
+Base 1 BaseHeight ->   S ( Xlength  BaseHeight  Ylength )  I ( Cube )
+
+BodyX ->  T ( 0 BaseHeight 0 ) S ( Xlength  CenterHeight  2 )  I ( Cube )  
+BodyY ->  T ( 0 BaseHeight 0 ) S ( 2  CenterHeight  Ylength )  I ( Cube )  
+
+Xend ->   S (  2  CenterHeight 2 ) T ( 1.75 0 0 ) I ( Cylinder ) 
+Yend ->   S (  2  CenterHeight 2 ) T ( 0 0 1.75 ) I ( Cylinder ) 
+
+SectionX CenterHeight CenterHeight Xlength ->   [ Base ] [ BodyX ] [ Xend ] | [ WindowsXN ] [ WindowsXS ] T ( 0 1 0 )  
+WindowsXN Xlength ->  T ( Xlength/2.0-0.8 0 -1 )   | T ( -0.9 0 0 ) [  S ( 0.8 0.95 0.01 ) T ( 0.9 0 0 ) I ( Cube ) ]   
+WindowsXS Xlength ->  T ( Xlength/2.0-0.8 0 1 )   | T ( -0.9 0 0 ) [  S ( 0.8 0.95 0.01 ) T ( 0.9 0 0 ) I ( Cube ) ]   
+
+SectionY CenterHeight CenterHeight Ylength ->   [ BodyY ] [ Yend ] | [ WindowsYE ] [ WindowsYW ]  T ( 0 1 0 )  
+WindowsYE Ylength ->  T ( -1 0 Ylength/2.0-0.8 )   | T ( 0 0 -0.9 ) [  S ( 0.01 0.95 0.8 ) T ( 0 0 0.9 ) I ( Cube ) ]  
+WindowsYW Ylength ->  T ( 1 0 Ylength/2.0-0.8 )   | T ( 0 0 -0.9 ) [  S ( 0.01 0.95 0.8 ) T ( 0 0 0.9 ) I ( Cube ) ]  

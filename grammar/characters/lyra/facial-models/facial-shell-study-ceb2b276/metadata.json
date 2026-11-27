@@ -1,0 +1,27 @@
+{
+  "title": "Facial Shell Study",
+  "group": "characters/lyra/facial-models",
+  "directory": "characters/lyra/facial-models/facial-shell-study-ceb2b276",
+  "source_file": "Facial_Shell_Study.p3d",
+  "git_blob_sha": "ceb2b276b6f32712dd1091e8492050cb1dc85c2f",
+  "bytes": 2104,
+  "source_commit": "b24c9de9cfb76c87fa7a5047f652f5c8ed6b5e07",
+  "source_branch": "codex/lyra-face-identity-milestone-e",
+  "original_paths": [
+    "examples/FacialSkin/Facial_Shell_Study.p3d"
+  ],
+  "description": "Facial shell construction study; inspect skin geometry, topology and continuity.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FacialSkin/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

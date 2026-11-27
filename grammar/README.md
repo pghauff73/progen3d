@@ -2,6 +2,6 @@
 
 [Browse the HTML index](index.html) · [Manifest](manifest.json) · [Quality methodology](QUALITY.md)
 
-Baseline: `95c61f312c8bbfe5489b312beee569f437f075e9`. 90 original files, 82 distinct blobs. Original source paths preserved; grammar copies use existing Git blob identities. Per-model folders contain the exact grammar, `index.html`, `metadata.json` and source-related renders where available. Open the HTML index locally after cloning, or use an HTTP static server. GitHub's source browser does not execute arbitrary HTML. Use the original project path for relative dependencies.
+115 distinct grammar blobs (82 from the main baseline plus 33 unique development-branch sources). All 21 enumerated repository branches checked for standalone grammar files. Source commit and original path recorded per entry. Open index.html locally after cloning or serve the folder over HTTP. GitHub's source browser does not execute arbitrary HTML. Use original project paths for external dependencies.
 
-Scope: main-branch standalone grammar extensions only. Other branch content, separately exported files, embedded grammars and archives require a subsequent inventory/import. Published previews are not newly rendered or independently verified. Missing render and validation evidence is explicit.
+Scope excludes separately exported library files, archive members and embedded grammars. Published sample images are identified as such; absent or unverified evidence is not claimed as tested. Existing source branches and files are preserved.

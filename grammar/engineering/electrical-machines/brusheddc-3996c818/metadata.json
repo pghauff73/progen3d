@@ -1,0 +1,27 @@
+{
+  "title": "Brushed DC",
+  "group": "engineering/electrical-machines",
+  "directory": "engineering/electrical-machines/brusheddc-3996c818",
+  "source_file": "BrushedDC.p3d",
+  "git_blob_sha": "3996c81812814bec55000a6dd6b5d9309d16e066",
+  "bytes": 2891,
+  "source_commit": "c2b470d8fc3ff821fb3d505c406ad8f2966171f3",
+  "source_branch": "feature/electrical-machines",
+  "original_paths": [
+    "examples/ElectricalMachines/BrushedDC.p3d"
+  ],
+  "description": "Brushed DC machine model for inspecting rotor, stator and commutation arrangement.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/ElectricalMachines/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

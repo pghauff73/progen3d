@@ -1,0 +1,25 @@
+{
+  "title": "cylindrical fit",
+  "group": "engineering/materials-and-tolerances",
+  "directory": "engineering/materials-and-tolerances/cylindrical-fit-06ef295a",
+  "source_file": "cylindrical-fit.p3d",
+  "git_blob_sha": "06ef295affa42aa0ae5bfcb23f7ee3a774e8d151",
+  "bytes": 1454,
+  "source_commit": "62a249e8e3cd6b4f29c9b691c582962b9b1766c2",
+  "source_branch": "roadmap/engineering-study-integration",
+  "original_paths": [
+    "examples/EngineeringStudies/cylindrical-fit.p3d"
+  ],
+  "description": "Cylindrical fit study for examining mating geometry and clearances.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated; historical development branch",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
