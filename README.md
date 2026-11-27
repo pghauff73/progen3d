@@ -546,7 +546,7 @@ Start ->
 - conditions gate a production using the currently supported expression semantics.
 - time functions support deterministic animated grammar evaluation.
 
-The [grammar corpus](examples/Progen3D_Example_Grammar_Corpus/) contains diagnostic fixtures, proposed shape examples, and a parser-oriented writing guide. The former `current/` example directory is not present in this checkout; verify syntax against the current parser.
+The [engineering grammar reference](docs/ENGINEERING_GRAMMAR.md) documents the source language, shape descriptor schemas, and parser/runtime boundaries. The [grammar corpus](examples/Progen3D_Example_Grammar_Corpus/) contains diagnostic fixtures, proposed shape examples, and a parser-oriented writing guide. The former `current/` example directory is not present in this checkout; verify syntax against the current parser.
 
 ### Geometry instances and materials
 

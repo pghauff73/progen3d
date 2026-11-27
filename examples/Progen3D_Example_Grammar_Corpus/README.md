@@ -10,10 +10,11 @@ This directory is a partial archive of grammar documentation, diagnostic fixture
 - `proposed_axialprofilev1/` — design fixtures; these are not current executable grammars.
 - `proposed_future_curved/` — design notes for curved shape families, not current executable examples.
 - `reference/` — the parser-oriented grammar writing guide.
+- [`docs/ENGINEERING_GRAMMAR.md`](../../docs/ENGINEERING_GRAMMAR.md) — exhaustive implementation-oriented grammar and descriptor reference.
 
 ## Language coverage described by the guide
 
-The source grammar includes the built-in box names `Cube`, `CubeX`, `CubeY`, and `CubeZ`, `Cylinder` and `Sphere`, and additional shape specifications recognized by the parser. Other implemented syntax includes rule parameters and repetition, up to three `|` sections, one alternate production, `R` and `R*`, expression-level `&name` resampling, conditionals, bracket scopes, transforms, time functions, materials, and physics actions. Parser recognition of a shape name does not guarantee complete geometry, rendering, collision, or physics support for that family; check the current implementation.
+For the complete source syntax, recognized shape descriptor names and option arities, and implementation boundaries, see the [engineering grammar reference](../../../docs/ENGINEERING_GRAMMAR.md). The parser-oriented [writing guide](reference/Progen3D_Grammar_Writing_Guide.md) provides authoring explanations and examples. Parser recognition of a shape name does not guarantee complete geometry, rendering, collision, or physics support for that family; check the current implementation.
 
 ### Historical corpus notes
 
@@ -27,8 +28,9 @@ The following caveats describe the 2026-08-21 validation corpus, not examples in
 
 ## Recommended reading order
 
-1. `reference/Progen3D_Grammar_Writing_Guide.md` for current syntax guidance.
-2. `diagnostic_fixtures/README.md` for intentionally invalid source cases.
-3. `proposed_axialprofilev1/README.md` and `proposed_future_curved/README.md` for explicitly proposed designs.
+1. `../../docs/ENGINEERING_GRAMMAR.md` for the implementation-oriented source language reference.
+2. `reference/Progen3D_Grammar_Writing_Guide.md` for authoring explanations and examples.
+3. `diagnostic_fixtures/README.md` for intentionally invalid source cases.
+4. `proposed_axialprofilev1/README.md` and `proposed_future_curved/README.md` for explicitly proposed designs.
 
 `VALIDATION.md` preserves results recorded on 2026-08-21. It describes files and a tested binary from that historical run; it is not evidence that the referenced fixture files or results are present or current in this checkout.

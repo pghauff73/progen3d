@@ -277,8 +277,9 @@ and density apply to the next instance attempt and are cleared after instancing.
 `!I` ignores velocity. Density-derived mass requires compatible closed
 watertight geometry; supported shape and collision behavior vary.
 
-The airflow action family is described in §9. These actions configure a
-following movable primitive rather than directly modifying a transform.
+The airflow action family is described in §8. These actions configure the
+next eligible `I(...)` instance when an airflow configuration is active rather
+than directly modifying a transform.
 
 ## 6. Geometry instances and shape specifications
 
@@ -346,7 +347,81 @@ recognition.
 
 STL catalog/UI support does not make `STL.*` an accepted source instance name.
 
-### 6.3 Material names
+### 6.3 Descriptor syntax and option arities
+
+The following inventory describes the parser schema for nested shape
+descriptors. An arity is the number of whitespace-separated expression
+arguments inside an option's parentheses. Each option may appear at most once;
+the listed ranges are inclusive. These are parser constraints, not guarantees
+that every value is semantically valid or that the resulting shape works in
+every runtime subsystem.
+
+| Descriptor family | Options and accepted argument counts |
+|---|---|
+| `Cylinder`, `Tube`, `CylinderSector`, `DSection`, `HalfCylinder` | `radial(2)`, `wall(1)`, `axial(2)`, `azimuth(2)`, `chord(3)`, `clip(5)`, `topology(1)`, `close(1–4)`, `segments(1–2)`, `mapping(1)` |
+| `Sphere`, `Hemisphere`, `SphereCap`, `SphereBowl`, `SphereQuarter`, `SphereOctant` | `radial(2)`, `wall(1)`, `polar(2)`, `azimuth(2)`, `clip(5)`, `slab(5)`, `topology(1)`, `close(1–4)`, `segments(1–2)`, `mapping(1)` |
+| `TaperedSweep` | `samples(8–8192)`, `up(3)`, `segments(1)`, `cap(1)` |
+| `BranchJunction` | `core(2)`, `parent(5)`, `child(5)`, `segments(1)` |
+| `SweepProfile` | `profile(3–4097)`, `path(6–24576)`, `up(3)`, `cap(1)`, `detail(1)` |
+| `VariableSectionSweep` | `path(6–24576)`, `station(3–4104)`, `stationTransform(6)`, `nominalSection(2–4097)`, `up(3)`, `frame(1)`, `cap(1)`, `detail(1)` |
+| `SweepDisk` | `path(6–24576)`, `curve(7–12289)`, `up(3)`, `radius(1)`, `radiusStart(1)`, `radiusEnd(1)`, `longitudinalSegments(1)`, `radialSegments(1)`, `segments(1)`, `cap(1)`, `detail(1)` |
+| `Revolve` | `profile(3–4097)`, `angle(2)`, `segments(1)`, `cap(1)`, `detail(1)` |
+| `Loft` | `section(4–4098)`, `cap(1)`, `detail(1)` |
+| `SurfaceLoft` | `section(4–4098)`, `detail(1)` |
+| `CurveNetworkSurface` | `uCurve(7–12289)`, `vCurve(7–12289)`, `samplesU(1)`, `samplesV(1)`, `tolerance(1)`, `method(1)`, `detail(1)` |
+| `ShellLoft` | `section(14–8194)`, `cap(1)`, `detail(1)` |
+| `FoldedProfile` | `path(4–8192)`, `thickness(1)`, `depth(1)`, `cap(1)`, `detail(1)` |
+| `CurvedPanel` | `width(1)`, `height(1)`, `curvature(1–2)`, `thickness(1)`, `segments(1–2)`, `detail(1)` |
+| `FormedPanel` | `section(4–4098)`, `thickness(1)`, `side(1)`, `detail(1)` |
+| `HostedOpening` | `host(2–4097)`, `opening(2–4097)`, `depth(1)`, `cap(1)`, `detail(1)` |
+| `EmbossedBead` | `path(6–24576)`, `up(3)`, `width(1)`, `depth(1)`, `shoulder(1)`, `side(1)`, `end(1)`, `detail(1)` |
+| `EdgeFlange` | `path(6–24576)`, `up(3)`, `width(1)`, `thickness(1)`, `angle(1)`, `bend(1)`, `side(1)`, `detail(1)` |
+| `PanelCut` | `path(6–24576)`, `gap(1–2)`, `up(3)`, `cap(1)`, `detail(1)` |
+| `VehicleBodyShell` | `thickness(1)`, `section(7)`, `cap(1)`, `detail(1)` |
+| `GeneratedMeshReference` | `meshKey(1)`, `detail(1)`, `topology(1)` |
+| `LeafBlade`, `PetalBlade` | `profile(1)`, `length(1)`, `width(1)`, `curvature(1)`, `camber(1)`, `twist(1)`, `thickness(1)`, `widthPower(1)`, `segments(2)` |
+| `Plant` | `species(1)`, `architecture(1)`, `age(1)`, `state(1)`, `seed(1)`, `generation(1)`, `lAxiom(1–128)`, `lRule(2–128)`, `lSystem(6)`, `trunk(4)`, `branching(12)`, `leaf(7)`, `petiole(3)`, `leafArray(8)`, `phyllotaxis(3–7)`, `organArray(10)`, `flower(8)`, `flowerHead(6)`, `inflorescence(7)`, `fruit(6)`, `whorl(4)`, `growth(8)`, `tropism(5)`, `crown(5–9)`, `crownCustom(1)`, `crownSample(3)`, `spaceColonization(8)`, `crownObstacle(8)`, `floweringAge(1)`, `matureAge(1)`, `detail(1)` |
+| `Vine` | `species(1)`, `start(3)`, `direction(3)`, `radius(1)`, `mode(1)`, `collision(1)`, `attachment(1)`, `step(1)`, `segments(1)`, `seekDistance(1)`, `attachDistance(1)`, `tolerance(1)`, `radiusDecay(1)`, `minimumRadius(1)`, `preferred(3)`, `gamma(1)`, `target(7)`, `obstacle(8)`, `detail(1)` |
+| `ScatterRegion` | `region(1)`, `species(1)`, `seed(1)`, `surface(7)`, `face(1)`, `density(1)`, `separation(1)`, `scale(2)`, `orientation(1)`, `collisionRadius(1)`, `layer(1)`, `mask(1–10)`, `obstacle(8)`, `detail(1)` |
+
+Alias-only options are `Tube.inner(1)`, `CylinderSector.sweep(1)`,
+`DSection.angle(1)/offset(1)/side(1)`,
+`HalfCylinder.angle(1)/side(1)`,
+`Hemisphere.axis(1)/side(1)`,
+`SphereCap.axis(1)/offset(1)/side(1)`, and
+`SphereBowl.inner(1)/axis(1)/offset(1)/side(1)`. Cylinder aliases inherit
+the `Cylinder` option set; sphere aliases inherit the `Sphere` option set.
+`MirrorShape` and `ShellOffset` use a nested-source form instead of the generic
+option table:
+
+```p3d
+MirrorShape(source(Cube) plane(0 1 0) mode(keepBoth) detail(LOD3))
+ShellOffset(source(Sphere) thickness(0.1) side(both) detail(LOD3))
+```
+
+Four descriptors have dedicated syntax rather than an option map:
+
+- `AxialProfile` requires `axis(x|y|z)`, one or more
+  `profile(name polygon(x1 z1 ...))` definitions, and exactly one
+  `at(position profileName [center(x z) scale(x z) rotate(degrees)])`.
+  Optional `hold(position)`, `linear(position profileName ...)`, and
+  `step(profileName ...)` transitions follow `at`; optional `cap(none|all|
+  bottom|top)` must be last.
+- `Extrude` takes one `Rect`, `RoundedRect`, `Circle`, `Ellipse`,
+  `ChamferRect`, or `Polygon` profile constructor, then a depth expression,
+  and optionally `cap(all|none|front|back)`.
+- `InstanceArray` requires `source(shapeDescriptor)` and exactly one
+  `linear(e e e e)`, `grid(e e e e)`, or `radial(e e e e e e)` pattern;
+  `detail(e)` is optional.
+- `CompoundShape` requires one or more
+  `part(purpose source(shapeDescriptor) [transform(16 expressions)])`
+  statements; an optional `detail(e)` is allowed. A missing transform is the
+  identity matrix.
+
+The remaining nested-source descriptors require exactly one `source(...)`.
+The shape parser and evaluator are the source of truth if these schemas change.
+
+### 6.4 Material names
 
 Materials are compact descriptor names, not quoted free-form strings. Explicit
 material names are canonicalized by the runtime. The editor recognizes lexical
@@ -393,7 +468,9 @@ it.
 `origin(x y z)`, `normal(x y z)`, `tangent(x y z)`,
 `region(Point)`, `region(PlaneRectangle width height)`,
 `region(AxisSegment length)`, `region(ObjectBoundaryFace name)`,
-`tolerance(value)`, and `clearance(...)`.
+`tolerance(value)`, and `clearance(nominal)` or
+`clearance(nominal minimum maximum)`. The one-value form uses the nominal
+expression for all three values.
 
 `Connect(...)` requires `id(...)`, `source(object interface)`,
 `target(object interface)`, and `type(...)`. Optional fields are
@@ -440,27 +517,36 @@ model validators.
 
 ## 8. Airflow grammar
 
-Airflow declarations use three whitespace-separated expressions:
+The source actions `AirProperties` and `Wind` set the medium and wind vector.
+`AirProperties` takes two whitespace-separated expressions; `Wind` takes
+three. Airflow actions are accumulated and validated by the grammar executor,
+then attached to the next eligible `I(...)` instance when the airflow state is
+active and reset after that attempt. They do not attach merely because an
+instance is described as a "body".
 
 ```p3d
 AirProperties(density dynamicViscosity)
 Wind(x y z)
 ```
 
-The recognized three-expression body actions are:
+The recognized airflow body actions and expression arities are:
 
-```text
-BodyInertia(i1 i2 i3)  LoadPoint(x y z)  LoadAxis(x y z)
-BodyForce(x y z)       BodyTorque(x y z) ForceRamp(start end scale)
-DragSurface(cd area length)  LiftSurface(cl area length)
-PropSample(advance thrust power)  Propeller(diameter rpm spin)
-DuctStation(flow pressure area)  PlateFriction(area length regime)
-```
+| Action | Arguments |
+|---|---:|
+| `BodyInertia(i1 i2 i3)` | 3 |
+| `LoadPoint(x y z)`, `LoadAxis(x y z)` | 3 each |
+| `BodyForce(x y z)`, `BodyTorque(x y z)` | 3 each |
+| `ForceRamp(start end scale)` | 3 |
+| `DragSurface(cd area length)`, `LiftSurface(cl area length)` | 3 each |
+| `PropSample(advance thrust power)` | 3 |
+| `Propeller(diameter rpm spin)` | 3 |
+| `DuctStation(flow pressure area)` | 3 |
+| `PlateFriction(area length regime)` | 3 |
 
 The implementation requires finite values and imposes additional invariants
 (positive inertia components, a nonzero load axis, increasing propeller/duct
 samples, and a valid propeller table, among others). The declaration sequence
-applies to the next `I(...)` body; it must meet the preflight rules in
+must meet the preflight rules in
 `src/physics/model/BodyAirflow.cpp`. This is a specialized grammar extension,
 not a general-purpose fluid solver.
 
@@ -509,7 +595,7 @@ Before accepting a grammar:
 | Shape expression lowering and validation dispatch | `src/grammar/service/ShapeSpecificationEvaluator.cpp` |
 | Spatial object, interface, connection, constraint declarations | `src/grammar/service/Spatial*DeclarationParser.cpp` and `SpatialObjectSpecificationParser.cpp` |
 | Vehicle joints | `src/grammar/service/VehicleJointDeclarationParser.cpp` |
-| Lighting declarations | `src/grammar/service/LightingDeclarationParser.cpp` |
-| Airflow action names and runtime checks | `src/physics/model/BodyAirflow.cpp` |
+| Lighting declarations, including `Controls` | `src/grammar/service/LightingDeclarationParser.cpp` |
+| Airflow source actions and arity; attachment and execution | `src/Grammar.cpp` |
+| Airflow value validation and simulation semantics | `src/physics/model/BodyAirflow.cpp` |
 | Detailed authoring examples | `examples/Progen3D_Example_Grammar_Corpus/reference/Progen3D_Grammar_Writing_Guide.md` |
-
