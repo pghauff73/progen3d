@@ -1,0 +1,59 @@
+{
+  "title": "Orange Dome House",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/orange-dome-house-b909c8ac",
+  "source_file": "Orange_Dome_House.p3d",
+  "git_blob_sha": "b909c8ac0c4c1139c356419bddc75a89d5663543",
+  "bytes": 91152,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Orange_Dome_House.p3d"
+  ],
+  "description": "ORANGE DOME HOUSE | ProGen3D native grammar | metres | Y up",
+  "features": [
+    "AxialProfile",
+    "CubeY",
+    "TaperedSweep"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ORANGE DOME HOUSE | ProGen3D native grammar | metres | Y up · A single pod reconstructed from the supplied exterior photograph. · Start -> DomeHouse           complete raised pod · Start -> FurnishedCutaway    rear shell course, access stair and interior · Start -> OpenFloorPlan       shell removed for top or orbit inspection · Change only the active Start production below, then rebuild. · Floor level 2.78 m. Decagonal rim diameter through opposite vertices 7.20 m. · Floor finish, walls, furniture, stair, access opening and scale are design assumptions. · Panel material tokens select burnt-orange and amber swatches in the Android palette. · Four repeated pylons and two outward-propped upper windows are modelling choices."
+    ],
+    [
+      "Named objects",
+      "DomeHouse, FurnishedCutaway, OpenFloorPlan, SitePad, PylonArray, DeckCassette, HabitatFloor, RearStair, LowerFarFacets, LowerNearFacets, ShoulderFacets, RoofFacets, RearVestibule, WetRoom, Galley, SleepingBerth, WindowBanquette, DiningNook"
+    ],
+    [
+      "Object classes",
+      "Building, Foundation, Support, Floor, FloorFinish, Stair, Cladding, Entry, Bathroom, Kitchen, Bedroom, Seating, Dining"
+    ],
+    [
+      "Instantiated primitives",
+      "AxialProfile, CubeY, TaperedSweep"
+    ],
+    [
+      "Material identifiers",
+      "beigebrownmattepolyester, orangebrownmattefabric, charcoalmattemetal, blackmatterubber, silverbrushedmetal, darkwalnutwood, lightashwood, beigeoakwood, lightbirchwood, offwhiteceramic, bluewhiteglossysmoothglass, warmteakwood, goldbrushedmetal, offwhitemattefabric, sagegreenfabric, ivorymattepaint, goldbeigeroughfabric, slateblueglossyglass, goldorangemattepaint, warmwhitematteplaster, cleartransparentglass"
+    ],
+    [
+      "Production rules",
+      "Start, DomeHouse, FurnishedCutaway, OpenFloorPlan, SitePad, TaperedPylon, PylonArray, DeckCassette, HabitatFloor, RearStair, LowerFarFacets, LowerNearFacets, ShoulderFacets, RoofFacets, RearVestibule, Fitout, WetRoom, Galley, SleepingBerth, WindowBanquette (44 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "834"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

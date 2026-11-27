@@ -3,7 +3,7 @@
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
   "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 250,
+  "distinct_sources": 255,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -6530,6 +6530,70 @@
       }
     },
     {
+      "title": "Pro Gen3D One Branch Forks",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-one-branch-forks-a200de90",
+      "source_file": "ProGen3D_One_Branch_Forks.p3d",
+      "git_blob_sha": "a200de90fa5cb05db4f4716e2a790a9e9488e0b7",
+      "bytes": 79147,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_One_Branch_Forks.p3d"
+      ],
+      "description": "Run It Again / One Branch Forks. Image 2: a low view from a Queensland veranda.",
+      "features": [
+        "TaperedSweep",
+        "Loft",
+        "LeafBlade",
+        "SweepDisk",
+        "Revolve",
+        "Cube",
+        "SweepProfile",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Run It Again / One Branch Forks. Image 2: a low view from a Queensland veranda. · GumView(blueTip twigDepth). Use blueTip=1 for the drawn fork; 0 grows a leafed fork. · TwigDepth 0, 1 or 2 controls successive fork generations on every foliage spray. · Main boughs keep their traced silhouettes. The editor seed varies leaves and spray angles. · Approximate metres, Y up. Reproduce the preview from (0, 0.92, 4.4), facing -Z · with 12 degrees of upward pitch, 54.2 degrees horizontal field of view, 16:9. · Heights, hidden surfaces and out-of-frame limbs are inferred from a single view. · Each shoot forks into two shorter shoots. Each leaf attaches at its own shoot station. · The spine bends down quadratically, and a small out-of-plane bend gives it depth."
+        ],
+        [
+          "Named objects",
+          "GumScene, Scaffold, Bark, LeafSprays, Fruit, GrowingTip, Horizon, Veranda, Rocker, SpraysTrunk, SpraysRoofCanopy, SpraysCrownLeader, SpraysUpperFine, SpraysHighEast, SpraysHighEastSpur, SpraysTopRight, SpraysHighWest, SpraysWestSkirt, SpraysLowerFork, SpraysOuterLower, SpraysFineLower, SpraysDroopingSpur, SpraysEastFork, SpraysCrossBough"
+        ],
+        [
+          "Object classes",
+          "VerandaStudy, EucalyptusScaffold, ExfoliatingBark, PendantEucalyptusFoliage, WoodyCapsules, TerminalFork, DistantTreeLine, TimberVeranda, BentwoodRockingChair, PendantShoots"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, Loft, LeafBlade, SweepDisk, Revolve, Cube, SweepProfile, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "silverbeigebirchwood, silvergreybirchwood, ambercedarwood, brownwalnutwood, amberbrowncedarwood, sagegreenmattepaint, olivegreenmattepaint, browncedarwood, cyanemissivepaint, warmwhitepaint, beigewhitepaint, amberbeigepinewood, sagegreenweatheredpaint, amberoakpolishedwood, brownoakwood"
+        ],
+        [
+          "Production rules",
+          "Start, GumView, TracedLimbs, Trunk, CrossBough, TerminalWood, EastFork, LowerFork, OuterLower, FineLower, DroopingSpur, CrownLeader, HighEast, HighEastSpur, HighWest, RoofCanopy, TopRight, WestSkirt, UpperFine, BarkPlates (63 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "807"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Pro Gen3D Spur Gear Pair",
       "group": "education/grammar-showcases",
       "directory": "education/grammar-showcases/progen3d-spur-gear-pair-7191aa76",
@@ -7764,6 +7828,61 @@
         [
           "Source lines",
           "13"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 V1 All Parts",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-v1-all-parts-283fd3f3",
+      "source_file": "Ender3_V1_All_Parts.grammar",
+      "git_blob_sha": "283fd3f37b5f896ea7baab8eb0c2f73ca7ec0a5f",
+      "bytes": 52415,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_V1_All_Parts.grammar"
+      ],
+      "description": "Ender3 V1 All Parts exported procedural grammar.",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          ""
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "X, Assembly_Frame, Instance_Base_Left_4040, Instance_Base_Right_4040, Instance_Base_Centre_4040, Instance_Upright_Left_2040, Instance_Upright_Right_2040, Instance_Top_Crossmember_2020, Instance_X_Gantry_2020, Instance_Y_Guide_2040, Instance_Frame_Corner_Bracket_L, Instance_Rubber_Foot_L__115, Instance_Rubber_Foot_L_115, Instance_Frame_Corner_Bracket_R, Instance_Rubber_Foot_R__115, Instance_Rubber_Foot_R_115, Instance_Top_Endcap_0, Instance_Top_Endcap_1, Instance_Frame_M5x45_1, Instance_Frame_M5x45_2 (535 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "547"
         ]
       ],
       "render_assets": [],
@@ -10573,6 +10692,125 @@
       }
     },
     {
+      "title": "Lantern Walk Garden",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/lantern-walk-garden-64058a79",
+      "source_file": "Lantern_Walk_Garden.p3d",
+      "git_blob_sha": "64058a792a26ff5fd3b75396cd855f8dfae6d026",
+      "bytes": 88333,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Lantern_Walk_Garden.p3d"
+      ],
+      "description": "Lantern Walk | a small garden courtyard reconstructed from reference 801",
+      "features": [
+        "Cube",
+        "Loft",
+        "TaperedSweep",
+        "Sphere",
+        "Cylinder",
+        "Revolve",
+        "LeafBlade",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Lantern Walk | a small garden courtyard reconstructed from reference 801 · Native ProGen3D. Coordinates in estimated metres. Y is up. The patio is toward negative Z. · Portrait view: eye (0 1.50 0), direction (0 -0.4044 -0.9146), vertical FOV 70.19 degrees, aspect 709:1068. · For the illustrated planting use seed 73. Randomness changes surface scatter and fine foliage. · Garden(pebblesPerRow canopySprays flowerStems) controls detail. Suggested ranges are 4..9, 4..6, 4..7. · For a lighter scene, set the Garden call in Start to Garden(4 4 4). · Flagstone(x z width depth yaw) is editable individually in SteppingStones. The patio centre is X=-0.78, Z=-7.14."
+        ],
+        [
+          "Named objects",
+          "LanternWalk, Soil, Walk, Steps, Lawn, Patio, LeftChair, RightChair, Hearth, TeaTable, Fence, Festoon, PathLamps, ScreenPlanting, ShadeTree, BeyondFence, WhiteHydrangea, HangingBasket, Borders, BedRocks, TuftBorder, HostaBorder, RoseDriftBorder, GoldDriftBorder (+2 more)"
+        ],
+        [
+          "Object classes",
+          "CourtyardGarden, MulchedBeds, GravelPath, SteppingStones, ClippedTurf, CircularPaving, WovenLoungeChair, FireBowl, PlantStand, CedarScreen, StringLights, StakeLanterns, ColumnarEvergreens, MultistemTree, BackgroundCanopy, MopheadShrub, TrailingPlanter, MixedPerennialBorders, LandscapeBoulders, PerennialDrift"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Loft, TaperedSweep, Sphere, Cylinder, Revolve, LeafBlade, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "darkbrownmattepaint, beigegreywhitemattepolyester, olivegreenmattepaint, darkbrownmattemetal, naturalbeigecottonfabric, ivorymattepaint, darkbrownmattefabric, offwhitemattefabric, darkwalnutwood, whitebeigemattefabric, sagegreenfabric, charcoalmattemetal, blackmatterubber, orangeroughceramic, warmteakwood, goldorangemattepaint, whitebeigeblueemissivepaint, sagegreenmattepaint, greenlimebeigemattepaint, goldenoakwood, pinkflowerpetal, orangebrownmattefabric, redpurpleflowerpetal, offwhiteceramic"
+        ],
+        [
+          "Production rules",
+          "Start, Garden, SoilBase, PathBed, Turf, Edging, GravelRows, Pebble, FlagFace, Flagstone, SteppingStones, Paving, PatioDisc, LoungeChair, ThrowPillow, Bowl, SideTable, CedarFence, Slat, PostAt (56 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "843"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "M3 Pose printing",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/m3-pose-printing-fd16535b",
+      "source_file": "M3_Pose_printing.grammar",
+      "git_blob_sha": "fd16535b522a5e0ce0db58032e1002f38b76135e",
+      "bytes": 144947,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "M3_Pose_printing.grammar"
+      ],
+      "description": "M3 Pose printing exported procedural grammar.",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          ""
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "X, Assembly_Frame, Instance_Base_Left_4040, Instance_Base_Right_4040, Instance_Base_Centre_4040, Instance_Upright_Left_2040, Instance_Upright_Right_2040, Instance_Top_Crossmember_2020, Instance_X_Gantry_2020, Instance_Y_Guide_2040, Instance_Frame_Corner_Bracket_L, Instance_Rubber_Foot_L__115, Instance_Rubber_Foot_L_115, Instance_Frame_Corner_Bracket_R, Instance_Rubber_Foot_R__115, Instance_Rubber_Foot_R_115, Instance_Top_Endcap_0, Instance_Top_Endcap_1, Instance_Frame_M5x45_1, Instance_Frame_M5x45_2 (535 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "536"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "M5 Base 262 Parts",
       "group": "engineering/exported-studies",
       "directory": "engineering/exported-studies/m5-base-262-parts-e37f4376",
@@ -10583,7 +10821,8 @@
       "source_commit": null,
       "original_paths": [],
       "library_exports": [
-        "M5_Base_262_Parts.grammar"
+        "M5_Base_262_Parts.grammar",
+        "Ender3_V1_M2_Detailed.grammar"
       ],
       "description": "M5 Base 262 Parts exported procedural grammar.",
       "features": [],
@@ -10615,6 +10854,65 @@
         [
           "Source lines",
           "536"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Orange Dome House",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/orange-dome-house-b909c8ac",
+      "source_file": "Orange_Dome_House.p3d",
+      "git_blob_sha": "b909c8ac0c4c1139c356419bddc75a89d5663543",
+      "bytes": 91152,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Orange_Dome_House.p3d"
+      ],
+      "description": "ORANGE DOME HOUSE | ProGen3D native grammar | metres | Y up",
+      "features": [
+        "AxialProfile",
+        "CubeY",
+        "TaperedSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ORANGE DOME HOUSE | ProGen3D native grammar | metres | Y up · A single pod reconstructed from the supplied exterior photograph. · Start -> DomeHouse           complete raised pod · Start -> FurnishedCutaway    rear shell course, access stair and interior · Start -> OpenFloorPlan       shell removed for top or orbit inspection · Change only the active Start production below, then rebuild. · Floor level 2.78 m. Decagonal rim diameter through opposite vertices 7.20 m. · Floor finish, walls, furniture, stair, access opening and scale are design assumptions. · Panel material tokens select burnt-orange and amber swatches in the Android palette. · Four repeated pylons and two outward-propped upper windows are modelling choices."
+        ],
+        [
+          "Named objects",
+          "DomeHouse, FurnishedCutaway, OpenFloorPlan, SitePad, PylonArray, DeckCassette, HabitatFloor, RearStair, LowerFarFacets, LowerNearFacets, ShoulderFacets, RoofFacets, RearVestibule, WetRoom, Galley, SleepingBerth, WindowBanquette, DiningNook"
+        ],
+        [
+          "Object classes",
+          "Building, Foundation, Support, Floor, FloorFinish, Stair, Cladding, Entry, Bathroom, Kitchen, Bedroom, Seating, Dining"
+        ],
+        [
+          "Instantiated primitives",
+          "AxialProfile, CubeY, TaperedSweep"
+        ],
+        [
+          "Material identifiers",
+          "beigebrownmattepolyester, orangebrownmattefabric, charcoalmattemetal, blackmatterubber, silverbrushedmetal, darkwalnutwood, lightashwood, beigeoakwood, lightbirchwood, offwhiteceramic, bluewhiteglossysmoothglass, warmteakwood, goldbrushedmetal, offwhitemattefabric, sagegreenfabric, ivorymattepaint, goldbeigeroughfabric, slateblueglossyglass, goldorangemattepaint, warmwhitematteplaster, cleartransparentglass"
+        ],
+        [
+          "Production rules",
+          "Start, DomeHouse, FurnishedCutaway, OpenFloorPlan, SitePad, TaperedPylon, PylonArray, DeckCassette, HabitatFloor, RearStair, LowerFarFacets, LowerNearFacets, ShoulderFacets, RoofFacets, RearVestibule, Fitout, WetRoom, Galley, SleepingBerth, WindowBanquette (44 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "834"
         ]
       ],
       "render_assets": [],
@@ -14683,7 +14981,7 @@
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 135,
+  "library_exports_imported": 140,
   "library_export_inventory_count": 251,
-  "library_export_names_transferred": 136
+  "library_export_names_transferred": 142
 }

@@ -1,0 +1,64 @@
+{
+  "title": "Lantern Walk Garden",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/lantern-walk-garden-64058a79",
+  "source_file": "Lantern_Walk_Garden.p3d",
+  "git_blob_sha": "64058a792a26ff5fd3b75396cd855f8dfae6d026",
+  "bytes": 88333,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Lantern_Walk_Garden.p3d"
+  ],
+  "description": "Lantern Walk | a small garden courtyard reconstructed from reference 801",
+  "features": [
+    "Cube",
+    "Loft",
+    "TaperedSweep",
+    "Sphere",
+    "Cylinder",
+    "Revolve",
+    "LeafBlade",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Lantern Walk | a small garden courtyard reconstructed from reference 801 · Native ProGen3D. Coordinates in estimated metres. Y is up. The patio is toward negative Z. · Portrait view: eye (0 1.50 0), direction (0 -0.4044 -0.9146), vertical FOV 70.19 degrees, aspect 709:1068. · For the illustrated planting use seed 73. Randomness changes surface scatter and fine foliage. · Garden(pebblesPerRow canopySprays flowerStems) controls detail. Suggested ranges are 4..9, 4..6, 4..7. · For a lighter scene, set the Garden call in Start to Garden(4 4 4). · Flagstone(x z width depth yaw) is editable individually in SteppingStones. The patio centre is X=-0.78, Z=-7.14."
+    ],
+    [
+      "Named objects",
+      "LanternWalk, Soil, Walk, Steps, Lawn, Patio, LeftChair, RightChair, Hearth, TeaTable, Fence, Festoon, PathLamps, ScreenPlanting, ShadeTree, BeyondFence, WhiteHydrangea, HangingBasket, Borders, BedRocks, TuftBorder, HostaBorder, RoseDriftBorder, GoldDriftBorder (+2 more)"
+    ],
+    [
+      "Object classes",
+      "CourtyardGarden, MulchedBeds, GravelPath, SteppingStones, ClippedTurf, CircularPaving, WovenLoungeChair, FireBowl, PlantStand, CedarScreen, StringLights, StakeLanterns, ColumnarEvergreens, MultistemTree, BackgroundCanopy, MopheadShrub, TrailingPlanter, MixedPerennialBorders, LandscapeBoulders, PerennialDrift"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Loft, TaperedSweep, Sphere, Cylinder, Revolve, LeafBlade, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "darkbrownmattepaint, beigegreywhitemattepolyester, olivegreenmattepaint, darkbrownmattemetal, naturalbeigecottonfabric, ivorymattepaint, darkbrownmattefabric, offwhitemattefabric, darkwalnutwood, whitebeigemattefabric, sagegreenfabric, charcoalmattemetal, blackmatterubber, orangeroughceramic, warmteakwood, goldorangemattepaint, whitebeigeblueemissivepaint, sagegreenmattepaint, greenlimebeigemattepaint, goldenoakwood, pinkflowerpetal, orangebrownmattefabric, redpurpleflowerpetal, offwhiteceramic"
+    ],
+    [
+      "Production rules",
+      "Start, Garden, SoilBase, PathBed, Turf, Edging, GravelRows, Pebble, FlagFace, Flagstone, SteppingStones, Paving, PatioDisc, LoungeChair, ThrowPillow, Bowl, SideTable, CedarFence, Slat, PostAt (56 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "843"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

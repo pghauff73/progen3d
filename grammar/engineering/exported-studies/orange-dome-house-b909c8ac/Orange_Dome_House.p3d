@@ -1,0 +1,833 @@
+# ORANGE DOME HOUSE | ProGen3D native grammar | metres | Y up
+# A single pod reconstructed from the supplied exterior photograph.
+# Start -> DomeHouse           complete raised pod
+# Start -> FurnishedCutaway    rear shell course, access stair and interior
+# Start -> OpenFloorPlan       shell removed for top or orbit inspection
+# Change only the active Start production below, then rebuild.
+# Floor level 2.78 m. Decagonal rim diameter through opposite vertices 7.20 m.
+# Floor finish, walls, furniture, stair, access opening and scale are design assumptions.
+# Panel material tokens select burnt-orange and amber swatches in the Android palette.
+# Four repeated pylons and two outward-propped upper windows are modelling choices.
+# Model axes: +Z toward the lounge glazing, +X toward the sleeping berth.
+
+Start -> DomeHouse
+
+# Whole-house assembly. The cutaway and plan below reuse the same rooms and fittings.
+DomeHouse ->
+  [ Object(id(DomeHouse) class(Building) taxonomy(Building SpatialOrganisation SpatialBreakdown BuildingContext Building EnclosedBuilding ProgrammedBuilding) layer(Temporary))
+    [
+      SitePad
+      PylonArray
+      DeckCassette
+      RearStair
+      HabitatFloor
+      RearVestibule
+      Fitout
+      LowerFarFacets
+      LowerNearFacets
+      ShoulderFacets
+      RoofFacets
+    ]
+  ]
+
+FurnishedCutaway ->
+  [ Object(id(FurnishedCutaway) class(Building) taxonomy(Building SpatialOrganisation SpatialBreakdown BuildingContext Building EnclosedBuilding ProgrammedBuilding) layer(Temporary))
+    [
+      PylonArray
+      DeckCassette
+      RearStair
+      HabitatFloor
+      RearVestibule
+      Fitout
+      LowerFarFacets
+    ]
+  ]
+
+OpenFloorPlan ->
+  [ Object(id(OpenFloorPlan) class(Building) taxonomy(Building SpatialOrganisation SpatialBreakdown BuildingContext Building EnclosedBuilding ProgrammedBuilding) layer(Temporary))
+    [
+      DeckCassette
+      RearStair
+      HabitatFloor
+      RearVestibule
+      Fitout
+    ]
+  ]
+
+SitePad ->
+  [ Object(id(SitePad) class(Foundation) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Foundation SitePad) layer(Terrain))
+    [
+      [ T(0 -0.18 0) !I(AxialProfile(axis(y) profile(Low polygon(0 4.65 0.45578 4.627609 0.90717 4.560652 1.349824 4.449773 1.779478 4.29604 2.191995 4.100934 2.583402 3.866334 2.949929 3.594499 3.288047 3.288047 3.594499 2.949929 3.866334 2.583402 4.100934 2.191995 4.29604 1.779478 4.449773 1.349824 4.560652 0.90717 4.627609 0.45578 4.65 0 4.627609 -0.45578 4.560652 -0.90717 4.449773 -1.349824 4.29604 -1.779478 4.100934 -2.191995 3.866334 -2.583402 3.594499 -2.949929 3.288047 -3.288047 2.949929 -3.594499 2.583402 -3.866334 2.191995 -4.100934 1.779478 -4.29604 1.349824 -4.449773 0.90717 -4.560652 0.45578 -4.627609 0 -4.65 -0.45578 -4.627609 -0.90717 -4.560652 -1.349824 -4.449773 -1.779478 -4.29604 -2.191995 -4.100934 -2.583402 -3.866334 -2.949929 -3.594499 -3.288047 -3.288047 -3.594499 -2.949929 -3.866334 -2.583402 -4.100934 -2.191995 -4.29604 -1.779478 -4.449773 -1.349824 -4.560652 -0.90717 -4.627609 -0.45578 -4.65 0 -4.627609 0.45578 -4.560652 0.90717 -4.449773 1.349824 -4.29604 1.779478 -4.100934 2.191995 -3.866334 2.583402 -3.594499 2.949929 -3.288047 3.288047 -2.949929 3.594499 -2.583402 3.866334 -2.191995 4.100934 -1.779478 4.29604 -1.349824 4.449773 -0.90717 4.560652 -0.45578 4.627609)) at(0 Low) hold(0.18) cap(all)) material(beigebrownmattepolyester) alpha(1) texscale(1)) ]
+      [ T(-3.92 -0.12 -3.9) BoxBeigebrownmattepolyester(1.25 1.3 0.12) ]
+    ]
+  ]
+
+# One radial support in local coordinates. PylonArray rotates this rule to four bearings.
+TaperedPylon ->
+  [ T(0 0.005 3.11) BoxSilverbrushedmetal(0.62 0.57 0.055) ]
+  RodCharcoalmattemetal(0 0.06 3.11 0 0.52 3.06 0.115 0.115 1 0 0)
+  [ T(0 0.47 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.1116 2.905 0.1116 2.905 0.155 2.9658 0.155 3.1642 0.1116 3.225 -0.1116 3.225 -0.155 3.1642 -0.155 2.9658)) profile(High polygon(-0.234 2.635 0.234 2.635 0.325 2.7433 0.325 3.0967 0.234 3.205 -0.234 3.205 -0.325 3.0967 -0.325 2.7433)) at(0 Low) linear(0.94 High) cap(all)) material(orangebrownmattefabric) alpha(1) texscale(1)) ]
+  [ T(0 1.41 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.234 2.635 0.234 2.635 0.325 2.7433 0.325 3.0967 0.234 3.205 -0.234 3.205 -0.325 3.0967 -0.325 2.7433)) profile(High polygon(-0.3564 2.295 0.3564 2.295 0.495 2.4527 0.495 2.9673 0.3564 3.125 -0.3564 3.125 -0.495 2.9673 -0.495 2.4527)) at(0 Low) linear(1.01 High) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+  [ T(0 2.42 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.3564 2.295 0.3564 2.295 0.495 2.4527 0.495 2.9673 0.3564 3.125 -0.3564 3.125 -0.495 2.9673 -0.495 2.4527)) profile(High polygon(-0.3852 2.23 0.3852 2.23 0.535 2.401 0.535 2.959 0.3852 3.13 -0.3852 3.13 -0.535 2.959 -0.535 2.401)) at(0 Low) linear(0.13 High) cap(all)) material(blackmatterubber) alpha(1) texscale(1)) ]
+  [ T(0 0.06 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.23 2.965 -0.205251 2.954749 -0.195 2.93 -0.205251 2.905251 -0.23 2.895 -0.254749 2.905251 -0.265 2.93 -0.254749 2.954749)) at(0 Low) hold(0.025) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+  [ T(0 0.06 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.23 3.325 -0.205251 3.314749 -0.195 3.29 -0.205251 3.265251 -0.23 3.255 -0.254749 3.265251 -0.265 3.29 -0.254749 3.314749)) at(0 Low) hold(0.025) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+  [ T(0 0.06 0) !I(AxialProfile(axis(y) profile(Low polygon(0.23 2.965 0.254749 2.954749 0.265 2.93 0.254749 2.905251 0.23 2.895 0.205251 2.905251 0.195 2.93 0.205251 2.954749)) at(0 Low) hold(0.025) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+  [ T(0 0.06 0) !I(AxialProfile(axis(y) profile(Low polygon(0.23 3.325 0.254749 3.314749 0.265 3.29 0.254749 3.265251 0.23 3.255 0.205251 3.265251 0.195 3.29 0.205251 3.314749)) at(0 Low) hold(0.025) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+
+PylonArray ->
+  [ Object(id(PylonArray) class(Support) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Support PylonArray) layer(Structure))
+    [
+      [ A(45 1) TaperedPylon ]
+      [ A(135 1) TaperedPylon ]
+      [ A(225 1) TaperedPylon ]
+      [ A(315 1) TaperedPylon ]
+    ]
+  ]
+
+# Bevelled metal rim, shadow joint and structural underside.
+DeckCassette ->
+  [ Object(id(DeckCassette) class(Floor) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Floor DeckCassette) layer(Structure))
+    [
+      [ T(0 2.51 0) !I(AxialProfile(axis(y) profile(Low polygon(1.032117 3.176529 2.702117 1.963203 3.34 0 2.702117 -1.963203 1.032117 -3.176529 -1.032117 -3.176529 -2.702117 -1.963203 -3.34 0 -2.702117 1.963203 -1.032117 3.176529)) profile(High polygon(1.115551 3.433314 2.920551 2.121905 3.61 0 2.920551 -2.121905 1.115551 -3.433314 -1.115551 -3.433314 -2.920551 -2.121905 -3.61 0 -2.920551 2.121905 -1.115551 3.433314)) at(0 Low) linear(0.1 High) cap(all)) material(silverbrushedmetal) alpha(1) texscale(1)) ]
+      [ T(0 2.61 0) !I(AxialProfile(axis(y) profile(Low polygon(1.115551 3.433314 2.920551 2.121905 3.61 0 2.920551 -2.121905 1.115551 -3.433314 -1.115551 -3.433314 -2.920551 -2.121905 -3.61 0 -2.920551 2.121905 -1.115551 3.433314)) at(0 Low) hold(0.052) cap(all)) material(blackmatterubber) alpha(1) texscale(1)) ]
+      [ T(0 2.662 0) !I(AxialProfile(axis(y) profile(Low polygon(1.115551 3.433314 2.920551 2.121905 3.61 0 2.920551 -2.121905 1.115551 -3.433314 -1.115551 -3.433314 -2.920551 -2.121905 -3.61 0 -2.920551 2.121905 -1.115551 3.433314)) at(0 Low) hold(0.077) cap(all)) material(silverbrushedmetal) alpha(1) texscale(1)) ]
+      [ T(0 2.739 0) !I(AxialProfile(axis(y) profile(Low polygon(1.103191 3.395272 2.888191 2.098393 3.57 0 2.888191 -2.098393 1.103191 -3.395272 -1.103191 -3.395272 -2.888191 -2.098393 -3.57 0 -2.888191 2.098393 -1.103191 3.395272)) at(0 Low) hold(0.025) cap(all)) material(darkwalnutwood) alpha(1) texscale(1)) ]
+      RodCharcoalmattemetal(0 2.52 0.53 0 2.52 3 0.045 0.045 1 0 0)
+      RodCharcoalmattemetal(0.311526 2.52 0.428779 1.763356 2.52 2.427051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(0.50406 2.52 0.163779 2.85317 2.52 0.927051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(0.50406 2.52 -0.163779 2.85317 2.52 -0.927051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(0.311526 2.52 -0.428779 1.763356 2.52 -2.427051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(0 2.52 -0.53 0 2.52 -3 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(-0.311526 2.52 -0.428779 -1.763356 2.52 -2.427051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(-0.50406 2.52 -0.163779 -2.85317 2.52 -0.927051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(-0.50406 2.52 0.163779 -2.85317 2.52 0.927051 0.045 0.045 0 1 0)
+      RodCharcoalmattemetal(-0.311526 2.52 0.428779 -1.763356 2.52 2.427051 0.045 0.045 0 1 0)
+    ]
+  ]
+
+# Individually cut boards intersect a decagonal floor perimeter.
+HabitatFloor ->
+  [ Object(id(HabitatFloor) class(FloorFinish) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey FloorFinish HabitatFloor) layer(Interior))
+    [
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 -3.395272 -1.103191 -3.395272 -1.396734 -3.182 -0.652 -3.182)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 -3.253735 1.103191 -3.395272 -0.648 -3.395272 -0.648 -3.182 1.298 -3.182)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.396734 -3.182 1.302 -3.250828 1.302 -3.182)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 -3.178 -1.40224 -3.178 -1.761475 -2.917 -0.002 -2.917)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.761475 -2.917 1.40224 -3.178 0.002 -3.178 0.002 -2.917)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 -2.913 -1.766981 -2.913 -2.126216 -2.652 -1.302 -2.652)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 -2.913 -1.298 -2.913 -1.298 -2.652 0.648 -2.652)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.126216 -2.652 1.766981 -2.913 0.652 -2.913 0.652 -2.652)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 -2.648 -2.131722 -2.648 -2.490958 -2.387 -0.652 -2.387)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 -2.648 -0.648 -2.648 -0.648 -2.387 1.298 -2.387)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.490958 -2.387 2.131722 -2.648 1.302 -2.648 1.302 -2.387)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 -2.383 -2.496463 -2.383 -2.855699 -2.122 -1.952 -2.122)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 -2.383 -1.948 -2.383 -1.948 -2.122 -0.002 -2.122)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 -2.383 0.002 -2.383 0.002 -2.122 1.948 -2.122)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.855699 -2.122 2.496463 -2.383 1.952 -2.383 1.952 -2.122)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 -2.118 -2.861204 -2.118 -2.888191 -2.098393 -2.966624 -1.857 -1.302 -1.857)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 -2.118 -1.298 -2.118 -1.298 -1.857 0.648 -1.857)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.598 -2.118 0.652 -2.118 0.652 -1.857 2.598 -1.857)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.966624 -1.857 2.888191 -2.098393 2.861204 -2.118 2.602 -2.118 2.602 -1.857)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.602 -1.853 -2.967924 -1.853 -3.052728 -1.592 -2.602 -1.592)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 -1.853 -2.598 -1.853 -2.598 -1.592 -0.652 -1.592)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 -1.853 -0.648 -1.853 -0.648 -1.592 1.298 -1.592)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.052728 -1.592 2.967924 -1.853 1.302 -1.853 1.302 -1.592)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 -1.588 -3.054028 -1.588 -3.138832 -1.327 -1.952 -1.327)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 -1.588 -1.948 -1.588 -1.948 -1.327 -0.002 -1.327)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 -1.588 0.002 -1.588 0.002 -1.327 1.948 -1.327)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.138832 -1.327 3.054028 -1.588 1.952 -1.588 1.952 -1.327)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 -1.323 -3.140131 -1.323 -3.224935 -1.062 -1.302 -1.062)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 -1.323 -1.298 -1.323 -1.298 -1.062 0.648 -1.062)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.598 -1.323 0.652 -1.323 0.652 -1.062 2.598 -1.062)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.224935 -1.062 3.140131 -1.323 2.602 -1.323 2.602 -1.062)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.602 -1.058 -3.226235 -1.058 -3.311039 -0.797 -2.602 -0.797)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 -1.058 -2.598 -1.058 -2.598 -0.797 -0.652 -0.797)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 -1.058 -0.648 -1.058 -0.648 -0.797 1.298 -0.797)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.248 -0.991014 3.226235 -1.058 1.302 -1.058 1.302 -0.797 3.248 -0.797)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.311039 -0.797 3.252 -0.978703 3.252 -0.797)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 -0.793 -3.312339 -0.793 -3.397143 -0.532 -1.952 -0.532)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 -0.793 -1.948 -0.793 -1.948 -0.532 -0.002 -0.532)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 -0.793 0.002 -0.793 0.002 -0.532 1.948 -0.532)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.397143 -0.532 3.312339 -0.793 1.952 -0.793 1.952 -0.532)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-3.252 -0.528 -3.398442 -0.528 -3.483246 -0.267 -3.252 -0.267)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 -0.528 -3.248 -0.528 -3.248 -0.267 -1.302 -0.267)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 -0.528 -1.298 -0.528 -1.298 -0.267 0.648 -0.267)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.598 -0.528 0.652 -0.528 0.652 -0.267 2.598 -0.267)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.483246 -0.267 3.398442 -0.528 2.602 -0.528 2.602 -0.267)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.602 -0.263 -3.484546 -0.263 -3.56935 -0.002 -2.602 -0.002)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 -0.263 -2.598 -0.263 -2.598 -0.002 -0.652 -0.002)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 -0.263 -0.648 -0.263 -0.648 -0.002 1.298 -0.002)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.248 -0.263 1.302 -0.263 1.302 -0.002 3.248 -0.002)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.56935 -0.002 3.484546 -0.263 3.252 -0.263 3.252 -0.002)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 0.002 -3.56935 0.002 -3.484546 0.263 -1.952 0.263)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 0.002 -1.948 0.002 -1.948 0.263 -0.002 0.263)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 0.002 0.002 0.002 0.002 0.263 1.948 0.263)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.484546 0.263 3.56935 0.002 1.952 0.002 1.952 0.263)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-3.252 0.267 -3.483246 0.267 -3.398442 0.528 -3.252 0.528)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 0.267 -3.248 0.267 -3.248 0.528 -1.302 0.528)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 0.267 -1.298 0.267 -1.298 0.528 0.648 0.528)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.598 0.267 0.652 0.267 0.652 0.528 2.598 0.528)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.398442 0.528 3.483246 0.267 2.602 0.267 2.602 0.528)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.602 0.532 -3.397143 0.532 -3.312339 0.793 -2.602 0.793)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 0.532 -2.598 0.532 -2.598 0.793 -0.652 0.793)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 0.532 -0.648 0.532 -0.648 0.793 1.298 0.793)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.248 0.532 1.302 0.532 1.302 0.793 3.248 0.793)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.312339 0.793 3.397143 0.532 3.252 0.532 3.252 0.793)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 0.797 -3.311039 0.797 -3.226235 1.058 -1.952 1.058)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 0.797 -1.948 0.797 -1.948 1.058 -0.002 1.058)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 0.797 0.002 0.797 0.002 1.058 1.948 1.058)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.226235 1.058 3.311039 0.797 1.952 0.797 1.952 1.058)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 1.062 -3.224935 1.062 -3.140131 1.323 -1.302 1.323)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 1.062 -1.298 1.062 -1.298 1.323 0.648 1.323)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.598 1.062 0.652 1.062 0.652 1.323 2.598 1.323)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.140131 1.323 3.224935 1.062 2.602 1.062 2.602 1.323)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.602 1.327 -3.138832 1.327 -3.054028 1.588 -2.602 1.588)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 1.327 -2.598 1.327 -2.598 1.588 -0.652 1.588)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 1.327 -0.648 1.327 -0.648 1.588 1.298 1.588)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(3.054028 1.588 3.138832 1.327 1.302 1.327 1.302 1.588)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 1.592 -3.052728 1.592 -2.967924 1.853 -1.952 1.853)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 1.592 -1.948 1.592 -1.948 1.853 -0.002 1.853)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 1.592 0.002 1.592 0.002 1.853 1.948 1.853)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.967924 1.853 3.052728 1.592 1.952 1.592 1.952 1.853)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 1.857 -2.966624 1.857 -2.888191 2.098393 -2.861204 2.118 -1.302 2.118)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 1.857 -1.298 1.857 -1.298 2.118 0.648 2.118)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.598 1.857 0.652 1.857 0.652 2.118 2.598 2.118)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.861204 2.118 2.888191 2.098393 2.966624 1.857 2.602 1.857 2.602 2.118)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.602 2.122 -2.855699 2.122 -2.602 2.306323)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 2.122 -2.598 2.122 -2.598 2.309229 -2.496463 2.383 -0.652 2.383)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 2.122 -0.648 2.122 -0.648 2.383 1.298 2.383)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.496463 2.383 2.855699 2.122 1.302 2.122 1.302 2.383)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.952 2.387 -2.490958 2.387 -2.131722 2.648 -1.952 2.648)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 2.387 -1.948 2.387 -1.948 2.648 -0.002 2.648)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.948 2.387 0.002 2.387 0.002 2.648 1.948 2.648)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(2.131722 2.648 2.490958 2.387 1.952 2.387 1.952 2.648)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.302 2.652 -2.126216 2.652 -1.766981 2.913 -1.302 2.913)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(0.648 2.652 -1.298 2.652 -1.298 2.913 0.648 2.913)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.766981 2.913 2.126216 2.652 0.652 2.652 0.652 2.913)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.652 2.917 -1.761475 2.917 -1.40224 3.178 -0.652 3.178)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.298 2.917 -0.648 2.917 -0.648 3.178 1.298 3.178)) at(0 Low) hold(0.016) cap(all)) material(beigeoakwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.40224 3.178 1.761475 2.917 1.302 2.917 1.302 3.178)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.002 3.182 -1.396734 3.182 -1.103191 3.395272 -0.002 3.395272)) at(0 Low) hold(0.016) cap(all)) material(lightbirchwood) alpha(1) texscale(1)) ]
+      [ T(0 2.764 0) !I(AxialProfile(axis(y) profile(Low polygon(1.103191 3.395272 1.396734 3.182 0.002 3.182 0.002 3.395272)) at(0 Low) hold(0.016) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+    ]
+  ]
+
+# Sixteen rises from the pad to the level landing. The landing forms the final step.
+RearStair ->
+  [ Object(id(RearStair) class(Stair) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Stair RearStair) layer(Structure))
+    [
+      [ T(0 2.62 -3.7) BoxWarmteakwood(1.58 1.52 0.16) ]
+      [ T(0 2.57 -4.36) BoxCharcoalmattemetal(1.61 0.1 0.12) ]
+      [ T(-0.916 2.54625 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-1.168 2.3725 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-1.42 2.19875 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-1.672 2.025 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-1.924 1.85125 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-2.176 1.6775 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-2.428 1.50375 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-2.68 1.33 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-2.932 1.15625 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-3.184 0.9825 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-3.436 0.80875 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-3.688 0.635 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-3.94 0.46125 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-4.192 0.2875 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      [ T(-4.444 0.11375 -4.01) BoxLightashwood(0.266 1 0.06) ]
+      RodCharcoalmattemetal(-0.79 2.65 -4.455 -4.7212 0.055 -4.455 0.069 0.069 0 0 1)
+      RodGoldbrushedmetal(-0.79 3.71 -4.455 -4.57 1.10375 -4.455 0.035 0.035 0 0 1)
+      RodCharcoalmattemetal(-0.79 2.72 -4.455 -0.79 3.71 -4.455 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-1.546 2.19875 -4.455 -1.546 3.18875 -4.455 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-2.302 1.6775 -4.455 -2.302 2.6675 -4.455 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-3.058 1.15625 -4.455 -3.058 2.14625 -4.455 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-3.814 0.635 -4.455 -3.814 1.625 -4.455 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-4.57 0.11375 -4.455 -4.57 1.10375 -4.455 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-0.79 2.65 -3.565 -4.7212 0.055 -3.565 0.069 0.069 0 0 1)
+      RodGoldbrushedmetal(-0.79 3.71 -3.565 -4.57 1.10375 -3.565 0.035 0.035 0 0 1)
+      RodCharcoalmattemetal(-0.79 2.72 -3.565 -0.79 3.71 -3.565 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-1.546 2.19875 -3.565 -1.546 3.18875 -3.565 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-2.302 1.6775 -3.565 -2.302 2.6675 -3.565 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-3.058 1.15625 -3.565 -3.058 2.14625 -3.565 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-3.814 0.635 -3.565 -3.814 1.625 -3.565 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(-4.57 0.11375 -3.565 -4.57 1.10375 -3.565 0.025 0.025 1 0 0)
+      RodCharcoalmattemetal(0.72 2.78 -4.45 0.72 3.71 -4.45 0.026 0.026 1 0 0)
+      RodCharcoalmattemetal(-0.71 2.78 -4.45 -0.71 3.71 -4.45 0.026 0.026 1 0 0)
+      RodCharcoalmattemetal(0.72 2.78 -3.3 0.72 3.71 -3.3 0.026 0.026 1 0 0)
+      RodCharcoalmattemetal(-0.79 3.26 -4.455 0.72 3.26 -4.455 0.014 0.014 0 1 0)
+      RodGoldbrushedmetal(-0.79 3.71 -4.455 0.72 3.71 -4.455 0.032 0.032 0 1 0)
+      RodCharcoalmattemetal(0.72 3.26 -4.455 0.72 3.26 -3.33 0.014 0.014 1 0 0)
+      RodGoldbrushedmetal(0.72 3.71 -4.455 0.72 3.71 -3.33 0.032 0.032 1 0 0)
+      RodCharcoalmattemetal(-0.64 0 -4.24 -0.64 2.62 -4.24 0.07 0.07 1 0 0)
+      RodCharcoalmattemetal(0.64 0 -4.24 0.64 2.62 -4.24 0.07 0.07 1 0 0)
+    ]
+  ]
+
+# Ten base vertices alternate with ten shoulder vertices. Rear triangles are trimmed around the entrance.
+LowerFarFacets ->
+  [ Object(id(LowerFarFacets) class(Cladding) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Cladding LowerFarFacets) layer(Envelope))
+    [
+      RodCharcoalmattemetal(3.6 2.78 0 2.912461 2.78 -2.116027 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.912461 2.78 -2.116027 3.509399 4.16 -1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(3.509399 4.16 -1.140273 3.6 2.78 0 0.016 0.016 1 0 0)
+      [ T(3.597406 2.7846 -0.010854) A(180 2) A(72 1) A(100.918031 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+      RodCharcoalmattemetal(2.912461 2.78 -2.116027 3.509399 4.16 -1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(3.509399 4.16 -1.140273 2.168928 4.16 -2.985273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.168928 4.16 -2.985273 2.912461 2.78 -2.116027 0.016 0.016 1 0 0)
+      [ T(2.175874 4.1554 -2.976225) A(-54 1) A(93.756262 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.369141 0.054) ]
+      RodCharcoalmattemetal(2.912461 2.78 -2.116027 1.112461 2.78 -3.423803 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(1.112461 2.78 -3.423803 2.168928 4.16 -2.985273 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(2.168928 4.16 -2.985273 2.912461 2.78 -2.116027 0.016 0.016 1 0 0)
+      [ T(2.903983 2.7846 -2.123284) A(-180 2) A(36 1) A(100.918031 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+      RodCharcoalmattemetal(1.112461 2.78 -3.423803 2.168928 4.16 -2.985273 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(2.168928 4.16 -2.985273 0.56 4.16 -3.508045 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.56 4.16 -3.508045 0.56 3.465324 -3.556 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0.56 3.465324 -3.556 1.112461 2.78 -3.423803 0.016 0.016 0 0 1)
+      [ T(0.565403 3.467084 -3.554123) A(90 2) A(-3.948971 1) A(72.039988 0) FacetOrangebrownmattefabric(0.689366 0.725008 1.67443 0.054) ]
+      [ T(0.565403 3.467084 -3.554123) A(23.352916 2) A(-18.038684 1) A(86.440575 0) FacetOrangebrownmattefabric(1.824651 0.262255 0.841316 0.054) ]
+      RodCharcoalmattemetal(-0.56 2.78 -3.423803 -1.112461 2.78 -3.423803 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-1.112461 2.78 -3.423803 -0.56 3.465324 -3.556 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.56 3.465324 -3.556 -0.56 2.78 -3.423803 0.016 0.016 1 0 0)
+      [ T(-0.561842 2.782284 -3.424244) A(180 2) A(100.918031 0) FacetGoldorangemattepaint(0.546937 0 0.690978 0.054) ]
+      RodCharcoalmattemetal(1.112461 2.78 -3.423803 0.56 2.78 -3.423803 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.56 2.78 -3.423803 0.56 3.465324 -3.556 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0.56 3.465324 -3.556 1.112461 2.78 -3.423803 0.016 0.016 0 0 1)
+      [ T(1.108778 2.782284 -3.424244) A(180 2) A(100.918031 0) FacetGoldorangemattepaint(0.546937 0.546937 0.690978 0.054) ]
+      RodCharcoalmattemetal(-1.112461 2.78 -3.423803 -0.56 3.465324 -3.556 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.56 3.465324 -3.556 -0.56 4.16 -3.508045 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-0.56 4.16 -3.508045 -2.168928 4.16 -2.985273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.168928 4.16 -2.985273 -1.112461 2.78 -3.423803 0.016 0.016 0 0 1)
+      [ T(-2.158242 4.154813 -2.989103) A(18 1) A(93.756262 0) FacetOrangebrownmattefabric(1.674809 1.68948 0.68921 0.054) ]
+      [ T(-2.158242 4.154813 -2.989103) A(-23.352916 2) A(18.038684 1) A(86.440575 0) FacetOrangebrownmattefabric(1.824651 1.562396 0.841316 0.054) ]
+      RodCharcoalmattemetal(-1.112461 2.78 -3.423803 -2.912461 2.78 -2.116027 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.912461 2.78 -2.116027 -2.168928 4.16 -2.985273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-2.168928 4.16 -2.985273 -1.112461 2.78 -3.423803 0.016 0.016 0 0 1)
+      [ T(-1.121983 2.7846 -3.417982) A(180 2) A(-36 1) A(100.918031 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+      RodCharcoalmattemetal(-2.912461 2.78 -2.116027 -2.168928 4.16 -2.985273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-2.168928 4.16 -2.985273 -3.509399 4.16 -1.140273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-3.509399 4.16 -1.140273 -2.912461 2.78 -2.116027 0.016 0.016 1 0 0)
+      [ T(-3.502941 4.1554 -1.149675) A(54 1) A(93.756262 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.369141 0.054) ]
+      RodCharcoalmattemetal(-2.912461 2.78 -2.116027 -3.6 2.78 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-3.6 2.78 0 -3.509399 4.16 -1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-3.509399 4.16 -1.140273 -2.912461 2.78 -2.116027 0.016 0.016 1 0 0)
+      [ T(-2.916743 2.7846 -2.105721) A(180 2) A(-72 1) A(100.918031 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+    ]
+  ]
+
+LowerNearFacets ->
+  [ Object(id(LowerNearFacets) class(Cladding) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Cladding LowerNearFacets) layer(Envelope))
+    [
+      RodCharcoalmattemetal(-1.112461 2.78 3.423803 1.112461 2.78 3.423803 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(1.112461 2.78 3.423803 0 4.16 3.69 0.026 0.026 0 0 1)
+      RodCharcoalmattemetal(0 4.16 3.69 -1.112461 2.78 3.423803 0.026 0.026 0 0 1)
+      [ T(-1.101337 2.7846 3.424691) A(-79.081969 0) FacetSlateblueglossyglass(2.202673 1.101337 1.391385 0.028) ]
+      RodCharcoalmattemetal(1.112461 2.78 3.423803 0 4.16 3.69 0.026 0.026 0 0 1)
+      RodCharcoalmattemetal(0 4.16 3.69 2.168928 4.16 2.985273 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(2.168928 4.16 2.985273 1.112461 2.78 3.423803 0.026 0.026 0 0 1)
+      [ T(2.158176 4.1554 2.989084) A(180 2) A(-18 1) A(-86.243738 0) FacetSlateblueglossyglass(2.25774 1.12887 1.369141 0.028) ]
+      RodCharcoalmattemetal(1.112461 2.78 3.423803 2.912461 2.78 2.116027 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(2.912461 2.78 2.116027 2.168928 4.16 2.985273 0.026 0.026 1 0 0)
+      RodCharcoalmattemetal(2.168928 4.16 2.985273 1.112461 2.78 3.423803 0.026 0.026 0 0 1)
+      [ T(1.121983 2.7846 3.417982) A(36 1) A(-79.081969 0) FacetSlateblueglossyglass(2.202673 1.101337 1.391385 0.028) ]
+      RodCharcoalmattemetal(2.912461 2.78 2.116027 2.168928 4.16 2.985273 0.026 0.026 1 0 0)
+      RodCharcoalmattemetal(2.168928 4.16 2.985273 3.509399 4.16 1.140273 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(3.509399 4.16 1.140273 2.912461 2.78 2.116027 0.026 0.026 1 0 0)
+      [ T(3.502941 4.1554 1.149675) A(180 2) A(-54 1) A(-86.243738 0) FacetSlateblueglossyglass(2.25774 1.12887 1.369141 0.028) ]
+      RodCharcoalmattemetal(2.912461 2.78 2.116027 3.6 2.78 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(3.6 2.78 0 3.509399 4.16 1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(3.509399 4.16 1.140273 2.912461 2.78 2.116027 0.016 0.016 1 0 0)
+      [ T(2.916743 2.7846 2.105721) A(72 1) A(-79.081969 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+      RodCharcoalmattemetal(3.6 2.78 0 3.509399 4.16 1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(3.509399 4.16 1.140273 3.509399 4.16 -1.140273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(3.509399 4.16 -1.140273 3.6 2.78 0 0.016 0.016 1 0 0)
+      [ T(3.509701 4.1554 -1.12887) A(93.756262 2) A(-90 1) FacetGoldorangemattepaint(2.25774 1.12887 1.369141 0.054) ]
+      RodCharcoalmattemetal(-3.6 2.78 0 -3.509399 4.16 -1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-3.509399 4.16 -1.140273 -3.509399 4.16 1.140273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-3.509399 4.16 1.140273 -3.6 2.78 0 0.016 0.016 1 0 0)
+      [ T(-3.509701 4.1554 1.12887) A(-93.756262 2) A(90 1) FacetGoldorangemattepaint(2.25774 1.12887 1.369141 0.054) ]
+      RodCharcoalmattemetal(-3.6 2.78 0 -2.912461 2.78 2.116027 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.912461 2.78 2.116027 -3.509399 4.16 1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-3.509399 4.16 1.140273 -3.6 2.78 0 0.016 0.016 1 0 0)
+      [ T(-3.597406 2.7846 0.010854) A(-72 1) A(-79.081969 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+      RodCharcoalmattemetal(-2.912461 2.78 2.116027 -3.509399 4.16 1.140273 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-3.509399 4.16 1.140273 -2.168928 4.16 2.985273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.168928 4.16 2.985273 -2.912461 2.78 2.116027 0.016 0.016 1 0 0)
+      [ T(-2.175874 4.1554 2.976225) A(180 2) A(54 1) A(-86.243738 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.369141 0.054) ]
+      RodCharcoalmattemetal(-2.912461 2.78 2.116027 -1.112461 2.78 3.423803 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-1.112461 2.78 3.423803 -2.168928 4.16 2.985273 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-2.168928 4.16 2.985273 -2.912461 2.78 2.116027 0.016 0.016 1 0 0)
+      [ T(-2.903983 2.7846 2.123284) A(-36 1) A(-79.081969 0) FacetOrangebrownmattefabric(2.202673 1.101337 1.391385 0.054) ]
+      RodCharcoalmattemetal(-1.112461 2.78 3.423803 -2.168928 4.16 2.985273 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-2.168928 4.16 2.985273 0 4.16 3.69 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 4.16 3.69 -1.112461 2.78 3.423803 0.016 0.016 0 0 1)
+      [ T(-0.010938 4.1554 3.686764) A(180 2) A(18 1) A(-86.243738 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.369141 0.054) ]
+    ]
+  ]
+
+# Fixed panes share edges with two upper sashes rotated out around their high edges.
+ShoulderFacets ->
+  [ Object(id(ShoulderFacets) class(Cladding) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Cladding ShoulderFacets) layer(Envelope))
+    [
+      RodCharcoalmattemetal(0 4.16 3.69 2.168928 4.16 2.985273 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(2.168928 4.16 2.985273 0.9116 5.41 2.805617 0.026 0.026 0 0 1)
+      RodCharcoalmattemetal(0.9116 5.41 2.805617 0 4.16 3.69 0.026 0.026 0 0 1)
+      [ T(0.010268 4.164167 3.684703) A(18 1) A(-114.109415 0) FacetSlateblueglossyglass(2.25774 1.12887 1.355768 0.028) ]
+      RodCharcoalmattemetal(0 4.16 3.69 -0.9116 5.41 2.805617 0.026 0.026 0 0 1)
+      RodCharcoalmattemetal(-0.9116 5.41 2.805617 0.9116 5.41 2.805617 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(0.9116 5.41 2.805617 0 4.16 3.69 0.026 0.026 0 0 1)
+      RodSilverbrushedmetal(0 4.168333 3.684104 0 4.586426 4.083926 0.018 0.018 1 0 0)
+      RodCharcoalmattemetal(0 4.586426 4.083926 -0.902484 5.405833 2.808565 0.024 0.024 0 1 0)
+      RodCharcoalmattemetal(-0.902484 5.405833 2.808565 0.902484 5.405833 2.808565 0.024 0.024 0 1 0)
+      RodCharcoalmattemetal(0.902484 5.405833 2.808565 0 4.586426 4.083926 0.024 0.024 0 1 0)
+      [ T(0.902484 5.405833 2.808565) A(180 2) A(-32.72034 0) FacetSlateblueglossyglass(1.804968 0.902484 1.515908 0.028) ]
+      RodCharcoalmattemetal(2.168928 4.16 2.985273 3.509399 4.16 1.140273 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(3.509399 4.16 1.140273 2.3866 5.41 1.733966 0.026 0.026 0 0 1)
+      RodCharcoalmattemetal(2.3866 5.41 1.733966 2.168928 4.16 2.985273 0.026 0.026 1 0 0)
+      [ T(2.174121 4.164167 2.974952) A(54 1) A(-114.109415 0) FacetSlateblueglossyglass(2.25774 1.12887 1.355768 0.028) ]
+      RodCharcoalmattemetal(2.168928 4.16 2.985273 0.9116 5.41 2.805617 0.026 0.026 0 0 1)
+      RodCharcoalmattemetal(0.9116 5.41 2.805617 2.3866 5.41 1.733966 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(2.3866 5.41 1.733966 2.168928 4.16 2.985273 0.026 0.026 1 0 0)
+      RodSilverbrushedmetal(2.165462 4.168333 2.980503 2.400472 4.586426 3.303966 0.018 0.018 1 0 0)
+      RodCharcoalmattemetal(2.400472 4.586426 3.303966 0.920708 5.405833 2.802643 0.024 0.024 0 0 1)
+      RodCharcoalmattemetal(0.920708 5.405833 2.802643 2.380958 5.405833 1.74171 0.024 0.024 0 1 0)
+      RodCharcoalmattemetal(2.380958 5.405833 1.74171 2.400472 4.586426 3.303966 0.024 0.024 1 0 0)
+      [ T(2.380958 5.405833 1.74171) A(180 2) A(-36 1) A(-32.72034 0) FacetSlateblueglossyglass(1.804968 0.902484 1.515908 0.028) ]
+      RodCharcoalmattemetal(3.509399 4.16 1.140273 3.509399 4.16 -1.140273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(3.509399 4.16 -1.140273 2.95 5.41 0 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(2.95 5.41 0 3.509399 4.16 1.140273 0.016 0.016 1 0 0)
+      [ T(3.507534 4.164167 1.12887) A(114.109415 2) A(90 1) FacetOrangebrownmattefabric(2.25774 1.12887 1.355768 0.054) ]
+      RodCharcoalmattemetal(3.509399 4.16 1.140273 2.3866 5.41 1.733966 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(2.3866 5.41 1.733966 2.95 5.41 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.95 5.41 0 3.509399 4.16 1.140273 0.016 0.016 1 0 0)
+      [ T(2.949987 5.405833 0.009581) A(180 2) A(-72 1) A(-54.72034 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.515908 0.054) ]
+      RodCharcoalmattemetal(3.509399 4.16 -1.140273 2.168928 4.16 -2.985273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.168928 4.16 -2.985273 2.3866 5.41 -1.733966 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(2.3866 5.41 -1.733966 3.509399 4.16 -1.140273 0.016 0.016 0 0 1)
+      [ T(3.501188 4.164167 -1.148402) A(180 2) A(54 1) A(65.890585 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.355768 0.054) ]
+      RodCharcoalmattemetal(3.509399 4.16 -1.140273 2.95 5.41 0 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(2.95 5.41 0 2.3866 5.41 -1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.3866 5.41 -1.733966 3.509399 4.16 -1.140273 0.016 0.016 0 0 1)
+      [ T(2.392221 5.405833 -1.726208) A(-72 1) A(125.27966 0) FacetGoldorangemattepaint(1.804968 0.902484 1.515908 0.054) ]
+      RodCharcoalmattemetal(2.168928 4.16 -2.985273 0.56 4.16 -3.508045 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.56 4.16 -3.508045 0.56 4.927881 -3.146719 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0.56 4.927881 -3.146719 0.9116 5.41 -2.805617 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(0.9116 5.41 -2.805617 2.168928 4.16 -2.985273 0.016 0.016 0 0 1)
+      [ T(2.15774 4.165045 -2.986534) A(180 2) A(18 1) A(65.890585 0) FacetOrangebrownmattefabric(1.674809 1.56427 0.832854 0.054) ]
+      [ T(2.15774 4.165045 -2.986534) A(154.486614 2) A(5.174545 1) A(60.650412 0) FacetOrangebrownmattefabric(1.77217 1.633598 0.66619 0.054) ]
+      RodCharcoalmattemetal(0.525082 4.88 -3.180595 0.56 4.927881 -3.146719 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(0.56 4.927881 -3.146719 0.56 4.88 -3.16925 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0.56 4.88 -3.16925 0.525082 4.88 -3.180595 0.016 0.016 0 1 0)
+      [ T(0.525314 4.88016 -3.180444) A(53.897473 2) A(-29.754004 1) A(90.733121 0) FacetOrangebrownmattefabric(0.067577 0.023258 0.027933 0.054) ]
+      RodCharcoalmattemetal(2.168928 4.16 -2.985273 2.3866 5.41 -1.733966 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(2.3866 5.41 -1.733966 0.9116 5.41 -2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.9116 5.41 -2.805617 2.168928 4.16 -2.985273 0.016 0.016 0 0 1)
+      [ T(0.920708 5.405833 -2.802643) A(-36 1) A(125.27966 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.515908 0.054) ]
+      RodCharcoalmattemetal(-0.56 4.16 -3.508045 -2.168928 4.16 -2.985273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.168928 4.16 -2.985273 -0.9116 5.41 -2.805617 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.9116 5.41 -2.805617 -0.56 4.927881 -3.146719 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.56 4.927881 -3.146719 -0.56 4.16 -3.508045 0.016 0.016 1 0 0)
+      [ T(-0.564901 4.165045 -3.504079) A(180 2) A(-18 1) A(65.890585 0) FacetOrangebrownmattefabric(1.674809 0.545939 1.355768 0.054) ]
+      [ T(-0.564901 4.165045 -3.504079) A(105.710236 2) A(-28.411186 1) A(99.260211 0) FacetOrangebrownmattefabric(1.461559 0.81386 0.20856 0.054) ]
+      RodCharcoalmattemetal(-0.56 4.88 -3.16925 -0.56 4.927881 -3.146719 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-0.56 4.927881 -3.146719 -0.525082 4.88 -3.180595 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.525082 4.88 -3.180595 -0.56 4.88 -3.16925 0.016 0.016 0 1 0)
+      [ T(-0.559884 4.88016 -3.169212) A(90 2) A(-25.19929 1) A(106.383222 0) FacetOrangebrownmattefabric(0.052387 -0.004782 0.036032 0.054) ]
+      RodCharcoalmattemetal(-0.56 5.41 -2.805617 -0.9116 5.41 -2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.9116 5.41 -2.805617 -0.56 4.927881 -3.146719 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.56 4.927881 -3.146719 -0.56 5.41 -2.805617 0.016 0.016 1 0 0)
+      [ T(-0.561172 4.931095 -3.144445) A(126.102527 2) A(-29.754004 1) A(70.10354 0) FacetOrangebrownmattefabric(0.68045 0.502387 0.299092 0.054) ]
+      RodCharcoalmattemetal(0.56 4.927881 -3.146719 0.9116 5.41 -2.805617 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(0.9116 5.41 -2.805617 0.56 5.41 -2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.56 5.41 -2.805617 0.56 4.927881 -3.146719 0.016 0.016 1 0 0)
+      [ T(0.561172 5.408393 -2.806754) A(125.27966 0) FacetOrangebrownmattefabric(0.348084 0 0.584679 0.054) ]
+      RodCharcoalmattemetal(0.525082 4.88 -3.180595 0.56 4.927881 -3.146719 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(0.56 4.927881 -3.146719 0.56 5.41 -2.805617 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0.56 5.41 -2.805617 -0.56 5.41 -2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.56 5.41 -2.805617 -0.56 4.927881 -3.146719 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-0.56 4.927881 -3.146719 -0.525082 4.88 -3.180595 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.525082 4.88 -3.180595 0.525082 4.88 -3.180595 0.016 0.016 0 1 0)
+      [ T(-0.519831 4.881926 -3.179232) A(126.102527 2) A(-29.754004 1) A(70.10354 0) FacetOrangebrownmattefabric(0.067577 0.569965 0.299092 0.054) ]
+      [ T(-0.519831 4.881926 -3.179232) A(93.769406 2) A(-35.221177 1) A(87.823959 0) FacetOrangebrownmattefabric(0.643674 0.584125 1.1072 0.054) ]
+      [ T(-0.519831 4.881926 -3.179232) A(26.032849 2) A(-17.250353 1) A(121.26314 0) FacetOrangebrownmattefabric(1.251836 0.951637 0.501727 0.054) ]
+      [ T(-0.519831 4.881926 -3.179232) A(2.526606 2) A(-1.786432 1) A(125.240261 0) FacetOrangebrownmattefabric(1.075799 1.038146 0.056115 0.054) ]
+      RodCharcoalmattemetal(-2.168928 4.16 -2.985273 -3.509399 4.16 -1.140273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-3.509399 4.16 -1.140273 -2.3866 5.41 -1.733966 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-2.3866 5.41 -1.733966 -2.168928 4.16 -2.985273 0.016 0.016 1 0 0)
+      [ T(-2.174121 4.164167 -2.974952) A(180 2) A(-54 1) A(65.890585 0) FacetGoldorangemattepaint(2.25774 1.12887 1.355768 0.054) ]
+      RodCharcoalmattemetal(-2.168928 4.16 -2.985273 -0.9116 5.41 -2.805617 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.9116 5.41 -2.805617 -2.3866 5.41 -1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.3866 5.41 -1.733966 -2.168928 4.16 -2.985273 0.016 0.016 1 0 0)
+      [ T(-2.380958 5.405833 -1.74171) A(36 1) A(125.27966 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.515908 0.054) ]
+      RodCharcoalmattemetal(-3.509399 4.16 -1.140273 -3.509399 4.16 1.140273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-3.509399 4.16 1.140273 -2.95 5.41 0 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-2.95 5.41 0 -3.509399 4.16 -1.140273 0.016 0.016 1 0 0)
+      [ T(-3.507534 4.164167 -1.12887) A(-114.109415 2) A(-90 1) FacetOrangebrownmattefabric(2.25774 1.12887 1.355768 0.054) ]
+      RodCharcoalmattemetal(-3.509399 4.16 -1.140273 -2.3866 5.41 -1.733966 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-2.3866 5.41 -1.733966 -2.95 5.41 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.95 5.41 0 -3.509399 4.16 -1.140273 0.016 0.016 1 0 0)
+      [ T(-2.949987 5.405833 -0.009581) A(72 1) A(125.27966 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.515908 0.054) ]
+      RodCharcoalmattemetal(-3.509399 4.16 1.140273 -2.168928 4.16 2.985273 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.168928 4.16 2.985273 -2.3866 5.41 1.733966 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-2.3866 5.41 1.733966 -3.509399 4.16 1.140273 0.016 0.016 0 0 1)
+      [ T(-3.501188 4.164167 1.148402) A(-54 1) A(-114.109415 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.355768 0.054) ]
+      RodCharcoalmattemetal(-3.509399 4.16 1.140273 -2.95 5.41 0 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-2.95 5.41 0 -2.3866 5.41 1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.3866 5.41 1.733966 -3.509399 4.16 1.140273 0.016 0.016 0 0 1)
+      [ T(-2.392221 5.405833 1.726208) A(-180 2) A(72 1) A(-54.72034 0) FacetGoldorangemattepaint(1.804968 0.902484 1.515908 0.054) ]
+      RodCharcoalmattemetal(-2.168928 4.16 2.985273 0 4.16 3.69 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 4.16 3.69 -0.9116 5.41 2.805617 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.9116 5.41 2.805617 -2.168928 4.16 2.985273 0.016 0.016 0 0 1)
+      [ T(-2.157507 4.164167 2.987023) A(-18 1) A(-114.109415 0) FacetOrangebrownmattefabric(2.25774 1.12887 1.355768 0.054) ]
+      RodCharcoalmattemetal(-2.168928 4.16 2.985273 -2.3866 5.41 1.733966 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-2.3866 5.41 1.733966 -0.9116 5.41 2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.9116 5.41 2.805617 -2.168928 4.16 2.985273 0.016 0.016 0 0 1)
+      [ T(-0.920708 5.405833 2.802643) A(180 2) A(36 1) A(-54.72034 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.515908 0.054) ]
+    ]
+  ]
+
+# The ten-sided shoulder transitions to a five-sided crown.
+RoofFacets ->
+  [ Object(id(RoofFacets) class(Cladding) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Cladding RoofFacets) layer(Envelope))
+    [
+      RodCharcoalmattemetal(-0.9116 5.41 2.805617 0.9116 5.41 2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.9116 5.41 2.805617 0 6.24 1.65 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 6.24 1.65 -0.9116 5.41 2.805617 0.016 0.016 0 1 0)
+      [ T(-0.902484 5.412767 2.801765) A(-144.312913 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.408569 0.054) ]
+      RodCharcoalmattemetal(0.9116 5.41 2.805617 2.3866 5.41 1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.3866 5.41 1.733966 1.569243 6.24 0.509878 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(1.569243 6.24 0.509878 0.9116 5.41 2.805617 0.016 0.016 1 0 0)
+      [ T(0.918709 5.412767 2.794392) A(36 1) A(-150.562126 0) FacetOrangebrownmattefabric(1.804968 1.862631 1.671891 0.054) ]
+      RodCharcoalmattemetal(0.9116 5.41 2.805617 1.569243 6.24 0.509878 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(1.569243 6.24 0.509878 0 6.24 1.65 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 6.24 1.65 0.9116 5.41 2.805617 0.016 0.016 0 1 0)
+      [ T(0.910754 5.415533 2.794112) A(51.608768 2) A(65.237464 1) A(-108.32593 0) FacetOrangebrownmattefabric(2.502921 1.07387 1.28271 0.054) ]
+      RodCharcoalmattemetal(0 6.24 1.65 1.569243 6.24 0.509878 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(1.569243 6.24 0.509878 0 6.58 0 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(0 6.58 0 0 6.24 1.65 0.026 0.026 1 0 0)
+      [ T(0.005231 6.241133 1.6407) A(36 1) A(-165.710324 0) FacetSlateblueglossyglass(1.920294 0.960147 1.363723 0.028) ]
+      RodCharcoalmattemetal(2.3866 5.41 1.733966 2.95 5.41 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.95 5.41 0 1.569243 6.24 0.509878 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(1.569243 6.24 0.509878 2.3866 5.41 1.733966 0.016 0.016 1 0 0)
+      [ T(2.385754 5.412767 1.724106) A(72 1) A(-144.312913 0) FacetGoldorangemattepaint(1.804968 0.902484 1.408569 0.054) ]
+      RodCharcoalmattemetal(2.95 5.41 0 2.3866 5.41 -1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(2.3866 5.41 -1.733966 0.969846 6.24 -1.334878 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(0.969846 6.24 -1.334878 2.95 5.41 0 0.016 0.016 0 1 0)
+      [ T(2.941521 5.412767 -0.010229) A(180 2) A(72 1) A(29.437874 0) FacetOrangebrownmattefabric(1.804968 1.862631 1.671891 0.054) ]
+      RodCharcoalmattemetal(2.95 5.41 0 0.969846 6.24 -1.334878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.969846 6.24 -1.334878 1.569243 6.24 0.509878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(1.569243 6.24 0.509878 2.95 5.41 0 0.016 0.016 0 0 1)
+      [ T(2.938797 5.415533 -0.00275) A(157.258555 2) A(31.870071 1) A(10.301932 0) FacetCharcoalmattemetal(2.502921 1.07387 1.28271 0.054) ]
+      RodCharcoalmattemetal(1.569243 6.24 0.509878 0.969846 6.24 -1.334878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.969846 6.24 -1.334878 0 6.58 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 6.58 0 1.569243 6.24 0.509878 0.016 0.016 0 1 0)
+      [ T(1.562014 6.241133 0.502029) A(180 2) A(72 1) A(14.289676 0) FacetOrangebrownmattefabric(1.920294 0.960147 1.363723 0.054) ]
+      RodCharcoalmattemetal(2.3866 5.41 -1.733966 0.9116 5.41 -2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.9116 5.41 -2.805617 0.969846 6.24 -1.334878 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0.969846 6.24 -1.334878 2.3866 5.41 -1.733966 0.016 0.016 0 0 1)
+      [ T(2.376961 5.412767 -1.736208) A(180 2) A(36 1) A(35.687087 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.408569 0.054) ]
+      RodCharcoalmattemetal(0.9116 5.41 -2.805617 -0.9116 5.41 -2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.9116 5.41 -2.805617 -0.969846 6.24 -1.334878 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-0.969846 6.24 -1.334878 0.9116 5.41 -2.805617 0.016 0.016 0 1 0)
+      [ T(0.899251 5.412767 -2.800714) A(180 2) A(29.437874 0) FacetGoldorangemattepaint(1.804968 1.862631 1.671891 0.054) ]
+      RodCharcoalmattemetal(0.9116 5.41 -2.805617 -0.969846 6.24 -1.334878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.969846 6.24 -1.334878 0.969846 6.24 -1.334878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0.969846 6.24 -1.334878 0.9116 5.41 -2.805617 0.016 0.016 1 0 0)
+      [ T(0.905523 5.415533 -2.795812) A(156.195321 2) A(-35.572513 1) A(37.174424 0) FacetCharcoalmattemetal(2.502921 1.07387 1.28271 0.054) ]
+      RodCharcoalmattemetal(0.969846 6.24 -1.334878 -0.969846 6.24 -1.334878 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(-0.969846 6.24 -1.334878 0 6.58 0 0.026 0.026 0 1 0)
+      RodCharcoalmattemetal(0 6.58 0 0.969846 6.24 -1.334878 0.026 0.026 0 1 0)
+      [ T(0.960147 6.241133 -1.330428) A(180 2) A(14.289676 0) FacetSlateblueglossyglass(1.920294 0.960147 1.363723 0.028) ]
+      RodCharcoalmattemetal(-0.9116 5.41 -2.805617 -2.3866 5.41 -1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.3866 5.41 -1.733966 -0.969846 6.24 -1.334878 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-0.969846 6.24 -1.334878 -0.9116 5.41 -2.805617 0.016 0.016 1 0 0)
+      [ T(-0.916711 5.412767 -2.797142) A(180 2) A(-36 1) A(35.687087 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.408569 0.054) ]
+      RodCharcoalmattemetal(-2.3866 5.41 -1.733966 -2.95 5.41 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.95 5.41 0 -1.569243 6.24 0.509878 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(-1.569243 6.24 0.509878 -2.3866 5.41 -1.733966 0.016 0.016 1 0 0)
+      [ T(-2.385754 5.412767 -1.720707) A(180 2) A(-72 1) A(29.437874 0) FacetOrangebrownmattefabric(1.804968 1.862631 1.671891 0.054) ]
+      RodCharcoalmattemetal(-2.3866 5.41 -1.733966 -1.569243 6.24 0.509878 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-1.569243 6.24 0.509878 -0.969846 6.24 -1.334878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.969846 6.24 -1.334878 -2.3866 5.41 -1.733966 0.016 0.016 0 0 1)
+      [ T(-2.379153 5.415533 -1.725157) A(45.439724 2) A(-62.563924 1) A(160.754254 0) FacetCharcoalmattemetal(2.502921 1.07387 1.28271 0.054) ]
+      RodCharcoalmattemetal(-0.969846 6.24 -1.334878 -1.569243 6.24 0.509878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-1.569243 6.24 0.509878 0 6.58 0 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 6.58 0 -0.969846 6.24 -1.334878 0.016 0.016 0 1 0)
+      [ T(-0.968611 6.241133 -1.324279) A(180 2) A(-72 1) A(14.289676 0) FacetOrangebrownmattefabric(1.920294 0.960147 1.363723 0.054) ]
+      RodCharcoalmattemetal(-2.95 5.41 0 -2.3866 5.41 1.733966 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-2.3866 5.41 1.733966 -1.569243 6.24 0.509878 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(-1.569243 6.24 0.509878 -2.95 5.41 0 0.016 0.016 0 0 1)
+      [ T(-2.943519 5.412767 0.007479) A(-72 1) A(-144.312913 0) FacetOrangebrownmattefabric(1.804968 0.902484 1.408569 0.054) ]
+      RodCharcoalmattemetal(-2.3866 5.41 1.733966 -0.9116 5.41 2.805617 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-0.9116 5.41 2.805617 0 6.24 1.65 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 6.24 1.65 -2.3866 5.41 1.733966 0.016 0.016 0 0 1)
+      [ T(-2.373728 5.412767 1.737259) A(-36 1) A(-150.562126 0) FacetOrangebrownmattefabric(1.804968 1.862631 1.671891 0.054) ]
+      RodCharcoalmattemetal(-2.3866 5.41 1.733966 0 6.24 1.65 0.016 0.016 0 0 1)
+      RodCharcoalmattemetal(0 6.24 1.65 -1.569243 6.24 0.509878 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(-1.569243 6.24 0.509878 -2.3866 5.41 1.733966 0.016 0.016 1 0 0)
+      [ T(-2.37592 5.415533 1.729606) A(19.1764 2) A(1.903253 1) A(-156.557111 0) FacetOrangebrownmattefabric(2.502921 1.07387 1.28271 0.054) ]
+      RodCharcoalmattemetal(-1.569243 6.24 0.509878 0 6.24 1.65 0.016 0.016 0 1 0)
+      RodCharcoalmattemetal(0 6.24 1.65 0 6.58 0 0.016 0.016 1 0 0)
+      RodCharcoalmattemetal(0 6.58 0 -1.569243 6.24 0.509878 0.016 0.016 0 1 0)
+      [ T(-1.558782 6.241133 0.511979) A(-36 1) A(-165.710324 0) FacetGoldorangemattepaint(1.920294 0.960147 1.363723 0.054) ]
+    ]
+  ]
+
+RearVestibule ->
+  [ Object(id(RearVestibule) class(Entry) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Entry RearVestibule) layer(Envelope))
+    [
+      [ T(-0.568 2.78 -3.16) BoxDarkwalnutwood(0.055 0.51 2.1) ]
+      [ T(0.568 2.78 -3.16) BoxDarkwalnutwood(0.055 0.51 2.1) ]
+      [ T(0 4.838 -3.12) BoxDarkwalnutwood(1.18 0.43 0.07) ]
+      [ T(0 2.77 -3.19) BoxSilverbrushedmetal(1.13 0.49 0.021) ]
+      [ T(-0.53 2.78 -2.96) BoxCharcoalmattemetal(0.06 0.105 2.1) ]
+      [ T(0.53 2.78 -2.96) BoxCharcoalmattemetal(0.06 0.105 2.1) ]
+      [ T(0 4.827 -2.96) BoxCharcoalmattemetal(1.12 0.105 0.065) ]
+      [ T(0.397694 2.798 -2.498594) A(74 1) BoxWarmteakwood(0.96 0.055 2.006) ]
+      [ T(0.397694 2.93 -2.498594) A(74 1) BoxDarkwalnutwood(0.7 0.06 1.4) ]
+    ]
+  ]
+
+Fitout ->
+  WetRoom
+  Galley
+  SleepingBerth
+  WindowBanquette
+  DiningNook
+
+# A pocket entrance opens onto the central aisle. The front wall also serves the galley.
+WetRoom ->
+  [ Object(id(WetRoom) class(Bathroom) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Bathroom WetRoom) layer(Interior))
+    [
+      [ T(-1.48 2.782 -1.095) BoxBluewhiteglossysmoothglass(1.64 1.85 0.029) ]
+      [ T(-2.3 2.78 -1.095) BoxWarmwhitematteplaster(0.07 1.85 1.98) ]
+      [ T(-0.66 2.78 -1.72) BoxWarmwhitematteplaster(0.07 0.6 2.01) ]
+      [ T(-0.66 2.78 -0.3) BoxWarmwhitematteplaster(0.07 0.26 2.01) ]
+      [ T(-0.66 4.74 -0.96) BoxWarmwhitematteplaster(0.07 0.94 0.05) ]
+      [ T(-1.48 2.78 -2.02) BoxWarmwhitematteplaster(1.64 0.07 2) ]
+      [ T(-1.48 2.78 -0.17) BoxWarmwhitematteplaster(1.64 0.07 2.06) ]
+      [ T(-0.71 2.84 -1.7) BoxLightashwood(0.035 0.52 1.88) ]
+      [ T(-1.83 2.811 -1.53) BoxOffwhiteceramic(0.83 0.84 0.042) ]
+      [ T(0 2.852 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.88 -1.55 -1.845 -1.559378 -1.819378 -1.585 -1.81 -1.62 -1.819378 -1.655 -1.845 -1.680622 -1.88 -1.69 -1.915 -1.680622 -1.940622 -1.655 -1.95 -1.62 -1.940622 -1.585 -1.915 -1.559378)) at(0 Low) hold(0.008) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+      [ T(-1.39 2.855 -1.66) BoxCleartransparentglass(0.022 0.65 1.7) ]
+      RodSilverbrushedmetal(-1.39 2.855 -1.34 -1.39 4.55 -1.34 0.012 0.012 1 0 0)
+      RodSilverbrushedmetal(-2.225 3.81 -1.64 -2.225 4.55 -1.64 0.015 0.015 1 0 0)
+      RodSilverbrushedmetal(-2.225 4.55 -1.64 -2.02 4.55 -1.64 0.014 0.014 0 1 0)
+      [ T(0 4.515 0) !I(AxialProfile(axis(y) profile(Low polygon(-2.01 -1.555 -1.977472 -1.56147 -1.949896 -1.579896 -1.93147 -1.607472 -1.925 -1.64 -1.93147 -1.672528 -1.949896 -1.700104 -1.977472 -1.71853 -2.01 -1.725 -2.042528 -1.71853 -2.070104 -1.700104 -2.08853 -1.672528 -2.095 -1.64 -2.08853 -1.607472 -2.070104 -1.579896 -2.042528 -1.56147)) at(0 Low) hold(0.032) cap(all)) material(silverbrushedmetal) alpha(1) texscale(1)) ]
+      [ T(-1.98 2.81 -0.4) BoxOffwhiteceramic(0.39 0.17 0.67) ]
+      [ T(0 2.81 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.98 -0.41 -1.949176 -0.414035 -1.919536 -0.425985 -1.89222 -0.445391 -1.868277 -0.471508 -1.848628 -0.50333 -1.834027 -0.539636 -1.825036 -0.579031 -1.822 -0.62 -1.825036 -0.660969 -1.834027 -0.700364 -1.848628 -0.73667 -1.868277 -0.768492 -1.89222 -0.794609 -1.919536 -0.814015 -1.949176 -0.825965 -1.98 -0.83 -2.010824 -0.825965 -2.040464 -0.814015 -2.06778 -0.794609 -2.091723 -0.768492 -2.111372 -0.73667 -2.125973 -0.700364 -2.134964 -0.660969 -2.138 -0.62 -2.134964 -0.579031 -2.125973 -0.539636 -2.111372 -0.50333 -2.091723 -0.471508 -2.06778 -0.445391 -2.040464 -0.425985 -2.010824 -0.414035)) at(0 Low) hold(0.27) cap(all)) material(offwhiteceramic) alpha(1) texscale(1)) ]
+      [ T(0 3.08 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.98 -0.37 -1.939421 -0.37538 -1.900402 -0.391314 -1.864441 -0.417189 -1.832922 -0.45201 -1.807054 -0.49444 -1.787833 -0.542849 -1.775997 -0.595375 -1.772 -0.65 -1.775997 -0.704625 -1.787833 -0.757151 -1.807054 -0.80556 -1.832922 -0.84799 -1.864441 -0.882811 -1.900402 -0.908686 -1.939421 -0.92462 -1.98 -0.93 -2.020579 -0.92462 -2.059598 -0.908686 -2.095559 -0.882811 -2.127078 -0.84799 -2.152946 -0.80556 -2.172167 -0.757151 -2.184003 -0.704625 -2.188 -0.65 -2.184003 -0.595375 -2.172167 -0.542849 -2.152946 -0.49444 -2.127078 -0.45201 -2.095559 -0.417189 -2.059598 -0.391314 -2.020579 -0.37538)) at(0 Low) hold(0.1) cap(all)) material(offwhiteceramic) alpha(1) texscale(1)) ]
+      [ T(0 3.177 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.98 -0.469 -1.954638 -0.472478 -1.930251 -0.482778 -1.907776 -0.499504 -1.888076 -0.522014 -1.871909 -0.549442 -1.859896 -0.580734 -1.852498 -0.614689 -1.85 -0.65 -1.852498 -0.685311 -1.859896 -0.719266 -1.871909 -0.750558 -1.888076 -0.777986 -1.907776 -0.800496 -1.930251 -0.817222 -1.954638 -0.827522 -1.98 -0.831 -2.005362 -0.827522 -2.029749 -0.817222 -2.052224 -0.800496 -2.071924 -0.777986 -2.088091 -0.750558 -2.100104 -0.719266 -2.107502 -0.685311 -2.11 -0.65 -2.107502 -0.614689 -2.100104 -0.580734 -2.088091 -0.549442 -2.071924 -0.522014 -2.052224 -0.499504 -2.029749 -0.482778 -2.005362 -0.472478)) at(0 Low) hold(0.007) cap(all)) material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+      [ T(-1.052 2.815 -0.46) BoxLightashwood(0.51 0.39 0.7) ]
+      [ T(-1.052 3.515 -0.46) BoxIvorymattepaint(0.54 0.42 0.065) ]
+      [ T(0 3.579 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.052 -0.34 -1.018835 -0.342306 -0.986944 -0.349134 -0.957553 -0.360224 -0.931792 -0.375147 -0.91065 -0.393332 -0.89494 -0.414078 -0.885267 -0.436589 -0.882 -0.46 -0.885267 -0.483411 -0.89494 -0.505922 -0.91065 -0.526668 -0.931792 -0.544853 -0.957553 -0.559776 -0.986944 -0.570866 -1.018835 -0.577694 -1.052 -0.58 -1.085165 -0.577694 -1.117056 -0.570866 -1.146447 -0.559776 -1.172208 -0.544853 -1.19335 -0.526668 -1.20906 -0.505922 -1.218733 -0.483411 -1.222 -0.46 -1.218733 -0.436589 -1.20906 -0.414078 -1.19335 -0.393332 -1.172208 -0.375147 -1.146447 -0.360224 -1.117056 -0.349134 -1.085165 -0.342306)) at(0 Low) hold(0.018) cap(all)) material(offwhiteceramic) alpha(1) texscale(1)) ]
+      [ T(0 3.597 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.052 -0.377 -1.027809 -0.378595 -1.004547 -0.383318 -0.983109 -0.390988 -0.964319 -0.40131 -0.948898 -0.413888 -0.937439 -0.428237 -0.930383 -0.443808 -0.928 -0.46 -0.930383 -0.476192 -0.937439 -0.491763 -0.948898 -0.506112 -0.964319 -0.51869 -0.983109 -0.529012 -1.004547 -0.536682 -1.027809 -0.541405 -1.052 -0.543 -1.076191 -0.541405 -1.099453 -0.536682 -1.120891 -0.529012 -1.139681 -0.51869 -1.155102 -0.506112 -1.166561 -0.491763 -1.173617 -0.476192 -1.176 -0.46 -1.173617 -0.443808 -1.166561 -0.428237 -1.155102 -0.413888 -1.139681 -0.40131 -1.120891 -0.390988 -1.099453 -0.383318 -1.076191 -0.378595)) at(0 Low) hold(0.007) cap(all)) material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+      RodSilverbrushedmetal(-1.052 3.58 -0.32 -1.052 3.74 -0.32 0.014 0.014 1 0 0)
+      [ T(-1.05 3.81 -0.223) BoxSilverbrushedmetal(0.49 0.021 0.57) ]
+      [ T(-2.02 2.811 -1.09) BoxIvorymattepaint(0.006 1.74 0.003) ]
+      [ T(-1.76 2.811 -1.09) BoxIvorymattepaint(0.006 1.74 0.003) ]
+      [ T(-1.5 2.811 -1.09) BoxIvorymattepaint(0.006 1.74 0.003) ]
+      [ T(-1.24 2.811 -1.09) BoxIvorymattepaint(0.006 1.74 0.003) ]
+      [ T(-0.98 2.811 -1.09) BoxIvorymattepaint(0.006 1.74 0.003) ]
+      [ T(-1.48 2.811 -1.74) BoxIvorymattepaint(1.54 0.006 0.003) ]
+      [ T(-1.48 2.811 -1.47) BoxIvorymattepaint(1.54 0.006 0.003) ]
+      [ T(-1.48 2.811 -1.2) BoxIvorymattepaint(1.54 0.006 0.003) ]
+      [ T(-1.48 2.811 -0.93) BoxIvorymattepaint(1.54 0.006 0.003) ]
+      [ T(-1.48 2.811 -0.66) BoxIvorymattepaint(1.54 0.006 0.003) ]
+      [ T(-1.48 2.811 -0.39) BoxIvorymattepaint(1.54 0.006 0.003) ]
+    ]
+  ]
+
+Galley ->
+  [ Object(id(Galley) class(Kitchen) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Kitchen Galley) layer(Interior))
+    [
+      [ T(-1.48 2.805 0.18) BoxCharcoalmattemetal(1.76 0.6 0.12) ]
+      [ T(-1.48 2.923 0.18) BoxLightashwood(1.78 0.64 0.68) ]
+      [ T(-1.48 3.603 0.18) BoxIvorymattepaint(1.85 0.69 0.056) ]
+      [ T(-1.48 3.656 -0.124) BoxIvorymattepaint(1.84 0.035 0.17) ]
+      [ T(-2.04 2.945 0.51) BoxWarmteakwood(0.5 0.025 0.632) ]
+      [ T(-2.04 3.51 0.533) BoxGoldbrushedmetal(0.225 0.03 0.022) ]
+      [ T(-1.49 2.945 0.51) BoxWarmteakwood(0.54 0.025 0.632) ]
+      [ T(-1.49 3.51 0.533) BoxGoldbrushedmetal(0.243 0.03 0.022) ]
+      [ T(-0.92 2.945 0.51) BoxWarmteakwood(0.56 0.025 0.632) ]
+      [ T(-0.92 3.51 0.533) BoxGoldbrushedmetal(0.252 0.03 0.022) ]
+      [ T(-1.96 3.66 0.18) BoxSilverbrushedmetal(0.48 0.38 0.016) ]
+      [ T(-1.96 3.676 0.18) BoxCharcoalmattemetal(0.39 0.29 0.008) ]
+      RodGoldbrushedmetal(-1.96 3.66 -0.065 -1.96 3.9 -0.065 0.017 0.017 1 0 0)
+      RodGoldbrushedmetal(-1.96 3.9 -0.065 -1.96 3.9 0.071 0.017 0.017 1 0 0)
+      [ T(-0.97 3.66 0.19) BoxCharcoalmattemetal(0.49 0.4 0.016) ]
+      [ T(0 3.677 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.07 0.316 -1.034154 0.310323 -1.001817 0.293846 -0.976154 0.268183 -0.959677 0.235846 -0.954 0.2 -0.959677 0.164154 -0.976154 0.131817 -1.001817 0.106154 -1.034154 0.089677 -1.07 0.084 -1.105846 0.089677 -1.138183 0.106154 -1.163846 0.131817 -1.180323 0.164154 -1.186 0.2 -1.180323 0.235846 -1.163846 0.268183 -1.138183 0.293846 -1.105846 0.310323)) at(0 Low) hold(0.005) cap(all)) material(blackmatterubber) alpha(1) texscale(1)) ]
+      [ T(0 3.677 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.82 0.226 -0.79806 0.222525 -0.778267 0.21244 -0.76256 0.196733 -0.752475 0.17694 -0.749 0.155 -0.752475 0.13306 -0.76256 0.113267 -0.778267 0.09756 -0.79806 0.087475 -0.82 0.084 -0.84194 0.087475 -0.861733 0.09756 -0.87744 0.113267 -0.887525 0.13306 -0.891 0.155 -0.887525 0.17694 -0.87744 0.196733 -0.861733 0.21244 -0.84194 0.222525)) at(0 Low) hold(0.005) cap(all)) material(silverbrushedmetal) alpha(1) texscale(1)) ]
+      [ T(-1.48 4.16 -0.04) BoxLightashwood(1.52 0.24 0.038) ]
+      [ T(0 4.197 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.99 0.021 -1.961 0.013229 -1.939771 -0.008 -1.932 -0.037 -1.939771 -0.066 -1.961 -0.087229 -1.99 -0.095 -2.019 -0.087229 -2.040229 -0.066 -2.048 -0.037 -2.040229 -0.008 -2.019 0.013229)) at(0 Low) hold(0.13) cap(all)) material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+      [ T(0 4.327 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.99 0.024 -1.9595 0.015828 -1.937172 -0.0065 -1.929 -0.037 -1.937172 -0.0675 -1.9595 -0.089828 -1.99 -0.098 -2.0205 -0.089828 -2.042828 -0.0675 -2.051 -0.037 -2.042828 -0.0065 -2.0205 0.015828)) at(0 Low) hold(0.017) cap(all)) material(warmteakwood) alpha(1) texscale(1)) ]
+      [ T(0 4.197 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.83 0.021 -1.801 0.013229 -1.779771 -0.008 -1.772 -0.037 -1.779771 -0.066 -1.801 -0.087229 -1.83 -0.095 -1.859 -0.087229 -1.880229 -0.066 -1.888 -0.037 -1.880229 -0.008 -1.859 0.013229)) at(0 Low) hold(0.13) cap(all)) material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+      [ T(0 4.327 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.83 0.024 -1.7995 0.015828 -1.777172 -0.0065 -1.769 -0.037 -1.777172 -0.0675 -1.7995 -0.089828 -1.83 -0.098 -1.8605 -0.089828 -1.882828 -0.0675 -1.891 -0.037 -1.882828 -0.0065 -1.8605 0.015828)) at(0 Low) hold(0.017) cap(all)) material(warmteakwood) alpha(1) texscale(1)) ]
+      [ T(0 4.197 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.67 0.021 -1.641 0.013229 -1.619771 -0.008 -1.612 -0.037 -1.619771 -0.066 -1.641 -0.087229 -1.67 -0.095 -1.699 -0.087229 -1.720229 -0.066 -1.728 -0.037 -1.720229 -0.008 -1.699 0.013229)) at(0 Low) hold(0.13) cap(all)) material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+      [ T(0 4.327 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.67 0.024 -1.6395 0.015828 -1.617172 -0.0065 -1.609 -0.037 -1.617172 -0.0675 -1.6395 -0.089828 -1.67 -0.098 -1.7005 -0.089828 -1.722828 -0.0675 -1.731 -0.037 -1.722828 -0.0065 -1.7005 0.015828)) at(0 Low) hold(0.017) cap(all)) material(warmteakwood) alpha(1) texscale(1)) ]
+    ]
+  ]
+
+SleepingBerth ->
+  [ Object(id(SleepingBerth) class(Bedroom) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Bedroom SleepingBerth) layer(Interior))
+    [
+      [ T(1.46 2.8 -1.29) BoxDarkwalnutwood(1.59 2.15 0.28) ]
+      [ T(1.46 3.08 -1.29) BoxOffwhitemattefabric(1.55 2.07 0.17) ]
+      [ T(1.46 3.246 -0.99) BoxSagegreenfabric(1.56 1.42 0.07) ]
+      [ T(1.46 3.314 -0.47) BoxGoldbeigeroughfabric(1.575 0.34 0.025) ]
+      [ T(1.46 2.86 -2.39) BoxLightashwood(1.61 0.075 0.83) ]
+      [ T(0.72 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(0.834 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(0.948 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.062 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.176 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.29 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.404 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.518 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.632 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.746 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.86 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.974 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(2.088 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(2.202 3.24 -2.344) BoxWarmteakwood(0.036 0.03 0.43) ]
+      [ T(1.07 3.245 -1.996) BoxOffwhitemattefabric(0.62 0.36 0.12) ]
+      [ T(1.83 3.245 -1.996) BoxOffwhitemattefabric(0.62 0.36 0.12) ]
+      [ T(2.53 2.81 -1.4) BoxLightashwood(0.38 0.43 0.4) ]
+      [ T(0 3.209 0) !I(AxialProfile(axis(y) profile(Low polygon(2.53 -1.332 2.543266 -1.333307 2.556022 -1.337176 2.567779 -1.34346 2.578083 -1.351917 2.58654 -1.362221 2.592824 -1.373978 2.596693 -1.386734 2.598 -1.4 2.596693 -1.413266 2.592824 -1.426022 2.58654 -1.437779 2.578083 -1.448083 2.567779 -1.45654 2.556022 -1.462824 2.543266 -1.466693 2.53 -1.468 2.516734 -1.466693 2.503978 -1.462824 2.492221 -1.45654 2.481917 -1.448083 2.47346 -1.437779 2.467176 -1.426022 2.463307 -1.413266 2.462 -1.4 2.463307 -1.386734 2.467176 -1.373978 2.47346 -1.362221 2.481917 -1.351917 2.492221 -1.34346 2.503978 -1.337176 2.516734 -1.333307)) at(0 Low) hold(0.07) cap(all)) material(goldbrushedmetal) alpha(1) texscale(1)) ]
+      [ T(0 3.279 0) !I(AxialProfile(axis(y) profile(Low polygon(2.53 -1.285 2.565537 -1.290629 2.597595 -1.306963 2.623037 -1.332405 2.639371 -1.364463 2.645 -1.4 2.639371 -1.435537 2.623037 -1.467595 2.597595 -1.493037 2.565537 -1.509371 2.53 -1.515 2.494463 -1.509371 2.462405 -1.493037 2.436963 -1.467595 2.420629 -1.435537 2.415 -1.4 2.420629 -1.364463 2.436963 -1.332405 2.462405 -1.306963 2.494463 -1.290629)) at(0 Low) hold(0.16) cap(all)) material(offwhitemattefabric) alpha(1) texscale(1)) ]
+    ]
+  ]
+
+# Four straight upholstered chords follow the panorama glazing.
+WindowBanquette ->
+  [ Object(id(WindowBanquette) class(Seating) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Seating WindowBanquette) layer(Interior))
+    [
+      [ T(0 2.82 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.250571 2.27949 -1.577643 2.875664 -0.357083 3.260505 -0.283054 2.584546)) at(0 Low) hold(0.3) cap(all)) material(darkwalnutwood) alpha(1) texscale(1)) ]
+      [ T(0 3.12 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.233839 2.265842 -1.568601 2.880606 -0.367325 3.259367 -0.288932 2.56377)) at(0 Low) hold(0.14) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.25 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.494953 2.738525 -1.571617 2.878962 -0.363911 3.25975 -0.34616 3.100738)) at(0 Low) hold(0.31) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.54 0) !I(AxialProfile(axis(y) profile(Low polygon(-1.550133 2.833723 -1.593325 2.912682 -0.36547 3.299823 -0.355562 3.21037)) at(0 Low) hold(0.055) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      RodWarmteakwood(-1.141518 2.87 2.34046 -1.141518 3.06 2.34046 0.01 0.01 1 0 0)
+      RodWarmteakwood(-1.017464 2.87 2.396995 -1.017464 3.06 2.396995 0.01 0.01 1 0 0)
+      RodWarmteakwood(-0.89062 2.87 2.44696 -0.89062 3.06 2.44696 0.01 0.01 1 0 0)
+      RodWarmteakwood(-0.761336 2.87 2.490218 -0.761336 3.06 2.490218 0.01 0.01 1 0 0)
+      RodWarmteakwood(-0.629965 2.87 2.52665 -0.629965 3.06 2.52665 0.01 0.01 1 0 0)
+      RodWarmteakwood(-0.496867 2.87 2.556157 -0.496867 3.06 2.556157 0.01 0.01 1 0 0)
+      [ T(0 2.82 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.260489 2.586918 -0.328617 3.263497 0.945284 3.140834 0.74931 2.489686)) at(0 Low) hold(0.3) cap(all)) material(darkwalnutwood) alpha(1) texscale(1)) ]
+      [ T(0 3.12 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.250419 2.567818 -0.318363 3.264513 0.935412 3.143788 0.735781 2.472858)) at(0 Low) hold(0.14) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.25 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.306084 3.10495 -0.321781 3.264178 0.938704 3.142807 0.892913 2.989499)) at(0 Low) hold(0.31) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.54 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.319681 3.214141 -0.328588 3.303699 0.952927 3.180304 0.927094 3.09409)) at(0 Low) hold(0.055) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      RodWarmteakwood(-0.136283 2.87 2.600431 -0.136283 3.06 2.600431 0.01 0.01 1 0 0)
+      RodWarmteakwood(0 2.87 2.604 0 3.06 2.604 0.01 0.01 1 0 0)
+      RodWarmteakwood(0.136283 2.87 2.600431 0.136283 3.06 2.600431 0.01 0.01 1 0 0)
+      RodWarmteakwood(0.272192 2.87 2.589735 0.272192 3.06 2.589735 0.01 0.01 1 0 0)
+      RodWarmteakwood(0.407355 2.87 2.57194 0.407355 3.06 2.57194 0.01 0.01 1 0 0)
+      RodWarmteakwood(0.541402 2.87 2.547096 0.541402 3.06 2.547096 0.01 0.01 1 0 0)
+      [ T(0 2.82 0) !I(AxialProfile(axis(y) profile(Low polygon(0.771008 2.483052 0.972656 3.132465 2.09736 2.521801 1.662541 1.998989)) at(0 Low) hold(0.3) cap(all)) material(darkwalnutwood) alpha(1) texscale(1)) ]
+      [ T(0 3.12 0) !I(AxialProfile(axis(y) profile(Low polygon(0.772814 2.461536 0.982492 3.129394 2.089427 2.528378 1.643513 1.988785)) at(0 Low) hold(0.14) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.25 0) !I(AxialProfile(axis(y) profile(Low polygon(0.931448 2.977718 0.979215 3.130421 2.092074 2.526188 1.990021 2.40296)) at(0 Low) hold(0.31) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.54 0) !I(AxialProfile(axis(y) profile(Low polygon(0.961597 3.083542 0.988391 3.169461 2.119817 2.555147 2.062352 2.485881)) at(0 Low) hold(0.055) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      RodWarmteakwood(0.89062 2.87 2.44696 0.89062 3.06 2.44696 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.017464 2.87 2.396995 1.017464 3.06 2.396995 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.141518 2.87 2.34046 1.141518 3.06 2.34046 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.262444 2.87 2.27751 1.262444 3.06 2.27751 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.37991 2.87 2.208317 1.37991 3.06 2.208317 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.493593 2.87 2.133072 1.493593 3.06 2.133072 0.01 0.01 1 0 0)
+      [ T(0 2.82 0) !I(AxialProfile(axis(y) profile(Low polygon(1.679922 1.984404 2.119287 2.503403 2.915976 1.501826 2.311445 1.190472)) at(0 Low) hold(0.3) cap(all)) material(darkwalnutwood) alpha(1) texscale(1)) ]
+      [ T(0 3.12 0) !I(AxialProfile(axis(y) profile(Low polygon(1.673178 1.963893 2.127141 2.496732 2.911244 1.51098 2.289942 1.188515)) at(0 Low) hold(0.14) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.25 0) !I(AxialProfile(axis(y) profile(Low polygon(2.02089 2.377058 2.124525 2.498958 2.912824 1.50793 2.770735 1.434373)) at(0 Low) hold(0.31) cap(all)) material(sagegreenfabric) alpha(1) texscale(1)) ]
+      [ T(0 3.54 0) !I(AxialProfile(axis(y) profile(Low polygon(2.089991 2.462689 2.148226 2.531309 2.949678 1.523746 2.869716 1.48244)) at(0 Low) hold(0.055) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      RodWarmteakwood(1.775924 2.87 1.904445 1.775924 3.06 1.904445 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.873161 2.87 1.80889 1.873161 3.06 1.80889 0.01 0.01 1 0 0)
+      RodWarmteakwood(1.965264 2.87 1.708378 1.965264 3.06 1.708378 0.01 0.01 1 0 0)
+      RodWarmteakwood(2.05198 2.87 1.603182 2.05198 3.06 1.603182 0.01 0.01 1 0 0)
+      RodWarmteakwood(2.133072 2.87 1.493593 2.133072 3.06 1.493593 0.01 0.01 1 0 0)
+      RodWarmteakwood(2.208317 2.87 1.37991 2.208317 3.06 1.37991 0.01 0.01 1 0 0)
+    ]
+  ]
+
+# A single pedestal leaves knee space between the table and the perimeter seat.
+DiningNook ->
+  [ Object(id(DiningNook) class(Dining) taxonomy(Building Residential DetachedHouse RaisedDome SingleStorey Dining DiningNook) layer(Interior))
+    [
+      [ T(0 2.802 0) !I(AxialProfile(axis(y) profile(Low polygon(0.59 2.11 0.644625 2.10462 0.697151 2.088686 0.74556 2.062811 0.78799 2.02799 0.822811 1.98556 0.848686 1.937151 0.86462 1.884625 0.87 1.83 0.86462 1.775375 0.848686 1.722849 0.822811 1.67444 0.78799 1.63201 0.74556 1.597189 0.697151 1.571314 0.644625 1.55538 0.59 1.55 0.535375 1.55538 0.482849 1.571314 0.43444 1.597189 0.39201 1.63201 0.357189 1.67444 0.331314 1.722849 0.31538 1.775375 0.31 1.83 0.31538 1.884625 0.331314 1.937151 0.357189 1.98556 0.39201 2.02799 0.43444 2.062811 0.482849 2.088686 0.535375 2.10462)) at(0 Low) hold(0.045) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1)) ]
+      RodCharcoalmattemetal(0.59 2.83 1.83 0.59 3.5 1.83 0.061 0.061 1 0 0)
+      [ T(0 3.5 0) !I(AxialProfile(axis(y) profile(Low polygon(0.59 2.26 0.705103 2.251738 0.815783 2.227268 0.917786 2.187532 1.007193 2.134056 1.080567 2.068895 1.135089 1.994554 1.168663 1.913889 1.18 1.83 1.168663 1.746111 1.135089 1.665446 1.080567 1.591105 1.007193 1.525944 0.917786 1.472468 0.815783 1.432732 0.705103 1.408262 0.59 1.4 0.474897 1.408262 0.364217 1.432732 0.262214 1.472468 0.172807 1.525944 0.099433 1.591105 0.044911 1.665446 0.011337 1.746111 0 1.83 0.011337 1.913889 0.044911 1.994554 0.099433 2.068895 0.172807 2.134056 0.262214 2.187532 0.364217 2.227268 0.474897 2.251738)) at(0 Low) hold(0.053) cap(all)) material(lightashwood) alpha(1) texscale(1)) ]
+      [ T(0 3.554 0) !I(AxialProfile(axis(y) profile(Low polygon(0.84 1.95 0.877082 1.944127 0.910534 1.927082 0.937082 1.900534 0.954127 1.867082 0.96 1.83 0.954127 1.792918 0.937082 1.759466 0.910534 1.732918 0.877082 1.715873 0.84 1.71 0.802918 1.715873 0.769466 1.732918 0.742918 1.759466 0.725873 1.792918 0.72 1.83 0.725873 1.867082 0.742918 1.900534 0.769466 1.927082 0.802918 1.944127)) at(0 Low) hold(0.035) cap(all)) material(ivorymattepaint) alpha(1) texscale(1)) ]
+      [ T(0 3.588 0) !I(AxialProfile(axis(y) profile(Low polygon(0.84 1.908 0.864103 1.904182 0.885847 1.893103 0.903103 1.875847 0.914182 1.854103 0.918 1.83 0.914182 1.805897 0.903103 1.784153 0.885847 1.766897 0.864103 1.755818 0.84 1.752 0.815897 1.755818 0.794153 1.766897 0.776897 1.784153 0.765818 1.805897 0.762 1.83 0.765818 1.854103 0.776897 1.875847 0.794153 1.893103 0.815897 1.904182)) at(0 Low) hold(0.006) cap(all)) material(warmteakwood) alpha(1) texscale(1)) ]
+      [ T(0 3.554 0) !I(AxialProfile(axis(y) profile(Low polygon(0.29 1.768 0.308369 1.764346 0.323941 1.753941 0.334346 1.738369 0.338 1.72 0.334346 1.701631 0.323941 1.686059 0.308369 1.675654 0.29 1.672 0.271631 1.675654 0.256059 1.686059 0.245654 1.701631 0.242 1.72 0.245654 1.738369 0.256059 1.753941 0.271631 1.764346)) at(0 Low) hold(0.081) cap(all)) material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+      [ T(0 3.21 0) !I(AxialProfile(axis(y) profile(Low polygon(-0.29 1.605 -0.236942 1.598015 -0.1875 1.577535 -0.145043 1.544957 -0.112465 1.5025 -0.091985 1.453058 -0.085 1.4 -0.091985 1.346942 -0.112465 1.2975 -0.145043 1.255043 -0.1875 1.222465 -0.236942 1.201985 -0.29 1.195 -0.343058 1.201985 -0.3925 1.222465 -0.434957 1.255043 -0.467535 1.2975 -0.488015 1.346942 -0.495 1.4 -0.488015 1.453058 -0.467535 1.5025 -0.434957 1.544957 -0.3925 1.577535 -0.343058 1.598015)) at(0 Low) hold(0.061) cap(all)) material(goldbeigeroughfabric) alpha(1) texscale(1)) ]
+      RodWarmteakwood(-0.29 2.794 1.562 -0.29 3.21 1.515 0.024 0.024 1 0 0)
+      RodWarmteakwood(-0.149704 2.794 1.319 -0.190407 3.21 1.3425 0.024 0.024 0 0 1)
+      RodWarmteakwood(-0.430296 2.794 1.319 -0.389593 3.21 1.3425 0.024 0.024 0 0 1)
+      [ T(0 3.21 0) !I(AxialProfile(axis(y) profile(Low polygon(1.35 1.405 1.403058 1.398015 1.4525 1.377535 1.494957 1.344957 1.527535 1.3025 1.548015 1.253058 1.555 1.2 1.548015 1.146942 1.527535 1.0975 1.494957 1.055043 1.4525 1.022465 1.403058 1.001985 1.35 0.995 1.296942 1.001985 1.2475 1.022465 1.205043 1.055043 1.172465 1.0975 1.151985 1.146942 1.145 1.2 1.151985 1.253058 1.172465 1.3025 1.205043 1.344957 1.2475 1.377535 1.296942 1.398015)) at(0 Low) hold(0.061) cap(all)) material(goldbeigeroughfabric) alpha(1) texscale(1)) ]
+      RodWarmteakwood(1.35 2.794 1.362 1.35 3.21 1.315 0.024 0.024 1 0 0)
+      RodWarmteakwood(1.490296 2.794 1.119 1.449593 3.21 1.1425 0.024 0.024 0 0 1)
+      RodWarmteakwood(1.209704 2.794 1.119 1.250407 3.21 1.1425 0.024 0.024 0 0 1)
+    ]
+  ]
+
+BoxBeigebrownmattepolyester(width depth height) ->
+  [ S(width height depth) !I(CubeY material(beigebrownmattepolyester) alpha(1) texscale(1)) ]
+
+BoxSilverbrushedmetal(width depth height) ->
+  [ S(width height depth) !I(CubeY material(silverbrushedmetal) alpha(1) texscale(1)) ]
+
+RodCharcoalmattemetal(ax ay az bx by bz ra rb ux uy uz) ->
+  !I(TaperedSweep(samples(ax ay az ra bx by bz rb) up(ux uy uz) segments(10) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1))
+
+BoxWarmteakwood(width depth height) ->
+  [ S(width height depth) !I(CubeY material(warmteakwood) alpha(1) texscale(1)) ]
+
+BoxCharcoalmattemetal(width depth height) ->
+  [ S(width height depth) !I(CubeY material(charcoalmattemetal) alpha(1) texscale(1)) ]
+
+BoxLightashwood(width depth height) ->
+  [ S(width height depth) !I(CubeY material(lightashwood) alpha(1) texscale(1)) ]
+
+RodGoldbrushedmetal(ax ay az bx by bz ra rb ux uy uz) ->
+  !I(TaperedSweep(samples(ax ay az ra bx by bz rb) up(ux uy uz) segments(10) cap(all)) material(goldbrushedmetal) alpha(1) texscale(1))
+
+FacetSlateblueglossyglass(base offset rise depth) ->
+  !I(AxialProfile(axis(y) profile(Face polygon(0 0 base 0 offset rise)) at(0 Face) hold(depth) cap(all)) material(slateblueglossyglass) alpha(0.74) texscale(1))
+
+FacetOrangebrownmattefabric(base offset rise depth) ->
+  !I(AxialProfile(axis(y) profile(Face polygon(0 0 base 0 offset rise)) at(0 Face) hold(depth) cap(all)) material(orangebrownmattefabric) alpha(1) texscale(1))
+
+FacetGoldorangemattepaint(base offset rise depth) ->
+  !I(AxialProfile(axis(y) profile(Face polygon(0 0 base 0 offset rise)) at(0 Face) hold(depth) cap(all)) material(goldorangemattepaint) alpha(1) texscale(1))
+
+RodSilverbrushedmetal(ax ay az bx by bz ra rb ux uy uz) ->
+  !I(TaperedSweep(samples(ax ay az ra bx by bz rb) up(ux uy uz) segments(10) cap(all)) material(silverbrushedmetal) alpha(1) texscale(1))
+
+FacetCharcoalmattemetal(base offset rise depth) ->
+  !I(AxialProfile(axis(y) profile(Face polygon(0 0 base 0 offset rise)) at(0 Face) hold(depth) cap(all)) material(charcoalmattemetal) alpha(1) texscale(1))
+
+BoxDarkwalnutwood(width depth height) ->
+  [ S(width height depth) !I(CubeY material(darkwalnutwood) alpha(1) texscale(1)) ]
+
+BoxBluewhiteglossysmoothglass(width depth height) ->
+  [ S(width height depth) !I(CubeY material(bluewhiteglossysmoothglass) alpha(1) texscale(1)) ]
+
+BoxWarmwhitematteplaster(width depth height) ->
+  [ S(width height depth) !I(CubeY material(warmwhitematteplaster) alpha(1) texscale(1)) ]
+
+BoxOffwhiteceramic(width depth height) ->
+  [ S(width height depth) !I(CubeY material(offwhiteceramic) alpha(1) texscale(1)) ]
+
+BoxCleartransparentglass(width depth height) ->
+  [ S(width height depth) !I(CubeY material(cleartransparentglass) alpha(1) texscale(1)) ]
+
+BoxIvorymattepaint(width depth height) ->
+  [ S(width height depth) !I(CubeY material(ivorymattepaint) alpha(1) texscale(1)) ]
+
+BoxGoldbrushedmetal(width depth height) ->
+  [ S(width height depth) !I(CubeY material(goldbrushedmetal) alpha(1) texscale(1)) ]
+
+BoxOffwhitemattefabric(width depth height) ->
+  [ S(width height depth) !I(CubeY material(offwhitemattefabric) alpha(1) texscale(1)) ]
+
+BoxSagegreenfabric(width depth height) ->
+  [ S(width height depth) !I(CubeY material(sagegreenfabric) alpha(1) texscale(1)) ]
+
+BoxGoldbeigeroughfabric(width depth height) ->
+  [ S(width height depth) !I(CubeY material(goldbeigeroughfabric) alpha(1) texscale(1)) ]
+
+RodWarmteakwood(ax ay az bx by bz ra rb ux uy uz) ->
+  !I(TaperedSweep(samples(ax ay az ra bx by bz rb) up(ux uy uz) segments(10) cap(all)) material(warmteakwood) alpha(1) texscale(1))

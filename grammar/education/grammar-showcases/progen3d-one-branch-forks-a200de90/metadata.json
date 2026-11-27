@@ -1,0 +1,64 @@
+{
+  "title": "Pro Gen3D One Branch Forks",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-one-branch-forks-a200de90",
+  "source_file": "ProGen3D_One_Branch_Forks.p3d",
+  "git_blob_sha": "a200de90fa5cb05db4f4716e2a790a9e9488e0b7",
+  "bytes": 79147,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_One_Branch_Forks.p3d"
+  ],
+  "description": "Run It Again / One Branch Forks. Image 2: a low view from a Queensland veranda.",
+  "features": [
+    "TaperedSweep",
+    "Loft",
+    "LeafBlade",
+    "SweepDisk",
+    "Revolve",
+    "Cube",
+    "SweepProfile",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Run It Again / One Branch Forks. Image 2: a low view from a Queensland veranda. · GumView(blueTip twigDepth). Use blueTip=1 for the drawn fork; 0 grows a leafed fork. · TwigDepth 0, 1 or 2 controls successive fork generations on every foliage spray. · Main boughs keep their traced silhouettes. The editor seed varies leaves and spray angles. · Approximate metres, Y up. Reproduce the preview from (0, 0.92, 4.4), facing -Z · with 12 degrees of upward pitch, 54.2 degrees horizontal field of view, 16:9. · Heights, hidden surfaces and out-of-frame limbs are inferred from a single view. · Each shoot forks into two shorter shoots. Each leaf attaches at its own shoot station. · The spine bends down quadratically, and a small out-of-plane bend gives it depth."
+    ],
+    [
+      "Named objects",
+      "GumScene, Scaffold, Bark, LeafSprays, Fruit, GrowingTip, Horizon, Veranda, Rocker, SpraysTrunk, SpraysRoofCanopy, SpraysCrownLeader, SpraysUpperFine, SpraysHighEast, SpraysHighEastSpur, SpraysTopRight, SpraysHighWest, SpraysWestSkirt, SpraysLowerFork, SpraysOuterLower, SpraysFineLower, SpraysDroopingSpur, SpraysEastFork, SpraysCrossBough"
+    ],
+    [
+      "Object classes",
+      "VerandaStudy, EucalyptusScaffold, ExfoliatingBark, PendantEucalyptusFoliage, WoodyCapsules, TerminalFork, DistantTreeLine, TimberVeranda, BentwoodRockingChair, PendantShoots"
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep, Loft, LeafBlade, SweepDisk, Revolve, Cube, SweepProfile, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "silverbeigebirchwood, silvergreybirchwood, ambercedarwood, brownwalnutwood, amberbrowncedarwood, sagegreenmattepaint, olivegreenmattepaint, browncedarwood, cyanemissivepaint, warmwhitepaint, beigewhitepaint, amberbeigepinewood, sagegreenweatheredpaint, amberoakpolishedwood, brownoakwood"
+    ],
+    [
+      "Production rules",
+      "Start, GumView, TracedLimbs, Trunk, CrossBough, TerminalWood, EastFork, LowerFork, OuterLower, FineLower, DroopingSpur, CrownLeader, HighEast, HighEastSpur, HighWest, RoofCanopy, TopRight, WestSkirt, UpperFine, BarkPlates (63 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "807"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
