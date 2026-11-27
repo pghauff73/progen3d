@@ -1,5 +1,7 @@
 # Validation report
 
+> **Historical report (2026-08-21):** These results describe the source, fixture set, and tested binary from that run. The referenced `current/` tree and several listed examples are not present in this checkout, so this report is retained as historical evidence, not as validation of the current repository state.
+
 - Current-syntax examples: **57**
 - Expected-invalid diagnostic fixtures: **15**
 - Proposed AxialProfilev1 examples: **13**

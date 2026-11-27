@@ -2,9 +2,9 @@
 
 ## Parser-Compatible EBNF and Grammar Writing Guide
 
-**Guide status:** current implementation guide for the uploaded 21 August 2026 source snapshot.
+**Guide status:** implementation-oriented syntax guide, reviewed against the parser sources on 27 November 2026. Parser and runtime code remain authoritative; support may vary by shape family and runtime path.
 
-**Normative source order:** `Grammar.cpp` defines source parsing, semantic validation, expression evaluation, stochastic expansion, conditionals, time, rule calls, and action emission. `Scope.cpp` defines transform behavior. `Context.cpp` defines instancing, material canonicalisation, pending physics state, gravity, and simulation state. `Mesh.cpp` defines the six currently usable primitive meshes. `imgui_main.cpp` supplies editor syntax help, procedural material lexemes, and deterministic time-sample seeding.
+**Implementation entry points:** `src/Grammar.cpp` defines source parsing, semantic validation, expression evaluation, stochastic expansion, conditionals, time, rule calls, and action emission. `src/grammar/service/ShapeSpecificationParser.cpp` recognizes shape-specification names; geometry and runtime support are implemented across the relevant shape, mesh, context, and editor code.
 
 This guide describes what the current parser and runtime actually do. It does not silently promote unfinished UI or STL-catalog features into the language.
 
@@ -54,9 +54,9 @@ The final two instance arguments are the legacy per-instance alpha field and tex
 
 ---
 
-## 3. Canonical EBNF
+## 3. Parser-oriented grammar sketch
 
-The standalone EBNF file accompanies this guide. Its central document grammar is:
+The following sketch summarizes the central document structure; it is not a complete standalone EBNF specification:
 
 ```ebnf
 document   = spacing, rule, { spacing, rule }, spacing ;
@@ -93,7 +93,7 @@ conditional =
     sequence, ":", sequence ;
 ```
 
-The full file also formalises all actions, rule calls, instancing forms, conditions, expressions, numbers, identifiers, comments, and the current primitive set.
+Actions, rule calls, instancing forms, conditions, expressions, numbers, identifiers, comments, and shape specifications are described in the sections below.
 
 ### Why the EBNF has semantic notes
 
@@ -218,7 +218,7 @@ A logical rule may contain:
 
 ## 6. Entry rule
 
-The parser moves the first exact `Start` or `start` rule to the front. If neither exists, the first parsed rule becomes the entry.
+The parser moves the first rule named exactly `Start` or `start` to the front. Rule names are case-sensitive, so other capitalization is not matched. If neither spelling exists, the first parsed rule becomes the entry.
 
 Use this strict form:
 
@@ -676,9 +676,9 @@ A standalone `*` is also discarded and should not be used.
 
 ## 13. Instancing
 
-### 13.1 Current primitive set
+### 13.1 Built-in and shape-specification names
 
-The current grammar parser accepts exactly:
+The parser accepts these built-in instance names:
 
 ```text
 Cube
@@ -689,9 +689,9 @@ Cylinder
 Sphere
 ```
 
-Use exact case.
+Use exact case. It also recognizes shape-specification names through `ShapeSpecificationParser::isSupportedShapeName`; these include `AxialProfile`, `Extrude`, sweep and surface families, panel families, and vegetation shapes. Recognition alone does not guarantee that a shape family has complete geometry, rendering, collision, or physics behavior. Consult its parser, evaluator, and runtime implementation before relying on it.
 
-Although the uploaded project includes STL catalog and UI infrastructure, `Grammar.cpp` accepts only the six built-ins and `Mesh::isStlInstanceType` currently returns false. `STL.*` is not part of the executable source grammar in this build.
+STL catalog infrastructure does not make `STL.*` an accepted source instance name in this build.
 
 ### 13.2 Instance syntax
 
@@ -1023,7 +1023,7 @@ Use these rules for source that remains readable and resistant to parser ambigui
 | `R t(0 1)` | `t` is reserved | Choose another identifier |
 | `Row(n) floor(n/2) -> ...` | Repeat header accepts one compact token | Precompute/pass a value or use `n/2` |
 | `{ T(1 0 0) Part }` | Braces are discarded | `[ T(1 0 0) Part ]` |
-| `I(STL.part material(x) 1 1)` | STL instancing is disabled in this build | Use one of the six built-ins |
+| `I(STL.part material(x) 1 1)` | STL instancing is not accepted by the source parser | Use a built-in or a supported shape specification |
 | `I(Cube FloorTex 1 1)` | Bare name may change between material and index | Use `material(FloorTex)` or `index(FloorTex)` |
 | `?(x>0) A : B Common` | `Common` belongs only to false branch | Call a common helper from both branches |
 | `S(H 1 1) R H(2 2)` | Runtime declaration order is wrong | Move `R H(...)` before the use |
@@ -1141,8 +1141,6 @@ These are good candidates for a future grammar revision, but they should not be 
 
 ---
 
-## 24. Files delivered with this guide
+## 24. Files in this reference directory
 
-- `Progen3D_Grammar.ebnf`: standalone strict EBNF.
-- `Progen3D_Grammar_Writing_Guide.md`: this guide.
-- `Progen3D_Grammar_Showcase.p3d`: a single current-syntax example combining sections, counters, parameters, random values, alternate productions, materials, physics, deformation, and time.
+This directory currently contains this writing guide. Earlier versions referred to standalone EBNF and showcase files that are not included in this checkout.

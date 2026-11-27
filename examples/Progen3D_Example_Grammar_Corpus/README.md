@@ -1,19 +1,19 @@
 # Progen3D Example Grammar Corpus
 
-Generated: 2026-08-21
+Corpus status reviewed: 2026-11-27. The validation report below is historical evidence from 2026-08-21.
 
-This archive is a source-grounded example corpus for the Progen3D grammar implementation represented by the uploaded C++ snapshot.
+This directory is a partial archive of grammar documentation, diagnostic fixtures, and proposed shape examples. The historical `current/` example tree and several files listed in the validation report are not included in this checkout.
 
 ## Directory status
 
-- `current/` — examples intended to conform to the current parser/runtime syntax.
-- `diagnostic_fixtures/` — intentionally invalid regression grammars for diagnostics.
-- `proposed_axialprofilev1/` — executable design and acceptance examples for **AxialProfilev1**.
-- `proposed_future_curved/` — executable examples for partial, hollow, chord-cut, clipped Cylinder, and Sphere families.
+- `diagnostic_fixtures/` — intentionally invalid `.p3d` examples for parser and semantic diagnostics.
+- `proposed_axialprofilev1/` — design fixtures; these are not current executable grammars.
+- `proposed_future_curved/` — design notes for curved shape families, not current executable examples.
+- `reference/` — the parser-oriented grammar writing guide.
 
 ## Current language highlights represented here
 
-The current grammar supports the built-ins `Cube`, `CubeX`, `CubeY`, `CubeZ`, `Cylinder`, and `Sphere`; rule parameters; rule repetition; up to three `|` sections; one alternate production; `R` and `R*`; expression-level `&name` resampling; conditionals; bracket scopes; transforms; time functions; materials; and the current physics actions.
+The source grammar includes the built-in box names `Cube`, `CubeX`, `CubeY`, and `CubeZ`, `Cylinder` and `Sphere`, and additional shape specifications recognized by the parser. Other implemented syntax includes rule parameters and repetition, up to three `|` sections, one alternate production, `R` and `R*`, expression-level `&name` resampling, conditionals, bracket scopes, transforms, time functions, materials, and physics actions. Parser recognition of a shape name does not guarantee complete geometry, rendering, collision, or physics support for that family; check the current implementation.
 
 ### Important current-source caveats
 
@@ -25,19 +25,8 @@ The current grammar supports the built-ins `Cube`, `CubeX`, `CubeY`, `CubeZ`, `C
 
 ## Recommended reading order
 
-1. `current/00_basics`
-2. `current/01_rules`
-3. `current/02_random`
-4. `current/03_expressions`
-5. `current/04_conditionals`
-6. `current/05_time`
-7. `current/06_materials`
-8. `current/07_physics`
-9. `current/08_deformation`
-10. `current/09_architecture`
-11. `current/10_comprehensive`
-12. `diagnostic_fixtures`
-13. `proposed_axialprofilev1`
-14. `proposed_future_curved`
+1. `reference/Progen3D_Grammar_Writing_Guide.md` for current syntax guidance.
+2. `diagnostic_fixtures/README.md` for intentionally invalid source cases.
+3. `proposed_axialprofilev1/README.md` and `proposed_future_curved/README.md` for explicitly proposed designs.
 
-See `MANIFEST.csv` and `VALIDATION.md` for per-file status.
+`VALIDATION.md` preserves results recorded on 2026-08-21. It describes files and a tested binary from that historical run; it is not evidence that the referenced fixture files or results are present or current in this checkout.
