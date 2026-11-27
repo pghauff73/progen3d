@@ -1,9 +1,9 @@
 {
   "schema": "progen3d.grammar-catalogue.v1",
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
-  "scope": "All standalone grammar source blobs from the enumerated 21 repository branches, plus completely transferred Library exports. Other Library exports and embedded/archive grammars remain outstanding.",
+  "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 140,
+  "distinct_sources": 145,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -5793,6 +5793,120 @@
       }
     },
     {
+      "title": "Ender3 Y Hi Res Animated Overview",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-animated-overview-944c6518",
+      "source_file": "Ender3_Y_HiRes_Animated_Overview.p3d",
+      "git_blob_sha": "944c65180a7da200f6cbd218e8e21b191f4171df",
+      "bytes": 23931,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_HiRes_Animated_Overview.p3d"
+      ],
+      "description": "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M24Controls, M24Assembly, M24Belt (4 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "182"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y Hi Res Roller",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-roller-4b07c929",
+      "source_file": "Ender3_Y_HiRes_Roller.p3d",
+      "git_blob_sha": "4b07c929b5948231a95e5c2fda2776c8880274e9",
+      "bytes": 466,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_HiRes_Roller.p3d"
+      ],
+      "description": "High-resolution rebuild profile: high. Version 1; native geometry, no mesh import.",
+      "features": [
+        "Revolve"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "High-resolution rebuild profile: high. Version 1; native geometry, no mesh import. · CAD-derived axial half section in original source coordinates, mm."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve"
+        ],
+        [
+          "Material identifiers",
+          "blackmatteplastic"
+        ],
+        [
+          "Production rules",
+          "Start, Native95Roller (2 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "7"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "MCSMv22 aero Closed Preview",
       "group": "engineering/automotive/kinematic-previews",
       "directory": "engineering/automotive/kinematic-previews/mcsmv22-aero-closed-preview-2d7ed02b",
@@ -6769,6 +6883,134 @@
       }
     },
     {
+      "title": "cellular composition 02",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/cellular-composition-02-337f4faf",
+      "source_file": "cellular_composition_02.p3d",
+      "git_blob_sha": "337f4fafb4e091446fe3f236879852ec5b2f88df",
+      "bytes": 131923,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "cellular_composition_02.p3d"
+      ],
+      "description": "ProGen3D macro relief: cellular_composition_02",
+      "features": [
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D macro relief: cellular_composition_02 · 120 x 120 x 12 mm envelope. X/Z footprint, Y thickness. 5 mm flat border. 1 mm strips. · Polygon extrusion grammar, no imported mesh. Adjacent strips meet at shared faces."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude"
+        ],
+        [
+          "Material identifiers",
+          "silvermetalpolished"
+        ],
+        [
+          "Production rules",
+          "Start, Plate, Band000, Band001, Band002, Band003, Band004, Band005, Band006, Band007, Band008, Band009, Band010, Band011, Band012, Band013, Band014, Band015, Band016, Band017 (122 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "126"
+        ]
+      ],
+      "render_assets": [
+        {
+          "path": "renders/source-preview.svg",
+          "label": "Source-derived diagnostic preview",
+          "kind": "Analytic relief depth projection of literal source polygon strips, not a native render",
+          "sha": "e423c0159816aa49508ee5dad51737b5fdc81c0f"
+        }
+      ],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 80,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "dual surface cellular",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/dual-surface-cellular-43149fe0",
+      "source_file": "dual_surface_cellular.p3d",
+      "git_blob_sha": "43149fe080646b5beaae61206dfd18738d292a5b",
+      "bytes": 247793,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "dual_surface_cellular.p3d"
+      ],
+      "description": "ProGen3D macro relief: dual_surface_cellular",
+      "features": [
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D macro relief: dual_surface_cellular · 120 x 120 x 24 mm envelope. X/Z footprint, Y thickness. 5 mm flat border. 1 mm strips. · Polygon extrusion grammar, no imported mesh. Adjacent strips meet at shared faces."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude"
+        ],
+        [
+          "Material identifiers",
+          "silvermetalpolished"
+        ],
+        [
+          "Production rules",
+          "Start, Plate, Band000, Band001, Band002, Band003, Band004, Band005, Band006, Band007, Band008, Band009, Band010, Band011, Band012, Band013, Band014, Band015, Band016, Band017 (122 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "126"
+        ]
+      ],
+      "render_assets": [
+        {
+          "path": "renders/source-preview.svg",
+          "label": "Source-derived diagnostic preview",
+          "kind": "Analytic relief depth projection of literal source polygon strips, not a native render",
+          "sha": "b656d11dc0a89d9ee02930ab557eb8907b1def1b"
+        }
+      ],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 80,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Meridian S02 Crew Cabin",
       "group": "spacecraft/meridian/interior/districts-and-structure",
       "directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-crew-cabin-f02d4ce9",
@@ -7256,6 +7498,65 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 55,
         "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Meridian H03 Ship Refuges",
+      "group": "spacecraft/meridian/interior/habitation",
+      "directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-refuges-334c3dfb",
+      "source_file": "Meridian_H03_Ship_Refuges.p3d",
+      "git_blob_sha": "334c3dfb5942e80f438d89afde7b2bea4c1946e6",
+      "bytes": 49159,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Meridian_H03_Ship_Refuges.p3d"
+      ],
+      "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+      "features": [
+        "Cube",
+        "Sphere",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+        ],
+        [
+          "Named objects",
+          "Meridian_H03_ship_Collection_Emergency_Refuges, H03_Base_ship_refuges_HAB_REFUGE_A, H02_Ship_Refuge_HAB_REFUGE_A, H03_Base_ship_refuges_HAB_REFUGE_B, H02_Ship_Refuge_HAB_REFUGE_B"
+        ],
+        [
+          "Object classes",
+          "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Sphere, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, paleblueemissivepaint, purplemattepaint, whitebeigemattepaint, goldbrushedmetal, copperbrushedmetal"
+        ],
+        [
+          "Production rules",
+          "Start (1 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "331"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -8134,6 +8435,7 @@
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 25,
-  "library_export_inventory_count": 251
+  "library_exports_imported": 30,
+  "library_export_inventory_count": 251,
+  "library_export_names_transferred": 30
 }

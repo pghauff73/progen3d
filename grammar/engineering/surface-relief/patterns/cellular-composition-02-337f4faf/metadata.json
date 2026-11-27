@@ -1,0 +1,64 @@
+{
+  "title": "cellular composition 02",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/cellular-composition-02-337f4faf",
+  "source_file": "cellular_composition_02.p3d",
+  "git_blob_sha": "337f4fafb4e091446fe3f236879852ec5b2f88df",
+  "bytes": 131923,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "cellular_composition_02.p3d"
+  ],
+  "description": "ProGen3D macro relief: cellular_composition_02",
+  "features": [
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ProGen3D macro relief: cellular_composition_02 · 120 x 120 x 12 mm envelope. X/Z footprint, Y thickness. 5 mm flat border. 1 mm strips. · Polygon extrusion grammar, no imported mesh. Adjacent strips meet at shared faces."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude"
+    ],
+    [
+      "Material identifiers",
+      "silvermetalpolished"
+    ],
+    [
+      "Production rules",
+      "Start, Plate, Band000, Band001, Band002, Band003, Band004, Band005, Band006, Band007, Band008, Band009, Band010, Band011, Band012, Band013, Band014, Band015, Band016, Band017 (122 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "126"
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/source-preview.svg",
+      "label": "Source-derived diagnostic preview",
+      "kind": "Analytic relief depth projection of literal source polygon strips, not a native render",
+      "sha": "e423c0159816aa49508ee5dad51737b5fdc81c0f"
+    }
+  ],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

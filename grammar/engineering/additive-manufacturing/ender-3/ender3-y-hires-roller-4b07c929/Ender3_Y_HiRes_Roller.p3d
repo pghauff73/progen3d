@@ -1,0 +1,6 @@
+# High-resolution rebuild profile: high. Version 1; native geometry, no mesh import.
+# CAD-derived axial half section in original source coordinates, mm.
+Start -> [ S(.001 .001 .001) Native95Roller ]
+Native95Roller -> [ T(15.5 -35.5 -13.45)  A(90 0)
+    [ I(Revolve(profile(Polygon 8 -0.5 8 -5 8.1 -5.1 10 -5.1 12.05 -3.05 12.05 3.05 10 5.1 8.1 5.1 8 5 8 0.5 6.9 0.5 6.8 0.4 6.8 -0.4 6.9 -0.5) angle(0 360) segments(384) cap(all)) material(blackmatteplastic) 1) ]
+]

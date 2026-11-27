@@ -1,0 +1,57 @@
+{
+  "title": "Ender3 Y Hi Res Roller",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-roller-4b07c929",
+  "source_file": "Ender3_Y_HiRes_Roller.p3d",
+  "git_blob_sha": "4b07c929b5948231a95e5c2fda2776c8880274e9",
+  "bytes": 466,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Y_HiRes_Roller.p3d"
+  ],
+  "description": "High-resolution rebuild profile: high. Version 1; native geometry, no mesh import.",
+  "features": [
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "High-resolution rebuild profile: high. Version 1; native geometry, no mesh import. · CAD-derived axial half section in original source coordinates, mm."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve"
+    ],
+    [
+      "Material identifiers",
+      "blackmatteplastic"
+    ],
+    [
+      "Production rules",
+      "Start, Native95Roller (2 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "7"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
