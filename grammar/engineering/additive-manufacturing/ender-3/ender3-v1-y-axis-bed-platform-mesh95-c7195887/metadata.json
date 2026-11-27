@@ -1,0 +1,60 @@
+{
+  "title": "Ender3 V1 Y Axis Bed Platform Mesh95",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-v1-y-axis-bed-platform-mesh95-c7195887",
+  "source_file": "Ender3_V1_Y_Axis_Bed_Platform_Mesh95.p3d",
+  "git_blob_sha": "c71958871c895c391c1ec4c2e2fc4ff38d26b226",
+  "bytes": 104306,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_V1_Y_Axis_Bed_Platform_Mesh95.p3d"
+  ],
+  "description": "Ender-3 V1: native geometry matched independently to each source STL.",
+  "features": [
+    "SweepDisk",
+    "CompoundShape",
+    "Extrude",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Ender-3 V1: native geometry matched independently to each source STL. · This module shares the same printer frame as the complementary module. · Units: source mm; Start applies the single 0.001 scene-unit conversion. · Set both Explode bounds to 0 for factory pose or 1 for separated parts. · Geometry licence/provenance and measured limitations are included in the kit."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "SweepDisk, CompoundShape, Extrude, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, M95Controls, M95Assembly, Mesh95BedSpring, M95HeatedBed, Native95M4X30Flush (6 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "160"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

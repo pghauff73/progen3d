@@ -3,7 +3,7 @@
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
   "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 241,
+  "distinct_sources": 250,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -7777,6 +7777,129 @@
       }
     },
     {
+      "title": "Ender3 V1 Y Axis Bed Platform Mesh95",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-v1-y-axis-bed-platform-mesh95-c7195887",
+      "source_file": "Ender3_V1_Y_Axis_Bed_Platform_Mesh95.p3d",
+      "git_blob_sha": "c71958871c895c391c1ec4c2e2fc4ff38d26b226",
+      "bytes": 104306,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_V1_Y_Axis_Bed_Platform_Mesh95.p3d"
+      ],
+      "description": "Ender-3 V1: native geometry matched independently to each source STL.",
+      "features": [
+        "SweepDisk",
+        "CompoundShape",
+        "Extrude",
+        "Revolve"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Ender-3 V1: native geometry matched independently to each source STL. · This module shares the same printer frame as the complementary module. · Units: source mm; Start applies the single 0.001 scene-unit conversion. · Set both Explode bounds to 0 for factory pose or 1 for separated parts. · Geometry licence/provenance and measured limitations are included in the kit."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "SweepDisk, CompoundShape, Extrude, Revolve"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, M95Controls, M95Assembly, Mesh95BedSpring, M95HeatedBed, Native95M4X30Flush (6 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "160"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 X Axis",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-x-axis-f5ed2400",
+      "source_file": "Ender3_X_Axis.p3d",
+      "git_blob_sha": "f5ed2400795192c1f38206d455da95f272bd64e8",
+      "bytes": 88768,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_X_Axis.p3d"
+      ],
+      "description": "ENDER-3 X-AXIS — NATIVE PROCEDURAL GRAMMAR",
+      "features": [
+        "HostedOpening",
+        "Cube",
+        "Extrude",
+        "Cylinder",
+        "Revolve",
+        "SweepDisk",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ENDER-3 X-AXIS — NATIVE PROCEDURAL GRAMMAR · Prepared for Pamela G. Hauff / ProGen3D. · Replaces the previous stored-geometry version with parameterized native shapes. · 57 procedural component types; 141 source assembly placements. · Units: every dimension and T(...) is millimetres inside the root scope. · One root S(0.001 0.001 0.001) converts the assembly to metres. · Coordinates: X travel, Y vertical, Z depth. · Shapes: boxes, cylinders, spheres, profile extrusions, revolutions, openings and sweeps. · No imported geometry, stored vertex/face tables or external asset dependencies. · Source anchors retained; surface details are editable engineering approximations."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "HostedOpening, Cube, Extrude, Cylinder, Revolve, SweepDisk, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "blackmattemetal, blackmatteplastic, silverbrushedmetal, goldmetal, coppermetal, greenmatteplastic, graymattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, Ender3_XAxis, Rail_2020, Left_Support_Motor_Extruder, Right_Support_Wheels, GT2_Belt, Belt_End_Fittings, Idler_Tensioner, Printhead_Carriage, Place_000_1_2_1_2020_profile, Place_001_1_2_2_Z_Stent, Place_002_1_2_3_X_motor_bracket, Place_003_1_2_4_42_34_motor, Place_004_1_2_5_z_nut, Place_005_1_2_6_E_motor_bracket, Place_006_1_2_7_X_limit_switch_bracket, Place_007_1_2_8_X_belt, Place_008_1_2_9_limit_switch, Place_009_1_2_10_2GT_pulley, Place_010_1_2_11_Copper_cover (321 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "1000"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Ender3 Y Hi Res Animated Overview",
       "group": "engineering/additive-manufacturing/ender-3",
       "directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-animated-overview-944c6518",
@@ -8063,6 +8186,63 @@
       }
     },
     {
+      "title": "Ender3 Y M2 6 Animated Diagnostics",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-6-animated-diagnostics-9ec5d996",
+      "source_file": "Ender3_Y_M2_6_Animated_Diagnostics.p3d",
+      "git_blob_sha": "9ec5d99620b46a508fc970b64151fbd8eebb8afc",
+      "bytes": 52511,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M2_6_Animated_Diagnostics.p3d"
+      ],
+      "description": "M2.6 medium overview + diagnostic overlay baseline telemetry; inherited source below, no new mesh imports.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "M2.6 medium overview + diagnostic overlay baseline telemetry; inherited source below, no new mesh imports. · M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free. · Motor & carriage derived from independent physical states; bed platform from its own flexible state. · Assumed parameters; baked replay, NOT live ODE. Native source values in mm at 0.001m root scale. · ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M24Controls, M24Assembly, M24Belt, M26Telemetry (5 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "203"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Ender3 Y M2 6 Low LOD",
       "group": "engineering/additive-manufacturing/ender-3",
       "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-6-low-lod-08b0dd3d",
@@ -8108,6 +8288,63 @@
         [
           "Source lines",
           "32"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y M2 7 SYNTHETIC Demo",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-7-synthetic-demo-91586087",
+      "source_file": "Ender3_Y_M2_7_SYNTHETIC_Demo.p3d",
+      "git_blob_sha": "91586087c84e7a2d0ab4258b262b0a1174115539",
+      "bytes": 52642,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M2_7_SYNTHETIC_Demo.p3d"
+      ],
+      "description": "SYNTHETIC M2.7 calibrated-parameter DEMO ONLY. No hardware measurements or live native ODE.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "SYNTHETIC M2.7 calibrated-parameter DEMO ONLY. No hardware measurements or live native ODE. · M2.6 medium overview + diagnostic overlay baseline telemetry; inherited source below, no new mesh imports. · M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free. · Motor & carriage derived from independent physical states; bed platform from its own flexible state. · Assumed parameters; baked replay, NOT live ODE. Native source values in mm at 0.001m root scale. · ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M24Controls, M24Assembly, M24Belt, M26Telemetry (5 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "204"
         ]
       ],
       "render_assets": [],
@@ -8280,6 +8517,61 @@
         [
           "Source lines",
           "306"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Pro Gen3D Ender3 V1 Detailed",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/progen3d-ender3-v1-detailed-5b78e966",
+      "source_file": "ProGen3D_Ender3_V1_Detailed.p3d",
+      "git_blob_sha": "5b78e96655fb4776be86231dfb0f71f246330bb9",
+      "bytes": 103120,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_Ender3_V1_Detailed.p3d"
+      ],
+      "description": "Pro Gen3D Ender3 V1 Detailed exported procedural grammar.",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          ""
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          "steel, slate, amber, sage"
+        ],
+        [
+          "Production rules",
+          "Start, R90b95ecc887737e6e0bc_Body, R30bad4bbf5b8537ecd4c_Body, R52798e6ee58ce4b6523d_Body, R317ec9eeab7f7a53c540_Body, Rc99daeefe22659484a57_Body, R5c852ffdec358813b608_Body, R60251652322a0bd1cdec_Body, R86707fd9875e8480a2c7_Body, Re63e9ba5b0117919edaa_Body, R1c097fa2da188ba6f288_Body, R3e1b98cf951d20e6c71c_Body, R67764be7dd537674daa9_Body, Re55d5a40d39bd8284455_Body, R890cf7b94f149d65610c_Body, G49a5997add20af1eab57, Red94287071758b5446f3_Body, Rd820ed039574c36dabba_Body, Rf6614c94d67ab2bd4015_Body, Rbbec7c76defa3e688050_Body (135 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "270"
         ]
       ],
       "render_assets": [],
@@ -10268,6 +10560,61 @@
         [
           "Source lines",
           "287"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "M5 Base 262 Parts",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/m5-base-262-parts-e37f4376",
+      "source_file": "M5_Base_262_Parts.grammar",
+      "git_blob_sha": "e37f43765c87ee25aee0965cf11ff24594e80255",
+      "bytes": 141082,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "M5_Base_262_Parts.grammar"
+      ],
+      "description": "M5 Base 262 Parts exported procedural grammar.",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          ""
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "X, Assembly_Frame, Instance_Base_Left_4040, Instance_Base_Right_4040, Instance_Base_Centre_4040, Instance_Upright_Left_2040, Instance_Upright_Right_2040, Instance_Top_Crossmember_2020, Instance_X_Gantry_2020, Instance_Y_Guide_2040, Instance_Frame_Corner_Bracket_L, Instance_Rubber_Foot_L__115, Instance_Rubber_Foot_L_115, Instance_Frame_Corner_Bracket_R, Instance_Rubber_Foot_R__115, Instance_Rubber_Foot_R_115, Instance_Top_Endcap_0, Instance_Top_Endcap_1, Instance_Frame_M5x45_1, Instance_Frame_M5x45_2 (535 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "536"
         ]
       ],
       "render_assets": [],
@@ -13489,6 +13836,66 @@
       }
     },
     {
+      "title": "Meridian Robot Cockpit",
+      "group": "spacecraft/meridian/orbital-robot",
+      "directory": "spacecraft/meridian/orbital-robot/meridian-robot-cockpit-fa0a48e1",
+      "source_file": "Meridian_Robot_Cockpit.p3d",
+      "git_blob_sha": "fa0a48e1027ce48cdf8c3a4bc3dab66f1ed3bfc3",
+      "bytes": 101493,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Meridian_Robot_Cockpit.p3d"
+      ],
+      "description": "Meridian orbital robot | configured free pose",
+      "features": [
+        "Loft",
+        "Sphere",
+        "Cube",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Meridian orbital robot | configured free pose · Metres. A single fixed scale applies to shell, limbs, tool and propulsion."
+        ],
+        [
+          "Named objects",
+          "MeridianRobot, RobotPressureCapsule, RobotVisorGasket, RobotLifeSupport, RobotHipFrame, RobotPilot, RobotCanopy, RobotPropulsion, RobotLeftLeg, RobotRightLeg, RobotSocketArm, RobotGuideArm"
+        ],
+        [
+          "Object classes",
+          "Robot, RobotPart"
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, Sphere, Cube, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "offwhiteceramic, coolwhitemattepaint, charcoalmattemetal, orangeglosspaint, smokytransparentglass, blackbluepaintmatte, sandmattepaint, silverbrushedmetal, blackmattemetal, paleblueemissivepaint, goldpolishedmetal, greenemissivepaint"
+        ],
+        [
+          "Production rules",
+          "Start, RobotAssembly, PressureCapsule, VisorGasket, Canopy, Pilot, LifeSupport, HipFrame, LeftLeg, LeftLegClamp, RightLeg, RightLegClamp, SocketArm, SocketArmHand, GuideArm, GuideArmHand, SocketToolLocal, EmptySeat, NozzleXm00, Propulsion (43 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "571"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Meridian Robot D2 Piloted Hatch",
       "group": "spacecraft/meridian/orbital-robot",
       "directory": "spacecraft/meridian/orbital-robot/meridian-robot-d2-piloted-hatch-77f674a1",
@@ -14091,6 +14498,128 @@
       }
     },
     {
+      "title": "Gatewarden Super Fortress",
+      "group": "spacecraft/other-vessels",
+      "directory": "spacecraft/other-vessels/gatewarden-super-fortress-46790186",
+      "source_file": "Gatewarden_Super_Fortress.p3d",
+      "git_blob_sha": "467901860a6930e07a49e5d8c3122393d542fa4f",
+      "bytes": 51492,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Gatewarden_Super_Fortress.p3d"
+      ],
+      "description": "GATEWARDEN | mobile harbour super fortress",
+      "features": [
+        "Loft",
+        "Cube",
+        "Cylinder",
+        "Revolve",
+        "Sphere",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "GATEWARDEN | mobile harbour super fortress · Native ProGen3D grammar. Bow +X, dorsal +Y, starboard +Z. Time t is in seconds. · The root arguments set metres per design unit and seconds per harbour cycle. · Default study: t=0 gate closed and ferry outside; t=5 gate half open; · t=10 gate fully open and ferry sheltered; t=20 returns to the opening pose. · Geometry is self-contained. Five native rules are embedded from Spaceship Object Model v1. · Structure: Start > Gatewarden > named spatial objects > reusable geometry rules. · Hull, fortress, civic districts and port machinery · The central underside narrows to a dropped keel. The U-shaped forward cutout houses the gate. · Bow arm in starboard coordinates. The port arm mirrors the same rule."
+        ],
+        [
+          "Named objects",
+          "GatewardenRoot, Keel, passage, heat, Link11, StarboardBreakwater, mount, StarboardAftTower, data, StarboardWaistTower, Link2, StarboardForeTower, StarboardWall1, StarboardWall2, StarboardWall3, StarboardDistrict, power, Link1, StarboardRadiator1, Link3, StarboardRadiator2, Link4, StarboardArrivalBeacon, PortBreakwater (+26 more)"
+        ],
+        [
+          "Object classes",
+          "Spacecraft, Citadel, ArmouredBow, RingBastion, CurtainWall, CityQuarter, DeployableRadiator, BeaconSpire, TerracedCommandKeep, NavigationScanner, ShelteredApproach, DockGateLeaf, HarbourFerry, DriveCluster"
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, Cube, Cylinder, Revolve, Sphere, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "blackmattemetal, slategreymattemetal, ivorymattepaint, tealmattemetal, silverbrushedmetal, goldbrushedmetal, cyanemissivepaint, blacktealmetal, amberemissivepaint, silverblueglass, charcoalmattemetal, copperbrushedmetal, offwhiteceramic, bluegreymetal"
+        ],
+        [
+          "Production rules",
+          "Start, Gatewarden, AssembleKeel, AssembleStarboardBreakwater, AssembleStarboardAftTower, AssembleStarboardWaistTower, AssembleStarboardForeTower, AssembleStarboardWall1, AssembleStarboardWall2, AssembleStarboardWall3, AssembleStarboardDistrict, AssembleStarboardRadiator1, AssembleStarboardRadiator2, AssembleStarboardArrivalBeacon, AssemblePortBreakwater, AssemblePortAftTower, AssemblePortWaistTower, AssemblePortForeTower, AssemblePortWall1, AssemblePortWall2 (72 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "671"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Orbital Repair Robot",
+      "group": "spacecraft/other-vessels",
+      "directory": "spacecraft/other-vessels/orbital-repair-robot-c04852b4",
+      "source_file": "Orbital_Repair_Robot.p3d",
+      "git_blob_sha": "c04852b4fb907f8c6155d2dad297254873314107",
+      "bytes": 89007,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Orbital_Repair_Robot.p3d"
+      ],
+      "description": "Orbital Repair Robot | 85% visual reconstruction target",
+      "features": [
+        "Loft",
+        "Sphere",
+        "SweepDisk",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Orbital Repair Robot | 85% visual reconstruction target · Metres, +Y up, +Z towards repair bench, +X toward the pipe-guide arm. · Default view includes the repair assembly. Use RobotOnly in Start to isolate the robot. · RepairScene(scale) changes overall size. Limb subrules encode the braced reference pose. · Front view: eye (-4.2 3.1 5.7), target (0 1.37 0.52). · Low side view: eye (-6.5 1.25 1.1), target (0 1.37 0.55). · Rear view: eye (-3.2 4.8 -4.7), target (0 1.29 0.45). · Primary image drives proportions. Side and rear references inform occluded geometry. · Pilot likeness and surface wear are simplified. Geometry uses no imported assets."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, Sphere, SweepDisk, Cube"
+        ],
+        [
+          "Material identifiers",
+          "offwhiteceramic, coolwhitemattepaint, charcoalmattemetal, orangeglosspaint, smokytransparentglass, blackbluepaintmatte, sandmattepaint, silverbrushedmetal, goldpolishedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, RepairScene, RobotOnly, PressureCapsule, VisorGasket, Canopy, Pilot, LifeSupport, HipFrame, LeftLeg, RightLeg, FootClamp, SocketArm, GuideArm, SocketTool, ServiceBench, StationRail, SafetyTether (18 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "441"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Perihelion Surveyor",
       "group": "spacecraft/other-vessels",
       "directory": "spacecraft/other-vessels/perihelion-surveyor-58917ef6",
@@ -14154,7 +14683,7 @@
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 126,
+  "library_exports_imported": 135,
   "library_export_inventory_count": 251,
-  "library_export_names_transferred": 127
+  "library_export_names_transferred": 136
 }

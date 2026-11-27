@@ -1,0 +1,63 @@
+{
+  "title": "Ender3 X Axis",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-x-axis-f5ed2400",
+  "source_file": "Ender3_X_Axis.p3d",
+  "git_blob_sha": "f5ed2400795192c1f38206d455da95f272bd64e8",
+  "bytes": 88768,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_X_Axis.p3d"
+  ],
+  "description": "ENDER-3 X-AXIS — NATIVE PROCEDURAL GRAMMAR",
+  "features": [
+    "HostedOpening",
+    "Cube",
+    "Extrude",
+    "Cylinder",
+    "Revolve",
+    "SweepDisk",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ENDER-3 X-AXIS — NATIVE PROCEDURAL GRAMMAR · Prepared for Pamela G. Hauff / ProGen3D. · Replaces the previous stored-geometry version with parameterized native shapes. · 57 procedural component types; 141 source assembly placements. · Units: every dimension and T(...) is millimetres inside the root scope. · One root S(0.001 0.001 0.001) converts the assembly to metres. · Coordinates: X travel, Y vertical, Z depth. · Shapes: boxes, cylinders, spheres, profile extrusions, revolutions, openings and sweeps. · No imported geometry, stored vertex/face tables or external asset dependencies. · Source anchors retained; surface details are editable engineering approximations."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "HostedOpening, Cube, Extrude, Cylinder, Revolve, SweepDisk, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "blackmattemetal, blackmatteplastic, silverbrushedmetal, goldmetal, coppermetal, greenmatteplastic, graymattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Ender3_XAxis, Rail_2020, Left_Support_Motor_Extruder, Right_Support_Wheels, GT2_Belt, Belt_End_Fittings, Idler_Tensioner, Printhead_Carriage, Place_000_1_2_1_2020_profile, Place_001_1_2_2_Z_Stent, Place_002_1_2_3_X_motor_bracket, Place_003_1_2_4_42_34_motor, Place_004_1_2_5_z_nut, Place_005_1_2_6_E_motor_bracket, Place_006_1_2_7_X_limit_switch_bracket, Place_007_1_2_8_X_belt, Place_008_1_2_9_limit_switch, Place_009_1_2_10_2GT_pulley, Place_010_1_2_11_Copper_cover (321 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "1000"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

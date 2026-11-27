@@ -1,0 +1,670 @@
+# GATEWARDEN | mobile harbour super fortress
+# Native ProGen3D grammar. Bow +X, dorsal +Y, starboard +Z. Time t is in seconds.
+# The root arguments set metres per design unit and seconds per harbour cycle.
+# Default study: t=0 gate closed and ferry outside; t=5 gate half open;
+# t=10 gate fully open and ferry sheltered; t=20 returns to the opening pose.
+# Geometry is self-contained. Five native rules are embedded from Spaceship Object Model v1.
+# Structure: Start > Gatewarden > named spatial objects > reusable geometry rules.
+
+Start -> Gatewarden(20 20)
+
+Gatewarden(metres cycle) ->
+  [ S(metres metres metres) Object(id(GatewardenRoot) class(Spacecraft) taxonomy(Spaceship SuperFortress) layer(Structure)) [
+    AssembleKeel
+    AssembleStarboardBreakwater
+    AssembleStarboardAftTower
+    AssembleStarboardWaistTower
+    AssembleStarboardForeTower
+    AssembleStarboardWall1
+    AssembleStarboardWall2
+    AssembleStarboardWall3
+    AssembleStarboardDistrict
+    AssembleStarboardRadiator1(cycle)
+    AssembleStarboardRadiator2(cycle)
+    AssembleStarboardArrivalBeacon
+    AssemblePortBreakwater
+    AssemblePortAftTower
+    AssemblePortWaistTower
+    AssemblePortForeTower
+    AssemblePortWall1
+    AssemblePortWall2
+    AssemblePortWall3
+    AssemblePortDistrict
+    AssemblePortRadiator1(cycle)
+    AssemblePortRadiator2(cycle)
+    AssemblePortArrivalBeacon
+    AssembleKeep
+    AssembleScanner(cycle)
+    AssembleHarbour
+    AssembleStarboardDoor(cycle)
+    AssemblePortDoor(cycle)
+    AssembleFerry(cycle)
+    AssembleStern
+  ] ]
+
+AssembleKeel ->
+  [ Object(id(Keel) class(Citadel) taxonomy(Spaceship SuperFortress Citadel) layer(Structure)) [
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link11) source(Keel heat) target(Stern heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    CitadelHull
+  ] ]
+
+AssembleStarboardBreakwater ->
+  [ Object(id(StarboardBreakwater) class(ArmouredBow) taxonomy(Spaceship SuperFortress ArmouredBow) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [  BreakwaterArm ]
+  ] ]
+
+AssembleStarboardAftTower ->
+  [ Object(id(StarboardAftTower) class(RingBastion) taxonomy(Spaceship SuperFortress RingBastion) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ T(-32.9 4.64 17) S(1.05 1.05 1.05) BastionTower ]
+  ] ]
+
+AssembleStarboardWaistTower ->
+  [ Object(id(StarboardWaistTower) class(RingBastion) taxonomy(Spaceship SuperFortress RingBastion) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link2) source(StarboardWaistTower data) target(Scanner data) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-4.1 4.64 15.7) S(0.88 0.88 0.88) BastionTower ]
+  ] ]
+
+AssembleStarboardForeTower ->
+  [ Object(id(StarboardForeTower) class(RingBastion) taxonomy(Spaceship SuperFortress RingBastion) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ T(22.9 4.64 11.85) S(0.7 0.7 0.7) BastionTower ]
+  ] ]
+
+AssembleStarboardWall1 ->
+  [ Object(id(StarboardWall1) class(CurtainWall) taxonomy(Spaceship SuperFortress CurtainWall) layer(Structure)) [
+    [ T(-18.35 4.98 19.3) A(4 1) S(15.6 1 1.13) RampartSpan ]
+  ] ]
+
+AssembleStarboardWall2 ->
+  [ Object(id(StarboardWall2) class(CurtainWall) taxonomy(Spaceship SuperFortress CurtainWall) layer(Structure)) [
+    [ T(8.5 4.98 15.2) A(10 1) S(13.2 1 1.13) RampartSpan ]
+  ] ]
+
+AssembleStarboardWall3 ->
+  [ Object(id(StarboardWall3) class(CurtainWall) taxonomy(Spaceship SuperFortress CurtainWall) layer(Structure)) [
+    [ T(34.7 4.98 11.4) A(9 1) S(10.5 1 1.13) RampartSpan ]
+  ] ]
+
+AssembleStarboardDistrict ->
+  [ Object(id(StarboardDistrict) class(CityQuarter) taxonomy(Spaceship SuperFortress CityQuarter) layer(Structure)) [
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link1) source(StarboardDistrict passage) target(Keep passage) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-17.8 4.5 11.2) A(3 1) S(1.13 0.97 0.96) CityQuarter ]
+  ] ]
+
+AssembleStarboardRadiator1(cycle) ->
+  [ Object(id(StarboardRadiator1) class(DeployableRadiator) taxonomy(Spaceship SuperFortress DeployableRadiator) layer(Structure)) [
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link3) source(StarboardRadiator1 heat) target(Keel heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-32.3 -2.21 22) HeatWing(cycle) ]
+  ] ]
+
+AssembleStarboardRadiator2(cycle) ->
+  [ Object(id(StarboardRadiator2) class(DeployableRadiator) taxonomy(Spaceship SuperFortress DeployableRadiator) layer(Structure)) [
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link4) source(StarboardRadiator2 heat) target(Keel heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-24.3 -2.21 22) HeatWing(cycle) ]
+  ] ]
+
+AssembleStarboardArrivalBeacon ->
+  [ Object(id(StarboardArrivalBeacon) class(BeaconSpire) taxonomy(Spaceship SuperFortress BeaconSpire) layer(Structure)) [
+    [ T(48.5 4.51 10.2) S(0.66 0.66 0.66) Spire ]
+  ] ]
+
+AssemblePortBreakwater ->
+  [ Object(id(PortBreakwater) class(ArmouredBow) taxonomy(Spaceship SuperFortress ArmouredBow) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(1 1 -1) BreakwaterArm ]
+  ] ]
+
+AssemblePortAftTower ->
+  [ Object(id(PortAftTower) class(RingBastion) taxonomy(Spaceship SuperFortress RingBastion) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ T(-32.9 4.64 -17) S(1.05 1.05 1.05) BastionTower ]
+  ] ]
+
+AssemblePortWaistTower ->
+  [ Object(id(PortWaistTower) class(RingBastion) taxonomy(Spaceship SuperFortress RingBastion) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link7) source(PortWaistTower data) target(Scanner data) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-4.1 4.64 -15.7) S(0.88 0.88 0.88) BastionTower ]
+  ] ]
+
+AssemblePortForeTower ->
+  [ Object(id(PortForeTower) class(RingBastion) taxonomy(Spaceship SuperFortress RingBastion) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ T(22.9 4.64 -11.85) S(0.7 0.7 0.7) BastionTower ]
+  ] ]
+
+AssemblePortWall1 ->
+  [ Object(id(PortWall1) class(CurtainWall) taxonomy(Spaceship SuperFortress CurtainWall) layer(Structure)) [
+    [ T(-18.35 4.98 -19.3) A(-4 1) S(15.6 1 1.13) RampartSpan ]
+  ] ]
+
+AssemblePortWall2 ->
+  [ Object(id(PortWall2) class(CurtainWall) taxonomy(Spaceship SuperFortress CurtainWall) layer(Structure)) [
+    [ T(8.5 4.98 -15.2) A(-10 1) S(13.2 1 1.13) RampartSpan ]
+  ] ]
+
+AssemblePortWall3 ->
+  [ Object(id(PortWall3) class(CurtainWall) taxonomy(Spaceship SuperFortress CurtainWall) layer(Structure)) [
+    [ T(34.7 4.98 -11.4) A(-9 1) S(10.5 1 1.13) RampartSpan ]
+  ] ]
+
+AssemblePortDistrict ->
+  [ Object(id(PortDistrict) class(CityQuarter) taxonomy(Spaceship SuperFortress CityQuarter) layer(Structure)) [
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link6) source(PortDistrict passage) target(Keep passage) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-17.8 4.5 -11.2) A(-3 1) S(1.13 0.97 0.96) CityQuarter ]
+  ] ]
+
+AssemblePortRadiator1(cycle) ->
+  [ Object(id(PortRadiator1) class(DeployableRadiator) taxonomy(Spaceship SuperFortress DeployableRadiator) layer(Structure)) [
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link8) source(PortRadiator1 heat) target(Keel heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-32.3 -2.21 -22) S(1 1 -1) HeatWing(cycle) ]
+  ] ]
+
+AssemblePortRadiator2(cycle) ->
+  [ Object(id(PortRadiator2) class(DeployableRadiator) taxonomy(Spaceship SuperFortress DeployableRadiator) layer(Structure)) [
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link9) source(PortRadiator2 heat) target(Keel heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-24.3 -2.21 -22) S(1 1 -1) HeatWing(cycle) ]
+  ] ]
+
+AssemblePortArrivalBeacon ->
+  [ Object(id(PortArrivalBeacon) class(BeaconSpire) taxonomy(Spaceship SuperFortress BeaconSpire) layer(Structure)) [
+    [ T(48.5 4.51 -10.2) S(0.66 0.66 0.66) Spire ]
+  ] ]
+
+AssembleKeep ->
+  [ Object(id(Keep) class(TerracedCommandKeep) taxonomy(Spaceship SuperFortress TerracedCommandKeep) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link12) source(Keep passage) target(Harbour passage) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ T(-21.7 4.43 0) CentralKeep ]
+  ] ]
+
+AssembleScanner(cycle) ->
+  [ Object(id(Scanner) class(NavigationScanner) taxonomy(Spaceship SuperFortress NavigationScanner) layer(Structure)) [
+    Interface(id(data) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ T(-20.1 19.7 0) CrownScanner(cycle) ]
+  ] ]
+
+AssembleHarbour ->
+  [ Object(id(Harbour) class(ShelteredApproach) taxonomy(Spaceship SuperFortress ShelteredApproach) layer(Structure)) [
+    Interface(id(cargo) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    DockBasin
+  ] ]
+
+AssembleStarboardDoor(cycle) ->
+  [ Object(id(StarboardDoor) class(DockGateLeaf) taxonomy(Spaceship SuperFortress DockGateLeaf) layer(Structure)) [
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link5) source(StarboardDoor power) target(Harbour power) type(ConnectedTo) clearance(0) insertionDepth(0))
+    StarDoorMotion(cycle)
+  ] ]
+
+AssemblePortDoor(cycle) ->
+  [ Object(id(PortDoor) class(DockGateLeaf) taxonomy(Spaceship SuperFortress DockGateLeaf) layer(Structure)) [
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link10) source(PortDoor power) target(Harbour power) type(ConnectedTo) clearance(0) insertionDepth(0))
+    PortDoorMotion(cycle)
+  ] ]
+
+AssembleFerry(cycle) ->
+  [ Object(id(Ferry) class(HarbourFerry) taxonomy(Spaceship SuperFortress HarbourFerry) layer(Structure)) [
+    Interface(id(cargo) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link13) source(Ferry cargo) target(Harbour cargo) type(ConnectedTo) clearance(0) insertionDepth(0))
+    FerryMotion(cycle)
+  ] ]
+
+AssembleStern ->
+  [ Object(id(Stern) class(DriveCluster) taxonomy(Spaceship SuperFortress DriveCluster) layer(Structure)) [
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ T(-44.7 -2.5 0) EngineBank ]
+  ] ]
+
+# Hull, fortress, civic districts and port machinery
+
+# The central underside narrows to a dropped keel. The U-shaped forward cutout houses the gate.
+CitadelHull ->
+  [ A(-90 0) !I(Loft(section(-9.3 Polygon -39.97333 2.3 -32.05333 5.06 -14.77333 5.06 -2.53333 2.3 4.66667 0 -2.53333 -2.3 -14.77333 -5.06 -32.05333 -5.06 -39.97333 -2.3) section(-7.6 Polygon -46.13333 3.8 -36.23333 8.36 -14.63333 8.36 0.66667 3.8 9.66667 0 0.66667 -3.8 -14.63333 -8.36 -36.23333 -8.36 -46.13333 -3.8) section(-3.9 Polygon -49 5 -38 11 -14 11 3 5 13 0 3 -5 -14 -11 -38 -11 -49 -5) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(-5 Polygon -46.255 8.8 -39.885 15.2 -19.865 15.2 -0.755 9.6 2.885 6.4 -7.125 4 -7.125 -4 2.885 -6.4 -0.755 -9.6 -19.865 -15.2 -39.885 -15.2 -46.255 -8.8) section(-2.3 Polygon -49 11 -42 19 -20 19 1 12 5 8 -6 5 -6 -5 5 -8 1 -12 -20 -19 -42 -19 -49 -11) section(0.9 Polygon -49 11 -42 19 -20 19 1 12 5 8 -6 5 -6 -5 5 -8 1 -12 -20 -19 -42 -19 -49 -11) section(3.35 Polygon -47.475 10.01 -40.825 17.29 -19.925 17.29 0.025 10.92 3.825 7.28 -6.625 4.55 -6.625 -4.55 3.825 -7.28 0.025 -10.92 -19.925 -17.29 -40.825 -17.29 -47.475 -10.01) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(3.36 Polygon -47.475 10.01 -40.825 17.29 -19.925 17.29 0.025 10.92 3.825 7.28 -6.625 4.55 -6.625 -4.55 3.825 -7.28 0.025 -10.92 -19.925 -17.29 -40.825 -17.29 -47.475 -10.01) section(4.4 Polygon -46.56 9.625 -40.12 16.625 -19.88 16.625 -0.56 10.5 3.12 7 -7 4.375 -7 -4.375 3.12 -7 -0.56 -10.5 -19.88 -16.625 -40.12 -16.625 -46.56 -9.625) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ T(-29 4.1 0) [ A(-90 0) !I(Loft(section(0 Polygon -7.6 10 7.6 10 12 5.6 12 -5.6 7.6 -10 -7.6 -10 -12 -5.6 -12 5.6) section(1.8 Polygon -6.612 8.7 6.612 8.7 10.44 4.872 10.44 -4.872 6.612 -8.7 -6.612 -8.7 -10.44 -4.872 -10.44 4.872) cap(all)) material(tealmattemetal) 1 1) ] ]
+  [ T(-40 2.9 0) [ A(-90 0) !I(Loft(section(0 Polygon -5.64 6.5 5.64 6.5 8.5 3.64 8.5 -3.64 5.64 -6.5 -5.64 -6.5 -8.5 -3.64 -8.5 3.64) section(1.2 Polygon -4.9632 5.72 4.9632 5.72 7.48 3.2032 7.48 -3.2032 4.9632 -5.72 -4.9632 -5.72 -7.48 -3.2032 -7.48 3.2032) cap(all)) material(slategreymattemetal) 1 1) ] ]
+  [ T(-41 -5.05 0) S(1 1 0.8) BellyRib ]
+  [ T(-34 -5.05 0) BellyRib ]
+  [ T(-27 -5.05 0) S(1 1 1.08) BellyRib ]
+  [ T(-20 -5.05 0) S(1 1 1.04) BellyRib ]
+  [ T(-13 -5.05 0) S(1 1 0.94) BellyRib ]
+  [ T(-6 -5.05 0) S(1 1 0.7) BellyRib ]
+
+BellyRib ->
+  [ T(0 -1.15 -5.7) A(-90 1) A(-26.56505 2) S(5.14296 0.47 0.48) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 -2.3 0) A(-90 1) A(0 2) S(6.8 0.47 0.48) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 -1.15 5.7) A(-90 1) A(26.56505 2) S(5.14296 0.47 0.48) !I(Cube material(silverbrushedmetal) 1 1) ]
+
+# Bow arm in starboard coordinates. The port arm mirrors the same rule.
+BreakwaterArm ->
+  [ A(-90 0) !I(Loft(section(-4.6 Polygon -43.01385 -13.38 -38.31385 -11.826 -12.93385 -10.272 3.04615 -8.57 25.60615 -8.126 52.86615 -8.866 64.14615 -10.938 46.28615 -13.824 26.54615 -15.896 7.74615 -18.93 -12.93385 -20.78 -29.85385 -20.78 -40.19385 -18.412) section(-2.6 Polygon -46 -13.21385 -41 -11.15585 -14 -9.09785 3 -6.84385 27 -6.25585 56 -7.23585 68 -9.97985 49 -13.80185 28 -16.54585 8 -20.56385 -14 -23.01385 -32 -23.01385 -43 -19.87785) section(-0.25 Polygon -46 -13.2 -41 -11.1 -14 -9 3 -6.7 27 -6.1 56 -7.1 68 -9.9 49 -13.8 28 -16.6 8 -20.7 -14 -23.2 -32 -23.2 -43 -20) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(-0.18 Polygon -46 -13.2 -41 -11.1 -14 -9 3 -6.7 27 -6.1 56 -7.1 68 -9.9 49 -13.8 28 -16.6 8 -20.7 -14 -23.2 -32 -23.2 -43 -20) section(1.8 Polygon -46 -13.2 -41 -11.1 -14 -9 3 -6.7 27 -6.1 56 -7.1 68 -9.9 49 -13.8 28 -16.6 8 -20.7 -14 -23.2 -32 -23.2 -43 -20) section(3.1 Polygon -45.00462 -13.23462 -40.10462 -11.23962 -13.64462 -9.24462 3.01538 -7.05962 26.53538 -6.48962 54.95538 -7.43962 66.71538 -10.09962 48.09538 -13.80462 27.51538 -16.46462 7.91538 -20.35962 -13.64462 -22.73462 -31.28462 -22.73462 -42.06462 -19.69462) cap(all)) material(tealmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(3.12 Polygon -45.00462 -13.23462 -40.10462 -11.23962 -13.64462 -9.24462 3.01538 -7.05962 26.53538 -6.48962 54.95538 -7.43962 66.71538 -10.09962 48.09538 -13.80462 27.51538 -16.46462 7.91538 -20.35962 -13.64462 -22.73462 -31.28462 -22.73462 -42.06462 -19.69462) section(4.45 Polygon -43.01385 -13.29692 -38.31385 -11.49092 -12.93385 -9.68492 3.04615 -7.70692 25.60615 -7.19092 52.86615 -8.05092 64.14615 -10.45892 46.28615 -13.81292 26.54615 -16.22092 7.74615 -19.74692 -12.93385 -21.89692 -29.85385 -21.89692 -40.19385 -19.14492) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ A(-90 0) !I(Loft(section(4.03 Polygon 25 -7.15 52 -7.9 64 -9.9 47.5 -12.5 27 -15.1 18 -14.9) section(4.94 Polygon 26.11333 -7.84558 50.95333 -8.46808 61.99333 -10.12808 46.81333 -12.28608 27.95333 -14.44408 19.67333 -14.27808) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ T(-32 4.45 16.6) A(0 1) S(15 1 7) ShoulderPlate ]
+  [ T(-16 4.45 15.8) A(4 1) S(13.7 1 7.5) ShoulderPlate ]
+  [ T(-1.7 4.45 14.2) A(8 1) S(12.8 1 6.8) ShoulderPlate ]
+  [ T(12.3 4.45 12.5) A(9 1) S(12.4 1 5.9) ShoulderPlate ]
+  [ T(-28.35 -1.125 23.24) A(-4.15964 1) A(27.33068 2) S(3.72447 0.6 0.35) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-21.35 -1.125 23.24) A(-4.15964 1) A(27.33068 2) S(3.72447 0.6 0.35) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-14.35 -1.125 23.24) A(-4.15964 1) A(27.33068 2) S(3.72447 0.6 0.35) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-4.35 -1.125 22.42) A(-4.15964 1) A(27.33068 2) S(3.72447 0.6 0.35) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(2.85 -1.125 21.55) A(-4.15964 1) A(27.33068 2) S(3.72447 0.6 0.35) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-25 0.72 23.21) A(0 1) CheekInset ]
+  [ T(-14 0.72 23.17) A(7 1) CheekInset ]
+  [ T(-3.4 0.72 22) A(7 1) CheekInset ]
+  [ T(7.2 0.72 20.69) A(11 1) S(0.91 0.91 0.91) CheekInset ]
+  [ T(17.6 0.72 18.73) A(11 1) S(0.83 0.83 0.83) CheekInset ]
+  [ T(27.2 0.72 16.9) A(10 1) S(0.78 0.78 0.78) CheekInset ]
+  [ T(36 0.72 15.5) A(8 1) S(0.69 0.69 0.69) CheekInset ]
+  [ T(30.5 4.98 11.45) A(8 1) S(6.8 1 3.8) BowPanel ]
+  [ T(38.1 4.98 10.88) A(7 1) S(6.65 1 3.15) BowPanel ]
+  [ T(45.1 4.98 10.4) A(6 1) S(6.25 1 2.44) BowPanel ]
+  [ T(51.5 4.98 10.03) A(4 1) S(5.65 1 1.78) BowPanel ]
+  [ T(56.7 4.98 9.78) A(3 1) S(3.65 1 1.09) BowPanel ]
+  [ T(11.6 5.12 12.67) S(1.07 1.07 1.07) ShieldNiche ]
+  [ T(41.5 5.12 10.32) S(0.7 0.7 0.7) ShieldNiche ]
+  [ T(34 4.89 10.95) A(9 1) S(7.1 1 0.56) NoseStripe ]
+  [ T(42 4.89 9.8) A(9 1) S(4.6 1 0.56) NoseStripe ]
+  [ T(11 -2.6 6.425) A(-0.14324 1) A(0 2) S(4.00001 0.16 0.25) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(18 -2.6 6.425) A(-0.14324 1) A(0 2) S(4.00001 0.16 0.25) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(25 -2.6 6.425) A(-0.14324 1) A(0 2) S(4.00001 0.16 0.25) !I(Cube material(cyanemissivepaint) 1 1) ]
+
+BowPanel ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -0.28 0.5 0.28 0.5 0.5 0.28 0.5 -0.28 0.28 -0.5 -0.28 -0.5 -0.5 -0.28 -0.5 0.28) section(0.17 Polygon -0.2716 0.485 0.2716 0.485 0.485 0.2716 0.485 -0.2716 0.2716 -0.485 -0.2716 -0.485 -0.485 -0.2716 -0.485 0.2716) cap(all)) material(blacktealmetal) 1 1) ]
+  [ T(0 0.16 0) [ A(-90 0) !I(Loft(section(0 Polygon -0.2742 0.445 0.2742 0.445 0.47 0.2492 0.47 -0.2492 0.2742 -0.445 -0.2742 -0.445 -0.47 -0.2492 -0.47 0.2492) section(0.19 Polygon -0.2413 0.3916 0.2413 0.3916 0.4136 0.2193 0.4136 -0.2193 0.2413 -0.3916 -0.2413 -0.3916 -0.4136 -0.2193 -0.4136 0.2193) cap(all)) material(ivorymattepaint) 1 1) ] ]
+  [ T(-0.24 0.37 -0.09) S(0.14 0.04 0.35) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.31 0.37 0.17) S(0.061 0.05 0.2) !I(Cube material(goldbrushedmetal) 1 1) ]
+
+ShieldNiche ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -1.2484 1.14 1.2484 1.14 1.75 0.6384 1.75 -0.6384 1.2484 -1.14 -1.2484 -1.14 -1.75 -0.6384 -1.75 0.6384) section(0.22 Polygon -1.1735 1.0716 1.1735 1.0716 1.645 0.6001 1.645 -0.6001 1.1735 -1.0716 -1.1735 -1.0716 -1.645 -0.6001 -1.645 0.6001) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(0.2 Polygon -1.1566 0.985 1.1566 0.985 1.59 0.5516 1.59 -0.5516 1.1566 -0.985 -1.1566 -0.985 -1.59 -0.5516 -1.59 0.5516) section(0.72 Polygon -0.90215 0.7683 0.90215 0.7683 1.2402 0.43025 1.2402 -0.43025 0.90215 -0.7683 -0.90215 -0.7683 -1.2402 -0.43025 -1.2402 0.43025) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ T(0.48 0.67 0) S(1.55 0.31 1.1) !I(Cube material(blacktealmetal) 1 1) ]
+  [ T(0.74 0.85 0) S(0.49 0.11 0.74) !I(Cube material(amberemissivepaint) 1 1) ]
+
+ShoulderPlate ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -0.28 0.5 0.28 0.5 0.5 0.28 0.5 -0.28 0.28 -0.5 -0.28 -0.5 -0.5 -0.28 -0.5 0.28) section(0.3 Polygon -0.2688 0.48 0.2688 0.48 0.48 0.2688 0.48 -0.2688 0.2688 -0.48 -0.2688 -0.48 -0.48 -0.2688 -0.48 0.2688) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ T(0 0.27 0) [ A(-90 0) !I(Loft(section(0 Polygon -0.2922 0.37 0.2922 0.37 0.455 0.2072 0.455 -0.2072 0.2922 -0.37 -0.2922 -0.37 -0.455 -0.2072 -0.455 0.2072) section(0.27 Polygon -0.26882 0.3404 0.26882 0.3404 0.4186 0.19062 0.4186 -0.19062 0.26882 -0.3404 -0.26882 -0.3404 -0.4186 -0.19062 -0.4186 0.19062) cap(all)) material(ivorymattepaint) 1 1) ] ]
+  [ T(0.25 0.59 0) S(0.26 0.1 0.11) !I(Cube material(goldbrushedmetal) 1 1) ]
+
+NoseStripe ->
+  [ S(1 0.13 1) !I(Cube material(tealmattemetal) 1 1) ]
+
+CheekInset ->
+  [ S(7.3 1.03 0.25) !I(Cube material(blackmattemetal) 1 1) ]
+  [ T(0 -0.61 0.01) S(8 0.15 0.36) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(-2.55 0.05 0.158) S(0.79 0.32 0.09) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(-1.25 0.05 0.158) S(0.79 0.32 0.09) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.05 0.05 0.158) S(0.79 0.32 0.09) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(1.35 0.05 0.158) S(0.79 0.32 0.09) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(2.65 0.05 0.158) S(0.79 0.32 0.09) !I(Cube material(cyanemissivepaint) 1 1) ]
+
+# The bridge sits below a narrow lantern and scanner. The open terraces reveal successive window belts.
+CentralKeep ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -9.54 9 9.54 9 13.5 5.04 13.5 -5.04 9.54 -9 -9.54 -9 -13.5 -5.04 -13.5 5.04) section(2.8 Polygon -8.586 8.1 8.586 8.1 12.15 4.536 12.15 -4.536 8.586 -8.1 -8.586 -8.1 -12.15 -4.536 -12.15 4.536) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(2.7 Polygon -8.754 8.4 8.754 8.4 12.45 4.704 12.45 -4.704 8.754 -8.4 -8.754 -8.4 -12.45 -4.704 -12.45 4.704) section(3.35 Polygon -8.40384 8.064 8.40384 8.064 11.952 4.51584 11.952 -4.51584 8.40384 -8.064 -8.40384 -8.064 -11.952 -4.51584 -11.952 4.51584) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(3.22 Polygon -8.29 7.75 8.29 7.75 11.7 4.34 11.7 -4.34 8.29 -7.75 -8.29 -7.75 -11.7 -4.34 -11.7 4.34) section(7.07 Polygon -6.7149 6.2775 6.7149 6.2775 9.477 3.5154 9.477 -3.5154 6.7149 -6.2775 -6.7149 -6.2775 -9.477 -3.5154 -9.477 3.5154) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ T(-0.75 7 0) [ A(-90 0) !I(Loft(section(0 Polygon -6.728 6.3 6.728 6.3 9.5 3.528 9.5 -3.528 6.728 -6.3 -6.728 -6.3 -9.5 -3.528 -9.5 3.528) section(1.04 Polygon -6.52616 6.111 6.52616 6.111 9.215 3.42216 9.215 -3.42216 6.52616 -6.111 -6.52616 -6.111 -9.215 -3.42216 -9.215 3.42216) cap(all)) material(blackmattemetal) 1 1) ] ]
+  [ T(-0.75 8 0) [ A(-90 0) !I(Loft(section(0 Polygon -7.135 6.625 7.135 6.625 10.05 3.71 10.05 -3.71 7.135 -6.625 -7.135 -6.625 -10.05 -3.71 -10.05 3.71) section(0.56 Polygon -6.63555 6.16125 6.63555 6.16125 9.3465 3.4503 9.3465 -3.4503 6.63555 -6.16125 -6.63555 -6.16125 -9.3465 -3.4503 -9.3465 3.4503) cap(all)) material(silverbrushedmetal) 1 1) ] ]
+  [ T(-1.1 8.48 0) [ A(-90 0) !I(Loft(section(0 Polygon -5.506 5.1 5.506 5.1 7.75 2.856 7.75 -2.856 5.506 -5.1 -5.506 -5.1 -7.75 -2.856 -7.75 2.856) section(3.85 Polygon -4.34974 4.029 4.34974 4.029 6.1225 2.25624 6.1225 -2.25624 4.34974 -4.029 -4.34974 -4.029 -6.1225 -2.25624 -6.1225 2.25624) cap(all)) material(tealmattemetal) 1 1) ] ]
+  [ T(-1.4 12.28 0) [ A(-90 0) !I(Loft(section(0 Polygon -4.442 4.45 4.442 4.45 6.4 2.492 6.4 -2.492 4.442 -4.45 -4.442 -4.45 -6.4 -2.492 -6.4 2.492) section(0.66 Polygon -4.13106 4.1385 4.13106 4.1385 5.952 2.31756 5.952 -2.31756 4.13106 -4.1385 -4.13106 -4.1385 -5.952 -2.31756 -5.952 2.31756) cap(all)) material(goldbrushedmetal) 1 1) ] ]
+  [ T(-1.4 12.88 0) [ A(-90 0) !I(Loft(section(0 Polygon -4.084 3.9 4.084 3.9 5.8 2.184 5.8 -2.184 4.084 -3.9 -4.084 -3.9 -5.8 -2.184 -5.8 2.184) section(1.6 Polygon -3.75728 3.588 3.75728 3.588 5.336 2.00928 5.336 -2.00928 3.75728 -3.588 -3.75728 -3.588 -5.336 -2.00928 -5.336 2.00928) cap(all)) material(blackmattemetal) 1 1) ] ]
+  [ T(-1.4 14.43 0) [ A(-90 0) !I(Loft(section(0 Polygon -4.636 4.35 4.636 4.35 6.55 2.436 6.55 -2.436 4.636 -4.35 -4.636 -4.35 -6.55 -2.436 -6.55 2.436) section(0.54 Polygon -4.07968 3.828 4.07968 3.828 5.764 2.14368 5.764 -2.14368 4.07968 -3.828 -4.07968 -3.828 -5.764 -2.14368 -5.764 2.14368) cap(all)) material(ivorymattepaint) 1 1) ] ]
+  [ T(-7.5 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-6 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(-4.5 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-3 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-1.5 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(1.5 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(3 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(4.5 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(6 7.57 -6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-7.5 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-6 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(-4.5 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-3 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-1.5 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(1.5 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(3 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(4.5 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(6 7.57 6.33) S(0.89 0.35 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-4.8 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-3.7 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-2.6 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-1.4 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-0.2 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.9 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(2 13.76 -3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-4.8 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-3.7 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-2.6 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-1.4 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-0.2 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.9 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(2 13.76 3.74) S(0.51 0.5 0.22) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-6 7.6 -4.6) Spire ]
+  [ T(-6 7.6 4.6) Spire ]
+  [ T(4.9 7.6 -4.1) S(0.66 0.66 0.66) Spire ]
+  [ T(4.9 7.6 4.1) S(0.66 0.66 0.66) Spire ]
+  [ T(5.25 12.25 0) S(2.4 1.6 2.25) ShipObservation ]
+  [ T(-5.5 14.6 0) S(0.95 0.95 0.95) Spire ]
+  [ T(-7.3 0 -7.82) S(1 1 -1) KeepButtress ]
+  [ T(-7.3 0 7.82) KeepButtress ]
+  [ T(-3.8 0 -7.82) S(1 1 -1) KeepButtress ]
+  [ T(-3.8 0 7.82) KeepButtress ]
+  [ T(0 0 -7.82) S(1 1 -1) KeepButtress ]
+  [ T(0 0 7.82) KeepButtress ]
+  [ T(3.8 0 -7.82) S(1 1 -1) KeepButtress ]
+  [ T(3.8 0 7.82) KeepButtress ]
+  [ T(7.3 0 -7.82) S(1 1 -1) KeepButtress ]
+  [ T(7.3 0 7.82) KeepButtress ]
+  [ T(-5.6 9.45 -4.75) S(1 1 -1) KeepVent ]
+  [ T(-5.6 9.45 4.75) KeepVent ]
+  [ T(-2.3 9.45 -4.75) S(1 1 -1) KeepVent ]
+  [ T(-2.3 9.45 4.75) KeepVent ]
+  [ T(1 9.45 -4.75) S(1 1 -1) KeepVent ]
+  [ T(1 9.45 4.75) KeepVent ]
+  [ T(4.3 9.45 -4.75) S(1 1 -1) KeepVent ]
+  [ T(4.3 9.45 4.75) KeepVent ]
+  [ T(-6.6 3.05 -10.5) S(1 1 -1) BalconyBridge ]
+  [ T(-6.6 3.05 10.5) BalconyBridge ]
+  [ T(2.7 9.1 -4.6) S(0.67 0.67 0.67) CivicNeedle ]
+  [ T(2.7 9.1 4.6) S(0.67 0.67 0.67) CivicNeedle ]
+
+KeepButtress ->
+  [ T(0 4.15 -0.61) A(90 1) A(65.18913 2) S(6.7203 1.04 0.77) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(0 3.97 -0.165) A(90 1) A(65.26049 2) S(5.61538 0.32 0.89) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(0 1 0.6) S(1.45 0.5 1.63) !I(Cube material(blackmattemetal) 1 1) ]
+
+KeepVent ->
+  [ S(2.25 0.84 0.19) !I(Cube material(blackmattemetal) 1 1) ]
+  [ T(-0.78 0 0.16) S(0.14 0.75 0.15) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(-0.4 0 0.16) S(0.14 0.75 0.15) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 0 0.16) S(0.14 0.75 0.15) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.4 0 0.16) S(0.14 0.75 0.15) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.78 0 0.16) S(0.14 0.75 0.15) !I(Cube material(silverbrushedmetal) 1 1) ]
+
+BalconyBridge ->
+  [ S(1.83 0.52 7.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(-0.86 0.38 0) S(0.17 0.4 7.7) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(0.86 0.38 0) S(0.17 0.4 7.7) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(0.005 -0.22 -2.9) A(-31.2184 1) A(0 2) S(1.92938 0.12 0.12) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.005 -0.22 -1.3) A(-31.2184 1) A(0 2) S(1.92938 0.12 0.12) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.005 -0.22 0.3) A(-31.2184 1) A(0 2) S(1.92938 0.12 0.12) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.005 -0.22 1.9) A(-31.2184 1) A(0 2) S(1.92938 0.12 0.12) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.005 -0.22 3) A(-31.2184 1) A(0 2) S(1.92938 0.12 0.12) !I(Cube material(silverbrushedmetal) 1 1) ]
+
+CivicNeedle ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -0.832 0.95 0.832 0.95 1.25 0.532 1.25 -0.532 0.832 -0.95 -0.832 -0.95 -1.25 -0.532 -1.25 0.532) section(1.2 Polygon -0.6656 0.76 0.6656 0.76 1 0.4256 1 -0.4256 0.6656 -0.76 -0.6656 -0.76 -1 -0.4256 -1 0.4256) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(1.1 Polygon -0.5552 0.67 0.5552 0.67 0.85 0.3752 0.85 -0.3752 0.5552 -0.67 -0.5552 -0.67 -0.85 -0.3752 -0.85 0.3752) section(5 Polygon -0.30536 0.3685 0.30536 0.3685 0.4675 0.20636 0.4675 -0.20636 0.30536 -0.3685 -0.30536 -0.3685 -0.4675 -0.20636 -0.4675 0.20636) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ A(-90 0) !I(Loft(section(5 Polygon -0.38 0.5 0.38 0.5 0.6 0.28 0.6 -0.28 0.38 -0.5 -0.38 -0.5 -0.6 -0.28 -0.6 0.28) section(5.67 Polygon -0.3496 0.46 0.3496 0.46 0.552 0.2576 0.552 -0.2576 0.3496 -0.46 -0.3496 -0.46 -0.552 -0.2576 -0.552 0.2576) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ T(0 6.43 0) S(0.23 1.66 0.23) !I(Cylinder(segments(20 1)) material(silverbrushedmetal) 1 1) ]
+
+Spire ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -0.56 1 0.56 1 1 0.56 1 -0.56 0.56 -1 -0.56 -1 -1 -0.56 -1 0.56) section(0.65 Polygon -0.504 0.9 0.504 0.9 0.9 0.504 0.9 -0.504 0.504 -0.9 -0.504 -0.9 -0.9 -0.504 -0.9 0.504) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(0.62 Polygon -0.3584 0.64 0.3584 0.64 0.64 0.3584 0.64 -0.3584 0.3584 -0.64 -0.3584 -0.64 -0.64 -0.3584 -0.64 0.3584) section(4.42 Polygon -0.17203 0.3072 0.17203 0.3072 0.3072 0.17203 0.3072 -0.17203 0.17203 -0.3072 -0.17203 -0.3072 -0.3072 -0.17203 -0.3072 0.17203) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(4.38 Polygon -0.238 0.425 0.238 0.425 0.425 0.238 0.425 -0.238 0.238 -0.425 -0.238 -0.425 -0.425 -0.238 -0.425 0.238) section(5.48 Polygon -0.0714 0.1275 0.0714 0.1275 0.1275 0.0714 0.1275 -0.0714 0.0714 -0.1275 -0.0714 -0.1275 -0.1275 -0.0714 -0.1275 0.0714) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ T(0 5.8 0) S(0.15 1.3 0.15) !I(Cylinder(segments(20 1)) material(cyanemissivepaint) 1 1) ]
+
+CrownScanner(cycle) ->
+  [ S(2.35 0.54 2.35) !I(Cylinder(segments(20 1)) material(blackmattemetal) 1 1) ]
+  [ T(0 0.27 0) !I(Revolve(profile(Polygon 0.96 -0.09 1.2 -0.09 1.2 0.09 0.96 0.09) angle(0 360) segments(36) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ A(360*t/cycle 1) [ T(-0.22 0.55 0) ScannerBlade ] [ T(0.22 1.1 0) A(90 1) S(0.68 0.8 0.68) ScannerBlade ] ]
+
+ScannerBlade ->
+  [ S(0.34 0.44 4.4) !I(Cube material(tealmattemetal) 1 1) ]
+  [ T(0 0 1.9) S(0.41 0.55 0.53) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0 0 -1.95) S(0.41 0.52 0.47) !I(Cube material(goldbrushedmetal) 1 1) ]
+
+BastionTower ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -2.964 4.4 2.964 4.4 4.9 2.464 4.9 -2.464 2.964 -4.4 -2.964 -4.4 -4.9 -2.464 -4.9 2.464) section(0.9 Polygon -2.8158 4.18 2.8158 4.18 4.655 2.3408 4.655 -2.3408 2.8158 -4.18 -2.8158 -4.18 -4.655 -2.3408 -4.655 2.3408) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(0.84 Polygon -2.785 4.125 2.785 4.125 4.6 2.31 4.6 -2.31 2.785 -4.125 -2.785 -4.125 -4.6 -2.31 -4.6 2.31) section(2.74 Polygon -2.47865 3.67125 2.47865 3.67125 4.094 2.0559 4.094 -2.0559 2.47865 -3.67125 -2.47865 -3.67125 -4.094 -2.0559 -4.094 2.0559) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ A(-90 0) !I(Loft(section(2.72 Polygon -2.472 3.7 2.472 3.7 4.1 2.072 4.1 -2.072 2.472 -3.7 -2.472 -3.7 -4.1 -2.072 -4.1 2.072) section(3.4 Polygon -2.44728 3.663 2.44728 3.663 4.059 2.05128 4.059 -2.05128 2.44728 -3.663 -2.44728 -3.663 -4.059 -2.05128 -4.059 2.05128) cap(all)) material(tealmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(3.34 Polygon -2.662 3.95 2.662 3.95 4.4 2.212 4.4 -2.212 2.662 -3.95 -2.662 -3.95 -4.4 -2.212 -4.4 2.212) section(4.05 Polygon -2.3958 3.555 2.3958 3.555 3.96 1.9908 3.96 -1.9908 2.3958 -3.555 -2.3958 -3.555 -3.96 -1.9908 -3.96 1.9908) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(4.03 Polygon -1.824 2.9 1.824 2.9 3.1 1.624 3.1 -1.624 1.824 -2.9 -1.824 -2.9 -3.1 -1.624 -3.1 1.624) section(5.16 Polygon -1.75104 2.784 1.75104 2.784 2.976 1.55904 2.976 -1.55904 1.75104 -2.784 -1.75104 -2.784 -2.976 -1.55904 -2.976 1.55904) cap(all)) material(blackmattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(5.14 Polygon -1.98 3 1.98 3 3.3 1.68 3.3 -1.68 1.98 -3 -1.98 -3 -3.3 -1.68 -3.3 1.68) section(5.54 Polygon -1.8216 2.76 1.8216 2.76 3.036 1.5456 3.036 -1.5456 1.8216 -2.76 -1.8216 -2.76 -3.036 -1.5456 -3.036 1.5456) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(5.5 Polygon -1.46 2.25 1.46 2.25 2.45 1.26 2.45 -1.26 1.46 -2.25 -1.46 -2.25 -2.45 -1.26 -2.45 1.26) section(6.65 Polygon -1.1096 1.71 1.1096 1.71 1.862 0.9576 1.862 -0.9576 1.1096 -1.71 -1.1096 -1.71 -1.862 -0.9576 -1.862 0.9576) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ T(-1.6 4.65 -2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-1.6 4.65 2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-0.52 4.65 -2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-0.52 4.65 2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.56 4.65 -2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.56 4.65 2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(1.64 4.65 -2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(1.64 4.65 2.82) S(0.77 0.34 0.15) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-2.43 3.88 -3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(-2.43 3.88 3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(-0.84 3.88 -3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(-0.84 3.88 3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(0.84 3.88 -3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(0.84 3.88 3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(2.43 3.88 -3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(2.43 3.88 3.26) S(1.13 0.83 0.65) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(0 6.65 0) SignalCap ]
+
+SignalCap ->
+  [ T(0 0.15 0) S(1.68 0.44 1.68) !I(Cylinder(segments(20 1)) material(tealmattemetal) 1 1) ]
+  [ T(0 0.4 0) S(1.2 0.74 1.2) !I(Sphere(segments(16 10)) material(silverblueglass) 1 1) ]
+  [ T(0 0.31 0) !I(Revolve(profile(Polygon 0.62 -0.06 0.72 -0.06 0.72 0.06 0.62 0.06) angle(0 360) segments(36) cap(all)) material(goldbrushedmetal) 1 1) ]
+
+RampartSpan ->
+  [ S(1 0.72 1) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(0 0.39 0) S(1 0.12 1.12) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.39 0.72 0) S(0.13 0.65 0.93) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(-0.13 0.72 0) S(0.13 0.65 0.93) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(0.13 0.72 0) S(0.13 0.65 0.93) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(0.39 0.72 0) S(0.13 0.65 0.93) !I(Cube material(ivorymattepaint) 1 1) ]
+
+CityBlock ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -0.62 0.75 0.62 0.75 0.95 0.42 0.95 -0.42 0.62 -0.75 -0.62 -0.75 -0.95 -0.42 -0.95 0.42) section(1.15 Polygon -0.5828 0.705 0.5828 0.705 0.893 0.3948 0.893 -0.3948 0.5828 -0.705 -0.5828 -0.705 -0.893 -0.3948 -0.893 0.3948) cap(all)) material(ivorymattepaint) 1 1) ]
+  [ A(-90 0) !I(Loft(section(1.13 Polygon -0.5786 0.685 0.5786 0.685 0.88 0.3836 0.88 -0.3836 0.5786 -0.685 -0.5786 -0.685 -0.88 -0.3836 -0.88 0.3836) section(1.34 Polygon -0.54388 0.6439 0.54388 0.6439 0.8272 0.36058 0.8272 -0.36058 0.54388 -0.6439 -0.54388 -0.6439 -0.8272 -0.36058 -0.8272 0.36058) cap(all)) material(blackmattemetal) 1 1) ]
+  [ T(-0.1 1.33 0) [ A(-90 0) !I(Loft(section(0 Polygon -0.48 0.5 0.48 0.5 0.7 0.28 0.7 -0.28 0.48 -0.5 -0.48 -0.5 -0.7 -0.28 -0.7 0.28) section(1.25 Polygon -0.4128 0.43 0.4128 0.43 0.602 0.2408 0.602 -0.2408 0.4128 -0.43 -0.4128 -0.43 -0.602 -0.2408 -0.602 0.2408) cap(all)) material(silverbrushedmetal) 1 1) ] ]
+  [ T(-0.12 2.64 0) S(0.87 0.18 0.66) !I(Cube material(tealmattemetal) 1 1) ]
+  [ T(-0.46 0.86 -0.738) S(0.26 0.19 0.07) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(0 0.86 -0.738) S(0.26 0.19 0.07) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(0.46 0.86 -0.738) S(0.26 0.19 0.07) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(-0.46 0.86 0.738) S(0.26 0.19 0.07) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(0 0.86 0.738) S(0.26 0.19 0.07) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(0.46 0.86 0.738) S(0.26 0.19 0.07) !I(Cube material(amberemissivepaint) 1 1) ]
+
+CityQuarter ->
+  [ A(-90 0) !I(Loft(section(0 Polygon -6.322 2.45 6.322 2.45 7.4 1.372 7.4 -1.372 6.322 -2.45 -6.322 -2.45 -7.4 -1.372 -7.4 1.372) section(0.34 Polygon -6.13234 2.3765 6.13234 2.3765 7.178 1.33084 7.178 -1.33084 6.13234 -2.3765 -6.13234 -2.3765 -7.178 -1.33084 -7.178 1.33084) cap(all)) material(blackmattemetal) 1 1) ]
+  [ T(0 0.35 0) S(14 0.11 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-5.55 0.36 -1.22) S(0.92 1.09 0.82) CityBlock ]
+  [ T(-5.55 0.36 1.22) S(0.92 1.09 0.82) CityBlock ]
+  [ T(-3.05 0.36 -1.22) S(1.1 0.73 0.82) CityBlock ]
+  [ T(-3.05 0.36 1.22) S(1.1 0.73 0.82) CityBlock ]
+  [ T(-0.2 0.36 -1.22) S(1.26 1.29 0.82) CityBlock ]
+  [ T(-0.2 0.36 1.22) S(1.26 1.29 0.82) CityBlock ]
+  [ T(2.5 0.36 -1.22) S(0.9 0.86 0.82) CityBlock ]
+  [ T(2.5 0.36 1.22) S(0.9 0.86 0.82) CityBlock ]
+  [ T(5.5 0.36 -1.22) S(1.05 1.15 0.82) CityBlock ]
+  [ T(5.5 0.36 1.22) S(1.05 1.15 0.82) CityBlock ]
+  [ T(-5.55 3.12 -1.2) S(0.81 0.81 0.81) ShipAntenna ]
+  [ T(5.5 3.12 -1.2) S(0.81 0.81 0.81) ShipAntenna ]
+
+DockBasin ->
+  [ A(-90 0) !I(Loft(section(-3.23 Polygon -7.1 5.568 19.09 6.24 36.55 4.992 39.46 3.552 39.46 -3.552 36.55 -4.992 19.09 -6.24 -7.1 -5.568) section(-2.28 Polygon -8 5.8 19 6.5 37 5.2 40 3.7 40 -3.7 37 -5.2 19 -6.5 -8 -5.8) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ T(14.5 -2.18 -3.7) A(0 1) A(0 2) S(41 0.09 0.12) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(14.5 -2.18 3.7) A(0 1) A(0 2) S(41 0.09 0.12) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-4 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(1 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(6 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(11 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(16 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(21 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(26 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(31 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(36 -2.13 -4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(-4 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(1 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(6 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(11 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(16 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(21 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(26 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(31 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(36 -2.13 4.46) S(0.95 0.95 0.95) RunwayLight ]
+  [ T(11.2 -2.175 0) LaneArrow ]
+  [ T(22.2 -2.175 0) LaneArrow ]
+  [ T(33.2 -2.175 0) LaneArrow ]
+  [ T(2 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(6 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(10 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(14 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(18 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(22 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(26 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(30 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(34 -2.16 0) S(1.6 0.07 0.13) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(-6.6 0 0) S(1 1 0.98) HarbourArch ]
+  [ T(-2.3 0 0) S(1 1 0.98) HarbourArch ]
+  [ T(1.9 0 0) S(1 1 0.98) HarbourArch ]
+  [ T(-8.7 0.24 0) S(0.48 5 10.6) !I(Cube material(blackmattemetal) 1 1) ]
+  [ T(-8.4 0.3 -3.2) S(0.12 2.8 0.19) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-8.4 0.3 -2) S(0.12 2.8 0.19) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-8.4 0.3 2) S(0.12 2.8 0.19) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-8.4 0.3 3.2) S(0.12 2.8 0.19) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(3 0 -6) GatePocket ]
+  [ T(3 0 6) GatePocket ]
+
+LaneArrow ->
+  [ T(-0.525 0 -0.64) A(-136.97493 1) A(0 2) S(1.43628 0.06 0.18) !I(Cube material(amberemissivepaint) 1 1) ]
+  [ T(-0.525 0 0.64) A(136.97493 1) A(0 2) S(1.43628 0.06 0.18) !I(Cube material(amberemissivepaint) 1 1) ]
+
+RunwayLight ->
+  [ S(0.61 0.17 0.33) !I(Cube material(blackmattemetal) 1 1) ]
+  [ T(0 0.12 0) S(0.45 0.11 0.2) !I(Cube material(cyanemissivepaint) 1 1) ]
+
+HarbourArch ->
+  [ T(0 0.15 -4.58) S(0.68 4.83 0.47) !I(Cube material(tealmattemetal) 1 1) ]
+  [ T(0 0.15 4.58) S(0.68 4.83 0.47) !I(Cube material(tealmattemetal) 1 1) ]
+  [ T(0 2.78 0) S(0.78 0.64 9.62) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.4 2.72 0) S(0.08 0.19 8.4) !I(Cube material(amberemissivepaint) 1 1) ]
+
+GatePocket ->
+  [ A(-90 0) !I(Loft(section(-2.23 Polygon -1.022 2.9 1.022 2.9 1.825 2.097 1.825 -2.097 1.022 -2.9 -1.022 -2.9 -1.825 -2.097 -1.825 2.097) section(3.37 Polygon -0.94024 2.668 0.94024 2.668 1.679 1.92924 1.679 -1.92924 0.94024 -2.668 -0.94024 -2.668 -1.679 -1.92924 -1.679 1.92924) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ A(-90 0) !I(Loft(section(3.35 Polygon -1.064 2.85 1.064 2.85 1.9 2.014 1.9 -2.014 1.064 -2.85 -1.064 -2.85 -1.9 -2.014 -1.9 2.014) section(3.77 Polygon -1.00016 2.679 1.00016 2.679 1.786 1.89316 1.786 -1.89316 1.00016 -2.679 -1.00016 -2.679 -1.786 -1.89316 -1.786 1.89316) cap(all)) material(goldbrushedmetal) 1 1) ]
+
+GateLeaf ->
+  [ S(0.59 4.3 3.5) !I(Cube material(tealmattemetal) 1 1) ]
+  [ T(0.32 0 0) S(0.09 3.82 3.05) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(0.39 -1.24 0) S(0.1 0.12 2.82) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.39 -0.43 0) S(0.1 0.12 2.82) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.39 0.43 0) S(0.1 0.12 2.82) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.39 1.24 0) S(0.1 0.12 2.82) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0.48 0 0) A(-90 1) A(55.00798 2) S(4.39436 0.18 0.19) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(0.48 0.14 -1.48) S(0.11 2.8 0.13) !I(Cube material(cyanemissivepaint) 1 1) ]
+
+StarDoorMotion(cycle) ->
+  [ T(3.12 0.1 1.75+1.75*(1-cos(6.283185307*t/cycle))) GateLeaf ]
+
+PortDoorMotion(cycle) ->
+  [ T(3.12 0.1 -1.75-1.75*(1-cos(6.283185307*t/cycle))) S(1 1 -1) GateLeaf ]
+
+FerryMotion(cycle) ->
+  [ T(19.5+23.5*cos(6.283185307*t/cycle) -0.7 0) A(180 1) S(1.93 1.65 1.55) ShipShuttle ]
+
+HeatWing(cycle) ->
+  [ A(-90 2) S(0.78 5.6 0.78) !I(Cylinder(segments(20 1)) material(goldbrushedmetal) 1 1) ]
+  [ A(16+12*(1-cos(6.283185307*t/cycle)) 0) [ T(0 0 4.18) S(4.1 3.2 3.68) ShipRadiator ] [ T(0 0 8.18) OuterTip ] ]
+
+OuterTip ->
+  [ S(5.42 0.3 0.25) !I(Cube material(goldbrushedmetal) 1 1) ]
+
+EngineBank ->
+  [ A(-90 0) !I(Loft(section(-1.55 Polygon -2.8 13 2.8 13 5 10.8 5 -10.8 2.8 -13 -2.8 -13 -5 -10.8 -5 10.8) section(2.85 Polygon -2.408 11.18 2.408 11.18 4.3 9.288 4.3 -9.288 2.408 -11.18 -2.408 -11.18 -4.3 -9.288 -4.3 9.288) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ T(-2.8 1.7 -8.8) ArmouredEngine ]
+  [ T(-2.8 1.7 0) S(1.07 1.07 1.07) ArmouredEngine ]
+  [ T(-2.8 1.7 8.8) ArmouredEngine ]
+  [ T(-2.8 -2.4 -4.5) S(0.69 0.69 0.69) ArmouredEngine ]
+  [ T(-2.8 -2.4 4.5) S(0.69 0.69 0.69) ArmouredEngine ]
+  [ T(-0.7 2.83 -9.2) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.7 2.83 -6) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.7 2.83 -3) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.7 2.83 0) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.7 2.83 3) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.7 2.83 6) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+  [ T(-0.7 2.83 9) S(4 0.27 0.45) !I(Cube material(goldbrushedmetal) 1 1) ]
+
+ArmouredEngine ->
+  [ A(-90 2) !I(Revolve(profile(Polygon 1.9 -2.3 2.5 -1.9 2.75 -0.3 2.72 0.9 2.1 2.2 1.45 2.4) angle(0 360) segments(36) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ T(-2.82 0 0) S(3.6 3.25 3.25) ShipMainBell ]
+  [ T(-4.24 0 0) A(-90 2) !I(Revolve(profile(Polygon 1.12 -0.14 1.31 -0.14 1.31 0.14 1.12 0.14) angle(0 360) segments(36) cap(all)) material(cyanemissivepaint) 1 1) ]
+  [ T(-3.65 0 0) A(-90 2) S(1.72 0.14 1.72) !I(Cylinder(segments(20 1)) material(cyanemissivepaint) 1 1) ]
+  [ T(-1.05 0 0) A(0 0) EnginePetal ]
+  [ T(-1.05 0 0) A(60 0) EnginePetal ]
+  [ T(-1.05 0 0) A(120 0) EnginePetal ]
+  [ T(-1.05 0 0) A(180 0) EnginePetal ]
+  [ T(-1.05 0 0) A(240 0) EnginePetal ]
+  [ T(-1.05 0 0) A(300 0) EnginePetal ]
+
+EnginePetal ->
+  [ T(0 2.49 0) S(2.65 0.3 0.57) !I(Cube material(silverbrushedmetal) 1 1) ]
+
+# Embedded catalog grammar
+
+ShipMainBell ->
+  [ A(-90 2) !I(Revolve(profile(Polygon 0.85 -1 0.74 -1 0.24 -0.15 0.18 0.02 0.24 0.19 0.34 0.14 0.34 -0.09) angle(0 360) segments(36) cap(all)) material(charcoalmattemetal) 1 1) ]
+  [ T(-0.96 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.81 -0.04 0.88 -0.04 0.88 0.04 0.81 0.04) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0.24 0 0) A(-90 2) S(0.56 0.56 0.56) !I(Cylinder(segments(20 1)) material(silverbrushedmetal) 1 1) ]
+
+ShipShuttle ->
+  [ S(1.39 0.48 0.67) !I(Sphere(segments(16 10)) material(offwhiteceramic) 1 1) ]
+  [ T(0.31 0.17 0) S(0.61 0.28 0.42) !I(Sphere(segments(16 10)) material(silverblueglass) 1 1) ]
+  [ A(-90 0) !I(Extrude(Polygon(-0.52 0.69 0.26 0 -0.52 -0.69) 0.07 cap(all)) material(bluegreymetal) 1 1) ]
+  [ T(-0.52 -0.05 -0.25) A(-90 2) S(0.21 0.43 0.21) !I(Cylinder(segments(20 1)) material(charcoalmattemetal) 1 1) ]
+  [ T(-0.52 -0.05 0.25) A(-90 2) S(0.21 0.43 0.21) !I(Cylinder(segments(20 1)) material(charcoalmattemetal) 1 1) ]
+
+ShipRadiator ->
+  [ S(1.36 0.07 2.22) !I(Cube material(charcoalmattemetal) 1 1) ]
+  [ T(0 0.052 -1) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.8) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.6) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.4) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.2) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.2) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.4) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.6) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.8) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 1) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(-0.69 0.02 0) S(0.065 0.11 2.28) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0.69 0.02 0) S(0.065 0.11 2.28) !I(Cube material(copperbrushedmetal) 1 1) ]
+
+ShipAntenna ->
+  [ T(0 0.53 0) S(0.095 1.12 0.095) !I(Cylinder(segments(20 1)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0.7 0) A(0 1) A(0 2) S(1.16 0.06 0.06) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0 0.91 0) A(-90 1) A(0 2) S(0.82 0.05 0.05) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 1.12 0) S(0.14 0.14 0.14) !I(Sphere(segments(16 10)) material(cyanemissivepaint) 1 1) ]
+
+ShipObservation ->
+  [ T(0 0.11 0) S(1.44 0.74 1.16) !I(Sphere(segments(16 10)) material(silverblueglass) 1 1) ]
+  [  !I(Revolve(profile(Polygon 0.52 -0.05 0.58 -0.05 0.58 0.05 0.52 0.05) angle(0 360) segments(36) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0.14 0) A(0 1) A(0 2) S(1.14 0.037 0.037) !I(Cube material(offwhiteceramic) 1 1) ]
+  [ T(0 0.17 0) A(-90 1) A(0 2) S(0.94 0.037 0.037) !I(Cube material(offwhiteceramic) 1 1) ]

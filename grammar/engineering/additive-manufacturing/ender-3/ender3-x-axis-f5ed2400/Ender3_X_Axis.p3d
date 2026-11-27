@@ -1,0 +1,999 @@
+# ENDER-3 X-AXIS — NATIVE PROCEDURAL GRAMMAR
+# Prepared for Pamela G. Hauff / ProGen3D.
+# Replaces the previous stored-geometry version with parameterized native shapes.
+# 57 procedural component types; 141 source assembly placements.
+# Units: every dimension and T(...) is millimetres inside the root scope.
+# One root S(0.001 0.001 0.001) converts the assembly to metres.
+# Coordinates: X travel, Y vertical, Z depth.
+# Shapes: boxes, cylinders, spheres, profile extrusions, revolutions, openings and sweeps.
+# No imported geometry, stored vertex/face tables or external asset dependencies.
+# Source anchors retained; surface details are editable engineering approximations.
+# Screw ridges use round helical preview sections. Fits/threads are illustrative.
+# Plate details and section dimensions are model parameters, not fabrication drawings.
+# Native analytic descriptors were tested with the recovered Paper Studio 0.82 engine.
+#
+# CONTROL: 0 = assembled; 25 = component groups separated by 25 mm.
+Start -> [ S(0.001 0.001 0.001) Ender3_XAxis(0) ]
+
+Ender3_XAxis(explodeMM) ->
+    [ Rail_2020 ]
+    [ T(-explodeMM 0 0) Left_Support_Motor_Extruder ]
+    [ T(explodeMM 0 0) Right_Support_Wheels ]
+    [ T(0 0 -explodeMM) GT2_Belt ]
+    [ T(0 0 -explodeMM) Belt_End_Fittings ]
+    [ T(explodeMM 0 explodeMM) Idler_Tensioner ]
+    [ T(0 0 explodeMM) Printhead_Carriage ]
+
+# LOGICAL ASSEMBLIES — every original component anchor occurs once.
+
+# 1 logical components
+Rail_2020 ->
+    [ Place_000_1_2_1_2020_profile ]
+
+# 55 logical components
+Left_Support_Motor_Extruder ->
+    [ Place_002_1_2_3_X_motor_bracket ]
+    [ Place_003_1_2_4_42_34_motor ]
+    [ Place_004_1_2_5_z_nut ]
+    [ Place_005_1_2_6_E_motor_bracket ]
+    [ Place_006_1_2_7_X_limit_switch_bracket ]
+    [ Place_008_1_2_9_limit_switch ]
+    [ Place_009_1_2_10_2GT_pulley ]
+    [ Place_012_1_2_13_M4_Split_Washer ]
+    [ Place_013_1_2_14_M4_Split_Washer ]
+    [ Place_014_1_2_15_M3_Split_Washer ]
+    [ Place_015_1_2_16_M4X16_Pan_Head_Screw ]
+    [ Place_016_1_2_17_M3X40_P ]
+    [ Place_017_1_2_18_M4X16_Pan_Head_Screw ]
+    [ Place_018_1_2_19_M3X40_P ]
+    [ Place_019_1_2_20_M3X40_P ]
+    [ Place_020_1_2_21_M3X40_P ]
+    [ Place_025_1_2_26_M3X10_Pan_Head_Screw ]
+    [ Place_026_1_2_27_M3_Split_Washer ]
+    [ Place_027_1_2_28_M3X10_Pan_Head_Screw ]
+    [ Place_028_1_2_29_M3X6Pan_Head_Screw ]
+    [ Place_029_1_2_30_M3X6Pan_Head_Screw ]
+    [ Place_030_1_2_31_1_Rollers ]
+    [ Place_031_1_2_31_2_Eccentric_column ]
+    [ Place_032_1_2_31_3_Spacers_for_rollers ]
+    [ Place_033_1_2_31_4_M5X40_Pan_Head_Screw ]
+    [ Place_034_1_2_31_5_625pillow ]
+    [ Place_035_1_2_31_6_625pillow ]
+    [ Place_036_1_2_31_7_M5_Self_locking_nut ]
+    [ Place_037_1_2_32_1_Rollers ]
+    [ Place_038_1_2_32_2_Spacers_for_rollers ]
+    [ Place_039_1_2_32_3_Spacers_for_rollers ]
+    [ Place_040_1_2_32_4_M5X40_Pan_Head_Screw ]
+    [ Place_041_1_2_32_5_625pillow ]
+    [ Place_042_1_2_32_6_M5_Self_locking_nut ]
+    [ Place_043_1_2_32_7_625pillow ]
+    [ Place_044_1_2_33_1_Rollers ]
+    [ Place_045_1_2_33_2_Spacers_for_rollers ]
+    [ Place_046_1_2_33_3_Spacers_for_rollers ]
+    [ Place_047_1_2_33_4_M5X40_Pan_Head_Screw ]
+    [ Place_048_1_2_33_5_625pillow ]
+    [ Place_049_1_2_33_6_M5_Self_locking_nut ]
+    [ Place_050_1_2_33_7_625pillow ]
+    [ Place_051_1_2_34_1_40_42_motor ]
+    [ Place_052_1_2_34_2_624U_pillow ]
+    [ Place_053_1_2_34_3_M3X18_Socket_Head_Screw ]
+    [ Place_054_1_2_34_4_M3X10_Pan_Head_Screw ]
+    [ Place_055_1_2_34_5_Extrusion_Spring ]
+    [ Place_056_1_2_34_6_E_gear ]
+    [ Place_057_1_2_34_7_E_housing_2 ]
+    [ Place_058_1_2_34_8_E_idler_tensioner ]
+    [ Place_059_1_2_34_9_M3X10_Flush_Head_Screw ]
+    [ Place_060_1_2_34_10_M6_Pneumatic_joint ]
+    [ Place_061_1_2_34_11_M4_Split_Washer ]
+    [ Place_062_1_2_34_12_M4X8_Socket_Head_Screw ]
+    [ Place_063_1_2_34_13_M3X10_Pan_Head_Screw ]
+
+# 24 logical components
+Right_Support_Wheels ->
+    [ Place_001_1_2_2_Z_Stent ]
+    [ Place_021_1_2_22_M4X16_Pan_Head_Screw ]
+    [ Place_022_1_2_23_M4_Split_Washer ]
+    [ Place_023_1_2_24_M4X16_Pan_Head_Screw ]
+    [ Place_024_1_2_25_M4_Split_Washer ]
+    [ Place_074_1_2_36_1_Rollers ]
+    [ Place_075_1_2_36_2_Eccentric_column ]
+    [ Place_076_1_2_36_3_M5X30_Pan_Head_Screw ]
+    [ Place_077_1_2_36_4_625pillow ]
+    [ Place_078_1_2_36_5_625pillow ]
+    [ Place_079_1_2_36_6_M5_Self_locking_nut ]
+    [ Place_080_1_2_36_7_M5_Split_Washer ]
+    [ Place_081_1_2_37_1_Rollers ]
+    [ Place_082_1_2_37_2_Spacers_for_rollers ]
+    [ Place_083_1_2_37_3_M5X30_Pan_Head_Screw ]
+    [ Place_084_1_2_37_4_625pillow ]
+    [ Place_085_1_2_37_5_M5_Self_locking_nut ]
+    [ Place_086_1_2_37_6_625pillow ]
+    [ Place_087_1_2_38_1_Rollers ]
+    [ Place_088_1_2_38_2_Spacers_for_rollers ]
+    [ Place_089_1_2_38_3_M5X30_Pan_Head_Screw ]
+    [ Place_090_1_2_38_4_625pillow ]
+    [ Place_091_1_2_38_5_M5_Self_locking_nut ]
+    [ Place_092_1_2_38_6_625pillow ]
+
+# 1 logical components
+GT2_Belt ->
+    [ Place_007_1_2_8_X_belt ]
+
+# 2 logical components
+Belt_End_Fittings ->
+    [ Place_010_1_2_11_Copper_cover ]
+    [ Place_011_1_2_12_Copper_cover ]
+
+# 10 logical components
+Idler_Tensioner ->
+    [ Place_064_1_2_35_1_X_Adjustment_Block ]
+    [ Place_065_1_2_35_2_M4X8_Socket_Head_Screw ]
+    [ Place_066_1_2_35_3_M5_T_Slot_Nut ]
+    [ Place_067_1_2_35_4_M5_T_Slot_Nut ]
+    [ Place_068_1_2_35_5_M4X8_Socket_Head_Screw ]
+    [ Place_069_1_2_35_6_1_M8X25_Pan_Head_Screw ]
+    [ Place_070_1_2_35_6_2_M8_Self_locking_nut ]
+    [ Place_071_1_2_35_6_3_M8_nut ]
+    [ Place_072_1_2_35_6_4_F688_pillow ]
+    [ Place_073_1_2_35_6_5_F688_pillow ]
+
+# 48 logical components
+Printhead_Carriage ->
+    [ Place_093_1_2_39_1_E_plate ]
+    [ Place_094_1_2_39_2_Cold_section_fan ]
+    [ Place_095_1_2_39_3_Fan_cover ]
+    [ Place_096_1_2_39_4_Nozzle_fan_duct ]
+    [ Place_097_1_2_39_5_Nozzle_fan ]
+    [ Place_098_1_2_39_6_1_Radiator ]
+    [ Place_099_1_2_39_6_2_nozzle ]
+    [ Place_100_1_2_39_6_3_Heat_block ]
+    [ Place_101_1_2_39_6_4_Pneumatic_joint ]
+    [ Place_102_1_2_39_6_5_Nozzle_thermistor ]
+    [ Place_103_1_2_39_6_6_Heater ]
+    [ Place_104_1_2_39_6_7_M3X16_Pan_Head_Screw ]
+    [ Place_105_1_2_39_6_8_M3_Split_Washer ]
+    [ Place_106_1_2_39_6_9_M3x18_Flush_Head_Screw ]
+    [ Place_107_1_2_39_6_10_M3x18_Flush_Head_Screw ]
+    [ Place_108_1_2_39_6_11_M3_Screw ]
+    [ Place_109_1_2_39_6_12_M3X16_Pan_Head_Screw ]
+    [ Place_110_1_2_39_6_13_M3_Split_Washer ]
+    [ Place_111_1_2_39_6_14_M3_Screw ]
+    [ Place_112_1_2_39_7_1_Spacers_for_rollers ]
+    [ Place_113_1_2_39_7_2_Rollers ]
+    [ Place_114_1_2_39_7_3_M5X30_Pan_Head_Screw ]
+    [ Place_115_1_2_39_7_4_625pillow ]
+    [ Place_116_1_2_39_7_5_M5_Self_locking_nut ]
+    [ Place_117_1_2_39_7_6_625pillow ]
+    [ Place_118_1_2_39_8_1_Spacers_for_rollers ]
+    [ Place_119_1_2_39_8_2_Rollers ]
+    [ Place_120_1_2_39_8_3_M5X30_Pan_Head_Screw ]
+    [ Place_121_1_2_39_8_4_625pillow ]
+    [ Place_122_1_2_39_8_5_M5_Self_locking_nut ]
+    [ Place_123_1_2_39_8_6_625pillow ]
+    [ Place_124_1_2_39_9_1_Rollers ]
+    [ Place_125_1_2_39_9_2_Eccentric_column ]
+    [ Place_126_1_2_39_9_3_M5X30_Pan_Head_Screw ]
+    [ Place_127_1_2_39_9_4_M5_washer ]
+    [ Place_128_1_2_39_9_5_625pillow ]
+    [ Place_129_1_2_39_9_6_625pillow ]
+    [ Place_130_1_2_39_9_7_M5_Self_locking_nut ]
+    [ Place_131_1_2_39_10_M2X8_Socket_Head_Screw ]
+    [ Place_132_1_2_39_11_M3X10_Pan_Head_Screw ]
+    [ Place_133_1_2_39_12_M3X10_Pan_Head_Screw ]
+    [ Place_134_1_2_39_13_M3X10_Pan_Head_Screw ]
+    [ Place_135_1_2_39_14_M3X10_Pan_Head_Screw ]
+    [ Place_136_1_2_39_15_M3X6Pan_Head_Screw ]
+    [ Place_137_1_2_39_16_M3X6Pan_Head_Screw ]
+    [ Place_138_1_2_39_17_M2X8_Socket_Head_Screw ]
+    [ Place_139_1_2_39_18_M2X8_Socket_Head_Screw ]
+    [ Place_140_1_2_39_19_M2X8_Socket_Head_Screw ]
+
+# MEASURED COMPONENT ANCHORS — translations in millimetres, angles in degrees.
+Place_000_1_2_1_2020_profile -> T(-172.5 -0.000068 0) A(-90 0) Part_P000_2020_profile
+Place_001_1_2_2_Z_Stent -> T(-44.207612 -46.877124 57.665218) A(-90 0) Part_P001_Z_Stent
+Place_002_1_2_3_X_motor_bracket -> T(-199.5 -0.000068 -13) Part_P002_X_motor_bracket
+Place_003_1_2_4_42_34_motor -> T(-199.5 -0.000068 -13) A(90 2) Part_P003_42_34_motor
+Place_004_1_2_5_z_nut -> T(-73.299942 218.052796 -223.95) A(90 0) A(-90 2) Part_P004_z_nut
+Place_005_1_2_6_E_motor_bracket -> T(-199.5 -0.000068 -13.8) Part_P005_E_motor_bracket
+Place_006_1_2_7_X_limit_switch_bracket -> T(-199.5 -0.000068 24) A(180 0) A(-90 2) Part_P006_X_limit_switch_bracket
+Place_007_1_2_8_X_belt -> T(-77.489163 -130.899122 -3.563567) A(-179.73081951 2) Part_P007_X_belt
+Place_008_1_2_9_limit_switch -> T(-185.45 -0.000068 9.9) A(180 2) Part_P008_limit_switch
+Place_009_1_2_10_2GT_pulley -> T(-282.271997 -158.607132 -76.191711) A(90 0) A(19.73666903 1) A(90 2) Part_P009_2GT_pulley
+Place_010_1_2_11_Copper_cover -> T(-1.731392 -14.371152 -1.363567) A(90 0) A(0.26918049 1) A(-14.80374973 2) Part_P010_Copper_cover
+Place_011_1_2_12_Copper_cover -> T(40.885515 -14.170933 -1.363567) A(90 0) A(0.26918049 1) A(-25.62368914 2) Part_P010_Copper_cover
+Place_012_1_2_13_M4_Split_Washer -> T(-143.5 -0.000068 -14) A(90 0) A(44.75530746 1) Part_P011_M4_Split_Washer
+Place_013_1_2_14_M4_Split_Washer -> T(-169.5 -0.000068 -14) A(90 0) A(35.63240463 1) Part_P011_M4_Split_Washer
+Place_014_1_2_15_M3_Split_Washer -> T(-153.8 43.526364 -48.85) Part_P012_M3_Split_Washer
+Place_015_1_2_16_M4X16_Pan_Head_Screw -> T(-169.5 -0.000068 -16.2) A(-90 0) A(-67.58824972 1) A(-90 2) Part_P013_M4X16_Pan_Head_Screw
+Place_016_1_2_17_M3X40_P -> T(-184 -15.500068 24.01) A(90 0) A(21.79265705 1) A(-90 2) Part_P014_M3X40_P
+Place_017_1_2_18_M4X16_Pan_Head_Screw -> T(-143.5 -0.000068 -16.2) A(-90 0) A(-76.71115255 1) A(-90 2) Part_P013_M4X16_Pan_Head_Screw
+Place_018_1_2_19_M3X40_P -> T(-215 -15.500068 24.01) A(90 0) A(30.91555988 1) A(-90 2) Part_P014_M3X40_P
+Place_019_1_2_20_M3X40_P -> T(-215 15.499932 24.01) A(-90 0) A(65.68466936 1) A(90 2) Part_P014_M3X40_P
+Place_020_1_2_21_M3X40_P -> T(-184 15.499932 24.01) A(90 0) A(43.57944635 1) A(-90 2) Part_P014_M3X40_P
+Place_021_1_2_22_M4X16_Pan_Head_Screw -> T(84.2 -0.000068 -16.2) A(-90 0) A(10.76617387 1) A(-90 2) Part_P013_M4X16_Pan_Head_Screw
+Place_022_1_2_23_M4_Split_Washer -> T(84.2 -0.000068 -14) A(90 0) A(-42.72201896 1) Part_P011_M4_Split_Washer
+Place_023_1_2_24_M4X16_Pan_Head_Screw -> T(163.9 -0.000068 -16.2) A(-90 0) A(1.64327104 1) A(-90 2) Part_P013_M4X16_Pan_Head_Screw
+Place_024_1_2_25_M4_Split_Washer -> T(163.9 -0.000068 -14) A(90 0) A(-33.59911613 1) Part_P011_M4_Split_Washer
+Place_025_1_2_26_M3X10_Pan_Head_Screw -> T(-153.8 46.176364 -48.85) A(66.26488045 1) A(-90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_026_1_2_27_M3_Split_Washer -> T(-153.8 43.526364 -66.85) A(10.86262609 1) Part_P012_M3_Split_Washer
+Place_027_1_2_28_M3X10_Pan_Head_Screw -> T(-153.8 46.176364 -66.85) A(69.30146681 1) A(-90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_028_1_2_29_M3X6Pan_Head_Screw -> T(-192.45 7.499932 8.25) A(90 0) A(-48.55184874 1) A(90 2) Part_P016_M3X6Pan_Head_Screw
+Place_029_1_2_30_M3X6Pan_Head_Screw -> T(-192.45 -7.500068 8.25) A(90 0) A(-39.42894591 1) A(90 2) Part_P016_M3X6Pan_Head_Screw
+Place_030_1_2_31_1_Rollers -> T(-86.676787 -12.690739 -40.3) A(180 0) A(-94.2099138 2) Part_P017_Rollers
+Place_031_1_2_31_2_Eccentric_column -> T(-123.9 -0.000068 -32.4) A(-180 0) A(-103.33281662 2) Part_P018_Eccentric_column
+Place_032_1_2_31_3_Spacers_for_rollers -> T(-123.218867 0.161357 -13) A(-180 0) A(-3.0815806 2) Part_P019_Spacers_for_rollers
+Place_033_1_2_31_4_M5X40_Pan_Head_Screw -> T(-123.218867 0.161357 -7.25) A(90 0) A(50.75249952 1) A(-90 2) Part_P020_M5X40_Pan_Head_Screw
+Place_034_1_2_31_5_625pillow -> T(-123.218867 0.161357 -23.85) A(90 0) A(34.26715576 1) A(-90 2) Part_P021_625pillow
+Place_035_1_2_31_6_625pillow -> T(-123.218867 0.161357 -29.85) A(90 0) A(34.26715576 1) A(-90 2) Part_P021_625pillow
+Place_036_1_2_31_7_M5_Self_locking_nut -> T(-123.218867 0.161357 -46.72) A(-180 0) A(-146.53784603 2) Part_P022_M5_Self_locking_nut
+Place_037_1_2_32_1_Rollers -> T(-195.454431 -1.534875 -13.4) A(139.36805318 2) Part_P017_Rollers
+Place_038_1_2_32_2_Spacers_for_rollers -> T(-184.1 35.499932 -40.7) A(139.36805318 2) Part_P019_Spacers_for_rollers
+Place_039_1_2_32_3_Spacers_for_rollers -> T(-184.1 35.499932 -21.35) A(139.36805318 2) Part_P019_Spacers_for_rollers
+Place_040_1_2_32_4_M5X40_Pan_Head_Screw -> T(-184.1 35.499932 -7.25) A(-90 0) A(-28.93900087 1) A(90 2) Part_P020_M5X40_Pan_Head_Screw
+Place_041_1_2_32_5_625pillow -> T(-184.1 35.499932 -29.85) A(90 0) A(19.31081122 1) A(90 2) Part_P021_625pillow
+Place_042_1_2_32_6_M5_Self_locking_nut -> T(-184.1 35.499932 -46.72) A(180 0) A(64.74795179 2) Part_P022_M5_Self_locking_nut
+Place_043_1_2_32_7_625pillow -> T(-184.1 35.499932 -23.85) A(90 0) A(19.31081122 1) A(90 2) Part_P021_625pillow
+Place_044_1_2_33_1_Rollers -> T(-180.072473 3.026274 -13.4) A(-29.5550296 2) Part_P017_Rollers
+Place_045_1_2_33_2_Spacers_for_rollers -> T(-184.1 -35.500068 -40.7) A(-29.5550296 2) Part_P019_Spacers_for_rollers
+Place_046_1_2_33_3_Spacers_for_rollers -> T(-184.1 -35.500068 -21.35) A(-29.5550296 2) Part_P019_Spacers_for_rollers
+Place_047_1_2_33_4_M5X40_Pan_Head_Screw -> T(-184.1 -35.500068 -7.25) A(90 0) A(40.01591809 1) A(-90 2) Part_P020_M5X40_Pan_Head_Screw
+Place_048_1_2_33_5_625pillow -> T(-184.1 -35.500068 -29.85) A(-90 0) A(-30.38772844 1) A(-90 2) Part_P021_625pillow
+Place_049_1_2_33_6_M5_Self_locking_nut -> T(-184.1 -35.500068 -46.72) A(180 0) A(-126.32896543 2) Part_P022_M5_Self_locking_nut
+Place_050_1_2_33_7_625pillow -> T(-184.1 -35.500068 -23.85) A(-90 0) A(-30.38772844 1) A(-90 2) Part_P021_625pillow
+Place_051_1_2_34_1_40_42_motor -> T(-67.6 -0.500068 2.3) A(90 1) Part_P023_40_42_motor
+Place_052_1_2_34_2_624U_pillow -> T(-199.189308 0.019932 -15.63368) Part_P024_624U_pillow
+Place_053_1_2_34_3_M3X18_Socket_Head_Screw -> T(-139.5 55.586364 -57.7) A(180 0) A(41.10223873 1) A(90 2) Part_P025_M3X18_Socket_Head_Screw
+Place_054_1_2_34_4_M3X10_Pan_Head_Screw -> T(-108.5 49.196364 -57.7) A(47.57621463 1) A(-90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_055_1_2_34_5_Extrusion_Spring -> T(-117.545 53.073864 -88.051) A(-4.61004463 0) A(-90 1) Part_P026_Extrusion_Spring
+Place_056_1_2_34_6_E_gear -> T(-176.352887 105.472796 5.16061) A(-86.98650594 1) A(180 2) Part_P027_E_gear
+Place_057_1_2_34_7_E_housing_2 -> T(-127.278562 46.573034 -115.967432) A(-90 0) A(-22.52267359 2) Part_P028_E_housing_2
+Place_058_1_2_34_8_E_idler_tensioner -> T(-122.536777 46.573034 -114.787688) A(-90 0) A(-27.13754372 2) Part_P029_E_idler_tensioner
+Place_059_1_2_34_9_M3X10_Flush_Head_Screw -> T(-139.5 48.046364 -88.7) A(-57.41491962 1) A(-90 2) Part_P030_M3X10_Flush_Head_Screw
+Place_060_1_2_34_10_M6_Pneumatic_joint -> T(84.038543 146.509029 -243.713859) A(11.27576966 0) Part_P031_M6_Pneumatic_joint
+Place_061_1_2_34_11_M4_Split_Washer -> T(-124.689308 55.546364 -60.06368) A(180 0) A(10.04197538 1) Part_P011_M4_Split_Washer
+Place_062_1_2_34_12_M4X8_Socket_Head_Screw -> T(-124.689308 55.546364 -60.06368) A(0.67869964 1) A(-90 2) Part_P032_M4X8_Socket_Head_Screw
+Place_063_1_2_34_13_M3X10_Pan_Head_Screw -> T(-108.5 49.196364 -88.7) A(58.43884072 1) A(-90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_064_1_2_35_1_X_Adjustment_Block -> T(38.457148 -138.000068 136.55) A(-90 0) A(-90 2) Part_P033_X_Adjustment_Block
+Place_065_1_2_35_2_M4X8_Socket_Head_Screw -> T(157.542896 -0.000068 13) A(-90 0) A(87.95447568 1) A(90 2) Part_P032_M4X8_Socket_Head_Screw
+Place_066_1_2_35_3_M5_T_Slot_Nut -> T(157.542896 -0.000068 7.362749) A(180 0) A(-180 2) Part_P034_M5_T_Slot_Nut
+Place_067_1_2_35_4_M5_T_Slot_Nut -> T(170.542896 -0.000068 7.362749) A(-180 0) A(180 2) Part_P034_M5_T_Slot_Nut
+Place_068_1_2_35_5_M4X8_Socket_Head_Screw -> T(170.542896 -0.000068 13) A(90 0) A(19.02687333 1) A(-90 2) Part_P032_M4X8_Socket_Head_Screw
+Place_069_1_2_35_6_1_M8X25_Pan_Head_Screw -> T(186.542896 0.999932 17.4) A(-90 0) A(44.21495585 1) A(90 2) Part_P035_M8X25_Pan_Head_Screw
+Place_070_1_2_35_6_2_M8_Self_locking_nut -> T(186.542896 0.999932 -10.332457) A(180 0) A(-75.03778536 2) Part_P036_M8_Self_locking_nut
+Place_071_1_2_35_6_3_M8_nut -> T(186.542896 0.999932 10) A(83.59462165 2) Part_P037_M8_nut
+Place_072_1_2_35_6_4_F688_pillow -> T(186.542896 0.999932 -5.5) A(90 0) A(70.90489824 1) Part_P038_F688_pillow
+Place_073_1_2_35_6_5_F688_pillow -> T(186.542896 0.999932 4.5) A(90 0) A(-2.94752911 1) A(-180 2) Part_P038_F688_pillow
+Place_074_1_2_36_1_Rollers -> T(94.598445 -36.563233 -40.3) A(-180 0) A(-6.02229778 2) Part_P017_Rollers
+Place_075_1_2_36_2_Eccentric_column -> T(105.692388 -0.000068 -21.3) A(-58.36965787 2) Part_P018_Eccentric_column
+Place_076_1_2_36_3_M5X30_Pan_Head_Screw -> T(106.288403 0.367038 -6.25) A(90 0) A(-37.4351165 1) A(-90 2) Part_P039_M5X30_Pan_Head_Screw
+Place_077_1_2_36_4_625pillow -> T(106.288403 0.367038 -23.85) A(90 0) A(-53.92046026 1) A(-90 2) Part_P021_625pillow
+Place_078_1_2_36_5_625pillow -> T(106.288403 0.367038 -29.85) A(90 0) A(-53.92046026 1) A(-90 2) Part_P021_625pillow
+Place_079_1_2_36_6_M5_Self_locking_nut -> T(106.288403 0.367038 -35.87) A(180 0) A(-58.35023001 2) Part_P022_M5_Self_locking_nut
+Place_080_1_2_36_7_M5_Split_Washer -> T(106.288403 0.367038 -10) A(-65.7912671 2) Part_P040_M5_Split_Washer
+Place_081_1_2_37_1_Rollers -> T(144.998028 68.117806 -40.3) A(-180 0) A(123.77015487 2) Part_P017_Rollers
+Place_082_1_2_37_2_Spacers_for_rollers -> T(165.892388 35.499932 -13) A(-180 0) A(123.77015487 2) Part_P019_Spacers_for_rollers
+Place_083_1_2_37_3_M5X30_Pan_Head_Screw -> T(165.892388 35.499932 -35.1) A(90 0) A(-13.34110256 1) A(90 2) Part_P039_M5X30_Pan_Head_Screw
+Place_084_1_2_37_4_625pillow -> T(165.892388 35.499932 -23.85) A(-90 0) A(3.71291291 1) A(90 2) Part_P021_625pillow
+Place_085_1_2_37_5_M5_Self_locking_nut -> T(165.892388 35.499932 -6.48) A(80.3458501 2) Part_P022_M5_Self_locking_nut
+Place_086_1_2_37_6_625pillow -> T(165.892388 35.499932 -29.85) A(-90 0) A(3.71291291 1) A(90 2) Part_P021_625pillow
+Place_087_1_2_38_1_Rollers -> T(133.338767 -14.505742 -40.3) A(-180 0) A(99.23155471 2) Part_P017_Rollers
+Place_088_1_2_38_2_Spacers_for_rollers -> T(165.892388 -35.500068 -13) A(-180 0) A(99.23155471 2) Part_P019_Spacers_for_rollers
+Place_089_1_2_38_3_M5X30_Pan_Head_Screw -> T(165.892388 -35.500068 -35.1) A(90 0) A(11.1974976 1) A(90 2) Part_P039_M5X30_Pan_Head_Screw
+Place_090_1_2_38_4_625pillow -> T(165.892388 -35.500068 -23.85) A(-90 0) A(-20.82568726 1) A(90 2) Part_P021_625pillow
+Place_091_1_2_38_5_M5_Self_locking_nut -> T(165.892388 -35.500068 -6.48) A(104.88445026 2) Part_P022_M5_Self_locking_nut
+Place_092_1_2_38_6_625pillow -> T(165.892388 -35.500068 -29.85) A(-90 0) A(-20.82568726 1) A(90 2) Part_P021_625pillow
+Place_093_1_2_39_1_E_plate -> T(-19.187939 -0.000068 13.85) Part_P041_E_plate
+Place_094_1_2_39_2_Cold_section_fan -> T(-228.410161 55.149932 225.627778) A(-90 0) Part_P042_Cold_section_fan
+Place_095_1_2_39_3_Fan_cover -> T(-11.687939 -10.350068 58.35) A(180 0) A(-180 2) Part_P043_Fan_cover
+Place_096_1_2_39_4_Nozzle_fan_duct -> T(17.00095 -28.950068 35.85) A(-90 0) A(90 2) Part_P044_Nozzle_fan_duct
+Place_097_1_2_39_5_Nozzle_fan -> T(-118.37965 -18.376275 75.152646) A(-55 0) Part_P045_Nozzle_fan
+Place_098_1_2_39_6_1_Radiator -> T(-2.687939 7.549932 26.85) A(90 0) A(90 2) Part_P046_Radiator
+Place_099_1_2_39_6_2_nozzle -> T(-2.687939 -26.250068 26.85) A(90 0) A(56.02189561 2) Part_P047_nozzle
+Place_100_1_2_39_6_3_Heat_block -> T(-2.687939 -26.250068 30.85) A(-90 0) A(180 2) Part_P048_Heat_block
+Place_101_1_2_39_6_4_Pneumatic_joint -> T(-2.687939 17.049932 26.85) A(90 0) A(-16.99130605 2) Part_P049_Pneumatic_joint
+Place_102_1_2_39_6_5_Nozzle_thermistor -> T(5.312061 -20.750068 29.35) A(58.19394137 0) A(90 1) Part_P050_Nozzle_thermistor
+Place_103_1_2_39_6_6_Heater -> T(7.312061 -21.250068 36.35) A(-34.25829533 0) A(-90 1) Part_P051_Heater
+Place_104_1_2_39_6_7_M3X16_Pan_Head_Screw -> T(4.312061 7.549932 35.5) A(90 0) A(21.21866672 1) A(-90 2) Part_P052_M3X16_Pan_Head_Screw
+Place_105_1_2_39_6_8_M3_Split_Washer -> T(4.312061 7.549932 33.85) A(90 0) A(-45.22115494 1) A(-180 2) Part_P012_M3_Split_Washer
+Place_106_1_2_39_6_9_M3x18_Flush_Head_Screw -> T(-9.687939 -8.854673 25.35) A(9.80537807 1) A(90 2) Part_P053_M3x18_Flush_Head_Screw
+Place_107_1_2_39_6_10_M3x18_Flush_Head_Screw -> T(4.312061 -8.854673 25.35) A(83.17491411 1) A(90 2) Part_P053_M3x18_Flush_Head_Screw
+Place_108_1_2_39_6_11_M3_Screw -> T(-2.687939 -26.250068 36.35) A(180 0) A(57.07118416 1) A(-180 2) Part_P054_M3_Screw
+Place_109_1_2_39_6_12_M3X16_Pan_Head_Screw -> T(-9.687939 7.549932 35.5) A(90 0) A(58.28601613 1) A(-90 2) Part_P052_M3X16_Pan_Head_Screw
+Place_110_1_2_39_6_13_M3_Split_Washer -> T(-9.687939 7.549932 33.85) A(90 0) A(-54.4989006 1) A(-180 2) Part_P012_M3_Split_Washer
+Place_111_1_2_39_6_14_M3_Screw -> T(-2.687939 -14.250068 33.35) A(90 0) A(55.16631899 1) A(-180 2) Part_P054_M3_Screw
+Place_112_1_2_39_7_1_Spacers_for_rollers -> T(-39.187939 20.099932 5.5) A(-1.6257543 2) Part_P019_Spacers_for_rollers
+Place_113_1_2_39_7_2_Rollers -> T(-53.67453 56.025392 13.45) A(-1.6257543 2) Part_P017_Rollers
+Place_114_1_2_39_7_3_M5X30_Pan_Head_Screw -> T(-39.187939 20.099932 19.1) A(90 0) A(67.94519339 1) A(-90 2) Part_P039_M5X30_Pan_Head_Screw
+Place_115_1_2_39_7_4_625pillow -> T(-39.187939 20.099932 -3) A(-90 0) A(-58.31700374 1) A(-90 2) Part_P021_625pillow
+Place_116_1_2_39_7_5_M5_Self_locking_nut -> T(-39.187939 20.099932 -9.02) A(180 0) A(-154.25824074 2) Part_P022_M5_Self_locking_nut
+Place_117_1_2_39_7_6_625pillow -> T(-39.187939 20.099932 3) A(-90 0) A(-58.31700374 1) A(-90 2) Part_P021_625pillow
+Place_118_1_2_39_8_1_Spacers_for_rollers -> T(0.812061 20.099932 5.5) A(-21.53729187 2) Part_P019_Spacers_for_rollers
+Place_119_1_2_39_8_2_Rollers -> T(-0.573422 58.811434 13.45) A(-21.53729187 2) Part_P017_Rollers
+Place_120_1_2_39_8_3_M5X30_Pan_Head_Screw -> T(0.812061 20.099932 19.1) A(90 0) A(48.03365581 1) A(-90 2) Part_P039_M5X30_Pan_Head_Screw
+Place_121_1_2_39_8_4_625pillow -> T(0.812061 20.099932 -3) A(-90 0) A(-38.40546616 1) A(-90 2) Part_P021_625pillow
+Place_122_1_2_39_8_5_M5_Self_locking_nut -> T(0.812061 20.099932 -9.02) A(180 0) A(-134.34670316 2) Part_P022_M5_Self_locking_nut
+Place_123_1_2_39_8_6_625pillow -> T(0.812061 20.099932 3) A(-90 0) A(-38.40546616 1) A(-90 2) Part_P021_625pillow
+Place_124_1_2_39_9_1_Rollers -> T(-58.367585 -16.69771 13.45) A(62.00096974 2) Part_P017_Rollers
+Place_125_1_2_39_9_2_Eccentric_column -> T(-19.187939 -20.100068 5.55) A(52.87806691 2) Part_P018_Eccentric_column
+Place_126_1_2_39_9_3_M5X30_Pan_Head_Screw -> T(-19.746086 -19.677609 -8.25) A(90 0) A(-74.54161598 1) A(90 2) Part_P039_M5X30_Pan_Head_Screw
+Place_127_1_2_39_9_4_M5_washer -> T(-19.746086 -19.677609 16.35) A(52.87806691 2) Part_P055_M5_washer
+Place_128_1_2_39_9_5_625pillow -> T(-19.746086 -19.677609 -3) A(90 0) A(-58.05627222 1) A(90 2) Part_P021_625pillow
+Place_129_1_2_39_9_6_625pillow -> T(-19.746086 -19.677609 3) A(90 0) A(-58.05627222 1) A(90 2) Part_P021_625pillow
+Place_130_1_2_39_9_7_M5_Self_locking_nut -> T(-19.746086 -19.677609 20.47) A(9.6730375 2) Part_P022_M5_Self_locking_nut
+Place_131_1_2_39_10_M2X8_Socket_Head_Screw -> T(15.70095 8.649932 18.35) A(51.62372922 0) A(180 2) Part_P056_M2X8_Socket_Head_Screw
+Place_132_1_2_39_11_M3X10_Pan_Head_Screw -> T(5.812061 -25.550068 45.9) A(90 0) A(-89.99450072 1) A(90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_133_1_2_39_12_M3X10_Pan_Head_Screw -> T(-26.187939 -25.550068 45.9) A(90 0) A(-80.87159789 1) A(90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_134_1_2_39_13_M3X10_Pan_Head_Screw -> T(-26.187939 6.449932 45.9) A(90 0) A(-73.55614293 1) A(90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_135_1_2_39_14_M3X10_Pan_Head_Screw -> T(5.812061 6.449932 45.9) A(90 0) A(-68.20771142 1) A(90 2) Part_P015_M3X10_Pan_Head_Screw
+Place_136_1_2_39_15_M3X6Pan_Head_Screw -> T(-20.687939 17.649932 18.8) A(90 0) A(58.8680979 1) A(-90 2) Part_P016_M3X6Pan_Head_Screw
+Place_137_1_2_39_16_M3X6Pan_Head_Screw -> T(-38.187939 -1.250068 18.8) A(90 0) A(-18.60922851 1) A(-90 2) Part_P016_M3X6Pan_Head_Screw
+Place_138_1_2_39_17_M2X8_Socket_Head_Screw -> T(18.50095 -26.350068 18.35) A(60.74663205 0) A(180 2) Part_P056_M2X8_Socket_Head_Screw
+Place_139_1_2_39_18_M2X8_Socket_Head_Screw -> T(18.50095 -26.350068 53.35) A(68.06208701 0) A(180 2) Part_P056_M2X8_Socket_Head_Screw
+Place_140_1_2_39_19_M2X8_Socket_Head_Screw -> T(15.70095 8.649932 53.35) A(73.41051852 0) A(180 2) Part_P056_M2X8_Socket_Head_Screw
+
+# REUSABLE PROCEDURAL PARTS — component dimensions live in the implementation calls.
+Part_P000_2020_profile -> [ AX_M000 ]
+Part_P001_Z_Stent -> [ AX_M001 ]
+Part_P002_X_motor_bracket -> [ AX_M002 ]
+Part_P003_42_34_motor -> [ PC_M003 ]
+Part_P004_z_nut -> [ HW_M004 ]
+Part_P005_E_motor_bracket -> [ AX_M005 ]
+Part_P006_X_limit_switch_bracket -> [ PC_M006 ]
+Part_P007_X_belt -> [ AX_M007 ]
+Part_P008_limit_switch -> [ PC_M008 ]
+Part_P009_2GT_pulley -> [ HW_M009 ]
+Part_P010_Copper_cover -> [ HW_M010 ]
+Part_P011_M4_Split_Washer -> [ HW_M011 ]
+Part_P012_M3_Split_Washer -> [ HW_M012 ]
+Part_P013_M4X16_Pan_Head_Screw -> [ HW_M013 ]
+Part_P014_M3X40_P -> [ HW_M014 ]
+Part_P015_M3X10_Pan_Head_Screw -> [ HW_M015 ]
+Part_P016_M3X6Pan_Head_Screw -> [ HW_M016 ]
+Part_P017_Rollers -> [ HW_M017 ]
+Part_P018_Eccentric_column -> [ HW_M018 ]
+Part_P019_Spacers_for_rollers -> [ HW_M019 ]
+Part_P020_M5X40_Pan_Head_Screw -> [ HW_M020 ]
+Part_P021_625pillow -> [ HW_M021 ]
+Part_P022_M5_Self_locking_nut -> [ HW_M022 ]
+Part_P023_40_42_motor -> [ PC_M023 ]
+Part_P024_624U_pillow -> [ HW_M024 ]
+Part_P025_M3X18_Socket_Head_Screw -> [ HW_M025 ]
+Part_P026_Extrusion_Spring -> [ PC_M026 ]
+Part_P027_E_gear -> [ HW_M027 ]
+Part_P028_E_housing_2 -> [ PC_M028 ]
+Part_P029_E_idler_tensioner -> [ PC_M029 ]
+Part_P030_M3X10_Flush_Head_Screw -> [ HW_M030 ]
+Part_P031_M6_Pneumatic_joint -> [ PC_M031 ]
+Part_P032_M4X8_Socket_Head_Screw -> [ HW_M032 ]
+Part_P033_X_Adjustment_Block -> [ AX_M033 ]
+Part_P034_M5_T_Slot_Nut -> [ HW_M034 ]
+Part_P035_M8X25_Pan_Head_Screw -> [ HW_M035 ]
+Part_P036_M8_Self_locking_nut -> [ HW_M036 ]
+Part_P037_M8_nut -> [ HW_M037 ]
+Part_P038_F688_pillow -> [ HW_M038 ]
+Part_P039_M5X30_Pan_Head_Screw -> [ HW_M039 ]
+Part_P040_M5_Split_Washer -> [ HW_M040 ]
+Part_P041_E_plate -> [ PC_M041 ]
+Part_P042_Cold_section_fan -> [ PC_M042 ]
+Part_P043_Fan_cover -> [ PC_M043 ]
+Part_P044_Nozzle_fan_duct -> [ PC_M044 ]
+Part_P045_Nozzle_fan -> [ PC_M045 ]
+Part_P046_Radiator -> [ PC_M046 ]
+Part_P047_nozzle -> [ PC_M047 ]
+Part_P048_Heat_block -> [ PC_M048 ]
+Part_P049_Pneumatic_joint -> [ PC_M049 ]
+Part_P050_Nozzle_thermistor -> [ PC_M050 ]
+Part_P051_Heater -> [ PC_M051 ]
+Part_P052_M3X16_Pan_Head_Screw -> [ HW_M052 ]
+Part_P053_M3x18_Flush_Head_Screw -> [ HW_M053 ]
+Part_P054_M3_Screw -> [ HW_M054 ]
+Part_P055_M5_washer -> [ HW_M055 ]
+Part_P056_M2X8_Socket_Head_Screw -> [ HW_M056 ]
+
+# PARAMETRIC SHAPE DEFINITIONS — all are reachable from the assembly.
+
+AX_M000 -> AX_Rail(345)
+
+AX_Rail(length) -> [ T(length/2 0 0) PG_TSlotRailX(length 20 6 11 5.6 4.1 6.8 1.5 4.2) ]
+
+AX_M001 -> AX_RightSupport(3)
+
+AX_RightSupport(thickness) ->
+    [ T(0 70.6652 0) A(90 0) [ T(150.496 47.244 0) I(HostedOpening(host(Polygon -11.37788249 10.756 -6.496 10.756 24.05926131 27.3737737 28.98661563 19.01439571 28.73960058 -19.76225638 22.92048809 -29.43249311 -8.496 -11.244 -11.01234464 -11.244) opening(Circle 3.4 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(210.1 82.377 0) I(HostedOpening(host(Polygon 12.6642 0.623 12.6642 -10.377 9.9 -18.377 9.8902686 -18.3915971 -30.61738437 -16.11860429 -35.54473869 -7.7592263 -9.1 6.623 0.0 9.5001 8.9 6.623) opening(Circle 2.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(210.1 11.377 0) I(HostedOpening(host(Polygon 12.6642 12.623 12.6642 -1.377 8.9 -8.377 0.0 -10.8403 -11.1 -8.377 -36.68351191 6.43450689 -30.86439942 16.10474362 9.57178801 18.3737263) opening(Circle 2.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(128.408 46.877 0) I(HostedOpening(host(Polygon -6.408 11.123 10.71011751 11.123 11.07565536 -10.877 -8.408 -10.877 -11.9998 -5.877 -11.9998 6.123) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(208.108 46.877 0) I(HostedOpening(host(Polygon 10.892 -15.877 11.56378801 -17.1262737 -28.87239942 -19.39525638 -28.62538437 19.38139571 11.8822686 17.1084029 7.892 11.123 7.892 -11.877) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] ]
+
+AX_M002 -> AX_LeftSupport(3)
+
+AX_LeftSupport(thickness) ->
+    [ [ T(0 0 0) I(HostedOpening(host(Polygon -0.0 -19.67830645 -19.67830645 -0.0 -0.0 19.67830645 17.33868852 2.33961793 17.33868852 -2.33961793) opening(Circle 11.5 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(15.4 35.5 0) I(HostedOpening(host(Polygon -18.4 -5.54975 -18.4 0.5 -7.4 10.5 -0.4 11.9963 4.6 8.5 8.6 0.5 8.6 -10.06475 -15.4 -10.18475) opening(Circle 2.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(15.4 -35.5 0) I(HostedOpening(host(Polygon 25.89352488 9.97828238 28.1 9.03975352 43.053887 -8.2730565 36.6 -11.5 -5.4 -11.5 -23.4 -10.5 -26.13390805 -6.39913793 -15.4 10.18475) opening(Circle 2.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(76.281 0.161 0) I(HostedOpening(host(Polygon 11.219 4.839 11.219 -5.161 6.719 -10.161 -4.281 -15.161 -9.88629297 -21.4669546 -10.13575153 9.18236061 7.719 8.839) opening(Circle 3.4 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(30.5 0 0) I(HostedOpening(host(Polygon 1.5 10.0 13.0 9.77884615 13.0 -26.46024648 10.79352488 -25.52171762 -13.16131148 -2.33961793 -13.16131148 2.33961793 -2.94763736 12.22381868) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(56.5 0 0) I(HostedOpening(host(Polygon -13.0 9.77884615 9.64524847 9.34336061 9.89470703 -21.3059546 7.5 -24.0 7.5 -36.0 3.5 -43.0 1.953887 -43.7730565 -13.0 -26.46024648) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(-15.5 -15.5 0) I(HostedOpening(host(Polygon 15.5 -4.17830645 15.5 -9.81525 4.76609195 -26.39913793 3.5 -24.5 3.5 -11.5 -4.5 -8.5 -6.7642 -3.5 -6.7642 15.5 -4.17830645 15.5) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(-15.5 15.5 0) I(HostedOpening(host(Polygon -6.7642 0.5 -3.5 6.5 2.5 9.5 12.5 11.5 12.5 14.45025 15.5 9.81525 15.5 4.17830645 -4.17830645 -15.5 -6.7642 -15.5) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(15.5 -15.5 0) I(HostedOpening(host(Polygon 1.83868852 13.16038207 25.79352488 -10.02171762 -15.5 -9.81525 -15.5 -4.17830645) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(15.5 15.5 0) I(HostedOpening(host(Polygon 12.05236264 -3.27618132 1.83868852 -13.16038207 -15.5 4.17830645 -15.5 9.81525 8.5 9.93525 8.5 4.5 10.5 -2.5) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] ]
+
+AX_M005 -> AX_ExtruderSupport(3)
+
+AX_ExtruderSupport(thickness) ->
+    [ T(0 0 -26.9-thickness) [ T(15.4 35.5 0) I(HostedOpening(host(Polygon 4.6 8.5 8.6 0.5 9.56791202 -16.9224163 -15.4 -27.54257042 -15.4 3.5 -7.4 10.5 -0.4 11.9999) opening(Circle 2.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(15.4 -35.5 0) I(HostedOpening(host(Polygon 10.6 -1.5 6.6 -9.5 -3.4 -11.4977 -12.4 -8.5 -15.4 -2.5 -15.4 27.54257042 12.80633444 15.54494648 10.6 11.5) opening(Circle 2.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(76.281 0.161 0) I(HostedOpening(host(Polygon 1.719 -10.161 -9.97210775 -10.92346355 -10.13756015 9.40457388 3.719 8.839 7.719 3.839 7.719 -4.161) opening(Circle 3.4 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(30.5 0 0) I(HostedOpening(host(Polygon 1.5 -13.0 -2.29366556 -19.95505352 -30.5 -7.95742958 -30.5 7.95742958 -5.53208798 18.5775837 -5.5 18.0 0.5 11.0 13.0 10.48979592 13.0 -12.25) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(56.5 0 0) I(HostedOpening(host(Polygon 9.64343985 9.56557388 9.80889225 -10.76246355 -13.0 -12.25 -13.0 10.48979592) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] ]
+    [ T(0 45 0) A(90 0) [ T(75.5 -59.4 0) I(HostedOpening(host(Polygon -17.5 -2.17830645 -17.5 0.48372642 -17.13490755 2.5433989 0.0 19.67830645 19.67830645 0.0 0.0 -19.67830645) opening(Circle 11.5 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(45.6 -44.4 0) I(HostedOpening(host(Polygon 8.26496456 -6.10347938 -8.18391323 -6.10347938 -7.6 -2.6 -4.6 3.4 -4.6 6.10347938 7.84111183 6.10347938) opening(Circle 5.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(45.6 -34.7 0) I(HostedOpening(host(Polygon 7.84111183 -3.59652062 -4.6 -3.59652062 -4.6 -1.3 -12.6 4.8 13.20555556 4.8) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(45.6 -54.1 0) I(HostedOpening(host(Polygon 8.26496456 3.59652062 12.76509245 -2.7566011 12.4 -4.81627358 12.4 -3.9 -5.6 -2.9 -8.6 1.1 -8.18391323 3.59652062) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(60 -43.9 0) I(HostedOpening(host(Polygon 15.5 4.17830645 -1.63490755 -12.9566011 -6.13503544 -6.60347938 -6.55888817 5.60347938 -1.19444444 14.0 15.5 14.0) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(91 -43.9 0) I(HostedOpening(host(Polygon -2.0 14.0 3.0 9.9 5.5 3.9 5.5 -15.5 4.17830645 -15.5 -15.5 4.17830645 -15.5 14.0) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(60 -74.9 0) I(HostedOpening(host(Polygon -2.0 13.32169355 15.5 -4.17830645 15.5 -5.5 2.0 -5.5 -2.0 -1.1) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(91 -74.9 0) I(HostedOpening(host(Polygon -15.5 -5.5 -15.5 -4.17830645 4.17830645 15.5 5.5 15.5 5.5 -0.1 0.0 -5.5) opening(Circle 1.65 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] ]
+
+AX_M033 -> AX_IdlerPlate(46.6438 20 3)
+
+AX_IdlerPlate(length height thickness) ->
+    [ T(-126.55 136.41075 138) A(90 1) A(90 2) S(length/46.6438 height/20 1)
+      [ T(-17.32475 0 0) I(HostedOpening(host(Polygon 1.89096484 -9.81169575 0.05255236 -9.25401942 -1.64173828 -8.3484022 -3.12679646 -7.12964646 -4.3455522 -5.64458828 -5.25116942 -3.95029764 -5.80884575 -2.11188516 -5.99715 -0.2 -5.99715 0.2 -5.80884575 2.11188516 -5.25116942 3.95029764 -4.3455522 5.64458828 -3.12679646 7.12964646 -1.64173828 8.3484022 0.05255236 9.25401942 1.89096484 9.81169575 3.80285 10.0 6.5 10.0 6.5 -10.0 3.80285 -10.0) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(-4.32475 0 0) I(HostedOpening(host(Polygon -6.5 -10.0 -6.5 10.0 7.00625 10.0 8.25625 -10.0) opening(Circle 2.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] [ T(11.67525 1 0) I(HostedOpening(host(Polygon 3.75853516 8.81169575 5.59694764 8.25401942 7.29123828 7.3484022 8.77629646 6.12964646 9.9950522 4.64458828 10.90066942 2.95029764 11.45834575 1.11188516 11.64665 -0.8 11.64665 -1.2 11.45834575 -3.11188516 10.90066942 -4.95029764 9.9950522 -6.64458828 8.77629646 -8.12964646 7.29123828 -9.3484022 5.59694764 -10.25401942 3.75853516 -10.81169575 1.84665 -11.0 -7.74375 -11.0 -8.99375 9.0 1.84665 9.0) opening(Circle 4.2 24) depth(thickness) cap(all)) material(blackmattemetal) 1 1) ] ]
+
+# Timing belt parameters: source local endpoints and upper mounting tabs.
+
+AX_M007 -> AX_TimingBelt(-265.6038 120.5883 -131.6121 0.5636 7.1 1.4 6 2 -119.4 -77.5)
+
+AX_TimingBelt(leftX rightX centreY zMin radius thickness width pitch leftEnd rightEnd) ->
+    [ T(leftX centreY+radius zMin) AX_BeltRun(leftEnd-leftX thickness width pitch -1) ]
+    [ T(rightEnd centreY+radius zMin) AX_BeltRun(rightX-rightEnd thickness width pitch -1) ]
+    [ T(leftX centreY-radius zMin) AX_BeltRun(rightX-leftX thickness width pitch 1) ]
+    [ T(leftX centreY zMin) A(180 2) AX_BeltArc(radius thickness width) ]
+    [ T(rightX centreY zMin) AX_BeltArc(radius thickness width) ]
+    [ T(leftEnd centreY+radius+7 zMin+width/2) S(thickness 14 width) I(Cube material(blackmatteplastic) 1 1) ]
+    [ T(rightEnd centreY+radius+7 zMin+width/2) S(thickness 14 width) I(Cube material(blackmatteplastic) 1 1) ]
+
+AX_BeltRun(length thickness width pitch side) ->
+    [ T(length/2 0 width/2) S(length thickness width) I(Cube material(blackmatteplastic) 1 1) ]
+    AX_BeltTeeth(length/pitch length thickness width pitch side)
+
+AX_BeltTeeth(count length thickness width pitch side) count ->
+    [ T((AX_BeltTeeth_count+0.5)*pitch side*(thickness/2+0.3) width/2)
+      S(1.05 0.65 width) I(Cube material(blackmatteplastic) 1 1) ]
+
+AX_BeltArc(radius thickness width) ->
+    [ I(Extrude(Polygon((radius+thickness/2)*cos(radians(-90)) (radius+thickness/2)*sin(radians(-90)) (radius+thickness/2)*cos(radians(-78.75)) (radius+thickness/2)*sin(radians(-78.75)) (radius+thickness/2)*cos(radians(-67.5)) (radius+thickness/2)*sin(radians(-67.5)) (radius+thickness/2)*cos(radians(-56.25)) (radius+thickness/2)*sin(radians(-56.25)) (radius+thickness/2)*cos(radians(-45)) (radius+thickness/2)*sin(radians(-45)) (radius+thickness/2)*cos(radians(-33.75)) (radius+thickness/2)*sin(radians(-33.75)) (radius+thickness/2)*cos(radians(-22.5)) (radius+thickness/2)*sin(radians(-22.5)) (radius+thickness/2)*cos(radians(-11.25)) (radius+thickness/2)*sin(radians(-11.25)) (radius+thickness/2)*cos(radians(0)) (radius+thickness/2)*sin(radians(0)) (radius+thickness/2)*cos(radians(11.25)) (radius+thickness/2)*sin(radians(11.25)) (radius+thickness/2)*cos(radians(22.5)) (radius+thickness/2)*sin(radians(22.5)) (radius+thickness/2)*cos(radians(33.75)) (radius+thickness/2)*sin(radians(33.75)) (radius+thickness/2)*cos(radians(45)) (radius+thickness/2)*sin(radians(45)) (radius+thickness/2)*cos(radians(56.25)) (radius+thickness/2)*sin(radians(56.25)) (radius+thickness/2)*cos(radians(67.5)) (radius+thickness/2)*sin(radians(67.5)) (radius+thickness/2)*cos(radians(78.75)) (radius+thickness/2)*sin(radians(78.75)) (radius+thickness/2)*cos(radians(90)) (radius+thickness/2)*sin(radians(90)) (radius-thickness/2)*cos(radians(90)) (radius-thickness/2)*sin(radians(90)) (radius-thickness/2)*cos(radians(78.75)) (radius-thickness/2)*sin(radians(78.75)) (radius-thickness/2)*cos(radians(67.5)) (radius-thickness/2)*sin(radians(67.5)) (radius-thickness/2)*cos(radians(56.25)) (radius-thickness/2)*sin(radians(56.25)) (radius-thickness/2)*cos(radians(45)) (radius-thickness/2)*sin(radians(45)) (radius-thickness/2)*cos(radians(33.75)) (radius-thickness/2)*sin(radians(33.75)) (radius-thickness/2)*cos(radians(22.5)) (radius-thickness/2)*sin(radians(22.5)) (radius-thickness/2)*cos(radians(11.25)) (radius-thickness/2)*sin(radians(11.25)) (radius-thickness/2)*cos(radians(0)) (radius-thickness/2)*sin(radians(0)) (radius-thickness/2)*cos(radians(-11.25)) (radius-thickness/2)*sin(radians(-11.25)) (radius-thickness/2)*cos(radians(-22.5)) (radius-thickness/2)*sin(radians(-22.5)) (radius-thickness/2)*cos(radians(-33.75)) (radius-thickness/2)*sin(radians(-33.75)) (radius-thickness/2)*cos(radians(-45)) (radius-thickness/2)*sin(radians(-45)) (radius-thickness/2)*cos(radians(-56.25)) (radius-thickness/2)*sin(radians(-56.25)) (radius-thickness/2)*cos(radians(-67.5)) (radius-thickness/2)*sin(radians(-67.5)) (radius-thickness/2)*cos(radians(-78.75)) (radius-thickness/2)*sin(radians(-78.75)) (radius-thickness/2)*cos(radians(-90)) (radius-thickness/2)*sin(radians(-90))) width) material(blackmatteplastic) 1 1) ]
+    AX_ArcTeeth(radius thickness width)
+
+AX_ArcTeeth(radius thickness width) 11 ->
+    [ A(-90+(AX_ArcTeeth_count+0.5)*180/11 2)
+      T(radius-thickness/2-0.3 0 width/2) S(0.65 1.05 width) I(Cube material(blackmatteplastic) 1 1) ]
+
+
+# Native procedural motors, extruder, carriage, fans and hotend.
+# Dimensions are millimetres; parent supplies one S(.001 .001 .001).
+# PC_Mnnn wrappers preserve the source component local frame.
+# No imported or embedded surface geometry is used.
+# Small features are dimensional reconstructions, not manufacturing-certified CAD.
+# Material codes: 0 dark metal, 1 steel, 2 plastic, 3 brass, 4 copper, 5 PCB.
+
+PC_EmitBox(m) ->
+    ?(m<0.5) I(Cube material(blackmattemetal) 1 1) :
+    ?(m<1.5) I(Cube material(silverbrushedmetal) 1 1) :
+    ?(m<2.5) I(Cube material(blackmatteplastic) 1 1) :
+    ?(m<3.5) I(Cube material(goldmetal) 1 1) :
+    ?(m<4.5) I(Cube material(coppermetal) 1 1) :
+    I(Cube material(greenmatteplastic) 1 1)
+
+PC_EmitRing(ratio sides m) ->
+    ?(m<0.5) I(Cylinder(radial(ratio 1) segments(sides 1)) material(blackmattemetal) 1 1) :
+    ?(m<1.5) I(Cylinder(radial(ratio 1) segments(sides 1)) material(silverbrushedmetal) 1 1) :
+    ?(m<2.5) I(Cylinder(radial(ratio 1) segments(sides 1)) material(blackmatteplastic) 1 1) :
+    ?(m<3.5) I(Cylinder(radial(ratio 1) segments(sides 1)) material(goldmetal) 1 1) :
+    ?(m<4.5) I(Cylinder(radial(ratio 1) segments(sides 1)) material(coppermetal) 1 1) :
+    I(Cylinder(radial(ratio 1) segments(sides 1)) material(greenmatteplastic) 1 1)
+
+PC_EmitChamfer(w h depth corner m) ->
+    ?(m<0.5) I(Extrude(ChamferRect(w h corner) depth) material(blackmattemetal) 1 1) :
+    ?(m<1.5) I(Extrude(ChamferRect(w h corner) depth) material(silverbrushedmetal) 1 1) :
+    ?(m<2.5) I(Extrude(ChamferRect(w h corner) depth) material(blackmatteplastic) 1 1) :
+    ?(m<3.5) I(Extrude(ChamferRect(w h corner) depth) material(goldmetal) 1 1) :
+    ?(m<4.5) I(Extrude(ChamferRect(w h corner) depth) material(coppermetal) 1 1) :
+    I(Extrude(ChamferRect(w h corner) depth) material(greenmatteplastic) 1 1)
+
+PC_EmitRound(w h depth radius m) ->
+    ?(m<0.5) I(Extrude(RoundedRect(w h radius 4) depth) material(blackmattemetal) 1 1) :
+    ?(m<1.5) I(Extrude(RoundedRect(w h radius 4) depth) material(silverbrushedmetal) 1 1) :
+    ?(m<2.5) I(Extrude(RoundedRect(w h radius 4) depth) material(blackmatteplastic) 1 1) :
+    ?(m<3.5) I(Extrude(RoundedRect(w h radius 4) depth) material(goldmetal) 1 1) :
+    ?(m<4.5) I(Extrude(RoundedRect(w h radius 4) depth) material(coppermetal) 1 1) :
+    I(Extrude(RoundedRect(w h radius 4) depth) material(greenmatteplastic) 1 1)
+
+PC_Box(w h depth m) -> [ S(w h depth) PC_EmitBox(m) ]
+
+PC_RingZ(od id height m sides) -> [ T(0 0 -height/2) A(90 0) S(od height od) PC_EmitRing(id/od sides m) ]
+
+PC_CylinderZ(d height m) -> PC_RingZ(d 0 height m 32)
+
+PC_ChamferZ(w h depth corner m) -> [ T(0 0 -depth/2) PC_EmitChamfer(w h depth corner m) ]
+
+PC_RoundZ(w h depth radius m) -> [ T(0 0 -depth/2) PC_EmitRound(w h depth radius m) ]
+
+# NEMA-size motor. Front mounting face is local Z=0; shaft points +Z.
+
+PC_MotorZ(face body shaft) ->
+    [ T(0 0 -body+2.5) PC_ChamferZ(face face 5 3 1) ]
+    [ T(0 0 -body/2) PC_ChamferZ(face-.6 face-.6 body-10 3 0) ]
+    [ T(0 0 -2.5) PC_ChamferZ(face face 5 3 1) ]
+    [ T(0 0 1) PC_RingZ(22 5 2 1 40) ]
+    [ T(0 0 shaft/2) PC_CylinderZ(5 shaft 1) ]
+    [ T(-face/2-4.35 0 -body/2) PC_Box(8.7 12 21 2) ]
+
+PC_M003 -> PC_MotorZ(42 33.75 20)
+
+PC_M023 -> [ T(75.500002 41.526432 -56.400003) A(-90 0) A(-90 2) PC_MotorZ(42 40 24) ]
+
+# Open switch/motor support bracket: triangular web, edge arms and bored bosses.
+# Source is a 42 x 42 x 34 open bracket, not a 42 mm solid block.
+
+PC_M006 ->
+    [ I(Extrude(Polygon(-21 -21 21 -21 -21 21) 1.8) material(blackmatteplastic) 1 1) ]
+    [ T(-19.5 0 17.9) PC_Box(3 42 32.2 2) ]
+    [ T(0 -19.5 17.9) PC_Box(42 3 32.2 2) ]
+    [ T(-15.5 15.5 17) PC_RingZ(8 3.2 34 2 24) ]
+    [ T(15.5 -15.5 17) PC_RingZ(8 3.2 34 2 24) ]
+    [ T(-15.5 -15.5 2.5) PC_RingZ(8 3.2 5 2 24) ]
+    [ T(15.5 15.5 2.5) PC_RingZ(8 3.2 5 2 24) ]
+    PC_BracketRibs
+
+PC_BracketRibs 4 ->
+    [ T(-14+PC_BracketRibs_count*7 -14+PC_BracketRibs_count*7 7) A(45 2) PC_Box(2.2 9 10 2) ]
+
+# PCB, microswitch body and actuating leaf. The board fixes the 26 x 20 envelope.
+
+PC_M008 ->
+    [ T(-1 0 -1) PC_ChamferZ(26 20 2 1 5) ]
+    [ T(-2 -2 5) PC_RoundZ(20 10 6 1 2) ]
+    [ T(-1 4.7 8.7) PC_Box(23 2 .6 1) ]
+    PC_SwitchContacts
+
+PC_SwitchContacts 3 ->
+    [ T(5+PC_SwitchContacts_count*2.5 6 3) PC_Box(1 5 6 1) ]
+
+# The helix uses an analytic SweepDisk; no spring force or plastic deformation model.
+
+PC_M026 -> [ T(0 0 8.55687) A(90 0) PC_SpringY(7.7 1.2 17.11374 7) ]
+
+# Local CAD frames of these two extruder parts contain a rotation.
+# The inverse rotations below reconstruct simple engineering axes.
+
+PC_M028 -> [ T(19.250256 -38.456863 4.640830) A(90 0) A(22.522674 1) PC_ExtruderHousing ]
+
+PC_ExtruderHousing ->
+    [ T(0 -7.6875 0) A(-90 0) I(HostedOpening(host(ChamferRect 42 42 3.51) opening(Circle 11.5 32) depth(4) cap(all)) material(blackmatteplastic) 1 1) ]
+    [ T(0 -3.6875 0) A(-90 0) I(HostedOpening(host(ChamferRect 42 42 3.51) opening(Circle 18.5 40) depth(11.375) cap(all)) material(blackmatteplastic) 1 1) ]
+    [ T(-15.5 1 -15.5) A(-90 0) PC_RingZ(9 3.2 13.375 2 24) ]
+    [ T(15.5 1 -15.5) A(-90 0) PC_RingZ(9 3.2 13.375 2 24) ]
+
+PC_M029 -> [ T(9.464841 -37.333834 6.399580) S(.847585 .990774 1) T(0 4.004868 0) A(90 0) A(27.137544 1) PC_ExtruderLever ]
+
+PC_ExtruderLever ->
+    [ T(6 5.42625 20) A(90 0) I(HostedOpening(host(Polygon -19.56027 -48.32825 -10 -48.32825 -10 -8 7.56027 -8 7.56027 8.32825 -19.56027 8.32825) opening(Circle 2.5 24) depth(3) cap(all)) material(blackmattemetal) 1 1) ]
+    [ T(6 0 20) A(-90 0) PC_RingZ(15 5 10.8525 0 32) ]
+    [ T(-9 1 -23) PC_Box(8 6 8 0) ]
+
+PC_M031 -> [ T(-184.511088 -57.600062 191.526435) A(90 1) PC_PneumaticSmallZ ]
+
+PC_PneumaticSmallZ ->
+    [ T(0 0 -5) PC_RingZ(6 4 5 1 32) ]
+    [ T(0 0 0) PC_RingZ(9.237604 4 5 1 6) ]
+    [ T(0 0 4) PC_RingZ(7.5 4 3 1 32) ]
+    [ T(0 0 6.25) PC_RingZ(8 4 2.5 2 32) ]
+
+# Carriage plate with wheel mounting bores and two folded rear belt tabs.
+
+PC_M041 ->
+    [ I(HostedOpening(host(Polygon -32 -25 -25 -32 25 -32 32 -25 32 25 25 32 -25 32 -32 25) opening(Circle 8 32) depth(2.5) cap(all)) material(blackmattemetal) 1 1) ]
+    [ T(-20 20.1 2.75) PC_RingZ(12 5.2 8.5 0 32) ]
+    [ T(20 20.1 2.75) PC_RingZ(12 5.2 8.5 0 32) ]
+    [ T(0 -20.1 2.75) PC_RingZ(12 7.2 8.5 0 32) ]
+    [ T(-22 -17.5 -10.2) PC_Box(3 5 20.4 0) ]
+    [ T(22 -17.5 -10.2) PC_Box(3 5 20.4 0) ]
+    [ T(-18 -17.5 -19.4) PC_Box(8 5 2 0) ]
+    [ T(18 -17.5 -19.4) PC_Box(8 5 2 0) ]
+
+# Axial fan: real annular opening, seven analytic blade polygons and three spokes.
+# Blade count and dimensions are editable construction parameters.
+
+PC_AxialFanZ(face depth blades) ->
+    [ T(0 0 -depth/2) I(HostedOpening(host(RoundedRect face face 2 4) opening(Circle face*.4375 40) depth(depth) cap(all)) material(blackmatteplastic) 1 1) ]
+    [ PC_CylinderZ(face*.30 depth*.65 2) ]
+    PC_FanBlades(face depth blades)
+    PC_FanSpokes(face depth)
+
+PC_FanBlades(face depth n) n ->
+    [ A(360*PC_FanBlades_count/n 2) T(0 0 -depth*.06) I(Extrude(Polygon(face*.13 -face*.045 face*.355 -face*.175 face*.422 -face*.08 face*.22 face*.06) depth*.12) material(blackmatteplastic) 1 1) ]
+
+PC_FanSpokes(face depth) 3 ->
+    [ A(120*PC_FanSpokes_count 2) T(face*.285 0 depth*.41) A(18 2) PC_Box(face*.30 face*.0375 depth*.10 2) ]
+
+PC_M042 -> [ T(246.666677 189.777784 -64.000005) A(90 1) PC_AxialFanZ(40 8.888885 7) ]
+
+PC_M045 -> [ T(108.191721 23.577509 -5.734341) A(55 0) PC_AxialFanZ(40 10 7) ]
+
+# Open-backed fan cover; both fan apertures are actual holes.
+
+PC_M043 ->
+    [ T(-1.5 .8 0) I(HostedOpening(host(Polygon -24 -22.9 33 -22.9 33 26 27 31.79767 -24 31.79767) opening(Circle 18.5 40) depth(.8) cap(all)) material(blackmatteplastic) 1 1) ]
+    [ T(-25.5 1.5 22.5) A(90 1) I(HostedOpening(host(Polygon -22.5 -23.6 22.5 -23.6 22.5 31.09767 -22.5 31.09767) opening(Circle 18.5 40) depth(.8) cap(all)) material(blackmatteplastic) 1 1) ]
+    [ T(-9 31.79767 31.5) A(-90 0) I(HostedOpening(host(Polygon -16.5 -13.5 40.5 -13.5 40.5 31.5 -16.5 31.5) opening(Circle 6 32) depth(.8) cap(all)) material(blackmatteplastic) 1 1) ]
+    [ T(31.1 5.248835 22.5) PC_Box(.8 54.69767 45 2) ]
+    [ T(3 27 42.5) PC_Box(57 9.2 5 2) ]
+
+# Hollow rectangular air channel. The source-specific wall curvature is simplified.
+
+PC_M044 ->
+    [ T(-20 .011278 -.225) A(90 1) I(HostedOpening(host(RoundedRect 9.65 9.977444 .8 4) opening(Rect 7.25 7.577444) depth(40) cap(all)) material(blackmatteplastic) 1 1) ]
+
+# Heatsink: ten 1 mm fins at 1.8 mm pitch, bored core and end blocks.
+
+PC_M046 ->
+    [ T(0 0 -4) I(HostedOpening(host(RoundedRect 12 20 2 4) opening(Circle 2 24) depth(5.6) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(0 0 9.9) PC_RingZ(8 4 27.8 1 32) ]
+    PC_HeatFins(10 1.8 1 12 20)
+    [ T(0 0 19.8) I(HostedOpening(host(RoundedRect 12 20 2 4) opening(Circle 2 24) depth(4) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+PC_HeatFins(n pitch thick w h) n ->
+    [ T(0 0 2.6+PC_HeatFins_count*pitch) I(HostedOpening(host(RoundedRect w h 2 4) opening(Circle 2 24) depth(thick) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+# Nozzle: a continuous revolved taper with a 0.4 mm outlet and drilled inner funnel.
+# Hex flats are a six-sided native radial cylinder; thread geometry is schematic.
+
+PC_M047 ->
+    [ A(90 0) I(Revolve(profile(Polygon 2.5 -5 3 -4.5 3 4 .45 8 .2 8 .2 7.2 1 6.4 1.5 -5) angle(0 360) segments(40) cap(all)) material(goldmetal) 1 1) ]
+    [ T(0 0 2) PC_RingZ(6.928204 3 4 3 6) ]
+
+# Heater block with a drilled nozzle passage.
+# Outer dimensions are source measured; cartridge bore and small threads are simplified.
+
+PC_M048 ->
+    [ I(HostedOpening(host(ChamferRect 20 20 .4) opening(Circle 3 32) depth(10) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+PC_M049 ->
+    [ T(0 0 -4) PC_RingZ(10.8 5.3 2 2 40) ]
+    [ T(0 0 -1.5) PC_RingZ(8.8 5.3 3 3 40) ]
+    [ T(0 0 2.75) PC_RingZ(11.547007 5.3 5.5 3 6) ]
+    [ T(0 0 8.5) PC_RingZ(8.6 5.3 6 3 40) ]
+
+PC_M050 -> [ T(0 0 2) PC_CylinderZ(2 4 0) ]
+
+PC_M051 ->
+    [ T(0 0 10) PC_CylinderZ(5.9 20 1) ]
+    [ T(-.75 0 -2.71) PC_CylinderZ(1.1 5.42 2) ]
+    [ T(.75 0 -2.71) PC_CylinderZ(1.1 5.42 2) ]
+
+
+# Continuous helix from a parametric centerline, not extracted source vertices.
+
+PC_SpringY(meanD wireD height turns) ->
+    [ I(SweepDisk(path(
+        meanD/2*cos(6.283185307179586*turns*0/96) -height/2+wireD/2+(height-wireD)*0/96 meanD/2*sin(6.283185307179586*turns*0/96)
+        meanD/2*cos(6.283185307179586*turns*1/96) -height/2+wireD/2+(height-wireD)*1/96 meanD/2*sin(6.283185307179586*turns*1/96)
+        meanD/2*cos(6.283185307179586*turns*2/96) -height/2+wireD/2+(height-wireD)*2/96 meanD/2*sin(6.283185307179586*turns*2/96)
+        meanD/2*cos(6.283185307179586*turns*3/96) -height/2+wireD/2+(height-wireD)*3/96 meanD/2*sin(6.283185307179586*turns*3/96)
+        meanD/2*cos(6.283185307179586*turns*4/96) -height/2+wireD/2+(height-wireD)*4/96 meanD/2*sin(6.283185307179586*turns*4/96)
+        meanD/2*cos(6.283185307179586*turns*5/96) -height/2+wireD/2+(height-wireD)*5/96 meanD/2*sin(6.283185307179586*turns*5/96)
+        meanD/2*cos(6.283185307179586*turns*6/96) -height/2+wireD/2+(height-wireD)*6/96 meanD/2*sin(6.283185307179586*turns*6/96)
+        meanD/2*cos(6.283185307179586*turns*7/96) -height/2+wireD/2+(height-wireD)*7/96 meanD/2*sin(6.283185307179586*turns*7/96)
+        meanD/2*cos(6.283185307179586*turns*8/96) -height/2+wireD/2+(height-wireD)*8/96 meanD/2*sin(6.283185307179586*turns*8/96)
+        meanD/2*cos(6.283185307179586*turns*9/96) -height/2+wireD/2+(height-wireD)*9/96 meanD/2*sin(6.283185307179586*turns*9/96)
+        meanD/2*cos(6.283185307179586*turns*10/96) -height/2+wireD/2+(height-wireD)*10/96 meanD/2*sin(6.283185307179586*turns*10/96)
+        meanD/2*cos(6.283185307179586*turns*11/96) -height/2+wireD/2+(height-wireD)*11/96 meanD/2*sin(6.283185307179586*turns*11/96)
+        meanD/2*cos(6.283185307179586*turns*12/96) -height/2+wireD/2+(height-wireD)*12/96 meanD/2*sin(6.283185307179586*turns*12/96)
+        meanD/2*cos(6.283185307179586*turns*13/96) -height/2+wireD/2+(height-wireD)*13/96 meanD/2*sin(6.283185307179586*turns*13/96)
+        meanD/2*cos(6.283185307179586*turns*14/96) -height/2+wireD/2+(height-wireD)*14/96 meanD/2*sin(6.283185307179586*turns*14/96)
+        meanD/2*cos(6.283185307179586*turns*15/96) -height/2+wireD/2+(height-wireD)*15/96 meanD/2*sin(6.283185307179586*turns*15/96)
+        meanD/2*cos(6.283185307179586*turns*16/96) -height/2+wireD/2+(height-wireD)*16/96 meanD/2*sin(6.283185307179586*turns*16/96)
+        meanD/2*cos(6.283185307179586*turns*17/96) -height/2+wireD/2+(height-wireD)*17/96 meanD/2*sin(6.283185307179586*turns*17/96)
+        meanD/2*cos(6.283185307179586*turns*18/96) -height/2+wireD/2+(height-wireD)*18/96 meanD/2*sin(6.283185307179586*turns*18/96)
+        meanD/2*cos(6.283185307179586*turns*19/96) -height/2+wireD/2+(height-wireD)*19/96 meanD/2*sin(6.283185307179586*turns*19/96)
+        meanD/2*cos(6.283185307179586*turns*20/96) -height/2+wireD/2+(height-wireD)*20/96 meanD/2*sin(6.283185307179586*turns*20/96)
+        meanD/2*cos(6.283185307179586*turns*21/96) -height/2+wireD/2+(height-wireD)*21/96 meanD/2*sin(6.283185307179586*turns*21/96)
+        meanD/2*cos(6.283185307179586*turns*22/96) -height/2+wireD/2+(height-wireD)*22/96 meanD/2*sin(6.283185307179586*turns*22/96)
+        meanD/2*cos(6.283185307179586*turns*23/96) -height/2+wireD/2+(height-wireD)*23/96 meanD/2*sin(6.283185307179586*turns*23/96)
+        meanD/2*cos(6.283185307179586*turns*24/96) -height/2+wireD/2+(height-wireD)*24/96 meanD/2*sin(6.283185307179586*turns*24/96)
+        meanD/2*cos(6.283185307179586*turns*25/96) -height/2+wireD/2+(height-wireD)*25/96 meanD/2*sin(6.283185307179586*turns*25/96)
+        meanD/2*cos(6.283185307179586*turns*26/96) -height/2+wireD/2+(height-wireD)*26/96 meanD/2*sin(6.283185307179586*turns*26/96)
+        meanD/2*cos(6.283185307179586*turns*27/96) -height/2+wireD/2+(height-wireD)*27/96 meanD/2*sin(6.283185307179586*turns*27/96)
+        meanD/2*cos(6.283185307179586*turns*28/96) -height/2+wireD/2+(height-wireD)*28/96 meanD/2*sin(6.283185307179586*turns*28/96)
+        meanD/2*cos(6.283185307179586*turns*29/96) -height/2+wireD/2+(height-wireD)*29/96 meanD/2*sin(6.283185307179586*turns*29/96)
+        meanD/2*cos(6.283185307179586*turns*30/96) -height/2+wireD/2+(height-wireD)*30/96 meanD/2*sin(6.283185307179586*turns*30/96)
+        meanD/2*cos(6.283185307179586*turns*31/96) -height/2+wireD/2+(height-wireD)*31/96 meanD/2*sin(6.283185307179586*turns*31/96)
+        meanD/2*cos(6.283185307179586*turns*32/96) -height/2+wireD/2+(height-wireD)*32/96 meanD/2*sin(6.283185307179586*turns*32/96)
+        meanD/2*cos(6.283185307179586*turns*33/96) -height/2+wireD/2+(height-wireD)*33/96 meanD/2*sin(6.283185307179586*turns*33/96)
+        meanD/2*cos(6.283185307179586*turns*34/96) -height/2+wireD/2+(height-wireD)*34/96 meanD/2*sin(6.283185307179586*turns*34/96)
+        meanD/2*cos(6.283185307179586*turns*35/96) -height/2+wireD/2+(height-wireD)*35/96 meanD/2*sin(6.283185307179586*turns*35/96)
+        meanD/2*cos(6.283185307179586*turns*36/96) -height/2+wireD/2+(height-wireD)*36/96 meanD/2*sin(6.283185307179586*turns*36/96)
+        meanD/2*cos(6.283185307179586*turns*37/96) -height/2+wireD/2+(height-wireD)*37/96 meanD/2*sin(6.283185307179586*turns*37/96)
+        meanD/2*cos(6.283185307179586*turns*38/96) -height/2+wireD/2+(height-wireD)*38/96 meanD/2*sin(6.283185307179586*turns*38/96)
+        meanD/2*cos(6.283185307179586*turns*39/96) -height/2+wireD/2+(height-wireD)*39/96 meanD/2*sin(6.283185307179586*turns*39/96)
+        meanD/2*cos(6.283185307179586*turns*40/96) -height/2+wireD/2+(height-wireD)*40/96 meanD/2*sin(6.283185307179586*turns*40/96)
+        meanD/2*cos(6.283185307179586*turns*41/96) -height/2+wireD/2+(height-wireD)*41/96 meanD/2*sin(6.283185307179586*turns*41/96)
+        meanD/2*cos(6.283185307179586*turns*42/96) -height/2+wireD/2+(height-wireD)*42/96 meanD/2*sin(6.283185307179586*turns*42/96)
+        meanD/2*cos(6.283185307179586*turns*43/96) -height/2+wireD/2+(height-wireD)*43/96 meanD/2*sin(6.283185307179586*turns*43/96)
+        meanD/2*cos(6.283185307179586*turns*44/96) -height/2+wireD/2+(height-wireD)*44/96 meanD/2*sin(6.283185307179586*turns*44/96)
+        meanD/2*cos(6.283185307179586*turns*45/96) -height/2+wireD/2+(height-wireD)*45/96 meanD/2*sin(6.283185307179586*turns*45/96)
+        meanD/2*cos(6.283185307179586*turns*46/96) -height/2+wireD/2+(height-wireD)*46/96 meanD/2*sin(6.283185307179586*turns*46/96)
+        meanD/2*cos(6.283185307179586*turns*47/96) -height/2+wireD/2+(height-wireD)*47/96 meanD/2*sin(6.283185307179586*turns*47/96)
+        meanD/2*cos(6.283185307179586*turns*48/96) -height/2+wireD/2+(height-wireD)*48/96 meanD/2*sin(6.283185307179586*turns*48/96)
+        meanD/2*cos(6.283185307179586*turns*49/96) -height/2+wireD/2+(height-wireD)*49/96 meanD/2*sin(6.283185307179586*turns*49/96)
+        meanD/2*cos(6.283185307179586*turns*50/96) -height/2+wireD/2+(height-wireD)*50/96 meanD/2*sin(6.283185307179586*turns*50/96)
+        meanD/2*cos(6.283185307179586*turns*51/96) -height/2+wireD/2+(height-wireD)*51/96 meanD/2*sin(6.283185307179586*turns*51/96)
+        meanD/2*cos(6.283185307179586*turns*52/96) -height/2+wireD/2+(height-wireD)*52/96 meanD/2*sin(6.283185307179586*turns*52/96)
+        meanD/2*cos(6.283185307179586*turns*53/96) -height/2+wireD/2+(height-wireD)*53/96 meanD/2*sin(6.283185307179586*turns*53/96)
+        meanD/2*cos(6.283185307179586*turns*54/96) -height/2+wireD/2+(height-wireD)*54/96 meanD/2*sin(6.283185307179586*turns*54/96)
+        meanD/2*cos(6.283185307179586*turns*55/96) -height/2+wireD/2+(height-wireD)*55/96 meanD/2*sin(6.283185307179586*turns*55/96)
+        meanD/2*cos(6.283185307179586*turns*56/96) -height/2+wireD/2+(height-wireD)*56/96 meanD/2*sin(6.283185307179586*turns*56/96)
+        meanD/2*cos(6.283185307179586*turns*57/96) -height/2+wireD/2+(height-wireD)*57/96 meanD/2*sin(6.283185307179586*turns*57/96)
+        meanD/2*cos(6.283185307179586*turns*58/96) -height/2+wireD/2+(height-wireD)*58/96 meanD/2*sin(6.283185307179586*turns*58/96)
+        meanD/2*cos(6.283185307179586*turns*59/96) -height/2+wireD/2+(height-wireD)*59/96 meanD/2*sin(6.283185307179586*turns*59/96)
+        meanD/2*cos(6.283185307179586*turns*60/96) -height/2+wireD/2+(height-wireD)*60/96 meanD/2*sin(6.283185307179586*turns*60/96)
+        meanD/2*cos(6.283185307179586*turns*61/96) -height/2+wireD/2+(height-wireD)*61/96 meanD/2*sin(6.283185307179586*turns*61/96)
+        meanD/2*cos(6.283185307179586*turns*62/96) -height/2+wireD/2+(height-wireD)*62/96 meanD/2*sin(6.283185307179586*turns*62/96)
+        meanD/2*cos(6.283185307179586*turns*63/96) -height/2+wireD/2+(height-wireD)*63/96 meanD/2*sin(6.283185307179586*turns*63/96)
+        meanD/2*cos(6.283185307179586*turns*64/96) -height/2+wireD/2+(height-wireD)*64/96 meanD/2*sin(6.283185307179586*turns*64/96)
+        meanD/2*cos(6.283185307179586*turns*65/96) -height/2+wireD/2+(height-wireD)*65/96 meanD/2*sin(6.283185307179586*turns*65/96)
+        meanD/2*cos(6.283185307179586*turns*66/96) -height/2+wireD/2+(height-wireD)*66/96 meanD/2*sin(6.283185307179586*turns*66/96)
+        meanD/2*cos(6.283185307179586*turns*67/96) -height/2+wireD/2+(height-wireD)*67/96 meanD/2*sin(6.283185307179586*turns*67/96)
+        meanD/2*cos(6.283185307179586*turns*68/96) -height/2+wireD/2+(height-wireD)*68/96 meanD/2*sin(6.283185307179586*turns*68/96)
+        meanD/2*cos(6.283185307179586*turns*69/96) -height/2+wireD/2+(height-wireD)*69/96 meanD/2*sin(6.283185307179586*turns*69/96)
+        meanD/2*cos(6.283185307179586*turns*70/96) -height/2+wireD/2+(height-wireD)*70/96 meanD/2*sin(6.283185307179586*turns*70/96)
+        meanD/2*cos(6.283185307179586*turns*71/96) -height/2+wireD/2+(height-wireD)*71/96 meanD/2*sin(6.283185307179586*turns*71/96)
+        meanD/2*cos(6.283185307179586*turns*72/96) -height/2+wireD/2+(height-wireD)*72/96 meanD/2*sin(6.283185307179586*turns*72/96)
+        meanD/2*cos(6.283185307179586*turns*73/96) -height/2+wireD/2+(height-wireD)*73/96 meanD/2*sin(6.283185307179586*turns*73/96)
+        meanD/2*cos(6.283185307179586*turns*74/96) -height/2+wireD/2+(height-wireD)*74/96 meanD/2*sin(6.283185307179586*turns*74/96)
+        meanD/2*cos(6.283185307179586*turns*75/96) -height/2+wireD/2+(height-wireD)*75/96 meanD/2*sin(6.283185307179586*turns*75/96)
+        meanD/2*cos(6.283185307179586*turns*76/96) -height/2+wireD/2+(height-wireD)*76/96 meanD/2*sin(6.283185307179586*turns*76/96)
+        meanD/2*cos(6.283185307179586*turns*77/96) -height/2+wireD/2+(height-wireD)*77/96 meanD/2*sin(6.283185307179586*turns*77/96)
+        meanD/2*cos(6.283185307179586*turns*78/96) -height/2+wireD/2+(height-wireD)*78/96 meanD/2*sin(6.283185307179586*turns*78/96)
+        meanD/2*cos(6.283185307179586*turns*79/96) -height/2+wireD/2+(height-wireD)*79/96 meanD/2*sin(6.283185307179586*turns*79/96)
+        meanD/2*cos(6.283185307179586*turns*80/96) -height/2+wireD/2+(height-wireD)*80/96 meanD/2*sin(6.283185307179586*turns*80/96)
+        meanD/2*cos(6.283185307179586*turns*81/96) -height/2+wireD/2+(height-wireD)*81/96 meanD/2*sin(6.283185307179586*turns*81/96)
+        meanD/2*cos(6.283185307179586*turns*82/96) -height/2+wireD/2+(height-wireD)*82/96 meanD/2*sin(6.283185307179586*turns*82/96)
+        meanD/2*cos(6.283185307179586*turns*83/96) -height/2+wireD/2+(height-wireD)*83/96 meanD/2*sin(6.283185307179586*turns*83/96)
+        meanD/2*cos(6.283185307179586*turns*84/96) -height/2+wireD/2+(height-wireD)*84/96 meanD/2*sin(6.283185307179586*turns*84/96)
+        meanD/2*cos(6.283185307179586*turns*85/96) -height/2+wireD/2+(height-wireD)*85/96 meanD/2*sin(6.283185307179586*turns*85/96)
+        meanD/2*cos(6.283185307179586*turns*86/96) -height/2+wireD/2+(height-wireD)*86/96 meanD/2*sin(6.283185307179586*turns*86/96)
+        meanD/2*cos(6.283185307179586*turns*87/96) -height/2+wireD/2+(height-wireD)*87/96 meanD/2*sin(6.283185307179586*turns*87/96)
+        meanD/2*cos(6.283185307179586*turns*88/96) -height/2+wireD/2+(height-wireD)*88/96 meanD/2*sin(6.283185307179586*turns*88/96)
+        meanD/2*cos(6.283185307179586*turns*89/96) -height/2+wireD/2+(height-wireD)*89/96 meanD/2*sin(6.283185307179586*turns*89/96)
+        meanD/2*cos(6.283185307179586*turns*90/96) -height/2+wireD/2+(height-wireD)*90/96 meanD/2*sin(6.283185307179586*turns*90/96)
+        meanD/2*cos(6.283185307179586*turns*91/96) -height/2+wireD/2+(height-wireD)*91/96 meanD/2*sin(6.283185307179586*turns*91/96)
+        meanD/2*cos(6.283185307179586*turns*92/96) -height/2+wireD/2+(height-wireD)*92/96 meanD/2*sin(6.283185307179586*turns*92/96)
+        meanD/2*cos(6.283185307179586*turns*93/96) -height/2+wireD/2+(height-wireD)*93/96 meanD/2*sin(6.283185307179586*turns*93/96)
+        meanD/2*cos(6.283185307179586*turns*94/96) -height/2+wireD/2+(height-wireD)*94/96 meanD/2*sin(6.283185307179586*turns*94/96)
+        meanD/2*cos(6.283185307179586*turns*95/96) -height/2+wireD/2+(height-wireD)*95/96 meanD/2*sin(6.283185307179586*turns*95/96)
+        meanD/2*cos(6.283185307179586*turns*96/96) -height/2+wireD/2+(height-wireD)*96/96 meanD/2*sin(6.283185307179586*turns*96/96)) up(0 1 0) radius(wireD/2) radialSegments(8) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+
+# NATIVE PROCEDURAL HARDWARE — dimensions are millimetres.
+# Caller supplies one root S(0.001 0.001 0.001).
+# Analytic cylinders, radial profiles, genuine bores, spheres and swept helices.
+# All screw-thread ridges have round preview cross-sections, not ISO flank forms.
+# Modelled nominal bores/clearances are visual parameters, not certified fits.
+
+HW_Cylinder(d h) -> [ S(d h d) I(Cylinder(segments(32 1)) material(silverbrushedmetal) 1 1) ]
+
+HW_Ring(od id h) -> [ S(od h od) I(Cylinder(radial(id/od 1) segments(48 1)) material(silverbrushedmetal) 1 1) ]
+
+HW_DarkRing(od id h) -> [ S(od h od) I(Cylinder(radial(id/od 1) segments(48 1)) material(graymattemetal) 1 1) ]
+
+HW_BlackRing(od id h) -> [ S(od h od) I(Cylinder(radial(id/od 1) segments(48 1)) material(blackmatteplastic) 1 1) ]
+
+HW_CopperRing(od id h) -> [ S(od h od) I(Cylinder(radial(id/od 1) segments(48 1)) material(coppermetal) 1 1) ]
+
+HW_GoldRing(od id h) -> [ S(od h od) I(Cylinder(radial(id/od 1) segments(48 1)) material(goldmetal) 1 1) ]
+
+HW_SplitWasher(od id h) -> [ S(od h od) I(Cylinder(radial(id/od 1) azimuth(4 356) segments(48 1)) material(silverbrushedmetal) 1 1) ]
+
+# Hexagonal exterior with a genuinely circular through-bore.
+
+HW_HexNut(flat bore h) -> [ A(-90 0) I(HostedOpening(host(Polygon flat/sqrt(3) 0 flat/(2*sqrt(3)) flat/2 -flat/(2*sqrt(3)) flat/2 -flat/sqrt(3) 0 -flat/(2*sqrt(3)) -flat/2 flat/(2*sqrt(3)) -flat/2) opening(Circle bore/2 32) depth(h) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+HW_LockNut(flat bore h) -> [ HW_HexNut(flat bore h*0.72) ] [ T(0 h*0.72 0) HW_Ring(flat*0.96 bore h*0.28) ] [ T(0 h*0.94 0) HW_BlackRing(flat*0.82 bore h*0.06) ]
+
+# Low polygon spheres inside separate inner and outer races; shields close the faces.
+
+HW_Bearing(od bore h count ballD) -> [ HW_Ring(od od*0.78 h) ] [ HW_Ring(bore*1.6 bore h) ] [ T(0 h/2 0) HW_BearingBalls((od*0.78+bore*1.6)/4 ballD count) ] [ T(0 h*0.025 0) HW_DarkRing(od*0.91 bore*1.25 h*0.045) ] [ T(0 h*0.93 0) HW_DarkRing(od*0.91 bore*1.25 h*0.045) ]
+
+HW_BearingBalls(r d n) n -> [ A(HW_BearingBalls_count*360/n 1) T(r 0 0) S(d d d) I(Sphere(segments(12 8)) material(silverbrushedmetal) 1 1) ]
+
+# Two chamfered V-slot running faces and a central web between 16 mm bearing seats.
+
+HW_VWheel(od width seat web) -> [ I(Revolve(profile(Polygon seat/2+0.1 0 10 0 od/2 2.05 od/2 width-2.05 10 width seat/2+0.1 width seat/2 width-0.1 seat/2 width/2+0.5 web/2 width/2+0.4 web/2 width/2-0.4 seat/2 width/2-0.5 seat/2 0.1) angle(0 360) segments(64) cap(all)) material(blackmatteplastic) 1 1) ]
+
+HW_PanHead(d h socketD) -> [ I(Revolve(profile(Polygon socketD/2 0 d*0.36 0 d*0.47 h*0.30 d/2 h*0.65 d/2 h socketD/2 h) angle(0 360) segments(32) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 h*0.68 0) HW_Cylinder(d*0.5 h*0.32) ]
+
+HW_SocketHead(d h flat) -> [ A(-90 0) I(HostedOpening(host(Circle d/2 32) opening(Polygon flat/sqrt(3) 0 flat/(2*sqrt(3)) flat/2 -flat/(2*sqrt(3)) flat/2 -flat/sqrt(3) 0 -flat/(2*sqrt(3)) -flat/2 flat/(2*sqrt(3)) -flat/2) depth(h) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 h*0.65 0) HW_Cylinder(d*0.75 h*0.35) ]
+
+HW_CounterHead(d h shaft socketD) -> [ I(Revolve(profile(Polygon socketD/2 0 d/2 0 shaft/2 h socketD/2 h) angle(0 360) segments(32) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+HW_PanScrew(d length hd hh pitch) -> [ HW_PanHead(hd hh d*0.8) ] [ T(0 hh 0) HW_ThreadedShaft(d length pitch) ]
+
+HW_SocketScrew(d length hd hh pitch) -> [ HW_SocketHead(hd hh d*0.8) ] [ T(0 hh 0) HW_ThreadedShaft(d length pitch) ]
+
+HW_CountersunkScrew(d total hd hh pitch) -> [ HW_CounterHead(hd hh d d*0.65) ] [ T(0 hh 0) HW_ThreadedShaft(d total-hh pitch) ]
+
+HW_ThreadedShaft(d length pitch) -> [ HW_Cylinder(d-pitch*0.52 length) ] [ HW_ThreadTurns(d length pitch floor((length-pitch*0.26)/pitch)) ]
+
+HW_ThreadTurns(d length pitch n) n -> [ T(0 pitch*0.13+HW_ThreadTurns_count*pitch 0) HW_HelixTurn(d pitch) ]
+
+HW_HelixTurn(d pitch) -> [ I(SweepDisk(path((d/2-pitch*0.13)*cos(6.283185307179586*0/12) pitch*0/12 (d/2-pitch*0.13)*sin(6.283185307179586*0/12) (d/2-pitch*0.13)*cos(6.283185307179586*1/12) pitch*1/12 (d/2-pitch*0.13)*sin(6.283185307179586*1/12) (d/2-pitch*0.13)*cos(6.283185307179586*2/12) pitch*2/12 (d/2-pitch*0.13)*sin(6.283185307179586*2/12) (d/2-pitch*0.13)*cos(6.283185307179586*3/12) pitch*3/12 (d/2-pitch*0.13)*sin(6.283185307179586*3/12) (d/2-pitch*0.13)*cos(6.283185307179586*4/12) pitch*4/12 (d/2-pitch*0.13)*sin(6.283185307179586*4/12) (d/2-pitch*0.13)*cos(6.283185307179586*5/12) pitch*5/12 (d/2-pitch*0.13)*sin(6.283185307179586*5/12) (d/2-pitch*0.13)*cos(6.283185307179586*6/12) pitch*6/12 (d/2-pitch*0.13)*sin(6.283185307179586*6/12) (d/2-pitch*0.13)*cos(6.283185307179586*7/12) pitch*7/12 (d/2-pitch*0.13)*sin(6.283185307179586*7/12) (d/2-pitch*0.13)*cos(6.283185307179586*8/12) pitch*8/12 (d/2-pitch*0.13)*sin(6.283185307179586*8/12) (d/2-pitch*0.13)*cos(6.283185307179586*9/12) pitch*9/12 (d/2-pitch*0.13)*sin(6.283185307179586*9/12) (d/2-pitch*0.13)*cos(6.283185307179586*10/12) pitch*10/12 (d/2-pitch*0.13)*sin(6.283185307179586*10/12) (d/2-pitch*0.13)*cos(6.283185307179586*11/12) pitch*11/12 (d/2-pitch*0.13)*sin(6.283185307179586*11/12) (d/2-pitch*0.13)*cos(6.283185307179586*12/12) pitch*12/12 (d/2-pitch*0.13)*sin(6.283185307179586*12/12)) radius(pitch*0.13) longitudinalSegments(12) radialSegments(6) cap(none)) material(silverbrushedmetal) 1 1) ]
+
+
+# GT2 preview: hub, two flanges, 5 mm bore and twenty positive tooth ribs.
+
+HW_Pulley20 -> [ I(Revolve(profile(Polygon 2.5 0 7 0 7.5 0.5 7.5 7 7 7.5 5.30 7.5 5.30 15.5 7.5 15.5 7.5 16 4 16 4 15.5 2.5 15.5) angle(0 360) segments(64) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 7.5 0) HW_PulleyTeeth(20 5.70 8 0.82 0.78) ]
+
+HW_PulleyTeeth(n radius height radialDepth toothWidth) n -> [ A(HW_PulleyTeeth_count*360/n 1) T(radius height/2 0) S(radialDepth height toothWidth) I(Cube material(silverbrushedmetal) 1 1) ]
+
+# U groove, clear centre bore and face races of the extruder guide bearing.
+
+HW_UBearing -> [ I(Revolve(profile(Polygon 2 0 6.5 0 6.5 0.8 5.8 1.35 5.5 1.8 5.5 2.2 5.8 2.65 6.5 3.2 6.5 4 2 4) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 0.05 0) HW_DarkRing(10.2 5.4 0.15) ] [ T(0 3.8 0) HW_DarkRing(10.2 5.4 0.15) ]
+
+HW_Flanged688 -> [ I(Revolve(profile(Polygon 4 0 9 0 9 1 8 1 8 5 4 5) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 0.1 0) HW_DarkRing(15.2 9.2 0.12) ] [ T(0 4.78 0) HW_DarkRing(15.2 9.2 0.12) ]
+
+# Hobbed drive gear: a neck, a concave grip band and repeated shallow ribs.
+
+HW_ExtruderGear -> [ I(Revolve(profile(Polygon 2.5 0 4.5 0 4.5 3.9 5.475 3.9 5.475 5.4 5.0 7.4 5.475 9.4 5.475 10.9 2.5 10.9) angle(0 360) segments(64) cap(all)) material(goldmetal) 1 1) ] [ T(0 6.15 0) HW_HobRibs(28 5.06 2.5 0.22 0.2) ]
+
+HW_HobRibs(n r length depth width) n -> [ A(HW_HobRibs_count*360/n 1) T(r length/2 0) S(depth length width) I(Cube material(goldmetal) 1 1) ]
+
+# A continuous offset 5 mm bore passes through all three axial sections.
+
+HW_Eccentric -> [ A(-90 0) I(HostedOpening(host(Polygon 5.773503 0 2.886751 5 -2.886751 5 -5.773503 0 -2.886751 -5 2.886751 -5) opening(Polygon 0.7+2.5*cos(6.283185307179586*0/32) 0+2.5*sin(6.283185307179586*0/32) 0.7+2.5*cos(6.283185307179586*1/32) 0+2.5*sin(6.283185307179586*1/32) 0.7+2.5*cos(6.283185307179586*2/32) 0+2.5*sin(6.283185307179586*2/32) 0.7+2.5*cos(6.283185307179586*3/32) 0+2.5*sin(6.283185307179586*3/32) 0.7+2.5*cos(6.283185307179586*4/32) 0+2.5*sin(6.283185307179586*4/32) 0.7+2.5*cos(6.283185307179586*5/32) 0+2.5*sin(6.283185307179586*5/32) 0.7+2.5*cos(6.283185307179586*6/32) 0+2.5*sin(6.283185307179586*6/32) 0.7+2.5*cos(6.283185307179586*7/32) 0+2.5*sin(6.283185307179586*7/32) 0.7+2.5*cos(6.283185307179586*8/32) 0+2.5*sin(6.283185307179586*8/32) 0.7+2.5*cos(6.283185307179586*9/32) 0+2.5*sin(6.283185307179586*9/32) 0.7+2.5*cos(6.283185307179586*10/32) 0+2.5*sin(6.283185307179586*10/32) 0.7+2.5*cos(6.283185307179586*11/32) 0+2.5*sin(6.283185307179586*11/32) 0.7+2.5*cos(6.283185307179586*12/32) 0+2.5*sin(6.283185307179586*12/32) 0.7+2.5*cos(6.283185307179586*13/32) 0+2.5*sin(6.283185307179586*13/32) 0.7+2.5*cos(6.283185307179586*14/32) 0+2.5*sin(6.283185307179586*14/32) 0.7+2.5*cos(6.283185307179586*15/32) 0+2.5*sin(6.283185307179586*15/32) 0.7+2.5*cos(6.283185307179586*16/32) 0+2.5*sin(6.283185307179586*16/32) 0.7+2.5*cos(6.283185307179586*17/32) 0+2.5*sin(6.283185307179586*17/32) 0.7+2.5*cos(6.283185307179586*18/32) 0+2.5*sin(6.283185307179586*18/32) 0.7+2.5*cos(6.283185307179586*19/32) 0+2.5*sin(6.283185307179586*19/32) 0.7+2.5*cos(6.283185307179586*20/32) 0+2.5*sin(6.283185307179586*20/32) 0.7+2.5*cos(6.283185307179586*21/32) 0+2.5*sin(6.283185307179586*21/32) 0.7+2.5*cos(6.283185307179586*22/32) 0+2.5*sin(6.283185307179586*22/32) 0.7+2.5*cos(6.283185307179586*23/32) 0+2.5*sin(6.283185307179586*23/32) 0.7+2.5*cos(6.283185307179586*24/32) 0+2.5*sin(6.283185307179586*24/32) 0.7+2.5*cos(6.283185307179586*25/32) 0+2.5*sin(6.283185307179586*25/32) 0.7+2.5*cos(6.283185307179586*26/32) 0+2.5*sin(6.283185307179586*26/32) 0.7+2.5*cos(6.283185307179586*27/32) 0+2.5*sin(6.283185307179586*27/32) 0.7+2.5*cos(6.283185307179586*28/32) 0+2.5*sin(6.283185307179586*28/32) 0.7+2.5*cos(6.283185307179586*29/32) 0+2.5*sin(6.283185307179586*29/32) 0.7+2.5*cos(6.283185307179586*30/32) 0+2.5*sin(6.283185307179586*30/32) 0.7+2.5*cos(6.283185307179586*31/32) 0+2.5*sin(6.283185307179586*31/32)) depth(7.85) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 7.85 0) A(-90 0) I(HostedOpening(host(Circle 3.6 32) opening(Polygon 0.7+2.5*cos(6.283185307179586*0/32) 0+2.5*sin(6.283185307179586*0/32) 0.7+2.5*cos(6.283185307179586*1/32) 0+2.5*sin(6.283185307179586*1/32) 0.7+2.5*cos(6.283185307179586*2/32) 0+2.5*sin(6.283185307179586*2/32) 0.7+2.5*cos(6.283185307179586*3/32) 0+2.5*sin(6.283185307179586*3/32) 0.7+2.5*cos(6.283185307179586*4/32) 0+2.5*sin(6.283185307179586*4/32) 0.7+2.5*cos(6.283185307179586*5/32) 0+2.5*sin(6.283185307179586*5/32) 0.7+2.5*cos(6.283185307179586*6/32) 0+2.5*sin(6.283185307179586*6/32) 0.7+2.5*cos(6.283185307179586*7/32) 0+2.5*sin(6.283185307179586*7/32) 0.7+2.5*cos(6.283185307179586*8/32) 0+2.5*sin(6.283185307179586*8/32) 0.7+2.5*cos(6.283185307179586*9/32) 0+2.5*sin(6.283185307179586*9/32) 0.7+2.5*cos(6.283185307179586*10/32) 0+2.5*sin(6.283185307179586*10/32) 0.7+2.5*cos(6.283185307179586*11/32) 0+2.5*sin(6.283185307179586*11/32) 0.7+2.5*cos(6.283185307179586*12/32) 0+2.5*sin(6.283185307179586*12/32) 0.7+2.5*cos(6.283185307179586*13/32) 0+2.5*sin(6.283185307179586*13/32) 0.7+2.5*cos(6.283185307179586*14/32) 0+2.5*sin(6.283185307179586*14/32) 0.7+2.5*cos(6.283185307179586*15/32) 0+2.5*sin(6.283185307179586*15/32) 0.7+2.5*cos(6.283185307179586*16/32) 0+2.5*sin(6.283185307179586*16/32) 0.7+2.5*cos(6.283185307179586*17/32) 0+2.5*sin(6.283185307179586*17/32) 0.7+2.5*cos(6.283185307179586*18/32) 0+2.5*sin(6.283185307179586*18/32) 0.7+2.5*cos(6.283185307179586*19/32) 0+2.5*sin(6.283185307179586*19/32) 0.7+2.5*cos(6.283185307179586*20/32) 0+2.5*sin(6.283185307179586*20/32) 0.7+2.5*cos(6.283185307179586*21/32) 0+2.5*sin(6.283185307179586*21/32) 0.7+2.5*cos(6.283185307179586*22/32) 0+2.5*sin(6.283185307179586*22/32) 0.7+2.5*cos(6.283185307179586*23/32) 0+2.5*sin(6.283185307179586*23/32) 0.7+2.5*cos(6.283185307179586*24/32) 0+2.5*sin(6.283185307179586*24/32) 0.7+2.5*cos(6.283185307179586*25/32) 0+2.5*sin(6.283185307179586*25/32) 0.7+2.5*cos(6.283185307179586*26/32) 0+2.5*sin(6.283185307179586*26/32) 0.7+2.5*cos(6.283185307179586*27/32) 0+2.5*sin(6.283185307179586*27/32) 0.7+2.5*cos(6.283185307179586*28/32) 0+2.5*sin(6.283185307179586*28/32) 0.7+2.5*cos(6.283185307179586*29/32) 0+2.5*sin(6.283185307179586*29/32) 0.7+2.5*cos(6.283185307179586*30/32) 0+2.5*sin(6.283185307179586*30/32) 0.7+2.5*cos(6.283185307179586*31/32) 0+2.5*sin(6.283185307179586*31/32)) depth(2.4) cap(all)) material(silverbrushedmetal) 1 1) ] [ T(0 -0.5 0) A(-90 0) I(HostedOpening(host(Circle 4.3 32) opening(Polygon 0.7+2.5*cos(6.283185307179586*0/32) 0+2.5*sin(6.283185307179586*0/32) 0.7+2.5*cos(6.283185307179586*1/32) 0+2.5*sin(6.283185307179586*1/32) 0.7+2.5*cos(6.283185307179586*2/32) 0+2.5*sin(6.283185307179586*2/32) 0.7+2.5*cos(6.283185307179586*3/32) 0+2.5*sin(6.283185307179586*3/32) 0.7+2.5*cos(6.283185307179586*4/32) 0+2.5*sin(6.283185307179586*4/32) 0.7+2.5*cos(6.283185307179586*5/32) 0+2.5*sin(6.283185307179586*5/32) 0.7+2.5*cos(6.283185307179586*6/32) 0+2.5*sin(6.283185307179586*6/32) 0.7+2.5*cos(6.283185307179586*7/32) 0+2.5*sin(6.283185307179586*7/32) 0.7+2.5*cos(6.283185307179586*8/32) 0+2.5*sin(6.283185307179586*8/32) 0.7+2.5*cos(6.283185307179586*9/32) 0+2.5*sin(6.283185307179586*9/32) 0.7+2.5*cos(6.283185307179586*10/32) 0+2.5*sin(6.283185307179586*10/32) 0.7+2.5*cos(6.283185307179586*11/32) 0+2.5*sin(6.283185307179586*11/32) 0.7+2.5*cos(6.283185307179586*12/32) 0+2.5*sin(6.283185307179586*12/32) 0.7+2.5*cos(6.283185307179586*13/32) 0+2.5*sin(6.283185307179586*13/32) 0.7+2.5*cos(6.283185307179586*14/32) 0+2.5*sin(6.283185307179586*14/32) 0.7+2.5*cos(6.283185307179586*15/32) 0+2.5*sin(6.283185307179586*15/32) 0.7+2.5*cos(6.283185307179586*16/32) 0+2.5*sin(6.283185307179586*16/32) 0.7+2.5*cos(6.283185307179586*17/32) 0+2.5*sin(6.283185307179586*17/32) 0.7+2.5*cos(6.283185307179586*18/32) 0+2.5*sin(6.283185307179586*18/32) 0.7+2.5*cos(6.283185307179586*19/32) 0+2.5*sin(6.283185307179586*19/32) 0.7+2.5*cos(6.283185307179586*20/32) 0+2.5*sin(6.283185307179586*20/32) 0.7+2.5*cos(6.283185307179586*21/32) 0+2.5*sin(6.283185307179586*21/32) 0.7+2.5*cos(6.283185307179586*22/32) 0+2.5*sin(6.283185307179586*22/32) 0.7+2.5*cos(6.283185307179586*23/32) 0+2.5*sin(6.283185307179586*23/32) 0.7+2.5*cos(6.283185307179586*24/32) 0+2.5*sin(6.283185307179586*24/32) 0.7+2.5*cos(6.283185307179586*25/32) 0+2.5*sin(6.283185307179586*25/32) 0.7+2.5*cos(6.283185307179586*26/32) 0+2.5*sin(6.283185307179586*26/32) 0.7+2.5*cos(6.283185307179586*27/32) 0+2.5*sin(6.283185307179586*27/32) 0.7+2.5*cos(6.283185307179586*28/32) 0+2.5*sin(6.283185307179586*28/32) 0.7+2.5*cos(6.283185307179586*29/32) 0+2.5*sin(6.283185307179586*29/32) 0.7+2.5*cos(6.283185307179586*30/32) 0+2.5*sin(6.283185307179586*30/32) 0.7+2.5*cos(6.283185307179586*31/32) 0+2.5*sin(6.283185307179586*31/32)) depth(0.5) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+HW_TSlotNut -> [ I(HostedOpening(host(ChamferRect 6 9.5 0.7) opening(Circle 2.5 32) depth(4.1) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+# Brass-style lead-nut body: 8 mm main bore and two 3.5 mm mounting holes.
+
+HW_LeadNut -> [ I(HostedOpening(host(Rect 14 12.6) opening(Circle 4 40) depth(3.5) cap(all)) material(goldmetal) 1 1) ] [ T(10.249125 0 0) HW_LeadWing ] [ T(-10.249125 0 0) A(180 2) HW_LeadWing ] [ T(0 0 -5) A(90 0) HW_GoldRing(10.2 8 5) ] [ T(0 0 3.5) A(90 0) HW_GoldRing(10 8 2) ]
+
+HW_LeadWing -> [ I(HostedOpening(host(Polygon -3.249125 -6.3 1.749125 -6.3 3.249125 -4.8 3.249125 4.8 1.749125 6.3 -3.249125 6.3) opening(Polygon -0.249125+1.75*cos(6.283185307179586*0/24) 0+1.75*sin(6.283185307179586*0/24) -0.249125+1.75*cos(6.283185307179586*1/24) 0+1.75*sin(6.283185307179586*1/24) -0.249125+1.75*cos(6.283185307179586*2/24) 0+1.75*sin(6.283185307179586*2/24) -0.249125+1.75*cos(6.283185307179586*3/24) 0+1.75*sin(6.283185307179586*3/24) -0.249125+1.75*cos(6.283185307179586*4/24) 0+1.75*sin(6.283185307179586*4/24) -0.249125+1.75*cos(6.283185307179586*5/24) 0+1.75*sin(6.283185307179586*5/24) -0.249125+1.75*cos(6.283185307179586*6/24) 0+1.75*sin(6.283185307179586*6/24) -0.249125+1.75*cos(6.283185307179586*7/24) 0+1.75*sin(6.283185307179586*7/24) -0.249125+1.75*cos(6.283185307179586*8/24) 0+1.75*sin(6.283185307179586*8/24) -0.249125+1.75*cos(6.283185307179586*9/24) 0+1.75*sin(6.283185307179586*9/24) -0.249125+1.75*cos(6.283185307179586*10/24) 0+1.75*sin(6.283185307179586*10/24) -0.249125+1.75*cos(6.283185307179586*11/24) 0+1.75*sin(6.283185307179586*11/24) -0.249125+1.75*cos(6.283185307179586*12/24) 0+1.75*sin(6.283185307179586*12/24) -0.249125+1.75*cos(6.283185307179586*13/24) 0+1.75*sin(6.283185307179586*13/24) -0.249125+1.75*cos(6.283185307179586*14/24) 0+1.75*sin(6.283185307179586*14/24) -0.249125+1.75*cos(6.283185307179586*15/24) 0+1.75*sin(6.283185307179586*15/24) -0.249125+1.75*cos(6.283185307179586*16/24) 0+1.75*sin(6.283185307179586*16/24) -0.249125+1.75*cos(6.283185307179586*17/24) 0+1.75*sin(6.283185307179586*17/24) -0.249125+1.75*cos(6.283185307179586*18/24) 0+1.75*sin(6.283185307179586*18/24) -0.249125+1.75*cos(6.283185307179586*19/24) 0+1.75*sin(6.283185307179586*19/24) -0.249125+1.75*cos(6.283185307179586*20/24) 0+1.75*sin(6.283185307179586*20/24) -0.249125+1.75*cos(6.283185307179586*21/24) 0+1.75*sin(6.283185307179586*21/24) -0.249125+1.75*cos(6.283185307179586*22/24) 0+1.75*sin(6.283185307179586*22/24) -0.249125+1.75*cos(6.283185307179586*23/24) 0+1.75*sin(6.283185307179586*23/24)) depth(3.5) cap(all)) material(goldmetal) 1 1) ]
+
+# Black-finish variant shares the same dimensional and helical construction.
+
+HW_DarkCylinder(d h) -> [ S(d h d) I(Cylinder(segments(32 1)) material(blackmattemetal) 1 1) ]
+
+HW_DarkCounterHead(d h shaft socketD) -> [ I(Revolve(profile(Polygon socketD/2 0 d/2 0 shaft/2 h socketD/2 h) angle(0 360) segments(32) cap(all)) material(blackmattemetal) 1 1) ]
+
+HW_DarkCountersunkScrew(d total hd hh pitch) -> [ HW_DarkCounterHead(hd hh d d*0.65) ] [ T(0 hh 0) HW_DarkThreadedShaft(d total-hh pitch) ]
+
+HW_DarkThreadedShaft(d length pitch) -> [ HW_DarkCylinder(d-pitch*0.52 length) ] [ HW_DarkThreadTurns(d length pitch floor((length-pitch*0.26)/pitch)) ]
+
+HW_DarkThreadTurns(d length pitch n) n -> [ T(0 pitch*0.13+HW_DarkThreadTurns_count*pitch 0) HW_DarkHelixTurn(d pitch) ]
+
+HW_DarkHelixTurn(d pitch) -> [ I(SweepDisk(path((d/2-pitch*0.13)*cos(6.283185307179586*0/12) pitch*0/12 (d/2-pitch*0.13)*sin(6.283185307179586*0/12) (d/2-pitch*0.13)*cos(6.283185307179586*1/12) pitch*1/12 (d/2-pitch*0.13)*sin(6.283185307179586*1/12) (d/2-pitch*0.13)*cos(6.283185307179586*2/12) pitch*2/12 (d/2-pitch*0.13)*sin(6.283185307179586*2/12) (d/2-pitch*0.13)*cos(6.283185307179586*3/12) pitch*3/12 (d/2-pitch*0.13)*sin(6.283185307179586*3/12) (d/2-pitch*0.13)*cos(6.283185307179586*4/12) pitch*4/12 (d/2-pitch*0.13)*sin(6.283185307179586*4/12) (d/2-pitch*0.13)*cos(6.283185307179586*5/12) pitch*5/12 (d/2-pitch*0.13)*sin(6.283185307179586*5/12) (d/2-pitch*0.13)*cos(6.283185307179586*6/12) pitch*6/12 (d/2-pitch*0.13)*sin(6.283185307179586*6/12) (d/2-pitch*0.13)*cos(6.283185307179586*7/12) pitch*7/12 (d/2-pitch*0.13)*sin(6.283185307179586*7/12) (d/2-pitch*0.13)*cos(6.283185307179586*8/12) pitch*8/12 (d/2-pitch*0.13)*sin(6.283185307179586*8/12) (d/2-pitch*0.13)*cos(6.283185307179586*9/12) pitch*9/12 (d/2-pitch*0.13)*sin(6.283185307179586*9/12) (d/2-pitch*0.13)*cos(6.283185307179586*10/12) pitch*10/12 (d/2-pitch*0.13)*sin(6.283185307179586*10/12) (d/2-pitch*0.13)*cos(6.283185307179586*11/12) pitch*11/12 (d/2-pitch*0.13)*sin(6.283185307179586*11/12) (d/2-pitch*0.13)*cos(6.283185307179586*12/12) pitch*12/12 (d/2-pitch*0.13)*sin(6.283185307179586*12/12)) radius(pitch*0.13) longitudinalSegments(12) radialSegments(6) cap(none)) material(blackmattemetal) 1 1) ]
+
+HW_SetScrew -> [ HW_SocketHead(3 1.1 1.5) ] [ T(0 1.1 0) HW_ThreadedShaft(3 1.9 0.5) ]
+
+# z nut. Lead nut: flange envelope/axial position measured; three adjacent analytic bored sections make flange; mounting holes and smooth bore nominal.
+
+HW_M004 -> [ T(-166.0983 -80.5001 177.0264) HW_LeadNut ]
+
+# 2GT-pulley. Pulley: 16 mm axial envelope, 15 mm flanges, 5 mm bore, twenty analytic tooth ribs.
+
+HW_M009 -> [ T(64.69171 -131.47193 -121.33772) A(-90 2) HW_Pulley20 ]
+
+# Copper cover. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M010 -> [ T(0 0 0) A(90 0) HW_CopperRing(8 7.2 6) ]
+
+# M4 Split Washer. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M011 -> [ T(-0.00222 0 0)  HW_SplitWasher(7.2 4.2 1) ]
+
+# M3 Split Washer. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M012 -> [ T(-0.004 0 0)  HW_SplitWasher(4.6 3.1 1) ]
+
+# M4X16 Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M013 -> [ T(0 0 0) A(-90 2) HW_PanScrew(4 16 7.6 2.2 0.7) ]
+
+# M3X40-P. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M014 -> [ T(0 0 0) A(-90 2) HW_DarkCountersunkScrew(3 40.0007 5.54 1.6 0.5) ]
+
+# M3X10 Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M015 -> [ T(0 0 0) A(-90 2) HW_PanScrew(3 10.1 5.7 1.65 0.5) ]
+
+# M3X6Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M016 -> [ T(0 0 0) A(-90 2) HW_PanScrew(3 6 5.7 1.65 0.5) ]
+
+# Rollers. Wheel:24.1 x 10.2 mm;16 mm bearing seats and13.6 mm internal web.
+
+HW_M017 -> [ T(15.5 -35.5 -18.55) A(90 0) HW_VWheel(24.1 10.2 16 13.6) ]
+
+# Eccentric column. Eccentric:10 mm across flats; continuous5 mm boreoffset0.7 mm, inferred from source radial minimum1.8 mm.
+
+HW_M018 -> [ T(0 0 0.45) A(90 0) HW_Eccentric ]
+
+# Spacers for rollers. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M019 -> [ T(0 0 0) A(90 0) HW_Ring(8 5.5 8.35) ]
+
+# M5X40 Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M020 -> [ T(0 0 0) A(-90 2) HW_PanScrew(5 40 9.5 2.75 0.8) ]
+
+# 625pillow. Bearing:16 mm OD,5 mm bore,5 mm width; seven illustrative balls.
+
+HW_M021 -> [ T(-2.5 0 0) A(-90 2) HW_Bearing(16 5 5 7 2.35) ]
+
+# M5 Self-locking nut. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M022 -> [ T(0 0 -3.52) A(90 0) HW_LockNut(8 5 3.9) ]
+
+# 624U pillow. Guide bearing:13 mm OD,4 mm bore,4 mm width; concave U profile.
+
+HW_M024 -> [ T(74.5 50.52643 -44.43)  HW_UBearing ]
+
+# M3X18 Socket Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M025 -> [ T(-3 0 0) A(-90 2) HW_SocketScrew(3 18 5.5 3 0.5) ]
+
+# E gear. Drive gear:10.95 mm OD and10.9 mm length; hollow hub and hobbed band.
+
+HW_M027 -> [ T(75.5 45.52643 -56.4)  HW_ExtruderGear ]
+
+# M3X10 Flush Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M030 -> [ T(0 0 0) A(-90 2) HW_CountersunkScrew(3 10.0007 5.54 1.6 0.5) ]
+
+# M4X8 Socket Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M032 -> [ T(-4 0 0) A(-90 2) HW_SocketScrew(4 8 6.8 4 0.7) ]
+
+# M5 T-Slot Nut. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M034 -> [ T(0 0 -1.4373) HW_TSlotNut ]
+
+# M8X25 Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M035 -> [ T(0 0 0) A(-90 2) HW_PanScrew(8 25.4 14 4.4 1.25) ]
+
+# M8 Self-locking nut. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M036 -> [ T(0 0 -4.83246) A(90 0) HW_LockNut(13 8 7.1825) ]
+
+# M8 nut. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M037 -> [ T(0 0 -5.5) A(90 0) HW_HexNut(13 8 5.5) ]
+
+# F688 pillow. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M038 -> [ T(0 0 0)  HW_Flanged688 ]
+
+# M5X30 Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M039 -> [ T(0 0 0) A(-90 2) HW_PanScrew(5 30.2 9.5 2.75 0.8) ]
+
+# M5 Split Washer. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M040 -> [ T(-0.00286 0 0) A(90 0) HW_SplitWasher(7 5.1 1) ]
+
+# M3X16 Pan Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M052 -> [ T(0 0 0) A(-90 2) HW_PanScrew(3 16 5.7 1.65 0.5) ]
+
+# M3x18 Flush Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M053 -> [ T(-18 0 0) A(-90 2) HW_CountersunkScrew(3 18 6.72 1.8 0.5) ]
+
+# M3 Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M054 -> [ T(0 0 0)  HW_SetScrew ]
+
+# M5 washer. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M055 -> [ T(0 0 0) A(90 0) HW_Ring(10.2 5.2 0.6) ]
+
+# M2X8 Socket Head Screw. Native procedural replacement; exact manufacturing thread/fit details are not claimed.
+
+HW_M056 -> [ T(-2 0 0) A(-90 2) HW_SocketScrew(2 8 3.8 2 0.4) ]
+
+
+# Native procedural geometry helpers for the mesh-free Ender-3 reconstruction.
+# All geometric dimensions are millimetres. Caller uses one root S(.001 .001 .001).
+# These are procedural analytic descriptions, not sampled source model geometry.
+# Every helper isolates its transforms; materials can be edited at instantiation.
+
+PG_TSlotRailX(length side mouth cavity root inner shoulder lip bore) ->
+    [ T(-length/2 0 0) A(90 1)
+      I(HostedOpening(host(Rect 2*inner 2*inner) opening(Circle bore/2 32) depth(length) cap(all)) material(blackmattemetal) 1 1)
+      PG_TSlotRailCorners(length side mouth cavity root inner shoulder lip) ]
+
+PG_TSlotRailCorners(length side mouth cavity root inner shoulder lip) 4 ->
+    [ A(PG_TSlotRailCorners_count*90 2)
+      I(Extrude(Polygon(side/2 side/2 mouth/2 side/2 mouth/2 side/2-lip cavity/2 side/2-lip cavity/2 shoulder root/2 inner inner inner inner root/2 shoulder cavity/2 side/2-lip cavity/2 side/2-lip mouth/2 side/2 mouth/2) length) material(blackmattemetal) 1 1) ]

@@ -1,0 +1,60 @@
+{
+  "title": "Meridian Robot Cockpit",
+  "group": "spacecraft/meridian/orbital-robot",
+  "directory": "spacecraft/meridian/orbital-robot/meridian-robot-cockpit-fa0a48e1",
+  "source_file": "Meridian_Robot_Cockpit.p3d",
+  "git_blob_sha": "fa0a48e1027ce48cdf8c3a4bc3dab66f1ed3bfc3",
+  "bytes": 101493,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_Robot_Cockpit.p3d"
+  ],
+  "description": "Meridian orbital robot | configured free pose",
+  "features": [
+    "Loft",
+    "Sphere",
+    "Cube",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian orbital robot | configured free pose · Metres. A single fixed scale applies to shell, limbs, tool and propulsion."
+    ],
+    [
+      "Named objects",
+      "MeridianRobot, RobotPressureCapsule, RobotVisorGasket, RobotLifeSupport, RobotHipFrame, RobotPilot, RobotCanopy, RobotPropulsion, RobotLeftLeg, RobotRightLeg, RobotSocketArm, RobotGuideArm"
+    ],
+    [
+      "Object classes",
+      "Robot, RobotPart"
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, Sphere, Cube, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "offwhiteceramic, coolwhitemattepaint, charcoalmattemetal, orangeglosspaint, smokytransparentglass, blackbluepaintmatte, sandmattepaint, silverbrushedmetal, blackmattemetal, paleblueemissivepaint, goldpolishedmetal, greenemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start, RobotAssembly, PressureCapsule, VisorGasket, Canopy, Pilot, LifeSupport, HipFrame, LeftLeg, LeftLegClamp, RightLeg, RightLegClamp, SocketArm, SocketArmHand, GuideArm, GuideArmHand, SocketToolLocal, EmptySeat, NozzleXm00, Propulsion (43 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "571"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

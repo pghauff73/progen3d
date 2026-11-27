@@ -1,0 +1,60 @@
+{
+  "title": "Orbital Repair Robot",
+  "group": "spacecraft/other-vessels",
+  "directory": "spacecraft/other-vessels/orbital-repair-robot-c04852b4",
+  "source_file": "Orbital_Repair_Robot.p3d",
+  "git_blob_sha": "c04852b4fb907f8c6155d2dad297254873314107",
+  "bytes": 89007,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Orbital_Repair_Robot.p3d"
+  ],
+  "description": "Orbital Repair Robot | 85% visual reconstruction target",
+  "features": [
+    "Loft",
+    "Sphere",
+    "SweepDisk",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Orbital Repair Robot | 85% visual reconstruction target · Metres, +Y up, +Z towards repair bench, +X toward the pipe-guide arm. · Default view includes the repair assembly. Use RobotOnly in Start to isolate the robot. · RepairScene(scale) changes overall size. Limb subrules encode the braced reference pose. · Front view: eye (-4.2 3.1 5.7), target (0 1.37 0.52). · Low side view: eye (-6.5 1.25 1.1), target (0 1.37 0.55). · Rear view: eye (-3.2 4.8 -4.7), target (0 1.29 0.45). · Primary image drives proportions. Side and rear references inform occluded geometry. · Pilot likeness and surface wear are simplified. Geometry uses no imported assets."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, Sphere, SweepDisk, Cube"
+    ],
+    [
+      "Material identifiers",
+      "offwhiteceramic, coolwhitemattepaint, charcoalmattemetal, orangeglosspaint, smokytransparentglass, blackbluepaintmatte, sandmattepaint, silverbrushedmetal, goldpolishedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, RepairScene, RobotOnly, PressureCapsule, VisorGasket, Canopy, Pilot, LifeSupport, HipFrame, LeftLeg, RightLeg, FootClamp, SocketArm, GuideArm, SocketTool, ServiceBench, StationRail, SafetyTether (18 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "441"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

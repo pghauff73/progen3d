@@ -1,0 +1,55 @@
+{
+  "title": "M5 Base 262 Parts",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/m5-base-262-parts-e37f4376",
+  "source_file": "M5_Base_262_Parts.grammar",
+  "git_blob_sha": "e37f43765c87ee25aee0965cf11ff24594e80255",
+  "bytes": 141082,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "M5_Base_262_Parts.grammar"
+  ],
+  "description": "M5 Base 262 Parts exported procedural grammar.",
+  "features": [],
+  "detail": [
+    [
+      "Source notes",
+      ""
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      ""
+    ],
+    [
+      "Material identifiers",
+      ""
+    ],
+    [
+      "Production rules",
+      "X, Assembly_Frame, Instance_Base_Left_4040, Instance_Base_Right_4040, Instance_Base_Centre_4040, Instance_Upright_Left_2040, Instance_Upright_Right_2040, Instance_Top_Crossmember_2020, Instance_X_Gantry_2020, Instance_Y_Guide_2040, Instance_Frame_Corner_Bracket_L, Instance_Rubber_Foot_L__115, Instance_Rubber_Foot_L_115, Instance_Frame_Corner_Bracket_R, Instance_Rubber_Foot_R__115, Instance_Rubber_Foot_R_115, Instance_Top_Endcap_0, Instance_Top_Endcap_1, Instance_Frame_M5x45_1, Instance_Frame_M5x45_2 (535 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "536"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

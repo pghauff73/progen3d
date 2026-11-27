@@ -1,0 +1,57 @@
+{
+  "title": "Ender3 Y M2 7 SYNTHETIC Demo",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-7-synthetic-demo-91586087",
+  "source_file": "Ender3_Y_M2_7_SYNTHETIC_Demo.p3d",
+  "git_blob_sha": "91586087c84e7a2d0ab4258b262b0a1174115539",
+  "bytes": 52642,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Y_M2_7_SYNTHETIC_Demo.p3d"
+  ],
+  "description": "SYNTHETIC M2.7 calibrated-parameter DEMO ONLY. No hardware measurements or live native ODE.",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "SYNTHETIC M2.7 calibrated-parameter DEMO ONLY. No hardware measurements or live native ODE. · M2.6 medium overview + diagnostic overlay baseline telemetry; inherited source below, no new mesh imports. · M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free. · Motor & carriage derived from independent physical states; bed platform from its own flexible state. · Assumed parameters; baked replay, NOT live ODE. Native source values in mm at 0.001m root scale. · ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, blackmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, M24Controls, M24Assembly, M24Belt, M26Telemetry (5 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "204"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

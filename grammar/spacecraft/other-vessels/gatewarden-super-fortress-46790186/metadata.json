@@ -1,0 +1,62 @@
+{
+  "title": "Gatewarden Super Fortress",
+  "group": "spacecraft/other-vessels",
+  "directory": "spacecraft/other-vessels/gatewarden-super-fortress-46790186",
+  "source_file": "Gatewarden_Super_Fortress.p3d",
+  "git_blob_sha": "467901860a6930e07a49e5d8c3122393d542fa4f",
+  "bytes": 51492,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Gatewarden_Super_Fortress.p3d"
+  ],
+  "description": "GATEWARDEN | mobile harbour super fortress",
+  "features": [
+    "Loft",
+    "Cube",
+    "Cylinder",
+    "Revolve",
+    "Sphere",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "GATEWARDEN | mobile harbour super fortress · Native ProGen3D grammar. Bow +X, dorsal +Y, starboard +Z. Time t is in seconds. · The root arguments set metres per design unit and seconds per harbour cycle. · Default study: t=0 gate closed and ferry outside; t=5 gate half open; · t=10 gate fully open and ferry sheltered; t=20 returns to the opening pose. · Geometry is self-contained. Five native rules are embedded from Spaceship Object Model v1. · Structure: Start > Gatewarden > named spatial objects > reusable geometry rules. · Hull, fortress, civic districts and port machinery · The central underside narrows to a dropped keel. The U-shaped forward cutout houses the gate. · Bow arm in starboard coordinates. The port arm mirrors the same rule."
+    ],
+    [
+      "Named objects",
+      "GatewardenRoot, Keel, passage, heat, Link11, StarboardBreakwater, mount, StarboardAftTower, data, StarboardWaistTower, Link2, StarboardForeTower, StarboardWall1, StarboardWall2, StarboardWall3, StarboardDistrict, power, Link1, StarboardRadiator1, Link3, StarboardRadiator2, Link4, StarboardArrivalBeacon, PortBreakwater (+26 more)"
+    ],
+    [
+      "Object classes",
+      "Spacecraft, Citadel, ArmouredBow, RingBastion, CurtainWall, CityQuarter, DeployableRadiator, BeaconSpire, TerracedCommandKeep, NavigationScanner, ShelteredApproach, DockGateLeaf, HarbourFerry, DriveCluster"
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, Cube, Cylinder, Revolve, Sphere, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "blackmattemetal, slategreymattemetal, ivorymattepaint, tealmattemetal, silverbrushedmetal, goldbrushedmetal, cyanemissivepaint, blacktealmetal, amberemissivepaint, silverblueglass, charcoalmattemetal, copperbrushedmetal, offwhiteceramic, bluegreymetal"
+    ],
+    [
+      "Production rules",
+      "Start, Gatewarden, AssembleKeel, AssembleStarboardBreakwater, AssembleStarboardAftTower, AssembleStarboardWaistTower, AssembleStarboardForeTower, AssembleStarboardWall1, AssembleStarboardWall2, AssembleStarboardWall3, AssembleStarboardDistrict, AssembleStarboardRadiator1, AssembleStarboardRadiator2, AssembleStarboardArrivalBeacon, AssemblePortBreakwater, AssemblePortAftTower, AssemblePortWaistTower, AssemblePortForeTower, AssemblePortWall1, AssemblePortWall2 (72 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "671"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
