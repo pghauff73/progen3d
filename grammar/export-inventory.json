@@ -154,12 +154,14 @@
     {
       "filename": "Meridian_S01_Interior_Complete.p3d",
       "bytes": 432500,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/whole-spacecraft/meridian-s01-interior-complete-78d1bcf4"
     },
     {
       "filename": "Meridian_S01_Exterior_Complete.p3d",
       "bytes": 727268,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/whole-spacecraft/meridian-s01-exterior-complete-36bf75b0"
     },
     {
       "filename": "Lyra_E15_5_Integrated.p3d",
@@ -470,7 +472,8 @@
     {
       "filename": "Meridian_M074_Master.p3d",
       "bytes": 727268,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/whole-spacecraft/meridian-s01-exterior-complete-36bf75b0"
     },
     {
       "filename": "Meridian_M073_Interior_Study.p3d",
@@ -1403,6 +1406,6 @@
       "catalogue_directory": "education/grammar-showcases/p2-time-showcase-dd12fb3f"
     }
   ],
-  "represented": 142,
-  "pending": 109
+  "represented": 145,
+  "pending": 106
 }
