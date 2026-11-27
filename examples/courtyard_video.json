@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "grammar": "courtyard_camera.p3d",
+  "seed": 42,
+  "width": 640,
+  "height": 384,
+  "output_dir": "../build/courtyard-video",
+  "layers": false,
+  "timeline": {
+    "fps": 24,
+    "frame_count": 144
+  },
+  "camera": {
+    "position": [
+      {
+        "time": 0,
+        "value": [
+          0,
+          1.85,
+          6.6
+        ]
+      },
+      {
+        "time": 5.96,
+        "value": [
+          -0.67,
+          1.94,
+          6.02
+        ]
+      }
+    ],
+    "aim": [
+      {
+        "time": 0,
+        "value": {
+          "object": "COURTYARD_BUILDING"
+        }
+      }
+    ],
+    "focus": [
+      {
+        "time": 0,
+        "value": {
+          "object": "FOREGROUND_BRANCH",
+          "attachment": "focus"
+        }
+      },
+      {
+        "time": 2,
+        "value": {
+          "object": "FOREGROUND_BRANCH",
+          "attachment": "focus"
+        }
+      },
+      {
+        "time": 3,
+        "value": {
+          "object": "COURTYARD_ENTRANCE",
+          "attachment": "focus"
+        }
+      }
+    ],
+    "lens": [
+      {
+        "time": 0,
+        "value": {
+          "fov_degrees": 43,
+          "aperture_radius": 0.18,
+          "max_blur_px": 24
+        }
+      },
+      {
+        "time": 5.96,
+        "value": {
+          "fov_degrees": 39,
+          "aperture_radius": 0.18,
+          "max_blur_px": 24
+        }
+      }
+    ]
+  }
+}

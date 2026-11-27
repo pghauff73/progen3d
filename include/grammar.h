@@ -1,5 +1,6 @@
 #pragma once
 
+#include "audio/model/AudioEventDefinition.h"
 #include "grammar/model/ShapeDescriptorSyntax.h"
 #include "grammar/model/LightingDeclarationSyntax.h"
 #include "grammar/model/SpatialConnectionDeclarationSyntax.h"
@@ -720,6 +721,7 @@ public:
 	void ReadTokens2(GrammarRuleDefinition *rule,std::string rule_str,int index_k);
 	void addContext();
 	void ensure_start_rule_is_first();
+	const std::vector<AudioEventDefinition> &audioEvents() const { return audio_events_; }
 
     std::vector<GrammarRuleDefinition *> rule_list;
 	std::vector<GrammarActionToken *> tokens_new;
@@ -735,6 +737,7 @@ private:
 	std::shared_ptr<const GeneratedMeshProvider> document_meshes_;
 	void clearParsedState();
 	void rebuildFromLines(const std::string &success_message);
+	std::vector<AudioEventDefinition> audio_events_;
 };
 
 using Variable = GrammarVariableDefinition;

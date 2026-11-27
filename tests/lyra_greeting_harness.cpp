@@ -11,6 +11,7 @@
 #include <iterator>
 #include <map>
 #include <set>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -37,15 +38,38 @@ struct CharacterPose
 {
     std::map<std::string, glm::mat4> transforms;
     glm::vec3 hand_position{};
+    float largest_seam_gap = 0.0f;
 };
 
-CharacterPose inspectCharacter(const GrammarDocument &document)
+using MeshSeam = std::vector<std::pair<std::string, std::size_t>>;
+
+std::vector<MeshSeam> readCharacterSeams(const std::string &source)
+{
+    std::vector<MeshSeam> seams;
+    std::istringstream lines(source);
+    for (std::string line; std::getline(lines, line);) {
+        if (line.rfind("#@mesh-seam-v1 ", 0) != 0) continue;
+        std::istringstream row(line);
+        std::string tag, key;
+        std::size_t index;
+        row >> tag;
+        MeshSeam seam;
+        while (row >> key >> index) seam.emplace_back(key, index);
+        require(seam.size() >= 2, "A Lyra seam point needs at least two vertices.");
+        seams.push_back(std::move(seam));
+    }
+    require(seams.size() == 627, "Expected all 627 corresponding seam points.");
+    return seams;
+}
+
+CharacterPose inspectCharacter(const GrammarDocument &document, const std::vector<MeshSeam> &seams)
 {
     require(grammarUsesTime(&document), "The character must respond to the timeline.");
     const auto &instances = document.context->primitive_instances;
     require(instances.size() == 66, "Expected all 66 body and material mesh instances.");
     std::size_t triangles = 0;
     std::set<std::string> materials;
+    std::map<std::string, const ScenePrimitiveInstance *> instances_by_key;
     CharacterPose pose;
     for (const auto &instance : instances) {
         const auto *reference = dynamic_cast<const GeneratedMeshReferenceShapeSpecification *>(
@@ -54,6 +78,7 @@ CharacterPose inspectCharacter(const GrammarDocument &document)
                 "A character part did not resolve to its triangle mesh.");
         require(pose.transforms.emplace(reference->meshKey(), instance.primary_transform).second,
                 "Unexpected repeated mesh key " + reference->meshKey());
+        instances_by_key.emplace(reference->meshKey(), &instance);
         const auto &mesh = instance.resolved_geometry->triangleMesh();
         require(!mesh.faces.empty(), "Empty mesh " + reference->meshKey());
         triangles += mesh.faces.size();
@@ -66,6 +91,19 @@ CharacterPose inspectCharacter(const GrammarDocument &document)
     require(materials.size() == 11 && materials.count("cyanemissiveplaster") && materials.count("amberemissiveplaster"),
             "The eleven material assignments must include cyan and amber emissive surfaces.");
     require(pose.transforms.count("LyraHandLGloveWeave"), "Missing presenting hand.");
+    for (const auto &seam : seams) {
+        const auto worldPosition = [&](const auto &vertex) {
+            const auto &instance = *instances_by_key.at(vertex.first);
+            const auto &position = instance.resolved_geometry->triangleMesh().vertices.at(vertex.second);
+            return glm::vec3(instance.primary_transform * glm::vec4(position, 1.0f));
+        };
+        const auto first = worldPosition(seam.front());
+        for (const auto &vertex : seam) {
+            const float gap = glm::length(worldPosition(vertex) - first);
+            require(std::isfinite(gap) && gap < 1e-6f, "Open seam at " + vertex.first);
+            pose.largest_seam_gap = std::max(pose.largest_seam_gap, gap);
+        }
+    }
     return pose;
 }
 
@@ -90,6 +128,8 @@ void checkSeparateDocuments()
     require(!invalid.error_details.empty(), "Duplicate local mesh keys must be diagnosed.");
     invalid.loadFromSourceText(rule + header + "30\n#f 0 1 99\n#@endmesh\n");
     require(!invalid.error_details.empty(), "Out-of-range triangle indices must be diagnosed.");
+    invalid.loadFromSourceText(rule + header + "30" + end + "#@mesh-seam-v1 Panel 0 Missing 0\n");
+    require(!invalid.error_details.empty(), "A seam referencing an unknown mesh must be diagnosed.");
 }
 
 } // namespace
@@ -101,6 +141,7 @@ int main(int argc, char **argv)
         std::ifstream input(argv[1], std::ios::binary);
         require(input.good(), "Cannot open the staged Lyra example.");
         const std::string source{std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>()};
+        const auto seams = readCharacterSeams(source);
 
         GrammarDocument opened;
         opened.loadFromFile(argv[1]);
@@ -108,9 +149,16 @@ int main(int argc, char **argv)
         opened.addContext();
         opened.context->genPrimitives();
         opened.generateGeometry();
-        const CharacterPose start = inspectCharacter(opened);
-        const CharacterPose greeting = inspectCharacter(*compileSnapshot(source, 1.0)->scene_snapshot->grammarDocument());
-        const CharacterPose loop = inspectCharacter(*compileSnapshot(source, 4.0)->scene_snapshot->grammarDocument());
+        const CharacterPose start = inspectCharacter(opened, seams);
+        float largest_seam_gap = start.largest_seam_gap;
+        CharacterPose greeting, loop;
+        for (int frame = 1; frame <= 16; ++frame) {
+            const auto result = compileSnapshot(source, frame / 4.0);
+            auto pose = inspectCharacter(*result->scene_snapshot->grammarDocument(), seams);
+            largest_seam_gap = std::max(largest_seam_gap, pose.largest_seam_gap);
+            if (frame == 4) greeting = std::move(pose);
+            if (frame == 16) loop = std::move(pose);
+        }
         const float hand_travel = glm::length(greeting.hand_position - start.hand_position);
         require(std::isfinite(hand_travel) && hand_travel > 0.002f, "The left hand did not move at one second.");
         for (const auto &part : start.transforms) {
@@ -122,7 +170,8 @@ int main(int argc, char **argv)
         }
         checkSeparateDocuments();
         std::cout << "Lyra passed: 66 mesh instances, 58972 triangles, 11 materials, left-hand travel "
-                  << hand_travel * 1000.0f << " mm at one second, four-second pose closure.\n";
+                  << hand_travel * 1000.0f << " mm at one second, four-second pose closure, maximum seam gap "
+                  << largest_seam_gap * 1000.0f << " mm across 17 poses.\n";
         return 0;
     } catch (const std::exception &error) {
         std::cerr << "Lyra regression failed: " << error.what() << '\n';

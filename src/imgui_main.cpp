@@ -46,6 +46,7 @@
 #include "BackendApiClient.h"
 #include "CloudAuthWorkflow.h"
 #include "Context.h"
+#include "physics/model/SimulationStep.h"
 #include "building/model/SmallModernBuildingModel.h"
 #include "editor/application/ApplicationStartupProgress.h"
 #include "editor/application/EditorRuntimeEnvironment.h"
@@ -89,6 +90,9 @@
 #include "editor/service/DocumentPersistenceService.h"
 #include "editor/service/FirebaseAuthenticationService.h"
 #include "editor/service/GrammarCompilationService.h"
+#include "editor/service/GrammarStructureValidationService.h"
+#include "editor/service/PreviewGeometryUploadService.h"
+#include "editor/service/PreviewMaterialLibrary.h"
 #include "editor/service/MeshExportService.h"
 #include "editor/service/LocalFileDialogService.h"
 #include "editor/service/NativeLocalFileDialogService.h"
@@ -422,7 +426,6 @@ PreviewTimelineController preview_timeline_controller;
 SceneSelectionController scene_selection_controller;
 constexpr float kMinSimulationTimeScale = 0.01f;
 constexpr float kMaxSimulationTimeScale = 8.0f;
-constexpr float kPreviewSimulationStep = 1.0f / 120.0f;
 constexpr int kMaxPreviewSimulationStepsPerFrame = 8;
 constexpr double kGrammarAnimationSampleStep = 1.0 / 60.0;
 uint64_t next_grammar_design_nonce = 0;
@@ -443,20 +446,6 @@ std::string trim_copy(const std::string &input)
 }
 
 namespace {
-
-struct ValidationTokenSpan {
-	std::string text;
-	int line = -1;
-	int start_column = 0;
-	int end_column = 0;
-};
-
-struct ValidationRuleBlock {
-	int start_line = -1;
-	int end_line = -1;
-	std::vector<ValidationTokenSpan> tokens;
-	std::string content;
-};
 
 struct AppFonts {
 	ImFont *body = nullptr;
@@ -490,28 +479,14 @@ struct ViewCubeFace {
 	bool visible = false;
 };
 
-std::size_t find_comment_start(const std::string &line);
 void add_app_state_grammar_diagnostic(EditorWorkspaceSession *app_state, const GrammarDiagnostic &diagnostic);
-int line_code_end_column(const std::string &line);
 std::vector<std::string> current_editor_lines(const std::string &text);
-GrammarDiagnostic make_line_grammar_diagnostic(const std::vector<std::string> &lines,
-                                               int line_number,
-                                               const std::string &message);
-GrammarDiagnostic make_token_grammar_diagnostic(const ValidationTokenSpan &token,
-                                                const std::string &message);
 void clear_texture_library_state_internal(EditorWorkspaceSession *app_state);
 void clear_ai_assistant_state_internal(EditorWorkspaceSession *app_state);
 void invalidate_texture_materials_internal(EditorWorkspaceSession *app_state);
 void refresh_texture_library_internal(EditorWorkspaceSession *app_state, bool preserve_status_message = false);
 void refresh_ai_threads_internal(EditorWorkspaceSession *app_state, bool preserve_status_message = false);
 void open_cloud_dialog(EditorWorkspaceSession *app_state, CloudDialogAction action);
-std::vector<ValidationTokenSpan> tokenize_validation_rule_block(const std::vector<std::string> &lines,
-                                                                int start_line,
-                                                                int end_line);
-std::string join_validation_tokens(const std::vector<ValidationTokenSpan> &tokens,
-                                   std::size_t start_index,
-                                   std::size_t end_index);
-std::vector<ValidationRuleBlock> build_validation_rule_blocks(const std::vector<std::string> &lines);
 PreviewInteractionCameraState build_preview_camera_state(const ImVec2 &viewport_size);
 int pick_preview_instance_index(const PreviewInteractionCameraState &camera,
                                 const ImRect &viewport_rect,
@@ -523,8 +498,14 @@ std::vector<PreviewOutlineBatch> build_preview_outline_batches(Context *context,
                                                                const EditorWorkspaceSession *app_state);
 bool draw_preview_view_cube(const ImRect &preview_rect, bool *capture_pointer);
 void draw_material_metric_bar(const char *label, float value, unsigned int fill_rgb);
-void destroy_preview_material_textures(PreviewMaterial *material);
-void auto_generate_missing_texture_maps(PreviewMaterial *material);
+using preview_materials::MaterialLexeme;
+using preview_materials::MaterialLexemeKind;
+using preview_materials::MaterialSwatch;
+using preview_materials::auto_generate_missing_texture_maps;
+using preview_materials::destroy_preview_material_textures;
+using preview_materials::is_user_texture_slot_name;
+using preview_materials::material_lexemes;
+using preview_materials::upload_rgba_texture;
 void draw_render_settings_controls(EditorWorkspaceSession *app_state);
 std::string backend_credit_plan_label(const BackendCreditSummary &credits);
 std::string backend_credit_available_label(const BackendCreditSummary &credits);
@@ -1180,61 +1161,6 @@ void destroy_grammar()
 	grammar = nullptr;
 }
 
-struct MaterialSwatch {
-	float r = 1.0f;
-	float g = 1.0f;
-	float b = 1.0f;
-};
-
-struct ParsedMaterialSpec {
-	std::string name;
-	std::string family = "blend";
-	std::string description;
-	std::vector<std::string> color_names;
-	std::vector<std::string> descriptors;
-	std::vector<MaterialSwatch> palette;
-	std::string wood_species;
-	float opacity = 1.0f;
-	float reflectance = 0.28f;
-	float smoothness = 0.45f;
-	float height_scale = 0.04f;
-	float emission_strength = 0.0f;
-	float uv_rotation_speed = 0.0f;
-	float uv_activity = 0.0f;
-	float pulse_strength = 0.0f;
-	float normal_strength = 1.0f;
-	float transmission = 0.0f;
-	float index_of_refraction = 1.5f;
-	float thickness = 0.01f;
-	float anisotropic = 0.0f;
-	float sheen = 0.0f;
-	float clearcoat = 0.0f;
-	float clearcoat_roughness = 0.0f;
-	MaterialSwatch attenuation_color{1.0f, 1.0f, 1.0f};
-	bool two_tone = false;
-	bool vertical_pattern = false;
-	bool emphasize_veins = false;
-	uint32_t seed = 0;
-};
-
-enum class MaterialLexemeKind {
-	Color,
-	Family,
-	Opacity,
-	Finish
-};
-
-struct MaterialLexeme {
-	std::string_view token;
-	MaterialLexemeKind kind = MaterialLexemeKind::Color;
-	MaterialSwatch swatch{};
-};
-
-struct MaterialTokenMatch {
-	std::size_t position = 0;
-	const MaterialLexeme *lexeme = nullptr;
-};
-
 struct MaterialAutocompleteSuggestion {
 	std::string label;
 	std::string replacement;
@@ -1260,116 +1186,6 @@ struct MaterialAutocompletePrefixState {
 	bool has_family = false;
 	bool has_finish = false;
 };
-
-float clamp01(float value)
-{
-	return std::clamp(value, 0.0f, 1.0f);
-}
-
-float lerp_scalar(float a, float b, float t)
-{
-	return a + (b - a) * t;
-}
-
-float smooth_curve(float value)
-{
-	value = clamp01(value);
-	return value * value * (3.0f - 2.0f * value);
-}
-
-MaterialSwatch make_swatch(float r, float g, float b)
-{
-	return MaterialSwatch{r, g, b};
-}
-
-MaterialSwatch mix_swatch(const MaterialSwatch &a, const MaterialSwatch &b, float t)
-{
-	return make_swatch(lerp_scalar(a.r, b.r, t),
-	                   lerp_scalar(a.g, b.g, t),
-	                   lerp_scalar(a.b, b.b, t));
-}
-
-MaterialSwatch scale_swatch(const MaterialSwatch &color, float scale)
-{
-	return make_swatch(clamp01(color.r * scale),
-	                   clamp01(color.g * scale),
-	                   clamp01(color.b * scale));
-}
-
-MaterialSwatch lighten_swatch(const MaterialSwatch &color, float amount)
-{
-	return mix_swatch(color, make_swatch(1.0f, 1.0f, 1.0f), clamp01(amount));
-}
-
-MaterialSwatch darken_swatch(const MaterialSwatch &color, float amount)
-{
-	return mix_swatch(color, make_swatch(0.0f, 0.0f, 0.0f), clamp01(amount));
-}
-
-uint32_t stable_hash(const std::string &text)
-{
-	uint32_t hash = 2166136261u;
-	for (unsigned char character : text) {
-		hash ^= static_cast<uint32_t>(character);
-		hash *= 16777619u;
-	}
-	return hash;
-}
-
-float lattice_noise(int x, int y, uint32_t seed)
-{
-	uint32_t value = seed;
-	value ^= static_cast<uint32_t>(x) * 374761393u;
-	value ^= static_cast<uint32_t>(y) * 668265263u;
-	value = (value ^ (value >> 13u)) * 1274126177u;
-	value ^= value >> 16u;
-	return static_cast<float>(value & 0x00ffffffu) / static_cast<float>(0x01000000u);
-}
-
-float value_noise(float x, float y, uint32_t seed)
-{
-	const int x0 = static_cast<int>(std::floor(x));
-	const int y0 = static_cast<int>(std::floor(y));
-	const int x1 = x0 + 1;
-	const int y1 = y0 + 1;
-	const float tx = smooth_curve(x - static_cast<float>(x0));
-	const float ty = smooth_curve(y - static_cast<float>(y0));
-
-	const float n00 = lattice_noise(x0, y0, seed);
-	const float n10 = lattice_noise(x1, y0, seed);
-	const float n01 = lattice_noise(x0, y1, seed);
-	const float n11 = lattice_noise(x1, y1, seed);
-	const float nx0 = lerp_scalar(n00, n10, tx);
-	const float nx1 = lerp_scalar(n01, n11, tx);
-	return lerp_scalar(nx0, nx1, ty);
-}
-
-float fractal_noise(float x, float y, uint32_t seed, int octaves = 5)
-{
-	float amplitude = 0.5f;
-	float frequency = 1.0f;
-	float total = 0.0f;
-	float normalization = 0.0f;
-	for (int octave = 0; octave < octaves; ++octave) {
-		total += value_noise(x * frequency, y * frequency, seed + static_cast<uint32_t>(octave * 977u)) * amplitude;
-		normalization += amplitude;
-		amplitude *= 0.5f;
-		frequency *= 2.0f;
-	}
-	return normalization > 0.0f ? total / normalization : 0.0f;
-}
-
-std::string join_strings(const std::vector<std::string> &parts)
-{
-	std::ostringstream stream;
-	for (std::size_t index = 0; index < parts.size(); ++index) {
-		if (index > 0) {
-			stream << ", ";
-		}
-		stream << parts[index];
-	}
-	return stream.str();
-}
 
 std::vector<std::string> split_string_non_empty(const std::string &value, char delimiter)
 {
@@ -1417,136 +1233,6 @@ std::string join_string_tokens(const std::vector<std::string> &tokens, char deli
 		stream << tokens[index];
 	}
 	return stream.str();
-}
-
-void sort_and_unique_strings(std::vector<std::string> *values)
-{
-	if (values == nullptr) {
-		return;
-	}
-	std::sort(values->begin(), values->end());
-	values->erase(std::unique(values->begin(), values->end()), values->end());
-}
-
-template <std::size_t N>
-std::vector<MaterialTokenMatch> scan_material_lexemes(const std::string &name,
-                                                      const std::array<MaterialLexeme, N> &lexemes)
-{
-	std::vector<MaterialTokenMatch> matches;
-	for (std::size_t position = 0; position < name.size();) {
-		const MaterialLexeme *best_match = nullptr;
-		for (const MaterialLexeme &lexeme : lexemes) {
-			if (lexeme.token.empty() ||
-			    position + lexeme.token.size() > name.size() ||
-			    name.compare(position, lexeme.token.size(), lexeme.token) != 0) {
-				continue;
-			}
-			if (best_match == nullptr || lexeme.token.size() > best_match->token.size()) {
-				best_match = &lexeme;
-			}
-		}
-		if (best_match != nullptr) {
-			matches.push_back({position, best_match});
-			position += best_match->token.size();
-		} else {
-			++position;
-		}
-	}
-	return matches;
-}
-
-bool material_matches_token(const std::vector<MaterialTokenMatch> &matches, std::string_view token)
-{
-	for (const MaterialTokenMatch &match : matches) {
-		if (match.lexeme != nullptr && match.lexeme->token == token) {
-			return true;
-		}
-	}
-	return false;
-}
-
-const std::array<MaterialLexeme, 78> &material_lexemes()
-{
-	static const std::array<MaterialLexeme, 78> lexemes = {{
-		{"transparent", MaterialLexemeKind::Opacity, {}},
-		{"translucent", MaterialLexemeKind::Opacity, {}},
-		{"emissive", MaterialLexemeKind::Finish, {}},
-		{"glowing", MaterialLexemeKind::Finish, {}},
-		{"active", MaterialLexemeKind::Finish, {}},
-		{"animated", MaterialLexemeKind::Finish, {}},
-		{"rotating", MaterialLexemeKind::Finish, {}},
-		{"reflective", MaterialLexemeKind::Finish, {}},
-		{"weathered", MaterialLexemeKind::Finish, {}},
-		{"polished", MaterialLexemeKind::Finish, {}},
-		{"mirror", MaterialLexemeKind::Finish, {}},
-		{"concrete", MaterialLexemeKind::Family, {}},
-		{"ceramic", MaterialLexemeKind::Family, {}},
-		{"plastic", MaterialLexemeKind::Family, {}},
-		{"plaster", MaterialLexemeKind::Family, {}},
-		{"grass", MaterialLexemeKind::Family, {}},
-		{"brick", MaterialLexemeKind::Family, {}},
-		{"neon", MaterialLexemeKind::Family, {}},
-		{"floral", MaterialLexemeKind::Family, {}},
-		{"boards", MaterialLexemeKind::Family, {}},
-		{"orange", MaterialLexemeKind::Color, make_swatch(0.84f, 0.48f, 0.24f)},
-		{"purple", MaterialLexemeKind::Color, make_swatch(0.58f, 0.42f, 0.76f)},
-		{"silver", MaterialLexemeKind::Color, make_swatch(0.76f, 0.78f, 0.81f)},
-		{"yellow", MaterialLexemeKind::Color, make_swatch(0.88f, 0.78f, 0.32f)},
-		{"magenta", MaterialLexemeKind::Color, make_swatch(0.88f, 0.26f, 0.86f)},
-		{"lime", MaterialLexemeKind::Color, make_swatch(0.62f, 0.94f, 0.24f)},
-		{"violet", MaterialLexemeKind::Color, make_swatch(0.50f, 0.38f, 0.90f)},
-		{"twotone", MaterialLexemeKind::Finish, {}},
-		{"duotone", MaterialLexemeKind::Finish, {}},
-		{"horizontal", MaterialLexemeKind::Finish, {}},
-		{"vertical", MaterialLexemeKind::Finish, {}},
-		{"veins", MaterialLexemeKind::Finish, {}},
-		{"veined", MaterialLexemeKind::Finish, {}},
-		{"oak", MaterialLexemeKind::Finish, {}},
-		{"walnut", MaterialLexemeKind::Finish, {}},
-		{"pine", MaterialLexemeKind::Finish, {}},
-		{"cedar", MaterialLexemeKind::Finish, {}},
-		{"birch", MaterialLexemeKind::Finish, {}},
-		{"smooth", MaterialLexemeKind::Finish, {}},
-		{"glossy", MaterialLexemeKind::Finish, {}},
-		{"opaque", MaterialLexemeKind::Opacity, {}},
-		{"shiny", MaterialLexemeKind::Finish, {}},
-		{"rough", MaterialLexemeKind::Finish, {}},
-		{"smoky", MaterialLexemeKind::Opacity, {}},
-		{"white", MaterialLexemeKind::Color, make_swatch(0.94f, 0.95f, 0.96f)},
-		{"green", MaterialLexemeKind::Color, make_swatch(0.35f, 0.62f, 0.39f)},
-		{"black", MaterialLexemeKind::Color, make_swatch(0.16f, 0.18f, 0.20f)},
-		{"chrome", MaterialLexemeKind::Color, make_swatch(0.84f, 0.87f, 0.90f)},
-		{"copper", MaterialLexemeKind::Color, make_swatch(0.74f, 0.47f, 0.33f)},
-		{"beige", MaterialLexemeKind::Color, make_swatch(0.81f, 0.75f, 0.63f)},
-		{"glass", MaterialLexemeKind::Family, {}},
-		{"marble", MaterialLexemeKind::Family, {}},
-		{"stone", MaterialLexemeKind::Family, {}},
-		{"metal", MaterialLexemeKind::Family, {}},
-		{"paint", MaterialLexemeKind::Family, {}},
-		{"brown", MaterialLexemeKind::Color, make_swatch(0.48f, 0.34f, 0.22f)},
-		{"blue", MaterialLexemeKind::Color, make_swatch(0.28f, 0.50f, 0.84f)},
-		{"grey", MaterialLexemeKind::Color, make_swatch(0.58f, 0.60f, 0.63f)},
-		{"gray", MaterialLexemeKind::Color, make_swatch(0.58f, 0.60f, 0.63f)},
-		{"gold", MaterialLexemeKind::Color, make_swatch(0.82f, 0.70f, 0.33f)},
-		{"wood", MaterialLexemeKind::Family, {}},
-		{"rock", MaterialLexemeKind::Family, {}},
-		{"tile", MaterialLexemeKind::Family, {}},
-		{"amber", MaterialLexemeKind::Color, make_swatch(0.92f, 0.66f, 0.22f)},
-		{"teal", MaterialLexemeKind::Color, make_swatch(0.24f, 0.63f, 0.67f)},
-		{"cyan", MaterialLexemeKind::Color, make_swatch(0.33f, 0.71f, 0.81f)},
-		{"pink", MaterialLexemeKind::Color, make_swatch(0.87f, 0.63f, 0.73f)},
-		{"red", MaterialLexemeKind::Color, make_swatch(0.78f, 0.28f, 0.24f)},
-			{"aged", MaterialLexemeKind::Finish, {}},
-			{"matte", MaterialLexemeKind::Finish, {}},
-			{"satin", MaterialLexemeKind::Finish, {}},
-			{"frosted", MaterialLexemeKind::Finish, {}},
-			{"crystal", MaterialLexemeKind::Finish, {}},
-			{"brushed", MaterialLexemeKind::Finish, {}},
-			{"velvet", MaterialLexemeKind::Finish, {}},
-			{"clearcoat", MaterialLexemeKind::Finish, {}},
-			{"dull", MaterialLexemeKind::Finish, {}}
-	}};
-	return lexemes;
 }
 
 std::string normalize_material_autocomplete_text(const std::string &text)
@@ -1675,365 +1361,6 @@ std::string build_material_autocomplete_replacement(const MaterialAutocompletePr
 	return replacement;
 }
 
-ParsedMaterialSpec parse_material_name(const std::string &material_name)
-{
-	ParsedMaterialSpec spec;
-	spec.name = material_name.empty() ? "softwhitematteplaster" : material_name;
-	spec.seed = stable_hash(spec.name);
-	const auto &lexemes = material_lexemes();
-	const std::vector<MaterialTokenMatch> matches = scan_material_lexemes(spec.name, lexemes);
-	for (const MaterialTokenMatch &match : matches) {
-		if (spec.color_names.size() >= 3) {
-			break;
-		}
-		if (match.lexeme == nullptr || match.lexeme->kind != MaterialLexemeKind::Color) {
-			continue;
-		}
-		const std::string color_name(match.lexeme->token);
-		if (std::find(spec.color_names.begin(), spec.color_names.end(), color_name) == spec.color_names.end()) {
-			spec.color_names.push_back(color_name);
-			spec.palette.push_back(match.lexeme->swatch);
-		}
-	}
-	const bool has_explicit_colors = !spec.palette.empty();
-	const bool wants_boards = material_matches_token(matches, "boards");
-	const bool wants_floral = material_matches_token(matches, "floral");
-	const bool wants_horizontal = material_matches_token(matches, "horizontal");
-	spec.vertical_pattern = material_matches_token(matches, "vertical");
-	if (wants_horizontal) {
-		spec.vertical_pattern = false;
-	}
-	spec.two_tone = material_matches_token(matches, "twotone") ||
-	                material_matches_token(matches, "duotone");
-	spec.emphasize_veins = material_matches_token(matches, "veins") ||
-	                       material_matches_token(matches, "veined");
-
-	auto set_palette = [&](const std::vector<std::string> &labels,
-	                      const MaterialSwatch &first,
-	                      const MaterialSwatch &second,
-	                      const MaterialSwatch &third) {
-		spec.color_names = labels;
-		spec.palette = {first, second, third};
-	};
-
-	if (material_matches_token(matches, "oak")) {
-		spec.wood_species = "oak";
-	} else if (material_matches_token(matches, "walnut")) {
-		spec.wood_species = "walnut";
-	} else if (material_matches_token(matches, "pine")) {
-		spec.wood_species = "pine";
-	} else if (material_matches_token(matches, "cedar")) {
-		spec.wood_species = "cedar";
-	} else if (material_matches_token(matches, "birch")) {
-		spec.wood_species = "birch";
-	}
-
-	if (!has_explicit_colors) {
-		if (spec.wood_species == "oak") {
-			set_palette({"oak", "natural"},
-			            make_swatch(0.74f, 0.56f, 0.34f),
-			            make_swatch(0.48f, 0.35f, 0.19f),
-			            make_swatch(0.88f, 0.74f, 0.50f));
-		} else if (spec.wood_species == "walnut") {
-			set_palette({"walnut", "natural"},
-			            make_swatch(0.42f, 0.28f, 0.18f),
-			            make_swatch(0.24f, 0.16f, 0.10f),
-			            make_swatch(0.58f, 0.40f, 0.24f));
-		} else if (spec.wood_species == "pine") {
-			set_palette({"pine", "natural"},
-			            make_swatch(0.84f, 0.72f, 0.46f),
-			            make_swatch(0.64f, 0.50f, 0.27f),
-			            make_swatch(0.94f, 0.85f, 0.64f));
-		} else if (spec.wood_species == "cedar") {
-			set_palette({"cedar", "natural"},
-			            make_swatch(0.72f, 0.40f, 0.24f),
-			            make_swatch(0.46f, 0.23f, 0.14f),
-			            make_swatch(0.84f, 0.58f, 0.38f));
-		} else if (spec.wood_species == "birch") {
-			set_palette({"birch", "natural"},
-			            make_swatch(0.88f, 0.80f, 0.62f),
-			            make_swatch(0.68f, 0.58f, 0.38f),
-			            make_swatch(0.96f, 0.91f, 0.74f));
-		} else if (wants_floral) {
-			set_palette({"rose", "sage"},
-			            make_swatch(0.86f, 0.60f, 0.70f),
-			            make_swatch(0.92f, 0.89f, 0.82f),
-			            make_swatch(0.48f, 0.66f, 0.46f));
-		}
-	}
-
-	if (spec.palette.empty()) {
-		spec.color_names = {"white", "grey"};
-		spec.palette = {make_swatch(0.90f, 0.91f, 0.92f),
-		                make_swatch(0.60f, 0.62f, 0.66f)};
-	}
-	if (spec.palette.size() == 1) {
-		spec.palette.push_back(lighten_swatch(spec.palette.front(), 0.22f));
-	}
-
-	if (wants_floral) {
-		spec.family = "floral";
-		spec.reflectance = 0.20f;
-		spec.smoothness = 0.40f;
-		spec.height_scale = 0.050f;
-	} else if (material_matches_token(matches, "metal")) {
-		spec.family = "metal";
-		spec.reflectance = 0.88f;
-		spec.smoothness = 0.78f;
-		spec.height_scale = 0.030f;
-		} else if (material_matches_token(matches, "glass")) {
-			spec.family = "glass";
-			spec.opacity = 0.38f;
-			spec.reflectance = 0.82f;
-			spec.smoothness = 0.95f;
-			spec.height_scale = 0.010f;
-			spec.transmission = 0.94f;
-			spec.index_of_refraction = 1.50f;
-			spec.thickness = 0.018f;
-			spec.clearcoat = 0.32f;
-			spec.clearcoat_roughness = 0.05f;
-	} else if (material_matches_token(matches, "neon")) {
-		spec.family = "neon";
-		spec.reflectance = 0.58f;
-		spec.smoothness = 0.94f;
-		spec.height_scale = 0.025f;
-		spec.emission_strength = 1.15f;
-	} else if (material_matches_token(matches, "grass")) {
-		spec.family = "grass";
-		spec.reflectance = 0.10f;
-		spec.smoothness = 0.18f;
-		spec.height_scale = 0.075f;
-	} else if (material_matches_token(matches, "brick")) {
-		spec.family = "brick";
-		spec.reflectance = 0.12f;
-		spec.smoothness = 0.26f;
-		spec.height_scale = 0.085f;
-	} else if (wants_boards) {
-		spec.family = "boards";
-		spec.reflectance = 0.22f;
-		spec.smoothness = 0.40f;
-		spec.height_scale = 0.060f;
-	} else if (material_matches_token(matches, "wood") || !spec.wood_species.empty()) {
-		spec.family = "wood";
-		spec.reflectance = 0.20f;
-		spec.smoothness = 0.38f;
-		spec.height_scale = 0.055f;
-	} else if (material_matches_token(matches, "marble")) {
-		spec.family = "marble";
-		spec.reflectance = 0.30f;
-		spec.smoothness = 0.72f;
-		spec.height_scale = 0.032f;
-	} else if (material_matches_token(matches, "stone") || material_matches_token(matches, "rock")) {
-		spec.family = "stone";
-		spec.reflectance = 0.22f;
-		spec.smoothness = 0.44f;
-		spec.height_scale = 0.065f;
-	} else if (material_matches_token(matches, "concrete")) {
-		spec.family = "concrete";
-		spec.reflectance = 0.16f;
-		spec.smoothness = 0.32f;
-		spec.height_scale = 0.070f;
-	} else if (material_matches_token(matches, "ceramic") || material_matches_token(matches, "tile")) {
-		spec.family = "ceramic";
-		spec.reflectance = 0.46f;
-		spec.smoothness = 0.84f;
-		spec.height_scale = 0.040f;
-	} else if (material_matches_token(matches, "plastic")) {
-		spec.family = "plastic";
-		spec.reflectance = 0.40f;
-		spec.smoothness = 0.76f;
-		spec.height_scale = 0.024f;
-	} else if (material_matches_token(matches, "paint") || material_matches_token(matches, "plaster")) {
-		spec.family = "paint";
-		spec.reflectance = 0.26f;
-		spec.smoothness = 0.58f;
-		spec.height_scale = 0.028f;
-	}
-
-	if (material_matches_token(matches, "transparent")) {
-		spec.opacity = 0.24f;
-	}
-	if (material_matches_token(matches, "translucent")) {
-		spec.opacity = 0.45f;
-	}
-	if (material_matches_token(matches, "smoky")) {
-		spec.opacity = std::min(spec.opacity, 0.68f);
-		spec.attenuation_color = make_swatch(0.54f, 0.60f, 0.66f);
-		spec.thickness = std::max(spec.thickness, 0.045f);
-	}
-	if (material_matches_token(matches, "opaque")) {
-		spec.opacity = 1.0f;
-	}
-
-	if (material_matches_token(matches, "shiny") ||
-	    material_matches_token(matches, "glossy") ||
-	    material_matches_token(matches, "polished") ||
-	    material_matches_token(matches, "reflective")) {
-		spec.reflectance = std::max(spec.reflectance, 0.78f);
-		spec.smoothness = std::max(spec.smoothness, 0.86f);
-	}
-	if (material_matches_token(matches, "mirror")) {
-		spec.reflectance = std::max(spec.reflectance, 0.96f);
-		spec.smoothness = std::max(spec.smoothness, 0.98f);
-		spec.height_scale = std::min(spec.height_scale, 0.014f);
-	}
-	if (material_matches_token(matches, "frosted")) {
-		spec.smoothness = std::min(spec.smoothness, 0.42f);
-		spec.transmission = std::max(spec.transmission, 0.78f);
-		spec.opacity = std::max(spec.opacity, 0.52f);
-		spec.normal_strength = std::max(spec.normal_strength, 1.35f);
-	}
-	if (material_matches_token(matches, "crystal")) {
-		spec.family = "glass";
-		spec.smoothness = 0.99f;
-		spec.reflectance = 0.90f;
-		spec.transmission = 0.98f;
-		spec.index_of_refraction = 1.52f;
-		spec.opacity = 0.30f;
-	}
-	if (material_matches_token(matches, "brushed")) {
-		spec.anisotropic = 0.72f;
-		spec.smoothness = std::min(spec.smoothness, 0.66f);
-	}
-	if (material_matches_token(matches, "velvet")) {
-		spec.sheen = 0.82f;
-		spec.smoothness = std::min(spec.smoothness, 0.38f);
-	}
-	if (material_matches_token(matches, "clearcoat")) {
-		spec.clearcoat = 1.0f;
-		spec.clearcoat_roughness = 0.08f;
-	}
-	if (material_matches_token(matches, "smooth") || material_matches_token(matches, "satin")) {
-		spec.smoothness = std::max(spec.smoothness, 0.78f);
-	}
-	if (material_matches_token(matches, "rough") ||
-	    material_matches_token(matches, "aged") ||
-	    material_matches_token(matches, "weathered")) {
-		spec.smoothness = std::min(spec.smoothness, 0.28f);
-	}
-	if (material_matches_token(matches, "matte") || material_matches_token(matches, "dull")) {
-		spec.reflectance = std::min(spec.reflectance, 0.22f);
-		spec.smoothness = std::min(spec.smoothness, 0.42f);
-	}
-	if (material_matches_token(matches, "glowing") ||
-	    material_matches_token(matches, "emissive")) {
-		spec.emission_strength = std::max(spec.emission_strength, 0.95f);
-		spec.smoothness = std::max(spec.smoothness, 0.72f);
-	}
-	if (material_matches_token(matches, "rotating")) {
-		spec.uv_rotation_speed = std::max(spec.uv_rotation_speed, 0.70f);
-		spec.pulse_strength = std::max(spec.pulse_strength, 0.12f);
-	}
-	if (material_matches_token(matches, "animated") ||
-	    material_matches_token(matches, "active")) {
-		spec.uv_activity = std::max(spec.uv_activity, 1.0f);
-		spec.pulse_strength = std::max(spec.pulse_strength, 0.34f);
-	}
-	if (spec.family == "neon") {
-		spec.emission_strength = std::max(spec.emission_strength,
-		                                  material_matches_token(matches, "glowing") ? 1.85f : 1.25f);
-	}
-	if (spec.family == "glass") {
-		spec.reflectance = std::max(spec.reflectance, 0.82f);
-	}
-	if (spec.family == "boards" && spec.wood_species.empty()) {
-		spec.wood_species = "oak";
-	}
-	if (spec.two_tone) {
-		spec.smoothness = std::max(spec.smoothness, 0.44f);
-	}
-	if (spec.emphasize_veins) {
-		spec.height_scale = std::max(spec.height_scale, 0.050f);
-	}
-	if (!spec.wood_species.empty()) {
-		spec.descriptors.push_back(spec.wood_species);
-	}
-	if (wants_horizontal || spec.vertical_pattern) {
-		spec.descriptors.push_back(spec.vertical_pattern ? "vertical" : "horizontal");
-	}
-	if (spec.two_tone) {
-		spec.descriptors.push_back("two tone");
-	}
-	if (spec.emphasize_veins) {
-		spec.descriptors.push_back("veins");
-	}
-	if (spec.uv_rotation_speed > 0.0f) {
-		spec.descriptors.push_back("rotating");
-	}
-	if (spec.uv_activity > 0.0f) {
-		spec.descriptors.push_back("active");
-	}
-	sort_and_unique_strings(&spec.descriptors);
-
-	spec.opacity = clamp01(spec.opacity);
-	spec.reflectance = clamp01(spec.reflectance);
-	spec.smoothness = clamp01(spec.smoothness);
-	spec.height_scale = std::clamp(spec.height_scale, 0.0f, 0.16f);
-	spec.emission_strength = std::clamp(spec.emission_strength, 0.0f, 2.5f);
-	spec.pulse_strength = std::clamp(spec.pulse_strength, 0.0f, 1.0f);
-	spec.normal_strength = std::clamp(spec.normal_strength, 0.0f, 2.0f);
-	spec.transmission = clamp01(spec.transmission);
-	spec.index_of_refraction = std::clamp(spec.index_of_refraction, 1.0f, 2.5f);
-	spec.thickness = std::clamp(spec.thickness, 0.0f, 1.0f);
-	spec.anisotropic = clamp01(spec.anisotropic);
-	spec.sheen = clamp01(spec.sheen);
-	spec.clearcoat = clamp01(spec.clearcoat);
-	spec.clearcoat_roughness = clamp01(spec.clearcoat_roughness);
-
-	std::ostringstream description;
-	description << spec.family;
-	if (!spec.descriptors.empty()) {
-		description << " • " << join_strings(spec.descriptors);
-	}
-	description << " • " << join_strings(spec.color_names)
-	            << " • opacity " << std::fixed << std::setprecision(2) << spec.opacity
-	            << " • reflectance " << spec.reflectance
-	            << " • smoothness " << spec.smoothness
-		            << " • height " << spec.height_scale
-		            << " • glow " << spec.emission_strength
-		            << " • transmission " << spec.transmission
-		            << " • ior " << spec.index_of_refraction;
-	spec.description = description.str();
-	return spec;
-}
-
-GLuint upload_rgba_texture(const unsigned char *pixels,
-	                       int width,
-	                       int height,
-	                       bool color_texture = false)
-{
-	if (pixels == nullptr || width <= 0 || height <= 0) {
-		return 0;
-	}
-
-	auto configure_texture_antialiasing = []() {
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		if (!progen3d_texture_anisotropy_supported()) {
-			return;
-		}
-		GLfloat max_anisotropy = 1.0f;
-		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY, &max_anisotropy);
-		const GLfloat anisotropy = std::min<GLfloat>(max_anisotropy, 8.0f);
-		if (anisotropy > 1.0f) {
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, anisotropy);
-		}
-	};
-
-	GLuint texture = 0;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	configure_texture_antialiasing();
-	const GLint internal_format = color_texture ? GL_SRGB8_ALPHA8 : GL_RGBA8;
-	glTexImage2D(
-		GL_TEXTURE_2D, 0, internal_format, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	return texture;
-}
-
 GLuint load_texture_from_file(const std::string &filename)
 {
 	int width = 0;
@@ -2052,553 +1379,8 @@ GLuint load_texture_from_file(const std::string &filename)
 
 PreviewMaterial generate_procedural_material(const std::string &material_name)
 {
-	const ParsedMaterialSpec spec = parse_material_name(material_name);
-	const int texture_size = std::clamp(
-		current_preview_session().render_configuration.material_texture_resolution,
-		256,
-		2048);
-	std::vector<unsigned char> pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-	std::vector<unsigned char> height_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-	std::vector<unsigned char> emissive_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-	const MaterialSwatch primary = spec.palette.front();
-	const MaterialSwatch secondary = spec.palette.size() > 1
-	                                     ? spec.palette[1]
-	                                     : darken_swatch(primary, 0.28f);
-	const MaterialSwatch accent = spec.palette.size() > 2
-	                                  ? spec.palette[2]
-	                                  : lighten_swatch(primary, 0.35f);
-	const float roughness = 1.0f - spec.smoothness;
-	auto to_byte = [](float value) {
-		return static_cast<unsigned char>(std::round(clamp01(value) * 255.0f));
-	};
-	auto write_swatch_pixel = [&](std::vector<unsigned char> *target,
-	                              std::size_t pixel_index,
-	                              const MaterialSwatch &color) {
-		if (target == nullptr || pixel_index + 3 >= target->size()) {
-			return;
-		}
-		(*target)[pixel_index + 0] = to_byte(color.r);
-		(*target)[pixel_index + 1] = to_byte(color.g);
-		(*target)[pixel_index + 2] = to_byte(color.b);
-		(*target)[pixel_index + 3] = 255;
-	};
-	auto write_scalar_pixel = [&](std::vector<unsigned char> *target,
-	                              std::size_t pixel_index,
-	                              float value) {
-		const MaterialSwatch gray = make_swatch(value, value, value);
-		write_swatch_pixel(target, pixel_index, gray);
-	};
-	auto smooth_pulse = [](float x, float width, float feather) {
-		const float inner = std::max(0.0f, width - feather);
-		return glm::smoothstep(0.0f, feather, x) * (1.0f - glm::smoothstep(inner, width, x));
-	};
-
-	for (int y = 0; y < texture_size; ++y) {
-		for (int x = 0; x < texture_size; ++x) {
-			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
-			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
-			const float cloud = fractal_noise(u * 4.0f + 1.7f, v * 4.0f + 2.4f, spec.seed);
-			const float detail = fractal_noise(u * 14.0f + 9.1f, v * 14.0f + 7.6f, spec.seed ^ 0x9e3779b9u, 4);
-			const float cross = fractal_noise((u - v) * 8.0f + 3.2f, (u + v) * 8.0f + 4.8f, spec.seed ^ 0x7f4a7c15u, 3);
-			const float line_noise = fractal_noise(u * 40.0f + 6.1f, v * 2.6f + 5.4f, spec.seed ^ 0x6c8e9cf5u, 3);
-			const float micro = fractal_noise(u * 48.0f + 5.8f, v * 48.0f + 3.7f, spec.seed ^ 0x51ed270bu, 3);
-			const float primary_axis = spec.vertical_pattern ? u : v;
-			const float secondary_axis = spec.vertical_pattern ? v : u;
-
-			MaterialSwatch color = mix_swatch(primary, secondary, cloud);
-			MaterialSwatch emissive = make_swatch(0.0f, 0.0f, 0.0f);
-			float height_value = 0.50f;
-			if (spec.family == "metal") {
-				const float brushed = 0.35f + 0.65f * line_noise;
-				color = mix_swatch(primary, secondary, brushed);
-				color = mix_swatch(color, accent, std::pow(detail, 3.0f) * 0.22f);
-				color = scale_swatch(color, 0.82f + 0.24f * detail);
-				height_value = 0.46f + 0.12f * brushed + 0.06f * micro;
-			} else if (spec.family == "glass") {
-				const float ripple = fractal_noise(u * 18.0f + 3.4f, v * 18.0f + 1.2f, spec.seed ^ 0x2ed13a49u, 4);
-				color = mix_swatch(primary, secondary, 0.40f + 0.22f * cloud);
-				color = lighten_swatch(color, 0.20f + 0.10f * detail);
-				color = mix_swatch(color, make_swatch(0.94f, 0.97f, 1.0f), 0.18f * ripple);
-				height_value = 0.49f + 0.04f * ripple;
-			} else if (spec.family == "grass") {
-				const float blade_field = fractal_noise(u * 22.0f + 6.0f, v * 10.0f + 1.1f, spec.seed ^ 0x3ad1d91fu, 4);
-				const float blade_phase = std::fabs(std::sin((u * 36.0f + blade_field * 2.5f) * 3.1415926f));
-				const float blade_mask = std::pow(blade_phase, 7.0f);
-				const float tip_fade = glm::smoothstep(0.02f, 0.88f, v);
-				color = mix_swatch(primary, secondary, blade_field * 0.60f + detail * 0.40f);
-				color = mix_swatch(color, accent, blade_mask * 0.16f);
-				color = scale_swatch(color, 0.72f + 0.34f * tip_fade);
-				height_value = 0.18f + blade_mask * (0.56f + 0.18f * tip_fade) + 0.10f * micro;
-			} else if (spec.family == "brick") {
-				const float brick_u = u * 6.0f;
-				const float brick_v = v * 10.0f;
-				const float row = std::floor(brick_v);
-				const float stagger = std::fmod(row, 2.0f) * 0.5f;
-				const float local_u = std::fabs(std::fmod(brick_u + stagger, 1.0f));
-				const float local_v = std::fabs(std::fmod(brick_v, 1.0f));
-				const float mortar_x = std::min(local_u, 1.0f - local_u);
-				const float mortar_y = std::min(local_v, 1.0f - local_v);
-				const float mortar = std::min(mortar_x, mortar_y);
-				const float brick_mask = glm::smoothstep(0.06f, 0.13f, mortar);
-				const float brick_noise =
-					fractal_noise((brick_u + stagger) * 1.7f, brick_v * 1.2f, spec.seed ^ 0x7ac41261u, 4);
-				const MaterialSwatch mortar_color = make_swatch(0.78f, 0.75f, 0.72f);
-				color = mix_swatch(primary, secondary, brick_noise);
-				color = mix_swatch(color, accent, std::pow(detail, 2.0f) * 0.12f);
-				color = scale_swatch(color, 0.74f + 0.22f * brick_noise);
-				color = mix_swatch(mortar_color, color, brick_mask);
-				height_value = lerp_scalar(0.24f + 0.04f * micro, 0.72f + 0.10f * brick_noise, brick_mask);
-			} else if (spec.family == "floral") {
-				const float floral_u = u * 4.0f;
-				const float floral_v = v * 4.0f;
-				const float local_u = std::fmod(floral_u, 1.0f) - 0.5f;
-				const float local_v = std::fmod(floral_v, 1.0f) - 0.5f;
-				const float angle = std::atan2(local_v, local_u);
-				const float radius = std::sqrt(local_u * local_u + local_v * local_v);
-				const float petal_radius = 0.16f + 0.07f * (0.5f + 0.5f * std::sin(angle * 5.0f + cloud * 2.6f));
-				const float petal = 1.0f - glm::smoothstep(petal_radius, petal_radius + 0.05f, radius);
-				const float core = 1.0f - glm::smoothstep(0.04f, 0.10f, radius);
-				const float leaf_radius =
-					std::sqrt(local_u * local_u + std::pow(local_v + 0.22f, 2.0f));
-				const float leaf = 1.0f - glm::smoothstep(0.10f, 0.22f, leaf_radius);
-				const MaterialSwatch background = lighten_swatch(secondary, 0.08f);
-				const MaterialSwatch petals = mix_swatch(primary, accent, 0.44f + 0.20f * detail);
-				const MaterialSwatch leaf_color =
-					mix_swatch(accent, make_swatch(0.28f, 0.56f, 0.30f), 0.55f);
-				color = mix_swatch(background, leaf_color, leaf * 0.55f);
-				color = mix_swatch(color, petals, petal);
-				color = mix_swatch(color, make_swatch(0.95f, 0.84f, 0.36f), core);
-				height_value = 0.22f + petal * 0.42f + core * 0.22f + leaf * 0.10f;
-			} else if (spec.family == "boards") {
-				const float board_coord = primary_axis * 6.0f;
-				const float board_index = std::floor(board_coord);
-				const float board_local = std::fmod(board_coord, 1.0f);
-				const float seam_distance = std::min(board_local, 1.0f - board_local);
-				const float seam_mask = glm::smoothstep(0.03f, 0.10f, seam_distance);
-				const float board_noise =
-					fractal_noise(board_index * 0.78f + 2.4f,
-					             secondary_axis * 4.0f + 3.2f,
-					             spec.seed ^ 0x12a4bb91u,
-					             4);
-				float species_frequency = 24.0f;
-				if (spec.wood_species == "walnut") {
-					species_frequency = 34.0f;
-				} else if (spec.wood_species == "oak") {
-					species_frequency = 28.0f;
-				} else if (spec.wood_species == "pine") {
-					species_frequency = 18.0f;
-				} else if (spec.wood_species == "cedar") {
-					species_frequency = 22.0f;
-				} else if (spec.wood_species == "birch") {
-					species_frequency = 26.0f;
-				}
-				const float grain =
-					0.5f + 0.5f * std::sin((secondary_axis * species_frequency + board_noise * 2.8f) * 3.1415926f);
-				const float alternating = std::fmod(board_index, 2.0f);
-				const MaterialSwatch plank_a =
-					mix_swatch(primary, secondary, spec.two_tone ? alternating : board_noise);
-				const MaterialSwatch plank_b =
-					spec.two_tone
-					    ? mix_swatch(secondary, accent, 0.35f)
-					    : mix_swatch(primary, accent, 0.18f + 0.42f * detail);
-				color = mix_swatch(plank_a, plank_b, grain * 0.58f + detail * 0.28f);
-				color = scale_swatch(color, 0.74f + 0.24f * grain);
-				color = mix_swatch(make_swatch(0.16f, 0.11f, 0.08f), color, seam_mask);
-				height_value = lerp_scalar(0.16f + 0.03f * micro, 0.70f + 0.08f * grain, seam_mask);
-			} else if (spec.family == "neon") {
-				const float tile_u = u * 4.5f;
-				const float tile_v = v * 4.5f;
-				const float straight_band =
-					smooth_pulse(std::fabs(std::fmod(tile_v, 1.0f) - 0.5f), 0.18f, 0.06f);
-				const float vertical_band =
-					smooth_pulse(std::fabs(std::fmod(tile_u, 1.0f) - 0.5f), 0.12f, 0.05f);
-				const float diagonal_band =
-					smooth_pulse(std::fabs(std::fmod((u + v) * 6.0f + cloud * 0.4f, 1.0f) - 0.5f), 0.10f, 0.04f);
-				const float glow_mask = std::max(straight_band, std::max(vertical_band * 0.72f, diagonal_band * 0.92f));
-				const MaterialSwatch dark_back = darken_swatch(secondary, 0.82f);
-				const MaterialSwatch neon_core = lighten_swatch(accent, 0.28f);
-				color = mix_swatch(dark_back, neon_core, glow_mask * 0.38f + 0.10f * micro);
-				emissive = scale_swatch(neon_core, glow_mask);
-				height_value = 0.38f + glow_mask * 0.28f;
-			} else if (spec.family == "wood") {
-				float species_frequency = 26.0f;
-				float knot_frequency = 10.0f;
-				if (spec.wood_species == "walnut") {
-					species_frequency = 34.0f;
-					knot_frequency = 8.0f;
-				} else if (spec.wood_species == "oak") {
-					species_frequency = 28.0f;
-					knot_frequency = 11.0f;
-				} else if (spec.wood_species == "pine") {
-					species_frequency = 18.0f;
-					knot_frequency = 7.0f;
-				} else if (spec.wood_species == "cedar") {
-					species_frequency = 22.0f;
-					knot_frequency = 9.0f;
-				} else if (spec.wood_species == "birch") {
-					species_frequency = 24.0f;
-					knot_frequency = 6.0f;
-				}
-				const float grain =
-					0.5f + 0.5f * std::sin((primary_axis * species_frequency + cloud * 2.8f + line_noise * 1.2f) * 3.1415926f);
-				const float secondary_grain =
-					0.5f + 0.5f * std::sin((secondary_axis * species_frequency * 0.32f + detail * 3.6f) * 3.1415926f);
-				const float knot =
-					std::pow(fractal_noise(u * knot_frequency + 4.2f,
-					                      v * knot_frequency + 2.6f,
-					                      spec.seed ^ 0x5b8d0f21u,
-					                      3),
-					        6.0f);
-				color = mix_swatch(primary, secondary, grain * 0.72f + secondary_grain * 0.28f);
-				color = mix_swatch(color, accent, knot * 0.22f);
-				color = scale_swatch(color, 0.72f + 0.30f * detail);
-				height_value = 0.26f + 0.42f * grain + 0.14f * knot + 0.08f * micro;
-			} else if (spec.family == "marble") {
-				const float veins = std::pow(std::fabs(std::sin((u + v) * 18.0f + detail * 7.0f)), 3.0f);
-				color = mix_swatch(primary, secondary, cloud * 0.55f + veins * 0.45f);
-				color = mix_swatch(color, accent, veins * 0.20f);
-				height_value = 0.44f + veins * 0.14f + 0.06f * micro;
-			} else if (spec.family == "stone" || spec.family == "concrete") {
-				const float speckle = std::pow(detail, 6.0f);
-				color = mix_swatch(primary, secondary, cloud * 0.70f + cross * 0.30f);
-				color = mix_swatch(color, accent, speckle * 0.18f);
-				color = scale_swatch(color, 0.82f + 0.18f * cross);
-				height_value = 0.42f + 0.20f * cross + 0.16f * detail;
-			} else {
-				color = mix_swatch(primary, secondary, cloud * 0.65f + detail * 0.35f);
-				color = mix_swatch(color, accent, std::pow(cross, 2.0f) * 0.14f);
-				height_value = 0.40f + 0.16f * cross + 0.08f * micro;
-			}
-
-			if (spec.two_tone && spec.family != "boards" && spec.family != "floral") {
-				const float duo_band =
-					0.5f + 0.5f * std::sin((primary_axis * 10.0f + cross * 4.0f) * 3.1415926f);
-				const float duo_mix = glm::smoothstep(0.28f, 0.72f, duo_band);
-				const MaterialSwatch tone_a =
-					mix_swatch(primary, secondary, 0.30f + 0.18f * detail);
-				const MaterialSwatch tone_b =
-					mix_swatch(secondary, accent, 0.45f + 0.12f * cloud);
-				color = mix_swatch(tone_a, tone_b, duo_mix * 0.82f);
-				height_value = std::max(height_value, 0.34f + 0.12f * duo_mix);
-			}
-			if (spec.emphasize_veins) {
-				const float veins =
-					std::pow(std::fabs(std::sin((u * 1.8f + v * 0.6f + detail * 0.35f) * 14.0f + cloud * 4.0f)), 6.0f);
-				color = mix_swatch(color, accent, veins * 0.26f);
-				height_value = std::max(height_value, 0.38f + veins * 0.24f);
-			}
-			color = mix_swatch(color, darken_swatch(color, 0.35f), roughness * detail * 0.12f);
-			if (spec.emission_strength > 0.0f && spec.family != "neon") {
-				const float glow_mask =
-					std::pow(std::max(detail, fractal_noise(u * 7.0f + 4.0f, v * 7.0f + 8.0f, spec.seed ^ 0x4f3a8c59u, 3)), 3.4f);
-				emissive = mix_swatch(emissive, lighten_swatch(accent, 0.18f), glow_mask);
-				height_value = std::max(height_value, 0.40f + glow_mask * 0.12f);
-			}
-			if (spec.uv_activity > 0.0f && spec.emission_strength <= 0.0f) {
-				const float active_mask =
-					0.5f + 0.5f * std::sin((u + v + detail) * 12.0f + cloud * 3.4f);
-				emissive = mix_swatch(emissive,
-				                     scale_swatch(accent, 0.16f + 0.10f * active_mask),
-				                     spec.pulse_strength * 0.22f);
-			}
-			if (spec.family == "glass") {
-				emissive = mix_swatch(emissive, make_swatch(0.02f, 0.04f, 0.05f), 0.35f * std::pow(detail, 2.5f));
-			}
-			if (spec.family == "metal" && spec.reflectance > 0.9f) {
-				emissive = mix_swatch(emissive, make_swatch(0.03f, 0.03f, 0.03f), 0.25f * micro);
-			}
-			height_value = clamp01(height_value);
-
-			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
-			write_swatch_pixel(&pixels, pixel_index, color);
-			write_scalar_pixel(&height_pixels, pixel_index, height_value);
-			write_swatch_pixel(&emissive_pixels, pixel_index, emissive);
-		}
-	}
-
-	PreviewMaterial material;
-	float default_mapping_scale = 0.82f;
-	if (spec.family == "grass") {
-		default_mapping_scale = 1.22f;
-	} else if (spec.family == "brick") {
-		default_mapping_scale = 0.94f;
-	} else if (spec.family == "boards") {
-		default_mapping_scale = spec.vertical_pattern ? 0.70f : 0.76f;
-	} else if (spec.family == "floral") {
-		default_mapping_scale = 1.04f;
-	} else if (spec.family == "wood") {
-		default_mapping_scale = 0.72f;
-	} else if (spec.family == "glass") {
-		default_mapping_scale = 0.58f;
-	} else if (spec.family == "metal") {
-		default_mapping_scale = 0.68f;
-	} else if (spec.family == "neon") {
-		default_mapping_scale = 1.08f;
-	} else if (spec.family == "stone" || spec.family == "concrete") {
-		default_mapping_scale = 0.88f;
-	}
-	material.texture = upload_rgba_texture(pixels.data(), texture_size, texture_size, true);
-	material.height_texture = upload_rgba_texture(height_pixels.data(), texture_size, texture_size);
-	material.emissive_texture = upload_rgba_texture(emissive_pixels.data(), texture_size, texture_size, true);
-	material.name = spec.name;
-	material.family = spec.family;
-	material.description = spec.description;
-	material.opacity = spec.opacity;
-	material.reflectance = spec.reflectance;
-	material.smoothness = spec.smoothness;
-	material.height_scale = spec.height_scale;
-	material.emission_strength = spec.emission_strength;
-	material.uv_rotation_speed = spec.uv_rotation_speed;
-	material.uv_activity = spec.uv_activity;
-	material.pulse_strength = spec.pulse_strength;
-	material.normal_strength = spec.normal_strength;
-	material.transmission = spec.transmission;
-	material.index_of_refraction = spec.index_of_refraction;
-	material.thickness = spec.thickness;
-	material.attenuation_color = glm::vec3(
-		spec.attenuation_color.r,
-		spec.attenuation_color.g,
-		spec.attenuation_color.b);
-	material.texture_resolution = texture_size;
-
-	// Set PBR material properties based on material type
-	if (spec.family == "metal") {
-		material.metallic = 1.0f;
-		material.roughness = 1.0f - spec.smoothness;
-	} else if (spec.family == "glass") {
-		material.metallic = 0.0f;
-		material.roughness = 0.1f;
-		material.subsurface = 0.2f;
-	} else if (spec.family == "wood" || spec.family == "boards") {
-		material.metallic = 0.0f;
-		material.roughness = 0.8f - spec.smoothness * 0.6f;
-	} else if (spec.family == "stone" || spec.family == "concrete" || spec.family == "brick") {
-		material.metallic = 0.0f;
-		material.roughness = 0.9f;
-	} else if (spec.family == "grass" || spec.family == "floral") {
-		material.metallic = 0.0f;
-		material.roughness = 0.7f;
-		material.subsurface = 0.3f;
-	} else if (spec.family == "neon") {
-		material.metallic = 0.1f;
-		material.roughness = 0.3f;
-	} else {
-		material.metallic = 0.0f;
-		material.roughness = 1.0f - spec.smoothness;
-	}
-	material.ao = 1.0f;
-	material.subsurface = std::max(0.0f, material.subsurface);
-	material.anisotropic = spec.anisotropic;
-	material.sheen = std::max(spec.sheen,
-	                          (spec.family == "cloth" || spec.family == "floral") ? 0.3f : 0.0f);
-	material.clearcoat = std::max(spec.clearcoat,
-	                              (spec.family == "glass" || spec.family == "metal") ? 0.1f : 0.0f);
-	material.clearcoat_roughness = spec.clearcoat > 0.0f
-		? spec.clearcoat_roughness
-		: (1.0f - spec.smoothness) * 0.5f;
-
-	material.mapping_mode = static_cast<int>(PreviewMappingMode::UV);
-	material.mapping_scale = default_mapping_scale;
-	material.projection_axes = {
-		glm::vec3(1.0f, 0.0f, 0.0f),
-		glm::vec3(0.0f, 1.0f, 0.0f),
-		glm::vec3(0.0f, 0.0f, 1.0f)};
-	material.swatches = {
-		glm::vec3(primary.r, primary.g, primary.b),
-		glm::vec3(secondary.r, secondary.g, secondary.b),
-		glm::vec3(accent.r, accent.g, accent.b)};
-	// Auto-generate any missing texture maps
-	auto_generate_missing_texture_maps(&material);
-
-	return material;
-}
-
-GLuint generate_default_alpha_map(int texture_size = 64)
-{
-	std::vector<unsigned char> alpha_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-	return upload_rgba_texture(alpha_pixels.data(), texture_size, texture_size);
-}
-
-// Generate a default glow/emissive map (mostly black with subtle variation)
-GLuint generate_default_glow_map(int texture_size = 64)
-{
-	std::vector<unsigned char> glow_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 0);
-
-	for (int y = 0; y < texture_size; ++y) {
-		for (int x = 0; x < texture_size; ++x) {
-			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
-			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
-
-			// Very subtle glow variation
-			const float noise = fractal_noise(u * 8.0f + 1.0f, v * 8.0f + 2.0f, 0x12345678u, 2);
-			const unsigned char glow = static_cast<unsigned char>(std::max(0.0f, noise * 10.0f));
-
-			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
-			glow_pixels[pixel_index + 0] = glow;
-			glow_pixels[pixel_index + 1] = glow;
-			glow_pixels[pixel_index + 2] = glow;
-			glow_pixels[pixel_index + 3] = 255;
-		}
-	}
-
-	return upload_rgba_texture(glow_pixels.data(), texture_size, texture_size);
-}
-
-// Generate a default normal map (mostly flat with slight variation)
-GLuint generate_default_normal_map(int texture_size = 64)
-{
-	std::vector<unsigned char> normal_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 128);
-
-	for (int y = 0; y < texture_size; ++y) {
-		for (int x = 0; x < texture_size; ++x) {
-			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
-			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
-
-			// Generate slight normal variation
-			const float noise_x = fractal_noise(u * 12.0f + 3.0f, v * 12.0f + 4.0f, 0xABCDEF01u, 3) - 0.5f;
-			const float noise_y = fractal_noise(u * 12.0f + 5.0f, v * 12.0f + 6.0f, 0xFEDCBA12u, 3) - 0.5f;
-
-			// Convert to normal map colors (default flat is 128, 128, 255)
-			const unsigned char normal_x = static_cast<unsigned char>(std::clamp(128 + noise_x * 30.0f, 0.0f, 255.0f));
-			const unsigned char normal_y = static_cast<unsigned char>(std::clamp(128 + noise_y * 30.0f, 0.0f, 255.0f));
-
-			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
-			normal_pixels[pixel_index + 0] = normal_x;
-			normal_pixels[pixel_index + 1] = normal_y;
-			normal_pixels[pixel_index + 2] = 255;  // Z is always up
-			normal_pixels[pixel_index + 3] = 255;
-		}
-	}
-
-	return upload_rgba_texture(normal_pixels.data(), texture_size, texture_size);
-}
-
-GLuint generate_default_roughness_map(float smoothness, int texture_size = 64)
-{
-	std::vector<unsigned char> roughness_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 128);
-	(void)smoothness;
-
-	for (int y = 0; y < texture_size; ++y) {
-		for (int x = 0; x < texture_size; ++x) {
-			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
-			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
-
-			// Add slight variation
-			const float noise = fractal_noise(u * 10.0f + 7.0f, v * 10.0f + 8.0f, 0x23456789u, 2);
-			const unsigned char roughness = static_cast<unsigned char>(std::clamp(
-				228.0f + noise * 27.0f, 0.0f, 255.0f));
-
-			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
-			roughness_pixels[pixel_index + 0] = roughness;
-			roughness_pixels[pixel_index + 1] = roughness;
-			roughness_pixels[pixel_index + 2] = roughness;
-			roughness_pixels[pixel_index + 3] = 255;
-		}
-	}
-
-	return upload_rgba_texture(roughness_pixels.data(), texture_size, texture_size);
-}
-
-GLuint generate_default_metallic_map(int texture_size = 64)
-{
-	std::vector<unsigned char> metallic_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-
-	for (int y = 0; y < texture_size; ++y) {
-		for (int x = 0; x < texture_size; ++x) {
-			const unsigned char metallic = 255;
-
-			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
-			metallic_pixels[pixel_index + 0] = metallic;
-			metallic_pixels[pixel_index + 1] = metallic;
-			metallic_pixels[pixel_index + 2] = metallic;
-			metallic_pixels[pixel_index + 3] = 255;
-		}
-	}
-
-	return upload_rgba_texture(metallic_pixels.data(), texture_size, texture_size);
-}
-
-// Generate a default ambient occlusion map (mostly white with some darkening)
-GLuint generate_default_ao_map(int texture_size = 64)
-{
-	std::vector<unsigned char> ao_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-
-	for (int y = 0; y < texture_size; ++y) {
-		for (int x = 0; x < texture_size; ++x) {
-			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
-			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
-
-			// Generate some subtle AO patterns
-			const float noise = fractal_noise(u * 6.0f + 11.0f, v * 6.0f + 12.0f, 0x456789ABu, 2);
-			const float ao = 1.0f - (noise * 0.15f);  // Slight darkening
-
-			const unsigned char ao_value = static_cast<unsigned char>(std::clamp(ao * 255.0f, 0.0f, 255.0f));
-
-			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
-			ao_pixels[pixel_index + 0] = ao_value;
-			ao_pixels[pixel_index + 1] = ao_value;
-			ao_pixels[pixel_index + 2] = ao_value;
-			ao_pixels[pixel_index + 3] = 255;
-		}
-	}
-
-	return upload_rgba_texture(ao_pixels.data(), texture_size, texture_size);
-}
-
-// Auto-generate all missing texture maps for a material
-void auto_generate_missing_texture_maps(PreviewMaterial *material)
-{
-	if (material == nullptr) {
-		return;
-	}
-	const int auxiliary_texture_resolution =
-		std::clamp(material->texture_resolution, 64, 512);
-
-	// Generate alpha map if missing
-	if (material->alpha_texture == 0) {
-		material->alpha_texture = generate_default_alpha_map(auxiliary_texture_resolution);
-	}
-
-	// Generate glow map if missing
-	if (material->glow_texture == 0) {
-		material->glow_texture = generate_default_glow_map(auxiliary_texture_resolution);
-	}
-
-	// Generate normal map if missing
-	if (material->normal_texture == 0) {
-		material->normal_texture = generate_default_normal_map(auxiliary_texture_resolution);
-	}
-
-	// Generate roughness map if missing
-	if (material->roughness_texture == 0) {
-		material->roughness_texture = generate_default_roughness_map(
-			material->smoothness, auxiliary_texture_resolution);
-	}
-
-	// Generate metallic map if missing
-	if (material->metallic_texture == 0) {
-		material->metallic_texture = generate_default_metallic_map(auxiliary_texture_resolution);
-	}
-
-	// Generate ambient occlusion map if missing
-	if (material->ao_texture == 0) {
-		material->ao_texture = generate_default_ao_map(auxiliary_texture_resolution);
-	}
-}
-
-bool is_user_texture_slot_name(std::string_view material_name)
-{
-	constexpr std::string_view kPrefix = "usertexture";
-	if (material_name.size() <= kPrefix.size() || material_name.rfind(kPrefix, 0) != 0) {
-		return false;
-	}
-
-	for (char ch : material_name.substr(kPrefix.size())) {
-		if (std::isdigit(static_cast<unsigned char>(ch)) == 0) {
-			return false;
-		}
-	}
-	return true;
+	return preview_materials::generate_procedural_material(
+		material_name, current_preview_session().render_configuration.material_texture_resolution);
 }
 
 BackendTextureSlot make_texture_slot_placeholder(int slot_index)
@@ -2782,49 +1564,6 @@ PreviewMaterial generate_backend_texture_material(EditorWorkspaceSession *app_st
 	auto_generate_missing_texture_maps(&material);
 
 	return material;
-}
-
-void destroy_preview_material_textures(PreviewMaterial *material)
-{
-	if (material == nullptr) {
-		return;
-	}
-	if (material->texture != 0) {
-		glDeleteTextures(1, &material->texture);
-		material->texture = 0;
-	}
-	if (material->height_texture != 0) {
-		glDeleteTextures(1, &material->height_texture);
-		material->height_texture = 0;
-	}
-	if (material->emissive_texture != 0) {
-		glDeleteTextures(1, &material->emissive_texture);
-		material->emissive_texture = 0;
-	}
-	if (material->alpha_texture != 0) {
-		glDeleteTextures(1, &material->alpha_texture);
-		material->alpha_texture = 0;
-	}
-	if (material->glow_texture != 0) {
-		glDeleteTextures(1, &material->glow_texture);
-		material->glow_texture = 0;
-	}
-	if (material->normal_texture != 0) {
-		glDeleteTextures(1, &material->normal_texture);
-		material->normal_texture = 0;
-	}
-	if (material->roughness_texture != 0) {
-		glDeleteTextures(1, &material->roughness_texture);
-		material->roughness_texture = 0;
-	}
-	if (material->metallic_texture != 0) {
-		glDeleteTextures(1, &material->metallic_texture);
-		material->metallic_texture = 0;
-	}
-	if (material->ao_texture != 0) {
-		glDeleteTextures(1, &material->ao_texture);
-		material->ao_texture = 0;
-	}
 }
 
 void sync_active_materials(EditorWorkspaceSession *app_state, const std::vector<std::string> &material_names)
@@ -4676,119 +3415,40 @@ void reset_preview_simulation_timing()
 	preview_simulation_interpolation_alpha() = 1.0f;
 }
 
-bool is_preview_dynamic_cube_instance(const PrimitiveInstance &instance)
-{
-	return !instance.removed &&
-	       !instance.immovable &&
-	       (instance.type == "Cube" ||
-	        instance.type == "CubeX" ||
-	        instance.type == "CubeY" ||
-	        instance.type == "CubeZ");
-}
-
-PreviewDynamicCubeMode preview_dynamic_cube_mode_for_instance(const PrimitiveInstance &instance)
-{
-	if (instance.type == "CubeX") {
-		return PreviewDynamicCubeMode::CubeX;
-	}
-	if (instance.type == "CubeY") {
-		return PreviewDynamicCubeMode::CubeY;
-	}
-	if (instance.type == "CubeZ") {
-		return PreviewDynamicCubeMode::CubeZ;
-	}
-	return PreviewDynamicCubeMode::Default;
-}
-
 void upload_static_preview_buffers(EditorWorkspaceSession *app_state, Context *context)
 {
-	if (context == nullptr) {
-		upload_render_buffers(std::vector<std::vector<GLfloat>>{},
-		                      std::vector<int>{},
-		                      active_materials.size());
-		upload_transparent_render_batches(std::vector<PreviewTransparentBatch>{});
-		return;
+	if (context != nullptr) {
+		sync_active_materials(app_state, context->getMaterialNames());
 	}
-
-	sync_active_materials(app_state, context->getMaterialNames());
-	const auto base_vertices = build_base_vertex_data();
-	std::vector<std::vector<GLfloat>> buffers(active_materials.size());
-	std::vector<int> counts(active_materials.size(), 0);
-	std::vector<PreviewTransparentBatch> transparent_batches;
-	transparent_batches.reserve(context->primitive_instances.size());
-	for (const PrimitiveInstance &instance : context->primitive_instances) {
-		if (instance.removed ||
-		    is_preview_dynamic_cube_instance(instance) ||
-		    instance.material_index < 0) {
-			continue;
-		}
-		const std::size_t material_index = static_cast<std::size_t>(instance.material_index);
-		if (material_index >= active_materials.size()) {
-			continue;
-		}
-		if (active_materials[material_index].opacity < 0.999f) {
-			PreviewTransparentBatch batch;
-			batch.material_index = instance.material_index;
-			batch.center = context->getInstanceCenter(instance);
-			context->buildInstanceBuffer(instance, base_vertices.data(), &batch.vertices);
-			if (!batch.vertices.empty()) {
-				transparent_batches.push_back(std::move(batch));
-			}
-			continue;
-		}
-
-		context->buildInstanceBuffer(instance, base_vertices.data(), &buffers[material_index]);
-	}
-
-	for (std::size_t material_index = 0; material_index < buffers.size(); ++material_index) {
-		counts[material_index] = static_cast<int>(buffers[material_index].size() / 8u);
-	}
-	upload_render_buffers(buffers, counts, active_materials.size());
-	upload_transparent_render_batches(transparent_batches);
+	PreviewGeometryUploadService::uploadStatic(context, active_materials);
 }
 
 void upload_dynamic_preview_buffers(Context *context)
 {
-	std::vector<PreviewDynamicCubeDraw> draws;
-	if (context == nullptr) {
-		upload_dynamic_cube_draws(draws);
-		return;
-	}
-
-	draws.reserve(context->primitive_instances.size());
-	for (const PrimitiveInstance &instance : context->primitive_instances) {
-		if (!is_preview_dynamic_cube_instance(instance) || instance.material_index < 0) {
-			continue;
-		}
-		const std::size_t material_index = static_cast<std::size_t>(instance.material_index);
-		if (material_index >= active_materials.size()) {
-			continue;
-		}
-
-		PreviewDynamicCubeDraw draw;
-		draw.previous_primary_transform =
-			instance.has_previous_render_state ? instance.previous_primary_transform : instance.primary_transform;
-		draw.previous_secondary_transform =
-			instance.has_previous_render_state ? instance.previous_secondary_transform : instance.secondary_transform;
-		draw.current_primary_transform = instance.primary_transform;
-		draw.current_secondary_transform = instance.secondary_transform;
-		draw.previous_center =
-			instance.has_previous_render_state ? instance.previous_bounds_center : context->getInstanceCenter(instance);
-		draw.current_center = context->getInstanceCenter(instance);
-		draw.dual_scales = instance.dual_scales;
-		draw.dual_translations = instance.dual_translations;
-		draw.texscale = instance.texscale;
-		draw.material_index = instance.material_index;
-		draw.mode = preview_dynamic_cube_mode_for_instance(instance);
-		draws.push_back(std::move(draw));
-	}
-	upload_dynamic_cube_draws(draws);
+	PreviewGeometryUploadService::uploadDynamic(context, active_materials.size());
 }
 
 void upload_context_preview_buffers(EditorWorkspaceSession *app_state, Context *context)
 {
 	upload_static_preview_buffers(app_state, context);
 	upload_dynamic_preview_buffers(context);
+}
+
+void dispatch_preview_audio(const DueAudioEvents &events)
+{
+	ScenePreviewSession &preview = current_preview_session();
+	if (!preview.audio_enabled) return;
+	for (const AudioEventDefinition *event : events) {
+		preview.speech_playback.play(event->speech);
+	}
+}
+
+void advance_preview_physics(Context &context, float delta_time)
+{
+	SceneAudioEventEvaluator &audio = current_preview_session().audio_events;
+	std::vector<SimulationContact> contacts;
+	context.stepSimulation(delta_time, audio.hasCollisionTriggers() ? &contacts : nullptr);
+	dispatch_preview_audio(audio.advance(context, context.getTime(), &contacts));
 }
 
 void step_preview_simulation(float delta_time)
@@ -4799,13 +3459,13 @@ void step_preview_simulation(float delta_time)
 
 	preview_simulation_accumulated_time() = std::min(
 		preview_simulation_accumulated_time() + delta_time,
-		kPreviewSimulationStep * static_cast<float>(kMaxPreviewSimulationStepsPerFrame));
+		kSceneSimulationStepSeconds * static_cast<float>(kMaxPreviewSimulationStepsPerFrame));
 	bool advanced_simulation = false;
 	int step_count = 0;
-	while (preview_simulation_accumulated_time() >= kPreviewSimulationStep &&
+	while (preview_simulation_accumulated_time() >= kSceneSimulationStepSeconds &&
 	       step_count < kMaxPreviewSimulationStepsPerFrame) {
-		grammar->context->stepSimulation(kPreviewSimulationStep);
-		preview_simulation_accumulated_time() -= kPreviewSimulationStep;
+		advance_preview_physics(*grammar->context, kSceneSimulationStepSeconds);
+		preview_simulation_accumulated_time() -= kSceneSimulationStepSeconds;
 		advanced_simulation = true;
 		++step_count;
 	}
@@ -4813,7 +3473,7 @@ void step_preview_simulation(float delta_time)
 		upload_dynamic_preview_buffers(grammar->context);
 	}
 	preview_simulation_interpolation_alpha() =
-		std::clamp(preview_simulation_accumulated_time() / kPreviewSimulationStep, 0.0f, 1.0f);
+		std::clamp(preview_simulation_accumulated_time() / kSceneSimulationStepSeconds, 0.0f, 1.0f);
 }
 
 void step_preview_simulation_once(float delta_time)
@@ -4823,7 +3483,7 @@ void step_preview_simulation_once(float delta_time)
 	}
 
 	reset_preview_simulation_timing();
-	grammar->context->stepSimulation(delta_time);
+	advance_preview_physics(*grammar->context, delta_time);
 	upload_dynamic_preview_buffers(grammar->context);
 	preview_simulation_interpolation_alpha() = 1.0f;
 }
@@ -4905,262 +3565,15 @@ void request_scene_time_sample_internal(const std::string &source_text,
 	                                        true);
 }
 
-// Validate grammar and report any issues
 bool validate_grammar(Grammar *gram, EditorWorkspaceSession *app_state, bool quiet)
 {
-	if (gram == nullptr) {
-		if (!quiet) {
-			errorout("Grammar validation error: grammar is null.");
-		}
-		return false;
-	}
-
-	if (!quiet) {
-		debugout("Validating grammar structure");
-	}
-	bool valid = true;
-
-	if (app_state != nullptr) {
+	if (app_state != nullptr && gram != nullptr) {
 		app_state->document_diagnostics.clear();
 	}
-
-	const auto add_validation_issue = [&](const GrammarDiagnostic &diagnostic) {
-		valid = false;
-		add_app_state_grammar_diagnostic(app_state, diagnostic);
-
-		if (diagnostic.line >= 0 &&
-		    std::find(gram->error_lines.begin(), gram->error_lines.end(), diagnostic.line) ==
-		        gram->error_lines.end()) {
-			gram->error_lines.push_back(diagnostic.line);
-		}
-		const bool duplicate = std::any_of(
-			gram->error_details.begin(),
-			gram->error_details.end(),
-			[&](const GrammarDiagnostic &existing) {
-				return existing.line == diagnostic.line &&
-				       existing.start_column == diagnostic.start_column &&
-				       existing.end_column == diagnostic.end_column &&
-				       existing.message == diagnostic.message;
-			});
-		if (!duplicate) {
-			gram->error_details.push_back(diagnostic);
-		}
-
-		std::ostringstream ss;
-		ss << "Grammar validation error";
-		if (diagnostic.line >= 0) {
-			ss << " [line " << (diagnostic.line + 1);
-			if (diagnostic.start_column >= 0) {
-				ss << ", column " << (diagnostic.start_column + 1);
-			}
-			ss << "]";
-		}
-		ss << ": " << diagnostic.message;
-		if (!quiet) {
-			errorout(ss.str());
-		}
-	};
-
-	const auto is_open_delimiter = [](char c) {
-		return c == '(' || c == '[' || c == '{';
-	};
-
-	const auto is_close_delimiter = [](char c) {
-		return c == ')' || c == ']' || c == '}';
-	};
-
-	const auto matching_delimiter = [](char c) {
-		switch (c) {
-		case '(':
-			return ')';
-		case '[':
-			return ']';
-		case '{':
-			return '}';
-		case ')':
-			return '(';
-		case ']':
-			return '[';
-		case '}':
-			return '{';
-		default:
-			return '\0';
-		}
-	};
-
-	const auto delimiters_match = [&](char open, char close) {
-		return matching_delimiter(open) == close;
-	};
-
-	const std::vector<std::string> &source_lines = gram->lines;
-	if (source_lines.empty()) {
-		GrammarDiagnostic diagnostic;
-		diagnostic.message = "Document is empty.";
-		add_validation_issue(diagnostic);
-		return false;
-	}
-
-	if (gram->rule_list.empty()) {
-		GrammarDiagnostic diagnostic;
-		diagnostic.message = "No valid rules were parsed.";
-		add_validation_issue(diagnostic);
-	} else if (!quiet) {
-		debugout("Parsed rules: " + std::to_string(gram->rule_list.size()));
-	}
-
-	int empty_rules = 0;
-	for (const auto& rule : gram->rule_list) {
-		if (rule->tokens.empty()) {
-			empty_rules++;
-			if (!quiet) {
-				errorout("Grammar validation warning: rule '" + rule->rule_name + "' has no tokens in its main section.");
-			}
-		}
-	}
-
-	if (empty_rules > 0 && !quiet) {
-		debugout("Rules with empty main sections: " + std::to_string(empty_rules));
-	}
-
-	struct DelimiterState {
-		char delimiter = '\0';
-		int line = -1;
-		int column = 0;
-	};
-
-		std::vector<DelimiterState> delimiter_stack;
-	for (int line_index = 0; line_index < static_cast<int>(source_lines.size()); ++line_index) {
-		const std::string &line = source_lines[static_cast<std::size_t>(line_index)];
-		const std::size_t comment_column = find_comment_start(line);
-		const std::size_t code_end = comment_column == std::string::npos ? line.size() : comment_column;
-		for (std::size_t column = 0; column < code_end; ++column) {
-			const char c = line[column];
-			if (c == '\\') {
-				add_validation_issue(
-					{line_index,
-					 static_cast<int>(column),
-					 static_cast<int>(column) + 1,
-					 "Unexpected '\\' character in grammar source."});
-				continue;
-			}
-			if (is_open_delimiter(c)) {
-				delimiter_stack.push_back({c, line_index, static_cast<int>(column)});
-					continue;
-			}
-			if (!is_close_delimiter(c)) {
-				continue;
-			}
-			if (delimiter_stack.empty()) {
-				add_validation_issue(
-					{line_index,
-					 static_cast<int>(column),
-					 static_cast<int>(column) + 1,
-					 std::string("Unmatched closing delimiter '") + c + "'."});
-				continue;
-			}
-			const DelimiterState open = delimiter_stack.back();
-			if (delimiters_match(open.delimiter, c)) {
-				delimiter_stack.pop_back();
-				continue;
-			}
-			add_validation_issue(
-				{line_index,
-				 static_cast<int>(column),
-				 static_cast<int>(column) + 1,
-				 std::string("Mismatched closing delimiter '") + c +
-				     "'. Expected '" + matching_delimiter(open.delimiter) + "'."});
-		}
-	}
-
-	for (const DelimiterState &open : delimiter_stack) {
-		add_validation_issue(
-			{open.line,
-			 open.column,
-			 open.column + 1,
-			 std::string("Unclosed delimiter '") + open.delimiter + "'."});
-	}
-
-	const std::vector<ValidationRuleBlock> rule_blocks =
-		build_validation_rule_blocks(source_lines);
-	for (const ValidationRuleBlock &block : rule_blocks) {
-		std::vector<std::size_t> arrow_indices;
-		for (std::size_t token_index = 0; token_index < block.tokens.size(); ++token_index) {
-			if (block.tokens[token_index].text == "->") {
-				arrow_indices.push_back(token_index);
-			}
-		}
-		if (arrow_indices.empty()) {
-			add_validation_issue(
-				make_line_grammar_diagnostic(source_lines,
-				                             block.start_line,
-				                             "Rule is missing a '->' production arrow."));
-			continue;
-		}
-		if (arrow_indices[0] == 0) {
-			add_validation_issue(
-				make_token_grammar_diagnostic(block.tokens[arrow_indices[0]],
-				                              "Production arrow needs a rule name on the left-hand side."));
-		}
-		if (arrow_indices.size() > 2) {
-			add_validation_issue(
-				make_token_grammar_diagnostic(block.tokens[arrow_indices[2]],
-				                              "Rule has too many '->' clauses. Only one alternate production is supported."));
-		}
-
-		const std::size_t primary_body_end =
-			arrow_indices.size() > 1 ? arrow_indices[1] : block.tokens.size();
-		if (arrow_indices[0] + 1 >= primary_body_end) {
-			add_validation_issue(
-				make_token_grammar_diagnostic(block.tokens[arrow_indices[0]],
-				                              "Rule production body is empty."));
-		}
-
-		if (arrow_indices.size() > 1 && arrow_indices[1] + 1 >= block.tokens.size()) {
-			add_validation_issue(
-				make_token_grammar_diagnostic(block.tokens[arrow_indices[1]],
-				                              "Alternate production body is empty."));
-		}
-
-		std::size_t section_start = arrow_indices[0] + 1;
-		std::size_t pipe_count = 0;
-		for (std::size_t token_index = arrow_indices[0] + 1;
-		     token_index < primary_body_end;
-		     ++token_index) {
-			if (block.tokens[token_index].text != "|") {
-				continue;
-			}
-			++pipe_count;
-			if (section_start == token_index) {
-				add_validation_issue(
-					make_token_grammar_diagnostic(block.tokens[token_index],
-					                              "Rule has an empty section around '|'."));
-			}
-			if (pipe_count > 2) {
-				add_validation_issue(
-					make_token_grammar_diagnostic(block.tokens[token_index],
-					                              "Rule has too many '|' sections. At most three are supported."));
-			}
-			section_start = token_index + 1;
-		}
-		if (section_start == primary_body_end &&
-		    primary_body_end > arrow_indices[0] + 1 &&
-		    block.tokens[primary_body_end - 1].text == "|") {
-			add_validation_issue(
-				make_token_grammar_diagnostic(block.tokens[primary_body_end - 1],
-				                              "Rule has an empty section around '|'."));
-		}
-	}
-
-	if (!quiet) {
-		if (app_state != nullptr && !app_state->document_diagnostics.empty()) {
-			debugout("Grammar validation found " +
-			         std::to_string(app_state->document_diagnostics.size()) + " issue(s)");
-		} else {
-			debugout("Grammar validation completed without additional structural issues");
-		}
-	}
-
-	return valid;
+	return GrammarStructureValidationService::validate(
+		gram, quiet, [app_state](const GrammarDiagnostic &diagnostic) {
+			add_app_state_grammar_diagnostic(app_state, diagnostic);
+		});
 }
 
 void process_completed_regeneration(EditorWorkspaceSession *app_state)
@@ -5180,6 +3593,8 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 	} else if (!result->succeeded()) {
 		if (result->time_sample) {
 			preview_playback_active() = false;
+			current_preview_session().audio_seek_pending = false;
+			current_preview_session().speech_playback.cancelPlayback();
 		}
 		if (app_state != nullptr) {
 			app_state->document_diagnostics.clear();
@@ -5214,12 +3629,33 @@ void process_completed_regeneration(EditorWorkspaceSession *app_state)
 			preview_upload_succeeded = false;
 		}
 		if (preview_upload_succeeded) {
+			ScenePreviewSession &preview = current_preview_session();
+			const GrammarDocument *candidate_grammar = candidate_snapshot->grammarDocument();
+			const bool same_audio_program = result->time_sample && grammar != nullptr &&
+				candidate_snapshot->designNonce() == active_grammar_design_nonce &&
+				((candidate_grammar->audioEvents().empty() && grammar->audioEvents().empty()) ||
+				 candidate_grammar->lines == grammar->lines);
 			ElectricalControlGraph previous_control_graph =
 				current_preview_session().lighting.electrical_control_graph;
 			destroy_grammar();
 			current_scene_snapshot() = std::move(candidate_snapshot);
 			grammar = current_scene_snapshot()->grammarDocument();
 			active_grammar_design_nonce = current_scene_snapshot()->designNonce();
+			if (!same_audio_program) {
+				preview.audio_events.replaceProgram(grammar->audioEvents(), *grammar->context,
+				                                   result->evaluation_time);
+				preview.speech_playback.prepare(grammar->audioEvents());
+				preview.audio_camera_rebase = true;
+			} else {
+				preview.audio_events.bindScene(*grammar->context);
+				if (preview.audio_seek_pending) {
+					preview.audio_events.rebase(*grammar->context, result->evaluation_time);
+				} else {
+					dispatch_preview_audio(preview.audio_events.advance(*grammar->context,
+					                                                  result->evaluation_time));
+				}
+			}
+			preview.audio_seek_pending = false;
 			if (app_state != nullptr) {
 				app_state->document.recordSuccessfulGeneration(
 					result->request_id,
@@ -5289,6 +3725,7 @@ void set_editor_document_internal(EditorWorkspaceSession *app_state,
 		scene_regeneration_coordinator->cancelScheduledRequest();
 	}
 	current_preview_session().fit_camera_pending = true;
+	current_preview_session().speech_playback.cancelPlayback();
 	app_state->document.clearLocalIdentity();
 	app_state->local_document_workflow.reset();
 	clear_cloud_document_identity(app_state);
@@ -6267,7 +4704,7 @@ std::string join_lines(const std::vector<std::string> &lines)
 
 std::string trim_code_copy(const std::string &line)
 {
-	const std::size_t comment_start = find_comment_start(line);
+	const std::size_t comment_start = GrammarStructureValidationService::findCommentStart(line);
 	if (comment_start == std::string::npos) {
 		return trim_copy(line);
 	}
@@ -6277,23 +4714,6 @@ std::string trim_code_copy(const std::string &line)
 bool is_blank_or_comment_line(const std::string &line)
 {
 	return trim_code_copy(line).empty();
-}
-
-bool starts_new_rule(const std::string &trimmed_line)
-{
-	if (trimmed_line.empty()) {
-		return false;
-	}
-	if (trimmed_line.rfind("->", 0) == 0) {
-		return false;
-	}
-	return trimmed_line.find("->") != std::string::npos;
-}
-
-int first_non_whitespace_column(const std::string &line)
-{
-	const std::size_t start = line.find_first_not_of(" \t\r\n");
-	return start == std::string::npos ? 0 : static_cast<int>(start);
 }
 
 bool is_identifier_start_char(char c)
@@ -6355,198 +4775,12 @@ std::size_t consume_number_token(const std::string &text, std::size_t index)
 	return index;
 }
 
-std::size_t find_comment_start(const std::string &line)
-{
-	const std::size_t hash_comment = line.find('#');
-	const std::size_t slash_comment = line.find("//");
-	if (hash_comment == std::string::npos) {
-		return slash_comment;
-	}
-	if (slash_comment == std::string::npos) {
-		return hash_comment;
-	}
-	return std::min(hash_comment, slash_comment);
-}
-
 void add_app_state_grammar_diagnostic(EditorWorkspaceSession *app_state, const GrammarDiagnostic &diagnostic)
 {
 	if (app_state == nullptr) {
 		return;
 	}
 	app_state->document_diagnostics.addDiagnostic(diagnostic);
-}
-
-int line_code_end_column(const std::string &line)
-{
-	std::size_t code_end = find_comment_start(line);
-	if (code_end == std::string::npos) {
-		code_end = line.size();
-	}
-	while (code_end > 0 &&
-	       std::isspace(static_cast<unsigned char>(line[code_end - 1])) != 0) {
-		--code_end;
-	}
-	return static_cast<int>(code_end);
-}
-
-GrammarDiagnostic make_line_grammar_diagnostic(const std::vector<std::string> &lines,
-                                               int line_number,
-                                               const std::string &message)
-{
-	GrammarDiagnostic diagnostic;
-	diagnostic.line = line_number;
-	diagnostic.message = message;
-	if (line_number >= 0 && line_number < static_cast<int>(lines.size())) {
-		const std::string &line = lines[static_cast<std::size_t>(line_number)];
-		diagnostic.start_column = first_non_whitespace_column(line);
-		diagnostic.end_column =
-			std::max(diagnostic.start_column + 1, line_code_end_column(line));
-	}
-	return diagnostic;
-}
-
-GrammarDiagnostic make_token_grammar_diagnostic(const ValidationTokenSpan &token,
-                                                const std::string &message)
-{
-	GrammarDiagnostic diagnostic;
-	diagnostic.line = token.line;
-	diagnostic.start_column = token.start_column;
-	diagnostic.end_column = std::max(token.start_column + 1, token.end_column);
-	diagnostic.message = message;
-	return diagnostic;
-}
-
-std::vector<ValidationTokenSpan> tokenize_validation_rule_block(const std::vector<std::string> &lines,
-                                                                int start_line,
-                                                                int end_line)
-{
-	std::vector<ValidationTokenSpan> tokens;
-	if (start_line < 0 || end_line < start_line) {
-		return tokens;
-	}
-
-	for (int line_number = start_line;
-	     line_number <= end_line &&
-	     line_number < static_cast<int>(lines.size());
-	     ++line_number) {
-		const std::string &line = lines[static_cast<std::size_t>(line_number)];
-		const std::size_t code_end_raw = find_comment_start(line);
-		const std::size_t code_end =
-			code_end_raw == std::string::npos ? line.size() : code_end_raw;
-		const std::size_t code_start = line.find_first_not_of(" \t\r\n");
-		if (code_start == std::string::npos || code_start >= code_end) {
-			continue;
-		}
-
-		std::string current_token;
-		int current_start_column = -1;
-		const auto flush_token = [&]() {
-			if (current_token.empty()) {
-				return;
-			}
-			tokens.push_back({current_token,
-			                 line_number,
-			                 current_start_column,
-			                 current_start_column + static_cast<int>(current_token.size())});
-			current_token.clear();
-			current_start_column = -1;
-		};
-
-		for (std::size_t column = code_start; column < code_end; ++column) {
-			const char c = line[column];
-			if (std::isspace(static_cast<unsigned char>(c)) != 0) {
-				flush_token();
-				continue;
-			}
-			if (c == '-' && column + 1 < code_end && line[column + 1] == '>') {
-				flush_token();
-				tokens.push_back({"->",
-				                 line_number,
-				                 static_cast<int>(column),
-				                 static_cast<int>(column) + 2});
-				++column;
-				continue;
-			}
-			if (c == '(' || c == ')' || c == '[' || c == ']' || c == '{' || c == '}' ||
-			    c == '|' || c == ';' || c == '?' || c == ':') {
-				flush_token();
-				tokens.push_back({std::string(1, c),
-				                 line_number,
-				                 static_cast<int>(column),
-				                 static_cast<int>(column) + 1});
-				continue;
-			}
-			if (current_token.empty()) {
-				current_start_column = static_cast<int>(column);
-			}
-			current_token += c;
-		}
-		flush_token();
-	}
-
-	return tokens;
-}
-
-std::string join_validation_tokens(const std::vector<ValidationTokenSpan> &tokens,
-                                   std::size_t start_index,
-                                   std::size_t end_index)
-{
-	if (start_index >= end_index || start_index >= tokens.size()) {
-		return "";
-	}
-	end_index = std::min(end_index, tokens.size());
-
-	std::string output;
-	for (std::size_t index = start_index; index < end_index; ++index) {
-		if (!output.empty()) {
-			output += ' ';
-		}
-		output += tokens[index].text;
-	}
-	return output;
-}
-
-std::vector<ValidationRuleBlock> build_validation_rule_blocks(const std::vector<std::string> &lines)
-{
-	std::vector<ValidationRuleBlock> blocks;
-	int current_rule_start_line = -1;
-
-	const auto finalize_block = [&](int end_line) {
-		if (current_rule_start_line < 0 || end_line < current_rule_start_line) {
-			return;
-		}
-		ValidationRuleBlock block;
-		block.start_line = current_rule_start_line;
-		block.end_line = end_line;
-		block.tokens = tokenize_validation_rule_block(lines, current_rule_start_line, end_line);
-		block.content = join_validation_tokens(block.tokens, 0, block.tokens.size());
-		if (!block.content.empty()) {
-			blocks.push_back(std::move(block));
-		}
-		current_rule_start_line = -1;
-	};
-
-	for (int line_number = 0; line_number < static_cast<int>(lines.size()); ++line_number) {
-		const std::string &line = lines[static_cast<std::size_t>(line_number)];
-		const std::size_t code_end_raw = find_comment_start(line);
-		const std::size_t code_end =
-			code_end_raw == std::string::npos ? line.size() : code_end_raw;
-		const std::string trimmed = trim_copy(line.substr(0, code_end));
-		if (trimmed.empty()) {
-			continue;
-		}
-		if (current_rule_start_line < 0) {
-			current_rule_start_line = line_number;
-			continue;
-		}
-		if (starts_new_rule(trimmed)) {
-			finalize_block(line_number - 1);
-			current_rule_start_line = line_number;
-		}
-	}
-
-	finalize_block(static_cast<int>(lines.size()) - 1);
-	return blocks;
 }
 
 ImU32 color_for_editor_token(EditorTokenKind kind)
@@ -7266,7 +5500,7 @@ bool find_delimiter_near_cursor(const std::vector<std::string> &lines,
 	}
 
 	const std::string &line = lines[static_cast<std::size_t>(cursor_position.line)];
-	const std::size_t comment_start = find_comment_start(line);
+	const std::size_t comment_start = GrammarStructureValidationService::findCommentStart(line);
 	const int code_end = static_cast<int>(comment_start == std::string::npos ? line.size() : comment_start);
 	const std::array<int, 2> candidate_columns = {
 		std::clamp(cursor_position.column, 0, code_end),
@@ -7305,7 +5539,7 @@ bool find_matching_delimiter_forward(const std::vector<std::string> &lines,
 	int depth = 0;
 	for (int line_index = origin_line; line_index < static_cast<int>(lines.size()); ++line_index) {
 		const std::string &line = lines[static_cast<std::size_t>(line_index)];
-		const std::size_t comment_start = find_comment_start(line);
+		const std::size_t comment_start = GrammarStructureValidationService::findCommentStart(line);
 		const int code_end = static_cast<int>(comment_start == std::string::npos ? line.size() : comment_start);
 		int start_column = 0;
 		if (line_index == origin_line) {
@@ -7345,7 +5579,7 @@ bool find_matching_delimiter_backward(const std::vector<std::string> &lines,
 	int depth = 0;
 	for (int line_index = origin_line; line_index >= 0; --line_index) {
 		const std::string &line = lines[static_cast<std::size_t>(line_index)];
-		const std::size_t comment_start = find_comment_start(line);
+		const std::size_t comment_start = GrammarStructureValidationService::findCommentStart(line);
 		const int code_end = static_cast<int>(comment_start == std::string::npos ? line.size() : comment_start);
 		int start_column = code_end - 1;
 		if (line_index == origin_line) {
@@ -10309,11 +8543,16 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 	ImVec2 available = ImGui::GetContentRegionAvail();
 	available.x = std::max(available.x, 100.0f);
 	available.y = std::max(available.y, 100.0f);
-	if (request_fit_camera || current_preview_session().fit_camera_pending) {
+	ScenePreviewSession &preview = workspace_session.preview;
+	const bool fit_camera = request_fit_camera || preview.fit_camera_pending;
+	if (fit_camera) {
 		fit_preview_camera_to_scene(app_state, available);
 	}
 	const PreviewInteractionCameraState camera =
 		build_preview_camera_state(ImVec2(available.x, available.y));
+	dispatch_preview_audio(preview.audio_events.observeCamera(
+		camera.position / preview.camera.scaleFactor(), fit_camera || preview.audio_camera_rebase));
+	preview.audio_camera_rebase = false;
 
 	std::vector<PreviewOverlayVertex> overlay_vertices;
 	if (context != nullptr) {
@@ -11524,6 +9763,7 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 4.0f));
 	if (ImGui::Button(preview_playback_active() ? "Pause" : "Play")) {
 		preview_playback_active() = !preview_playback_active();
+		if (!preview_playback_active()) workspace_session.preview.speech_playback.cancelPlayback();
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Step")) {
@@ -11544,10 +9784,13 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 	ImGui::SameLine();
 	if (ImGui::Button(grammar_time_driven ? "Reset Time" : "Reset Sim")) {
 		preview_timeline_controller.reset(current_preview_session().timeline);
+		workspace_session.preview.speech_playback.cancelPlayback();
 		if (grammar_time_driven) {
+			workspace_session.preview.audio_seek_pending = true;
 			request_scene_time_sample_internal(app_state->document.source_text, 0.0);
 		} else if (context != nullptr) {
 			context->resetSimulation();
+			workspace_session.preview.audio_events.rebase(*context, 0.0);
 			upload_context_preview_buffers(app_state, context);
 		}
 	}
@@ -11556,6 +9799,7 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 		current_preview_session().camera.reset();
 		current_preview_session().projection.reset();
 		current_preview_session().fit_camera_pending = false;
+		workspace_session.preview.audio_camera_rebase = true;
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Fit")) {
@@ -11599,6 +9843,8 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 			preview_playback_active() = false;
 			preview_grammar_target_time() = static_cast<double>(editable_time);
 			preview_grammar_request_accumulator() = 0.0;
+			workspace_session.preview.speech_playback.cancelPlayback();
+			workspace_session.preview.audio_seek_pending = true;
 			request_scene_time_sample_internal(app_state->document.source_text,
 			                                   preview_grammar_target_time());
 		}
@@ -11614,6 +9860,15 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 	}
 	if (ImGui::IsItemHovered()) {
 		ImGui::SetTooltip("Adjust the lens field of view. Mouse-wheel zoom changes camera distance.");
+	}
+	if (!workspace_session.preview.audio_events.definitions().empty()) {
+		if (ImGui::Checkbox("Audio", &workspace_session.preview.audio_enabled) &&
+		    !workspace_session.preview.audio_enabled) {
+			workspace_session.preview.speech_playback.cancelPlayback();
+		}
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("%s", workspace_session.preview.speech_playback.status().c_str());
+		}
 	}
 	ImGui::SameLine();
 	ImGui::Checkbox("Overlay", &connection_overlay_visible());
@@ -12211,6 +10466,10 @@ int Progen3dEditorApplication::run()
 	}
 	app_state.preview.selection.selected_spatial_object_id =
 		launch_options_.selectedSpatialObjectId();
+	if (!launch_options_.smokeTestRequested()) {
+		app_state.preview.speech_playback.configure(
+			runtime_environment.pathLocator().resourcePath(std::filesystem::path("audio") / "kokoro"));
+	}
 	bool startup_document_load_failed = false;
 	std::string firebase_init_error;
 	if (!initialize_firebase_auth_support(&firebase_init_error) && !firebase_init_error.empty()) {

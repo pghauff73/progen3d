@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "grammar": "grammar_matching_panel.p3d",
+  "seed": 42,
+  "width": 220,
+  "height": 172,
+  "output_dir": "../build/grammar-matching-render",
+  "orthographic": {
+    "center": [0, 0, 0],
+    "direction": [-0.60, -0.22, -1],
+    "pixels_per_unit": 56
+  }
+}

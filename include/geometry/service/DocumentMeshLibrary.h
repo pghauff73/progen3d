@@ -7,6 +7,8 @@
 #include <unordered_map>
 #include <vector>
 
+class ScenePrimitiveInstance;
+
 class DocumentMeshLibrary final : public GeneratedMeshProvider
 {
 public:
@@ -18,7 +20,14 @@ public:
 	bool recognizes(const std::string &key) const override;
 	GeneratedMeshResolutionResult resolve(
 		const std::string &key, GeometryDetailLevel detail_level) const override;
+	bool alignSeams(std::vector<ScenePrimitiveInstance> &instances) const;
 
 private:
+	struct SeamVertex {
+		std::string mesh_key;
+		std::size_t index;
+	};
+
 	std::unordered_map<std::string, std::shared_ptr<Mesh>> meshes_;
+	std::vector<std::vector<SeamVertex>> seams_;
 };

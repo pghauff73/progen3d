@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mesh.h"
+#include "geometry/model/CalibratedOrthographicView.h"
 #include "geometry/model/ThreeViewProjection.h"
 
 #include <glm/glm.hpp>
@@ -50,4 +51,6 @@ public:
 		const Mesh &mesh,
 		const glm::mat4 &world_transform,
 		const ThreeViewProjectionConfiguration &configuration = {}) const;
+	BinarySilhouette projectCalibrated(const MeshGeometryData &world_mesh,
+	                                   const CalibratedOrthographicView &view) const;
 };

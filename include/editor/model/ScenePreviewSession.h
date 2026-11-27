@@ -1,5 +1,7 @@
 #pragma once
 
+#include "audio/service/SceneAudioEventEvaluator.h"
+#include "audio/service/SpeechPlaybackService.h"
 #include "editor/controller/PreviewCameraController.h"
 #include "editor/model/EditorSelection.h"
 #include "editor/model/GeneratedSceneSnapshot.h"
@@ -28,5 +30,10 @@ public:
 	PreviewStatistics statistics;
 	SceneSourceAssociationIndex source_associations;
 	LightingSceneState lighting;
+	SceneAudioEventEvaluator audio_events;
+	SpeechPlaybackService speech_playback;
+	bool audio_enabled = true;
+	bool audio_seek_pending = false;
+	bool audio_camera_rebase = true;
 	bool fit_camera_pending = true;
 };

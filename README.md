@@ -214,6 +214,59 @@ The Preview toolbar controls simulation time, regeneration, framing, and navigat
 
 The camera menu provides `24 deg Telephoto`, `43 deg Standard`, `70 deg Wide`, a lens reset, and readouts or controls for camera distance and movement/rotation velocity.
 
+### Grammar audio events
+
+Open [the audio events example](examples/audio_events.p3d), use **Run** to build
+the scene, and press **Play**. **Step** evaluates the same triggers for a single
+step. The **Audio** toggle appears in the Preview toolbar for grammars with
+audio events. Hover over it for Kokoro's preparation or playback status.
+
+Declare each event on its own line. Event IDs are unique within the document.
+`speak("Text" 1)` selects speaker 1. The default speaker is 0.
+
+```text
+audioEvent(release simulation(start) speak("The simulation is running."))
+audioEvent(checkpoint time(0.4) speak("The ball is falling."))
+audioEvent(impact collision(Ball Floor 0.5) speak("The ball hit the floor."))
+audioEvent(near camera(enter 0 1 0 3) speak("You are close to the display."))
+audioEvent(ballLower position(Ball enter 0 1.25 0 0.4) speak("The ball entered the lower zone."))
+```
+
+| Trigger | When it fires |
+| --- | --- |
+| `time(seconds)` | When forward playback crosses the marker. A marker at zero fires on the first advance from zero. |
+| `simulation(start)` | On the first forward advance of a preview run. |
+| `simulation(sleep ObjectId)`, `wake`, `stop`, `remove` | On the corresponding physics state transition of a named object. |
+| `collision(FirstId SecondId [minImpulse])` | When the physics solver first reports qualifying contact between the two objects. The default minimum impulse is 0.25 and repeated impacts are limited by a 0.35-second simulation cooldown per event. |
+| `camera(enter\|exit x y z radius)` | When preview camera movement crosses the world-space sphere, including while the timeline is paused. |
+| `position(ObjectId enter\|exit x y z radius)` | When a named object's position crosses the sphere between samples. Its position is the mean center of its live bound primitives, or its spatial frame origin when it has no bound geometry. |
+
+Object selectors refer to the `id(...)` field of an `Object` declaration. A selector
+without a matching object in the current scene stays inactive. A zone is
+initialized from the current position, so starting inside it is silent. Fit
+and Reset View also establish a fresh camera baseline.
+
+The clock follows the visible grammar snapshot in a grammar that uses `t`,
+and the physics clock otherwise. Position cues work in both modes. Collision
+and body state cues follow the physics solver during physics playback. Geometry
+compilation, initial placement, and time scrubbing are silent. Reset rearms the
+triggers. Pause, reset, and mute clear speech waiting for playback.
+
+The Windows build synthesizes speech offline with Kokoro on a background
+worker and prepares cues as soon as it accepts a grammar. Cues play
+sequentially on the default audio device, so a busy queue or a cold synthesis
+can delay playback after the trigger. The current build uses an English
+pronunciation lexicon. Spell out unusual names and abbreviations as they
+should be spoken.
+
+The Windows headless CLI records these cues with saved frame sequences.
+See [Compose saved frames into video](BUILDING.md#compose-saved-frames-into-video)
+for editing cuts, titles, captions, and narration, and exporting an MP4.
+The [Windows render queue](BUILDING.md#windows-render-queue-and-worker)
+can resume interrupted jobs from checksum-verified frames.
+[Parameter sweeps and calibrated image fitting](BUILDING.md#parameter-sweeps-and-calibrated-image-fitting)
+use editable grammars to produce contact sheets and compare fitted views.
+
 ### 6. Interactive 3D viewport
 
 The viewport renders the last accepted scene snapshot. It supports:

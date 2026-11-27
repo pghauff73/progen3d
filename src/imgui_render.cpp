@@ -23,14 +23,6 @@ void debugout(const std::string &message);
 
 namespace imgui_render_internal {
 
-struct CameraMatrices {
-	mat4 view{1.0f};
-	mat4 projection{1.0f};
-	vec3 position{0.0f, 0.0f, 0.0f};
-	vec3 target{0.0f, 0.0f, 0.0f};
-	float orbit_distance = 5.0f;
-};
-
 class PreviewShaderProgramLibrary {
 public:
 	GLuint opaque_program = 0;
@@ -950,7 +942,7 @@ public:
 class PreviewScenePass {
 public:
 	void execute(PreviewRenderRuntimeEnvironment &runtime,
-	             const CameraMatrices &camera,
+	             const PreviewCameraMatrices &camera,
 	             const PreviewLightingFrame &lighting_frame,
 	             const PreviewRenderSettings &settings,
 	             float scale_global,
@@ -969,49 +961,51 @@ PreviewRenderRuntimeEnvironment &preview_runtime_environment()
 }
 
 
-CameraMatrices build_camera_matrices(int width,
-                                     int height,
-                                     float camera_distance,
-                                     float angle_view,
-                                     float elevation_view,
-	                                 float roll_view,
-	                                 float vertical_field_of_view_radians,
-                                     const vec3 &target,
-                                     float scene_scale)
+PreviewCameraMatrices build_camera_matrices(const PreviewCameraState &state)
 {
 	constexpr float kDegreesToRadians = 0.01745329251994329577f;
-	const float angle_radians = -angle_view * kDegreesToRadians;
-	const float elevation_radians = elevation_view * kDegreesToRadians;
-	const float radius = std::max(camera_distance, 0.25f);
-	const vec3 scaled_target = target * scene_scale;
+	const float angle_radians = -state.angle_view * kDegreesToRadians;
+	const float elevation_radians = state.elevation_view * kDegreesToRadians;
+	const float radius = std::max(state.camera_distance, 0.25f);
+	const vec3 scaled_target = state.target * state.scale_global;
 
-	CameraMatrices camera;
-	camera.position =
-		scaled_target +
-		vec3(radius * std::cos(elevation_radians) * std::cos(angle_radians),
-		     radius * std::sin(elevation_radians),
-		     radius * std::cos(elevation_radians) * std::sin(angle_radians));
+	PreviewCameraMatrices camera;
+	if (state.world_position) {
+		camera.position = *state.world_position * state.scale_global;
+		camera.orbit_distance = glm::length(camera.position - scaled_target);
+	} else {
+		camera.position = scaled_target +
+			vec3(radius * std::cos(elevation_radians) * std::cos(angle_radians),
+			     radius * std::sin(elevation_radians),
+			     radius * std::cos(elevation_radians) * std::sin(angle_radians));
+		camera.orbit_distance = radius;
+	}
 	camera.target = scaled_target;
-	camera.orbit_distance = radius;
 	const vec3 forward = glm::normalize(scaled_target - camera.position);
-	vec3 right = glm::cross(forward, vec3(0.0f, 1.0f, 0.0f));
+	vec3 right = glm::cross(forward, state.world_up.value_or(vec3(0.0f, 1.0f, 0.0f)));
 	if (glm::length(right) <= 0.0001f) {
 		right = glm::cross(forward, vec3(0.0f, 0.0f, 1.0f));
 	}
 	right = glm::normalize(right);
-	right = rotate_around_axis(right, forward, glm::radians(roll_view));
+	right = rotate_around_axis(right, forward, glm::radians(state.roll_view));
 	const vec3 up = glm::normalize(glm::cross(right, forward));
 	camera.view = lookAt(camera.position, scaled_target, up);
-	const double far_plane = std::max(100.0, static_cast<double>(radius * 4.5f + 24.0f));
-	camera.projection = perspective(static_cast<double>(vertical_field_of_view_radians),
-	                                static_cast<double>(width) / static_cast<double>(height),
-	                                0.01,
-	                                far_plane);
+	const double far_plane = std::max({100.0, static_cast<double>(state.far_clip),
+	                                  static_cast<double>(camera.orbit_distance * 4.5f + 24.0f)});
+	const double aspect = static_cast<double>(std::max(1, state.width)) / std::max(1, state.height);
+	if (state.orthographic_vertical_span > 0.0) {
+		const double half_height = state.orthographic_vertical_span * 0.5;
+		const double half_width = half_height * aspect;
+		camera.projection = glm::ortho(-half_width, half_width, -half_height, half_height, state.near_clip, far_plane);
+	} else {
+		camera.projection = perspective(static_cast<double>(state.vertical_field_of_view_radians),
+		                                aspect, state.near_clip, far_plane);
+	}
 	return camera;
 }
 
 PreviewLightCameraContext build_preview_light_camera_context(
-	const CameraMatrices &camera,
+	const PreviewCameraMatrices &camera,
 	float scale_global)
 {
 	PreviewLightCameraContext context;
@@ -1352,7 +1346,7 @@ bool ensure_shadow_target()
 }
 
 void set_common_uniforms(GLuint program,
-	                     const CameraMatrices &camera,
+	                     const PreviewCameraMatrices &camera,
 	                     const PreviewLightingFrame &lighting_frame,
 	                     float preview_time,
 	                     float scale_global,
@@ -1457,7 +1451,7 @@ void draw_background()
 	glDepthMask(GL_TRUE);
 }
 
-void draw_grid(const CameraMatrices &camera)
+void draw_grid(const PreviewCameraMatrices &camera)
 {
 	PreviewShaderProgramLibrary &shader_programs = preview_runtime_environment().shader_programs;
 	PreviewGeometryRepository &geometry_repository = preview_runtime_environment().geometry_repository;
@@ -1482,7 +1476,7 @@ void draw_grid(const CameraMatrices &camera)
 	glDisable(GL_BLEND);
 }
 
-void draw_overlay_lines(const CameraMatrices &camera, float scale_global)
+void draw_overlay_lines(const PreviewCameraMatrices &camera, float scale_global)
 {
 	PreviewShaderProgramLibrary &shader_programs = preview_runtime_environment().shader_programs;
 	PreviewGeometryRepository &geometry_repository = preview_runtime_environment().geometry_repository;
@@ -1522,7 +1516,7 @@ void draw_overlay_lines(const CameraMatrices &camera, float scale_global)
 	glDisable(GL_LINE_SMOOTH);
 }
 
-void draw_outline_batches(const CameraMatrices &camera, float scale_global)
+void draw_outline_batches(const PreviewCameraMatrices &camera, float scale_global)
 {
 	PreviewShaderProgramLibrary &shader_programs = preview_runtime_environment().shader_programs;
 	PreviewGeometryRepository &geometry_repository = preview_runtime_environment().geometry_repository;
@@ -1905,7 +1899,7 @@ void PreviewShadowMapPass::execute(PreviewRenderRuntimeEnvironment &runtime,
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void draw_transparent_batches(const CameraMatrices &camera,
+void draw_transparent_batches(const PreviewCameraMatrices &camera,
                               float scale_global,
                               float simulation_alpha,
                               const std::vector<PreviewMaterial> &materials,
@@ -2510,7 +2504,7 @@ void upload_outline_batches(const std::vector<PreviewOutlineBatch> &batches)
 
 
 void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
-                               const CameraMatrices &camera,
+                               const PreviewCameraMatrices &camera,
 	                           const PreviewLightingFrame &lighting_frame,
                                const PreviewRenderSettings &settings,
                                float scale_global,
@@ -2546,7 +2540,9 @@ void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
 
 	glDepthMask(GL_TRUE);
 	glDisable(GL_BLEND);
-	draw_grid(camera);
+	if (settings.show_grid) {
+		draw_grid(camera);
+	}
 	runtime.light_buffer.bind();
 
 	// Apply bloom settings immediately (framebuffer setup)
@@ -2649,15 +2645,7 @@ void render_scene_to_preview(const PreviewFrameRequest &frame_request)
 		return;
 	}
 
-	const CameraMatrices camera = build_camera_matrices(render_targets.preview_width,
-	                                                    render_targets.preview_height,
-	                                                    frame_request.camera.camera_distance,
-	                                                    frame_request.camera.angle_view,
-	                                                    frame_request.camera.elevation_view,
-	                                                    frame_request.camera.roll_view,
-	                                                    frame_request.camera.vertical_field_of_view_radians,
-	                                                    frame_request.camera.target,
-	                                                    frame_request.camera.scale_global);
+	const PreviewCameraMatrices camera = build_camera_matrices(frame_request.camera);
 	const PreviewLightCameraContext light_camera = build_preview_light_camera_context(
 		camera, frame_request.camera.scale_global);
 	const PreviewLightingFrame lighting_frame = PreviewLightingFrameFactory().build(
@@ -3232,6 +3220,11 @@ OpenGlPreviewRenderer g_preview_renderer;
 DefaultPreviewCubemapGenerator g_preview_cubemap_generator;
 
 } // namespace
+
+PreviewCameraMatrices preview_camera_matrices(const PreviewCameraState &camera)
+{
+	return imgui_render_internal::build_camera_matrices(camera);
+}
 
 PreviewRenderer &preview_renderer()
 {

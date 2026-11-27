@@ -1,0 +1,22 @@
+# Play the simulation to hear the release, checkpoint, and contact cues.
+# Move the preview camera close to the scene to cross the camera boundary.
+audioEvent(release simulation(start) speak("The simulation is running."))
+audioEvent(checkpoint time(0.4) speak("The ball is falling."))
+audioEvent(dropZone position(Ball enter 0 1.25 0 0.4) speak("The ball entered the lower zone."))
+audioEvent(impact collision(Ball Floor 0.5) speak("The ball hit the floor."))
+audioEvent(rest simulation(sleep Ball) speak("The ball is at rest."))
+audioEvent(approach camera(enter 0 1 0 3) speak("You are close to the display."))
+audioEvent(departure camera(exit 0 1 0 3) speak("You left the display."))
+
+Start ->
+    G(9.81 0 -1 0)
+    Object(id(Demo) class(Scene) taxonomy(AudioDemo)) [
+        Object(id(Floor) class(SiteSurface) taxonomy(AudioDemo Floor)) [
+            T(0 -0.25 0) S(8 0.5 8)
+            !I(Cube material(softgreyconcrete) 1 0.5)
+        ]
+        Object(id(Ball) class(Furniture) taxonomy(AudioDemo Ball)) [
+            T(0 3 0) S(1 1 1) M(1)
+            I(Sphere material(redroughmetal) 1 0.5)
+        ]
+    ]

@@ -1,4 +1,5 @@
 #include "editor/presentation/GrammarDiagnosticPresentation.h"
+#include "grammar/service/AudioEventDeclarationParser.h"
 
 #include <algorithm>
 #include <cctype>
@@ -137,6 +138,7 @@ std::vector<EditorDiagnostic> GrammarDiagnosticPresentation::buildDiagnostics(
 
 	for (int line_index = 0; line_index < static_cast<int>(source_lines.size()); ++line_index) {
 		const std::string &source_line = source_lines[static_cast<std::size_t>(line_index)];
+		if (AudioEventDeclarationParser::recognizes(source_line)) continue;
 		const std::string trimmed_source_line = trim_source_code(source_line);
 		if (!trimmed_source_line.empty()) {
 			if (rule_block_start_line < 0) {

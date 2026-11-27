@@ -1,4 +1,5 @@
 #include "editor/presentation/GrammarSyntaxPresentation.h"
+#include "grammar/service/AudioEventDeclarationParser.h"
 
 #include <cctype>
 #include <regex>
@@ -17,6 +18,30 @@ bool is_identifier_character(char character)
 {
 	const unsigned char value = static_cast<unsigned char>(character);
 	return std::isalnum(value) != 0 || character == '_' || character == '.';
+}
+
+std::size_t speech_literal_end(const std::string &source_line, std::size_t start)
+{
+	std::size_t column = start + 1;
+	while (column < source_line.size()) {
+		const char character = source_line[column++];
+		if (character == '"') break;
+		if (character == '\\' && column < source_line.size()) ++column;
+	}
+	return column;
+}
+
+std::size_t speech_declaration_comment_start(const std::string &source_line)
+{
+	for (std::size_t column = 0; column < source_line.size();) {
+		if (source_line[column] == '"') {
+			column = speech_literal_end(source_line, column);
+			continue;
+		}
+		if (source_line[column] == '#' || source_line.compare(column, 2, "//") == 0) return column;
+		++column;
+	}
+	return std::string::npos;
 }
 
 std::size_t find_comment_start(const std::string &source_line)
@@ -133,20 +158,30 @@ std::vector<EditorToken> GrammarSyntaxPresentation::tokenizeLine(
 		"clamp", "wrap", "lerp", "cycle", "pingpong", "pulse", "accelerate",
 		"decelerate", "ease", "smoother", "swing", "oscillate", "spin",
 		"radians", "degrees"};
+	static const std::unordered_set<std::string> audio_keywords = {
+		"audioEvent", "time", "simulation", "collision", "camera", "position", "speak"};
 
 	std::vector<EditorToken> tokens;
+	const bool audio_declaration = AudioEventDeclarationParser::recognizes(source_line);
 	std::string definition_name;
 	const std::regex rule_definition("^\\s*([A-Za-z_][A-Za-z0-9_]*)\\b.*->");
 	std::smatch match;
-	if (std::regex_search(source_line, match, rule_definition)) {
+	if (!audio_declaration && std::regex_search(source_line, match, rule_definition)) {
 		definition_name = match[1].str();
 	}
 
-	const std::size_t comment_start = find_comment_start(source_line);
+	const std::size_t comment_start = audio_declaration
+		? speech_declaration_comment_start(source_line) : find_comment_start(source_line);
 	const std::string source_code = source_line.substr(0, comment_start);
 	std::size_t index = 0;
 	while (index < source_code.size()) {
 		const char character = source_code[index];
+		if (audio_declaration && character == '"') {
+			const std::size_t end = speech_literal_end(source_code, index);
+			tokens.push_back({source_code.substr(index, end - index), EditorTokenKind::Plain, "Spoken text."});
+			index = end;
+			continue;
+		}
 		if (std::isspace(static_cast<unsigned char>(character)) != 0) {
 			const std::size_t start = index;
 			while (index < source_code.size() &&
@@ -209,6 +244,9 @@ std::vector<EditorToken> GrammarSyntaxPresentation::tokenizeLine(
 			if (identifier == definition_name) {
 				token_kind = EditorTokenKind::RuleDefinition;
 				tooltip = "Rule definition. This line declares how this grammar symbol expands.";
+			} else if (audio_declaration && audio_keywords.count(identifier) != 0U) {
+				token_kind = EditorTokenKind::Keyword;
+				tooltip = "Grammar audio event.";
 			} else if (keywords.count(identifier) != 0U) {
 				token_kind = EditorTokenKind::Keyword;
 				tooltip = resolve_keyword_tooltip_ ? resolve_keyword_tooltip_(identifier) : "";

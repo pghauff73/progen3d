@@ -32,6 +32,7 @@
 #include "grammar/service/ShapeSpecificationEvaluator.h"
 #include "grammar/service/ShapeSpecificationParser.h"
 #include "grammar/service/LightingDeclarationParser.h"
+#include "grammar/service/AudioEventDeclarationParser.h"
 #include "grammar/service/SpatialConnectionDeclarationParser.h"
 #include "grammar/service/SpatialConstraintDeclarationParser.h"
 #include "grammar/service/SpatialInterfaceDeclarationParser.h"
@@ -757,7 +758,7 @@ static std::vector<SourceTokenSpan> tokenize_rule_source(const std::vector<std::
 	    line_number < static_cast<int>(source_lines.size());
 	    ++line_number){
 		const std::string &line = source_lines[static_cast<std::size_t>(line_number)];
-		if(is_blank_or_comment_line(line))continue;
+		if(is_blank_or_comment_line(line) || AudioEventDeclarationParser::recognizes(line))continue;
 
 		const std::size_t code_end_raw = find_comment_start(line);
 		const std::size_t code_end =
@@ -844,7 +845,7 @@ static int find_rule_end_line(const std::vector<std::string> &source_lines, int 
 	if(start_line < 0 || start_line >= static_cast<int>(source_lines.size()))return start_line;
 	for(int line_number = start_line + 1; line_number < static_cast<int>(source_lines.size()); ++line_number){
 		const std::string &line = source_lines[static_cast<std::size_t>(line_number)];
-		if(is_blank_or_comment_line(line))continue;
+		if(is_blank_or_comment_line(line) || AudioEventDeclarationParser::recognizes(line))continue;
 		if(starts_new_rule(trim_code_copy(line))){
 			return line_number - 1;
 		}
@@ -923,7 +924,7 @@ static std::vector<LogicalRule> build_logical_rules(const std::vector<std::strin
 
 	for(int line_num = 0; line_num < static_cast<int>(source_lines.size()); ++line_num){
 		const std::string &raw_line = source_lines[static_cast<std::size_t>(line_num)];
-		if(is_blank_or_comment_line(raw_line))continue;
+		if(is_blank_or_comment_line(raw_line) || AudioEventDeclarationParser::recognizes(raw_line))continue;
 		std::string trimmed = trim_code_copy(raw_line);
 		if(current_rule_start_line < 0){
 			current_rule_start_line = line_num;
@@ -1242,6 +1243,7 @@ static bool validate_source_structure_before_expansion(Grammar *grammar)
 	// random variable can be created.
 	for(int line_index = 0; line_index < static_cast<int>(grammar->lines.size()); ++line_index){
 		const std::string &line = grammar->lines[static_cast<std::size_t>(line_index)];
+		if (AudioEventDeclarationParser::recognizes(line)) continue;
 		const std::size_t comment_start = find_comment_start(line);
 		const std::size_t code_end =
 			comment_start == std::string::npos ? line.size() : comment_start;
@@ -5219,6 +5221,7 @@ void GrammarDocument::clearParsedState()
 	}
 	error_lines.clear();
 	error_details.clear();
+	audio_events_.clear();
 
 	for(Token *token : tokens_new){
 		delete token;
@@ -5237,6 +5240,24 @@ void GrammarDocument::rebuildFromLines(const std::string &success_message)
 {
 	const bool quiet_diagnostics = grammarEvaluationDiagnosticsQuiet(this);
 	set_grammar_uses_time(this, false);
+	const AudioEventDeclarationParser audio_parser;
+	std::unordered_set<std::string> audio_event_ids;
+	for (std::size_t line_index = 0; line_index < lines.size(); ++line_index) {
+		const std::string &line = lines[line_index];
+		if (!AudioEventDeclarationParser::recognizes(line)) continue;
+		AudioEventDeclarationResult audio_event = audio_parser.parse(line);
+		if (!audio_event.definition) {
+			const int column = static_cast<int>(audio_event.error_column);
+			report_grammar_issue(this, {static_cast<int>(line_index), column, column + 1,
+			                            audio_event.error});
+		} else if (!audio_event_ids.insert(audio_event.definition->id).second) {
+			report_grammar_issue(this, make_line_diagnostic(
+				this, static_cast<int>(line_index),
+				"Duplicate audio event ID '" + audio_event.definition->id + "'."));
+		} else {
+			audio_events_.push_back(std::move(*audio_event.definition));
+		}
+	}
 	// P0 gate: malformed delimiters must be rejected before parsing can build an
 	// executable token stream, and certainly before recursive expansion begins.
 	int mesh_line = 0;
@@ -5316,7 +5337,7 @@ void GrammarDocument::rebuildFromLines(const std::string &success_message)
 
 	if(!success_message.empty() && !quiet_diagnostics){
 		if(error_details.empty()){
-			errorout(success_message);
+			debugout(success_message);
 		}
 		else{
 			debugout("Grammar rebuild completed with blocking diagnostics.");
@@ -6279,6 +6300,17 @@ void GrammarDocument::generateGeometry()
 		if(token == NULL)continue;
 		token->performAction(context);
 		if(!error_details.empty())return;
+	}
+	if (const auto library = std::dynamic_pointer_cast<const DocumentMeshLibrary>(document_meshes_);
+	    library && library->alignSeams(context->primitive_instances)) {
+		Mesh &scene = context->getScene();
+		scene = Mesh();
+		for (const auto &instance : context->primitive_instances) {
+			Mesh mesh = instance.resolved_geometry && instance.resolved_geometry->hasTriangleMesh()
+				? instance.resolved_geometry->triangleMesh() : Mesh::getInstance(instance.type);
+			mesh.apply(instance.primary_transform);
+			scene.add(mesh);
+		}
 	}
 	std::string spatial_diagnostic;
 	if(!context->finalizeSpatialBuildingModel(&spatial_diagnostic)){

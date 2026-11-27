@@ -2184,7 +2184,8 @@ bool resolve_collision(Context *context,
                        PrimitiveInstance *a,
                        PrimitiveInstance *b,
                        const CollisionGeometry &geometry_a,
-                       const CollisionGeometry &geometry_b)
+                       const CollisionGeometry &geometry_b,
+                       float &resolved_impulse)
 {
 	if (a == nullptr || b == nullptr || !is_collision_candidate(*a) || !is_collision_candidate(*b)) {
 		return false;
@@ -2276,6 +2277,7 @@ bool resolve_collision(Context *context,
 		const float restitution = collision_restitution_for_closing_speed(closing_speed);
 		const float impulse_magnitude =
 			-(1.0f + restitution) * velocity_along_normal / inverse_mass_sum;
+		resolved_impulse = impulse_magnitude;
 		const vec3 impulse = impulse_magnitude * normal;
 		const bool resting_contact = restitution == 0.0f;
 		if (context != nullptr && !resting_contact) {
@@ -3534,8 +3536,9 @@ void SceneGenerationContext::resetSimulation()
 	time = 0.0f;
 }
 
-void SceneGenerationContext::stepSimulation(float delta_time)
+void SceneGenerationContext::stepSimulation(float delta_time, std::vector<SimulationContact> *contacts)
 {
+	if (contacts != nullptr) contacts->clear();
 	if (delta_time <= 0.0f) {
 		return;
 	}
@@ -3634,11 +3637,14 @@ void SceneGenerationContext::stepSimulation(float delta_time)
 				if (collision_geometries[i] == nullptr || collision_geometries[j] == nullptr) {
 					continue;
 				}
+				float resolved_impulse = 0.0f;
 				if (resolve_collision(this,
 				                     &primitive_instances[i],
 				                     &primitive_instances[j],
 				                     *collision_geometries[i],
-				                     *collision_geometries[j])) {
+				                     *collision_geometries[j],
+				                     resolved_impulse)) {
+					if (contacts != nullptr) contacts->push_back({i, j, resolved_impulse});
 					had_collision = true;
 					had_collision_contact[i] = true;
 					had_collision_contact[j] = true;

@@ -1,0 +1,58 @@
+# Courtyard focus-pull test. The foreground branch overlaps the entrance.
+audioEvent(entrance_focus time(3.0) speak("The courtyard entrance comes into focus."))
+Start -> [
+    Object(id(COURTYARD_SITE) class(CourtyardSite) taxonomy(Courtyard Site) layer(Structure) mask(Structure))
+    [ Courtyard Entrance Foreground ]
+]
+
+Courtyard -> [
+    T(0 1.8 -2.5)
+    Object(id(COURTYARD_BUILDING) class(CourtyardBuilding) taxonomy(Courtyard Building Facade) layer(Structure) mask(Structure))
+    [
+        [ T(0 -1.8 -0.55) S(7.4 3.82 0.38) !I(CubeY material(warmwhiteplaster) 1 0.25) ]
+        [ T(0 1.99 -0.49) S(7.55 0.16 0.57) !I(CubeY material(charcoalmattepaint) 1 0.25) ]
+        [ T(-2.52 -0.73 -0.32) S(1.72 1.68 0.12) !I(CubeY material(navybluemattepaint) 1 0.20) ]
+        [ T(2.52 -0.73 -0.32) S(1.72 1.68 0.12) !I(CubeY material(navybluemattepaint) 1 0.20) ]
+        [ T(-2.52 -0.75 -0.24) S(0.06 1.73 0.04) !I(CubeY material(whitepaint) 1 0.16) ]
+        [ T(2.52 -0.75 -0.24) S(0.06 1.73 0.04) !I(CubeY material(whitepaint) 1 0.16) ]
+        [ T(0 -1.87 0.88) S(8.6 0.09 4.0) !I(CubeY material(tanmatteconcrete) 1 0.25) ]
+    ]
+]
+
+Entrance -> [
+    T(0 1.69 -2.57)
+    Object(id(COURTYARD_ENTRANCE) class(EntranceDoor) taxonomy(Courtyard Building Entrance) layer(Envelope) mask(Structure))
+    [
+        Interface(id(focus) type(InspectionInterface) origin(0 0 0.16) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+        [ T(0 -1.44 -0.02) S(1.86 2.82 0.22) !I(CubeY material(charcoalmattepaint) 1 0.18) ]
+        [ T(0 -1.34 0.095) S(1.64 2.60 0.12) !I(CubeY material(amberwarmwood) 1 0.18) ]
+        Slat(-0.66) Slat(-0.44) Slat(-0.22) Slat(0) Slat(0.22) Slat(0.44) Slat(0.66)
+        [ T(0 0.64 0.165) S(1.66 0.055 0.03) !I(CubeY material(charcoalmattepaint) 1 0.15) ]
+        [ T(0 0.20 0.165) S(1.66 0.055 0.03) !I(CubeY material(charcoalmattepaint) 1 0.15) ]
+        [ T(0.51 -0.42 0.20) S(0.20 0.08 0.06) !I(CubeY material(brushedbrass) 1 0.12) ]
+        [ T(0 -1.67 0.30) S(2.12 0.22 0.65) !I(CubeY material(graymatteconcrete) 1 0.20) ]
+    ]
+]
+
+Slat(x) -> [ T(x -1.23 0.16) S(0.046 2.38 0.03) !I(CubeY material(charcoalmattepaint) 1 0.16) ]
+
+Foreground -> [
+    T(-0.72 1.60 3.35)
+    Object(id(FOREGROUND_BRANCH) class(TreeBranch) taxonomy(Courtyard Vegetation Branch) layer(Terrain) mask(Terrain))
+    [
+        Interface(id(focus) type(InspectionInterface) origin(0.42 0.16 0.06) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+        [ I(TaperedSweep(samples(-1.0 -0.54 0 0.070 -0.40 -0.22 0 0.052 0.08 0.02 0.025 0.038 0.60 0.20 0.06 0.016) up(0 0 1) segments(14) cap(all)) material(amberwarmwood) 1 0.18) ]
+        Leaf(-0.54 -0.28 0.02 27)
+        Leaf(-0.34 -0.19 0.02 -120)
+        Leaf(-0.19 -0.11 0.03 -8)
+        Leaf(0.06 0.00 0.025 -125)
+        Leaf(0.24 0.09 0.035 -24)
+        Leaf(0.41 0.14 0.05 -112)
+        Leaf(0.57 0.19 0.058 -57)
+    ]
+]
+
+Leaf(x y z angle) -> [
+    T(x y z) A(angle 2)
+    I(LeafBlade(profile(Ovate) length(0.47) width(0.22) curvature(0.035) camber(0.016) twist(8) thickness(0.009) widthPower(1.05) segments(16 5)) material(sagegreenmattepaint) 1 0.15)
+]

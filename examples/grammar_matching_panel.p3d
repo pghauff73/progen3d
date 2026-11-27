@@ -1,0 +1,13 @@
+# A panel with an authored landmark and three editable experiment parameters.
+Start -> [
+    Panel(1.625) # @param width 1.625
+    Light(FitKey type(Point) position(1 2 3) color(1 0.88 0.72) candela(6) range(15)) # @param key_candela 6
+]
+
+Panel(width) -> [
+    Object(id(FIT_PANEL) class(Panel) taxonomy(Examples Fitting Panel))
+    [
+        Interface(id(upper_right) type(InspectionInterface) origin(width*0.5 0.625 0.375) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+        [ S(width 1.25 0.75) !I(Cube material(navybluemattepaint) 1 0.2) ] # @param paint navybluemattepaint
+    ]
+]

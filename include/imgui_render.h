@@ -3,6 +3,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -142,7 +143,22 @@ public:
 	float roll_view = 0.0f;
 	float vertical_field_of_view_radians = 0.0f;
 	glm::vec3 target{0.0f};
+	std::optional<glm::vec3> world_position;
+	std::optional<glm::vec3> world_up;
+	double orthographic_vertical_span = 0.0;
+	double near_clip = 0.01;
+	float far_clip = 0.0f;
 };
+
+struct PreviewCameraMatrices {
+	glm::mat4 view{1.0f};
+	glm::mat4 projection{1.0f};
+	glm::vec3 position{0.0f};
+	glm::vec3 target{0.0f};
+	float orbit_distance = 5.0f;
+};
+
+PreviewCameraMatrices preview_camera_matrices(const PreviewCameraState &camera);
 
 class PreviewRenderSettings : public PreviewRenderData {
 public:
@@ -152,6 +168,7 @@ public:
 	int mapping_mode_override = -1;
 	bool lens_flare = false;
 	bool shadows = true;
+	bool show_grid = true;
 	int anti_aliasing = 0;
 	bool cubemap_enabled = false;
 	GLuint cubemap_texture = 0;

@@ -1,0 +1,27 @@
+# A falling sphere, a stationary floor, and a marker driven by grammar time.
+Start -> [
+    G(9.81 0 -1 0)
+    Object(id(DROP_STAGE) class(DropStage) taxonomy(Animation Physics Stage) layer(Terrain) mask(Terrain Structure))
+    [ Floor Ball ClockMarker ]
+]
+
+Floor -> [
+    T(0 -0.30 0)
+    Object(id(DROP_FLOOR) class(Floor) taxonomy(Animation Physics Floor) layer(Terrain) mask(Terrain Structure))
+    [ S(7.0 0.30 4.5) !I(CubeY material(lightgrayroughconcrete) 1 0.30) ]
+]
+
+Ball -> [
+    T(-0.6 1.60 0.10)
+    Object(id(DROPPING_BALL) class(Ball) taxonomy(Animation Physics Sphere) layer(Structure) mask(Terrain Structure))
+    [
+        Interface(id(focus) type(InspectionInterface) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+        [ S(0.72 0.72 0.72) I(Sphere material(redmattepaint) 1 0.24) ]
+    ]
+]
+
+ClockMarker -> [
+    T(1.20+0.40*t 0.10 -0.55)
+    Object(id(CLOCK_MARKER) class(TimeMarker) taxonomy(Animation Physics Marker) layer(Structure) mask(Structure))
+    [ S(0.28 0.74 0.28) !I(CubeY material(navybluemattepaint) 1 0.20) ]
+]

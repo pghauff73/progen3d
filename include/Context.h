@@ -120,6 +120,12 @@ struct CollisionParticle {
 	float size = 0.0f;
 };
 
+struct SimulationContact {
+	std::size_t first_instance_index;
+	std::size_t second_instance_index;
+	float impulse;
+};
+
 class GeneratedMeshProvider;
 
 class SceneGenerationContext
@@ -197,7 +203,7 @@ public:
 	                            float impulse_magnitude);
 	void clearPendingPrimitiveState();
 	void resetSimulation();
-	void stepSimulation(float delta_time);
+	void stepSimulation(float delta_time, std::vector<SimulationContact> *contacts = nullptr);
 	float getTime() const;
 	void genPrimitives();
 

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "grammar": "drop_and_settle.p3d",
+  "seed": 42,
+  "width": 320,
+  "height": 180,
+  "output_dir": "../build/drop-and-settle",
+  "layers": false,
+  "timeline": {
+    "fps": 24,
+    "frame_count": 72,
+    "physics": true,
+    "shutter": { "frame_fraction": 0.75, "samples": 8 }
+  },
+  "camera": {
+    "position": [
+      { "time": 0, "value": [4.2, 2.8, 6.0] },
+      { "time": 2, "value": [3.5, 2.5, 6.0] }
+    ],
+    "aim": [
+      { "time": 0, "value": [0.0, 0.65, 0.0] }
+    ],
+    "focus": [
+      { "time": 0, "value": { "object": "DROPPING_BALL", "attachment": "focus" } }
+    ],
+    "lens": [
+      { "time": 0, "value": { "fov_degrees": 41, "aperture_radius": 0 } }
+    ]
+  }
+}

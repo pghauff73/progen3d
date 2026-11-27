@@ -1,4 +1,5 @@
 #include "editor/model/GrammarSymbolIndex.h"
+#include "grammar/service/AudioEventDeclarationParser.h"
 
 #include <algorithm>
 #include <cctype>
@@ -45,6 +46,7 @@ GrammarSymbolIndex GrammarSymbolIndex::fromSourceLines(
 	const std::regex variable_declaration("\\bR\\*?\\s+([A-Za-z_][A-Za-z0-9_]*)\\b");
 
 	for (const std::string &source_line : source_lines) {
+		if (AudioEventDeclarationParser::recognizes(source_line)) continue;
 		const std::string source_code = trim_source_code(source_line);
 		if (source_code.empty()) {
 			continue;

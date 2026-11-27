@@ -458,6 +458,9 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/editor/service/DocumentPersistenceService.cpp \
 	$(SRC_DIR)/editor/service/FirebaseAuthenticationService.cpp \
 	$(SRC_DIR)/editor/service/GrammarCompilationService.cpp \
+	$(SRC_DIR)/editor/service/GrammarStructureValidationService.cpp \
+	$(SRC_DIR)/editor/service/PreviewGeometryUploadService.cpp \
+	$(SRC_DIR)/editor/service/PreviewMaterialLibrary.cpp \
 	$(SRC_DIR)/editor/service/MeshExportService.cpp \
 	$(SRC_DIR)/editor/service/NativeLocalFileDialogService.cpp \
 	$(SRC_DIR)/editor/service/OpenGl46CapabilityValidator.cpp \
@@ -469,6 +472,10 @@ APP_CPP_SOURCES = \
 	$(SRC_DIR)/editor/service/SpatialOverlayEvidenceService.cpp \
 	$(SRC_DIR)/editor/service/StructuredShapeCompletionService.cpp \
 	$(SRC_DIR)/editor/service/StlPartCatalogRepository.cpp \
+	$(SRC_DIR)/audio/service/SceneAudioEventEvaluator.cpp \
+	$(SRC_DIR)/audio/service/KokoroSpeechEngine.cpp \
+	$(SRC_DIR)/audio/service/SpeechPlaybackService.cpp \
+	$(SRC_DIR)/grammar/service/AudioEventDeclarationParser.cpp \
 	$(SRC_DIR)/main.cpp \
 	$(SRC_DIR)/imgui_main.cpp \
 	$(SRC_DIR)/imgui_render.cpp \

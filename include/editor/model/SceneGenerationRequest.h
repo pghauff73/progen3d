@@ -11,4 +11,5 @@ public:
 	std::uint64_t design_nonce = 0;
 	double evaluation_time = 0.0;
 	bool time_sample = false;
+	std::string source_name = "editor-buffer";
 };

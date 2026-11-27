@@ -1,10 +1,14 @@
 #include "geometry/service/DocumentMeshLibrary.h"
 
+#include "Context.h"
+#include "geometry/model/GeneratedMeshReferenceShapeSpecification.h"
 #include "geometry/service/GeneratedMeshProviderRegistry.h"
+#include "geometry/service/MeshTopologyAnalyzer.h"
 
 #include <algorithm>
 #include <cmath>
 #include <locale>
+#include <set>
 #include <sstream>
 #include <stdexcept>
 
@@ -86,15 +90,39 @@ std::shared_ptr<const DocumentMeshLibrary> DocumentMeshLibrary::read(
 	int declaration_line = 0;
 	std::istringstream row;
 	row.imbue(std::locale::classic());
+	std::set<std::pair<std::string, std::size_t>> seam_vertices;
 	for (source_line = 0; source_line < static_cast<int>(lines.size()); ++source_line) {
 		const std::string &line = lines[source_line];
 		const auto first = line.find_first_not_of(" \t\r");
 		if (first == std::string::npos) continue;
-		if (!mesh && line.compare(first, 9, "#@mesh-v1") != 0) continue;
+		if (!mesh && line.compare(first, 7, "#@mesh-") != 0) continue;
 		row.clear();
 		row.str(line);
 		row >> tag;
 		if (!mesh) {
+			if (tag == "#@mesh-seam-v1") {
+				std::vector<SeamVertex> seam;
+				std::string mesh_key;
+				bool different_meshes = false;
+				while (row >> mesh_key) {
+					std::size_t index;
+					const auto found = library->meshes_.find(mesh_key);
+					if (!(row >> index) || found == library->meshes_.end() ||
+					    index >= found->second->vertices.size()) {
+						throw std::invalid_argument("Invalid vertex in project mesh seam.");
+					}
+					if (!seam_vertices.emplace(mesh_key, index).second) {
+						throw std::invalid_argument("A project mesh vertex may belong to only one seam point.");
+					}
+					different_meshes |= !seam.empty() && mesh_key != seam.front().mesh_key;
+					seam.push_back({mesh_key, index});
+				}
+				if (!different_meshes) {
+					throw std::invalid_argument("A project mesh seam point must join at least two meshes.");
+				}
+				library->seams_.push_back(std::move(seam));
+				continue;
+			}
 			if (tag != "#@mesh-v1") continue; // Other grammar comments remain opaque.
 			std::string unit;
 			if (!(row >> key >> unit >> up) || !isValidMeshKey(key)) {
@@ -144,4 +172,87 @@ GeneratedMeshResolutionResult DocumentMeshLibrary::resolve(
 	const auto &mesh = found->second;
 	return GeneratedMeshResolutionResult::createSuccess(GeneratedPrimitiveMesh(
 		mesh, std::vector<MeshSurfaceTag>(mesh->faces.size(), MeshSurfaceTag(MeshSurfaceRole::Outer))));
+}
+
+bool DocumentMeshLibrary::alignSeams(std::vector<ScenePrimitiveInstance> &instances) const
+{
+	if (seams_.empty()) return false;
+
+	struct SeamMeshPose {
+		ScenePrimitiveInstance *instance = nullptr;
+		glm::dmat4 local_from_world{1.0};
+		std::shared_ptr<Mesh> deformed_mesh;
+	};
+	std::unordered_map<std::string, SeamMeshPose> poses;
+	for (const auto &seam : seams_) {
+		for (const SeamVertex &vertex : seam) poses.try_emplace(vertex.mesh_key);
+	}
+
+	std::set<std::string> seen_meshes;
+	for (auto &instance : instances) {
+		const auto *reference = dynamic_cast<const GeneratedMeshReferenceShapeSpecification *>(
+			instance.shape_specification.get());
+		if (!reference) continue;
+		const auto found = poses.find(reference->meshKey());
+		if (found == poses.end()) continue;
+		auto &pose = found->second;
+		// Seam declarations address individual surface instances by mesh key.
+		if (!seen_meshes.insert(reference->meshKey()).second) {
+			pose.instance = nullptr;
+			continue;
+		}
+		if (reference->requestsClosedGeometry() || !instance.resolved_geometry ||
+		    !instance.resolved_geometry->hasTriangleMesh()) continue;
+		const glm::dmat4 world_from_local(instance.primary_transform);
+		const double determinant = glm::determinant(world_from_local);
+		if (determinant == 0.0 || !std::isfinite(determinant)) continue;
+		pose.instance = &instance;
+		pose.local_from_world = glm::inverse(world_from_local);
+	}
+
+	for (const auto &seam : seams_) {
+		if (std::any_of(seam.begin(), seam.end(), [&](const SeamVertex &vertex) {
+			return poses.at(vertex.mesh_key).instance == nullptr;
+		})) continue;
+
+		glm::dvec3 world_point(0.0);
+		for (const SeamVertex &vertex : seam) {
+			const auto &instance = *poses.at(vertex.mesh_key).instance;
+			const auto &mesh = instance.resolved_geometry->triangleMesh();
+			world_point += glm::dvec3(glm::dmat4(instance.primary_transform) *
+			                          glm::dvec4(mesh.vertices[vertex.index], 1.0));
+		}
+		world_point /= static_cast<double>(seam.size());
+		for (const SeamVertex &vertex : seam) {
+			auto &pose = poses.at(vertex.mesh_key);
+			if (!pose.deformed_mesh) {
+				pose.deformed_mesh = std::make_shared<Mesh>(pose.instance->resolved_geometry->triangleMesh());
+			}
+			pose.deformed_mesh->vertices[vertex.index] = glm::vec3(
+				pose.local_from_world * glm::dvec4(world_point, 1.0));
+		}
+	}
+
+	bool deformed = false;
+	for (auto &entry : poses) {
+		auto &pose = entry.second;
+		if (!pose.deformed_mesh) continue;
+		auto &mesh = *pose.deformed_mesh;
+		mesh.clearCollisionAcceleration();
+		mesh.calc_normals();
+		for (auto &normal : mesh.face_normals) {
+			const float length = glm::length(normal);
+			if (length > 0.0f) normal /= length;
+		}
+		auto &instance = *pose.instance;
+		const auto &original = *instance.resolved_geometry;
+		const auto &surface_tags = original.faceSurfaceTags();
+		const auto topology = MeshTopologyAnalyzer().analyze(mesh, surface_tags);
+		instance.resolved_geometry = ResolvedPrimitiveGeometry::createTriangleMesh(
+			std::move(pose.deformed_mesh), surface_tags, topology.isWatertight(),
+			original.volumeEvidence(), original.collisionPolicy(), topology.topology_hash);
+		instance.collision_geometry_dirty = true;
+		deformed = true;
+	}
+	return deformed;
 }

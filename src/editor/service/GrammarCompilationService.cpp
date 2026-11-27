@@ -37,7 +37,7 @@ std::unique_ptr<SceneGenerationResult> GrammarCompilationService::compile(
 			throw std::runtime_error("grammar evaluation time is not finite or representable");
 		}
 		setGrammarEvaluationDiagnosticsQuiet(grammar_document.get(), request.time_sample);
-		grammar_document->loadFromSourceText(request.source_text, "editor-buffer");
+		grammar_document->loadFromSourceText(request.source_text, request.source_name);
 
 		const bool parser_succeeded = grammar_document->error_details.empty();
 		const bool structure_succeeded =

@@ -40,12 +40,21 @@ PreviewCaptureEvidence PreviewFramebufferCaptureService::captureCurrentPreview(
 			"The preview framebuffer could not be read.");
 	}
 	const PreviewImage image(width, height, std::move(pixels));
+	return writePreview(image, std::filesystem::path(output_path));
+}
+
+PreviewCaptureEvidence PreviewFramebufferCaptureService::writePreview(
+	const PreviewImage &image, const std::filesystem::path &path) const
+{
+	if (path.empty()) {
+		return PreviewCaptureEvidence::createFailure("Preview capture requires an output path.");
+	}
 	if (!image.isValid()) {
 		return PreviewCaptureEvidence::createFailure(
 			"The preview framebuffer returned invalid pixel dimensions.");
 	}
 
-	const std::filesystem::path path(output_path);
+	const std::string output_path = path.u8string();
 	std::error_code directory_error;
 	if (!path.parent_path().empty()) {
 		std::filesystem::create_directories(path.parent_path(), directory_error);
@@ -64,6 +73,7 @@ PreviewCaptureEvidence PreviewFramebufferCaptureService::captureCurrentPreview(
 	output << "P6\n" << image.width() << ' ' << image.height() << "\n255\n";
 	output.write(reinterpret_cast<const char *>(image.rgbPixels().data()),
 	             static_cast<std::streamsize>(image.rgbPixels().size()));
+	output.close();
 	if (!output) {
 		return PreviewCaptureEvidence::createFailure(
 			"The preview capture file could not be written: " + output_path);

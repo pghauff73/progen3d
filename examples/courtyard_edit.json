@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "cuts": [
+    {
+      "sequence": "sequence.json",
+      "start_frame": 0,
+      "end_frame": 144
+    }
+  ],
+  "titles": [
+    {
+      "start_frame": 0,
+      "end_frame": 36,
+      "text": "Courtyard approach"
+    }
+  ],
+  "captions": [
+    {
+      "start_frame": 72,
+      "end_frame": 134,
+      "text": "The courtyard entrance comes into focus."
+    }
+  ]
+}
