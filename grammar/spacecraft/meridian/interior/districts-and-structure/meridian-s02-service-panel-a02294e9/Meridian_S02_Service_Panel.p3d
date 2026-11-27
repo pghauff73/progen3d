@@ -1,0 +1,27 @@
+# @structural-relief orthogrid status(inline_candidate) reviewer_required(true)
+# Meridian S01 | AFT_CONVERTER_EQ_01
+# Frame: FIXED_M; catalog-proposed equipment
+# WARNING: Not physically qualified or human-rated.
+# Type=service_rack | room=AFT_CONVERTER | dimensions=2.000000 4.000000 3.000000; no hardware qualification
+# @glaze silverbrushedmetal 0.23 0.23
+# @glaze warmwhitepaint 0.52 0.115
+# @glaze slategreymattemetal 0.23 0.23
+Start ->
+[ Object(id(AFT_CONVERTER_EQ_01) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(191.000000 0.000000 -20.000000) A(0.000000 0) [ T(-4.000000 4.000000 0.000000) [ T(0.000000 0.000000 0.000000) S(1.960000 3.680000 2.880000) !I(Cube material(slategreymattemetal) 1 1) ] ] ]
+  [ T(191.000000 0.000000 -20.000000) A(0.000000 0) [ T(-4.000000 4.000000 0.000000) [ T(0.000000 -1.360000 1.500000) S(1.560000 0.050000 0.070000) !I(Cube material(silverbrushedmetal) 1 1) ] ] ]
+  [ T(191.000000 0.000000 -20.000000) A(0.000000 0) [ T(-4.000000 4.000000 0.000000) [ T(0.000000 0.000000 1.500000) S(1.560000 0.050000 0.070000) !I(Cube material(silverbrushedmetal) 1 1) ] ] ]
+  [ T(191.000000 0.000000 -20.000000) A(0.000000 0) [ T(-4.000000 4.000000 0.000000) [ T(0.000000 1.360000 1.500000) S(1.560000 0.050000 0.070000) !I(Cube material(silverbrushedmetal) 1 1) ] ] ]
+  [ T(191.000000 0.000000 -20.000000) A(0.000000 0) [ T(-4.000000 4.000000 0.000000) [ T(0.840000 0.000000 1.530000) S(0.060000 2.200000 0.050000) !I(Cube material(paleblueemissivepaint) 1 1) ] ] ]
+[ Object(id(S02_Relief_AFT_CONVERTER_EQ_01) class(StructuralReliefCandidate) taxonomy(Spacecraft Meridian StructuralRelief) layer(Equipment)) [
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-1.020477 0.000000 -0.571392) S(0.081554 2.161632 0.045000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-1.012896 0.000000 -0.178560) S(0.066392 2.161632 0.045000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-1.013930 0.000000 0.232128) S(0.068459 2.161632 0.045000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-1.020477 0.000000 0.571392) S(0.081554 2.161632 0.045000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-1.010300 -0.704352 0.000000) S(0.061200 0.038250 1.517760) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-1.010300 0.704352 0.000000) S(0.061200 0.038250 1.517760) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-0.982700 0.000000 -0.749952) S(0.006000 1.821600 0.015750) !I(Cube material(slategreymattemetal) 1 1) ] ]
+ [ T(191.000000 0.000000 -20.000000) A(0.000000 0) T(-4.000000 4.000000 0.000000) T(0.000000 0.000000 0.000000) [ T(-0.982700 0.000000 0.749952) S(0.006000 1.821600 0.015750) !I(Cube material(slategreymattemetal) 1 1) ] ]
+] ]
+
+] ]

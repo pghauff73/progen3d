@@ -1,0 +1,32 @@
+# Meridian S01 district assembly cargo; H03 detail and M02 conceptual envelopes
+Start ->
+[ Object(id(S01_District_cargo) class(SubsystemAssembly) taxonomy(Spacecraft Meridian Subsections) layer(Equipment)) [
+[ Object(id(Meridian_H03_ship_habitat_rooms_HAB_FOOD_STORE) class(HumanSystemsCandidate) taxonomy(Spacecraft Meridian ModularInterior) layer(Equipment)) [
+ [ Object(id(H03_Base_ship_habitat_rooms_HAB_FOOD_STORE) class(CrewInteriorSection) taxonomy(Spacecraft Meridian HumanInterior) layer(Equipment)) [
+ [ T(9.799090 -72.245260 19.358060) A(165.000000 0) S(16.400000 0.100000 21.621500) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(9.799090 -66.719020 17.877310) A(165.000000 0) S(16.400000 0.100000 21.621500) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(1.649090 -69.482140 18.617680) A(165.000000 0) S(0.100000 5.821200 21.621500) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(17.949090 -69.482140 18.617680) A(165.000000 0) S(0.100000 5.821200 21.621500) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(9.799090 -66.697050 29.011790) A(165.000000 0) S(16.400000 5.821200 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(5.299090 -72.267230 8.223580) A(165.000000 0) S(7.400000 5.821200 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(14.299090 -72.267230 8.223580) A(165.000000 0) S(7.400000 5.821200 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(9.799090 -71.156420 7.925940) A(165.000000 0) S(1.600000 3.521200 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(8.954090 -73.980780 8.630960) A(165.000000 0) S(0.090000 2.300000 0.130000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(10.644090 -73.980780 8.630960) A(165.000000 0) S(0.090000 2.300000 0.130000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(9.799090 -72.826500 8.321670) A(165.000000 0) S(1.800000 0.090000 0.130000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(10.819090 -74.022190 8.476410) A(165.000000 0) S(0.140000 2.300000 0.160000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(17.349090 -73.799600 9.307100) A(165.000000 0) S(0.620000 0.900000 0.350000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(17.679090 -64.191820 28.081700) A(165.000000 0) S(0.220000 0.160000 0.220000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ ] ]
+] ]
+[ Object(id(Meridian_H03_ship_fixed_rooms_FIX_CARGO) class(HumanSystemsCandidate) taxonomy(Spacecraft Meridian ModularInterior) layer(Equipment)) [
+ [ Object(id(H03_Base_ship_fixed_rooms_FIX_CARGO) class(CrewInteriorSection) taxonomy(Spacecraft Meridian HumanInterior) layer(Equipment)) [
+ [ T(-23.000000 0.000000 -9.940000) A(0.000000 0) S(14.000000 9.000000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-23.000000 2.160000 3.940000) A(0.000000 0) S(14.000000 4.500000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-29.940000 -3.060000 -3.000000) A(0.000000 0) S(0.120000 2.520000 14.000000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-16.060000 -3.060000 -3.000000) A(0.000000 0) S(0.120000 2.520000 14.000000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-26.080000 1.890000 -9.100000) A(0.000000 0) S(0.900000 0.700000 0.700000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(-16.400000 0.000000 -8.000000) A(0.000000 0) S(0.200000 0.200000 0.250000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ ] ]
+] ]
+] ]

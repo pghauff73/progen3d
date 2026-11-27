@@ -1,0 +1,55 @@
+{
+  "title": "Meridian H03 Farm A",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h03-farm-a-e0ebd01c",
+  "source_file": "Meridian_H03_Farm_A.p3d",
+  "git_blob_sha": "e0ebd01ced1a732c371f8ec760d5c61873fcdd13",
+  "bytes": 32616,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H03_Farm_A.p3d"
+  ],
+  "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_ship_hydroponics_HAB_FARM_A, H03_Base_ship_hydroponics_HAB_FARM_A, H02_Ship_Farm_HAB_FARM_A"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, greenmattepaint, palebluemattepaint, warmwhiteemissivepaint"
+    ],
+    [
+      "Source lines",
+      "239"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

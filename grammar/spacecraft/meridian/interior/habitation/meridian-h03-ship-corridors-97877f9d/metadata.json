@@ -1,0 +1,54 @@
+{
+  "title": "Meridian H03 Ship Corridors",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-corridors-97877f9d",
+  "source_file": "Meridian_H03_Ship_Corridors.p3d",
+  "git_blob_sha": "97877f9ddf7ab75c29dfd55eb2400457d22736e5",
+  "bytes": 22569,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H03_Ship_Corridors.p3d"
+  ],
+  "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+  "features": [
+    "Cube",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_ship_Collection_Corridors, H03_Base_ship_corridors_Fixed_Galleries, H03_Base_ship_corridors_Habitat_Crosslinks, H03_Base_ship_corridors_Habitat_Ring, H02_Ship_Habitat_Corridors"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, warmwhiteemissivepaint, tealmattepaint"
+    ],
+    [
+      "Source lines",
+      "178"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S01 Cargo",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-cargo-6a615a4c",
+  "source_file": "Meridian_S01_Cargo.p3d",
+  "git_blob_sha": "6a615a4cea7aedc39059914d47e980a804ee26fb",
+  "bytes": 3346,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Cargo.p3d"
+  ],
+  "description": "Meridian S01 district assembly cargo; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly cargo; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_cargo, Meridian_H03_ship_habitat_rooms_HAB_FOOD_STORE, H03_Base_ship_habitat_rooms_HAB_FOOD_STORE, Meridian_H03_ship_fixed_rooms_FIX_CARGO, H03_Base_ship_fixed_rooms_FIX_CARGO"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, HumanSystemsCandidate, CrewInteriorSection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "32"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

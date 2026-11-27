@@ -1,0 +1,55 @@
+{
+  "title": "Meridian H03 Module Medical",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h03-module-medical-db1b70ba",
+  "source_file": "Meridian_H03_Module_Medical.p3d",
+  "git_blob_sha": "db1b70ba33048686c266cf301e87826dc5ea4a7e",
+  "bytes": 2848,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H03_Module_Medical.p3d"
+  ],
+  "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_module_Collection_Medical, H03_Base_module_medical_Medical, H02_Module_Medical"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, whitebeigemattepaint, tealmattepaint, palebluemattepaint"
+    ],
+    [
+      "Source lines",
+      "26"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

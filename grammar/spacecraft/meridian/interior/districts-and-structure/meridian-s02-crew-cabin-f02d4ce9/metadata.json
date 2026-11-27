@@ -1,0 +1,56 @@
+{
+  "title": "Meridian S02 Crew Cabin",
+  "group": "spacecraft/meridian/interior/districts-and-structure",
+  "directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-crew-cabin-f02d4ce9",
+  "source_file": "Meridian_S02_Crew_Cabin.p3d",
+  "git_blob_sha": "f02d4ce9cf0b526e60269dc072f009ae7b5063bf",
+  "bytes": 6449,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S02_Crew_Cabin.p3d"
+  ],
+  "description": "@structural-relief perimeter_bead status(inline_candidate) reviewer_required(true)",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "@structural-relief perimeter_bead status(inline_candidate) reviewer_required(true) · Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_ship_cabins_HAB_CABIN_01, H03_Base_ship_cabins_HAB_CABIN_01, H02_Ship_Cabin_HAB_CABIN_01, S02_Relief_HAB_CABIN_01"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior, StructuralReliefCandidate"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, whitebeigemattepaint, purplemattepaint, goldbrushedmetal, slategreymattemetal, warmwhiteemissivepaint, amberemissivepaint, tealmattepaint"
+    ],
+    [
+      "Source lines",
+      "54"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

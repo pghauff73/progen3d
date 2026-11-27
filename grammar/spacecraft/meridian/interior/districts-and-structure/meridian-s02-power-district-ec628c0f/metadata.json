@@ -1,0 +1,54 @@
+{
+  "title": "Meridian S02 Power District",
+  "group": "spacecraft/meridian/interior/districts-and-structure",
+  "directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-power-district-ec628c0f",
+  "source_file": "Meridian_S02_Power_District.p3d",
+  "git_blob_sha": "ec628c0f5a8367b3988988f62b2faac18bc10382",
+  "bytes": 16430,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S02_Power_District.p3d"
+  ],
+  "description": "@structural-relief composed status(candidate) components(6)",
+  "features": [
+    "Cube",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "@structural-relief composed status(candidate) components(6) · Meridian S01 district assembly power; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_power, Meridian_H03_ship_fixed_rooms_FIX_POWER_A, H03_Base_ship_fixed_rooms_FIX_POWER_A, Meridian_H03_ship_fixed_rooms_FIX_POWER_B, H03_Base_ship_fixed_rooms_FIX_POWER_B, Meridian_H03_ship_fixed_rooms_FIX_BATTERY_A, H03_Base_ship_fixed_rooms_FIX_BATTERY_A, Meridian_H03_ship_fixed_rooms_FIX_BATTERY_B, H03_Base_ship_fixed_rooms_FIX_BATTERY_B, AFT_FUSION_POWER, AFT_CONVERTER, S02_Assembly_Relief_FIX_POWER_A, S02_Assembly_Relief_FIX_POWER_B, S02_Assembly_Relief_FIX_BATTERY_A, S02_Assembly_Relief_FIX_BATTERY_B, S02_Assembly_Relief_AFT_FUSION_POWER, S02_Assembly_Relief_AFT_CONVERTER"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, HumanSystemsCandidate, CrewInteriorSection, Subsection, CandidateStiffener"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, slategreymattemetal, goldbrushedmetal"
+    ],
+    [
+      "Source lines",
+      "128"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

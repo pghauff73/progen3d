@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S01 Maintenance",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-maintenance-d4eaa4d7",
+  "source_file": "Meridian_S01_Maintenance.p3d",
+  "git_blob_sha": "d4eaa4d7a1181d32df06c57a158e6050c8a759b3",
+  "bytes": 3386,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Maintenance.p3d"
+  ],
+  "description": "Meridian S01 district assembly maintenance; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly maintenance; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_maintenance, Meridian_H03_ship_fixed_rooms_FIX_WORKSHOP, H03_Base_ship_fixed_rooms_FIX_WORKSHOP, Meridian_H03_ship_fixed_rooms_FIX_EVA_PREP, H03_Base_ship_fixed_rooms_FIX_EVA_PREP, Meridian_H03_ship_fixed_rooms_FIX_ELECTRONICS, H03_Base_ship_fixed_rooms_FIX_ELECTRONICS"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, HumanSystemsCandidate, CrewInteriorSection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "34"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

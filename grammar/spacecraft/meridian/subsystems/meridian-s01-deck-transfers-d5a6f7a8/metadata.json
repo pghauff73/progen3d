@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S01 Deck Transfers",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-deck-transfers-d5a6f7a8",
+  "source_file": "Meridian_S01_Deck_Transfers.p3d",
+  "git_blob_sha": "d5a6f7a87775f35f174e522e3c41e1b825e14d29",
+  "bytes": 17312,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Deck_Transfers.p3d"
+  ],
+  "description": "Meridian S01 independent transfers visual survey; not installed",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 independent transfers visual survey; not installed"
+    ],
+    [
+      "Named objects",
+      "S01_Overview_transfers, LIFT_P_01, LIFT_P_02, LIFT_P_03, LIFT_P_05, LIFT_P_06, LIFT_P_07, LIFT_P_08, LIFT_P_09, LIFT_S_01, LIFT_S_02, LIFT_S_03, LIFT_S_05, LIFT_S_06, LIFT_S_07, LIFT_S_08, LIFT_S_09"
+    ],
+    [
+      "Object classes",
+      "ConceptSurvey, Subsection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, slategreymattemetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "174"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

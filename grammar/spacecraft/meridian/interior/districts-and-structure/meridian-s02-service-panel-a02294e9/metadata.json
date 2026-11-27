@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S02 Service Panel",
+  "group": "spacecraft/meridian/interior/districts-and-structure",
+  "directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-service-panel-a02294e9",
+  "source_file": "Meridian_S02_Service_Panel.p3d",
+  "git_blob_sha": "a02294e9e9df1f556b7b6f7a7bade5376210c1be",
+  "bytes": 3462,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S02_Service_Panel.p3d"
+  ],
+  "description": "@structural-relief orthogrid status(inline_candidate) reviewer_required(true)",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "@structural-relief orthogrid status(inline_candidate) reviewer_required(true) · Meridian S01 | AFT_CONVERTER_EQ_01 · Frame: FIXED_M; catalog-proposed equipment · WARNING: Not physically qualified or human-rated. · Type=service_rack | room=AFT_CONVERTER | dimensions=2.000000 4.000000 3.000000; no hardware qualification · @glaze silverbrushedmetal 0.23 0.23 · @glaze warmwhitepaint 0.52 0.115 · @glaze slategreymattemetal 0.23 0.23"
+    ],
+    [
+      "Named objects",
+      "AFT_CONVERTER_EQ_01, S02_Relief_AFT_CONVERTER_EQ_01"
+    ],
+    [
+      "Object classes",
+      "Subsection, StructuralReliefCandidate"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "slategreymattemetal, silverbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "27"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

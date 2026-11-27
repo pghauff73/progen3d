@@ -1,0 +1,56 @@
+{
+  "title": "Meridian H03 Cabin CS01",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h03-cabin-cs01-8668973e",
+  "source_file": "Meridian_H03_Cabin_CS01.p3d",
+  "git_blob_sha": "8668973ee7728365e158ae7ff81902d64f6d661b",
+  "bytes": 7559,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H03_Cabin_CS01.p3d"
+  ],
+  "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_module_cabins_CS01, H03_Base_module_cabins_CS01, H02_Module_Cabin_CS01"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, purplemattepaint, whitebeigemattepaint, sandmattepaint, goldbrushedmetal, slategreymattemetal, tealmattepaint, warmwhiteemissivepaint, blackbluepolishedglass, amberemissivepaint"
+    ],
+    [
+      "Source lines",
+      "61"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Meridian S01 Cryogenics",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-cryogenics-add53ed6",
+  "source_file": "Meridian_S01_Cryogenics.p3d",
+  "git_blob_sha": "add53ed67daf576393e430cd67ddf1fd9e6c8b2c",
+  "bytes": 2594,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Cryogenics.p3d"
+  ],
+  "description": "Meridian S01 district assembly cryogenic; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Sphere",
+    "SweepDisk",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly cryogenic; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_cryogenic, AFT_H2, AFT_CH4, AFT_O2, AFT_GASES"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, Subsection"
+    ],
+    [
+      "Instantiated primitives",
+      "Sphere, SweepDisk, Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, goldbrushedmetal, slategreymattemetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "23"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

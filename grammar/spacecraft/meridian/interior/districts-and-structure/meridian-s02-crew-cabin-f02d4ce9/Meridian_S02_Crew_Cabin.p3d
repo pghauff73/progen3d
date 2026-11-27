@@ -1,0 +1,54 @@
+# @structural-relief perimeter_bead status(inline_candidate) reviewer_required(true)
+# Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.
+# For assembly use scripts/assemble.py; no unsupported native include syntax.
+# CONCEPT-ONLY, NOT HUMAN-RATED.
+Start ->
+[ Object(id(Meridian_H03_ship_cabins_HAB_CABIN_01) class(HumanSystemsCandidate) taxonomy(Spacecraft Meridian ModularInterior) layer(Equipment)) [
+ [ Object(id(H03_Base_ship_cabins_HAB_CABIN_01) class(CrewInteriorSection) taxonomy(Spacecraft Meridian HumanInterior) layer(Equipment)) [
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) S(4.756000 0.100000 4.656900) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(6.355090 70.905260 11.250610) A(15.000000 0) S(4.756000 0.100000 4.656900) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(4.027090 72.543810 11.689660) A(15.000000 0) S(0.100000 3.492700 4.656900) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(8.683090 72.543810 11.689660) A(15.000000 0) S(0.100000 3.492700 4.656900) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(6.355090 73.133520 9.488820) A(15.000000 0) S(4.756000 3.492700 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(4.766090 71.954100 13.890490) A(15.000000 0) S(1.578000 3.492700 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(7.944090 71.954100 13.890490) A(15.000000 0) S(1.578000 3.492700 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(6.355090 70.843280 13.592850) A(15.000000 0) S(1.600000 1.192700 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(5.510090 72.517190 14.093140) A(15.000000 0) S(0.090000 2.300000 0.130000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(7.200090 72.517190 14.093140) A(15.000000 0) S(0.090000 2.300000 0.130000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(6.355090 71.362910 13.783850) A(15.000000 0) S(1.800000 0.090000 0.130000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(7.375090 72.475780 14.247680) A(15.000000 0) S(0.140000 2.300000 0.160000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(5.555090 73.951280 11.445620) A(15.000000 0) S(1.900000 0.650000 0.880000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(7.155090 74.168180 10.520230) A(15.000000 0) S(1.200000 0.700000 0.420000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(7.155090 73.822350 10.458620) A(15.000000 0) S(0.800000 0.470000 0.090000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(6.355090 71.088780 11.299780) A(15.000000 0) S(1.500000 0.070000 0.170000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(8.473090 71.195030 11.328250) A(15.000000 0) S(0.190000 0.130000 0.190000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(6.355090 73.786640 9.819110) A(15.000000 0) S(1.900000 0.070000 0.090000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ ] ]
+ [ Object(id(H02_Ship_Cabin_HAB_CABIN_01) class(HighResolutionCrewInterior) taxonomy(Spacecraft Meridian HumanInterior Detail) layer(Equipment)) [
+  [ T(5.045094 74.144469 11.497385) A(15.000000 0) S(0.490000 0.220000 0.550000) !I(Sphere(segments(24 14)) material(whitebeigemattepaint) 1 1) ]
+  [ T(5.555094 74.212083 11.515502) A(15.000000 0) S(1.780000 0.150000 0.800000) !I(Sphere(segments(24 14)) material(purplemattepaint) 1 1) ]
+  [ !I(SweepDisk(path(5.225094 74.291810 11.102049 5.225094 74.264863 11.550350 5.225094 74.074402 11.913426) radius(0.020000) segments(16) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ !I(SweepDisk(path(6.175094 74.291810 11.102049 6.175094 74.264863 11.550350 6.175094 74.074402 11.913426) radius(0.020000) segments(16) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ T(5.255094 74.293197 11.019598) A(15.000000 0) S(0.520000 0.130000 0.110000) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(5.955094 74.293197 11.019598) A(15.000000 0) S(0.520000 0.130000 0.110000) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(7.155094 73.889960 10.476735) A(15.000000 0) S(0.760000 0.400000 0.040000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+  [ !I(SweepDisk(path(6.855094 74.103479 10.761708 6.855094 73.955308 10.773770 6.975094 73.863706 10.883811) radius(0.025000) segments(16) cap(all)) material(slategreymattemetal) 1 1) ]
+  [ T(6.355094 71.088782 11.299782) A(15.000000 0) S(1.420000 0.045000 0.140000) !I(Cube material(warmwhiteemissivepaint) 1 1) ]
+  [ T(7.385094 72.928640 12.828046) A(15.000000 0) !I(Revolve(profile(Polygon 0.015000 0.000000 0.100000 0.000000 0.100000 0.045000 0.015000 0.045000) angle(0 360) segments(32) cap(all)) material(goldbrushedmetal) 1 1) ]
+  [ T(7.775094 72.610578 12.701411) A(15.000000 0) S(0.120000 0.110000 0.120000) !I(Sphere(segments(24 14)) material(amberemissivepaint) 1 1) ]
+  [ T(4.705094 71.273422 10.417507) A(15.000000 0) S(0.110000 0.035000 0.180000) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(4.905094 71.273422 10.417507) A(15.000000 0) S(0.110000 0.035000 0.180000) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(5.105094 71.273422 10.417507) A(15.000000 0) S(0.110000 0.035000 0.180000) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ T(5.305094 71.273422 10.417507) A(15.000000 0) S(0.110000 0.035000 0.180000) !I(Cube material(slategreymattemetal) 1 1) ]
+  [ !I(SweepDisk(path(5.515094 73.845294 9.793418 7.195094 73.845294 9.793418) radius(0.026000) segments(16) cap(all)) material(tealmattepaint) 1 1) ]
+ ] ]
+[ Object(id(S02_Relief_HAB_CABIN_01) class(StructuralReliefCandidate) taxonomy(Spacecraft Meridian StructuralRelief) layer(Equipment)) [
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) [ T(0.000000 -0.071700 -0.816000) S(2.460000 0.044000 0.030000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) [ T(0.000000 -0.071700 0.816000) S(2.460000 0.044000 0.030000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) [ T(-1.020000 -0.071700 0.000000) S(0.030000 0.044000 1.968000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) [ T(1.020000 -0.071700 0.000000) S(0.030000 0.044000 1.968000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) [ T(0.000000 -0.052700 -1.008000) S(2.250000 0.006000 0.010500) !I(Cube material(slategreymattemetal) 1 1) ] ]
+ [ T(6.355090 74.182360 12.128700) A(15.000000 0) [ T(0.000000 -0.052700 1.008000) S(2.250000 0.006000 0.010500) !I(Cube material(slategreymattemetal) 1 1) ] ]
+] ]
+
+] ]

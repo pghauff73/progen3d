@@ -1,0 +1,35 @@
+# Meridian S01 district assembly thermal; H03 detail and M02 conceptual envelopes
+Start ->
+[ Object(id(S01_District_thermal) class(SubsystemAssembly) taxonomy(Spacecraft Meridian Subsections) layer(Equipment)) [
+[ Object(id(AFT_CRYO) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(250.000000 10.000000 0.000000) A(0.000000 0) [ T(0.000000 -2.880000 0.000000) S(13.440000 0.100000 7.680000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(250.000000 10.000000 0.000000) A(0.000000 0) [ T(0.000000 2.880000 0.000000) S(13.440000 0.055000 7.680000) !I(Cube material(slategreymattemetal) 1 1) ] ]
+  [ T(250.000000 10.000000 0.000000) A(0.000000 0) [ T(-6.440000 0.000000 3.440000) S(0.100000 5.400000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(250.000000 10.000000 0.000000) A(0.000000 0) [ T(6.440000 0.000000 3.440000) S(0.100000 5.400000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(250.000000 10.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 3.520000) S(2.200000 0.090000 0.080000) !I(Cube material(paleblueemissivepaint) 1 1) ] ]
+] ]
+[ Object(id(COOLANT_MANIFOLD_A) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(121.000000 6.700000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(1.950000 1.200000 0.900000) !I(Cube material(slategreymattemetal) 1 1) ] ]
+  [ T(121.000000 6.700000 0.000000) A(0.000000 0) [ T(0.000000 -0.500000 0.600000) S(1.950000 0.080000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(121.000000 6.700000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.600000) S(1.950000 0.080000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(121.000000 6.700000 0.000000) A(0.000000 0) [ T(0.000000 0.500000 0.600000) S(1.950000 0.080000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+] ]
+[ Object(id(COOLANT_MANIFOLD_B) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(121.000000 -6.700000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(1.950000 1.200000 0.900000) !I(Cube material(slategreymattemetal) 1 1) ] ]
+  [ T(121.000000 -6.700000 0.000000) A(0.000000 0) [ T(0.000000 -0.500000 0.600000) S(1.950000 0.080000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(121.000000 -6.700000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.600000) S(1.950000 0.080000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(121.000000 -6.700000 0.000000) A(0.000000 0) [ T(0.000000 0.500000 0.600000) S(1.950000 0.080000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+] ]
+[ Object(id(REACTOR_RADIATOR_A) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(235.000000 30.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(2.600000 1.800000 0.900000) !I(Cube material(slategreymattemetal) 1 1) ] ]
+  [ T(235.000000 30.000000 0.000000) A(0.000000 0) [ T(0.000000 -0.750000 0.600000) S(2.600000 0.120000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(235.000000 30.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.600000) S(2.600000 0.120000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(235.000000 30.000000 0.000000) A(0.000000 0) [ T(0.000000 0.750000 0.600000) S(2.600000 0.120000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+] ]
+[ Object(id(REACTOR_RADIATOR_B) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(235.000000 -30.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(2.600000 1.800000 0.900000) !I(Cube material(slategreymattemetal) 1 1) ] ]
+  [ T(235.000000 -30.000000 0.000000) A(0.000000 0) [ T(0.000000 -0.750000 0.600000) S(2.600000 0.120000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(235.000000 -30.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.600000) S(2.600000 0.120000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(235.000000 -30.000000 0.000000) A(0.000000 0) [ T(0.000000 0.750000 0.600000) S(2.600000 0.120000 0.300000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+] ]
+] ]

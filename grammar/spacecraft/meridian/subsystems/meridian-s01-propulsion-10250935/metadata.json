@@ -1,0 +1,54 @@
+{
+  "title": "Meridian S01 Propulsion",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-propulsion-10250935",
+  "source_file": "Meridian_S01_Propulsion.p3d",
+  "git_blob_sha": "10250935d3b414186aa3005df4a6ab933b66cefa",
+  "bytes": 823,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Propulsion.p3d"
+  ],
+  "description": "Meridian S01 district assembly propulsion; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly propulsion; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_propulsion, AFT_ENGINE"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, Subsection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "slategreymattemetal, silverbrushedmetal, goldbrushedmetal"
+    ],
+    [
+      "Source lines",
+      "9"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

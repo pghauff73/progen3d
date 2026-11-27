@@ -1,0 +1,55 @@
+{
+  "title": "Meridian S01 Water",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-water-bd75b212",
+  "source_file": "Meridian_S01_Water.p3d",
+  "git_blob_sha": "bd75b2122a2145d4b6a27b1f3be9d50e5e658c88",
+  "bytes": 1743,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Water.p3d"
+  ],
+  "description": "Meridian S01 district assembly water; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly water; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_water, Meridian_H03_ship_fixed_rooms_FIX_WATER, H03_Base_ship_fixed_rooms_FIX_WATER, AFT_WATER"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, HumanSystemsCandidate, CrewInteriorSection, Subsection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, goldbrushedmetal"
+    ],
+    [
+      "Source lines",
+      "18"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

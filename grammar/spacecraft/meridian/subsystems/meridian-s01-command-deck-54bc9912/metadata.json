@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S01 Command Deck",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-command-deck-54bc9912",
+  "source_file": "Meridian_S01_Command_Deck.p3d",
+  "git_blob_sha": "54bc9912e5c2492d56a2bfa02b664cda32f89285",
+  "bytes": 3071,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Command_Deck.p3d"
+  ],
+  "description": "Meridian S01 district assembly command; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly command; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_command, Meridian_H03_ship_fixed_rooms_FIX_COMMAND, H03_Base_ship_fixed_rooms_FIX_COMMAND, Meridian_H03_ship_fixed_rooms_FIX_ENGINEERING, H03_Base_ship_fixed_rooms_FIX_ENGINEERING"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, HumanSystemsCandidate, CrewInteriorSection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "30"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

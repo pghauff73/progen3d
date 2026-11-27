@@ -1,0 +1,56 @@
+{
+  "title": "Meridian H04 Resized H03 Cabin",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h04-resized-h03-cabin-8802161e",
+  "source_file": "Meridian_H04_Resized_H03_Cabin.p3d",
+  "git_blob_sha": "8802161e1907a34d9da2e19f682733754c2323f5",
+  "bytes": 7645,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H04_Resized_H03_Cabin.p3d"
+  ],
+  "description": "Regenerated H03 source geometry; width/length/height changed. Concept only.",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Regenerated H03 source geometry; width/length/height changed. Concept only. · Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_module_cabins_CS01, H03_Base_module_cabins_CS01, H02_Module_Cabin_CS01"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, purplemattepaint, whitebeigemattepaint, sandmattepaint, goldbrushedmetal, slategreymattemetal, tealmattepaint, warmwhiteemissivepaint, blackbluepolishedglass, amberemissivepaint"
+    ],
+    [
+      "Source lines",
+      "62"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,30 @@
+# Meridian S01 district assembly command; H03 detail and M02 conceptual envelopes
+Start ->
+[ Object(id(S01_District_command) class(SubsystemAssembly) taxonomy(Spacecraft Meridian Subsections) layer(Equipment)) [
+[ Object(id(Meridian_H03_ship_fixed_rooms_FIX_COMMAND) class(HumanSystemsCandidate) taxonomy(Spacecraft Meridian ModularInterior) layer(Equipment)) [
+ [ Object(id(H03_Base_ship_fixed_rooms_FIX_COMMAND) class(CrewInteriorSection) taxonomy(Spacecraft Meridian HumanInterior) layer(Equipment)) [
+ [ T(-43.000000 0.000000 1.060000) A(0.000000 0) S(18.000000 4.000000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-43.000000 0.960000 14.940000) A(0.000000 0) S(18.000000 2.000000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-51.940000 -1.360000 8.000000) A(0.000000 0) S(0.120000 1.120000 14.000000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-34.060000 -1.360000 8.000000) A(0.000000 0) S(0.120000 1.120000 14.000000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(-46.960000 0.840000 1.900000) A(0.000000 0) S(0.900000 0.700000 0.700000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(-49.000000 0.000000 1.800000) A(0.000000 0) S(1.800000 1.000000 0.850000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(-43.000000 0.000000 1.800000) A(0.000000 0) S(1.800000 1.000000 0.850000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(-37.000000 0.000000 1.800000) A(0.000000 0) S(1.800000 1.000000 0.850000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(-34.400000 0.000000 3.000000) A(0.000000 0) S(0.200000 0.200000 0.250000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ ] ]
+] ]
+[ Object(id(Meridian_H03_ship_fixed_rooms_FIX_ENGINEERING) class(HumanSystemsCandidate) taxonomy(Spacecraft Meridian ModularInterior) layer(Equipment)) [
+ [ Object(id(H03_Base_ship_fixed_rooms_FIX_ENGINEERING) class(CrewInteriorSection) taxonomy(Spacecraft Meridian HumanInterior) layer(Equipment)) [
+ [ T(97.000000 0.000000 0.560000) A(0.000000 0) S(16.000000 4.500000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(97.000000 1.080000 7.440000) A(0.000000 0) S(16.000000 2.250000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(89.060000 -1.530000 4.000000) A(0.000000 0) S(0.120000 1.260000 7.000000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(104.940000 -1.530000 4.000000) A(0.000000 0) S(0.120000 1.260000 7.000000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(93.480000 0.945000 1.400000) A(0.000000 0) S(0.900000 0.700000 0.700000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(91.666670 0.000000 1.300000) A(0.000000 0) S(1.800000 1.000000 0.850000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(97.000000 0.000000 1.300000) A(0.000000 0) S(1.800000 1.000000 0.850000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(102.333330 0.000000 1.300000) A(0.000000 0) S(1.800000 1.000000 0.850000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(104.600000 0.000000 2.500000) A(0.000000 0) S(0.200000 0.200000 0.250000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ ] ]
+] ]
+] ]

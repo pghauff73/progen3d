@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S01 Thermal",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-thermal-db935f2b",
+  "source_file": "Meridian_S01_Thermal.p3d",
+  "git_blob_sha": "db935f2b08f7669887408c1fd23e68c6630fe978",
+  "bytes": 4136,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Thermal.p3d"
+  ],
+  "description": "Meridian S01 district assembly thermal; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S01 district assembly thermal; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_thermal, AFT_CRYO, COOLANT_MANIFOLD_A, COOLANT_MANIFOLD_B, REACTOR_RADIATOR_A, REACTOR_RADIATOR_B"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, Subsection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, slategreymattemetal, paleblueemissivepaint"
+    ],
+    [
+      "Source lines",
+      "35"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

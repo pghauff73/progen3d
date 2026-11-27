@@ -1,0 +1,55 @@
+{
+  "title": "Meridian S03 Power Service Grooved",
+  "group": "spacecraft/meridian/interior/surface-relief",
+  "directory": "spacecraft/meridian/interior/surface-relief/meridian-s03-power-service-grooved-0d16361f",
+  "source_file": "Meridian_S03_Power_Service_Grooved.p3d",
+  "git_blob_sha": "0d16361f07910d5045d9431d1cd187fe0bda896f",
+  "bytes": 12755,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S03_Power_Service_Grooved.p3d"
+  ],
+  "description": "Meridian S03 continuous surface-groove variant; AFT_FUSION_POWER",
+  "features": [
+    "Cube",
+    "Extrude",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S03 continuous surface-groove variant; AFT_FUSION_POWER · @surface-groove depth(0.001000m) width(0.004000m) pattern(graded_orthogrid) policy(integrated_candidate) · NOT STRUCTURALLY CERTIFIED; optical, seal and pressure surfaces excluded. · Meridian S01 | AFT_FUSION_POWER · Frame: FIXED_M; catalog-proposed spatial envelope · WARNING: Not physically qualified or human-rated. · Compartment: Fusion electrical powerplant concept | fusion_power | dimensions_m=25.000000 24.000000 24.000000; opening/pressure unqualified · @glaze silverbrushedmetal 0.23 0.23"
+    ],
+    [
+      "Named objects",
+      "AFT_FUSION_POWER"
+    ],
+    [
+      "Object classes",
+      "Subsection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Extrude, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "slategreymattemetal, silverbrushedmetal, goldbrushedmetal"
+    ],
+    [
+      "Source lines",
+      "71"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

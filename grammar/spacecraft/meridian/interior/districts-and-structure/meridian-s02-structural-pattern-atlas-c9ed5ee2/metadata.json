@@ -1,0 +1,53 @@
+{
+  "title": "Meridian S02 Structural Pattern Atlas",
+  "group": "spacecraft/meridian/interior/districts-and-structure",
+  "directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-structural-pattern-atlas-c9ed5ee2",
+  "source_file": "Meridian_S02_Structural_Pattern_Atlas.p3d",
+  "git_blob_sha": "c9ed5ee2e9bdd1ac477265cd7faae37dfad1a7f1",
+  "bytes": 7765,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S02_Structural_Pattern_Atlas.p3d"
+  ],
+  "description": "Meridian S02 true macro/micro structural relief study, material + boundaries illustrative.",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian S02 true macro/micro structural relief study, material + boundaries illustrative. · NOT A CERTIFIED STRUCTURAL DESIGN. 7 patterned 1m square, 6mm skin specimens. · @glaze silverbrushedmetal 0.23 0.23"
+    ],
+    [
+      "Named objects",
+      "Meridian_S02_StructuralAtlas, S02_Panel_isogrid, S02_Panel_orthogrid, S02_Panel_graded_orthogrid, S02_Panel_corrugation, S02_Panel_chevron, S02_Panel_joggle_lap, S02_Panel_perimeter_bead"
+    ],
+    [
+      "Object classes",
+      "StructuralCouponStudy, StructuralCoupon"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, slategreymattemetal"
+    ],
+    [
+      "Source lines",
+      "73"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

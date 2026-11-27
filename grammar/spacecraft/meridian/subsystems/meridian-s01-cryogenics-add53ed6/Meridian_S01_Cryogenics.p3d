@@ -1,0 +1,23 @@
+# Meridian S01 district assembly cryogenic; H03 detail and M02 conceptual envelopes
+Start ->
+[ Object(id(S01_District_cryogenic) class(SubsystemAssembly) taxonomy(Spacecraft Meridian Subsections) layer(Equipment)) [
+[ Object(id(AFT_H2) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(160.000000 15.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(8.000000 7.000000 7.000000) !I(Sphere(segments(20 12)) material(silverbrushedmetal) 1 1) ] ]
+  [ T(160.000000 15.000000 0.000000) A(0.000000 0) [ !I(SweepDisk(path(-7.700000 0.000000 0.000000 -5.280000 0.000000 0.000000) radius(0.100000) segments(12) cap(all)) material(goldbrushedmetal) 1 1) ] ]
+] ]
+[ Object(id(AFT_CH4) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(160.000000 -15.000000 0.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(8.000000 6.000000 6.000000) !I(Sphere(segments(20 12)) material(silverbrushedmetal) 1 1) ] ]
+  [ T(160.000000 -15.000000 0.000000) A(0.000000 0) [ !I(SweepDisk(path(-6.300000 0.000000 0.000000 -4.320000 0.000000 0.000000) radius(0.100000) segments(12) cap(all)) material(goldbrushedmetal) 1 1) ] ]
+] ]
+[ Object(id(AFT_O2) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(183.000000 0.000000 16.000000) A(0.000000 0) [ T(0.000000 0.000000 0.000000) S(8.000000 6.000000 6.000000) !I(Sphere(segments(20 12)) material(silverbrushedmetal) 1 1) ] ]
+  [ T(183.000000 0.000000 16.000000) A(0.000000 0) [ !I(SweepDisk(path(-5.600000 0.000000 0.000000 -3.840000 0.000000 0.000000) radius(0.100000) segments(12) cap(all)) material(goldbrushedmetal) 1 1) ] ]
+] ]
+[ Object(id(AFT_GASES) class(Subsection) taxonomy(Spacecraft Meridian Subsection) layer(Equipment)) [
+  [ T(139.000000 0.000000 -17.000000) A(0.000000 0) [ T(0.000000 -5.760000 0.000000) S(15.360000 0.100000 7.680000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(139.000000 0.000000 -17.000000) A(0.000000 0) [ T(0.000000 5.760000 0.000000) S(15.360000 0.055000 7.680000) !I(Cube material(slategreymattemetal) 1 1) ] ]
+  [ T(139.000000 0.000000 -17.000000) A(0.000000 0) [ T(-7.360000 0.000000 3.440000) S(0.100000 10.800000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(139.000000 0.000000 -17.000000) A(0.000000 0) [ T(7.360000 0.000000 3.440000) S(0.100000 10.800000 0.120000) !I(Cube material(silverbrushedmetal) 1 1) ] ]
+  [ T(139.000000 0.000000 -17.000000) A(0.000000 0) [ T(0.000000 0.000000 3.520000) S(2.200000 0.090000 0.080000) !I(Cube material(paleblueemissivepaint) 1 1) ] ]
+] ]
+] ]

@@ -1,0 +1,26 @@
+# Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.
+# For assembly use scripts/assemble.py; no unsupported native include syntax.
+# CONCEPT-ONLY, NOT HUMAN-RATED.
+Start ->
+[ Object(id(Meridian_H03_module_Collection_Medical) class(HumanSystemsCandidate) taxonomy(Spacecraft Meridian ModularInterior) layer(Equipment)) [
+ [ Object(id(H03_Base_module_medical_Medical) class(CrewInteriorSection) taxonomy(Spacecraft Meridian HumanInterior) layer(Equipment)) [
+ [ T(18.250000 -21.000000 0.050000) A(0.000000 0) S(12.000000 9.000000 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(18.250000 -21.000000 3.050000) A(0.000000 0) S(12.000000 9.000000 0.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(12.350000 -21.000000 1.550000) A(0.000000 0) S(0.120000 9.000000 3.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(24.150000 -21.000000 1.550000) A(0.000000 0) S(0.120000 9.000000 3.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(18.250000 -25.450000 1.550000) A(0.000000 0) S(12.000000 0.120000 3.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(18.250000 -16.550000 1.550000) A(0.000000 0) S(12.000000 0.120000 3.100000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(18.250000 -21.000000 2.870000) A(0.000000 0) S(0.260000 0.260000 0.170000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ [ T(16.250000 -21.000000 0.700000) A(0.000000 0) S(2.200000 1.000000 0.800000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(20.250000 -21.000000 0.700000) A(0.000000 0) S(2.200000 1.000000 0.800000) !I(Cube material(paleblueemissivepaint) 1 1) ]
+ [ T(22.050000 -19.000000 0.750000) A(0.000000 0) S(0.900000 0.850000 1.500000) !I(Cube material(silverbrushedmetal) 1 1) ]
+ ] ]
+ [ Object(id(H02_Module_Medical) class(HighResolutionCrewInterior) taxonomy(Spacecraft Meridian HumanInterior Detail) layer(Equipment)) [
+  [ T(16.250000 -21.000000 1.110000) A(0.000000 0) S(1.850000 0.760000 0.180000) !I(Sphere(segments(24 14)) material(whitebeigemattepaint) 1 1) ]
+  [ !I(SweepDisk(path(17.080000 -21.300000 0.700000 17.080000 -21.300000 2.000000 16.850000 -21.300000 2.000000) radius(0.035000) segments(16) cap(all)) material(tealmattepaint) 1 1) ]
+  [ T(16.850000 -21.300000 2.000000) A(0.000000 0) S(0.130000 0.130000 0.150000) !I(Sphere(segments(24 14)) material(palebluemattepaint) 1 1) ]
+  [ T(20.250000 -21.000000 1.110000) A(0.000000 0) S(1.850000 0.760000 0.180000) !I(Sphere(segments(24 14)) material(whitebeigemattepaint) 1 1) ]
+  [ !I(SweepDisk(path(21.080000 -21.300000 0.700000 21.080000 -21.300000 2.000000 20.850000 -21.300000 2.000000) radius(0.035000) segments(16) cap(all)) material(tealmattepaint) 1 1) ]
+  [ T(20.850000 -21.300000 2.000000) A(0.000000 0) S(0.130000 0.130000 0.150000) !I(Sphere(segments(24 14)) material(palebluemattepaint) 1 1) ]
+ ] ]
+] ]

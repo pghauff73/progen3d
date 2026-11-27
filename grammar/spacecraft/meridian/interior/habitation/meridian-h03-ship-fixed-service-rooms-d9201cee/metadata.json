@@ -1,0 +1,55 @@
+{
+  "title": "Meridian H03 Ship Fixed Service Rooms",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-fixed-service-rooms-d9201cee",
+  "source_file": "Meridian_H03_Ship_Fixed_Service_Rooms.p3d",
+  "git_blob_sha": "d9201cee7d6233f4d94f86f40ad89b7620fb813e",
+  "bytes": 34022,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H03_Ship_Fixed_Service_Rooms.p3d"
+  ],
+  "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+  "features": [
+    "Cube",
+    "Revolve",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source comments",
+      "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_ship_Collection_Fixed_Service_Rooms, H02_Ship_Fixed_Control, H03_Base_ship_fixed_rooms_FIX_BATTERY_A, H03_Base_ship_fixed_rooms_FIX_BATTERY_B, H03_Base_ship_fixed_rooms_FIX_BEAM_COMBINER, H03_Base_ship_fixed_rooms_FIX_CARGO, H03_Base_ship_fixed_rooms_FIX_COMMAND, H03_Base_ship_fixed_rooms_FIX_COMPUTER_A, H03_Base_ship_fixed_rooms_FIX_COMPUTER_B, H03_Base_ship_fixed_rooms_FIX_ECLSS_A, H03_Base_ship_fixed_rooms_FIX_ECLSS_B, H03_Base_ship_fixed_rooms_FIX_ELECTRONICS, H03_Base_ship_fixed_rooms_FIX_ENGINEERING, H03_Base_ship_fixed_rooms_FIX_EVA_PREP, H03_Base_ship_fixed_rooms_FIX_POWER_A, H03_Base_ship_fixed_rooms_FIX_POWER_B, H03_Base_ship_fixed_rooms_FIX_SCIENCE_CONTROL, H03_Base_ship_fixed_rooms_FIX_WATER, H03_Base_ship_fixed_rooms_FIX_WORKSHOP"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, HighResolutionCrewInterior, CrewInteriorSection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Revolve, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "paleblueemissivepaint, slategreymattemetal, goldbrushedmetal, palebluemattepaint, silverbrushedmetal"
+    ],
+    [
+      "Source lines",
+      "267"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
