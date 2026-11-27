@@ -28,7 +28,8 @@ endif()
 
 set(imgui_dir third_party/vendor/imgui-1.90.1)
 set(glad_dir third_party/vendor/glad)
-add_executable(progen3d
+list(REMOVE_ITEM editor_sources "src/main.cpp")
+add_library(progen3d_objects OBJECT
     ${editor_sources}
     stbimage/stb_image_impl.cpp
     ${glad_dir}/src/gl.c
@@ -39,10 +40,10 @@ add_executable(progen3d
     ${imgui_dir}/backends/imgui_impl_glfw.cpp
     ${imgui_dir}/backends/imgui_impl_opengl3.cpp
 )
-target_include_directories(progen3d PRIVATE
+target_include_directories(progen3d_objects PUBLIC
     include . ${imgui_dir} ${imgui_dir}/backends ${glad_dir}/include "${STB_INCLUDE_DIR}"
 )
-target_compile_definitions(progen3d PRIVATE
+target_compile_definitions(progen3d_objects PUBLIC
     NOMINMAX WIN32_LEAN_AND_MEAN IMGUI_USER_CONFIG="imgui_user_config.h"
 )
 # Bound MinGW's optimizer memory use for the large editor translation unit.
@@ -51,10 +52,22 @@ set_source_files_properties(src/imgui_main.cpp PROPERTIES COMPILE_OPTIONS "$<$<C
 set_source_files_properties(src/building/generated/SmallModernBuildingKnowledgeCatalog.cpp
     PROPERTIES COMPILE_OPTIONS -O0
 )
-target_link_libraries(progen3d PRIVATE
+target_link_libraries(progen3d_objects PUBLIC
     glfw OpenSSL::Crypto PkgConfig::CURL PkgConfig::JSONCPP PkgConfig::XML PkgConfig::EIGEN
     comdlg32 shell32 ws2_32
 )
+
+add_executable(progen3d src/main.cpp)
+target_link_libraries(progen3d PRIVATE progen3d_objects)
+
+option(BUILD_TESTING "Build native regression tests" OFF)
+if(BUILD_TESTING)
+    enable_testing()
+    add_executable(lyra_greeting_harness tests/lyra_greeting_harness.cpp)
+    target_link_libraries(lyra_greeting_harness PRIVATE progen3d_objects)
+    add_test(NAME bundled_lyra_greeting COMMAND lyra_greeting_harness
+        "$<TARGET_FILE_DIR:progen3d>/examples/Characters/Lyra/Lyra_Greeting.p3d")
+endif()
 
 get_filename_component(ucrt_bin_dir "${CMAKE_CXX_COMPILER}" DIRECTORY)
 add_custom_target(stage_progen3d ALL

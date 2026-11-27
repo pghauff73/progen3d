@@ -48,6 +48,8 @@ foreach(resource_dir IN ITEMS examples idscv1 libraries parts stls textures)
         file(COPY "${SOURCE_DIR}/${resource_dir}" DESTINATION "${app_dir}")
     endif()
 endforeach()
+configure_file("${SOURCE_DIR}/tools/windows/Open Lyra.cmd"
+               "${app_dir}/Open Lyra.cmd" @ONLY NEWLINE_STYLE CRLF)
 if(IS_DIRECTORY "${SOURCE_DIR}/assets/images")
     file(COPY "${SOURCE_DIR}/assets/images" DESTINATION "${app_dir}/assets")
 endif()

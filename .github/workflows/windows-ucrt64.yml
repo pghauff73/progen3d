@@ -1,0 +1,57 @@
+name: Windows portable editor
+
+on:
+  pull_request:
+    branches: [codex/windows-ucrt64]
+  push:
+    branches: [codex/windows-ucrt64]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 110
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja mingw-w64-ucrt-x86_64-pkgconf
+            mingw-w64-ucrt-x86_64-glfw mingw-w64-ucrt-x86_64-glm
+            mingw-w64-ucrt-x86_64-stb mingw-w64-ucrt-x86_64-curl
+            mingw-w64-ucrt-x86_64-openssl mingw-w64-ucrt-x86_64-jsoncpp
+            mingw-w64-ucrt-x86_64-libxml2 mingw-w64-ucrt-x86_64-eigen3
+            mingw-w64-ucrt-x86_64-ca-certificates
+      - name: Build the Windows editor and native tests
+        run: |
+          cmake -S . -B build/ucrt64 -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+          cmake --build build/ucrt64 --parallel 2
+      - name: Verify the staged Lyra example
+        run: |
+          ctest --test-dir build/ucrt64 --output-on-failure
+          cd build/ucrt64
+          test -f 'Open Lyra.cmd'
+          test -f progen3d.exe
+          cmp examples/Characters/Lyra/Lyra_Greeting.p3d ../../examples/Characters/Lyra/Lyra_Greeting.p3d
+      - name: Assemble portable app directory
+        run: |
+          mkdir -p build/portable
+          cd build/ucrt64
+          cp -t ../portable progen3d.exe *.dll cacert.pem 'Open Lyra.cmd'
+          for directory in assets examples idscv1 libraries parts stls textures; do
+            if test -d "$directory"; then cp -R "$directory" ../portable/; fi
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ProGen3D-Windows-x64-Lyra
+          path: build/portable/
+          if-no-files-found: error
