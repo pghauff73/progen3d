@@ -1,0 +1,93 @@
+# Cutaway ideal Venturi. Venturi(throatRadiusRatio inletVelocityHead).
+# Try 0.60 0.088 or 0.72 0.088. The inlet bore radius is 0.56.
+# Gold arrows follow velocity ratios and blue columns follow piezometric head.
+Start -> Venturi(0.60 0.088)
+
+Venturi(r k) ->
+ [ Bench(0.56*r 1/(r*r) 2.55-k 2.55-k/(r*r*r*r)) ]
+
+Bench(throat gain inletHead throatHead) ->
+ [ Object(id(Exhibit) class(VenturiFlowBench) taxonomy(Study Hydraulics Measurement) layer(Equipment)) [
+   [ Object(id(Base) class(InstrumentBed) taxonomy(Study Hydraulics Support) layer(Structure)) [ Base ] ]
+   [ T(0 1.19 0) A(-90 2) A(178 1)
+     [ Object(id(InletBore) class(BoreSection) taxonomy(Study Hydraulics Pipe) layer(Equipment)) [ End(-2.70 -1.46) ] ]
+     [ Object(id(Convergent) class(FlowContraction) taxonomy(Study Hydraulics Pipe) layer(Equipment)) [
+       Cone(-1.46 -0.45 0.56 throat) ] ]
+     [ Object(id(ThroatBore) class(BoreSection) taxonomy(Study Hydraulics Pipe) layer(Equipment)) [ Narrow(throat) ] ]
+     [ Object(id(Recovery) class(FlowDiffuser) taxonomy(Study Hydraulics Pipe) layer(Equipment)) [
+       Cone(0.45 2.06 throat 0.56) ] ]
+     [ Object(id(OutletBore) class(BoreSection) taxonomy(Study Hydraulics Pipe) layer(Equipment)) [ End(2.06 2.70) ] ]
+     [ Object(id(Cuffs) class(PipeFlanges) taxonomy(Study Hydraulics Pipe) layer(Equipment)) [
+       [ Flange(-2.65) ] [ Flange(2.65) ] ] ] ]
+   [ Object(id(Flow) class(VelocityArrows) taxonomy(Study Hydraulics Flow) layer(Equipment)) [
+     [ Arrow(-2.24 0.26) ] [ Arrow(0 0.26*gain) ] [ Arrow(2.31 0.26) ] ] ]
+   [ T(-2.12 0 0)
+     [ Object(id(InletGauge) class(Piezometer) taxonomy(Study Hydraulics Heads) layer(Equipment)) [ Gauge(0.56 inletHead) ] ] ]
+   [ Object(id(ThroatGauge) class(Piezometer) taxonomy(Study Hydraulics Heads) layer(Equipment)) [
+     Gauge(throat throatHead) ] ]
+   [ T(2.37 0 0)
+     [ Object(id(OutletGauge) class(Piezometer) taxonomy(Study Hydraulics Heads) layer(Equipment)) [ Gauge(0.56 inletHead) ] ] ] ] ]
+
+# These five annular sectors expose the bore along the same 120 degree cut.
+End(x X) ->
+ [ !I(Revolve(profile(Polygon 0.56 x 0.639 x 0.639 X 0.56 X) angle(0 240) segments(64) cap(all))
+   material(silverbluepolishedmetal) 1 0.26) ]
+Narrow(r) ->
+ [ !I(Revolve(profile(Polygon r -0.45 r+0.079 -0.45 r+0.079 0.45 r 0.45)
+   angle(0 240) segments(64) cap(all)) material(copperpolishedmetal) 1 0.25) ]
+Cone(x X r R) ->
+ [ !I(Revolve(profile(Polygon r x r+0.079 x R+0.079 X R X)
+   angle(0 240) segments(64) cap(all)) material(bluegreymattepaint) 1 0.26) ]
+Flange(x) ->
+ [ T(0 x 0) !I(Revolve(profile(Polygon 0.56 -0.071 0.746 -0.071 0.767 -0.047
+   0.767 0.047 0.746 0.071 0.56 0.071) angle(0 240) segments(64) cap(all))
+   material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 x-0.101 0) FlangeBolts(7) ]
+FlangeBolts(n) n ->
+ [ A(-15-35*FlangeBolts_count 1) T(0.704 0 0) S(0.069 0.203 0.069)
+   !I(Cylinder(segments(6 1)) material(charcoalmattemetal) 1 0.25) ]
+
+Arrow(x len) ->
+ [ T(x-len/2 1.19 0)
+   [ !I(TaperedSweep(samples(0 0 0 0.016 len 0 0 0.016) up(0 1 0) segments(10) cap(all))
+     material(goldbrushedmetal) 1 0.25) ]
+   [ !I(TaperedSweep(samples(len-0.091 0 0 0.045 len 0 0 0.003) up(0 1 0) segments(10) cap(all))
+     material(goldbrushedmetal) 1 0.25) ] ]
+
+Gauge(tapRadius head) ->
+ [ Tap(1.19-tapRadius-0.067) ]
+ [ T(0 0 0.95)
+   [ T(0 0.405 0) S(0.205 0.105 0.205) !I(Cylinder(segments(16 1)) material(goldbrushedmetal) 1 0.23) ]
+   [ T(0 2.615 0) S(0.189 0.057 0.189) !I(Cylinder(radial(0.68 1) topology(shell) close(all) segments(24 1))
+     material(goldbrushedmetal) 1 0.25) ]
+   [ A(200 1) !I(Revolve(profile(Polygon 0.064 0.509 0.093 0.509 0.093 2.628 0.064 2.628)
+     angle(0 220) segments(36) cap(all)) material(silverbluepolishedmetal) 1 0.21) ]
+   [ T(0 0.471 0) S(0.122 head-0.471 0.122) !I(Cylinder(segments(32 1))
+     material(tealmatteceramic) 1 0.24) ]
+   [ T(0 head-0.015 0) S(0.129 0.012 0.129) !I(Cylinder(segments(32 1))
+     material(warmwhitematteplaster) 1 0.24) ]
+   [ T(0.19 1.529 -0.034) S(0.196 2.208 0.067) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+   [ T(0.225 1.46 0.008) GaugeTicks(24) ] ]
+GaugeTicks(n) n ->
+ [ T(0 GaugeTicks_count*0.05 0)
+   S(0.055+0.052*(1-min(1,wrap(GaugeTicks_count,0,4))) 0.009 0.012)
+   !I(Cube material(silverbrushedmetal) 1 0.24) ]
+Tap(y) ->
+ [ !I(TaperedSweep(samples(0 y 0 0.045 0 0.444 0 0.034 0 0.370 0.13 0.034
+                           0 0.370 0.85 0.034 0 0.473 0.95 0.034) up(1 0 0) segments(12) cap(all))
+   material(copperpolishedmetal) 1 0.25) ]
+ [ T(0 y-0.031 0) S(0.158 0.079 0.158) !I(Cylinder(segments(12 1)) material(goldbrushedmetal) 1 0.22) ]
+
+Base ->
+ [ T(0 0.104 0.26) S(6.18 0.208 2.36) !I(Cube material(amberwarmwood) 1 0.29) ]
+ [ T(0 0.221 0.26) S(6.05 0.037 2.21) !I(Cube material(charcoalmattemetal) 1 0.28) ]
+ [ T(0 0.240 1.334) S(5.93 0.015 0.024) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ T(-2.39 0 0) Cradle ] [ T(2.54 0 0) Cradle ]
+ [ T(-2.12 0 0.95) GaugeFoot ] [ T(0 0 0.95) GaugeFoot ] [ T(2.37 0 0.95) GaugeFoot ]
+Cradle ->
+ [ T(0 0.264 0) S(0.428 0.051 0.954) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.411 0) S(0.272 0.249 0.739) !I(Cube material(bluegreymattepaint) 1 0.24) ]
+ [ T(0 0.548 0) S(0.276 0.046 0.679) !I(Cube material(silverbrushedmetal) 1 0.25) ]
+GaugeFoot ->
+ [ T(0.082 0.338 -0.018) S(0.412 0.204 0.257) !I(Cube material(bluegreymattepaint) 1 0.24) ]
+ [ T(0.082 0.432 -0.018) S(0.418 0.025 0.259) !I(Cube material(goldbrushedmetal) 1 0.24) ]

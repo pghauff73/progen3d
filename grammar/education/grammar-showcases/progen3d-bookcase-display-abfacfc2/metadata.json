@@ -1,0 +1,57 @@
+{
+  "title": "Pro Gen3D Bookcase Display",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-bookcase-display-abfacfc2",
+  "source_file": "ProGen3D_Bookcase_Display.p3d",
+  "git_blob_sha": "abfacfc23201f927df12aabb048b9fd4e2cc3f39",
+  "bytes": 1829,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_Bookcase_Display.p3d"
+  ],
+  "description": "Pro Gen3D Bookcase Display exported procedural grammar.",
+  "features": [
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      ""
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "warmWood, darkWood, linen, dustyBlue, rust, sage, amber, tealmattemetal, copperbrushedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, R12848cea84fc21b19e2f_Body, Rd6bdd8bc3c9deef003cc_Body, G015f842c1edc15b5efcb, R6ddc13b188376f758fb9_Body, G421731fc5f66d7e56e69 (6 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "28"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

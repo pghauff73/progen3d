@@ -1,0 +1,55 @@
+{
+  "title": "Ender3 Bearing Pair",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-bearing-pair-1c33e31b",
+  "source_file": "Ender3_Bearing_Pair.p3d",
+  "git_blob_sha": "1c33e31bd1152b23f820ad8e428dd5ea09e5f251",
+  "bytes": 162,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Bearing_Pair.p3d"
+  ],
+  "description": "Two 625ZZ bearings, with origins 40 mm apart.",
+  "features": [],
+  "detail": [
+    [
+      "Source notes",
+      "Two 625ZZ bearings, with origins 40 mm apart."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      ""
+    ],
+    [
+      "Material identifiers",
+      ""
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "5"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

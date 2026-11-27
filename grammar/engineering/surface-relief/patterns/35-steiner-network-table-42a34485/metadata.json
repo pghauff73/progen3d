@@ -1,0 +1,62 @@
+{
+  "title": "35 steiner network table",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/35-steiner-network-table-42a34485",
+  "source_file": "35-steiner-network-table.p3d",
+  "git_blob_sha": "42a344858eb20d6c2e2c205c0bde924d1100dda8",
+  "bytes": 4807,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "35-steiner-network-table.p3d"
+  ],
+  "description": "Four-corner Steiner exhibit. Steiner(width depth mode).",
+  "features": [
+    "TaperedSweep",
+    "Revolve",
+    "Cylinder",
+    "Cube",
+    "Sphere",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Four-corner Steiner exhibit. Steiner(width depth mode). · Mode 0 chooses the shorter topology. Mode 1 pairs the sides across width. · Mode 2 pairs the sides across depth. A collapsed topology falls back to the other."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Base, Terminals, Construction, Junctions, Arms, Bridge"
+    ],
+    [
+      "Object classes",
+      "SteinerNetworkTable, DisplayCase, FixedTerminals, EquilateralWitness, SteinerJunctions, TerminalEdges, JunctionEdge"
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep, Revolve, Cylinder, Cube, Sphere, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "tealmatteceramic, copperpolishedmetal, silverbrushedmetal, goldbrushedmetal, charcoalmattemetal, bluegreymattepaint, amberwarmwood"
+    ],
+    [
+      "Production rules",
+      "Start, Steiner, Auto, Force, Choose, Layout, Exhibit, Arm, Bridge, Ferrule, Junction, Terminal, Witness, Triangle, Scribe, Pin, Bed (17 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "101"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

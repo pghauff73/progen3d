@@ -1,0 +1,61 @@
+{
+  "title": "Copperleaf",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/copperleaf-a79706e9",
+  "source_file": "Copperleaf.p3d",
+  "git_blob_sha": "a79706e9d7d834de1e9cb2c1eb61f39a02644e9e",
+  "bytes": 18101,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Copperleaf.p3d"
+  ],
+  "description": "Copperleaf | Exterior",
+  "features": [
+    "Cube",
+    "Revolve",
+    "Sphere",
+    "Cylinder",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Copperleaf | Exterior · +X bow, +Y dorsal, +Z starboard. Units: metres; t: seconds."
+    ],
+    [
+      "Named objects",
+      "VesselRoot, Keel, mount, Forebody, passage, Aftbody, Garden, fluid, heat, Link4, Bridge, PortWing, Link1, PortBell, PortPane, StarWing, Link2, StarBell, StarPane, ServiceDock, Antenna, signal, power, Mark (+3 more)"
+    ],
+    [
+      "Object classes",
+      "Spacecraft, ShipTrussKeel, ShipSpindle, ShipGreenhouse, ShipObservation, ShipRadiator, ShipMainBell, ShipWindows, ShipDock, ShipAntenna, ShipMarkings, ShipCoolant, ShipReactor"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Revolve, Sphere, Cylinder, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, copperbrushedmetal, bluegreymetal, offwhiteceramic, goldbrushedmetal, cleartransparentglass, darkwalnutwood, olivegreenmattepaint, sagegreenmattepaint, silverblueglass, charcoalmattemetal, cyanemissivepaint, ambermetalpolished, tealmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, PlaceKeel, PlaceForebody, PlaceAftbody, PlaceGarden, PlaceBridge, PlacePortWing, PlacePortBell, PlacePortPane, PlaceStarWing, PlaceStarBell, PlaceStarPane, PlaceServiceDock, PlaceAntenna, PlaceMark, PlaceLoop, PlacePower, ShipTrussKeel, ShipSpindle, ShipGreenhouse (29 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "287"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

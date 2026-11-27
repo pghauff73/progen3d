@@ -1,0 +1,96 @@
+# Six-actuator motion platform. Hexapod(heave sway surge pitch roll yaw seconds).
+# Translation amplitudes are model units. Angles are degrees.
+# The drive is prescribed and the six telescoping legs follow the moving deck.
+Start -> Hexapod(0.16 0.12 0.10 10 8 14 8)
+
+Hexapod(h x z p r w period) ->
+ [ Wave(h x z p r w 6.28318530718*t/period) ]
+Wave(h x z p r w phase) ->
+ [ Station(x*sin(phase) 1.92+h*sin(phase) z*(1-cos(phase))/2
+   p*sin(phase) r*sin(2*phase) w*(1-cos(phase))/2) ]
+Station(x y z p r w) ->
+ [ Object(id(Exhibit) class(MotionPlatform) taxonomy(Study Mechanisms ParallelRobotics) layer(Equipment)) [
+   [ Object(id(Bed) class(InstrumentBed) taxonomy(Study Mechanisms Mount) layer(Structure)) [ Bed ] ]
+   [ Object(id(LowerJoints) class(BaseAnchors) taxonomy(Study Mechanisms Joint) layer(Equipment)) [ Feet(6) ] ]
+   [ T(x y z) A(w 1) A(p 2) A(r 0)
+     [ Object(id(UpperJoints) class(MovingAnchors) taxonomy(Study Mechanisms Joint) layer(Equipment)) [ Heads(6) ] ]
+     [ Object(id(Deck) class(RigidPayloadDeck) taxonomy(Study Mechanisms Deck) layer(Structure)) [ Deck ] ] ]
+   [ Object(id(Actuators) class(TelescopingLegs) taxonomy(Study Mechanisms Actuation) layer(Equipment)) [
+     Legs(6 x y z radians(p) radians(r) radians(w)) ] ] ] ]
+
+Feet(n) n ->
+ [ Foot(radians(120*floor(Feet_count/2)+30*wrap(Feet_count,0,2)-15)) ]
+Foot(a) ->
+ [ T(1.48*cos(a) 0 1.48*sin(a))
+   [ T(0 0.216 0) S(0.273 0.097 0.273) !I(Cylinder(segments(24 1)) material(copperpolishedmetal) 1 0.25) ]
+   [ T(0 0.312 0) S(0.186 0.075 0.186) !I(Cylinder(segments(16 1)) material(charcoalmattemetal) 1 0.25) ]
+   [ T(0 0.421 0) S(0.181 0.181 0.181) !I(Sphere(segments(24 14)) material(goldbrushedmetal) 1 0.24) ] ]
+Heads(n) n ->
+ [ Head(radians(120*floor(Heads_count/2)+90*wrap(Heads_count,0,2)-45)) ]
+Head(a) ->
+ [ T(1.07*cos(a) 0 1.07*sin(a))
+   [ S(0.166 0.166 0.166) !I(Sphere(segments(24 14)) material(goldbrushedmetal) 1 0.25) ]
+   [ T(0 0.050 0) S(0.229 0.082 0.229) !I(Cylinder(segments(20 1)) material(copperpolishedmetal) 1 0.24) ] ]
+
+Legs(n x y z p r w) n ->
+ [ Leg(x y z p r w radians(120*floor(Legs_count/2)+30*wrap(Legs_count,0,2)-15)
+       radians(120*floor(Legs_count/2)+90*wrap(Legs_count,0,2)-45)) ]
+Leg(x y z p r w a b) ->
+ [ RollPoint(x y z p w 1.48*cos(a) 1.48*sin(a)
+             1.07*cos(b) -1.07*sin(b)*sin(r) 1.07*sin(b)*cos(r)) ]
+RollPoint(x y z p w a b X Y Z) ->
+ [ PitchPoint(x y z w a b X Y Z cos(p) sin(p)) ]
+PitchPoint(x y z w a b X Y Z c s) ->
+ [ YawPoint(x y z a b X*c-Y*s X*s+Y*c Z cos(w) sin(w)) ]
+YawPoint(x y z a b X Y Z c s) ->
+ [ Target(a b x+X*c+Z*s y+Y z+Z*c-X*s) ]
+Target(a b X Y Z) ->
+ [ Length(a b X-a Y-0.421 Z-b) ]
+Length(a b x y z) ->
+ [ Normals(a b x y z sqrt(x*x+y*y+z*z)) ]
+Normals(a b x y z L) ->
+ [ T(a 0.421 b) CylinderAssembly(x y z x/L y/L z/L) ]
+
+# All distances down the actuator body are fixed. Only the exposed rod changes length.
+CylinderAssembly(X Y Z i j k) ->
+ [ !I(TaperedSweep(samples(0 0 0 0.038 0.08*i 0.08*j 0.08*k 0.057
+   0.14*i 0.14*j 0.14*k 0.096 0.84*i 0.84*j 0.84*k 0.096
+   0.91*i 0.91*j 0.91*k 0.076) up(1 0 0) segments(14) cap(all))
+   material(bluegreymattepaint) 1 0.24) ]
+ [ !I(TaperedSweep(samples(0.82*i 0.82*j 0.82*k 0.101 0.876*i 0.876*j 0.876*k 0.101)
+   up(1 0 0) segments(14) cap(all)) material(copperpolishedmetal) 1 0.23) ]
+ [ !I(TaperedSweep(samples(0.77*i 0.77*j 0.77*k 0.052 X Y Z 0.052)
+   up(1 0 0) segments(14) cap(all)) material(silverbrushedmetal) 1 0.23) ]
+ [ !I(TaperedSweep(samples(X-0.149*i Y-0.149*j Z-0.149*k 0.068
+   X-0.042*i Y-0.042*j Z-0.042*k 0.068) up(1 0 0) segments(14) cap(all))
+   material(charcoalmattemetal) 1 0.25) ]
+
+Deck ->
+ [ !I(Revolve(profile(Polygon 0.89 0.081 1.191 0.081 1.241 0.109 1.241 0.196
+   1.182 0.228 0.89 0.228) angle(0 360) segments(96)) material(tealmatteceramic) 1 0.26) ]
+ [ !I(Revolve(profile(Polygon 0.88 0.202 0.915 0.202 0.915 0.234 0.880 0.234)
+   angle(0 360) segments(96)) material(copperpolishedmetal) 1 0.23) ]
+ [ Members(3) ] [ Studs(18) ]
+ [ T(0 0.156 0) S(0.822 0.115 0.822) !I(Cylinder(segments(24 1)) material(charcoalmattemetal) 1 0.25) ]
+ [ T(0 0.264 0) S(0.548 0.156 0.548) !I(Cylinder(segments(24 1)) material(offwhiteceramic) 1 0.25) ]
+ [ T(0 0.419 0) S(0.407 0.025 0.407) !I(Cylinder(segments(32 1)) material(goldbrushedmetal) 1 0.24) ]
+ [ T(0.059 0.445 0) S(0.153 0.017 0.028) !I(Cube material(redmattepaint) 1 0.23) ]
+Members(n) n ->
+ [ A(360*Members_count/n 1) T(0.64 0.153 0)
+   S(0.642 0.118 0.161) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+Studs(n) n ->
+ [ A(360*Studs_count/n 1) T(1.055 0.224 0)
+   S(0.048 0.022 0.048) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.24) ]
+
+Bed ->
+ [ !I(Revolve(profile(Polygon 0 0 1.72 0 1.84 0.050 1.84 0.133 1.77 0.183 0 0.183)
+   angle(0 360) segments(96)) material(amberwarmwood) 1 0.29) ]
+ [ !I(Revolve(profile(Polygon 0 0.176 1.754 0.176 1.754 0.217 0 0.217)
+   angle(0 360) segments(96)) material(charcoalmattemetal) 1 0.25) ]
+ [ !I(Revolve(profile(Polygon 1.688 0.217 1.746 0.217 1.746 0.226 1.688 0.226)
+   angle(0 360) segments(96)) material(goldbrushedmetal) 1 0.23) ]
+ [ Ticks(48) ]
+Ticks(n) n ->
+ [ A(360*Ticks_count/n 1) T(1.688 0.226 0)
+   S(0.048+0.033*(1-min(1,wrap(Ticks_count,0,4))) 0.009 0.011)
+   !I(Cube material(charcoalmattemetal) 1 0.24) ]

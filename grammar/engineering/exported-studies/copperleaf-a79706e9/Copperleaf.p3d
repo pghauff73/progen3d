@@ -1,0 +1,286 @@
+# Copperleaf | Exterior
+# +X bow, +Y dorsal, +Z starboard. Units: metres; t: seconds.
+Start ->
+[ Object(id(VesselRoot) class(Spacecraft) taxonomy(Spaceship) layer(Structure)) [
+  PlaceKeel
+  PlaceForebody
+  PlaceAftbody
+  PlaceGarden
+  PlacePortWing
+  PlacePortBell
+  PlacePortPane
+  PlaceStarWing
+  PlaceStarBell
+  PlaceStarPane
+  PlaceServiceDock
+  PlaceAntenna
+  PlaceMark
+  PlaceLoop
+  PlacePower
+] ]
+
+PlaceKeel ->
+[ T(0 -0.4 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Keel) class(ShipTrussKeel) taxonomy(Spaceship Hulls ShipTrussKeel) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(1.7 0.78 0.94) ShipTrussKeel ]
+    PlaceBridge
+  ]
+]
+
+PlaceForebody ->
+[ T(2.59 0.01 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Forebody) class(ShipSpindle) taxonomy(Spaceship Hulls ShipSpindle) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.95 1.36 1.39) ShipSpindle ]
+  ]
+]
+
+PlaceAftbody ->
+[ T(-2.88 0 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Aftbody) class(ShipSpindle) taxonomy(Spaceship Hulls ShipSpindle) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.65 1.26 1.3) ShipSpindle ]
+  ]
+]
+
+PlaceGarden ->
+[ T(-0.08 0.14 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Garden) class(ShipGreenhouse) taxonomy(Spaceship Habitat ShipGreenhouse) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(fluid) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link4) source(Garden passage) target(ServiceDock passage) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ S(1.27 1.37 1.37) ShipGreenhouse ]
+  ]
+]
+
+PlaceBridge ->
+[ T(2.54 1.33 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Bridge) class(ShipObservation) taxonomy(Spaceship Mission ShipObservation) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.95 0.81 0.85) ShipObservation ]
+  ]
+]
+
+PlacePortWing ->
+[ T(-2.51 0.04 -1.65) A(0 2) A(0 1) A(9 0)
+    Object(id(PortWing) class(ShipRadiator) taxonomy(Spaceship Surfaces ShipRadiator) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link1) source(PortWing heat) target(Loop heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ S(0.99 1 0.97) ShipRadiator ]
+  ]
+]
+
+PlacePortBell ->
+[ T(-3.96 -0.02 -0.38) A(0 2) A(0 1) A(0 0)
+    Object(id(PortBell) class(ShipMainBell) taxonomy(Spaceship Drive ShipMainBell) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(fluid) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.66 0.48 0.48) ShipMainBell ]
+  ]
+]
+
+PlacePortPane ->
+[ T(2.47 0.2 -1.01) A(0 2) A(180 1) A(0 0)
+    Object(id(PortPane) class(ShipWindows) taxonomy(Spaceship Surfaces ShipWindows) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.77 0.75 0.74) ShipWindows ]
+  ]
+]
+
+PlaceStarWing ->
+[ T(-2.51 0.04 1.65) A(0 2) A(0 1) A(-9 0)
+    Object(id(StarWing) class(ShipRadiator) taxonomy(Spaceship Surfaces ShipRadiator) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link2) source(StarWing heat) target(Loop heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ S(0.99 1 0.97) ShipRadiator ]
+  ]
+]
+
+PlaceStarBell ->
+[ T(-3.96 -0.02 0.38) A(0 2) A(0 1) A(0 0)
+    Object(id(StarBell) class(ShipMainBell) taxonomy(Spaceship Drive ShipMainBell) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(fluid) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.66 0.48 0.48) ShipMainBell ]
+  ]
+]
+
+PlaceStarPane ->
+[ T(2.47 0.2 1.01) A(0 2) A(0 1) A(0 0)
+    Object(id(StarPane) class(ShipWindows) taxonomy(Spaceship Surfaces ShipWindows) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.77 0.75 0.74) ShipWindows ]
+  ]
+]
+
+PlaceServiceDock ->
+[ T(1.03 -0.25 0.63) A(0 2) A(-90 1) A(0 0)
+    Object(id(ServiceDock) class(ShipDock) taxonomy(Spaceship Access ShipDock) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(passage) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.48 0.48 0.48) ShipDock ]
+  ]
+]
+
+PlaceAntenna ->
+[ T(-2.78 0.83 -0.13) A(0 2) A(0 1) A(0 0)
+    Object(id(Antenna) class(ShipAntenna) taxonomy(Spaceship Command ShipAntenna) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(signal) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.56 0.56 0.56) ShipAntenna ]
+  ]
+]
+
+PlaceMark ->
+[ T(2.9 0.86 0.08) A(0 2) A(0 1) A(0 0)
+    Object(id(Mark) class(ShipMarkings) taxonomy(Spaceship Mission ShipMarkings) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.64 0.72 0.66) ShipMarkings ]
+  ]
+]
+
+PlaceLoop ->
+[ T(-2.44 -0.25 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Loop) class(ShipCoolant) taxonomy(Spaceship Energy ShipCoolant) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(fluid) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Connect(id(Link3) source(Loop heat) target(Power heat) type(ConnectedTo) clearance(0) insertionDepth(0))
+    [ S(0.48 0.48 0.48) ShipCoolant ]
+  ]
+]
+
+PlacePower ->
+[ T(-2.93 -0.06 0) A(0 2) A(0 1) A(0 0)
+    Object(id(Power) class(ShipReactor) taxonomy(Spaceship Energy ShipReactor) layer(Structure)) [
+    Interface(id(mount) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(power) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    Interface(id(heat) type(ServiceConnection) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+    [ S(0.53 0.53 0.53) ShipReactor ]
+  ]
+]
+
+ShipTrussKeel ->
+  [ T(0 -0.4 -0.42) A(0 1) A(0 2) S(4 0.11 0.11) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 -0.4 0.42) A(0 1) A(0 2) S(4 0.11 0.11) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 0.4 -0.42) A(0 1) A(0 2) S(4 0.11 0.11) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 0.4 0.42) A(0 1) A(0 2) S(4 0.11 0.11) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(-1.5 0 -0.42) A(0 1) A(-38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(-1.5 0 0.42) A(0 1) A(-38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(-0.5 0 -0.42) A(0 1) A(38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(-0.5 0 0.42) A(0 1) A(38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0.5 0 -0.42) A(0 1) A(-38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0.5 0 0.42) A(0 1) A(-38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(1.5 0 -0.42) A(0 1) A(38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(1.5 0 0.42) A(0 1) A(38.65981 2) S(1.28062 0.085 0.085) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(-2 0.4 0) A(-90 1) A(0 2) S(0.84 0.09 0.09) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(-1 0.4 0) A(-90 1) A(0 2) S(0.84 0.09 0.09) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.4 0) A(-90 1) A(0 2) S(0.84 0.09 0.09) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(1 0.4 0) A(-90 1) A(0 2) S(0.84 0.09 0.09) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(2 0.4 0) A(-90 1) A(0 2) S(0.84 0.09 0.09) !I(Cube material(bluegreymetal) 1 1) ]
+
+ShipSpindle ->
+  [ A(-90 2) S(0.77 1 1) !I(Revolve(profile(Polygon 0.09 -2.3 0.57 -1.94 0.82 -1.2 0.88 -0.3 0.78 0.68 0.46 1.61 0.04 2.5) angle(0 360) segments(36) cap(all)) material(offwhiteceramic) 1 1) ]
+  [ T(-1.85 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.48 -0.045 0.54 -0.045 0.54 0.045 0.48 0.045) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(-0.035 0.615 0) A(0 1) A(-2.15296 2) S(1.33094 0.045 0.045) !I(Cube material(goldbrushedmetal) 1 1) ]
+
+ShipGreenhouse ->
+  [ A(-90 2) !I(Revolve(profile(Polygon 0.65 -1.05 0.7 -1.05 0.7 1.05 0.65 1.05) angle(0 360) segments(36) cap(all)) material(cleartransparentglass) 1 1) ]
+  [ T(-1.04 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.677 -0.0235 0.72 -0.0235 0.72 0.0235 0.677 0.0235) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(-0.52 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.677 -0.0235 0.72 -0.0235 0.72 0.0235 0.677 0.0235) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ A(-90 2) !I(Revolve(profile(Polygon 0.677 -0.0235 0.72 -0.0235 0.72 0.0235 0.677 0.0235) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0.52 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.677 -0.0235 0.72 -0.0235 0.72 0.0235 0.677 0.0235) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(1.04 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.677 -0.0235 0.72 -0.0235 0.72 0.0235 0.677 0.0235) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0 -0.34 0) S(1.94 0.14 0.78) !I(Cube material(darkwalnutwood) 1 1) ]
+  [ T(-0.74 -0.05 -0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(olivegreenmattepaint) 1 1) ]
+  [ T(-0.74 -0.05 0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(olivegreenmattepaint) 1 1) ]
+  [ T(-0.37 0.03 -0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(sagegreenmattepaint) 1 1) ]
+  [ T(-0.37 0.03 0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(sagegreenmattepaint) 1 1) ]
+  [ T(0 -0.05 -0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(olivegreenmattepaint) 1 1) ]
+  [ T(0 -0.05 0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(olivegreenmattepaint) 1 1) ]
+  [ T(0.39 0.03 -0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(sagegreenmattepaint) 1 1) ]
+  [ T(0.39 0.03 0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(sagegreenmattepaint) 1 1) ]
+  [ T(0.75 -0.05 -0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(olivegreenmattepaint) 1 1) ]
+  [ T(0.75 -0.05 0.22) S(0.28 0.45 0.25) !I(Sphere(segments(16 10)) material(olivegreenmattepaint) 1 1) ]
+
+ShipObservation ->
+  [ T(0 0.11 0) S(1.44 0.74 1.16) !I(Sphere(segments(16 10)) material(silverblueglass) 1 1) ]
+  [  !I(Revolve(profile(Polygon 0.52 -0.05 0.58 -0.05 0.58 0.05 0.52 0.05) angle(0 360) segments(36) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0.14 0) A(0 1) A(0 2) S(1.14 0.037 0.037) !I(Cube material(offwhiteceramic) 1 1) ]
+  [ T(0 0.17 0) A(-90 1) A(0 2) S(0.94 0.037 0.037) !I(Cube material(offwhiteceramic) 1 1) ]
+
+ShipRadiator ->
+  [ S(1.36 0.07 2.22) !I(Cube material(charcoalmattemetal) 1 1) ]
+  [ T(0 0.052 -1) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.8) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.6) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.4) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 -0.2) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.2) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.4) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.6) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 0.8) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0 0.052 1) S(1.25 0.035 0.038) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(-0.69 0.02 0) S(0.065 0.11 2.28) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0.69 0.02 0) S(0.065 0.11 2.28) !I(Cube material(copperbrushedmetal) 1 1) ]
+
+ShipMainBell ->
+  [ A(-90 2) !I(Revolve(profile(Polygon 0.85 -1 0.74 -1 0.24 -0.15 0.18 0.02 0.24 0.19 0.34 0.14 0.34 -0.09) angle(0 360) segments(36) cap(all)) material(charcoalmattemetal) 1 1) ]
+  [ T(-0.96 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.81 -0.04 0.88 -0.04 0.88 0.04 0.81 0.04) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0.24 0 0) A(-90 2) S(0.56 0.56 0.56) !I(Cylinder(segments(20 1)) material(silverbrushedmetal) 1 1) ]
+
+ShipWindows ->
+  [ S(2.02 0.27 0.1) !I(Cube material(charcoalmattemetal) 1 1) ]
+  [ T(-0.825 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-0.55 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(-0.275 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.275 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.55 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+  [ T(0.825 0 0.064) S(0.22 0.11 0.06) !I(Cube material(cyanemissivepaint) 1 1) ]
+
+ShipDock ->
+  [ A(-90 2) !I(Revolve(profile(Polygon 0.56 -0.175 0.74 -0.175 0.74 0.175 0.56 0.175) angle(0 360) segments(36) cap(all)) material(bluegreymetal) 1 1) ]
+  [ T(0.2 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.61 -0.04 0.7 -0.04 0.7 0.04 0.61 0.04) angle(0 360) segments(36) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ A(0 0) [ T(0.22 0.67 0) S(0.18 0.15 0.16) !I(Cube material(ambermetalpolished) 1 1) ] ]
+  [ A(120 0) [ T(0.22 0.67 0) S(0.18 0.15 0.16) !I(Cube material(ambermetalpolished) 1 1) ] ]
+  [ A(240 0) [ T(0.22 0.67 0) S(0.18 0.15 0.16) !I(Cube material(ambermetalpolished) 1 1) ] ]
+
+ShipAntenna ->
+  [ T(0 0.53 0) S(0.095 1.12 0.095) !I(Cylinder(segments(20 1)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0.7 0) A(0 1) A(0 2) S(1.16 0.06 0.06) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0 0.91 0) A(-90 1) A(0 2) S(0.82 0.05 0.05) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(0 1.12 0) S(0.14 0.14 0.14) !I(Sphere(segments(16 10)) material(cyanemissivepaint) 1 1) ]
+
+ShipMarkings ->
+  [ S(1.27 0.06 0.73) !I(Cube material(offwhiteceramic) 1 1) ]
+  [ T(0 0.035 0) A(-90 0) !I(Extrude(Polygon(-0.43 0.23 0.09 0 -0.43 -0.23 -0.25 0) 0.016 cap(all)) material(tealmattemetal) 1 1) ]
+  [ T(0.4 0.05 0) S(0.12 0.04 0.63) !I(Cube material(ambermetalpolished) 1 1) ]
+
+ShipCoolant ->
+  [ T(0 0 -0.34) A(0 1) A(0 2) S(1.32 0.12 0.12) !I(Cube material(copperbrushedmetal) 1 1) ]
+  [ T(0 0 0.34) A(0 1) A(0 2) S(1.32 0.12 0.12) !I(Cube material(bluegreymetal) 1 1) ]
+  [ T(0.66 0 0) A(-90 1) A(0 2) S(0.68 0.11 0.11) !I(Cube material(silverbrushedmetal) 1 1) ]
+  [ T(-0.6 0 0) S(0.61 0.28 0.61) !I(Cylinder(segments(20 1)) material(tealmattemetal) 1 1) ]
+  [ T(0.58 0 0) S(0.41 0.33 0.81) !I(Cube material(charcoalmattemetal) 1 1) ]
+
+ShipReactor ->
+  [ A(-90 2) S(1.05 1.63 1.05) !I(Cylinder(segments(20 1)) material(charcoalmattemetal) 1 1) ]
+  [ T(-0.62 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.48 -0.045 0.58 -0.045 0.58 0.045 0.48 0.045) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(-0.3 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.48 -0.045 0.58 -0.045 0.58 0.045 0.48 0.045) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0.3 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.48 -0.045 0.58 -0.045 0.58 0.045 0.48 0.045) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0.62 0 0) A(-90 2) !I(Revolve(profile(Polygon 0.48 -0.045 0.58 -0.045 0.58 0.045 0.48 0.045) angle(0 360) segments(36) cap(all)) material(copperbrushedmetal) 1 1) ]
+  [ T(0.8 0 0) S(0.3 0.82 0.82) !I(Sphere(segments(16 10)) material(silverbrushedmetal) 1 1) ]

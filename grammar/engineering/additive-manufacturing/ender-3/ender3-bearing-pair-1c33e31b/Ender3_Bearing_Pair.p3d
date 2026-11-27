@@ -1,0 +1,4 @@
+@use Bearing = "printers/ender3-v1-factory@1.0.0#400202004"
+
+# Two 625ZZ bearings, with origins 40 mm apart.
+Start -> [ Bearing ] [ T(0.04 0 0) A(90 0) Bearing ]

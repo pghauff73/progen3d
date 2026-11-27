@@ -1,0 +1,61 @@
+{
+  "title": "33 standing wave membrane",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/33-standing-wave-membrane-ffb75f8a",
+  "source_file": "33-standing-wave-membrane.p3d",
+  "git_blob_sha": "ffb75f8a96db0e6c1c2306a40bbb3acee8e9d650",
+  "bytes": 3978,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "33-standing-wave-membrane.p3d"
+  ],
+  "description": "Rectangular membrane eigenmode. Membrane(m n amplitude waveSpeed cellsPerLobe).",
+  "features": [
+    "Loft",
+    "TaperedSweep",
+    "Sphere",
+    "Cube",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Rectangular membrane eigenmode. Membrane(m n amplitude waveSpeed cellsPerLobe). · The clear span is 4.60 by 3.20. Use an even cellsPerLobe (try 4, 6 or 8). · The time phase starts at a displacement maximum. Swap m and n to compare."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Stand, Cloth, Nodes, Peaks"
+    ],
+    [
+      "Object classes",
+      "MembraneModeExhibit, MembraneFrame, DisplacedMembrane, InteriorNodalLines, AntinodeMarkers"
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, TaperedSweep, Sphere, Cube, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "tealmatteceramic, offwhiteceramic, goldbrushedmetal, amberwarmwood, charcoalmattemetal, silverbrushedmetal, bluegreymattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Membrane, Exhibit, Cell, Panel, Base, Tower, LongRail, ShortRail (9 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "72"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

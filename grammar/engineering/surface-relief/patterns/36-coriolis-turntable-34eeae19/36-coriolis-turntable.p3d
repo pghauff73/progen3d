@@ -1,0 +1,74 @@
+# Coriolis turntable. Turntable(degreesPerSecond flight cycle chords frame).
+# Frame 0 follows the disk. Frame 1 follows the laboratory.
+# Choose a cycle for which abs(degreesPerSecond)*cycle is a multiple of 360.
+# At the end of the flight the disk catches the ball, then the scene resets it.
+Start -> Turntable(45 4.4 8 64 0)
+
+Turntable(rate flight cycle n view) ->
+ [ Pose(rate flight n view wrap(t,0,cycle)) ]
+Pose(rate flight n view clock) ->
+ [ Exhibit(rate flight n view clock min(clock,flight) 1.92) ]
+
+Exhibit(rate flight n view clock elapsed radius) ->
+ [ Object(id(Exhibit) class(RotatingFrameExhibit) taxonomy(Study Dynamics Frames) layer(Equipment)) [
+   [ Object(id(Stand) class(TurntablePedestal) taxonomy(Study Dynamics Mount) layer(Structure)) [ Base ] ]
+   [ A((view-1)*rate*clock 1)
+     [ Object(id(Reference) class(LaboratoryAxis) taxonomy(Study Dynamics Reference) layer(Equipment)) [ LabAxis ] ] ]
+   [ A(view*rate*clock 1)
+     [ Object(id(Platter) class(RotatingDisk) taxonomy(Study Dynamics Reference) layer(Equipment)) [ Disk ] ]
+     [ Object(id(Trail) class(DiskFrameTrajectory) taxonomy(Study Dynamics Trace) layer(Equipment)) [
+       Chords(n rate flight radius) ] ]
+     [ Object(id(Milestones) class(SampleTimeMarks) taxonomy(Study Dynamics Trace) layer(Equipment)) [
+       Stations(4 rate flight radius) ] ]
+     [ Object(id(Ball) class(FreeParticle) taxonomy(Study Dynamics Specimen) layer(Equipment)) [
+       Particle(radians(rate*elapsed) radius*elapsed/flight) ] ] ] ] ]
+
+Chords(n rate flight radius) n ->
+ [ Path(rate*flight*Chords_count/n rate*flight*(Chords_count+1)/n
+        radius*Chords_count/n radius*(Chords_count+1)/n) ]
+Path(a b r R) ->
+ [ Chord(radians(a) radians(b) r R) ]
+Chord(a b r R) ->
+ [ !I(TaperedSweep(samples(r*cos(a) 0.448 r*sin(a) 0.020 R*cos(b) 0.448 R*sin(b) 0.020)
+     up(0 1 0) segments(10) cap(all)) material(copperpolishedmetal) 1 0.23) ]
+Stations(n rate flight radius) n ->
+ [ Milestone(radians(rate*flight*(Stations_count+1)/n) radius*(Stations_count+1)/n) ]
+Milestone(a r) ->
+ [ T(r*cos(a) 0.445 r*sin(a)) S(0.063 0.023 0.063)
+   !I(Cylinder(segments(16 1)) material(goldbrushedmetal) 1 0.24) ]
+Particle(a r) ->
+ [ T(r*cos(a) 0.532 r*sin(a)) S(0.160 0.160 0.160)
+   !I(Sphere(segments(32 18)) material(offwhiteceramic) 1 0.20) ]
+
+LabAxis ->
+ [ !I(TaperedSweep(samples(0 0.436 0 0.009 2.19 0.436 0 0.009)
+     up(0 1 0) segments(8) cap(all)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(2.27 0.260 0)
+   [ S(0.26 0.103 0.203) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+   [ T(0 0.113 0) S(0.264 0.038 0.176) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+   [ T(0 0.167 0) S(0.073 0.073 0.073) !I(Sphere(segments(16 12)) material(redmattepaint) 1 0.24) ] ]
+
+Disk ->
+ [ !I(Revolve(profile(Polygon 0 0.278 2.02 0.278 2.13 0.314 2.15 0.347
+    2.115 0.426 0 0.426) angle(0 360) segments(120)) material(bluegreymattepaint) 1 0.23) ]
+ [ !I(Revolve(profile(Polygon 2.066 0.405 2.116 0.405 2.116 0.424 2.095 0.442
+    2.066 0.442) angle(0 360) segments(120)) material(goldbrushedmetal) 1 0.24) ]
+ [ OrbitRings(4) ] [ EdgeTicks(48) ]
+ [ T(2.018 0.430 0) S(0.056 0.015 0.096) !I(Cube material(redmattepaint) 1 0.26) ]
+ [ T(0 0.422 0) S(0.14 0.021 0.14) !I(Cylinder(segments(24 1)) material(goldbrushedmetal) 1 0.22) ]
+OrbitRings(n) n ->
+ [ OrbitRing(0.48*(OrbitRings_count+1)) ]
+OrbitRing(r) ->
+ [ !I(Revolve(profile(Polygon r-0.005 0.426 r+0.005 0.426 r+0.005 0.429 r-0.005 0.429)
+   angle(0 360) segments(96)) material(silverbluepolishedmetal) 1 0.24) ]
+EdgeTicks(n) n ->
+ [ A(360*EdgeTicks_count/n 1)
+   T(2.065 0.442 0) S(0.032+0.026*(1-min(1,wrap(EdgeTicks_count,0,4))) 0.010 0.011)
+   !I(Cube material(charcoalmattemetal) 1 0.23) ]
+Base ->
+ [ !I(Revolve(profile(Polygon 0 0.008 2.39 0.008 2.46 0.045 2.46 0.134
+   2.40 0.182 0 0.182) angle(0 360) segments(120)) material(amberwarmwood) 1 0.30) ]
+ [ !I(Revolve(profile(Polygon 0 0.180 2.379 0.180 2.392 0.202 2.375 0.227
+   0 0.227) angle(0 360) segments(120)) material(charcoalmattemetal) 1 0.27) ]
+ [ !I(Revolve(profile(Polygon 0.115 0.217 1.39 0.217 1.42 0.243 1.42 0.286
+   0.115 0.286) angle(0 360) segments(96)) material(goldbrushedmetal) 1 0.24) ]

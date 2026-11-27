@@ -1,0 +1,59 @@
+{
+  "title": "32 flexure bench",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/32-flexure-bench-b0af7526",
+  "source_file": "32-flexure-bench.p3d",
+  "git_blob_sha": "b0af752697e9b53c4f89e5a19ce3532bf80e0248",
+  "bytes": 5130,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "32-flexure-bench.p3d"
+  ],
+  "description": "Beam flexure bench. FlexBench(loadInset peakPover2EI period chords).",
+  "features": [
+    "Extrude",
+    "Cube",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Beam flexure bench. FlexBench(loadInset peakPover2EI period chords). · Span 4.80. Use inset 1.60 for four-point or 2.40 for a centre load. · Both modes have the same total force at the same P/(2EI). · Rollers are tangent to the analytic surface at the indicated station."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Bed, Datum, Specimen, Supports, LoadHeads, Indicator"
+    ],
+    [
+      "Object classes",
+      "FlexureDemonstrator, FlexureMachine, ZeroDatum, DeflectedBeam, ReactionRollers, LoadingRollers, MidspanIndicator"
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, Cube, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, tealmatteceramic, copperpolishedmetal, goldbrushedmetal, silverbrushedmetal, redmattepaint, amberwarmwood, charcoalmattemetal, offwhiteceramic"
+    ],
+    [
+      "Production rules",
+      "Start, FlexBench, Bench, Span, HeightPair, DropPair, Mesh, Moment, Bearings, FootRoller, Loading, LoadHeight, Ram, Roller, Gauge, GaugeDelta, Bed, Plinth, Column, Scale (20 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "104"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

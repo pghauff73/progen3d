@@ -1,0 +1,87 @@
+# Equatorial sundial. Dial(latitudeMagnitude poleDeclination solarHour rodHeight).
+# Positive declination lights the face toward the elevated celestial pole.
+# 12 is local apparent solar noon. Test 23.44, 12, and 8 degrees of declination.
+Start -> Dial(27.47 23.44 14 0.28)
+
+Dial(latitude declination hour g) ->
+ [ Exhibit(latitude radians(declination) radians(15*(hour-12)) g) ]
+
+Exhibit(latitude d h g) ->
+ [ Object(id(Exhibit) class(EquatorialDialTable) taxonomy(Study Astronomy Sundial) layer(Equipment)) [
+   [ Object(id(Base) class(DisplayBed) taxonomy(Study Astronomy Mount) layer(Structure)) [
+     Base Cradles(radians(90-latitude)) ] ]
+   [ T(0 1.91 -0.20) A(90-latitude 0)
+     [ Object(id(Face) class(EquatorialPlate) taxonomy(Study Astronomy Sundial) layer(Equipment)) [ Plate ] ]
+     [ Object(id(Hours) class(AngularScale) taxonomy(Study Astronomy Scale) layer(Equipment)) [
+       [ T(0 0.045 0) Marks(24) ] [ T(0 -0.051 0) Marks(24) ] ] ]
+     [ Object(id(Gnomon) class(PolarRod) taxonomy(Study Astronomy Sundial) layer(Equipment)) [ Gnomon(g) ] ]
+     [ Object(id(Incident) class(SolarRay) taxonomy(Study Astronomy Optics) layer(Equipment)) [
+       SolarIncident(g sin(d) cos(d) sin(h) cos(h)) ] ]
+     [ Object(id(Shadow) class(ProjectedTip) taxonomy(Study Astronomy Optics) layer(Equipment)) [
+       Projection(g sin(d) cos(d) sin(h) cos(h)) ] ] ] ] ]
+
+SolarIncident(g sd cd sh ch) -> ?(sd>=0)
+ [ Ray(g+0.047 sd cd sh ch) ]
+ : [ Ray(0-g-0.047 sd cd sh ch) ]
+Ray(y sd cd sh ch) ->
+ [ !I(TaperedSweep(samples(-0.89*cd*sh y+0.89*sd -0.89*cd*ch 0.014 0 y 0 0.014)
+     up(1 0 0) segments(10) cap(all)) material(goldbrushedmetal) 1 0.23) ]
+ [ T(-0.89*cd*sh y+0.89*sd -0.89*cd*ch)
+   S(0.083 0.083 0.083) !I(Sphere(segments(16 12)) material(copperpolishedmetal) 1 0.23) ]
+
+Projection(g sd cd sh ch) -> ?(abs(sd)>0.000001)
+ [ Intercept(g*cd/abs(sd) sd sh ch) ]
+ : [ ]
+Intercept(r sd sh ch) -> ?(sd>=0)
+ [ Cast(r sh ch 0.057) ] : [ Cast(r sh ch -0.057) ]
+Cast(r sh ch y) ->
+ [ RedTrace(min(r,1.535)*sh min(r,1.535)*ch y) ] [ TipMark(r sh ch y) ]
+RedTrace(x z y) ->
+ [ !I(TaperedSweep(samples(0 y 0 0.022 x y z 0.022) up(0 1 0) segments(10) cap(all))
+   material(redmattepaint) 1 0.25) ]
+TipMark(r sh ch y) -> ?(r<1.535)
+ [ T(r*sh y r*ch) S(0.061 0.061 0.061)
+   !I(Sphere(segments(16 10)) material(redmattepaint) 1 0.23) ]
+ : [ ]
+
+Plate ->
+ [ T(0 -0.047 0) S(3.10 0.094 3.10) !I(Cylinder(segments(144 1)) material(offwhiteceramic) 1 0.26) ]
+ [ !I(Revolve(profile(Polygon 1.535 -0.054 1.590 -0.054 1.616 -0.035 1.616 0.035
+   1.590 0.054 1.535 0.054) angle(0 360) segments(144)) material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.046 0) [ Engraving(0.42) ] [ Engraving(0.78) ] [ Engraving(1.36) ] ]
+ [ T(0 -0.049 0) [ Engraving(0.42) ] [ Engraving(0.78) ] [ Engraving(1.36) ] ]
+Engraving(r) ->
+ [ !I(Revolve(profile(Polygon r-0.004 0 r+0.004 0 r+0.004 0.003 r-0.004 0.003)
+   angle(0 360) segments(120)) material(bluegreymattepaint) 1 0.24) ]
+Marks(n) n ->
+ [ A(15*Marks_count 1)
+   [ T(0 0 0.967) S(0.009 0.006 0.883)
+     !I(Cube material(bluegreymattepaint) 1 0.22) ]
+   [ T(0 0 1.464) S(0.017+0.010*(1-min(1,wrap(Marks_count,0,6))) 0.009 0.104)
+     !I(Cube material(charcoalmattemetal) 1 0.24) ]
+   [ A(7.5 1) T(0 0 1.485) S(0.011 0.006 0.058)
+     !I(Cube material(charcoalmattemetal) 1 0.25) ] ]
+Gnomon(g) ->
+ [ !I(Revolve(profile(Polygon 0 0-g-0.047 0.011 0-g-0.047 0.029 0-g+0.004
+   0.029 g-0.004 0.011 g+0.047 0 g+0.047) angle(0 360) segments(48))
+   material(copperpolishedmetal) 1 0.22) ]
+ [ T(0 -0.083 0) S(0.195 0.166 0.195) !I(Cylinder(segments(24 1)) material(goldbrushedmetal) 1 0.25) ]
+
+Cradles(a) ->
+ [ Post(-0.91 1.91-1.245*sin(a) -0.20+1.245*cos(a)) ]
+ [ Post(0.91 1.91-1.245*sin(a) -0.20+1.245*cos(a)) ]
+Post(x y z) ->
+ [ T(x 0.231 z)
+   [ S(0.36 0.062 0.32) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+   [ T(0 0.05 0) S(0.165 y-0.342 0.185) !I(Cylinder(segments(20 1))
+     material(bluegreymattepaint) 1 0.27) ] ]
+ [ T(x y-0.054 z) S(0.208 0.108 0.202) !I(Sphere(segments(24 12)) material(goldbrushedmetal) 1 0.25) ]
+
+Base ->
+ [ T(0 0.099 0) S(3.87 0.198 2.84) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.213 0) S(3.75 0.032 2.72) !I(Cube material(charcoalmattemetal) 1 0.27) ]
+ [ T(0 0.231 1.21) S(3.57 0.013 0.019) !I(Cube material(goldbrushedmetal) 1 0.23) ]
+ [ T(0 0.231 0.91) S(0.499 0.018 0.220) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+ [ T(0 0.246 0.926) A(90 0)
+   !I(Extrude(Polygon(-0.038 -0.071 0.038 -0.071 0.038 0.015 0.079 0.015
+     0 0.104 -0.079 0.015 -0.038 0.015) 0.011 cap(all)) material(goldbrushedmetal) 1 0.23) ]

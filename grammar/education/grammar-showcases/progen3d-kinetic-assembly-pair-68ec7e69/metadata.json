@@ -1,0 +1,60 @@
+{
+  "title": "Pro Gen3D Kinetic Assembly Pair",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-kinetic-assembly-pair-68ec7e69",
+  "source_file": "ProGen3D_Kinetic_Assembly_Pair.p3d",
+  "git_blob_sha": "68ec7e690a00cf5cb96b2b7e8017744b24ef6d35",
+  "bytes": 15472,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_Kinetic_Assembly_Pair.p3d"
+  ],
+  "description": "ProGen3D Kinetic Assembly — native grammar",
+  "features": [
+    "Cube",
+    "SweepDisk",
+    "Revolve",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ProGen3D Kinetic Assembly — native grammar · Four supported, parameterised spur-wheel visualisations with real teeth, · separate spokes, chamfered rings, hubs, shafts, bearing collars and fasteners. · Prescribed motion only: no tooth-contact or stress solver is implied. · Editable parameters: uniform scale, drive teeth, follower teeth, module, drive degrees/s. · Default 32:24 gearing at 90:-120 degrees/s has a 12 second closed loop. · @texture silverbrushedmetal brushed_metal uv 2 18 · @texture lavenderwhiteplastic none · @texture mintwhiteplastic none · @texture ivorymattepaint none"
+    ],
+    [
+      "Named objects",
+      "CatalogueScenec309c3286be738e9, R15914dc5ab4f202a1a85_KineticAssembly, R15914dc5ab4f202a1a85_UpperDrive, R15914dc5ab4f202a1a85_UpperFollower, R15914dc5ab4f202a1a85_LowerDrive, R15914dc5ab4f202a1a85_LowerFollower, R15914dc5ab4f202a1a85_BasePlate, R15914dc5ab4f202a1a85_CurvedFrame, R15914dc5ab4f202a1a85_TransparentGuard, R8bc6bc1df4e23b7f0a95_KineticAssembly, R8bc6bc1df4e23b7f0a95_UpperDrive, R8bc6bc1df4e23b7f0a95_UpperFollower, R8bc6bc1df4e23b7f0a95_LowerDrive, R8bc6bc1df4e23b7f0a95_LowerFollower, R8bc6bc1df4e23b7f0a95_BasePlate, R8bc6bc1df4e23b7f0a95_CurvedFrame, R8bc6bc1df4e23b7f0a95_TransparentGuard"
+    ],
+    [
+      "Object classes",
+      "Assembly, Gear, Frame, Guard"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, SweepDisk, Revolve, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "ivorymattepaint, silverbrushedmetal, lavenderwhiteplastic, smokyglass, mintwhiteplastic, charcoalmatteplastic"
+    ],
+    [
+      "Production rules",
+      "Start, R15914dc5ab4f202a1a85_Body, R15914dc5ab4f202a1a85_Kinetic, R15914dc5ab4f202a1a85_Base, R15914dc5ab4f202a1a85_Frame, R15914dc5ab4f202a1a85_Cover, R15914dc5ab4f202a1a85_MintWheel, R15914dc5ab4f202a1a85_LavenderWheel, R15914dc5ab4f202a1a85_MintRing, R15914dc5ab4f202a1a85_LavenderRing, R15914dc5ab4f202a1a85_Hub, R15914dc5ab4f202a1a85_Bearing, R15914dc5ab4f202a1a85_Fastener, R8bc6bc1df4e23b7f0a95_Body, R8bc6bc1df4e23b7f0a95_Kinetic, R8bc6bc1df4e23b7f0a95_Base, R8bc6bc1df4e23b7f0a95_Frame, R8bc6bc1df4e23b7f0a95_Cover, R8bc6bc1df4e23b7f0a95_MintWheel, R8bc6bc1df4e23b7f0a95_LavenderWheel (26 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "308"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

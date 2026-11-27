@@ -1,0 +1,100 @@
+# Four-corner Steiner exhibit. Steiner(width depth mode).
+# Mode 0 chooses the shorter topology. Mode 1 pairs the sides across width.
+# Mode 2 pairs the sides across depth. A collapsed topology falls back to the other.
+Start -> Steiner(3.40 2.40 0)
+
+Steiner(w d mode) -> ?(mode<0.5)
+ [ Auto(w d) ]
+ : [ Force(w d mode) ]
+Auto(w d) -> ?(w>=d)
+ [ Layout(w d 0) ]
+ : [ Layout(d w 90) ]
+Force(w d mode) -> ?(mode<1.5)
+ [ Choose(w d 0) ]
+ : [ Choose(d w 90) ]
+Choose(w d yaw) -> ?(w>d/sqrt(3)+0.26)
+ [ Layout(w d yaw) ]
+ : [ Layout(d w 90-yaw) ]
+
+Layout(w d yaw) ->
+ [ Exhibit(w/2 d/2 w/2-d/2/sqrt(3) w/2+sqrt(3)*d/2 yaw) ]
+
+Exhibit(w d j a yaw) ->
+ [ A(yaw 1)
+   [ Object(id(Exhibit) class(SteinerNetworkTable) taxonomy(Study Geometry Networks) layer(Equipment)) [
+     [ Object(id(Base) class(DisplayCase) taxonomy(Study Geometry Mount) layer(Structure)) [ Bed(a d) ] ]
+     [ Object(id(Terminals) class(FixedTerminals) taxonomy(Study Geometry Networks) layer(Equipment)) [
+       [ T(-w 0 -d) Terminal ] [ T(-w 0 d) Terminal ]
+       [ T(w 0 -d) Terminal ] [ T(w 0 d) Terminal ] ] ]
+     [ Object(id(Construction) class(EquilateralWitness) taxonomy(Study Geometry Networks) layer(Equipment)) [
+       [ T(0 0.224 0) Witness(w d a) ] ] ]
+     [ Object(id(Junctions) class(SteinerJunctions) taxonomy(Study Geometry Networks) layer(Equipment)) [
+       [ T(-j 0.604 0) Junction(0) ] [ T(j 0.604 0) Junction(180) ] ] ]
+     [ Object(id(Arms) class(TerminalEdges) taxonomy(Study Geometry Networks) layer(Equipment)) [
+       [ T(0 0.604 0)
+         [ Arm(-w -d -j 0) ] [ Arm(-w d -j 0) ]
+         [ Arm(w -d j 0) ] [ Arm(w d j 0) ] ] ] ]
+     [ Object(id(Bridge) class(JunctionEdge) taxonomy(Study Geometry Networks) layer(Equipment)) [
+       [ T(0 0.604 0) Bridge(-j j) ] ] ] ] ] ]
+
+Arm(x z X Z) ->
+ [ !I(TaperedSweep(samples(x 0 z 0.033 0.86*x+0.14*X 0 0.86*z+0.14*Z 0.046
+          0.14*x+0.86*X 0 0.14*z+0.86*Z 0.046 X 0 Z 0.033)
+          up(0 1 0) segments(12) cap(all)) material(tealmatteceramic) 1 0.23) ]
+ [ Ferrule(x z X Z) ] [ Ferrule(X Z x z) ]
+Bridge(x X) ->
+ [ !I(TaperedSweep(samples(x 0 0 0.033 0.86*x+0.14*X 0 0 0.046
+          0.14*x+0.86*X 0 0 0.046 X 0 0 0.033)
+          up(0 1 0) segments(12) cap(all)) material(copperpolishedmetal) 1 0.23) ]
+ [ Ferrule(x 0 X 0) ] [ Ferrule(X 0 x 0) ]
+Ferrule(x z X Z) ->
+ [ !I(TaperedSweep(samples(0.95*x+0.05*X 0 0.95*z+0.05*Z 0.055
+     0.88*x+0.12*X 0 0.88*z+0.12*Z 0.055) up(0 1 0) segments(6) cap(all))
+     material(silverbrushedmetal) 1 0.26) ]
+
+Junction(yaw) ->
+ [ T(0 -0.065 0) !I(Revolve(profile(Polygon 0 0 0.082 0 0.121 0.036
+   0.121 0.098 0.086 0.132 0 0.132) angle(0 360) segments(36)) material(goldbrushedmetal) 1 0.23) ]
+ [ T(0 0.067 0) S(0.072 0.019 0.072) !I(Cylinder(segments(12 1)) material(charcoalmattemetal) 1 0.23) ]
+ [ T(0 0.068 0) A(yaw 1) JunctionTicks(3) ]
+JunctionTicks(n) n ->
+ [ A(360*JunctionTicks_count/n 1) T(0.063 0 0) S(0.036 0.007 0.009)
+   !I(Cube material(charcoalmattemetal) 1 0.23) ]
+Terminal ->
+ [ T(0 0.223 0) !I(Revolve(profile(Polygon 0 0 0.163 0 0.192 0.028
+   0.192 0.091 0.097 0.117 0.081 0.285 0.115 0.315 0.115 0.352 0 0.352)
+   angle(0 360) segments(36)) material(bluegreymattepaint) 1 0.28) ]
+ [ T(0 0.557 0) S(0.246 0.037 0.246) !I(Cylinder(segments(24 1)) material(silverbrushedmetal) 1 0.24) ]
+ [ T(0 0.604 0) S(0.146 0.146 0.146) !I(Sphere(segments(16 10)) material(goldbrushedmetal) 1 0.24) ]
+
+Witness(w d a) ->
+ [ Triangle(-w -a d) ] [ Triangle(w a d) ]
+ [ T(0 0 d+0.368)
+   [ !I(TaperedSweep(samples(0-a 0 0 0.014 a 0 0 0.014) up(0 1 0) segments(8) cap(all))
+     material(copperpolishedmetal) 1 0.25) ]
+   [ LengthTicks(33 a a/16) ]
+   [ T(-a 0 0) Pin ] [ T(a 0 0) Pin ] ]
+Triangle(x a d) ->
+ [ Scribe(x -d a 0) ] [ Scribe(x d a 0) ] [ Scribe(x -d x d) ]
+ [ T(a 0 0) Pin ]
+Scribe(x z X Z) ->
+ [ !I(TaperedSweep(samples(x 0 z 0.011 X 0 Z 0.011) up(0 1 0) segments(8) cap(all))
+   material(goldbrushedmetal) 1 0.25) ]
+Pin ->
+ [ T(0 -0.006 0) S(0.077 0.020 0.077)
+   !I(Cylinder(segments(14 1)) material(silverbrushedmetal) 1 0.23) ]
+LengthTicks(n a step) n ->
+ [ T(LengthTicks_count*step-a 0 -0.061)
+   S(0.011 0.010 0.042+0.029*(1-min(1,wrap(LengthTicks_count,0,4))))
+   !I(Cube material(goldbrushedmetal) 1 0.23) ]
+
+Bed(a d) ->
+ [ T(0 0.197 0) A(90 0)
+   !I(Extrude(Polygon(0-a-0.24 0-d-0.68 a+0.24 0-d-0.68 a+0.36 0-d-0.56 a+0.36 d+0.56
+     a+0.24 d+0.68 0-a-0.24 d+0.68 0-a-0.36 d+0.56 0-a-0.36 0-d-0.56)
+     0.189 cap(all)) material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.214 0) A(90 0)
+   !I(Extrude(Polygon(0-a-0.20 0-d-0.62 a+0.20 0-d-0.62 a+0.29 0-d-0.53 a+0.29 d+0.53
+     a+0.20 d+0.62 0-a-0.20 d+0.62 0-a-0.29 d+0.53 0-a-0.29 0-d-0.53)
+     0.017 cap(all)) material(charcoalmattemetal) 1 0.27) ]
+ [ T(0 0.218 -d-0.531) S(2*a+0.49 0.015 0.018) !I(Cube material(goldbrushedmetal) 1 0.26) ]

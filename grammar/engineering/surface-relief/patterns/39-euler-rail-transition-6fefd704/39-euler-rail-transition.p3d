@@ -1,0 +1,85 @@
+# Euler rail transition. Railway(mode headingDegrees finalBankDegrees chords).
+# Mode 0 ramps curvature. Mode 1 uses circular curvature after a straight lead.
+# Compare heading 55 and bank 10, then try zero bank. Model length is 4.80.
+Start -> Railway(0 55 10 32)
+
+Railway(mode heading bank n) ->
+ [ Exhibit(mode radians(heading) bank n) ]
+Exhibit(mode b bank n) ->
+ [ Object(id(Exhibit) class(RailTransitionStudy) taxonomy(Study Rail Geometry) layer(Equipment)) [
+   [ Object(id(Bench) class(DisplayBed) taxonomy(Study Rail Mount) layer(Structure)) [ Bench ] ]
+   [ T(-1.91 0.619 -1.14)
+     [ Object(id(Lead) class(StraightTrack) taxonomy(Study Rail Alignment) layer(Equipment)) [
+       Pair(0-0.94 0 0 0 0 0 0 0) [ T(-0.78 0 0) Sleeper Support ] [ T(-0.39 0 0) Sleeper Support ] ] ]
+     [ Object(id(Rails) class(CurvedRails) taxonomy(Study Rail Alignment) layer(Equipment)) [
+       Chords(n b mode bank) ] ]
+     [ Object(id(Sleepers) class(TrackTies) taxonomy(Study Rail Structure) layer(Structure)) [
+       Ties(17 b mode bank) ] ]
+     [ Object(id(Tangent) class(ExitDirection) taxonomy(Study Rail Reference) layer(Equipment)) [
+       Probe(1 0 b mode bank 3 0 0 0 0) ] ] ] ] ]
+
+Chords(n b mode bank) n ->
+ [ Probe(Chords_count/n (Chords_count+1)/n b mode bank 0 0 0 0 0) ]
+Ties(n b mode bank) n ->
+ [ Probe(Ties_count/(n-1) 0 b mode bank 2 0 0 0 0) ]
+
+# Integrate cos(heading) and sin(heading) on 0..u using five Gauss points.
+Probe(u v b m c k x0 z0 a0 r0) ->
+ [ Gauss(u v b m c k x0 z0 a0 r0 0.046910077*u 0.230765345*u
+   0.5*u 0.769234655*u 0.953089923*u) ]
+Gauss(u v b m c k x0 z0 a0 r0 i j l p q) ->
+ [ Angles(u v b m c k x0 z0 a0 r0
+   b*i*(m+(1-m)*i) b*j*(m+(1-m)*j) b*l*(m+(1-m)*l) b*p*(m+(1-m)*p) b*q*(m+(1-m)*q)) ]
+Angles(u v b m c k x0 z0 a0 r0 I J L P Q) ->
+ [ Dispatch(u v b m c k x0 z0 a0 r0
+   4.80*u*(0.118463442*(cos(I)+cos(Q))+0.239314335*(cos(J)+cos(P))+0.284444444*cos(L))
+   4.80*u*(0.118463442*(sin(I)+sin(Q))+0.239314335*(sin(J)+sin(P))+0.284444444*sin(L))
+   b*u*(m+(1-m)*u) c*u) ]
+Dispatch(u v b m c k x0 z0 a0 r0 x z a r) -> ?(k<0.5)
+ [ Probe(v 0 b m c 1 x z a r) ]
+ : [ Detail(k x0 z0 a0 r0 x z a r) ]
+Detail(k x0 z0 a0 r0 x z a r) -> ?(k<1.5)
+ [ Pair(x0 z0 a0 r0 x z a r) ]
+ : [ Marker(k x z a r) ]
+Marker(k x z a r) -> ?(k<2.5)
+ [ T(x 0 z) [ Support ] [ A(-a*180/3.14159265359 1) A(-r 0) Sleeper ] ]
+ : [ T(x 0 z) A(-a*180/3.14159265359 1) EndFlag ]
+
+Pair(x z a r X Z A R) ->
+ [ Rail(x z a radians(r) X Z A radians(R) -0.347) ]
+ [ Rail(x z a radians(r) X Z A radians(R) 0.347) ]
+Rail(x z a r X Z A R g) ->
+ [ Section(x-g*sin(a)*cos(r) g*sin(r) z+g*cos(a)*cos(r)
+   X-g*sin(A)*cos(R) g*sin(R) Z+g*cos(A)*cos(R)) ]
+Section(x y z X Y Z) ->
+ [ !I(TaperedSweep(samples(x y z 0.033 X Y Z 0.033)
+   up(0 1 0) segments(8) cap(all)) material(silverbrushedmetal) 1 0.23) ]
+ [ !I(SweepProfile(profile(Rect 0.052 0.052)
+   path(x y-0.035 z X Y-0.035 Z) up(0 1 0) cap(all)) material(charcoalmattemetal) 1 0.25) ]
+
+Sleeper ->
+ [ T(0 -0.093 0) S(0.158 0.063 1.015) !I(Cube material(amberwarmwood) 1 0.27) ]
+ [ T(0 -0.052 -0.347) Shoe ] [ T(0 -0.052 0.347) Shoe ]
+ [ T(0 -0.122 0) S(0.123 0.038 0.165) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+Support ->
+ [ T(0 -0.398 0) S(0.119 0.289 0.129) !I(Cylinder(segments(8 1)) material(bluegreymattepaint) 1 0.25) ]
+Shoe ->
+ [ S(0.109 0.028 0.143) !I(Cube material(copperpolishedmetal) 1 0.23) ]
+ [ T(0 0.010 -0.051) S(0.027 0.017 0.027)
+   !I(Cylinder(segments(8 1)) material(goldbrushedmetal) 1 0.22) ]
+EndFlag ->
+ [ T(0 0.062 0)
+   !I(TaperedSweep(samples(0 0 0 0.017 0.39 0 0 0.017) up(0 1 0) segments(8) cap(all))
+     material(copperpolishedmetal) 1 0.24) ]
+ [ T(0 0.062 0)
+   !I(TaperedSweep(samples(0.35 0 0 0.048 0.46 0 0 0.004) up(0 1 0) segments(8) cap(all))
+     material(copperpolishedmetal) 1 0.24) ]
+
+Bench ->
+ [ T(-0.26 0.094 0.12) S(6.41 0.188 4.00) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(-0.26 0.204 0.12) S(6.29 0.037 3.89) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+ [ T(-0.26 0.225 1.99) S(6.10 0.011 0.020) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(-2.93 0.232 -0.18) Gauge(29) ]
+Gauge(n) n ->
+ [ T(0.195*Gauge_count 0 0) S(0.008 0.009 0.044+0.038*(1-min(1,wrap(Gauge_count,0,4))))
+   !I(Cube material(warmwhitematteplaster) 1 0.24) ]

@@ -1,0 +1,60 @@
+{
+  "title": "Pro Gen3D Bearing Family",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-bearing-family-d93319b3",
+  "source_file": "ProGen3D_Bearing_Family.p3d",
+  "git_blob_sha": "d93319b3be9042d0c08dc1780057955502b218b3",
+  "bytes": 8858,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_Bearing_Family.p3d"
+  ],
+  "description": "ProGen3D | Bearing family 1.0.0 | Y-axis shaft, origin at the centre of the bearing.",
+  "features": [
+    "Revolve",
+    "Sphere",
+    "Cylinder",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ProGen3D | Bearing family 1.0.0 | Y-axis shaft, origin at the centre of the bearing. · Change the Start rule to a named preset below, or call Bearing directly. · Bearing(family bore outside width element count rollerLength front rear) · Enter lengths in millimetres. Output geometry uses metres. · family: 0 deep-groove ball, 1 cylindrical roller, 2 needle roller, 3 thrust ball, 4 plain sleeve. · bore = shaft-hole diameter; outside = housing-seat diameter; width = axial width. · element = ball or roller diameter; count = rolling elements in the single row. · rollerLength = axial length for families 1/2; use zero for 68 percent of bearing width. · front (+Y) and rear (-Y) are independent: 0 open, 1 metal shield, 2 elastomer seal. · Use open faces for thrust and sleeve. Sleeve uses only bore, outside and width."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, Sphere, Cylinder, Cube"
+    ],
+    [
+      "Material identifiers",
+      "steelbrushedmetal, goldbrushedmetal, blackmatterubber, bronzebrushedmetal, silverpolishedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Bearing623, Bearing625, Bearing608, Bearing6001, Bearing6204, Bearing6305, Bearing6312, Bearing625ZZ, CylindricalExample, NeedleExample, ThrustExample, SleeveExample, Bearing, CheckedBody, RollingInput, Layout, BallRaces, Balls, RollerSize (36 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "142"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -3,7 +3,7 @@
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
   "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 164,
+  "distinct_sources": 184,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -225,6 +225,64 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 80,
         "validation_status": "Not independently validated",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Wraparound Lounge Chair",
+      "group": "architecture/furniture",
+      "directory": "architecture/furniture/wraparound-lounge-chair-5dc1824f",
+      "source_file": "Wraparound_Lounge_Chair.p3d",
+      "git_blob_sha": "5dc1824f00d8c4dff39e4cb6796725928c55022b",
+      "bytes": 22994,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Wraparound_Lounge_Chair.p3d"
+      ],
+      "description": "WRAPAROUND LOUNGE CHAIR",
+      "features": [
+        "Loft",
+        "VariableSectionSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "WRAPAROUND LOUNGE CHAIR · Single-view reconstruction from the supplied photograph, 904.jpg. · Native ProGen3D desktop. World axes: X across, Y up, +Z toward the open front. · Edit the four Start arguments: overall width (mm), depth (mm), seat crown · height (mm), and back rise (mm from the arm datum to the rear centre). · Defaults are photographic estimates. Suggested editing range: 760-1000 mm wide, · 710-930 mm deep, 370-460 mm seat height, 30-85 mm back rise. · The nominal model is 890 mm wide, 825 mm deep and 696 mm tall. · Profiles are in millimetres. LoungeChair converts the finished chair to metres. · Four ground contacts and the recessed underframe are inferred from the image."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, VariableSectionSweep"
+        ],
+        [
+          "Material identifiers",
+          "oatmealbeigeroughcloth, lightoakverticalwood, blackmatteplastic, lightoakwood"
+        ],
+        [
+          "Production rules",
+          "Start, LoungeChair, SeatCushion, Horseshoe, SideStandard, FrontGlide, Undercarriage, RearFoot, Bearer (9 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "401"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -5646,6 +5704,183 @@
       }
     },
     {
+      "title": "Pro Gen3D Bearing Family",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-bearing-family-d93319b3",
+      "source_file": "ProGen3D_Bearing_Family.p3d",
+      "git_blob_sha": "d93319b3be9042d0c08dc1780057955502b218b3",
+      "bytes": 8858,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_Bearing_Family.p3d"
+      ],
+      "description": "ProGen3D | Bearing family 1.0.0 | Y-axis shaft, origin at the centre of the bearing.",
+      "features": [
+        "Revolve",
+        "Sphere",
+        "Cylinder",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D | Bearing family 1.0.0 | Y-axis shaft, origin at the centre of the bearing. · Change the Start rule to a named preset below, or call Bearing directly. · Bearing(family bore outside width element count rollerLength front rear) · Enter lengths in millimetres. Output geometry uses metres. · family: 0 deep-groove ball, 1 cylindrical roller, 2 needle roller, 3 thrust ball, 4 plain sleeve. · bore = shaft-hole diameter; outside = housing-seat diameter; width = axial width. · element = ball or roller diameter; count = rolling elements in the single row. · rollerLength = axial length for families 1/2; use zero for 68 percent of bearing width. · front (+Y) and rear (-Y) are independent: 0 open, 1 metal shield, 2 elastomer seal. · Use open faces for thrust and sleeve. Sleeve uses only bore, outside and width."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve, Sphere, Cylinder, Cube"
+        ],
+        [
+          "Material identifiers",
+          "steelbrushedmetal, goldbrushedmetal, blackmatterubber, bronzebrushedmetal, silverpolishedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, Bearing623, Bearing625, Bearing608, Bearing6001, Bearing6204, Bearing6305, Bearing6312, Bearing625ZZ, CylindricalExample, NeedleExample, ThrustExample, SleeveExample, Bearing, CheckedBody, RollingInput, Layout, BallRaces, Balls, RollerSize (36 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "142"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Pro Gen3D Bookcase Display",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-bookcase-display-abfacfc2",
+      "source_file": "ProGen3D_Bookcase_Display.p3d",
+      "git_blob_sha": "abfacfc23201f927df12aabb048b9fd4e2cc3f39",
+      "bytes": 1829,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_Bookcase_Display.p3d"
+      ],
+      "description": "Pro Gen3D Bookcase Display exported procedural grammar.",
+      "features": [
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          ""
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "warmWood, darkWood, linen, dustyBlue, rust, sage, amber, tealmattemetal, copperbrushedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, R12848cea84fc21b19e2f_Body, Rd6bdd8bc3c9deef003cc_Body, G015f842c1edc15b5efcb, R6ddc13b188376f758fb9_Body, G421731fc5f66d7e56e69 (6 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "28"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Pro Gen3D Kinetic Assembly Pair",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-kinetic-assembly-pair-68ec7e69",
+      "source_file": "ProGen3D_Kinetic_Assembly_Pair.p3d",
+      "git_blob_sha": "68ec7e690a00cf5cb96b2b7e8017744b24ef6d35",
+      "bytes": 15472,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "ProGen3D_Kinetic_Assembly_Pair.p3d"
+      ],
+      "description": "ProGen3D Kinetic Assembly — native grammar",
+      "features": [
+        "Cube",
+        "SweepDisk",
+        "Revolve",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D Kinetic Assembly — native grammar · Four supported, parameterised spur-wheel visualisations with real teeth, · separate spokes, chamfered rings, hubs, shafts, bearing collars and fasteners. · Prescribed motion only: no tooth-contact or stress solver is implied. · Editable parameters: uniform scale, drive teeth, follower teeth, module, drive degrees/s. · Default 32:24 gearing at 90:-120 degrees/s has a 12 second closed loop. · @texture silverbrushedmetal brushed_metal uv 2 18 · @texture lavenderwhiteplastic none · @texture mintwhiteplastic none · @texture ivorymattepaint none"
+        ],
+        [
+          "Named objects",
+          "CatalogueScenec309c3286be738e9, R15914dc5ab4f202a1a85_KineticAssembly, R15914dc5ab4f202a1a85_UpperDrive, R15914dc5ab4f202a1a85_UpperFollower, R15914dc5ab4f202a1a85_LowerDrive, R15914dc5ab4f202a1a85_LowerFollower, R15914dc5ab4f202a1a85_BasePlate, R15914dc5ab4f202a1a85_CurvedFrame, R15914dc5ab4f202a1a85_TransparentGuard, R8bc6bc1df4e23b7f0a95_KineticAssembly, R8bc6bc1df4e23b7f0a95_UpperDrive, R8bc6bc1df4e23b7f0a95_UpperFollower, R8bc6bc1df4e23b7f0a95_LowerDrive, R8bc6bc1df4e23b7f0a95_LowerFollower, R8bc6bc1df4e23b7f0a95_BasePlate, R8bc6bc1df4e23b7f0a95_CurvedFrame, R8bc6bc1df4e23b7f0a95_TransparentGuard"
+        ],
+        [
+          "Object classes",
+          "Assembly, Gear, Frame, Guard"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, SweepDisk, Revolve, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "ivorymattepaint, silverbrushedmetal, lavenderwhiteplastic, smokyglass, mintwhiteplastic, charcoalmatteplastic"
+        ],
+        [
+          "Production rules",
+          "Start, R15914dc5ab4f202a1a85_Body, R15914dc5ab4f202a1a85_Kinetic, R15914dc5ab4f202a1a85_Base, R15914dc5ab4f202a1a85_Frame, R15914dc5ab4f202a1a85_Cover, R15914dc5ab4f202a1a85_MintWheel, R15914dc5ab4f202a1a85_LavenderWheel, R15914dc5ab4f202a1a85_MintRing, R15914dc5ab4f202a1a85_LavenderRing, R15914dc5ab4f202a1a85_Hub, R15914dc5ab4f202a1a85_Bearing, R15914dc5ab4f202a1a85_Fastener, R8bc6bc1df4e23b7f0a95_Body, R8bc6bc1df4e23b7f0a95_Kinetic, R8bc6bc1df4e23b7f0a95_Base, R8bc6bc1df4e23b7f0a95_Frame, R8bc6bc1df4e23b7f0a95_Cover, R8bc6bc1df4e23b7f0a95_MintWheel, R8bc6bc1df4e23b7f0a95_LavenderWheel (26 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "308"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "buildings",
       "group": "education/legacy",
       "directory": "education/legacy/buildings-ce84c870",
@@ -5853,6 +6088,61 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 80,
         "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Bearing Pair",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-bearing-pair-1c33e31b",
+      "source_file": "Ender3_Bearing_Pair.p3d",
+      "git_blob_sha": "1c33e31bd1152b23f820ad8e428dd5ea09e5f251",
+      "bytes": 162,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Bearing_Pair.p3d"
+      ],
+      "description": "Two 625ZZ bearings, with origins 40 mm apart.",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          "Two 625ZZ bearings, with origins 40 mm apart."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start (1 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "5"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -7233,6 +7523,67 @@
       }
     },
     {
+      "title": "Copperleaf",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/copperleaf-a79706e9",
+      "source_file": "Copperleaf.p3d",
+      "git_blob_sha": "a79706e9d7d834de1e9cb2c1eb61f39a02644e9e",
+      "bytes": 18101,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Copperleaf.p3d"
+      ],
+      "description": "Copperleaf | Exterior",
+      "features": [
+        "Cube",
+        "Revolve",
+        "Sphere",
+        "Cylinder",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Copperleaf | Exterior · +X bow, +Y dorsal, +Z starboard. Units: metres; t: seconds."
+        ],
+        [
+          "Named objects",
+          "VesselRoot, Keel, mount, Forebody, passage, Aftbody, Garden, fluid, heat, Link4, Bridge, PortWing, Link1, PortBell, PortPane, StarWing, Link2, StarBell, StarPane, ServiceDock, Antenna, signal, power, Mark (+3 more)"
+        ],
+        [
+          "Object classes",
+          "Spacecraft, ShipTrussKeel, ShipSpindle, ShipGreenhouse, ShipObservation, ShipRadiator, ShipMainBell, ShipWindows, ShipDock, ShipAntenna, ShipMarkings, ShipCoolant, ShipReactor"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Revolve, Sphere, Cylinder, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, copperbrushedmetal, bluegreymetal, offwhiteceramic, goldbrushedmetal, cleartransparentglass, darkwalnutwood, olivegreenmattepaint, sagegreenmattepaint, silverblueglass, charcoalmattemetal, cyanemissivepaint, ambermetalpolished, tealmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, PlaceKeel, PlaceForebody, PlaceAftbody, PlaceGarden, PlaceBridge, PlacePortWing, PlacePortBell, PlacePortPane, PlaceStarWing, PlaceStarBell, PlaceStarPane, PlaceServiceDock, PlaceAntenna, PlaceMark, PlaceLoop, PlacePower, ShipTrussKeel, ShipSpindle, ShipGreenhouse (29 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "287"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Procedural Material Catalogue",
       "group": "engineering/exported-studies",
       "directory": "engineering/exported-studies/procedural-material-catalogue-bfbb45d8",
@@ -7692,6 +8043,860 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 55,
         "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "29 corner cube retroreflector",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/29-corner-cube-retroreflector-f7229871",
+      "source_file": "29-corner-cube-retroreflector.p3d",
+      "git_blob_sha": "f7229871d0381700287c33346c8c4ddde7294185",
+      "bytes": 4940,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "29-corner-cube-retroreflector.p3d"
+      ],
+      "description": "Hollow corner cube. Corner(rearTiltDegrees entryX).",
+      "features": [
+        "Extrude",
+        "SweepProfile",
+        "Cylinder",
+        "TaperedSweep",
+        "Sphere",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Hollow corner cube. Corner(rearTiltDegrees entryX). · Try 0 or 6 degrees at entry X 0.52. Another tested setup is -4 and 0.66. · The marked ray takes the X, floor, rear reflection sequence. · The reflective face is local z=0. Two fixed mirrors are transformed from · the back-facing profile so their positive local z goes out of the cavity."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Base, XMirror, FloorMirror, RearMirror, Incoming, FirstBounce, SecondBounce, Returning"
+        ],
+        [
+          "Object classes",
+          "RetroreflectionBench, DisplayBase, PlanarMirror, AdjustableMirror, IncidentRay, ReflectedRay, ReturnRay"
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude, SweepProfile, Cylinder, TaperedSweep, Sphere, Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbluepolishedmetal, bluegreymattepaint, goldbrushedmetal, redmattepaint, tealmatteceramic, amberwarmwood, charcoalmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, Corner, Incident, FirstTwo, SecondHit, RearNormal, RearHit, Return, Exhibit, Mirror, Plate, Mount, Ray, Reflected, Tip, Dot, Base, Seat (18 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "87"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "30 polar projection atlas",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/30-polar-projection-atlas-c54f5ad3",
+      "source_file": "30-polar-projection-atlas.p3d",
+      "git_blob_sha": "c54f5ad3544f469eff25802e3ccbecac5585b1b0",
+      "bytes": 5726,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "30-polar-projection-atlas.p3d"
+      ],
+      "description": "Polar projection atlas. Atlas(latitudeBands meridians).",
+      "features": [
+        "Sphere",
+        "Revolve",
+        "Cylinder",
+        "Cube",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Polar projection atlas. Atlas(latitudeBands meridians). · Try 6 12 or 9 16. Lambert is left, orthographic is right. · The north hemisphere bands divide sin(latitude) into equal steps."
+        ],
+        [
+          "Named objects",
+          "Atlas, Case, Lambert, LambertFrame, Orthographic, OrthographicFrame, Hemisphere, Pedestal, Legend"
+        ],
+        [
+          "Object classes",
+          "CartographicExhibit, DisplayCase, EqualAreaProjection, CompassFrame, OrthographicProjection, ReferenceHemisphere, HemisphereStand, ProjectionLabels"
+        ],
+        [
+          "Instantiated primitives",
+          "Sphere, Revolve, Cylinder, Cube, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "goldbrushedmetal, bluegreymattepaint, tealmatteceramic, offwhiteceramic, sagegreenmattepaint, charcoalmattemetal, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Atlas, Radii, Painted, MidShade, WarmShade, Latitudes, Profile, Shell, ShellMid, ShellWarm, Frame, Stand, Bed, Nameplate, Glyph (16 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "101"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "31 kepler sector table",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/31-kepler-sector-table-e26b72c4",
+      "source_file": "31-kepler-sector-table.p3d",
+      "git_blob_sha": "e26b72c4f3ad335b3fc9bbcd323d219378285267",
+      "bytes": 4687,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "31-kepler-sector-table.p3d"
+      ],
+      "description": "Kepler sector table. Kepler(eccentricity sectors chordsPerSector period mode).",
+      "features": [
+        "Extrude",
+        "TaperedSweep",
+        "Cylinder",
+        "Sphere",
+        "Revolve",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Kepler sector table. Kepler(eccentricity sectors chordsPerSector period mode). · Mode 0 gives equal time. Mode 1 gives equal increments of eccentric anomaly. · Try e=0.68 or e=0.28. The moving planet keeps equal-area timing in both modes."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Bench, Sectors, Track, Graduations, Focus, Planet"
+        ],
+        [
+          "Object classes",
+          "OrbitalAreaTable, DisplayCase, AreaSectors, OrbitRim, SectorBoundaries, FocusMarkers, OrbitingBead"
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude, TaperedSweep, Cylinder, Sphere, Revolve, Cube"
+        ],
+        [
+          "Material identifiers",
+          "bluegreymattepaint, tealmatteceramic, offwhiteceramic, sagegreenmattepaint, charcoalmattemetal, goldbrushedmetal, silverbrushedmetal, copperpolishedmetal, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Kepler, Table, Pair, SolvePair, Shade, ShadeMid, ShadeWarm, FindPoint, Point, RimSegment, Sun, OtherFocus, Bed, Screw (15 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "82"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "32 flexure bench",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/32-flexure-bench-b0af7526",
+      "source_file": "32-flexure-bench.p3d",
+      "git_blob_sha": "b0af752697e9b53c4f89e5a19ce3532bf80e0248",
+      "bytes": 5130,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "32-flexure-bench.p3d"
+      ],
+      "description": "Beam flexure bench. FlexBench(loadInset peakPover2EI period chords).",
+      "features": [
+        "Extrude",
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Beam flexure bench. FlexBench(loadInset peakPover2EI period chords). · Span 4.80. Use inset 1.60 for four-point or 2.40 for a centre load. · Both modes have the same total force at the same P/(2EI). · Rollers are tangent to the analytic surface at the indicated station."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Bed, Datum, Specimen, Supports, LoadHeads, Indicator"
+        ],
+        [
+          "Object classes",
+          "FlexureDemonstrator, FlexureMachine, ZeroDatum, DeflectedBeam, ReactionRollers, LoadingRollers, MidspanIndicator"
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude, Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "bluegreymattepaint, tealmatteceramic, copperpolishedmetal, goldbrushedmetal, silverbrushedmetal, redmattepaint, amberwarmwood, charcoalmattemetal, offwhiteceramic"
+        ],
+        [
+          "Production rules",
+          "Start, FlexBench, Bench, Span, HeightPair, DropPair, Mesh, Moment, Bearings, FootRoller, Loading, LoadHeight, Ram, Roller, Gauge, GaugeDelta, Bed, Plinth, Column, Scale (20 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "104"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "33 standing wave membrane",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/33-standing-wave-membrane-ffb75f8a",
+      "source_file": "33-standing-wave-membrane.p3d",
+      "git_blob_sha": "ffb75f8a96db0e6c1c2306a40bbb3acee8e9d650",
+      "bytes": 3978,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "33-standing-wave-membrane.p3d"
+      ],
+      "description": "Rectangular membrane eigenmode. Membrane(m n amplitude waveSpeed cellsPerLobe).",
+      "features": [
+        "Loft",
+        "TaperedSweep",
+        "Sphere",
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Rectangular membrane eigenmode. Membrane(m n amplitude waveSpeed cellsPerLobe). · The clear span is 4.60 by 3.20. Use an even cellsPerLobe (try 4, 6 or 8). · The time phase starts at a displacement maximum. Swap m and n to compare."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Stand, Cloth, Nodes, Peaks"
+        ],
+        [
+          "Object classes",
+          "MembraneModeExhibit, MembraneFrame, DisplacedMembrane, InteriorNodalLines, AntinodeMarkers"
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, TaperedSweep, Sphere, Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "tealmatteceramic, offwhiteceramic, goldbrushedmetal, amberwarmwood, charcoalmattemetal, silverbrushedmetal, bluegreymattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Membrane, Exhibit, Cell, Panel, Base, Tower, LongRail, ShortRail (9 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "72"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "34 venturi flow bench",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/34-venturi-flow-bench-26ae7318",
+      "source_file": "34-venturi-flow-bench.p3d",
+      "git_blob_sha": "26ae73184423261c208bb70bb28017dcb32a9c9a",
+      "bytes": 5463,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "34-venturi-flow-bench.p3d"
+      ],
+      "description": "Cutaway ideal Venturi. Venturi(throatRadiusRatio inletVelocityHead).",
+      "features": [
+        "Revolve",
+        "Cylinder",
+        "TaperedSweep",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Cutaway ideal Venturi. Venturi(throatRadiusRatio inletVelocityHead). · Try 0.60 0.088 or 0.72 0.088. The inlet bore radius is 0.56. · Gold arrows follow velocity ratios and blue columns follow piezometric head. · These five annular sectors expose the bore along the same 120 degree cut."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Base, InletBore, Convergent, ThroatBore, Recovery, OutletBore, Cuffs, Flow, InletGauge, ThroatGauge, OutletGauge"
+        ],
+        [
+          "Object classes",
+          "VenturiFlowBench, InstrumentBed, BoreSection, FlowContraction, FlowDiffuser, PipeFlanges, VelocityArrows, Piezometer"
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve, Cylinder, TaperedSweep, Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbluepolishedmetal, copperpolishedmetal, bluegreymattepaint, goldbrushedmetal, charcoalmattemetal, tealmatteceramic, warmwhitematteplaster, silverbrushedmetal, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Venturi, Bench, End, Narrow, Cone, Flange, Arrow, Gauge, Tap, Base, Cradle, GaugeFoot (13 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "94"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "35 steiner network table",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/35-steiner-network-table-42a34485",
+      "source_file": "35-steiner-network-table.p3d",
+      "git_blob_sha": "42a344858eb20d6c2e2c205c0bde924d1100dda8",
+      "bytes": 4807,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "35-steiner-network-table.p3d"
+      ],
+      "description": "Four-corner Steiner exhibit. Steiner(width depth mode).",
+      "features": [
+        "TaperedSweep",
+        "Revolve",
+        "Cylinder",
+        "Cube",
+        "Sphere",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Four-corner Steiner exhibit. Steiner(width depth mode). · Mode 0 chooses the shorter topology. Mode 1 pairs the sides across width. · Mode 2 pairs the sides across depth. A collapsed topology falls back to the other."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Base, Terminals, Construction, Junctions, Arms, Bridge"
+        ],
+        [
+          "Object classes",
+          "SteinerNetworkTable, DisplayCase, FixedTerminals, EquilateralWitness, SteinerJunctions, TerminalEdges, JunctionEdge"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, Revolve, Cylinder, Cube, Sphere, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "tealmatteceramic, copperpolishedmetal, silverbrushedmetal, goldbrushedmetal, charcoalmattemetal, bluegreymattepaint, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Steiner, Auto, Force, Choose, Layout, Exhibit, Arm, Bridge, Ferrule, Junction, Terminal, Witness, Triangle, Scribe, Pin, Bed (17 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "101"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "36 coriolis turntable",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/36-coriolis-turntable-34eeae19",
+      "source_file": "36-coriolis-turntable.p3d",
+      "git_blob_sha": "34eeae1944d2660a0cfda2dc0f7baf253c47bb97",
+      "bytes": 4176,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "36-coriolis-turntable.p3d"
+      ],
+      "description": "Coriolis turntable. Turntable(degreesPerSecond flight cycle chords frame).",
+      "features": [
+        "TaperedSweep",
+        "Cylinder",
+        "Sphere",
+        "Cube",
+        "Revolve"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Coriolis turntable. Turntable(degreesPerSecond flight cycle chords frame). · Frame 0 follows the disk. Frame 1 follows the laboratory. · Choose a cycle for which abs(degreesPerSecond)*cycle is a multiple of 360. · At the end of the flight the disk catches the ball, then the scene resets it."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Stand, Reference, Platter, Trail, Milestones, Ball"
+        ],
+        [
+          "Object classes",
+          "RotatingFrameExhibit, TurntablePedestal, LaboratoryAxis, RotatingDisk, DiskFrameTrajectory, SampleTimeMarks, FreeParticle"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, Cylinder, Sphere, Cube, Revolve"
+        ],
+        [
+          "Material identifiers",
+          "copperpolishedmetal, goldbrushedmetal, offwhiteceramic, silverbrushedmetal, bluegreymattepaint, redmattepaint, silverbluepolishedmetal, charcoalmattemetal, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Turntable, Pose, Exhibit, Path, Chord, Milestone, Particle, LabAxis, Disk, OrbitRing, Base (12 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "75"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "37 pantograph rosette",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/37-pantograph-rosette-ef04ab9d",
+      "source_file": "37-pantograph-rosette.p3d",
+      "git_blob_sha": "ef04ab9d3e372cae34f4fe1a8c87516b0138740f",
+      "bytes": 4755,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "37-pantograph-rosette.p3d"
+      ],
+      "description": "Pantograph rosette. Pantograph(scale period traceChords).",
+      "features": [
+        "SweepProfile",
+        "Cylinder",
+        "Cube",
+        "Revolve",
+        "TaperedSweep"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Pantograph rosette. Pantograph(scale period traceChords). · Tested scales include 1.70 and 2.30. Try 5 or 8 seconds for the cycle. · The fixed pivot is the scale centre. The tracing stylus follows the small rosette."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Bed, MasterTrace, CopyTrace, Origin, Links, Pins, InputStylus, OutputStylus"
+        ],
+        [
+          "Object classes",
+          "PantographTable, DraftingBed, TemplateEngraving, CopyEngraving, FixedBearing, ParallelogramArms, HingePins, TraceFollower, CopyPen"
+        ],
+        [
+          "Instantiated primitives",
+          "SweepProfile, Cylinder, Cube, Revolve, TaperedSweep"
+        ],
+        [
+          "Material identifiers",
+          "bluegreymattepaint, copperpolishedmetal, silverbrushedmetal, goldbrushedmetal, charcoalmattemetal, redmattepaint, tealmatteceramic, amberwarmwood, offwhiteceramic"
+        ],
+        [
+          "Production rules",
+          "Start, Pantograph, Board, Path, Locate, Split, Solve, Elbow, Parallelogram, Build, Linkage, Bar, Knuckle, Stylus, Bearing, TraceChord, TracePoints, Ink, Bed, Screw (20 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "93"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "38 equatorial sundial",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/38-equatorial-sundial-dd444c74",
+      "source_file": "38-equatorial-sundial.p3d",
+      "git_blob_sha": "dd444c740f2aae564fc1f5d3b412d5abeba4ac97",
+      "bytes": 4585,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "38-equatorial-sundial.p3d"
+      ],
+      "description": "Equatorial sundial. Dial(latitudeMagnitude poleDeclination solarHour rodHeight).",
+      "features": [
+        "TaperedSweep",
+        "Sphere",
+        "Cylinder",
+        "Revolve",
+        "Cube",
+        "Extrude"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Equatorial sundial. Dial(latitudeMagnitude poleDeclination solarHour rodHeight). · Positive declination lights the face toward the elevated celestial pole. · 12 is local apparent solar noon. Test 23.44, 12, and 8 degrees of declination."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Base, Face, Hours, Gnomon, Incident, Shadow"
+        ],
+        [
+          "Object classes",
+          "EquatorialDialTable, DisplayBed, EquatorialPlate, AngularScale, PolarRod, SolarRay, ProjectedTip"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, Sphere, Cylinder, Revolve, Cube, Extrude"
+        ],
+        [
+          "Material identifiers",
+          "goldbrushedmetal, copperpolishedmetal, redmattepaint, offwhiteceramic, bluegreymattepaint, charcoalmattemetal, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Dial, Exhibit, SolarIncident, Ray, Projection, Intercept, Cast, RedTrace, TipMark, Plate, Engraving, Gnomon, Cradles, Post, Base (16 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "88"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "39 euler rail transition",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/39-euler-rail-transition-6fefd704",
+      "source_file": "39-euler-rail-transition.p3d",
+      "git_blob_sha": "6fefd704f4b900cbc3b50c30d128d4e2f71e7a63",
+      "bytes": 4251,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "39-euler-rail-transition.p3d"
+      ],
+      "description": "Euler rail transition. Railway(mode headingDegrees finalBankDegrees chords).",
+      "features": [
+        "TaperedSweep",
+        "SweepProfile",
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Euler rail transition. Railway(mode headingDegrees finalBankDegrees chords). · Mode 0 ramps curvature. Mode 1 uses circular curvature after a straight lead. · Compare heading 55 and bank 10, then try zero bank. Model length is 4.80. · Integrate cos(heading) and sin(heading) on 0..u using five Gauss points."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Bench, Lead, Rails, Sleepers, Tangent"
+        ],
+        [
+          "Object classes",
+          "RailTransitionStudy, DisplayBed, StraightTrack, CurvedRails, TrackTies, ExitDirection"
+        ],
+        [
+          "Instantiated primitives",
+          "TaperedSweep, SweepProfile, Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, charcoalmattemetal, amberwarmwood, bluegreymattepaint, copperpolishedmetal, goldbrushedmetal, warmwhitematteplaster"
+        ],
+        [
+          "Production rules",
+          "Start, Railway, Exhibit, Probe, Gauss, Angles, Dispatch, Detail, Marker, Pair, Rail, Section, Sleeper, Support, Shoe, EndFlag, Bench (17 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "86"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "40 six actuator platform",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/40-six-actuator-platform-6f8cd227",
+      "source_file": "40-six-actuator-platform.p3d",
+      "git_blob_sha": "6f8cd227c8e15c015f89f0350a5af300dc4ce2ed",
+      "bytes": 5273,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "40-six-actuator-platform.p3d"
+      ],
+      "description": "Six-actuator motion platform. Hexapod(heave sway surge pitch roll yaw seconds).",
+      "features": [
+        "Cylinder",
+        "Sphere",
+        "TaperedSweep",
+        "Revolve",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Six-actuator motion platform. Hexapod(heave sway surge pitch roll yaw seconds). · Translation amplitudes are model units. Angles are degrees. · The drive is prescribed and the six telescoping legs follow the moving deck. · All distances down the actuator body are fixed. Only the exposed rod changes length."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Bed, LowerJoints, UpperJoints, Deck, Actuators"
+        ],
+        [
+          "Object classes",
+          "MotionPlatform, InstrumentBed, BaseAnchors, MovingAnchors, RigidPayloadDeck, TelescopingLegs"
+        ],
+        [
+          "Instantiated primitives",
+          "Cylinder, Sphere, TaperedSweep, Revolve, Cube"
+        ],
+        [
+          "Material identifiers",
+          "copperpolishedmetal, charcoalmattemetal, goldbrushedmetal, bluegreymattepaint, silverbrushedmetal, tealmatteceramic, offwhiteceramic, redmattepaint, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Hexapod, Wave, Station, Foot, Head, Leg, RollPoint, PitchPoint, YawPoint, Target, Length, Normals, CylinderAssembly, Deck, Bed (16 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "97"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "41 helical screw lift",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/41-helical-screw-lift-7e4b553b",
+      "source_file": "41-helical-screw-lift.p3d",
+      "git_blob_sha": "7e4b553b190130bdead800a2a431eb1378209405",
+      "bytes": 5635,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "41-helical-screw-lift.p3d"
+      ],
+      "description": "Cutaway screw lift. Screw(lead starts slopeDegrees period chords).",
+      "features": [
+        "Cylinder",
+        "Loft",
+        "Revolve",
+        "Cube",
+        "TaperedSweep",
+        "SweepProfile",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Cutaway screw lift. Screw(lead starts slopeDegrees period chords). · Lead is the axial repeat of one flight in one revolution. Adjacent · flights at the same clock angle are separated by lead/starts."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Base, Trough, Bearings, Sight, Crossings, Flights, Shaft"
+        ],
+        [
+          "Object classes",
+          "ScrewLift, DisplayBed, HelicalCasing, StationarySupports, ClockAngleWitness, FlightPhaseMarks, HelicoidalRotor, RotatingAxle"
+        ],
+        [
+          "Instantiated primitives",
+          "Cylinder, Loft, Revolve, Cube, TaperedSweep, SweepProfile, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, copperpolishedmetal, goldbrushedmetal, bluegreymattepaint, charcoalmattemetal, tealmatteceramic, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Screw, Exhibit, Edges, Profile, Trough, Rim, Bearing, Handwheel, SightRail, Strut, Crossings, Flag, Supports, Tower, Base (16 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "104"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "42 cavalieri volume table",
+      "group": "engineering/surface-relief/patterns",
+      "directory": "engineering/surface-relief/patterns/42-cavalieri-volume-table-54cb62f4",
+      "source_file": "42-cavalieri-volume-table.p3d",
+      "git_blob_sha": "54cb62f44cc12f9d344ae7657306460c07ef3408",
+      "bytes": 3959,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "42-cavalieri-volume-table.p3d"
+      ],
+      "description": "Cavalieri volume table. Cavalieri(heightFraction visibleDegrees arcFacets profileSpans).",
+      "features": [
+        "Revolve",
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Cavalieri volume table. Cavalieri(heightFraction visibleDegrees arcFacets profileSpans). · Heights 0.48 and 0.82 show different equal-area sections. 270 opens a quarter. · Both specimens have radius 1.24. Each gold top face is the section being compared."
+        ],
+        [
+          "Named objects",
+          "Exhibit, Base, HeightGauge, HemisphereBody, HemisphereSection, ConeVoidBody, ConeVoidSection"
+        ],
+        [
+          "Object classes",
+          "CavalieriVolumeTable, DisplayBed, CommonSliceDatum, HemisphereSegment, DiskSection, CylinderMinusCone, AnnulusSection"
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve, Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "bluegreymattepaint, goldbrushedmetal, tealmatteceramic, redmattepaint, silverbrushedmetal, charcoalmattemetal, copperpolishedmetal, amberwarmwood"
+        ],
+        [
+          "Production rules",
+          "Start, Cavalieri, Exhibit, District, Segment, Crown, DiskSection, Cavity, Annulus, Gauge, Mast, Slider, Pedestal, Bed, Legend (15 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "75"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -9541,7 +10746,7 @@
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 49,
+  "library_exports_imported": 69,
   "library_export_inventory_count": 251,
-  "library_export_names_transferred": 50
+  "library_export_names_transferred": 70
 }

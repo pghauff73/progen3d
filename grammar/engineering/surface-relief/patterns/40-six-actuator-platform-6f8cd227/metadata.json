@@ -1,0 +1,61 @@
+{
+  "title": "40 six actuator platform",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/40-six-actuator-platform-6f8cd227",
+  "source_file": "40-six-actuator-platform.p3d",
+  "git_blob_sha": "6f8cd227c8e15c015f89f0350a5af300dc4ce2ed",
+  "bytes": 5273,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "40-six-actuator-platform.p3d"
+  ],
+  "description": "Six-actuator motion platform. Hexapod(heave sway surge pitch roll yaw seconds).",
+  "features": [
+    "Cylinder",
+    "Sphere",
+    "TaperedSweep",
+    "Revolve",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Six-actuator motion platform. Hexapod(heave sway surge pitch roll yaw seconds). · Translation amplitudes are model units. Angles are degrees. · The drive is prescribed and the six telescoping legs follow the moving deck. · All distances down the actuator body are fixed. Only the exposed rod changes length."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Bed, LowerJoints, UpperJoints, Deck, Actuators"
+    ],
+    [
+      "Object classes",
+      "MotionPlatform, InstrumentBed, BaseAnchors, MovingAnchors, RigidPayloadDeck, TelescopingLegs"
+    ],
+    [
+      "Instantiated primitives",
+      "Cylinder, Sphere, TaperedSweep, Revolve, Cube"
+    ],
+    [
+      "Material identifiers",
+      "copperpolishedmetal, charcoalmattemetal, goldbrushedmetal, bluegreymattepaint, silverbrushedmetal, tealmatteceramic, offwhiteceramic, redmattepaint, amberwarmwood"
+    ],
+    [
+      "Production rules",
+      "Start, Hexapod, Wave, Station, Foot, Head, Leg, RollPoint, PitchPoint, YawPoint, Target, Length, Normals, CylinderAssembly, Deck, Bed (16 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "97"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,103 @@
+# Cutaway screw lift. Screw(lead starts slopeDegrees period chords).
+# Lead is the axial repeat of one flight in one revolution. Adjacent
+# flights at the same clock angle are separated by lead/starts.
+Start -> Screw(1.28 1 22 6 72)
+
+Screw(lead n slope period q) ->
+ [ Exhibit(lead n slope period q 360*t/period) ]
+Exhibit(lead n slope period q clock) ->
+ [ Object(id(Exhibit) class(ScrewLift) taxonomy(Study Machines Screw) layer(Equipment)) [
+   [ Object(id(Base) class(DisplayBed) taxonomy(Study Machines Mount) layer(Structure)) [
+     Base Supports(radians(slope)) ] ]
+   [ T(0 1.54 0) A(90 1) A(-slope 0)
+     [ Object(id(Trough) class(HelicalCasing) taxonomy(Study Machines Screw) layer(Equipment)) [
+       A(90 0) Trough ] ]
+     [ Object(id(Bearings) class(StationarySupports) taxonomy(Study Machines Mount) layer(Structure)) [
+       [ T(0 0 -2.23) A(90 0) Bearing ] [ T(0 0 2.23) A(90 0) Bearing ] ] ]
+     [ Object(id(Sight) class(ClockAngleWitness) taxonomy(Study Machines Measurement) layer(Equipment)) [
+       SightRail ] ]
+     [ Object(id(Crossings) class(FlightPhaseMarks) taxonomy(Study Machines Measurement) layer(Equipment)) [
+       Crossings(lead/n wrap(lead*(0.25+clock/360),0,lead/n)) ] ]
+     [ A(-clock 2)
+       [ Object(id(Flights) class(HelicoidalRotor) taxonomy(Study Machines Screw) layer(Equipment)) [
+         Starts(n lead q) ] ]
+       [ Object(id(Shaft) class(RotatingAxle) taxonomy(Study Machines Drive) layer(Equipment)) [
+         [ T(0 0 -2.39) A(90 0) S(0.409 4.78 0.409) !I(Cylinder(segments(48 1))
+           material(silverbrushedmetal) 1 0.25) ] [ T(0 0 2.37) A(90 0) Handwheel ] ] ] ] ] ] ]
+
+Starts(n lead q) n ->
+ [ Panels(q lead 360*Starts_count/n Starts_count) ]
+Panels(n lead phase k) n ->
+ [ Edges(radians(phase+1440*Panels_count/n/lead) radians(phase+1440*(Panels_count+1)/n/lead)
+   -2+4*Panels_count/n 4/n k) ]
+Edges(a b z d k) ->
+ [ T(0 0 z) Profile(cos(a) sin(a) cos(b) sin(b) d k) ]
+Profile(c s C S d k) -> ?(k<0.5)
+ [ !I(Loft(section(0 Polygon 0.18*c+0.020*s 0.18*s-0.020*c 0.606*c+0.020*s 0.606*s-0.020*c
+                     0.606*c-0.020*s 0.606*s+0.020*c 0.18*c-0.020*s 0.18*s+0.020*c)
+            section(d Polygon 0.18*C+0.020*S 0.18*S-0.020*C 0.606*C+0.020*S 0.606*S-0.020*C
+                     0.606*C-0.020*S 0.606*S+0.020*C 0.18*C-0.020*S 0.18*S+0.020*C) cap(all))
+      material(copperpolishedmetal) 1 0.25) ]
+ : [ !I(Loft(section(0 Polygon 0.18*c+0.020*s 0.18*s-0.020*c 0.606*c+0.020*s 0.606*s-0.020*c
+                       0.606*c-0.020*s 0.606*s+0.020*c 0.18*c-0.020*s 0.18*s+0.020*c)
+              section(d Polygon 0.18*C+0.020*S 0.18*S-0.020*C 0.606*C+0.020*S 0.606*S-0.020*C
+                       0.606*C-0.020*S 0.606*S+0.020*C 0.18*C-0.020*S 0.18*S+0.020*C) cap(all))
+      material(goldbrushedmetal) 1 0.24) ]
+
+Trough ->
+ [ !I(Revolve(profile(Polygon 0.645 -2.06 0.703 -2.06 0.703 2.06 0.645 2.06)
+   angle(0 180) segments(64) cap(all)) material(bluegreymattepaint) 1 0.26) ]
+ [ Rim(-2.01) ] [ Rim(2.01) ]
+ [ T(-0.679 0 0) S(0.069 4.14 0.049) !I(Cube material(silverbrushedmetal) 1 0.24) ]
+ [ T(0.679 0 0) S(0.069 4.14 0.049) !I(Cube material(silverbrushedmetal) 1 0.24) ]
+Rim(z) ->
+ [ T(0 z 0) !I(Revolve(profile(Polygon 0.645 -0.064 0.719 -0.064 0.737 -0.047
+   0.737 0.047 0.719 0.064 0.645 0.064) angle(0 180) segments(64) cap(all))
+   material(goldbrushedmetal) 1 0.25) ]
+Bearing ->
+ [ !I(Revolve(profile(Polygon 0.205 -0.086 0.297 -0.086 0.329 -0.046
+   0.329 0.046 0.297 0.086 0.205 0.086) angle(0 360) segments(64))
+   material(charcoalmattemetal) 1 0.24) ]
+Handwheel ->
+ [ !I(Revolve(profile(Polygon 0.367 0.025 0.450 0.025 0.469 0.051 0.469 0.125
+   0.451 0.148 0.367 0.148) angle(0 360) segments(64)) material(bluegreymattepaint) 1 0.24) ]
+ [ T(0 -0.015 0) S(0.465 0.141 0.465) !I(Cylinder(segments(32 1))
+   material(goldbrushedmetal) 1 0.24) ]
+ [ Spokes(5) ]
+ [ T(0.410 0.137 0) S(0.105 0.224 0.105) !I(Cylinder(segments(20 1))
+   material(copperpolishedmetal) 1 0.25) ]
+Spokes(n) n ->
+ [ A(360*Spokes_count/n 1) T(0.286 0.084 0) S(0.200 0.049 0.067)
+   !I(Cube material(silverbrushedmetal) 1 0.23) ]
+
+SightRail ->
+ [ !I(TaperedSweep(samples(0 0.696 -2.12 0.009 0 0.696 2.12 0.009) up(1 0 0) segments(8) cap(all))
+   material(silverbrushedmetal) 1 0.25) ]
+ [ [ T(0 0 -2.10) Strut ] [ T(0 0 2.10) Strut ] ]
+ [ T(-0.794 0.041 0) !I(TaperedSweep(samples(0 0 -2.05 0.016 0 0 2.05 0.016)
+   up(1 0 0) segments(8) cap(all)) material(goldbrushedmetal) 1 0.25) ]
+ [ RailTicks(41) ]
+Strut ->
+ [ !I(SweepProfile(profile(Rect 0.028 0.034)
+   path(-0.703 0 0 -0.662 0.374 0 0 0.696 0) up(0 0 1) cap(all))
+   material(silverbrushedmetal) 1 0.23) ]
+RailTicks(n) n ->
+ [ T(-0.794 0.043 -2+0.10*RailTicks_count)
+   S(0.038+0.052*(1-min(1,wrap(RailTicks_count,0,5))) 0.011 0.009)
+   !I(Cube material(goldbrushedmetal) 1 0.24) ]
+Crossings(spacing from) ->
+ [ T(0 0.663 -2+from+spacing) Flag ] [ T(0 0.663 -2+from+2*spacing) Flag ]
+Flag ->
+ [ S(0.080 0.080 0.080) !I(Sphere(segments(20 12)) material(tealmatteceramic) 1 0.24) ]
+
+Supports(a) ->
+ [ Tower(-2.23*cos(a) 1.54-2.23*sin(a)) ] [ Tower(2.23*cos(a) 1.54+2.23*sin(a)) ]
+Tower(x h) ->
+ [ T(x 0.238 0)
+   [ S(0.45 0.063 0.86) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+   [ T(0 h/2-0.244 0) S(0.281 h-0.59 0.49) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+   [ T(0 h-0.586 0) S(0.406 0.088 0.71) !I(Cube material(silverbrushedmetal) 1 0.24) ] ]
+Base ->
+ [ T(0 0.097 0) S(5.68 0.194 2.40) !I(Cube material(amberwarmwood) 1 0.29) ]
+ [ T(0 0.213 0) S(5.58 0.048 2.30) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+ [ T(0 0.234 1.075) S(5.44 0.012 0.021) !I(Cube material(goldbrushedmetal) 1 0.24) ]

@@ -1,0 +1,27 @@
+Start -> G421731fc5f66d7e56e69
+
+R12848cea84fc21b19e2f_Body -> [ S ( 0.022 0.658 0.31 ) I ( CubeY material(warmWood) 1 1 ) ]
+
+Rd6bdd8bc3c9deef003cc_Body ->
+    [ T ( 0.169 0.032 0 ) S ( 0.36 0.026 0.31 ) I ( Cube material(warmWood) 1 1 ) ]
+    [ T ( 0.169 0.33 0 ) S ( 0.36 0.025 0.31 ) I ( Cube material(warmWood) 1 1 ) ]
+    [ T ( 0.169 0.648 0 ) S ( 0.36 0.03 0.33 ) I ( Cube material(warmWood) 1 1 ) ]
+    [ T ( 0.169 0.335 -0.146 ) S ( 0.36 0.62 0.018 ) I ( Cube material(darkWood) 1 1 ) ]
+    [ T ( 0.349 0 0 ) S ( 0.022 0.658 0.31 ) I ( CubeY material(warmWood) 1 1 ) ]
+    [ T ( 0.169 0.13 0.025 ) S ( 0.279 0.16 0.22 ) I ( Cube material(linen) 1 1 ) ]
+    [ T ( 0.169 0.158 0.139 ) S ( 0.075 0.024 0.006 ) I ( Cube material(darkWood) 1 1 ) ]
+    [ T ( 0.055 0.342 0.01 ) S ( 0.042 0.21 0.17 ) I ( CubeY material(dustyBlue) 1 1 ) ]
+    [ T ( 0.10 0.342 0.01 ) S ( 0.043 0.245 0.18 ) I ( CubeY material(rust) 1 1 ) ]
+    [ T ( 0.147 0.342 0.01 ) S ( 0.043 0.18 0.16 ) I ( CubeY material(sage) 1 1 ) ]
+    [ T ( 0.202 0.446 0.019 ) A ( 13 2 ) S ( 0.037 0.208 0.168 ) I ( Cube material(amber) 1 1 ) ]
+
+G015f842c1edc15b5efcb -> [ T ( -0.022 0 0 ) R12848cea84fc21b19e2f_Body ] [ Rd6bdd8bc3c9deef003cc_Body ] [ T ( 0.36 0 0 ) Rd6bdd8bc3c9deef003cc_Body ] [ T ( 0.72 0 0 ) Rd6bdd8bc3c9deef003cc_Body ]
+
+R6ddc13b188376f758fb9_Body(span lift u) ->
+    I(SweepDisk(path(-span -lift*u span*u  span lift*u span*u)
+                radius(0.026) segments(8) cap(all)) material(tealmattemetal) 1 1)
+    I(SweepDisk(path(span*u -lift*u -span  span*u lift*u span)
+                radius(0.026) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
+
+
+G421731fc5f66d7e56e69 -> [ G015f842c1edc15b5efcb ] [ T ( -0.75 0.25 0 ) R6ddc13b188376f758fb9_Body ( 0.5 0.25 -0.55 ) ] [ T ( 1.85 0.25 0 ) R6ddc13b188376f758fb9_Body ( 0.5 0.25 0.55 ) ]

@@ -1,0 +1,58 @@
+{
+  "title": "Wraparound Lounge Chair",
+  "group": "architecture/furniture",
+  "directory": "architecture/furniture/wraparound-lounge-chair-5dc1824f",
+  "source_file": "Wraparound_Lounge_Chair.p3d",
+  "git_blob_sha": "5dc1824f00d8c4dff39e4cb6796725928c55022b",
+  "bytes": 22994,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Wraparound_Lounge_Chair.p3d"
+  ],
+  "description": "WRAPAROUND LOUNGE CHAIR",
+  "features": [
+    "Loft",
+    "VariableSectionSweep"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "WRAPAROUND LOUNGE CHAIR · Single-view reconstruction from the supplied photograph, 904.jpg. · Native ProGen3D desktop. World axes: X across, Y up, +Z toward the open front. · Edit the four Start arguments: overall width (mm), depth (mm), seat crown · height (mm), and back rise (mm from the arm datum to the rear centre). · Defaults are photographic estimates. Suggested editing range: 760-1000 mm wide, · 710-930 mm deep, 370-460 mm seat height, 30-85 mm back rise. · The nominal model is 890 mm wide, 825 mm deep and 696 mm tall. · Profiles are in millimetres. LoungeChair converts the finished chair to metres. · Four ground contacts and the recessed underframe are inferred from the image."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, VariableSectionSweep"
+    ],
+    [
+      "Material identifiers",
+      "oatmealbeigeroughcloth, lightoakverticalwood, blackmatteplastic, lightoakwood"
+    ],
+    [
+      "Production rules",
+      "Start, LoungeChair, SeatCushion, Horseshoe, SideStandard, FrontGlide, Undercarriage, RearFoot, Bearer (9 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "401"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

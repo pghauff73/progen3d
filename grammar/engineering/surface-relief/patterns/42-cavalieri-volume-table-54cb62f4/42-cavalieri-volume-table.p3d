@@ -1,0 +1,74 @@
+# Cavalieri volume table. Cavalieri(heightFraction visibleDegrees arcFacets profileSpans).
+# Heights 0.48 and 0.82 show different equal-area sections. 270 opens a quarter.
+# Both specimens have radius 1.24. Each gold top face is the section being compared.
+Start -> Cavalieri(0.48 270 72 24)
+
+Cavalieri(h angle n m) ->
+ [ Exhibit(1.24 1.24*h angle n m) ]
+Exhibit(r h angle n m) ->
+ [ Object(id(Exhibit) class(CavalieriVolumeTable) taxonomy(Study Geometry Volumes) layer(Equipment)) [
+   [ Object(id(Base) class(DisplayBed) taxonomy(Study Geometry Mount) layer(Structure)) [
+     Bed [ T(-1.57 0 0.08) Pedestal ] [ T(1.57 0 0.08) Pedestal ] ] ]
+   [ Object(id(HeightGauge) class(CommonSliceDatum) taxonomy(Study Geometry Measurement) layer(Equipment)) [
+     Gauge(r h) ] ]
+   [ T(-1.57 0.391 0.08) A(90+angle/2 1)
+     [ Object(id(HemisphereBody) class(HemisphereSegment) taxonomy(Study Geometry Solid) layer(Equipment)) [
+       Tiers(m r h-0.029 angle n) ] ]
+     [ Object(id(HemisphereSection) class(DiskSection) taxonomy(Study Geometry Section) layer(Equipment)) [
+       Crown(r h h-0.029 angle n) ] ] ]
+   [ T(1.57 0.391 0.08) A(90+angle/2 1)
+     [ Object(id(ConeVoidBody) class(CylinderMinusCone) taxonomy(Study Geometry Solid) layer(Equipment)) [
+       Cavity(r h-0.029 angle n) ] ]
+     [ Object(id(ConeVoidSection) class(AnnulusSection) taxonomy(Study Geometry Section) layer(Equipment)) [
+       Annulus(r h h-0.029 angle n) ] ] ] ] ]
+
+Tiers(m r h angle n) m ->
+ [ District(r h*Tiers_count/m h*(Tiers_count+1)/m angle n) ]
+District(r y Y angle n) ->
+ [ Segment(y Y sqrt(r*r-y*y) sqrt(r*r-Y*Y) angle n) ]
+Segment(y Y a b angle n) ->
+ [ !I(Revolve(profile(Polygon 0 y a y b Y 0 Y) angle(0 angle) segments(n) cap(all))
+   material(bluegreymattepaint) 1 0.25) ]
+Crown(r h b angle n) ->
+ [ DiskSection(h b sqrt(r*r-h*h) sqrt(r*r-b*b) angle n) ]
+DiskSection(h b a A angle n) ->
+ [ !I(Revolve(profile(Polygon 0 b A b a h 0 h) angle(0 angle) segments(n) cap(all))
+   material(goldbrushedmetal) 1 0.23) ]
+Cavity(r h angle n) ->
+ [ !I(Revolve(profile(Polygon 0 0 r 0 r h h h) angle(0 angle) segments(n) cap(all))
+   material(tealmatteceramic) 1 0.24) ]
+Annulus(r h b angle n) ->
+ [ !I(Revolve(profile(Polygon b b r b r h h h) angle(0 angle) segments(n) cap(all))
+   material(goldbrushedmetal) 1 0.23) ]
+
+Gauge(r h) ->
+ [ T(-2.81 0 -1.35) Mast(r) ] [ T(2.81 0 -1.35) Mast(r) ]
+ [ T(0 h+0.391 -1.35) S(5.66 0.016 0.021)
+   !I(Cube material(redmattepaint) 1 0.24) ]
+ [ T(-2.81 h+0.391 -1.35) Slider ] [ T(2.81 h+0.391 -1.35) Slider ]
+Mast(r) ->
+ [ T(0 0.241 0) S(0.207 0.082 0.20) !I(Cylinder(segments(20 1)) material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.317 0) S(0.077 r+0.278 0.077) !I(Cylinder(segments(20 1))
+   material(silverbrushedmetal) 1 0.23) ]
+ [ T(0.051 0.391 0.018) HeightTicks(11 r/10) ]
+HeightTicks(n d) n ->
+ [ T(0 HeightTicks_count*d 0)
+   S(0.042+0.031*(1-min(1,wrap(HeightTicks_count,0,5))) 0.011 0.015)
+   !I(Cube material(goldbrushedmetal) 1 0.24) ]
+Slider ->
+ [ T(0 -0.046 0) S(0.136 0.092 0.136) !I(Cylinder(segments(12 1)) material(redmattepaint) 1 0.24) ]
+
+Pedestal ->
+ [ !I(Revolve(profile(Polygon 0 0.226 1.27 0.226 1.33 0.249 1.33 0.325
+   1.27 0.379 0 0.379) angle(0 360) segments(80)) material(charcoalmattemetal) 1 0.29) ]
+ [ !I(Revolve(profile(Polygon 0 0.369 1.283 0.369 1.283 0.391 0 0.391)
+   angle(0 360) segments(80)) material(copperpolishedmetal) 1 0.25) ]
+Bed ->
+ [ T(0 0.103 0.05) S(6.20 0.206 3.28) !I(Cube material(amberwarmwood) 1 0.31) ]
+ [ T(0 0.216 0.05) S(6.08 0.041 3.18) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+ [ T(0 0.239 1.595) S(5.96 0.014 0.021) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ T(-1.57 0.238 1.509) Legend(0) ] [ T(1.57 0.238 1.509) Legend(0.032) ]
+Legend(inner) ->
+ [ S(0.39 0.025 0.182) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ !I(Revolve(profile(Polygon inner 0.012 0.062 0.012 0.062 0.024 inner 0.024)
+   angle(0 360) segments(32)) material(charcoalmattemetal) 1 0.24) ]

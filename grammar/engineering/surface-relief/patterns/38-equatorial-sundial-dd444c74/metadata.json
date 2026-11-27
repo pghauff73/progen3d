@@ -1,0 +1,62 @@
+{
+  "title": "38 equatorial sundial",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/38-equatorial-sundial-dd444c74",
+  "source_file": "38-equatorial-sundial.p3d",
+  "git_blob_sha": "dd444c740f2aae564fc1f5d3b412d5abeba4ac97",
+  "bytes": 4585,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "38-equatorial-sundial.p3d"
+  ],
+  "description": "Equatorial sundial. Dial(latitudeMagnitude poleDeclination solarHour rodHeight).",
+  "features": [
+    "TaperedSweep",
+    "Sphere",
+    "Cylinder",
+    "Revolve",
+    "Cube",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Equatorial sundial. Dial(latitudeMagnitude poleDeclination solarHour rodHeight). · Positive declination lights the face toward the elevated celestial pole. · 12 is local apparent solar noon. Test 23.44, 12, and 8 degrees of declination."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Base, Face, Hours, Gnomon, Incident, Shadow"
+    ],
+    [
+      "Object classes",
+      "EquatorialDialTable, DisplayBed, EquatorialPlate, AngularScale, PolarRod, SolarRay, ProjectedTip"
+    ],
+    [
+      "Instantiated primitives",
+      "TaperedSweep, Sphere, Cylinder, Revolve, Cube, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "goldbrushedmetal, copperpolishedmetal, redmattepaint, offwhiteceramic, bluegreymattepaint, charcoalmattemetal, amberwarmwood"
+    ],
+    [
+      "Production rules",
+      "Start, Dial, Exhibit, SolarIncident, Ray, Projection, Intercept, Cast, RedTrace, TipMark, Plate, Engraving, Gnomon, Cradles, Post, Base (16 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "88"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

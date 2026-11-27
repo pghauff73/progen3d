@@ -1,0 +1,307 @@
+Start -> Object(id(CatalogueScenec309c3286be738e9) class(Assembly) taxonomy(Catalogue Scene)) [ Gfea45c5d8ea337b24251 ]
+
+# ProGen3D Kinetic Assembly — native grammar
+# Four supported, parameterised spur-wheel visualisations with real teeth,
+# separate spokes, chamfered rings, hubs, shafts, bearing collars and fasteners.
+# Prescribed motion only: no tooth-contact or stress solver is implied.
+# Editable parameters: uniform scale, drive teeth, follower teeth, module, drive degrees/s.
+# Default 32:24 gearing at 90:-120 degrees/s has a 12 second closed loop.
+# @texture silverbrushedmetal brushed_metal uv 2 18
+# @texture lavenderwhiteplastic none
+# @texture mintwhiteplastic none
+# @texture ivorymattepaint none
+# @texture smokyglass none
+
+
+R15914dc5ab4f202a1a85_Body(scale driveTeeth followerTeeth module speed) ->
+  S(scale scale scale) R15914dc5ab4f202a1a85_Kinetic(driveTeeth followerTeeth module speed)
+
+R15914dc5ab4f202a1a85_Kinetic(driveTeeth followerTeeth module speed) ->
+  Object(id(R15914dc5ab4f202a1a85_KineticAssembly) class(Assembly) taxonomy(Mechanical Transmission KineticAssembly))
+  [
+  [ R15914dc5ab4f202a1a85_Base ]
+  [ R15914dc5ab4f202a1a85_Frame ]
+  [ R15914dc5ab4f202a1a85_Cover ]
+  [ T(-followerTeeth*module/2 2.35 0)
+    Object(id(R15914dc5ab4f202a1a85_UpperDrive) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(speed*t 2) R15914dc5ab4f202a1a85_MintWheel(driveTeeth driveTeeth*module/2) ] ]
+  [ T(driveTeeth*module/2 2.35 0)
+    Object(id(R15914dc5ab4f202a1a85_UpperFollower) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(-speed*driveTeeth/followerTeeth*t+180/followerTeeth 2)
+    R15914dc5ab4f202a1a85_LavenderWheel(followerTeeth followerTeeth*module/2) ] ]
+  [ T(-followerTeeth*module/2 2.35-driveTeeth*module 0)
+    Object(id(R15914dc5ab4f202a1a85_LowerDrive) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(-speed*t+180/driveTeeth 2) R15914dc5ab4f202a1a85_MintWheel(driveTeeth driveTeeth*module/2) ] ]
+  [ T(driveTeeth*module/2 2.35-driveTeeth*module 0)
+    Object(id(R15914dc5ab4f202a1a85_LowerFollower) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(speed*driveTeeth/followerTeeth*t 2)
+    R15914dc5ab4f202a1a85_LavenderWheel(followerTeeth followerTeeth*module/2) ] ]
+  [ T(-followerTeeth*module/2 2.35 0) R15914dc5ab4f202a1a85_Bearing ]
+  [ T(driveTeeth*module/2 2.35 0) R15914dc5ab4f202a1a85_Bearing ]
+  [ T(-followerTeeth*module/2 2.35-driveTeeth*module 0) R15914dc5ab4f202a1a85_Bearing ]
+  [ T(driveTeeth*module/2 2.35-driveTeeth*module 0) R15914dc5ab4f202a1a85_Bearing ]
+  ]
+
+R15914dc5ab4f202a1a85_Base ->
+  Object(id(R15914dc5ab4f202a1a85_BasePlate) class(Frame) taxonomy(Mechanical Structure BasePlate))
+  [
+  [ T(-.02 .12 0) S(2.94 .24 1.18) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(-.02 .26 0) S(2.78 .045 1.04) !I(Cube material(silverbrushedmetal) 1 1) ]
+  R15914dc5ab4f202a1a85_Feet(4)
+  R15914dc5ab4f202a1a85_BaseBolts(4)
+  ]
+
+R15914dc5ab4f202a1a85_Feet(n) n ->
+  [ T(-1.12+2.24*(R15914dc5ab4f202a1a85_Feet_count-2*floor(R15914dc5ab4f202a1a85_Feet_count/2)) -.055 -.38+.76*floor(R15914dc5ab4f202a1a85_Feet_count/2))
+    S(.33 .11 .33) !I(Cube material(lavenderwhiteplastic) 1 1) ]
+
+R15914dc5ab4f202a1a85_BaseBolts(n) n ->
+  [ T(-1.16+2.32*(R15914dc5ab4f202a1a85_BaseBolts_count-2*floor(R15914dc5ab4f202a1a85_BaseBolts_count/2)) .30 -.38+.76*floor(R15914dc5ab4f202a1a85_BaseBolts_count/2))
+    A(90 0) R15914dc5ab4f202a1a85_Fastener(.09) ]
+
+R15914dc5ab4f202a1a85_Frame ->
+  Object(id(R15914dc5ab4f202a1a85_CurvedFrame) class(Frame) taxonomy(Mechanical Structure CurvedSupport))
+  [
+  R15914dc5ab4f202a1a85_Rails(2)
+  [ T(-1.22 1.64 0) S(.16 2.72 .84) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(1.12 1.64 0) S(.16 2.72 .84) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(-.05 3.07 0) S(2.48 .12 .84) !I(Cube material(silverbrushedmetal) 1 1) ]
+  R15914dc5ab4f202a1a85_FrameBolts(4)
+  ]
+
+R15914dc5ab4f202a1a85_Rails(n) n ->
+  [ T(0 0 -.43+.86*R15914dc5ab4f202a1a85_Rails_count)
+    !I(SweepDisk(path(-1.33 .28 0 -1.32 .73 0 -1.27 1.17 0 -1.18 1.62 0
+       -1.06 2.04 0 -.90 2.44 0 -.68 2.79 0 -.40 3.06 0 -.08 3.21 0
+       .25 3.25 0 .58 3.17 0 .84 2.98 0 1.04 2.68 0 1.18 2.31 0
+       1.28 1.86 0 1.34 1.37 0 1.37 .82 0 1.38 .28 0)
+       radius(.085) segments(12) cap(all)) material(ivorymattepaint) 1 1) ]
+
+R15914dc5ab4f202a1a85_FrameBolts(n) n ->
+  [ T(-1.22+2.34*(R15914dc5ab4f202a1a85_FrameBolts_count-2*floor(R15914dc5ab4f202a1a85_FrameBolts_count/2)) .46+2.47*floor(R15914dc5ab4f202a1a85_FrameBolts_count/2) .49) R15914dc5ab4f202a1a85_Fastener(.105) ]
+
+R15914dc5ab4f202a1a85_Cover ->
+  Object(id(R15914dc5ab4f202a1a85_TransparentGuard) class(Guard) taxonomy(Mechanical Safety TransparentGuard))
+  [
+  [ T(-.03 1.73 -.52) S(2.70 2.92 .035) !I(Cube material(smokyglass) .23 1) ]
+  [ T(-1.37 1.73 0) S(.035 2.92 .98) !I(Cube material(smokyglass) .16 1) ]
+  [ T(1.31 1.73 0) S(.035 2.92 .98) !I(Cube material(smokyglass) .16 1) ]
+  ]
+
+R15914dc5ab4f202a1a85_MintWheel(n r) ->
+  [ A(90 0) R15914dc5ab4f202a1a85_MintRing(r) ]
+  R15914dc5ab4f202a1a85_MintTeeth(n r)
+  R15914dc5ab4f202a1a85_MintSpokes(6 r)
+  R15914dc5ab4f202a1a85_Hub
+  R15914dc5ab4f202a1a85_HubBolts(6 r)
+
+R15914dc5ab4f202a1a85_LavenderWheel(n r) ->
+  [ A(90 0) R15914dc5ab4f202a1a85_LavenderRing(r) ]
+  R15914dc5ab4f202a1a85_LavenderTeeth(n r)
+  R15914dc5ab4f202a1a85_LavenderSpokes(6 r)
+  R15914dc5ab4f202a1a85_Hub
+  R15914dc5ab4f202a1a85_HubBolts(6 r)
+
+R15914dc5ab4f202a1a85_MintRing(r) ->
+  !I(Revolve(profile(Polygon r*.64 -.11 r-.06 -.11 r-.035 -.085
+     r-.035 .085 r-.06 .11 r*.64 .11)
+     angle(0 360) segments(64) cap(all)) material(mintwhiteplastic) 1 1)
+
+R15914dc5ab4f202a1a85_LavenderRing(r) ->
+  !I(Revolve(profile(Polygon r*.64 -.11 r-.06 -.11 r-.035 -.085
+     r-.035 .085 r-.06 .11 r*.64 .11)
+     angle(0 360) segments(64) cap(all)) material(lavenderwhiteplastic) 1 1)
+
+R15914dc5ab4f202a1a85_MintTeeth(n r) n ->
+  [ A(360*R15914dc5ab4f202a1a85_MintTeeth_count/n 2)
+    [ T(r-.015 0 0) S(.10 2.7*r/n .205) !I(Cube material(mintwhiteplastic) 1 1) ]
+    [ T(r+.037 0 0) S(.025 2.0*r/n .185) !I(Cube material(mintwhiteplastic) 1 1) ] ]
+
+R15914dc5ab4f202a1a85_LavenderTeeth(n r) n ->
+  [ A(360*R15914dc5ab4f202a1a85_LavenderTeeth_count/n 2)
+    [ T(r-.015 0 0) S(.10 2.7*r/n .205) !I(Cube material(lavenderwhiteplastic) 1 1) ]
+    [ T(r+.037 0 0) S(.025 2.0*r/n .185) !I(Cube material(lavenderwhiteplastic) 1 1) ] ]
+
+R15914dc5ab4f202a1a85_MintSpokes(n r) n ->
+  [ A(360*R15914dc5ab4f202a1a85_MintSpokes_count/n 2) T(r*.36 0 0) A(12 2)
+    S(r*.67 .095 .135) !I(Cube material(mintwhiteplastic) 1 1) ]
+
+R15914dc5ab4f202a1a85_LavenderSpokes(n r) n ->
+  [ A(360*R15914dc5ab4f202a1a85_LavenderSpokes_count/n 2) T(r*.36 0 0) A(12 2)
+    S(r*.67 .095 .135) !I(Cube material(lavenderwhiteplastic) 1 1) ]
+
+R15914dc5ab4f202a1a85_Hub ->
+  [ A(90 0)
+    !I(Revolve(profile(Polygon .08 -.16 .17 -.16 .195 -.135
+       .195 .135 .17 .16 .08 .16)
+       angle(0 360) segments(40) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0 .20) A(90 0) S(.14 .60 .14)
+    !I(Cylinder(segments(32 1)) material(silverbrushedmetal) 1 1) ]
+
+R15914dc5ab4f202a1a85_HubBolts(n r) n ->
+  [ A(360*R15914dc5ab4f202a1a85_HubBolts_count/n 2) T(r*.48 0 .125) R15914dc5ab4f202a1a85_Fastener(.031) ]
+
+R15914dc5ab4f202a1a85_Bearing ->
+  [ T(0 0 -.34) A(90 0)
+    !I(Revolve(profile(Polygon .075 -.085 .19 -.085 .21 -.06
+       .21 .06 .19 .085 .075 .085)
+       angle(0 360) segments(32) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+R15914dc5ab4f202a1a85_Fastener(r) ->
+  [ A(90 0) S(r*2 .035 r*2) !I(Cylinder(segments(12 1)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0 .02) S(r*1.15 .012 .012) !I(Cube material(charcoalmatteplastic) 1 1) ]
+
+
+# ProGen3D Kinetic Assembly — native grammar
+# Four supported, parameterised spur-wheel visualisations with real teeth,
+# separate spokes, chamfered rings, hubs, shafts, bearing collars and fasteners.
+# Prescribed motion only: no tooth-contact or stress solver is implied.
+# Editable parameters: uniform scale, drive teeth, follower teeth, module, drive degrees/s.
+# Default 32:24 gearing at 90:-120 degrees/s has a 12 second closed loop.
+# @texture silverbrushedmetal brushed_metal uv 2 18
+# @texture lavenderwhiteplastic none
+# @texture mintwhiteplastic none
+# @texture ivorymattepaint none
+# @texture smokyglass none
+
+
+R8bc6bc1df4e23b7f0a95_Body(scale driveTeeth followerTeeth module speed) ->
+  S(scale scale scale) R8bc6bc1df4e23b7f0a95_Kinetic(driveTeeth followerTeeth module speed)
+
+R8bc6bc1df4e23b7f0a95_Kinetic(driveTeeth followerTeeth module speed) ->
+  Object(id(R8bc6bc1df4e23b7f0a95_KineticAssembly) class(Assembly) taxonomy(Mechanical Transmission KineticAssembly))
+  [
+  [ R8bc6bc1df4e23b7f0a95_Base ]
+  [ R8bc6bc1df4e23b7f0a95_Frame ]
+  [ R8bc6bc1df4e23b7f0a95_Cover ]
+  [ T(-followerTeeth*module/2 2.35 0)
+    Object(id(R8bc6bc1df4e23b7f0a95_UpperDrive) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(speed*t 2) R8bc6bc1df4e23b7f0a95_MintWheel(driveTeeth driveTeeth*module/2) ] ]
+  [ T(driveTeeth*module/2 2.35 0)
+    Object(id(R8bc6bc1df4e23b7f0a95_UpperFollower) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(-speed*driveTeeth/followerTeeth*t+180/followerTeeth 2)
+    R8bc6bc1df4e23b7f0a95_LavenderWheel(followerTeeth followerTeeth*module/2) ] ]
+  [ T(-followerTeeth*module/2 2.35-driveTeeth*module 0)
+    Object(id(R8bc6bc1df4e23b7f0a95_LowerDrive) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(-speed*t+180/driveTeeth 2) R8bc6bc1df4e23b7f0a95_MintWheel(driveTeeth driveTeeth*module/2) ] ]
+  [ T(driveTeeth*module/2 2.35-driveTeeth*module 0)
+    Object(id(R8bc6bc1df4e23b7f0a95_LowerFollower) class(Gear) taxonomy(Mechanical Transmission SpurGear))
+    [ A(speed*driveTeeth/followerTeeth*t 2)
+    R8bc6bc1df4e23b7f0a95_LavenderWheel(followerTeeth followerTeeth*module/2) ] ]
+  [ T(-followerTeeth*module/2 2.35 0) R8bc6bc1df4e23b7f0a95_Bearing ]
+  [ T(driveTeeth*module/2 2.35 0) R8bc6bc1df4e23b7f0a95_Bearing ]
+  [ T(-followerTeeth*module/2 2.35-driveTeeth*module 0) R8bc6bc1df4e23b7f0a95_Bearing ]
+  [ T(driveTeeth*module/2 2.35-driveTeeth*module 0) R8bc6bc1df4e23b7f0a95_Bearing ]
+  ]
+
+R8bc6bc1df4e23b7f0a95_Base ->
+  Object(id(R8bc6bc1df4e23b7f0a95_BasePlate) class(Frame) taxonomy(Mechanical Structure BasePlate))
+  [
+  [ T(-.02 .12 0) S(2.94 .24 1.18) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(-.02 .26 0) S(2.78 .045 1.04) !I(Cube material(silverbrushedmetal) 1 1) ]
+  R8bc6bc1df4e23b7f0a95_Feet(4)
+  R8bc6bc1df4e23b7f0a95_BaseBolts(4)
+  ]
+
+R8bc6bc1df4e23b7f0a95_Feet(n) n ->
+  [ T(-1.12+2.24*(R8bc6bc1df4e23b7f0a95_Feet_count-2*floor(R8bc6bc1df4e23b7f0a95_Feet_count/2)) -.055 -.38+.76*floor(R8bc6bc1df4e23b7f0a95_Feet_count/2))
+    S(.33 .11 .33) !I(Cube material(lavenderwhiteplastic) 1 1) ]
+
+R8bc6bc1df4e23b7f0a95_BaseBolts(n) n ->
+  [ T(-1.16+2.32*(R8bc6bc1df4e23b7f0a95_BaseBolts_count-2*floor(R8bc6bc1df4e23b7f0a95_BaseBolts_count/2)) .30 -.38+.76*floor(R8bc6bc1df4e23b7f0a95_BaseBolts_count/2))
+    A(90 0) R8bc6bc1df4e23b7f0a95_Fastener(.09) ]
+
+R8bc6bc1df4e23b7f0a95_Frame ->
+  Object(id(R8bc6bc1df4e23b7f0a95_CurvedFrame) class(Frame) taxonomy(Mechanical Structure CurvedSupport))
+  [
+  R8bc6bc1df4e23b7f0a95_Rails(2)
+  [ T(-1.22 1.64 0) S(.16 2.72 .84) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(1.12 1.64 0) S(.16 2.72 .84) !I(Cube material(ivorymattepaint) 1 1) ]
+  [ T(-.05 3.07 0) S(2.48 .12 .84) !I(Cube material(silverbrushedmetal) 1 1) ]
+  R8bc6bc1df4e23b7f0a95_FrameBolts(4)
+  ]
+
+R8bc6bc1df4e23b7f0a95_Rails(n) n ->
+  [ T(0 0 -.43+.86*R8bc6bc1df4e23b7f0a95_Rails_count)
+    !I(SweepDisk(path(-1.33 .28 0 -1.32 .73 0 -1.27 1.17 0 -1.18 1.62 0
+       -1.06 2.04 0 -.90 2.44 0 -.68 2.79 0 -.40 3.06 0 -.08 3.21 0
+       .25 3.25 0 .58 3.17 0 .84 2.98 0 1.04 2.68 0 1.18 2.31 0
+       1.28 1.86 0 1.34 1.37 0 1.37 .82 0 1.38 .28 0)
+       radius(.085) segments(12) cap(all)) material(ivorymattepaint) 1 1) ]
+
+R8bc6bc1df4e23b7f0a95_FrameBolts(n) n ->
+  [ T(-1.22+2.34*(R8bc6bc1df4e23b7f0a95_FrameBolts_count-2*floor(R8bc6bc1df4e23b7f0a95_FrameBolts_count/2)) .46+2.47*floor(R8bc6bc1df4e23b7f0a95_FrameBolts_count/2) .49) R8bc6bc1df4e23b7f0a95_Fastener(.105) ]
+
+R8bc6bc1df4e23b7f0a95_Cover ->
+  Object(id(R8bc6bc1df4e23b7f0a95_TransparentGuard) class(Guard) taxonomy(Mechanical Safety TransparentGuard))
+  [
+  [ T(-.03 1.73 -.52) S(2.70 2.92 .035) !I(Cube material(smokyglass) .23 1) ]
+  [ T(-1.37 1.73 0) S(.035 2.92 .98) !I(Cube material(smokyglass) .16 1) ]
+  [ T(1.31 1.73 0) S(.035 2.92 .98) !I(Cube material(smokyglass) .16 1) ]
+  ]
+
+R8bc6bc1df4e23b7f0a95_MintWheel(n r) ->
+  [ A(90 0) R8bc6bc1df4e23b7f0a95_MintRing(r) ]
+  R8bc6bc1df4e23b7f0a95_MintTeeth(n r)
+  R8bc6bc1df4e23b7f0a95_MintSpokes(6 r)
+  R8bc6bc1df4e23b7f0a95_Hub
+  R8bc6bc1df4e23b7f0a95_HubBolts(6 r)
+
+R8bc6bc1df4e23b7f0a95_LavenderWheel(n r) ->
+  [ A(90 0) R8bc6bc1df4e23b7f0a95_LavenderRing(r) ]
+  R8bc6bc1df4e23b7f0a95_LavenderTeeth(n r)
+  R8bc6bc1df4e23b7f0a95_LavenderSpokes(6 r)
+  R8bc6bc1df4e23b7f0a95_Hub
+  R8bc6bc1df4e23b7f0a95_HubBolts(6 r)
+
+R8bc6bc1df4e23b7f0a95_MintRing(r) ->
+  !I(Revolve(profile(Polygon r*.64 -.11 r-.06 -.11 r-.035 -.085
+     r-.035 .085 r-.06 .11 r*.64 .11)
+     angle(0 360) segments(64) cap(all)) material(mintwhiteplastic) 1 1)
+
+R8bc6bc1df4e23b7f0a95_LavenderRing(r) ->
+  !I(Revolve(profile(Polygon r*.64 -.11 r-.06 -.11 r-.035 -.085
+     r-.035 .085 r-.06 .11 r*.64 .11)
+     angle(0 360) segments(64) cap(all)) material(lavenderwhiteplastic) 1 1)
+
+R8bc6bc1df4e23b7f0a95_MintTeeth(n r) n ->
+  [ A(360*R8bc6bc1df4e23b7f0a95_MintTeeth_count/n 2)
+    [ T(r-.015 0 0) S(.10 2.7*r/n .205) !I(Cube material(mintwhiteplastic) 1 1) ]
+    [ T(r+.037 0 0) S(.025 2.0*r/n .185) !I(Cube material(mintwhiteplastic) 1 1) ] ]
+
+R8bc6bc1df4e23b7f0a95_LavenderTeeth(n r) n ->
+  [ A(360*R8bc6bc1df4e23b7f0a95_LavenderTeeth_count/n 2)
+    [ T(r-.015 0 0) S(.10 2.7*r/n .205) !I(Cube material(lavenderwhiteplastic) 1 1) ]
+    [ T(r+.037 0 0) S(.025 2.0*r/n .185) !I(Cube material(lavenderwhiteplastic) 1 1) ] ]
+
+R8bc6bc1df4e23b7f0a95_MintSpokes(n r) n ->
+  [ A(360*R8bc6bc1df4e23b7f0a95_MintSpokes_count/n 2) T(r*.36 0 0) A(12 2)
+    S(r*.67 .095 .135) !I(Cube material(mintwhiteplastic) 1 1) ]
+
+R8bc6bc1df4e23b7f0a95_LavenderSpokes(n r) n ->
+  [ A(360*R8bc6bc1df4e23b7f0a95_LavenderSpokes_count/n 2) T(r*.36 0 0) A(12 2)
+    S(r*.67 .095 .135) !I(Cube material(lavenderwhiteplastic) 1 1) ]
+
+R8bc6bc1df4e23b7f0a95_Hub ->
+  [ A(90 0)
+    !I(Revolve(profile(Polygon .08 -.16 .17 -.16 .195 -.135
+       .195 .135 .17 .16 .08 .16)
+       angle(0 360) segments(40) cap(all)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0 .20) A(90 0) S(.14 .60 .14)
+    !I(Cylinder(segments(32 1)) material(silverbrushedmetal) 1 1) ]
+
+R8bc6bc1df4e23b7f0a95_HubBolts(n r) n ->
+  [ A(360*R8bc6bc1df4e23b7f0a95_HubBolts_count/n 2) T(r*.48 0 .125) R8bc6bc1df4e23b7f0a95_Fastener(.031) ]
+
+R8bc6bc1df4e23b7f0a95_Bearing ->
+  [ T(0 0 -.34) A(90 0)
+    !I(Revolve(profile(Polygon .075 -.085 .19 -.085 .21 -.06
+       .21 .06 .19 .085 .075 .085)
+       angle(0 360) segments(32) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+R8bc6bc1df4e23b7f0a95_Fastener(r) ->
+  [ A(90 0) S(r*2 .035 r*2) !I(Cylinder(segments(12 1)) material(silverbrushedmetal) 1 1) ]
+  [ T(0 0 .02) S(r*1.15 .012 .012) !I(Cube material(charcoalmatteplastic) 1 1) ]
+
+
+Gfea45c5d8ea337b24251 -> [ T ( -2 0 0 ) R15914dc5ab4f202a1a85_Body ( 1 32 24 0.045 90 ) ] [ T ( 2 0 0 ) R8bc6bc1df4e23b7f0a95_Body ( 1 32 24 0.045 -45 ) ]

@@ -1,0 +1,103 @@
+# Beam flexure bench. FlexBench(loadInset peakPover2EI period chords).
+# Span 4.80. Use inset 1.60 for four-point or 2.40 for a centre load.
+# Both modes have the same total force at the same P/(2EI).
+Start -> FlexBench(1.60 0.07 8 48)
+
+FlexBench(a peak period n) ->
+ [ Bench(a peak*(1-cos(6.28318530718*t/period))/2 n) ]
+
+Bench(a k n) ->
+ [ Object(id(Exhibit) class(FlexureDemonstrator) taxonomy(Study Mechanics Bending) layer(Equipment)) [
+   [ Object(id(Bed) class(FlexureMachine) taxonomy(Study Mechanics Frame) layer(Structure)) [ Bed ] ]
+   [ Object(id(Datum) class(ZeroDatum) taxonomy(Study Mechanics Datum) layer(Equipment)) [ Datum(25) ] ]
+   [ Object(id(Specimen) class(DeflectedBeam) taxonomy(Study Mechanics Beam) layer(Equipment))
+     [ T(-2.40 1.05 -0.225) Beam(n a k) ] ]
+   [ Object(id(Supports) class(ReactionRollers) taxonomy(Study Mechanics Roller) layer(Equipment))
+     [ Bearings(a k) ] ]
+   [ Object(id(LoadHeads) class(LoadingRollers) taxonomy(Study Mechanics Roller) layer(Equipment))
+     [ Loading(a k) ] ]
+   [ Object(id(Indicator) class(MidspanIndicator) taxonomy(Study Mechanics Gauge) layer(Equipment))
+     [ Gauge(a k) ] ] ] ]
+
+Beam(n a k) n ->
+ [ Span(4.80*Beam_count/n 4.80*(Beam_count+1)/n a k) ]
+Span(x X a k) ->
+ [ HeightPair(x X min(x,4.80-x) min(X,4.80-X) a k) ]
+HeightPair(x X u v a k) ->
+ [ DropPair(x X u v max(0,u-a) max(0,v-a) a k) ]
+DropPair(x X u v p q a k) ->
+ [ Mesh(x X k*(u*u*u-p*p*p-3*a*(4.80-a)*u)/6 k*(v*v*v-q*q*q-3*a*(4.80-a)*v)/6
+   min((x+X)/2,4.80-(x+X)/2)/a) ]
+Mesh(x X y Y ratio) -> ?(ratio<0.58)
+ [ !I(Extrude(Polygon(x y-0.074 X Y-0.074 X Y+0.074 x y+0.074) 0.45 cap(all))
+   material(bluegreymattepaint) 1 0.26) ]
+ : [ Moment(x X y Y ratio) ]
+Moment(x X y Y ratio) -> ?(ratio<0.985)
+ [ !I(Extrude(Polygon(x y-0.074 X Y-0.074 X Y+0.074 x y+0.074) 0.45 cap(all))
+   material(tealmatteceramic) 1 0.25) ]
+ : [ !I(Extrude(Polygon(x y-0.074 X Y-0.074 X Y+0.074 x y+0.074) 0.45 cap(all))
+   material(copperpolishedmetal) 1 0.24) ]
+
+# Rollers are tangent to the analytic surface at the indicated station.
+Bearings(a k) ->
+ [ FootRoller(-2.40 -k*a*(4.80-a)/2) ] [ FootRoller(2.40 k*a*(4.80-a)/2) ]
+FootRoller(x slope) ->
+ [ T(x+0.117*slope/sqrt(1+slope*slope) 0.976-0.117/sqrt(1+slope*slope) 0)
+   Roller(0.117) ]
+
+Loading(a k) -> ?(a>2.3999)
+ [ LoadHeight(2.40 a k 0) ]
+ : [ LoadHeight(a a k -k*a*(4.80-2*a)/2) ]
+   [ LoadHeight(4.80-a a k k*a*(4.80-2*a)/2) ]
+LoadHeight(x a k slope) ->
+ [ Ram(x-2.40-0.117*slope/sqrt(1+slope*slope)
+       1.124+k*(a*a*a-3*a*(4.80-a)*a)/6+0.117/sqrt(1+slope*slope)) ]
+Ram(x y) ->
+ [ T(x y 0)
+   [ Roller(0.117) ]
+   [ T(0 0.080 0) S(0.228 0.119 0.65) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+   [ T(0 0.129 0) S(0.105 2.11-y-0.129 0.105)
+     !I(Cylinder(segments(24 1)) material(silverbrushedmetal) 1 0.26) ]
+   [ T(0 1.981-y 0) S(0.246 0.071 0.244) !I(Cube material(bluegreymattepaint) 1 0.25) ] ]
+Roller(r) ->
+ [ T(0 0 -0.317) A(90 0) S(2*r 0.634 2*r)
+   !I(Cylinder(segments(32 1)) material(silverbrushedmetal) 1 0.24) ]
+ [ T(0 0 0.319) A(90 0) S(0.103 0.030 0.103)
+   !I(Cylinder(segments(8 1)) material(goldbrushedmetal) 1 0.25) ]
+
+Gauge(a k) ->
+ [ GaugeDelta(a k max(0,2.40-a)) ]
+GaugeDelta(a k p) ->
+ [ T(0 1.05+k*(13.824-p*p*p-7.20*a*(4.80-a))/6 0)
+   [ S(0.043 0.024 0.899) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+   [ T(0 0 0.424) !I(Extrude(Polygon(-0.043 -0.042 0.072 0 -0.043 0.042) 0.025 cap(all))
+     material(redmattepaint) 1 0.23) ] ]
+Datum(n) n ->
+ [ T((Datum_count-(n-1)/2)*0.201 1.05 -0.287) S(0.102 0.014 0.017)
+   !I(Cube material(goldbrushedmetal) 1 0.24) ]
+
+Bed ->
+ [ T(0 0.091 0) S(5.88 0.182 1.83) !I(Cube material(amberwarmwood) 1 0.32) ]
+ [ T(0 0.196 0) S(5.76 0.039 1.74) !I(Cube material(charcoalmattemetal) 1 0.27) ]
+ [ T(0 0.217 0.834) S(5.57 0.018 0.021) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(-2.40 0.216 0) Plinth ] [ T(2.40 0.216 0) Plinth ]
+ [ T(-2.66 0.215 -0.53) Column ] [ T(2.66 0.215 -0.53) Column ]
+ [ T(0 2.17 -0.34) S(5.53 0.197 0.36) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+ [ T(0 2.15 -0.062) S(5.21 0.076 0.37) !I(Cube material(silverbrushedmetal) 1 0.23) ]
+ [ T(0 2.236 -0.147) S(5.39 0.023 0.035) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ T(0.150 0.680 0.377) Scale ]
+Plinth ->
+ [ T(0 0.187 0) S(0.373 0.374 0.66) !I(Cube material(bluegreymattepaint) 1 0.26) ]
+ [ T(0 0.390 0) S(0.447 0.033 0.71) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.465 0) S(0.316 0.118 0.63) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+Column ->
+ [ T(0 0.065 0) S(0.428 0.13 0.459) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+ [ T(0 1.002 0) S(0.193 1.834 0.206) !I(Cube material(bluegreymattepaint) 1 0.27) ]
+ [ T(0 1.896 0.013) S(0.282 0.104 0.256) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+Scale ->
+ [ T(0 -0.232 -0.031) S(0.161 0.46 0.045) !I(Cube material(bluegreymattepaint) 1 0.26) ]
+ [ T(0 0.211 -0.010) S(0.236 0.534 0.070) !I(Cube material(offwhiteceramic) 1 0.26) ]
+ [ T(-0.064 0 0.038) Ticks(20) ]
+Ticks(n) n ->
+ [ T(0 0.025*Ticks_count 0) S(0.038+0.029*(1-min(1,wrap(Ticks_count,0,5))) 0.006 0.012)
+   !I(Cube material(charcoalmattemetal) 1 0.24) ]

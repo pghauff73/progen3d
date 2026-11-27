@@ -1,0 +1,400 @@
+# WRAPAROUND LOUNGE CHAIR
+# Single-view reconstruction from the supplied photograph, 904.jpg.
+# Native ProGen3D desktop. World axes: X across, Y up, +Z toward the open front.
+# Edit the four Start arguments: overall width (mm), depth (mm), seat crown
+# height (mm), and back rise (mm from the arm datum to the rear centre).
+# Defaults are photographic estimates. Suggested editing range: 760-1000 mm wide,
+# 710-930 mm deep, 370-460 mm seat height, 30-85 mm back rise.
+# The nominal model is 890 mm wide, 825 mm deep and 696 mm tall.
+# Profiles are in millimetres. LoungeChair converts the finished chair to metres.
+# Four ground contacts and the recessed underframe are inferred from the image.
+# The native beige rough finish stands in for the photographed looped fabric.
+
+Start -> LoungeChair(890 825 410 58)
+
+LoungeChair(width depth seatHeight backRise) ->
+    [ S(0.001 0.001 0.001)
+      S(width/832 1 depth/772.578)
+      [ T(0 96 7) S(1 (seatHeight-96)/314 1) SeatCushion ]
+      [ T(0 seatHeight+124 0) Horseshoe(backRise) ]
+      [ T(390 0 188) SideStandard(seatHeight+169) ]
+      [ T(-390 0 188) A(180 1) SideStandard(seatHeight+169) ]
+      Undercarriage
+    ]
+
+# The lowest outline closes the underside. The last forms a small flat at the crown.
+# Progressively smaller outlines turn the top into a shallow dome. The three
+# closely spaced rings near 226 mm form the recessed boxing seam.
+SeatCushion ->
+    [ A(-90 0)
+      !I(Loft(
+        section(0 RoundedRect 554 484 159 11)
+        section(2 RoundedRect 593 523 166 11)
+        section(6 RoundedRect 636 565 176 11)
+        section(13 RoundedRect 677 609 190 11)
+        section(23 RoundedRect 708 643 204 11)
+        section(36 RoundedRect 738 672 211 11)
+        section(52 RoundedRect 757 695 222 11)
+        section(74 RoundedRect 774 716 229 11)
+        section(102 RoundedRect 783 730 232 11)
+        section(140 RoundedRect 789 739 238 11)
+        section(184 RoundedRect 790 742 243 11)
+        section(210 RoundedRect 788 743 245 11)
+        section(225 RoundedRect 785.8 741.2 244 11)
+        section(226.8 RoundedRect 784.4 739.8 243.6 11)
+        section(228.6 RoundedRect 785.1 740.5 244 11)
+        section(244 RoundedRect 781 737 243 11)
+        section(259 RoundedRect 775 731 241 11)
+        section(272 RoundedRect 766 722 237 11)
+        section(283 RoundedRect 749 705 232 11)
+        section(293 RoundedRect 718 674 222 11)
+        section(301 RoundedRect 662 621 205 11)
+        section(307 RoundedRect 556 521 173 11)
+        section(311 RoundedRect 421 394 132 11)
+        section(313 RoundedRect 270 254 86 11)
+        section(314 RoundedRect 110 104 35 11)
+        cap(all)) material(oatmealbeigeroughcloth) 1 1) ]
+
+# The horseshoe is one closed swept solid, open toward the front of the chair.
+# Its path follows the horizontal midline from the left tip around to the right.
+# Stations are arc-length fractions. The section softens and shrinks into each
+# tip. Vertical station offsets raise the rear while retaining a level arm end.
+# Each unit rounded rectangle is scaled to its local half-width and half-height.
+# The final rotation leans the upper edge outwards at the back. A shallow
+# compression at station 0.5 suggests the centre-back join.
+Horseshoe(rise) ->
+    !I(VariableSectionSweep(
+        path(
+          -330.00 0 260.00   -330.60 0 251.64   -331.25 0 243.28   -331.96 0 234.93   -332.70 0 226.58
+          -333.49 0 218.24   -334.31 0 209.89   -335.15 0 201.55   -336.01 0 193.21   -336.88 0 184.87
+          -337.75 0 176.53   -338.60 0 168.19   -339.43 0 159.85   -340.23 0 151.51   -340.99 0 143.16
+          -341.70 0 134.81   -342.35 0 126.46   -342.93 0 118.10   -343.43 0 109.73   -343.85 0 101.36
+          -344.20 0 92.99   -344.47 0 84.61   -344.67 0 76.23   -344.80 0 67.85   -344.86 0 59.47
+          -344.85 0 51.08   -344.78 0 42.69   -344.65 0 34.30   -344.45 0 25.91   -344.20 0 17.53
+          -343.89 0 9.14   -343.52 0 0.76   -343.08 0 -7.63   -342.58 0 -16.00   -342.00 0 -24.37
+          -341.33 0 -32.74   -340.58 0 -41.09   -339.72 0 -49.43   -338.77 0 -57.77   -337.70 0 -66.09
+          -336.51 0 -74.39   -335.21 0 -82.68   -333.77 0 -90.95   -332.19 0 -99.20   -330.48 0 -107.44
+          -328.61 0 -115.65   -326.58 0 -123.82   -324.39 0 -131.96   -322.02 0 -140.04   -319.46 0 -148.07
+          -316.71 0 -156.03   -313.76 0 -163.91   -310.59 0 -171.71   -307.21 0 -179.42   -303.60 0 -187.02
+          -299.75 0 -194.51   -295.65 0 -201.88   -291.30 0 -209.12   -286.69 0 -216.23   -281.83 0 -223.17
+          -276.71 0 -229.95   -271.36 0 -236.54   -265.77 0 -242.93   -259.94 0 -249.10   -253.90 0 -255.04
+          -247.64 0 -260.73   -241.17 0 -266.15   -234.49 0 -271.29   -227.61 0 -276.14   -220.55 0 -280.67
+          -213.30 0 -284.87   -205.87 0 -288.76   -198.29 0 -292.35   -190.57 0 -295.65   -182.72 0 -298.67
+          -174.76 0 -301.44   -166.70 0 -303.96   -158.56 0 -306.25   -150.35 0 -308.33   -142.08 0 -310.21
+          -133.78 0 -311.90   -125.45 0 -313.42   -117.11 0 -314.78   -108.76 0 -316.00   -100.41 0 -317.07
+          -92.06 0 -318.02   -83.71 0 -318.84   -75.35 0 -319.54   -66.99 0 -320.14   -58.62 0 -320.64
+          -50.25 0 -321.05   -41.88 0 -321.37   -33.51 0 -321.62   -25.14 0 -321.80   -16.76 0 -321.92
+          -8.38 0 -321.98   -0.00 0 -322.00   8.38 0 -321.98   16.76 0 -321.92   25.14 0 -321.80
+          33.51 0 -321.62   41.88 0 -321.37   50.25 0 -321.05   58.62 0 -320.64   66.99 0 -320.14
+          75.35 0 -319.54   83.71 0 -318.84   92.06 0 -318.02   100.41 0 -317.07   108.76 0 -316.00
+          117.11 0 -314.78   125.45 0 -313.42   133.78 0 -311.90   142.08 0 -310.21   150.35 0 -308.33
+          158.56 0 -306.25   166.70 0 -303.96   174.76 0 -301.44   182.72 0 -298.67   190.57 0 -295.65
+          198.29 0 -292.35   205.87 0 -288.76   213.30 0 -284.87   220.55 0 -280.67   227.61 0 -276.14
+          234.49 0 -271.29   241.17 0 -266.15   247.64 0 -260.73   253.90 0 -255.04   259.94 0 -249.10
+          265.77 0 -242.93   271.36 0 -236.54   276.71 0 -229.95   281.83 0 -223.17   286.69 0 -216.23
+          291.30 0 -209.12   295.65 0 -201.88   299.75 0 -194.51   303.60 0 -187.02   307.21 0 -179.42
+          310.59 0 -171.71   313.76 0 -163.91   316.71 0 -156.03   319.46 0 -148.07   322.02 0 -140.04
+          324.39 0 -131.96   326.58 0 -123.82   328.61 0 -115.65   330.48 0 -107.44   332.19 0 -99.20
+          333.77 0 -90.95   335.21 0 -82.68   336.51 0 -74.39   337.70 0 -66.09   338.77 0 -57.77
+          339.72 0 -49.43   340.58 0 -41.09   341.33 0 -32.74   342.00 0 -24.37   342.58 0 -16.00
+          343.08 0 -7.63   343.52 0 0.76   343.89 0 9.14   344.20 0 17.53   344.45 0 25.91
+          344.65 0 34.30   344.78 0 42.69   344.85 0 51.08   344.86 0 59.47   344.80 0 67.85
+          344.67 0 76.23   344.47 0 84.61   344.20 0 92.99   343.85 0 101.36   343.43 0 109.73
+          342.93 0 118.10   342.35 0 126.46   341.70 0 134.81   340.99 0 143.16   340.23 0 151.51
+          339.43 0 159.85   338.60 0 168.19   337.75 0 176.53   336.88 0 184.87   336.01 0 193.21
+          335.15 0 201.55   334.31 0 209.89   333.49 0 218.24   332.70 0 226.58   331.96 0 234.93
+          331.25 0 243.28   330.60 0 251.64   330.00 0 260.00
+        )
+        station(0 RoundedRect 2 2 0.740 9)
+        stationTransform(0 0 rise*0 8.750 11.550 0)
+        station(0.00045 RoundedRect 2 2 0.740 9)
+        stationTransform(0.00045 0 rise*0 14.670 19.365 -0.00001)
+        station(0.0014 RoundedRect 2 2 0.740 9)
+        stationTransform(0.0014 0 rise*0.00002 25.486 33.642 -0.0001)
+        station(0.0032 RoundedRect 2 2 0.740 9)
+        stationTransform(0.0032 0 rise*0.0001 37.390 49.355 -0.00051)
+        station(0.0055 RoundedRect 2 2 0.740 9)
+        stationTransform(0.0055 0 rise*0.0003 47.036 62.090 -0.00149)
+        station(0.0085 RoundedRect 2 2 0.740 9)
+        stationTransform(0.0085 0 rise*0.00071 55.096 72.733 -0.00356)
+        station(0.012 RoundedRect 2 2 0.740 9)
+        stationTransform(0.012 0 rise*0.00142 60.445 79.802 -0.0071)
+        station(0.017 RoundedRect 2 2 0.740 9)
+        stationTransform(0.017 0 rise*0.00285 62.523 82.560 -0.01425)
+        station(0.023 RoundedRect 2 2 0.741 9)
+        stationTransform(0.023 0 rise*0.00521 62.542 82.609 -0.02606)
+        station(0.03 RoundedRect 2 2 0.741 9)
+        stationTransform(0.03 0 rise*0.00886 62.571 82.686 -0.04428)
+        station(0.042 RoundedRect 2 2 0.742 9)
+        stationTransform(0.042 0 rise*0.01731 62.638 82.863 -0.08655)
+        station(0.054 RoundedRect 2 2 0.743 9)
+        stationTransform(0.054 0 rise*0.0285 62.728 83.099 -0.14252)
+        station(0.066 RoundedRect 2 2 0.744 9)
+        stationTransform(0.066 0 rise*0.04238 62.839 83.390 -0.2119)
+        station(0.078 RoundedRect 2 2 0.746 9)
+        stationTransform(0.078 0 rise*0.05885 62.971 83.736 -0.29427)
+        station(0.09 RoundedRect 2 2 0.748 9)
+        stationTransform(0.09 0 rise*0.07784 63.123 84.135 -0.38918)
+        station(0.102 RoundedRect 2 2 0.750 9)
+        stationTransform(0.102 0 rise*0.09922 63.294 84.584 -0.49608)
+        station(0.114 RoundedRect 2 2 0.752 9)
+        stationTransform(0.114 0 rise*0.12287 63.483 85.080 -0.61437)
+        station(0.126 RoundedRect 2 2 0.755 9)
+        stationTransform(0.126 0 rise*0.14868 63.689 85.622 -0.74338)
+        station(0.138 RoundedRect 2 2 0.758 9)
+        stationTransform(0.138 0 rise*0.17647 63.912 86.206 -0.88236)
+        station(0.15 RoundedRect 2 2 0.761 9)
+        stationTransform(0.15 0 rise*0.20611 64.149 86.828 -1.03054)
+        station(0.162 RoundedRect 2 2 0.764 9)
+        stationTransform(0.162 0 rise*0.23741 64.399 87.486 -1.18706)
+        station(0.174 RoundedRect 2 2 0.767 9)
+        stationTransform(0.174 0 rise*0.27021 64.662 88.174 -1.35105)
+        station(0.186 RoundedRect 2 2 0.770 9)
+        stationTransform(0.186 0 rise*0.30431 64.935 88.891 -1.52157)
+        station(0.198 RoundedRect 2 2 0.774 9)
+        stationTransform(0.198 0 rise*0.33953 65.216 89.630 -1.69764)
+        station(0.21 RoundedRect 2 2 0.778 9)
+        stationTransform(0.21 0 rise*0.37566 65.505 90.389 -1.87828)
+        station(0.222 RoundedRect 2 2 0.781 9)
+        stationTransform(0.222 0 rise*0.41249 65.800 91.162 -2.06244)
+        station(0.234 RoundedRect 2 2 0.785 9)
+        stationTransform(0.234 0 rise*0.44982 66.099 91.946 -2.2491)
+        station(0.246 RoundedRect 2 2 0.789 9)
+        stationTransform(0.246 0 rise*0.48743 66.399 92.736 -2.43717)
+        station(0.258 RoundedRect 2 2 0.793 9)
+        stationTransform(0.258 0 rise*0.52512 66.701 93.528 -2.62561)
+        station(0.27 RoundedRect 2 2 0.796 9)
+        stationTransform(0.27 0 rise*0.56267 67.001 94.316 -2.81333)
+        station(0.282 RoundedRect 2 2 0.800 9)
+        stationTransform(0.282 0 rise*0.59985 67.299 95.097 -2.99927)
+        station(0.294 RoundedRect 2 2 0.804 9)
+        stationTransform(0.294 0 rise*0.63648 67.592 95.866 -3.18238)
+        station(0.306 RoundedRect 2 2 0.807 9)
+        stationTransform(0.306 0 rise*0.67232 67.879 96.619 -3.36161)
+        station(0.318 RoundedRect 2 2 0.811 9)
+        stationTransform(0.318 0 rise*0.70719 68.158 97.351 -3.53594)
+        station(0.33 RoundedRect 2 2 0.814 9)
+        stationTransform(0.33 0 rise*0.74088 68.427 98.058 -3.70438)
+        station(0.342 RoundedRect 2 2 0.817 9)
+        stationTransform(0.342 0 rise*0.7732 68.686 98.737 -3.86599)
+        station(0.354 RoundedRect 2 2 0.820 9)
+        stationTransform(0.354 0 rise*0.80397 68.932 99.383 -4.01983)
+        station(0.366 RoundedRect 2 2 0.823 9)
+        stationTransform(0.366 0 rise*0.83301 69.164 99.993 -4.16503)
+        station(0.378 RoundedRect 2 2 0.826 9)
+        stationTransform(0.378 0 rise*0.86015 69.381 100.563 -4.30077)
+        station(0.39 RoundedRect 2 2 0.829 9)
+        stationTransform(0.39 0 rise*0.88526 69.582 101.090 -4.42628)
+        station(0.402 RoundedRect 2 2 0.831 9)
+        stationTransform(0.402 0 rise*0.90817 69.765 101.572 -4.54085)
+        station(0.414 RoundedRect 2 2 0.833 9)
+        stationTransform(0.414 0 rise*0.92876 69.930 102.004 -4.64382)
+        station(0.426 RoundedRect 2 2 0.835 9)
+        stationTransform(0.426 0 rise*0.94692 70.075 102.385 -4.7346)
+        station(0.438 RoundedRect 2 2 0.836 9)
+        stationTransform(0.438 0 rise*0.96254 70.200 102.713 -4.81269)
+        station(0.45 RoundedRect 2 2 0.838 9)
+        stationTransform(0.45 0 rise*0.97553 70.304 102.986 -4.87764)
+        station(0.462 RoundedRect 2 2 0.839 9)
+        stationTransform(0.462 0 rise*0.98582 70.387 103.202 -4.92908)
+        station(0.474 RoundedRect 2 2 0.839 9)
+        stationTransform(0.474 0 rise*0.99334 70.447 103.360 -4.96671)
+        station(0.486 RoundedRect 2 2 0.840 9)
+        stationTransform(0.486 0 rise*0.99807 70.485 103.459 -4.99033)
+        station(0.496 RoundedRect 2 2 0.840 9)
+        stationTransform(0.496 0 rise*0.99984 70.499 103.497 -4.99921)
+        station(0.4985 RoundedRect 2 2 0.840 9)
+        stationTransform(0.4985 0 rise*0.99998 69.724 102.361 -4.99989)
+        station(0.5 RoundedRect 2 2 0.840 9)
+        stationTransform(0.5 0 rise*1 68.949 101.223 -5)
+        station(0.5015 RoundedRect 2 2 0.840 9)
+        stationTransform(0.5015 0 rise*0.99998 69.724 102.361 -4.99989)
+        station(0.504 RoundedRect 2 2 0.840 9)
+        stationTransform(0.504 0 rise*0.99984 70.499 103.497 -4.99921)
+        station(0.514 RoundedRect 2 2 0.840 9)
+        stationTransform(0.514 0 rise*0.99807 70.485 103.459 -4.99033)
+        station(0.526 RoundedRect 2 2 0.839 9)
+        stationTransform(0.526 0 rise*0.99334 70.447 103.360 -4.96671)
+        station(0.538 RoundedRect 2 2 0.839 9)
+        stationTransform(0.538 0 rise*0.98582 70.387 103.202 -4.92908)
+        station(0.55 RoundedRect 2 2 0.838 9)
+        stationTransform(0.55 0 rise*0.97553 70.304 102.986 -4.87764)
+        station(0.562 RoundedRect 2 2 0.836 9)
+        stationTransform(0.562 0 rise*0.96254 70.200 102.713 -4.81269)
+        station(0.574 RoundedRect 2 2 0.835 9)
+        stationTransform(0.574 0 rise*0.94692 70.075 102.385 -4.7346)
+        station(0.586 RoundedRect 2 2 0.833 9)
+        stationTransform(0.586 0 rise*0.92876 69.930 102.004 -4.64382)
+        station(0.598 RoundedRect 2 2 0.831 9)
+        stationTransform(0.598 0 rise*0.90817 69.765 101.572 -4.54085)
+        station(0.61 RoundedRect 2 2 0.829 9)
+        stationTransform(0.61 0 rise*0.88526 69.582 101.090 -4.42628)
+        station(0.622 RoundedRect 2 2 0.826 9)
+        stationTransform(0.622 0 rise*0.86015 69.381 100.563 -4.30077)
+        station(0.634 RoundedRect 2 2 0.823 9)
+        stationTransform(0.634 0 rise*0.83301 69.164 99.993 -4.16503)
+        station(0.646 RoundedRect 2 2 0.820 9)
+        stationTransform(0.646 0 rise*0.80397 68.932 99.383 -4.01983)
+        station(0.658 RoundedRect 2 2 0.817 9)
+        stationTransform(0.658 0 rise*0.7732 68.686 98.737 -3.86599)
+        station(0.67 RoundedRect 2 2 0.814 9)
+        stationTransform(0.67 0 rise*0.74088 68.427 98.058 -3.70438)
+        station(0.682 RoundedRect 2 2 0.811 9)
+        stationTransform(0.682 0 rise*0.70719 68.158 97.351 -3.53594)
+        station(0.694 RoundedRect 2 2 0.807 9)
+        stationTransform(0.694 0 rise*0.67232 67.879 96.619 -3.36161)
+        station(0.706 RoundedRect 2 2 0.804 9)
+        stationTransform(0.706 0 rise*0.63648 67.592 95.866 -3.18238)
+        station(0.718 RoundedRect 2 2 0.800 9)
+        stationTransform(0.718 0 rise*0.59985 67.299 95.097 -2.99927)
+        station(0.73 RoundedRect 2 2 0.796 9)
+        stationTransform(0.73 0 rise*0.56267 67.001 94.316 -2.81333)
+        station(0.742 RoundedRect 2 2 0.793 9)
+        stationTransform(0.742 0 rise*0.52512 66.701 93.528 -2.62561)
+        station(0.754 RoundedRect 2 2 0.789 9)
+        stationTransform(0.754 0 rise*0.48743 66.399 92.736 -2.43717)
+        station(0.766 RoundedRect 2 2 0.785 9)
+        stationTransform(0.766 0 rise*0.44982 66.099 91.946 -2.2491)
+        station(0.778 RoundedRect 2 2 0.781 9)
+        stationTransform(0.778 0 rise*0.41249 65.800 91.162 -2.06244)
+        station(0.79 RoundedRect 2 2 0.778 9)
+        stationTransform(0.79 0 rise*0.37566 65.505 90.389 -1.87828)
+        station(0.802 RoundedRect 2 2 0.774 9)
+        stationTransform(0.802 0 rise*0.33953 65.216 89.630 -1.69764)
+        station(0.814 RoundedRect 2 2 0.770 9)
+        stationTransform(0.814 0 rise*0.30431 64.935 88.891 -1.52157)
+        station(0.826 RoundedRect 2 2 0.767 9)
+        stationTransform(0.826 0 rise*0.27021 64.662 88.174 -1.35105)
+        station(0.838 RoundedRect 2 2 0.764 9)
+        stationTransform(0.838 0 rise*0.23741 64.399 87.486 -1.18706)
+        station(0.85 RoundedRect 2 2 0.761 9)
+        stationTransform(0.85 0 rise*0.20611 64.149 86.828 -1.03054)
+        station(0.862 RoundedRect 2 2 0.758 9)
+        stationTransform(0.862 0 rise*0.17647 63.912 86.206 -0.88236)
+        station(0.874 RoundedRect 2 2 0.755 9)
+        stationTransform(0.874 0 rise*0.14868 63.689 85.622 -0.74338)
+        station(0.886 RoundedRect 2 2 0.752 9)
+        stationTransform(0.886 0 rise*0.12287 63.483 85.080 -0.61437)
+        station(0.898 RoundedRect 2 2 0.750 9)
+        stationTransform(0.898 0 rise*0.09922 63.294 84.584 -0.49608)
+        station(0.91 RoundedRect 2 2 0.748 9)
+        stationTransform(0.91 0 rise*0.07784 63.123 84.135 -0.38918)
+        station(0.922 RoundedRect 2 2 0.746 9)
+        stationTransform(0.922 0 rise*0.05885 62.971 83.736 -0.29427)
+        station(0.934 RoundedRect 2 2 0.744 9)
+        stationTransform(0.934 0 rise*0.04238 62.839 83.390 -0.2119)
+        station(0.946 RoundedRect 2 2 0.743 9)
+        stationTransform(0.946 0 rise*0.0285 62.728 83.099 -0.14252)
+        station(0.958 RoundedRect 2 2 0.742 9)
+        stationTransform(0.958 0 rise*0.01731 62.638 82.863 -0.08655)
+        station(0.97 RoundedRect 2 2 0.741 9)
+        stationTransform(0.97 0 rise*0.00886 62.571 82.686 -0.04428)
+        station(0.977 RoundedRect 2 2 0.741 9)
+        stationTransform(0.977 0 rise*0.00521 62.542 82.609 -0.02606)
+        station(0.983 RoundedRect 2 2 0.740 9)
+        stationTransform(0.983 0 rise*0.00285 62.523 82.560 -0.01425)
+        station(0.988 RoundedRect 2 2 0.740 9)
+        stationTransform(0.988 0 rise*0.00142 60.445 79.802 -0.0071)
+        station(0.9915 RoundedRect 2 2 0.740 9)
+        stationTransform(0.9915 0 rise*0.00071 55.096 72.733 -0.00356)
+        station(0.9945 RoundedRect 2 2 0.740 9)
+        stationTransform(0.9945 0 rise*0.0003 47.036 62.090 -0.00149)
+        station(0.9968 RoundedRect 2 2 0.740 9)
+        stationTransform(0.9968 0 rise*0.0001 37.390 49.355 -0.00051)
+        station(0.9986 RoundedRect 2 2 0.740 9)
+        stationTransform(0.9986 0 rise*0.00002 25.486 33.642 -0.0001)
+        station(0.99955 RoundedRect 2 2 0.740 9)
+        stationTransform(0.99955 0 rise*0 14.670 19.365 -0.00001)
+        station(1 RoundedRect 2 2 0.740 9)
+        stationTransform(1 0 rise*0 8.750 11.550 0)
+        up(0 1 0) frame(rotationMinimizing) cap(all))
+       material(oatmealbeigeroughcloth) 1 1)
+
+# One wooden standard forms both the tall arm support and its inboard shelf.
+# The outer face stays fair as the inner face sweeps out beneath the cushion.
+# The station above the shelf recedes inside the cushion. The last six rings
+# roll the shoulder into a small rounded top. The glides sit directly below.
+SideStandard(h) ->
+    [ FrontGlide ]
+    !I(VariableSectionSweep(
+        path(0 3 0  0 h 0)
+        station(0 RoundedRect 48 112 12 7)
+        station(1.5/(h-3) RoundedRect 50 114 13 7)
+        station(6/(h-3) RoundedRect 52 116 14 7)
+        station(33/(h-3) RoundedRect 52 116 14 7)
+        station(51/(h-3) RoundedRect 55 117 14 7)
+        stationTransform(51/(h-3) -1.5 0 1 1 0)
+        station(63/(h-3) RoundedRect 60 118 15 7)
+        stationTransform(63/(h-3) -4 0 1 1 0)
+        station(73/(h-3) RoundedRect 69 120 15 7)
+        stationTransform(73/(h-3) -8.5 0 1 1 0)
+        station(80/(h-3) RoundedRect 82 121 16 7)
+        stationTransform(80/(h-3) -15 0 1 1 0)
+        station(86/(h-3) RoundedRect 105 122 16 7)
+        stationTransform(86/(h-3) -26.5 0 1 1 0)
+        station(89/(h-3) RoundedRect 145 122 16 7)
+        stationTransform(89/(h-3) -46.5 0 1 1 0)
+        station(93/(h-3) RoundedRect 193 123 17 7)
+        stationTransform(93/(h-3) -70.5 0 1 1 0)
+        station(101/(h-3) RoundedRect 202 124 17 7)
+        stationTransform(101/(h-3) -75 0 1 1 0)
+        station(111/(h-3) RoundedRect 189 124 17 7)
+        stationTransform(111/(h-3) -68.5 0 1 1 0)
+        station(119/(h-3) RoundedRect 146 124 17 7)
+        stationTransform(119/(h-3) -47 0 1 1 0)
+        station(129/(h-3) RoundedRect 94 124 16 7)
+        stationTransform(129/(h-3) -21 0 1 1 0)
+        station(146/(h-3) RoundedRect 61 123 15 7)
+        stationTransform(146/(h-3) -4.5 0 1 1 0)
+        station(177/(h-3) RoundedRect 51 122 15 7)
+        station(0.56 RoundedRect 49 119 15 7)
+        stationTransform(0.56 -0.5 0 1 1 0)
+        station(0.82 RoundedRect 48 116 15 7)
+        stationTransform(0.82 -1 0 1 1 0)
+        station((h-22)/(h-3) RoundedRect 47 114 16 7)
+        stationTransform((h-22)/(h-3) -1.5 0 1 1 0)
+        station((h-15)/(h-3) RoundedRect 46 113 16 7)
+        stationTransform((h-15)/(h-3) -1.5 0 1 1 0)
+        station((h-10)/(h-3) RoundedRect 44 109 16 7)
+        stationTransform((h-10)/(h-3) -1.5 0 1 1 0)
+        station((h-6)/(h-3) RoundedRect 39 101 16 7)
+        stationTransform((h-6)/(h-3) -1.5 0 1 1 0)
+        station((h-4)/(h-3) RoundedRect 33 93 15 7)
+        stationTransform((h-4)/(h-3) -1.5 0 1 1 0)
+        station(1 RoundedRect 25 84 11 7)
+        stationTransform(1 -1.5 0 1 1 0)
+        up(0 0 -1) frame(referenceAligned) cap(all))
+       material(lightoakverticalwood) 1 1)
+
+FrontGlide ->
+    [ A(-90 0)
+      !I(Loft(section(0 RoundedRect 45 108 12 6)
+              section(1 RoundedRect 48 111 13 6)
+              section(3 RoundedRect 48 112 13 6) cap(all))
+         material(blackmatteplastic) 1 1) ]
+
+# Symmetric rear feet stay tucked under the upholstered body. The unseen
+# mounting rails terminate over these feet and enter the integral front ledges.
+Undercarriage ->
+    [ T(-223 0 -192) RearFoot ]
+    [ T(223 0 -192) RearFoot ]
+    [ T(-233 0 -10) Bearer ]
+    [ T(233 0 -10) Bearer ]
+
+RearFoot ->
+    [ A(-90 0)
+      !I(Loft(section(0 RoundedRect 42 62 11 6)
+              section(3 RoundedRect 45 65 12 6) cap(all))
+         material(blackmatteplastic) 1 1)
+      !I(Loft(section(3 RoundedRect 45 65 12 6)
+              section(8 RoundedRect 49 70 13 6)
+              section(97 RoundedRect 57 83 15 6)
+              section(116 RoundedRect 62 86 17 6) cap(all))
+         material(lightoakverticalwood) 1 1) ]
+
+Bearer ->
+    [ A(-90 0)
+      !I(Loft(section(97 RoundedRect 48 465 18 6)
+              section(100 RoundedRect 55 472 20 6)
+              section(120 RoundedRect 55 472 20 6) cap(all))
+         material(lightoakwood) 1 1) ]

@@ -1,0 +1,59 @@
+{
+  "title": "42 cavalieri volume table",
+  "group": "engineering/surface-relief/patterns",
+  "directory": "engineering/surface-relief/patterns/42-cavalieri-volume-table-54cb62f4",
+  "source_file": "42-cavalieri-volume-table.p3d",
+  "git_blob_sha": "54cb62f44cc12f9d344ae7657306460c07ef3408",
+  "bytes": 3959,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "42-cavalieri-volume-table.p3d"
+  ],
+  "description": "Cavalieri volume table. Cavalieri(heightFraction visibleDegrees arcFacets profileSpans).",
+  "features": [
+    "Revolve",
+    "Cube",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Cavalieri volume table. Cavalieri(heightFraction visibleDegrees arcFacets profileSpans). · Heights 0.48 and 0.82 show different equal-area sections. 270 opens a quarter. · Both specimens have radius 1.24. Each gold top face is the section being compared."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Base, HeightGauge, HemisphereBody, HemisphereSection, ConeVoidBody, ConeVoidSection"
+    ],
+    [
+      "Object classes",
+      "CavalieriVolumeTable, DisplayBed, CommonSliceDatum, HemisphereSegment, DiskSection, CylinderMinusCone, AnnulusSection"
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, Cube, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, goldbrushedmetal, tealmatteceramic, redmattepaint, silverbrushedmetal, charcoalmattemetal, copperpolishedmetal, amberwarmwood"
+    ],
+    [
+      "Production rules",
+      "Start, Cavalieri, Exhibit, District, Segment, Crown, DiskSection, Cavity, Annulus, Gauge, Mast, Slider, Pedestal, Bed, Legend (15 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "75"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

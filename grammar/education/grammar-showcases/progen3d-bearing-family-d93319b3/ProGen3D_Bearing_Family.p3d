@@ -1,0 +1,141 @@
+# ProGen3D | Bearing family 1.0.0 | Y-axis shaft, origin at the centre of the bearing.
+# Change the Start rule to a named preset below, or call Bearing directly.
+# Bearing(family bore outside width element count rollerLength front rear)
+# Enter lengths in millimetres. Output geometry uses metres.
+# family: 0 deep-groove ball, 1 cylindrical roller, 2 needle roller, 3 thrust ball, 4 plain sleeve.
+# bore = shaft-hole diameter; outside = housing-seat diameter; width = axial width.
+# element = ball or roller diameter; count = rolling elements in the single row.
+# rollerLength = axial length for families 1/2; use zero for 68 percent of bearing width.
+# front (+Y) and rear (-Y) are independent: 0 open, 1 metal shield, 2 elastomer seal.
+# Use open faces for thrust and sleeve. Sleeve uses only bore, outside and width.
+# The seven open ball sizes and the 625ZZ use NSK envelope dimensions, ball counts and ball diameters.
+# Other families are illustrative examples. Pitch circle, ring profiles, cage and closures are schematic.
+# Geometry checks: outside > bore > 0. For rolling models use 3 to 96 whole elements, diameter
+# below 78 percent of annular radial space, and neighbour-centre distance > 1.2 element diameters.
+# Ball diameter and roller length are capped at 76 percent of width. Needles require length >= 3 diameters.
+# Unsupported combinations emit no geometry. The model describes nominal geometry only.
+Start -> Bearing625
+
+# Deep-groove ball bearing 623 | https://www.nsk.com/engineering/623-esm-md.html
+Bearing623 -> Bearing(0 3 10 4 1.588 7 0 0 0)
+# Deep-groove ball bearing 625 | https://www.nsk.com/engineering/625-esm-md.html
+Bearing625 -> Bearing(0 5 16 5 2.778 7 0 0 0)
+# Deep-groove ball bearing 608 | https://www.nsk.com/engineering/608-esm-md.html
+Bearing608 -> Bearing(0 8 22 7 3.969 7 0 0 0)
+# Deep-groove ball bearing 6001 | https://www.nsk.com/engineering/6001-dgbb-sr.html
+Bearing6001 -> Bearing(0 12 28 8 4.762 8 0 0 0)
+# Deep-groove ball bearing 6204 | https://www.nsk.com/engineering/6204-dgbb-sr.html
+Bearing6204 -> Bearing(0 20 47 14 7.938 8 0 0 0)
+# Deep-groove ball bearing 6305 | https://www.nsk.com/engineering/6305-dgbb-sr.html
+Bearing6305 -> Bearing(0 25 62 17 10.319 8 0 0 0)
+# Deep-groove ball bearing 6312 | https://www.nsk.com/engineering/6312-dgbb-sr.html
+Bearing6312 -> Bearing(0 60 130 31 22.225 8 0 0 0)
+# 625ZZ double-shielded ball bearing | https://www.nsk.com/au-en/engineering/products/bearings/ball-bearings/deep-groove-ball-bearings/extra-small-ball-bearings-and-miniature-ball-bearings-metric-series/625zz1mc5-apn.html
+Bearing625ZZ -> Bearing(0 5 16 5 2.778 7 0 1 1)
+# Cylindrical roller bearing example | illustrative dimensions
+CylindricalExample -> Bearing(1 20 47 14 6 10 9 0 0)
+# Needle roller bearing example with two rings | illustrative dimensions
+NeedleExample -> Bearing(2 12 22 16 2 14 11 0 0)
+# Single-direction thrust ball bearing example | illustrative dimensions
+ThrustExample -> Bearing(3 20 40 14 5 12 0 0 0)
+# Plain sleeve bushing example | illustrative dimensions
+SleeveExample -> Bearing(4 8 12 14 0 0 0 0 0)
+
+Bearing(family bore outside width element count rollerLength front rear) ->
+ [ ?(min(front,rear)>=0) [ ?(max(front,rear)<=2)
+    [ ?(front+rear==floor(front)+floor(rear)) CheckedBody(family bore outside width element count rollerLength front rear) : [] ]
+    : [] ] : [] ]
+
+CheckedBody(family bore outside width element count rollerLength front rear) ->
+ [ ?(min(bore,width)>0) [ ?(outside>bore)
+     [ ?(family==4) [ ?(front+rear==0) [ S(0.001 0.001 0.001) Sleeve(bore/2 outside/2 width/2) ] : [] ]
+       : RollingInput(family bore outside width element count rollerLength front rear) ]
+     : [] ] : [] ]
+
+# Dimensions in mm inside this model. The external shaft axis is Y, centred at the origin.
+# Reject crossed races, overcrowded elements and unsupported closures before creating a shape.
+RollingInput(f bore outside w e n len front rear) ->
+ [ ?(min(e,n-2)>0) [ ?(n==floor(n)) [ ?(n<=96)
+     [ ?(e<0.78*(outside-bore)/2) [ ?(e*1.2<(outside+bore)/2*sin(3.14159265359/n))
+       [ S(0.001 0.001 0.001) Layout(f bore/2 outside/2 w 0.25*(outside+bore) e/2 n len front rear) ]
+     : [] ] : [] ] : [] ] : [] ] : [] ]
+
+Layout(f ri ro w pitch r n len front rear) ->
+ [ ?(f==0) [ ?(2*r<=0.76*w)
+   [ BallRaces(ri ro w/2 pitch r) Balls(pitch r n)
+     RadialCage(pitch r+0.018*w r n) FacePair(pitch 0.63*r w front rear) ] : [] ] : [] ]
+ [ ?(f==1) RollerSize(ri ro w pitch r n len front rear 1) : [] ]
+ [ ?(f==2) RollerSize(ri ro w pitch r n len front rear 2) : [] ]
+ [ ?(f==3) [ ?(front+rear==0) [ ?(2*r<=0.76*w)
+   [ [ ThrustWasher(ri ro-0.08*r w/2 pitch r) ]
+     [ A(180 0) ThrustWasher(ri+0.08*r ro w/2 pitch r) ]
+     Balls(pitch r n) ThrustCage(pitch r n) ] : [] ] : [] ] : [] ]
+
+# A meridian of each ring is revolved about Y. The eight groove facets approximate a circular seat.
+BallRaces(ri ro h p r) ->
+ [ !I(Revolve(profile(Polygon ri -h p-0.63*r -h p-0.63*r -0.82*r p-0.82*r -0.62*r
+      p-0.94*r -0.4*r p-1.01*r -0.2*r p-1.035*r 0 p-1.01*r 0.2*r p-0.94*r 0.4*r
+      p-0.82*r 0.62*r p-0.63*r 0.82*r p-0.63*r h ri h) angle(0 360) segments(96)) material(steelbrushedmetal) 1 0.3) ]
+ [ !I(Revolve(profile(Polygon p+0.63*r -h ro -h ro h p+0.63*r h p+0.63*r 0.82*r
+      p+0.82*r 0.62*r p+0.94*r 0.4*r p+1.01*r 0.2*r p+1.035*r 0 p+1.01*r -0.2*r
+      p+0.94*r -0.4*r p+0.82*r -0.62*r p+0.63*r -0.82*r) angle(0 360) segments(96)) material(steelbrushedmetal) 1 0.3) ]
+
+Balls(p r n) -> Pattern(0 p r 0 n 0 n)
+
+RollerSize(ri ro w p r n len front rear f) ->
+ [ ?(len>=0) [ ?(len==0) RollerSet(ri ro w p r n 0.68*w front rear f)
+   : RollerSet(ri ro w p r n len front rear f) ] : [] ]
+RollerSet(ri ro w p r n len front rear f) ->
+ [ ?(len<=0.76*w) [ ?(f==1) RollerParts(ri ro w p r n len front rear)
+   : [ ?(len>=6*r) RollerParts(ri ro w p r n len front rear) : [] ] ] : [] ]
+RollerParts(ri ro w p r n len front rear) ->
+ [ Ring(ri p-1.012*r -w/2 w/2) Ring(p+1.012*r ro -w/2 w/2)
+   Rollers(p r n len) RadialCage(p len/2+0.018*w r n) FacePair(p 1.012*r w front rear) ]
+Rollers(p r n len) -> Pattern(1 p r len n 0 n)
+
+# Two end rails and one separator halfway between each pair of rolling elements.
+RadialCage(p h r n) ->
+ [ CageHoop(p-0.13*r p+0.13*r h-0.015*r h+0.015*r)
+   CageHoop(p-0.13*r p+0.13*r -h-0.015*r -h+0.015*r)
+   Separators(p h r n) ]
+Separators(p h r n) -> Pattern(2 p r h n 0 n)
+CageHoop(ri ro lo hi) ->
+ [ !I(Revolve(profile(Polygon ri lo ro lo ro hi ri hi) angle(0 360) segments(96)) material(goldbrushedmetal) 1 0.3) ]
+
+FacePair(p land w front rear) ->
+ [ Face(p land w front) ] [ A(180 0) Face(p land w rear) ]
+Face(p land w style) ->
+ [ ?(style==1) [ Ring(p-0.93*land p+land 0.435*w 0.457*w) ] : [] ]
+ [ ?(style==2) [ !I(Revolve(profile(Polygon p-land 0.438*w p-0.75*land 0.428*w
+       p+0.82*land 0.428*w p+land 0.442*w p+land 0.466*w p+0.8*land 0.458*w
+       p-0.75*land 0.458*w p-land 0.464*w) angle(0 360) segments(96)) material(blackmatterubber) 1 0.65) ] : [] ]
+
+# Two opposed grooved thrust washers. The faces normal to the shaft carry the ball row.
+ThrustWasher(ri ro h p r) ->
+ [ !I(Revolve(profile(Polygon ri 0.66*r p-0.80*r 0.66*r p-0.6*r 0.84*r p-0.4*r 0.95*r
+      p-0.2*r 1.01*r p 1.035*r p+0.2*r 1.01*r p+0.4*r 0.95*r p+0.6*r 0.84*r
+      p+0.80*r 0.66*r ro 0.66*r ro h ri h) angle(0 360) segments(96)) material(steelbrushedmetal) 1 0.3) ]
+ThrustCage(p r n) ->
+ [ CageHoop(p-1.16*r p-1.06*r -0.12*r 0.12*r) CageHoop(p+1.06*r p+1.16*r -0.12*r 0.12*r)
+   ThrustWebs(p r n) ]
+ThrustWebs(p r n) -> Pattern(3 p r 0 n 0 n)
+
+Ring(ri ro lo hi) ->
+ [ !I(Revolve(profile(Polygon ri lo ro lo ro hi ri hi) angle(0 360) segments(96)) material(steelbrushedmetal) 1 0.3) ]
+Sleeve(ri ro h) ->
+ [ BushedRing(ri ro h min(0.12*h,0.10*(ro-ri))) ]
+BushedRing(ri ro h bevel) ->
+ [ !I(Revolve(profile(Polygon ri -h+bevel ri+bevel -h ro-bevel -h ro -h+bevel
+     ro h-bevel ro-bevel h ri+bevel h ri h-bevel) angle(0 360) segments(96)) material(bronzebrushedmetal) 1 0.38) ]
+
+# Bisect an index interval so every native call has logarithmic nesting depth.
+# The same angular pattern drives balls, rollers, cage separators and thrust webs.
+Pattern(mode p r axial n first size) ->
+ [ ?(size>1)
+   [ Pattern(mode p r axial n first floor(size/2)) Pattern(mode p r axial n first+floor(size/2) size-floor(size/2)) ]
+   : [ A(360*first/n 1) Station(mode p r axial n) ] ]
+Station(mode p r axial n) ->
+ [ ?(mode==0) [ T(p 0 0) S(2*r 2*r 2*r) !I(Sphere(segments(24 16)) material(silverpolishedmetal) 1 0.18) ] : [] ]
+ [ ?(mode==1) [ T(p -axial/2 0) S(2*r axial 2*r) !I(Cylinder(segments(24 1)) material(silverpolishedmetal) 1 0.18) ] : [] ]
+ [ ?(mode==2) [ A(180/n 1) T(p 0 0) S(0.24*r 2*axial 0.22*r) !I(Cube material(goldbrushedmetal) 1 0.3) ] : [] ]
+ [ ?(mode==3) [ A(180/n 1) T(p 0 0) S(2.24*r 0.20*r 0.20*r) !I(Cube material(goldbrushedmetal) 1 0.3) ] : [] ]
