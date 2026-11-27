@@ -1,0 +1,51 @@
+# Acoustic phase-grating cutaway. Panel(prime mode designWavelength).
+# Use 7 or 13, mode 1 for quadratic residues, 0 for a linear staircase.
+# Coordinates are model units; open front exposes the depth at each station.
+Start -> Panel(13 1 1.50)
+
+Panel(p mode wave) ->
+ [ Object(id(Exhibit) class(PhaseGrating) taxonomy(Study Acoustics Diffuser) layer(Equipment)) [
+   [ Object(id(Case) class(CutawayCase) taxonomy(Study Acoustics Diffuser) layer(Structure))
+     [ Joinery(0.38*p 0.28+wave/2) ] ]
+   [ T(-0.19*p 0 0)
+     [ Object(id(Partitions) class(WellPartitions) taxonomy(Study Acoustics Diffuser) layer(Structure))
+       [ Fins(2*p+1 0.28+wave/2) ] ]
+     [ Object(id(Wells) class(WellFloors) taxonomy(Study Acoustics Diffuser) layer(Equipment))
+       [ Periods(2 p mode wave) ] ]
+     [ Object(id(Index) class(IndexMarks) taxonomy(Study Acoustics Diffuser) layer(Equipment))
+       [ Ticks(2*p) ] ] ] ] ]
+
+# For either sequence, depth is residue * wavelength / (2*prime).
+Periods(count p mode wave) count ->
+ [ T(Periods_count*p*0.19 0 0) WellsOfPeriod(p mode wave) ]
+WellsOfPeriod(p mode wave) p ->
+ [ T((WellsOfPeriod_count+0.5)*0.19 0 0)
+   Cell(wrap(WellsOfPeriod_count*(1+mode*(WellsOfPeriod_count-1)),0,p) wave p) ]
+Cell(res wave p) ->
+ [ Cartridge(0.28+wave/2-res*wave/2/p) ]
+Cartridge(h) ->
+ [ T(0 (h+0.190)/2 0) S(0.174 h-0.240 1.46) !I(Cube material(amberwarmwood) 1 0.31) ]
+ [ T(0 h-0.0125 0) S(0.174 0.025 1.50) !I(Cube material(bluegreymattepaint) 1 0.28) ]
+ [ T(0 h-0.034 0.736) S(0.128 0.012 0.012) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+
+Fins(n mouth) n ->
+ [ T(0.19*Fins_count (mouth+0.215)/2 0) S(0.016 mouth-0.215 1.50) !I(Cube material(silverbrushedmetal) 1 0.28) ]
+Ticks(n) n ->
+ [ T((Ticks_count+0.5)*0.19 0.164 0.805) S(0.014 0.047 0.008) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+
+Joinery(span mouth) ->
+ [ T(0 0.155 0) S(span+0.20 0.12 1.61) !I(Cube material(charcoalmattemetal) 1 0.3) ]
+ [ T(0 (mouth+0.215)/2 -0.777) S(span+0.12 mouth-0.215 0.054) !I(Cube material(amberwarmwood) 1 0.3) ]
+ [ T(0 mouth-0.012 -0.78) S(span+0.14 0.024 0.09) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+ [ T(span/2+0.045 0 0) Cheek(mouth) ] [ T(0-span/2-0.045 0 0) Cheek(mouth) ]
+ [ T(0-span/2+0.15 0 0) Feet ] [ T(span/2-0.15 0 0) Feet ]
+Cheek(h) ->
+ [ T(0 (h+0.215)/2 0) S(0.074 h-0.215 1.56) !I(Cube material(amberwarmwood) 1 0.3) ]
+ [ T(0 h-0.009 0) S(0.085 0.022 1.57) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+ [ T(0 h-0.11 0.779) Screw ] [ T(0 0.30 0.779) Screw ]
+Screw ->
+ [ A(90 0) S(0.054 0.018 0.054) !I(Cylinder(segments(6 1)) material(goldbrushedmetal) 1 0.24) ]
+Feet ->
+ [ T(0 0 0.60) Pad ] [ T(0 0 -0.60) Pad ]
+Pad ->
+ [ !I(Revolve(profile(Polygon 0.008 0 0.108 0 0.12 0.012 0.12 0.065 0.09 0.073 0.084 0.095 0.008 0.095) angle(0 360) segments(32)) material(charcoalmattemetal) 1 0.26) ]

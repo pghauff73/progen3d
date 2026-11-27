@@ -1,0 +1,70 @@
+# Width gauge. Gauge(odd harmonic, contour facets, seconds per revolution).
+# Illustrated harmonics: 3 and 5. Use 120 facets; compare 30 to see chord error.
+Start -> Gauge(3 120 8)
+
+Gauge(n facets period) ->
+ [ Object(id(Instrument) class(WidthGauge) taxonomy(Study Geometry Metrology) layer(Equipment)) [
+   [ Object(id(Stand) class(Frame) taxonomy(Study Geometry Metrology) layer(Structure)) [ Pedestal ] ]
+   [ T(0 1.98 0) Pose(n facets 360*t/period 1.08/(n*n-1)) ] ] ]
+
+Pose(n facets turn e) ->
+ [ A(turn 2) [
+   [ Object(id(Rotor) class(Profile) taxonomy(Study Geometry Metrology) layer(Equipment))
+     [ Panels(facets n e) ] ]
+   [ Object(id(Face) class(Dial) taxonomy(Study Geometry Metrology) layer(Equipment))
+     [ Facework(n) ] ] ] ]
+ [ T(0 e*cos(radians(n*(90-turn))) 0)
+   [ Object(id(Carriage) class(ParallelJaws) taxonomy(Study Geometry Metrology) layer(Equipment))
+     [ Yoke ] ] ]
+
+# Boundary p = h normal + h' tangent. Each wedge includes an enamel face
+# inset inside the brass perimeter; the hub hides the common centre.
+Panels(count n e) count ->
+ [ Segment(radians(360*Panels_count/count) radians(360*(Panels_count+1)/count) n e) ]
+Segment(a b n e) ->
+ [ Supports(a b 1.20+e*cos(n*a) 1.20+e*cos(n*b) 0-n*e*sin(n*a) 0-n*e*sin(n*b)) ]
+Supports(a b ha hb da db) ->
+ [ Wedge((ha*cos(a)-da*sin(a)) (ha*sin(a)+da*cos(a)) (hb*cos(b)-db*sin(b)) (hb*sin(b)+db*cos(b))) ]
+Wedge(x y u v) ->
+ [ !I(Extrude(Polygon(0 0 x y u v) 0.18 cap(all)) material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0 0.18) S(0.945 0.945 1) !I(Extrude(Polygon(0 0 x y u v) 0.018 cap(all)) material(bluegreymattepaint) 1 0.30) ]
+
+Facework(n) ->
+ [ T(0 0 0.197) Petals(n) ]
+ [ T(0 0 0.195) A(90 0) Boss ]
+Petals(n) n ->
+ [ A(360*Petals_count/n 2)
+   [ !I(Extrude(Polygon(0.20 0 0.58 -0.165 0.96 -0.025 1.04 0 0.79 0.09 0.54 0.12) 0.014 cap(all)) material(copperpolishedmetal) 1 0.26) ]
+   [ T(0 0 0.014) !I(Extrude(Polygon(0.29 0 0.63 -0.028 0.976 0 0.62 0.014) 0.008 cap(all)) material(goldbrushedmetal) 1 0.26) ]
+   [ A(180/n 2) T(0.80 0 0.003) A(90 0) S(0.09 0.023 0.09) !I(Cylinder material(silverbrushedmetal) 1 0.25) ] ]
+Boss ->
+ [ !I(Revolve(profile(Polygon 0.01 0 0.28 0 0.28 0.035 0.23 0.06 0.16 0.06 0.15 0.103 0.01 0.103) angle(0 360) segments(60)) material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.104 0) S(0.15 0.008 0.025) !I(Cube material(charcoalmattemetal) 1 0.30) ]
+
+Yoke ->
+ [ T(-0.03 1.26 0.08) Rail ]
+ [ T(-0.03 -1.26 0.08) Rail ]
+ [ T(-1.50 0 0.08) S(0.14 2.64 0.26) !I(Cube material(bluegreymattepaint) 1 0.29) ]
+ [ T(-1.55 0 0.245) !I(Extrude(Polygon(-0.22 0 0 -0.065 0 0.065) 0.025 cap(all)) material(redmattepaint) 1 0.24) ]
+Rail ->
+ [ S(3.08 0.12 0.28) !I(Cube material(silverbrushedmetal) 1 0.25) ]
+ [ T(-1.47 0 0.14) A(90 0) S(0.082 0.018 0.082) !I(Cylinder material(copperpolishedmetal) 1 0.24) ]
+
+Pedestal ->
+ [ T(-0.22 0.10 0) S(4.18 0.20 1.16) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(-0.22 0.22 0) S(4.02 0.04 1.01) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+ [ T(0 1.13 -0.40) S(0.38 1.78 0.30) !I(Cube material(bluegreymattepaint) 1 0.30) ]
+ [ T(0 1.98 -0.41) A(90 0) S(0.34 0.42 0.34) !I(Cylinder material(copperpolishedmetal) 1 0.26) ]
+ [ T(-1.86 1.33 0.04) S(0.23 2.18 0.27) !I(Cube material(bluegreymattepaint) 1 0.28) ]
+ [ T(-1.86 1.98 0.18) S(0.22 0.51 0.024) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ Marks(9) ]
+ [ T(-1.50 1.26 0.08) Bearing ] [ T(-1.50 2.29 0.08) Bearing ]
+Marks(n) n ->
+ [ T(-1.83 1.98+(Marks_count-4)*0.05 0.196) S(0.12-0.045*wrap(Marks_count,0,2) 0.009 0.01) !I(Cube material(charcoalmattemetal) 1 0.3) ]
+
+# Back straps attach the two guides to the fixed scale column.
+Bearing ->
+ [ T(-0.15 0 -0.175) S(0.53 0.115 0.076) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+ [ T(-0.105 0 0) S(0.055 0.115 0.29) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+ [ T(0.105 0 0) S(0.055 0.115 0.29) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+ [ T(0 0 0.158) S(0.26 0.115 0.044) !I(Cube material(goldbrushedmetal) 1 0.25) ]

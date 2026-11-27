@@ -1,0 +1,60 @@
+{
+  "title": "16 constant width gauge",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/16-constant-width-gauge-faa5f43a",
+  "source_file": "16-constant-width-gauge.p3d",
+  "git_blob_sha": "faa5f43a8be8c5353981d6b24c9b2147a2ccadd1",
+  "bytes": 3974,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "16-constant-width-gauge.p3d"
+  ],
+  "description": "Width gauge. Gauge(odd harmonic, contour facets, seconds per revolution).",
+  "features": [
+    "Extrude",
+    "Cylinder",
+    "Revolve",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Width gauge. Gauge(odd harmonic, contour facets, seconds per revolution). · Illustrated harmonics: 3 and 5. Use 120 facets; compare 30 to see chord error. · Boundary p = h normal + h' tangent. Each wedge includes an enamel face · inset inside the brass perimeter; the hub hides the common centre. · Back straps attach the two guides to the fixed scale column."
+    ],
+    [
+      "Named objects",
+      "Instrument, Stand, Rotor, Face, Carriage"
+    ],
+    [
+      "Object classes",
+      "WidthGauge, Frame, Profile, Dial, ParallelJaws"
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, Cylinder, Revolve, Cube"
+    ],
+    [
+      "Material identifiers",
+      "goldbrushedmetal, bluegreymattepaint, copperpolishedmetal, silverbrushedmetal, charcoalmattemetal, redmattepaint, amberwarmwood"
+    ],
+    [
+      "Production rules",
+      "Start, Gauge, Pose, Segment, Supports, Wedge, Facework, Boss, Yoke, Rail, Pedestal, Bearing (12 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "71"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

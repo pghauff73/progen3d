@@ -1,0 +1,61 @@
+{
+  "title": "Motion Simulator Rig",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/motion-simulator-rig-bb8cac80",
+  "source_file": "Motion_Simulator_Rig.p3d",
+  "git_blob_sha": "bb8cac80551e76a7e930ab17381697d2a612aebc",
+  "bytes": 11722,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Motion_Simulator_Rig.p3d"
+  ],
+  "description": "Motion simulator rig | photographic reconstruction | native desktop ProGen3D",
+  "features": [
+    "Cube",
+    "Extrude",
+    "Sphere",
+    "SweepDisk",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Motion simulator rig | photographic reconstruction | native desktop ProGen3D · Y is up. Local +Z on the upper frame faces its FRONT plate. Lengths are relative. · The reference shows one pose. Hidden joint locations, the three-pair layout, · cable routes, tooth count and motion below are modelling choices. · Rig(rod length, crank radius, crank swing in degrees, period in seconds, board 0/1). · Set swing to 0 to hold the reconstructed neutral pose. Set board to 0 to isolate the rig. · Motor output shafts point along local X. Both crank pins in a pair describe · the same YZ circle; the other two pairs are copies rotated around world Y. · Deck height follows the positive vertical component of a fixed-length rod. · For the chosen crank, rod length must exceed its maximum horizontal projection."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Extrude, Sphere, SweepDisk, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "lightoakwood, charcoalroughmetal, ambermetalpolished, silverbluepolishedmetal, steelshinyroughmetal, warmwhitematteplaster, offwhiteceramic, softyellowglossyplastic, terracottaroughceramic, charcoalroughrubber, lightgreyroughmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Rig, Stand, Bare, Bench, Phase, Resolve, Assembly, BaseSide, Station, DriveMount, Gearmotor, CoverBolt, Shaft, MotorBarrel, Crank, UpperJoint, LowerJoint, Bearing, Tie (44 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "218"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

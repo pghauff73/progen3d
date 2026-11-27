@@ -1,0 +1,61 @@
+# Parabolic trough optical bench. Trough(strips tiltDegrees focalLength).
+# Illustrated edits: 32 or 8 strips, 18 degrees, focal length 0.93.
+# Half-aperture 1.48, four axial bays, receiver radius 0.052.
+Start -> Trough(32 18 0.93)
+
+Trough(n tilt f) ->
+ [ Object(id(Collector) class(OpticalBench) taxonomy(Study Solar Optics) layer(Equipment)) [
+   [ Object(id(Frame) class(TestStand) taxonomy(Study Solar Optics) layer(Structure)) [ Bed ] ]
+   [ T(0 1.86 0)
+     [ Object(id(Receiver) class(FocalTube) taxonomy(Study Solar Optics) layer(Equipment)) [ Tube ] ]
+     [ A(tilt 2)
+       [ Object(id(Mirrors) class(ReflectorTiles) taxonomy(Study Solar Optics) layer(Equipment)) [ Bays(4 n f) ] ]
+       [ Object(id(Cradle) class(TroughRibs) taxonomy(Study Solar Optics) layer(Structure))
+         [ Ribs(5 n f) [ Rim(1.48 f) ] [ Rim(-1.48 f) ] [ Yoke(-2.19 f) ] [ Yoke(2.19 f) ] ] ] ] ] ] ]
+
+# Tile ends stop 0.008 short of each bay boundary. The narrow lateral gaps
+# expose the supports. Optical face is the top edge of this extruded section.
+Bays(b n f) b ->
+ [ T(0 0 -2.16+1.08*Bays_count+0.008) Strips(n f) ]
+Strips(n f) n ->
+ [ Tile(-1.48+2.96*Strips_count/n+0.002 -1.48+2.96*(Strips_count+1)/n-0.002 f) ]
+Tile(a b f) ->
+ [ Glass(a b a*a/4/f-f b*b/4/f-f) ]
+Glass(a b h H) ->
+ [ !I(Extrude(Polygon(a h-0.034 b H-0.034 b H a h) 1.064 cap(all)) material(silverbluepolishedmetal) 1 0.16) ]
+
+# Teal ribs follow the same chord endpoints as the tiles. The two rolled
+# edges join all five ribs. Triangulated end yokes carry them to the axis.
+Ribs(count n f) count ->
+ [ T(0 0 -2.20+1.08*Ribs_count) Webs(n f) ]
+Webs(n f) n ->
+ [ Web(-1.48+2.96*Webs_count/n -1.48+2.96*(Webs_count+1)/n f) ]
+Web(a b f) ->
+ [ !I(Extrude(Polygon(a a*a/4/f-f-0.13 b b*b/4/f-f-0.13 b b*b/4/f-f-0.034 a a*a/4/f-f-0.034) 0.08 cap(all)) material(bluegreymattepaint) 1 0.28) ]
+Rim(x f) ->
+ [ T(x x*x/4/f-f-0.055 0) S(0.046 0.104 4.40) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+Yoke(z f) ->
+ [ T(0 0 z) [ Brace(1.48 f) ] [ Brace(-1.48 f) ] [ Brace(0 f) ]
+   [ T(0 0 -0.050) A(90 0) S(0.215 0.10 0.215) !I(Cylinder material(copperpolishedmetal) 1 0.24) ] ]
+Brace(x f) ->
+ [ !I(SweepDisk(path(0 0 0 x x*x/4/f-f-0.083 0) up(0 0 1) radius(0.037) radialSegments(10) cap(all)) material(bluegreymattepaint) 1 0.26) ]
+
+Tube ->
+ [ T(0 0 -2.45) A(90 0) S(0.104 4.90 0.104) !I(Cylinder(segments(48 1)) material(charcoalmattemetal) 1 0.28) ]
+ [ Ferrule(-2.39) ] [ Ferrule(2.39) ]
+Ferrule(z) ->
+ [ T(0 0 z) A(90 0)
+   [ S(0.168 0.065 0.168) !I(Cylinder(segments(8 1)) material(goldbrushedmetal) 1 0.25) ] ]
+
+Bed ->
+ [ BaseRail(-0.83) ] [ BaseRail(0.83) ]
+ [ T(0 0 -2.285) Trestle ] [ T(0 0 2.285) Trestle ]
+BaseRail(x) ->
+ [ T(x 0.09 0) S(0.24 0.18 4.80) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(x 0.19 0) S(0.19 0.024 4.74) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+Trestle ->
+ [ T(0 0.24 0) S(1.91 0.08 0.16) !I(Cube material(bluegreymattepaint) 1 0.28) ]
+ [ Leg(0.82) ] [ Leg(-0.82) ]
+ [ T(0 1.86 -0.057) A(90 0) S(0.245 0.114 0.245) !I(Cylinder material(copperpolishedmetal) 1 0.24) ]
+Leg(x) ->
+ [ !I(SweepProfile(profile(Rect 0.114 0.104) path(x 0.27 0 0 1.86 0) up(0 0 1) cap(all)) material(bluegreymattepaint) 1 0.28) ]

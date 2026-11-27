@@ -1,0 +1,47 @@
+# Marquetry tree. Tree(generations forkAngleDegrees).
+# Illustrated: Tree(4 36) and Tree(4 45). Smaller study: Tree(3 36).
+Start -> Tree(4 36)
+
+Tree(depth angle) ->
+ [ Object(id(Exhibit) class(MarquetryPanel) taxonomy(Study Geometry Dissection) layer(Equipment)) [
+   [ Object(id(Stand) class(DisplayFoot) taxonomy(Study Geometry Dissection) layer(Structure)) [ Plinth ] ]
+   [ Object(id(Canopy) class(RecursiveTiling) taxonomy(Study Geometry Dissection) layer(Equipment))
+     [ T(-0.70 0.34 -0.07) Tile(depth 1.4 angle 0) ] ] ] ]
+
+Plinth ->
+ [ T(0 0.075 0) S(2.36 0.15 0.96) !I(Cube material(amberwarmwood) 1 0.32) ]
+ [ T(0 0.163 0) S(2.27 0.026 0.88) !I(Cube material(goldbrushedmetal) 1 0.27) ]
+ [ T(0 0.225 0) S(2.18 0.10 0.80) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+ [ T(0 0.308 0) S(1.57 0.066 0.42) !I(Cube material(amberwarmwood) 1 0.29) ]
+
+# Every square has a full-size brass substrate, bevelled enamel and a vein motif.
+Tile(d s angle hand) ->
+ [ !I(Extrude(Polygon(0 0 s 0 s s 0 s) 0.14 cap(all)) material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0 0.14) Face(s hand) ]
+ [ T(s/2 s/2 0.165) A(36-72*hand 2) Feather(s) ]
+ [ Fork(d s angle) ]
+
+Face(s hand) -> ?(hand<0.5)
+ [ BevelBlue(s) ]
+ : [ BevelGreen(s) ]
+BevelBlue(s) ->
+ [ !I(Loft(section(0 Polygon s*0.025 s*0.025 s*0.975 s*0.025 s*0.975 s*0.975 s*0.025 s*0.975)
+           section(0.025 Polygon s*0.055 s*0.055 s*0.945 s*0.055 s*0.945 s*0.945 s*0.055 s*0.945) cap(all)) material(bluegreymattepaint) 1 0.25) ]
+BevelGreen(s) ->
+ [ !I(Loft(section(0 Polygon s*0.025 s*0.025 s*0.975 s*0.025 s*0.975 s*0.975 s*0.025 s*0.975)
+           section(0.025 Polygon s*0.055 s*0.055 s*0.945 s*0.055 s*0.945 s*0.945 s*0.055 s*0.945) cap(all)) material(sagegreenmattepaint) 1 0.25) ]
+Feather(s) ->
+ [ !I(Extrude(Polygon(0 -0.38*s 0.015*s 0 0 0.39*s -0.015*s 0) 0.005 cap(all)) material(goldbrushedmetal) 1 0.23) ]
+ [ Barbs(3 s) ]
+Barbs(n s) n ->
+ [ T(0 (Barbs_count-1)*s*0.123 0) [ Barb(s) ] [ A(180 1) T(0 0 -0.005) Barb(s) ] ]
+Barb(s) ->
+ [ !I(Extrude(Polygon(0 0 0.15*s 0.07*s 0.21*s 0.19*s 0.085*s 0.14*s) 0.005 cap(all)) material(goldbrushedmetal) 1 0.25) ]
+
+Fork(d s angle) -> ?(d>0)
+ [ T(0 s 0) Spandrel(d s angle s*cos(radians(angle)) s*sin(radians(angle))) ]
+ : [ ]
+Spandrel(d s angle left right) ->
+ [ !I(Extrude(Polygon(0 0 s 0 left*left/s left*right/s) 0.118 cap(all)) material(copperpolishedmetal) 1 0.25) ]
+ [ A(angle 2) Tile(d-1 left angle 0) ]
+ [ T(left*left/s left*right/s 0) A(angle-90 2) Tile(d-1 right angle 1) ]

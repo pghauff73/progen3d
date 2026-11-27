@@ -1,0 +1,60 @@
+{
+  "title": "14 code wheel",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/14-code-wheel-aacdc752",
+  "source_file": "14-code-wheel.p3d",
+  "git_blob_sha": "aacdc75292910500484a1d7e8691c23d84dcbc46",
+  "bytes": 2643,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "14-code-wheel.p3d"
+  ],
+  "description": "Reflective code-wheel demonstrator. Encoder(gray period). gray = 1 or 0.",
+  "features": [
+    "Revolve",
+    "Cylinder",
+    "Cube",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Reflective code-wheel demonstrator. Encoder(gray period). gray = 1 or 0. · Read from the hub outwards, most significant bit first. Time zero reads sector zero. · Each bright run occupies whole sectors. The high bit has one half-circle in both codes."
+    ],
+    [
+      "Named objects",
+      "Instrument, Case, Spindle, Code, Head"
+    ],
+    [
+      "Object classes",
+      "Demonstrator, InstrumentCase, Rotor, ReflectiveTracks, ReadHead"
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, Cylinder, Cube, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "offwhiteceramic, amberwarmwood, goldbrushedmetal, charcoalmattemetal, silverbrushedmetal, copperpolishedmetal, bluegreymattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Encoder, Arc, Foot, Wheel, Pickup (6 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "42"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

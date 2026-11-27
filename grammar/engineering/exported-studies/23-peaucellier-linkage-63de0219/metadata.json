@@ -1,0 +1,61 @@
+{
+  "title": "23 peaucellier linkage",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/23-peaucellier-linkage-63de0219",
+  "source_file": "23-peaucellier-linkage.p3d",
+  "git_blob_sha": "63de0219886df697fe147e6ac723c9d545450a73",
+  "bytes": 4162,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "23-peaucellier-linkage.p3d"
+  ],
+  "description": "Peaucellier–Lipkin straight-line mechanism. Inversor(crankRadius period).",
+  "features": [
+    "SweepProfile",
+    "SweepDisk",
+    "Cylinder",
+    "Revolve",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Peaucellier–Lipkin straight-line mechanism. Inversor(crankRadius period). · Tested crank radii 0.88 and 1.02; the oscillation is ±32° on the cell axis. · The inversion centre, drive joint, and tracer lie on one ray. The · midpoint of the rhombus lies on that ray and the other vertices sit · symmetrically either side, perpendicular to it."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Board, BasePivot, DriverPivot, Reference, LongLinks, CellLinks, Driver, Input, Output, Knuckles"
+    ],
+    [
+      "Object classes",
+      "StraightLineInstrument, DisplayStand, FixedPivot, Plot, EqualAnchorBars, EqualRhombusBars, Crank, DrivenJoint, TracingJoint, SidePivots"
+    ],
+    [
+      "Instantiated primitives",
+      "SweepProfile, SweepDisk, Cylinder, Revolve, Cube"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, goldbrushedmetal, copperpolishedmetal, silverbrushedmetal, sagegreenmattepaint, redmattepaint, amberwarmwood, warmwhitematteplaster"
+    ],
+    [
+      "Production rules",
+      "Start, Inversor, Layout, Invert, Rhombus, Assemble, Bar, Pivot, Axle, Pointer, Tip, Guides, Boardwork, Tack (14 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "65"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

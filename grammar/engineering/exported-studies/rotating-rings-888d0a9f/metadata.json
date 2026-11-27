@@ -1,0 +1,59 @@
+{
+  "title": "Rotating Rings",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/rotating-rings-888d0a9f",
+  "source_file": "Rotating_Rings.p3d",
+  "git_blob_sha": "888d0a9f9670b1e6c7ed8fe6b4163c091dfda1b3",
+  "bytes": 37569,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Rotating_Rings.p3d"
+  ],
+  "description": "Nested ring display / photograph reconstruction",
+  "features": [
+    "Cylinder",
+    "Cube",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Nested ring display / photograph reconstruction · One scene unit represents 100 mm at the illustrative 1800 mm outer diameter. · Set t in seconds. Joint inputs are parent-relative yaw angles in degrees. · At t=0 the absolute headings are +9, -70, +42. The pose repeats at 72 s. · The lower direct drives and rotary electrical interfaces are inferred."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cylinder, Cube, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "charcoalroughmetal, graphitemetal, darkslatesmoothstone, silverbluepolishedmetal, steelshinyroughmetal, ambermetalpolished, copperpolishedmetal, blackrubber, redmattepaint, forestgreenmattepaint, warmwhitematteplaster, cyanneonglowingactive, orangeglossypaint"
+    ],
+    [
+      "Production rules",
+      "Start, Display, BaseBody, OuterBody, MiddleBody, InnerBody, Pedestal, OuterModules, OuterFrame, MiddleModules, MiddleFrame, InnerModules, InnerFrame, Controller, Loom, JOneHousing, JOneStator, JOneRotor, JOneTransferBody, JOneBrushes (73 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "590"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,41 @@
+# Reflective code-wheel demonstrator. Encoder(gray period). gray = 1 or 0.
+# Read from the hub outwards, most significant bit first. Time zero reads sector zero.
+Start -> Encoder(1 16)
+
+Encoder(g period) ->
+ [ Object(id(Instrument) class(Demonstrator) taxonomy(Instrument Encoder) layer(Equipment)) [
+ [ Object(id(Case) class(InstrumentCase) taxonomy(Instrument Encoder) layer(Structure)) [ Foot ] ]
+ [ A(360*t/period+11.25 1)
+   [ Object(id(Spindle) class(Rotor) taxonomy(Instrument Encoder) layer(Equipment)) [ Wheel ] ]
+   [ Object(id(Code) class(ReflectiveTracks) taxonomy(Instrument Encoder) layer(Equipment))
+     [ Band(0.80 8 8 1) Band(1.11 4 4+4*g 2-g) Band(1.42 2 2+2*g 4-2*g) Band(1.73 1 1+g 8-4*g) ] ] ]
+ [ Object(id(Head) class(ReadHead) taxonomy(Instrument Encoder) layer(Equipment)) [ Pickup ] ]
+ ] ]
+
+# Each bright run occupies whole sectors. The high bit has one half-circle in both codes.
+Band(r lead width runs) runs ->
+ [ Arc(r 22.5*lead+360*Band_count/runs 22.5*width) ]
+Arc(r a span) ->
+ [ A(-a 1) !I(Revolve(profile(Polygon r-0.127 0.363 r+0.127 0.363 r+0.127 0.377 r-0.127 0.377) angle(0 span) segments(4*span/22.5)) material(offwhiteceramic) 1 0.30) ]
+
+Foot ->
+ [ !I(Revolve(profile(Polygon 0.01 0 2.15 0 2.24 0.07 2.24 0.15 2.17 0.21 0.01 0.21) angle(0 360) segments(128)) material(amberwarmwood) 1 0.28) ]
+ [ !I(Revolve(profile(Polygon 2.06 0.197 2.19 0.197 2.16 0.235 2.06 0.235) angle(0 360) segments(128)) material(goldbrushedmetal) 1 0.25) ]
+Wheel ->
+ [ !I(Revolve(profile(Polygon 0.01 0.211 1.96 0.211 2.01 0.259 2.01 0.334 1.98 0.363 0.01 0.363) angle(0 360) segments(128)) material(charcoalmattemetal) 1 0.31) ]
+ [ !I(Revolve(profile(Polygon 0.012 0.363 0.53 0.363 0.53 0.395 0.45 0.423 0.31 0.423 0.30 0.49 0.26 0.53 0.012 0.53) angle(0 360) segments(64)) material(goldbrushedmetal) 1 0.23) ]
+ [ Bolts(6) ] [ Divisions(16) ]
+Bolts(n) n ->
+ [ A(360*Bolts_count/n 1) T(0.381 0.422 0) S(0.070 0.030 0.070) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.23) ]
+Divisions(n) n ->
+ [ A(360*Divisions_count/n 1) T(1.923 0.367 0) S(0.091 0.009 0.019) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+
+Pickup ->
+ [ T(2.13 0.234 0) S(0.16 0.40 0.23) !I(Cylinder material(copperpolishedmetal) 1 0.25) ]
+ [ T(1.42 0.639 0) S(1.59 0.10 0.15) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+ [ Lenses(4) ]
+Lenses(n) n ->
+ [ T(0.80+0.31*Lenses_count 0.498 0)
+   [ S(0.124 0.096 0.124) !I(Cylinder material(copperpolishedmetal) 1 0.25) ]
+   [ T(0 -0.003 0) S(0.092 0.020 0.092) !I(Sphere material(bluegreymattepaint) 1 0.22) ]
+   [ T(0 0.192 0) S(0.087 0.014 0.087) !I(Cylinder material(goldbrushedmetal) 1 0.25) ] ]

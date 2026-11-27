@@ -1,0 +1,56 @@
+# Pin-jointed truss demonstrator. Bench(panels orientation rise).
+# Use an even panel count of 6 or 8. Orientation 0: Pratt. 1: Howe.
+# Copper diagonals indicate tension, and teal diagonals indicate compression.
+Start -> Bench(6 0 1.15)
+
+Bench(n k h) ->
+ [ Object(id(Exhibit) class(TrussDemonstrator) taxonomy(Study Structures Truss) layer(Equipment)) [
+   [ Object(id(Frame) class(DisplayBase) taxonomy(Study Structures Truss) layer(Structure)) [ Base ] ]
+   [ T(-2.40 0.87 0)
+     [ Object(id(Chords) class(HorizontalBars) taxonomy(Study Structures Truss) layer(Equipment)) [ Bays(n 4.80/n h) ] ]
+     [ Object(id(Posts) class(VerticalBars) taxonomy(Study Structures Truss) layer(Equipment)) [ Posts(n+1 4.80/n h) ] ]
+     [ Object(id(Braces) class(DiagonalBars) taxonomy(Study Structures Truss) layer(Equipment)) [ Braces(n 4.80/n h k) ] ]
+     [ Object(id(Pins) class(PanelJoints) taxonomy(Study Structures Truss) layer(Equipment)) [ Pins(n+1 4.80/n h) ] ]
+     [ Object(id(Loads) class(PointLoads) taxonomy(Study Structures Truss) layer(Equipment)) [ Loads(n-1 4.80/n) ] ] ] ] ]
+
+Bays(n d h) n ->
+ [ T(Bays_count*d 0 0) [ Bar(d 0 0 0 0.13) ] [ T(0 h 0) Bar(d 0 0 0 0.13) ] ]
+Posts(n d h) n ->
+ [ T(Posts_count*d 0 0) Bar(0 h 0 0 0.098) ]
+Bar(x y X Y w) ->
+ [ !I(SweepProfile(profile(Rect w 0.136) path(X Y 0 x y 0) up(0 0 1) cap(all)) material(charcoalmattemetal) 1 0.25) ]
+
+Braces(n d h k) n ->
+ [ T(Braces_count*d 0 0) BraceSlope(Braces_count n d h k) ]
+BraceSlope(i n d h k) -> ?(i<n/2)
+ [ Diagonal(d h k k) ]
+ : [ Diagonal(d h 1-k k) ]
+Diagonal(d h slope k) -> ?(k<0.5)
+ [ !I(SweepProfile(profile(Rect 0.083 0.105) path(0 h*(1-slope) 0 d h*slope 0) up(0 0 1) cap(all)) material(copperpolishedmetal) 1 0.25) ]
+ : [ !I(SweepProfile(profile(Rect 0.083 0.105) path(0 h*(1-slope) 0 d h*slope 0) up(0 0 1) cap(all)) material(bluegreymattepaint) 1 0.25) ]
+
+Pins(n d h) n ->
+ [ T(Pins_count*d 0 0)
+   [ Pin ] [ T(0 h 0) Pin ] ]
+Pin ->
+ [ T(0 0 -0.102) A(90 0) S(0.181 0.205 0.181) !I(Cylinder(segments(16 1)) material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0 0.103) A(90 0) S(0.094 0.030 0.094) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.25) ]
+
+Loads(n d) n ->
+ [ T((Loads_count+1)*d 0 0)
+   [ T(0 -0.29 0) S(0.028 0.242 0.028) !I(Cylinder material(silverbrushedmetal) 1 0.24) ]
+   [ T(0 -0.43 0) !I(Revolve(profile(Polygon 0.007 0 0.091 0 0.12 0.026 0.12 0.116 0.082 0.145 0.007 0.145) angle(0 360) segments(32)) material(redmattepaint) 1 0.32) ] ]
+
+Base ->
+ [ S(5.67 0.16 0.97) T(0 0.50 0) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.176 0) S(5.56 0.032 0.89) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+ [ T(0 0.211 0) S(5.49 0.038 0.84) !I(Cube material(charcoalmattemetal) 1 0.26) ]
+ [ T(-2.40 0 0) Plinth(0.30) ] [ T(2.40 0 0) Plinth(0.235) ]
+ [ T(-2.40 0 0) Wedge ] [ T(2.40 0 0) [ T(-0.105 0 0) Roller ] [ T(0.105 0 0) Roller ] [ Wedge ] ]
+Plinth(y) ->
+ [ T(0 0.23 0) S(0.48 y 0.56) !I(Cylinder(segments(12 1)) material(bluegreymattepaint) 1 0.27) ]
+ [ T(0 0.23+y 0) S(0.47 0.045 0.49) !I(Cube material(silverbrushedmetal) 1 0.24) ]
+Roller ->
+ [ T(0 0.521 -0.203) A(90 0) S(0.107 0.406 0.107) !I(Cylinder(segments(24 1)) material(copperpolishedmetal) 1 0.24) ]
+Wedge ->
+ [ T(0 0.548 -0.18) !I(Extrude(Polygon(-0.19 0 0.19 0 0.09 0.31 -0.09 0.31) 0.36 cap(all)) material(bluegreymattepaint) 1 0.25) ]

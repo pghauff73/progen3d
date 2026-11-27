@@ -1,0 +1,589 @@
+# Nested ring display / photograph reconstruction
+# One scene unit represents 100 mm at the illustrative 1800 mm outer diameter.
+# Set t in seconds. Joint inputs are parent-relative yaw angles in degrees.
+# At t=0 the absolute headings are +9, -70, +42. The pose repeats at 72 s.
+# The lower direct drives and rotary electrical interfaces are inferred.
+Start -> Display(9+360*3*cycle(t,72) -79-360*7*cycle(t,72) 112+360*10*cycle(t,72))
+
+Display(q1 q2 q3) ->
+    T(0 15.40 0)
+    BaseBody
+    [ A(q1 1) OuterBody
+      [ A(q2 1) MiddleBody
+        [ A(q3 1) InnerBody ] ] ]
+
+BaseBody -> Pedestal JOneHousing JOneStator JOneTransferBody JOneBrushes
+
+OuterBody -> OuterFrame JOneRotor JOneContacts JTwoHousing JTwoStator JTwoTransferBody JTwoBrushes
+
+MiddleBody -> MiddleFrame JTwoRotor JTwoContacts JThreeHousing JThreeStator JThreeTransferBody JThreeBrushes
+
+InnerBody -> InnerFrame JThreeRotor JThreeContacts
+
+DeckFeet(n) n ->
+    [ A(DeckFeet_count*360/n 1) T(0 -15.40 4.58) S(0.82 0.23 0.82) DarkCylinder ]
+
+Pedestal ->
+    [ T(0 -15.2 0) S(11.08 0.32 11.08) FrameCylinder ]
+    [ T(0 -14.9 0) S(10.72 0.08 10.72) LipCylinder ]
+    DeckFeet(6)
+    [ T(-1.95 -14.84 -1.45) S(0.44 4.28 0.44) FrameBox ]
+    [ T(-1.95 -14.82 -1.45) S(0.75 0.13 0.74) SilverBox ]
+    [ T(-1.95 -14.84 1.45) S(0.44 4.28 0.44) FrameBox ]
+    [ T(-1.95 -14.82 1.45) S(0.75 0.13 0.74) SilverBox ]
+    [ T(1.95 -14.84 -1.45) S(0.44 4.28 0.44) FrameBox ]
+    [ T(1.95 -14.82 -1.45) S(0.75 0.13 0.74) SilverBox ]
+    [ T(1.95 -14.84 1.45) S(0.44 4.28 0.44) FrameBox ]
+    [ T(1.95 -14.82 1.45) S(0.75 0.13 0.74) SilverBox ]
+    [ T(0 -14.62 -1.45) S(4.2 0.35 0.33) FrameBox ]
+    [ T(0 -14.62 1.45) S(4.2 0.35 0.33) FrameBox ]
+    [ T(-1.96 -14.62 0) S(0.32 0.35 3.19) FrameBox ]
+    [ T(1.96 -14.62 0) S(0.32 0.35 3.19) FrameBox ]
+    [ T(0 -10.82 -1.45) S(4.2 0.35 0.33) FrameBox ]
+    [ T(0 -10.82 1.45) S(4.2 0.35 0.33) FrameBox ]
+    [ T(-1.96 -10.82 0) S(0.32 0.35 3.19) FrameBox ]
+    [ T(1.96 -10.82 0) S(0.32 0.35 3.19) FrameBox ]
+    [ T(0 -14.26 0) S(3.66 0.16 2.74) SteelBox ]
+    [ T(0 -14.09 -0.4) S(2.2 1.2 1.35) FrameBox ]
+    [ T(-0.8 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(-0.56 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(-0.32 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(-0.08 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(0.16 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(0.4 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(0.64 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(0.88 -14.02 0.31) S(0.065 1.1 0.12) SilverBox ]
+    [ T(0 -10.56 -1.1275) S(4.4 0.19 1.115) LipBox ]
+    [ T(0 -10.56 1.1275) S(4.4 0.19 1.115) LipBox ]
+    [ T(-1.385 -10.56 0) S(1.63 0.19 1.14) LipBox ]
+    [ T(1.385 -10.56 0) S(1.63 0.19 1.14) LipBox ]
+    [ T(5.12 -14.83 0) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(4.43405 -14.83 2.56) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(2.56 -14.83 4.43405) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(0 -14.83 5.12) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-2.56 -14.83 4.43405) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-4.43405 -14.83 2.56) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-5.12 -14.83 0) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-4.43405 -14.83 -2.56) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-2.56 -14.83 -4.43405) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-0 -14.83 -5.12) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(2.56 -14.83 -4.43405) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(4.43405 -14.83 -2.56) S(0.136 0.045 0.136) SilverCylinder ]
+    [ T(-1.7 -10.38 -1.2) S(0.176 0.06 0.176) SilverCylinder ]
+    [ T(-1.7 -10.38 1.2) S(0.176 0.06 0.176) SilverCylinder ]
+    [ T(1.62 -10.38 -1.2) S(0.176 0.06 0.176) SilverCylinder ]
+    [ T(1.62 -10.38 1.2) S(0.176 0.06 0.176) SilverCylinder ]
+    [ T(-0.87 -14.1 0.1) A(-68.459024 1) A(49.412612 0) S(0.104 1.075918 0.104) CableWire ]
+    [ T(-1.63 -13.4 0.4) A(0 1) A(0 0) S(0.104 2.8 0.104) CableWire ]
+    [ T(-0.84 -14.28 0.65) S(0.15 2.19 0.15) SilverBox ]
+    [ T(-0.84 -14.28 -0.9) S(0.15 2.19 0.15) SilverBox ]
+    [ T(0.84 -14.28 0.65) S(0.15 2.19 0.15) SilverBox ]
+    [ T(0.84 -14.28 -0.9) S(0.15 2.19 0.15) SilverBox ]
+    [ T(0 -12.48 -0.14) S(1.92 0.15 1.78) SteelBox ]
+    [ T(0 -12.11 -0.14) S(1.92 0.15 1.78) SteelBox ]
+    [ T(0 -11.96 0) S(0.96 0.79 0.96) FrameCylinder ]
+    [ T(0 -11.21 0) S(1.14 0.12 1.14) SilverCylinder ]
+    [ T(-1.98 -12.92 1.21) S(0.67 0.69 0.59) LipBox ]
+    [ T(-2.32 -12.61 1.21) A(90 2) S(0.41 0.40 0.41) CaseCylinder ]
+    [ T(-2.54 -12.65 1.2) A(0 1) A(180 0) S(0.104 0.75 0.104) DarkWire ]
+    [ T(-2.54 -13.4 1.2) A(100.304846 1) A(149.525787 0) S(0.104 0.881816 0.104) DarkWire ]
+    [ T(-2.1 -14.16 1.12) A(119.68314 1) A(101.7778 0) S(0.104 1.175798 0.104) DarkWire ]
+
+OuterModules ->
+    [ A(10 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(30 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(50 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(70 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(90 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(110 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(130 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(150 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(170 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(190 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(210 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(230 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(250 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(270 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(290 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(310 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(330 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+    [ A(350 2) T(0 7.51 -0.112) S(1.195585 1 1) Controller ]
+
+OuterFrame ->
+    [ T(0 0 -0.56) A(90 0) S(18 1.12 18) I(Cylinder(segments(128) radial(0.99 1) topology(shell) close(all)) material(charcoalroughmetal) 1 0.5) ]
+    [ T(0 0 -0.56) A(90 0) S(14.804 1.12 14.804) I(Cylinder(segments(64) azimuth(93.686403 172.627194) radial(0.987571 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ] [ T(0 0 -0.56) A(90 0) S(14.804 1.12 14.804) I(Cylinder(segments(64) azimuth(273.686403 172.627194) radial(0.987571 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 0 -0.56) A(90 0) S(18 0.043 18) I(Cylinder(segments(128) radial(0.983889 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 -0.56) A(90 0) S(14.894 0.043 14.894) I(Cylinder(segments(64) azimuth(93.686403 172.627194) radial(0.981603 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ] [ T(0 0 -0.56) A(90 0) S(14.894 0.043 14.894) I(Cylinder(segments(64) azimuth(273.686403 172.627194) radial(0.981603 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 0.517) A(90 0) S(18 0.043 18) I(Cylinder(segments(128) radial(0.983889 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 0.517) A(90 0) S(14.894 0.043 14.894) I(Cylinder(segments(64) azimuth(93.686403 172.627194) radial(0.981603 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ] [ T(0 0 0.517) A(90 0) S(14.894 0.043 14.894) I(Cylinder(segments(64) azimuth(273.686403 172.627194) radial(0.981603 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    BayWebs(36 7.36 1.59 1.12)
+    OuterModules
+    [ A(0 2) BayLeads(17 10 7.47 1.152886 1.1154 1.12) ]
+    [ A(180 2) BayLeads(17 10 7.47 1.152886 1.1154 1.12) ]
+
+MiddleModules ->
+    [ A(12 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(36 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(60 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(84 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(108 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(132 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(156 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(192 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(216 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(240 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(264 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(288 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(312 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+    [ A(336 2) T(0 5.58 -0.158) S(1.088122 1 1) Controller ]
+
+MiddleFrame ->
+    [ T(0 0 -0.79) A(90 0) S(13.98 1.58 13.98) I(Cylinder(segments(128) radial(0.987124 1) topology(shell) close(all)) material(charcoalroughmetal) 1 0.5) ]
+    [ T(0 0 -0.79) A(90 0) S(10.944 1.58 10.944) I(Cylinder(segments(64) azimuth(95.011782 169.976436) radial(0.983187 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ] [ T(0 0 -0.79) A(90 0) S(10.944 1.58 10.944) I(Cylinder(segments(64) azimuth(275.011782 169.976436) radial(0.983187 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 0 -0.79) A(90 0) S(13.98 0.043 13.98) I(Cylinder(segments(128) radial(0.979256 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 -0.79) A(90 0) S(11.034 0.043 11.034) I(Cylinder(segments(64) azimuth(95.011782 169.976436) radial(0.975168 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ] [ T(0 0 -0.79) A(90 0) S(11.034 0.043 11.034) I(Cylinder(segments(64) azimuth(275.011782 169.976436) radial(0.975168 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 0.747) A(90 0) S(13.98 0.043 13.98) I(Cylinder(segments(128) radial(0.979256 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 0.747) A(90 0) S(11.034 0.043 11.034) I(Cylinder(segments(64) azimuth(95.011782 169.976436) radial(0.975168 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ] [ T(0 0 0.747) A(90 0) S(11.034 0.043 11.034) I(Cylinder(segments(64) azimuth(275.011782 169.976436) radial(0.975168 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    BayWebs(30 5.43 1.51 1.58)
+    MiddleModules
+    [ A(0 2) BayLeads(14 12 5.54 1.049261 1.0626 1.58) ]
+    [ A(180 2) BayLeads(14 12 5.54 1.049261 1.0626 1.58) ]
+
+InnerModules ->
+    [ A(15 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(45 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(75 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(105 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(135 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(165 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(195 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(225 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(255 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(285 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(315 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+    [ A(345 2) T(0 3.5 -0.104) S(0.915931 1 1) Controller ]
+
+InnerFrame ->
+    [ T(0 0 -0.52) A(90 0) S(10.06 1.04 10.06) I(Cylinder(segments(128) radial(0.982107 1) topology(shell) close(all)) material(charcoalroughmetal) 1 0.5) ]
+    [ T(0 0 -0.52) A(90 0) S(6.784 1.04 6.784) I(Cylinder(segments(128) radial(0.972877 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 0 -0.52) A(90 0) S(10.06 0.043 10.06) I(Cylinder(segments(128) radial(0.971173 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 -0.52) A(90 0) S(6.874 0.043 6.874) I(Cylinder(segments(128) radial(0.96014 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 0.477) A(90 0) S(10.06 0.043 10.06) I(Cylinder(segments(128) radial(0.971173 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 0 0.477) A(90 0) S(6.874 0.043 6.874) I(Cylinder(segments(128) radial(0.96014 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    BayWebs(24 3.35 1.63 1.04)
+    InnerModules
+    [ A(0 2) BayLeads(11 15 3.46 0.88322 1.1418 1.04) ]
+    [ A(180 2) BayLeads(11 15 3.46 0.88322 1.1418 1.04) ]
+    [ T(0 0 -0.435) A(90 0) S(5.46 0.87 5.46) I(Cylinder(segments(128) radial(0.934066 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 0 0.42) A(90 0) S(5.3 0.12 5.3) I(Cylinder(segments(128) radial(0.966038 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    HubBridges(6)
+    HubSpokes(12)
+    [ T(0 0 -0.48) A(90 0) S(1.13 1.02 1.13) FrameCylinder ]
+    [ T(0 0 0.54) A(90 0) S(0.66 0.10 0.66) SilverCylinder ]
+    [ T(0 0 0.64) A(90 0) S(0.37 0.035 0.37) FrameCylinder ]
+
+BayWebs(n r h d) n ->
+    [ A((BayWebs_count+0.5)*360/n 2) T(0 r 0) S(0.21 h d) FrameBox ]
+    [ A((BayWebs_count+0.5)*360/n 2) T(0 r+0.13 0.5*d) A(90 0) S(0.085 0.033 0.085) SilverWire ]
+
+Controller ->
+    [ T(0 0 -0.04) S(0.69 0.68 0.15) PCBBox ]
+    [ T(-0.02 0.065 0.065) S(0.56 0.51 0.15) CaseBox ]
+    Fins(7)
+    [ T(0.03 0.13 0.15) S(0.26 0.26 0.014) IvoryBox ]
+    [ T(0.27 0.1 0.09) S(0.095 0.2 0.12) DarkBox ]
+    [ T(0.31 0.36 0.06) S(0.05 0.06 0.11) LEDBox ]
+
+Fins(n) n ->
+    [ T(-0.25+Fins_count*0.071 0.10 0.15) S(0.023 0.41 0.055) SilverBox ]
+
+HubBridges(n) n ->
+    [ A(HubBridges_count*360/n 2) T(0 2.70 0) S(0.15 0.67 0.49) FrameBox ]
+
+HubSpokes(n) n ->
+    [ A(HubSpokes_count*360/n 2) T(0 0.45 -0.08) A(4 2) S(0.13 2.14 0.23) SilverBox ]
+
+BayLeads(n pitch r w h d) n ->
+    [ A((BayLeads_count+1)*pitch 2) T(0 r -0.2*d) S(w h 1) Loom ]
+
+Loom ->
+    [ T(-0.47 0.12 0.04) A(125.537678 1) A(15.509035 0) S(0.046 0.321714 0.046) CableWire ]
+    [ T(-0.4 0.43 -0.01) A(115.346176 1) A(36.901049 0) S(0.046 0.350143 0.046) CableWire ]
+    [ T(-0.21 0.71 -0.1) A(99.090277 1) A(74.544763 0) S(0.046 0.262679 0.046) CableWire ]
+    [ T(0.04 0.78 -0.14) A(79.215702 1) A(112.831202 0) S(0.046 0.231948 0.046) CableWire ]
+    [ T(0.25 0.69 -0.1) A(60.255119 1) A(151.742688 0) S(0.046 0.340588 0.046) CableWire ]
+    [ T(0.39 0.39 -0.02) A(34.99202 1) A(132.023757 0) S(0.046 0.164317 0.046) CableWire ]
+    [ T(-0.47 0.22 0.04) A(125.537678 1) A(15.509035 0) S(0.046 0.321714 0.046) DarkWire ]
+    [ T(-0.4 0.53 -0.01) A(115.346176 1) A(36.901049 0) S(0.046 0.350143 0.046) DarkWire ]
+    [ T(-0.21 0.81 -0.1) A(99.090277 1) A(74.544763 0) S(0.046 0.262679 0.046) DarkWire ]
+    [ T(0.04 0.88 -0.14) A(79.215702 1) A(112.831202 0) S(0.046 0.231948 0.046) DarkWire ]
+    [ T(0.25 0.79 -0.1) A(60.255119 1) A(151.742688 0) S(0.046 0.340588 0.046) DarkWire ]
+    [ T(0.39 0.49 -0.02) A(34.99202 1) A(132.023757 0) S(0.046 0.164317 0.046) DarkWire ]
+    [ T(-0.39 0.38 -0.01) S(0.07 0.1 0.09) DarkBox ]
+    [ T(0.44 0.21 0.08) S(0.13 0.08 0.13) DarkBox ]
+
+JOneHousing ->
+    [ T(0 -10.37 0) S(1.4508 0.137 1.4508) I(Cylinder(segments(64) radial(0.418803 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -10.2193 0) S(1.24 0.959 1.24) I(Cylinder(segments(64) radial(0.88 1) topology(shell) close(all)) material(charcoalroughmetal) 1 0.5) ]
+    [ T(0.6014 -10.233 0) S(0.124 0.0959 0.124) SilverCylinder ]
+    [ T(0.3007 -10.233 0.520828) S(0.124 0.0959 0.124) SilverCylinder ]
+    [ T(-0.3007 -10.233 0.520828) S(0.124 0.0959 0.124) SilverCylinder ]
+    [ T(-0.6014 -10.233 0) S(0.124 0.0959 0.124) SilverCylinder ]
+    [ T(-0.3007 -10.233 -0.520828) S(0.124 0.0959 0.124) SilverCylinder ]
+    [ T(0.3007 -10.233 -0.520828) S(0.124 0.0959 0.124) SilverCylinder ]
+
+JOneStator ->
+    [ T(0.4588 -9.9453 0) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(0.397332 -9.9453 0.2294) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(0.2294 -9.9453 0.397332) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(0 -9.9453 0.4588) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(-0.2294 -9.9453 0.397332) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(-0.397332 -9.9453 0.2294) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(-0.4588 -9.9453 0) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(-0.397332 -9.9453 -0.2294) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(-0.2294 -9.9453 -0.397332) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(-0 -9.9453 -0.4588) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(0.2294 -9.9453 -0.397332) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(0.397332 -9.9453 -0.2294) S(0.14136 0.5069 0.14136) CopperCylinder ]
+    [ T(0 -10.1508 0) S(1.0912 0.11234 1.0912) I(Cylinder(segments(64) radial(0.715909 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+    [ T(0 -10.14395 0) S(0.6448 0.09727 0.6448) I(Cylinder(segments(64) radial(0.875 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0.3565 -10.13162 0) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.308738 -10.13162 0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.17825 -10.13162 0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0 -10.13162 0.3565) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.17825 -10.13162 0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.308738 -10.13162 0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.3565 -10.13162 0) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.308738 -10.13162 -0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.17825 -10.13162 -0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0 -10.13162 -0.3565) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.17825 -10.13162 -0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.308738 -10.13162 -0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0 -9.3836 0) S(1.0912 0.11234 1.0912) I(Cylinder(segments(64) radial(0.715909 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+    [ T(0 -9.37675 0) S(0.6448 0.09727 0.6448) I(Cylinder(segments(64) radial(0.875 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0.3565 -9.36442 0) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.308738 -9.36442 0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.17825 -9.36442 0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0 -9.36442 0.3565) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.17825 -9.36442 0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.308738 -9.36442 0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.3565 -9.36442 0) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.308738 -9.36442 -0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0.17825 -9.36442 -0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(-0 -9.36442 -0.3565) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.17825 -9.36442 -0.308738) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.308738 -9.36442 -0.17825) S(0.06634 0.06634 0.06634) SilverBall ]
+    [ T(0.465 -9.274 0) S(0.2108 0.137 0.1984) PCBBox ]
+
+JOneRotor ->
+    [ T(0 -10.388 0) S(0.558 1.3974 0.558) I(Cylinder(segments(64) radial(0.544444 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0 -9.93845 0) S(0.73656 0.49046 0.73656) I(Cylinder(segments(64) radial(0.755892 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -9.19865 0) S(0.9672 0.05891 0.9672) I(Cylinder(segments(64) radial(0.578205 1) topology(shell) close(all)) material(ambermetalpolished) 1 0.5) ]
+    [ T(0 -9.11508 0) S(1.3888 0.12878 1.3888) I(Cylinder(segments(64) radial(0.217857 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -9.11234 0.5394) S(0.093 0.11645 0.0868) IndexBox ]
+
+JOneTransferBody ->
+    [ T(0 -10.962 0) S(0.8432 0.4884 0.8432) I(Cylinder(segments(64) radial(0.87 1) topology(shell) close(all)) material(ambermetalpolished) 1 0.5) ]
+    [ T(0 -10.4958 0) S(0.910656 0.1258 0.910656) I(Cylinder(segments(64) radial(0.731481 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+
+JOneBrushes ->
+    [ T(0.328848 -10.851 0) S(0.118048 0.2516 0.177072) DarkBox ]
+    [ T(0.261392 -10.888 0) S(0.118048 0.03182 0.08432) SilverBox ]
+    [ T(0.261392 -10.8066 0) S(0.118048 0.03182 0.08432) SilverBox ]
+    [ T(0.261392 -10.7252 0) S(0.118048 0.03182 0.08432) SilverBox ]
+    [ T(0.261392 -10.6438 0) S(0.118048 0.03182 0.08432) SilverBox ]
+
+JOneContacts ->
+    [ T(0 -11.12 0) S(0.413168 0.7548 0.413168) I(Cylinder(segments(64) radial(0.489796 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 -10.888 0) S(0.539648 0.0407 0.539648) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 -10.8066 0) S(0.539648 0.0407 0.539648) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 -10.7252 0) S(0.539648 0.0407 0.539648) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 -10.6438 0) S(0.539648 0.0407 0.539648) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+
+JTwoHousing ->
+    [ T(0 -8.27 0) S(0.9828 0.128 0.9828) I(Cylinder(segments(64) radial(0.418803 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -8.1292 0) S(0.84 0.896 0.84) I(Cylinder(segments(64) radial(0.88 1) topology(shell) close(all)) material(charcoalroughmetal) 1 0.5) ]
+    [ T(0.4074 -8.142 0) S(0.084 0.0896 0.084) SilverCylinder ]
+    [ T(0.2037 -8.142 0.352819) S(0.084 0.0896 0.084) SilverCylinder ]
+    [ T(-0.2037 -8.142 0.352819) S(0.084 0.0896 0.084) SilverCylinder ]
+    [ T(-0.4074 -8.142 0) S(0.084 0.0896 0.084) SilverCylinder ]
+    [ T(-0.2037 -8.142 -0.352819) S(0.084 0.0896 0.084) SilverCylinder ]
+    [ T(0.2037 -8.142 -0.352819) S(0.084 0.0896 0.084) SilverCylinder ]
+    [ T(-0.512266 -8.27 0) S(0.562531 0.128 0.48) LipBox ]
+    [ T(0.512266 -8.27 0) S(0.562531 0.128 0.48) LipBox ]
+
+JTwoStator ->
+    [ T(0.3108 -7.8732 0) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(0.269161 -7.8732 0.1554) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(0.1554 -7.8732 0.269161) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(0 -7.8732 0.3108) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(-0.1554 -7.8732 0.269161) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(-0.269161 -7.8732 0.1554) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(-0.3108 -7.8732 0) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(-0.269161 -7.8732 -0.1554) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(-0.1554 -7.8732 -0.269161) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(-0 -7.8732 -0.3108) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(0.1554 -7.8732 -0.269161) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(0.269161 -7.8732 -0.1554) S(0.09576 0.4736 0.09576) CopperCylinder ]
+    [ T(0 -8.0652 0) S(0.7392 0.10496 0.7392) I(Cylinder(segments(64) radial(0.715909 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+    [ T(0 -8.0588 0) S(0.4368 0.09088 0.4368) I(Cylinder(segments(64) radial(0.875 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0.2415 -8.04728 0) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.209145 -8.04728 0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.12075 -8.04728 0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0 -8.04728 0.2415) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.12075 -8.04728 0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.209145 -8.04728 0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.2415 -8.04728 0) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.209145 -8.04728 -0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.12075 -8.04728 -0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0 -8.04728 -0.2415) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.12075 -8.04728 -0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.209145 -8.04728 -0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0 -7.3484 0) S(0.7392 0.10496 0.7392) I(Cylinder(segments(64) radial(0.715909 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+    [ T(0 -7.342 0) S(0.4368 0.09088 0.4368) I(Cylinder(segments(64) radial(0.875 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0.2415 -7.33048 0) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.209145 -7.33048 0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.12075 -7.33048 0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0 -7.33048 0.2415) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.12075 -7.33048 0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.209145 -7.33048 0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.2415 -7.33048 0) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.209145 -7.33048 -0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0.12075 -7.33048 -0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(-0 -7.33048 -0.2415) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.12075 -7.33048 -0.209145) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.209145 -7.33048 -0.12075) S(0.04494 0.04494 0.04494) SilverBall ]
+    [ T(0.315 -7.246 0) S(0.1428 0.128 0.1344) PCBBox ]
+
+JTwoRotor ->
+    [ T(0 -8.288 0) S(0.378 1.3056 0.378) I(Cylinder(segments(64) radial(0.544444 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0 -7.8668 0) S(0.49896 0.45824 0.49896) I(Cylinder(segments(64) radial(0.755892 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -7.1756 0) S(0.6552 0.05504 0.6552) I(Cylinder(segments(64) radial(0.578205 1) topology(shell) close(all)) material(ambermetalpolished) 1 0.5) ]
+    [ T(0 -7.09752 0) S(0.9408 0.12032 0.9408) I(Cylinder(segments(64) radial(0.217857 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -7.09496 0.3654) S(0.063 0.1088 0.0588) IndexBox ]
+
+JTwoTransferBody ->
+    [ T(0 7.218 0) S(0.7728 0.8349 0.7728) I(Cylinder(segments(64) radial(0.87 1) topology(shell) close(all)) material(ambermetalpolished) 1 0.5) ]
+    [ T(0 8.01495 0) S(0.834624 0.21505 0.834624) I(Cylinder(segments(64) radial(0.731481 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(-0.525596 8.14 0) S(0.548872 0.09 0.45) LipBox ]
+    [ T(0.525596 8.14 0) S(0.548872 0.09 0.45) LipBox ]
+
+JTwoBrushes ->
+    [ T(0.301392 7.40775 0) S(0.108192 0.4301 0.162288) DarkBox ]
+    [ T(0.239568 7.3445 0) S(0.108192 0.054395 0.07728) SilverBox ]
+    [ T(0.239568 7.48365 0) S(0.108192 0.054395 0.07728) SilverBox ]
+    [ T(0.239568 7.6228 0) S(0.108192 0.054395 0.07728) SilverBox ]
+    [ T(0.239568 7.76195 0) S(0.108192 0.054395 0.07728) SilverBox ]
+    [ T(0 7.148425 0) S(0.73416 0.107525 0.73416) I(Cylinder(segments(64) radial(0.522105 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+
+JTwoContacts ->
+    [ T(0 6.955 0) S(0.378672 1.2903 0.378672) I(Cylinder(segments(64) radial(0.489796 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 7.3445 0) S(0.494592 0.069575 0.494592) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 7.48365 0) S(0.494592 0.069575 0.494592) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 7.6228 0) S(0.494592 0.069575 0.494592) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 7.76195 0) S(0.494592 0.069575 0.494592) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 6.955 0) S(0.834624 0.11385 0.834624) I(Cylinder(segments(64) radial(0.226852 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+
+JThreeHousing ->
+    [ T(0 -6.41 0) S(0.8424 0.138 0.8424) I(Cylinder(segments(64) radial(0.418803 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -6.2582 0) S(0.72 0.966 0.72) I(Cylinder(segments(64) radial(0.88 1) topology(shell) close(all)) material(charcoalroughmetal) 1 0.5) ]
+    [ T(0.3492 -6.272 0) S(0.072 0.0966 0.072) SilverCylinder ]
+    [ T(0.1746 -6.272 0.302416) S(0.072 0.0966 0.072) SilverCylinder ]
+    [ T(-0.1746 -6.272 0.302416) S(0.072 0.0966 0.072) SilverCylinder ]
+    [ T(-0.3492 -6.272 0) S(0.072 0.0966 0.072) SilverCylinder ]
+    [ T(-0.1746 -6.272 -0.302416) S(0.072 0.0966 0.072) SilverCylinder ]
+    [ T(0.1746 -6.272 -0.302416) S(0.072 0.0966 0.072) SilverCylinder ]
+    [ T(-0.470859 -6.41 0) S(0.545718 0.138 0.48) LipBox ]
+    [ T(0.470859 -6.41 0) S(0.545718 0.138 0.48) LipBox ]
+
+JThreeStator ->
+    [ T(0.2664 -5.9822 0) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(0.230709 -5.9822 0.1332) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(0.1332 -5.9822 0.230709) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(0 -5.9822 0.2664) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(-0.1332 -5.9822 0.230709) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(-0.230709 -5.9822 0.1332) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(-0.2664 -5.9822 0) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(-0.230709 -5.9822 -0.1332) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(-0.1332 -5.9822 -0.230709) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(-0 -5.9822 -0.2664) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(0.1332 -5.9822 -0.230709) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(0.230709 -5.9822 -0.1332) S(0.08208 0.5106 0.08208) CopperCylinder ]
+    [ T(0 -6.1892 0) S(0.6336 0.11316 0.6336) I(Cylinder(segments(64) radial(0.715909 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+    [ T(0 -6.1823 0) S(0.3744 0.09798 0.3744) I(Cylinder(segments(64) radial(0.875 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0.207 -6.16988 0) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.179267 -6.16988 0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.1035 -6.16988 0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0 -6.16988 0.207) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.1035 -6.16988 0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.179267 -6.16988 0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.207 -6.16988 0) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.179267 -6.16988 -0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.1035 -6.16988 -0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0 -6.16988 -0.207) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.1035 -6.16988 -0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.179267 -6.16988 -0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0 -5.4164 0) S(0.6336 0.11316 0.6336) I(Cylinder(segments(64) radial(0.715909 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+    [ T(0 -5.4095 0) S(0.3744 0.09798 0.3744) I(Cylinder(segments(64) radial(0.875 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0.207 -5.39708 0) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.179267 -5.39708 0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.1035 -5.39708 0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0 -5.39708 0.207) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.1035 -5.39708 0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.179267 -5.39708 0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.207 -5.39708 0) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.179267 -5.39708 -0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0.1035 -5.39708 -0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(-0 -5.39708 -0.207) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.1035 -5.39708 -0.179267) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.179267 -5.39708 -0.1035) S(0.03852 0.03852 0.03852) SilverBall ]
+    [ T(0.27 -5.306 0) S(0.1224 0.138 0.1152) PCBBox ]
+
+JThreeRotor ->
+    [ T(0 -6.428 0) S(0.324 1.4076 0.324) I(Cylinder(segments(64) radial(0.544444 1) topology(shell) close(all)) material(steelshinyroughmetal) 1 0.5) ]
+    [ T(0 -5.9753 0) S(0.42768 0.49404 0.42768) I(Cylinder(segments(64) radial(0.755892 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -5.2301 0) S(0.5616 0.05934 0.5616) I(Cylinder(segments(64) radial(0.578205 1) topology(shell) close(all)) material(ambermetalpolished) 1 0.5) ]
+    [ T(0 -5.14592 0) S(0.8064 0.12972 0.8064) I(Cylinder(segments(64) radial(0.217857 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(0 -5.14316 0.3132) S(0.054 0.1173 0.0504) IndexBox ]
+
+JThreeTransferBody ->
+    [ T(0 5.264 0) S(0.6624 0.8547 0.6624) I(Cylinder(segments(64) radial(0.87 1) topology(shell) close(all)) material(ambermetalpolished) 1 0.5) ]
+    [ T(0 6.07985 0) S(0.715392 0.22015 0.715392) I(Cylinder(segments(64) radial(0.731481 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+    [ T(-0.478718 6.21 0) S(0.526877 0.09 0.45) LipBox ]
+    [ T(0.478718 6.21 0) S(0.526877 0.09 0.45) LipBox ]
+
+JThreeBrushes ->
+    [ T(0.258336 5.45825 0) S(0.092736 0.4403 0.139104) DarkBox ]
+    [ T(0.205344 5.3935 0) S(0.092736 0.055685 0.06624) SilverBox ]
+    [ T(0.205344 5.53595 0) S(0.092736 0.055685 0.06624) SilverBox ]
+    [ T(0.205344 5.6784 0) S(0.092736 0.055685 0.06624) SilverBox ]
+    [ T(0.205344 5.82085 0) S(0.092736 0.055685 0.06624) SilverBox ]
+    [ T(0 5.192775 0) S(0.62928 0.110075 0.62928) I(Cylinder(segments(64) radial(0.522105 1) topology(shell) close(all)) material(silverbluepolishedmetal) 1 0.5) ]
+
+JThreeContacts ->
+    [ T(0 4.995 0) S(0.324576 1.3209 0.324576) I(Cylinder(segments(64) radial(0.489796 1) topology(shell) close(all)) material(darkslatesmoothstone) 1 0.5) ]
+    [ T(0 5.3935 0) S(0.423936 0.071225 0.423936) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 5.53595 0) S(0.423936 0.071225 0.423936) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 5.6784 0) S(0.423936 0.071225 0.423936) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 5.82085 0) S(0.423936 0.071225 0.423936) I(Cylinder(segments(64) radial(0.759375 1) topology(shell) close(all)) material(copperpolishedmetal) 1 0.5) ]
+    [ T(0 4.995 0) S(0.715392 0.11655 0.715392) I(Cylinder(segments(64) radial(0.226852 1) topology(shell) close(all)) material(graphitemetal) 1 0.5) ]
+
+FrameBox ->
+    I(Cube material(charcoalroughmetal) 1 0.5)
+
+FrameCylinder ->
+    I(Cylinder(segments(48)) material(charcoalroughmetal) 1 0.5)
+
+FrameWire ->
+    I(Cylinder(segments(8)) material(charcoalroughmetal) 1 0.5)
+
+LipBox ->
+    I(Cube material(graphitemetal) 1 0.5)
+
+LipCylinder ->
+    I(Cylinder(segments(48)) material(graphitemetal) 1 0.5)
+
+LipWire ->
+    I(Cylinder(segments(8)) material(graphitemetal) 1 0.5)
+
+SilverBox ->
+    I(Cube material(steelshinyroughmetal) 1 0.5)
+
+SilverCylinder ->
+    I(Cylinder(segments(48)) material(steelshinyroughmetal) 1 0.5)
+
+SilverWire ->
+    I(Cylinder(segments(8)) material(steelshinyroughmetal) 1 0.5)
+
+SilverBall ->
+    I(Sphere(segments(10 6)) material(steelshinyroughmetal) 1 0.5)
+
+DarkBox ->
+    I(Cube material(blackrubber) 1 0.5)
+
+DarkCylinder ->
+    I(Cylinder(segments(48)) material(blackrubber) 1 0.5)
+
+DarkWire ->
+    I(Cylinder(segments(8)) material(blackrubber) 1 0.5)
+
+CaseBox ->
+    I(Cube material(silverbluepolishedmetal) 1 0.5)
+
+CaseCylinder ->
+    I(Cylinder(segments(48)) material(silverbluepolishedmetal) 1 0.5)
+
+CaseWire ->
+    I(Cylinder(segments(8)) material(silverbluepolishedmetal) 1 0.5)
+
+CableBox ->
+    I(Cube material(redmattepaint) 1 0.5)
+
+CableCylinder ->
+    I(Cylinder(segments(48)) material(redmattepaint) 1 0.5)
+
+CableWire ->
+    I(Cylinder(segments(8)) material(redmattepaint) 1 0.5)
+
+CopperBox ->
+    I(Cube material(copperpolishedmetal) 1 0.5)
+
+CopperCylinder ->
+    I(Cylinder(segments(48)) material(copperpolishedmetal) 1 0.5)
+
+CopperWire ->
+    I(Cylinder(segments(8)) material(copperpolishedmetal) 1 0.5)
+
+GoldBox ->
+    I(Cube material(ambermetalpolished) 1 0.5)
+
+GoldCylinder ->
+    I(Cylinder(segments(48)) material(ambermetalpolished) 1 0.5)
+
+GoldWire ->
+    I(Cylinder(segments(8)) material(ambermetalpolished) 1 0.5)
+
+PCBBox ->
+    I(Cube material(forestgreenmattepaint) 1 0.5)
+
+PCBCylinder ->
+    I(Cylinder(segments(48)) material(forestgreenmattepaint) 1 0.5)
+
+PCBWire ->
+    I(Cylinder(segments(8)) material(forestgreenmattepaint) 1 0.5)
+
+IvoryBox ->
+    I(Cube material(warmwhitematteplaster) 1 0.5)
+
+IvoryCylinder ->
+    I(Cylinder(segments(48)) material(warmwhitematteplaster) 1 0.5)
+
+IvoryWire ->
+    I(Cylinder(segments(8)) material(warmwhitematteplaster) 1 0.5)
+
+LEDBox ->
+    I(Cube material(cyanneonglowingactive) 1 0.5)
+
+LEDCylinder ->
+    I(Cylinder(segments(48)) material(cyanneonglowingactive) 1 0.5)
+
+LEDWire ->
+    I(Cylinder(segments(8)) material(cyanneonglowingactive) 1 0.5)
+
+IndexBox ->
+    I(Cube material(orangeglossypaint) 1 0.5)
+
+IndexCylinder ->
+    I(Cylinder(segments(48)) material(orangeglossypaint) 1 0.5)
+
+IndexWire ->
+    I(Cylinder(segments(8)) material(orangeglossypaint) 1 0.5)
+
+SteelBox ->
+    I(Cube material(darkslatesmoothstone) 1 0.5)
+
+SteelCylinder ->
+    I(Cylinder(segments(48)) material(darkslatesmoothstone) 1 0.5)
+
+SteelWire ->
+    I(Cylinder(segments(8)) material(darkslatesmoothstone) 1 0.5)

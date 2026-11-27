@@ -1,0 +1,62 @@
+# Tensegrity study. Prism(struts bottomRadius topRadius height).
+# Try 3 or 4 struts. The twist follows the strut count automatically.
+Start -> Prism(3 1.03 1.03 2.34)
+
+Prism(n b u h) ->
+ [ Object(id(Exhibit) class(TensegrityDemonstrator) taxonomy(Study Structures Tensegrity) layer(Equipment)) [
+   [ Object(id(Plinth) class(DisplayBase) taxonomy(Study Structures Tensegrity) layer(Structure)) [ Base(b) Seats(n b) ] ]
+   [ T(0 0.39 0)
+     [ Object(id(BottomJoints) class(JointSet) taxonomy(Study Structures Tensegrity) layer(Equipment)) [ Nodes(n b 0) ] ]
+     [ Object(id(TopJoints) class(JointSet) taxonomy(Study Structures Tensegrity) layer(Equipment)) [ T(0 h 0) Nodes(n u 90-180/n) ] ]
+     [ Object(id(LowerRing) class(TensionRing) taxonomy(Study Structures Tensegrity) layer(Equipment)) [ Ring(n b 0) ] ]
+     [ Object(id(UpperRing) class(TensionRing) taxonomy(Study Structures Tensegrity) layer(Equipment)) [ T(0 h 0) Ring(n u 90-180/n) ] ]
+     [ Object(id(Lacing) class(TensionMembers) taxonomy(Study Structures Tensegrity) layer(Equipment)) [ Sides(n b u h 90-180/n 0) ] ]
+     [ Object(id(Struts) class(CompressionMembers) taxonomy(Study Structures Tensegrity) layer(Equipment)) [ Sides(n b u h 90+180/n 1) ] ] ] ] ]
+
+Nodes(n r a) n ->
+ [ Node(r radians(360*Nodes_count/n+a)) ]
+Node(r a) ->
+ [ T(r*cos(a) 0 r*sin(a))
+   [ S(0.146 0.146 0.146) !I(Sphere material(goldbrushedmetal) 1 0.25) ]
+   [ T(0 0.044 0) S(0.068 0.065 0.068) !I(Cylinder(segments(6 1)) material(silverbrushedmetal) 1 0.24) ] ]
+
+Ring(n r a) n ->
+ [ RingSpan(r radians(360*Ring_count/n+a) radians(360*(Ring_count+1)/n+a)) ]
+RingSpan(r a b) ->
+ [ Wire(r*cos(a) 0 r*sin(a) r*cos(b) 0 r*sin(b) 0.015) ]
+
+Sides(n b u h a k) n ->
+ [ SideSpan(b u h radians(360*Sides_count/n) radians(360*Sides_count/n+a) k) ]
+SideSpan(b u h a f k) -> ?(k<0.5)
+ [ Wire(b*cos(a) 0 b*sin(a) u*cos(f) h u*sin(f) 0.020) ]
+ : [ Compression(b*cos(a) 0 b*sin(a) u*cos(f) h u*sin(f)) ]
+
+Wire(x y z X Y Z r) ->
+ [ !I(TaperedSweep(samples(x y z r X Y Z r) up(0 1 0) segments(12) cap(all)) material(copperpolishedmetal) 1 0.24) ]
+ [ Terminal(x y z X Y Z 0.044 0.052) ] [ Terminal(X Y Z x y z 0.044 0.052) ]
+
+Compression(x y z X Y Z) ->
+ [ !I(TaperedSweep(samples(x y z 0.036 0.88*x+0.12*X 0.88*y+0.12*Y 0.88*z+0.12*Z 0.055
+   0.12*x+0.88*X 0.12*y+0.88*Y 0.12*z+0.88*Z 0.055 X Y Z 0.036)
+   up(0 1 0) segments(16) cap(all)) material(bluegreymattepaint) 1 0.25) ]
+ [ Terminal(x y z X Y Z 0.09 0.100) ] [ Terminal(X Y Z x y z 0.09 0.100) ]
+
+Terminal(x y z X Y Z r end) ->
+ [ !I(TaperedSweep(samples(0.97*x+0.03*X 0.97*y+0.03*Y 0.97*z+0.03*Z r*0.78
+   (1-end)*x+end*X (1-end)*y+end*Y (1-end)*z+end*Z r*0.78)
+   up(0 1 0) segments(6) cap(all)) material(silverbrushedmetal) 1 0.24) ]
+
+Base(b) ->
+ [ !I(Revolve(profile(Polygon 0.008 0  b+0.38 0  b+0.48 0.055  b+0.48 0.137
+   b+0.39 0.195  0.008 0.195) angle(0 360) segments(72)) material(amberwarmwood) 1 0.25) ]
+ [ T(0 0.195 0) S(2*b+0.79 0.035 2*b+0.79) !I(Cylinder(segments(72 1)) material(charcoalmattemetal) 1 0.25) ]
+ [ T(0 0.23 0) Scale(36 b) ]
+ [ T(0 0.23 0) S(0.45 0.015 0.45) !I(Cylinder(segments(48 1)) material(bluegreymattepaint) 1 0.24) ]
+Scale(n b) n ->
+ [ A(-360*Scale_count/n 1)
+   T(b+0.30 0 0) S(0.064 0.008 0.012) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+Seats(n r) n ->
+ [ A(-360*Seats_count/n 1) T(r 0.23 0)
+   [ S(0.202 0.027 0.202) !I(Cylinder(segments(12 1)) material(goldbrushedmetal) 1 0.25) ]
+   [ T(0 0.027 0) S(0.091 0.060 0.091) !I(Cylinder(segments(16 1)) material(charcoalmattemetal) 1 0.25) ]
+   [ T(0 0.087 0) S(0.155 0.043 0.155) !I(Cylinder(segments(16 1)) material(silverbrushedmetal) 1 0.25) ] ]

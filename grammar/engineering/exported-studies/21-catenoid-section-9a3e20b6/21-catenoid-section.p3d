@@ -1,0 +1,54 @@
+# Catenoid section. Bridge(branch axialBands waistOffset).
+# Branch 0: wide neck. Branch 1: narrow neck. Use even band counts 12 to 48.
+# The two brass rims have radius 1.50 and separation 1.70 for both branches.
+Start -> Bridge(0 32 0.00)
+
+Bridge(branch n shift) ->
+ [ Object(id(Instrument) class(SurfaceStudy) taxonomy(Study Geometry Catenoid) layer(Equipment)) [
+   [ Object(id(Frame) class(RingFrame) taxonomy(Study Geometry Catenoid) layer(Structure))
+     [ Bed [ Upright(180) ] [ Upright(275) ] [ Rim(0.48) ] [ Rim(2.18) ] ] ]
+   [ Object(id(Shell) class(CutawaySurface) taxonomy(Study Geometry Catenoid) layer(Equipment))
+     [ T(0 1.33 0) A(-110 1) Bands(n 1.1805480365-0.7222272178*branch shift) ] ] ] ]
+
+# The neck radius a solves a*cosh(0.85/a)=1.50. At signed height z=0.85*u,
+# evaluate cosh(z/a) as an even series through degree 12 for this bounded range.
+Bands(n a shift) n ->
+ [ Interval(-1+2*Bands_count/n -1+2*(Bands_count+1)/n a shift Bands_count) ]
+Interval(u v a s i) ->
+ [ Profile(u v a s i 0.7225*u*u/a/a 0.7225*v*v/a/a) ]
+Profile(u v a s i x y) ->
+ [ Heights(u v s i
+   a*(1+x*(0.5+x*(0.041666666667+x*(0.001388888889+x*(0.0000248015873+x*(0.0000002755732+x*0.000000002087676))))))
+   a*(1+y*(0.5+y*(0.041666666667+y*(0.001388888889+y*(0.0000248015873+y*(0.0000002755732+y*0.000000002087676))))))) ]
+Heights(u v s i r q) ->
+ [ Band(0.85*u 0.85*v r+s*cos(radians(90*u)) q+s*cos(radians(90*v)) i) ]
+Band(h H r q i) ->
+ [ !I(Revolve(profile(Polygon r h q H q-0.025 H r-0.025 h) angle(0 270) segments(72)) material(bluegreymattepaint) 1 0.28) ]
+ [ Edge(h H r q) ] [ A(90 1) Edge(h H r q) ]
+ [ Stripe(i r h) ]
+Edge(h H r q) ->
+ [ !I(SweepDisk(path(r h 0 q H 0) up(0 0 1) radius(0.019) radialSegments(8) cap(all)) material(copperpolishedmetal) 1 0.24) ]
+Stripe(i r h) -> ?(wrap(i,0,8)<0.5)
+ [ !I(Revolve(profile(Polygon r-0.004 h-0.008 r+0.013 h-0.008 r+0.013 h+0.008 r-0.004 h+0.008) angle(0 270) segments(72)) material(silverbrushedmetal) 1 0.25) ]
+ : [ ]
+
+Rim(y) ->
+ [ T(0 y 0) !I(Revolve(profile(Polygon 1.46 -0.026 1.50 -0.045 1.55 -0.025 1.55 0.025 1.50 0.045 1.46 0.025) angle(0 360) segments(96)) material(goldbrushedmetal) 1 0.24) ]
+Bed ->
+ [ S(3.97 0.17 3.97) T(0 0.5 0) !I(Cube material(amberwarmwood) 1 0.31) ]
+ [ T(0 0.18 0) S(3.88 0.026 3.88) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+ [ T(0 0.213 0) S(3.83 0.040 3.83) !I(Cube material(charcoalmattemetal) 1 0.30) ]
+ [ !I(Revolve(profile(Polygon 0.01 0.233 1.63 0.233 1.63 0.275 1.55 0.31 0.01 0.31) angle(0 360) segments(96)) material(bluegreymattepaint) 1 0.28) ]
+ [ Feet(3) ]
+Feet(n) n ->
+ [ A(120*Feet_count 1) T(1.50 0.305 0)
+   !I(Revolve(profile(Polygon 0.008 0 0.082 0 0.082 0.028 0.046 0.054 0.041 0.121 0.057 0.139 0.008 0.139) angle(0 360) segments(24)) material(copperpolishedmetal) 1 0.24) ]
+Upright(angle) ->
+ [ A(0-angle 1) T(1.78 0 0)
+   [ T(0 0.233 0) S(0.23 0.08 0.23) !I(Cylinder material(copperpolishedmetal) 1 0.25) ]
+   [ T(0 0.31 0) S(0.10 2.08 0.10) !I(Cylinder material(silverbrushedmetal) 1 0.25) ]
+   [ Clamp(0.48) ] [ Clamp(2.18) ]
+   [ T(0 2.39 0) S(0.14 0.045 0.14) !I(Cylinder material(goldbrushedmetal) 1 0.26) ] ]
+Clamp(y) ->
+ [ T(-0.128 y 0) S(0.34 0.070 0.095) !I(Cube material(bluegreymattepaint) 1 0.27) ]
+ [ T(0 y-0.065 0) S(0.19 0.13 0.19) !I(Cylinder material(copperpolishedmetal) 1 0.24) ]

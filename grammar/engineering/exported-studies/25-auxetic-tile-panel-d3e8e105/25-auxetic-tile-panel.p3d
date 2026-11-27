@@ -1,0 +1,59 @@
+# Corner-hinged tile panel. Coupon(cols rows halfWidth halfDepth openAngle period).
+# Default tiles are square. Try halfDepth 0.26 to compare rectangular tiles.
+# The motion goes from 8 degrees to openAngle and back in one period.
+Start -> Coupon(5 4 0.36 0.36 38 8)
+
+Coupon(cols rows a b limit period) ->
+ [ Object(id(Exhibit) class(AuxeticTestPanel) taxonomy(Study Structures Auxetics) layer(Equipment)) [
+   [ Object(id(Frame) class(DisplayTray) taxonomy(Study Structures Auxetics) layer(Structure)) [ Tray ] ]
+   [ Pattern(cols rows a b 8+(limit-8)*(1-cos(radians(360*t/period)))/2) ] ] ]
+
+Pattern(cols rows a b angle) ->
+ [ Lattice(cols rows a b angle cos(radians(angle)) sin(radians(angle))) ]
+Lattice(cols rows a b angle c s) ->
+ [ T((1-cols)*(a*c+b*s) 0 (1-rows)*(a*s+b*c))
+   [ Object(id(Tiles) class(RigidTileArray) taxonomy(Study Structures Auxetics) layer(Equipment))
+     [ TileRows(rows cols a b angle 2*a*c+2*b*s 2*a*s+2*b*c) ] ]
+   [ Object(id(Pivots) class(CornerHingeArray) taxonomy(Study Structures Auxetics) layer(Equipment))
+     [ [ XRows(rows cols-1 2*a*c+2*b*s 2*a*s+2*b*c a*s-b*c) ]
+     [ ZRows(rows-1 cols 2*a*c+2*b*s 2*a*s+2*b*c a*c-b*s) ] ] ] ]
+
+TileRows(rows cols a b angle dx dz) rows ->
+ [ T(0 0 TileRows_count*dz) TileCols(cols a b angle dx TileRows_count) ]
+TileCols(cols a b angle dx row) cols ->
+ [ T(TileCols_count*dx 0 0) Tile(a b angle 1-2*wrap(TileCols_count+row,0,2)) ]
+Tile(a b angle hand) ->
+ [ A(0-hand*angle 1) T(0 0.325+0.0475*(1-hand) 0)
+   [ T(0 -0.126-0.0475*(1-hand) 0) S(0.16 0.091+0.0475*(1-hand) 0.16) !I(Cylinder(segments(16 1)) material(charcoalroughmetal) 1 0.28) ]
+   [ S(2*a 0.079 2*b) !I(Cube material(charcoalmattemetal) 1 0.24) ]
+   [ T(0 0.04 0) A(-90 0) Enamel(a b hand) ]
+   [ T(0 0.068 0) S(a*0.79 0.006 0.025) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+   [ T(0 0.069 0) S(0.059 0.007 0.052) !I(Cube material(copperpolishedmetal) 1 0.24) ] ]
+Enamel(a b hand) -> ?(hand>0)
+ [ !I(Extrude(Polygon(-0.86*a -0.69*b -0.69*a -0.86*b 0.69*a -0.86*b 0.86*a -0.69*b 0.86*a 0.69*b 0.69*a 0.86*b -0.69*a 0.86*b -0.86*a 0.69*b) 0.024 cap(all)) material(bluegreymattepaint) 1 0.24) ]
+ : [ !I(Extrude(Polygon(-0.86*a -0.69*b -0.69*a -0.86*b 0.69*a -0.86*b 0.86*a -0.69*b 0.86*a 0.69*b 0.69*a 0.86*b -0.69*a 0.86*b -0.86*a 0.69*b) 0.024 cap(all)) material(sagegreenmattepaint) 1 0.24) ]
+
+# One pin for each adjoining pair. Offsets alternate with tile handedness.
+XRows(rows gaps dx dz offset) rows ->
+ [ T(0 0 XRows_count*dz) XCols(gaps dx offset XRows_count) ]
+XCols(n dx offset row) n ->
+ [ T((XCols_count+0.5)*dx 0 offset*(1-2*wrap(XCols_count+row,0,2))) Rivet ]
+ZRows(n cols dx dz offset) n ->
+ [ T(0 0 (ZRows_count+0.5)*dz) ZCols(cols dx offset ZRows_count) ]
+ZCols(n dx offset row) n ->
+ [ T(ZCols_count*dx+offset*(1-2*wrap(ZCols_count+row,0,2)) 0 0) Rivet ]
+Rivet ->
+ [ T(0 0.272 0) S(0.063 0.225 0.063) !I(Cylinder(segments(12 1)) material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0.493 0) S(0.128 0.027 0.128) !I(Cylinder(segments(16 1)) material(copperpolishedmetal) 1 0.23) ]
+ [ T(0 0.520 0) S(0.047 0.013 0.047) !I(Cylinder(segments(12 1)) material(silverbrushedmetal) 1 0.23) ]
+
+Tray ->
+ [ S(5.70 0.15 4.63) T(0 0.5 0) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.162 0) S(5.58 0.024 4.51) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0.186 0) S(5.49 0.026 4.43) !I(Cube material(warmwhitematteplaster) 1 0.27) ]
+ [ T(0 0.202 2.08) ScaleX(51) ]
+ [ T(-2.57 0.202 0) ScaleZ(41) ]
+ScaleX(n) n ->
+ [ T((ScaleX_count-25)*0.10 0 0) S(0.012 0.007 0.061+0.063*(1-wrap(ScaleX_count,0,5)/4)) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+ScaleZ(n) n ->
+ [ T(0 0 (ScaleZ_count-20)*0.10) S(0.061+0.063*(1-wrap(ScaleZ_count,0,5)/4) 0.007 0.012) !I(Cube material(charcoalmattemetal) 1 0.25) ]

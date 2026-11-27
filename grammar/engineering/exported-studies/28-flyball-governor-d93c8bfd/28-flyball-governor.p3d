@@ -1,0 +1,88 @@
+# Quasi-static flyball governor. Governor(lowRPM highRPM period lowerLength).
+# Upper arms are 1.12 m. Suggested lower lengths are 1.12-1.32 m.
+# Try 32-48 rpm over 6 s or 30-42 rpm over 5 s.
+Start -> Governor(32 48 6 1.12)
+
+Governor(lo hi period lower) ->
+ [ Motion(lo+(hi-lo)*(1-cos(6.28318530718*t/period))/2 lower
+          3*(lo+hi)*t-3*(hi-lo)*sin(6.28318530718*t/period)*period/6.28318530718) ]
+Motion(rpm lower phase) ->
+ [ Height(min(1.12,9.80665/(radians(6*rpm)*radians(6*rpm))) lower phase) ]
+Height(h lower phase) ->
+ [ Radius(h lower phase sqrt(1.12*1.12-h*h)) ]
+Radius(h lower phase r) ->
+ [ Exhibit(phase r 3.05-h 3.05-h-sqrt(lower*lower-r*r)) ]
+
+Exhibit(phase r y s) ->
+ [ Object(id(Exhibit) class(FlyballGovernor) taxonomy(Study Mechanical Regulation) layer(Equipment)) [
+   [ Object(id(Pedestal) class(InstrumentBase) taxonomy(Study Mechanical Regulation) layer(Structure)) [ Base ] ]
+   [ Object(id(Scale) class(SleeveTravelScale) taxonomy(Study Mechanical Regulation) layer(Equipment)) [ Scale ] ]
+   [ Object(id(Spindle) class(DriveShaft) taxonomy(Study Mechanical Regulation) layer(Equipment)) [ Shaft ] ]
+   [ Object(id(Follower) class(SleeveIndicator) taxonomy(Study Mechanical Regulation) layer(Equipment)) [ T(0 s 0) Indicator ] ]
+   [ A(phase 1)
+     [ Object(id(Drive) class(DriveWheel) taxonomy(Study Mechanical Regulation) layer(Equipment)) [ Flywheel ] ]
+     [ Object(id(UpperPivot) class(SpindleHead) taxonomy(Study Mechanical Regulation) layer(Equipment)) [ T(0 3.05 0) Head ] ]
+     [ Object(id(Sleeve) class(SlidingCollar) taxonomy(Study Mechanical Regulation) layer(Equipment)) [ T(0 s 0) Sleeve ] ]
+     [ Object(id(Flyballs) class(OpposedWeights) taxonomy(Study Mechanical Regulation) layer(Equipment)) [
+       [ T(r y 0) Ball ] [ T(-r y 0) Ball ] ] ]
+     [ Object(id(UpperLinks) class(PendulumArms) taxonomy(Study Mechanical Regulation) layer(Equipment)) [
+       [ Upper(r y) ] [ Upper(-r y) ] ] ]
+     [ Object(id(LowerLinks) class(SleeveForks) taxonomy(Study Mechanical Regulation) layer(Equipment)) [
+       [ Lower(r y s) ] [ Lower(-r y s) ] ] ] ] ] ]
+
+Upper(x y) ->
+ [ !I(SweepProfile(profile(Rect 0.096 0.096) path(0 3.05 0 x y 0) up(0 0 1) cap(all)) material(bluegreymattepaint) 1 0.24) ]
+Lower(x y s) ->
+ [ Fork(x y s -0.081) ] [ Fork(x y s 0.081) ]
+Fork(x y s z) ->
+ [ !I(SweepProfile(profile(Rect 0.048 0.069) path(0 s z x y z) up(0 0 1) cap(all)) material(silverbrushedmetal) 1 0.26) ]
+
+Ball ->
+ [ S(0.330 0.330 0.330) !I(Sphere material(copperpolishedmetal) 1 0.24) ]
+ [ Pin(0.182 0.362) ]
+Pin(d w) ->
+ [ T(0 0 -w/2) A(90 0) S(d w d) !I(Cylinder(segments(16 1)) material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 0 w/2) A(90 0) S(d*0.63 0.027 d*0.63) !I(Cylinder(segments(6 1)) material(charcoalmattemetal) 1 0.24) ]
+Head ->
+ [ !I(Revolve(profile(Polygon 0.086 -0.120 0.184 -0.120 0.206 -0.083 0.206 0.066
+   0.161 0.125 0.086 0.125) angle(0 360) segments(48)) material(goldbrushedmetal) 1 0.25) ]
+ [ Pin(0.135 0.432) ]
+Sleeve ->
+ [ !I(Revolve(profile(Polygon 0.086 -0.115 0.119 -0.115 0.153 -0.087
+   0.153 0.079 0.121 0.113 0.086 0.113) angle(0 360) segments(48)) material(goldbrushedmetal) 1 0.25) ]
+ [ Pin(0.131 0.360) ]
+Indicator ->
+ [ !I(Revolve(profile(Polygon 0.089 -0.181 0.181 -0.181 0.194 -0.159
+   0.194 -0.111 0.089 -0.111) angle(0 360) segments(48)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(0.914 -0.145 0.056) S(1.57 0.043 0.062) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ T(0 -0.145 0.037) !I(Extrude(Polygon(1.648 -0.052 1.814 0 1.648 0.052) 0.041 cap(all))
+   material(redmattepaint) 1 0.24) ]
+
+Shaft ->
+ [ T(0 0.32 0) S(0.156 3.035 0.156) !I(Cylinder(segments(48 1)) material(silverbrushedmetal) 1 0.25) ]
+ [ T(0 3.315 0) S(0.185 0.061 0.185) !I(Cylinder(segments(12 1)) material(bluegreymattepaint) 1 0.24) ]
+Flywheel ->
+ [ !I(Revolve(profile(Polygon 0.574 0.416 0.735 0.416 0.755 0.440
+   0.755 0.553 0.733 0.581 0.574 0.581) angle(0 360) segments(72)) material(bluegreymattepaint) 1 0.24) ]
+ [ T(0 0.412 0) S(0.428 0.163 0.428) !I(Cylinder(segments(48 1)) material(goldbrushedmetal) 1 0.25) ]
+ [ Spokes(6) ]
+ [ T(0.664 0.588 0) S(0.114 0.013 0.046) !I(Cube material(redmattepaint) 1 0.24) ]
+Spokes(n) n ->
+ [ A(360*Spokes_count/n 1) T(0.39 0.495 0) S(0.405 0.091 0.071)
+   !I(Cube material(charcoalmattemetal) 1 0.24) ]
+
+Base ->
+ [ T(0.26 0.096 0) S(3.52 0.192 2.89) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0.26 0.201 0) S(3.40 0.027 2.77) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+ [ T(0 0.213 0) S(0.79 0.068 0.79) !I(Cylinder(segments(48 1)) material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.281 0) S(0.59 0.119 0.59) !I(Cylinder(segments(12 1)) material(bluegreymattepaint) 1 0.24) ]
+ [ T(0 0.399 0) S(0.36 0.047 0.36) !I(Cylinder(segments(24 1)) material(silverbrushedmetal) 1 0.24) ]
+Scale ->
+ [ T(1.72 0.252 -0.174) S(0.45 0.082 0.58) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+ [ T(1.75 1.35 -0.130) S(0.34 2.20 0.106) !I(Cube material(bluegreymattepaint) 1 0.25) ]
+ [ T(1.77 1.51 -0.063) S(0.236 1.865 0.036) !I(Cube material(offwhiteceramic) 1 0.25) ]
+ [ T(1.85 0.63 -0.040) Ticks(35) ]
+Ticks(n) n ->
+ [ T(0 Ticks_count*0.052 0)
+   S(0.055+0.052*(1-min(1,wrap(Ticks_count,0,5))) 0.012 0.014)
+   !I(Cube material(charcoalmattemetal) 1 0.23) ]

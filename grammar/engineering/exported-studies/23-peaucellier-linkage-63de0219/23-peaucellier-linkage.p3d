@@ -1,0 +1,64 @@
+# Peaucellier–Lipkin straight-line mechanism. Inversor(crankRadius period).
+# Tested crank radii 0.88 and 1.02; the oscillation is ±32° on the cell axis.
+Start -> Inversor(0.88 8)
+
+Inversor(c period) ->
+ [ Object(id(Exhibit) class(StraightLineInstrument) taxonomy(Study Linkage Inversor) layer(Equipment)) [
+   [ Object(id(Board) class(DisplayStand) taxonomy(Study Linkage Inversor) layer(Structure)) [ Boardwork ] ]
+   [ T(-1.34 0 0) Layout(c radians(32*cos(radians(360*t/period))) 1.65 0.94) ] ] ]
+
+Layout(c phi r s) ->
+ [ Object(id(BasePivot) class(FixedPivot) taxonomy(Study Linkage Inversor) layer(Equipment)) [ T(0 0.16 0) Pivot(0.30) ] ]
+ [ Object(id(DriverPivot) class(FixedPivot) taxonomy(Study Linkage Inversor) layer(Equipment)) [ T(c 0.16 0) Pivot(0.56) ] ]
+ [ Object(id(Reference) class(Plot) taxonomy(Study Linkage Inversor) layer(Equipment)) [ Guides(c r*r/2/c-s*s/2/c) ] ]
+ [ Invert(c r s cos(phi) sin(phi) 2*c*cos(phi) (r*r-s*s)/2/c/cos(phi)) ]
+
+# The inversion centre, drive joint, and tracer lie on one ray. The
+# midpoint of the rhombus lies on that ray and the other vertices sit
+# symmetrically either side, perpendicular to it.
+Invert(c r s u v rho p) ->
+ [ Rhombus(c u v rho p rho/2+p/2 sqrt(s*s-(rho-p)*(rho-p)/4)) ]
+Rhombus(c u v rho p m h) ->
+ [ Assemble(c rho*u rho*v p*u p*v (m*u-h*v) (m*v+h*u) m*u+h*v (m*v-h*u)) ]
+
+Assemble(c x z X Z bx bz dx dz) ->
+ [ Object(id(LongLinks) class(EqualAnchorBars) taxonomy(Study Linkage Inversor) layer(Equipment)) [
+   [ Bar(0 0 bx bz 0.38) ] [ Bar(0 0 dx dz 0.45) ] ] ]
+ [ Object(id(CellLinks) class(EqualRhombusBars) taxonomy(Study Linkage Inversor) layer(Equipment)) [
+   [ Bar(x z bx bz 0.52) ] [ Bar(x z dx dz 0.59) ]
+   [ Bar(X Z bx bz 0.59) ] [ Bar(X Z dx dz 0.52) ] ] ]
+ [ Object(id(Driver) class(Crank) taxonomy(Study Linkage Inversor) layer(Equipment)) [ Bar(c 0 x z 0.68) ] ]
+ [ Object(id(Input) class(DrivenJoint) taxonomy(Study Linkage Inversor) layer(Equipment)) [ T(x 0.46 z) Axle(0.29) Pointer ] ]
+ [ Object(id(Output) class(TracingJoint) taxonomy(Study Linkage Inversor) layer(Equipment)) [ T(X 0.16 Z) Axle(0.50) Tip ] ]
+ [ Object(id(Knuckles) class(SidePivots) taxonomy(Study Linkage Inversor) layer(Equipment)) [
+   [ T(bx 0.33 bz) Axle(0.33) ] [ T(dx 0.38 dz) Axle(0.28) ] ] ]
+
+Bar(x z X Z y) ->
+ [ !I(SweepProfile(profile(Rect 0.102 0.058) path(x y z X y Z) up(0 1 0) cap(all)) material(bluegreymattepaint) 1 0.25) ]
+ [ !I(SweepDisk(path(0.89*x+0.11*X y+0.031 0.89*z+0.11*Z 0.11*x+0.89*X y+0.031 0.11*z+0.89*Z) up(0 1 0) radius(0.010) radialSegments(6) cap(all)) material(goldbrushedmetal) 1 0.23) ]
+
+Pivot(h) ->
+ [ S(0.24 0.13 0.24) !I(Cylinder(segments(24 1)) material(copperpolishedmetal) 1 0.25) ]
+ [ Axle(h) ]
+Axle(h) ->
+ [ S(0.083 h 0.083) !I(Cylinder(segments(16 1)) material(silverbrushedmetal) 1 0.24) ]
+ [ T(0 h 0) S(0.143 0.023 0.143) !I(Cylinder(segments(12 1)) material(goldbrushedmetal) 1 0.25) ]
+Pointer -> [ T(0 0.32 0) S(0.142 0.038 0.142) !I(Cylinder(segments(12 1)) material(sagegreenmattepaint) 1 0.25) ]
+Tip ->
+ [ T(0 0.524 0) S(0.116 0.10 0.116) !I(Cylinder(segments(12 1)) material(redmattepaint) 1 0.26) ]
+ [ T(0 -0.014 0) !I(Revolve(profile(Polygon 0.003 0 0.021 0 0.046 0.046 0.046 0.19 0.003 0.19) angle(0 360) segments(24)) material(redmattepaint) 1 0.26) ]
+
+Guides(c x) ->
+ [ T(c 0 0) !I(Revolve(profile(Polygon c-0.008 0.136 c+0.008 0.136 c+0.008 0.143 c-0.008 0.143) angle(-64 128) segments(72)) material(sagegreenmattepaint) 1 0.28) ]
+ [ T(x 0.143 0) S(0.029 0.006 1.67) !I(Cube material(redmattepaint) 1 0.25) ]
+ [ Ruler(17 x) ]
+Ruler(n x) n ->
+ [ T(x+0.08 0.143 0.10*(Ruler_count-8)) S(0.038+0.044*(1-wrap(Ruler_count,0,2)) 0.006 0.010) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+
+Boardwork ->
+ [ S(3.54 0.11 3.03) T(0 0.5 0) !I(Cube material(amberwarmwood) 1 0.32) ]
+ [ T(0 0.121 0) S(3.44 0.023 2.93) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.136 0) S(3.37 0.012 2.86) !I(Cube material(warmwhitematteplaster) 1 0.27) ]
+ [ Tack(1.58 1.31) ] [ Tack(-1.58 1.31) ] [ Tack(1.58 -1.31) ] [ Tack(-1.58 -1.31) ]
+Tack(x z) ->
+ [ T(x 0.141 z) S(0.102 0.025 0.102) !I(Cylinder(segments(8 1)) material(copperpolishedmetal) 1 0.25) ]

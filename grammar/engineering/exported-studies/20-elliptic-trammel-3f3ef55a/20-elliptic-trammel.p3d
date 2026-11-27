@@ -1,0 +1,58 @@
+# Elliptic trammel. Trammel(pivotSpacing stylusReach periodSeconds).
+# Tested pivot spacings 0.45 and 0.80 with reach 2.10. Compare a full turn.
+Start -> Trammel(0.80 2.10 8)
+
+Trammel(d a period) ->
+ [ Object(id(Instrument) class(DraftingTrammel) taxonomy(Study Drafting Linkage) layer(Equipment)) [
+   [ Object(id(Board) class(DraftingBoard) taxonomy(Study Drafting Linkage) layer(Structure)) [ Surface ] ]
+   [ Object(id(Tracks) class(CrossSlide) taxonomy(Study Drafting Linkage) layer(Structure)) [ Quadrants(4) ] ]
+   [ Object(id(Ink) class(ReferenceEllipse) taxonomy(Study Drafting Linkage) layer(Equipment))
+     [ S(a 1 a-d) !I(Revolve(profile(Polygon 0.995 0.234 1.005 0.234 1.005 0.237 0.995 0.237) angle(0 360) segments(144)) material(bluegreymattepaint) 1 0.28) ] ]
+   [ Pose(d a 35+360*t/period) ] ] ]
+
+Pose(d a theta) ->
+ [ Object(id(Horizontal) class(SlidingPin) taxonomy(Study Drafting Linkage) layer(Equipment))
+   [ T(d*cos(radians(theta)) 0 0) Shoe ] ]
+ [ Object(id(Transverse) class(SlidingPin) taxonomy(Study Drafting Linkage) layer(Equipment))
+   [ T(0 0 d*sin(radians(theta))) A(90 1) Shoe ] ]
+ [ T(0 0 d*sin(radians(theta))) A(theta 1)
+   [ Object(id(Beam) class(Rule) taxonomy(Study Drafting Linkage) layer(Equipment)) [ Rulework(a d) ] ]
+   [ Object(id(Stylus) class(Scriber) taxonomy(Study Drafting Linkage) layer(Equipment)) [ T(a 0 0) Pencil ] ] ]
+
+Surface ->
+ [ T(0 0.105 0) S(4.75 0.21 4.00) !I(Cube material(amberwarmwood) 1 0.32) ]
+ [ T(0 0.216 0) S(4.66 0.012 3.90) !I(Cube material(goldbrushedmetal) 1 0.27) ]
+ [ T(0 0.228 0) S(4.59 0.012 3.83) !I(Cube material(warmwhitematteplaster) 1 0.30) ]
+ [ Corners(2) ]
+Corners(n) n ->
+ [ T(2.19-4.38*Corners_count 0.234 1.82) Tack ]
+ [ T(2.19-4.38*Corners_count 0.234 -1.82) Tack ]
+Tack ->
+ [ S(0.086 0.014 0.086) !I(Cylinder(segments(12 1)) material(copperpolishedmetal) 1 0.26) ]
+Quadrants(n) n ->
+ [ A(90*Quadrants_count 1)
+   [ T(0.555 0.301 0.555) S(0.946 0.134 0.946) !I(Cube material(bluegreymattepaint) 1 0.29) ]
+   [ T(0.555 0.370 0.105) S(0.946 0.009 0.033) !I(Cube material(silverbrushedmetal) 1 0.26) ]
+   [ T(0.105 0.370 0.555) S(0.033 0.009 0.946) !I(Cube material(silverbrushedmetal) 1 0.26) ]
+   [ T(0.93 0.368 0.93) Tack ] ]
+
+Shoe ->
+ [ T(0 0.295 0) S(0.32 0.118 0.148) !I(Cube material(silverbrushedmetal) 1 0.25) ]
+ [ T(0 0.350 0) S(0.096 0.214 0.096) !I(Cylinder material(copperpolishedmetal) 1 0.24) ]
+ [ T(0 0.558 0) S(0.165 0.046 0.165) !I(Cylinder(segments(12 1)) material(goldbrushedmetal) 1 0.25) ]
+ [ T(0 0.604 0) S(0.084 0.013 0.018) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+
+# Local beam origin is the transverse pivot, the second pivot lies at x=d,
+# and the pencil axis at x=a. Scales and collars move with this same frame.
+Rulework(a d) ->
+ [ T(a/2 0.503 0) S(a+0.28 0.11 0.18) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(a/2 0.550 0) S(a+0.23 0.018 0.102) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ Marks(25 a) ]
+ [ T(d 0.506 0) S(0.20 0.094 0.205) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+ [ T(a 0.503 0) S(0.21 0.115 0.206) !I(Cube material(copperpolishedmetal) 1 0.25) ]
+Marks(n a) n ->
+ [ T(a*(Marks_count+1)/(n+1) 0.561 0.040) S(0.010 0.006 0.034+0.020*wrap(Marks_count,0,2)) !I(Cube material(charcoalmattemetal) 1 0.30) ]
+Pencil ->
+ [ !I(Revolve(profile(Polygon 0.003 0.237 0.010 0.237 0.048 0.35 0.048 0.45 0.055 0.47 0.055 0.565 0.003 0.565) angle(0 360) segments(32)) material(charcoalmattemetal) 1 0.24) ]
+ [ T(0 0.56 0) S(0.122 0.21 0.122) !I(Cylinder(segments(8 1)) material(redmattepaint) 1 0.25) ]
+ [ T(0 0.77 0) S(0.14 0.043 0.14) !I(Cylinder material(goldbrushedmetal) 1 0.25) ]

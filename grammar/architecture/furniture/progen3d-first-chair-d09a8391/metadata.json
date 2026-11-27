@@ -1,0 +1,61 @@
+{
+  "title": "Pro Gen3D First Chair",
+  "group": "architecture/furniture",
+  "directory": "architecture/furniture/progen3d-first-chair-d09a8391",
+  "source_file": "ProGen3D_First_Chair.p3d",
+  "git_blob_sha": "d09a839183b45b1136b91b83b4aa1d097231a990",
+  "bytes": 28844,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_First_Chair.p3d"
+  ],
+  "description": "Run It Again / The First Chair. Native ProGen3D scene, Y up, front is +Z.",
+  "features": [
+    "Cube",
+    "Loft",
+    "SweepProfile",
+    "SweepDisk",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Run It Again / The First Chair. Native ProGen3D scene, Y up, front is +Z. · RockerStudy(draft slats). draft=1 matches the image, draft=0 finishes the timber frame. · slats=3 matches the reference; 2 through 5 all fit the same back frame. · Model units are metres. Dimensions and hidden joinery are inferred from one image. · The drafting mat is fixed. Orbit from +X, +Y, +Z for the illustrated three-quarter view. · Fine lines stand just proud of the mat. Plank top and tangent of each wooden runner meet at Y=0. · Every slat has the same bent and tapered profile. Their centres fan out towards the crown."
+    ],
+    [
+      "Named objects",
+      "ChairStudy, DraftingMat, FloorSample, Seat, BackBow, BackSlats, LowerFrame, FarSide, NearSide, Pegs, Construction"
+    ],
+    [
+      "Object classes",
+      "FurnitureStudy, GriddedCuttingMat, PlankSample, CarvedSeat, BentBackFrame, ShapedBackSlats, StretchersAndAprons, TimberSideFrame, WoodenJointPlugs, ControlCurves"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Loft, SweepProfile, SweepDisk, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "blacktealmattepaint, tealgreymattepaint, brownwalnutwood, browncedarwood, amberoakpolishedwood, brownoakwood, cyanemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start, RockerStudy, Near, Overlay, Mat, Board, SlatAt, BackSlat, SeatShell, Runner, ArmLeg, FrontFoot, HindFoot, Bow, Joinery, PegSet, Peg, Edges, Handles, Node (20 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "309"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "title": "Pro Gen3D Two Brass Gears",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-two-brass-gears-13a66adb",
+  "source_file": "ProGen3D_Two_Brass_Gears.p3d",
+  "git_blob_sha": "13a66adb1a8c69574ac67ca33dc8d2a54110c992",
+  "bytes": 38363,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "ProGen3D_Two_Brass_Gears.p3d"
+  ],
+  "description": "Run It Again / Two Brass Gears. Native ProGen3D. Y up; front is +Z. Approximate metres.",
+  "features": [
+    "Extrude",
+    "Revolve",
+    "SweepDisk",
+    "Cube",
+    "SweepProfile",
+    "TaperedSweep",
+    "LeafBlade",
+    "Loft",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Run It Again / Two Brass Gears. Native ProGen3D. Y up; front is +Z. Approximate metres. · Workshop(inputRPM setting). setting=1 includes the veranda, chair, oil can and hand tools. · setting=0 isolates the gearbox and plinth. Set RPM to 0 to freeze, or negative to reverse. · At 10 RPM one input turn takes 6 s. Hold time t at 0 for the pictured starting pose. · This is a prescribed no-load animation. No torque, friction, or contact solver is used. · 40T and 20T are chosen from the song. Dimensions and hidden parts are inferred. · Preview camera (0.13, 0.318, 0.96); target (0.019, 0.193, 0); horizontal FOV 50 degrees. · Axles lie along Z. Their centre line falls 7 degrees. Pitch radii are 0.180 and 0.090. · The extra 9 degrees on the pinion put a space opposite the driver tooth at the pitch point. · Involute flanks, 20 degree pressure angle, 9 mm module. Addendum m, dedendum 1.25m."
+    ],
+    [
+      "Named objects",
+      "WorkshopJig, Base, Backboard, Bearings, PanelScrews, WorkshopSetting, Driver, InputShaft, Crank, Grip, Pinion, OutputShaft"
+    ],
+    [
+      "Object classes",
+      "HandCrankedGearStudy, LaminatedPlinth, PlywoodBearingPanel, FlangedPlainBearings, SlottedFasteners, VerandaWorkbench, FortyToothGear, SteelInputShaft, HandCrank, TurnedWoodGrip, TwentyToothGear, SteelOutputShaft"
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, Revolve, SweepDisk, Cube, SweepProfile, TaperedSweep, LeafBlade, Loft, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "goldbrushedmetal, goldpolishedmetal, brownbrushedmetal, silverbrushedmetal, charcoalroughmetal, copperbrushedmetal, amberoakpolishedwood, brownwalnutwood, browncedarwood, beigebrownpinewood, amberoakwood, ambercedarwood, sagegreenweatheredpaint, warmwhitemattepaint, beigewhitepaint, beigeroughfabric, bluegreymattepaint, beigepinewood, silverbeigebirchwood, olivegreenmattepaint, brownoakwood"
+    ],
+    [
+      "Production rules",
+      "Start, Workshop, DriveTrain, DriverSector, DriverFace, PinionSector, PinionFace, Dot, ShaftA, ShaftB, CrankArm, HandGrip, BaseAssembly, Backer, PlyTone, FacePly, CorePly, FixedHardware, BearingA, BearingB (49 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "460"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "title": "Motion Simulator Tilt and Rotation",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/motion-simulator-tilt-and-rotation-93d1baeb",
+  "source_file": "Motion_Simulator_Tilt_and_Rotation.p3d",
+  "git_blob_sha": "93d1baebd38263b76f7597973b0e9972d055e212",
+  "bytes": 13415,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Motion_Simulator_Tilt_and_Rotation.p3d"
+  ],
+  "description": "Motion simulator rig | platform pitch, roll and yaw | ProGen3D desktop",
+  "features": [
+    "Cube",
+    "Extrude",
+    "Sphere",
+    "SweepDisk",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Motion simulator rig | platform pitch, roll and yaw | ProGen3D desktop · Four five-second studies: pitch, roll, yaw, then all three together. · Period is the duration of ONE study. Nominal maximum angles are in degrees. · The final study uses its own smaller angles to stay within the linkage workspace. · Pitch and roll follow the upper frame's neutral local X and Z. Yaw turns about · world Y. The base is fixed and the deck centre stays at the neutral lift height. · Dimensions, joint limits and pose ranges are illustrative; the source is one photograph. · The matrix maps a neutral deck lug to its new position in the drive's bay coordinates. · With v the upper lug relative to its output shaft, the rod constraint is · vy*sin(theta)-vz*cos(theta) = (dot(v,v)+arm^2-rod^2)/(2*arm)."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Extrude, Sphere, SweepDisk, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "lightoakwood, charcoalroughmetal, ambermetalpolished, silverbluepolishedmetal, steelshinyroughmetal, warmwhitematteplaster, offwhiteceramic, softyellowglossyplastic, terracottaroughceramic, charcoalroughrubber, lightgreyroughmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Demo, Motion, Select, Later, Last, Attitude, Platform, Bay, Basis, Coeffs, NoCable, Leg, Offset, Newton, AssembleLeg, Bench, BaseSide, DriveMount, Gearmotor (53 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "240"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

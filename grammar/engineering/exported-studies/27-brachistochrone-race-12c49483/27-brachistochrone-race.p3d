@@ -1,0 +1,81 @@
+# Brachistochrone race. Race(terminalAngle dropMetres displaySlowdown railSegments).
+# Try angles 165 or 210, a positive drop, and 24-64 rail segments.
+# Beads slide from rest without friction. The hold after arrival is for display.
+Start -> Race(210 1.85 2.4 44)
+
+Race(angle drop slow n) ->
+ [ Setup(radians(angle) drop/(1-cos(radians(angle))) drop slow n) ]
+Setup(a r h slow n) ->
+ [ Clockwork(a r h slow n r*(a-sin(a)) a*sqrt(r/9.80665)) ]
+Clockwork(a r h slow n w tc) ->
+ [ Exhibit(a r h n w tc sqrt(2*(w*w+h*h)/(9.80665*h))
+           wrap(t/slow,0,sqrt(2*(w*w+h*h)/(9.80665*h))+0.36)) ]
+
+Exhibit(a r h n w tc tl s) ->
+ [ Object(id(Exhibit) class(DescentRace) taxonomy(Study Mechanics Gravity) layer(Equipment)) [
+   [ Object(id(Bed) class(DisplayBench) taxonomy(Study Mechanics Bench) layer(Structure)) [ Base(w) ] ]
+   [ T(-w/2 h+0.72 0)
+     [ T(0 0 -0.44)
+       [ Object(id(CycloidRails) class(CycloidalGuide) taxonomy(Study Mechanics Rail) layer(Equipment)) [ Curve(n a r) ] ]
+       [ Object(id(CycloidSupports) class(GuideSupports) taxonomy(Study Mechanics Frame) layer(Structure)) [ CurvePosts(6 a r h) ] ]
+       [ Object(id(CycloidBead) class(SlidingBead) taxonomy(Study Mechanics Bead) layer(Equipment))
+         [ CurveBead(a*min(1,s/tc) r) ] ]
+       [ Object(id(CycloidFinish) class(ArrivalIndicator) taxonomy(Study Mechanics Signal) layer(Equipment))
+         [ T(w -h 0) Finish(s tc) ] ] ]
+     [ T(0 0 0.44)
+       [ Object(id(StraightRails) class(StraightGuide) taxonomy(Study Mechanics Rail) layer(Equipment)) [ Rails(0 0 w -h) ] ]
+       [ Object(id(StraightSupports) class(GuideSupports) taxonomy(Study Mechanics Frame) layer(Structure)) [ LinePosts(6 w h) ] ]
+       [ Object(id(StraightBead) class(SlidingBead) taxonomy(Study Mechanics Bead) layer(Equipment))
+         [ LineBead(min(1,s/tl)*min(1,s/tl) w h) ] ]
+       [ Object(id(StraightFinish) class(ArrivalIndicator) taxonomy(Study Mechanics Signal) layer(Equipment))
+         [ T(w -h 0) Finish(s tl) ] ] ] ] ] ]
+
+Curve(n a r) n ->
+ [ CurveChord(a*Curve_count/n a*(Curve_count+1)/n r) ]
+CurveChord(a b r) ->
+ [ Rails(r*(a-sin(a)) -r*(1-cos(a)) r*(b-sin(b)) -r*(1-cos(b))) ]
+Rails(x y X Y) ->
+ [ T(0 0 -0.136) RailWeb(x y X Y) ] [ T(0 0 0.091) RailWeb(x y X Y) ]
+RailWeb(x y X Y) ->
+ [ !I(Extrude(Polygon(x y-0.15 X Y-0.15 X Y-0.057 x y-0.057) 0.045 cap(all)) material(bluegreymattepaint) 1 0.26) ]
+
+CurvePosts(n a r h) n ->
+ [ CurvePost(a*CurvePosts_count/(n-1) r h) ]
+CurvePost(a r h) ->
+ [ Post(r*(a-sin(a)) -r*(1-cos(a)) h+0.72-r*(1-cos(a))) ]
+LinePosts(n w h) n ->
+ [ Post(w*LinePosts_count/(n-1) -h*LinePosts_count/(n-1) h+0.72-h*LinePosts_count/(n-1)) ]
+Post(x y absoluteHeight) ->
+ [ T(x y-0.168 0) S(0.082 0.043 0.336) !I(Cube material(goldbrushedmetal) 1 0.25) ]
+ [ T(x y+0.263-absoluteHeight 0) S(0.061 absoluteHeight-0.44 0.079)
+   !I(Cylinder(segments(12 1)) material(silverbrushedmetal) 1 0.23) ]
+ [ T(x y+0.234-absoluteHeight 0) S(0.169 0.034 0.19)
+   !I(Cube material(charcoalmattemetal) 1 0.27) ]
+
+CurveBead(a r) ->
+ [ T(r*(a-sin(a)) -r*(1-cos(a)) 0) S(0.216 0.216 0.216)
+   !I(Sphere material(copperpolishedmetal) 1 0.24) ]
+LineBead(q w h) ->
+ [ T(q*w -q*h 0) S(0.216 0.216 0.216)
+   !I(Sphere material(silverbrushedmetal) 1 0.24) ]
+
+Finish(s arrival) ->
+ [ T(0.136 -0.475 0)
+   [ S(0.15 0.254 0.34) !I(Cube material(charcoalmattemetal) 1 0.27) ]
+   [ T(0 0.136 0) S(0.143 0.025 0.30) !I(Cube material(goldbrushedmetal) 1 0.24) ]
+   [ T(0 0.162 0) Lamp(s arrival) ] ]
+Lamp(s arrival) -> ?(s>=arrival)
+ [ S(0.105 0.105 0.105) !I(Sphere material(sagegreenmattepaint) 1 0.23) ]
+ : [ S(0.063 0.063 0.063) !I(Sphere material(redmattepaint) 1 0.23) ]
+
+Base(w) ->
+ [ T(0 0.09 0) S(w+0.83 0.18 1.54) !I(Cube material(amberwarmwood) 1 0.30) ]
+ [ T(0 0.194 0) S(w+0.76 0.035 1.44) !I(Cube material(charcoalmattemetal) 1 0.25) ]
+ [ T(0 0.215 -0.44) S(w+0.60 0.028 0.36) !I(Cube material(bluegreymattepaint) 1 0.26) ]
+ [ T(0 0.215 0.44) S(w+0.60 0.028 0.36) !I(Cube material(bluegreymattepaint) 1 0.26) ]
+ [ T(-w/2 0.222 -0.685) Marks(21 w) ]
+ [ T(0 0.206 -0.72) S(w+0.73 0.030 0.016) !I(Cube material(goldbrushedmetal) 1 0.26) ]
+Marks(n w) n ->
+ [ T(w*Marks_count/(n-1) 0 0)
+   S(0.013 0.008 0.025+0.024*(1-min(1,wrap(Marks_count,0,5))))
+   !I(Cube material(goldbrushedmetal) 1 0.25) ]

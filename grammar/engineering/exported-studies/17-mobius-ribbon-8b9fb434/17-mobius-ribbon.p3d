@@ -1,0 +1,64 @@
+# Openwork ribbon. Ribbon(halfTurns stations halfWidth).
+# Illustrated: one half-turn or two half-turns, 48 stations, half-width 0.52.
+# Use a positive multiple of six stations so the three feet coincide with beads.
+Start -> Ribbon(1 48 0.52)
+
+Ribbon(k n w) ->
+ [ Object(id(Exhibit) class(TopologyModel) taxonomy(Study Geometry Ribbon) layer(Equipment)) [
+   [ Object(id(Boundary) class(EdgeRails) taxonomy(Study Geometry Ribbon) layer(Equipment))
+     [ Segments(n k w) ] ]
+   [ Object(id(Beads) class(Junctions) taxonomy(Study Geometry Ribbon) layer(Equipment))
+     [ Stations(n k w) ] ]
+   [ Object(id(Slats) class(TransverseSlats) taxonomy(Study Geometry Ribbon) layer(Equipment))
+     [ Ribs(n k w) ] ]
+   [ Object(id(Stand) class(Tripod) taxonomy(Study Geometry Ribbon) layer(Structure))
+     [ Hub [ Legs(3 k w) ] ] ] ] ]
+
+# Radius 1.55; centreline rises and falls twice each circuit.
+Segments(n k w) n ->
+ [ Interval(360*Segments_count/n 360*(Segments_count+1)/n k w) ]
+Interval(a b k w) ->
+ [ Edge(a b k w) ] [ Edge(a b k 0-w) ]
+Edge(a b k s) ->
+ [ Chord(a b 1.55+s*cos(radians(k*a/2)) 1.55+s*cos(radians(k*b/2))
+         (1.12+0.12*sin(radians(2*a))+s*sin(radians(k*a/2)))
+         (1.12+0.12*sin(radians(2*b))+s*sin(radians(k*b/2)))) ]
+Chord(a b r R h H) ->
+ [ !I(SweepDisk(path(r*cos(radians(a)) h r*sin(radians(a)) R*cos(radians(b)) H R*sin(radians(b))) up(0 1 0) radius(0.029) radialSegments(10) cap(all)) material(goldbrushedmetal) 1 0.24) ]
+
+Stations(n k w) n ->
+ [ A(-360*Stations_count/n 1) T(1.55 1.12+0.12*sin(radians(720*Stations_count/n)) 0)
+   A(k*180*Stations_count/n 2) [ T(w 0 0) Bead(Stations_count) ] [ T(0-w 0 0) Bead(1) ] ]
+Bead(i) -> ?(i<0.5)
+ [ S(0.145 0.145 0.145) !I(Sphere(segments(16 8)) material(redglossymetal) 1 0.24) ]
+ : [ S(0.082 0.082 0.082) !I(Sphere(segments(16 8)) material(copperpolishedmetal) 1 0.24) ]
+
+Ribs(n k w) n ->
+ [ A(-360*Ribs_count/n 1) T(1.55 1.12+0.12*sin(radians(720*Ribs_count/n)) 0)
+   A(k*180*Ribs_count/n 2) [ Slat(w 4.3/n) ] [ Landmark(Ribs_count w 4.3/n) ] ]
+# Six-sided enamel section narrows at each bead. A thin inset on each face
+# keeps the ornament visible as the strip frame turns through vertical.
+Slat(w b) ->
+ [ T(0 0 0-b/2) !I(Loft(section(0 Polygon 0-w 0 -0.82*w -0.027 0.82*w -0.027 w 0 0.82*w 0.027 -0.82*w 0.027)
+   section(b Polygon 0-w 0 -0.82*w -0.027 0.82*w -0.027 w 0 0.82*w 0.027 -0.82*w 0.027) cap(all)) material(bluegreymattepaint) 1 0.28) ]
+ [ Inlay(w b) ] [ A(180 0) Inlay(w b) ]
+Landmark(i w b) -> ?(i<0.5)
+ [ T(0.68*w 0 0) S(0.12 0.070 b+0.014) !I(Cube material(redglossymetal) 1 0.24) ]
+ : [ ]
+Inlay(w b) ->
+ [ T(0 0.028 0) S(w*1.22 0.004 b*0.18) !I(Cube material(silverbrushedmetal) 1 0.25) ]
+
+Hub ->
+ [ !I(Revolve(profile(Polygon 0.01 0.015 0.32 0.015 0.36 0.055 0.36 0.14 0.25 0.20 0.01 0.20) angle(0 360) segments(48)) material(amberwarmwood) 1 0.28) ]
+Legs(n k w) n ->
+ [ Leg(60+360*Legs_count/n k w) ]
+Leg(a k w) -> ?(sin(radians(k*a/2))<0)
+ [ Mount(a k w) ]
+ : [ Mount(a k 0-w) ]
+Mount(a k s) ->
+ [ A(0-a 1) Foot(1.55+s*cos(radians(k*a/2)) (1.12+0.12*sin(radians(2*a))+s*sin(radians(k*a/2)))) ]
+Foot(r h) ->
+ [ T(r/2 0.105 0) S(r 0.11 0.18) !I(Cube material(amberwarmwood) 1 0.32) ]
+ [ T(r 0 0)
+   [ S(0.32 0.095 0.32) !I(Cylinder material(charcoalmattemetal) 1 0.28) ]
+   [ !I(Revolve(profile(Polygon 0.012 0.09 0.16 0.09 0.16 0.135 0.092 0.205 0.045 0.23 0.035 h-0.08 0.050 h-0.065 0.046 h-0.032 0.012 h-0.032) angle(0 360) segments(32)) material(copperpolishedmetal) 1 0.24) ] ]
