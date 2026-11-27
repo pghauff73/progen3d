@@ -1,0 +1,33 @@
+{
+  "title": "SMB OMv2 Instance SMB 001 Spatially Aware",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/smb-omv2-instance-smb-001-spatiallyaware-5aee2e31",
+  "source_file": "SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d",
+  "git_blob_sha": "5aee2e310b7610727c49b5b44c42371e3683613e",
+  "bytes": 165734,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d",
+    "examples/SimpleModernBuilding/SMB_OMv2_Instance_SMB_001_SpatiallyAware.p3d"
+  ],
+  "description": "Spatially aware version 2 of the Small Modern Building instance; inspect object placement, boundaries and spatial relationships.",
+  "features": [],
+  "detail": [],
+  "render_assets": [
+    {
+      "path": "renders/1-progen3d-editor-smb-omv2-full.png",
+      "original": "docs/images/readme/progen3d-editor-smb-omv2-full.png",
+      "sha": "d5353abc6c8b3cf9c505505f2733b118450690a7",
+      "label": "SMB-OMv2 editor preview",
+      "kind": "Published repository screenshot"
+    }
+  ],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

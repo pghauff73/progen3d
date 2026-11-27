@@ -1,0 +1,36 @@
+{
+  "title": "Complex Modern Courtyard Building OM20",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/complex-modern-courtyard-building-om20-b53866a6",
+  "source_file": "Complex_Modern_Courtyard_Building_OM20.p3d",
+  "git_blob_sha": "b53866a6c3c47cb9d38534935eb054983c835a58",
+  "bytes": 1158482,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d",
+    "examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/Complex_Modern_Courtyard_Building_OM20.p3d"
+  ],
+  "description": "Complex courtyard building with a twenty-level object model and spatially structured architecture.",
+  "features": [],
+  "detail": [],
+  "render_assets": [
+    {
+      "path": "renders/1-modern-courtyard-om20-front.png",
+      "original": "docs/images/readme/modern-courtyard-om20-front.png",
+      "sha": "06af2706c2c2cf99f274efaaee51e41f8cd23d4a",
+      "label": "OM20 front view",
+      "kind": "Published repository screenshot"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/README.md",
+    "examples/SimpleModernBuilding/Complex_Modern_Courtyard_Building_OM20/VALIDATION.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

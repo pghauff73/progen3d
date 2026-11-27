@@ -1,0 +1,25 @@
+{
+  "title": "SMB OMv1 Instance SMB 001 Five Deep Positioned",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/smb-omv1-instance-smb-001-fivedeep-positioned-de2534d4",
+  "source_file": "SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d",
+  "git_blob_sha": "de2534d4ca8c3bea7a5d17b6af1c0299e68c2738",
+  "bytes": 74174,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d",
+    "examples/SimpleModernBuilding/SMB_OMv1_Instance_SMB_001_FiveDeep_Positioned.p3d"
+  ],
+  "description": "Five-deep positioned instance of the Small Modern Building object model, version 1.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

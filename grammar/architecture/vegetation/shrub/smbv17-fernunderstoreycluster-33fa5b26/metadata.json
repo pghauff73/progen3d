@@ -1,0 +1,97 @@
+{
+  "title": "Fern Understorey Cluster",
+  "group": "architecture/vegetation/shrub",
+  "directory": "architecture/vegetation/shrub/smbv17-fernunderstoreycluster-33fa5b26",
+  "source_file": "SMBV17_FernUnderstoreyCluster.grammar",
+  "git_blob_sha": "33fa5b266076d4364e7b73672aac1047122cbbb5",
+  "bytes": 2493,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV17_FernUnderstoreyCluster.grammar"
+  ],
+  "description": "A distinct fern understorey cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "FernUnderstoreyCluster"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Shrub / FernUnderstoreyCluster"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, ExplicitFoliageComposition"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; dense foliage mass; grounded base; asymmetric crown rhythm"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/camera_three_views.png",
+      "sha": "14ce53e3c3f596a3029481fb11e7bd3ed735cf55",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/front.png",
+      "sha": "cc550830c1b602ecac8e7df615d5b5b3384a3be0",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/right.png",
+      "sha": "75f50bee9c872a1bbace8d67f7278abc292b5baa",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FERN_UNDERSTOREY_CLUSTER/top.png",
+      "sha": "908c1f62edc44619b53e5a5d914ab839816fa8b9",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

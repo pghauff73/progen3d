@@ -1,0 +1,97 @@
+{
+  "title": "Feather Reed Grass",
+  "group": "architecture/vegetation/grass",
+  "directory": "architecture/vegetation/grass/smbv22-featherreedgrass-40ede269",
+  "source_file": "SMBV22_FeatherReedGrass.grammar",
+  "git_blob_sha": "40ede2691fa7e2a73239cb0fa2a93e7b63cc2c8b",
+  "bytes": 2413,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV22_FeatherReedGrass.grammar"
+  ],
+  "description": "A distinct feather reed grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "FeatherReedGrass"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Grass / FeatherReedGrass"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; multiple blade clumps; individual blade accents; directional tufting"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/camera_three_views.png",
+      "sha": "2d98b9ee1f73345ec1ea5d4d361e1f9ffabcc453",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/front.png",
+      "sha": "9a7994f5cb3b1a856d6b9e853d4def8541b03122",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/right.png",
+      "sha": "68292bc1ad0f8a2f873425752a73ede945c27432",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FEATHER_REED_GRASS/top.png",
+      "sha": "baba66919c217eb211231decec951edfac22dbbc",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

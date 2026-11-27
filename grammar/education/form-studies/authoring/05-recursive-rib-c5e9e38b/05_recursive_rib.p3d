@@ -1,0 +1,9 @@
+# Remaining fork levels, segment length, radius and turning angle in degrees.
+Start -> Rib(4 0.7 0.035 28)
+
+Rib(depth length radius turn) ->
+    I(SweepDisk(path(0 0 0 0 length 0) radius(radius) segments(8) cap(all))
+      material(copperbrushedmetal) 1 1)
+    ?(depth>0) [ T(0 length 0) A(turn 2) Rib(depth-1 length*0.72 radius*0.72 turn) ]
+               [ T(0 length 0) A(-turn 2) Rib(depth-1 length*0.72 radius*0.72 turn) ]
+    :

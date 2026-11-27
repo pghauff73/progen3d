@@ -1,0 +1,26 @@
+{
+  "title": "04 bay assembly",
+  "group": "education/form-studies/authoring",
+  "directory": "education/form-studies/authoring/04-bay-assembly-fb1a6ade",
+  "source_file": "04_bay_assembly.p3d",
+  "git_blob_sha": "fb1a6ade5c6bb651a048b1a76731e312c83d66ec",
+  "bytes": 867,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/FormStudies/authoring/grammars/04_bay_assembly.p3d"
+  ],
+  "description": "An authoring exercise in composing repeated structural bays.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FormStudies/authoring/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "title": "Green Facade Cable Vine",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv41-greenfacadecablevine-f091a160",
+  "source_file": "SMBV41_GreenFacadeCableVine.grammar",
+  "git_blob_sha": "f091a1603998ece409bc2558cb4fb6498ee8de1a",
+  "bytes": 3065,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV41_GreenFacadeCableVine.grammar"
+  ],
+  "description": "A distinct green facade cable vine building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Vine",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "GreenFacadeCableVine"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / GreenFacadeCableVine"
+    ],
+    [
+      "Generation methods",
+      "GuidedClimbing, SurfaceAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.6 × 4.5 × 1.2"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), facadeAttachment (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/camera_three_views.png",
+      "sha": "5b062c3572c75007a9ba79af8c83527f2dec3440",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/front.png",
+      "sha": "3da0893a7b8c1da89bd2a7addc6e04126dd8d644",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/right.png",
+      "sha": "30c2fbc82600419de096a9b4fff0c1eba43e4c43",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_FACADE_CABLE_VINE/top.png",
+      "sha": "2699f6dcad731ab334e42c8da7b8bb8dd5902831",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

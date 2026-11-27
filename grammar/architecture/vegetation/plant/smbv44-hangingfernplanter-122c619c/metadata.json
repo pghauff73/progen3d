@@ -1,0 +1,97 @@
+{
+  "title": "Hanging Fern Planter",
+  "group": "architecture/vegetation/plant",
+  "directory": "architecture/vegetation/plant/smbv44-hangingfernplanter-122c619c",
+  "source_file": "SMBV44_HangingFernPlanter.grammar",
+  "git_blob_sha": "122c619c27ed34e6ff0264ca1b385012af2751be",
+  "bytes": 1985,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV44_HangingFernPlanter.grammar"
+  ],
+  "description": "A distinct hanging fern planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "HangingFernPlanter"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Plant / HangingFernPlanter"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven"
+    ],
+    [
+      "Authored extent XYZ",
+      "2.4 × 3.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; container or soil host; distinct stems and leaves; maintainable access"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/camera_three_views.png",
+      "sha": "0d32e7385111d759621d2bde8db8921d4a06aa1c",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/front.png",
+      "sha": "fdfc3f76c15f2dfc9e0fb3b53941485d19362d32",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/right.png",
+      "sha": "c6a963407d77a844126b09f828268516e4c2ca42",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_HANGING_FERN_PLANTER/top.png",
+      "sha": "d2e534303bbadd727a513836c9b30cd2e1d168d9",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "title": "Jasmine Wall Climber",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv37-jasminewallclimber-daaca065",
+  "source_file": "SMBV37_JasmineWallClimber.grammar",
+  "git_blob_sha": "daaca065e08195b8c29095c472c564bf91c147fc",
+  "bytes": 3052,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV37_JasmineWallClimber.grammar"
+  ],
+  "description": "A distinct jasmine wall climber building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Vine",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "JasmineWallClimber"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / JasmineWallClimber"
+    ],
+    [
+      "Generation methods",
+      "GuidedClimbing, SurfaceAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.6 × 4.5 × 1.2"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), facadeAttachment (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/camera_three_views.png",
+      "sha": "6e2ce07e044f7c5f168ce659644cb139dcf78425",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/front.png",
+      "sha": "80797e066781d0bcc52079453027da29285234be",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/right.png",
+      "sha": "7b92c682d3f9f649225c524ca2495cd09e4f047d",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_JASMINE_WALL_CLIMBER/top.png",
+      "sha": "21d7ba9ff044c43d3beac6d0f28db69f48a8056a",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

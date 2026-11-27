@@ -1,0 +1,97 @@
+{
+  "title": "Kitchen Herb Planter",
+  "group": "architecture/vegetation/plant",
+  "directory": "architecture/vegetation/plant/smbv45-kitchenherbplanter-dd3bc899",
+  "source_file": "SMBV45_KitchenHerbPlanter.grammar",
+  "git_blob_sha": "dd3bc8999dee57d12f592cbc56edc204c70316da",
+  "bytes": 1990,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV45_KitchenHerbPlanter.grammar"
+  ],
+  "description": "A distinct kitchen herb planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "KitchenHerbPlanter"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Plant / KitchenHerbPlanter"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven"
+    ],
+    [
+      "Authored extent XYZ",
+      "2.4 × 3.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; container or soil host; distinct stems and leaves; maintainable access"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/camera_three_views.png",
+      "sha": "d0ce5c4c1c2ee22521f48d4f605e3a0a1bc0eb2c",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/front.png",
+      "sha": "e94f8e998390b4e8e86f38467b577f4612c36b24",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/right.png",
+      "sha": "146426cc8f24cbb275949e1429dc2f67e0f82619",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_KITCHEN_HERB_PLANTER/top.png",
+      "sha": "405ebcb36ef7762f1faa945a9fd63855eca403c6",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

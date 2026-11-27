@@ -1,0 +1,97 @@
+{
+  "title": "Sculptural Agave Cluster",
+  "group": "architecture/vegetation/shrub",
+  "directory": "architecture/vegetation/shrub/smbv16-sculpturalagavecluster-875f405c",
+  "source_file": "SMBV16_SculpturalAgaveCluster.grammar",
+  "git_blob_sha": "875f405c0deba68147242b9d984fbf22964f7a24",
+  "bytes": 2493,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV16_SculpturalAgaveCluster.grammar"
+  ],
+  "description": "A distinct sculptural agave cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "SculpturalAgaveCluster"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Shrub / SculpturalAgaveCluster"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, ExplicitFoliageComposition"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; dense foliage mass; grounded base; asymmetric crown rhythm"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/camera_three_views.png",
+      "sha": "77d66cb045588e5165c4ef14873d4a7401bd78ae",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/front.png",
+      "sha": "dd3b403838503e79f4b5e9f5b0bae513c6748b70",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/right.png",
+      "sha": "f284c1938d69c32f0f8812761367e4d42ad9cb7c",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_AGAVE_CLUSTER/top.png",
+      "sha": "030461518362f63ffff37ea93eab52d05f28bec5",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

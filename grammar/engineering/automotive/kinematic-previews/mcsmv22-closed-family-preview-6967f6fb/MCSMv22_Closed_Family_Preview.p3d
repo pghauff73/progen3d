@@ -1,0 +1,271 @@
+# MCSMv2.2 executable closed family preview.
+
+Start ->
+    MCSMv22ClosedFamilyPreview
+
+MCSMv22ClosedFamilyPreview ->
+[
+    Object(id(MCSMV22_CLOSED_FAMILY) name(McsMv22ClosedFamily)
+           class(ModernCarKinematicFamilyV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3 Family)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        [ T(-7.2 0 0) MCSMv22ReferenceFamilyClosed ]
+        [ T(-2.4 0 0) MCSMv22TrackFamilyClosed ]
+        [ T(2.4 0 0) MCSMv22AeroFamilyClosed ]
+        [ T(7.2 0 0) MCSMv22CrossoverFamilyClosed ]
+    ]
+]
+
+MCSMv22ReferenceFamilyClosed ->
+[
+    Object(id(MCSMV22_FAMILY_REFERENCE) name(ResearchMedianAWDHotHatch)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22ReferenceFamilyClosedComponentFixedBody
+        MCSMv22ReferenceFamilyClosedComponentClosures
+        MCSMv22ReferenceFamilyClosedComponentGlass
+        MCSMv22ReferenceFamilyClosedComponentSuspension
+        MCSMv22ReferenceFamilyClosedComponentTyres
+    ]
+]
+
+MCSMv22ReferenceFamilyClosedComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22ReferenceFamilyClosedComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceClosuresClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22ReferenceFamilyClosedComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceGlassClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22ReferenceFamilyClosedComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22ReferenceFamilyClosedComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceNominalTyreMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackFamilyClosed ->
+[
+    Object(id(MCSMV22_FAMILY_TRACK) name(TrackWidebodyAWD)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22TrackFamilyClosedComponentFixedBody
+        MCSMv22TrackFamilyClosedComponentClosures
+        MCSMv22TrackFamilyClosedComponentGlass
+        MCSMv22TrackFamilyClosedComponentSuspension
+        MCSMv22TrackFamilyClosedComponentTyres
+    ]
+]
+
+MCSMv22TrackFamilyClosedComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackFamilyClosedComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackClosuresClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackFamilyClosedComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackGlassClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22TrackFamilyClosedComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackFamilyClosedComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackNominalTyreMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(1) texscale(0.1))
+]
+
+MCSMv22AeroFamilyClosed ->
+[
+    Object(id(MCSMV22_FAMILY_AERO) name(AeroFastbackAWD)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22AeroFamilyClosedComponentFixedBody
+        MCSMv22AeroFamilyClosedComponentClosures
+        MCSMv22AeroFamilyClosedComponentGlass
+        MCSMv22AeroFamilyClosedComponentSuspension
+        MCSMv22AeroFamilyClosedComponentTyres
+    ]
+]
+
+MCSMv22AeroFamilyClosedComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22AeroFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22AeroFamilyClosedComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22AeroClosuresClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22AeroFamilyClosedComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22AeroGlassClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22AeroFamilyClosedComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22AeroSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22AeroFamilyClosedComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22AeroNominalTyreMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverFamilyClosed ->
+[
+    Object(id(MCSMV22_FAMILY_CROSSOVER) name(UrbanCrossoverEVAWD)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22CrossoverFamilyClosedComponentFixedBody
+        MCSMv22CrossoverFamilyClosedComponentClosures
+        MCSMv22CrossoverFamilyClosedComponentGlass
+        MCSMv22CrossoverFamilyClosedComponentSuspension
+        MCSMv22CrossoverFamilyClosedComponentTyres
+    ]
+]
+
+MCSMv22CrossoverFamilyClosedComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverFamilyClosedComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverClosuresClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverFamilyClosedComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverGlassClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22CrossoverFamilyClosedComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22CrossoverFamilyClosedComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22CrossoverNominalTyreMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(1) texscale(0.1))
+]
+

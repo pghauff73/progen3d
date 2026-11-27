@@ -1,0 +1,98 @@
+{
+  "title": "Poolside Tropical Cluster",
+  "group": "architecture/vegetation/ecologicalplanting",
+  "directory": "architecture/vegetation/ecologicalplanting/smbv47-poolsidetropicalcluster-178513b6",
+  "source_file": "SMBV47_PoolsideTropicalCluster.grammar",
+  "git_blob_sha": "178513b60dccdf084995168ac838c1788d596daf",
+  "bytes": 2600,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV47_PoolsideTropicalCluster.grammar"
+  ],
+  "description": "A distinct poolside tropical cluster building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "PoolsideTropicalCluster"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / EcologicalPlanting / PoolsideTropicalCluster"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 2.6 × 3"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), stormwaterConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; water or drainage host; mixed planting density; service connection"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/camera_three_views.png",
+      "sha": "8cf7ca0c179c8d622532ececfd94c9003eb98508",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/front.png",
+      "sha": "ebfe08a7ba0f8a8cd48f2d357c65ae15e1fa4d2e",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/right.png",
+      "sha": "55b1d861f0962e0bf02ce88fcffb5ae3cd2b277a",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_POOLSIDE_TROPICAL_CLUSTER/top.png",
+      "sha": "b4909a1854d44c12e9b62260aeebd4562575a103",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

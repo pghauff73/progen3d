@@ -1,0 +1,9 @@
+# Nine measured centres in model units. Left edge of the field is x=0.
+Start ->
+    At(0.06) At(0.42) At(0.78)
+    At(1.14) At(1.50) At(1.86)
+    At(2.22) At(2.58) At(2.94)
+
+At(x) ->
+    [ T(x 0.6 0) S(0.12 1.2 0.08)
+      I(Cube material(tealmattemetal) 1 1) ]

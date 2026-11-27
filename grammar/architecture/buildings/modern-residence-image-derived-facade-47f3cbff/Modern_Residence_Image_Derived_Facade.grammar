@@ -1,0 +1,534 @@
+# ================================================================
+# MODERN THREE-STOREY RESIDENCE — IMAGE-DERIVED FACADE STUDY
+# Current Progen3D grammar syntax
+#
+# Based on the supplied/generated front-elevation reference image.
+# Visible facade features are modelled directly:
+#   - three occupied levels
+#   - tall exposed-concrete blade walls
+#   - full-height timber louvre screen to the left
+#   - dark steel/metal balcony frames
+#   - warm timber soffits and right-side cladding
+#   - large floor-to-ceiling glazing
+#   - central glazed/timber entrance
+#   - stone-textured entry pier
+#   - wide dark garage door
+#   - two glass-railed balconies
+#   - vertical centre privacy screen
+#   - roof/perimeter frame
+#   - front steps, planters and address plaque
+#
+# Rear and side construction is conservative inference because the
+# source image only establishes the front elevation.
+#
+# Approximate overall dimensions:
+#   width         15.0
+#   depth          10.0
+#   floor height    3.2
+#   occupied top    9.6
+# ================================================================
+
+
+Start ->
+    ModernResidence()
+
+
+ModernResidence() ->
+    Site()
+    StructuralShell()
+    GroundFloorFacade()
+    FirstFloorFacade()
+    SecondFloorFacade()
+    ConcreteBladeSystem()
+    TimberLouvreSystem()
+    BalconySystem()
+    RoofFrameSystem()
+    EntrySystem()
+    GarageSystem()
+    FrontLandscape()
+
+
+# ================================================================
+# REUSABLE GEOMETRY CONSTRUCTORS
+# ================================================================
+
+ConcreteBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(lightgreyroughconcrete) 1 0.38)
+]
+
+
+WhiteBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(warmwhitematteplaster) 1 0.34)
+]
+
+
+DarkMetalBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(charcoalroughmetal) 1 0.22)
+]
+
+
+MetalBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(silverbluepolishedmetal) 1 0.20)
+]
+
+
+WoodBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(amberwarmwood) 1 0.24)
+]
+
+
+GlassBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(bluewhiteglossysmoothglass) 0.66 0.18)
+]
+
+
+StoneBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(lightgreyroughconcrete) 1 0.16)
+]
+
+
+GreenBlock(x y z sx sy sz) ->
+[
+    T(x y z)
+    S(sx sy sz)
+    !I(CubeY material(greenmattepaint) 1 0.26)
+]
+
+
+# ================================================================
+# SITE
+# ================================================================
+
+Site() ->
+    GroundPad()
+    Driveway()
+    FrontWalk()
+
+
+GroundPad() ->
+    ConcreteBlock(0 -0.30 0 17.0 0.30 12.0)
+
+
+Driveway() ->
+    ConcreteBlock(4.45 -0.08 -6.10 5.40 0.12 2.20)
+
+
+FrontWalk() ->
+    ConcreteBlock(-1.60 -0.07 -6.15 3.20 0.12 2.30)
+
+
+# ================================================================
+# STRUCTURAL SHELL
+# Conservative side/rear interpretation of the unseen building.
+# ================================================================
+
+StructuralShell() ->
+    FloorSlabs()
+    SideWalls()
+    RearWall()
+    RoofSlab()
+
+
+FloorSlabs() ->
+    ConcreteBlock(0 0.00 0 15.0 0.24 10.0)
+    ConcreteBlock(0 3.20 0 15.0 0.22 10.0)
+    ConcreteBlock(0 6.40 0 15.0 0.22 10.0)
+
+
+RoofSlab() ->
+    ConcreteBlock(0 9.60 0 15.0 0.22 10.0)
+
+
+SideWalls() ->
+    WhiteBlock(-7.50 0.12 0 0.22 9.48 10.0)
+    WhiteBlock(7.50 0.12 0 0.22 9.48 10.0)
+
+
+RearWall() ->
+    WhiteBlock(0 0.12 5.00 15.0 9.48 0.22)
+
+
+# ================================================================
+# GROUND FLOOR FRONT FACADE
+# ================================================================
+
+GroundFloorFacade() ->
+    GroundLeftZone()
+    GroundEntryZone()
+    GroundGarageFraming()
+    GroundHorizontalBand()
+
+
+GroundLeftZone() ->
+    WhiteBlock(-6.85 0.12 -4.98 1.30 3.08 0.24)
+    WhiteBlock(-4.45 0.12 -4.98 0.42 3.08 0.24)
+
+
+GroundEntryZone() ->
+    WhiteBlock(-3.70 0.12 -4.98 0.55 3.08 0.24)
+    WhiteBlock(-0.80 0.12 -4.98 0.34 3.08 0.24)
+    StoneEntryPier()
+
+
+StoneEntryPier() ->
+    StoneBlock(0.55 0.12 -5.06 2.30 2.72 0.32)
+    StoneCourses()
+
+
+StoneCourses() ->
+    StoneBlock(-0.34 0.36 -5.24 0.42 0.14 0.08)
+    StoneBlock(0.14 0.62 -5.24 0.55 0.16 0.08)
+    StoneBlock(0.72 0.92 -5.24 0.42 0.14 0.08)
+    StoneBlock(-0.05 1.22 -5.24 0.74 0.15 0.08)
+    StoneBlock(0.70 1.50 -5.24 0.50 0.14 0.08)
+    StoneBlock(0.10 1.82 -5.24 0.62 0.16 0.08)
+    StoneBlock(0.78 2.12 -5.24 0.42 0.14 0.08)
+    StoneBlock(-0.10 2.42 -5.24 0.72 0.16 0.08)
+
+
+GroundGarageFraming() ->
+    WhiteBlock(1.90 0.12 -4.98 0.35 3.08 0.24)
+    WhiteBlock(7.15 0.12 -4.98 0.70 3.08 0.24)
+    ConcreteBlock(4.45 2.78 -5.00 5.60 0.42 0.30)
+
+
+GroundHorizontalBand() ->
+    DarkMetalBlock(-1.10 2.88 -5.26 5.10 0.30 0.58)
+
+
+# ================================================================
+# FIRST OCCUPIED UPPER FLOOR
+# ================================================================
+
+FirstFloorFacade() ->
+    FirstFloorGlazing()
+    FirstFloorRightCladding()
+    FirstFloorFrame()
+    FirstFloorCentreScreen()
+
+
+FirstFloorGlazing() ->
+    GlazedFacadeBay(-2.85 3.48 -5.10 2.20 2.48)
+    GlazedFacadeBay(-0.48 3.48 -5.10 2.20 2.48)
+    GlazedFacadeBay(1.90 3.48 -5.10 2.20 2.48)
+    GlazedFacadeBay(4.18 3.48 -5.10 2.00 2.48)
+
+
+FirstFloorRightCladding() ->
+    WoodBlock(5.85 3.35 -5.05 1.22 2.95 0.28)
+    WoodCladdingLines(5.30 3.42 -5.22 1.10 2.72)
+
+
+FirstFloorFrame() ->
+    DarkMetalBlock(0.70 3.18 -5.28 8.85 0.28 0.55)
+    DarkMetalBlock(0.70 6.10 -5.16 8.85 0.24 0.42)
+
+
+FirstFloorCentreScreen() ->
+    CentreLouver(-0.25 3.30 -5.64 2.70)
+    CentreLouver(-0.05 3.30 -5.64 2.70)
+    CentreLouver(0.15 3.30 -5.64 2.70)
+    CentreLouver(0.35 3.30 -5.64 2.70)
+    CentreLouver(0.55 3.30 -5.64 2.70)
+
+
+# ================================================================
+# SECOND / TOP OCCUPIED FLOOR
+# ================================================================
+
+SecondFloorFacade() ->
+    SecondFloorGlazing()
+    SecondFloorRightCladding()
+    SecondFloorFrame()
+
+
+SecondFloorGlazing() ->
+    GlazedFacadeBay(-2.90 6.68 -5.10 2.18 2.42)
+    GlazedFacadeBay(-0.58 6.68 -5.10 2.18 2.42)
+    GlazedFacadeBay(1.74 6.68 -5.10 2.18 2.42)
+    GlazedFacadeBay(4.00 6.68 -5.10 1.92 2.42)
+
+
+SecondFloorRightCladding() ->
+    WoodBlock(5.78 6.55 -5.05 1.32 2.82 0.28)
+    WoodCladdingLines(5.20 6.62 -5.22 1.15 2.60)
+
+
+SecondFloorFrame() ->
+    DarkMetalBlock(0.55 6.38 -5.28 9.10 0.28 0.56)
+    DarkMetalBlock(0.55 9.26 -5.18 9.10 0.28 0.48)
+
+
+# ================================================================
+# GLAZED FACADE BAY
+# Frame depth intentionally projects beyond glazing.
+# ================================================================
+
+GlazedFacadeBay(cx cy z w h) ->
+    GlassBlock(cx cy z w h 0.08)
+    DarkMetalBlock(cx-w/2 cy z-0.05 0.08 h 0.16)
+    DarkMetalBlock(cx+w/2 cy z-0.05 0.08 h 0.16)
+    DarkMetalBlock(cx cy z-0.05 w 0.08 0.16)
+    DarkMetalBlock(cx cy+h-0.08 z-0.05 w 0.08 0.16)
+
+
+# ================================================================
+# CONCRETE BLADE SYSTEM
+# Dominant vertical elements visible in reference.
+# ================================================================
+
+ConcreteBladeSystem() ->
+    LeftOuterBlade()
+    LeftInnerBlade()
+    RightStoneBlade()
+
+
+LeftOuterBlade() ->
+    ConcreteBlock(-7.08 0.00 -5.28 0.56 9.80 0.72)
+    ConcreteBlock(-6.82 8.95 -4.35 0.30 0.65 2.55)
+
+
+LeftInnerBlade() ->
+    ConcreteBlock(-4.22 0.00 -5.30 0.50 9.82 0.72)
+    ConcreteBlock(-3.96 8.95 -4.34 0.28 0.65 2.55)
+
+
+RightStoneBlade() ->
+    StoneBlock(6.90 0.18 -5.23 0.74 9.02 0.44)
+    DarkMetalBlock(6.86 0.18 -5.47 0.05 9.05 0.07)
+
+
+# ================================================================
+# TIMBER LOUVRE SYSTEM
+# ================================================================
+
+TimberLouvreSystem() ->
+    FullHeightLeftLouvers()
+    LeftLouverCrossRails()
+
+
+FullHeightLeftLouvers() ->
+    FullHeightLouver(-6.62)
+    FullHeightLouver(-6.44)
+    FullHeightLouver(-6.26)
+    FullHeightLouver(-6.08)
+    FullHeightLouver(-5.90)
+    FullHeightLouver(-5.72)
+    FullHeightLouver(-5.54)
+    FullHeightLouver(-5.36)
+    FullHeightLouver(-5.18)
+    FullHeightLouver(-5.00)
+    FullHeightLouver(-4.82)
+    FullHeightLouver(-4.64)
+
+
+FullHeightLouver(x) ->
+    WoodBlock(x 0.42 -5.56 0.085 8.72 0.28)
+
+
+LeftLouverCrossRails() ->
+    DarkMetalBlock(-5.63 3.10 -5.61 2.05 0.18 0.34)
+    DarkMetalBlock(-5.63 6.28 -5.61 2.05 0.18 0.34)
+    DarkMetalBlock(-5.63 9.12 -5.61 2.05 0.18 0.34)
+
+
+CentreLouver(x y z h) ->
+    WoodBlock(x y z 0.085 h 0.25)
+
+
+# ================================================================
+# TIMBER CLADDING DETAIL
+# Narrow dark gaps imply individual vertical boards.
+# ================================================================
+
+WoodCladdingLines(x0 y z w h) ->
+    DarkMetalBlock(x0 y z 0.035 h 0.05)
+    DarkMetalBlock(x0+0.18 y z 0.035 h 0.05)
+    DarkMetalBlock(x0+0.36 y z 0.035 h 0.05)
+    DarkMetalBlock(x0+0.54 y z 0.035 h 0.05)
+    DarkMetalBlock(x0+0.72 y z 0.035 h 0.05)
+    DarkMetalBlock(x0+0.90 y z 0.035 h 0.05)
+
+
+# ================================================================
+# BALCONY SYSTEM
+# ================================================================
+
+BalconySystem() ->
+    FirstBalcony()
+    SecondBalcony()
+
+
+FirstBalcony() ->
+    ConcreteBlock(0.70 3.22 -5.68 8.95 0.18 1.20)
+    WoodBlock(0.70 3.12 -5.67 8.65 0.07 1.05)
+    DarkMetalBlock(0.70 3.20 -6.24 8.95 0.24 0.22)
+    BalconyGlass(0.70 3.58 -6.28 8.50)
+
+
+SecondBalcony() ->
+    ConcreteBlock(0.60 6.42 -5.67 9.05 0.18 1.18)
+    WoodBlock(0.60 6.32 -5.66 8.75 0.07 1.03)
+    DarkMetalBlock(0.60 6.40 -6.22 9.05 0.24 0.22)
+    BalconyGlass(0.60 6.78 -6.26 8.60)
+
+
+BalconyGlass(cx y z w) ->
+    GlassBlock(cx y z w 0.88 0.055)
+    DarkMetalBlock(cx-w/2 y z-0.03 0.055 0.90 0.09)
+    DarkMetalBlock(cx+w/2 y z-0.03 0.055 0.90 0.09)
+    DarkMetalBlock(cx y+0.84 z-0.03 w 0.045 0.09)
+
+
+# ================================================================
+# ROOF FRAME / DEEP TOP SOFFIT
+# ================================================================
+
+RoofFrameSystem() ->
+    RoofFrontBeam()
+    RoofSideReturns()
+    RoofTimberSoffit()
+
+
+RoofFrontBeam() ->
+    DarkMetalBlock(0.45 9.30 -5.48 9.55 0.34 0.60)
+
+
+RoofSideReturns() ->
+    DarkMetalBlock(-4.16 8.90 -5.08 0.28 0.74 1.42)
+    DarkMetalBlock(5.05 8.90 -5.08 0.28 0.74 1.42)
+
+
+RoofTimberSoffit() ->
+    WoodBlock(0.45 9.08 -5.32 9.05 0.10 1.20)
+
+
+# ================================================================
+# ENTRY
+# ================================================================
+
+EntrySystem() ->
+    EntryOpening()
+    EntryDoor()
+    EntryFrame()
+    EntryCanopy()
+    EntrySteps()
+    AddressPlaque()
+
+
+EntryOpening() ->
+    GlassBlock(-2.15 0.35 -5.15 1.40 2.38 0.08)
+
+
+EntryDoor() ->
+    WoodBlock(-2.00 0.28 -5.30 1.15 2.42 0.12)
+    DarkMetalBlock(-1.56 1.15 -5.39 0.055 0.58 0.055)
+
+
+EntryFrame() ->
+    DarkMetalBlock(-2.68 0.20 -5.33 0.10 2.58 0.16)
+    DarkMetalBlock(-1.35 0.20 -5.33 0.10 2.58 0.16)
+    DarkMetalBlock(-2.02 2.68 -5.33 1.42 0.10 0.16)
+
+
+EntryCanopy() ->
+    DarkMetalBlock(-1.45 2.84 -5.72 4.15 0.22 1.18)
+    WoodBlock(-1.45 2.73 -5.70 3.90 0.06 1.00)
+
+
+EntrySteps() ->
+    ConcreteBlock(-2.00 -0.02 -5.54 1.90 0.12 0.55)
+    ConcreteBlock(-2.00 -0.10 -5.84 2.15 0.12 0.55)
+    ConcreteBlock(-2.00 -0.18 -6.14 2.40 0.12 0.55)
+
+
+AddressPlaque() ->
+    ConcreteBlock(-7.60 0.15 -5.72 1.55 1.25 0.34)
+    DarkMetalBlock(-7.60 0.54 -5.91 0.82 0.48 0.06)
+
+
+# ================================================================
+# GARAGE
+# ================================================================
+
+GarageSystem() ->
+    GarageDoor()
+    GarageDoorBands()
+    GarageHeader()
+
+
+GarageDoor() ->
+    DarkMetalBlock(4.46 0.26 -5.16 4.98 2.46 0.12)
+
+
+GarageDoorBands() ->
+    MetalBlock(4.46 0.70 -5.24 4.90 0.025 0.025)
+    MetalBlock(4.46 1.10 -5.24 4.90 0.025 0.025)
+    MetalBlock(4.46 1.50 -5.24 4.90 0.025 0.025)
+    MetalBlock(4.46 1.90 -5.24 4.90 0.025 0.025)
+    MetalBlock(4.46 2.30 -5.24 4.90 0.025 0.025)
+
+
+GarageHeader() ->
+    ConcreteBlock(4.46 2.70 -5.10 5.32 0.46 0.30)
+
+
+# ================================================================
+# FRONT LANDSCAPE / PLANTER GEOMETRY
+# Simplified geometry only; vegetation is schematic.
+# ================================================================
+
+FrontLandscape() ->
+    LeftPlanter()
+    EntryPlanter()
+    RightPlanter()
+
+
+LeftPlanter() ->
+    ConcreteBlock(-5.95 -0.02 -5.86 2.00 0.30 0.74)
+    GreenBlock(-5.95 0.26 -5.85 1.72 0.22 0.52)
+
+
+EntryPlanter() ->
+    ConcreteBlock(0.50 -0.02 -5.82 2.65 0.32 0.78)
+    GreenBlock(0.50 0.28 -5.80 2.30 0.24 0.56)
+    EntryTree()
+
+
+EntryTree() ->
+[
+    T(0.92 0.32 -5.88)
+    S(0.16 1.65 0.16)
+    !I(Cylinder material(amberwarmwood) 1 0.22)
+]
+[
+    T(0.92 1.80 -5.88)
+    S(1.10 1.10 1.10)
+    !I(Sphere material(greenmattepaint) 1 0.24)
+]
+
+
+RightPlanter() ->
+    ConcreteBlock(7.22 -0.02 -5.80 0.72 0.66 0.72)
+    GreenBlock(7.22 0.58 -5.80 0.62 0.58 0.62)

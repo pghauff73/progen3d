@@ -1,0 +1,29 @@
+# Two oppositely wound straight-rod families on circular tracks.
+# Lantern(stations, track radius, rod length, relative twist in degrees).
+Start -> Lantern(24 1.20 3.00 86-32*cos(radians(360)*t/8))
+
+Lantern(n radius length twist) ->
+    Cage(n radius radians(twist) sqrt(length^2-(2*radius*sin(radians(twist)/2))^2))
+
+Cage(n radius angle height) ->
+    [ Track(radius) ]
+    [ T(0 height 0) Track(radius) ]
+    Stations(n radius angle height)
+
+Stations(n radius angle height) n ->
+    [ A(360*Stations_count/n 1)
+      Bay(radius radius*cos(angle) radius*sin(angle) height) ]
+
+Bay(radius tipX tipZ height) ->
+    I(SweepDisk(path(radius 0 0 tipX height tipZ)
+                radius(0.022) segments(8) cap(all)) material(copperbrushedmetal) 1 1)
+    I(SweepDisk(path(radius 0 0 tipX height -tipZ)
+                radius(0.022) segments(8) cap(all)) material(tealmattemetal) 1 1)
+    [ T(radius 0 0) S(0.105 0.105 0.105)
+      I(Sphere(segments(12 8)) material(goldbrushedmetal) 1 1) ]
+
+Track(radius) ->
+    I(Revolve(profile(Polygon radius-0.075 -0.055  radius+0.045 -0.055
+                              radius+0.075 -0.025  radius+0.075 0.025
+                              radius+0.045 0.055   radius-0.075 0.055)
+              angle(0 360) segments(72) cap(all)) material(charcoalmattemetal) 1 1)

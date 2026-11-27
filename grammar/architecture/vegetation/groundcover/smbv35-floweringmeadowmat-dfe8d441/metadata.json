@@ -1,0 +1,97 @@
+{
+  "title": "Flowering Meadow Mat",
+  "group": "architecture/vegetation/groundcover",
+  "directory": "architecture/vegetation/groundcover/smbv35-floweringmeadowmat-dfe8d441",
+  "source_file": "SMBV35_FloweringMeadowMat.grammar",
+  "git_blob_sha": "dfe8d44161aec9e2e9441c95e395c6b2f9bcab43",
+  "bytes": 2218,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV35_FloweringMeadowMat.grammar"
+  ],
+  "description": "A distinct flowering meadow mat building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "ScatterRegion",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "FloweringMeadowMat"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Groundcover / FloweringMeadowMat"
+    ],
+    [
+      "Generation methods",
+      "DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.4 × 0.9 × 2.4"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; low spreading mat; edge variation; surface coverage rhythm"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/camera_three_views.png",
+      "sha": "d02bc01a22f08948ecbffd1e1efbe62cb5af0b37",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/front.png",
+      "sha": "42a680b07e46acdcd73d932cb4c1323cb8d69a0e",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/right.png",
+      "sha": "098d0418e3d458f193859d4c17235d896312bb89",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_MEADOW_MAT/top.png",
+      "sha": "22992d393bba2eabfde89e673d9402dbc26d5182",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

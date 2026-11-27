@@ -1,0 +1,26 @@
+{
+  "title": "01 measured layout",
+  "group": "education/form-studies/authoring",
+  "directory": "education/form-studies/authoring/01-measured-layout-6bd2a40f",
+  "source_file": "01_measured_layout.p3d",
+  "git_blob_sha": "6bd2a40f7d224451b6a0db0830a45442deb82a24",
+  "bytes": 262,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/FormStudies/authoring/grammars/01_measured_layout.p3d"
+  ],
+  "description": "An authoring exercise in constructing measured layouts using explicit dimensions.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FormStudies/authoring/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "title": "Lomandra Grass",
+  "group": "architecture/vegetation/grass",
+  "directory": "architecture/vegetation/grass/smbv25-lomandragrass-be4993e0",
+  "source_file": "SMBV25_LomandraGrass.grammar",
+  "git_blob_sha": "be4993e01a14bb9525945aab52983c5ab934fdfd",
+  "bytes": 2395,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV25_LomandraGrass.grammar"
+  ],
+  "description": "A distinct lomandra grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "LomandraGrass"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Grass / LomandraGrass"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; multiple blade clumps; individual blade accents; directional tufting"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/camera_three_views.png",
+      "sha": "fa192c463ac09a067c4a045d9a9a8d132f73bf9f",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/front.png",
+      "sha": "6cc0446d0384ef1c6bef24bab2e5a4fadb9e22aa",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/right.png",
+      "sha": "ce746ab2ce6f362bf808bca8ba3d6b51a9f8582f",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_LOMANDRA_GRASS/top.png",
+      "sha": "90f787c52b10a152209a4deb89ec05b7e0d3d7c2",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

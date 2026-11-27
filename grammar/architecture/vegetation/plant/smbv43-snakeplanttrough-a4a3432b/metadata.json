@@ -1,0 +1,97 @@
+{
+  "title": "Snake Plant Trough",
+  "group": "architecture/vegetation/plant",
+  "directory": "architecture/vegetation/plant/smbv43-snakeplanttrough-a4a3432b",
+  "source_file": "SMBV43_SnakePlantTrough.grammar",
+  "git_blob_sha": "a4a3432b7102faba79bce00adbcf83b7e6d45eb3",
+  "bytes": 1983,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV43_SnakePlantTrough.grammar"
+  ],
+  "description": "A distinct snake plant trough building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "SnakePlantTrough"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Plant / SnakePlantTrough"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven"
+    ],
+    [
+      "Authored extent XYZ",
+      "2.4 × 3.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; container or soil host; distinct stems and leaves; maintainable access"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/camera_three_views.png",
+      "sha": "baa73e8c25ad1e94246f04381a3801db295d0ffe",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/front.png",
+      "sha": "441659a8c83eba3a28f80b89c2c2c454018ec77d",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/right.png",
+      "sha": "565a076f3ccd0c2e5b43e1a007b704b722109daa",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SNAKE_PLANT_TROUGH/top.png",
+      "sha": "d7aef554e6c1b8b19941833f8e068602cfc7c436",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

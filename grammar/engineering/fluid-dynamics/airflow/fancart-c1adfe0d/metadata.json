@@ -1,0 +1,26 @@
+{
+  "title": "Fan Cart",
+  "group": "engineering/fluid-dynamics/airflow",
+  "directory": "engineering/fluid-dynamics/airflow/fancart-c1adfe0d",
+  "source_file": "FanCart.p3d",
+  "git_blob_sha": "c1adfe0dab4c9e7d09b2a4c368d0ac52d2811102",
+  "bytes": 1044,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/Airflow/FanCart.p3d"
+  ],
+  "description": "Airflow study of a cart with a propeller map and force-driven motion; intended for the native airflow simulation example.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/Airflow/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

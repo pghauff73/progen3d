@@ -1,0 +1,34 @@
+{
+  "title": "05 lantern essence",
+  "group": "education/form-studies/models",
+  "directory": "education/form-studies/models/05-lantern-essence-af71c6df",
+  "source_file": "05_lantern_essence.p3d",
+  "git_blob_sha": "af71c6df72b05f706af2b74661029ddb1dd275cd",
+  "bytes": 389,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/FormStudies/05_lantern_essence.p3d"
+  ],
+  "description": "A reduced lantern grammar illustrating economical representation of the same design idea.",
+  "features": [],
+  "detail": [],
+  "render_assets": [
+    {
+      "path": "renders/1-05-Lantern-Essence.jpg",
+      "original": "examples/FormStudies/images/studio/05-Lantern-Essence.jpg",
+      "sha": "c3711bc07fa9c0702c19d34b0c83b3808544008c",
+      "label": "05-Lantern-Essence",
+      "kind": "Published form-study image; exact rendering provenance not independently checked"
+    }
+  ],
+  "documentation": [
+    "examples/FormStudies/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

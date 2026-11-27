@@ -1,0 +1,25 @@
+{
+  "title": "Modern Residence Image Derived Facade",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/modern-residence-image-derived-facade-47f3cbff",
+  "source_file": "Modern_Residence_Image_Derived_Facade.grammar",
+  "git_blob_sha": "47f3cbff4fbfa0756041eedeb00667214f69b0cd",
+  "bytes": 13081,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/Modern_Residence_Image_Derived_Facade.grammar",
+    "examples/SimpleModernBuilding/Modern_Residence_Image_Derived_Facade.grammar"
+  ],
+  "description": "Modern residence facade derived from image references; use for facade composition and visual matching.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

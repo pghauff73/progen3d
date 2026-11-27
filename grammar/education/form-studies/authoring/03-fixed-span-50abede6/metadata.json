@@ -1,0 +1,26 @@
+{
+  "title": "03 fixed span",
+  "group": "education/form-studies/authoring",
+  "directory": "education/form-studies/authoring/03-fixed-span-50abede6",
+  "source_file": "03_fixed_span.p3d",
+  "git_blob_sha": "50abede62fa7a5935e9c02d64fd7401cb49ec7b7",
+  "bytes": 357,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/FormStudies/authoring/grammars/03_fixed_span.p3d"
+  ],
+  "description": "An authoring exercise in distributing repetitions across a fixed span.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FormStudies/authoring/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

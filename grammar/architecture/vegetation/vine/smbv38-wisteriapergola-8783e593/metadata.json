@@ -1,0 +1,96 @@
+{
+  "title": "Wisteria Pergola",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv38-wisteriapergola-8783e593",
+  "source_file": "SMBV38_WisteriaPergola.grammar",
+  "git_blob_sha": "8783e593f015218cc0c974a86e5ecf6aca317805",
+  "bytes": 3028,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV38_WisteriaPergola.grammar"
+  ],
+  "description": "A distinct wisteria pergola building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Vine",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "WisteriaPergola"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / WisteriaPergola"
+    ],
+    [
+      "Generation methods",
+      "GuidedClimbing, SurfaceAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.6 × 4.5 × 1.2"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), facadeAttachment (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/camera_three_views.png",
+      "sha": "e74e68eeb177a904f4f4fa55a666168e3d2cb61e",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/front.png",
+      "sha": "440f50148aac0b098eb97ffa015d833c5943618e",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/right.png",
+      "sha": "da6a266565cd4efb0e86392a60baafeeeb55818e",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_WISTERIA_PERGOLA/top.png",
+      "sha": "f7ea668873b6cfcc2e21c98fe4e3478380e2fee3",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

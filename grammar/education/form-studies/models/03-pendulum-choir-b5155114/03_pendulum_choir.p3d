@@ -1,0 +1,33 @@
+# Nine independent small-angle pendulums. Lengths are in metres, time in seconds.
+# Choir(count, common return time, cycles of the longest pendulum, pivot spacing).
+Start -> Choir(9 24 12 0.15)
+
+Choir(n period first pitch) ->
+    Frame((n-1)*pitch/2+0.15)
+    Voices(n period first pitch)
+
+Voices(n period first pitch) n ->
+    [ T((Voices_count-(n-1)/2)*pitch 1.12 0)
+      Voice(period first+Voices_count) ]
+
+Voice(period beats) ->
+    [ A(12*cos(radians(360)*beats*t/period) 0)
+      Drop(9.81*(period/(radians(360)*beats))^2) ]
+
+Drop(length) ->
+    I(SweepDisk(path(0 0 0 0 -length 0) radius(0.004) segments(8) cap(all))
+      material(charcoalmattemetal) 1 1)
+    [ T(0 -length 0) S(0.080 0.080 0.080)
+      I(Sphere(segments(16 10)) material(copperbrushedmetal) 1 1) ]
+
+Frame(halfwidth) ->
+    [ T(-halfwidth 0 0) Stand ]
+    [ T(halfwidth 0 0) Stand ]
+    I(SweepDisk(path(-halfwidth 1.12 0 halfwidth 1.12 0)
+                radius(0.022) segments(12) cap(all)) material(tealmattemetal) 1 1)
+
+Stand ->
+    I(SweepDisk(path(0 0 0 0 1.12 0) radius(0.018) segments(12) cap(all))
+      material(tealmattemetal) 1 1)
+    I(SweepDisk(path(0 0 -0.24 0 0 0.24) radius(0.028) segments(12) cap(all))
+      material(tealmattemetal) 1 1)

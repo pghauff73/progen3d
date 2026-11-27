@@ -1,0 +1,34 @@
+{
+  "title": "04 constant length lantern",
+  "group": "education/form-studies/models",
+  "directory": "education/form-studies/models/04-constant-length-lantern-e8dbbe8d",
+  "source_file": "04_constant_length_lantern.p3d",
+  "git_blob_sha": "e8dbbe8da008d1f898d5b588a87d76caa926c435",
+  "bytes": 1298,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/FormStudies/04_constant_length_lantern.p3d"
+  ],
+  "description": "A lantern form study with constant-length construction members.",
+  "features": [],
+  "detail": [],
+  "render_assets": [
+    {
+      "path": "renders/1-04-Constant-Length-Lantern.jpg",
+      "original": "examples/FormStudies/images/studio/04-Constant-Length-Lantern.jpg",
+      "sha": "e610cdc02a3a15666104ac9bfd9e1893a6d0566b",
+      "label": "04-Constant-Length-Lantern",
+      "kind": "Published form-study image; exact rendering provenance not independently checked"
+    }
+  ],
+  "documentation": [
+    "examples/FormStudies/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

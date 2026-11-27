@@ -1,0 +1,97 @@
+{
+  "title": "Topiary Sphere Shrub",
+  "group": "architecture/vegetation/shrub",
+  "directory": "architecture/vegetation/shrub/smbv20-topiarysphereshrub-1a465773",
+  "source_file": "SMBV20_TopiarySphereShrub.grammar",
+  "git_blob_sha": "1a465773e1a43a5bf4184be567069209decc5283",
+  "bytes": 2473,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV20_TopiarySphereShrub.grammar"
+  ],
+  "description": "A distinct topiary sphere shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "TopiarySphereShrub"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Shrub / TopiarySphereShrub"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, ExplicitFoliageComposition"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; dense foliage mass; grounded base; asymmetric crown rhythm"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/camera_three_views.png",
+      "sha": "7ff2e660b2c470f0787fb64ed4c5d53ca90307e7",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/front.png",
+      "sha": "da99d4889c5cb4928ceff136fb8b4073addb879c",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/right.png",
+      "sha": "455ff42331fc6bc6d7a249ad86bf4aa32355ca3d",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TOPIARY_SPHERE_SHRUB/top.png",
+      "sha": "50578fb85b03ebdea7d381c93ce78b504e16e880",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,8 @@
+# Forward +X, left +Y, up +Z. Units are metres, kg, N and seconds.
+# Set lateralMount to 0 or -0.08 to centre or mirror the load.
+Start -> FanCart(0.08)
+
+FanCart(lateralMount) ->
+    M(2) BodyInertia(0.10 0.12 0.12)
+    LoadPoint(0 lateralMount 0) BodyForce(1.20 0 0)
+    S(0.6 0.35 0.15) I(Cube material(tealmatteceramic) 1 1)

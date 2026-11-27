@@ -1,0 +1,99 @@
+{
+  "title": "Layered Flowering Plant Cluster",
+  "group": "architecture/vegetation/plant",
+  "directory": "architecture/vegetation/plant/smbv03-layeredfloweringplantcluster-75571511",
+  "source_file": "SMBV03_LayeredFloweringPlantCluster.grammar",
+  "git_blob_sha": "75571511d5821a74c846bf54cd42308ebf12c968",
+  "bytes": 3440,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV03_LayeredFloweringPlantCluster.grammar"
+  ],
+  "description": "A modern rectangular planter containing deterministic flowering herbs, scattered grass underplanting, modeled leaves, petals, soil, and drainage feet.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "LayeredFloweringPlantCluster"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Plant / LayeredFloweringPlantCluster"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, GoldenAngleFlowerHead, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 5 × 3"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; container or soil host; distinct stems and leaves; maintainable access"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/camera_three_views.png",
+      "sha": "e0fd640ec1ff55c1bfb71b8a30761f8ab1654d18",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/front.png",
+      "sha": "01afe4c3821391cc42aedc556956276e991c7a3d",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/right.png",
+      "sha": "a2cae8304894eaa11b825ce6da482a59d40c9cb1",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_FLOWERING_PLANT_CLUSTER/top.png",
+      "sha": "711576910618ed8d9f424c34016aa6a06e5d3842",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/three_view_match/per_object_metrics.csv"
+  ],
+  "quality": {
+    "visual_match_percent": 99.850977,
+    "mean_match_percent": 99.87961966666667,
+    "quality_evidence_rating": 100,
+    "validation_status": "Recorded historical three-view match; not rerun",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

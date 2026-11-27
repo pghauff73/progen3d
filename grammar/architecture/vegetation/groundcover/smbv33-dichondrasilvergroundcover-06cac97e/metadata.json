@@ -1,0 +1,97 @@
+{
+  "title": "Dichondra Silver Groundcover",
+  "group": "architecture/vegetation/groundcover",
+  "directory": "architecture/vegetation/groundcover/smbv33-dichondrasilvergroundcover-06cac97e",
+  "source_file": "SMBV33_DichondraSilverGroundcover.grammar",
+  "git_blob_sha": "06cac97eb4a6002953826f1e241cfe656097f02b",
+  "bytes": 2258,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV33_DichondraSilverGroundcover.grammar"
+  ],
+  "description": "A distinct dichondra silver groundcover building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "ScatterRegion",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "DichondraSilverGroundcover"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Groundcover / DichondraSilverGroundcover"
+    ],
+    [
+      "Generation methods",
+      "DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.4 × 0.9 × 2.4"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; low spreading mat; edge variation; surface coverage rhythm"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/camera_three_views.png",
+      "sha": "c7cc03673f7ac666c9a1c1d2da305db36efcbef1",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/front.png",
+      "sha": "4751d406ff19d40c7dbed5ad4b1970d4318a51a5",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/right.png",
+      "sha": "294e92ed5f7635a49f412eb9693403b43545854a",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DICHONDRA_SILVER_GROUNDCOVER/top.png",
+      "sha": "a3d2b9ee9a918a3e76e0b4967a46c0b17fd5b9ff",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

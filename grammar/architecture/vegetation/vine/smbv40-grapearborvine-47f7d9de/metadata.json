@@ -1,0 +1,96 @@
+{
+  "title": "Grape Arbor Vine",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv40-grapearborvine-47f7d9de",
+  "source_file": "SMBV40_GrapeArborVine.grammar",
+  "git_blob_sha": "47f7d9deeb9c62143b71f9a8840f721247b1a165",
+  "bytes": 3026,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV40_GrapeArborVine.grammar"
+  ],
+  "description": "A distinct grape arbor vine building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Vine",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "GrapeArborVine"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / GrapeArborVine"
+    ],
+    [
+      "Generation methods",
+      "GuidedClimbing, SurfaceAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.6 × 4.5 × 1.2"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), facadeAttachment (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/camera_three_views.png",
+      "sha": "306920b37ce65530cf3c63ff9ced9bf0ac8d95a4",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/front.png",
+      "sha": "3b343833d0a751628bc382d0eccc220d060b7734",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/right.png",
+      "sha": "0159921c1e02c8cad7a03ffde33b1b6b581394d7",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GRAPE_ARBOR_VINE/top.png",
+      "sha": "268e6ffeda3013b00235f4dd6cd84fd0db610180",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

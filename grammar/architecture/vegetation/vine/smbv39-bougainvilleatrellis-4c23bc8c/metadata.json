@@ -1,0 +1,96 @@
+{
+  "title": "Bougainvillea Trellis",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv39-bougainvilleatrellis-4c23bc8c",
+  "source_file": "SMBV39_BougainvilleaTrellis.grammar",
+  "git_blob_sha": "4c23bc8c9d134b6f727554b26d722ffff274b0f5",
+  "bytes": 3059,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV39_BougainvilleaTrellis.grammar"
+  ],
+  "description": "A distinct bougainvillea trellis building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Vine",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "BougainvilleaTrellis"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / BougainvilleaTrellis"
+    ],
+    [
+      "Generation methods",
+      "GuidedClimbing, SurfaceAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.6 × 4.5 × 1.2"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), facadeAttachment (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/camera_three_views.png",
+      "sha": "a0725fdd5ba15fc4025548accf291b2ca148291e",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/front.png",
+      "sha": "1eb67ee0c9748708aea3202c1cfc1ebb83995115",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/right.png",
+      "sha": "10e93a120ef9faa77fba52c7711ad4696dfffc70",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_BOUGAINVILLEA_TRELLIS/top.png",
+      "sha": "da8cc3e9d31f23ab65389c8343b607953ba20d59",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "title": "Native Privacy Shrub",
+  "group": "architecture/vegetation/shrub",
+  "directory": "architecture/vegetation/shrub/smbv21-nativeprivacyshrub-3d52c75e",
+  "source_file": "SMBV21_NativePrivacyShrub.grammar",
+  "git_blob_sha": "3d52c75ec62eba2c53b857c21becc79444a0533e",
+  "bytes": 2473,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV21_NativePrivacyShrub.grammar"
+  ],
+  "description": "A distinct native privacy shrub building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "NativePrivacyShrub"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Shrub / NativePrivacyShrub"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, ExplicitFoliageComposition"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; dense foliage mass; grounded base; asymmetric crown rhythm"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/camera_three_views.png",
+      "sha": "dfd51494cba8fdca168b166a06a85c549da246ce",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/front.png",
+      "sha": "419436e0480c6eb577f4cc495c2c58f5d51e853a",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/right.png",
+      "sha": "3e0862d3b27699c2cd8562e288c15444d23dfa2f",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_NATIVE_PRIVACY_SHRUB/top.png",
+      "sha": "a0de00e894e2cc7538ca2e32bc291c3acfdc06f9",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

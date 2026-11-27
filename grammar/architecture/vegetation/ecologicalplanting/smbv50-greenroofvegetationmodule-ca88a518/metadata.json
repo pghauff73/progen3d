@@ -1,0 +1,98 @@
+{
+  "title": "Green Roof Vegetation Module",
+  "group": "architecture/vegetation/ecologicalplanting",
+  "directory": "architecture/vegetation/ecologicalplanting/smbv50-greenroofvegetationmodule-ca88a518",
+  "source_file": "SMBV50_GreenRoofVegetationModule.grammar",
+  "git_blob_sha": "ca88a5181b38255a20617280c49267870148db94",
+  "bytes": 2571,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV50_GreenRoofVegetationModule.grammar"
+  ],
+  "description": "A distinct green roof vegetation module building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "GreenRoofVegetationModule"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / EcologicalPlanting / GreenRoofVegetationModule"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 2.6 × 3"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), stormwaterConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; water or drainage host; mixed planting density; service connection"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/camera_three_views.png",
+      "sha": "d208efd827d40ad78ec9fcca9b1b0afcdebda4cd",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/front.png",
+      "sha": "43a4497261fedb8c462810324ce14a72b6a6b979",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/right.png",
+      "sha": "b194f1ef4ce0e1332e93c5f7dc005688d640856c",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_GREEN_ROOF_MODULE/top.png",
+      "sha": "e5fd30d87bc2a35890b828e9770ae6171552efcd",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

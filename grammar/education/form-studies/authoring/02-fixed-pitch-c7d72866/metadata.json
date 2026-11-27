@@ -1,0 +1,26 @@
+{
+  "title": "02 fixed pitch",
+  "group": "education/form-studies/authoring",
+  "directory": "education/form-studies/authoring/02-fixed-pitch-c7d72866",
+  "source_file": "02_fixed_pitch.p3d",
+  "git_blob_sha": "c7d72866f0b7a6585d549d5a0d7e5b5c8781b681",
+  "bytes": 241,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/FormStudies/authoring/grammars/02_fixed_pitch.p3d"
+  ],
+  "description": "An authoring exercise in repeating bays at a fixed pitch.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/FormStudies/authoring/README.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

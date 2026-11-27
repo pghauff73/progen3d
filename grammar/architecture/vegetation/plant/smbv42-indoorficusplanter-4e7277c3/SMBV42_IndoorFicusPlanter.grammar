@@ -1,0 +1,39 @@
+# Generated Simple Modern Building vegetation object.
+# Object-local geometry uses Y-up coordinates and a five-degree comparison lens.
+
+Start -> SMB_VEGETATION_INDOOR_FICUS_PLANTER
+
+SMB_VEGETATION_INDOOR_FICUS_PLANTER ->
+[
+    Object(
+        id(SMB_VEGETATION_INDOOR_FICUS_PLANTER)
+        class(IndoorFicusPlanter)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Plant IndoorFicusPlanter)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(baseSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(irrigationConnection) type(ServiceConnection) origin(0 0.48 -0.78) normal(0 0 -1) tangent(1 0 0) region(Point) tolerance(0.01))
+        Interface(id(inspection) type(InspectionInterface) origin(0 1.45 0) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ T(0 0.42 0) S(1.65 0.84 1.65) I(Cylinder material(blackroughmetal) 1 0.18) ]
+        [ T(0 0.82 0) S(1.42 0.12 1.42) I(Cylinder material(earthmaterial) 1 0.20) ]
+        [ T(0 0.86 0) S(2.20 2.20 2.20) I(Plant(species(Shrub) age(2.20) state(Flowering) seed(560042) detail(LOD4)) material(sagegreenmattepaint) 1 0.16) ]
+        SMBV42_Leaf(-0.52 1.42 0.20 -22)
+        SMBV42_Leaf(0 1.72 -0.16 10)
+        SMBV42_Leaf(0.54 1.44 0.18 24)
+        SMBV42_Flower(-0.34 2.02 0.10 -12)
+        SMBV42_Flower(0.38 1.94 -0.08 14)
+    ]
+]
+
+SMBV42_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Lanceolate) length(0.58) width(0.22) curvature(0.18) camber(0.038) twist(10) thickness(0.010) widthPower(1.16) segments(18 5)) material(sagegreenmattepaint) 1 0.14)
+]
+
+SMBV42_Flower(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(PetalBlade(profile(Obovate) length(0.30) width(0.18) curvature(0.22) camber(0.048) twist(-8) thickness(0.008) widthPower(0.92) segments(14 5)) material(redglossymetal) 1 0.12)
+]

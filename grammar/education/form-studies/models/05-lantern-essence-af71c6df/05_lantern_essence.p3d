@@ -1,0 +1,10 @@
+# The copper centreline family from the complete lantern, with the same clock.
+Start -> Ribs(24 1.20 3.00 radians(86-32*cos(radians(360)*t/8)))
+
+Ribs(n r length a) n ->
+    [ A(360*Ribs_count/n 1)
+      Rib(r r*cos(a) sqrt(length^2-(2*r*sin(a/2))^2) r*sin(a)) ]
+
+Rib(r x y z) ->
+    I(SweepDisk(path(r 0 0 x y z) radius(0.022) segments(8) cap(all))
+      material(copperbrushedmetal) 1 1)

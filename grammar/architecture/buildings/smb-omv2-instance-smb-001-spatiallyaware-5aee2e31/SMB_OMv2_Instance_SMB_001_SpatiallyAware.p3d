@@ -1,0 +1,4320 @@
+# ================================================================
+# SMB-OMv2 Small Modern Building — spatially aware canonical fixture
+#
+# This file is generated from the unchanged SMB-OMv1 five-deep fixture.
+# It promotes all 124 object identities to executable Object scopes, localizes
+# physical geometry under object frames, declares typed interfaces and graph
+# relationships, and resolves three P0 support/clearance placements.
+#
+# Cube migration invariant:
+# - Every rectangular solid uses CubeY.
+# - Existing v1 y coordinates remain center coordinates.
+# - SMB_StaticCube and SMB_DynamicCube subtract height/2 before CubeY emission.
+# ================================================================
+
+# SMB-OMv2 Small Modern Building
+#
+# This grammar is generated from the unchanged SMB-OMv1 five-deep source.
+# The 124 stable object identities become executable Object scopes with local
+# frames, typed interfaces, graph connections, collision policies, and P0
+# collision-positioning evidence.
+#
+# Positioning policy:
+# - CubeY is the canonical rectangular primitive; helper rules translate the
+#   former center y coordinate to CubeY's base-origin convention.
+# - Fixed authored transforms remain unchanged from SMB-OMv1.
+# - Cabinet floor/wall and roof-HVAC support placement use deterministic OMv2
+#   Position constraints. Gravity remains only for legacy preview compatibility.
+# - Other explicit support, service, monitoring, power, containment, and window
+#   relationships are typed graph evidence and do not invent geometry.
+#
+# Error-checking policy:
+# - Configuration variables are checked by one-comparison validation stages.
+# - Invalid input fails closed into one visible red validation marker.
+# - The building hierarchy is not expanded after a failed check.
+
+Start ->
+    R BuildingWidth(18 18)
+    R BuildingDepth(14 14)
+    R StoreyHeight(3.2 3.2)
+    R WallThickness(0.22 0.22)
+    R SlabThickness(0.45 0.45)
+    R ContactAllowance(0.03 0.03)
+    R SiteWidth(34 34)
+    R SiteDepth(30 30)
+    G(9.81 0 -1 0)
+    SMB_001_ValidateBuildingWidthMinimum
+
+# -----------------------------------------------------------------------------
+# Staged fail-closed configuration validation
+# -----------------------------------------------------------------------------
+
+SMB_001_ValidateBuildingWidthMinimum -> ?(BuildingWidth>=14) SMB_001_ValidateBuildingWidthMaximum : SMB_Error_BuildingWidthMinimum
+SMB_001_ValidateBuildingWidthMaximum -> ?(BuildingWidth<=30) SMB_001_ValidateBuildingDepthMinimum : SMB_Error_BuildingWidthMaximum
+SMB_001_ValidateBuildingDepthMinimum -> ?(BuildingDepth>=10) SMB_001_ValidateBuildingDepthMaximum : SMB_Error_BuildingDepthMinimum
+SMB_001_ValidateBuildingDepthMaximum -> ?(BuildingDepth<=24) SMB_001_ValidateStoreyHeightMinimum : SMB_Error_BuildingDepthMaximum
+SMB_001_ValidateStoreyHeightMinimum -> ?(StoreyHeight>=2.6) SMB_001_ValidateStoreyHeightMaximum : SMB_Error_StoreyHeightMinimum
+SMB_001_ValidateStoreyHeightMaximum -> ?(StoreyHeight<=4.5) SMB_001_ValidateWallThicknessMinimum : SMB_Error_StoreyHeightMaximum
+SMB_001_ValidateWallThicknessMinimum -> ?(WallThickness>=0.12) SMB_001_ValidateWallThicknessMaximum : SMB_Error_WallThicknessMinimum
+SMB_001_ValidateWallThicknessMaximum -> ?(WallThickness<=0.5) SMB_001_ValidateSlabThicknessMinimum : SMB_Error_WallThicknessMaximum
+SMB_001_ValidateSlabThicknessMinimum -> ?(SlabThickness>=0.2) SMB_001_ValidateSlabThicknessMaximum : SMB_Error_SlabThicknessMinimum
+SMB_001_ValidateSlabThicknessMaximum -> ?(SlabThickness<=0.8) SMB_001_ValidateContactAllowanceMinimum : SMB_Error_SlabThicknessMaximum
+SMB_001_ValidateContactAllowanceMinimum -> ?(ContactAllowance>=0) SMB_001_ValidateContactAllowanceMaximum : SMB_Error_ContactAllowanceMinimum
+SMB_001_ValidateContactAllowanceMaximum -> ?(ContactAllowance<=0.08) SMB_001_ValidateSiteWidth : SMB_Error_ContactAllowanceMaximum
+SMB_001_ValidateSiteWidth -> ?(SiteWidth>=BuildingWidth+8) SMB_001_ValidateSiteDepth : SMB_Error_SiteWidth
+SMB_001_ValidateSiteDepth -> ?(SiteDepth>=BuildingDepth+8) SMB_001 : SMB_Error_SiteDepth
+
+SMB_Error_BuildingWidthMinimum -> SMB_ValidationErrorMarker(-6)
+SMB_Error_BuildingWidthMaximum -> SMB_ValidationErrorMarker(-5)
+SMB_Error_BuildingDepthMinimum -> SMB_ValidationErrorMarker(-4)
+SMB_Error_BuildingDepthMaximum -> SMB_ValidationErrorMarker(-3)
+SMB_Error_StoreyHeightMinimum -> SMB_ValidationErrorMarker(-2)
+SMB_Error_StoreyHeightMaximum -> SMB_ValidationErrorMarker(-1)
+SMB_Error_WallThicknessMinimum -> SMB_ValidationErrorMarker(0)
+SMB_Error_WallThicknessMaximum -> SMB_ValidationErrorMarker(1)
+SMB_Error_SlabThicknessMinimum -> SMB_ValidationErrorMarker(2)
+SMB_Error_SlabThicknessMaximum -> SMB_ValidationErrorMarker(3)
+SMB_Error_ContactAllowanceMinimum -> SMB_ValidationErrorMarker(4)
+SMB_Error_ContactAllowanceMaximum -> SMB_ValidationErrorMarker(5)
+SMB_Error_SiteWidth -> SMB_ValidationErrorMarker(6)
+SMB_Error_SiteDepth -> SMB_ValidationErrorMarker(7)
+
+SMB_ValidationErrorMarker(x) ->
+    [ T(x 1 0) A(45 1) [ T(0 -1.1 0) S(0.35 2.2 0.35) !I(CubeY material(redroughmetal) 1 0.25) ] ]
+    [ T(x 1 0) A(-45 1) [ T(0 -1.1 0) S(0.35 2.2 0.35) !I(CubeY material(redroughmetal) 1 0.25) ] ]
+
+# L0 object rules: building root and containers
+# Every rule below owns exactly one stable OMv2 object identity.
+
+SMB_001 ->
+[
+    Object(
+        id(SMB_001)
+        class(SmallModernBuilding)
+        taxonomy(SmallModernBuilding)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Site SMB_001_Structure SMB_001_GroundFloor SMB_001_UpperFloor SMB_001_Envelope SMB_001_RoofZone SMB_001_Services SMB_001_ExternalWorks SMB_001_Relationships
+    ]
+]
+
+SMB_SemanticLeaf ->
+[
+    Object(
+        id(SMB_SemanticLeaf)
+        class(SemanticEvidence)
+        taxonomy(SmallModernBuilding RelationshipSystem SemanticEvidence)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SEMANTIC_L1_SemanticClass
+    ]
+]
+
+SMB_001_Site ->
+[
+    Object(
+        id(SMB_001_Site)
+        class(BuildingSite)
+        taxonomy(SmallModernBuilding BuildingSite)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Site_PropertyBoundary SMB_001_Site_GroundSurface SMB_001_Site_EntryPath SMB_001_Site_Driveway SMB_001_Site_Landscape
+    ]
+]
+
+SMB_001_Site_PropertyBoundary ->
+[
+    T(0 0.12 -SiteDepth/2)
+    Object(
+        id(SMB_001_Site_PropertyBoundary)
+        class(PropertyBoundary)
+        taxonomy(SmallModernBuilding BuildingSite PropertyBoundary)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SITE_BOUNDARY_L1_BoundarySystem(0 0 0 SiteWidth 0.24 0.12 14 1 0.4 0)
+            SMB_SITE_BOUNDARY_L1_BoundarySystem(0 0 (SiteDepth/2)-(-SiteDepth/2) SiteWidth 0.24 0.12 14 1 0.4 0)
+            SMB_SITE_BOUNDARY_L1_BoundarySystem((-SiteWidth/2)-(0) 0 (0)-(-SiteDepth/2) 0.12 0.24 SiteDepth 14 1 0.4 0)
+            SMB_SITE_BOUNDARY_L1_BoundarySystem((SiteWidth/2)-(0) 0 (0)-(-SiteDepth/2) 0.12 0.24 SiteDepth 14 1 0.4 0)
+    ]
+]
+
+SMB_001_Site_GroundSurface ->
+[
+    T(0 -0.125 0)
+    Object(
+        id(SMB_001_Site_GroundSurface)
+        class(GroundSurface)
+        taxonomy(SmallModernBuilding BuildingSite GroundSurface)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_GROUND_SURFACE_L1_SurfaceAssembly(0 0 0 SiteWidth 0.25 SiteDepth 10 1 0.9 0)
+    ]
+]
+
+SMB_001_Site_EntryPath ->
+[
+    T(0 0.07 -BuildingDepth/2-4)
+    Object(
+        id(SMB_001_Site_EntryPath)
+        class(PavedPath)
+        taxonomy(SmallModernBuilding BuildingSite PavedPath)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PATH_PAVEMENT_L1_PathAssembly(0 0 0 3 0.14 8 3 1 0.55 0)
+    ]
+]
+
+SMB_001_Site_Driveway ->
+[
+    T(7 0.08 -BuildingDepth/2-4)
+    Object(
+        id(SMB_001_Site_Driveway)
+        class(PavedPath)
+        taxonomy(SmallModernBuilding BuildingSite PavedPath)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PATH_PAVEMENT_L1_PathAssembly(0 0 0 5 0.16 8 4 1 0.65 0)
+    ]
+]
+
+SMB_001_Site_Landscape ->
+[
+    Object(
+        id(SMB_001_Site_Landscape)
+        class(LandscapeSystem)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Site_Planter_Left SMB_001_Site_Planter_Right SMB_001_Site_Tree_Left SMB_001_Site_Tree_Right
+    ]
+]
+
+SMB_001_Site_Planter_Left ->
+[
+    T(-11 0.38 3)
+    Object(
+        id(SMB_001_Site_Planter_Left)
+        class(Planter)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Planter)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_LANDSCAPE_CONTAINER_L1_LandscapeAssembly(0 0 0 4 0.76 3 3 1 0.5 0)
+    ]
+]
+
+SMB_001_Site_Planter_Right ->
+[
+    T(11 0.38 3)
+    Object(
+        id(SMB_001_Site_Planter_Right)
+        class(Planter)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Planter)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_LANDSCAPE_CONTAINER_L1_LandscapeAssembly(0 0 0 4 0.76 3 3 1 0.5 0)
+    ]
+]
+
+SMB_001_Site_Tree_Left ->
+[
+    T(-11 0.76 3)
+    Object(
+        id(SMB_001_Site_Tree_Left)
+        class(Tree)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Tree)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_TREE_L1_TreeAssembly(0 0 0 0.48 3.2 4.2 6 10 1 0.4)
+    ]
+]
+
+SMB_001_Site_Tree_Right ->
+[
+    T(11 0.76 3)
+    Object(
+        id(SMB_001_Site_Tree_Right)
+        class(Tree)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Tree)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_TREE_L1_TreeAssembly(0 0 0 0.48 3.5 4.5 6 10 1 0.4)
+    ]
+]
+
+SMB_001_Structure ->
+[
+    Object(
+        id(SMB_001_Structure)
+        class(StructuralSystem)
+        taxonomy(SmallModernBuilding StructuralSystem)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Structure_Foundation SMB_001_Structure_GroundSlab SMB_001_Structure_UpperSlab SMB_001_Structure_RoofSlab SMB_001_Structure_Columns SMB_001_Structure_Core
+    ]
+]
+
+SMB_001_Structure_Foundation ->
+[
+    T(0 0.18 0)
+    Object(
+        id(SMB_001_Structure_Foundation)
+        class(Foundation)
+        taxonomy(SmallModernBuilding StructuralSystem Foundation)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_FOUNDATION_L1_FoundationAssembly(0 0 0 BuildingWidth+0.8 0.36 BuildingDepth+0.8 2 1 0.55 0)
+    ]
+]
+
+SMB_001_Structure_GroundSlab ->
+[
+    T(0 0.36+SlabThickness/2 0)
+    Object(
+        id(SMB_001_Structure_GroundSlab)
+        class(StructuralSlab)
+        taxonomy(SmallModernBuilding StructuralSystem StructuralSlab)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(upperSurface)
+            type(Bearing)
+            origin(0 0.225 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 18 14)
+            tolerance(0.001)
+        )
+
+        SMB_SLAB_L1_SlabAssembly(0 0 0 BuildingWidth SlabThickness BuildingDepth 2 1 0.5 0)
+    ]
+]
+
+SMB_001_Structure_UpperSlab ->
+[
+    T(0 0.36+SlabThickness+StoreyHeight 0)
+    Object(
+        id(SMB_001_Structure_UpperSlab)
+        class(StructuralSlab)
+        taxonomy(SmallModernBuilding StructuralSystem StructuralSlab)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(upperSurface)
+            type(Bearing)
+            origin(0 0.225 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 18 14)
+            tolerance(0.001)
+        )
+
+        SMB_SLAB_L1_SlabAssembly(0 0 0 BuildingWidth SlabThickness BuildingDepth 2 1 0.5 0)
+    ]
+]
+
+SMB_001_Structure_RoofSlab ->
+[
+    T(0 0.36+SlabThickness+2*StoreyHeight 0)
+    Object(
+        id(SMB_001_Structure_RoofSlab)
+        class(StructuralSlab)
+        taxonomy(SmallModernBuilding StructuralSystem StructuralSlab)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(upperSurface)
+            type(Bearing)
+            origin(0 0.225 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 18 14)
+            tolerance(0.001)
+        )
+
+        SMB_SLAB_L1_SlabAssembly(0 0 0 BuildingWidth SlabThickness BuildingDepth 14 1 0.45 0)
+    ]
+]
+
+SMB_001_Structure_Columns ->
+[
+    Object(
+        id(SMB_001_Structure_Columns)
+        class(ColumnSystem)
+        taxonomy(SmallModernBuilding StructuralSystem ColumnSystem)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Structure_Column_FL SMB_001_Structure_Column_FR SMB_001_Structure_Column_RL SMB_001_Structure_Column_RR
+    ]
+]
+
+SMB_001_Structure_Column_FL ->
+[
+    T(-BuildingWidth/2+0.55 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 -BuildingDepth/2+0.55)
+    Object(
+        id(SMB_001_Structure_Column_FL)
+        class(StructuralColumn)
+        taxonomy(SmallModernBuilding StructuralSystem ColumnSystem StructuralColumn)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_COLUMN_L1_ColumnAssembly(0 0 0 0.5 StoreyHeight-SlabThickness/2 0.5 7 1 0.3 0)
+            SMB_COLUMN_L1_ColumnAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 0.5 StoreyHeight-SlabThickness 0.5 7 1 0.3 0)
+    ]
+]
+
+SMB_001_Structure_Column_FR ->
+[
+    T(BuildingWidth/2-0.55 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 -BuildingDepth/2+0.55)
+    Object(
+        id(SMB_001_Structure_Column_FR)
+        class(StructuralColumn)
+        taxonomy(SmallModernBuilding StructuralSystem ColumnSystem StructuralColumn)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_COLUMN_L1_ColumnAssembly(0 0 0 0.5 StoreyHeight-SlabThickness/2 0.5 7 1 0.3 0)
+            SMB_COLUMN_L1_ColumnAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 0.5 StoreyHeight-SlabThickness 0.5 7 1 0.3 0)
+    ]
+]
+
+SMB_001_Structure_Column_RL ->
+[
+    T(-BuildingWidth/2+0.55 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 BuildingDepth/2-0.55)
+    Object(
+        id(SMB_001_Structure_Column_RL)
+        class(StructuralColumn)
+        taxonomy(SmallModernBuilding StructuralSystem ColumnSystem StructuralColumn)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_COLUMN_L1_ColumnAssembly(0 0 0 0.5 StoreyHeight-SlabThickness/2 0.5 7 1 0.3 0)
+            SMB_COLUMN_L1_ColumnAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 0.5 StoreyHeight-SlabThickness 0.5 7 1 0.3 0)
+    ]
+]
+
+SMB_001_Structure_Column_RR ->
+[
+    T(BuildingWidth/2-0.55 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 BuildingDepth/2-0.55)
+    Object(
+        id(SMB_001_Structure_Column_RR)
+        class(StructuralColumn)
+        taxonomy(SmallModernBuilding StructuralSystem ColumnSystem StructuralColumn)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_COLUMN_L1_ColumnAssembly(0 0 0 0.5 StoreyHeight-SlabThickness/2 0.5 7 1 0.3 0)
+            SMB_COLUMN_L1_ColumnAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 0.5 StoreyHeight-SlabThickness 0.5 7 1 0.3 0)
+    ]
+]
+
+SMB_001_Structure_Core ->
+[
+    T(0 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 3.8)
+    Object(
+        id(SMB_001_Structure_Core)
+        class(BuildingCore)
+        taxonomy(SmallModernBuilding StructuralSystem BuildingCore)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_CORE_L1_CoreAssembly(0 0 0 2.6 StoreyHeight-SlabThickness/2 2.8 2 1 0.35 0)
+            SMB_CORE_L1_CoreAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 2.6 StoreyHeight-SlabThickness 2.8 2 1 0.35 0)
+    ]
+]
+
+SMB_001_GroundFloor ->
+[
+    Object(
+        id(SMB_001_GroundFloor)
+        class(GroundStorey)
+        taxonomy(SmallModernBuilding GroundStorey)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containsLivingRoom)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containsKitchen)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containsDiningRoom)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(fireMonitoringInput)
+            type(ControlPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Entry_01 SMB_001_Ground_LivingRoom_01 SMB_001_Ground_Kitchen_01 SMB_001_Ground_DiningRoom_01 SMB_001_Ground_Bathroom_01 SMB_001_Ground_UtilityRoom_01 SMB_001_Ground_Stair_01
+    ]
+]
+
+SMB_001_Ground_Entry_01 ->
+[
+    Object(
+        id(SMB_001_Ground_Entry_01)
+        class(EntranceZone)
+        taxonomy(SmallModernBuilding GroundStorey EntranceZone)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Entry_Door_01 SMB_001_Ground_Entry_Canopy_01
+    ]
+]
+
+SMB_001_Ground_Entry_Door_01 ->
+[
+    T(0 0.36+SlabThickness+1.1 -BuildingDepth/2-0.12)
+    Object(
+        id(SMB_001_Ground_Entry_Door_01)
+        class(Door)
+        taxonomy(SmallModernBuilding GroundStorey EntranceZone Door)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_DOOR_L1_DoorAssembly(0 0 0 1.55 2.2 0.12 6 1 0.3 0)
+    ]
+]
+
+SMB_001_Ground_Entry_Canopy_01 ->
+[
+    T(0 0.36+SlabThickness+2.7 -BuildingDepth/2-1.25)
+    Object(
+        id(SMB_001_Ground_Entry_Canopy_01)
+        class(Canopy)
+        taxonomy(SmallModernBuilding GroundStorey EntranceZone Canopy)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_CANOPY_L1_CanopyAssembly(0 0 0 4.2 0.18 2.3 14 1 0.35 0)
+    ]
+]
+
+SMB_001_Ground_LivingRoom_01 ->
+[
+    Object(
+        id(SMB_001_Ground_LivingRoom_01)
+        class(LivingRoom)
+        taxonomy(SmallModernBuilding GroundStorey LivingRoom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containedByGroundFloor)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Living_FloorFinish SMB_001_Ground_Living_Glazing SMB_001_Ground_Living_Sofa SMB_001_Ground_Living_MediaUnit SMB_001_Ground_Living_Light
+    ]
+]
+
+SMB_001_Ground_Living_FloorFinish ->
+[
+    T(-4.4 0.36+SlabThickness+0.04 -2)
+    Object(
+        id(SMB_001_Ground_Living_FloorFinish)
+        class(FloorFinish)
+        taxonomy(SmallModernBuilding GroundStorey LivingRoom FloorFinish)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(furnitureBearing)
+            type(Bearing)
+            origin(0 0.04 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 7.4 5.5)
+            tolerance(0.001)
+        )
+
+        SMB_FLOOR_FINISH_L1_FinishAssembly(0 0 0 7.4 0.08 5.5 11 1 0.5 0)
+    ]
+]
+
+SMB_001_Ground_Living_Glazing ->
+[
+    T(-4.2 0.36+SlabThickness+1.7 -BuildingDepth/2-0.14)
+    Object(
+        id(SMB_001_Ground_Living_Glazing)
+        class(Glazing)
+        taxonomy(SmallModernBuilding GroundStorey LivingRoom Glazing)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_GLAZING_L1_GlazingAssembly(0 0 0 5 2.35 0.08 5 0.58 0.25 0)
+    ]
+]
+
+SMB_001_Ground_Living_Sofa ->
+[
+    T(-5.1 0.36+SlabThickness+0.08+0.55+ContactAllowance -1.2)
+    Object(
+        id(SMB_001_Ground_Living_Sofa)
+        class(Furniture)
+        taxonomy(SmallModernBuilding GroundStorey LivingRoom Furniture)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_LivingSofaSupportedByFloorFinish)
+            source(SMB_001_Ground_Living_Sofa floorSupport)
+            target(SMB_001_Ground_Living_FloorFinish furnitureBearing)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_FURNITURE_L1_FurnitureAssembly(0 0 0 3.2 1.1 1.25 10 1 0.4 5)
+    ]
+]
+
+SMB_001_Ground_Living_MediaUnit ->
+[
+    T(-1.4 0.36+SlabThickness+0.08+0.5+ContactAllowance -3.3)
+    Object(
+        id(SMB_001_Ground_Living_MediaUnit)
+        class(Furniture)
+        taxonomy(SmallModernBuilding GroundStorey LivingRoom Furniture)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_LivingMediaUnitSupportedByFloorFinish)
+            source(SMB_001_Ground_Living_MediaUnit floorSupport)
+            target(SMB_001_Ground_Living_FloorFinish furnitureBearing)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_FURNITURE_L1_FurnitureAssembly(0 0 0 2.1 1 0.55 14 1 0.32 4)
+    ]
+]
+
+SMB_001_Ground_Living_Light ->
+[
+    T(-4.2 0.36+SlabThickness+StoreyHeight-SlabThickness/2-0.12 -2)
+    Object(
+        id(SMB_001_Ground_Living_Light)
+        class(Luminaire)
+        taxonomy(SmallModernBuilding GroundStorey LivingRoom Luminaire)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_LIGHT_L1_LuminaireAssembly(0 0 0 0.9 0.12 0.9 18 1 0.25 0)
+    ]
+]
+
+SMB_001_Ground_Kitchen_01 ->
+[
+    Object(
+        id(SMB_001_Ground_Kitchen_01)
+        class(Kitchen)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containedByGroundFloor)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Kitchen_CabinetRun SMB_001_Ground_Kitchen_Benchtop SMB_001_Ground_Kitchen_Island SMB_001_Ground_Kitchen_Sink SMB_001_Ground_Kitchen_Oven SMB_001_Ground_Kitchen_Light
+    ]
+]
+
+SMB_001_Ground_Kitchen_CabinetRun ->
+[
+    T(5.2 0.36+SlabThickness+0.55+1 -5.8)
+    Object(
+        id(SMB_001_Ground_Kitchen_CabinetRun)
+        class(Cabinet)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen Cabinet)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(bottomSupport)
+            type(Support)
+            origin(0 -1.1/2 0)
+            normal(0 -1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 5.6 0.85)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(backClearanceFace)
+            type(Mate)
+            origin(0 0 -0.85/2)
+            normal(0 0 -1)
+            tangent(1 0 0)
+            region(PlaneRectangle 5.6 1.1)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_CabinetSupportedByGroundSlab)
+            source(SMB_001_Ground_Kitchen_CabinetRun bottomSupport)
+            target(SMB_001_Structure_GroundSlab upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        Position(
+            id(CP_CabinetGroundSlab)
+            moving(bottomSupport)
+            target(SMB_001_Structure_GroundSlab upperSurface)
+            mode(Drop)
+            direction(World 0 -1 0)
+            clearance(0)
+            seatingDepth(0)
+            maxDistance(2)
+            tolerance(0.001)
+            priority(10)
+            mask(Structure)
+        )
+
+        Position(
+            id(CP_CabinetFrontWallGap)
+            moving(backClearanceFace)
+            target(SMB_001_Envelope_Front kitchenInteriorFace)
+            mode(Gap)
+            direction(World 0 0 -1)
+            clearance(0.01)
+            seatingDepth(0)
+            maxDistance(2)
+            tolerance(0.001)
+            priority(20)
+            mask(Envelope)
+        )
+
+        SMB_CABINET_L1_CabinetAssembly(0 0 0 5.6 1.1 0.85 11 1 0.34 0)
+    ]
+]
+
+SMB_001_Ground_Kitchen_Benchtop ->
+[
+    T(5.2 0.36+SlabThickness+1.16 -5.8)
+    Object(
+        id(SMB_001_Ground_Kitchen_Benchtop)
+        class(Benchtop)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen Benchtop)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(sinkSeat)
+            type(Bearing)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_BENCHTOP_L1_BenchtopAssembly(0 0 0 5.85 0.12 0.95 4 1 0.28 0)
+    ]
+]
+
+SMB_001_Ground_Kitchen_Island ->
+[
+    T(3.1 0.36+SlabThickness+0.52 -1.7)
+    Object(
+        id(SMB_001_Ground_Kitchen_Island)
+        class(Cabinet)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen Cabinet)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_CABINET_L1_CabinetAssembly(0 0 0 2.8 1.04 1.15 11 1 0.34 0)
+    ]
+]
+
+SMB_001_Ground_Kitchen_Sink ->
+[
+    T(5.3 0.36+SlabThickness+1.28 -5.8)
+    Object(
+        id(SMB_001_Ground_Kitchen_Sink)
+        class(Sink)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen Sink)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(coldWaterInlet)
+            type(PipePort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(rimSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(hotWaterInlet)
+            type(PipePort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(wasteOutlet)
+            type(DrainPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_KitchenSinkSupportedByBenchtop)
+            source(SMB_001_Ground_Kitchen_Sink rimSupport)
+            target(SMB_001_Ground_Kitchen_Benchtop sinkSeat)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        Connect(
+            id(CONN_KitchenSinkHotWater)
+            source(SMB_001_Ground_Kitchen_Sink hotWaterInlet)
+            target(SMB_001_Plumbing_HotWaterRiser sinkSupplyOutlet)
+            type(ConnectedTo)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        Connect(
+            id(CONN_KitchenSinkWaste)
+            source(SMB_001_Ground_Kitchen_Sink wasteOutlet)
+            target(SMB_001_Plumbing_SanitaryStack sinkDrainInlet)
+            type(DrainsTo)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_SINK_L1_SinkAssembly(0 0 0 1.1 0.22 0.65 13 1 0.22 0)
+    ]
+]
+
+SMB_001_Ground_Kitchen_Oven ->
+[
+    T(7.1 0.36+SlabThickness+0.75 -5.75)
+    Object(
+        id(SMB_001_Ground_Kitchen_Oven)
+        class(Appliance)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen Appliance)
+        layer(Equipment)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_APPLIANCE_L1_ApplianceAssembly(0 0 0 0.9 1.5 0.8 14 1 0.28 0)
+    ]
+]
+
+SMB_001_Ground_Kitchen_Light ->
+[
+    T(4.3 0.36+SlabThickness+StoreyHeight-SlabThickness/2-0.12 -2)
+    Object(
+        id(SMB_001_Ground_Kitchen_Light)
+        class(Luminaire)
+        taxonomy(SmallModernBuilding GroundStorey Kitchen Luminaire)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_LIGHT_L1_LuminaireAssembly(0 0 0 0.9 0.12 0.9 18 1 0.25 0)
+    ]
+]
+
+SMB_001_Ground_DiningRoom_01 ->
+[
+    Object(
+        id(SMB_001_Ground_DiningRoom_01)
+        class(DiningRoom)
+        taxonomy(SmallModernBuilding GroundStorey DiningRoom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containedByGroundFloor)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Dining_Table SMB_001_Ground_Dining_Chairs SMB_001_Ground_Dining_Light
+    ]
+]
+
+SMB_001_Ground_Dining_Table ->
+[
+    T(-4.2 0.36+SlabThickness+0.4+ContactAllowance 3.8)
+    Object(
+        id(SMB_001_Ground_Dining_Table)
+        class(Table)
+        taxonomy(SmallModernBuilding GroundStorey DiningRoom Table)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_DiningTableSupportedByGroundSlab)
+            source(SMB_001_Ground_Dining_Table floorSupport)
+            target(SMB_001_Structure_GroundSlab upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_TABLE_L1_TableAssembly(0 0 0 3 0.8 1.55 6 1 0.36 12)
+    ]
+]
+
+SMB_001_Ground_Dining_Chairs ->
+[
+    T(-6.2 0.36+SlabThickness+0.48+ContactAllowance 3.8)
+    Object(
+        id(SMB_001_Ground_Dining_Chairs)
+        class(ChairSet)
+        taxonomy(SmallModernBuilding GroundStorey DiningRoom ChairSet)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_DiningChairsSupportedByGroundSlab)
+            source(SMB_001_Ground_Dining_Chairs floorSupport)
+            target(SMB_001_Structure_GroundSlab upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_CHAIR_L1_ChairAssembly(0 0 0 0.8 0.96 0.8 6 1 0.35 3)
+            SMB_CHAIR_L1_ChairAssembly((-2.2)-(-6.2) 0 0 0.8 0.96 0.8 6 1 0.35 3)
+            SMB_CHAIR_L1_ChairAssembly((-4.2)-(-6.2) 0 (2.5)-(3.8) 0.8 0.96 0.8 6 1 0.35 3)
+            SMB_CHAIR_L1_ChairAssembly((-4.2)-(-6.2) 0 (5.1)-(3.8) 0.8 0.96 0.8 6 1 0.35 3)
+    ]
+]
+
+SMB_001_Ground_Dining_Light ->
+[
+    T(-4.2 0.36+SlabThickness+StoreyHeight-SlabThickness/2-0.12 3.8)
+    Object(
+        id(SMB_001_Ground_Dining_Light)
+        class(Luminaire)
+        taxonomy(SmallModernBuilding GroundStorey DiningRoom Luminaire)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_LIGHT_L1_LuminaireAssembly(0 0 0 1 0.12 1 18 1 0.25 0)
+    ]
+]
+
+SMB_001_Ground_Bathroom_01 ->
+[
+    Object(
+        id(SMB_001_Ground_Bathroom_01)
+        class(Bathroom)
+        taxonomy(SmallModernBuilding GroundStorey Bathroom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Bathroom_Partitions SMB_001_Ground_Bathroom_Vanity SMB_001_Ground_Bathroom_Toilet SMB_001_Ground_Bathroom_Shower
+    ]
+]
+
+SMB_001_Ground_Bathroom_Partitions ->
+[
+    T(3.4 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 3.6)
+    Object(
+        id(SMB_001_Ground_Bathroom_Partitions)
+        class(Partition)
+        taxonomy(SmallModernBuilding GroundStorey Bathroom Partition)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PARTITION_L1_PartitionAssembly(0 0 0 0.18 StoreyHeight-SlabThickness/2 5.1 0 1 0.45 0)
+    ]
+]
+
+SMB_001_Ground_Bathroom_Vanity ->
+[
+    T(4.9 0.36+SlabThickness+0.5 5.6)
+    Object(
+        id(SMB_001_Ground_Bathroom_Vanity)
+        class(Vanity)
+        taxonomy(SmallModernBuilding GroundStorey Bathroom Vanity)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_VANITY_L1_VanityAssembly(0 0 0 1.8 1 0.65 12 1 0.3 0)
+    ]
+]
+
+SMB_001_Ground_Bathroom_Toilet ->
+[
+    T(2.1 0.36+SlabThickness+0.48 5.4)
+    Object(
+        id(SMB_001_Ground_Bathroom_Toilet)
+        class(Toilet)
+        taxonomy(SmallModernBuilding GroundStorey Bathroom Toilet)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_TOILET_L1_ToiletAssembly(0 0 0 0.75 0.96 0.95 12 1 0.28 0)
+    ]
+]
+
+SMB_001_Ground_Bathroom_Shower ->
+[
+    T(6.4 0.36+SlabThickness+1.1 3.7)
+    Object(
+        id(SMB_001_Ground_Bathroom_Shower)
+        class(Shower)
+        taxonomy(SmallModernBuilding GroundStorey Bathroom Shower)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SHOWER_L1_ShowerAssembly(0 0 0 1.7 2.2 1.7 17 0.5 0.24 0)
+    ]
+]
+
+SMB_001_Ground_UtilityRoom_01 ->
+[
+    Object(
+        id(SMB_001_Ground_UtilityRoom_01)
+        class(UtilityRoom)
+        taxonomy(SmallModernBuilding GroundStorey UtilityRoom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Ground_Utility_Partition SMB_001_Ground_Utility_Washer SMB_001_Ground_Utility_WaterHeater
+    ]
+]
+
+SMB_001_Ground_Utility_Partition ->
+[
+    T(7.1 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 3.9)
+    Object(
+        id(SMB_001_Ground_Utility_Partition)
+        class(Partition)
+        taxonomy(SmallModernBuilding GroundStorey UtilityRoom Partition)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PARTITION_L1_PartitionAssembly(0 0 0 0.18 StoreyHeight-SlabThickness/2 5.4 0 1 0.45 0)
+    ]
+]
+
+SMB_001_Ground_Utility_Washer ->
+[
+    T(7.7 0.36+SlabThickness+0.65 5.4)
+    Object(
+        id(SMB_001_Ground_Utility_Washer)
+        class(Appliance)
+        taxonomy(SmallModernBuilding GroundStorey UtilityRoom Appliance)
+        layer(Equipment)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_APPLIANCE_L1_ApplianceAssembly(0 0 0 1.1 1.3 1.1 12 1 0.3 0)
+    ]
+]
+
+SMB_001_Ground_Utility_WaterHeater ->
+[
+    T(7.7 0.36+SlabThickness 2.7)
+    Object(
+        id(SMB_001_Ground_Utility_WaterHeater)
+        class(WaterHeater)
+        taxonomy(SmallModernBuilding GroundStorey UtilityRoom WaterHeater)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(hotWaterOutlet)
+            type(PipePort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_WATER_HEATER_L1_WaterHeaterAssembly(0 0 0 0.9 1.9 0.9 13 1 0.25 0)
+    ]
+]
+
+SMB_001_Ground_Stair_01 ->
+[
+    Object(
+        id(SMB_001_Ground_Stair_01)
+        class(StairSystem)
+        taxonomy(SmallModernBuilding GroundStorey StairSystem)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_StairStep
+    ]
+]
+
+SMB_StairStep ->
+[
+    T(-1.8 0.36+SlabThickness+0.16 4.2)
+    Object(
+        id(SMB_StairStep)
+        class(StairFlight)
+        taxonomy(SmallModernBuilding GroundStorey StairSystem StairFlight)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_STAIR_L1_StairAssembly(0 0 0 0.34 0.16 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((-1.46)-(-1.8) (0.36+SlabThickness+0.24)-(0.36+SlabThickness+0.16) 0 0.34 0.32 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((-1.12)-(-1.8) (0.36+SlabThickness+0.32)-(0.36+SlabThickness+0.16) 0 0.34 0.48 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((-0.78)-(-1.8) (0.36+SlabThickness+0.40)-(0.36+SlabThickness+0.16) 0 0.34 0.64 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((-0.44)-(-1.8) (0.36+SlabThickness+0.48)-(0.36+SlabThickness+0.16) 0 0.34 0.80 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((-0.10)-(-1.8) (0.36+SlabThickness+0.56)-(0.36+SlabThickness+0.16) 0 0.34 0.96 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((0.24)-(-1.8) (0.36+SlabThickness+0.64)-(0.36+SlabThickness+0.16) 0 0.34 1.12 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((0.58)-(-1.8) (0.36+SlabThickness+0.72)-(0.36+SlabThickness+0.16) 0 0.34 1.28 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((0.92)-(-1.8) (0.36+SlabThickness+0.80)-(0.36+SlabThickness+0.16) 0 0.34 1.44 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((1.26)-(-1.8) (0.36+SlabThickness+0.88)-(0.36+SlabThickness+0.16) 0 0.34 1.60 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((1.60)-(-1.8) (0.36+SlabThickness+0.96)-(0.36+SlabThickness+0.16) 0 0.34 1.76 2.2 11 1 0.35 0)
+        SMB_STAIR_L1_StairAssembly((1.94)-(-1.8) (0.36+SlabThickness+1.04)-(0.36+SlabThickness+0.16) 0 0.34 1.92 2.2 11 1 0.35 0)
+    ]
+]
+
+SMB_001_UpperFloor ->
+[
+    Object(
+        id(SMB_001_UpperFloor)
+        class(UpperStorey)
+        taxonomy(SmallModernBuilding UpperStorey)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containsBedroom01)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containsBedroom02)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(fireMonitoringInput)
+            type(ControlPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Upper_Hall_01 SMB_001_Upper_Bedroom_01 SMB_001_Upper_Bedroom_02 SMB_001_Upper_Bathroom_01 SMB_001_Upper_Study_01
+    ]
+]
+
+SMB_001_Upper_Hall_01 ->
+[
+    T(0 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.04 2.2)
+    Object(
+        id(SMB_001_Upper_Hall_01)
+        class(UpperHall)
+        taxonomy(SmallModernBuilding UpperStorey UpperHall)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_ROOM_L1_RoomAssembly(0 0 0 2.8 0.08 7.8 11 1 0.45 0)
+    ]
+]
+
+SMB_001_Upper_Bedroom_01 ->
+[
+    Object(
+        id(SMB_001_Upper_Bedroom_01)
+        class(Bedroom)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containedByUpperFloor)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Upper_Bedroom_01_Floor SMB_001_Upper_Bedroom_01_Bed SMB_001_Upper_Bedroom_01_Wardrobe SMB_001_Upper_Bedroom_01_Window
+    ]
+]
+
+SMB_001_Upper_Bedroom_01_Floor ->
+[
+    T(-4.5 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.04 -2)
+    Object(
+        id(SMB_001_Upper_Bedroom_01_Floor)
+        class(FloorFinish)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom FloorFinish)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(furnitureBearing)
+            type(Bearing)
+            origin(0 0.04 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 7.2 5.4)
+            tolerance(0.001)
+        )
+
+        SMB_FLOOR_FINISH_L1_FinishAssembly(0 0 0 7.2 0.08 5.4 11 1 0.5 0)
+    ]
+]
+
+SMB_001_Upper_Bedroom_01_Bed ->
+[
+    T(-4.8 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.08+0.4+ContactAllowance -2.3)
+    Object(
+        id(SMB_001_Upper_Bedroom_01_Bed)
+        class(Bed)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom Bed)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_Bedroom01BedSupportedByFloorFinish)
+            source(SMB_001_Upper_Bedroom_01_Bed floorSupport)
+            target(SMB_001_Upper_Bedroom_01_Floor furnitureBearing)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_BED_L1_BedAssembly(0 0 0 3.1 0.8 2 6 1 0.4 18)
+    ]
+]
+
+SMB_001_Upper_Bedroom_01_Wardrobe ->
+[
+    T(-7.2 0.36+SlabThickness+StoreyHeight+SlabThickness/2+1.15 0.2)
+    Object(
+        id(SMB_001_Upper_Bedroom_01_Wardrobe)
+        class(Wardrobe)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom Wardrobe)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_WARDROBE_L1_WardrobeAssembly(0 0 0 1.2 2.3 3.2 11 1 0.35 0)
+    ]
+]
+
+SMB_001_Upper_Bedroom_01_Window ->
+[
+    T(-4.5 0.36+SlabThickness+StoreyHeight+SlabThickness/2+1.65 -BuildingDepth/2-0.14)
+    Object(
+        id(SMB_001_Upper_Bedroom_01_Window)
+        class(Window)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom Window)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(frameSeat)
+            type(Seat)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_Bedroom01WindowSeatedInFrontFacade)
+            source(SMB_001_Upper_Bedroom_01_Window frameSeat)
+            target(SMB_001_Envelope_Front bedroom01Opening)
+            type(SeatedIn)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_WINDOW_L1_WindowAssembly(0 0 0 3.6 1.8 0.08 5 0.58 0.25 0)
+    ]
+]
+
+SMB_001_Upper_Bedroom_02 ->
+[
+    Object(
+        id(SMB_001_Upper_Bedroom_02)
+        class(Bedroom)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(containedByUpperFloor)
+            type(Mate)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Upper_Bedroom_02_Floor SMB_001_Upper_Bedroom_02_Bed SMB_001_Upper_Bedroom_02_Wardrobe SMB_001_Upper_Bedroom_02_Window
+    ]
+]
+
+SMB_001_Upper_Bedroom_02_Floor ->
+[
+    T(4.5 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.04 -2)
+    Object(
+        id(SMB_001_Upper_Bedroom_02_Floor)
+        class(FloorFinish)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom FloorFinish)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(furnitureBearing)
+            type(Bearing)
+            origin(0 0.04 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 7.2 5.4)
+            tolerance(0.001)
+        )
+
+        SMB_FLOOR_FINISH_L1_FinishAssembly(0 0 0 7.2 0.08 5.4 11 1 0.5 0)
+    ]
+]
+
+SMB_001_Upper_Bedroom_02_Bed ->
+[
+    T(4.8 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.08+0.4+ContactAllowance -2.3)
+    Object(
+        id(SMB_001_Upper_Bedroom_02_Bed)
+        class(Bed)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom Bed)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_Bedroom02BedSupportedByFloorFinish)
+            source(SMB_001_Upper_Bedroom_02_Bed floorSupport)
+            target(SMB_001_Upper_Bedroom_02_Floor furnitureBearing)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_BED_L1_BedAssembly(0 0 0 3.1 0.8 2 6 1 0.4 18)
+    ]
+]
+
+SMB_001_Upper_Bedroom_02_Wardrobe ->
+[
+    T(7.2 0.36+SlabThickness+StoreyHeight+SlabThickness/2+1.15 0.2)
+    Object(
+        id(SMB_001_Upper_Bedroom_02_Wardrobe)
+        class(Wardrobe)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom Wardrobe)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_WARDROBE_L1_WardrobeAssembly(0 0 0 1.2 2.3 3.2 11 1 0.35 0)
+    ]
+]
+
+SMB_001_Upper_Bedroom_02_Window ->
+[
+    T(4.5 0.36+SlabThickness+StoreyHeight+SlabThickness/2+1.65 -BuildingDepth/2-0.14)
+    Object(
+        id(SMB_001_Upper_Bedroom_02_Window)
+        class(Window)
+        taxonomy(SmallModernBuilding UpperStorey Bedroom Window)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(frameSeat)
+            type(Seat)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_Bedroom02WindowSeatedInFrontFacade)
+            source(SMB_001_Upper_Bedroom_02_Window frameSeat)
+            target(SMB_001_Envelope_Front bedroom02Opening)
+            type(SeatedIn)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_WINDOW_L1_WindowAssembly(0 0 0 3.6 1.8 0.08 5 0.58 0.25 0)
+    ]
+]
+
+SMB_001_Upper_Bathroom_01 ->
+[
+    Object(
+        id(SMB_001_Upper_Bathroom_01)
+        class(Bathroom)
+        taxonomy(SmallModernBuilding UpperStorey Bathroom)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Upper_Bathroom_Partition SMB_001_Upper_Bathroom_Vanity SMB_001_Upper_Bathroom_Toilet SMB_001_Upper_Bathroom_Shower
+    ]
+]
+
+SMB_001_Upper_Bathroom_Partition ->
+[
+    T(-4.2 0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2 3.9)
+    Object(
+        id(SMB_001_Upper_Bathroom_Partition)
+        class(Partition)
+        taxonomy(SmallModernBuilding UpperStorey Bathroom Partition)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PARTITION_L1_PartitionAssembly(0 0 0 0.18 StoreyHeight-SlabThickness 5.2 0 1 0.45 0)
+    ]
+]
+
+SMB_001_Upper_Bathroom_Vanity ->
+[
+    T(-5.8 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.5 5.4)
+    Object(
+        id(SMB_001_Upper_Bathroom_Vanity)
+        class(Vanity)
+        taxonomy(SmallModernBuilding UpperStorey Bathroom Vanity)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_VANITY_L1_VanityAssembly(0 0 0 1.8 1 0.65 12 1 0.3 0)
+    ]
+]
+
+SMB_001_Upper_Bathroom_Toilet ->
+[
+    T(-2.9 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.48 5.3)
+    Object(
+        id(SMB_001_Upper_Bathroom_Toilet)
+        class(Toilet)
+        taxonomy(SmallModernBuilding UpperStorey Bathroom Toilet)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_TOILET_L1_ToiletAssembly(0 0 0 0.75 0.96 0.95 12 1 0.28 0)
+    ]
+]
+
+SMB_001_Upper_Bathroom_Shower ->
+[
+    T(-6.3 0.36+SlabThickness+StoreyHeight+SlabThickness/2+1.1 3.2)
+    Object(
+        id(SMB_001_Upper_Bathroom_Shower)
+        class(Shower)
+        taxonomy(SmallModernBuilding UpperStorey Bathroom Shower)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SHOWER_L1_ShowerAssembly(0 0 0 1.7 2.2 1.7 17 0.5 0.24 0)
+    ]
+]
+
+SMB_001_Upper_Study_01 ->
+[
+    Object(
+        id(SMB_001_Upper_Study_01)
+        class(Study)
+        taxonomy(SmallModernBuilding UpperStorey Study)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Upper_Study_Desk SMB_001_Upper_Study_Chair SMB_001_Upper_Study_Window
+    ]
+]
+
+SMB_001_Upper_Study_Desk ->
+[
+    T(4.4 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.4+ContactAllowance 3.4)
+    Object(
+        id(SMB_001_Upper_Study_Desk)
+        class(Desk)
+        taxonomy(SmallModernBuilding UpperStorey Study Desk)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_StudyDeskSupportedByUpperSlab)
+            source(SMB_001_Upper_Study_Desk floorSupport)
+            target(SMB_001_Structure_UpperSlab upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_DESK_L1_DeskAssembly(0 0 0 2.8 0.8 1.3 6 1 0.38 10)
+    ]
+]
+
+SMB_001_Upper_Study_Chair ->
+[
+    T(4.4 0.36+SlabThickness+StoreyHeight+SlabThickness/2+0.48+ContactAllowance 5.1)
+    Object(
+        id(SMB_001_Upper_Study_Chair)
+        class(ChairSet)
+        taxonomy(SmallModernBuilding UpperStorey Study ChairSet)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(floorSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_StudyChairSupportedByUpperSlab)
+            source(SMB_001_Upper_Study_Chair floorSupport)
+            target(SMB_001_Structure_UpperSlab upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_CHAIR_L1_ChairAssembly(0 0 0 0.85 0.96 0.85 6 1 0.35 3)
+    ]
+]
+
+SMB_001_Upper_Study_Window ->
+[
+    T(BuildingWidth/2+0.14 0.36+SlabThickness+StoreyHeight+SlabThickness/2+1.65 3.7)
+    Object(
+        id(SMB_001_Upper_Study_Window)
+        class(Window)
+        taxonomy(SmallModernBuilding UpperStorey Study Window)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(frameSeat)
+            type(Seat)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_StudyWindowSeatedInRightFacade)
+            source(SMB_001_Upper_Study_Window frameSeat)
+            target(SMB_001_Envelope_Right studyOpening)
+            type(SeatedIn)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        SMB_WINDOW_L1_WindowAssembly(0 0 0 0.08 1.8 3.2 5 0.58 0.25 0)
+    ]
+]
+
+SMB_001_Envelope ->
+[
+    Object(
+        id(SMB_001_Envelope)
+        class(EnvelopeSystem)
+        taxonomy(SmallModernBuilding EnvelopeSystem)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Envelope_Front SMB_001_Envelope_Rear SMB_001_Envelope_Left SMB_001_Envelope_Right SMB_001_Envelope_ExternalFins SMB_001_Envelope_Downpipes
+    ]
+]
+
+SMB_001_Envelope_Front ->
+[
+    T(0 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 -BuildingDepth/2-WallThickness/2)
+    Object(
+        id(SMB_001_Envelope_Front)
+        class(Facade)
+        taxonomy(SmallModernBuilding EnvelopeSystem Facade)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(bedroom01Opening)
+            type(Seat)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(bedroom02Opening)
+            type(Seat)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(kitchenInteriorFace)
+            type(Mate)
+            origin(0 0 0.11)
+            normal(0 0 1)
+            tangent(1 0 0)
+            region(PlaneRectangle 18 3.975)
+            tolerance(0.001)
+        )
+
+        SMB_FACADE_L1_FacadeAssembly(0 0 0 BuildingWidth StoreyHeight-SlabThickness/2 WallThickness 0 1 0.48 0)
+            SMB_FACADE_L1_FacadeAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 BuildingWidth StoreyHeight-SlabThickness WallThickness 0 1 0.48 0)
+    ]
+]
+
+SMB_001_Envelope_Rear ->
+[
+    T(0 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 BuildingDepth/2+WallThickness/2)
+    Object(
+        id(SMB_001_Envelope_Rear)
+        class(Facade)
+        taxonomy(SmallModernBuilding EnvelopeSystem Facade)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_FACADE_L1_FacadeAssembly(0 0 0 BuildingWidth StoreyHeight-SlabThickness/2 WallThickness 0 1 0.48 0)
+            SMB_FACADE_L1_FacadeAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 BuildingWidth StoreyHeight-SlabThickness WallThickness 0 1 0.48 0)
+    ]
+]
+
+SMB_001_Envelope_Left ->
+[
+    T(-BuildingWidth/2-WallThickness/2 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 0)
+    Object(
+        id(SMB_001_Envelope_Left)
+        class(Facade)
+        taxonomy(SmallModernBuilding EnvelopeSystem Facade)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_FACADE_L1_FacadeAssembly(0 0 0 WallThickness StoreyHeight-SlabThickness/2 BuildingDepth 0 1 0.48 0)
+            SMB_FACADE_L1_FacadeAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 WallThickness StoreyHeight-SlabThickness BuildingDepth 0 1 0.48 0)
+    ]
+]
+
+SMB_001_Envelope_Right ->
+[
+    T(BuildingWidth/2+WallThickness/2 0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2 0)
+    Object(
+        id(SMB_001_Envelope_Right)
+        class(Facade)
+        taxonomy(SmallModernBuilding EnvelopeSystem Facade)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(studyOpening)
+            type(Seat)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_FACADE_L1_FacadeAssembly(0 0 0 WallThickness StoreyHeight-SlabThickness/2 BuildingDepth 0 1 0.48 0)
+            SMB_FACADE_L1_FacadeAssembly(0 (0.36+SlabThickness+StoreyHeight+SlabThickness/2+(StoreyHeight-SlabThickness)/2)-(0.36+SlabThickness+(StoreyHeight-SlabThickness/2)/2) 0 WallThickness StoreyHeight-SlabThickness BuildingDepth 0 1 0.48 0)
+    ]
+]
+
+SMB_001_Envelope_ExternalFins ->
+[
+    T(-6.6 4.9 -BuildingDepth/2-0.55)
+    Object(
+        id(SMB_001_Envelope_ExternalFins)
+        class(FacadeFin)
+        taxonomy(SmallModernBuilding EnvelopeSystem FacadeFin)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_FIN_L1_FinAssembly(0 0 0 0.18 4.1 0.8 14 1 0.3 0)
+            SMB_FIN_L1_FinAssembly((-3.3)-(-6.6) 0 0 0.18 4.1 0.8 14 1 0.3 0)
+            SMB_FIN_L1_FinAssembly((0)-(-6.6) 0 0 0.18 4.1 0.8 14 1 0.3 0)
+            SMB_FIN_L1_FinAssembly((3.3)-(-6.6) 0 0 0.18 4.1 0.8 14 1 0.3 0)
+            SMB_FIN_L1_FinAssembly((6.6)-(-6.6) 0 0 0.18 4.1 0.8 14 1 0.3 0)
+    ]
+]
+
+SMB_001_Envelope_Downpipes ->
+[
+    T(-BuildingWidth/2-0.35 0.2 -BuildingDepth/2-0.35)
+    Object(
+        id(SMB_001_Envelope_Downpipes)
+        class(PipeRun)
+        taxonomy(SmallModernBuilding EnvelopeSystem PipeRun)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PIPE_L1_PipeAssembly(0 0 0 0.22 7.1 0.22 14 1 0.24 0)
+            SMB_PIPE_L1_PipeAssembly((BuildingWidth/2+0.35)-(-BuildingWidth/2-0.35) 0 0 0.22 7.1 0.22 14 1 0.24 0)
+            SMB_PIPE_L1_PipeAssembly(0 0 (BuildingDepth/2+0.35)-(-BuildingDepth/2-0.35) 0.22 7.1 0.22 14 1 0.24 0)
+            SMB_PIPE_L1_PipeAssembly((BuildingWidth/2+0.35)-(-BuildingWidth/2-0.35) 0 (BuildingDepth/2+0.35)-(-BuildingDepth/2-0.35) 0.22 7.1 0.22 14 1 0.24 0)
+    ]
+]
+
+SMB_001_RoofZone ->
+[
+    Object(
+        id(SMB_001_RoofZone)
+        class(RoofSystem)
+        taxonomy(SmallModernBuilding RoofSystem)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Roof_Parapet SMB_001_Roof_SolarArray SMB_001_Roof_HVACOutdoorUnit
+    ]
+]
+
+SMB_001_Roof_Parapet ->
+[
+    T(0 0.36+SlabThickness+2*StoreyHeight+SlabThickness/2+0.35 -BuildingDepth/2)
+    Object(
+        id(SMB_001_Roof_Parapet)
+        class(Parapet)
+        taxonomy(SmallModernBuilding RoofSystem Parapet)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PARAPET_L1_ParapetAssembly(0 0 0 BuildingWidth+0.4 0.7 0.24 14 1 0.35 0)
+            SMB_PARAPET_L1_ParapetAssembly(0 0 (BuildingDepth/2)-(-BuildingDepth/2) BuildingWidth+0.4 0.7 0.24 14 1 0.35 0)
+            SMB_PARAPET_L1_ParapetAssembly((-BuildingWidth/2)-(0) 0 (0)-(-BuildingDepth/2) 0.24 0.7 BuildingDepth 14 1 0.35 0)
+            SMB_PARAPET_L1_ParapetAssembly((BuildingWidth/2)-(0) 0 (0)-(-BuildingDepth/2) 0.24 0.7 BuildingDepth 14 1 0.35 0)
+    ]
+]
+
+SMB_001_Roof_SolarArray ->
+[
+    Object(
+        id(SMB_001_Roof_SolarArray)
+        class(PhotovoltaicArray)
+        taxonomy(SmallModernBuilding RoofSystem PhotovoltaicArray)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(electricalOutput)
+            type(ElectricalPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SOLAR_ARRAY_L1_PVArrayAssembly(0.36+SlabThickness+2*StoreyHeight+SlabThickness/2+0.18)
+        SMB_SolarPanel(0.36+SlabThickness+2*StoreyHeight+SlabThickness/2+0.18)
+    ]
+]
+
+SMB_SolarPanel(roofY) ->
+[
+    T(-5.1 roofY -3.0)
+    Object(
+        id(SMB_SolarPanel)
+        class(PhotovoltaicModuleSet)
+        taxonomy(SmallModernBuilding RoofSystem PhotovoltaicArray PhotovoltaicModuleSet)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly(0 0 0 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly((-2.2)-(-5.1) 0 0 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly((0.7)-(-5.1) 0 0 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly((3.6)-(-5.1) 0 0 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly(0 0 (-1.2)-(-3.0) 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly((-2.2)-(-5.1) 0 (-1.2)-(-3.0) 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly((0.7)-(-5.1) 0 (-1.2)-(-3.0) 2.3 0.12 1.35 18 1 0.22 0)
+        SMB_SOLAR_PANEL_L1_PVModuleAssembly((3.6)-(-5.1) 0 (-1.2)-(-3.0) 2.3 0.12 1.35 18 1 0.22 0)
+    ]
+]
+
+SMB_001_Roof_HVACOutdoorUnit ->
+[
+    T(5.8 0.36+SlabThickness+2*StoreyHeight+SlabThickness/2+0.75+1 4.7)
+    Object(
+        id(SMB_001_Roof_HVACOutdoorUnit)
+        class(HVACEquipment)
+        taxonomy(SmallModernBuilding RoofSystem HVACEquipment)
+        layer(Hvac)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(livingServicePort)
+            type(DuctPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(bedroomServicePort)
+            type(DuctPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(mountingSurface)
+            type(Support)
+            origin(0 -1.5/2 0)
+            normal(0 -1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 2.2 1.6)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_HVACSupportedByRoofSlab)
+            source(SMB_001_Roof_HVACOutdoorUnit mountingSurface)
+            target(SMB_001_Structure_RoofSlab upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        Position(
+            id(CP_HVACRoofSlab)
+            moving(mountingSurface)
+            target(SMB_001_Structure_RoofSlab upperSurface)
+            mode(Drop)
+            direction(World 0 -1 0)
+            clearance(0)
+            seatingDepth(0)
+            maxDistance(2)
+            tolerance(0.001)
+            priority(30)
+            mask(Structure)
+        )
+
+        SMB_HVAC_UNIT_L1_HVACEquipmentAssembly(0 0 0 2.2 1.5 1.6 13 1 0.3 0)
+    ]
+]
+
+SMB_001_Services ->
+[
+    Object(
+        id(SMB_001_Services)
+        class(BuildingServices)
+        taxonomy(SmallModernBuilding BuildingServices)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Plumbing SMB_001_Electrical SMB_001_HVAC SMB_001_FireSafety
+    ]
+]
+
+SMB_001_Plumbing ->
+[
+    Object(
+        id(SMB_001_Plumbing)
+        class(PlumbingSystem)
+        taxonomy(SmallModernBuilding BuildingServices PlumbingSystem)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Plumbing_ColdWaterRiser SMB_001_Plumbing_HotWaterRiser SMB_001_Plumbing_SanitaryStack
+    ]
+]
+
+SMB_001_Plumbing_ColdWaterRiser ->
+[
+    T(7.4 0.36+SlabThickness 4.8)
+    Object(
+        id(SMB_001_Plumbing_ColdWaterRiser)
+        class(PipeRun)
+        taxonomy(SmallModernBuilding BuildingServices PlumbingSystem PipeRun)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(sinkSupplyOutlet)
+            type(PipePort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PIPE_L1_PipeAssembly(0 0 0 0.18 2*StoreyHeight-SlabThickness/2 0.18 13 1 0.22 0)
+    ]
+]
+
+SMB_001_Plumbing_HotWaterRiser ->
+[
+    T(7.0 0.36+SlabThickness 4.8)
+    Object(
+        id(SMB_001_Plumbing_HotWaterRiser)
+        class(PipeRun)
+        taxonomy(SmallModernBuilding BuildingServices PlumbingSystem PipeRun)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(heaterSupplyInlet)
+            type(PipePort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(sinkSupplyOutlet)
+            type(PipePort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PIPE_L1_PipeAssembly(0 0 0 0.18 2*StoreyHeight-SlabThickness/2 0.18 7 1 0.22 0)
+    ]
+]
+
+SMB_001_Plumbing_SanitaryStack ->
+[
+    T(6.6 0.36+SlabThickness 4.8)
+    Object(
+        id(SMB_001_Plumbing_SanitaryStack)
+        class(PipeRun)
+        taxonomy(SmallModernBuilding BuildingServices PlumbingSystem PipeRun)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(sinkDrainInlet)
+            type(DrainPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PIPE_L1_PipeAssembly(0 0 0 0.28 2*StoreyHeight-SlabThickness/2 0.28 14 1 0.25 0)
+    ]
+]
+
+SMB_001_Electrical ->
+[
+    Object(
+        id(SMB_001_Electrical)
+        class(ElectricalSystem)
+        taxonomy(SmallModernBuilding BuildingServices ElectricalSystem)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_Electrical_MainPanel SMB_001_Electrical_GroundLights SMB_001_Electrical_UpperLights
+        SMB_CeilingLight(0.36+SlabThickness+StoreyHeight-SlabThickness/2-0.12 0.36+SlabThickness+2*StoreyHeight-SlabThickness/2-0.12)
+    ]
+]
+
+SMB_001_Electrical_MainPanel ->
+[
+    T(7.8 0.36+SlabThickness+1.05 1.2)
+    Object(
+        id(SMB_001_Electrical_MainPanel)
+        class(ElectricalPanel)
+        taxonomy(SmallModernBuilding BuildingServices ElectricalSystem ElectricalPanel)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(solarInput)
+            type(ElectricalPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_ELECTRICAL_PANEL_L1_PanelAssembly(0 0 0 0.9 2.1 0.28 14 1 0.3 0)
+    ]
+]
+
+SMB_001_Electrical_GroundLights ->
+[
+    Object(
+        id(SMB_001_Electrical_GroundLights)
+        class(GroundLightingCircuit)
+        taxonomy(SmallModernBuilding BuildingServices ElectricalSystem GroundLightingCircuit)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_ELECTRICAL_LIGHT_GROUP_L1_LightingCircuitAssembly(0.36+SlabThickness+StoreyHeight-SlabThickness/2-0.12)
+    ]
+]
+
+SMB_001_Electrical_UpperLights ->
+[
+    Object(
+        id(SMB_001_Electrical_UpperLights)
+        class(UpperLightingCircuit)
+        taxonomy(SmallModernBuilding BuildingServices ElectricalSystem UpperLightingCircuit)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_ELECTRICAL_LIGHT_GROUP_L1_LightingCircuitAssembly(0.36+SlabThickness+2*StoreyHeight-SlabThickness/2-0.12)
+    ]
+]
+
+SMB_CeilingLight(groundY upperY) ->
+[
+    T(-4.5 groundY -2)
+    Object(
+        id(SMB_CeilingLight)
+        class(CeilingLuminaireSet)
+        taxonomy(SmallModernBuilding BuildingServices ElectricalSystem CeilingLuminaireSet)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_LIGHT_L1_LuminaireAssembly(0 0 0 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly((4.5)-(-4.5) 0 0 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly(0 0 (3.8)-(-2) 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly((4.5)-(-4.5) 0 (3.8)-(-2) 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly(0 (upperY)-(groundY) 0 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly((4.5)-(-4.5) (upperY)-(groundY) 0 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly(0 (upperY)-(groundY) (3.8)-(-2) 0.72 0.12 0.72 18 1 0.22 0)
+        SMB_LIGHT_L1_LuminaireAssembly((4.5)-(-4.5) (upperY)-(groundY) (3.8)-(-2) 0.72 0.12 0.72 18 1 0.22 0)
+    ]
+]
+
+SMB_001_HVAC ->
+[
+    Object(
+        id(SMB_001_HVAC)
+        class(HVACSystem)
+        taxonomy(SmallModernBuilding BuildingServices HVACSystem)
+        layer(Hvac)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_HVAC_LivingIndoorUnit SMB_001_HVAC_BedroomIndoorUnit SMB_001_HVAC_BathroomExhaust
+    ]
+]
+
+SMB_001_HVAC_LivingIndoorUnit ->
+[
+    T(-7.4 0.36+SlabThickness+2.35 -4.5)
+    Object(
+        id(SMB_001_HVAC_LivingIndoorUnit)
+        class(HVACEquipment)
+        taxonomy(SmallModernBuilding BuildingServices HVACSystem HVACEquipment)
+        layer(Hvac)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(outdoorServicePort)
+            type(DuctPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_HVAC_UNIT_L1_HVACEquipmentAssembly(0 0 0 0.38 0.72 1.4 12 1 0.3 0)
+    ]
+]
+
+SMB_001_HVAC_BedroomIndoorUnit ->
+[
+    T(7.4 0.36+SlabThickness+StoreyHeight+SlabThickness/2+2.0 -4.5)
+    Object(
+        id(SMB_001_HVAC_BedroomIndoorUnit)
+        class(HVACEquipment)
+        taxonomy(SmallModernBuilding BuildingServices HVACSystem HVACEquipment)
+        layer(Hvac)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(outdoorServicePort)
+            type(DuctPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_HVAC_UNIT_L1_HVACEquipmentAssembly(0 0 0 0.38 0.72 1.4 12 1 0.3 0)
+    ]
+]
+
+SMB_001_HVAC_BathroomExhaust ->
+[
+    T(-4.2 0.36+SlabThickness+2*StoreyHeight-SlabThickness/2-0.2 3.8)
+    Object(
+        id(SMB_001_HVAC_BathroomExhaust)
+        class(HVACEquipment)
+        taxonomy(SmallModernBuilding BuildingServices HVACSystem HVACEquipment)
+        layer(Hvac)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_HVAC_UNIT_L1_HVACEquipmentAssembly(0 0 0 0.65 0.22 0.65 14 1 0.24 0)
+    ]
+]
+
+SMB_001_FireSafety ->
+[
+    Object(
+        id(SMB_001_FireSafety)
+        class(FireSafetySystem)
+        taxonomy(SmallModernBuilding BuildingServices FireSafetySystem)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_FireSafety_SmokeAlarm_Ground SMB_001_FireSafety_SmokeAlarm_Upper SMB_001_FireSafety_Extinguisher
+    ]
+]
+
+SMB_001_FireSafety_SmokeAlarm_Ground ->
+[
+    T(0 0.36+SlabThickness+StoreyHeight-SlabThickness/2-0.1 0)
+    Object(
+        id(SMB_001_FireSafety_SmokeAlarm_Ground)
+        class(SmokeAlarm)
+        taxonomy(SmallModernBuilding BuildingServices FireSafetySystem SmokeAlarm)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(monitoringOutput)
+            type(ControlPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SMOKE_ALARM_L1_SmokeAlarmAssembly(0 0 0 0.28 0.1 0.28 12 1 0.22 0)
+    ]
+]
+
+SMB_001_FireSafety_SmokeAlarm_Upper ->
+[
+    T(0 0.36+SlabThickness+2*StoreyHeight-SlabThickness/2-0.1 0)
+    Object(
+        id(SMB_001_FireSafety_SmokeAlarm_Upper)
+        class(SmokeAlarm)
+        taxonomy(SmallModernBuilding BuildingServices FireSafetySystem SmokeAlarm)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Interface(
+            id(monitoringOutput)
+            type(ControlPort)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SMOKE_ALARM_L1_SmokeAlarmAssembly(0 0 0 0.28 0.1 0.28 12 1 0.22 0)
+    ]
+]
+
+SMB_001_FireSafety_Extinguisher ->
+[
+    T(8.1 0.36+SlabThickness 4.8)
+    Object(
+        id(SMB_001_FireSafety_Extinguisher)
+        class(FireExtinguisher)
+        taxonomy(SmallModernBuilding BuildingServices FireSafetySystem FireExtinguisher)
+        layer(Equipment)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_EXTINGUISHER_L1_ExtinguisherAssembly(0 0 0 0.32 0.9 0.32 9 1 0.24 0)
+    ]
+]
+
+SMB_001_ExternalWorks ->
+[
+    Object(
+        id(SMB_001_ExternalWorks)
+        class(ExternalWorksSystem)
+        taxonomy(SmallModernBuilding ExternalWorksSystem)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_001_External_Patio SMB_001_External_PerimeterFence SMB_001_External_Lights
+    ]
+]
+
+SMB_001_External_Patio ->
+[
+    T(-4.5 0.09 BuildingDepth/2+3.1)
+    Object(
+        id(SMB_001_External_Patio)
+        class(Patio)
+        taxonomy(SmallModernBuilding ExternalWorksSystem Patio)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_PATIO_L1_PatioAssembly(0 0 0 9 0.18 6 3 1 0.6 0)
+    ]
+]
+
+SMB_001_External_PerimeterFence ->
+[
+    T(0 0.9 SiteDepth/2-0.7)
+    Object(
+        id(SMB_001_External_PerimeterFence)
+        class(Fence)
+        taxonomy(SmallModernBuilding ExternalWorksSystem Fence)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_FENCE_L1_FenceAssembly(0 0 0 SiteWidth-1.4 1.8 0.12 14 1 0.35 0)
+            SMB_FENCE_L1_FenceAssembly((-SiteWidth/2+0.7)-(0) 0 (0)-(SiteDepth/2-0.7) 0.12 1.8 SiteDepth-1.4 14 1 0.35 0)
+            SMB_FENCE_L1_FenceAssembly((SiteWidth/2-0.7)-(0) 0 (0)-(SiteDepth/2-0.7) 0.12 1.8 SiteDepth-1.4 14 1 0.35 0)
+    ]
+]
+
+SMB_001_External_Lights ->
+[
+    Object(
+        id(SMB_001_External_Lights)
+        class(ExternalLightingSystem)
+        taxonomy(SmallModernBuilding ExternalWorksSystem ExternalLightingSystem)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_ExternalLight
+    ]
+]
+
+SMB_ExternalLight ->
+[
+    T(-13 0 -10)
+    Object(
+        id(SMB_ExternalLight)
+        class(ExternalLuminaireSet)
+        taxonomy(SmallModernBuilding ExternalWorksSystem ExternalLightingSystem ExternalLuminaireSet)
+        layer(Electrical)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_EXTERNAL_LIGHT_L1_ExternalLuminaireAssembly(0 0 0 0.22 2.4 0.6 14 18 1 0.24)
+        SMB_EXTERNAL_LIGHT_L1_ExternalLuminaireAssembly((13)-(-13) 0 0 0.22 2.4 0.6 14 18 1 0.24)
+        SMB_EXTERNAL_LIGHT_L1_ExternalLuminaireAssembly(0 0 (10)-(-10) 0.22 2.4 0.6 14 18 1 0.24)
+        SMB_EXTERNAL_LIGHT_L1_ExternalLuminaireAssembly((13)-(-13) 0 (10)-(-10) 0.22 2.4 0.6 14 18 1 0.24)
+    ]
+]
+
+SMB_001_Relationships ->
+[
+    Object(
+        id(SMB_001_Relationships)
+        class(RelationshipSystem)
+        taxonomy(SmallModernBuilding RelationshipSystem)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        SMB_SemanticLeaf
+        SMB_REL_GroundFloor_CONTAINS_LivingRoom SMB_REL_GroundFloor_CONTAINS_Kitchen SMB_REL_GroundFloor_CONTAINS_DiningRoom SMB_REL_UpperFloor_CONTAINS_Bedroom01 SMB_REL_UpperFloor_CONTAINS_Bedroom02 SMB_REL_KitchenSink_CONNECTED_TO_ColdWater SMB_REL_WaterHeater_CONNECTED_TO_HotWater SMB_REL_LivingIndoorUnit_SERVED_BY_HVACOutdoor SMB_REL_BedroomIndoorUnit_SERVED_BY_HVACOutdoor SMB_REL_SolarArray_POWERS_ElectricalSystem SMB_REL_SmokeAlarmGround_MONITORS_GroundFloor SMB_REL_SmokeAlarmUpper_MONITORS_UpperFloor
+    ]
+]
+
+SMB_REL_GroundFloor_CONTAINS_LivingRoom ->
+[
+    Object(
+        id(SMB_REL_GroundFloor_CONTAINS_LivingRoom)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_GroundFloorContainsLivingRoom)
+            source(SMB_001_GroundFloor containsLivingRoom)
+            target(SMB_001_Ground_LivingRoom_01 containedByGroundFloor)
+            type(Contains)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_GroundFloor_CONTAINS_Kitchen ->
+[
+    Object(
+        id(SMB_REL_GroundFloor_CONTAINS_Kitchen)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_GroundFloorContainsKitchen)
+            source(SMB_001_GroundFloor containsKitchen)
+            target(SMB_001_Ground_Kitchen_01 containedByGroundFloor)
+            type(Contains)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_GroundFloor_CONTAINS_DiningRoom ->
+[
+    Object(
+        id(SMB_REL_GroundFloor_CONTAINS_DiningRoom)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_GroundFloorContainsDiningRoom)
+            source(SMB_001_GroundFloor containsDiningRoom)
+            target(SMB_001_Ground_DiningRoom_01 containedByGroundFloor)
+            type(Contains)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_UpperFloor_CONTAINS_Bedroom01 ->
+[
+    Object(
+        id(SMB_REL_UpperFloor_CONTAINS_Bedroom01)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_UpperFloorContainsBedroom01)
+            source(SMB_001_UpperFloor containsBedroom01)
+            target(SMB_001_Upper_Bedroom_01 containedByUpperFloor)
+            type(Contains)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_UpperFloor_CONTAINS_Bedroom02 ->
+[
+    Object(
+        id(SMB_REL_UpperFloor_CONTAINS_Bedroom02)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_UpperFloorContainsBedroom02)
+            source(SMB_001_UpperFloor containsBedroom02)
+            target(SMB_001_Upper_Bedroom_02 containedByUpperFloor)
+            type(Contains)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_KitchenSink_CONNECTED_TO_ColdWater ->
+[
+    Object(
+        id(SMB_REL_KitchenSink_CONNECTED_TO_ColdWater)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_KitchenSinkColdWater)
+            source(SMB_001_Ground_Kitchen_Sink coldWaterInlet)
+            target(SMB_001_Plumbing_ColdWaterRiser sinkSupplyOutlet)
+            type(ConnectedTo)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_WaterHeater_CONNECTED_TO_HotWater ->
+[
+    Object(
+        id(SMB_REL_WaterHeater_CONNECTED_TO_HotWater)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_WaterHeaterHotWater)
+            source(SMB_001_Ground_Utility_WaterHeater hotWaterOutlet)
+            target(SMB_001_Plumbing_HotWaterRiser heaterSupplyInlet)
+            type(ConnectedTo)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_LivingIndoorUnit_SERVED_BY_HVACOutdoor ->
+[
+    Object(
+        id(SMB_REL_LivingIndoorUnit_SERVED_BY_HVACOutdoor)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_LivingHVACServedByOutdoor)
+            source(SMB_001_HVAC_LivingIndoorUnit outdoorServicePort)
+            target(SMB_001_Roof_HVACOutdoorUnit livingServicePort)
+            type(ServedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_BedroomIndoorUnit_SERVED_BY_HVACOutdoor ->
+[
+    Object(
+        id(SMB_REL_BedroomIndoorUnit_SERVED_BY_HVACOutdoor)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_BedroomHVACServedByOutdoor)
+            source(SMB_001_HVAC_BedroomIndoorUnit outdoorServicePort)
+            target(SMB_001_Roof_HVACOutdoorUnit bedroomServicePort)
+            type(ServedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_SolarArray_POWERS_ElectricalSystem ->
+[
+    Object(
+        id(SMB_REL_SolarArray_POWERS_ElectricalSystem)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_SolarArrayPowersElectrical)
+            source(SMB_001_Roof_SolarArray electricalOutput)
+            target(SMB_001_Electrical_MainPanel solarInput)
+            type(Powers)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_SmokeAlarmGround_MONITORS_GroundFloor ->
+[
+    Object(
+        id(SMB_REL_SmokeAlarmGround_MONITORS_GroundFloor)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_GroundAlarmMonitorsGroundFloor)
+            source(SMB_001_FireSafety_SmokeAlarm_Ground monitoringOutput)
+            target(SMB_001_GroundFloor fireMonitoringInput)
+            type(Monitors)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+
+SMB_REL_SmokeAlarmUpper_MONITORS_UpperFloor ->
+[
+    Object(
+        id(SMB_REL_SmokeAlarmUpper_MONITORS_UpperFloor)
+        class(SpatialRelationshipAssertion)
+        taxonomy(SmallModernBuilding RelationshipSystem SpatialRelationshipAssertion)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_UpperAlarmMonitorsUpperFloor)
+            source(SMB_001_FireSafety_SmokeAlarm_Upper monitoringOutput)
+            target(SMB_001_UpperFloor fireMonitoringInput)
+            type(Monitors)
+            clearance(0)
+            insertionDepth(0)
+        )
+    ]
+]
+# Five-deep physical template chains
+# All simple templates use the same explicit placement contract:
+# (x y z width height depth materialIndex alpha textureScale mass)
+# -----------------------------------------------------------------------------
+
+SMB_SITE_BOUNDARY_L1_BoundarySystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SITE_BOUNDARY_L2_BoundarySegment(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SITE_BOUNDARY_L2_BoundarySegment(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SITE_BOUNDARY_L3_ControlFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SITE_BOUNDARY_L3_ControlFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SITE_BOUNDARY_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SITE_BOUNDARY_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SITE_BOUNDARY_L5_AtomicBoundaryPoint(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SITE_BOUNDARY_L5_AtomicBoundaryPoint(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_GROUND_SURFACE_L1_SurfaceAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GROUND_SURFACE_L2_LayerSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GROUND_SURFACE_L2_LayerSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GROUND_SURFACE_L3_SurfaceComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GROUND_SURFACE_L3_SurfaceComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GROUND_SURFACE_L4_EdgeJointFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GROUND_SURFACE_L4_EdgeJointFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GROUND_SURFACE_L5_AtomicSurfaceRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GROUND_SURFACE_L5_AtomicSurfaceRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_PATH_PAVEMENT_L1_PathAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATH_PAVEMENT_L2_PavementSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATH_PAVEMENT_L2_PavementSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATH_PAVEMENT_L3_PavementComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATH_PAVEMENT_L3_PavementComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATH_PAVEMENT_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATH_PAVEMENT_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATH_PAVEMENT_L5_AtomicPavementRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATH_PAVEMENT_L5_AtomicPavementRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_LANDSCAPE_CONTAINER_L1_LandscapeAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LANDSCAPE_CONTAINER_L2_ContainerSoilSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LANDSCAPE_CONTAINER_L2_ContainerSoilSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LANDSCAPE_CONTAINER_L3_PlantingComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LANDSCAPE_CONTAINER_L3_PlantingComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LANDSCAPE_CONTAINER_L4_RootEdgeSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LANDSCAPE_CONTAINER_L4_RootEdgeSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LANDSCAPE_CONTAINER_L5_AtomicLandscapeRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LANDSCAPE_CONTAINER_L5_AtomicLandscapeRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_TREE_L1_TreeAssembly(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale) -> SMB_TREE_L2_PrimaryOrganSystem(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale)
+SMB_TREE_L2_PrimaryOrganSystem(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale) -> SMB_TREE_L3_OrganComponent(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale)
+SMB_TREE_L3_OrganComponent(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale) -> SMB_TREE_L4_SurfaceTissueFeature(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale)
+SMB_TREE_L4_SurfaceTissueFeature(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale) -> SMB_TREE_L5_AtomicPlantRegion(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale)
+SMB_TREE_L5_AtomicPlantRegion(x baseY z trunkDiameter trunkHeight crownDiameter trunkMaterialIndex crownMaterialIndex alpha textureScale) -> SMB_StaticCylinder(x baseY z trunkDiameter trunkHeight trunkDiameter trunkMaterialIndex alpha textureScale) SMB_StaticSphere(x baseY+trunkHeight+crownDiameter*0.18 z crownDiameter crownDiameter crownDiameter crownMaterialIndex alpha textureScale)
+
+SMB_FOUNDATION_L1_FoundationAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FOUNDATION_L2_LoadTransferComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FOUNDATION_L2_LoadTransferComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FOUNDATION_L3_MaterialComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FOUNDATION_L3_MaterialComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FOUNDATION_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FOUNDATION_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FOUNDATION_L5_AtomicFoundationRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FOUNDATION_L5_AtomicFoundationRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_SLAB_L1_SlabAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SLAB_L2_SlabZone(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SLAB_L2_SlabZone(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SLAB_L3_LayerComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SLAB_L3_LayerComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SLAB_L4_FeatureInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SLAB_L4_FeatureInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SLAB_L5_AtomicSlabRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SLAB_L5_AtomicSlabRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_COLUMN_L1_ColumnAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_COLUMN_L2_ColumnShaft(x y z width height depth materialIndex alpha textureScale mass)
+SMB_COLUMN_L2_ColumnShaft(x y z width height depth materialIndex alpha textureScale mass) -> SMB_COLUMN_L3_SectionComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_COLUMN_L3_SectionComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_COLUMN_L4_EndSurfaceInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_COLUMN_L4_EndSurfaceInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_COLUMN_L5_AtomicColumnRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_COLUMN_L5_AtomicColumnRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_CORE_L1_CoreAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CORE_L2_CoreWallSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CORE_L2_CoreWallSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CORE_L3_WallComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CORE_L3_WallComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CORE_L4_OpeningConnectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CORE_L4_OpeningConnectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CORE_L5_AtomicCoreRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CORE_L5_AtomicCoreRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_DOOR_L1_DoorAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DOOR_L2_DoorSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DOOR_L2_DoorSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DOOR_L3_HardwareComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DOOR_L3_HardwareComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DOOR_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DOOR_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DOOR_L5_AtomicDoorFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DOOR_L5_AtomicDoorFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_CANOPY_L1_CanopyAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CANOPY_L2_SupportSkinSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CANOPY_L2_SupportSkinSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CANOPY_L3_PanelMember(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CANOPY_L3_PanelMember(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CANOPY_L4_EdgeConnectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CANOPY_L4_EdgeConnectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CANOPY_L5_AtomicCanopyRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CANOPY_L5_AtomicCanopyRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_ROOM_L1_RoomAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ROOM_L2_BoundaryAndContentsSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ROOM_L2_BoundaryAndContentsSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ROOM_L3_RoomComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ROOM_L3_RoomComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ROOM_L4_SubcomponentFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ROOM_L4_SubcomponentFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ROOM_L5_AtomicRoomFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ROOM_L5_AtomicRoomFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_FLOOR_FINISH_L1_FinishAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FLOOR_FINISH_L2_FinishField(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FLOOR_FINISH_L2_FinishField(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FLOOR_FINISH_L3_FinishComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FLOOR_FINISH_L3_FinishComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FLOOR_FINISH_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FLOOR_FINISH_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FLOOR_FINISH_L5_AtomicFinishRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FLOOR_FINISH_L5_AtomicFinishRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_GLAZING_L1_GlazingAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GLAZING_L2_PaneFrameSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GLAZING_L2_PaneFrameSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GLAZING_L3_GlazingComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GLAZING_L3_GlazingComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GLAZING_L4_EdgeSealInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GLAZING_L4_EdgeSealInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_GLAZING_L5_AtomicGlazingRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_GLAZING_L5_AtomicGlazingRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_FURNITURE_L1_FurnitureAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FURNITURE_L2_PrimaryBodySystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FURNITURE_L2_PrimaryBodySystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FURNITURE_L3_FurnitureComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FURNITURE_L3_FurnitureComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FURNITURE_L4_JointSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FURNITURE_L4_JointSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FURNITURE_L5_AtomicFurnitureRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FURNITURE_L5_AtomicFurnitureRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DynamicCube(x y z width height depth materialIndex alpha textureScale mass)
+
+SMB_LIGHT_L1_LuminaireAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LIGHT_L2_OpticalElectricalSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LIGHT_L2_OpticalElectricalSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LIGHT_L3_LuminaireComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LIGHT_L3_LuminaireComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LIGHT_L4_ElectricalOpticalInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LIGHT_L4_ElectricalOpticalInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_LIGHT_L5_AtomicLightFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_LIGHT_L5_AtomicLightFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCylinder(x y z width height depth materialIndex alpha textureScale)
+
+SMB_CABINET_L1_CabinetAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CABINET_L2_CabinetModule(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CABINET_L2_CabinetModule(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CABINET_L3_CabinetComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CABINET_L3_CabinetComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CABINET_L4_HardwareJointFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CABINET_L4_HardwareJointFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CABINET_L5_AtomicCabinetRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CABINET_L5_AtomicCabinetRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_BENCHTOP_L1_BenchtopAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BENCHTOP_L2_SlabSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BENCHTOP_L2_SlabSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BENCHTOP_L3_SlabComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BENCHTOP_L3_SlabComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BENCHTOP_L4_EdgeCutoutInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BENCHTOP_L4_EdgeCutoutInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BENCHTOP_L5_AtomicBenchtopRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BENCHTOP_L5_AtomicBenchtopRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_SINK_L1_SinkAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SINK_L2_BowlDrainSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SINK_L2_BowlDrainSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SINK_L3_FixtureComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SINK_L3_FixtureComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SINK_L4_SealConnectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SINK_L4_SealConnectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SINK_L5_AtomicSinkRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SINK_L5_AtomicSinkRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_APPLIANCE_L1_ApplianceAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_APPLIANCE_L2_FunctionalSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_APPLIANCE_L2_FunctionalSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_APPLIANCE_L3_ApplianceComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_APPLIANCE_L3_ApplianceComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_APPLIANCE_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_APPLIANCE_L4_InterfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_APPLIANCE_L5_AtomicApplianceRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_APPLIANCE_L5_AtomicApplianceRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_TABLE_L1_TableAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TABLE_L2_TopSupportSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TABLE_L2_TopSupportSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TABLE_L3_TableComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TABLE_L3_TableComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TABLE_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TABLE_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TABLE_L5_AtomicTableRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TABLE_L5_AtomicTableRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DynamicCube(x y z width height depth materialIndex alpha textureScale mass)
+
+SMB_CHAIR_L1_ChairAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CHAIR_L2_SeatFrameSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CHAIR_L2_SeatFrameSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CHAIR_L3_ChairComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CHAIR_L3_ChairComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CHAIR_L4_JointSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CHAIR_L4_JointSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_CHAIR_L5_AtomicChairRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_CHAIR_L5_AtomicChairRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DynamicCube(x y z width height depth materialIndex alpha textureScale mass)
+
+SMB_PARTITION_L1_PartitionAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARTITION_L2_LayeredWallSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARTITION_L2_LayeredWallSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARTITION_L3_PartitionComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARTITION_L3_PartitionComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARTITION_L4_JointOpeningFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARTITION_L4_JointOpeningFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARTITION_L5_AtomicPartitionRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARTITION_L5_AtomicPartitionRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_VANITY_L1_VanityAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_VANITY_L2_CabinetFixtureSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_VANITY_L2_CabinetFixtureSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_VANITY_L3_VanityComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_VANITY_L3_VanityComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_VANITY_L4_JointPlumbingFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_VANITY_L4_JointPlumbingFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_VANITY_L5_AtomicVanityRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_VANITY_L5_AtomicVanityRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_TOILET_L1_ToiletAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TOILET_L2_PanCisternSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TOILET_L2_PanCisternSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TOILET_L3_FixtureComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TOILET_L3_FixtureComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TOILET_L4_SealConnectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TOILET_L4_SealConnectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_TOILET_L5_AtomicToiletRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_TOILET_L5_AtomicToiletRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCylinder(x y-height/2 z width height*0.55 depth materialIndex alpha textureScale) SMB_StaticSphere(x y+height*0.22 z width height*0.55 depth materialIndex alpha textureScale)
+
+SMB_SHOWER_L1_ShowerAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SHOWER_L2_WetAreaSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SHOWER_L2_WetAreaSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SHOWER_L3_ShowerComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SHOWER_L3_ShowerComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SHOWER_L4_WaterSealInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SHOWER_L4_WaterSealInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SHOWER_L5_AtomicShowerRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SHOWER_L5_AtomicShowerRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_WATER_HEATER_L1_WaterHeaterAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WATER_HEATER_L2_TankHeatingSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WATER_HEATER_L2_TankHeatingSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WATER_HEATER_L3_HeaterComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WATER_HEATER_L3_HeaterComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WATER_HEATER_L4_HydraulicElectricalInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WATER_HEATER_L4_HydraulicElectricalInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WATER_HEATER_L5_AtomicHeaterRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WATER_HEATER_L5_AtomicHeaterRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCylinder(x y z width height depth materialIndex alpha textureScale)
+
+SMB_STAIR_L1_StairAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_STAIR_L2_FlightLandingSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_STAIR_L2_FlightLandingSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_STAIR_L3_StepComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_STAIR_L3_StepComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_STAIR_L4_EdgeSupportFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_STAIR_L4_EdgeSupportFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_STAIR_L5_AtomicStairRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_STAIR_L5_AtomicStairRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_BED_L1_BedAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BED_L2_FrameMattressSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BED_L2_FrameMattressSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BED_L3_BedComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BED_L3_BedComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BED_L4_JointSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BED_L4_JointSurfaceFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_BED_L5_AtomicBedRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_BED_L5_AtomicBedRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DynamicCube(x y z width height depth materialIndex alpha textureScale mass)
+
+SMB_WARDROBE_L1_WardrobeAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WARDROBE_L2_CabinetModuleSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WARDROBE_L2_CabinetModuleSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WARDROBE_L3_WardrobeComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WARDROBE_L3_WardrobeComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WARDROBE_L4_HardwareJointFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WARDROBE_L4_HardwareJointFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WARDROBE_L5_AtomicWardrobeRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WARDROBE_L5_AtomicWardrobeRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_WINDOW_L1_WindowAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WINDOW_L2_FrameSashSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WINDOW_L2_FrameSashSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WINDOW_L3_WindowComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WINDOW_L3_WindowComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WINDOW_L4_SealHardwareInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WINDOW_L4_SealHardwareInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_WINDOW_L5_AtomicWindowRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_WINDOW_L5_AtomicWindowRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_DESK_L1_DeskAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DESK_L2_TopSupportSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DESK_L2_TopSupportSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DESK_L3_DeskComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DESK_L3_DeskComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DESK_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DESK_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DESK_L5_AtomicDeskRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_DESK_L5_AtomicDeskRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_DynamicCube(x y z width height depth materialIndex alpha textureScale mass)
+
+SMB_FACADE_L1_FacadeAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FACADE_L2_EnvelopeZone(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FACADE_L2_EnvelopeZone(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FACADE_L3_FacadeComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FACADE_L3_FacadeComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FACADE_L4_JointEdgeInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FACADE_L4_JointEdgeInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FACADE_L5_AtomicFacadeRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FACADE_L5_AtomicFacadeRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_FIN_L1_FinAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FIN_L2_FinMemberSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FIN_L2_FinMemberSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FIN_L3_FinComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FIN_L3_FinComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FIN_L4_ConnectionEdgeFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FIN_L4_ConnectionEdgeFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FIN_L5_AtomicFinRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FIN_L5_AtomicFinRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_PIPE_L1_PipeAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PIPE_L2_PipeRunSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PIPE_L2_PipeRunSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PIPE_L3_PipeComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PIPE_L3_PipeComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PIPE_L4_JointConnectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PIPE_L4_JointConnectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PIPE_L5_AtomicPipeRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PIPE_L5_AtomicPipeRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCylinder(x y z width height depth materialIndex alpha textureScale)
+
+SMB_PARAPET_L1_ParapetAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARAPET_L2_WallCopingSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARAPET_L2_WallCopingSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARAPET_L3_ParapetComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARAPET_L3_ParapetComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARAPET_L4_JointWeatheringFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARAPET_L4_JointWeatheringFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PARAPET_L5_AtomicParapetRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PARAPET_L5_AtomicParapetRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_SOLAR_ARRAY_L1_PVArrayAssembly(roofY) -> SMB_SOLAR_ARRAY_L2_StringRowSystem(roofY)
+SMB_SOLAR_ARRAY_L2_StringRowSystem(roofY) -> SMB_SOLAR_ARRAY_L3_PVModule(roofY)
+SMB_SOLAR_ARRAY_L3_PVModule(roofY) -> SMB_SOLAR_ARRAY_L4_CellMountInterface(roofY)
+SMB_SOLAR_ARRAY_L4_CellMountInterface(roofY) -> SMB_SOLAR_ARRAY_L5_AtomicPVFeature(roofY)
+SMB_SOLAR_ARRAY_L5_AtomicPVFeature(roofY) -> SMB_NoGeometry
+
+SMB_SOLAR_PANEL_L1_PVModuleAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SOLAR_PANEL_L2_LaminateFrameSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SOLAR_PANEL_L2_LaminateFrameSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SOLAR_PANEL_L3_PVComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SOLAR_PANEL_L3_PVComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SOLAR_PANEL_L4_ElectricalMountInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SOLAR_PANEL_L4_ElectricalMountInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SOLAR_PANEL_L5_AtomicPVRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SOLAR_PANEL_L5_AtomicPVRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_HVAC_UNIT_L1_HVACEquipmentAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_HVAC_UNIT_L2_ThermalAirflowSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_HVAC_UNIT_L2_ThermalAirflowSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_HVAC_UNIT_L3_HVACComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_HVAC_UNIT_L3_HVACComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_HVAC_UNIT_L4_FluidElectricalInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_HVAC_UNIT_L4_FluidElectricalInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_HVAC_UNIT_L5_AtomicHVACRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_HVAC_UNIT_L5_AtomicHVACRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_ELECTRICAL_PANEL_L1_PanelAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ELECTRICAL_PANEL_L2_BusProtectionSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ELECTRICAL_PANEL_L2_BusProtectionSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ELECTRICAL_PANEL_L3_PanelComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ELECTRICAL_PANEL_L3_PanelComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ELECTRICAL_PANEL_L4_ElectricalConnectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ELECTRICAL_PANEL_L4_ElectricalConnectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_ELECTRICAL_PANEL_L5_AtomicElectricalContact(x y z width height depth materialIndex alpha textureScale mass)
+SMB_ELECTRICAL_PANEL_L5_AtomicElectricalContact(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_ELECTRICAL_LIGHT_GROUP_L1_LightingCircuitAssembly(levelY) -> SMB_ELECTRICAL_LIGHT_GROUP_L2_CircuitDistributionSystem(levelY)
+SMB_ELECTRICAL_LIGHT_GROUP_L2_CircuitDistributionSystem(levelY) -> SMB_ELECTRICAL_LIGHT_GROUP_L3_LuminairePoint(levelY)
+SMB_ELECTRICAL_LIGHT_GROUP_L3_LuminairePoint(levelY) -> SMB_ELECTRICAL_LIGHT_GROUP_L4_TerminalControlFeature(levelY)
+SMB_ELECTRICAL_LIGHT_GROUP_L4_TerminalControlFeature(levelY) -> SMB_ELECTRICAL_LIGHT_GROUP_L5_AtomicElectricalOpticalFeature(levelY)
+SMB_ELECTRICAL_LIGHT_GROUP_L5_AtomicElectricalOpticalFeature(levelY) -> SMB_NoGeometry
+
+SMB_SMOKE_ALARM_L1_SmokeAlarmAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SMOKE_ALARM_L2_DetectionElectronicsSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SMOKE_ALARM_L2_DetectionElectronicsSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SMOKE_ALARM_L3_AlarmComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SMOKE_ALARM_L3_AlarmComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SMOKE_ALARM_L4_SensingElectricalInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SMOKE_ALARM_L4_SensingElectricalInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_SMOKE_ALARM_L5_AtomicDetectionFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_SMOKE_ALARM_L5_AtomicDetectionFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCylinder(x y z width height depth materialIndex alpha textureScale)
+
+SMB_EXTINGUISHER_L1_ExtinguisherAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_EXTINGUISHER_L2_PressureDischargeSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_EXTINGUISHER_L2_PressureDischargeSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_EXTINGUISHER_L3_ExtinguisherComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_EXTINGUISHER_L3_ExtinguisherComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_EXTINGUISHER_L4_PressureMountInterface(x y z width height depth materialIndex alpha textureScale mass)
+SMB_EXTINGUISHER_L4_PressureMountInterface(x y z width height depth materialIndex alpha textureScale mass) -> SMB_EXTINGUISHER_L5_AtomicExtinguisherRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_EXTINGUISHER_L5_AtomicExtinguisherRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCylinder(x y z width height depth materialIndex alpha textureScale)
+
+SMB_PATIO_L1_PatioAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATIO_L2_PavingSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATIO_L2_PavingSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATIO_L3_PavingComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATIO_L3_PavingComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATIO_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATIO_L4_JointEdgeFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_PATIO_L5_AtomicPatioRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_PATIO_L5_AtomicPatioRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_FENCE_L1_FenceAssembly(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FENCE_L2_PanelPostSystem(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FENCE_L2_PanelPostSystem(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FENCE_L3_FenceComponent(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FENCE_L3_FenceComponent(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FENCE_L4_JointGroundFeature(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FENCE_L4_JointGroundFeature(x y z width height depth materialIndex alpha textureScale mass) -> SMB_FENCE_L5_AtomicFenceRegion(x y z width height depth materialIndex alpha textureScale mass)
+SMB_FENCE_L5_AtomicFenceRegion(x y z width height depth materialIndex alpha textureScale mass) -> SMB_StaticCube(x y z width height depth materialIndex alpha textureScale)
+
+SMB_EXTERNAL_LIGHT_L1_ExternalLuminaireAssembly(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale) -> SMB_EXTERNAL_LIGHT_L2_PoleOpticSystem(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale)
+SMB_EXTERNAL_LIGHT_L2_PoleOpticSystem(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale) -> SMB_EXTERNAL_LIGHT_L3_ExternalLightComponent(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale)
+SMB_EXTERNAL_LIGHT_L3_ExternalLightComponent(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale) -> SMB_EXTERNAL_LIGHT_L4_MountElectricalInterface(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale)
+SMB_EXTERNAL_LIGHT_L4_MountElectricalInterface(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale) -> SMB_EXTERNAL_LIGHT_L5_AtomicExternalLightFeature(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale)
+SMB_EXTERNAL_LIGHT_L5_AtomicExternalLightFeature(x baseY z poleDiameter poleHeight globeDiameter poleMaterialIndex globeMaterialIndex alpha textureScale) -> SMB_StaticCylinder(x baseY z poleDiameter poleHeight poleDiameter poleMaterialIndex alpha textureScale) SMB_StaticSphere(x baseY+poleHeight z globeDiameter globeDiameter globeDiameter globeMaterialIndex alpha textureScale)
+
+# -----------------------------------------------------------------------------
+# Five-deep semantic and relationship templates
+# -----------------------------------------------------------------------------
+
+SMB_RELATIONSHIP_L1_SourceObject -> SMB_RELATIONSHIP_L2_SourceInterface
+SMB_RELATIONSHIP_L2_SourceInterface -> SMB_RELATIONSHIP_L3_TypedRelation
+SMB_RELATIONSHIP_L3_TypedRelation -> SMB_RELATIONSHIP_L4_TargetInterface
+SMB_RELATIONSHIP_L4_TargetInterface -> SMB_RELATIONSHIP_L5_EvidenceLeaf
+SMB_RELATIONSHIP_L5_EvidenceLeaf -> SMB_NoGeometry
+
+SMB_SEMANTIC_L1_SemanticClass -> SMB_SEMANTIC_L2_SemanticInstance
+SMB_SEMANTIC_L2_SemanticInstance -> SMB_SEMANTIC_L3_AttributeGroup
+SMB_SEMANTIC_L3_AttributeGroup -> SMB_SEMANTIC_L4_ReferenceInterface
+SMB_SEMANTIC_L4_ReferenceInterface -> SMB_SEMANTIC_L5_AtomicSemanticLeaf
+SMB_SEMANTIC_L5_AtomicSemanticLeaf -> SMB_NoGeometry
+
+# -----------------------------------------------------------------------------
+# Geometry implementation helpers below the SMB hierarchy
+# -----------------------------------------------------------------------------
+
+SMB_StaticCube(x y z width height depth materialIndex alpha textureScale) -> [ T(x y-height/2 z) S(width height depth) !I(CubeY index(materialIndex) alpha textureScale) ]
+SMB_DynamicCube(x y z width height depth materialIndex alpha textureScale mass) -> [ M(mass) T(x y-height/2 z) S(width height depth) I(CubeY index(materialIndex) alpha textureScale) ]
+SMB_StaticCylinder(x y z width height depth materialIndex alpha textureScale) -> [ T(x y z) S(width height depth) !I(Cylinder index(materialIndex) alpha textureScale) ]
+SMB_StaticSphere(x y z width height depth materialIndex alpha textureScale) -> [ T(x y z) S(width height depth) !I(Sphere index(materialIndex) alpha textureScale) ]
+
+# Repeat zero is the supported no-op representation. The body remains a valid
+# grammar production, but neither it nor its setup/tail sections are expanded.
+SMB_NoGeometry 0 -> [ S(1 1 1) ]

@@ -1,0 +1,68 @@
+# MCSMv2.2 executable closed-state preview.
+# +X right, +Y up, +Z forward; origin is ground package centre.
+
+Start ->
+    MCSMv22TrackClosedPreview
+
+MCSMv22TrackClosedPreview ->
+[
+    Object(id(MCSMV22_TRACK_CLOSED) name(TrackWidebodyAWD)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22TrackClosedPreviewComponentFixedBody
+        MCSMv22TrackClosedPreviewComponentClosures
+        MCSMv22TrackClosedPreviewComponentGlass
+        MCSMv22TrackClosedPreviewComponentSuspension
+        MCSMv22TrackClosedPreviewComponentTyres
+    ]
+]
+
+MCSMv22TrackClosedPreviewComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackClosedPreviewComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackClosuresClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackClosedPreviewComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackGlassClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22TrackClosedPreviewComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22TrackClosedPreviewComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22TrackNominalTyreMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(1) texscale(0.1))
+]

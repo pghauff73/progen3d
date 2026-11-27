@@ -1,0 +1,37 @@
+{
+  "title": "MCSMv22 track Open Preview",
+  "group": "engineering/automotive/kinematic-previews",
+  "directory": "engineering/automotive/kinematic-previews/mcsmv22-track-open-preview-d06cc5c6",
+  "source_file": "MCSMv22_track_Open_Preview.p3d",
+  "git_blob_sha": "d06cc5c66270f336bcc6bdd5277cb6844646049d",
+  "bytes": 2050,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_NATIVE/MCSMv22_track_Open_Preview.p3d"
+  ],
+  "description": "MCSMv2.2 track vehicle variant, open closure configuration. Use to inspect fixed body, closures, glazing, suspension and tyres in the authored coordinate frame.",
+  "features": [],
+  "detail": [
+    [
+      "Coordinate convention",
+      "+X right, +Y up, +Z forward for native previews"
+    ],
+    [
+      "Revision",
+      "MCSMv2.2"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/QUICKSTART.md",
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/GRAMMAR_VALIDATION.json",
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/KNOWN_LIMITATIONS.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

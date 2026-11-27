@@ -1,0 +1,97 @@
+{
+  "title": "Wall-Climbing Ivy Privacy Screen",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv04-wallclimbingivyprivacyscreen-e81619f7",
+  "source_file": "SMBV04_WallClimbingIvyPrivacyScreen.grammar",
+  "git_blob_sha": "e81619f71e3924c3474035282c4bb84277325dab",
+  "bytes": 3855,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV04_WallClimbingIvyPrivacyScreen.grammar"
+  ],
+  "description": "A freestanding slatted privacy screen with deterministic wall-seeking ivy, offset attachment behavior, a planted trough, and visible support feet.",
+  "features": [
+    "Vine",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "WallClimbingIvyPrivacyScreen"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / WallClimbingIvyPrivacyScreen"
+    ],
+    [
+      "Generation methods",
+      "WallClimbing, SurfaceSeeking, OffsetAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 5 × 3"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), screenConnection (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/camera_three_views.png",
+      "sha": "200303f8b29aae960544a6aa70f5fc2527547215",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/front.png",
+      "sha": "fab48ea1a5794aff169837693060ddb388ff7713",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/right.png",
+      "sha": "0ec9994e5a07528103ccb546dddead2fe7ee3a74",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_IVY_PRIVACY_SCREEN/top.png",
+      "sha": "483f80891c246aac19929f8f8bf9fcbb7924dbae",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/three_view_match/per_object_metrics.csv"
+  ],
+  "quality": {
+    "visual_match_percent": 99.919078,
+    "mean_match_percent": 99.93819233333333,
+    "quality_evidence_rating": 100,
+    "validation_status": "Recorded historical three-view match; not rerun",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

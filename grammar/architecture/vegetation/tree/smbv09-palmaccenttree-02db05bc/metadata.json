@@ -1,0 +1,98 @@
+{
+  "title": "Palm Accent Tree",
+  "group": "architecture/vegetation/tree",
+  "directory": "architecture/vegetation/tree/smbv09-palmaccenttree-02db05bc",
+  "source_file": "SMBV09_PalmAccentTree.grammar",
+  "git_blob_sha": "02db05bc155464ac0d453b011d534b784bee70b1",
+  "bytes": 2288,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV09_PalmAccentTree.grammar"
+  ],
+  "description": "A distinct palm accent tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "TaperedSweep",
+    "BranchJunction",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "PalmAccentTree"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Tree / PalmAccentTree"
+    ],
+    [
+      "Generation methods",
+      "LSystem, ExplicitCrownComposition"
+    ],
+    [
+      "Authored extent XYZ",
+      "4.8 × 6.2 × 4.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "rootSupport (Support), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; tapered trunk; branch hierarchy; multi-lobed crown"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/camera_three_views.png",
+      "sha": "530bb537efc08584a07f6faf7da27b554fecb3bd",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/front.png",
+      "sha": "9c90334382756dc558385edf60b827756d5124e6",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/right.png",
+      "sha": "9afaa1b266d1876b68858c996e548d0024992cd4",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_PALM_ACCENT_TREE/top.png",
+      "sha": "bda45b0f1c32dd7e2cb2cee36b5447b408a2a9c4",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "title": "MCSMv22 reference Closed Preview",
+  "group": "engineering/automotive/kinematic-previews",
+  "directory": "engineering/automotive/kinematic-previews/mcsmv22-reference-closed-preview-e78e5ec9",
+  "source_file": "MCSMv22_reference_Closed_Preview.p3d",
+  "git_blob_sha": "e78e5ec96b7038c10a53ed00b9804adfd931d5b5",
+  "bytes": 2151,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_NATIVE/MCSMv22_reference_Closed_Preview.p3d"
+  ],
+  "description": "MCSMv2.2 reference vehicle variant, closed closure configuration. Use to inspect fixed body, closures, glazing, suspension and tyres in the authored coordinate frame.",
+  "features": [],
+  "detail": [
+    [
+      "Coordinate convention",
+      "+X right, +Y up, +Z forward for native previews"
+    ],
+    [
+      "Revision",
+      "MCSMv2.2"
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-mcsmv2_2_reference_closed.png",
+      "original": "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/previews/mcsmv2_2_reference_closed.png",
+      "sha": "7306e44587c374647baf40412ed5bc34ec8f369e",
+      "label": "Reference variant closed",
+      "kind": "Release-family preview; exact source correspondence not independently checked"
+    }
+  ],
+  "documentation": [
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/QUICKSTART.md",
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/GRAMMAR_VALIDATION.json",
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/KNOWN_LIMITATIONS.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

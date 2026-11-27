@@ -1,0 +1,98 @@
+{
+  "title": "Courtyard Canopy Tree",
+  "group": "architecture/vegetation/tree",
+  "directory": "architecture/vegetation/tree/smbv01-courtyardcanopytree-d07a4e13",
+  "source_file": "SMBV01_CourtyardCanopyTree.grammar",
+  "git_blob_sha": "d07a4e130570f5808e6ae25824a936d3cf5264af",
+  "bytes": 2822,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV01_CourtyardCanopyTree.grammar"
+  ],
+  "description": "A broad, layered courtyard shade tree with a tapered trunk, explicit branch junctions, swept limbs, foliage lobes, and individually modeled leaves.",
+  "features": [
+    "TaperedSweep",
+    "BranchJunction",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "ArchitecturalCanopyTree"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Tree / ArchitecturalCanopyTree"
+    ],
+    [
+      "Generation methods",
+      "ExplicitBranchGraph"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 5 × 3"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "rootSupport (Support), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; tapered trunk; branch hierarchy; multi-lobed crown"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/camera_three_views.png",
+      "sha": "9b38bb3a788f8a51eda2d0f3cf70c5282892225b",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/front.png",
+      "sha": "318d9196ee6daf115f745c31d828ccdd7220007f",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/right.png",
+      "sha": "6bd651f2a0d30adb39dc8f3594fb9defee1fb371",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_COURTYARD_CANOPY_TREE/top.png",
+      "sha": "d6349d60a996b04b86c8d095c42c9902977b2373",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/three_view_match/per_object_metrics.csv"
+  ],
+  "quality": {
+    "visual_match_percent": 99.904092,
+    "mean_match_percent": 99.96803066666666,
+    "quality_evidence_rating": 100,
+    "validation_status": "Recorded historical three-view match; not rerun",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

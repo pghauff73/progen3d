@@ -1,0 +1,29 @@
+{
+  "title": "Modern Townhouse Advanced New Techniques",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/modern-townhouse-advanced-newtechniques-53849201",
+  "source_file": "Modern_Townhouse_Advanced_NewTechniques.p3d",
+  "git_blob_sha": "538492014841847e6c18849003db003d150b45b2",
+  "bytes": 58530,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d",
+    "examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/Modern_Townhouse_Advanced_NewTechniques.p3d"
+  ],
+  "description": "Advanced townhouse grammar showcasing newer operators and architectural construction techniques.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [
+    "examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/REQUIRED_OPERATORS.md",
+    "examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/SOURCE_MAPPING.md",
+    "examples/SimpleModernBuilding/Modern_Townhouse_Advanced_Grammar/VALIDATION.json"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

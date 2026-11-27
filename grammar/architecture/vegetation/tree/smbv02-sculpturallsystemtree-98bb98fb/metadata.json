@@ -1,0 +1,98 @@
+{
+  "title": "Sculptural L-System Tree",
+  "group": "architecture/vegetation/tree",
+  "directory": "architecture/vegetation/tree/smbv02-sculpturallsystemtree-98bb98fb",
+  "source_file": "SMBV02_SculpturalLSystemTree.grammar",
+  "git_blob_sha": "98bb98fb62472e503e38bd78b79bc4b425698f1a",
+  "bytes": 2008,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV02_SculpturalLSystemTree.grammar"
+  ],
+  "description": "A narrow architectural tree whose deterministic L-system crown is supported by a visible warm-timber trunk and clipped cloud foliage.",
+  "features": [
+    "Plant",
+    "TaperedSweep",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "SculpturalLSystemTree"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Tree / SculpturalLSystemTree"
+    ],
+    [
+      "Generation methods",
+      "LSystem, Phyllotaxis, Tropism"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 5 × 3"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "rootSupport (Support), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; tapered trunk; branch hierarchy; multi-lobed crown"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/camera_three_views.png",
+      "sha": "3d1fc5711cc9375305af125a857cbb7417050bf7",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/front.png",
+      "sha": "f4e0cdd255549f27da473c7646367cd0d5195b42",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/right.png",
+      "sha": "c71ad82c366e9c17d5f5497a91e22b5d9f738d92",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_SCULPTURAL_LSYSTEM_TREE/top.png",
+      "sha": "7751563b3b6cc83f3c008e7c0daee14aa1e176ce",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/three_view_match/per_object_metrics.csv"
+  ],
+  "quality": {
+    "visual_match_percent": 99.799423,
+    "mean_match_percent": 99.84081900000001,
+    "quality_evidence_rating": 100,
+    "validation_status": "Recorded historical three-view match; not rerun",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

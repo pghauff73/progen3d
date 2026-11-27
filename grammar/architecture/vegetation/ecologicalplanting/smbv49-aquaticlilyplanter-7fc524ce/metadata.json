@@ -1,0 +1,98 @@
+{
+  "title": "Aquatic Lily Planter",
+  "group": "architecture/vegetation/ecologicalplanting",
+  "directory": "architecture/vegetation/ecologicalplanting/smbv49-aquaticlilyplanter-7fc524ce",
+  "source_file": "SMBV49_AquaticLilyPlanter.grammar",
+  "git_blob_sha": "7fc524ce34f518da2ba4e9b5dd79fbfcf09506e8",
+  "bytes": 2575,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV49_AquaticLilyPlanter.grammar"
+  ],
+  "description": "A distinct aquatic lily planter building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "AquaticLilyPlanter"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / EcologicalPlanting / AquaticLilyPlanter"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 2.6 × 3"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), stormwaterConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; water or drainage host; mixed planting density; service connection"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/camera_three_views.png",
+      "sha": "a67e2774f79d7bf04d7ce5998aaa3684aced5646",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/front.png",
+      "sha": "976f2ef48eb3e9aba41bfe16b667765c31e8ddd6",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/right.png",
+      "sha": "a05fcb2d09e478ca337fd351b90af77c11cd2fdb",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_AQUATIC_LILY_PLANTER/top.png",
+      "sha": "698848f609f2a9df73d0008d2df16b3fb37b2008",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

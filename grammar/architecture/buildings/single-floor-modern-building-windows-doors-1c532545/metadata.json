@@ -1,0 +1,25 @@
+{
+  "title": "Single Floor Modern Building Windows Doors",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/single-floor-modern-building-windows-doors-1c532545",
+  "source_file": "Single_Floor_Modern_Building_Windows_Doors.p3d",
+  "git_blob_sha": "1c5325456b7bec56f9580b4e342918a8dd667c41",
+  "bytes": 7091,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/Single_Floor_Modern_Building_Windows_Doors.p3d",
+    "examples/SimpleModernBuilding/Single_Floor_Modern_Building_Windows_Doors.p3d"
+  ],
+  "description": "Single-storey modern building with windows and doors for architectural layout exploration.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

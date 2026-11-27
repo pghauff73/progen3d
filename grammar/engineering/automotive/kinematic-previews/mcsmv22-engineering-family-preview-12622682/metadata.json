@@ -1,0 +1,37 @@
+{
+  "title": "MCSMv22 Engineering Family Preview",
+  "group": "engineering/automotive/kinematic-previews",
+  "directory": "engineering/automotive/kinematic-previews/mcsmv22-engineering-family-preview-12622682",
+  "source_file": "MCSMv22_Engineering_Family_Preview.p3d",
+  "git_blob_sha": "126226828d6dd1a08f200a959a2330a9936c03c0",
+  "bytes": 8639,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_NATIVE/MCSMv22_Engineering_Family_Preview.p3d"
+  ],
+  "description": "Engineering family preview for inspecting the MCSMv2.2 vehicle system configurations.",
+  "features": [],
+  "detail": [
+    [
+      "Coordinate convention",
+      "+X right, +Y up, +Z forward for native previews"
+    ],
+    [
+      "Revision",
+      "MCSMv2.2"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/QUICKSTART.md",
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/GRAMMAR_VALIDATION.json",
+    "examples/MVPv2_5_Red_AWD_Hatchback/MCSMv2_2_0_RELEASE/KNOWN_LIMITATIONS.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "title": "Evergreen Screen Tree",
+  "group": "architecture/vegetation/tree",
+  "directory": "architecture/vegetation/tree/smbv11-evergreenscreentree-00eee475",
+  "source_file": "SMBV11_EvergreenScreenTree.grammar",
+  "git_blob_sha": "00eee4758a8d30952b2c6659ed22506d9f9cdb5a",
+  "bytes": 2313,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV11_EvergreenScreenTree.grammar"
+  ],
+  "description": "A distinct evergreen screen tree building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "TaperedSweep",
+    "BranchJunction",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "EvergreenScreenTree"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Tree / EvergreenScreenTree"
+    ],
+    [
+      "Generation methods",
+      "LSystem, ExplicitCrownComposition"
+    ],
+    [
+      "Authored extent XYZ",
+      "4.8 × 6.2 × 4.2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "rootSupport (Support), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; tapered trunk; branch hierarchy; multi-lobed crown"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/camera_three_views.png",
+      "sha": "940dafa2d500966fc5132e54afd39a70d8e26e64",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/front.png",
+      "sha": "4deab43e357286f1e960375588ade844fdfd1eb8",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/right.png",
+      "sha": "fd3222fcfbd033134aaacd73c6476ef478ec4f14",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_EVERGREEN_SCREEN_TREE/top.png",
+      "sha": "f26acb96fab552635256457a092ac798069970a5",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Modern Luxury Residence From Image Set",
+  "group": "architecture/buildings",
+  "directory": "architecture/buildings/modern-luxury-residence-from-image-set-449573e8",
+  "source_file": "Modern_Luxury_Residence_From_Image_Set.grammar",
+  "git_blob_sha": "449573e8582bffab66c6a278650b31b67635d414",
+  "bytes": 47611,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "docs/assets/source-files/examples/SimpleModernBuilding/Modern_Luxury_Residence_From_Image_Set.grammar",
+    "examples/SimpleModernBuilding/Modern_Luxury_Residence_From_Image_Set.grammar"
+  ],
+  "description": "Image-derived modern luxury residence grammar; intended for architectural massing and visual comparison.",
+  "features": [],
+  "detail": [],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

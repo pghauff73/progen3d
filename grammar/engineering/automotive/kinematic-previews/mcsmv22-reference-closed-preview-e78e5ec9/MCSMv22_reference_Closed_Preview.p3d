@@ -1,0 +1,68 @@
+# MCSMv2.2 executable closed-state preview.
+# +X right, +Y up, +Z forward; origin is ground package centre.
+
+Start ->
+    MCSMv22ReferenceClosedPreview
+
+MCSMv22ReferenceClosedPreview ->
+[
+    Object(id(MCSMV22_REFERENCE_CLOSED) name(ResearchMedianAWDHotHatch)
+           class(ModernCarKinematicVariantV22)
+           taxonomy(Vehicle MCSMv2_2 RegisteredSurface SampledKinematics V3)
+           layer(Equipment) mask(Equipment Terrain Temporary))
+    [
+        Interface(id(packageCentre) type(InspectionInterface)
+                  origin(0 0 0) normal(0 1 0) tangent(0 0 1)
+                  region(Point) tolerance(0.001))
+        MCSMv22ReferenceClosedPreviewComponentFixedBody
+        MCSMv22ReferenceClosedPreviewComponentClosures
+        MCSMv22ReferenceClosedPreviewComponentGlass
+        MCSMv22ReferenceClosedPreviewComponentSuspension
+        MCSMv22ReferenceClosedPreviewComponentTyres
+    ]
+]
+
+MCSMv22ReferenceClosedPreviewComponentFixedBody ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceFixedBodyMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22ReferenceClosedPreviewComponentClosures ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceClosuresClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(redmetallicpaint) alpha(1) texscale(0.1))
+]
+
+MCSMv22ReferenceClosedPreviewComponentGlass ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceGlassClosedMesh)
+          detail(LOD2)
+          topology(surface))
+       material(smokytransparentglass) alpha(0.56) texscale(0.1))
+]
+
+MCSMv22ReferenceClosedPreviewComponentSuspension ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceSuspensionMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughmetal) alpha(1) texscale(0.1))
+]
+
+MCSMv22ReferenceClosedPreviewComponentTyres ->
+[
+    !I(GeneratedMeshReference(
+          meshKey(MCSMv22ReferenceNominalTyreMesh)
+          detail(LOD1)
+          topology(surface))
+       material(charcoalroughrubber) alpha(1) texscale(0.1))
+]

@@ -1,0 +1,99 @@
+{
+  "title": "Tendril Pergola Vine",
+  "group": "architecture/vegetation/vine",
+  "directory": "architecture/vegetation/vine/smbv05-tendrilpergolavine-6a65607f",
+  "source_file": "SMBV05_TendrilPergolaVine.grammar",
+  "git_blob_sha": "6a65607f743090e2d143555b3116a003124f41e9",
+  "bytes": 4145,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV05_TendrilPergolaVine.grammar"
+  ],
+  "description": "A compact pergola bay with twining tendril vines, branching overhead growth, leaf blades, and flowering petals around a clear structural frame.",
+  "features": [
+    "Vine",
+    "BranchJunction",
+    "LeafBlade",
+    "PetalBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "TendrilPergolaVine"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Vine / TendrilPergolaVine"
+    ],
+    [
+      "Generation methods",
+      "TendrilClimbing, TwineAttachment"
+    ],
+    [
+      "Authored extent XYZ",
+      "4 × 5 × 3"
+    ],
+    [
+      "Placement",
+      "HostedByObject"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), pergolaConnection (Mate), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; host structure; climbing paths; attached foliage layers"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/camera_three_views.png",
+      "sha": "b80e5e0cf6a83ed16e9b1f333deefc72e237e626",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/front.png",
+      "sha": "56325930cb7c00baf336f35ee5775294432353a4",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/right.png",
+      "sha": "fe377fd928ca216e389e7f1f229623301a7d47e4",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_TENDRIL_PERGOLA_VINE/top.png",
+      "sha": "30d7b7a6c45b5241dfabad3389c96ca9271ceef1",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/three_view_match/per_object_metrics.csv"
+  ],
+  "quality": {
+    "visual_match_percent": 99.910182,
+    "mean_match_percent": 99.92827199999999,
+    "quality_evidence_rating": 100,
+    "validation_status": "Recorded historical three-view match; not rerun",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

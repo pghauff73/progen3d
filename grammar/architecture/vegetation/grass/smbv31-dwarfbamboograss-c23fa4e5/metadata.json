@@ -1,0 +1,97 @@
+{
+  "title": "Dwarf Bamboo Grass",
+  "group": "architecture/vegetation/grass",
+  "directory": "architecture/vegetation/grass/smbv31-dwarfbamboograss-c23fa4e5",
+  "source_file": "SMBV31_DwarfBambooGrass.grammar",
+  "git_blob_sha": "c23fa4e5907795160a0823aafce97de6183aa3d6",
+  "bytes": 2413,
+  "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
+  "original_paths": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/grammars/SMBV31_DwarfBambooGrass.grammar"
+  ],
+  "description": "A distinct dwarf bamboo grass building-landscape object with explicit support, irrigation or attachment semantics and object-local botanical geometry.",
+  "features": [
+    "Plant",
+    "ScatterRegion",
+    "LeafBlade"
+  ],
+  "detail": [
+    [
+      "Object class",
+      "DwarfBambooGrass"
+    ],
+    [
+      "Taxonomy",
+      "SmallModernBuilding / BuildingSite / LandscapeSystem / Grass / DwarfBambooGrass"
+    ],
+    [
+      "Generation methods",
+      "SpeciesDriven, DeterministicScatter"
+    ],
+    [
+      "Authored extent XYZ",
+      "3.2 × 2.4 × 2"
+    ],
+    [
+      "Placement",
+      "ConstraintSolved"
+    ],
+    [
+      "Orientation",
+      "WorldUpWithFreeYaw"
+    ],
+    [
+      "Connection interfaces",
+      "baseSupport (Support), irrigationConnection (ServiceConnection), inspection (InspectionInterface)"
+    ],
+    [
+      "Visual requirements",
+      "object-local support or attachment geometry; recognizable botanical silhouette in front right and top views; non-flat layered organic geometry; multiple blade clumps; individual blade accents; directional tufting"
+    ],
+    [
+      "Biological calibration",
+      "Architectural archetype; biological measurements and physical calibration are not certified."
+    ]
+  ],
+  "render_assets": [
+    {
+      "path": "renders/1-camera_three_views.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/camera_three_views.png",
+      "sha": "2e04fc8af95168ad9a57c4bd1d68f185a35b5c52",
+      "label": "camera three views",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/2-front.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/front.png",
+      "sha": "d210b508d917a5473aab0adeab9eb231a58c8c2f",
+      "label": "front",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/3-right.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/right.png",
+      "sha": "d5e8fd60f80157abdfb4a0ddfb2833a58a6b98cd",
+      "label": "right",
+      "kind": "Repository camera-view evidence"
+    },
+    {
+      "path": "renders/4-top.png",
+      "original": "examples/SimpleModernBuilding/VegetationBuildingObjects/evidence/camera_views/SMB_VEGETATION_DWARF_BAMBOO_GRASS/top.png",
+      "sha": "87df67bc99eb903f8cd341a17177d538d9c574dc",
+      "label": "top",
+      "kind": "Repository camera-view evidence"
+    }
+  ],
+  "documentation": [
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/suite_manifest.json",
+    "examples/SimpleModernBuilding/VegetationBuildingObjects/BUILDING_VEGETATION_OBJECT_MODEL.md"
+  ],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 80,
+    "validation_status": "Not independently validated",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

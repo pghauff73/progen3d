@@ -1,0 +1,1394 @@
+# =====================================================================
+# MODERN LUXURY RESIDENCE — IMAGE-SET RECONSTRUCTION
+# Purpose-driven Progen3D grammar using the current implemented language.
+#
+# SOURCE EVIDENCE
+# ---------------
+# Exterior views establish pale concrete, charcoal frames, timber screens,
+# dark stone, broad glazing, deep balconies, a rear terrace, and a pool.
+# Interior views establish a double-height foyer, floating stair, living room,
+# kitchen, dining room, bedroom, and bathroom.
+#
+# INFERRED CONTENT
+# ----------------
+# Exact dimensions, hidden rooms, structure sizes, and service routes remain
+# inferred. Their rules are intentionally simpler than the visible facades.
+#
+# CURRENT METHODS USED
+# --------------------
+# - Object / Interface / Connect / Position spatial declarations
+# - explicit material, alpha, and texture-scale intent
+# - checked expressions and parameterized purpose-driven rules
+# - repeated assemblies with per-rule iteration counters
+# - Extrude profiles: Rect, RoundedRect, Circle, Ellipse, ChamferRect, Polygon
+# - canonical Cylinder and Sphere descriptors plus current curved aliases
+# - AxialProfile for a stepped stone entrance blade
+# - bounded time functions for the gate, pool water, privacy screen, and fan
+#
+# Coordinate convention before the presentation rotation:
+#   X = left/right, Y = vertical, Z = front/back
+#   front facade = Z -5.5, rear facade = Z +5.5
+# =====================================================================
+
+Start ->
+[
+    A(degrees(radians(-62)) 1)
+    ModernLuxuryResidence(16 11 3.2)
+]
+
+
+# =====================================================================
+# RESIDENCE OBJECT MODEL
+# =====================================================================
+
+ModernLuxuryResidence(buildingWidth buildingDepth storeyHeight) ->
+[
+    Object(
+        id(MLR_001)
+        name(ModernLuxuryResidence)
+        class(ResidentialProperty)
+        taxonomy(Architecture Residence ModernLuxuryResidence)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(inspection)
+            type(InspectionInterface)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(Point)
+            tolerance(0.001)
+        )
+
+        ResidenceSite(buildingWidth buildingDepth)
+        ResidenceStructure(buildingWidth buildingDepth storeyHeight)
+        ResidenceEnvelope(buildingWidth buildingDepth storeyHeight)
+        GroundLevelInterior(storeyHeight)
+        UpperLevelInteriors(storeyHeight)
+        ResidenceCirculation(storeyHeight)
+        RearAmenitySystem(buildingWidth buildingDepth)
+        FrontLandscapeSystem(buildingWidth buildingDepth)
+        ResidenceLightingSystem(storeyHeight)
+    ]
+]
+
+
+# =====================================================================
+# PROCEDURAL MATERIAL CONSTRUCTIONS
+# Every rectangular solid is authored from actual dimensions. Extrude owns
+# topology; transforms own placement. Y coordinates identify the solid base.
+# =====================================================================
+
+ConcreteSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(lightgreyroughconcrete) alpha(1) texscale(0.36))
+]
+
+PlasterSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(warmwhitematteplaster) alpha(1) texscale(0.32))
+]
+
+MetalSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(charcoalroughmetal) alpha(1) texscale(0.20))
+]
+
+PolishedMetalSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(silverbluepolishedmetal) alpha(1) texscale(0.18))
+]
+
+TimberSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(amberwarmwood) alpha(1) texscale(0.22))
+]
+
+GlassSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(bluewhiteglossysmoothglass) alpha(0.58) texscale(0.16))
+]
+
+StoneSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(lightgreyroughconcrete) alpha(1) texscale(0.14))
+]
+
+WarmStoneSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(offwhiteceramic) alpha(1) texscale(0.18))
+]
+
+GreenSolid(centerX baseY centerZ width height depth) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(Rect(width height) depth cap(all))
+       material(greenmattepaint) alpha(1) texscale(0.24))
+]
+
+RoundedTimberSolid(centerX baseY centerZ width height depth radius) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(RoundedRect(width height clamp(radius,0.01,min(width,height)*0.45) 4) depth cap(all))
+       material(amberwarmwood) alpha(1) texscale(0.22))
+]
+
+RoundedUpholsterySolid(centerX baseY centerZ width height depth radius) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(RoundedRect(width height clamp(radius,0.01,min(width,height)*0.45) 4) depth cap(all))
+       material(warmwhitematteplaster) alpha(1) texscale(0.30))
+]
+
+ChamferedMetalSolid(centerX baseY centerZ width height depth chamfer) ->
+[
+    T(centerX baseY centerZ)
+    T(0 height/2 -depth/2)
+    !I(Extrude(ChamferRect(width height chamfer) depth cap(all))
+       material(charcoalroughmetal) alpha(1) texscale(0.18))
+]
+
+RoundWallFeature(centerX centerY centerZ radius depth materialScale) ->
+[
+    T(centerX centerY centerZ-depth/2)
+    !I(Extrude(Circle(radius 48) depth cap(all))
+       material(silverbluepolishedmetal) alpha(1) texscale(materialScale))
+]
+
+EllipticalCeramicFixture(centerX centerY centerZ radiusX radiusY depth) ->
+[
+    T(centerX centerY centerZ-depth/2)
+    !I(Extrude(Ellipse(radiusX radiusY 48) depth cap(all))
+       material(offwhiteceramic) alpha(1) texscale(0.16))
+]
+
+WaterSurface(centerX baseY centerZ width depth) ->
+[
+    T(0 clamp(oscillate(t,-0.015,0.015,5),-0.02,0.02) 0)
+    T(centerX baseY centerZ)
+    T(0 0.035 -depth/2)
+    !I(Extrude(Rect(width 0.07) depth cap(all))
+       material(bluewhiteglossysmoothglass) alpha(0.68) texscale(0.12))
+]
+
+
+# =====================================================================
+# SITE SYSTEM
+# =====================================================================
+
+ResidenceSite(buildingWidth buildingDepth) ->
+[
+    Object(
+        id(MLR_SITE)
+        name(ResidenceSite)
+        class(BuildingSite)
+        container(MLR_001)
+        taxonomy(Architecture Residence BuildingSite)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(groundDatum)
+            type(Support)
+            origin(0 0 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 20 17)
+            tolerance(0.002)
+        )
+
+        ConcreteSolid(0 -0.42 0 buildingWidth+4 0.34 buildingDepth+6)
+        ConcreteSolid(4.8 -0.08 -7.0 6.0 0.10 3.1)
+        WarmStoneSolid(-2.0 -0.06 -7.0 3.4 0.10 3.0)
+        GreenSolid(0 -0.16 6.40 buildingWidth 0.16 1.50)
+        GreenSolid(-4.05 -0.16 8.55 7.90 0.16 2.80)
+        EntrySteppingStoneSequence(5 -3.2 0.72 -7.45)
+    ]
+]
+
+EntrySteppingStoneSequence(stoneCount startX spacing centerZ) stoneCount ->
+    WarmStoneSolid(startX+EntrySteppingStoneSequence_count*spacing -0.01 centerZ 0.52 0.08 0.82)
+
+
+# =====================================================================
+# STRUCTURAL SYSTEM
+# =====================================================================
+
+ResidenceStructure(buildingWidth buildingDepth storeyHeight) ->
+[
+    Object(
+        id(MLR_STRUCTURE)
+        name(ResidenceStructure)
+        class(StructuralSystem)
+        container(MLR_001)
+        taxonomy(Architecture Residence StructuralSystem)
+        layer(Temporary)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        GroundSlabObject(buildingWidth buildingDepth)
+        UpperFloorSlabWithStairOpening(storeyHeight-0.16)
+        UpperFloorSlabWithStairOpening(2*storeyHeight-0.16)
+        ConcreteSolid(0 3*storeyHeight-0.12 0 buildingWidth+0.5 0.24 buildingDepth+0.5)
+        ConcreteSolid(-7.84 0 0 0.30 3*storeyHeight buildingDepth)
+        ConcreteSolid(7.84 0 0 0.30 3*storeyHeight buildingDepth)
+        StructuralPierRow(4 -5.7 3.8 5.30 0.34 3*storeyHeight)
+    ]
+]
+
+GroundSlabObject(buildingWidth buildingDepth) ->
+[
+    T(0 -0.24 0)
+    Object(
+        id(MLR_GROUND_SLAB)
+        name(GroundSlab)
+        class(FoundationSlab)
+        container(MLR_STRUCTURE)
+        taxonomy(Architecture Residence StructuralSystem FoundationSlab)
+        layer(Structure)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(upperSurface)
+            type(Support)
+            origin(0 0.24 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 16 11)
+            tolerance(0.001)
+        )
+
+        ConcreteSolid(0 0 0 buildingWidth 0.24 buildingDepth)
+    ]
+]
+
+StructuralPierRow(pierCount startX spacing centerZ width height) pierCount ->
+    ConcreteSolid(startX+StructuralPierRow_count*spacing 0 centerZ width height 0.42)
+
+UpperFloorSlabWithStairOpening(baseY) ->
+    ConcreteSolid(-7.075 baseY 0 1.85 0.20 11.0)
+    ConcreteSolid(2.625 baseY 0 10.75 0.20 11.0)
+    ConcreteSolid(-4.45 baseY -4.525 3.40 0.20 1.95)
+    ConcreteSolid(-4.45 baseY 3.675 3.40 0.20 3.65)
+
+
+# =====================================================================
+# EXTERIOR ENVELOPE SYSTEM
+# =====================================================================
+
+ResidenceEnvelope(buildingWidth buildingDepth storeyHeight) ->
+[
+    Object(
+        id(MLR_ENVELOPE)
+        name(ResidenceEnvelope)
+        class(BuildingEnvelope)
+        container(MLR_001)
+        taxonomy(Architecture Residence BuildingEnvelope)
+        layer(Envelope)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        FrontFacade(storeyHeight)
+        RearFacade(storeyHeight)
+        SideFacades(storeyHeight buildingDepth)
+        RoofExpression(buildingWidth buildingDepth storeyHeight)
+    ]
+]
+
+FrontFacade(storeyHeight) ->
+    FrontGroundStorey(storeyHeight)
+    FrontFirstStorey(storeyHeight)
+    FrontSecondStorey(storeyHeight)
+    FrontEntranceStoneBlade(storeyHeight)
+    FrontPrivacyLouverField(storeyHeight)
+    FrontEntryGate()
+
+FrontGroundStorey(storeyHeight) ->
+    ConcreteSolid(-7.25 0 -5.60 1.18 storeyHeight 0.42)
+    ConcreteSolid(7.20 0 -5.60 1.28 storeyHeight 0.42)
+    ConcreteSolid(-0.15 storeyHeight-0.34 -5.60 13.0 0.34 0.42)
+    FrontWindowBay(-3.20 0.30 -5.78 3.35 2.45)
+    FrontEntryAssembly(-0.65 0.18 -5.79 2.15 2.66)
+    GarageDoorAssembly(4.42 0.20 -5.79 4.45 2.55)
+    TimberSolid(0.20 storeyHeight-0.20 -6.05 8.6 0.18 1.15)
+    SlopedEntryCanopySide(-4.05 storeyHeight-0.58 -6.25)
+
+FrontFirstStorey(storeyHeight) ->
+    ConcreteSolid(-6.95 storeyHeight -5.60 1.80 storeyHeight 0.42)
+    ConcreteSolid(6.95 storeyHeight -5.60 1.80 storeyHeight 0.42)
+    FrontWindowBay(-3.55 storeyHeight+0.38 -5.79 4.15 2.30)
+    FrontWindowBay(2.00 storeyHeight+0.38 -5.79 5.75 2.30)
+    FrontBalcony(-0.75 storeyHeight-0.05 -6.10 10.4)
+    TimberSolid(-0.75 2*storeyHeight-0.18 -6.08 10.5 0.16 1.08)
+
+FrontSecondStorey(storeyHeight) ->
+    ConcreteSolid(-6.95 2*storeyHeight -5.60 1.80 storeyHeight 0.42)
+    ConcreteSolid(6.95 2*storeyHeight -5.60 1.80 storeyHeight 0.42)
+    FrontWindowBay(-3.55 2*storeyHeight+0.38 -5.79 4.15 2.30)
+    FrontWindowBay(2.00 2*storeyHeight+0.38 -5.79 5.75 2.30)
+    FrontBalcony(-0.75 2*storeyHeight-0.05 -6.10 10.4)
+    TimberSolid(-0.75 3*storeyHeight-0.18 -6.08 10.5 0.16 1.08)
+
+FrontWindowBay(centerX baseY centerZ width height) ->
+    GlassSolid(centerX baseY centerZ width height 0.10)
+    ChamferedMetalSolid(centerX-width/2 baseY-0.08 centerZ-0.07 0.12 height+0.16 0.12 0.025)
+    ChamferedMetalSolid(centerX+width/2 baseY-0.08 centerZ-0.07 0.12 height+0.16 0.12 0.025)
+    ChamferedMetalSolid(centerX baseY-0.08 centerZ-0.07 width+0.12 0.12 0.12 0.025)
+    ChamferedMetalSolid(centerX baseY+height-0.04 centerZ-0.07 width+0.12 0.12 0.12 0.025)
+    WindowMullionRow(3 centerX-width/4 width/4 baseY centerZ height)
+
+WindowMullionRow(mullionCount startX spacing baseY centerZ height) mullionCount ->
+    MetalSolid(startX+WindowMullionRow_count*spacing baseY centerZ-0.08 0.055 height 0.10)
+
+FrontEntryAssembly(centerX baseY centerZ width height) ->
+    GlassSolid(centerX baseY centerZ width height 0.10)
+    MetalSolid(centerX-width/2 baseY centerZ-0.08 0.10 height 0.12)
+    MetalSolid(centerX+width/2 baseY centerZ-0.08 0.10 height 0.12)
+    TimberSolid(centerX+0.56 baseY centerZ-0.15 0.82 height 0.16)
+    PolishedMetalSolid(centerX+0.20 baseY+height*0.48 centerZ-0.25 0.06 0.62 0.06)
+
+GarageDoorAssembly(centerX baseY centerZ width height) ->
+    MetalSolid(centerX baseY centerZ width height 0.12)
+    GarageDoorJointSequence(6 centerX width baseY centerZ height)
+
+GarageDoorJointSequence(jointCount centerX width baseY centerZ height) jointCount ->
+    PolishedMetalSolid(centerX baseY+(GarageDoorJointSequence_count+1)*(height/(jointCount+1)) centerZ-0.10 width 0.035 0.05)
+
+FrontBalcony(centerX baseY centerZ width) ->
+    ConcreteSolid(centerX baseY centerZ width 0.18 1.10)
+    GlassSolid(centerX baseY+0.18 centerZ-0.56 width 1.05 0.06)
+    MetalSolid(centerX baseY+1.20 centerZ-0.58 width 0.07 0.08)
+
+FrontEntranceStoneBlade(storeyHeight) ->
+[
+    T(-6.00 0 -5.82)
+    !I(
+        AxialProfile(
+            axis(y)
+            profile(Base polygon(
+                -0.72 -0.34
+                 0.72 -0.34
+                 0.72  0.34
+                -0.72  0.34
+            ))
+            profile(Shaft polygon(
+                -0.54 -0.28
+                 0.54 -0.28
+                 0.54  0.28
+                -0.54  0.28
+            ))
+            profile(Crown polygon(
+                -0.78 -0.40
+                 0.66 -0.40
+                 0.78  0.34
+                -0.68  0.42
+            ))
+            at(0 Base)
+            hold(0.32)
+            step(Shaft)
+            hold(3*storeyHeight-0.52)
+            linear(3*storeyHeight Crown center(0.05 -0.03) scale(1 0.92) rotate(4))
+            cap(all)
+        )
+        material(lightgreyroughconcrete) alpha(1) texscale(0.13)
+    )
+]
+
+FrontPrivacyLouverField(storeyHeight) ->
+    TimberLouverRow(10 -5.35 0.22 0.42 -5.98 3*storeyHeight-0.78)
+    MetalSolid(-4.36 0.38 -5.96 2.18 0.11 0.18)
+    MetalSolid(-4.36 storeyHeight -5.96 2.18 0.11 0.18)
+    MetalSolid(-4.36 2*storeyHeight -5.96 2.18 0.11 0.18)
+    MetalSolid(-4.36 3*storeyHeight-0.42 -5.96 2.18 0.11 0.18)
+
+TimberLouverRow(louverCount startX spacing baseY centerZ height) louverCount ->
+[
+    T(0 0 0.10*smoother(pingpong(t,14,TimberLouverRow_count/louverCount)))
+    TimberSolid(startX+TimberLouverRow_count*spacing baseY centerZ 0.075 height 0.24)
+]
+
+FrontEntryGate() ->
+[
+    T(-2.95 0.15 -6.50)
+    A(swing(t,0,72,12) 1)
+    T(0 0 -0.04)
+    ChamferedMetalSolid(0 0 0 1.15 1.35 0.10 0.04)
+]
+
+SlopedEntryCanopySide(centerX baseY centerZ) ->
+[
+    T(centerX baseY centerZ-0.09)
+    !I(Extrude(Polygon(-0.85 0 0.85 0 0.58 0.52 -0.65 0.52) 0.18 cap(all))
+       material(charcoalroughmetal) alpha(1) texscale(0.18))
+]
+
+RearFacade(storeyHeight) ->
+    RearSlidingWall(0.10 0.22 5.54 10.8 2.55)
+    RearUpperWindowRow(2 storeyHeight)
+    RearUpperWindowRow(2 2*storeyHeight)
+    RearBalcony(-0.10 storeyHeight-0.05 6.05 11.6)
+    RearBalcony(-0.10 2*storeyHeight-0.05 6.05 11.6)
+    ConcreteSolid(-7.40 0 5.52 0.85 3*storeyHeight 0.46)
+    ConcreteSolid(7.40 0 5.52 0.85 3*storeyHeight 0.46)
+    TimberScreenCluster(storeyHeight)
+
+RearSlidingWall(centerX baseY centerZ width height) ->
+    GlassSolid(centerX baseY centerZ width height 0.10)
+    SlidingDoorPanelPair(centerX baseY centerZ width height)
+    WindowMullionRow(5 centerX-width*0.40 width*0.20 baseY centerZ height)
+
+SlidingDoorPanelPair(centerX baseY centerZ width height) ->
+[
+    T(lerp(-0.55,0.55,ease(pingpong(t,10))) 0 -0.12)
+    MetalSolid(centerX-width*0.25 baseY centerZ width*0.48 height 0.08)
+    MetalSolid(centerX+width*0.25 baseY centerZ width*0.48 height 0.08)
+]
+
+RearUpperWindowRow(rowCount baseY) rowCount ->
+    FrontWindowBay(-3.4+RearUpperWindowRow_count*6.8 baseY+0.40 5.57 5.25 2.28)
+
+RearBalcony(centerX baseY centerZ width) ->
+    ConcreteSolid(centerX baseY centerZ width 0.18 1.05)
+    GlassSolid(centerX baseY+0.18 centerZ+0.54 width 1.05 0.06)
+    TimberSolid(centerX baseY+3.05 centerZ width 0.14 1.02)
+
+TimberScreenCluster(storeyHeight) ->
+    TimberLouverRow(7 4.95 0.26 storeyHeight+0.38 5.90 storeyHeight-0.82)
+    TimberLouverRow(7 -6.50 0.26 2*storeyHeight+0.38 5.90 storeyHeight-0.82)
+
+SideFacades(storeyHeight buildingDepth) ->
+    SideWallBand(7.70 0 storeyHeight buildingDepth)
+    SideWallBand(7.70 storeyHeight storeyHeight buildingDepth)
+    SideWallBand(7.70 2*storeyHeight storeyHeight buildingDepth)
+    SideWallBand(-7.70 0 storeyHeight buildingDepth)
+    SideWallBand(-7.70 storeyHeight storeyHeight buildingDepth)
+    SideWallBand(-7.70 2*storeyHeight storeyHeight buildingDepth)
+    SideWindowSequence(3 7.88 0.52 -3.3 3.25 storeyHeight)
+    SideWindowSequence(3 7.88 storeyHeight+0.52 -3.3 3.25 storeyHeight)
+    SideWindowSequence(3 7.88 2*storeyHeight+0.52 -3.3 3.25 storeyHeight)
+    TimberSolid(7.96 0.40 1.95 0.16 8.65 2.05)
+
+SideWallBand(centerX baseY storeyHeight buildingDepth) ->
+    ConcreteSolid(centerX baseY -4.60 0.38 storeyHeight 1.65)
+    ConcreteSolid(centerX baseY 0 0.38 storeyHeight 2.15)
+    ConcreteSolid(centerX baseY 4.60 0.38 storeyHeight 1.65)
+
+SideWindowSequence(windowCount centerX baseY startZ spacing storeyHeight) windowCount ->
+[
+    T(centerX baseY startZ+SideWindowSequence_count*spacing)
+    A(90 1)
+    FrontWindowBay(0 0 0 1.75 storeyHeight-0.92)
+]
+
+RoofExpression(buildingWidth buildingDepth storeyHeight) ->
+    MetalSolid(0 3*storeyHeight+0.18 -buildingDepth/2-0.14 buildingWidth+0.85 0.38 0.34)
+    MetalSolid(0 3*storeyHeight+0.18 buildingDepth/2+0.14 buildingWidth+0.85 0.38 0.34)
+    MetalSolid(-buildingWidth/2-0.18 3*storeyHeight+0.18 0 0.34 0.38 buildingDepth+0.85)
+    MetalSolid(buildingWidth/2+0.18 3*storeyHeight+0.18 0 0.34 0.38 buildingDepth+0.85)
+    RoofSkylight(0.5 3*storeyHeight+0.28 -0.6)
+
+RoofSkylight(centerX baseY centerZ) ->
+[
+    T(centerX baseY centerZ)
+    S(1.70 0.48 1.70)
+    !I(SphereCap(axis(y) offset(0.08) side(positive) segments(56 28))
+       material(bluewhiteglossysmoothglass) alpha(0.50) texscale(0.12))
+]
+
+
+# =====================================================================
+# GROUND-LEVEL INTERIOR SYSTEM
+# =====================================================================
+
+GroundLevelInterior(storeyHeight) ->
+[
+    Object(
+        id(MLR_GROUND_INTERIOR)
+        name(GroundLevelInterior)
+        class(InteriorStorey)
+        container(MLR_001)
+        taxonomy(Architecture Residence Interior GroundLevel)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        WarmStoneSolid(0 0.015 0 15.2 0.06 10.2)
+        GroundInteriorPartitions(storeyHeight)
+        FoyerAssembly(storeyHeight)
+        LivingRoomAssembly(storeyHeight)
+        KitchenAssembly(storeyHeight)
+        DiningRoomAssembly(storeyHeight)
+    ]
+]
+
+GroundInteriorPartitions(storeyHeight) ->
+    PlasterSolid(-3.15 0.08 1.35 0.16 storeyHeight-0.18 4.20)
+    PlasterSolid(3.85 0.08 1.40 0.16 storeyHeight-0.18 4.10)
+    PlasterSolid(5.85 0.08 2.15 3.70 storeyHeight-0.18 0.16)
+    TimberSolid(-5.35 0.10 1.75 0.14 storeyHeight*2-0.25 3.65)
+
+FoyerAssembly(storeyHeight) ->
+    TimberSolid(-4.75 0.15 -3.45 3.30 0.14 0.56)
+    RoundWallFeature(-4.75 1.58 -3.77 0.58 0.08 0.16)
+    FoyerPendantCluster(storeyHeight)
+    IndoorTree(-6.15 0.10 -2.55 1.45)
+
+FoyerPendantCluster(storeyHeight) ->
+    PendantRing(-4.95 2.35 -2.35 0.30)
+    PendantRing(-4.20 1.95 -2.05 0.22)
+    PendantRing(-3.55 2.70 -2.55 0.25)
+    PendantRing(-4.35 4.85 -2.30 0.34)
+    PendantRing(-3.65 5.45 -2.05 0.24)
+
+PendantRing(centerX centerY centerZ radius) ->
+[
+    T(centerX centerY centerZ)
+    S(radius 0.06 radius)
+    !I(Tube(inner(0.68) segments(48 1))
+       material(charcoalroughmetal) alpha(0.78+0.18*pulse(t,6,0.45)) texscale(0.12))
+]
+
+IndoorTree(centerX baseY centerZ scaleValue) ->
+[
+    T(centerX baseY centerZ)
+    S(0.18 scaleValue 0.18)
+    !I(Cylinder(axial(0 1) topology(solid) close(all) segments(24 1))
+       material(amberwarmwood) alpha(1) texscale(0.22))
+]
+[
+    T(centerX baseY+scaleValue centerZ)
+    S(0.86 0.86 0.86)
+    !I(Sphere(segments(40 20))
+       material(greenmattepaint) alpha(1) texscale(0.24))
+]
+
+LivingRoomAssembly(storeyHeight) ->
+    StoneSolid(-0.25 0.08 4.78 5.65 storeyHeight-0.22 0.18)
+    MetalSolid(-0.25 0.48 4.62 1.48 0.72 0.08)
+    GlassSolid(-0.25 0.60 4.54 1.10 0.40 0.05)
+    OrientedSofa(-0.45 0.12 2.30 3.35 0.78 1.02 180)
+    OrientedSofa(2.40 0.12 3.55 2.25 0.78 0.92 90)
+    LivingChair(-2.78 0.12 2.85)
+    RoundedTimberSolid(0.42 0.30 3.55 1.65 0.22 0.92 0.10)
+    WarmStoneSolid(0.42 0.53 3.55 1.78 0.08 1.02)
+    GreenSolid(0.15 0.07 2.95 5.35 0.04 3.20)
+    TimberSolid(0.25 storeyHeight-0.22 2.40 6.25 0.16 5.75)
+    CeilingFan(0.30 storeyHeight-0.42 2.40)
+
+OrientedSofa(centerX baseY centerZ width height depth yawAngle) ->
+[
+    T(centerX baseY centerZ)
+    A(yawAngle 1)
+    RoundedUpholsterySolid(0 0 0 width height depth 0.18)
+    RoundedUpholsterySolid(0 height*0.68 depth*0.35 width*0.94 height*0.52 0.22 0.10)
+]
+
+LivingChair(centerX baseY centerZ) ->
+[
+    T(centerX baseY centerZ)
+    A(-18 1)
+    RoundedUpholsterySolid(0 0 0 1.05 0.72 0.88 0.16)
+    MetalSolid(-0.42 -0.12 -0.30 0.08 0.46 0.08)
+    MetalSolid(0.42 -0.12 -0.30 0.08 0.46 0.08)
+]
+
+CeilingFan(centerX centerY centerZ) ->
+[
+    T(centerX centerY centerZ)
+    A(wrap(spin(t,8),0,360) 1)
+    MetalSolid(0 -0.08 0 0.16 0.28 0.16)
+    TimberSolid(1.00 0 0 1.85 0.06 0.16)
+    TimberSolid(-1.00 0 0 1.85 0.06 0.16)
+    [ A(90 1) TimberSolid(1.00 0 0 1.85 0.06 0.16) ]
+    [ A(90 1) TimberSolid(-1.00 0 0 1.85 0.06 0.16) ]
+]
+
+KitchenAssembly(storeyHeight) ->
+    TimberSolid(5.85 0.08 -1.45 3.15 2.35 0.64)
+    PlasterSolid(5.85 2.45 -1.45 3.25 0.44 0.70)
+    TimberSolid(7.12 0.08 -0.20 0.62 2.65 2.15)
+    GlassSolid(5.85 0.98 -1.80 2.10 0.72 0.05)
+    KitchenIslandObject()
+    BarStoolSequence(4 0.65 0.92 -1.05)
+    PendantRing(1.95 storeyHeight-0.55 -0.10 0.23)
+    PendantRing(3.05 storeyHeight-0.55 -0.10 0.23)
+
+KitchenIslandObject() ->
+[
+    T(2.35 0.58 -0.20)
+    Object(
+        id(MLR_KITCHEN_ISLAND)
+        name(KitchenIsland)
+        class(KitchenIsland)
+        container(MLR_GROUND_INTERIOR)
+        taxonomy(Architecture Residence Interior Kitchen KitchenIsland)
+        layer(Furniture)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(bottomSupport)
+            type(Support)
+            origin(0 0 0)
+            normal(0 -1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 3.90 1.08)
+            tolerance(0.001)
+        )
+
+        Connect(
+            id(CONN_KitchenIslandSupportedByGroundSlab)
+            source(MLR_KITCHEN_ISLAND bottomSupport)
+            target(MLR_GROUND_SLAB upperSurface)
+            type(SupportedBy)
+            clearance(0)
+            insertionDepth(0)
+        )
+
+        Position(
+            id(POS_KitchenIslandOnGroundSlab)
+            moving(bottomSupport)
+            target(MLR_GROUND_SLAB upperSurface)
+            mode(Drop)
+            direction(World 0 -1 0)
+            clearance(0)
+            seatingDepth(0)
+            maxDistance(1.0)
+            tolerance(0.001)
+            priority(10)
+            mask(Structure)
+        )
+
+        RoundedTimberSolid(0 0 0 3.70 0.90 1.02 0.12)
+        WarmStoneSolid(0 0.90 0 3.92 0.10 1.14)
+        KitchenIslandBasin(0.82 1.02 0.10)
+        MetalSolid(-0.72 1.01 0.05 0.88 0.05 0.46)
+    ]
+]
+
+KitchenIslandBasin(centerX centerY centerZ) ->
+[
+    T(centerX centerY centerZ)
+    S(0.42 0.16 0.32)
+    !I(SphereBowl(inner(0.72) axis(y) offset(-0.08) side(positive) segments(48 24))
+       material(offwhiteceramic) alpha(1) texscale(0.16))
+]
+
+BarStoolSequence(stoolCount startX spacing centerZ) stoolCount ->
+    BarStool(startX+BarStoolSequence_count*spacing 0.04 centerZ)
+
+BarStool(centerX baseY centerZ) ->
+    RoundedTimberSolid(centerX baseY+0.62 centerZ 0.54 0.12 0.46 0.08)
+    MetalSolid(centerX-0.20 baseY centerZ-0.16 0.06 0.62 0.06)
+    MetalSolid(centerX+0.20 baseY centerZ-0.16 0.06 0.62 0.06)
+    MetalSolid(centerX-0.20 baseY centerZ+0.16 0.06 0.62 0.06)
+    MetalSolid(centerX+0.20 baseY centerZ+0.16 0.06 0.62 0.06)
+
+DiningRoomAssembly(storeyHeight) ->
+    RoundedTimberSolid(4.65 0.68 3.28 3.65 0.14 1.36 0.08)
+    MetalSolid(3.12 0.08 3.28 0.14 0.62 0.72)
+    MetalSolid(6.18 0.08 3.28 0.14 0.62 0.72)
+    DiningChairSequence(3 3.72 0.94 2.32)
+    DiningChairSequence(3 3.72 0.94 4.24)
+    PendantRing(4.65 storeyHeight-0.66 3.28 0.34)
+    RoundWhiteSideTable(6.65 0.08 4.88 0.62 0.54)
+
+RoundWhiteSideTable(centerX baseY centerZ radius height) ->
+[
+    T(centerX baseY centerZ)
+    S(0.13 height 0.13)
+    !I(Cylinder(axial(0 1) topology(solid) close(all) segments(32 1))
+       material(silverbluepolishedmetal) alpha(1) texscale(0.16))
+]
+[
+    T(centerX baseY+height centerZ)
+    A(90 0)
+    T(0 0 -0.04)
+    !I(Extrude(Circle(radius 48) 0.08 cap(all))
+       material(offwhiteceramic) alpha(1) texscale(0.16))
+]
+
+DiningChairSequence(chairCount startX spacing centerZ) chairCount ->
+    DiningChair(startX+DiningChairSequence_count*spacing 0.08 centerZ)
+
+DiningChair(centerX baseY centerZ) ->
+    RoundedUpholsterySolid(centerX baseY+0.48 centerZ 0.62 0.12 0.62 0.08)
+    RoundedUpholsterySolid(centerX baseY+0.58 centerZ+0.25 0.62 0.74 0.12 0.06)
+    MetalSolid(centerX-0.24 baseY centerZ-0.20 0.05 0.48 0.05)
+    MetalSolid(centerX+0.24 baseY centerZ-0.20 0.05 0.48 0.05)
+
+
+# =====================================================================
+# UPPER-LEVEL INTERIOR SYSTEM
+# =====================================================================
+
+UpperLevelInteriors(storeyHeight) ->
+[
+    Object(
+        id(MLR_UPPER_INTERIORS)
+        name(UpperLevelInteriors)
+        class(InteriorStoreyGroup)
+        container(MLR_001)
+        taxonomy(Architecture Residence Interior UpperLevels)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        UpperFloorFinishWithStairOpening(storeyHeight+0.02)
+        UpperFloorFinishWithStairOpening(2*storeyHeight+0.02)
+        FirstFloorGallery(storeyHeight)
+        MasterSuite(storeyHeight)
+        MasterBathroom(storeyHeight)
+        StairVoidGuardrails(storeyHeight)
+        StairVoidGuardrails(2*storeyHeight)
+    ]
+]
+
+UpperFloorFinishWithStairOpening(baseY) ->
+    WarmStoneSolid(-7.075 baseY 0 1.85 0.06 10.2)
+    WarmStoneSolid(2.625 baseY 0 10.75 0.06 10.2)
+    WarmStoneSolid(-4.45 baseY -4.325 3.40 0.06 1.55)
+    WarmStoneSolid(-4.45 baseY 3.475 3.40 0.06 3.25)
+
+StairVoidGuardrails(baseY) ->
+    GlassSolid(-6.12 baseY+0.10 -0.85 0.06 1.05 5.40)
+    GlassSolid(-2.78 baseY+0.10 -0.85 0.06 1.05 5.40)
+    GlassSolid(-4.45 baseY+0.10 1.82 3.34 1.05 0.06)
+
+FirstFloorGallery(storeyHeight) ->
+    GlassSolid(-2.95 storeyHeight+0.20 -0.30 0.06 1.05 4.70)
+    OrientedSofa(2.60 storeyHeight+0.14 1.10 2.45 0.72 0.92 180)
+    RoundedTimberSolid(2.55 storeyHeight+0.38 2.15 1.18 0.18 0.72 0.08)
+    TimberSolid(-0.10 storeyHeight+0.10 -1.20 0.16 storeyHeight-0.20 5.80)
+
+MasterSuite(storeyHeight) ->
+    PlasterSolid(-1.25 2*storeyHeight+0.10 0.55 0.16 storeyHeight-0.20 9.40)
+    PlasterSolid(-5.05 2*storeyHeight+0.10 1.35 5.90 storeyHeight-0.20 0.16)
+    RoundedUpholsterySolid(3.45 2*storeyHeight+0.24 -0.35 3.20 0.42 2.20 0.18)
+    TimberSolid(3.45 2*storeyHeight+0.66 0.62 3.25 1.28 0.18)
+    RoundedTimberSolid(1.40 2*storeyHeight+0.22 -0.20 0.78 0.48 0.62 0.08)
+    RoundedTimberSolid(5.50 2*storeyHeight+0.22 -0.20 0.78 0.48 0.62 0.08)
+    TimberSolid(3.45 2*storeyHeight+0.12 4.58 4.75 2.50 0.18)
+    GlassSolid(3.45 2*storeyHeight+0.44 -5.44 5.80 2.16 0.08)
+
+MasterBathroom(storeyHeight) ->
+    PlasterSolid(-4.92 2*storeyHeight+0.10 -1.55 5.80 storeyHeight-0.20 0.16)
+    TimberSolid(-4.78 2*storeyHeight+0.72 -1.20 3.70 0.56 0.70)
+    WarmStoneSolid(-4.78 2*storeyHeight+1.28 -1.20 3.82 0.10 0.80)
+    VanityBasin(-5.62 2*storeyHeight+1.46 -1.20)
+    VanityBasin(-3.94 2*storeyHeight+1.46 -1.20)
+    RoundWallFeature(-5.62 2*storeyHeight+2.10 -1.64 0.62 0.06 0.14)
+    RoundWallFeature(-3.94 2*storeyHeight+2.10 -1.64 0.62 0.06 0.14)
+    GlassSolid(-2.05 2*storeyHeight+0.20 0.82 1.60 2.18 0.06)
+    GlassSolid(-1.28 2*storeyHeight+0.20 1.58 0.06 2.18 1.62)
+    SculptedBath(-4.92 2*storeyHeight+0.34 3.42)
+
+VanityBasin(centerX centerY centerZ) ->
+[
+    T(centerX centerY centerZ)
+    S(0.55 0.22 0.38)
+    A(180 0)
+    !I(Hemisphere(axis(y) side(positive) segments(48 24))
+       material(offwhiteceramic) alpha(1) texscale(0.16))
+]
+
+SculptedBath(centerX centerY centerZ) ->
+[
+    T(centerX centerY centerZ)
+    S(1.25 0.62 0.68)
+    !I(SphereBowl(inner(0.78) axis(y) offset(-0.10) side(positive) segments(56 28))
+       material(offwhiteceramic) alpha(1) texscale(0.16))
+]
+
+
+# =====================================================================
+# VERTICAL CIRCULATION SYSTEM
+# =====================================================================
+
+ResidenceCirculation(storeyHeight) ->
+[
+    Object(
+        id(MLR_CIRCULATION)
+        name(FloatingStairSystem)
+        class(VerticalCirculationSystem)
+        container(MLR_001)
+        taxonomy(Architecture Residence Interior VerticalCirculation FloatingStair)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        StairFlightSequence(13 -5.15 0.24 -2.65 0.095 0.225 0.25 20.8)
+        StairFlightSequence(13 -3.95 storeyHeight+0.18 0.48 -0.095 0.225 -0.25 20.8)
+        TimberSolid(-4.00 storeyHeight-0.08 0.88 1.85 0.12 1.55)
+        TimberSolid(-5.04 2*storeyHeight-0.08 -2.70 1.82 0.12 1.42)
+        GlassSolid(-3.02 storeyHeight+0.12 0.88 0.06 1.05 1.55)
+        GlassSolid(-4.08 2*storeyHeight+0.12 -2.70 0.06 1.05 1.42)
+        StairStringer(-5.59 0.10 -2.48 -69.2)
+        StairStringer(-4.71 0.10 -2.82 -69.2)
+        StairStringer(-4.39 storeyHeight+0.04 0.65 110.8)
+        StairStringer(-3.51 storeyHeight+0.04 0.31 110.8)
+    ]
+]
+
+StairFlightSequence(stepCount startX startY startZ deltaX deltaY deltaZ treadYaw) stepCount ->
+[
+    T(startX+StairFlightSequence_count*deltaX
+      startY+StairFlightSequence_count*deltaY
+      startZ+StairFlightSequence_count*deltaZ)
+    A(treadYaw 1)
+    TimberSolid(0 0 0 1.42 0.12 0.42)
+]
+
+StairStringer(startX baseY startZ yawAngle) ->
+[
+    T(startX baseY startZ)
+    A(yawAngle 1)
+    T(0 0 -0.05)
+    !I(Extrude(Polygon(0 0 3.20 2.70 3.20 2.84 0 0.14) 0.10 cap(all))
+       material(charcoalroughmetal) alpha(1) texscale(0.18))
+]
+
+
+# =====================================================================
+# REAR AMENITY SYSTEM
+# =====================================================================
+
+RearAmenitySystem(buildingWidth buildingDepth) ->
+[
+    Object(
+        id(MLR_REAR_AMENITY)
+        name(RearAmenitySystem)
+        class(OutdoorAmenitySystem)
+        container(MLR_001)
+        taxonomy(Architecture Residence Exterior RearAmenity)
+        layer(Interior)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        WarmStoneSolid(0 0.02 buildingDepth/2+1.12 buildingWidth-1.0 0.10 2.24)
+        OutdoorDiningAssembly()
+        OutdoorLoungeAssembly()
+        OutdoorKitchenAssembly()
+        SwimmingPoolObject()
+    ]
+]
+
+OutdoorDiningAssembly() ->
+    RoundedTimberSolid(-4.20 0.56 6.65 3.15 0.14 1.25 0.08)
+    DiningChairSequence(3 -5.20 1.0 5.85)
+    DiningChairSequence(3 -5.20 1.0 7.42)
+
+OutdoorLoungeAssembly() ->
+    OrientedSofa(1.85 0.18 6.42 2.72 0.74 0.92 180)
+    CurvedOutdoorChair(3.82 0.18 6.72)
+    RoundedTimberSolid(2.55 0.30 7.45 1.35 0.18 0.72 0.08)
+
+CurvedOutdoorChair(centerX baseY centerZ) ->
+[
+    T(centerX baseY centerZ)
+    S(0.82 0.62 0.82)
+    A(18 1)
+    !I(CylinderSector(sweep(235) segments(48 1))
+       material(warmwhitematteplaster) alpha(1) texscale(0.30))
+]
+
+OutdoorKitchenAssembly() ->
+    ChamferedMetalSolid(5.80 0.16 5.92 2.85 0.84 0.64 0.08)
+    WarmStoneSolid(5.80 1.00 5.92 2.98 0.10 0.74)
+    OutdoorFireplaceHood(5.80 1.28 5.96)
+
+OutdoorFireplaceHood(centerX baseY centerZ) ->
+[
+    T(centerX baseY centerZ)
+    S(0.75 0.85 0.48)
+    !I(DSection(angle(0) offset(0.05) side(positive) segments(48 1))
+       material(charcoalroughmetal) alpha(1) texscale(0.18))
+]
+
+SwimmingPoolObject() ->
+[
+    T(3.85 -0.30 9.18)
+    Object(
+        id(MLR_SWIMMING_POOL)
+        name(SwimmingPool)
+        class(SwimmingPool)
+        container(MLR_REAR_AMENITY)
+        taxonomy(Architecture Residence Exterior RearAmenity SwimmingPool)
+        layer(Plumbing)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(
+            id(waterDatum)
+            type(InspectionInterface)
+            origin(0 0.34 0)
+            normal(0 1 0)
+            tangent(1 0 0)
+            region(PlaneRectangle 7.20 3.24)
+            tolerance(0.002)
+        )
+
+        PoolBasinShell()
+        WaterSurface(0 0.31 0 7.20 3.24)
+        GlassSolid(-3.78 0.50 -0.95 0.06 1.05 5.65)
+        GlassSolid(3.78 0.50 -0.95 0.06 1.05 5.65)
+        GlassSolid(0 0.50 1.84 7.50 1.05 0.06)
+        PoolOverflowChannel(-3.58 0.52 -1.62 3.24)
+    ]
+]
+
+PoolBasinShell() ->
+    ConcreteSolid(0 0 0 7.65 0.16 3.70)
+    ConcreteSolid(-3.72 0.16 0 0.20 0.40 3.70)
+    ConcreteSolid(3.72 0.16 0 0.20 0.40 3.70)
+    ConcreteSolid(0 0.16 -1.75 7.25 0.40 0.20)
+    ConcreteSolid(0 0.16 1.75 7.25 0.40 0.20)
+    WarmStoneSolid(-3.76 0.54 0 0.28 0.08 3.90)
+    WarmStoneSolid(3.76 0.54 0 0.28 0.08 3.90)
+    WarmStoneSolid(0 0.54 -1.86 7.80 0.08 0.28)
+    WarmStoneSolid(0 0.54 1.86 7.80 0.08 0.28)
+
+PoolOverflowChannel(centerX centerY startZ channelLength) ->
+[
+    T(centerX centerY startZ)
+    A(90 0)
+    S(0.16 channelLength 0.16)
+    !I(HalfCylinder(angle(0) side(positive) segments(40 1))
+       material(charcoalroughmetal) alpha(1) texscale(0.14))
+]
+
+
+# =====================================================================
+# FRONT LANDSCAPE SYSTEM
+# =====================================================================
+
+FrontLandscapeSystem(buildingWidth buildingDepth) ->
+[
+    Object(
+        id(MLR_FRONT_LANDSCAPE)
+        name(FrontLandscapeSystem)
+        class(LandscapeSystem)
+        container(MLR_001)
+        taxonomy(Architecture Residence Exterior FrontLandscape)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        ConcreteSolid(-7.52 0.04 -6.25 1.62 1.24 0.34)
+        MetalSolid(-7.52 0.52 -6.44 0.86 0.46 0.06)
+        EntryStepSequence(3 -2.20 -0.01 -5.94 0.30)
+        FrontPlanter(-5.55 -0.02 -6.35 2.20 0.38 0.80)
+        FrontPlanter(0.88 -0.02 -6.35 2.86 0.40 0.84)
+        FrontPlanter(7.16 -0.02 -6.30 0.92 0.72 0.92)
+        LandscapeTree(1.05 0.30 -6.30 1.62)
+        LandscapeTree(-6.45 0.28 -7.35 1.35)
+        SculpturalGardenForms()
+    ]
+]
+
+EntryStepSequence(stepCount centerX startY startZ deltaZ) stepCount ->
+    WarmStoneSolid(centerX
+                   startY-EntryStepSequence_count*0.08
+                   startZ-EntryStepSequence_count*deltaZ
+                   2.0+EntryStepSequence_count*0.24 0.12 0.54)
+
+FrontPlanter(centerX baseY centerZ width height depth) ->
+    ChamferedMetalSolid(centerX baseY centerZ width height depth 0.08)
+    GreenSolid(centerX baseY+height-0.03 centerZ width-0.28 0.18 depth-0.26)
+
+LandscapeTree(centerX baseY centerZ height) ->
+[
+    T(centerX baseY centerZ)
+    S(0.17 height 0.17)
+    !I(Cylinder(segments(24 1))
+       material(amberwarmwood) alpha(1) texscale(0.22))
+]
+[
+    T(centerX baseY+height centerZ)
+    S(0.92 0.92 0.92)
+    !I(Sphere(segments(40 20))
+       material(greenmattepaint) alpha(1) texscale(0.24))
+]
+
+SculpturalGardenForms() ->
+    GardenSphereCap(-6.70 0.06 -5.92 0.42)
+    GardenSphereQuarter(-6.05 0.06 -5.96 0.36)
+    GardenSphereOctant(-5.48 0.06 -5.98 0.44)
+
+GardenSphereCap(centerX baseY centerZ scaleValue) ->
+[
+    T(centerX baseY centerZ)
+    S(scaleValue scaleValue scaleValue)
+    !I(SphereCap(axis(y) offset(-0.15) side(positive) segments(40 20))
+       material(lightgreyroughconcrete) alpha(1) texscale(0.15))
+]
+
+GardenSphereQuarter(centerX baseY centerZ scaleValue) ->
+[
+    T(centerX baseY centerZ)
+    S(scaleValue scaleValue scaleValue)
+    !I(SphereQuarter(segments(40 20))
+       material(offwhiteceramic) alpha(1) texscale(0.16))
+]
+
+GardenSphereOctant(centerX baseY centerZ scaleValue) ->
+[
+    T(centerX baseY centerZ)
+    S(scaleValue scaleValue scaleValue)
+    !I(SphereOctant(segments(40 20))
+       material(silverbluepolishedmetal) alpha(1) texscale(0.14))
+]
+
+
+# =====================================================================
+# ARCHITECTURAL LIGHTING AND ELECTRICAL CONTROL SYSTEM
+# Scene lights are first-class grammar records. Visible fixture geometry is
+# authored separately, while switches control typed circuits rather than GLSL.
+# =====================================================================
+
+ResidenceLightingSystem(storeyHeight) ->
+[
+    LightSwitch(
+        EntryLightingSwitch
+        type(SinglePole)
+        mount(MLR_GROUND_INTERIOR)
+        height(1.10)
+        position(-2.45 0 -5.05)
+        state(on)
+        dimmer(1)
+    )
+    LightSwitch(
+        LivingLightingDimmer
+        type(Dimmer)
+        mount(MLR_GROUND_INTERIOR)
+        height(1.10)
+        position(-3.05 0 0.45)
+        state(on)
+        dimmer(0.82)
+    )
+    LightSwitch(
+        KitchenLightingDimmer
+        type(Dimmer)
+        mount(MLR_GROUND_INTERIOR)
+        height(1.10)
+        position(3.92 0 -2.28)
+        state(on)
+        dimmer(0.88)
+    )
+    LightSwitch(
+        DiningLightingDimmer
+        type(Dimmer)
+        mount(MLR_GROUND_INTERIOR)
+        height(1.10)
+        position(3.72 0 4.72)
+        state(on)
+        dimmer(0.78)
+    )
+    LightSwitch(
+        UpperLightingDimmer
+        type(Dimmer)
+        mount(MLR_UPPER_INTERIORS)
+        height(1.10)
+        position(-0.42 storeyHeight -1.48)
+        state(on)
+        dimmer(0.76)
+    )
+    LightSwitch(
+        RearExteriorLightingSwitch
+        type(SinglePole)
+        mount(MLR_REAR_AMENITY)
+        height(1.10)
+        position(6.88 0 5.18)
+        state(on)
+        dimmer(1)
+    )
+
+    LightingArray(
+        LivingDownlights
+        fixture(RecessedDownlight)
+        origin(-2.60 storeyHeight-0.26 0.95)
+        grid(3 2)
+        spacing(2.45 2.55)
+        direction(0 -1 0)
+        temperature(3000)
+        lumens(720)
+        range(7.5)
+        cone(22 36)
+        mount(ceilingMount)
+        clearance(0.10 0.12 0.10)
+        shadow(off)
+        circuit(LivingDownlightCircuit)
+        controls(LivingLightingDimmer)
+    )
+    LightingArray(
+        KitchenDownlights
+        fixture(RecessedDownlight)
+        origin(4.55 storeyHeight-0.26 -2.30)
+        grid(2 2)
+        spacing(2.15 2.05)
+        direction(0 -1 0)
+        temperature(3200)
+        lumens(760)
+        range(7.0)
+        cone(22 36)
+        mount(ceilingMount)
+        clearance(0.10 0.12 0.10)
+        shadow(off)
+        circuit(KitchenDownlightCircuit)
+        controls(KitchenLightingDimmer)
+    )
+    LightingArray(
+        GalleryDownlights
+        fixture(RecessedDownlight)
+        origin(0.85 2*storeyHeight-0.26 -1.25)
+        grid(2 2)
+        spacing(2.35 2.30)
+        direction(0 -1 0)
+        temperature(3000)
+        lumens(680)
+        range(6.5)
+        cone(22 36)
+        mount(ceilingMount)
+        clearance(0.10 0.12 0.10)
+        shadow(off)
+        circuit(GalleryDownlightCircuit)
+        controls(UpperLightingDimmer)
+    )
+    LightingArray(
+        MasterSuiteDownlights
+        fixture(RecessedDownlight)
+        origin(1.20 3*storeyHeight-0.34 -2.30)
+        grid(3 2)
+        spacing(2.10 2.55)
+        direction(0 -1 0)
+        temperature(2900)
+        lumens(650)
+        range(6.5)
+        cone(22 36)
+        mount(ceilingMount)
+        clearance(0.10 0.14 0.10)
+        shadow(off)
+        circuit(MasterSuiteDownlightCircuit)
+        controls(UpperLightingDimmer)
+    )
+
+    LightFixture(
+        FoyerPendant
+        type(Pendant)
+        emitter(FoyerPendantEmitter)
+        position(-4.20 4.35 -2.22)
+        direction(0 -1 0)
+        temperature(2700)
+        lumens(980)
+        range(8.0)
+        cone(28 52)
+        mount(ceilingMount)
+        clearance(0.40 1.20 0.40)
+        shadow(on)
+    )
+    LightFixture(
+        KitchenPendantLeft
+        type(Pendant)
+        emitter(KitchenPendantLeftEmitter)
+        position(1.95 storeyHeight-0.62 -0.10)
+        direction(0 -1 0)
+        temperature(2700)
+        lumens(820)
+        range(6.5)
+        cone(26 46)
+        mount(ceilingMount)
+        clearance(0.28 0.70 0.28)
+        shadow(on)
+    )
+    LightFixture(
+        KitchenPendantRight
+        type(Pendant)
+        emitter(KitchenPendantRightEmitter)
+        position(3.05 storeyHeight-0.62 -0.10)
+        direction(0 -1 0)
+        temperature(2700)
+        lumens(820)
+        range(6.5)
+        cone(26 46)
+        mount(ceilingMount)
+        clearance(0.28 0.70 0.28)
+        shadow(off)
+    )
+    LightFixture(
+        KitchenUnderCabinetStrip
+        type(LEDStrip)
+        emitter(KitchenUnderCabinetStripEmitter)
+        position(5.85 2.08 -1.78)
+        direction(0 -1 0.20)
+        temperature(3300)
+        lumens(980)
+        range(4.5)
+        cone(35 65)
+        mount(cabinetUnderside)
+        clearance(1.20 0.10 0.08)
+        shadow(off)
+    )
+    LightFixture(
+        DiningPendant
+        type(Pendant)
+        emitter(DiningPendantEmitter)
+        position(4.65 storeyHeight-0.72 3.28)
+        direction(0 -1 0)
+        temperature(2700)
+        lumens(900)
+        range(6.5)
+        cone(28 48)
+        mount(ceilingMount)
+        clearance(0.42 0.90 0.42)
+        shadow(on)
+    )
+    LightFixture(
+        RearWallLightLeft
+        type(ExteriorWallLight)
+        emitter(RearWallLightLeftEmitter)
+        position(-3.25 2.18 5.72)
+        direction(0 -0.35 1)
+        temperature(3000)
+        lumens(620)
+        range(7.0)
+        cone(30 60)
+        mount(exteriorWallFace)
+        clearance(0.24 0.36 0.20)
+        shadow(off)
+    )
+    LightFixture(
+        RearWallLightRight
+        type(ExteriorWallLight)
+        emitter(RearWallLightRightEmitter)
+        position(3.25 2.18 5.72)
+        direction(0 -0.35 1)
+        temperature(3000)
+        lumens(620)
+        range(7.0)
+        cone(30 60)
+        mount(exteriorWallFace)
+        clearance(0.24 0.36 0.20)
+        shadow(off)
+    )
+
+    LightingCircuit(
+        FoyerPendantCircuit
+        controls(EntryLightingSwitch)
+        fixtures(FoyerPendant)
+        alwaysOn(off)
+    )
+    LightingCircuit(
+        KitchenPendantCircuit
+        controls(KitchenLightingDimmer)
+        fixtures(KitchenPendantLeft KitchenPendantRight)
+        alwaysOn(off)
+    )
+    LightingCircuit(
+        KitchenTaskCircuit
+        controls(KitchenLightingDimmer)
+        fixtures(KitchenUnderCabinetStrip)
+        alwaysOn(off)
+    )
+    LightingCircuit(
+        DiningPendantCircuit
+        controls(DiningLightingDimmer)
+        fixtures(DiningPendant)
+        alwaysOn(off)
+    )
+    LightingCircuit(
+        RearExteriorCircuit
+        controls(RearExteriorLightingSwitch)
+        fixtures(RearWallLightLeft RearWallLightRight)
+        alwaysOn(off)
+    )
+
+    ArchitecturalLightingFixtureGeometry(storeyHeight)
+]
+
+ArchitecturalLightingFixtureGeometry(storeyHeight) ->
+    RecessedDownlightTrimRow(3 -2.60 storeyHeight-0.26 0.95 2.45)
+    RecessedDownlightTrimRow(3 -2.60 storeyHeight-0.26 3.50 2.45)
+    RecessedDownlightTrimRow(2 4.55 storeyHeight-0.26 -2.30 2.15)
+    RecessedDownlightTrimRow(2 4.55 storeyHeight-0.26 -0.25 2.15)
+    RecessedDownlightTrimRow(2 0.85 2*storeyHeight-0.26 -1.25 2.35)
+    RecessedDownlightTrimRow(2 0.85 2*storeyHeight-0.26 1.05 2.35)
+    RecessedDownlightTrimRow(3 1.20 3*storeyHeight-0.34 -2.30 2.10)
+    RecessedDownlightTrimRow(3 1.20 3*storeyHeight-0.34 0.25 2.10)
+    PendantFixtureVisual(-4.20 4.35 -2.22 0.30 0.82)
+    PendantFixtureVisual(1.95 storeyHeight-0.62 -0.10 0.23 0.54)
+    PendantFixtureVisual(3.05 storeyHeight-0.62 -0.10 0.23 0.54)
+    PendantFixtureVisual(4.65 storeyHeight-0.72 3.28 0.34 0.72)
+    LedStripFixtureVisual(5.85 2.08 -1.78 2.15)
+    ExteriorWallLightVisual(-3.25 2.18 5.72)
+    ExteriorWallLightVisual(3.25 2.18 5.72)
+    SwitchPlateVisual(-2.45 1.10 -5.05)
+    SwitchPlateVisual(-3.05 1.10 0.45)
+    SwitchPlateVisual(3.92 1.10 -2.28)
+    SwitchPlateVisual(3.72 1.10 4.72)
+    SwitchPlateVisual(-0.42 storeyHeight+1.10 -1.48)
+    SwitchPlateVisual(6.88 1.10 5.18)
+
+RecessedDownlightTrimRow(lightCount startX centerY centerZ spacing) lightCount ->
+    RecessedDownlightFixtureVisual(startX+RecessedDownlightTrimRow_count*spacing centerY centerZ)
+
+RecessedDownlightFixtureVisual(centerX centerY centerZ) ->
+[
+    T(centerX centerY centerZ)
+    S(0.092 0.025 0.092)
+    !I(Tube(inner(0.62) segments(32 1))
+       material(silverbluepolishedmetal) alpha(1) texscale(0.10))
+]
+[
+    T(centerX centerY-0.018 centerZ)
+    S(0.060 0.016 0.060)
+    !I(Cylinder(axial(0 1) topology(solid) close(all) segments(32 1))
+       material(bluewhiteglossysmoothglass) alpha(0.82) texscale(0.08))
+]
+
+PendantFixtureVisual(centerX centerY centerZ radius dropLength) ->
+    MetalSolid(centerX centerY+0.02 centerZ 0.24 0.08 0.24)
+    MetalSolid(centerX centerY-dropLength/2 centerZ 0.025 dropLength 0.025)
+    PendantRing(centerX centerY-dropLength centerZ radius)
+
+LedStripFixtureVisual(centerX centerY centerZ length) ->
+    MetalSolid(centerX centerY centerZ length 0.06 0.08)
+    GlassSolid(centerX centerY-0.035 centerZ+0.012 length-0.08 0.025 0.05)
+
+ExteriorWallLightVisual(centerX centerY centerZ) ->
+    ChamferedMetalSolid(centerX-0.16 centerY-0.24 centerZ 0.32 0.48 0.16 0.04)
+    GlassSolid(centerX-0.16 centerY-0.12 centerZ+0.09 0.22 0.20 0.04)
+
+SwitchPlateVisual(centerX centerY centerZ) ->
+    WarmStoneSolid(centerX centerY centerZ 0.12 0.20 0.025)
+    ChamferedMetalSolid(centerX centerY+0.055 centerZ-0.018 0.055 0.075 0.020 0.012)

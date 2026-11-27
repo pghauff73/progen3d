@@ -1,0 +1,26 @@
+# UIUC Aeronaut Carbon Electric 8.5 x 6, 5004 rpm; axial inflow.
+# Shaft reaction rolls the free cart about its thrust axis.
+# Still air, effective drag area 0.030 m2; initial speed inside the measured domain.
+Start ->
+    AirProperties(1.20 0.000018) Wind(0 0 0)
+    M(2) V(2.413 0 0) BodyInertia(0.10 0.12 0.12)
+    DragSurface(1 0.030 0.6)
+    PropSample(0.134 0.1035 0.0523)
+    PropSample(0.169 0.1016 0.0536)
+    PropSample(0.205 0.0984 0.0538)
+    PropSample(0.239 0.0953 0.0540)
+    PropSample(0.278 0.0909 0.0542)
+    PropSample(0.311 0.0872 0.0538)
+    PropSample(0.346 0.0823 0.0534)
+    PropSample(0.382 0.0765 0.0514)
+    PropSample(0.421 0.0711 0.0500)
+    PropSample(0.453 0.0662 0.0481)
+    PropSample(0.495 0.0599 0.0459)
+    PropSample(0.527 0.0537 0.0426)
+    PropSample(0.562 0.0474 0.0394)
+    PropSample(0.603 0.0393 0.0355)
+    PropSample(0.623 0.0353 0.0331)
+    PropSample(0.665 0.0264 0.0274)
+    PropSample(0.705 0.0190 0.0226)
+    Propeller(0.2159 5004 1)
+    S(0.6 0.35 0.15) I(Cube material(tealmatteceramic) 1 1)

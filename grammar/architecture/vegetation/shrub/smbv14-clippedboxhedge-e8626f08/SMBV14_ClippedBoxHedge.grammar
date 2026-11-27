@@ -1,0 +1,48 @@
+# Generated Simple Modern Building vegetation object.
+# Object-local geometry uses Y-up coordinates and a five-degree comparison lens.
+
+Start -> SMB_VEGETATION_CLIPPED_BOX_HEDGE
+
+SMB_VEGETATION_CLIPPED_BOX_HEDGE ->
+[
+    Object(
+        id(SMB_VEGETATION_CLIPPED_BOX_HEDGE)
+        class(ClippedBoxHedge)
+        taxonomy(SmallModernBuilding BuildingSite LandscapeSystem Shrub ClippedBoxHedge)
+        layer(Terrain)
+        mask(Structure Envelope Interior Furniture Plumbing Hvac Electrical Equipment Terrain Temporary)
+    )
+    [
+        Interface(id(baseSupport) type(Support) origin(0 0 0) normal(0 1 0) tangent(1 0 0) region(Point) tolerance(0.001))
+        Interface(id(irrigationConnection) type(ServiceConnection) origin(0 0.18 -0.60) normal(0 0 -1) tangent(1 0 0) region(Point) tolerance(0.01))
+        Interface(id(inspection) type(InspectionInterface) origin(0 1.0 0) normal(0 0 1) tangent(1 0 0) region(Point) tolerance(0.001))
+
+        [ T(0 0.10 0) S(2.80 0.20 1.35) I(CubeY material(earthmaterial) 1 0.20) ]
+        [ T(-0.72 0.20 0.08) S(1.75 1.75 1.75) I(Plant(species(Shrub) age(8) state(Flowering) seed(520014) detail(LOD4)) material(sagegreenmattepaint) 1 0.16) ]
+        [ T(0.04 0.20 -0.10) S(1.93 1.93 1.93) I(Plant(species(Shrub) age(7) state(Mature) seed(520015) detail(LOD3)) material(sagegreenmattepaint) 1 0.16) ]
+        [ T(0.78 0.20 0.10) S(1.67 1.67 1.67) I(Plant(species(Shrub) age(5) state(Flowering) seed(520016) detail(LOD4)) material(sagegreenmattepaint) 1 0.16) ]
+        SMBV14_Lobe(-0.78 1.02 0.04 0.66 0.52 0.58)
+        SMBV14_Lobe(0 1.20 -0.08 0.78 0.58 0.66)
+        SMBV14_Lobe(0.80 0.98 0.10 0.64 0.50 0.56)
+        SMBV14_Leaf(-1.08 1.18 0.12 -28)
+        SMBV14_Leaf(0.02 1.58 -0.06 18)
+        SMBV14_Leaf(1.08 1.16 0.10 30)
+        SMBV14_Flower(-0.54 1.62 0.08 -12)
+        SMBV14_Flower(0.58 1.54 -0.04 16)
+    ]
+]
+
+SMBV14_Lobe(x y z sx sy sz) ->
+[
+    T(x y z) S(sx sy sz) I(Sphere material(sagegreenmattepaint) 1 0.20)
+]
+
+SMBV14_Leaf(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(LeafBlade(profile(Ovate) length(0.52) width(0.25) curvature(0.18) camber(0.036) twist(8) thickness(0.010) widthPower(1.05) segments(16 5)) material(sagegreenmattepaint) 1 0.15)
+]
+
+SMBV14_Flower(x y z yaw) ->
+[
+    T(x y z) A(yaw 1) A(90 1) I(PetalBlade(profile(Obovate) length(0.34) width(0.20) curvature(0.22) camber(0.050) twist(-8) thickness(0.009) widthPower(0.92) segments(16 5)) material(redglossymetal) 1 0.13)
+]

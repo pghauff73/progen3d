@@ -1,0 +1,9 @@
+# Sample a helicoid with a stack of straight slats.
+# Slats(count, rise from first to last centre, total twist in degrees).
+Start -> Slats(25 2.4 240)
+
+Slats(n rise twist) n ->
+    [ T(0 rise*Slats_count/(n-1) 0)
+      A(twist*Slats_count/(n-1) 1)
+      S(2.6 0.055 0.22)
+      I(Cube material(tealmatteceramic) 1 1) ]
