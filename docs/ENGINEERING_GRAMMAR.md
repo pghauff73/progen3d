@@ -517,12 +517,13 @@ model validators.
 
 ## 8. Airflow grammar
 
-The source actions `AirProperties` and `Wind` set the medium and wind vector.
-`AirProperties` takes two whitespace-separated expressions; `Wind` takes
-three. Airflow actions are accumulated and validated by the grammar executor,
-then attached to the next eligible `I(...)` instance when the airflow state is
-active and reset after that attempt. They do not attach merely because an
-instance is described as a "body".
+The source actions `AirProperties` and `Wind` set ambient density/viscosity
+and wind velocity. `AirProperties` takes two whitespace-separated expressions;
+`Wind` takes three. Body airflow declarations accumulate until an `I(...)`
+action is reached; if the active configuration passes validation, it is
+attached to that instance and cleared. Invalid configurations report a
+diagnostic and abort execution. This attachment path is for `I(...)`, not
+`!I(...)`.
 
 ```p3d
 AirProperties(density dynamicViscosity)

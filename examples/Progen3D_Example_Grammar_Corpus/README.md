@@ -14,7 +14,7 @@ This directory is a partial archive of grammar documentation, diagnostic fixture
 
 ## Language coverage described by the guide
 
-For the complete source syntax, recognized shape descriptor names and option arities, and implementation boundaries, see the [engineering grammar reference](../../../docs/ENGINEERING_GRAMMAR.md). The parser-oriented [writing guide](reference/Progen3D_Grammar_Writing_Guide.md) provides authoring explanations and examples. Parser recognition of a shape name does not guarantee complete geometry, rendering, collision, or physics support for that family; check the current implementation.
+For the complete source syntax, recognized shape descriptor names and option arities, and implementation boundaries, see the [engineering grammar reference](../../docs/ENGINEERING_GRAMMAR.md). The parser-oriented [writing guide](reference/Progen3D_Grammar_Writing_Guide.md) provides authoring explanations and examples. Parser recognition of a shape name does not guarantee complete geometry, rendering, collision, or physics support for that family; check the current implementation.
 
 ### Historical corpus notes
 
