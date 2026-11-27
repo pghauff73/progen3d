@@ -1,0 +1,278 @@
+# MERIDIAN  /  Deep-space interferometer
+# Geometry study from the port-bow concept image. Metres; +X aft, +Y up, +Z port.
+# Start arguments: overall scale, half the telescope baseline in m, drum period in s.
+# The default is 900 m long with a 150 m baseline. Positive period required.
+# Try 65 to 85 m for the half-baseline. Try 120 for a slower habitat rotation.
+# For a spacecraft-only view use Start as printed. For the staged view replace
+# the Start line with: Start -> [ Meridian(1 75 60) ] [ RingedGiant ]
+# Preview camera in native metres, 35 mm lens on a 36 mm horizontal sensor.
+# Eye (-625.727 61.995 472.767), forward (0.74322 -0.07731 -0.66456), +Y up.
+# Lens shift (horizontal sensor-width units): -0.12503 -0.00547.
+Start -> Meridian(1 75 60)
+
+Meridian(scale halfBaseline period) ->
+    [ S(scale scale scale) Object(id(MeridianRoot) class(Spacecraft) taxonomy(Spacecraft Observatory) layer(Structure)) [
+      [ Object(id(PortBoom) class(OpticalTruss) taxonomy(Spacecraft Observatory OpticalTruss) layer(Structure)) [ A(22 0) T(-370 0 halfBaseline) Boom ] ]
+      [ Object(id(StarboardBoom) class(OpticalTruss) taxonomy(Spacecraft Observatory OpticalTruss) layer(Structure)) [ A(22 0) T(-370 0 -halfBaseline) Boom ] ]
+      [ Object(id(PortTelescope) class(Telescope) taxonomy(Spacecraft Observatory Telescope) layer(Structure)) [ A(22 0) T(-450 0 halfBaseline) Telescope ReplacementBlanket ] ]
+      [ Object(id(StarboardTelescope) class(Telescope) taxonomy(Spacecraft Observatory Telescope) layer(Structure)) [ A(22 0) T(-450 0 -halfBaseline) Telescope ] ]
+      [ Object(id(ServiceBay) class(AccessGallery) taxonomy(Spacecraft Observatory AccessGallery) layer(Structure)) [ A(22 0) T(-132 0 halfBaseline) Gallery ] ]
+      [ Object(id(FixedYoke) class(BearingCarrier) taxonomy(Spacecraft Observatory BearingCarrier) layer(Structure)) [ A(22 0) T(110 0 0) Yoke(halfBaseline) ] ]
+      [ Object(id(Habitat) class(RotatingHabitat) taxonomy(Spacecraft Observatory RotatingHabitat) layer(Structure)) [ T(156 0 0) A(360*t/period 0) HabitatDrum ] ]
+      [ Object(id(AftSpine) class(EngineMount) taxonomy(Spacecraft Observatory EngineMount) layer(Structure)) [ T(156 0 0) S(1.378 1 1) AftSpine ] ]
+      [ Object(id(ForwardFin) class(Radiator) taxonomy(Spacecraft Observatory Radiator) layer(Structure)) [ T(267 14 0) Radiator(167) ] ]
+      [ Object(id(MiddleFin) class(Radiator) taxonomy(Spacecraft Observatory Radiator) layer(Structure)) [ T(339 14 0) Radiator(145) ] ]
+      [ Object(id(AftFin) class(Radiator) taxonomy(Spacecraft Observatory Radiator) layer(Structure)) [ T(391 14 0) Radiator(127) ] ]
+      [ Object(id(Drive) class(Propulsion) taxonomy(Spacecraft Observatory Propulsion) layer(Structure)) [ T(396 0 0) DriveBell ] ]
+    ] ]
+
+# Four continuous longerons span 480 m. The 12 bays meet at transverse frames.
+# Each side uses a Warren truss; top and bottom ties resist racking.
+
+Boom ->
+    Longerons
+    TrussBays(12 480/12)
+    TrussFrames(13 480/12)
+    HarnessTrays(6 480/6)
+
+Longerons ->
+    [ T(240 -12 -10) S(480 3.25 2.6) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(240 -12 10) S(480 3.25 2.6) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(240 12 -10) S(480 3.25 2.6) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(240 12 10) S(480 3.25 2.6) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    !I(SweepDisk(path(0 -7 -11 480 -7 -11) radius(0.72) segments(6) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(SweepDisk(path(0 -9 -11 480 -9 -11) radius(0.58) segments(6) cap(all)) material(slategreymattemetal) 1 1)
+
+TrussBays(n pitch) n ->
+    [ T(TrussBays_count*pitch 0 0) WarrenBay(pitch) ]
+
+WarrenBay(pitch) ->
+    !I(SweepDisk(path(0 -12 -10 pitch/2 12 -10) radius(1.22) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0 -12 10 pitch/2 12 10) radius(1.22) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(pitch/2 12 -10 pitch -12 -10) radius(1.22) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(pitch/2 12 10 pitch -12 10) radius(1.22) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0 12 -10 pitch 12 10) radius(0.75) segments(6) cap(all)) material(silverbrushedmetal) 1 1)
+    !I(SweepDisk(path(0 -12 10 pitch -12 -10) radius(0.75) segments(6) cap(all)) material(silverbrushedmetal) 1 1)
+    [ T(pitch/2 12 0) S(2.8 2.7 22) !I(Cube material(whitebeigemattepaint) 1 1) ]
+
+TrussFrames(n pitch) n ->
+    [ T(TrussFrames_count*pitch 0 0) Bulkhead ]
+
+Bulkhead ->
+    [ T(0 -12 0) S(2.8 2.7 22) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 12 0) S(2.8 2.7 22) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 0 -10) S(2.6 24 2.5) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 0 10) S(2.6 24 2.5) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 12 10.7) S(5 4 2) !I(Cube material(slategreymattemetal) 1 1) ]
+
+HarnessTrays(n pitch) n ->
+    [ T((HarnessTrays_count+0.28)*pitch 0 0) JunctionBox ]
+
+JunctionBox ->
+    [ T(0 11.8 0) S(11 4.2 7) !I(Cube material(slategreymattemetal) 1 1) ]
+    [ T(0 14 0) S(10.4 0.7 6.6) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 12 3.6) S(4.8 1.6 0.6) !I(Cube material(blackmattemetal) 1 1) ]
+
+# Telescope local X starts at the lip. The black barrel has an open entrance,
+# five internal knife-edge stops and a recessed dark optical surface.
+# Three interrupted foil courses fold away from the cylindrical inner barrel.
+
+Telescope ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 26 0 28.4 0 31 4 31 13 29 13 27.3 3 26 3) angle(0 360) segments(48) cap(all)) material(blackgreymattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 25.8 1.4 26.8 1.4 25.4 59 22 62 20 62 23.3 55) angle(0 360) segments(48) cap(all)) material(blackmattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 29 9 30.5 9 29 59 20 73 15.2 80 13.6 80 18.2 71 27 58) angle(0 360) segments(20) cap(all)) material(goldbrushedmetal) 1 1) ]
+    BaffleSet(5)
+    [ A(-90 2) !I(Revolve(profile(Polygon 0.025 62 7 60 14 56.8 20 54 22 56 22 64 0.025 65) angle(0 360) segments(48) cap(all)) material(blackbluepolishedglass) 1 1) ]
+    FoilStations(16)
+    BarrelStraps(3)
+    [ A(-90 2) !I(Revolve(profile(Polygon 16.4 71 20 71 20 75 16.4 75) angle(0 360) segments(32) cap(all)) material(slategreymattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 12 78 16 78 16 80 12 80) angle(0 360) segments(32) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+BaffleSet(n) n ->
+    [ T(6+BaffleSet_count*8.4 0 0) KnifeEdge(BaffleSet_count) ]
+
+KnifeEdge(i) ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 25.8-i*0.48 0 23.75-i*0.53 0.7 25.8-i*0.48 1.6) angle(0 360) segments(48) cap(all)) material(blackgreymattemetal) 1 1) ]
+
+FoilStations(n) n ->
+    [ A(360*FoilStations_count/n 0) FoilPetal ]
+
+FoilPetal ->
+    [ T(18.5 30.55 0) A(-2.2 2) A(3.6 0) S(20.1 0.65 12) !I(Cube material(goldbrushedmetal) 1 1) ]
+    [ T(38.1 30.6 0) A(2.9 2) A(-5.4 0) S(19.4 0.7 11.7) !I(Cube material(goldbrushedmetal) 1 1) ]
+    [ T(54.7 29.77 0) A(-7 2) A(4.7 0) S(13.4 0.62 11.35) !I(Cube material(goldbrushedmetal) 1 1) ]
+    [ T(66.4 24.5 0) A(-31 2) A(-2 0) S(17.5 0.85 9.5) !I(Cube material(goldbrushedmetal) 1 1) ]
+    !I(SweepDisk(path(9 30.8 -5.75 27 31.3 3.15) radius(0.37) segments(5) cap(all)) material(lightgoldpolishedmetal) 1 1)
+    !I(SweepDisk(path(28 31.25 3.2 45 31.1 -4.5) radius(0.33) segments(5) cap(all)) material(copperbrushedmetal) 1 1)
+    [ T(6.6 31.4 0) S(3.3 2.3 2.8) !I(Cube material(silverbrushedmetal) 1 1) ]
+    [ T(67 24.7 0) S(3.5 2.3 2.2) !I(Cube material(slategreymattemetal) 1 1) ]
+
+BarrelStraps(n) n ->
+    [ T(9+BarrelStraps_count*23 0 0) BarrelStrap ]
+
+BarrelStrap ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 28.8 0 31.3 0 31.3 1.05 28.8 1.05) angle(0 360) segments(16) cap(all)) material(blackgreymattemetal) 1 1) ]
+
+ReplacementBlanket ->
+    [ A(56.25 0) T(38.1 31.36 0) A(2.9 2) A(-5.4 0) S(18.8 0.55 11.4) !I(Cube material(lightgoldpolishedmetal) 1 1) ]
+
+# The illuminated recess faces outboard on the port boom. People are modelled
+# at 1.76 m. The deck and handrails are independent of the rotating habitat.
+
+Gallery ->
+    [ T(0 -7.2 14.1) S(31 1.25 8.6) !I(Cube material(slategreymattemetal) 1 1) ]
+    [ T(0 -2.35 10.85) S(27 8.4 0.75) !I(Cube material(blackgreymattemetal) 1 1) ]
+    [ T(0 -1.85 11.44) S(13 6.15 0.45) !I(Cube material(warmwhiteemissivepaint) 1 1) ]
+    [ T(-1.5 -2.1 11.72) S(4.25 5.45 0.26) !I(Cube material(slategreymattemetal) 1 1) ]
+    [ T(0 2.1 12.6) S(29 1.15 4.6) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 1.44 14.85) S(25.5 0.55 0.5) !I(Cube material(warmwhiteemissivepaint) 1 1) ]
+    !I(SweepDisk(path(-15 -5.55 18.2 15 -5.55 18.2) radius(0.175) segments(6) cap(all)) material(goldbrushedmetal) 1 1)
+    !I(SweepDisk(path(-15 -6.15 18.2 15 -6.15 18.2) radius(0.13) segments(6) cap(all)) material(goldbrushedmetal) 1 1)
+    RailPosts(7)
+    [ T(-3.5 -6.57 15.8) Technician ]
+    [ T(1.7 -6.57 15.25) A(28 1) Technician ]
+
+RailPosts(n) n ->
+    !I(SweepDisk(path(RailPosts_count*5-15 -6.7 18.2 RailPosts_count*5-15 -5.5 18.2) radius(0.15) segments(6) cap(all)) material(goldbrushedmetal) 1 1)
+
+Technician ->
+    [ T(0 0.96 0) S(0.43 0.58 0.26) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(0 1 -0.2) S(0.37 0.45 0.18) !I(Cube material(slategreymattemetal) 1 1) ]
+    [ T(0 1.53 0) S(0.43 0.46 0.42) !I(Sphere(segments(10 8)) material(whitebeigemattepaint) 1 1) ]
+    [ T(0 1.54 0.19) S(0.27 0.15 0.05) !I(Cube material(blackbluepolishedglass) 1 1) ]
+    !I(SweepDisk(path(-0.105 0.73 0 -0.17 0.11 0.04) radius(0.085) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0.105 0.73 0 0.18 0.11 -0.04) radius(0.085) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(-0.2 1.19 0 -0.31 0.83 0.11) radius(0.07) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0.2 1.18 0 0.39 0.99 0.13) radius(0.07) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+
+# The fixed transverse yoke carries both optical paths to a stationary hub.
+# Two bearings surround the spine. Only HabitatDrum and its children rotate.
+
+Yoke(b) ->
+    [ T(0 0 0) S(16 17 2*b+19) !I(Cube material(slategreymattemetal) 1 1) ]
+    !I(SweepDisk(path(0 -10 -b 0 18 0) radius(2.8) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0 10 -b 0 -18 0) radius(2.8) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0 -10 b 0 18 0) radius(2.8) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    !I(SweepDisk(path(0 10 b 0 -18 0) radius(2.8) segments(6) cap(all)) material(whitebeigemattepaint) 1 1)
+    [ A(-90 2) !I(Revolve(profile(Polygon 4 -12 19 -12 29 -4 30 6 24 11 4 11) angle(0 360) segments(48) cap(all)) material(slategreymattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 14 -6 27 -6 27 -3 14 -3) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(2 0 b) S(13 29 24) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(2 0 -b) S(13 29 24) !I(Cube material(whitebeigemattepaint) 1 1) ]
+
+HabitatDrum ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 73 -35 84 -35 96 -29 101 -21 101 19 96 29 84 35 73 35 70 28 70 -28) angle(0 360) segments(64) cap(all)) material(redbrownmattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 72 -31 92 -31 92 -28.75 72 -28.75) angle(0 360) segments(64) cap(all)) material(blackgreymattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 72 28.75 92 28.75 92 31 72 31) angle(0 360) segments(64) cap(all)) material(blackgreymattemetal) 1 1) ]
+    DrumSectors(32)
+    SpokePairs(8)
+    [ A(-90 2) !I(Revolve(profile(Polygon 16 -22 21 -22 21 22 16 22) angle(0 360) segments(48) cap(all)) material(slategreymattemetal) 1 1) ]
+
+DrumSectors(n) n ->
+    [ A(360*DrumSectors_count/n 0) HabitatSector ]
+
+HabitatSector ->
+    [ T(0 101.2 0) S(38.8 1.4 18.3) !I(Cube material(redbrownmattemetal) 1 1) ]
+    [ T(-25.4 96 0) A(28 2) S(15.5 1.35 18) !I(Cube material(copperbrushedmetal) 1 1) ]
+    [ T(25.4 96 0) A(-28 2) S(15.5 1.35 18) !I(Cube material(redbrownmattemetal) 1 1) ]
+    [ T(0 101.9 8.9) S(40 1.7 0.92) !I(Cube material(blackgreymattemetal) 1 1) ]
+    [ T(-35.4 80.2 0) S(1.3 8.8 13.5) !I(Cube material(blackgreymattemetal) 1 1) ]
+    [ T(-36.12 80 0) S(0.35 2.5 5.3) !I(Cube material(amberemissivepaint) 1 1) ]
+    [ T(-36.38 80.1 0) S(0.24 4.5 0.64) !I(Cube material(slategreymattemetal) 1 1) ]
+
+SpokePairs(n) n ->
+    [ A(360*SpokePairs_count/n 0) HabitatSpoke ]
+
+HabitatSpoke ->
+    !I(SweepDisk(path(-15 18 -3 -21 72 -10) radius(2.2) segments(6) cap(all)) material(slategreymattemetal) 1 1)
+    !I(SweepDisk(path(-15 18 3 -21 72 10) radius(2.2) segments(6) cap(all)) material(slategreymattemetal) 1 1)
+    !I(SweepDisk(path(15 18 0 20 72 0) radius(2.9) segments(6) cap(all)) material(slategreymattemetal) 1 1)
+
+AftSpine ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 0.5 -47 15 -47 15 43 24 44 27 64 26 122 23 166 17 180 0.5 180) angle(0 360) segments(40) cap(all)) material(slategreymattemetal) 1 1) ]
+    SpineBands(7)
+    SpineServiceRails(10)
+    [ A(-90 2) !I(Revolve(profile(Polygon 14.8 -38 18.2 -38 18.2 -34 14.8 -34) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 14.8 34 18.2 34 18.2 38 14.8 38) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+SpineBands(n) n ->
+    [ T(52+SpineBands_count*18 0 0) EquipmentBelt ]
+
+EquipmentBelt ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 21 0 27.5 0 27.5 3 21 3) angle(0 360) segments(32) cap(all)) material(blackgreymattemetal) 1 1) ]
+
+SpineServiceRails(n) n ->
+    [ A(360*SpineServiceRails_count/n 0) AftStringer ]
+
+AftStringer ->
+    [ T(108 26.8 0) S(117 1.8 2.2) !I(Cube material(silverbrushedmetal) 1 1) ]
+    [ T(81 26.2 0) S(27 4.2 8.8) !I(Cube material(whitebeigemattepaint) 1 1) ]
+    [ T(141 24.4 0) S(21 4.4 7.5) !I(Cube material(whitebeigemattepaint) 1 1) ]
+
+# Three independent dorsal radiator blades. The panel paths and narrow return
+# headers are visible on both faces. Roots overlap the fixed equipment spine.
+
+Radiator(height) ->
+    [ T(0 7 0) S(31 15 10) !I(Cube material(slategreymattemetal) 1 1) ]
+    [ T(0 height/2+7 0) S(30 height 2.1) !I(Cube material(blackgreymattemetal) 1 1) ]
+    [ T(-15 height/2+7 0) S(1.05 height+1.7 3.4) !I(Cube material(copperbrushedmetal) 1 1) ]
+    [ T(15 height/2+7 0) S(1.15 height+1.7 3.4) !I(Cube material(silverbrushedmetal) 1 1) ]
+    [ T(0 height+7 0) S(31 1.4 3.25) !I(Cube material(copperbrushedmetal) 1 1) ]
+    RadiatorRows(8 height/8)
+    !I(SweepDisk(path(-12 28 0 -13 0 11) radius(1.5) segments(6) cap(all)) material(silverbrushedmetal) 1 1)
+    !I(SweepDisk(path(12 28 0 13 0 -11) radius(1.5) segments(6) cap(all)) material(silverbrushedmetal) 1 1)
+
+RadiatorRows(n pitch) n ->
+    [ T(0 7+pitch*(RadiatorRows_count+0.5) 0) TilePair(pitch) ]
+
+TilePair(p) ->
+    [ T(-7.3 0 -1.21) S(13.3 p-0.95 0.55) !I(Cube material(blackmattemetal) 1 1) ]
+    [ T(-7.3 0 1.21) S(13.3 p-0.95 0.55) !I(Cube material(blackmattemetal) 1 1) ]
+    [ T(7.3 0 -1.21) S(13.3 p-0.95 0.55) !I(Cube material(blackmattemetal) 1 1) ]
+    [ T(7.3 0 1.21) S(13.3 p-0.95 0.55) !I(Cube material(blackmattemetal) 1 1) ]
+    [ T(0 p/2 0) S(29 0.55 3) !I(Cube material(slategreymattemetal) 1 1) ]
+
+DriveBell ->
+    [ A(-90 2) !I(Revolve(profile(Polygon 7 -7 21 -7 24 -2 21 10 14 18 11 25 11 32 17 46 21 54 18.3 54 14 45 8 30 7 19) angle(0 360) segments(48) cap(all)) material(blackgreymattemetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 21 -4 24.7 -4 24.7 2 21 2) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 14 13 18 13 18 16.3 14 16.3) angle(0 360) segments(48) cap(all)) material(copperbrushedmetal) 1 1) ]
+    [ A(-90 2) !I(Revolve(profile(Polygon 18.8 52 21.3 52 21.3 54 18.8 54) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ]
+    NozzleFlutes(20)
+    [ A(-90 2) !I(Revolve(profile(Polygon 0.01 22 8.5 22 8.5 23 0.01 23) angle(0 360) segments(32) cap(all)) material(paleblueemissivepaint) 1 1) ]
+
+NozzleFlutes(n) n ->
+    [ A(360*NozzleFlutes_count/n 0) CoolingLine ]
+
+CoolingLine ->
+    !I(SweepDisk(path(1 23.4 0 17 14.6 0) radius(0.82) segments(6) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(SweepDisk(path(17 14.6 0 28 10.7 0) radius(0.7) segments(6) cap(all)) material(copperbrushedmetal) 1 1)
+    !I(SweepDisk(path(32 11.1 0 52 19.4 0) radius(0.65) segments(6) cap(all)) material(silverbrushedmetal) 1 1)
+
+# Optional astronomical backdrop. It has its own origin and scale. Coordinates
+# are artistic staging, independent of the ship dimensions and drum period.
+
+RingedGiant ->
+    [ T(-395.734 -590.567 -4761.687) A(-2.5005 2) A(-7.7524 0) S(1.6632 1.6632 1.6632) GiantSystem ]
+
+GiantSystem ->
+    [ S(2700 2530 2700) !I(Sphere(segments(96 64)) material(paleochremattepaint) 1 1) ]
+    CloudBelts
+    RingBelts
+
+CloudBelts ->
+    !I(Revolve(profile(Polygon 1059.4481 -784.02048 1061.01765 -785.26003 1093.79098 -744.72391 1124.80197 -702.98789 1123.13806 -701.8782) angle(0 360) segments(128) cap(all)) material(sandmattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1194.18432 -589.9791 1195.95348 -590.91187 1235.11346 -515.33533 1268.84257 -437.49282 1266.96558 -436.80222) angle(0 360) segments(128) cap(all)) material(warmbeigemattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1319.51146 -267.32587 1321.46629 -267.74852 1327.15995 -241.755 1332.27148 -215.65544 1330.30066 -215.31502) angle(0 360) segments(128) cap(all)) material(ivorymattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1349.17762 44.14786 1351.1764 44.21766 1346.85523 110.42633 1338.84243 176.33232 1336.86189 176.05397) angle(0 360) segments(128) cap(all)) material(sandmattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1320.49926 263.00829 1322.45556 263.42411 1317.34833 285.01299 1311.83982 306.51504 1309.89923 306.0312) angle(0 360) segments(128) cap(all)) material(warmbeigemattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1266.96558 436.80222 1268.84257 437.49282 1244.52256 495.05634 1217.23098 551.4378 1215.43034 550.56734) angle(0 360) segments(128) cap(all)) material(ivorymattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1020.40218 828.24713 1021.91389 829.55661 1004.7318 847.78848 987.1794 865.70787 985.71907 864.34132) angle(0 360) segments(128) cap(all)) material(sandmattepaint) 1 1)
+
+RingBelts ->
+    !I(Revolve(profile(Polygon 1710 -0.48 1803 -0.48 1803 0.48 1710 0.48) angle(0 360) segments(160) cap(all)) material(slategreymattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1822 -0.48 1924 -0.48 1924 0.48 1822 0.48) angle(0 360) segments(160) cap(all)) material(warmbeigemattepaint) 1 1)
+    !I(Revolve(profile(Polygon 1932 -0.48 2038 -0.48 2038 0.48 1932 0.48) angle(0 360) segments(160) cap(all)) material(sandmattepaint) 1 1)
+    !I(Revolve(profile(Polygon 2049 -0.48 2118 -0.48 2118 0.48 2049 0.48) angle(0 360) segments(160) cap(all)) material(ivorymattepaint) 1 1)
+    !I(Revolve(profile(Polygon 2129 -0.48 2254 -0.48 2254 0.48 2129 0.48) angle(0 360) segments(160) cap(all)) material(warmbeigemattepaint) 1 1)
+    !I(Revolve(profile(Polygon 2315 -0.48 2449 -0.48 2449 0.48 2315 0.48) angle(0 360) segments(160) cap(all)) material(sandmattepaint) 1 1)
+    !I(Revolve(profile(Polygon 2459 -0.48 2494 -0.48 2494 0.48 2459 0.48) angle(0 360) segments(160) cap(all)) material(ivorymattepaint) 1 1)
+    !I(Revolve(profile(Polygon 2560 -0.48 2603 -0.48 2603 0.48 2560 0.48) angle(0 360) segments(160) cap(all)) material(slategreymattepaint) 1 1)

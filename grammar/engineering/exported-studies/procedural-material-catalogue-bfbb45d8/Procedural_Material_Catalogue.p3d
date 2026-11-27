@@ -1,0 +1,128 @@
+# Animated procedural material catalogue: 24 native spheres, static geometry.
+# Play or scrub the timeline in the updated workshop. Times below are seconds.
+# Physical solids stay static unless a state animation is explicitly assigned.
+# Texture-motion directives change shading only; they do not deform geometry.
+
+# @texture rule:Material1 woven uv 6
+# @surface rule:Material1 color 0.82 0.8 0.75 roughness 0.82 metallic 0 relief 0.7
+# @texture-motion rule:Material1 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material2 pine_grain uv 2
+# @surface rule:Material2 color 0.88 0.7 0.46 roughness 0.57 metallic 0 relief 0.65
+# @texture-motion rule:Material2 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material3 stone_grain uv 2
+# @surface rule:Material3 color 0.74 0.72 0.7 roughness 0.62 metallic 0 relief 0.35
+# @texture-motion rule:Material3 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material4 brushed_metal uv 2
+# @surface rule:Material4 color 0.8 0.83 0.86 roughness 0.32 metallic 1 relief 0.55
+# @texture-motion rule:Material4 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material5 concrete uv 2
+# @surface rule:Material5 color 0.75 0.75 0.71 roughness 0.9 metallic 0 relief 0.65
+# @texture-motion rule:Material5 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material6 marble_vein uv 1
+# @surface rule:Material6 color 0.95 0.94 0.89 roughness 0.24 metallic 0 relief 0.12
+# @texture-motion rule:Material6 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material7 carbon_fiber uv 3
+# @surface rule:Material7 color 1 1 1 roughness 0.26 metallic 0 relief 0.8
+# @texture-motion rule:Material7 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material8 denim_twill uv 3
+# @surface rule:Material8 color 1 1 1 roughness 0.86 metallic 0 relief 0.8
+# @texture-motion rule:Material8 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material9 leather uv 2
+# @surface rule:Material9 color 1 1 1 roughness 0.52 metallic 0 relief 0.7
+# @texture-motion rule:Material9 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material10 rubber uv 2
+# @surface rule:Material10 color 1 1 1 roughness 0.77 metallic 0 relief 0.55
+# @texture-motion rule:Material10 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material11 plastic uv 2
+# @surface rule:Material11 color 1 1 1 roughness 0.38 metallic 0 relief 0.35
+# @texture-motion rule:Material11 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material12 ceramic_tile uv 2
+# @surface rule:Material12 color 1 1 1 roughness 0.19 metallic 0 relief 0.8
+# @texture-motion rule:Material12 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material13 brick uv 2
+# @surface rule:Material13 color 1 1 1 roughness 0.88 metallic 0 relief 1
+# @texture-motion rule:Material13 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material14 rusted_metal uv 2
+# @surface rule:Material14 color 1 1 1 roughness 0.67 metallic 0.45 relief 0.65
+# @texture-motion rule:Material14 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material15 machined_metal uv 2
+# @surface rule:Material15 color 1 1 1 roughness 0.26 metallic 1 relief 0.6
+# @texture-motion rule:Material15 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material16 hammered_metal uv 2
+# @surface rule:Material16 color 1 1 1 roughness 0.32 metallic 1 relief 1
+# @texture-motion rule:Material16 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material17 sandstone uv 2
+# @surface rule:Material17 color 1 1 1 roughness 0.86 metallic 0 relief 0.7
+# @texture-motion rule:Material17 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material18 skin uv 2
+# @surface rule:Material18 color 1 1 1 roughness 0.48 metallic 0 relief 0.3
+# @texture-motion rule:Material18 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material19 frosted_glass uv 2
+# @surface rule:Material19 color 1 1 1 roughness 0.48 metallic 0 relief 0.35
+# @texture-motion rule:Material19 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material20 water uv 2
+# @surface rule:Material20 color 1 1 1 roughness 0.08 metallic 0 relief 1
+# @texture-motion rule:Material20 flow period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material21 ice uv 2
+# @surface rule:Material21 color 1 1 1 roughness 0.21 metallic 0 relief 0.55
+# @texture-motion rule:Material21 none period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material22 lava uv 2
+# @surface rule:Material22 color 1 1 1 roughness 0.84 metallic 0 relief 0.8
+# @texture-motion rule:Material22 flow period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material23 hologram uv 3
+# @surface rule:Material23 color 1 1 1 roughness 0.4 metallic 0 relief 0
+# @texture-motion rule:Material23 shimmer period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Material24 plasma uv 1
+# @surface rule:Material24 color 1 1 1 roughness 0.5 metallic 0 relief 0
+# @texture-motion rule:Material24 pulse period 6 speed 1 amount 0.85 phase 0 seed 0
+
+Start ->
+    [ T(-4 2.4 0) S(1.3 1.3 1.3) Material1 ]
+    [ T(-2.4 2.4 0) S(1.3 1.3 1.3) Material2 ]
+    [ T(-0.8 2.4 0) S(1.3 1.3 1.3) Material3 ]
+    [ T(0.8 2.4 0) S(1.3 1.3 1.3) Material4 ]
+    [ T(2.4 2.4 0) S(1.3 1.3 1.3) Material5 ]
+    [ T(4 2.4 0) S(1.3 1.3 1.3) Material6 ]
+    [ T(-4 0.8 0) S(1.3 1.3 1.3) Material7 ]
+    [ T(-2.4 0.8 0) S(1.3 1.3 1.3) Material8 ]
+    [ T(-0.8 0.8 0) S(1.3 1.3 1.3) Material9 ]
+    [ T(0.8 0.8 0) S(1.3 1.3 1.3) Material10 ]
+    [ T(2.4 0.8 0) S(1.3 1.3 1.3) Material11 ]
+    [ T(4 0.8 0) S(1.3 1.3 1.3) Material12 ]
+    [ T(-4 -0.8 0) S(1.3 1.3 1.3) Material13 ]
+    [ T(-2.4 -0.8 0) S(1.3 1.3 1.3) Material14 ]
+    [ T(-0.8 -0.8 0) S(1.3 1.3 1.3) Material15 ]
+    [ T(0.8 -0.8 0) S(1.3 1.3 1.3) Material16 ]
+    [ T(2.4 -0.8 0) S(1.3 1.3 1.3) Material17 ]
+    [ T(4 -0.8 0) S(1.3 1.3 1.3) Material18 ]
+    [ T(-4 -2.4 0) S(1.3 1.3 1.3) Material19 ]
+    [ T(-2.4 -2.4 0) S(1.3 1.3 1.3) Material20 ]
+    [ T(-0.8 -2.4 0) S(1.3 1.3 1.3) Material21 ]
+    [ T(0.8 -2.4 0) S(1.3 1.3 1.3) Material22 ]
+    [ T(2.4 -2.4 0) S(1.3 1.3 1.3) Material23 ]
+    [ T(4 -2.4 0) S(1.3 1.3 1.3) Material24 ]
+
+Material1 -> I(Sphere(segments(48 24)) jade)
+Material2 -> I(Sphere(segments(48 24)) jade)
+Material3 -> I(Sphere(segments(48 24)) jade)
+Material4 -> I(Sphere(segments(48 24)) jade)
+Material5 -> I(Sphere(segments(48 24)) jade)
+Material6 -> I(Sphere(segments(48 24)) jade)
+Material7 -> I(Sphere(segments(48 24)) jade)
+Material8 -> I(Sphere(segments(48 24)) jade)
+Material9 -> I(Sphere(segments(48 24)) jade)
+Material10 -> I(Sphere(segments(48 24)) jade)
+Material11 -> I(Sphere(segments(48 24)) jade)
+Material12 -> I(Sphere(segments(48 24)) jade)
+Material13 -> I(Sphere(segments(48 24)) jade)
+Material14 -> I(Sphere(segments(48 24)) jade)
+Material15 -> I(Sphere(segments(48 24)) jade)
+Material16 -> I(Sphere(segments(48 24)) jade)
+Material17 -> I(Sphere(segments(48 24)) jade)
+Material18 -> I(Sphere(segments(48 24)) jade)
+Material19 -> I(Sphere(segments(48 24)) jade)
+Material20 -> I(Sphere(segments(48 24)) jade)
+Material21 -> I(Sphere(segments(48 24)) jade)
+Material22 -> I(Sphere(segments(48 24)) jade)
+Material23 -> I(Sphere(segments(48 24)) jade)
+Material24 -> I(Sphere(segments(48 24)) jade)

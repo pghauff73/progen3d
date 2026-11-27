@@ -1,0 +1,36 @@
+# Six authored material-state animations with a shared six-second loop.
+# These are artistic surface controls, not fluid/corrosion/thermal solvers.
+
+# @texture rule:Effect1 hologram uv 3
+# @surface rule:Effect1 color 1 1 1 roughness 0.4 metallic 0 relief 0
+# @texture-motion rule:Effect1 shimmer period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Effect2 water uv 2
+# @surface rule:Effect2 color 1 1 1 roughness 0.08 metallic 0 relief 1
+# @texture-motion rule:Effect2 flow period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Effect3 lava uv 2
+# @surface rule:Effect3 color 1 1 1 roughness 0.84 metallic 0 relief 0.8
+# @texture-motion rule:Effect3 flow period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Effect4 concrete uv 2
+# @surface rule:Effect4 color 0.75 0.75 0.71 roughness 0.9 metallic 0 relief 0.65
+# @texture-motion rule:Effect4 wetting period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Effect5 brushed_metal uv 2
+# @surface rule:Effect5 color 0.8 0.83 0.86 roughness 0.32 metallic 1 relief 0.55
+# @texture-motion rule:Effect5 oxidize period 6 speed 1 amount 0.85 phase 0 seed 0
+# @texture rule:Effect6 machined_metal uv 2
+# @surface rule:Effect6 color 1 1 1 roughness 0.26 metallic 1 relief 0.6
+# @texture-motion rule:Effect6 thermal period 6 speed 1 amount 0.85 phase 0 seed 0
+
+Start ->
+    [ T(-1.8 0.9 0) S(1.4 1.4 1.4) Effect1 ]
+    [ T(0 0.9 0) S(1.4 1.4 1.4) Effect2 ]
+    [ T(1.8 0.9 0) S(1.4 1.4 1.4) Effect3 ]
+    [ T(-1.8 -0.9 0) S(1.4 1.4 1.4) Effect4 ]
+    [ T(0 -0.9 0) S(1.4 1.4 1.4) Effect5 ]
+    [ T(1.8 -0.9 0) S(1.4 1.4 1.4) Effect6 ]
+
+Effect1 -> I(Sphere(segments(48 24)) jade)
+Effect2 -> I(Sphere(segments(48 24)) jade)
+Effect3 -> I(Sphere(segments(48 24)) jade)
+Effect4 -> I(Sphere(segments(48 24)) jade)
+Effect5 -> I(Sphere(segments(48 24)) jade)
+Effect6 -> I(Sphere(segments(48 24)) jade)

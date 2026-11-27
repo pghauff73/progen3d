@@ -1,0 +1,57 @@
+{
+  "title": "Meridian M073 Interior Study",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-m073-interior-study-89af9de0",
+  "source_file": "Meridian_M073_Interior_Study.p3d",
+  "git_blob_sha": "89af9de078eef5dcb1dc854490c646a362e68e8c",
+  "bytes": 49045,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_M073_Interior_Study.p3d"
+  ],
+  "description": "Meridian M07.3 independently compiled interface-detail study.",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian M07.3 independently compiled interface-detail study. · Markers only for unbuilt openings; master M07.2 grammar preserved unmodified."
+    ],
+    [
+      "Named objects",
+      "M073_InteriorStudy, PORTAL_PRESSURE_0148_J0, PORTAL_PRESSURE_0148_J1, PORTAL_PRESSURE_0148_H, PORTAL_PRESSURE_0148_SILL, STATUS_PRESSURE_0148, PORTAL_PRESSURE_0149_J0, PORTAL_PRESSURE_0149_J1, PORTAL_PRESSURE_0149_H, PORTAL_PRESSURE_0149_SILL, STATUS_PRESSURE_0149, PORTAL_PRESSURE_0150_J0, PORTAL_PRESSURE_0150_J1, PORTAL_PRESSURE_0150_H, PORTAL_PRESSURE_0150_SILL, STATUS_PRESSURE_0150, PORTAL_PRESSURE_0151_J0, PORTAL_PRESSURE_0151_J1, PORTAL_PRESSURE_0151_H, PORTAL_PRESSURE_0151_SILL, STATUS_PRESSURE_0151, PORTAL_PRESSURE_0152_J0, PORTAL_PRESSURE_0152_J1, PORTAL_PRESSURE_0152_H (+186 more)"
+    ],
+    [
+      "Object classes",
+      "StudyAssembly, InterfaceStudyPiece"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, goldbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "215"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

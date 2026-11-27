@@ -1,0 +1,287 @@
+# X CARRIAGE / 2GT BELT / NEMA 17 — ENGINEERING GRAMMAR
+# Dimensions in millimetres. Native procedural constructors only.
+# Default motor: STEPPERONLINE 17HS13-1334S nominal manufacturer dimensions.
+# This is a new symmetric drive, informed by the preceding Ender-3 rail/carriage.
+# Coordinate frame: X travel, Y up, Z from rail towards carriage and belt.
+# Equal toothed pulleys; open belt with two carriage clamps on the upper run.
+# Pitch path L=2*C+N*p-gap. Clamp engagement is INCLUDED in the modelled belt.
+# There are no unmodelled clamp tails in this ideal cut-length equation.
+# Belt tooth and pulley groove forms are simplified engineering envelopes.
+# Threads, fits, bearing life, belt tension and stiffness are not certified.
+# Regenerate from axis_config.json to keep dimensioned plate holes coordinated.
+#
+# CONTROLS: positionMM, animate(0/1), periodSeconds, explodeMM, view.
+# Views:0 full;1 carriage;2 belt;3 motor+drive;4 idler;5 rail+mounts.
+# Animation ignores static position and traverses +/-Travel/2 sinusoidally.
+Start -> [ S(0.001 0.001 0.001) EngineeringAxis(0 0 8 0 0) ]
+
+EngineeringAxis(positionMM animated period explode view) ->
+    R RailLength(345 345)
+    R RailSide(20 20)
+    R PlateWidth(64 64)
+    R PlateHeight(64 64)
+    R PlateThickness(2.5 2.5)
+    R PlateBack(13.85 13.85)
+    R WheelSpan(40 40)
+    R WheelY(20.1 20.1)
+    R WheelOD(24.1 24.1)
+    R WheelWidth(10.2 10.2)
+    R WheelContactRadius(10.1 10.1)
+    R Travel(220 220)
+    R Pitch(2 2)
+    R BeltWidth(6 6)
+    R BeltHeight(1.38 1.38)
+    R ToothHeight(0.75 0.75)
+    R PLD(0.254 0.254)
+    R BeltLength(800 800)
+    R EndGap(40 40)
+    R ClampLength(12 12)
+    R BeltZ(24 24)
+    R PulleyTeeth(20 20)
+    R PulleyWidth(8 8)
+    R FlangeThickness(1 1)
+    R FlangeOD(16 16)
+    R HubLength(6 6)
+    R HubOD(12 12)
+    R BushOD(8 8)
+    R BushID(5 5)
+    R BushLength(8 8)
+    R AxialClearance(0.2 0.2)
+    R MotorFace(42 42)
+    R MotorLength(34 34)
+    R MotorMountPitch(31 31)
+    R PilotDiameter(22 22)
+    R PilotHeight(2 2)
+    R ShaftDiameter(5 5)
+    R ShaftLength(24 24)
+    R ShaftFlat(4.5 4.5)
+    R FlatLength(16.5 16.5)
+    R MotorFaceZ(10 10)
+    R MountThickness(3 3)
+    R FullStepDegrees(1.8 1.8)
+    R Microsteps(16 16)
+    R CentreDistance((BeltLength+EndGap-PulleyTeeth*Pitch)/2 (BeltLength+EndGap-PulleyTeeth*Pitch)/2)
+    R PitchRadius(PulleyTeeth*Pitch/6.283185307179586 PulleyTeeth*Pitch/6.283185307179586)
+    R Backing(BeltHeight-ToothHeight BeltHeight-ToothHeight)
+    R PlateFront(PlateBack+PlateThickness PlateBack+PlateThickness)
+    R BeltCount(BeltLength/Pitch BeltLength/Pitch)
+    R StepDensity(360*Microsteps/(FullStepDegrees*PulleyTeeth*Pitch) 360*Microsteps/(FullStepDegrees*PulleyTeeth*Pitch))
+    MotionSelect(positionMM animated period explode view)
+
+MotionSelect(q animated period explode view) ->
+    ?(animated>0) AxisPose(Travel/2*sin(6.283185307179586*t/period) explode view)
+    : AxisPose(q explode view)
+
+AxisPose(q explode view) ->
+    ?(view<0.5) [ RailAndMounts MotorDrive(q explode) IdlerDrive(q explode) BeltGroup(q explode) CarriageGroup(q explode) ]
+    : ?(view<1.5) CarriageGroup(q explode)
+    : ?(view<2.5) BeltGroup(q explode)
+    : ?(view<3.5) MotorDrive(q explode)
+    : ?(view<4.5) IdlerDrive(q explode)
+    : RailAndMounts
+
+# STATIONARY FRAME AND COORDINATED HOLE PATTERNS
+RailAndMounts ->
+    [ Rail2020(RailLength) ]
+    [ T(-CentreDistance/2 0 MotorFaceZ) MotorMountPlate MotorMountArm MotorMountFasteners ]
+    [ T(CentreDistance/2 0 MotorFaceZ) IdlerMountPlate IdlerMountFasteners ]
+
+# Motor phase is indexed against the first cut belt end, including fractional poses.
+MotorDrive(q explode) ->
+    [ T(-CentreDistance/2 0 MotorFaceZ-explode) NEMA17Body ]
+    [ T(-CentreDistance/2 0 MotorFaceZ-explode)
+      A(wrap(90-360*((CentreDistance-EndGap)/2+q)/(PulleyTeeth*Pitch),-180,180) 2 -180 180) MotorShaft ]
+    [ T(-CentreDistance/2 0 BeltZ-explode)
+      A(wrap(90-360*((CentreDistance-EndGap)/2+q)/(PulleyTeeth*Pitch),-180,180) 2 -180 180)
+      TimingPulley(ShaftDiameter 1) ]
+
+IdlerDrive(q explode) ->
+    [ T(CentreDistance/2 0 BeltZ+explode)
+      A(wrap(270-360*((CentreDistance-EndGap)/2+PulleyTeeth*Pitch/2+CentreDistance+q)/(PulleyTeeth*Pitch),-180,180) 2 -180 180)
+      TimingPulley(BushOD 0) ]
+    [ T(CentreDistance/2 0 BeltZ+explode) RingZ(BushOD BushID BushLength 3) ]
+    [ T(CentreDistance/2 0 MotorFaceZ+MountThickness) IdlerAxle(explode) ]
+
+BeltGroup(q explode) ->
+    [ T(0 0 BeltZ+2*explode) OpenTimingBelt(q CentreDistance PitchRadius EndGap Pitch BeltWidth PLD Backing ToothHeight BeltCount) ]
+
+CarriageGroup(q explode) -> [ T(q 0 explode) XCarriage ]
+
+# OPEN BELT: continuous backing profiles plus an indexed tooth train.
+OpenTimingBelt(q c r gap pitch width pld backing toothH count) ->
+    [ T((q-gap/2-c/2)/2 r-pld+backing/2 0) Box(q-gap/2+c/2 backing width 2) ]
+    [ T((q+gap/2+c/2)/2 r-pld+backing/2 0) Box(c/2-q-gap/2 backing width 2) ]
+    [ T(0 -r+pld-backing/2 0) Box(c backing width 2) ]
+    [ T(-c/2 0 -width/2) BeltHalfArc(r pld backing width) ]
+    [ T(c/2 0 -width/2) A(180 2) BeltHalfArc(r pld backing width) ]
+    BeltToothTrain(q c r gap pitch width pld toothH count)
+
+BeltToothTrain(q c r gap pitch width pld toothH count) count ->
+    BeltToothAt((BeltToothTrain_count+0.5)*pitch q c r gap pitch width pld toothH)
+
+BeltToothAt(s q c r gap pitch width pld toothH) ->
+    ?(s<q-gap/2+c/2)
+       [ T(q-gap/2-s r 0) BeltTooth(pitch width pld toothH) ]
+    : ?(s<q-gap/2+c/2+3.141592653589793*r)
+       [ T(-c/2 0 0) A(degrees((s-q+gap/2-c/2)/r) 2 -360 360)
+         T(0 r 0) BeltTooth(pitch width pld toothH) ]
+    : ?(s<q-gap/2+c/2+3.141592653589793*r+c)
+       [ T(-c/2+s-q+gap/2-c/2-3.141592653589793*r -r 0) A(180 2) BeltTooth(pitch width pld toothH) ]
+    : ?(s<q-gap/2+c/2+6.283185307179586*r+c)
+       [ T(c/2 0 0) A(180+degrees((s-q+gap/2-c/2-3.141592653589793*r-c)/r) 2 -360 360)
+         T(0 r 0) BeltTooth(pitch width pld toothH) ]
+    : [ T(c/2-s+q-gap/2+c/2+6.283185307179586*r+c r 0) BeltTooth(pitch width pld toothH) ]
+
+# Nominal tooth envelope; arc pitch and phase are exact, flank contour simplified.
+BeltTooth(pitch width pld h) ->
+    [ T(0 0 -width/2) I(Extrude(Polygon(-pitch*.24 -pld pitch*.24 -pld pitch*.21 -pld-h*.65 pitch*.12 -pld-h -pitch*.12 -pld-h -pitch*.21 -pld-h*.65) width) material(blackmatteplastic) 1 1) ]
+
+# TOOTHED DRIVE AND IDLER: actual bore, flanges, indexed teeth, optional hub.
+TimingPulley(bore withHub) ->
+    [ RingZ(2*(PitchRadius-PLD-ToothHeight-.1) bore PulleyWidth 1) ]
+    [ T(0 0 -PulleyWidth/2-FlangeThickness/2) RingZ(FlangeOD bore FlangeThickness 1) ]
+    [ T(0 0 PulleyWidth/2+FlangeThickness/2) RingZ(FlangeOD bore FlangeThickness 1) ]
+    PulleyToothTrain(PulleyTeeth PitchRadius PLD ToothHeight PulleyWidth)
+    [ ?(withHub>0) [ T(0 0 -PulleyWidth/2-FlangeThickness-HubLength/2) RingZ(HubOD bore HubLength 1) ] HubSetScrew : [ ] ]
+    [ T(FlangeOD*.3 0 PulleyWidth/2+FlangeThickness+.025) Box(1.2 .45 .05 3) ]
+
+PulleyToothTrain(count r pld h width) count ->
+    [ A(PulleyToothTrain_count*360/count 2)
+      T(r-pld-(h+.1)/2 0 0) Box(h+.1 Pitch*.37 width 1) ]
+
+HubSetScrew ->
+    [ T(0 HubOD/2-.6 -PulleyWidth/2-FlangeThickness-1) A(-90 0) RingZ(2.5 1.2 1.2 0) ]
+
+# SELECTED NEMA 17: nominal 42 x 42 x 34, four M3 mounting bores.
+NEMA17Body ->
+    [ T(0 0 -MotorLength+2) ChamferPlate(MotorFace MotorFace 4 3 1) ]
+    [ T(0 0 (0-MotorLength-1)/2) ChamferPlate(MotorFace-.4 MotorFace-.4 MotorLength-9 3 0) ]
+    [ T(0 0 -5) MotorFrontPlate ]
+    [ T(0 0 PilotHeight/2) RingZ(PilotDiameter ShaftDiameter+.2 PilotHeight 1) ]
+    [ T(0 -MotorFace/2-1 -MotorLength+6) Box(12 2 5 2) ]
+    MotorLeads
+
+MotorShaft ->
+    [ T(0 0 (ShaftLength-FlatLength)/2) RingZ(ShaftDiameter 0 ShaftLength-FlatLength 1) ]
+    [ T(0 0 ShaftLength-FlatLength) DFlatShaft ]
+
+MotorLeads 4 ->
+    [ T(-3+MotorLeads_count*2 -MotorFace/2-6 -MotorLength+6) A(90 0) RingZ(.9 0 10 2) ]
+
+MotorMountFasteners 4 ->
+    [ A(90*MotorMountFasteners_count 2) T(MotorMountPitch/2 MotorMountPitch/2 MountThickness) SocketScrewZ(3 7 5.5 3) ]
+MotorMountArm ->
+    [ T(42 0 0) I(HostedOpening(host(Rect 16 14) opening(Circle 2.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(58 0 0) I(HostedOpening(host(Rect 16 14) opening(Circle 2.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(29.5 0 MountThickness/2) Box(9 14 MountThickness 1) ]
+    [ T(42 0 MountThickness) SocketScrewZ(5 8 8 3) ]
+    [ T(58 0 MountThickness) SocketScrewZ(5 8 8 3) ]
+    [ T(42 0 5.3-MotorFaceZ) RailTnutZ ]
+    [ T(58 0 5.3-MotorFaceZ) RailTnutZ ]
+
+IdlerMountFasteners ->
+    [ T(-42 0 MountThickness) SocketScrewZ(5 8 8 3) ]
+    [ T(-58 0 MountThickness) SocketScrewZ(5 8 8 3) ]
+    [ T(-42 0 5.3-MotorFaceZ) RailTnutZ ]
+    [ T(-58 0 5.3-MotorFaceZ) RailTnutZ ]
+
+RailTnutZ -> [ I(HostedOpening(host(ChamferRect 12 7 .5) opening(Circle 2.5 32) depth(2) cap(all)) material(silverbrushedmetal)) ]
+
+IdlerAxle(explode) ->
+    [ T(0 0 (BeltZ-PulleyWidth/2-FlangeThickness-AxialClearance/2-MotorFaceZ-MountThickness)/2) RingZ(10 5 BeltZ-PulleyWidth/2-FlangeThickness-AxialClearance/2-MotorFaceZ-MountThickness 1) ]
+    [ T(0 0 BeltZ-(BushLength+PulleyWidth)/4-FlangeThickness/2-AxialClearance/4-MotorFaceZ-MountThickness) RingZ(BushOD-.3 BushID PulleyWidth/2+FlangeThickness+AxialClearance/2-BushLength/2 1) ]
+    [ T(0 0 -MountThickness-1) A(180 0) SocketScrewZ(5 BeltZ+PulleyWidth/2+FlangeThickness+5-MotorFaceZ 8.5 3) ]
+    [ T(0 0 -MountThickness-.5) RingZ(9.5 5.2 1 1) ]
+    [ T(0 0 BeltZ+(BushLength+PulleyWidth)/4+FlangeThickness/2+AxialClearance/4-MotorFaceZ-MountThickness) RingZ(BushOD-.3 BushID PulleyWidth/2+FlangeThickness+AxialClearance/2-BushLength/2 1) ]
+    [ T(0 0 BeltZ+PulleyWidth/2+FlangeThickness+.5+AxialClearance/4-MotorFaceZ-MountThickness) RingZ(10 5 1-AxialClearance/2 1) ]
+    [ T(0 0 BeltZ+PulleyWidth/2+FlangeThickness+2.5-MotorFaceZ-MountThickness) HexRingZ(8 5 3) ]
+
+# CARRIAGE: three profile wheels, drilled plate and paired positive-tooth clamps.
+XCarriage ->
+    [ T(0 0 PlateBack) CarriagePlate ]
+    [ T(-WheelSpan/2 WheelY 0) CarriageWheel ]
+    [ T(WheelSpan/2 WheelY 0) CarriageWheel ]
+    [ T(0 -WheelY 0) CarriageWheel ]
+    [ T(-EndGap/2-ClampLength/2 PitchRadius 0) BeltClamp(-1) ]
+    [ T(EndGap/2+ClampLength/2 PitchRadius 0) BeltClamp(1) ]
+
+CarriageWheel ->
+    [ ProfileWheel(WheelOD WheelWidth WheelContactRadius) ]
+    [ T(0 0 -WheelWidth/4) RingZ(16 5 WheelWidth/2-.1 1) ]
+    [ T(0 0 WheelWidth/4) RingZ(16 5 WheelWidth/2-.1 1) ]
+    [ T(0 0 (WheelWidth/2+PlateBack)/2) RingZ(8 5.2 PlateBack-WheelWidth/2 1) ]
+    [ T(0 0 PlateFront) SocketScrewZ(5 PlateFront+WheelWidth/2+3 8 4) ]
+    [ T(0 0 -WheelWidth/2-1.5) HexRingZ(8 5 3) ]
+
+ProfileWheel(od width contactR) ->
+    [ A(90 0) I(Revolve(profile(Polygon 8 -width/2 contactR -width/2 od/2 -width/2+1.95 od/2 width/2-1.95 contactR width/2 8 width/2) angle(0 360) segments(64) cap(all)) material(blackmatteplastic) 1 1) ]
+
+BeltClamp(side) ->
+    [ T(-ClampLength/4 -4 PlateFront) ClampRearPanel ]
+    [ T(ClampLength/4 -4 PlateFront) ClampRearPanel ]
+    [ T(0 -PLD-ToothHeight-.75 BeltZ) Box(ClampLength 1.5 BeltWidth+1 4) ]
+    [ T(0 Backing-PLD+.75 BeltZ) Box(ClampLength 1.5 BeltWidth+1 4) ]
+    ClampRack(ClampLength/Pitch-1)
+    [ T(-ClampLength/4 -4 BeltZ+BeltWidth/2+.5) SocketScrewZ(3 BeltZ+BeltWidth/2+.5-PlateBack+3 5.5 2.5) ]
+    [ T(ClampLength/4 -4 BeltZ+BeltWidth/2+.5) SocketScrewZ(3 BeltZ+BeltWidth/2+.5-PlateBack+3 5.5 2.5) ]
+    [ T(-ClampLength/4 -4 PlateBack-1.2) HexRingZ(5.5 3 2.4) ]
+    [ T(ClampLength/4 -4 PlateBack-1.2) HexRingZ(5.5 3 2.4) ]
+
+ClampRearPanel -> [ I(HostedOpening(host(Polygon -ClampLength/4 -2 ClampLength/4 -2 ClampLength/4 6 -ClampLength/4 6) opening(Circle 1.65 32) depth(BeltZ-BeltWidth/2-PlateFront) cap(all)) material(orangematteplastic)) ]
+
+ClampRack(count) count ->
+    [ T(-ClampLength/2+(ClampRack_count+1)*Pitch -PLD-ToothHeight/2 BeltZ) Box(Pitch*.38 ToothHeight BeltWidth 4) ]
+
+# PRIMITIVES: boxes and concentric bores are dimensioned native solids.
+Box(w h depth materialCode) -> [ S(w h depth) EmitBox(materialCode) ]
+EmitBox(m) -> ?(m<.5) I(Cube material(blackmattemetal)) : ?(m<1.5) I(Cube material(silverbrushedmetal)) : ?(m<2.5) I(Cube material(blackmatteplastic)) : ?(m<3.5) I(Cube material(coppermetal)) : I(Cube material(orangematteplastic))
+RingZ(od id height m) -> [ T(0 0 -height/2) A(90 0) S(od height od) EmitRing(id/od m) ]
+EmitRing(ratio m) -> ?(m<.5) I(Cylinder(radial(ratio 1) segments(48 1)) material(blackmattemetal)) : ?(m<1.5) I(Cylinder(radial(ratio 1) segments(48 1)) material(silverbrushedmetal)) : ?(m<2.5) I(Cylinder(radial(ratio 1) segments(48 1)) material(blackmatteplastic)) : I(Cylinder(radial(ratio 1) segments(48 1)) material(coppermetal))
+ChamferPlate(w h depth corner m) -> [ T(0 0 -depth/2) EmitChamfer(w h depth corner m) ]
+EmitChamfer(w h depth corner m) -> ?(m<.5) I(Extrude(ChamferRect(w h corner) depth) material(blackmattemetal)) : I(Extrude(ChamferRect(w h corner) depth) material(silverbrushedmetal))
+SocketScrewZ(d length headD headH) ->
+    [ T(0 0 -length/2) RingZ(d 0 length 1) ]
+    [ I(HostedOpening(host(Circle headD/2 32) opening(Polygon d*.45 0 d*.225 d*.389711 -d*.225 d*.389711 -d*.45 0 -d*.225 -d*.389711 d*.225 -d*.389711) depth(headH) cap(all)) material(blackmattemetal)) ]
+HexRingZ(af id height) -> [ T(0 0 -height/2) I(HostedOpening(host(Polygon af/1.732050807569 0 af/3.464101615138 af/2 -af/3.464101615138 af/2 -af/1.732050807569 0 -af/3.464101615138 -af/2 af/3.464101615138 -af/2) opening(Circle id/2 32) depth(height) cap(all)) material(silverbrushedmetal)) ]
+
+BeltHalfArc(r pld backing width) 48 ->
+    [ I(Extrude(Polygon((r-pld+backing)*cos(radians(90+(BeltHalfArc_count+0)*180/48)) (r-pld+backing)*sin(radians(90+(BeltHalfArc_count+0)*180/48)) (r-pld+backing)*cos(radians(90+(BeltHalfArc_count+1)*180/48)) (r-pld+backing)*sin(radians(90+(BeltHalfArc_count+1)*180/48)) (r-pld)*cos(radians(90+(BeltHalfArc_count+1)*180/48)) (r-pld)*sin(radians(90+(BeltHalfArc_count+1)*180/48)) (r-pld)*cos(radians(90+(BeltHalfArc_count+0)*180/48)) (r-pld)*sin(radians(90+(BeltHalfArc_count+0)*180/48))) width) material(blackmatteplastic)) ]
+
+DFlatShaft -> [ I(Extrude(Polygon(ShaftDiameter/2*cos(2.2142974356) ShaftDiameter/2*sin(2.2142974356) ShaftDiameter/2*cos(2.3183845833) ShaftDiameter/2*sin(2.3183845833) ShaftDiameter/2*cos(2.422471731) ShaftDiameter/2*sin(2.422471731) ShaftDiameter/2*cos(2.5265588787) ShaftDiameter/2*sin(2.5265588787) ShaftDiameter/2*cos(2.6306460264) ShaftDiameter/2*sin(2.6306460264) ShaftDiameter/2*cos(2.7347331741) ShaftDiameter/2*sin(2.7347331741) ShaftDiameter/2*cos(2.8388203218) ShaftDiameter/2*sin(2.8388203218) ShaftDiameter/2*cos(2.9429074695) ShaftDiameter/2*sin(2.9429074695) ShaftDiameter/2*cos(3.0469946172) ShaftDiameter/2*sin(3.0469946172) ShaftDiameter/2*cos(3.1510817649) ShaftDiameter/2*sin(3.1510817649) ShaftDiameter/2*cos(3.2551689126) ShaftDiameter/2*sin(3.2551689126) ShaftDiameter/2*cos(3.3592560603) ShaftDiameter/2*sin(3.3592560603) ShaftDiameter/2*cos(3.463343208) ShaftDiameter/2*sin(3.463343208) ShaftDiameter/2*cos(3.5674303557) ShaftDiameter/2*sin(3.5674303557) ShaftDiameter/2*cos(3.6715175034) ShaftDiameter/2*sin(3.6715175034) ShaftDiameter/2*cos(3.7756046511) ShaftDiameter/2*sin(3.7756046511) ShaftDiameter/2*cos(3.8796917988) ShaftDiameter/2*sin(3.8796917988) ShaftDiameter/2*cos(3.9837789465) ShaftDiameter/2*sin(3.9837789465) ShaftDiameter/2*cos(4.0878660942) ShaftDiameter/2*sin(4.0878660942) ShaftDiameter/2*cos(4.1919532419) ShaftDiameter/2*sin(4.1919532419) ShaftDiameter/2*cos(4.2960403896) ShaftDiameter/2*sin(4.2960403896) ShaftDiameter/2*cos(4.4001275373) ShaftDiameter/2*sin(4.4001275373) ShaftDiameter/2*cos(4.504214685) ShaftDiameter/2*sin(4.504214685) ShaftDiameter/2*cos(4.6083018327) ShaftDiameter/2*sin(4.6083018327) ShaftDiameter/2*cos(4.7123889804) ShaftDiameter/2*sin(4.7123889804) ShaftDiameter/2*cos(4.8164761281) ShaftDiameter/2*sin(4.8164761281) ShaftDiameter/2*cos(4.9205632758) ShaftDiameter/2*sin(4.9205632758) ShaftDiameter/2*cos(5.0246504235) ShaftDiameter/2*sin(5.0246504235) ShaftDiameter/2*cos(5.1287375712) ShaftDiameter/2*sin(5.1287375712) ShaftDiameter/2*cos(5.2328247189) ShaftDiameter/2*sin(5.2328247189) ShaftDiameter/2*cos(5.3369118666) ShaftDiameter/2*sin(5.3369118666) ShaftDiameter/2*cos(5.4409990143) ShaftDiameter/2*sin(5.4409990143) ShaftDiameter/2*cos(5.545086162) ShaftDiameter/2*sin(5.545086162) ShaftDiameter/2*cos(5.6491733097) ShaftDiameter/2*sin(5.6491733097) ShaftDiameter/2*cos(5.7532604574) ShaftDiameter/2*sin(5.7532604574) ShaftDiameter/2*cos(5.8573476051) ShaftDiameter/2*sin(5.8573476051) ShaftDiameter/2*cos(5.9614347528) ShaftDiameter/2*sin(5.9614347528) ShaftDiameter/2*cos(6.0655219005) ShaftDiameter/2*sin(6.0655219005) ShaftDiameter/2*cos(6.1696090482) ShaftDiameter/2*sin(6.1696090482) ShaftDiameter/2*cos(6.2736961959) ShaftDiameter/2*sin(6.2736961959) ShaftDiameter/2*cos(6.3777833436) ShaftDiameter/2*sin(6.3777833436) ShaftDiameter/2*cos(6.4818704913) ShaftDiameter/2*sin(6.4818704913) ShaftDiameter/2*cos(6.585957639) ShaftDiameter/2*sin(6.585957639) ShaftDiameter/2*cos(6.6900447867) ShaftDiameter/2*sin(6.6900447867) ShaftDiameter/2*cos(6.7941319344) ShaftDiameter/2*sin(6.7941319344) ShaftDiameter/2*cos(6.8982190821) ShaftDiameter/2*sin(6.8982190821) ShaftDiameter/2*cos(7.0023062298) ShaftDiameter/2*sin(7.0023062298) ShaftDiameter/2*cos(7.1063933775) ShaftDiameter/2*sin(7.1063933775) ShaftDiameter/2*cos(7.2104805252) ShaftDiameter/2*sin(7.2104805252)) FlatLength) material(silverbrushedmetal)) ]
+
+MotorFrontPlate ->
+    [ T(-15.5 -15.5 0) I(HostedOpening(host(Polygon -2.5 -5.5 15.5 -5.5 15.5 15.5 -5.5 15.5 -5.5 -2.5) opening(Circle 1.5 32) depth(5) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(-15.5 15.5 0) I(HostedOpening(host(Polygon 15.5 5.5 -2.5 5.5 -5.5 2.5 -5.5 -15.5 15.5 -15.5) opening(Circle 1.5 32) depth(5) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(15.5 -15.5 0) I(HostedOpening(host(Polygon -15.5 -5.5 2.5 -5.5 5.5 -2.5 5.5 15.5 -15.5 15.5) opening(Circle 1.5 32) depth(5) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(15.5 15.5 0) I(HostedOpening(host(Polygon 5.5 -15.5 5.5 2.5 2.5 5.5 -15.5 5.5 -15.5 -15.5) opening(Circle 1.5 32) depth(5) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+MotorMountPlate ->
+    [ T(0 0 0) I(HostedOpening(host(Polygon 0 19.4948387097 -19.4948387097 0 0 -19.4948387097 19.4948387097 0) opening(Circle 11.25 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(-15.5 -15.5 0) I(HostedOpening(host(Polygon -6.5 -9.5 15.5 -9.5 15.5 -3.9948387097 -3.9948387097 15.5 -9.5 15.5 -9.5 -6.5) opening(Circle 1.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(-15.5 15.5 0) I(HostedOpening(host(Polygon 15.5 9.5 -6.5 9.5 -9.5 6.5 -9.5 -15.5 -3.9948387097 -15.5 15.5 3.9948387097) opening(Circle 1.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(15.5 -15.5 0) I(HostedOpening(host(Polygon -15.5 -9.5 6.5 -9.5 9.5 -6.5 9.5 15.5 3.9948387097 15.5 -15.5 -3.9948387097) opening(Circle 1.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(15.5 15.5 0) I(HostedOpening(host(Polygon 9.5 -15.5 9.5 6.5 6.5 9.5 -15.5 9.5 -15.5 3.9948387097 3.9948387097 -15.5) opening(Circle 1.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+IdlerMountPlate ->
+    [ T(-58 0 0) I(HostedOpening(host(Polygon -8 -7 8 -7.8533333333 8 7.8533333333 -8 7) opening(Circle 2.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(-42 0 0) I(HostedOpening(host(Polygon -8 -7.8533333333 21.003125 -9.4001666667 21.003125 9.4001666667 -8 7.8533333333) opening(Circle 2.65 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(0 0 0) I(HostedOpening(host(Polygon -20.996875 -9.4001666667 9 -11 12 -8 12 8 9 11 -20.996875 9.4001666667) opening(Circle 2.6 32) depth(MountThickness) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+CarriagePlate ->
+    [ T(-20 20.1 0) I(HostedOpening(host(Polygon 20 0.6276119403 20 11.9 -5 11.9 -12 4.9 -12 -5.1744470903 -6 -8.2194793489 8.6226189185 -10.6931652552) opening(Circle 2.6 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(20 20.1 0) I(HostedOpening(host(Polygon 12 -5.1744470903 12 4.9 5 11.9 -20 11.9 -20 0.6276119403 -8.6226189185 -10.6931652552 6 -8.2194793489) opening(Circle 2.6 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(0 -20.1 0) I(HostedOpening(host(Polygon -25 -11.9 25 -11.9 29.220858206 -7.679141794 26 -3.5215674185 13.4538942638 9.3226368159 -13.4538942638 9.3226368159 -26 -3.5215674185 -29.220858206 -7.679141794) opening(Circle 2.6 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(0 0 0) I(HostedOpening(host(Polygon 11.3773810815 9.4068347448 0 20.7276119403 -11.3773810815 9.4068347448 -13.4538942638 -10.7773631841 13.4538942638 -10.7773631841) opening(Circle 6 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(-29 2.3661977237 0) I(HostedOpening(host(Polygon 3 9.5143229274 -3 12.5593551861 -3 -27.3661977237 -0.220858206 -30.1453395177 3 -25.9877651421) opening(Circle 1.65 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(-23 2.3661977237 0) I(HostedOpening(host(Polygon 11.6226189185 7.0406370211 -3 9.5143229274 -3 -25.9877651421 9.5461057362 -13.1435609078) opening(Circle 1.65 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(23 2.3661977237 0) I(HostedOpening(host(Polygon 3 9.5143229274 -11.6226189185 7.0406370211 -9.5461057362 -13.1435609078 3 -25.9877651421) opening(Circle 1.65 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+    [ T(29 2.3661977237 0) I(HostedOpening(host(Polygon 0.220858206 -30.1453395177 3 -27.3661977237 3 12.5593551861 -3 9.5143229274 -3 -25.9877651421) opening(Circle 1.65 32) depth(PlateThickness) cap(all)) material(tealmattemetal) 1 1) ]
+
+# 2020 rail: nominal open-slot section with a genuine centre bore.
+Rail2020(length) -> [ T(-length/2 0 0) A(90 1) I(HostedOpening(host(Rect 8.2 8.2) opening(Circle 2.1 32) depth(length) cap(all)) material(blackmattemetal)) RailCorners(length) ]
+RailCorners(length) 4 -> [ A(RailCorners_count*90 2) I(Extrude(Polygon(10 10 5.1 10 3 7.9 3 7.3 5.5 7.3 5.5 6.8 2.8 4.1 4.1 4.1 4.1 2.8 6.8 5.5 7.3 5.5 7.3 3 7.9 3 10 5.1) length) material(blackmattemetal)) ]
+
+# Engineering equations and limitations are in XCarriage_Engineering_Notes.txt.
+# Sources: https://files.omc-stepperonline.com/17HS13-1334S_Full_Datasheet.pdf
+# https://sg.misumi-ec.com/vona2/detail/110302652060/
+# https://www.gates.com/content/dam/documents-library/catalogs/ptir-catalogue-belt.pdf

@@ -1,0 +1,57 @@
+{
+  "title": "speech 48x64",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/speech-48x64-9a79be88",
+  "source_file": "speech_48x64.p3d",
+  "git_blob_sha": "9a79be88a552c108c7d7f362082b760462f81c99",
+  "bytes": 1873,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "speech_48x64.p3d"
+  ],
+  "description": "EXPERIMENTAL scripted visemes; no native acceptance or audio sync.",
+  "features": [
+    "FacialSkin"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "EXPERIMENTAL scripted visemes; no native acceptance or audio sync."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "FacialSkin"
+    ],
+    [
+      "Material identifiers",
+      "silvercyanpolishedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Speech (2 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "4"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

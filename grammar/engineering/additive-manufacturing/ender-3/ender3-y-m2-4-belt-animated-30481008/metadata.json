@@ -1,0 +1,57 @@
+{
+  "title": "Ender3 Y M2 4 Belt Animated",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-4-belt-animated-30481008",
+  "source_file": "Ender3_Y_M2_4_Belt_Animated.p3d",
+  "git_blob_sha": "30481008b25b79c5847766da9f31dbac06a8aa28",
+  "bytes": 11411,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Y_M2_4_Belt_Animated.p3d"
+  ],
+  "description": "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions.",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "blackmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, M24Controls, M24Assembly, M24Belt (4 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "110"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

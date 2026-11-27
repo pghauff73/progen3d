@@ -1,0 +1,60 @@
+{
+  "title": "Meridian Observatory",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-observatory-b86c5a08",
+  "source_file": "Meridian_Observatory.p3d",
+  "git_blob_sha": "b86c5a08e7fe95ebb8e2ed3cba37a519d7ab48ba",
+  "bytes": 19652,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_Observatory.p3d"
+  ],
+  "description": "MERIDIAN  /  Deep-space interferometer",
+  "features": [
+    "Cube",
+    "SweepDisk",
+    "Revolve",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "MERIDIAN  /  Deep-space interferometer · Geometry study from the port-bow concept image. Metres; +X aft, +Y up, +Z port. · Start arguments: overall scale, half the telescope baseline in m, drum period in s. · The default is 900 m long with a 150 m baseline. Positive period required. · Try 65 to 85 m for the half-baseline. Try 120 for a slower habitat rotation. · For a spacecraft-only view use Start as printed. For the staged view replace · the Start line with: Start -> [ Meridian(1 75 60) ] [ RingedGiant ] · Preview camera in native metres, 35 mm lens on a 36 mm horizontal sensor. · Eye (-625.727 61.995 472.767), forward (0.74322 -0.07731 -0.66456), +Y up. · Lens shift (horizontal sensor-width units): -0.12503 -0.00547."
+    ],
+    [
+      "Named objects",
+      "MeridianRoot, PortBoom, StarboardBoom, PortTelescope, StarboardTelescope, ServiceBay, FixedYoke, Habitat, AftSpine, ForwardFin, MiddleFin, AftFin, Drive"
+    ],
+    [
+      "Object classes",
+      "Spacecraft, OpticalTruss, Telescope, AccessGallery, BearingCarrier, RotatingHabitat, EngineMount, Radiator, Propulsion"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, SweepDisk, Revolve, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "whitebeigemattepaint, copperbrushedmetal, slategreymattemetal, silverbrushedmetal, blackmattemetal, blackgreymattemetal, goldbrushedmetal, blackbluepolishedglass, lightgoldpolishedmetal, warmwhiteemissivepaint, redbrownmattemetal, amberemissivepaint, paleblueemissivepaint, paleochremattepaint, sandmattepaint, warmbeigemattepaint, ivorymattepaint, slategreymattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Meridian, Boom, Longerons, WarrenBay, Bulkhead, JunctionBox, Telescope, KnifeEdge, FoilPetal, BarrelStrap, ReplacementBlanket, Gallery, Technician, Yoke, HabitatDrum, HabitatSector, HabitatSpoke, AftSpine, EquipmentBelt (29 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "279"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

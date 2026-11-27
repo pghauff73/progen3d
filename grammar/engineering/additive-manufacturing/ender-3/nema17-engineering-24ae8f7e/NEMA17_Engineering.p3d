@@ -1,0 +1,305 @@
+# NEMA 17 | STEPPERONLINE 17HS19-2004S1 | engineering reference
+# Self-contained native ProGen3D grammar. Paper Studio Android 0.82.
+# Start arguments: section (0 assembled / 1 longitudinal cutaway), full steps/s,
+# direction (+1/-1), shaft projection in mm, flat length in mm.
+# Set the rate to 0 to park. Use a positive projection with 0 < flat < projection.
+# One grammar unit = one millimetre throughout, including the assembly interfaces.
+# Origin: mounting face centre, +Z out of shaft, +X normal to flat at t=0.
+# Positive direction is CCW viewed from the output end. Ideal command position.
+Start -> Nema17(0 8 1 24 15)
+
+Nema17(section rate direction projection flat) ->
+  [ Object(id(Nema17Motor) class(StepperMotor) taxonomy(Machine StepperMotor)) [ MotorParts(section rate direction projection flat) ] ]
+
+MotorParts(section rate direction projection flat) ->
+  [ Object(id(MotorFrame) class(MotorHousing) taxonomy(Machine MotorHousing) container(Nema17Motor)) [
+    Interface(id(Mount) type(Mate) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(PlaneRectangle 42 42))
+    Interface(id(MountNE) type(Socket) origin(15.5 15.5 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 4.5))
+    Interface(id(MountNW) type(Socket) origin(-15.5 15.5 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 4.5))
+    Interface(id(MountSW) type(Socket) origin(-15.5 -15.5 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 4.5))
+    Interface(id(MountSE) type(Socket) origin(15.5 -15.5 0) normal(0 0 1) tangent(1 0 0) region(AxisSegment 4.5))
+    FrameQuarters(4-2*section)
+  ] ]
+  [ Object(id(Stator) class(WoundStator) taxonomy(Machine WoundStator) container(Nema17Motor)) [ Poles(8-4*section) ] ]
+  [ Object(id(FrontBearing) class(Bearing) taxonomy(Machine Bearing) container(Nema17Motor)) [ T(0 0 -3.8) BearingQuarters(4-2*section) ] ]
+  [ Object(id(RearBearing) class(Bearing) taxonomy(Machine Bearing) container(Nema17Motor)) [ T(0 0 -45) BearingQuarters(4-2*section) ] ]
+  [ A(direction*1.8*floor(rate*t) 2) RotatingGroup(projection flat) ]
+  [ Object(id(PhaseLeads) class(WiringHarness) taxonomy(Machine WiringHarness) container(Nema17Motor)) [ VisibleLeads(1-section) ] ]
+
+# Front taps are open smooth 2.5 mm minor-bore representations of M3 x 0.5.
+# They terminate 4.5 mm behind the mounting face. Threads are schematic.
+FrameQuarters(n) n ->
+  [ A(FrameQuarters_count*90 2)
+    [ T(0 0 -4.5) FaceLower ] [ T(0 0 -4.5) FaceUpper ]
+    [ T(0 0 -6) EndBellWeb(6.5 1.5) ]
+    [ PilotQuarter(3.5 11 2) ]
+    [ T(0 0 -42) CaseBands(12) ]
+    [ T(0 0 -42) YokeQuarter(18.3 19.5 36) ]
+    [ T(0 0 -46) EndBellWeb(6.5 4) ]
+    [ T(0 0 -48) RearClosure ]
+  ]
+
+# Three millimetres per visible group of laminations. The stripe marks a group,
+# rather than specifying the manufacturing lamination gauge.
+CaseBands(n) n ->
+  [ T(0 0 CaseBands_count*3) [ StackWeb(2.7) ] [ T(0 0 2.7) StackJoint(0.3) ] ]
+
+# Eight radial teeth carriers. Each pole has five face teeth on a 7.2 deg pitch.
+Poles(n) n ->
+  [ A(22.5+Poles_count*45 2)
+    [ T(0 0 -36) PoleShoe ] [ T(0 0 -36) PoleStem ] [ StatorTeeth(5) ]
+    [ T(0 0 -23.5) Turns(7) ]
+  ]
+StatorTeeth(n) n ->
+  [ A((StatorTeeth_count-2)*7.2 2) T(0 0 -36) StatorTooth ]
+Turns(n) n ->
+  [ T(13+Turns_count*0.72 0 0) WindingTurn ]
+
+RotatingGroup(projection flat) ->
+  [ Object(id(OutputShaft) class(DriveShaft) taxonomy(Machine DriveShaft) container(Nema17Motor)) [
+    Interface(id(Output) type(Shaft) origin(0 0 projection) normal(0 0 1) tangent(1 0 0) region(AxisSegment flat))
+    [ T(0 0 -45) !I(Extrude(Circle(2.5 40) 45+projection-flat cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(0 0 projection-flat) ShaftFlat(flat) ]
+  ] ]
+  [ Object(id(RearRotor) class(HybridRotorCup) taxonomy(Machine HybridRotorCup) container(Nema17Motor)) [ T(0 0 -36) RotorPitches(50) ] ]
+  [ Object(id(FrontRotor) class(HybridRotorCup) taxonomy(Machine HybridRotorCup) container(Nema17Motor)) [ T(0 0 -21.5) A(3.6 2) RotorPitches(50) ] ]
+  [ Object(id(AxialMagnet) class(PermanentMagnet) taxonomy(Machine PermanentMagnet) container(Nema17Motor)) [ T(0 0 -25.5) MagnetQuarters(4) ] ]
+
+RotorPitches(n) n ->
+  [ A(RotorPitches_count*7.2 2) RotorPitch ]
+MagnetQuarters(n) n ->
+  [ A(MagnetQuarters_count*90 2) MagnetQuarter(2.5 9.05 4) ]
+
+# Sealed bearings shown as stepped concentric races and shields.
+BearingQuarters(n) n ->
+  [ A(BearingQuarters_count*90 2)
+    [ BearingRace(2.5 3.65 3.8) ] [ BearingRace(5.6 6.5 3.8) ]
+    [ T(0 0 0.2) BearingShield(3.65 5.6 3.4) ] ]
+
+# Rear four-colour pigtail is shortened for inspection. The cable and end plug
+# are omitted beyond the displayed ends. Pair A black/green, pair B red/blue.
+VisibleLeads(n) n -> Leads
+Leads ->
+  [ T(0 -19.8 -44.4) !I(Extrude(RoundedRect(7.6 4.8 0.8) 2.0 cap(all)) material(graphite) 1 1) ]
+  [ T(-2.2 0 0) LeadBlack ] [ T(-0.75 0 0) LeadGreen ]
+  [ T(0.75 0 0) LeadRed ] [ T(2.2 0 0) LeadBlue ]
+
+LeadBlack -> !I(SweepDisk(path(0 -21 -43.4  0 -23.5 -43.4  0 -26 -44  0 -28.2 -45.1  0 -31.4 -46.3) radius(0.57) segments(10) cap(all)) material(graphite) 1 1)
+
+LeadGreen -> !I(SweepDisk(path(0 -21 -43.4  0 -23.5 -43.4  0 -26 -44  0 -28.2 -45.1  0 -31.4 -46.3) radius(0.57) segments(10) cap(all)) material(greenmattepaint) 1 1)
+
+LeadRed -> !I(SweepDisk(path(0 -21 -43.4  0 -23.5 -43.4  0 -26 -44  0 -28.2 -45.1  0 -31.4 -46.3) radius(0.57) segments(10) cap(all)) material(redmattepaint) 1 1)
+
+LeadBlue -> !I(SweepDisk(path(0 -21 -43.4  0 -23.5 -43.4  0 -26 -44  0 -28.2 -45.1  0 -31.4 -46.3) radius(0.57) segments(10) cap(all)) material(bluemattepaint) 1 1)
+
+FaceLower ->
+  !I(Extrude(Polygon(
+    21 0   21 17.4   19.2 19.2   16.383883 16.383883
+    16.539337 16.194463   16.654849 15.978354   16.725982 15.743863   16.75 15.5
+    16.725982 15.256137   16.654849 15.021646   16.539337 14.805537   16.383883 14.616117
+    16.194463 14.460663   15.978354 14.345151   15.743863 14.274018   15.5 14.25
+    15.256137 14.274018   15.021646 14.345151   14.805537 14.460663   14.616117 14.616117
+    4.596194 4.596194   4.942639 4.221412   5.25861 3.820604   5.542161 3.396241
+    5.791542 2.950938   6.005217 2.487442   6.181867 2.00861   6.320404 1.517395
+    6.419974 1.016824   6.479963 0.509984   6.5 0
+  ) 4.5 cap(all)) material(silverbrushedmetal) 1 1)
+
+FaceUpper ->
+  !I(Extrude(Polygon(
+    0 6.5   0.509984 6.479963   1.016824 6.419974   1.517395 6.320404
+    2.00861 6.181867   2.487442 6.005217   2.950938 5.791542   3.396241 5.542161
+    3.820604 5.25861   4.221412 4.942639   4.596194 4.596194   14.616117 14.616117
+    14.460663 14.805537   14.345151 15.021646   14.274018 15.256137   14.25 15.5
+    14.274018 15.743863   14.345151 15.978354   14.460663 16.194463   14.616117 16.383883
+    14.805537 16.539337   15.021646 16.654849   15.256137 16.725982   15.5 16.75
+    15.743863 16.725982   15.978354 16.654849   16.194463 16.539337   16.383883 16.383883
+    19.2 19.2   17.4 21   0 21
+  ) 4.5 cap(all)) material(silverbrushedmetal) 1 1)
+
+EndBellWeb(bore h) ->
+  !I(Extrude(Polygon(
+    21 0   21 17.4   17.4 21   0 21
+    0 bore   bore*0.078459 bore*0.996917   bore*0.156434 bore*0.987688   bore*0.233445 bore*0.97237
+    bore*0.309017 bore*0.951057   bore*0.382683 bore*0.92388   bore*0.45399 bore*0.891007   bore*0.522499 bore*0.85264
+    bore*0.587785 bore*0.809017   bore*0.649448 bore*0.760406   bore*0.707107 bore*0.707107   bore*0.760406 bore*0.649448
+    bore*0.809017 bore*0.587785   bore*0.85264 bore*0.522499   bore*0.891007 bore*0.45399   bore*0.92388 bore*0.382683
+    bore*0.951057 bore*0.309017   bore*0.97237 bore*0.233445   bore*0.987688 bore*0.156434   bore*0.996917 bore*0.078459
+    bore 0
+  ) h cap(all)) material(silverbrushedmetal) 1 1)
+
+RearClosure ->
+  !I(Extrude(Polygon(
+    0 0   21 0   21 17.4   17.4 21
+    0 21
+  ) 2 cap(all)) material(silverbrushedmetal) 1 1)
+
+StackWeb(h) ->
+  !I(Extrude(Polygon(
+    21 0   21 17.4   17.4 21   0 21
+    0 19.5   1.529952 19.439888   3.050472 19.259923   4.552185 18.961213
+    6.025831 18.545602   7.462327 18.015651   8.852815 17.374627   10.188722 16.626483
+    11.461812 15.775831   12.664237 14.827916   13.788582 13.788582   14.827916 12.664237
+    15.775831 11.461812   16.626483 10.188722   17.374627 8.852815   18.015651 7.462327
+    18.545602 6.025831   18.961213 4.552185   19.259923 3.050472   19.439888 1.529952
+    19.5 0
+  ) h cap(all)) material(charcoalmattemetal) 1 1)
+
+StackJoint(h) ->
+  !I(Extrude(Polygon(
+    20.85 0   20.85 17.25   17.25 20.85   0 20.85
+    0 19.5   1.529952 19.439888   3.050472 19.259923   4.552185 18.961213
+    6.025831 18.545602   7.462327 18.015651   8.852815 17.374627   10.188722 16.626483
+    11.461812 15.775831   12.664237 14.827916   13.788582 13.788582   14.827916 12.664237
+    15.775831 11.461812   16.626483 10.188722   17.374627 8.852815   18.015651 7.462327
+    18.545602 6.025831   18.961213 4.552185   19.259923 3.050472   19.439888 1.529952
+    19.5 0
+  ) h cap(all)) material(graphite) 1 1)
+
+PilotQuarter(inner outer h) ->
+  !I(Extrude(Polygon(
+    outer 0   outer*0.996917 outer*0.078459   outer*0.987688 outer*0.156434   outer*0.97237 outer*0.233445
+    outer*0.951057 outer*0.309017   outer*0.92388 outer*0.382683   outer*0.891007 outer*0.45399   outer*0.85264 outer*0.522499
+    outer*0.809017 outer*0.587785   outer*0.760406 outer*0.649448   outer*0.707107 outer*0.707107   outer*0.649448 outer*0.760406
+    outer*0.587785 outer*0.809017   outer*0.522499 outer*0.85264   outer*0.45399 outer*0.891007   outer*0.382683 outer*0.92388
+    outer*0.309017 outer*0.951057   outer*0.233445 outer*0.97237   outer*0.156434 outer*0.987688   outer*0.078459 outer*0.996917
+    0 outer   0 inner   inner*0.078459 inner*0.996917   inner*0.156434 inner*0.987688
+    inner*0.233445 inner*0.97237   inner*0.309017 inner*0.951057   inner*0.382683 inner*0.92388   inner*0.45399 inner*0.891007
+    inner*0.522499 inner*0.85264   inner*0.587785 inner*0.809017   inner*0.649448 inner*0.760406   inner*0.707107 inner*0.707107
+    inner*0.760406 inner*0.649448   inner*0.809017 inner*0.587785   inner*0.85264 inner*0.522499   inner*0.891007 inner*0.45399
+    inner*0.92388 inner*0.382683   inner*0.951057 inner*0.309017   inner*0.97237 inner*0.233445   inner*0.987688 inner*0.156434
+    inner*0.996917 inner*0.078459   inner 0
+  ) h cap(all)) material(silverbrushedmetal) 1 1)
+
+YokeQuarter(inner outer h) ->
+  !I(Extrude(Polygon(
+    outer 0   outer*0.996917 outer*0.078459   outer*0.987688 outer*0.156434   outer*0.97237 outer*0.233445
+    outer*0.951057 outer*0.309017   outer*0.92388 outer*0.382683   outer*0.891007 outer*0.45399   outer*0.85264 outer*0.522499
+    outer*0.809017 outer*0.587785   outer*0.760406 outer*0.649448   outer*0.707107 outer*0.707107   outer*0.649448 outer*0.760406
+    outer*0.587785 outer*0.809017   outer*0.522499 outer*0.85264   outer*0.45399 outer*0.891007   outer*0.382683 outer*0.92388
+    outer*0.309017 outer*0.951057   outer*0.233445 outer*0.97237   outer*0.156434 outer*0.987688   outer*0.078459 outer*0.996917
+    0 outer   0 inner   inner*0.078459 inner*0.996917   inner*0.156434 inner*0.987688
+    inner*0.233445 inner*0.97237   inner*0.309017 inner*0.951057   inner*0.382683 inner*0.92388   inner*0.45399 inner*0.891007
+    inner*0.522499 inner*0.85264   inner*0.587785 inner*0.809017   inner*0.649448 inner*0.760406   inner*0.707107 inner*0.707107
+    inner*0.760406 inner*0.649448   inner*0.809017 inner*0.587785   inner*0.85264 inner*0.522499   inner*0.891007 inner*0.45399
+    inner*0.92388 inner*0.382683   inner*0.951057 inner*0.309017   inner*0.97237 inner*0.233445   inner*0.987688 inner*0.156434
+    inner*0.996917 inner*0.078459   inner 0
+  ) h cap(all)) material(charcoalmattemetal) 1 1)
+
+BearingRace(inner outer h) ->
+  !I(Extrude(Polygon(
+    outer 0   outer*0.996917 outer*0.078459   outer*0.987688 outer*0.156434   outer*0.97237 outer*0.233445
+    outer*0.951057 outer*0.309017   outer*0.92388 outer*0.382683   outer*0.891007 outer*0.45399   outer*0.85264 outer*0.522499
+    outer*0.809017 outer*0.587785   outer*0.760406 outer*0.649448   outer*0.707107 outer*0.707107   outer*0.649448 outer*0.760406
+    outer*0.587785 outer*0.809017   outer*0.522499 outer*0.85264   outer*0.45399 outer*0.891007   outer*0.382683 outer*0.92388
+    outer*0.309017 outer*0.951057   outer*0.233445 outer*0.97237   outer*0.156434 outer*0.987688   outer*0.078459 outer*0.996917
+    0 outer   0 inner   inner*0.078459 inner*0.996917   inner*0.156434 inner*0.987688
+    inner*0.233445 inner*0.97237   inner*0.309017 inner*0.951057   inner*0.382683 inner*0.92388   inner*0.45399 inner*0.891007
+    inner*0.522499 inner*0.85264   inner*0.587785 inner*0.809017   inner*0.649448 inner*0.760406   inner*0.707107 inner*0.707107
+    inner*0.760406 inner*0.649448   inner*0.809017 inner*0.587785   inner*0.85264 inner*0.522499   inner*0.891007 inner*0.45399
+    inner*0.92388 inner*0.382683   inner*0.951057 inner*0.309017   inner*0.97237 inner*0.233445   inner*0.987688 inner*0.156434
+    inner*0.996917 inner*0.078459   inner 0
+  ) h cap(all)) material(steelshinyroughmetal) 1 1)
+
+BearingShield(inner outer h) ->
+  !I(Extrude(Polygon(
+    outer 0   outer*0.996917 outer*0.078459   outer*0.987688 outer*0.156434   outer*0.97237 outer*0.233445
+    outer*0.951057 outer*0.309017   outer*0.92388 outer*0.382683   outer*0.891007 outer*0.45399   outer*0.85264 outer*0.522499
+    outer*0.809017 outer*0.587785   outer*0.760406 outer*0.649448   outer*0.707107 outer*0.707107   outer*0.649448 outer*0.760406
+    outer*0.587785 outer*0.809017   outer*0.522499 outer*0.85264   outer*0.45399 outer*0.891007   outer*0.382683 outer*0.92388
+    outer*0.309017 outer*0.951057   outer*0.233445 outer*0.97237   outer*0.156434 outer*0.987688   outer*0.078459 outer*0.996917
+    0 outer   0 inner   inner*0.078459 inner*0.996917   inner*0.156434 inner*0.987688
+    inner*0.233445 inner*0.97237   inner*0.309017 inner*0.951057   inner*0.382683 inner*0.92388   inner*0.45399 inner*0.891007
+    inner*0.522499 inner*0.85264   inner*0.587785 inner*0.809017   inner*0.649448 inner*0.760406   inner*0.707107 inner*0.707107
+    inner*0.760406 inner*0.649448   inner*0.809017 inner*0.587785   inner*0.85264 inner*0.522499   inner*0.891007 inner*0.45399
+    inner*0.92388 inner*0.382683   inner*0.951057 inner*0.309017   inner*0.97237 inner*0.233445   inner*0.987688 inner*0.156434
+    inner*0.996917 inner*0.078459   inner 0
+  ) h cap(all)) material(graphite) 1 1)
+
+MagnetQuarter(inner outer h) ->
+  !I(Extrude(Polygon(
+    outer 0   outer*0.996917 outer*0.078459   outer*0.987688 outer*0.156434   outer*0.97237 outer*0.233445
+    outer*0.951057 outer*0.309017   outer*0.92388 outer*0.382683   outer*0.891007 outer*0.45399   outer*0.85264 outer*0.522499
+    outer*0.809017 outer*0.587785   outer*0.760406 outer*0.649448   outer*0.707107 outer*0.707107   outer*0.649448 outer*0.760406
+    outer*0.587785 outer*0.809017   outer*0.522499 outer*0.85264   outer*0.45399 outer*0.891007   outer*0.382683 outer*0.92388
+    outer*0.309017 outer*0.951057   outer*0.233445 outer*0.97237   outer*0.156434 outer*0.987688   outer*0.078459 outer*0.996917
+    0 outer   0 inner   inner*0.078459 inner*0.996917   inner*0.156434 inner*0.987688
+    inner*0.233445 inner*0.97237   inner*0.309017 inner*0.951057   inner*0.382683 inner*0.92388   inner*0.45399 inner*0.891007
+    inner*0.522499 inner*0.85264   inner*0.587785 inner*0.809017   inner*0.649448 inner*0.760406   inner*0.707107 inner*0.707107
+    inner*0.760406 inner*0.649448   inner*0.809017 inner*0.587785   inner*0.85264 inner*0.522499   inner*0.891007 inner*0.45399
+    inner*0.92388 inner*0.382683   inner*0.951057 inner*0.309017   inner*0.97237 inner*0.233445   inner*0.987688 inner*0.156434
+    inner*0.996917 inner*0.078459   inner 0
+  ) h cap(all)) material(graphite) 1 1)
+
+RotorPitch ->
+  !I(Extrude(Polygon(
+    9.301609 -0.585208   9.313741 -0.341519   9.9971 -0.240832   10 0
+    9.9971 0.240832   9.313741 0.341519   9.301609 0.585208   2.495067 0.156976
+    2.5 0   2.495067 -0.156976
+  ) 10.5 cap(all)) material(steelshinyroughmetal) 1 1)
+
+PoleShoe ->
+  !I(Extrude(Polygon(
+    11.650442 -3.785458   11.832591 -3.170533   11.982308 -2.546918   12.099182 -1.916322
+    12.182893 -1.280474   12.233212 -0.641115   12.25 0   12.233212 0.641115
+    12.182893 1.280474   12.099182 1.916322   11.982308 2.546918   11.832591 3.170533
+    11.650442 3.785458   10.318963 3.352834   10.480295 2.808187   10.612901 2.255842
+    10.716418 1.697314   10.790563 1.134134   10.83513 0.567845   10.85 0
+    10.83513 -0.567845   10.790563 -1.134134   10.716418 -1.697314   10.612901 -2.255842
+    10.480295 -2.808187   10.318963 -3.352834
+  ) 25 cap(all)) material(charcoalmattemetal) 1 1)
+
+StatorTooth ->
+  !I(Extrude(Polygon(
+    10.873037 -0.389195   10.24728 -0.236122   10.25 0   10.24728 0.236122
+    10.873037 0.389195
+  ) 25 cap(all)) material(steelshinyroughmetal) 1 1)
+
+PoleStem ->
+  !I(Extrude(Polygon(
+    12.05 -1.6   18.35 -1.6   18.35 1.6   12.05 1.6
+  ) 25 cap(all)) material(charcoalmattemetal) 1 1)
+
+WindingTurn ->
+  !I(SweepDisk(path(
+    0 2.95 12.5   0.005643 2.851043 12.997488   0.011287 2.569239 13.419239
+    0.01693 2.147488 13.701043   0.022573 1.65 13.8   0.059288 -1.65 13.8
+    0.064931 -2.147488 13.701043   0.070574 -2.569239 13.419239   0.076217 -2.851043 12.997488
+    0.081861 -2.95 12.5   0.36 -2.95 -12.5   0.365643 -2.851043 -12.997488
+    0.371287 -2.569239 -13.419239   0.37693 -2.147488 -13.701043   0.382573 -1.65 -13.8
+    0.419288 1.65 -13.8   0.424931 2.147488 -13.701043   0.430574 2.569239 -13.419239
+    0.436217 2.851043 -12.997488   0.441861 2.95 -12.5   0.72 2.95 12.5
+  ) radius(0.32) segments(8) cap(all)) material(copperpolishedmetal) 1 1)
+
+ShaftFlat(h) ->
+  !I(Extrude(Polygon(
+    2 1.5   1.901015 1.62362   1.767767 1.767767   1.62362 1.901015
+    1.469463 2.022542   1.306246 2.1316   1.134976 2.227516   0.956709 2.309699
+    0.772542 2.377641   0.583613 2.430925   0.391086 2.469221   0.196148 2.492293
+    0 2.5   -0.196148 2.492293   -0.391086 2.469221   -0.583613 2.430925
+    -0.772542 2.377641   -0.956709 2.309699   -1.134976 2.227516   -1.306246 2.1316
+    -1.469463 2.022542   -1.62362 1.901015   -1.767767 1.767767   -1.901015 1.62362
+    -2.022542 1.469463   -2.1316 1.306246   -2.227516 1.134976   -2.309699 0.956709
+    -2.377641 0.772542   -2.430925 0.583613   -2.469221 0.391086   -2.492293 0.196148
+    -2.5 0   -2.492293 -0.196148   -2.469221 -0.391086   -2.430925 -0.583613
+    -2.377641 -0.772542   -2.309699 -0.956709   -2.227516 -1.134976   -2.1316 -1.306246
+    -2.022542 -1.469463   -1.901015 -1.62362   -1.767767 -1.767767   -1.62362 -1.901015
+    -1.469463 -2.022542   -1.306246 -2.1316   -1.134976 -2.227516   -0.956709 -2.309699
+    -0.772542 -2.377641   -0.583613 -2.430925   -0.391086 -2.469221   -0.196148 -2.492293
+    0 -2.5   0.196148 -2.492293   0.391086 -2.469221   0.583613 -2.430925
+    0.772542 -2.377641   0.956709 -2.309699   1.134976 -2.227516   1.306246 -2.1316
+    1.469463 -2.022542   1.62362 -1.901015   1.767767 -1.767767   1.901015 -1.62362
+    2 -1.5
+  ) h cap(all)) material(silverbrushedmetal) 1 1)
+
+# Reference dimensions and construction
+# STEPPERONLINE 17HS19-2004S1, 42 x 42 x 48 mm nominal model. 31 mm square bolt
+# pitch, four M3 mounting holes, 22 x 2 mm register, 5 mm shaft, 4.5 mm across
+# the flat. Drawing and product data:
+# https://www.stepperonline.com.au/nema-17-bipolar-59ncm-84oz-in-2a-42x48mm-4-wires-w-1m-cable-connector-17hs19-2004s1.html
+# https://www.oyostepper.de/images/upload/File/17HS19-2004S1.pdf
+# Based on generic two-phase hybrid construction. Internal diameters, stack
+# lengths, bearing geometry and displayed winding turns are illustrative.
+# https://www.orientalmotor.eu/system/files/document/tech/technicalmanual_stepping_10e.pdf
+# Holding torque 0.59 N m and rated current 2 A/phase are catalogue values.
+# The time input selects ideal full-step poses. Load, current and torque
+# transients are outside the scope of this kinematic grammar.

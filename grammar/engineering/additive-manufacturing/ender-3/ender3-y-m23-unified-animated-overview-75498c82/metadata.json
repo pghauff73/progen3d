@@ -1,0 +1,57 @@
+{
+  "title": "Ender3 Y M23 Unified Animated Overview",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m23-unified-animated-overview-75498c82",
+  "source_file": "Ender3_Y_M23_Unified_Animated_Overview.p3d",
+  "git_blob_sha": "75498c82bc00e3179329e0d81575341b64caeb80",
+  "bytes": 12062,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Y_M23_Unified_Animated_Overview.p3d"
+  ],
+  "description": "M2.3 Native ProGen3D module. mm -> m in Start. Factory-CAD geometry only.",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "M2.3 Native ProGen3D module. mm -> m in Start. Factory-CAD geometry only. · All five modules share one rail-centred frame. Travel is illustrative, not a physical limit-switch measurement. · Wheel rotation and pulley transmission are kinematic approximations; belt shape is static CAD reference."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, blackmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, M23Controls, M23Assembly (3 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "84"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

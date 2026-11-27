@@ -9,7 +9,8 @@
   "source_commit": null,
   "original_paths": [],
   "library_exports": [
-    "Ender3_Y_HiRes_Animated_Overview.p3d"
+    "Ender3_Y_HiRes_Animated_Overview.p3d",
+    "Ender3_Y_M2_4_Unified_Animated_Overview.p3d"
   ],
   "description": "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions.",
   "features": [

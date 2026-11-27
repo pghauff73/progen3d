@@ -1,0 +1,57 @@
+{
+  "title": "Procedural Material Catalogue",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/procedural-material-catalogue-bfbb45d8",
+  "source_file": "Procedural_Material_Catalogue.p3d",
+  "git_blob_sha": "bfbb45d8ae55dd313c5e3046c7ab561e9057d4b7",
+  "bytes": 7393,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Procedural_Material_Catalogue.p3d"
+  ],
+  "description": "Animated procedural material catalogue: 24 native spheres, static geometry.",
+  "features": [
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Animated procedural material catalogue: 24 native spheres, static geometry. · Play or scrub the timeline in the updated workshop. Times below are seconds. · Physical solids stay static unless a state animation is explicitly assigned. · Texture-motion directives change shading only; they do not deform geometry. · @texture rule:Material1 woven uv 6 · @surface rule:Material1 color 0.82 0.8 0.75 roughness 0.82 metallic 0 relief 0.7 · @texture-motion rule:Material1 none period 6 speed 1 amount 0.85 phase 0 seed 0 · @texture rule:Material2 pine_grain uv 2 · @surface rule:Material2 color 0.88 0.7 0.46 roughness 0.57 metallic 0 relief 0.65 · @texture-motion rule:Material2 none period 6 speed 1 amount 0.85 phase 0 seed 0"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Sphere"
+    ],
+    [
+      "Material identifiers",
+      ""
+    ],
+    [
+      "Production rules",
+      "Start, Material1, Material2, Material3, Material4, Material5, Material6, Material7, Material8, Material9, Material10, Material11, Material12, Material13, Material14, Material15, Material16, Material17, Material18, Material19 (25 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "129"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

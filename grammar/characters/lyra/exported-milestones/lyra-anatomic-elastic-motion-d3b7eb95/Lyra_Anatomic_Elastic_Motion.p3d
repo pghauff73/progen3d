@@ -1,0 +1,292 @@
+# Lyra | Anatomic Elastic Skin, Muscle & Armor Grammar (Pure Procedural Native Desktop)
+# World units: metres. +Y up. Zero raw mesh-v1 blocks.
+# Combines Lyra_Reference_Motion.p3d proportions, all 11 native Lyra materials, and 15-second
+# non-looping gesture with volume-preserving contractile muscles (1/sqrt(1+strain)) and DSY/DTZ
+# elastic skin/undersuit envelopes.
+# Set suitAlpha=0.45 (default) to inspect muscle contraction beneath the suit, or 1.0 for opaque Lyra.
+
+Start -> Speed(1 0.45)
+Speed(rate suitAlpha) -> Clock(clamp(t*rate,0,15) suitAlpha)
+
+Clock(s suitAlpha) ->
+    Animate(clamp((s-0)/1.5,0,1) clamp((s-1.5)/1,0,1) clamp((s-2.5)/1,0,1) clamp((s-3.5)/1,0,1) clamp((s-7.5)/1,0,1) clamp((s-8.5)/1,0,1) clamp((s-9.5)/1,0,1) clamp((s-10.5)/1,0,1) clamp((s-12.5)/1,0,1) clamp((s-13.5)/1,0,1) clamp((s-14.5)/0.5,0,1) suitAlpha)
+
+Animate(h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 suitAlpha) ->
+    # Compute data-driven anatomical activations [0..1] from Lyra's 15s trajectory
+    LyraScene(
+        h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10
+        clamp(0.0003+0.0108*h0+0.5914*h1+0.3233*h2-0.219*h3+0.1525*h4+0.0681*h5+0.0726*h6-0.9997*h7+0.7058*h8+0.0298*h9-0.0299*h10,0,1)
+        clamp(0.0005+0.0755*h0+0.924*h1-0.5888*h2+0.1281*h3-0.1541*h4-0.088*h6-0.2969*h7+0.5474*h8-0.0235*h9+0.0153*h10,0,1)
+        clamp(0+0.0464*h0+0.8985*h1+0.0551*h2-0.0425*h3-0.217*h4-0.4776*h5-0.2627*h6+0.8745*h8+0.0392*h9+0.0006*h10,0,1)
+        sin(t*1.2)*0.5+0.5
+        suitAlpha
+    )
+
+LyraScene(h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 flexL abdL turnAct breath suitAlpha) ->
+    # Planted lower body (static stance matching PartR0..PartR22)
+    [ T(-0.292 0.000 0.072) LyraLeg(-1 suitAlpha) ]
+    [ T(0.195 0.000 0.109) LyraLeg(1 suitAlpha) ]
+    [ T(0.000 0.888 0.004) LyraPelvis(breath suitAlpha) ]
+
+    # Articulated torso, neck, head, and right arm (hierarchical chain from PartR47)
+    [ T(0.0069-0.0058*h1+0.0008*h3+0.0014*h5+0.001*h6+0.0028*h7-0.0056*h8 1.4093 0.0228+0.0036*h1-0.0033*h7+0.0038*h8)
+      A(0-0.4045*h0-7.9204*h1-0.554*h2+1.9034*h3+1.0017*h4+3.4832*h5+2.4491*h6+0.038*h7-6.9053*h8-0.0308*h9-0.0154*h10 1)
+      A(0+0.0308*h0+0.4864*h1+0.0072*h2+0.0203*h3-0.0045*h4+0.0418*h5+0.0344*h6-0.614*h7+0.5362*h8+0.0053*h9+0.0027*h10 2)
+      A(0+0.0318*h0+0.6204*h1+0.012*h2+0.0006*h3+0.025*h4+0.0013*h5-0.0128*h6-0.6756*h7+0.6612*h8-0.0009*h9 0)
+      LyraUpperTorso(h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 flexL abdL turnAct breath suitAlpha)
+    ]
+
+    # Articulated left arm & hand (exact 15s world-space gesture + live elastic muscles)
+    [ T(-0.1607-0.0014*h0-0.0264*h1+0.0167*h2+0.0067*h3-0.0095*h4-0.0036*h5-0.0016*h6+0.019*h7-0.004*h8 1.3309+0.0011*h1+0.0057*h2-0.0006*h3-0.0063*h4+0.0008*h5+0.0018*h6-0.002*h7+0.0046*h8+0.0025*h9-0.0009*h10 -0.0036-0.011*h1+0.0148*h2+0.0065*h3-0.0215*h4+0.0129*h5+0.0166*h6-0.0179*h7+0.0081*h8+0.0028*h9)
+      A(-137.8218-1.9187*h0-35.2465*h1+27.5602*h2+12.1001*h3-20.8345*h4-3.0753*h5-0.6193*h6+21.9581*h7+1.9225*h8+1.6179*h9-0.4894*h10 2)
+      A(7.4444+0.5514*h0+7.1912*h1+13.5785*h2-1.4416*h3-20.2763*h4+1.3611*h5+6.9082*h6-7.8401*h7+18.1382*h8+2.495*h9-0.0839*h10 0)
+      A(79.76-0.057*h0+2.8427*h1-15.9136*h2-4.9308*h3+26.2899*h4-5.9467*h5-10.0617*h6+7.7389*h7-15.0482*h8-4.7344*h9+0.3378*h10 1)
+      LyraLeftUpperArm(flexL abdL suitAlpha)
+    ]
+    [ T(-0.2283-0.0206*h0-0.2787*h1+0.1787*h2-0.0033*h3+0.0018*h4-0.0108*h5+0.015*h6+0.1179*h7-0.1235*h8+0.0054*h9-0.006*h10 0.9726+0.0043*h0+0.2323*h1+0.1141*h2-0.0702*h3+0.0333*h4+0.0218*h5+0.0305*h6-0.3661*h7+0.2773*h8+0.0156*h9-0.011*h10 0.0503+0.0031*h0-0.0628*h1+0.0712*h2-0.0015*h3-0.0314*h4+0.0213*h5+0.0261*h6-0.026*h7+0.0053*h8+0.0124*h9-0.0057*h10)
+      A(0-2.9571*h0-64.8767*h1-69.481*h2+26.7515*h3-23.8158*h4-6.2364*h5-11.3419*h6+151.9576*h7-112.6109*h8-1.5806*h9+4.7456*h10 2)
+      A(0-1.2608*h0-2.4032*h1+10.1848*h2+5.6811*h3-39.2105*h4+6.5104*h5+10.8683*h6+9.6298*h7+8.256*h8+3.6852*h9+2.0559*h10 0)
+      A(0-4.1004*h0-85.9847*h1-18.1264*h2-14.134*h3+57.4342*h4-1.3957*h5-23.1261*h6+89.4331*h7-120.3166*h8-4.96*h9+2.314*h10 1)
+      LyraLeftForearm(flexL suitAlpha)
+    ]
+    [ T(-0.2418-0.0355*h0-0.4292*h1+0.2737*h2-0.0594*h3+0.0715*h4+0.0408*h6+0.1382*h7-0.2544*h8+0.0109*h9-0.0071*h10 0.7932+0.0079*h0+0.4323*h1+0.2363*h2-0.1601*h3+0.1115*h4+0.0498*h5+0.0535*h6-0.7312*h7+0.5159*h8+0.0218*h9-0.0219*h10 0.1082+0.0084*h0-0.164*h1+0.0276*h2-0.0281*h3+0.1873*h4-0.0138*h5-0.0396*h6+0.0223*h7-0.1515*h8+0.0056*h9-0.0102*h10)
+      A(0-3.4004*h0-86.0761*h1-41.0275*h2+31.9462*h3-31.0879*h4-10.4208*h5-12.0016*h6+152.0681*h7-98.0434*h8-3.2921*h9+2.9437*h10 2)
+      A(0-2.6642*h0+9.7519*h1+15.0245*h2+0.7887*h3-56.0623*h4+11.8229*h5+14.0315*h6+7.307*h7+20.0092*h8+1.3742*h9+1.4399*h10 0)
+      A(0-5.425*h0-108.6862*h1+2.0607*h2-43.4797*h3+105.8966*h4-15.4453*h5-29.0687*h6+94.1475*h7-155.7662*h8+3.3444*h9-3.4248*h10 1)
+      LyraLeftHand(suitAlpha)
+    ]
+
+# ============================================================================
+# ANATOMIC ELASTIC MUSCLE & SKIN PRIMITIVES (Using Lyra's Native Palette)
+# ============================================================================
+
+# Volume-preserving contractile muscle belly: sx = sz = 1/sqrt(1 + strain)
+MuscleBelly(length rx rz strain) ->
+    [ S(1/sqrt(1+strain) 1+strain 1/sqrt(1+strain))
+      MuscleSpindle(length rx rz)
+    ]
+
+MuscleSpindle(length rx rz) ->
+    # Proximal tendon origin
+    [ S(rx*0.42 length*0.14 rz*0.42)
+      I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(14 1))
+        material(silvercyanpolishedmetal) alpha(1) texscale(1)) ]
+    # Striated contractile muscle belly
+    [ T(0 length*0.10 0)
+      I(AxialProfile(axis(y)
+        profile(P0 polygon(-rx*0.38 -rz*0.38 rx*0.38 -rz*0.38 rx*0.38 rz*0.38 -rx*0.38 rz*0.38))
+        profile(P1 polygon(-rx*0.88 -rz*0.86 rx*0.88 -rz*0.86 rx*0.88 rz*0.86 -rx*0.88 rz*0.86))
+        profile(P2 polygon(-rx -rz rx -rz rx rz -rx rz))
+        profile(P3 polygon(-rx*0.82 -rz*0.80 rx*0.82 -rz*0.80 rx*0.82 rz*0.80 -rx*0.82 rz*0.80))
+        profile(P4 polygon(-rx*0.34 -rz*0.34 rx*0.34 -rz*0.34 rx*0.34 rz*0.34 -rx*0.34 rz*0.34))
+        at(0 P0) linear(length*0.22 P1) linear(length*0.42 P2) linear(length*0.64 P3) linear(length*0.80 P4) cap(all))
+        material(violetmattepaint) alpha(1) texscale(0.5)) ]
+    # Distal tendon insertion
+    [ T(0 length*0.86 0) S(rx*0.38 length*0.14 rz*0.38)
+      I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(14 1))
+        material(silvercyanpolishedmetal) alpha(1) texscale(1)) ]
+
+# Elastic skin/undersuit sleeve with muscle-driven radial bulge & flexion crease taper
+ElasticSuitSleeve(length rBot rTop bulge creaseShear suitAlpha) ->
+    [ S(1+bulge 1 1+bulge*0.85) DSY(1-creaseShear*0.14 1 1+creaseShear*0.12)
+      I(AxialProfile(axis(y)
+        profile(Bot polygon(-rBot -rBot*0.95 rBot -rBot*0.95 rBot rBot*0.95 -rBot rBot*0.95))
+        profile(Mid polygon(-(rBot+rTop)*0.54 -(rBot+rTop)*0.52 (rBot+rTop)*0.54 -(rBot+rTop)*0.52 (rBot+rTop)*0.54 (rBot+rTop)*0.52 -(rBot+rTop)*0.54 (rBot+rTop)*0.52))
+        profile(Top polygon(-rTop -rTop*0.95 rTop -rTop*0.95 rTop rTop*0.95 -rTop rTop*0.95))
+        at(0 Bot) linear(length*0.50 Mid) linear(length Top) cap(all))
+        material(blackbluefabric) alpha(suitAlpha) texscale(1)) ]
+
+# Elastic joint capsule bridging flexion creases
+ElasticJointSleeve(rx ry rz flex suitAlpha) ->
+    [ S(rx*(1+0.10*flex) ry*(1+0.06*flex) rz*(1+0.14*flex)) DTZ(0 0 0.012*flex)
+      I(Sphere(segments(18 10) close(all)) material(blackbluefabric) alpha(suitAlpha) texscale(1)) ]
+
+# ============================================================================
+# LOWER BODY: SKELETON + MUSCLES + ELASTIC SUIT + LYRA ARMOR
+# ============================================================================
+
+LyraLeg(side suitAlpha) ->
+    # Boot & armored toe cap
+    [ T(0 0.000 0.020) LyraBoot(suitAlpha) ]
+    # Shin: tibia bone + calf muscles + elastic suit + shin guard
+    [ T(side*(-0.030) 0.140 -0.070) LyraShin(suitAlpha) ]
+    # Thigh: femur bone + quads/hamstrings + elastic suit + knee armor
+    [ T(side*(-0.095) 0.470 -0.072) LyraThigh(suitAlpha) ]
+
+LyraBoot(suitAlpha) ->
+    [ S(0.118 0.032 0.275) I(CubeY material(blackbluemattepaint) alpha(1) texscale(1)) ]
+    [ T(0 0.030 -0.025) I(AxialProfile(axis(y)
+        profile(Sole polygon(-0.056 -0.105 0.056 -0.105 0.052 0.125 -0.052 0.125))
+        profile(Ankle polygon(-0.050 -0.062 0.050 -0.062 0.048 0.062 -0.048 0.062))
+        at(0 Sole) linear(0.118 Ankle) cap(all)) material(blackbluefabric) alpha(suitAlpha) texscale(1)) ]
+    [ T(0 0.048 0.095) S(0.095 0.046 0.075) I(SphereCap(axis(y) offset(0.0) side(positive) segments(16 8) close(all)) material(tealbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.082 -0.070) S(0.092 0.065 0.032) I(CubeY material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.036 0.020) S(0.121 0.009 0.190) I(CubeY material(cyanemissive) alpha(1) texscale(1)) ]
+
+LyraShin(suitAlpha) ->
+    # Tibia core
+    [ S(0.020 0.340 0.022) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(12 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    # Gastrocnemius / soleus calf muscle
+    [ T(0 0.020 -0.028) MuscleBelly(0.305 0.042 0.040 -0.03) ]
+    # Elastic suit layer
+    [ ElasticSuitSleeve(0.340 0.048 0.066 0.02 0.04 suitAlpha) ]
+    # Lyra shin guard & emissive accents
+    [ T(0 0.175 0.078) I(CurvedPanel(width(0.105) height(0.260) curvature(0.024 0.010) thickness(0.012) segments(8 8)) material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.180 0.094) S(0.012 0.190 0.008) I(CubeY material(cyanemissive) alpha(1) texscale(1)) ]
+    [ T(0.052 0.240 0.040) S(0.008 0.060 0.014) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+
+LyraThigh(suitAlpha) ->
+    # Femur core
+    [ S(0.024 0.365 0.024) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(12 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    # Quadriceps & hamstrings
+    [ T(0 0.015 0.032) MuscleBelly(0.340 0.054 0.046 -0.04) ]
+    [ T(0 0.020 -0.030) MuscleBelly(0.335 0.048 0.042 0.03) ]
+    # Elastic thigh suit & knee capsule
+    [ ElasticSuitSleeve(0.365 0.064 0.090 0.02 0.04 suitAlpha) ]
+    [ T(0 0.010 0.068) S(0.062 0.068 0.042) I(SphereCap(axis(z) offset(0.15) side(positive) segments(16 8) close(all)) material(tealbluemetal) alpha(1) texscale(1)) ]
+
+LyraPelvis(breath suitAlpha) ->
+    # Skeletal pelvic core & glutes
+    [ T(0 -0.040 0) S(0.230 0.130 0.140) I(CubeY material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    [ T(-0.085 -0.055 -0.065) A(-8 0) MuscleBelly(0.160 0.068 0.054 -0.03) ]
+    [ T(0.085 -0.055 -0.065) A(-8 0) MuscleBelly(0.160 0.068 0.054 -0.03) ]
+    # Elastic pelvic undersuit
+    [ T(0 -0.075 0) I(AxialProfile(axis(y)
+        profile(Bot polygon(-0.185 -0.115 0.185 -0.115 0.175 0.115 -0.175 0.115))
+        profile(Top polygon(-0.165 -0.110 0.165 -0.110 0.160 0.110 -0.160 0.110))
+        at(0 Bot) linear(0.165 Top) cap(all)) material(blackbluefabric) alpha(suitAlpha) texscale(1)) ]
+    # Belt armor & emissive indicators
+    [ T(0 0.025 0.118) I(CurvedPanel(width(0.240) height(0.068) curvature(0.022 0.006) thickness(0.014) segments(8 4)) material(tealbluemetal) alpha(1) texscale(1)) ]
+    [ T(-0.165 0.010 0.000) S(0.045 0.095 0.140) I(CubeY material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0.165 0.010 0.000) S(0.045 0.095 0.140) I(CubeY material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.030 0.136) S(0.085 0.014 0.008) I(CubeY material(cyanemissive) alpha(1) texscale(1)) ]
+    [ T(0.115 0.030 0.120) S(0.026 0.012 0.008) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+    [ T(-0.115 0.030 0.120) S(0.026 0.012 0.008) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+
+# ============================================================================
+# UPPER TORSO, BREATHING RIBCAGE, NECK, HEAD & RIGHT ARM
+# ============================================================================
+
+LyraUpperTorso(h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 flexL abdL turnAct breath suitAlpha) ->
+    # Spine & breathing ribcage core
+    [ T(0 -0.400 -0.035) S(0.026 0.480 0.026) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(12 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    [ T(0 -0.210 0.010) S(1+0.030*breath 1+0.012*breath 1+0.040*breath)
+      I(AxialProfile(axis(y)
+        profile(R0 polygon(-0.120 -0.084 0.120 -0.084 0.116 0.088 -0.116 0.088))
+        profile(R1 polygon(-0.148 -0.100 0.148 -0.100 0.144 0.104 -0.144 0.104))
+        profile(R2 polygon(-0.126 -0.084 0.126 -0.084 0.122 0.086 -0.122 0.086))
+        at(0 R0) linear(0.140 R1) linear(0.265 R2) cap(all)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+
+    # Core & chest musculature driven by Lyra's left-arm gesture & breath
+    [ T(-0.040 -0.370 0.095) MuscleBelly(0.230 0.034 0.020 -0.04*breath) ]
+    [ T(0.040 -0.370 0.095) MuscleBelly(0.230 0.034 0.020 -0.04*breath) ]
+    [ T(-0.082 -0.065 0.098) A(78 2) MuscleBelly(0.150 0.050 0.026 -0.16*abdL-0.06*flexL) ]
+    [ T(0.082 -0.065 0.098) A(-78 2) MuscleBelly(0.150 0.050 0.026 -0.03*breath) ]
+    [ T(-0.086 -0.220 -0.088) A(-16 2) MuscleBelly(0.245 0.052 0.024 0.10*abdL) ]
+    [ T(0.086 -0.220 -0.088) A(16 2) MuscleBelly(0.245 0.052 0.024 0.02*breath) ]
+
+    # Elastic torso undersuit envelope
+    [ T(0 -0.400 0.020) S(1+0.025*breath 1 1+0.032*breath+0.022*abdL)
+      I(AxialProfile(axis(y)
+        profile(Waist polygon(-0.145 -0.105 0.145 -0.105 0.140 0.108 -0.140 0.108))
+        profile(Ribs polygon(-0.168 -0.120 0.168 -0.120 0.165 0.126 -0.165 0.126))
+        profile(Shoulders polygon(-0.185 -0.118 0.185 -0.118 0.180 0.115 -0.180 0.115))
+        at(0 Waist) linear(0.240 Ribs) linear(0.455 Shoulders) cap(all)) material(blackbluefabric) alpha(suitAlpha) texscale(1)) ]
+
+    # Lyra chest cuirass, backplate & emissive core
+    [ T(0 -0.030 0.124) I(CurvedPanel(width(0.290) height(0.185) curvature(0.038 0.018) thickness(0.016) segments(10 6)) material(tealbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 -0.025 -0.122) I(CurvedPanel(width(0.270) height(0.190) curvature(-0.032 -0.014) thickness(0.016) segments(10 6)) material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 -0.190 0.118) S(0.190 0.110 0.024) I(CubeY material(blackbluemattepaint) alpha(1) texscale(1)) ]
+    [ T(0 0.005 0.148) S(0.072 0.028 0.010) I(CubeY material(cyanemissive) alpha(1) texscale(1)) ]
+    [ T(0 -0.065 0.142) S(0.042 0.014 0.010) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+
+    # Sternocleidomastoid neck muscles + silver collar (PartR35)
+    [ T(-0.034 0.078 0.005) A(-14 2) MuscleBelly(0.095 0.015 0.013 0.10*turnAct) ]
+    [ T(0.026 0.078 0.005) A(14 2) MuscleBelly(0.095 0.015 0.013 -0.12*turnAct) ]
+    [ T(-0.007 0.082 -0.019) I(Revolve(profile(Polygon 0.044 0 0.056 0 0.058 0.042 0.048 0.082 0.040 0.082) angle(0 360) segments(24) cap(all)) material(silvercyanpolishedmetal) alpha(1) texscale(1)) ]
+
+    # Head with exact relative turn (PartR23)
+    [ T(-0.004 0.245 -0.014)
+      A(0-0.6627*h0-12.7462*h1-0.749*h2-0.8887*h3+3.9896*h4+7.5026*h5+3.5937*h6-0.0457*h7-13.2084*h8-0.8714*h9+0.0005*h10 1)
+      A(0+0.0425*h0+0.4182*h1-0.1598*h2-0.5512*h3-0.051*h4+1.0315*h5+0.2536*h6-0.9801*h7+0.1148*h8-0.056*h9-0.0036*h10 2)
+      A(0+0.0461*h0+1.5173*h1+0.5033*h2+1.8972*h3+2.0153*h4-3.9491*h5-3.0066*h6+0.978*h7+3.0283*h8+0.0175*h9 0)
+      LyraHead
+    ]
+
+    # Right arm (anatomical muscles + elastic suit + gauntlet, coupled to chest sway)
+    [ T(0.172 -0.075 -0.028) LyraRightArm(suitAlpha) ]
+
+LyraHead ->
+    [ S(0.091 0.125 0.118) I(Sphere(segments(28 16) close(all)) material(blackbluemattepaint) alpha(1) texscale(1)) ]
+    [ T(0 0.024 0.012) S(0.095 0.112 0.122) I(SphereCap(axis(y) offset(0.18) side(positive) segments(24 12) close(all)) material(tealbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 -0.005 0.098) I(CurvedPanel(width(0.138) height(0.088) curvature(0.032 0.012) thickness(0.010) segments(10 6)) material(blackmattepaint) alpha(1) texscale(1)) ]
+    [ T(0 0.048 0.096) S(0.122 0.012 0.016) I(CubeY material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    [ T(-0.092 0.000 0.005) S(0.018 0.062 0.072) I(CubeY material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0.092 0.000 0.005) S(0.018 0.062 0.072) I(CubeY material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.068 -0.035) S(0.064 0.088 0.135) I(SphereCap(axis(y) offset(0.05) side(positive) segments(16 10) close(all)) material(violetmattepaint) alpha(1) texscale(1)) ]
+    [ T(0 -0.075 -0.055) S(0.120 0.085 0.095) I(CubeY material(bluecyanfabric) alpha(1) texscale(1)) ]
+    [ T(0 -0.082 0.062) S(0.082 0.024 0.036) I(CubeY material(silvercyanpolishedmetal) alpha(1) texscale(1)) ]
+    [ T(0 0.095 0.020) I(SweepDisk(path(0 0 0  0 0.025 -0.075  0 -0.010 -0.145) up(0 1 0) radius(0.014) radialSegments(12) cap(all)) material(tealbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.004 0.118) S(0.108 0.014 0.008) I(CubeY material(cyanemissive) alpha(1) texscale(1)) ]
+    [ T(-0.098 0.012 0.028) S(0.008 0.018 0.018) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+    [ T(0.098 0.012 0.028) S(0.008 0.018 0.018) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+
+# ============================================================================
+# LEFT & RIGHT ARMS (Anatomic Muscles + Elastic Suit + Lyra Gauntlets)
+# ============================================================================
+
+LyraLeftUpperArm(flexL abdL suitAlpha) ->
+    # Contractile deltoid cap + elastic shoulder capsule + pauldron
+    [ T(0 -0.018 0) S(1+0.12*abdL 1-0.14*abdL 1+0.12*abdL)
+      I(SphereCap(axis(y) offset(-0.20) side(positive) segments(18 10) close(all)) material(violetmattepaint) alpha(1) texscale(0.5)) ]
+    [ ElasticJointSleeve(0.064 0.062 0.064 abdL suitAlpha) ]
+    [ T(-0.010 0.010 0) S(0.068 0.056 0.070) I(SphereCap(axis(y) offset(0.10) side(positive) segments(16 8) close(all)) material(violetbluemetal) alpha(1) texscale(1)) ]
+    # Humerus bone shaft
+    [ T(-0.022 -0.220 0.005) S(0.016 0.220 0.016) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(12 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    # AGONIST biceps & brachialis (shorten up to 22%, bulge radially via 1/sqrt(sy))
+    [ T(-0.022 -0.215 0.028) MuscleBelly(0.210 0.032 0.030 -0.22*flexL) ]
+    [ T(-0.022 -0.205 0.015) MuscleBelly(0.155 0.026 0.020 -0.18*flexL) ]
+    # ANTAGONIST triceps (lengthens 18%, thins radially via 1/sqrt(sy))
+    [ T(-0.022 -0.215 -0.024) MuscleBelly(0.215 0.034 0.028 0.18*flexL) ]
+    # Elastic upper-arm suit sleeve & elbow crease capsule
+    [ T(-0.022 -0.220 0.005) ElasticSuitSleeve(0.220 0.040 0.050 0.14*flexL flexL suitAlpha) ]
+    [ T(-0.022 -0.220 0.005) ElasticJointSleeve(0.044 0.044 0.048 flexL suitAlpha) ]
+
+LyraLeftForearm(flexL suitAlpha) ->
+    [ T(0 -0.115 0) LyraForearmAnatomy(flexL suitAlpha) ]
+
+LyraLeftHand(suitAlpha) ->
+    [ T(0 -0.080 0) LyraHandGeometry ]
+
+LyraRightArm(suitAlpha) ->
+    [ T(0.010 0.010 0) S(0.068 0.056 0.070) I(SphereCap(axis(y) offset(0.10) side(positive) segments(16 8) close(all)) material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ ElasticJointSleeve(0.064 0.062 0.064 0.10 suitAlpha) ]
+    [ T(0.022 -0.220 0.004) S(0.016 0.220 0.016) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(12 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    [ T(0.022 -0.215 0.026) MuscleBelly(0.210 0.032 0.030 -0.04) ]
+    [ T(0.022 -0.215 -0.022) MuscleBelly(0.215 0.034 0.028 0.03) ]
+    [ T(0.022 -0.220 0.004) ElasticSuitSleeve(0.220 0.040 0.050 0.03 0.05 suitAlpha) ]
+    [ T(0.044 -0.455 0.055) A(-12 0) LyraForearmAnatomy(0.10 suitAlpha) ]
+    [ T(0.058 -0.595 0.112) A(-12 0) LyraHandGeometry ]
+
+LyraForearmAnatomy(flex suitAlpha) ->
+    # Radius & ulna paired bones
+    [ T(-0.009 0.000 0) S(0.011 0.235 0.011) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(10 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    [ T(0.009 0.000 0) S(0.011 0.235 0.011) I(Cylinder(radial(0 1) axial(0 1) azimuth(0 360) topology(solid) close(all) segments(10 1)) material(whitepolishedmetal) alpha(1) texscale(1)) ]
+    # Brachioradialis & forearm extensors
+    [ T(-0.014 0.015 0.016) MuscleBelly(0.210 0.022 0.022 -0.15*flex) ]
+    [ T(0.010 0.015 -0.014) MuscleBelly(0.205 0.020 0.018 0.10*flex) ]
+    # Elastic forearm suit sleeve
+    [ ElasticSuitSleeve(0.235 0.032 0.044 0.08*flex flex*0.5 suitAlpha) ]
+    # Lyra wrist wrap, violet gauntlet cuff & emissive strips
+    [ T(0 0.010 0) I(Revolve(profile(Polygon 0.033 0 0.040 0 0.042 0.065 0.035 0.065) angle(0 360) segments(18) cap(all)) material(bluecyanfabric) alpha(1) texscale(1)) ]
+    [ T(0 0.110 0.044) I(CurvedPanel(width(0.068) height(0.145) curvature(0.016 0.008) thickness(0.010) segments(6 6)) material(violetbluemetal) alpha(1) texscale(1)) ]
+    [ T(0 0.115 0.056) S(0.010 0.110 0.007) I(CubeY material(cyanemissive) alpha(1) texscale(1)) ]
+    [ T(0 0.040 0.046) S(0.022 0.010 0.007) I(CubeY material(amberemissive) alpha(1) texscale(1)) ]
+
+LyraHandGeometry ->
+    [ I(AxialProfile(axis(y)
+        profile(Tips polygon(-0.022 -0.038 0.022 -0.038 0.020 0.044 -0.020 0.044))
+        profile(Palm polygon(-0.028 -0.048 0.028 -0.048 0.026 0.052 -0.026 0.052))
+        profile(Wrist polygon(-0.024 -0.032 0.024 -0.032 0.024 0.032 -0.024 0.032))
+        at(0 Tips) linear(0.085 Palm) linear(0.158 Wrist) cap(all)) material(bluecyanfabric) alpha(1) texscale(1)) ]
+    [ T(0 0.088 0.048) A(28 0) S(0.022 0.064 0.026) I(CubeY material(bluecyanfabric) alpha(1) texscale(1)) ]

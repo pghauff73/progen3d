@@ -1,0 +1,12 @@
+# Ender-3 X carriage service loop. Metres, Z up; isolated horizontal travel.
+# The clamp is pinned to the frame. The far node follows the carriage mount.
+# Play the first 2 s in Simulate, then choose the wire in Physics replay.
+Start -> G(0 0 0 -1) [ Rail ] [ FrameClamp ] [ Harness(0.18 0.055) ] [ Carriage(-0.06) ]
+
+Rail -> T(0.1 0.035 0.125) S(0.24 0.018 0.018) !I(Cube material(silverbrushedmetal) 1 1)
+FrameClamp -> T(0 0 0.15) S(0.014 0.018 0.018) !I(Cube material(graphite) 1 1)
+Harness(span slack) -> T(0 0 0.15) FlexDimensions(span 0.004 slack) FlexGrid(24 0)
+    FlexMaterial(1200 5000000 4) FlexPin(0 0) FlexAnchor(XCarriage 24 0)
+    I(FlexibleWire material(copper) 1 1)
+Carriage(speed) -> Object(id(XCarriage) class(Carriage) taxonomy(Printer Motion Carriage) layer(Equipment))
+    [ T(0.18 0.012 0.15) V(speed 0 0) S(0.025 0.022 0.025) I(Cube material(steel) 1 1) ]

@@ -1,0 +1,8 @@
+# ProGen3D registered mesh example. Open in the Paper Studio native grammar editor.
+# The reference vehicle body is packaged with Paper Studio 0.81.
+Start ->
+    I(GeneratedMeshReference(
+        meshKey(MCSMv22ReferenceFixedBodyMesh)
+        detail(LOD2)
+        topology(surface))
+      material(redmetallicpaint) alpha(1) texscale(0.1))

@@ -1,0 +1,6 @@
+# M07 separate volume-envelope study: unlocated tank cylinders, not installed in Meridian.
+Start -> [ Object(id(M07_TANK_STUDY_ROOT) class(Spacecraft) taxonomy(Spacecraft Meridian TankStudy) layer(Structure)) [ 
+  [ Object(id(LH2_ENVELOPE) class(UnlocatedCryogenicTankEnvelope) taxonomy(Spacecraft Meridian UnlocatedCryogenicTankEnvelope) layer(Equipment)) [ T(0 -10 0) !I(Revolve(profile(Polygon 0 0 1.87750537 0 1.87750537 12.00000000 0 12.00000000) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ] ]
+  [ Object(id(LCH4_ENVELOPE) class(UnlocatedCryogenicTankEnvelope) taxonomy(Spacecraft Meridian UnlocatedCryogenicTankEnvelope) layer(Equipment)) [ T(0 0 0) !I(Revolve(profile(Polygon 0 0 0.85918302 0 0.85918302 7.00000000 0 7.00000000) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ] ]
+  [ Object(id(LOX_ENVELOPE) class(UnlocatedCryogenicTankEnvelope) taxonomy(Spacecraft Meridian UnlocatedCryogenicTankEnvelope) layer(Equipment)) [ T(0 10 0) !I(Revolve(profile(Polygon 0 0 0.67325918 0 0.67325918 7.00000000 0 7.00000000) angle(0 360) segments(48) cap(all)) material(silverbrushedmetal) 1 1) ] ]
+] ]

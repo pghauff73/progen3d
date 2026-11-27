@@ -1,0 +1,61 @@
+{
+  "title": "XCarriage Belt NEMA17",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/xcarriage-belt-nema17-419577d2",
+  "source_file": "XCarriage_Belt_NEMA17.p3d",
+  "git_blob_sha": "419577d2393160c7f514826853bcae360db1566f",
+  "bytes": 22847,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "XCarriage_Belt_NEMA17.p3d"
+  ],
+  "description": "X CARRIAGE / 2GT BELT / NEMA 17 — ENGINEERING GRAMMAR",
+  "features": [
+    "Extrude",
+    "HostedOpening",
+    "Revolve",
+    "Cube",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "X CARRIAGE / 2GT BELT / NEMA 17 — ENGINEERING GRAMMAR · Dimensions in millimetres. Native procedural constructors only. · Default motor: STEPPERONLINE 17HS13-1334S nominal manufacturer dimensions. · This is a new symmetric drive, informed by the preceding Ender-3 rail/carriage. · Coordinate frame: X travel, Y up, Z from rail towards carriage and belt. · Equal toothed pulleys; open belt with two carriage clamps on the upper run. · Pitch path L=2*C+N*p-gap. Clamp engagement is INCLUDED in the modelled belt. · There are no unmodelled clamp tails in this ideal cut-length equation. · Belt tooth and pulley groove forms are simplified engineering envelopes. · Threads, fits, bearing life, belt tension and stiffness are not certified."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, HostedOpening, Revolve, Cube, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "blackmatteplastic, silverbrushedmetal, orangematteplastic, blackmattemetal, coppermetal, tealmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, EngineeringAxis, MotionSelect, AxisPose, RailAndMounts, MotorDrive, IdlerDrive, BeltGroup, CarriageGroup, OpenTimingBelt, BeltToothAt, BeltTooth, TimingPulley, HubSetScrew, NEMA17Body, MotorShaft, MotorMountArm, IdlerMountFasteners, RailTnutZ, IdlerAxle (39 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "288"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

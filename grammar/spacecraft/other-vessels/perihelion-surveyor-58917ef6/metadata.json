@@ -1,0 +1,61 @@
+{
+  "title": "Perihelion Surveyor",
+  "group": "spacecraft/other-vessels",
+  "directory": "spacecraft/other-vessels/perihelion-surveyor-58917ef6",
+  "source_file": "Perihelion_Surveyor.p3d",
+  "git_blob_sha": "58917ef6db83e960d5a75904ee7c13f2e9658c32",
+  "bytes": 43344,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Perihelion_Surveyor.p3d"
+  ],
+  "description": "PERIHELION SURVEYOR | ProGen3D | reference study 907",
+  "features": [
+    "Revolve",
+    "Cube",
+    "Sphere",
+    "Loft",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "PERIHELION SURVEYOR | ProGen3D | reference study 907 · Model units are relative. +Y is dorsal, +Z is the flared engine end. · The named ship opens by itself. For the cover composition change Start to Encounter. · Surveyor takes a uniform scale and a reflector tilt in degrees. Suggested tilt range 35 to 65. · The far side, underside and cropped tip are interpretations of the single painted view. · @surface warmwhitemattepaint roughness 0.45 color 0.93 0.88 0.76 · @surface beigemattepaint roughness 0.48 color 0.82 0.75 0.59 · @surface blackmattemetal roughness 0.58 color 0.1 0.135 0.155 · @surface blackpolishedmetal roughness 0.17 color 0.035 0.092 0.105 · @surface goldmattepaint roughness 0.46 color 0.84 0.71 0.36"
+    ],
+    [
+      "Named objects",
+      "SurveyVessel, Drum, ForwardShell, FlightDeck, Propulsion, SignalMast, PortReflector, StarboardBoom, ServiceCage"
+    ],
+    [
+      "Object classes",
+      "Spacecraft, Hull, Command, Engine, Mast, Antenna, Instrument, Truss"
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, Cube, Sphere, Loft, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "blackmattemetal, greymattemetal, silverbrushedmetal, warmwhitemattepaint, beigemattepaint, goldmattepaint, amberbrushedmetal, blackpolishedmetal, copperbrushedmetal, cyanpolishedmetal, ambermattepaint, sandgoldmattepaint, coppermattepaint, orangemattepaint, beigewarmmattepaint, redmattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Surveyor, Keel, HullDrum, ShoulderPlates, CrownTiles, Forebody, ObservationPort, Viewport, AuxiliaryHatch, ServiceDeck, DeckCabinet, DeckOptic, LouverBank, HullPipes, HullMarkings, MaintenancePlate, StencilPair, CautionBars, BridgeSpine (39 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "483"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

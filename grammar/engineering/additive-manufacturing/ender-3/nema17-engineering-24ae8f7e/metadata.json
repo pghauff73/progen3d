@@ -1,0 +1,58 @@
+{
+  "title": "NEMA17 Engineering",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/nema17-engineering-24ae8f7e",
+  "source_file": "NEMA17_Engineering.p3d",
+  "git_blob_sha": "24ae8f7ecabcc7f8b0582e1f64005d22e0530e84",
+  "bytes": 19936,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "NEMA17_Engineering.p3d"
+  ],
+  "description": "NEMA 17 | STEPPERONLINE 17HS19-2004S1 | engineering reference",
+  "features": [
+    "Extrude",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "NEMA 17 | STEPPERONLINE 17HS19-2004S1 | engineering reference · Self-contained native ProGen3D grammar. Paper Studio Android 0.82. · Start arguments: section (0 assembled / 1 longitudinal cutaway), full steps/s, · direction (+1/-1), shaft projection in mm, flat length in mm. · Set the rate to 0 to park. Use a positive projection with 0 < flat < projection. · One grammar unit = one millimetre throughout, including the assembly interfaces. · Origin: mounting face centre, +Z out of shaft, +X normal to flat at t=0. · Positive direction is CCW viewed from the output end. Ideal command position. · Front taps are open smooth 2.5 mm minor-bore representations of M3 x 0.5. · They terminate 4.5 mm behind the mounting face. Threads are schematic."
+    ],
+    [
+      "Named objects",
+      "Nema17Motor, MotorFrame, Mount, MountNE, MountNW, MountSW, MountSE, Stator, FrontBearing, RearBearing, PhaseLeads, OutputShaft, Output, RearRotor, FrontRotor, AxialMagnet"
+    ],
+    [
+      "Object classes",
+      "StepperMotor, MotorHousing, WoundStator, Bearing, WiringHarness, DriveShaft, HybridRotorCup, PermanentMagnet"
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, graphite, greenmattepaint, redmattepaint, bluemattepaint, charcoalmattemetal, steelshinyroughmetal, copperpolishedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Nema17, MotorParts, RotatingGroup, Leads, LeadBlack, LeadGreen, LeadRed, LeadBlue, FaceLower, FaceUpper, EndBellWeb, RearClosure, StackWeb, StackJoint, PilotQuarter, YokeQuarter, BearingRace, BearingShield, MagnetQuarter (26 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "306"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

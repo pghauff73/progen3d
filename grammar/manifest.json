@@ -3,7 +3,7 @@
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
   "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 145,
+  "distinct_sources": 164,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -5093,6 +5093,70 @@
       }
     },
     {
+      "title": "Lyra Anatomic Elastic Motion",
+      "group": "characters/lyra/exported-milestones",
+      "directory": "characters/lyra/exported-milestones/lyra-anatomic-elastic-motion-d3b7eb95",
+      "source_file": "Lyra_Anatomic_Elastic_Motion.p3d",
+      "git_blob_sha": "d3b7eb9537cb92fa07fcad2e7724fad115dcfb48",
+      "bytes": 21714,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Lyra_Anatomic_Elastic_Motion.p3d"
+      ],
+      "description": "Lyra | Anatomic Elastic Skin, Muscle & Armor Grammar (Pure Procedural Native Desktop)",
+      "features": [
+        "Cylinder",
+        "AxialProfile",
+        "Sphere",
+        "CubeY",
+        "SphereCap",
+        "CurvedPanel",
+        "Revolve",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Lyra | Anatomic Elastic Skin, Muscle & Armor Grammar (Pure Procedural Native Desktop) · World units: metres. +Y up. Zero raw mesh-v1 blocks. · Combines Lyra_Reference_Motion.p3d proportions, all 11 native Lyra materials, and 15-second · non-looping gesture with volume-preserving contractile muscles (1/sqrt(1+strain)) and DSY/DTZ · elastic skin/undersuit envelopes. · Set suitAlpha=0.45 (default) to inspect muscle contraction beneath the suit, or 1.0 for opaque Lyra. · Compute data-driven anatomical activations [0..1] from Lyra's 15s trajectory · Planted lower body (static stance matching PartR0..PartR22) · Articulated torso, neck, head, and right arm (hierarchical chain from PartR47) · Articulated left arm & hand (exact 15s world-space gesture + live elastic muscles)"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cylinder, AxialProfile, Sphere, CubeY, SphereCap, CurvedPanel, Revolve, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "silvercyanpolishedmetal, violetmattepaint, blackbluefabric, blackbluemattepaint, tealbluemetal, violetbluemetal, cyanemissive, whitepolishedmetal, amberemissive, blackmattepaint, bluecyanfabric"
+        ],
+        [
+          "Production rules",
+          "Start, Speed, Clock, Animate, LyraScene, MuscleBelly, MuscleSpindle, ElasticSuitSleeve, ElasticJointSleeve, LyraLeg, LyraBoot, LyraShin, LyraThigh, LyraPelvis, LyraUpperTorso, LyraHead, LyraLeftUpperArm, LyraLeftForearm, LyraLeftHand, LyraRightArm (22 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "293"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Facial Elastic Study",
       "group": "characters/lyra/facial-models",
       "directory": "characters/lyra/facial-models/facial-elastic-study-89c08b65",
@@ -5793,6 +5857,64 @@
       }
     },
     {
+      "title": "Ender3 Carriage Harness 0.82",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-carriage-harness-0-82-eb2bfb29",
+      "source_file": "Ender3_Carriage_Harness_0.82.p3d",
+      "git_blob_sha": "eb2bfb2973e244c4755738146d6490be3dbd02ff",
+      "bytes": 880,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Carriage_Harness_0.82.p3d"
+      ],
+      "description": "Ender-3 X carriage service loop. Metres, Z up; isolated horizontal travel.",
+      "features": [
+        "Cube",
+        "FlexibleWire"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Ender-3 X carriage service loop. Metres, Z up; isolated horizontal travel. · The clamp is pinned to the frame. The far node follows the carriage mount. · Play the first 2 s in Simulate, then choose the wire in Physics replay."
+        ],
+        [
+          "Named objects",
+          "XCarriage"
+        ],
+        [
+          "Object classes",
+          "Carriage"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, FlexibleWire"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, graphite, copper, steel"
+        ],
+        [
+          "Production rules",
+          "Start, Rail, FrameClamp, Harness, Carriage (5 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "13"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Ender3 Y Hi Res Animated Overview",
       "group": "engineering/additive-manufacturing/ender-3",
       "directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-animated-overview-944c6518",
@@ -5803,7 +5925,8 @@
       "source_commit": null,
       "original_paths": [],
       "library_exports": [
-        "Ender3_Y_HiRes_Animated_Overview.p3d"
+        "Ender3_Y_HiRes_Animated_Overview.p3d",
+        "Ender3_Y_M2_4_Unified_Animated_Overview.p3d"
       ],
       "description": "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions.",
       "features": [
@@ -5894,6 +6017,411 @@
         [
           "Source lines",
           "7"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y M2 4 Belt Animated",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-4-belt-animated-30481008",
+      "source_file": "Ender3_Y_M2_4_Belt_Animated.p3d",
+      "git_blob_sha": "30481008b25b79c5847766da9f31dbac06a8aa28",
+      "bytes": 11411,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M2_4_Belt_Animated.p3d"
+      ],
+      "description": "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M24Controls, M24Assembly, M24Belt (4 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "110"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y M2 5 Belt Dynamics",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-5-belt-dynamics-58afb132",
+      "source_file": "Ender3_Y_M2_5_Belt_Dynamics.p3d",
+      "git_blob_sha": "58afb13233709064ff5218228488143c5bcdbb41",
+      "bytes": 15751,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M2_5_Belt_Dynamics.p3d"
+      ],
+      "description": "M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free. · Motor & carriage derived from independent physical states; bed platform from its own flexible state. · Assumed parameters; baked replay, NOT live ODE. Native source values in mm at 0.001m root scale. · ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M24Controls, M24Assembly, M24Belt (4 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "113"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y M2 5 Unified Dynamics Overview",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-5-unified-dynamics-overview-18481fd1",
+      "source_file": "Ender3_Y_M2_5_Unified_Dynamics_Overview.p3d",
+      "git_blob_sha": "18481fd13baba18819330f8665b47ea9b339a50f",
+      "bytes": 28294,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M2_5_Unified_Dynamics_Overview.p3d"
+      ],
+      "description": "M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "M2.5: 8-state ODE replay with piecewise linear sampled motion; source engine remains mesh-free. · Motor & carriage derived from independent physical states; bed platform from its own flexible state. · Assumed parameters; baked replay, NOT live ODE. Native source values in mm at 0.001m root scale. · ProGen3D M2.4. Source geometry mm; scene root metres. 31 inherited mesh-free definitions. · The model does not certify electrical homing, belt stretch or physical collision-free travel. · GT2: pitch 2mm x 20T = 40mm/rev. Effective idler radius 8mm uncalibrated. · Software-only optional trigger clamp; source factory switch actuator travel UNMEASURED."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M24Controls, M24Assembly, M24Belt (4 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "185"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y M2 6 Low LOD",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-6-low-lod-08b0dd3d",
+      "source_file": "Ender3_Y_M2_6_Low_LOD.p3d",
+      "git_blob_sha": "08b0dd3d001e9f77d17cf037a2397be8b0b3a233",
+      "bytes": 39812,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M2_6_Low_LOD.p3d"
+      ],
+      "description": "M2.6 LOW LOD procedural schematic; time driven native replay, mesh-free.",
+      "features": [
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "M2.6 LOW LOD procedural schematic; time driven native replay, mesh-free."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M26Low, M26Telemetry (3 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "32"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Ender3 Y M23 Unified Animated Overview",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/ender3-y-m23-unified-animated-overview-75498c82",
+      "source_file": "Ender3_Y_M23_Unified_Animated_Overview.p3d",
+      "git_blob_sha": "75498c82bc00e3179329e0d81575341b64caeb80",
+      "bytes": 12062,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Ender3_Y_M23_Unified_Animated_Overview.p3d"
+      ],
+      "description": "M2.3 Native ProGen3D module. mm -> m in Start. Factory-CAD geometry only.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "M2.3 Native ProGen3D module. mm -> m in Start. Factory-CAD geometry only. · All five modules share one rail-centred frame. Travel is illustrative, not a physical limit-switch measurement. · Wheel rotation and pulley transmission are kinematic approximations; belt shape is static CAD reference."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, blackmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, M23Controls, M23Assembly (3 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "84"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "NEMA17 Engineering",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/nema17-engineering-24ae8f7e",
+      "source_file": "NEMA17_Engineering.p3d",
+      "git_blob_sha": "24ae8f7ecabcc7f8b0582e1f64005d22e0530e84",
+      "bytes": 19936,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "NEMA17_Engineering.p3d"
+      ],
+      "description": "NEMA 17 | STEPPERONLINE 17HS19-2004S1 | engineering reference",
+      "features": [
+        "Extrude",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "NEMA 17 | STEPPERONLINE 17HS19-2004S1 | engineering reference · Self-contained native ProGen3D grammar. Paper Studio Android 0.82. · Start arguments: section (0 assembled / 1 longitudinal cutaway), full steps/s, · direction (+1/-1), shaft projection in mm, flat length in mm. · Set the rate to 0 to park. Use a positive projection with 0 < flat < projection. · One grammar unit = one millimetre throughout, including the assembly interfaces. · Origin: mounting face centre, +Z out of shaft, +X normal to flat at t=0. · Positive direction is CCW viewed from the output end. Ideal command position. · Front taps are open smooth 2.5 mm minor-bore representations of M3 x 0.5. · They terminate 4.5 mm behind the mounting face. Threads are schematic."
+        ],
+        [
+          "Named objects",
+          "Nema17Motor, MotorFrame, Mount, MountNE, MountNW, MountSW, MountSE, Stator, FrontBearing, RearBearing, PhaseLeads, OutputShaft, Output, RearRotor, FrontRotor, AxialMagnet"
+        ],
+        [
+          "Object classes",
+          "StepperMotor, MotorHousing, WoundStator, Bearing, WiringHarness, DriveShaft, HybridRotorCup, PermanentMagnet"
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, graphite, greenmattepaint, redmattepaint, bluemattepaint, charcoalmattemetal, steelshinyroughmetal, copperpolishedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, Nema17, MotorParts, RotatingGroup, Leads, LeadBlack, LeadGreen, LeadRed, LeadBlue, FaceLower, FaceUpper, EndBellWeb, RearClosure, StackWeb, StackJoint, PilotQuarter, YokeQuarter, BearingRace, BearingShield, MagnetQuarter (26 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "306"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "XCarriage Belt NEMA17",
+      "group": "engineering/additive-manufacturing/ender-3",
+      "directory": "engineering/additive-manufacturing/ender-3/xcarriage-belt-nema17-419577d2",
+      "source_file": "XCarriage_Belt_NEMA17.p3d",
+      "git_blob_sha": "419577d2393160c7f514826853bcae360db1566f",
+      "bytes": 22847,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "XCarriage_Belt_NEMA17.p3d"
+      ],
+      "description": "X CARRIAGE / 2GT BELT / NEMA 17 — ENGINEERING GRAMMAR",
+      "features": [
+        "Extrude",
+        "HostedOpening",
+        "Revolve",
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "X CARRIAGE / 2GT BELT / NEMA 17 — ENGINEERING GRAMMAR · Dimensions in millimetres. Native procedural constructors only. · Default motor: STEPPERONLINE 17HS13-1334S nominal manufacturer dimensions. · This is a new symmetric drive, informed by the preceding Ender-3 rail/carriage. · Coordinate frame: X travel, Y up, Z from rail towards carriage and belt. · Equal toothed pulleys; open belt with two carriage clamps on the upper run. · Pitch path L=2*C+N*p-gap. Clamp engagement is INCLUDED in the modelled belt. · There are no unmodelled clamp tails in this ideal cut-length equation. · Belt tooth and pulley groove forms are simplified engineering envelopes. · Threads, fits, bearing life, belt tension and stiffness are not certified."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Extrude, HostedOpening, Revolve, Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "blackmatteplastic, silverbrushedmetal, orangematteplastic, blackmattemetal, coppermetal, tealmattemetal"
+        ],
+        [
+          "Production rules",
+          "Start, EngineeringAxis, MotionSelect, AxisPose, RailAndMounts, MotorDrive, IdlerDrive, BeltGroup, CarriageGroup, OpenTimingBelt, BeltToothAt, BeltTooth, TimingPulley, HubSetScrew, NEMA17Body, MotorShaft, MotorMountArm, IdlerMountFasteners, RailTnutZ, IdlerAxle (39 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "288"
         ]
       ],
       "render_assets": [],
@@ -6644,6 +7172,291 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 55,
         "validation_status": "Not independently validated; historical development branch",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Animated Procedural Materials",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/animated-procedural-materials-e722e40f",
+      "source_file": "Animated_Procedural_Materials.p3d",
+      "git_blob_sha": "e722e40fd4c1e6f9c259282fd0470b9ac907823f",
+      "bytes": 1858,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Animated_Procedural_Materials.p3d"
+      ],
+      "description": "Six authored material-state animations with a shared six-second loop.",
+      "features": [
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Six authored material-state animations with a shared six-second loop. · These are artistic surface controls, not fluid/corrosion/thermal solvers. · @texture rule:Effect1 hologram uv 3 · @surface rule:Effect1 color 1 1 1 roughness 0.4 metallic 0 relief 0 · @texture-motion rule:Effect1 shimmer period 6 speed 1 amount 0.85 phase 0 seed 0 · @texture rule:Effect2 water uv 2 · @surface rule:Effect2 color 1 1 1 roughness 0.08 metallic 0 relief 1 · @texture-motion rule:Effect2 flow period 6 speed 1 amount 0.85 phase 0 seed 0 · @texture rule:Effect3 lava uv 2 · @surface rule:Effect3 color 1 1 1 roughness 0.84 metallic 0 relief 0.8"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Sphere"
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6 (7 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "37"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Procedural Material Catalogue",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/procedural-material-catalogue-bfbb45d8",
+      "source_file": "Procedural_Material_Catalogue.p3d",
+      "git_blob_sha": "bfbb45d8ae55dd313c5e3046c7ab561e9057d4b7",
+      "bytes": 7393,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Procedural_Material_Catalogue.p3d"
+      ],
+      "description": "Animated procedural material catalogue: 24 native spheres, static geometry.",
+      "features": [
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Animated procedural material catalogue: 24 native spheres, static geometry. · Play or scrub the timeline in the updated workshop. Times below are seconds. · Physical solids stay static unless a state animation is explicitly assigned. · Texture-motion directives change shading only; they do not deform geometry. · @texture rule:Material1 woven uv 6 · @surface rule:Material1 color 0.82 0.8 0.75 roughness 0.82 metallic 0 relief 0.7 · @texture-motion rule:Material1 none period 6 speed 1 amount 0.85 phase 0 seed 0 · @texture rule:Material2 pine_grain uv 2 · @surface rule:Material2 color 0.88 0.7 0.46 roughness 0.57 metallic 0 relief 0.65 · @texture-motion rule:Material2 none period 6 speed 1 amount 0.85 phase 0 seed 0"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Sphere"
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start, Material1, Material2, Material3, Material4, Material5, Material6, Material7, Material8, Material9, Material10, Material11, Material12, Material13, Material14, Material15, Material16, Material17, Material18, Material19 (25 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "129"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Registered Mesh Example",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/registered-mesh-example-b3f7d848",
+      "source_file": "Registered_Mesh_Example.p3d",
+      "git_blob_sha": "b3f7d848e070d4d258db84d8cba0b289a8a29435",
+      "bytes": 340,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Registered_Mesh_Example.p3d"
+      ],
+      "description": "ProGen3D registered mesh example. Open in the Paper Studio native grammar editor.",
+      "features": [
+        "GeneratedMeshReference"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "ProGen3D registered mesh example. Open in the Paper Studio native grammar editor. · The reference vehicle body is packaged with Paper Studio 0.81."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "GeneratedMeshReference"
+        ],
+        [
+          "Material identifiers",
+          "redmetallicpaint"
+        ],
+        [
+          "Production rules",
+          "Start (1 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "9"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "speech 48x64",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/speech-48x64-9a79be88",
+      "source_file": "speech_48x64.p3d",
+      "git_blob_sha": "9a79be88a552c108c7d7f362082b760462f81c99",
+      "bytes": 1873,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "speech_48x64.p3d"
+      ],
+      "description": "EXPERIMENTAL scripted visemes; no native acceptance or audio sync.",
+      "features": [
+        "FacialSkin"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "EXPERIMENTAL scripted visemes; no native acceptance or audio sync."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "FacialSkin"
+        ],
+        [
+          "Material identifiers",
+          "silvercyanpolishedmetal"
+        ],
+        [
+          "Production rules",
+          "Start, Speech (2 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "4"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Two Brackets",
+      "group": "engineering/exported-studies",
+      "directory": "engineering/exported-studies/two-brackets-bf7646ab",
+      "source_file": "Two_Brackets.p3d",
+      "git_blob_sha": "bf7646ab151b8330afa1b59a6248ffe3de10b0d4",
+      "bytes": 638,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Two_Brackets.p3d"
+      ],
+      "description": "One 20 x 10 x 12 mm Z-up STL, placed twice 30 mm apart along X.",
+      "features": [
+        "GeneratedMeshReference"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "One 20 x 10 x 12 mm Z-up STL, placed twice 30 mm apart along X. · @mesh-v1 Bracket mm Z · v 0 0 0 · v 20 0 0 · v 20 0 2 · v 2 0 2 · v 0 0 12 · v 2 0 12 · v 20 10 2 · v 20 10 0"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "GeneratedMeshReference"
+        ],
+        [
+          "Material identifiers",
+          "greenmattemetal, redmetallicpaint"
+        ],
+        [
+          "Production rules",
+          "Start (1 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "38"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -7617,6 +8430,180 @@
       }
     },
     {
+      "title": "Meridian M07 Tank Envelope Study",
+      "group": "spacecraft/meridian/interior/habitation",
+      "directory": "spacecraft/meridian/interior/habitation/meridian-m07-tank-envelope-study-72128a96",
+      "source_file": "Meridian_M07_Tank_Envelope_Study.p3d",
+      "git_blob_sha": "72128a96edcb342135222a0ae744bb654853157e",
+      "bytes": 1152,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Meridian_M07_Tank_Envelope_Study.p3d"
+      ],
+      "description": "M07 separate volume-envelope study: unlocated tank cylinders, not installed in Meridian.",
+      "features": [
+        "Revolve"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "M07 separate volume-envelope study: unlocated tank cylinders, not installed in Meridian."
+        ],
+        [
+          "Named objects",
+          "M07_TANK_STUDY_ROOT, LH2_ENVELOPE, LCH4_ENVELOPE, LOX_ENVELOPE"
+        ],
+        [
+          "Object classes",
+          "Spacecraft, UnlocatedCryogenicTankEnvelope"
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal"
+        ],
+        [
+          "Production rules",
+          "Start (1 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "7"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Meridian M073 Interior Study",
+      "group": "spacecraft/meridian/interior/habitation",
+      "directory": "spacecraft/meridian/interior/habitation/meridian-m073-interior-study-89af9de0",
+      "source_file": "Meridian_M073_Interior_Study.p3d",
+      "git_blob_sha": "89af9de078eef5dcb1dc854490c646a362e68e8c",
+      "bytes": 49045,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Meridian_M073_Interior_Study.p3d"
+      ],
+      "description": "Meridian M07.3 independently compiled interface-detail study.",
+      "features": [
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Meridian M07.3 independently compiled interface-detail study. · Markers only for unbuilt openings; master M07.2 grammar preserved unmodified."
+        ],
+        [
+          "Named objects",
+          "M073_InteriorStudy, PORTAL_PRESSURE_0148_J0, PORTAL_PRESSURE_0148_J1, PORTAL_PRESSURE_0148_H, PORTAL_PRESSURE_0148_SILL, STATUS_PRESSURE_0148, PORTAL_PRESSURE_0149_J0, PORTAL_PRESSURE_0149_J1, PORTAL_PRESSURE_0149_H, PORTAL_PRESSURE_0149_SILL, STATUS_PRESSURE_0149, PORTAL_PRESSURE_0150_J0, PORTAL_PRESSURE_0150_J1, PORTAL_PRESSURE_0150_H, PORTAL_PRESSURE_0150_SILL, STATUS_PRESSURE_0150, PORTAL_PRESSURE_0151_J0, PORTAL_PRESSURE_0151_J1, PORTAL_PRESSURE_0151_H, PORTAL_PRESSURE_0151_SILL, STATUS_PRESSURE_0151, PORTAL_PRESSURE_0152_J0, PORTAL_PRESSURE_0152_J1, PORTAL_PRESSURE_0152_H (+186 more)"
+        ],
+        [
+          "Object classes",
+          "StudyAssembly, InterfaceStudyPiece"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube"
+        ],
+        [
+          "Material identifiers",
+          "silverbrushedmetal, goldbrushedmetal, paleblueemissivepaint"
+        ],
+        [
+          "Production rules",
+          "Start (1 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "215"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Meridian Observatory",
+      "group": "spacecraft/meridian/interior/habitation",
+      "directory": "spacecraft/meridian/interior/habitation/meridian-observatory-b86c5a08",
+      "source_file": "Meridian_Observatory.p3d",
+      "git_blob_sha": "b86c5a08e7fe95ebb8e2ed3cba37a519d7ab48ba",
+      "bytes": 19652,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Meridian_Observatory.p3d"
+      ],
+      "description": "MERIDIAN  /  Deep-space interferometer",
+      "features": [
+        "Cube",
+        "SweepDisk",
+        "Revolve",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "MERIDIAN  /  Deep-space interferometer · Geometry study from the port-bow concept image. Metres; +X aft, +Y up, +Z port. · Start arguments: overall scale, half the telescope baseline in m, drum period in s. · The default is 900 m long with a 150 m baseline. Positive period required. · Try 65 to 85 m for the half-baseline. Try 120 for a slower habitat rotation. · For a spacecraft-only view use Start as printed. For the staged view replace · the Start line with: Start -> [ Meridian(1 75 60) ] [ RingedGiant ] · Preview camera in native metres, 35 mm lens on a 36 mm horizontal sensor. · Eye (-625.727 61.995 472.767), forward (0.74322 -0.07731 -0.66456), +Y up. · Lens shift (horizontal sensor-width units): -0.12503 -0.00547."
+        ],
+        [
+          "Named objects",
+          "MeridianRoot, PortBoom, StarboardBoom, PortTelescope, StarboardTelescope, ServiceBay, FixedYoke, Habitat, AftSpine, ForwardFin, MiddleFin, AftFin, Drive"
+        ],
+        [
+          "Object classes",
+          "Spacecraft, OpticalTruss, Telescope, AccessGallery, BearingCarrier, RotatingHabitat, EngineMount, Radiator, Propulsion"
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, SweepDisk, Revolve, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "whitebeigemattepaint, copperbrushedmetal, slategreymattemetal, silverbrushedmetal, blackmattemetal, blackgreymattemetal, goldbrushedmetal, blackbluepolishedglass, lightgoldpolishedmetal, warmwhiteemissivepaint, redbrownmattemetal, amberemissivepaint, paleblueemissivepaint, paleochremattepaint, sandmattepaint, warmbeigemattepaint, ivorymattepaint, slategreymattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Meridian, Boom, Longerons, WarrenBay, Bulkhead, JunctionBox, Telescope, KnifeEdge, FoilPetal, BarrelStrap, ReplacementBlanket, Gallery, Technician, Yoke, HabitatDrum, HabitatSector, HabitatSpoke, AftSpine, EquipmentBelt (29 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "279"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Meridian R01 H03 Cabin Detailed",
       "group": "spacecraft/meridian/interior/habitation",
       "directory": "spacecraft/meridian/interior/habitation/meridian-r01-h03-cabin-detailed-290e222c",
@@ -7669,6 +8656,64 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 55,
         "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Meridian Service Airlock",
+      "group": "spacecraft/meridian/interior/habitation",
+      "directory": "spacecraft/meridian/interior/habitation/meridian-service-airlock-a6c5cc95",
+      "source_file": "Meridian_Service_Airlock.p3d",
+      "git_blob_sha": "a6c5cc95a99bb77230c8782d7ca808cd4dfeaafa",
+      "bytes": 32990,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Meridian_Service_Airlock.p3d"
+      ],
+      "description": "Meridian service airlock | cinematic model",
+      "features": [
+        "Loft",
+        "Cube"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Meridian service airlock | cinematic model · Metres, +Y up, +Z through the exterior hatch. · Airlock(lift) uses 0 m for closed and 3.1 m for open. · Film placement in the revised Meridian coordinate frame: · [ T(-35.7 -0.09 -229.3) Airlock(3.1) ]"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Loft, Cube"
+        ],
+        [
+          "Material identifiers",
+          "whitebeigemattepaint, silverbrushedmetal, orangeglosspaint, charcoalmattemetal, paleblueemissivepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Airlock, AirlockShell, AirlockHatch (4 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "139"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -8431,11 +9476,72 @@
         "validation_status": "Complete text extracted; source byte count matched; no parser/render/physical validation performed",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
+    },
+    {
+      "title": "Perihelion Surveyor",
+      "group": "spacecraft/other-vessels",
+      "directory": "spacecraft/other-vessels/perihelion-surveyor-58917ef6",
+      "source_file": "Perihelion_Surveyor.p3d",
+      "git_blob_sha": "58917ef6db83e960d5a75904ee7c13f2e9658c32",
+      "bytes": 43344,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Perihelion_Surveyor.p3d"
+      ],
+      "description": "PERIHELION SURVEYOR | ProGen3D | reference study 907",
+      "features": [
+        "Revolve",
+        "Cube",
+        "Sphere",
+        "Loft",
+        "SweepDisk"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "PERIHELION SURVEYOR | ProGen3D | reference study 907 · Model units are relative. +Y is dorsal, +Z is the flared engine end. · The named ship opens by itself. For the cover composition change Start to Encounter. · Surveyor takes a uniform scale and a reflector tilt in degrees. Suggested tilt range 35 to 65. · The far side, underside and cropped tip are interpretations of the single painted view. · @surface warmwhitemattepaint roughness 0.45 color 0.93 0.88 0.76 · @surface beigemattepaint roughness 0.48 color 0.82 0.75 0.59 · @surface blackmattemetal roughness 0.58 color 0.1 0.135 0.155 · @surface blackpolishedmetal roughness 0.17 color 0.035 0.092 0.105 · @surface goldmattepaint roughness 0.46 color 0.84 0.71 0.36"
+        ],
+        [
+          "Named objects",
+          "SurveyVessel, Drum, ForwardShell, FlightDeck, Propulsion, SignalMast, PortReflector, StarboardBoom, ServiceCage"
+        ],
+        [
+          "Object classes",
+          "Spacecraft, Hull, Command, Engine, Mast, Antenna, Instrument, Truss"
+        ],
+        [
+          "Instantiated primitives",
+          "Revolve, Cube, Sphere, Loft, SweepDisk"
+        ],
+        [
+          "Material identifiers",
+          "blackmattemetal, greymattemetal, silverbrushedmetal, warmwhitemattepaint, beigemattepaint, goldmattepaint, amberbrushedmetal, blackpolishedmetal, copperbrushedmetal, cyanpolishedmetal, ambermattepaint, sandgoldmattepaint, coppermattepaint, orangemattepaint, beigewarmmattepaint, redmattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Surveyor, Keel, HullDrum, ShoulderPlates, CrownTiles, Forebody, ObservationPort, Viewport, AuxiliaryHatch, ServiceDeck, DeckCabinet, DeckOptic, LouverBank, HullPipes, HullMarkings, MaintenancePlate, StencilPair, CautionBars, BridgeSpine (39 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "483"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
     }
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 30,
+  "library_exports_imported": 49,
   "library_export_inventory_count": 251,
-  "library_export_names_transferred": 30
+  "library_export_names_transferred": 50
 }

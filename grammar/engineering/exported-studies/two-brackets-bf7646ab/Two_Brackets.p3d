@@ -1,0 +1,37 @@
+# One 20 x 10 x 12 mm Z-up STL, placed twice 30 mm apart along X.
+Start -> [ I(GeneratedMeshReference(meshKey(Bracket) topology(surface)) material(greenmattemetal) alpha(1) texscale(1)) ] [ T(0.03 0 0) I(GeneratedMeshReference(meshKey(Bracket) topology(surface)) material(redmetallicpaint)) ]
+
+#@mesh-v1 Bracket mm Z
+#v 0 0 0
+#v 20 0 0
+#v 20 0 2
+#v 2 0 2
+#v 0 0 12
+#v 2 0 12
+#v 20 10 2
+#v 20 10 0
+#v 0 10 0
+#v 2 10 2
+#v 0 10 12
+#v 2 10 12
+#f 0 1 2
+#f 0 2 3
+#f 0 3 4
+#f 3 5 4
+#f 6 7 8
+#f 9 6 8
+#f 10 9 8
+#f 10 11 9
+#f 0 8 7
+#f 0 7 1
+#f 1 7 6
+#f 1 6 2
+#f 2 6 9
+#f 2 9 3
+#f 3 9 11
+#f 3 11 5
+#f 5 11 10
+#f 5 10 4
+#f 4 10 8
+#f 4 8 0
+#@endmesh

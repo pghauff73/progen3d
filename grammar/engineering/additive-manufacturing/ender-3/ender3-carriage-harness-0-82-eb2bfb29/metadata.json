@@ -1,0 +1,58 @@
+{
+  "title": "Ender3 Carriage Harness 0.82",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-carriage-harness-0-82-eb2bfb29",
+  "source_file": "Ender3_Carriage_Harness_0.82.p3d",
+  "git_blob_sha": "eb2bfb2973e244c4755738146d6490be3dbd02ff",
+  "bytes": 880,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Carriage_Harness_0.82.p3d"
+  ],
+  "description": "Ender-3 X carriage service loop. Metres, Z up; isolated horizontal travel.",
+  "features": [
+    "Cube",
+    "FlexibleWire"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Ender-3 X carriage service loop. Metres, Z up; isolated horizontal travel. · The clamp is pinned to the frame. The far node follows the carriage mount. · Play the first 2 s in Simulate, then choose the wire in Physics replay."
+    ],
+    [
+      "Named objects",
+      "XCarriage"
+    ],
+    [
+      "Object classes",
+      "Carriage"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, FlexibleWire"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, graphite, copper, steel"
+    ],
+    [
+      "Production rules",
+      "Start, Rail, FrameClamp, Harness, Carriage (5 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "13"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

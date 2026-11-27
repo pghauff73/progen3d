@@ -1,0 +1,57 @@
+{
+  "title": "Animated Procedural Materials",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/animated-procedural-materials-e722e40f",
+  "source_file": "Animated_Procedural_Materials.p3d",
+  "git_blob_sha": "e722e40fd4c1e6f9c259282fd0470b9ac907823f",
+  "bytes": 1858,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Animated_Procedural_Materials.p3d"
+  ],
+  "description": "Six authored material-state animations with a shared six-second loop.",
+  "features": [
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Six authored material-state animations with a shared six-second loop. · These are artistic surface controls, not fluid/corrosion/thermal solvers. · @texture rule:Effect1 hologram uv 3 · @surface rule:Effect1 color 1 1 1 roughness 0.4 metallic 0 relief 0 · @texture-motion rule:Effect1 shimmer period 6 speed 1 amount 0.85 phase 0 seed 0 · @texture rule:Effect2 water uv 2 · @surface rule:Effect2 color 1 1 1 roughness 0.08 metallic 0 relief 1 · @texture-motion rule:Effect2 flow period 6 speed 1 amount 0.85 phase 0 seed 0 · @texture rule:Effect3 lava uv 2 · @surface rule:Effect3 color 1 1 1 roughness 0.84 metallic 0 relief 0.8"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Sphere"
+    ],
+    [
+      "Material identifiers",
+      ""
+    ],
+    [
+      "Production rules",
+      "Start, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6 (7 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "37"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

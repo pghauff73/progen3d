@@ -1,0 +1,58 @@
+{
+  "title": "Meridian Service Airlock",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-service-airlock-a6c5cc95",
+  "source_file": "Meridian_Service_Airlock.p3d",
+  "git_blob_sha": "a6c5cc95a99bb77230c8782d7ca808cd4dfeaafa",
+  "bytes": 32990,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_Service_Airlock.p3d"
+  ],
+  "description": "Meridian service airlock | cinematic model",
+  "features": [
+    "Loft",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian service airlock | cinematic model · Metres, +Y up, +Z through the exterior hatch. · Airlock(lift) uses 0 m for closed and 3.1 m for open. · Film placement in the revised Meridian coordinate frame: · [ T(-35.7 -0.09 -229.3) Airlock(3.1) ]"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, Cube"
+    ],
+    [
+      "Material identifiers",
+      "whitebeigemattepaint, silverbrushedmetal, orangeglosspaint, charcoalmattemetal, paleblueemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Airlock, AirlockShell, AirlockHatch (4 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "139"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Two Brackets",
+  "group": "engineering/exported-studies",
+  "directory": "engineering/exported-studies/two-brackets-bf7646ab",
+  "source_file": "Two_Brackets.p3d",
+  "git_blob_sha": "bf7646ab151b8330afa1b59a6248ffe3de10b0d4",
+  "bytes": 638,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Two_Brackets.p3d"
+  ],
+  "description": "One 20 x 10 x 12 mm Z-up STL, placed twice 30 mm apart along X.",
+  "features": [
+    "GeneratedMeshReference"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "One 20 x 10 x 12 mm Z-up STL, placed twice 30 mm apart along X. · @mesh-v1 Bracket mm Z · v 0 0 0 · v 20 0 0 · v 20 0 2 · v 2 0 2 · v 0 0 12 · v 2 0 12 · v 20 10 2 · v 20 10 0"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "GeneratedMeshReference"
+    ],
+    [
+      "Material identifiers",
+      "greenmattemetal, redmetallicpaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "38"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
