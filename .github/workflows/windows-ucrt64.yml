@@ -41,7 +41,7 @@ jobs:
           cd build/ucrt64
           test -f 'Open Lyra.cmd'
           test -f progen3d.exe
-          cmp examples/Characters/Lyra/Lyra_Greeting.p3d ../../examples/Characters/Lyra/Lyra_Greeting.p3d
+          cmake -E compare_files examples/Characters/Lyra/Lyra_Greeting.p3d ../../examples/Characters/Lyra/Lyra_Greeting.p3d
       - name: Assemble portable app directory
         run: |
           mkdir -p build/portable
