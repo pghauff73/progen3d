@@ -1,0 +1,58 @@
+{
+  "title": "coruscant component24 hierarchy",
+  "group": "architecture/buildings/exported-models",
+  "directory": "architecture/buildings/exported-models/coruscant-component24-hierarchy-7978c546",
+  "source_file": "coruscant_component24_hierarchy.p3d",
+  "git_blob_sha": "7978c546d7b3d3f452b6165b4566429b5db46408",
+  "bytes": 4499,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "coruscant_component24_hierarchy.p3d"
+  ],
+  "description": "Coruscant Component_24 semantic decomposition",
+  "features": [
+    "Cube",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Coruscant Component_24 semantic decomposition · Source: coruscant-city-20.zip -> source/city+5.zip -> model.dae · Source node: Component_24 / ID3049 · Source geometry: 98 instance_geometry elements, ~27.239 normalized units high. · Normalization used here: 10,000 COLLADA source units = 1 Progen3D unit. · Axis mapping: COLLADA X -> Progen3D X; COLLADA Z(up) -> Progen3D Y; COLLADA Y -> Progen3D Z. ·  · IMPORTANT: dimensions/offsets below are source-derived or slice-derived. · Material choices and replacement of continuous/irregular surfaces by Cube/Sphere · are a Progen3D approximation using the current executable primitive set."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "darkslateroughmetal, charcoalsmoothmetal, silverblueroughmetal, darkslatesmoothmetal, silverbluepolishedmetal, silverbluesmoothmetal, bluewhiteshinysmoothmetal, bluewhiteglossysmoothglass, charcoalroughmetal, smokytransparentglass"
+    ],
+    [
+      "Production rules",
+      "Start, CoruscantTower24, Tower24Base, Tower24LowerBody, Tower24MainShaft, Tower24Crown, Tower24Spire, Tower24FacadeRibs (8 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "165"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

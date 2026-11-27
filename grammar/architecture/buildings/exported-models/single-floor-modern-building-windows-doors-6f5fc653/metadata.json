@@ -1,0 +1,58 @@
+{
+  "title": "Single Floor Modern Building Windows Doors",
+  "group": "architecture/buildings/exported-models",
+  "directory": "architecture/buildings/exported-models/single-floor-modern-building-windows-doors-6f5fc653",
+  "source_file": "Single_Floor_Modern_Building_Windows_Doors.p3d",
+  "git_blob_sha": "6f5fc65326d951027b13d15320af1827919e076c",
+  "bytes": 7086,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Single_Floor_Modern_Building_Windows_Doors.p3d"
+  ],
+  "description": "================================================================",
+  "features": [
+    "Cube",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "================================================================ · SINGLE-FLOOR MODERN BUILDING · Current Progen3D grammar syntax ·  · Overall dimensions: · width       = 12.0 · depth       = 8.0 · wall height = 3.2 ·  · Openings:"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "warmwhitematteplaster, lightgreyroughconcrete, silverbluepolishedmetal, bluewhiteglossysmoothglass, amberwarmwood, charcoalroughmetal"
+    ],
+    [
+      "Production rules",
+      "Start, SingleFloorBuilding, WallBlock, ConcreteBlock, MetalBlock, GlassBlock, WoodBlock, Foundation, FloorSlab, ExteriorWalls, FrontWall, RearWall, LeftWall, RightWall, Windows, FrontRearWindow, SideWindow, Doors, MainGlazedDoor, MainDoorHandle (28 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "306"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

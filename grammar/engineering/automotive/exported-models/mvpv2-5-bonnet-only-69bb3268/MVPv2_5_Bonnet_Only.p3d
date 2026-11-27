@@ -1,0 +1,543 @@
+# =============================================================================
+# MVPv2.5 BONNET / HOOD ONLY
+#
+# SOURCE BASIS
+# ------------
+# Derived from the supplied MVPv2.5 bonnet / hood engineering drawing.
+#
+# IMAGE-SUPPORTED DIMENSIONS
+# --------------------------
+#   overall length      1.335 m
+#   maximum width       1.390 m
+#   maximum height      0.085 m
+#   rear edge width     0.410 m
+#
+# IMAGE-SUPPORTED SUBPARTS
+# ------------------------
+#   Class-A outer skin
+#   stamped reinforcement / inner panel
+#   left and right four-bar hinges
+#   left and right support struts
+#   latch assembly
+#   perimeter seal
+#
+# INFERRED
+# --------
+#   exact hinge coordinates
+#   four-bar link lengths
+#   strut mounting coordinates
+#   latch/striker coordinates
+#   panel thicknesses
+#   reinforcement rib geometry
+#   seal cross-section
+#   exact Class-A control points
+#
+# IMPORTANT
+# ---------
+# MVPv2.5 / FGKv1 TARGET SYNTAX.
+# Not compatible with the current Progen3D parser.
+# Rule names provide object identity.
+# No Object(...) syntax is used.
+#
+# Coordinate convention:
+#   +X = vehicle right
+#   +Y = up
+#   +Z = front
+# =============================================================================
+
+
+Start ->
+    MVP25_Bonnet()
+
+
+MVP25_Bonnet() ->
+    MVP25_BonnetReferenceFrame()
+    MVP25_BonnetDimensions()
+    MVP25_BonnetLandmarks()
+    MVP25_BonnetCharacterCurves()
+    MVP25_BonnetOuterSkin()
+    MVP25_BonnetInnerPanel()
+    MVP25_BonnetRolledEdge()
+    MVP25_BonnetHingeSystem()
+    MVP25_BonnetSupportSystem()
+    MVP25_BonnetLatchSystem()
+    MVP25_BonnetSeal()
+    MVP25_BonnetInterfaces()
+    MVP25_BonnetState()
+    MVP25_BonnetConstraints()
+    MVP25_BonnetValidation()
+
+
+# =============================================================================
+# 1. LOCAL REFERENCE FRAME
+# =============================================================================
+
+MVP25_BonnetReferenceFrame() ->
+    LocalFrame(
+        name(BonnetFrame)
+        origin(point(0 0 0))
+        longitudinalAxis(+Z)
+        lateralAxis(+X)
+        verticalAxis(+Y)
+        symmetryPlane(plane(X 0))
+    )
+
+
+# =============================================================================
+# 2. DIMENSIONS
+# =============================================================================
+
+MVP25_BonnetDimensions() ->
+    BonnetDimensions(
+        overallLength(1.335 source(ImageSheet))
+        maximumWidth(1.390 source(ImageSheet))
+        maximumHeight(0.085 source(ImageSheet))
+        rearEdgeWidth(0.410 source(ImageSheet))
+    )
+
+
+# =============================================================================
+# 3. LANDMARKS
+# =============================================================================
+
+MVP25_BonnetLandmarks() ->
+    SurfaceLandmark(BonnetFrontCentre point(0 0.000 0.6675) source(ImageDerived) confidence(0.80))
+    SurfaceLandmark(BonnetRearCentre point(0 0.000 -0.6675) source(ImageDerived) confidence(0.80))
+
+    SurfaceLandmark(BonnetFrontLeft point(-0.695 0.000 0.6675) source(ImageDerived) confidence(0.75))
+    SurfaceLandmark(BonnetFrontRight point(0.695 0.000 0.6675) source(ImageDerived) confidence(0.75))
+
+    SurfaceLandmark(BonnetRearLeft point(-0.205 0.000 -0.6675) source(ImageSheet) confidence(0.85))
+    SurfaceLandmark(BonnetRearRight point(0.205 0.000 -0.6675) source(ImageSheet) confidence(0.85))
+
+    SurfaceLandmark(BonnetCrown point(0 0.085 0.000) source(ImageSheet) confidence(0.90))
+
+
+# =============================================================================
+# 4. CHARACTER CURVES
+# =============================================================================
+
+MVP25_BonnetCharacterCurves() ->
+    AutomotiveCharacterCurve(
+        name(BonnetCentreCrown)
+        role(PrimaryCharacterLine)
+        curve(
+            Bezier3(
+                (0 0.010 0.6675)
+                (0 0.060 0.3000)
+                (0 0.085 -0.1500)
+                (0 0.030 -0.6675)
+            )
+        )
+        source(ImageFit)
+        confidence(0.65)
+    )
+
+    AutomotiveCharacterCurve(
+        name(BonnetCreaseL)
+        role(SecondaryCharacterLine)
+        curve(
+            Bezier3(
+                (-0.320 0.010 0.620)
+                (-0.300 0.055 0.260)
+                (-0.270 0.065 -0.180)
+                (-0.210 0.025 -0.610)
+            )
+        )
+        source(ImageFit)
+        confidence(0.60)
+    )
+
+    AutomotiveCharacterCurve(
+        name(BonnetCreaseR)
+        role(SecondaryCharacterLine)
+        mirrorOf(BonnetCreaseL)
+    )
+
+    AutomotiveCharacterCurve(
+        name(BonnetPerimeter)
+        role(BoundaryCurve)
+        closed(true)
+        through(
+            BonnetFrontLeft
+            BonnetFrontCentre
+            BonnetFrontRight
+            BonnetRearRight
+            BonnetRearCentre
+            BonnetRearLeft
+        )
+        source(ImageFit)
+        confidence(0.70)
+    )
+
+
+# =============================================================================
+# 5. CLASS-A OUTER SKIN
+# =============================================================================
+
+MVP25_BonnetOuterSkin() ->
+    ClassASurfacePatch(
+        name(BonnetOuterSkin)
+
+        boundaries(
+            BonnetFrontBoundary
+            BonnetRearBoundary
+            BonnetSideBoundaryL
+            BonnetSideBoundaryR
+        )
+
+        internalGuides(
+            BonnetCentreCrown
+            BonnetCreaseL
+            BonnetCreaseR
+        )
+
+        degreeU(5)
+        degreeV(5)
+
+        spansU(1)
+        spansV(1)
+
+        symmetryPlane(X 0)
+
+        maximumHeight(0.085 source(ImageSheet))
+
+        output(BonnetOuterSkin)
+    )
+
+
+# =============================================================================
+# 6. STAMPED INNER PANEL / REINFORCEMENT
+# =============================================================================
+
+MVP25_BonnetInnerPanel() ->
+    StampedSheetPanel(
+        name(BonnetInnerPanel)
+
+        host(BonnetOuterSkin)
+
+        inset(0.018 source(Inferred) confidence(0.25))
+        thickness(0.00085 source(Inferred) confidence(0.25))
+
+        reinforcementLayout(
+            CentreSpine
+            UpperCrossBrace
+            LowerCrossBrace
+            DiagonalBraceL
+            DiagonalBraceR
+            HingeReinforcementL
+            HingeReinforcementR
+            LatchReinforcement
+        )
+
+        stampedFeatures(
+            BonnetReliefPocketL
+            BonnetReliefPocketR
+            BonnetDrainChannel
+        )
+
+        source(Inferred)
+        confidence(0.30)
+
+        output(BonnetInnerPanel)
+    )
+
+
+# =============================================================================
+# 7. ROLLED / HEMMED EDGE
+# =============================================================================
+
+MVP25_BonnetRolledEdge() ->
+    RolledEdge(
+        name(BonnetRolledEdge)
+
+        contactCurve(BonnetPerimeter)
+
+        radius(0.0040 source(Inferred) confidence(0.25))
+        flangeLength(0.018 source(Inferred) confidence(0.25))
+        flangeAngle(178 source(Inferred) confidence(0.25))
+
+        continuity(G1)
+
+        output(BonnetRolledEdge)
+    )
+
+
+# =============================================================================
+# 8. FOUR-BAR HINGE SYSTEM
+# =============================================================================
+
+MVP25_BonnetHingeSystem() ->
+    MVP25_BonnetHingeL()
+    MVP25_BonnetHingeR()
+
+
+MVP25_BonnetHingeL() ->
+    FourBarClosureJoint(
+        name(BonnetHingeL)
+
+        bodyMountA(BonnetBodyMountA_L)
+        bodyMountB(BonnetBodyMountB_L)
+
+        closureMountA(BonnetPanelMountA_L)
+        closureMountB(BonnetPanelMountB_L)
+
+        openingRange(0 62 source(Inferred))
+
+        solveLinkLengths(true)
+        solveForNoCowlCollision(true)
+
+        source(Inferred)
+        confidence(0.25)
+
+        output(BonnetHingeL)
+    )
+
+
+MVP25_BonnetHingeR() ->
+    MirrorJoint(
+        source(BonnetHingeL)
+        plane(X 0)
+        output(BonnetHingeR)
+    )
+
+
+# =============================================================================
+# 9. SUPPORT STRUTS
+# =============================================================================
+
+MVP25_BonnetSupportSystem() ->
+    MVP25_BonnetStrutL()
+    MVP25_BonnetStrutR()
+
+
+MVP25_BonnetStrutL() ->
+    TelescopingLink(
+        name(BonnetStrutL)
+
+        bodyMount(BonnetStrutBodyMountL)
+        closureMount(BonnetStrutPanelMountL)
+
+        bodyRadius(0.012 source(Inferred))
+        rodRadius(0.006 source(Inferred))
+
+        solveLengthFromPose(true)
+
+        source(Inferred)
+        confidence(0.20)
+
+        output(BonnetStrutL)
+    )
+
+
+MVP25_BonnetStrutR() ->
+    MirrorShape(
+        source(BonnetStrutL)
+        plane(X 0)
+        output(BonnetStrutR)
+    )
+
+
+# =============================================================================
+# 10. LATCH / STRIKER
+# =============================================================================
+
+MVP25_BonnetLatchSystem() ->
+    ClosureLatch(
+        name(BonnetLatch)
+
+        closureMount(BonnetLatchMount)
+        bodyStriker(BonnetStriker)
+
+        engagementDirection(+Y)
+        latchType(PrimarySecondarySafety)
+
+        source(Inferred)
+        confidence(0.25)
+
+        output(BonnetLatch)
+    )
+
+
+# =============================================================================
+# 11. PERIMETER SEAL
+# =============================================================================
+
+MVP25_BonnetSeal() ->
+    VariableSealSweep(
+        name(BonnetSeal)
+
+        path(BonnetSealPath)
+
+        profileAt(
+            t0 EPDM_BulbSmall
+            tMid EPDM_BulbMedium
+            t1 EPDM_BulbSmall
+        )
+
+        compressionTarget(0.22 source(Inferred))
+        closureContact(BonnetOuterSkin)
+        bodyContact(BonnetAperture)
+
+        source(Inferred)
+        confidence(0.25)
+
+        output(BonnetSeal)
+    )
+
+
+# =============================================================================
+# 12. INTERFACES
+# =============================================================================
+
+MVP25_BonnetInterfaces() ->
+    Interface(Bonnet.hingeLeft system(BonnetHingeL))
+    Interface(Bonnet.hingeRight system(BonnetHingeR))
+
+    Interface(Bonnet.strutLeft system(BonnetStrutL))
+    Interface(Bonnet.strutRight system(BonnetStrutR))
+
+    Interface(Bonnet.latch system(BonnetLatch))
+
+    Interface(Bonnet.seal path(BonnetSealPath))
+
+    Interface(Bonnet.outerSkin surface(BonnetOuterSkin))
+    Interface(Bonnet.innerPanel surface(BonnetInnerPanel))
+
+
+# =============================================================================
+# 13. STATE
+# =============================================================================
+
+MVP25_BonnetState() ->
+    ClosureState(
+        name(BonnetState)
+
+        bonnetOpen(0)
+
+        range(0 1)
+
+        mapping(
+            0 Closed
+            1 FullyOpen
+        )
+    )
+
+
+# =============================================================================
+# 14. CONSTRAINTS
+# =============================================================================
+
+MVP25_BonnetConstraints() ->
+    RequireDimension(
+        Bonnet.overallLength
+        value(1.335)
+        tolerance(0.005)
+    )
+
+    RequireDimension(
+        Bonnet.maximumWidth
+        value(1.390)
+        tolerance(0.005)
+    )
+
+    RequireDimension(
+        Bonnet.maximumHeight
+        value(0.085)
+        tolerance(0.005)
+    )
+
+    RequireDimension(
+        Bonnet.rearEdgeWidth
+        value(0.410)
+        tolerance(0.005)
+    )
+
+    RequireSymmetry(
+        BonnetOuterSkin
+        plane(X 0)
+        tolerance(0.0015)
+    )
+
+    RequireClosureFitsAperture(
+        Bonnet
+        BonnetAperture
+        tolerance(0.0015)
+    )
+
+    RequireNoCollisionDuringClosureSweep(
+        Bonnet
+        range(0 1)
+    )
+
+    RequireFourBarValid(
+        BonnetHingeL
+        range(0 62)
+    )
+
+    RequireFourBarValid(
+        BonnetHingeR
+        range(0 62)
+    )
+
+    RequireStrutLengthValid(
+        BonnetStrutL
+        overState(bonnetOpen 0 1)
+    )
+
+    RequireStrutLengthValid(
+        BonnetStrutR
+        overState(bonnetOpen 0 1)
+    )
+
+    RequireLatchEngagement(
+        BonnetLatch
+        when(bonnetOpen=0)
+    )
+
+    RequireSealCompression(
+        BonnetSeal
+        target(0.22)
+        tolerance(0.08)
+    )
+
+
+# =============================================================================
+# 15. VALIDATION
+# =============================================================================
+
+MVP25_BonnetValidation() ->
+    RequireFiniteSurface(BonnetOuterSkin)
+
+    RequireValidClassASurface(
+        BonnetOuterSkin
+        minimumContinuity(G2)
+    )
+
+    HighlightFlowValidator(
+        surfaces(BonnetOuterSkin)
+        maximumRipple(0.08)
+        maximumNormalJump(2.0)
+    )
+
+    RequireStampedPanelValid(BonnetInnerPanel)
+
+    RequireRolledEdgeValid(BonnetRolledEdge)
+
+    RequireClosureFitsClosed(
+        Bonnet
+        tolerance(0.0015)
+    )
+
+    RequireNoCollisionDuringClosureSweep(Bonnet)
+
+    RequireStateRange(bonnetOpen 0 1)
+
+    RequireFiniteVertices()
+    RequireValidIndices()
+    RequireNoDegenerateTriangles()
+    RequireValidNormals()
+    RequireManifoldWhereRequired()
+    RequireDeterministicMeshHash()
+
+    CommitOnlyIfValid()

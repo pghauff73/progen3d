@@ -1,0 +1,55 @@
+{
+  "title": "Modern Chair 3D Curve Grammar",
+  "group": "architecture/furniture",
+  "directory": "architecture/furniture/modern-chair-3d-curve-grammar-ef097c87",
+  "source_file": "Modern_Chair_3D_Curve_Grammar.p3d",
+  "git_blob_sha": "ef097c8704d6fad7621483eccb3f5ab5e5e6dbcd",
+  "bytes": 9915,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Modern_Chair_3D_Curve_Grammar.p3d"
+  ],
+  "description": "=============================================================================",
+  "features": [],
+  "detail": [
+    [
+      "Source notes",
+      "============================================================================= · PROGEN3D MODERN CHAIR — 3D CURVE RECONSTRUCTION ·  · SOURCE · ------ · Reconstructed from the supplied FRONT / SIDE / TOP chair image with · registered contour lines, section shading, centre curves and axes. ·  · SCALE · -----"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      ""
+    ],
+    [
+      "Material identifiers",
+      ""
+    ],
+    [
+      "Production rules",
+      "Start, ModernChair, ChairCurveNetwork, BackCenterCurve, SeatCenterCurve, ShellLeftEdgeCurve, ShellRightEdgeCurve, BackTopSection, BackUpperSection, BackMidSection, TransitionSection, SeatMidSection, SeatFrontSection, ChairShell, FrontLeftLegCurve, FrontRightLegCurve, RearLeftLegCurve, RearRightLegCurve, ChairLegs, ChairEdgeRim (21 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "431"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

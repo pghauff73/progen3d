@@ -1,0 +1,55 @@
+{
+  "title": "MVPv2 5 Bonnet Only",
+  "group": "engineering/automotive/exported-models",
+  "directory": "engineering/automotive/exported-models/mvpv2-5-bonnet-only-69bb3268",
+  "source_file": "MVPv2_5_Bonnet_Only.p3d",
+  "git_blob_sha": "69bb3268e1e871ad8187c26ac442d2573afbecb1",
+  "bytes": 13139,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "MVPv2_5_Bonnet_Only.p3d"
+  ],
+  "description": "=============================================================================",
+  "features": [],
+  "detail": [
+    [
+      "Source notes",
+      "============================================================================= · MVPv2.5 BONNET / HOOD ONLY ·  · SOURCE BASIS · ------------ · Derived from the supplied MVPv2.5 bonnet / hood engineering drawing. ·  · IMAGE-SUPPORTED DIMENSIONS · -------------------------- · overall length      1.335 m"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      ""
+    ],
+    [
+      "Material identifiers",
+      ""
+    ],
+    [
+      "Production rules",
+      "Start, MVP25_Bonnet, MVP25_BonnetReferenceFrame, MVP25_BonnetDimensions, MVP25_BonnetLandmarks, MVP25_BonnetCharacterCurves, MVP25_BonnetOuterSkin, MVP25_BonnetInnerPanel, MVP25_BonnetRolledEdge, MVP25_BonnetHingeSystem, MVP25_BonnetHingeL, MVP25_BonnetHingeR, MVP25_BonnetSupportSystem, MVP25_BonnetStrutL, MVP25_BonnetStrutR, MVP25_BonnetLatchSystem, MVP25_BonnetSeal, MVP25_BonnetInterfaces, MVP25_BonnetState, MVP25_BonnetConstraints (21 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "544"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

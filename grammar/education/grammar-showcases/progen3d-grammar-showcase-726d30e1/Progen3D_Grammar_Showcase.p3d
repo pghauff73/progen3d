@@ -1,0 +1,68 @@
+# Progen3D current-grammar showcase
+# This file uses the strict writing profile from Progen3D_Grammar_Writing_Guide.md.
+
+Start ->
+    G(9.81 0 -1 0)
+    Ground
+    R* ColumnCount(4 7)
+    R ColumnHeight(2.5 5.0)
+    Colonnade(ColumnCount ColumnHeight)
+    FallingBody
+    AnimatedBeacon
+
+Ground ->
+    [ T(0 -0.25 0)
+      S(14 0.25 8)
+      !I(Cube material(lightgreyroughconcrete) 1 0.5) ]
+
+# Header form: parameters, compact repeat expression, then production.
+# Three sections mean setup | repeated body | tail.
+Colonnade(count height) count ->
+    T(-(count-1) 0 0)
+    |
+    [ T(Colonnade_count*2 0 0)
+      Column(height)
+      Cap(height) ]
+    |
+    T(count-1 0 0)
+
+Column(height) ->
+    [ S(0.60 height 0.60)
+      I(Cylinder material(warmwhitematteplaster) 1 0.5) ]
+
+# Probability is selected once per Cap invocation.
+Cap(height) ; 0.72 ->
+    [ T(0 height 0)
+      S(0.82 0.20 0.82)
+      I(Cube material(softbeigemattesandstone) 1 0.5) ]
+->
+    [ T(0 height 0)
+      S(0.52 0.52 0.52)
+      I(Sphere material(silvermetalpolishedreflective) 1 0.5) ]
+
+FallingBody ->
+    [ T(0 5 2)
+      V(0.6 0 0)
+      VR(0 35 0)
+      M(2)
+      S(0.8 0.8 0.8)
+      I(Cube material(redmetalglossy) 1 0.5) ]
+
+# The conditional is the final construct in this square-bracket sequence.
+AnimatedBeacon ->
+    [ T(0 2 -3)
+      A(oscillate(t,-35,35,4) 1 -35 35)
+      ?(pulse(t,2,0.35)==1)
+          BeaconOn
+      :
+          BeaconOff ]
+
+BeaconOn ->
+    [ S(0.55 1.4 0.55)
+      D(1 1 0.45)
+      DSX(1 0.72 0.72)
+      I(CubeZ material(cyanneonglowingactive) 1 0.5) ]
+
+BeaconOff ->
+    [ S(0.18 0.45 0.18)
+      I(Sphere material(smokytransparentglass) 1 0.5) ]

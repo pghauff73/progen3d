@@ -1,0 +1,430 @@
+# =============================================================================
+# PROGEN3D MODERN CHAIR — 3D CURVE RECONSTRUCTION
+#
+# SOURCE
+# ------
+# Reconstructed from the supplied FRONT / SIDE / TOP chair image with
+# registered contour lines, section shading, centre curves and axes.
+#
+# SCALE
+# -----
+# The source image provides no physical dimensions.
+# Therefore this grammar uses NORMALIZED CHAIR UNITS:
+#
+#   approximate overall chair width   = 1.000
+#   approximate overall height        = 1.660
+#   approximate shell depth           = 1.050
+#   approximate seat height           = 0.820
+#
+# Apply a uniform outer S(...) transform to place the chair at any desired
+# physical scale.
+#
+# COORDINATE SYSTEM
+# -----------------
+#   +X = chair right
+#   +Y = up
+#   +Z = forward
+#   Y=0 = floor
+#
+# IMPORTANT
+# ---------
+# This is an FGKv1 / Curve3D TARGET grammar.
+# Current Progen3D does not yet implement Curve3D, CurveNetworkSurface,
+# ShellOffset or SweepDisk as grammar actions.
+#
+# The important reconstruction invariant is that the same 3D curve network
+# explains FRONT (X,Y), SIDE (Z,Y), and TOP (X,Z) projections.
+# =============================================================================
+
+
+Start ->
+    ModernChair()
+
+
+ModernChair() ->
+    ChairCurveNetwork()
+    ChairShell()
+    ChairLegs()
+    ChairEdgeRim()
+
+
+# =============================================================================
+# 1. LONGITUDINAL / CENTRE CURVES
+# =============================================================================
+
+ChairCurveNetwork() ->
+    BackCenterCurve()
+    SeatCenterCurve()
+    ShellLeftEdgeCurve()
+    ShellRightEdgeCurve()
+
+    BackTopSection()
+    BackUpperSection()
+    BackMidSection()
+    TransitionSection()
+    SeatMidSection()
+    SeatFrontSection()
+
+    FrontLeftLegCurve()
+    FrontRightLegCurve()
+    RearLeftLegCurve()
+    RearRightLegCurve()
+
+
+BackCenterCurve() ->
+    Curve3D(
+        name(BackCenter)
+        interpolation(CatmullRom)
+        points(
+            ( 0.000 0.840 -0.300 )
+            ( 0.000 1.080 -0.360 )
+            ( 0.000 1.360 -0.470 )
+            ( 0.000 1.640 -0.540 )
+        )
+        provenance(ImageFit)
+        confidence(0.78)
+    )
+
+
+SeatCenterCurve() ->
+    Curve3D(
+        name(SeatCenter)
+        interpolation(BezierCubic)
+        points(
+            ( 0.000 0.840 -0.300 )
+            ( 0.000 0.805 -0.090 )
+            ( 0.000 0.815  0.270 )
+            ( 0.000 0.860  0.500 )
+        )
+        provenance(ImageFit)
+        confidence(0.82)
+    )
+
+
+ShellLeftEdgeCurve() ->
+    Curve3D(
+        name(ShellLeftEdge)
+        interpolation(CatmullRom)
+        points(
+            ( -0.440 0.850  0.500 )
+            ( -0.490 0.820  0.120 )
+            ( -0.480 0.840 -0.280 )
+            ( -0.460 1.150 -0.340 )
+            ( -0.420 1.420 -0.440 )
+            ( -0.390 1.640 -0.520 )
+        )
+        provenance(ImageFit)
+        confidence(0.74)
+    )
+
+
+ShellRightEdgeCurve() ->
+    MirrorCurve3D(
+        source(ShellLeftEdge)
+        plane(X 0)
+        output(ShellRightEdge)
+    )
+
+
+# =============================================================================
+# 2. TRANSVERSE 3D SECTION CURVES
+# =============================================================================
+
+BackTopSection() ->
+    Curve3D(
+        name(Section_BackTop)
+        interpolation(BezierCubic)
+        points(
+            ( -0.390 1.640 -0.520 )
+            ( -0.133 1.660 -0.550 )
+            (  0.133 1.660 -0.550 )
+            (  0.390 1.640 -0.520 )
+        )
+        provenance(ImageFit)
+        confidence(0.68)
+    )
+
+
+BackUpperSection() ->
+    Curve3D(
+        name(Section_BackUpper)
+        interpolation(BezierCubic)
+        points(
+            ( -0.420 1.410 -0.440 )
+            ( -0.143 1.430 -0.500 )
+            (  0.143 1.430 -0.500 )
+            (  0.420 1.410 -0.440 )
+        )
+        provenance(ImageFit)
+        confidence(0.68)
+    )
+
+
+BackMidSection() ->
+    Curve3D(
+        name(Section_BackMid)
+        interpolation(BezierCubic)
+        points(
+            ( -0.460 1.140 -0.340 )
+            ( -0.156 1.165 -0.420 )
+            (  0.156 1.165 -0.420 )
+            (  0.460 1.140 -0.340 )
+        )
+        provenance(ImageFit)
+        confidence(0.68)
+    )
+
+
+TransitionSection() ->
+    Curve3D(
+        name(Section_Transition)
+        interpolation(BezierCubic)
+        points(
+            ( -0.480 0.840 -0.280 )
+            ( -0.163 0.825 -0.305 )
+            (  0.163 0.825 -0.305 )
+            (  0.480 0.840 -0.280 )
+        )
+        provenance(ImageFit)
+        confidence(0.73)
+    )
+
+
+SeatMidSection() ->
+    Curve3D(
+        name(Section_SeatMid)
+        interpolation(BezierCubic)
+        points(
+            ( -0.490 0.815 0.120 )
+            ( -0.167 0.800 0.130 )
+            (  0.167 0.800 0.130 )
+            (  0.490 0.815 0.120 )
+        )
+        provenance(ImageFit)
+        confidence(0.68)
+    )
+
+
+SeatFrontSection() ->
+    Curve3D(
+        name(Section_SeatFront)
+        interpolation(BezierCubic)
+        points(
+            ( -0.440 0.850 0.500 )
+            ( -0.150 0.870 0.525 )
+            (  0.150 0.870 0.525 )
+            (  0.440 0.850 0.500 )
+        )
+        provenance(ImageFit)
+        confidence(0.73)
+    )
+
+
+# =============================================================================
+# 3. SHELL SURFACE FROM 3D CURVE NETWORK
+# =============================================================================
+
+ChairShell() ->
+    CurveNetworkSurface(
+        name(ChairShellSurface)
+
+        longitudinalCurves(
+            ShellLeftEdge
+            BackCenter
+            SeatCenter
+            ShellRightEdge
+        )
+
+        transverseCurves(
+            Section_BackTop
+            Section_BackUpper
+            Section_BackMid
+            Section_Transition
+            Section_SeatMid
+            Section_SeatFront
+        )
+
+        fitting(
+            method(Gordon)
+            continuity(G2)
+            preserveCurves(true)
+        )
+
+        output(ChairShellSurface)
+    )
+
+    ShellOffset(
+        source(ChairShellSurface)
+        thickness(0.030)
+        direction(Inward)
+        closeBoundary(true)
+        output(ChairShellSolid)
+    )
+
+
+# =============================================================================
+# 4. LEG CENTRE CURVES
+# =============================================================================
+
+FrontLeftLegCurve() ->
+    Curve3D(
+        name(FrontLeftLeg)
+        interpolation(BezierCubic)
+        points(
+            ( -0.380 0.780 0.360 )
+            ( -0.395 0.530 0.405 )
+            ( -0.430 0.250 0.455 )
+            ( -0.455 0.000 0.500 )
+        )
+        provenance(ImageFit)
+        confidence(0.72)
+    )
+
+
+FrontRightLegCurve() ->
+    MirrorCurve3D(
+        source(FrontLeftLeg)
+        plane(X 0)
+        output(FrontRightLeg)
+    )
+
+
+RearLeftLegCurve() ->
+    Curve3D(
+        name(RearLeftLeg)
+        interpolation(BezierCubic)
+        points(
+            ( -0.380 0.780 -0.235 )
+            ( -0.395 0.540 -0.285 )
+            ( -0.430 0.255 -0.365 )
+            ( -0.455 0.000 -0.445 )
+        )
+        provenance(ImageFit)
+        confidence(0.72)
+    )
+
+
+RearRightLegCurve() ->
+    MirrorCurve3D(
+        source(RearLeftLeg)
+        plane(X 0)
+        output(RearRightLeg)
+    )
+
+
+# =============================================================================
+# 5. LEGS GENERATED FROM CENTRE CURVES
+# =============================================================================
+
+ChairLegs() ->
+    SweepDisk(
+        path(FrontLeftLeg)
+        radiusStart(0.022)
+        radiusEnd(0.018)
+        radialSegments(16)
+        output(FrontLeftLegMesh)
+    )
+
+    SweepDisk(
+        path(FrontRightLeg)
+        radiusStart(0.022)
+        radiusEnd(0.018)
+        radialSegments(16)
+        output(FrontRightLegMesh)
+    )
+
+    SweepDisk(
+        path(RearLeftLeg)
+        radiusStart(0.022)
+        radiusEnd(0.018)
+        radialSegments(16)
+        output(RearLeftLegMesh)
+    )
+
+    SweepDisk(
+        path(RearRightLeg)
+        radiusStart(0.022)
+        radiusEnd(0.018)
+        radialSegments(16)
+        output(RearRightLegMesh)
+    )
+
+
+# =============================================================================
+# 6. RED CONTOUR / RIM RECONSTRUCTION
+# =============================================================================
+
+ChairEdgeRim() ->
+    SweepDisk(
+        path(Section_BackTop)
+        radiusStart(0.008)
+        radiusEnd(0.008)
+        radialSegments(12)
+        output(BackTopRim)
+    )
+
+    SweepDisk(
+        path(ShellLeftEdge)
+        radiusStart(0.008)
+        radiusEnd(0.008)
+        radialSegments(12)
+        output(LeftShellRim)
+    )
+
+    SweepDisk(
+        path(ShellRightEdge)
+        radiusStart(0.008)
+        radiusEnd(0.008)
+        radialSegments(12)
+        output(RightShellRim)
+    )
+
+    SweepDisk(
+        path(Section_SeatFront)
+        radiusStart(0.008)
+        radiusEnd(0.008)
+        radialSegments(12)
+        output(SeatFrontRim)
+    )
+
+
+# =============================================================================
+# 7. RECONSTRUCTION VALIDATION
+# =============================================================================
+
+ChairValidation() ->
+    RequireMirrorPair(
+        ShellLeftEdge
+        ShellRightEdge
+        plane(X 0)
+        tolerance(0.010)
+    )
+
+    RequireCurvePassesThrough(
+        ChairShellSurface
+        Section_BackTop
+        Section_BackUpper
+        Section_BackMid
+        Section_Transition
+        Section_SeatMid
+        Section_SeatFront
+    )
+
+    RequireCurveNetworkContinuity(
+        ChairShellSurface
+        minimum(G1)
+    )
+
+    RequireGroundContact(
+        FrontLeftLeg
+        FrontRightLeg
+        RearLeftLeg
+        RearRightLeg
+        plane(Y 0)
+        tolerance(0.010)
+    )
+
+    RequireFiniteGeometry()
+    RequireNoDegenerateTriangles()
+    RequireValidNormals()
+    CommitOnlyIfValid()

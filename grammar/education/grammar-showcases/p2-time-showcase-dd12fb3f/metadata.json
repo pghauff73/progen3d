@@ -1,0 +1,58 @@
+{
+  "title": "P2 time showcase",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/p2-time-showcase-dd12fb3f",
+  "source_file": "P2_time_showcase.p3d",
+  "git_blob_sha": "dd12fb3fe5af7203bff9d60f9a4e39855faad813",
+  "bytes": 1355,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "P2_time_showcase.p3d"
+  ],
+  "description": "P2 time showcase exported procedural grammar.",
+  "features": [
+    "Cube",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      ""
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "plaster"
+    ],
+    [
+      "Production rules",
+      "Start, Ground, Rotor, Pendulum, Breather, Beacon, BeaconOn, BeaconOff (8 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "54"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

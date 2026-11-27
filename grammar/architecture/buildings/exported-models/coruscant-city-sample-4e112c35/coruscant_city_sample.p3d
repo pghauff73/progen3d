@@ -1,0 +1,114 @@
+# Progen3D massing conversion from coruscant-city-20.zip
+# Source: SketchUp COLLADA model.dae
+# Conversion: dominant component AABBs -> procedural Progen3D primitives
+# Normalization: 10,000 source inches = 1 Progen3D unit
+# Axis mapping: COLLADA X -> Progen3D X, COLLADA Z(up) -> Y, COLLADA Y -> Z
+# This file uses only current parser/runtime syntax.
+
+Start ->
+    Ground()
+    Podiums()
+    LowCityMasses()
+    TowerField()
+
+Ground() ->
+[
+    T(0 -2.15 0)
+    S(48 0.25 42)
+    !I(Cube material(charcoalroughmetal) 1 0.65)
+]
+
+Podiums() ->
+    Podium(-20.514 -18.064 1.656 1.646 13.497 13.496)
+    Podium(-20.514 -18.064 0.094 2.548 8.599 8.598)
+    Podium(-9.079 -16.601 0.095 0.363 9.634 9.634)
+    Podium(-9.209 -16.601 1.131 0.711 6.243 6.503)
+
+Podium(px pz base h dx dz) ->
+[
+    T(px base pz)
+    S(dx h dz)
+    !I(Cylinder material(darkslatesmoothstone) 1 0.55)
+]
+
+LowCityMasses() ->
+    Block(10.103 -2.010 -1.783 1.496 3.663 2.798)
+    Block(10.088 1.047 -1.783 1.496 3.663 2.798)
+    Block(6.353 -8.478 -1.738 1.496 3.663 2.798)
+    Block(6.338 -5.420 -1.738 1.496 3.663 2.798)
+
+Block(px pz base h dx dz) ->
+[
+    T(px base pz)
+    S(dx h dz)
+    !I(Cube material(lightgreyroughconcrete) 1 0.45)
+]
+
+TowerField() ->
+    Tower(19.218 -5.805 0 15.019 1.618)
+    Tower(14.129 -5.949 0 15.019 1.618)
+    Tower(10.854 -7.728 0 15.019 1.618)
+
+    Tower(19.196 12.334 0 15.019 1.618)
+    Tower(14.108 12.477 0 15.019 1.618)
+    Tower(10.833 14.257 0 15.019 1.618)
+
+    Tower(-11.186 -7.728 0 15.019 1.618)
+    Tower(-14.461 -5.949 0 15.019 1.618)
+    Tower(-19.550 -5.805 0 15.019 1.618)
+
+    Tower(-14.343 12.477 0 15.019 1.618)
+    Tower(-11.068 14.257 0 15.019 1.618)
+
+    Tower(-2.266 -13.299 0 15.019 1.618)
+
+    SlenderTower(11.685 6.169 0 14.602 0.846)
+
+Tower(px pz base h d) ->
+[
+    T(px base pz)
+    S(d*1.65 0.35 d*1.65)
+    !I(Cylinder material(darkslatesmoothstone) 1 0.55)
+]
+[
+    T(px base+0.25 pz)
+    S(d h d)
+    !I(Cylinder material(silverbluepolishedmetal) 1 0.32)
+]
+[
+    T(px base+h*0.70 pz)
+    S(d*1.22 h*0.11 d*1.22)
+    !I(Cylinder material(bluewhiteshinysmoothmetal) 1 0.28)
+]
+[
+    T(px base+h pz)
+    S(d*1.35 d*0.55 d*1.35)
+    !I(Sphere material(bluewhiteglossysmoothglass) 0.74 0.30)
+]
+[
+    T(px base+h+d*0.14 pz)
+    S(d*0.24 h*0.13 d*0.24)
+    !I(Cylinder material(bluewhiteshinysmoothmetal) 1 0.22)
+]
+
+SlenderTower(px pz base h d) ->
+[
+    T(px base pz)
+    S(d*1.7 0.28 d*1.7)
+    !I(Cylinder material(darkslatesmoothstone) 1 0.5)
+]
+[
+    T(px base+0.20 pz)
+    S(d h d)
+    !I(Cylinder material(bluewhiteshinysmoothmetal) 1 0.26)
+]
+[
+    T(px base+h pz)
+    S(d*1.20 d*0.42 d*1.20)
+    !I(Sphere material(smokytransparentglass) 0.68 0.25)
+]
+[
+    T(px base+h+d*0.10 pz)
+    S(d*0.16 h*0.18 d*0.16)
+    !I(Cylinder material(silverbluepolishedmetal) 1 0.20)
+]

@@ -1,0 +1,59 @@
+{
+  "title": "Modern Residence Image Derived Facade",
+  "group": "architecture/buildings/exported-models",
+  "directory": "architecture/buildings/exported-models/modern-residence-image-derived-facade-5a9ff288",
+  "source_file": "Modern_Residence_Image_Derived_Facade.p3d",
+  "git_blob_sha": "5a9ff28823a74017bc8261f55bd895bd07ed5106",
+  "bytes": 13073,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Modern_Residence_Image_Derived_Facade.p3d"
+  ],
+  "description": "================================================================",
+  "features": [
+    "Cube",
+    "Cylinder",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "================================================================ · MODERN THREE-STOREY RESIDENCE — IMAGE-DERIVED FACADE STUDY · Current Progen3D grammar syntax ·  · Based on the supplied/generated front-elevation reference image. · Visible facade features are modelled directly: · - three occupied levels · - tall exposed-concrete blade walls · - full-height timber louvre screen to the left · - dark steel/metal balcony frames"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Cylinder, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "lightgreyroughconcrete, warmwhitematteplaster, charcoalroughmetal, silverbluepolishedmetal, amberwarmwood, bluewhiteglossysmoothglass, greenmattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, ModernResidence, ConcreteBlock, WhiteBlock, DarkMetalBlock, MetalBlock, WoodBlock, GlassBlock, StoneBlock, GreenBlock, Site, GroundPad, Driveway, FrontWalk, StructuralShell, FloorSlabs, RoofSlab, SideWalls, RearWall, GroundFloorFacade (70 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "535"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

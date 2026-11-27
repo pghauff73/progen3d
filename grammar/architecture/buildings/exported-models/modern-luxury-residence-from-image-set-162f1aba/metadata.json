@@ -1,0 +1,59 @@
+{
+  "title": "Modern Luxury Residence From Image Set",
+  "group": "architecture/buildings/exported-models",
+  "directory": "architecture/buildings/exported-models/modern-luxury-residence-from-image-set-162f1aba",
+  "source_file": "Modern_Luxury_Residence_From_Image_Set.p3d",
+  "git_blob_sha": "162f1abae60a6963b4a1aacd9caa7b5c7287bda8",
+  "bytes": 25157,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Modern_Luxury_Residence_From_Image_Set.p3d"
+  ],
+  "description": "=====================================================================",
+  "features": [
+    "Cube",
+    "Cylinder",
+    "Sphere"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "===================================================================== · MODERN LUXURY RESIDENCE — MULTI-IMAGE ARCHITECTURAL GRAMMAR · Current Progen3D syntax ·  · SOURCE BASIS · ------------ · Exterior reference views: · front elevation · rear elevation with pool/patio · left/front oblique"
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Cylinder, Sphere"
+    ],
+    [
+      "Material identifiers",
+      "lightgreyroughconcrete, warmwhitematteplaster, charcoalroughmetal, silverbluepolishedmetal, amberwarmwood, bluewhiteglossysmoothglass, offwhiteceramic, greenmattepaint"
+    ],
+    [
+      "Production rules",
+      "Start, Residence, Concrete, WhitePlaster, DarkMetal, PolishedMetal, Timber, Glass, Stone, WarmStone, BlackGlass, Green, Water, Site, SiteGround, FrontDrive, FrontEntryPath, RearGardenGround, StructuralShell, FoundationSlab (148 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "1000"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

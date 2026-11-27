@@ -1,0 +1,53 @@
+// Progen3D P2 temporal grammar showcase.
+// `t` is immutable time in seconds. Press Run for a new stochastic design,
+// then use Play, Step, Reset Time, or the time scrubber.
+
+Start ->
+    Ground
+    Rotor
+    Pendulum
+    Breather
+    Beacon
+
+Ground ->
+    [ T(0 -2 0)
+      S(12 0.15 7)
+      !I(Cube material(plaster)) ]
+
+// Continuous rotation wrapped into a conventional signed angle interval.
+// Bounded A() is the final safety envelope.
+Rotor ->
+    [ T(-3 0 0)
+      A(wrap(spin(t,90),-180,180) 1 -180 180)
+      S(0.25 3 0.25)
+      I(Cube material(plaster)) ]
+
+// Smooth sinusoidal movement between explicit joint limits.
+Pendulum ->
+    [ T(0 0 0)
+      A(oscillate(t,-35,50,4) 2 -35 50)
+      T(0 -1.5 0)
+      S(0.25 3 0.25)
+      I(Cube material(plaster)) ]
+
+// Cubic easing removes abrupt velocity at the ends of the ping-pong cycle.
+Breather ->
+    [ T(3 0 0)
+      S(lerp(0.65,1.35,ease(pingpong(t,3)))
+        lerp(0.65,1.35,ease(pingpong(t,3)))
+        lerp(0.65,1.35,ease(pingpong(t,3))))
+      I(Sphere material(plaster)) ]
+
+// A time condition can select a different scene topology per snapshot.
+Beacon ->
+    ?(pulse(t,2,0.25) == 1) BeaconOn : BeaconOff
+
+BeaconOn ->
+    [ T(0 2 0)
+      S(0.45 0.45 0.45)
+      I(Sphere material(plaster)) ]
+
+BeaconOff ->
+    [ T(0 2 0)
+      S(0.08 0.08 0.08)
+      I(Sphere material(plaster)) ]

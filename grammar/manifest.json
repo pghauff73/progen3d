@@ -3,7 +3,7 @@
   "source_commit": "95c61f312c8bbfe5489b312beee569f437f075e9",
   "scope": "Standalone grammar sources across 21 enumerated repository branches plus transferred library exports. Other exports and embedded/archived grammars remain outstanding.",
   "source_path_count": 90,
-  "distinct_sources": 224,
+  "distinct_sources": 233,
   "records": [
     {
       "title": "Complex Modern Courtyard Building OM20",
@@ -225,6 +225,354 @@
         "mean_match_percent": null,
         "quality_evidence_rating": 80,
         "validation_status": "Not independently validated",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "coruscant city sample",
+      "group": "architecture/buildings/exported-models",
+      "directory": "architecture/buildings/exported-models/coruscant-city-sample-4e112c35",
+      "source_file": "coruscant_city_sample.p3d",
+      "git_blob_sha": "4e112c351030853bd5e35e2031a10137736bf51c",
+      "bytes": 2799,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "coruscant_city_sample.p3d"
+      ],
+      "description": "Progen3D massing conversion from coruscant-city-20.zip",
+      "features": [
+        "Cube",
+        "Cylinder",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Progen3D massing conversion from coruscant-city-20.zip · Source: SketchUp COLLADA model.dae · Conversion: dominant component AABBs -> procedural Progen3D primitives · Normalization: 10,000 source inches = 1 Progen3D unit · Axis mapping: COLLADA X -> Progen3D X, COLLADA Z(up) -> Y, COLLADA Y -> Z · This file uses only current parser/runtime syntax."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "charcoalroughmetal, darkslatesmoothstone, lightgreyroughconcrete, silverbluepolishedmetal, bluewhiteshinysmoothmetal, bluewhiteglossysmoothglass, smokytransparentglass"
+        ],
+        [
+          "Production rules",
+          "Start, Ground, Podiums, Podium, LowCityMasses, Block, TowerField, Tower, SlenderTower (9 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "115"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "coruscant component24 hierarchy",
+      "group": "architecture/buildings/exported-models",
+      "directory": "architecture/buildings/exported-models/coruscant-component24-hierarchy-7978c546",
+      "source_file": "coruscant_component24_hierarchy.p3d",
+      "git_blob_sha": "7978c546d7b3d3f452b6165b4566429b5db46408",
+      "bytes": 4499,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "coruscant_component24_hierarchy.p3d"
+      ],
+      "description": "Coruscant Component_24 semantic decomposition",
+      "features": [
+        "Cube",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Coruscant Component_24 semantic decomposition · Source: coruscant-city-20.zip -> source/city+5.zip -> model.dae · Source node: Component_24 / ID3049 · Source geometry: 98 instance_geometry elements, ~27.239 normalized units high. · Normalization used here: 10,000 COLLADA source units = 1 Progen3D unit. · Axis mapping: COLLADA X -> Progen3D X; COLLADA Z(up) -> Progen3D Y; COLLADA Y -> Progen3D Z. ·  · IMPORTANT: dimensions/offsets below are source-derived or slice-derived. · Material choices and replacement of continuous/irregular surfaces by Cube/Sphere · are a Progen3D approximation using the current executable primitive set."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "darkslateroughmetal, charcoalsmoothmetal, silverblueroughmetal, darkslatesmoothmetal, silverbluepolishedmetal, silverbluesmoothmetal, bluewhiteshinysmoothmetal, bluewhiteglossysmoothglass, charcoalroughmetal, smokytransparentglass"
+        ],
+        [
+          "Production rules",
+          "Start, CoruscantTower24, Tower24Base, Tower24LowerBody, Tower24MainShaft, Tower24Crown, Tower24Spire, Tower24FacadeRibs (8 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "165"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Modern Luxury Residence From Image Set",
+      "group": "architecture/buildings/exported-models",
+      "directory": "architecture/buildings/exported-models/modern-luxury-residence-from-image-set-162f1aba",
+      "source_file": "Modern_Luxury_Residence_From_Image_Set.p3d",
+      "git_blob_sha": "162f1abae60a6963b4a1aacd9caa7b5c7287bda8",
+      "bytes": 25157,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Modern_Luxury_Residence_From_Image_Set.p3d"
+      ],
+      "description": "=====================================================================",
+      "features": [
+        "Cube",
+        "Cylinder",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "===================================================================== · MODERN LUXURY RESIDENCE — MULTI-IMAGE ARCHITECTURAL GRAMMAR · Current Progen3D syntax ·  · SOURCE BASIS · ------------ · Exterior reference views: · front elevation · rear elevation with pool/patio · left/front oblique"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "lightgreyroughconcrete, warmwhitematteplaster, charcoalroughmetal, silverbluepolishedmetal, amberwarmwood, bluewhiteglossysmoothglass, offwhiteceramic, greenmattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, Residence, Concrete, WhitePlaster, DarkMetal, PolishedMetal, Timber, Glass, Stone, WarmStone, BlackGlass, Green, Water, Site, SiteGround, FrontDrive, FrontEntryPath, RearGardenGround, StructuralShell, FoundationSlab (148 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "1000"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Modern Residence Image Derived Facade",
+      "group": "architecture/buildings/exported-models",
+      "directory": "architecture/buildings/exported-models/modern-residence-image-derived-facade-5a9ff288",
+      "source_file": "Modern_Residence_Image_Derived_Facade.p3d",
+      "git_blob_sha": "5a9ff28823a74017bc8261f55bd895bd07ed5106",
+      "bytes": 13073,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Modern_Residence_Image_Derived_Facade.p3d"
+      ],
+      "description": "================================================================",
+      "features": [
+        "Cube",
+        "Cylinder",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "================================================================ · MODERN THREE-STOREY RESIDENCE — IMAGE-DERIVED FACADE STUDY · Current Progen3D grammar syntax ·  · Based on the supplied/generated front-elevation reference image. · Visible facade features are modelled directly: · - three occupied levels · - tall exposed-concrete blade walls · - full-height timber louvre screen to the left · - dark steel/metal balcony frames"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "lightgreyroughconcrete, warmwhitematteplaster, charcoalroughmetal, silverbluepolishedmetal, amberwarmwood, bluewhiteglossysmoothglass, greenmattepaint"
+        ],
+        [
+          "Production rules",
+          "Start, ModernResidence, ConcreteBlock, WhiteBlock, DarkMetalBlock, MetalBlock, WoodBlock, GlassBlock, StoneBlock, GreenBlock, Site, GroundPad, Driveway, FrontWalk, StructuralShell, FloorSlabs, RoofSlab, SideWalls, RearWall, GroundFloorFacade (70 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "535"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Single Floor Modern Building Windows Doors",
+      "group": "architecture/buildings/exported-models",
+      "directory": "architecture/buildings/exported-models/single-floor-modern-building-windows-doors-6f5fc653",
+      "source_file": "Single_Floor_Modern_Building_Windows_Doors.p3d",
+      "git_blob_sha": "6f5fc65326d951027b13d15320af1827919e076c",
+      "bytes": 7086,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Single_Floor_Modern_Building_Windows_Doors.p3d"
+      ],
+      "description": "================================================================",
+      "features": [
+        "Cube",
+        "Cylinder"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "================================================================ · SINGLE-FLOOR MODERN BUILDING · Current Progen3D grammar syntax ·  · Overall dimensions: · width       = 12.0 · depth       = 8.0 · wall height = 3.2 ·  · Openings:"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder"
+        ],
+        [
+          "Material identifiers",
+          "warmwhitematteplaster, lightgreyroughconcrete, silverbluepolishedmetal, bluewhiteglossysmoothglass, amberwarmwood, charcoalroughmetal"
+        ],
+        [
+          "Production rules",
+          "Start, SingleFloorBuilding, WallBlock, ConcreteBlock, MetalBlock, GlassBlock, WoodBlock, Foundation, FloorSlab, ExteriorWalls, FrontWall, RearWall, LeftWall, RightWall, Windows, FrontRearWindow, SideWindow, Doors, MainGlazedDoor, MainDoorHandle (28 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "306"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Modern Chair 3D Curve Grammar",
+      "group": "architecture/furniture",
+      "directory": "architecture/furniture/modern-chair-3d-curve-grammar-ef097c87",
+      "source_file": "Modern_Chair_3D_Curve_Grammar.p3d",
+      "git_blob_sha": "ef097c8704d6fad7621483eccb3f5ab5e5e6dbcd",
+      "bytes": 9915,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Modern_Chair_3D_Curve_Grammar.p3d"
+      ],
+      "description": "=============================================================================",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          "============================================================================= · PROGEN3D MODERN CHAIR — 3D CURVE RECONSTRUCTION ·  · SOURCE · ------ · Reconstructed from the supplied FRONT / SIDE / TOP chair image with · registered contour lines, section shading, centre curves and axes. ·  · SCALE · -----"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start, ModernChair, ChairCurveNetwork, BackCenterCurve, SeatCenterCurve, ShellLeftEdgeCurve, ShellRightEdgeCurve, BackTopSection, BackUpperSection, BackMidSection, TransitionSection, SeatMidSection, SeatFrontSection, ChairShell, FrontLeftLegCurve, FrontRightLegCurve, RearLeftLegCurve, RearRightLegCurve, ChairLegs, ChairEdgeRim (21 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "431"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
         "score_type": "Evidence completeness; not intrinsic model fidelity"
       }
     },
@@ -5887,6 +6235,64 @@
       }
     },
     {
+      "title": "P2 time showcase",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/p2-time-showcase-dd12fb3f",
+      "source_file": "P2_time_showcase.p3d",
+      "git_blob_sha": "dd12fb3fe5af7203bff9d60f9a4e39855faad813",
+      "bytes": 1355,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "P2_time_showcase.p3d"
+      ],
+      "description": "P2 time showcase exported procedural grammar.",
+      "features": [
+        "Cube",
+        "Sphere"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          ""
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Sphere"
+        ],
+        [
+          "Material identifiers",
+          "plaster"
+        ],
+        [
+          "Production rules",
+          "Start, Ground, Rotor, Pendulum, Breather, Beacon, BeaconOn, BeaconOff (8 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "54"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
       "title": "Pro Gen3D Bearing Family",
       "group": "education/grammar-showcases",
       "directory": "education/grammar-showcases/progen3d-bearing-family-d93319b3",
@@ -6233,6 +6639,66 @@
         [
           "Source lines",
           "460"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "Progen3D Grammar Showcase",
+      "group": "education/grammar-showcases",
+      "directory": "education/grammar-showcases/progen3d-grammar-showcase-726d30e1",
+      "source_file": "Progen3D_Grammar_Showcase.p3d",
+      "git_blob_sha": "726d30e11247d574a37a972cb6bd30aedf342f73",
+      "bytes": 1658,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "Progen3D_Grammar_Showcase.p3d"
+      ],
+      "description": "Progen3D current-grammar showcase",
+      "features": [
+        "Cube",
+        "Cylinder",
+        "Sphere",
+        "CubeZ"
+      ],
+      "detail": [
+        [
+          "Source notes",
+          "Progen3D current-grammar showcase · This file uses the strict writing profile from Progen3D_Grammar_Writing_Guide.md. · Header form: parameters, compact repeat expression, then production. · Three sections mean setup | repeated body | tail. · Probability is selected once per Cap invocation. · The conditional is the final construct in this square-bracket sequence."
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          "Cube, Cylinder, Sphere, CubeZ"
+        ],
+        [
+          "Material identifiers",
+          "lightgreyroughconcrete, warmwhitematteplaster, softbeigemattesandstone, silvermetalpolishedreflective, redmetalglossy, cyanneonglowingactive, smokytransparentglass"
+        ],
+        [
+          "Production rules",
+          "Start, Ground, Column, FallingBody, AnimatedBeacon, BeaconOn, BeaconOff (7 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "69"
         ]
       ],
       "render_assets": [],
@@ -7928,6 +8394,61 @@
         [
           "Source lines",
           "344"
+        ]
+      ],
+      "render_assets": [],
+      "documentation": [],
+      "quality": {
+        "visual_match_percent": null,
+        "mean_match_percent": null,
+        "quality_evidence_rating": 55,
+        "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+        "score_type": "Evidence completeness; not intrinsic model fidelity"
+      }
+    },
+    {
+      "title": "MVPv2 5 Bonnet Only",
+      "group": "engineering/automotive/exported-models",
+      "directory": "engineering/automotive/exported-models/mvpv2-5-bonnet-only-69bb3268",
+      "source_file": "MVPv2_5_Bonnet_Only.p3d",
+      "git_blob_sha": "69bb3268e1e871ad8187c26ac442d2573afbecb1",
+      "bytes": 13139,
+      "source_type": "Library export",
+      "source_commit": null,
+      "original_paths": [],
+      "library_exports": [
+        "MVPv2_5_Bonnet_Only.p3d"
+      ],
+      "description": "=============================================================================",
+      "features": [],
+      "detail": [
+        [
+          "Source notes",
+          "============================================================================= · MVPv2.5 BONNET / HOOD ONLY ·  · SOURCE BASIS · ------------ · Derived from the supplied MVPv2.5 bonnet / hood engineering drawing. ·  · IMAGE-SUPPORTED DIMENSIONS · -------------------------- · overall length      1.335 m"
+        ],
+        [
+          "Named objects",
+          ""
+        ],
+        [
+          "Object classes",
+          ""
+        ],
+        [
+          "Instantiated primitives",
+          ""
+        ],
+        [
+          "Material identifiers",
+          ""
+        ],
+        [
+          "Production rules",
+          "Start, MVP25_Bonnet, MVP25_BonnetReferenceFrame, MVP25_BonnetDimensions, MVP25_BonnetLandmarks, MVP25_BonnetCharacterCurves, MVP25_BonnetOuterSkin, MVP25_BonnetInnerPanel, MVP25_BonnetRolledEdge, MVP25_BonnetHingeSystem, MVP25_BonnetHingeL, MVP25_BonnetHingeR, MVP25_BonnetSupportSystem, MVP25_BonnetStrutL, MVP25_BonnetStrutR, MVP25_BonnetLatchSystem, MVP25_BonnetSeal, MVP25_BonnetInterfaces, MVP25_BonnetState, MVP25_BonnetConstraints (21 lexical matches)"
+        ],
+        [
+          "Source lines",
+          "544"
         ]
       ],
       "render_assets": [],
@@ -13164,7 +13685,7 @@
   ],
   "development_branch_sources_added": 33,
   "enumerated_branches": 21,
-  "library_exports_imported": 109,
+  "library_exports_imported": 118,
   "library_export_inventory_count": 251,
-  "library_export_names_transferred": 110
+  "library_export_names_transferred": 119
 }

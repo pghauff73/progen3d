@@ -1,0 +1,60 @@
+{
+  "title": "Progen3D Grammar Showcase",
+  "group": "education/grammar-showcases",
+  "directory": "education/grammar-showcases/progen3d-grammar-showcase-726d30e1",
+  "source_file": "Progen3D_Grammar_Showcase.p3d",
+  "git_blob_sha": "726d30e11247d574a37a972cb6bd30aedf342f73",
+  "bytes": 1658,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Progen3D_Grammar_Showcase.p3d"
+  ],
+  "description": "Progen3D current-grammar showcase",
+  "features": [
+    "Cube",
+    "Cylinder",
+    "Sphere",
+    "CubeZ"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Progen3D current-grammar showcase · This file uses the strict writing profile from Progen3D_Grammar_Writing_Guide.md. · Header form: parameters, compact repeat expression, then production. · Three sections mean setup | repeated body | tail. · Probability is selected once per Cap invocation. · The conditional is the final construct in this square-bracket sequence."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Cylinder, Sphere, CubeZ"
+    ],
+    [
+      "Material identifiers",
+      "lightgreyroughconcrete, warmwhitematteplaster, softbeigemattesandstone, silvermetalpolishedreflective, redmetalglossy, cyanneonglowingactive, smokytransparentglass"
+    ],
+    [
+      "Production rules",
+      "Start, Ground, Column, FallingBody, AnimatedBeacon, BeaconOn, BeaconOff (7 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "69"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
