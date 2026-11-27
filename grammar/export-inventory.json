@@ -1,0 +1,1264 @@
+{
+  "schema": "progen3d.export-inventory.v1",
+  "snapshot": "2026-11-27",
+  "total": 251,
+  "enumeration_complete": true,
+  "description": "Snapshot of separately exported grammar files. Match filename and size against library_exports in the current manifest to determine current coverage; this inventory records no private file identifiers. Pending files are not uploaded source.",
+  "entries": [
+    {
+      "filename": "dual_surface_cellular.p3d",
+      "bytes": 247793,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "cellular_composition_02.p3d",
+      "bytes": 131923,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S03_Power_Service_Grooved.p3d",
+      "bytes": 12755,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S03_Cargo_Service_Grooved.p3d",
+      "bytes": 12047,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S03_Computer_Service_Grooved.p3d",
+      "bytes": 12775,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S03_Crew_Cabin_Grooved_And_Ribbed.p3d",
+      "bytes": 11020,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S03_Crew_Cabin_Grooved.p3d",
+      "bytes": 9855,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Lyra_MAPBF_Sampled_Preview.p3d",
+      "bytes": 4121051,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_U11_uncrewed_folded.p3d",
+      "bytes": 918749,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_S02_Interior_Assembly.p3d",
+      "bytes": 635228,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_S02_Power_District.p3d",
+      "bytes": 16430,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S02_Service_Panel.p3d",
+      "bytes": 3462,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S02_Crew_Cabin.p3d",
+      "bytes": 6449,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S02_Structural_Pattern_Atlas.p3d",
+      "bytes": 7765,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Deck_Transfers.p3d",
+      "bytes": 17312,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Thermal.p3d",
+      "bytes": 4136,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Water.p3d",
+      "bytes": 1743,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Cryogenics.p3d",
+      "bytes": 2594,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Propulsion.p3d",
+      "bytes": 823,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Power.p3d",
+      "bytes": 6699,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Maintenance.p3d",
+      "bytes": 3386,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Cargo.p3d",
+      "bytes": 3346,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Command_Deck.p3d",
+      "bytes": 3071,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_S01_Hydroponics.p3d",
+      "bytes": 132620,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_S01_Crew_Quarters.p3d",
+      "bytes": 131708,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_S01_Interior_Complete.p3d",
+      "bytes": 432500,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_S01_Exterior_Complete.p3d",
+      "bytes": 727268,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_5_Integrated.p3d",
+      "bytes": 4251383,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_5_Head.p3d",
+      "bytes": 4123312,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_U10_Piloted_Relief.p3d",
+      "bytes": 886217,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_U10_Repair_Relief.p3d",
+      "bytes": 865461,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_U10_Uncrewed_Relief.p3d",
+      "bytes": 877417,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_D9_Uncrewed_Repair_Relief.p3d",
+      "bytes": 800334,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_D9_Uncrewed_Relief.p3d",
+      "bytes": 812254,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_R01_H03_Cabin_Detailed.p3d",
+      "bytes": 27938,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Lyra_E15_4_Integrated.p3d",
+      "bytes": 4215678,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_4_Head.p3d",
+      "bytes": 4087598,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H04_Ship_Default.p3d",
+      "bytes": 387822,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H04_Pilot_Assembly.p3d",
+      "bytes": 50130,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H04_Resized_H03_Cabin.p3d",
+      "bytes": 7645,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Lyra_E15_3_Body_Skin_Preview.p3d",
+      "bytes": 2259568,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_3_fine.p3d",
+      "bytes": 2131519,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_2_Body_Envelope_Preview.p3d",
+      "bytes": 1974500,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_2_Envelope_Head.p3d",
+      "bytes": 1846427,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H03_Reassembled_Module.p3d",
+      "bytes": 247238,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H03_Reassembled_Ship.p3d",
+      "bytes": 387822,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H03_Farm_A.p3d",
+      "bytes": 32616,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_H03_Cabin_CS01.p3d",
+      "bytes": 7559,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_H03_Module_Medical.p3d",
+      "bytes": 2848,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_H03_Ship_Fixed_Service_Rooms.p3d",
+      "bytes": 34022,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_H03_Ship_Corridors.p3d",
+      "bytes": 22569,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_H03_Ship_Refuges.p3d",
+      "bytes": 49159,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_H03_Ship_Hydroponics.p3d",
+      "bytes": 130057,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H03_Ship_Crew_Quarters.p3d",
+      "bytes": 119907,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E15_1_Reset.p3d",
+      "bytes": 1239719,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E14_Hologram.p3d",
+      "bytes": 5508294,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E14_Integrated.p3d",
+      "bytes": 5508039,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E13_Hologram.p3d",
+      "bytes": 5397672,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E13_Integrated.p3d",
+      "bytes": 5397417,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E12_Hologram.p3d",
+      "bytes": 4214077,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E12_Integrated.p3d",
+      "bytes": 4213822,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H02_HighRes_Module.p3d",
+      "bytes": 247238,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H02_HighRes_Ship.p3d",
+      "bytes": 387822,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_UltraRes_Bed_Spring.p3d",
+      "bytes": 64846,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_HiRes_Roller.p3d",
+      "bytes": 466,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Ender3_Y_HiRes_GT2_Pulley.p3d",
+      "bytes": 287188,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_HiRes_Frame_Drive_Animated.p3d",
+      "bytes": 1323570,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_HiRes_Animated_Overview.p3d",
+      "bytes": 23931,
+      "status_at_snapshot": "represented"
+    },
+    {
+      "filename": "Meridian_D6_uncrewed_repair.p3d",
+      "bytes": 699715,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_D6_uncrewed_folded.p3d",
+      "bytes": 706032,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_D6_piloted_hatch_open.p3d",
+      "bytes": 714848,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_D6_piloted_closed.p3d",
+      "bytes": 714832,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E11_Smile_7p6s.p3d",
+      "bytes": 3821560,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E11_Hologram.p3d",
+      "bytes": 3772714,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E11_Integrated(1).p3d",
+      "bytes": 3772459,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E11_Integrated.p3d",
+      "bytes": 3772459,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E10_Hologram.p3d",
+      "bytes": 3190237,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E10_Integrated.p3d",
+      "bytes": 3189982,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_D5_Uncrewed_Repair.p3d",
+      "bytes": 564630,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_D5_Piloted_Hatch_Open.p3d",
+      "bytes": 576350,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_D5_Piloted.p3d",
+      "bytes": 576346,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_E9_Anatomical_96x128.p3d",
+      "bytes": 732854,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H01_Ship_Interior.p3d",
+      "bytes": 154659,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_H01_Human_Module.p3d",
+      "bytes": 61522,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M074_Deck_Study.p3d",
+      "bytes": 186716,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M074_Master.p3d",
+      "bytes": 727268,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M073_Interior_Study.p3d",
+      "bytes": 49045,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M073_Master.p3d",
+      "bytes": 726367,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M072_Systems.p3d",
+      "bytes": 725215,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_D2_Piloted_Hatch.p3d",
+      "bytes": 137725,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_D2_Repair_Locked.p3d",
+      "bytes": 435789,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M071_Systems.p3d",
+      "bytes": 731769,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_7_SYNTHETIC_Demo.p3d",
+      "bytes": 52642,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_6_High_LOD_FrameDrive.p3d",
+      "bytes": 1352154,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_6_Animated_Diagnostics.p3d",
+      "bytes": 52511,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_6_Low_LOD.p3d",
+      "bytes": 39812,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "speech_48x64.p3d",
+      "bytes": 1873,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M07_Tank_Envelope_Study.p3d",
+      "bytes": 1152,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M07_Systems.p3d",
+      "bytes": 715854,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_5_Belt_Dynamics.p3d",
+      "bytes": 15751,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_5_Unified_Dynamics_Overview.p3d",
+      "bytes": 28294,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M061_Systems.p3d",
+      "bytes": 714079,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M2_Uncrewed_Mass_Overlay.p3d",
+      "bytes": 399947,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M2_Piloted_Mass_Overlay.p3d",
+      "bytes": 408747,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M06_Systems.p3d",
+      "bytes": 712404,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M05_Systems.p3d",
+      "bytes": 710304,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M04_Systems.p3d",
+      "bytes": 708366,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_Cockpit.p3d",
+      "bytes": 101493,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_M03_Systems.p3d",
+      "bytes": 707020,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_4_Belt_Animated.p3d",
+      "bytes": 11411,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M2_4_Unified_Animated_Overview.p3d",
+      "bytes": 23931,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Y_M23_Unified_Animated_Overview.p3d",
+      "bytes": 12062,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Bed_Platform_Mesh95.p3d",
+      "bytes": 104306,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Left_Rollers_Mesh95.p3d",
+      "bytes": 731291,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Right_Rollers_Mesh95.p3d",
+      "bytes": 733738,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Bed_Knobs_Mesh95.p3d",
+      "bytes": 1030656,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Frame_Drive_Mesh95.p3d",
+      "bytes": 1021173,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Robot_Repair.p3d",
+      "bytes": 399299,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_Animated_Procedural_Hologram.p3d",
+      "bytes": 1242622,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Procedural_Material_Catalogue.p3d",
+      "bytes": 7393,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Animated_Procedural_Materials.p3d",
+      "bytes": 1858,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Systems_Cutaway.p3d",
+      "bytes": 705709,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Animated.p3d",
+      "bytes": 325467,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_Y_Axis_Engineering.p3d",
+      "bytes": 325467,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_Active_Hologram.p3d",
+      "bytes": 1240244,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_Anatomic_Elastic_Motion.p3d",
+      "bytes": 21714,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_Procedural_NoMesh.p3d",
+      "bytes": 1239719,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "XCarriage_Simulated.p3d",
+      "bytes": 1198458,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_Reference_Motion.p3d",
+      "bytes": 1724707,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "XCarriage_Belt_NEMA17.p3d",
+      "bytes": 22847,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_X_Axis.p3d",
+      "bytes": 88768,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Service_Refit.p3d",
+      "bytes": 295623,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lead_Screw_Axis.p3d",
+      "bytes": 293048,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "NEMA17_Engineering.p3d",
+      "bytes": 19936,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Service_Airlock.p3d",
+      "bytes": 32990,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Port_Bay_Refit.p3d",
+      "bytes": 583861,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lyra_Greeting.p3d",
+      "bytes": 1961041,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Orbital_Repair_Robot.p3d",
+      "bytes": 89007,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Carriage_Harness_0.82.p3d",
+      "bytes": 880,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Truss_Clearance_Trial.p3d",
+      "bytes": 591429,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Traced_Foil.p3d",
+      "bytes": 602012,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Salt_Storyboard_Animated.p3d",
+      "bytes": 1944594,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Two_Brackets.p3d",
+      "bytes": 638,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Container_Berth_Photo_Fit.p3d",
+      "bytes": 307724,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Reference_Fit.p3d",
+      "bytes": 568851,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Salt_Storyboard_Match.p3d",
+      "bytes": 1811100,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Perihelion_Surveyor_Reference_Fit.p3d",
+      "bytes": 562223,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Container_Berth.p3d",
+      "bytes": 57566,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Registered_Mesh_Example.p3d",
+      "bytes": 340,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Perihelion_Surveyor.p3d",
+      "bytes": 43344,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Meridian_Observatory.p3d",
+      "bytes": 19652,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Gatewarden_Berth_Four.p3d",
+      "bytes": 270521,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Wraparound_Lounge_Chair.p3d",
+      "bytes": 22994,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Bearing_Family.p3d",
+      "bytes": 8858,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "The_Sky_Beneath_the_Salt.p3d",
+      "bytes": 1023963,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Gatewarden_Super_Fortress.p3d",
+      "bytes": 51492,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_Bearing_Pair.p3d",
+      "bytes": 162,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Copperleaf.p3d",
+      "bytes": 18101,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Ender3_V1_Detailed.p3d",
+      "bytes": 103120,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Kinetic_Assembly_Pair.p3d",
+      "bytes": 15472,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Bookcase_Display.p3d",
+      "bytes": 1829,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "M5_Base_262_Parts.grammar",
+      "bytes": 141082,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "M3_Pose_printing.grammar",
+      "bytes": 144947,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "SDF1_Mesh_Fitted_Transformation.p3d",
+      "bytes": 457569,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_M2_Detailed.grammar",
+      "bytes": 141082,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ender3_V1_All_Parts.grammar",
+      "bytes": 52415,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "SDF1_Modular_Transformation.p3d",
+      "bytes": 68499,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "42-cavalieri-volume-table.p3d",
+      "bytes": 3959,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "41-helical-screw-lift.p3d",
+      "bytes": 5635,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "40-six-actuator-platform.p3d",
+      "bytes": 5273,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "39-euler-rail-transition.p3d",
+      "bytes": 4251,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "38-equatorial-sundial.p3d",
+      "bytes": 4585,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "37-pantograph-rosette.p3d",
+      "bytes": 4755,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "36-coriolis-turntable.p3d",
+      "bytes": 4176,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "35-steiner-network-table.p3d",
+      "bytes": 4807,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "34-venturi-flow-bench.p3d",
+      "bytes": 5463,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "33-standing-wave-membrane.p3d",
+      "bytes": 3978,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "32-flexure-bench.p3d",
+      "bytes": 5130,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "31-kepler-sector-table.p3d",
+      "bytes": 4687,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "30-polar-projection-atlas.p3d",
+      "bytes": 5726,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "29-corner-cube-retroreflector.p3d",
+      "bytes": 4940,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "28-flyball-governor.p3d",
+      "bytes": 5240,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "27-brachistochrone-race.p3d",
+      "bytes": 4277,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "26-tensegrity-prism.p3d",
+      "bytes": 3632,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_The_Curve_Becomes_Timber.p3d",
+      "bytes": 181852,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "25-auxetic-tile-panel.p3d",
+      "bytes": 3752,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Two_Brass_Gears.p3d",
+      "bytes": 38363,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "24-truss-force-bench.p3d",
+      "bytes": 3330,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_One_Branch_Forks.p3d",
+      "bytes": 79147,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_First_Chair.p3d",
+      "bytes": 28844,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "23-peaucellier-linkage.p3d",
+      "bytes": 4162,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "22-napier-rods.p3d",
+      "bytes": 4351,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "21-catenoid-section.p3d",
+      "bytes": 3319,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "20-elliptic-trammel.p3d",
+      "bytes": 3625,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "19-residue-diffuser.p3d",
+      "bytes": 2835,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "18-parabolic-trough.p3d",
+      "bytes": 3195,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Motion_Simulator_Tilt_and_Rotation.p3d",
+      "bytes": 13415,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "17-mobius-ribbon.p3d",
+      "bytes": 3485,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Motion_Simulator_Rig.p3d",
+      "bytes": 11722,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "16-constant-width-gauge.p3d",
+      "bytes": 3974,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Rotating_Rings.p3d",
+      "bytes": 37569,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Orange_Dome_House.p3d",
+      "bytes": 91152,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "15-marquetry-tree.p3d",
+      "bytes": 2488,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Canopy_Over_the_Copper_Delta.p3d",
+      "bytes": 381693,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "14-code-wheel.p3d",
+      "bytes": 2643,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Lantern_Walk_Garden.p3d",
+      "bytes": 88333,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Cedar_Lantern.p3d",
+      "bytes": 472280,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "13-knot-cabinet.p3d",
+      "bytes": 2408,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Recent_Engineering_Inventions.p3d",
+      "bytes": 11390,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Ribbon_House.p3d",
+      "bytes": 196290,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Spur_Gear_Pair.p3d",
+      "bytes": 2568,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "ProGen3D_Ducted_Fan.p3d",
+      "bytes": 34166,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "11-scotch-yoke.p3d",
+      "bytes": 3878,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "10-truchet-tracing-board.p3d",
+      "bytes": 2167,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "07-three-cross-wheel.p3d",
+      "bytes": 4164,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "08-pendulum-wave.p3d",
+      "bytes": 2894,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "09-hyperboloid-pavilion.p3d",
+      "bytes": 4045,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Tesseract_4D.p3d",
+      "bytes": 3590,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "04-volute-pump.p3d",
+      "bytes": 18764,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "05-miura-solar-blanket.p3d",
+      "bytes": 2186,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "06-sunflower-capitulum.p3d",
+      "bytes": 5400,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Popular_Objects_Collection.p3d",
+      "bytes": 36499,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "03-orchid-shadehouse.p3d",
+      "bytes": 10976,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "01-meridian-orrery.p3d",
+      "bytes": 6351,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "02-two-shaft-loom.p3d",
+      "bytes": 9513,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Winthrop_Armchair.p3d",
+      "bytes": 141682,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Sage_Childrens_Bedroom.p3d",
+      "bytes": 18986,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MCSMv2_Modern_Car_Family.p3d",
+      "bytes": 10639,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MCSMv1_Modern_Car_Family.p3d",
+      "bytes": 5195,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Modern_Chair_3D_Curve_Grammar.p3d",
+      "bytes": 9915,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv2_5_Chassis_Parts_Assembly.p3d",
+      "bytes": 38541,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv2_5_Bonnet_Only.p3d",
+      "bytes": 13139,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv2_5_Doors_Bonnet_Hatch_Chassis_FinalAssembly.p3d",
+      "bytes": 37877,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv2_5_Red_Sport_Hatchback_AWD.p3d",
+      "bytes": 56116,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv1_Sport_Hatchback_AWD_FullPrimitives.p3d",
+      "bytes": 49196,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv1_Red_Sporty_Hatchback_Current.p3d",
+      "bytes": 22497,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MVPv1_Red_Sporty_Hatchback_Advanced.p3d",
+      "bytes": 33660,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Modern_Townhouse_Advanced_NewTechniques.p3d",
+      "bytes": 58530,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Modern_Luxury_Residence_Detailed_V3.p3d",
+      "bytes": 106308,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Modern_Luxury_Residence_Detailed_V2.p3d",
+      "bytes": 61723,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Modern_Luxury_Residence_From_Image_Set.p3d",
+      "bytes": 25157,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Modern_Residence_Image_Derived_Facade.p3d",
+      "bytes": 13073,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Complex_Modern_Courtyard_Building_OM20.p3d",
+      "bytes": 729756,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Complex_Modern_Courtyard_Building_OM5.p3d",
+      "bytes": 163523,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Single_Floor_Modern_Building_Windows_Doors.p3d",
+      "bytes": 7086,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "SMB_OMv1_Instance_SMB_001.p3d",
+      "bytes": 23909,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "MBT20v1_Progen3D_Taxonomy_Grammar.p3d",
+      "bytes": 84939,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "coruscant_component24_hierarchy.p3d",
+      "bytes": 4499,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "coruscant_city_sample.p3d",
+      "bytes": 2799,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "Progen3D_Grammar_Showcase.p3d",
+      "bytes": 1658,
+      "status_at_snapshot": "pending"
+    },
+    {
+      "filename": "P2_time_showcase.p3d",
+      "bytes": 1355,
+      "status_at_snapshot": "pending"
+    }
+  ]
+}
