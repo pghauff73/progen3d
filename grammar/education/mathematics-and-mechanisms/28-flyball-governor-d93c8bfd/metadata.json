@@ -1,0 +1,62 @@
+{
+  "title": "28 flyball governor",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/28-flyball-governor-d93c8bfd",
+  "source_file": "28-flyball-governor.p3d",
+  "git_blob_sha": "d93c8bfdaf9ea7451a70b25b42fe9eb489852136",
+  "bytes": 5240,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "28-flyball-governor.p3d"
+  ],
+  "description": "Quasi-static flyball governor. Governor(lowRPM highRPM period lowerLength).",
+  "features": [
+    "SweepProfile",
+    "Sphere",
+    "Cylinder",
+    "Revolve",
+    "Cube",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Quasi-static flyball governor. Governor(lowRPM highRPM period lowerLength). · Upper arms are 1.12 m. Suggested lower lengths are 1.12-1.32 m. · Try 32-48 rpm over 6 s or 30-42 rpm over 5 s."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Pedestal, Scale, Spindle, Follower, Drive, UpperPivot, Sleeve, Flyballs, UpperLinks, LowerLinks"
+    ],
+    [
+      "Object classes",
+      "FlyballGovernor, InstrumentBase, SleeveTravelScale, DriveShaft, SleeveIndicator, DriveWheel, SpindleHead, SlidingCollar, OpposedWeights, PendulumArms, SleeveForks"
+    ],
+    [
+      "Instantiated primitives",
+      "SweepProfile, Sphere, Cylinder, Revolve, Cube, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, silverbrushedmetal, copperpolishedmetal, goldbrushedmetal, charcoalmattemetal, redmattepaint, amberwarmwood, offwhiteceramic"
+    ],
+    [
+      "Production rules",
+      "Start, Governor, Motion, Height, Radius, Exhibit, Upper, Lower, Fork, Ball, Pin, Head, Sleeve, Indicator, Shaft, Flywheel, Base, Scale (18 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "89"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

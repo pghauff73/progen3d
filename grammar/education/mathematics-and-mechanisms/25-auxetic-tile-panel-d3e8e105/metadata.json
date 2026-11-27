@@ -1,0 +1,59 @@
+{
+  "title": "25 auxetic tile panel",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/25-auxetic-tile-panel-d3e8e105",
+  "source_file": "25-auxetic-tile-panel.p3d",
+  "git_blob_sha": "d3e8e105c0acceead02cae6eb5b70ed08f033a34",
+  "bytes": 3752,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "25-auxetic-tile-panel.p3d"
+  ],
+  "description": "Corner-hinged tile panel. Coupon(cols rows halfWidth halfDepth openAngle period).",
+  "features": [
+    "Cylinder",
+    "Cube",
+    "Extrude"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Corner-hinged tile panel. Coupon(cols rows halfWidth halfDepth openAngle period). · Default tiles are square. Try halfDepth 0.26 to compare rectangular tiles. · The motion goes from 8 degrees to openAngle and back in one period. · One pin for each adjoining pair. Offsets alternate with tile handedness."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Frame, Tiles, Pivots"
+    ],
+    [
+      "Object classes",
+      "AuxeticTestPanel, DisplayTray, RigidTileArray, CornerHingeArray"
+    ],
+    [
+      "Instantiated primitives",
+      "Cylinder, Cube, Extrude"
+    ],
+    [
+      "Material identifiers",
+      "charcoalroughmetal, charcoalmattemetal, goldbrushedmetal, copperpolishedmetal, bluegreymattepaint, sagegreenmattepaint, silverbrushedmetal, amberwarmwood, warmwhitematteplaster"
+    ],
+    [
+      "Production rules",
+      "Start, Coupon, Pattern, Lattice, Tile, Enamel, Rivet, Tray (8 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "60"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

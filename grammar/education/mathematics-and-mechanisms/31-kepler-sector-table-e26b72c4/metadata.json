@@ -1,0 +1,62 @@
+{
+  "title": "31 kepler sector table",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/31-kepler-sector-table-e26b72c4",
+  "source_file": "31-kepler-sector-table.p3d",
+  "git_blob_sha": "e26b72c4f3ad335b3fc9bbcd323d219378285267",
+  "bytes": 4687,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "31-kepler-sector-table.p3d"
+  ],
+  "description": "Kepler sector table. Kepler(eccentricity sectors chordsPerSector period mode).",
+  "features": [
+    "Extrude",
+    "TaperedSweep",
+    "Cylinder",
+    "Sphere",
+    "Revolve",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Kepler sector table. Kepler(eccentricity sectors chordsPerSector period mode). · Mode 0 gives equal time. Mode 1 gives equal increments of eccentric anomaly. · Try e=0.68 or e=0.28. The moving planet keeps equal-area timing in both modes."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Bench, Sectors, Track, Graduations, Focus, Planet"
+    ],
+    [
+      "Object classes",
+      "OrbitalAreaTable, DisplayCase, AreaSectors, OrbitRim, SectorBoundaries, FocusMarkers, OrbitingBead"
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, TaperedSweep, Cylinder, Sphere, Revolve, Cube"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, tealmatteceramic, offwhiteceramic, sagegreenmattepaint, charcoalmattemetal, goldbrushedmetal, silverbrushedmetal, copperpolishedmetal, amberwarmwood"
+    ],
+    [
+      "Production rules",
+      "Start, Kepler, Table, Pair, SolvePair, Shade, ShadeMid, ShadeWarm, FindPoint, Point, RimSegment, Sun, OtherFocus, Bed, Screw (15 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "82"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

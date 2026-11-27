@@ -3,42 +3,49 @@
   "snapshot": "2026-11-27",
   "total": 251,
   "enumeration_complete": true,
-  "description": "Snapshot of separately exported grammar files. Match filename and size against library_exports in the current manifest to determine current coverage; this inventory records no private file identifiers. Pending files are not uploaded source.",
+  "description": "Library export inventory; represented matches uploaded source filename or alias and reported byte count. Pending entries were not transferred; no truncated sources accepted.",
   "entries": [
     {
       "filename": "dual_surface_cellular.p3d",
       "bytes": 247793,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/surface-relief/patterns/dual-surface-cellular-43149fe0"
     },
     {
       "filename": "cellular_composition_02.p3d",
       "bytes": 131923,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/surface-relief/patterns/cellular-composition-02-337f4faf"
     },
     {
       "filename": "Meridian_S03_Power_Service_Grooved.p3d",
       "bytes": 12755,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/surface-relief/meridian-s03-power-service-grooved-0d16361f"
     },
     {
       "filename": "Meridian_S03_Cargo_Service_Grooved.p3d",
       "bytes": 12047,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/surface-relief/meridian-s03-cargo-service-grooved-99a8ff9b"
     },
     {
       "filename": "Meridian_S03_Computer_Service_Grooved.p3d",
       "bytes": 12775,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/surface-relief/meridian-s03-computer-service-grooved-04f50075"
     },
     {
       "filename": "Meridian_S03_Crew_Cabin_Grooved_And_Ribbed.p3d",
       "bytes": 11020,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/surface-relief/meridian-s03-crew-cabin-grooved-and-ribbed-607e1576"
     },
     {
       "filename": "Meridian_S03_Crew_Cabin_Grooved.p3d",
       "bytes": 9855,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/surface-relief/meridian-s03-crew-cabin-grooved-48b8036f"
     },
     {
       "filename": "Lyra_MAPBF_Sampled_Preview.p3d",
@@ -58,72 +65,86 @@
     {
       "filename": "Meridian_S02_Power_District.p3d",
       "bytes": 16430,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-power-district-ec628c0f"
     },
     {
       "filename": "Meridian_S02_Service_Panel.p3d",
       "bytes": 3462,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-service-panel-a02294e9"
     },
     {
       "filename": "Meridian_S02_Crew_Cabin.p3d",
       "bytes": 6449,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-crew-cabin-f02d4ce9"
     },
     {
       "filename": "Meridian_S02_Structural_Pattern_Atlas.p3d",
       "bytes": 7765,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/districts-and-structure/meridian-s02-structural-pattern-atlas-c9ed5ee2"
     },
     {
       "filename": "Meridian_S01_Deck_Transfers.p3d",
       "bytes": 17312,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-deck-transfers-d5a6f7a8"
     },
     {
       "filename": "Meridian_S01_Thermal.p3d",
       "bytes": 4136,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-thermal-db935f2b"
     },
     {
       "filename": "Meridian_S01_Water.p3d",
       "bytes": 1743,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-water-bd75b212"
     },
     {
       "filename": "Meridian_S01_Cryogenics.p3d",
       "bytes": 2594,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-cryogenics-add53ed6"
     },
     {
       "filename": "Meridian_S01_Propulsion.p3d",
       "bytes": 823,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-propulsion-10250935"
     },
     {
       "filename": "Meridian_S01_Power.p3d",
       "bytes": 6699,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-power-62f5b1ae"
     },
     {
       "filename": "Meridian_S01_Maintenance.p3d",
       "bytes": 3386,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-maintenance-d4eaa4d7"
     },
     {
       "filename": "Meridian_S01_Cargo.p3d",
       "bytes": 3346,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-cargo-6a615a4c"
     },
     {
       "filename": "Meridian_S01_Command_Deck.p3d",
       "bytes": 3071,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-command-deck-54bc9912"
     },
     {
       "filename": "Meridian_S01_Hydroponics.p3d",
       "bytes": 132620,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/subsystems/meridian-s01-hydroponics-b2b84320"
     },
     {
       "filename": "Meridian_S01_Crew_Quarters.p3d",
@@ -178,7 +199,8 @@
     {
       "filename": "Meridian_R01_H03_Cabin_Detailed.p3d",
       "bytes": 27938,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-r01-h03-cabin-detailed-290e222c"
     },
     {
       "filename": "Lyra_E15_4_Integrated.p3d",
@@ -198,12 +220,14 @@
     {
       "filename": "Meridian_H04_Pilot_Assembly.p3d",
       "bytes": 50130,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h04-pilot-assembly-a136a3c2"
     },
     {
       "filename": "Meridian_H04_Resized_H03_Cabin.p3d",
       "bytes": 7645,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h04-resized-h03-cabin-8802161e"
     },
     {
       "filename": "Lyra_E15_3_Body_Skin_Preview.p3d",
@@ -238,42 +262,50 @@
     {
       "filename": "Meridian_H03_Farm_A.p3d",
       "bytes": 32616,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-farm-a-e0ebd01c"
     },
     {
       "filename": "Meridian_H03_Cabin_CS01.p3d",
       "bytes": 7559,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-cabin-cs01-8668973e"
     },
     {
       "filename": "Meridian_H03_Module_Medical.p3d",
       "bytes": 2848,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-module-medical-db1b70ba"
     },
     {
       "filename": "Meridian_H03_Ship_Fixed_Service_Rooms.p3d",
       "bytes": 34022,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-fixed-service-rooms-d9201cee"
     },
     {
       "filename": "Meridian_H03_Ship_Corridors.p3d",
       "bytes": 22569,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-corridors-97877f9d"
     },
     {
       "filename": "Meridian_H03_Ship_Refuges.p3d",
       "bytes": 49159,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-refuges-334c3dfb"
     },
     {
       "filename": "Meridian_H03_Ship_Hydroponics.p3d",
       "bytes": 130057,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-hydroponics-49a93f71"
     },
     {
       "filename": "Meridian_H03_Ship_Crew_Quarters.p3d",
       "bytes": 119907,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-crew-quarters-9159b71f"
     },
     {
       "filename": "Lyra_E15_1_Reset.p3d",
@@ -323,12 +355,14 @@
     {
       "filename": "Ender3_Y_UltraRes_Bed_Spring.p3d",
       "bytes": 64846,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-ultrares-bed-spring-92ab5bed"
     },
     {
       "filename": "Ender3_Y_HiRes_Roller.p3d",
       "bytes": 466,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-roller-4b07c929"
     },
     {
       "filename": "Ender3_Y_HiRes_GT2_Pulley.p3d",
@@ -343,7 +377,8 @@
     {
       "filename": "Ender3_Y_HiRes_Animated_Overview.p3d",
       "bytes": 23931,
-      "status_at_snapshot": "represented"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-animated-overview-944c6518"
     },
     {
       "filename": "Meridian_D6_uncrewed_repair.p3d",
@@ -423,12 +458,14 @@
     {
       "filename": "Meridian_H01_Human_Module.p3d",
       "bytes": 61522,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-h01-human-module-7c922c89"
     },
     {
       "filename": "Meridian_M074_Deck_Study.p3d",
       "bytes": 186716,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-m074-deck-study-1ed6a17a"
     },
     {
       "filename": "Meridian_M074_Master.p3d",
@@ -438,7 +475,8 @@
     {
       "filename": "Meridian_M073_Interior_Study.p3d",
       "bytes": 49045,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-m073-interior-study-89af9de0"
     },
     {
       "filename": "Meridian_M073_Master.p3d",
@@ -453,7 +491,8 @@
     {
       "filename": "Meridian_Robot_D2_Piloted_Hatch.p3d",
       "bytes": 137725,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/orbital-robot/meridian-robot-d2-piloted-hatch-77f674a1"
     },
     {
       "filename": "Meridian_Robot_D2_Repair_Locked.p3d",
@@ -468,7 +507,8 @@
     {
       "filename": "Ender3_Y_M2_7_SYNTHETIC_Demo.p3d",
       "bytes": 52642,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-7-synthetic-demo-91586087"
     },
     {
       "filename": "Ender3_Y_M2_6_High_LOD_FrameDrive.p3d",
@@ -478,22 +518,26 @@
     {
       "filename": "Ender3_Y_M2_6_Animated_Diagnostics.p3d",
       "bytes": 52511,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-6-animated-diagnostics-9ec5d996"
     },
     {
       "filename": "Ender3_Y_M2_6_Low_LOD.p3d",
       "bytes": 39812,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-6-low-lod-08b0dd3d"
     },
     {
       "filename": "speech_48x64.p3d",
       "bytes": 1873,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/speech-48x64-9a79be88"
     },
     {
       "filename": "Meridian_M07_Tank_Envelope_Study.p3d",
       "bytes": 1152,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-m07-tank-envelope-study-72128a96"
     },
     {
       "filename": "Meridian_M07_Systems.p3d",
@@ -503,12 +547,14 @@
     {
       "filename": "Ender3_Y_M2_5_Belt_Dynamics.p3d",
       "bytes": 15751,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-5-belt-dynamics-58afb132"
     },
     {
       "filename": "Ender3_Y_M2_5_Unified_Dynamics_Overview.p3d",
       "bytes": 28294,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-5-unified-dynamics-overview-18481fd1"
     },
     {
       "filename": "Meridian_M061_Systems.p3d",
@@ -543,7 +589,8 @@
     {
       "filename": "Meridian_Robot_Cockpit.p3d",
       "bytes": 101493,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/orbital-robot/meridian-robot-cockpit-fa0a48e1"
     },
     {
       "filename": "Meridian_M03_Systems.p3d",
@@ -553,22 +600,26 @@
     {
       "filename": "Ender3_Y_M2_4_Belt_Animated.p3d",
       "bytes": 11411,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m2-4-belt-animated-30481008"
     },
     {
       "filename": "Ender3_Y_M2_4_Unified_Animated_Overview.p3d",
       "bytes": 23931,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-hires-animated-overview-944c6518"
     },
     {
       "filename": "Ender3_Y_M23_Unified_Animated_Overview.p3d",
       "bytes": 12062,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-y-m23-unified-animated-overview-75498c82"
     },
     {
       "filename": "Ender3_V1_Y_Axis_Bed_Platform_Mesh95.p3d",
       "bytes": 104306,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-v1-y-axis-bed-platform-mesh95-c7195887"
     },
     {
       "filename": "Ender3_V1_Y_Axis_Left_Rollers_Mesh95.p3d",
@@ -603,12 +654,14 @@
     {
       "filename": "Procedural_Material_Catalogue.p3d",
       "bytes": 7393,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/procedural-material-catalogue-bfbb45d8"
     },
     {
       "filename": "Animated_Procedural_Materials.p3d",
       "bytes": 1858,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/animated-procedural-materials-e722e40f"
     },
     {
       "filename": "Meridian_Systems_Cutaway.p3d",
@@ -633,7 +686,8 @@
     {
       "filename": "Lyra_Anatomic_Elastic_Motion.p3d",
       "bytes": 21714,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "characters/lyra/exported-milestones/lyra-anatomic-elastic-motion-d3b7eb95"
     },
     {
       "filename": "Lyra_Procedural_NoMesh.p3d",
@@ -653,12 +707,14 @@
     {
       "filename": "XCarriage_Belt_NEMA17.p3d",
       "bytes": 22847,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/xcarriage-belt-nema17-419577d2"
     },
     {
       "filename": "Ender3_X_Axis.p3d",
       "bytes": 88768,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-x-axis-f5ed2400"
     },
     {
       "filename": "Meridian_Service_Refit.p3d",
@@ -673,12 +729,14 @@
     {
       "filename": "NEMA17_Engineering.p3d",
       "bytes": 19936,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/nema17-engineering-24ae8f7e"
     },
     {
       "filename": "Meridian_Service_Airlock.p3d",
       "bytes": 32990,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-service-airlock-a6c5cc95"
     },
     {
       "filename": "Meridian_Port_Bay_Refit.p3d",
@@ -693,12 +751,14 @@
     {
       "filename": "Orbital_Repair_Robot.p3d",
       "bytes": 89007,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/other-vessels/orbital-repair-robot-c04852b4"
     },
     {
       "filename": "Ender3_Carriage_Harness_0.82.p3d",
       "bytes": 880,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-carriage-harness-0-82-eb2bfb29"
     },
     {
       "filename": "Meridian_Truss_Clearance_Trial.p3d",
@@ -718,7 +778,8 @@
     {
       "filename": "Two_Brackets.p3d",
       "bytes": 638,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/two-brackets-bf7646ab"
     },
     {
       "filename": "Container_Berth_Photo_Fit.p3d",
@@ -748,17 +809,20 @@
     {
       "filename": "Registered_Mesh_Example.p3d",
       "bytes": 340,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/registered-mesh-example-b3f7d848"
     },
     {
       "filename": "Perihelion_Surveyor.p3d",
       "bytes": 43344,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/other-vessels/perihelion-surveyor-58917ef6"
     },
     {
       "filename": "Meridian_Observatory.p3d",
       "bytes": 19652,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/meridian/interior/habitation/meridian-observatory-b86c5a08"
     },
     {
       "filename": "Gatewarden_Berth_Four.p3d",
@@ -768,12 +832,14 @@
     {
       "filename": "Wraparound_Lounge_Chair.p3d",
       "bytes": 22994,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/furniture/wraparound-lounge-chair-5dc1824f"
     },
     {
       "filename": "ProGen3D_Bearing_Family.p3d",
       "bytes": 8858,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-bearing-family-d93319b3"
     },
     {
       "filename": "The_Sky_Beneath_the_Salt.p3d",
@@ -783,42 +849,50 @@
     {
       "filename": "Gatewarden_Super_Fortress.p3d",
       "bytes": 51492,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "spacecraft/other-vessels/gatewarden-super-fortress-46790186"
     },
     {
       "filename": "Ender3_Bearing_Pair.p3d",
       "bytes": 162,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-bearing-pair-1c33e31b"
     },
     {
       "filename": "Copperleaf.p3d",
       "bytes": 18101,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/copperleaf-a79706e9"
     },
     {
       "filename": "ProGen3D_Ender3_V1_Detailed.p3d",
       "bytes": 103120,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/progen3d-ender3-v1-detailed-5b78e966"
     },
     {
       "filename": "ProGen3D_Kinetic_Assembly_Pair.p3d",
       "bytes": 15472,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-kinetic-assembly-pair-68ec7e69"
     },
     {
       "filename": "ProGen3D_Bookcase_Display.p3d",
       "bytes": 1829,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-bookcase-display-abfacfc2"
     },
     {
       "filename": "M5_Base_262_Parts.grammar",
       "bytes": 141082,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/m5-base-262-parts-e37f4376"
     },
     {
       "filename": "M3_Pose_printing.grammar",
       "bytes": 144947,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/m3-pose-printing-fd16535b"
     },
     {
       "filename": "SDF1_Mesh_Fitted_Transformation.p3d",
@@ -828,12 +902,14 @@
     {
       "filename": "Ender3_V1_M2_Detailed.grammar",
       "bytes": 141082,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/m5-base-262-parts-e37f4376"
     },
     {
       "filename": "Ender3_V1_All_Parts.grammar",
       "bytes": 52415,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/additive-manufacturing/ender-3/ender3-v1-all-parts-283fd3f3"
     },
     {
       "filename": "SDF1_Modular_Transformation.p3d",
@@ -843,87 +919,104 @@
     {
       "filename": "42-cavalieri-volume-table.p3d",
       "bytes": 3959,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/42-cavalieri-volume-table-54cb62f4"
     },
     {
       "filename": "41-helical-screw-lift.p3d",
       "bytes": 5635,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/41-helical-screw-lift-7e4b553b"
     },
     {
       "filename": "40-six-actuator-platform.p3d",
       "bytes": 5273,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/40-six-actuator-platform-6f8cd227"
     },
     {
       "filename": "39-euler-rail-transition.p3d",
       "bytes": 4251,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/39-euler-rail-transition-6fefd704"
     },
     {
       "filename": "38-equatorial-sundial.p3d",
       "bytes": 4585,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/38-equatorial-sundial-dd444c74"
     },
     {
       "filename": "37-pantograph-rosette.p3d",
       "bytes": 4755,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/37-pantograph-rosette-ef04ab9d"
     },
     {
       "filename": "36-coriolis-turntable.p3d",
       "bytes": 4176,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/36-coriolis-turntable-34eeae19"
     },
     {
       "filename": "35-steiner-network-table.p3d",
       "bytes": 4807,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/35-steiner-network-table-42a34485"
     },
     {
       "filename": "34-venturi-flow-bench.p3d",
       "bytes": 5463,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/34-venturi-flow-bench-26ae7318"
     },
     {
       "filename": "33-standing-wave-membrane.p3d",
       "bytes": 3978,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/33-standing-wave-membrane-ffb75f8a"
     },
     {
       "filename": "32-flexure-bench.p3d",
       "bytes": 5130,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/32-flexure-bench-b0af7526"
     },
     {
       "filename": "31-kepler-sector-table.p3d",
       "bytes": 4687,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/31-kepler-sector-table-e26b72c4"
     },
     {
       "filename": "30-polar-projection-atlas.p3d",
       "bytes": 5726,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/30-polar-projection-atlas-c54f5ad3"
     },
     {
       "filename": "29-corner-cube-retroreflector.p3d",
       "bytes": 4940,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/29-corner-cube-retroreflector-f7229871"
     },
     {
       "filename": "28-flyball-governor.p3d",
       "bytes": 5240,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/28-flyball-governor-d93c8bfd"
     },
     {
       "filename": "27-brachistochrone-race.p3d",
       "bytes": 4277,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/27-brachistochrone-race-12c49483"
     },
     {
       "filename": "26-tensegrity-prism.p3d",
       "bytes": 3632,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/26-tensegrity-prism-1979e9d3"
     },
     {
       "filename": "ProGen3D_The_Curve_Becomes_Timber.p3d",
@@ -933,92 +1026,110 @@
     {
       "filename": "25-auxetic-tile-panel.p3d",
       "bytes": 3752,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/25-auxetic-tile-panel-d3e8e105"
     },
     {
       "filename": "ProGen3D_Two_Brass_Gears.p3d",
       "bytes": 38363,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-two-brass-gears-13a66adb"
     },
     {
       "filename": "24-truss-force-bench.p3d",
       "bytes": 3330,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/24-truss-force-bench-cfef3590"
     },
     {
       "filename": "ProGen3D_One_Branch_Forks.p3d",
       "bytes": 79147,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-one-branch-forks-a200de90"
     },
     {
       "filename": "ProGen3D_First_Chair.p3d",
       "bytes": 28844,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/furniture/progen3d-first-chair-d09a8391"
     },
     {
       "filename": "23-peaucellier-linkage.p3d",
       "bytes": 4162,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/23-peaucellier-linkage-63de0219"
     },
     {
       "filename": "22-napier-rods.p3d",
       "bytes": 4351,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/22-napier-rods-37da5573"
     },
     {
       "filename": "21-catenoid-section.p3d",
       "bytes": 3319,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/21-catenoid-section-9a3e20b6"
     },
     {
       "filename": "20-elliptic-trammel.p3d",
       "bytes": 3625,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/20-elliptic-trammel-3f3ef55a"
     },
     {
       "filename": "19-residue-diffuser.p3d",
       "bytes": 2835,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/19-residue-diffuser-b72c8818"
     },
     {
       "filename": "18-parabolic-trough.p3d",
       "bytes": 3195,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/18-parabolic-trough-75e378d4"
     },
     {
       "filename": "Motion_Simulator_Tilt_and_Rotation.p3d",
       "bytes": 13415,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/motion-simulator-tilt-and-rotation-93d1baeb"
     },
     {
       "filename": "17-mobius-ribbon.p3d",
       "bytes": 3485,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/17-mobius-ribbon-8b9fb434"
     },
     {
       "filename": "Motion_Simulator_Rig.p3d",
       "bytes": 11722,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/motion-simulator-rig-bb8cac80"
     },
     {
       "filename": "16-constant-width-gauge.p3d",
       "bytes": 3974,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/16-constant-width-gauge-faa5f43a"
     },
     {
       "filename": "Rotating_Rings.p3d",
       "bytes": 37569,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/rotating-rings-888d0a9f"
     },
     {
       "filename": "Orange_Dome_House.p3d",
       "bytes": 91152,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/orange-dome-house-b909c8ac"
     },
     {
       "filename": "15-marquetry-tree.p3d",
       "bytes": 2488,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/15-marquetry-tree-2ed94ee7"
     },
     {
       "filename": "Canopy_Over_the_Copper_Delta.p3d",
@@ -1028,12 +1139,14 @@
     {
       "filename": "14-code-wheel.p3d",
       "bytes": 2643,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/14-code-wheel-aacdc752"
     },
     {
       "filename": "Lantern_Walk_Garden.p3d",
       "bytes": 88333,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/lantern-walk-garden-64058a79"
     },
     {
       "filename": "Cedar_Lantern.p3d",
@@ -1043,12 +1156,14 @@
     {
       "filename": "13-knot-cabinet.p3d",
       "bytes": 2408,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/13-knot-cabinet-82f0228f"
     },
     {
       "filename": "Recent_Engineering_Inventions.p3d",
       "bytes": 11390,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/recent-engineering-inventions-ccee3d84"
     },
     {
       "filename": "Ribbon_House.p3d",
@@ -1058,77 +1173,92 @@
     {
       "filename": "ProGen3D_Spur_Gear_Pair.p3d",
       "bytes": 2568,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-spur-gear-pair-7191aa76"
     },
     {
       "filename": "ProGen3D_Ducted_Fan.p3d",
       "bytes": 34166,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-ducted-fan-db19de77"
     },
     {
       "filename": "11-scotch-yoke.p3d",
       "bytes": 3878,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/11-scotch-yoke-4709a5d0"
     },
     {
       "filename": "10-truchet-tracing-board.p3d",
       "bytes": 2167,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/10-truchet-tracing-board-758a9dd8"
     },
     {
       "filename": "07-three-cross-wheel.p3d",
       "bytes": 4164,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/07-three-cross-wheel-c4501e1a"
     },
     {
       "filename": "08-pendulum-wave.p3d",
       "bytes": 2894,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/08-pendulum-wave-21d103b7"
     },
     {
       "filename": "09-hyperboloid-pavilion.p3d",
       "bytes": 4045,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/09-hyperboloid-pavilion-4e6e306e"
     },
     {
       "filename": "Tesseract_4D.p3d",
       "bytes": 3590,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/tesseract-4d-0cad6c22"
     },
     {
       "filename": "04-volute-pump.p3d",
       "bytes": 18764,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/04-volute-pump-299dab9e"
     },
     {
       "filename": "05-miura-solar-blanket.p3d",
       "bytes": 2186,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/05-miura-solar-blanket-f8b5a278"
     },
     {
       "filename": "06-sunflower-capitulum.p3d",
       "bytes": 5400,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/06-sunflower-capitulum-965eb282"
     },
     {
       "filename": "Popular_Objects_Collection.p3d",
       "bytes": 36499,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/popular-objects-collection-2098023b"
     },
     {
       "filename": "03-orchid-shadehouse.p3d",
       "bytes": 10976,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/03-orchid-shadehouse-73628eb9"
     },
     {
       "filename": "01-meridian-orrery.p3d",
       "bytes": 6351,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/01-meridian-orrery-2b4216c9"
     },
     {
       "filename": "02-two-shaft-loom.p3d",
       "bytes": 9513,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/mathematics-and-mechanisms/02-two-shaft-loom-03538dc6"
     },
     {
       "filename": "Winthrop_Armchair.p3d",
@@ -1138,22 +1268,26 @@
     {
       "filename": "Sage_Childrens_Bedroom.p3d",
       "bytes": 18986,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/exported-studies/sage-childrens-bedroom-914b840e"
     },
     {
       "filename": "MCSMv2_Modern_Car_Family.p3d",
       "bytes": 10639,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/automotive/exported-models/mcsmv2-modern-car-family-669d6bf5"
     },
     {
       "filename": "MCSMv1_Modern_Car_Family.p3d",
       "bytes": 5195,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/automotive/exported-models/mcsmv1-modern-car-family-4048deeb"
     },
     {
       "filename": "Modern_Chair_3D_Curve_Grammar.p3d",
       "bytes": 9915,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/furniture/modern-chair-3d-curve-grammar-ef097c87"
     },
     {
       "filename": "MVPv2_5_Chassis_Parts_Assembly.p3d",
@@ -1163,7 +1297,8 @@
     {
       "filename": "MVPv2_5_Bonnet_Only.p3d",
       "bytes": 13139,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "engineering/automotive/exported-models/mvpv2-5-bonnet-only-69bb3268"
     },
     {
       "filename": "MVPv2_5_Doors_Bonnet_Hatch_Chassis_FinalAssembly.p3d",
@@ -1208,12 +1343,14 @@
     {
       "filename": "Modern_Luxury_Residence_From_Image_Set.p3d",
       "bytes": 25157,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/buildings/exported-models/modern-luxury-residence-from-image-set-162f1aba"
     },
     {
       "filename": "Modern_Residence_Image_Derived_Facade.p3d",
       "bytes": 13073,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/buildings/exported-models/modern-residence-image-derived-facade-5a9ff288"
     },
     {
       "filename": "Complex_Modern_Courtyard_Building_OM20.p3d",
@@ -1228,7 +1365,8 @@
     {
       "filename": "Single_Floor_Modern_Building_Windows_Doors.p3d",
       "bytes": 7086,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/buildings/exported-models/single-floor-modern-building-windows-doors-6f5fc653"
     },
     {
       "filename": "SMB_OMv1_Instance_SMB_001.p3d",
@@ -1243,22 +1381,28 @@
     {
       "filename": "coruscant_component24_hierarchy.p3d",
       "bytes": 4499,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/buildings/exported-models/coruscant-component24-hierarchy-7978c546"
     },
     {
       "filename": "coruscant_city_sample.p3d",
       "bytes": 2799,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "architecture/buildings/exported-models/coruscant-city-sample-4e112c35"
     },
     {
       "filename": "Progen3D_Grammar_Showcase.p3d",
       "bytes": 1658,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/progen3d-grammar-showcase-726d30e1"
     },
     {
       "filename": "P2_time_showcase.p3d",
       "bytes": 1355,
-      "status_at_snapshot": "pending"
+      "status_at_snapshot": "represented",
+      "catalogue_directory": "education/grammar-showcases/p2-time-showcase-dd12fb3f"
     }
-  ]
+  ],
+  "represented": 142,
+  "pending": 109
 }

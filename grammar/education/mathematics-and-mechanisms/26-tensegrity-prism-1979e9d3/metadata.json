@@ -1,0 +1,61 @@
+{
+  "title": "26 tensegrity prism",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/26-tensegrity-prism-1979e9d3",
+  "source_file": "26-tensegrity-prism.p3d",
+  "git_blob_sha": "1979e9d3c22f35117c9cd29eb36320734c782942",
+  "bytes": 3632,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "26-tensegrity-prism.p3d"
+  ],
+  "description": "Tensegrity study. Prism(struts bottomRadius topRadius height).",
+  "features": [
+    "Sphere",
+    "Cylinder",
+    "TaperedSweep",
+    "Revolve",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Tensegrity study. Prism(struts bottomRadius topRadius height). · Try 3 or 4 struts. The twist follows the strut count automatically."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Plinth, BottomJoints, TopJoints, LowerRing, UpperRing, Lacing, Struts"
+    ],
+    [
+      "Object classes",
+      "TensegrityDemonstrator, DisplayBase, JointSet, TensionRing, TensionMembers, CompressionMembers"
+    ],
+    [
+      "Instantiated primitives",
+      "Sphere, Cylinder, TaperedSweep, Revolve, Cube"
+    ],
+    [
+      "Material identifiers",
+      "goldbrushedmetal, silverbrushedmetal, copperpolishedmetal, bluegreymattepaint, amberwarmwood, charcoalmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Prism, Node, RingSpan, SideSpan, Wire, Compression, Terminal, Base (9 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "63"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

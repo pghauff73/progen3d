@@ -1,0 +1,62 @@
+{
+  "title": "29 corner cube retroreflector",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/29-corner-cube-retroreflector-f7229871",
+  "source_file": "29-corner-cube-retroreflector.p3d",
+  "git_blob_sha": "f7229871d0381700287c33346c8c4ddde7294185",
+  "bytes": 4940,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "29-corner-cube-retroreflector.p3d"
+  ],
+  "description": "Hollow corner cube. Corner(rearTiltDegrees entryX).",
+  "features": [
+    "Extrude",
+    "SweepProfile",
+    "Cylinder",
+    "TaperedSweep",
+    "Sphere",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Hollow corner cube. Corner(rearTiltDegrees entryX). · Try 0 or 6 degrees at entry X 0.52. Another tested setup is -4 and 0.66. · The marked ray takes the X, floor, rear reflection sequence. · The reflective face is local z=0. Two fixed mirrors are transformed from · the back-facing profile so their positive local z goes out of the cavity."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Base, XMirror, FloorMirror, RearMirror, Incoming, FirstBounce, SecondBounce, Returning"
+    ],
+    [
+      "Object classes",
+      "RetroreflectionBench, DisplayBase, PlanarMirror, AdjustableMirror, IncidentRay, ReflectedRay, ReturnRay"
+    ],
+    [
+      "Instantiated primitives",
+      "Extrude, SweepProfile, Cylinder, TaperedSweep, Sphere, Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbluepolishedmetal, bluegreymattepaint, goldbrushedmetal, redmattepaint, tealmatteceramic, amberwarmwood, charcoalmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Corner, Incident, FirstTwo, SecondHit, RearNormal, RearHit, Return, Exhibit, Mirror, Plate, Mount, Ray, Reflected, Tip, Dot, Base, Seat (18 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "87"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "title": "15 marquetry tree",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/15-marquetry-tree-2ed94ee7",
+  "source_file": "15-marquetry-tree.p3d",
+  "git_blob_sha": "2ed94ee70f8b9b92f02dc7d7166ece3450e48c28",
+  "bytes": 2488,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "15-marquetry-tree.p3d"
+  ],
+  "description": "Marquetry tree. Tree(generations forkAngleDegrees).",
+  "features": [
+    "Cube",
+    "Extrude",
+    "Loft"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Marquetry tree. Tree(generations forkAngleDegrees). · Illustrated: Tree(4 36) and Tree(4 45). Smaller study: Tree(3 36). · Every square has a full-size brass substrate, bevelled enamel and a vein motif."
+    ],
+    [
+      "Named objects",
+      "Exhibit, Stand, Canopy"
+    ],
+    [
+      "Object classes",
+      "MarquetryPanel, DisplayFoot, RecursiveTiling"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Extrude, Loft"
+    ],
+    [
+      "Material identifiers",
+      "amberwarmwood, goldbrushedmetal, charcoalmattemetal, bluegreymattepaint, sagegreenmattepaint, copperpolishedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Tree, Plinth, Tile, Face, BevelBlue, BevelGreen, Feather, Barb, Fork, Spandrel (11 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "48"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

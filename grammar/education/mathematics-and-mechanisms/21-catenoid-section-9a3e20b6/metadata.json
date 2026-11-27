@@ -1,0 +1,60 @@
+{
+  "title": "21 catenoid section",
+  "group": "education/mathematics-and-mechanisms",
+  "directory": "education/mathematics-and-mechanisms/21-catenoid-section-9a3e20b6",
+  "source_file": "21-catenoid-section.p3d",
+  "git_blob_sha": "9a3e20b6223f8622b06b0dfa3c847832af05861d",
+  "bytes": 3319,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "21-catenoid-section.p3d"
+  ],
+  "description": "Catenoid section. Bridge(branch axialBands waistOffset).",
+  "features": [
+    "Revolve",
+    "SweepDisk",
+    "Cube",
+    "Cylinder"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Catenoid section. Bridge(branch axialBands waistOffset). · Branch 0: wide neck. Branch 1: narrow neck. Use even band counts 12 to 48. · The two brass rims have radius 1.50 and separation 1.70 for both branches. · The neck radius a solves a*cosh(0.85/a)=1.50. At signed height z=0.85*u, · evaluate cosh(z/a) as an even series through degree 12 for this bounded range."
+    ],
+    [
+      "Named objects",
+      "Instrument, Frame, Shell"
+    ],
+    [
+      "Object classes",
+      "SurfaceStudy, RingFrame, CutawaySurface"
+    ],
+    [
+      "Instantiated primitives",
+      "Revolve, SweepDisk, Cube, Cylinder"
+    ],
+    [
+      "Material identifiers",
+      "bluegreymattepaint, copperpolishedmetal, silverbrushedmetal, goldbrushedmetal, amberwarmwood, charcoalmattemetal"
+    ],
+    [
+      "Production rules",
+      "Start, Bridge, Interval, Profile, Heights, Band, Edge, Stripe, Rim, Bed, Upright, Clamp (12 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "55"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

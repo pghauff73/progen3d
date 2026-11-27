@@ -1,6 +1,6 @@
 # ProGen3D grammar library
 
-[HTML catalogue](index.html) · [Manifest](manifest.json) · [Quality methodology](QUALITY.md) · [Export importer](tools/import-exports.cjs)
+[HTML catalogue](index.html) · [Manifest](manifest.json) · [Export inventory](export-inventory.json) · [Quality methodology](QUALITY.md) · [Export importer](tools/import-exports.cjs)
 
 255 distinct source blobs, 140 additional library sources and 142 exported filenames represented including aliases. All 21 enumerated repository branches checked for standalone extensions. Separately exported library files not yet transferred remain outstanding. Open the HTML locally or serve over HTTP. GitHub source browser does not execute arbitrary HTML.
 
