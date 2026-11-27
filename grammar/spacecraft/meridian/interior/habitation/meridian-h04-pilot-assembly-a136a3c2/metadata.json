@@ -1,0 +1,60 @@
+{
+  "title": "Meridian H04 Pilot Assembly",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h04-pilot-assembly-a136a3c2",
+  "source_file": "Meridian_H04_Pilot_Assembly.p3d",
+  "git_blob_sha": "a136a3c228439b4d08263de703ef5c08c8f2d453",
+  "bytes": 50130,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H04_Pilot_Assembly.p3d"
+  ],
+  "description": "Meridian H04 native procedural instance expansion. Concept geometry only.",
+  "features": [
+    "Cube",
+    "SweepDisk",
+    "Sphere",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian H04 native procedural instance expansion. Concept geometry only."
+    ],
+    [
+      "Named objects",
+      "Meridian_H04_Pilot_Assembly, H04_CABIN_A_0, H04_CABIN_B_0, H04_CORRIDOR_A_0, H04_CORRIDOR_B_0, H04_FARM_0, H04_REFUGE_0, H04_RACK_0, H04_MEDICAL_0, H04_SERVICE_0, H04_CABIN_H03_DERIVED_1, H04_CABIN_H03_DERIVED_2, H04_SOURCE_CABIN_90_1, H04_SOURCE_CABIN_90_2"
+    ],
+    [
+      "Object classes",
+      "ParametricAssembly, ParametricRoom, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, SweepDisk, Sphere, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, goldbrushedmetal, warmwhiteemissivepaint, slategreymattemetal, purplemattepaint, paleblueemissivepaint, tealmattepaint, sandmattepaint, whitebeigemattepaint, blackbluepolishedglass, amberemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "386"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

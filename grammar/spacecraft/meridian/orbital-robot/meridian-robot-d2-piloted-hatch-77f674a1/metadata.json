@@ -1,0 +1,60 @@
+{
+  "title": "Meridian Robot D2 Piloted Hatch",
+  "group": "spacecraft/meridian/orbital-robot",
+  "directory": "spacecraft/meridian/orbital-robot/meridian-robot-d2-piloted-hatch-77f674a1",
+  "source_file": "Meridian_Robot_D2_Piloted_Hatch.p3d",
+  "git_blob_sha": "77f674a1e0afdae889de4b51ff0959e1fb54005b",
+  "bytes": 137725,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_Robot_D2_Piloted_Hatch.p3d"
+  ],
+  "description": "Meridian orbital robot | configured free pose",
+  "features": [
+    "Loft",
+    "Sphere",
+    "SweepDisk",
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian orbital robot | configured free pose · Metres. A single fixed scale applies to shell, limbs, tool and propulsion. · D1 architecture minus replaced D2 actuator prototypes · D2: moveable drive, jaw, retaining pin and access-hatch visual hardware"
+    ],
+    [
+      "Named objects",
+      "MeridianRobot, RobotPressureCapsule, RobotVisorGasket, RobotLifeSupport, RobotHipFrame, RobotPilot, RobotCanopy, RobotPropulsion, RobotLeftLeg, RobotRightLeg, RobotSocketArm, RobotGuideArm, D1LongeronPort, D1LongeronStarboard, D1LowerCrossMember, D1ShoulderCrossMember, D1AftEquipmentBulkhead, D1EmergencyGrapple, D1PressureEnvelopeRibs, D1SeatInertialMount, D1BayNitrogenLeft, D1BayNitrogenRight, D1BayBattery, D1BayAvionics (+44 more)"
+    ],
+    [
+      "Object classes",
+      "Robot, RobotPart, D1MechanicalComponent, D2ActuatedComponent"
+    ],
+    [
+      "Instantiated primitives",
+      "Loft, Sphere, SweepDisk, Cube"
+    ],
+    [
+      "Material identifiers",
+      "offwhiteceramic, coolwhitemattepaint, charcoalmattemetal, orangeglosspaint, smokytransparentglass, blackbluepaintmatte, sandmattepaint, silverbrushedmetal, goldpolishedmetal, greenemissivepaint, goldbrushedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, RobotAssembly, PressureCapsule, VisorGasket, Canopy, Pilot, LifeSupport, HipFrame, LeftLeg, LeftLegClamp, RightLeg, RightLegClamp, SocketArm, SocketArmHand, GuideArm, GuideArmHand, SocketToolLocal, EmptySeat, NozzleXp00, Propulsion (53 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "841"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

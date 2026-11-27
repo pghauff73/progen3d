@@ -1,0 +1,60 @@
+{
+  "title": "Meridian H03 Ship Crew Quarters",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h03-ship-crew-quarters-9159b71f",
+  "source_file": "Meridian_H03_Ship_Crew_Quarters.p3d",
+  "git_blob_sha": "9159b71f732b437fc938b3651257bf5a1754c6ea",
+  "bytes": 119907,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H03_Ship_Crew_Quarters.p3d"
+  ],
+  "description": "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame.",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk",
+    "Revolve"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian H03 semantic modular grammar; source H02. Coordinates remain in H02 scene frame. · For assembly use scripts/assemble.py; no unsupported native include syntax. · CONCEPT-ONLY, NOT HUMAN-RATED."
+    ],
+    [
+      "Named objects",
+      "Meridian_H03_ship_Collection_Crew_Quarters, H03_Base_ship_cabins_HAB_CABIN_01, H02_Ship_Cabin_HAB_CABIN_01, H03_Base_ship_cabins_HAB_CABIN_02, H02_Ship_Cabin_HAB_CABIN_02, H03_Base_ship_cabins_HAB_CABIN_03, H02_Ship_Cabin_HAB_CABIN_03, H03_Base_ship_cabins_HAB_CABIN_04, H02_Ship_Cabin_HAB_CABIN_04, H03_Base_ship_cabins_HAB_CABIN_05, H02_Ship_Cabin_HAB_CABIN_05, H03_Base_ship_cabins_HAB_CABIN_06, H02_Ship_Cabin_HAB_CABIN_06, H03_Base_ship_cabins_HAB_CABIN_07, H02_Ship_Cabin_HAB_CABIN_07, H03_Base_ship_cabins_HAB_CABIN_08, H02_Ship_Cabin_HAB_CABIN_08, H03_Base_ship_cabins_HAB_CABIN_09, H02_Ship_Cabin_HAB_CABIN_09, H03_Base_ship_cabins_HAB_CABIN_10, H02_Ship_Cabin_HAB_CABIN_10, H03_Base_ship_cabins_HAB_CABIN_11, H02_Ship_Cabin_HAB_CABIN_11, H03_Base_ship_cabins_HAB_CABIN_12 (+25 more)"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk, Revolve"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, whitebeigemattepaint, purplemattepaint, goldbrushedmetal, slategreymattemetal, warmwhiteemissivepaint, amberemissivepaint, tealmattepaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "919"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

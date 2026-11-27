@@ -1,0 +1,59 @@
+{
+  "title": "Meridian S01 Hydroponics",
+  "group": "spacecraft/meridian/subsystems",
+  "directory": "spacecraft/meridian/subsystems/meridian-s01-hydroponics-b2b84320",
+  "source_file": "Meridian_S01_Hydroponics.p3d",
+  "git_blob_sha": "b2b84320a20b2b192feaa20f7f092f3b3332acc9",
+  "bytes": 132620,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_S01_Hydroponics.p3d"
+  ],
+  "description": "Meridian S01 district assembly agriculture; H03 detail and M02 conceptual envelopes",
+  "features": [
+    "Cube",
+    "Sphere",
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian S01 district assembly agriculture; H03 detail and M02 conceptual envelopes"
+    ],
+    [
+      "Named objects",
+      "S01_District_agriculture, Meridian_H03_ship_hydroponics_HAB_FARM_A, H03_Base_ship_hydroponics_HAB_FARM_A, H02_Ship_Farm_HAB_FARM_A, Meridian_H03_ship_hydroponics_HAB_FARM_B, H03_Base_ship_hydroponics_HAB_FARM_B, H02_Ship_Farm_HAB_FARM_B, Meridian_H03_ship_hydroponics_HAB_FARM_C, H03_Base_ship_hydroponics_HAB_FARM_C, H02_Ship_Farm_HAB_FARM_C, Meridian_H03_ship_hydroponics_HAB_FARM_D, H03_Base_ship_hydroponics_HAB_FARM_D, H02_Ship_Farm_HAB_FARM_D, Meridian_H03_ship_habitat_rooms_HAB_NURSERY, H03_Base_ship_habitat_rooms_HAB_NURSERY"
+    ],
+    [
+      "Object classes",
+      "SubsystemAssembly, HumanSystemsCandidate, CrewInteriorSection, HighResolutionCrewInterior"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube, Sphere, SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint, greenmattepaint, palebluemattepaint, warmwhiteemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "963"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

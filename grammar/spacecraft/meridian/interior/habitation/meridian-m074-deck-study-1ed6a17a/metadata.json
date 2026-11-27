@@ -1,0 +1,57 @@
+{
+  "title": "Meridian M074 Deck Study",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-m074-deck-study-1ed6a17a",
+  "source_file": "Meridian_M074_Deck_Study.p3d",
+  "git_blob_sha": "1ed6a17aa2df0a87272d28e91f175fa440d24c39",
+  "bytes": 186716,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_M074_Deck_Study.p3d"
+  ],
+  "description": "Meridian M07.4 - separately compiled fixed-hull pressure and transfer study.",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian M07.4 - separately compiled fixed-hull pressure and transfer study. · Actual Y-wall panel gaps modeled at declared ports; cap leaves are separate pieces. · Uninstalled proposal, no modification of source pressure hull or qualified access."
+    ],
+    [
+      "Named objects",
+      "M074_DECK_RECONSTRUCTION, JAMB_PRESSURE_0148_L, JAMB_PRESSURE_0148_R, CAP_PRESSURE_0148, GUIDE_PRESSURE_0148_1, JAMB_PRESSURE_0152_L, JAMB_PRESSURE_0152_R, CAP_PRESSURE_0152, GUIDE_PRESSURE_0152_1, JAMB_FIX_ROUTE_P_01_GALLERY_L, JAMB_FIX_ROUTE_P_01_GALLERY_R, CAP_FIX_ROUTE_P_01_GALLERY, GUIDE_FIX_ROUTE_P_01_GALLERY_0, GUIDE_FIX_ROUTE_P_01_GALLERY_1, RAIL_LIFT_P_01_L, RAIL_LIFT_P_01_R, CARRIAGE_LIFT_P_01, CONTROL_LIFT_P_01, JAMB_PRESSURE_0156_L, JAMB_PRESSURE_0156_R, CAP_PRESSURE_0156, GUIDE_PRESSURE_0156_1, JAMB_FIX_ROUTE_P_02_GALLERY_L, JAMB_FIX_ROUTE_P_02_GALLERY_R (+827 more)"
+    ],
+    [
+      "Object classes",
+      "EngineeringStudy, DeckTransitionStudy"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "856"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Ender3 Y Ultra Res Bed Spring",
+  "group": "engineering/additive-manufacturing/ender-3",
+  "directory": "engineering/additive-manufacturing/ender-3/ender3-y-ultrares-bed-spring-92ab5bed",
+  "source_file": "Ender3_Y_UltraRes_Bed_Spring.p3d",
+  "git_blob_sha": "92ab5bedf3239f89277852f1e1c4af51896192da",
+  "bytes": 64846,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Ender3_Y_UltraRes_Bed_Spring.p3d"
+  ],
+  "description": "High-resolution rebuild profile: ultra. Version 1; native geometry, no mesh import.",
+  "features": [
+    "SweepDisk"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "High-resolution rebuild profile: ultra. Version 1; native geometry, no mesh import. · CAD-fitted helical centreline. Wire diameter 0.9 mm, mean diameter 8 mm. · The source has ground end planes; M2.1 local end-height adjustment; round sweep ends remain an approximation."
+    ],
+    [
+      "Named objects",
+      ""
+    ],
+    [
+      "Object classes",
+      ""
+    ],
+    [
+      "Instantiated primitives",
+      "SweepDisk"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal"
+    ],
+    [
+      "Production rules",
+      "Start, Mesh95BedSpring (2 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "6"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Meridian H01 Human Module",
+  "group": "spacecraft/meridian/interior/habitation",
+  "directory": "spacecraft/meridian/interior/habitation/meridian-h01-human-module-7c922c89",
+  "source_file": "Meridian_H01_Human_Module.p3d",
+  "git_blob_sha": "7c922c89d5dba38cc1eb35d62ab27e532c767fed",
+  "bytes": 61522,
+  "source_type": "Library export",
+  "source_commit": null,
+  "original_paths": [],
+  "library_exports": [
+    "Meridian_H01_Human_Module.p3d"
+  ],
+  "description": "Meridian human-rating-oriented design candidate, NOT CERTIFIED",
+  "features": [
+    "Cube"
+  ],
+  "detail": [
+    [
+      "Source notes",
+      "Meridian human-rating-oriented design candidate, NOT CERTIFIED"
+    ],
+    [
+      "Named objects",
+      "MeridianHumanInteriorRoot, Section_000, Section_001, Section_002, Section_003, Section_004, Section_005, Section_006, Section_007, Section_008, Section_009, Section_010, Section_011, Section_012, Section_013, Section_014, Section_015, Section_016, Section_017, Section_018, Section_019"
+    ],
+    [
+      "Object classes",
+      "HumanSystemsCandidate, CrewInteriorSection"
+    ],
+    [
+      "Instantiated primitives",
+      "Cube"
+    ],
+    [
+      "Material identifiers",
+      "silverbrushedmetal, paleblueemissivepaint"
+    ],
+    [
+      "Production rules",
+      "Start (1 lexical matches)"
+    ],
+    [
+      "Source lines",
+      "524"
+    ]
+  ],
+  "render_assets": [],
+  "documentation": [],
+  "quality": {
+    "visual_match_percent": null,
+    "mean_match_percent": null,
+    "quality_evidence_rating": 55,
+    "validation_status": "Complete text and reported byte count match; original raw hash unavailable; runtime untested",
+    "score_type": "Evidence completeness; not intrinsic model fidelity"
+  }
+}
