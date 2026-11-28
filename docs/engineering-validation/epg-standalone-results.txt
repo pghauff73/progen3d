@@ -1,0 +1,47 @@
+test_all_examples (__main__.TestEPG.test_all_examples) ... ok
+test_battery_energy (__main__.TestEPG.test_battery_energy) ... ok
+test_battery_pack_legacy (__main__.TestEPG.test_battery_pack_legacy) ... ok
+test_cable_resistance (__main__.TestEPG.test_cable_resistance) ... ok
+test_capacitor_energy (__main__.TestEPG.test_capacitor_energy) ... ok
+test_capacitor_step (__main__.TestEPG.test_capacitor_step) ... ok
+test_chemistry (__main__.TestEPG.test_chemistry) ... ok
+test_closed_valve (__main__.TestEPG.test_closed_valve) ... ok
+test_control_not_power (__main__.TestEPG.test_control_not_power) ... ok
+test_cycle_no_source (__main__.TestEPG.test_cycle_no_source) ... ok
+test_direct (__main__.TestEPG.test_direct) ... ok
+test_disconnected_bus (__main__.TestEPG.test_disconnected_bus) ... ok
+test_duplicate_route_point (__main__.TestEPG.test_duplicate_route_point) ... ok
+test_elastic (__main__.TestEPG.test_elastic) ... ok
+test_flywheel (__main__.TestEPG.test_flywheel) ... ok
+test_flywheel_step (__main__.TestEPG.test_flywheel_step) ... ok
+test_fuel_cell_both (__main__.TestEPG.test_fuel_cell_both) ... ok
+test_fuel_cell_requires_both (__main__.TestEPG.test_fuel_cell_requires_both) ... ok
+test_geometry_annular (__main__.TestEPG.test_geometry_annular) ... ok
+test_invalid_efficiency (__main__.TestEPG.test_invalid_efficiency) ... ok
+test_invalid_radius (__main__.TestEPG.test_invalid_radius) ... ok
+test_isolated (__main__.TestEPG.test_isolated) ... ok
+test_missing_motor_input_native_like (__main__.TestEPG.test_missing_motor_input_native_like) ... ok
+test_nonexistent_port (__main__.TestEPG.test_nonexistent_port) ... ok
+test_ohms (__main__.TestEPG.test_ohms) ... ok
+test_pneumatic (__main__.TestEPG.test_pneumatic) ... ok
+test_pressure (__main__.TestEPG.test_pressure) ... ok
+test_pressure_bad_area (__main__.TestEPG.test_pressure_bad_area) ... ok
+test_pump_no_shaft (__main__.TestEPG.test_pump_no_shaft) ... ok
+test_receiver_requires_beam (__main__.TestEPG.test_receiver_requires_beam) ... ok
+test_reverse (__main__.TestEPG.test_reverse) ... ok
+test_rotary_contact_geometry (__main__.TestEPG.test_rotary_contact_geometry) ... ok
+test_shaft_power (__main__.TestEPG.test_shaft_power) ... ok
+test_solar (__main__.TestEPG.test_solar) ... ok
+test_solar_requires_light (__main__.TestEPG.test_solar_requires_light) ... ok
+test_speculative (__main__.TestEPG.test_speculative) ... ok
+test_speculative_plus_established (__main__.TestEPG.test_speculative_plus_established) ... ok
+test_switch_closed (__main__.TestEPG.test_switch_closed) ... ok
+test_switch_open (__main__.TestEPG.test_switch_open) ... ok
+test_transformer (__main__.TestEPG.test_transformer) ... ok
+test_warning_nonfatal_cli (__main__.TestEPG.test_warning_nonfatal_cli) ... ok
+test_wrong_domain (__main__.TestEPG.test_wrong_domain) ... ok
+
+----------------------------------------------------------------------
+Ran 42 tests in 1.496s
+
+OK

@@ -52,6 +52,7 @@ std::unique_ptr<SceneGenerationResult> GrammarCompilationService::compile(
 
 		result->diagnostic_lines = grammar_document->error_lines;
 		result->diagnostics = grammar_document->error_details;
+		result->warnings = grammar_document->warning_details;
 		if (structure_succeeded && result->diagnostics.empty() &&
 		    grammar_document->context != nullptr) {
 			result->scene_snapshot = std::make_unique<GeneratedSceneSnapshot>(

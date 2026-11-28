@@ -729,6 +729,7 @@ public:
 	// Error tracking
 	std::vector<int> error_lines;
 	std::vector<GrammarDiagnostic> error_details;
+	std::vector<GrammarDiagnostic> warning_details;
 
 private:
 	void clearParsedState();

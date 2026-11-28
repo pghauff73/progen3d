@@ -1,0 +1,52 @@
+# EPG v1 generated native P3D; SI metres. Geometry is an illustrative envelope.
+# Parameter data are preserved in companion JSON. Connectivity is not an operating guarantee.
+Start -> EPGAssembly
+
+EPGAssembly ->
+ [ Object(id(EPGAssembly) class(EnergyAssembly) taxonomy(Engineering Energy) layer(Equipment)) [
+   # Battery; established
+   [ T(0 0 0) Object(id(MainBattery) class(Battery) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # VoltageRegulator; established
+   [ T(0 0 0.15) Object(id(Regulator) class(VoltageRegulator) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ClosedSwitch; established
+   [ T(0 0 0.3) Object(id(Isolator) class(ClosedSwitch) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # InsulatedConductor; established
+   [ T(0 0 0.34) Object(id(Harness) class(InsulatedConductor) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0.05 0 0.2) normal(0.52999894 0 0.847998304) tangent(0.847998304 0 -0.52999894) region(Point))
+      [ !I(SweepDisk(path(0 0 0 0 0 0.12 0.05 0 0.2) radius(0.0015) segments(16) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon 0.003 0 0.00289777748 0.000776457135 0.00259807621 0.0015 0.00212132034 0.00212132034 0.0015 0.00259807621 0.000776457135 0.00289777748 1.8369702e-19 0.003 -0.000776457135 0.00289777748 -0.0015 0.00259807621 -0.00212132034 0.00212132034 -0.00259807621 0.0015 -0.00289777748 0.000776457135 -0.003 3.6739404e-19 -0.0015 1.8369702e-19 -0.00144888874 0.000388228568 -0.00129903811 0.00075 -0.00106066017 0.00106066017 -0.00075 0.00129903811 -0.000388228568 0.00144888874 9.18485099e-20 0.0015 0.000388228568 0.00144888874 0.00075 0.00129903811 0.00106066017 0.00106066017 0.00129903811 0.00075 0.00144888874 0.000388228568 0.0015 0) path(0 0 0 0 0 0.12 0.05 0 0.2) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.003 3.6739404e-19 -0.00289777748 -0.000776457135 -0.00259807621 -0.0015 -0.00212132034 -0.00212132034 -0.0015 -0.00259807621 -0.000776457135 -0.00289777748 -5.5109106e-19 -0.003 0.000776457135 -0.00289777748 0.0015 -0.00259807621 0.00212132034 -0.00212132034 0.00259807621 -0.0015 0.00289777748 -0.000776457135 0.003 -7.34788079e-19 0.0015 -3.6739404e-19 0.00144888874 -0.000388228568 0.00129903811 -0.00075 0.00106066017 -0.00106066017 0.00075 -0.00129903811 0.000388228568 -0.00144888874 -2.7554553e-19 -0.0015 -0.000388228568 -0.00144888874 -0.00075 -0.00129903811 -0.00106066017 -0.00106066017 -0.00129903811 -0.00075 -0.00144888874 -0.000388228568 -0.0015 1.8369702e-19) path(0 0 0 0 0 0.12 0.05 0 0.2) cap(all)) material(charcoalmattemetal) 1 1) ]
+   ] ]
+   # ElectricMotor; established
+   [ T(0.05 0 0.58) Object(id(Shoulder) class(ElectricMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # RotationalPowerShaft; established
+   [ T(0.05 0 0.62) Object(id(DriveShaft) class(RotationalPowerShaft) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(Shaft) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(Shaft) origin(0 0 0.12) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 0 0 0 0.12) radius(0.01) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   Connect(id(Supply) source(MainBattery PowerOut) target(Regulator In) type(Powers))
+   Connect(id(Regulated) source(Regulator Out) target(Isolator In) type(Powers))
+   Connect(id(Switched) source(Isolator Out) target(Harness In) type(Powers))
+   Connect(id(MotorFeed) source(Harness Out) target(Shoulder PowerIn) type(Powers))
+   Connect(id(Torque) source(Shoulder ShaftOut) target(DriveShaft In) type(ConnectedTo))
+ ] ]
+
+EPGBox(w h d) -> [ S(w h d) !I(Cube material(silverbrushedmetal) 1 1) ]

@@ -1,0 +1,444 @@
+# EPG v1 generated native P3D; SI metres. Geometry is an illustrative envelope.
+# Parameter data are preserved in companion JSON. Connectivity is not an operating guarantee.
+Start -> EPGAssembly
+
+EPGAssembly ->
+ [ Object(id(EPGAssembly) class(EnergyAssembly) taxonomy(Engineering Energy) layer(Equipment)) [
+   # Battery; established
+   [ T(0 0 0) Object(id(DemoBattery) class(Battery) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # BatteryPack; established
+   [ T(0.25 0 0) Object(id(DemoBatteryPack) class(BatteryPack) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(Output) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # Supercapacitor; established
+   [ T(0.5 0 0) Object(id(DemoSupercapacitor) class(Supercapacitor) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # GridSupply; established
+   [ T(0.75 0 0) Object(id(DemoGridSupply) class(GridSupply) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # SolarIrradiance; established
+   [ T(1 0 0) Object(id(DemoSolarIrradiance) class(SolarIrradiance) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(RadiantOut) type(ThermalInterface) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # HeatSource; established
+   [ T(1.25 0 0) Object(id(DemoHeatSource) class(HeatSource) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(HeatOut) type(ThermalInterface) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # FuelTank; established
+   [ T(1.5 0 0) Object(id(DemoFuelTank) class(FuelTank) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(FuelOut) type(PipePort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # OxidantSupply; established
+   [ T(1.75 0 0) Object(id(DemoOxidantSupply) class(OxidantSupply) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(OxidantOut) type(PipePort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # LaserBeam; established
+   [ T(2 0 0) Object(id(DemoLaserBeam) class(LaserBeam) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(RadiantOut) type(ThermalInterface) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # MicrowaveBeam; established
+   [ T(0 0.19 0) Object(id(DemoMicrowaveBeam) class(MicrowaveBeam) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(MicrowaveOut) type(ThermalInterface) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # SolarPanel; established
+   [ T(0.25 0.19 0) Object(id(DemoSolarPanel) class(SolarPanel) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(RadiantIn) type(ThermalInterface) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # SolarThermalSteamGenerator; established
+   [ T(0.5 0.19 0) Object(id(DemoSolarThermalSteamGenerator) class(SolarThermalSteamGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(RadiantIn) type(ThermalInterface) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # GasTurbineGenerator; established
+   [ T(0.75 0.19 0) Object(id(DemoGasTurbineGenerator) class(GasTurbineGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(FuelIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(OxidantIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # BiodieselGenerator; established
+   [ T(1 0.19 0) Object(id(DemoBiodieselGenerator) class(BiodieselGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(FuelIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(OxidantIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # HydrogenTurbineGenerator; established
+   [ T(1.25 0.19 0) Object(id(DemoHydrogenTurbineGenerator) class(HydrogenTurbineGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(FuelIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(OxidantIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # MethaneTurbineGenerator; established
+   [ T(1.5 0.19 0) Object(id(DemoMethaneTurbineGenerator) class(MethaneTurbineGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(FuelIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(OxidantIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # HydrogenMethaneTurbineGenerator; established
+   [ T(1.75 0.19 0) Object(id(DemoHydrogenMethaneTurbineGenerator) class(HydrogenMethaneTurbineGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(FuelIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(OxidantIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # FuelCell; established
+   [ T(2 0.19 0) Object(id(DemoFuelCell) class(FuelCell) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(FuelIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(OxidantIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ThermalLaserAbsorptionGenerator; established
+   [ T(0 0.38 0) Object(id(DemoThermalLaserAbsorptionGenerator) class(ThermalLaserAbsorptionGenerator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(RadiantIn) type(ThermalInterface) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # MicrowavePowerReceiver; established
+   [ T(0.25 0.38 0) Object(id(DemoMicrowavePowerReceiver) class(MicrowavePowerReceiver) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(MicrowaveIn) type(ThermalInterface) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # Helium3DeuteriumFusion; research
+   [ T(0.5 0.38 0) Object(id(DemoHelium3DeuteriumFusion) class(Helium3DeuteriumFusion) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ThermonuclearFusionPlant; research
+   [ T(0.75 0.38 0) Object(id(DemoThermonuclearFusionPlant) class(ThermonuclearFusionPlant) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ThoriumPowerPlant; research
+   [ T(1 0.38 0) Object(id(DemoThoriumPowerPlant) class(ThoriumPowerPlant) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # HafniumPowerPlant; speculative
+   [ T(1.25 0.38 0) Object(id(DemoHafniumPowerPlant) class(HafniumPowerPlant) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ThoriumHafniumPowerPlant; speculative
+   [ T(1.5 0.38 0) Object(id(DemoThoriumHafniumPowerPlant) class(ThoriumHafniumPowerPlant) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # MatterAntimatterReactor; speculative
+   [ T(1.75 0.38 0) Object(id(DemoMatterAntimatterReactor) class(MatterAntimatterReactor) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # EntangledWirelessPowerSource; speculative
+   [ T(2 0.38 0) Object(id(DemoEntangledWirelessPowerSource) class(EntangledWirelessPowerSource) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # TimeFieldBetaDecayAmplifier; speculative
+   [ T(0 0.57 0) Object(id(DemoTimeFieldBetaDecayAmplifier) class(TimeFieldBetaDecayAmplifier) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # CyclicStateGasPlasmaEngine; speculative
+   [ T(0.25 0.57 0) Object(id(DemoCyclicStateGasPlasmaEngine) class(CyclicStateGasPlasmaEngine) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ChemicalReductiveProtonReactor; speculative
+   [ T(0.5 0.57 0) Object(id(DemoChemicalReductiveProtonReactor) class(ChemicalReductiveProtonReactor) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # PressurisedGasCylinder; established
+   [ T(0.75 0.57 0) Object(id(DemoPressurisedGasCylinder) class(PressurisedGasCylinder) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(GasOut) type(PipePort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # PressurisedFluidAccumulator; established
+   [ T(1 0.57 0) Object(id(DemoPressurisedFluidAccumulator) class(PressurisedFluidAccumulator) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(FluidOut) type(PipePort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # FlywheelStorage; established
+   [ T(1.25 0.57 0) Object(id(DemoFlywheelStorage) class(FlywheelStorage) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(ShaftOut) type(Shaft) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # InsulatedConductor; established
+   [ T(1.5 0.57 0) Object(id(DemoInsulatedConductor) class(InsulatedConductor) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0.04 0 0.14) normal(0.707106781 0 0.707106781) tangent(0.707106781 0 -0.707106781) region(Point))
+      [ !I(SweepDisk(path(0 0 0 0 0 0.1 0.04 0 0.14) radius(0.004) segments(16) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon 0.008 0 0.00772740661 0.00207055236 0.00692820323 0.004 0.00565685425 0.00565685425 0.004 0.00692820323 0.00207055236 0.00772740661 4.8985872e-19 0.008 -0.00207055236 0.00772740661 -0.004 0.00692820323 -0.00565685425 0.00565685425 -0.00692820323 0.004 -0.00772740661 0.00207055236 -0.008 9.79717439e-19 -0.004 4.8985872e-19 -0.00386370331 0.00103527618 -0.00346410162 0.002 -0.00282842712 0.00282842712 -0.002 0.00346410162 -0.00103527618 0.00386370331 2.4492936e-19 0.004 0.00103527618 0.00386370331 0.002 0.00346410162 0.00282842712 0.00282842712 0.00346410162 0.002 0.00386370331 0.00103527618 0.004 0) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.008 9.79717439e-19 -0.00772740661 -0.00207055236 -0.00692820323 -0.004 -0.00565685425 -0.00565685425 -0.004 -0.00692820323 -0.00207055236 -0.00772740661 -1.46957616e-18 -0.008 0.00207055236 -0.00772740661 0.004 -0.00692820323 0.00565685425 -0.00565685425 0.00692820323 -0.004 0.00772740661 -0.00207055236 0.008 -1.95943488e-18 0.004 -9.79717439e-19 0.00386370331 -0.00103527618 0.00346410162 -0.002 0.00282842712 -0.00282842712 0.002 -0.00346410162 0.00103527618 -0.00386370331 -7.34788079e-19 -0.004 -0.00103527618 -0.00386370331 -0.002 -0.00346410162 -0.00282842712 -0.00282842712 -0.00346410162 -0.002 -0.00386370331 -0.00103527618 -0.004 4.8985872e-19) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(charcoalmattemetal) 1 1) ]
+   ] ]
+   # ElectricalCable; established
+   [ T(1.75 0.57 0) Object(id(DemoElectricalCable) class(ElectricalCable) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0.04 0 0.14) normal(0.707106781 0 0.707106781) tangent(0.707106781 0 -0.707106781) region(Point))
+      [ !I(SweepDisk(path(0 0 0 0 0 0.1 0.04 0 0.14) radius(0.004) segments(16) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon 0.008 0 0.00772740661 0.00207055236 0.00692820323 0.004 0.00565685425 0.00565685425 0.004 0.00692820323 0.00207055236 0.00772740661 4.8985872e-19 0.008 -0.00207055236 0.00772740661 -0.004 0.00692820323 -0.00565685425 0.00565685425 -0.00692820323 0.004 -0.00772740661 0.00207055236 -0.008 9.79717439e-19 -0.004 4.8985872e-19 -0.00386370331 0.00103527618 -0.00346410162 0.002 -0.00282842712 0.00282842712 -0.002 0.00346410162 -0.00103527618 0.00386370331 2.4492936e-19 0.004 0.00103527618 0.00386370331 0.002 0.00346410162 0.00282842712 0.00282842712 0.00346410162 0.002 0.00386370331 0.00103527618 0.004 0) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.008 9.79717439e-19 -0.00772740661 -0.00207055236 -0.00692820323 -0.004 -0.00565685425 -0.00565685425 -0.004 -0.00692820323 -0.00207055236 -0.00772740661 -1.46957616e-18 -0.008 0.00207055236 -0.00772740661 0.004 -0.00692820323 0.00565685425 -0.00565685425 0.00692820323 -0.004 0.00772740661 -0.00207055236 0.008 -1.95943488e-18 0.004 -9.79717439e-19 0.00386370331 -0.00103527618 0.00346410162 -0.002 0.00282842712 -0.00282842712 0.002 -0.00346410162 0.00103527618 -0.00386370331 -7.34788079e-19 -0.004 -0.00103527618 -0.00386370331 -0.002 -0.00346410162 -0.00282842712 -0.00282842712 -0.00346410162 -0.002 -0.00386370331 -0.00103527618 -0.004 4.8985872e-19) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(charcoalmattemetal) 1 1) ]
+   ] ]
+   # PowerBus; established
+   [ T(2 0.57 0) Object(id(DemoPowerBus) class(PowerBus) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # ConductionBushing; established
+   [ T(0 0.76 0) Object(id(DemoConductionBushing) class(ConductionBushing) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.0216 0 0.0208639978 0.00559049137 0.0187061487 0.0108 0.0152735065 0.0152735065 0.0108 0.0187061487 0.00559049137 0.0208639978 1.32261854e-18 0.0216 -0.00559049137 0.0208639978 -0.0108 0.0187061487 -0.0152735065 0.0152735065 -0.0187061487 0.0108 -0.0208639978 0.00559049137 -0.0216 2.64523709e-18 -0.012 1.46957616e-18 -0.0115911099 0.00310582854 -0.0103923048 0.006 -0.00848528137 0.00848528137 -0.006 0.0103923048 -0.00310582854 0.0115911099 7.34788079e-19 0.012 0.00310582854 0.0115911099 0.006 0.0103923048 0.00848528137 0.00848528137 0.0103923048 0.006 0.0115911099 0.00310582854 0.012 0) path(0 0 0 0 0 0.05) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.0216 2.64523709e-18 -0.0208639978 -0.00559049137 -0.0187061487 -0.0108 -0.0152735065 -0.0152735065 -0.0108 -0.0187061487 -0.00559049137 -0.0208639978 -3.96785563e-18 -0.0216 0.00559049137 -0.0208639978 0.0108 -0.0187061487 0.0152735065 -0.0152735065 0.0187061487 -0.0108 0.0208639978 -0.00559049137 0.0216 -5.29047417e-18 0.012 -2.93915232e-18 0.0115911099 -0.00310582854 0.0103923048 -0.006 0.00848528137 -0.00848528137 0.006 -0.0103923048 0.00310582854 -0.0115911099 -2.20436424e-18 -0.012 -0.00310582854 -0.0115911099 -0.006 -0.0103923048 -0.00848528137 -0.00848528137 -0.0103923048 -0.006 -0.0115911099 -0.00310582854 -0.012 1.46957616e-18) path(0 0 0 0 0 0.05) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon 0.028 0 0.0270459231 0.00724693326 0.0242487113 0.014 0.0197989899 0.0197989899 0.014 0.0242487113 0.00724693326 0.0270459231 1.71450552e-18 0.028 -0.00724693326 0.0270459231 -0.014 0.0242487113 -0.0197989899 0.0197989899 -0.0242487113 0.014 -0.0270459231 0.00724693326 -0.028 3.42901104e-18 -0.0216 2.64523709e-18 -0.0208639978 0.00559049137 -0.0187061487 0.0108 -0.0152735065 0.0152735065 -0.0108 0.0187061487 -0.00559049137 0.0208639978 1.32261854e-18 0.0216 0.00559049137 0.0208639978 0.0108 0.0187061487 0.0152735065 0.0152735065 0.0187061487 0.0108 0.0208639978 0.00559049137 0.0216 0) path(0 0 0 0 0 0.05) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.028 3.42901104e-18 -0.0270459231 -0.00724693326 -0.0242487113 -0.014 -0.0197989899 -0.0197989899 -0.014 -0.0242487113 -0.00724693326 -0.0270459231 -5.14351656e-18 -0.028 0.00724693326 -0.0270459231 0.014 -0.0242487113 0.0197989899 -0.0197989899 0.0242487113 -0.014 0.0270459231 -0.00724693326 0.028 -6.85802208e-18 0.0216 -5.29047417e-18 0.0208639978 -0.00559049137 0.0187061487 -0.0108 0.0152735065 -0.0152735065 0.0108 -0.0187061487 0.00559049137 -0.0208639978 -3.96785563e-18 -0.0216 -0.00559049137 -0.0208639978 -0.0108 -0.0187061487 -0.0152735065 -0.0152735065 -0.0187061487 -0.0108 -0.0208639978 -0.00559049137 -0.0216 2.64523709e-18) path(0 0 0 0 0 0.05) cap(all)) material(charcoalmattemetal) 1 1) ]
+   ] ]
+   # SlipRing; established
+   [ T(0.25 0.76 0) Object(id(DemoSlipRing) class(SlipRing) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.0216 0 0.0208639978 0.00559049137 0.0187061487 0.0108 0.0152735065 0.0152735065 0.0108 0.0187061487 0.00559049137 0.0208639978 1.32261854e-18 0.0216 -0.00559049137 0.0208639978 -0.0108 0.0187061487 -0.0152735065 0.0152735065 -0.0187061487 0.0108 -0.0208639978 0.00559049137 -0.0216 2.64523709e-18 -0.012 1.46957616e-18 -0.0115911099 0.00310582854 -0.0103923048 0.006 -0.00848528137 0.00848528137 -0.006 0.0103923048 -0.00310582854 0.0115911099 7.34788079e-19 0.012 0.00310582854 0.0115911099 0.006 0.0103923048 0.00848528137 0.00848528137 0.0103923048 0.006 0.0115911099 0.00310582854 0.012 0) path(0 0 0 0 0 0.05) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.0216 2.64523709e-18 -0.0208639978 -0.00559049137 -0.0187061487 -0.0108 -0.0152735065 -0.0152735065 -0.0108 -0.0187061487 -0.00559049137 -0.0208639978 -3.96785563e-18 -0.0216 0.00559049137 -0.0208639978 0.0108 -0.0187061487 0.0152735065 -0.0152735065 0.0187061487 -0.0108 0.0208639978 -0.00559049137 0.0216 -5.29047417e-18 0.012 -2.93915232e-18 0.0115911099 -0.00310582854 0.0103923048 -0.006 0.00848528137 -0.00848528137 0.006 -0.0103923048 0.00310582854 -0.0115911099 -2.20436424e-18 -0.012 -0.00310582854 -0.0115911099 -0.006 -0.0103923048 -0.00848528137 -0.00848528137 -0.0103923048 -0.006 -0.0115911099 -0.00310582854 -0.012 1.46957616e-18) path(0 0 0 0 0 0.05) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon 0.028 0 0.0270459231 0.00724693326 0.0242487113 0.014 0.0197989899 0.0197989899 0.014 0.0242487113 0.00724693326 0.0270459231 1.71450552e-18 0.028 -0.00724693326 0.0270459231 -0.014 0.0242487113 -0.0197989899 0.0197989899 -0.0242487113 0.014 -0.0270459231 0.00724693326 -0.028 3.42901104e-18 -0.0216 2.64523709e-18 -0.0208639978 0.00559049137 -0.0187061487 0.0108 -0.0152735065 0.0152735065 -0.0108 0.0187061487 -0.00559049137 0.0208639978 1.32261854e-18 0.0216 0.00559049137 0.0208639978 0.0108 0.0187061487 0.0152735065 0.0152735065 0.0187061487 0.0108 0.0208639978 0.00559049137 0.0216 0) path(0 0 0 0 0 0.05) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.028 3.42901104e-18 -0.0270459231 -0.00724693326 -0.0242487113 -0.014 -0.0197989899 -0.0197989899 -0.014 -0.0242487113 -0.00724693326 -0.0270459231 -5.14351656e-18 -0.028 0.00724693326 -0.0270459231 0.014 -0.0242487113 0.0197989899 -0.0197989899 0.0242487113 -0.014 0.0270459231 -0.00724693326 0.028 -6.85802208e-18 0.0216 -5.29047417e-18 0.0208639978 -0.00559049137 0.0187061487 -0.0108 0.0152735065 -0.0152735065 0.0108 -0.0187061487 0.00559049137 -0.0208639978 -3.96785563e-18 -0.0216 -0.00559049137 -0.0208639978 -0.0108 -0.0187061487 -0.0152735065 -0.0152735065 -0.0187061487 -0.0108 -0.0208639978 -0.00559049137 -0.0216 2.64523709e-18) path(0 0 0 0 0 0.05) cap(all)) material(charcoalmattemetal) 1 1) ]
+   ] ]
+   # ClosedSwitch; established
+   [ T(0.5 0.76 0) Object(id(DemoClosedSwitch) class(ClosedSwitch) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # OpenSwitch; established
+   [ T(0.75 0.76 0) Object(id(DemoOpenSwitch) class(OpenSwitch) taxonomy(Engineering Energy Blocked) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # PowerRegulator; established
+   [ T(1 0.76 0) Object(id(DemoPowerRegulator) class(PowerRegulator) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # VoltageRegulator; established
+   [ T(1.25 0.76 0) Object(id(DemoVoltageRegulator) class(VoltageRegulator) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # VoltageTransformer; established
+   [ T(1.5 0.76 0) Object(id(DemoVoltageTransformer) class(VoltageTransformer) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # GasPressureLine; established
+   [ T(1.75 0.76 0) Object(id(DemoGasPressureLine) class(GasPressureLine) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0.04 0 0.14) normal(0.707106781 0 0.707106781) tangent(0.707106781 0 -0.707106781) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.008 0 0.00772740661 0.00207055236 0.00692820323 0.004 0.00565685425 0.00565685425 0.004 0.00692820323 0.00207055236 0.00772740661 4.8985872e-19 0.008 -0.00207055236 0.00772740661 -0.004 0.00692820323 -0.00565685425 0.00565685425 -0.00692820323 0.004 -0.00772740661 0.00207055236 -0.008 9.79717439e-19 -0.004 4.8985872e-19 -0.00386370331 0.00103527618 -0.00346410162 0.002 -0.00282842712 0.00282842712 -0.002 0.00346410162 -0.00103527618 0.00386370331 2.4492936e-19 0.004 0.00103527618 0.00386370331 0.002 0.00346410162 0.00282842712 0.00282842712 0.00346410162 0.002 0.00386370331 0.00103527618 0.004 0) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.008 9.79717439e-19 -0.00772740661 -0.00207055236 -0.00692820323 -0.004 -0.00565685425 -0.00565685425 -0.004 -0.00692820323 -0.00207055236 -0.00772740661 -1.46957616e-18 -0.008 0.00207055236 -0.00772740661 0.004 -0.00692820323 0.00565685425 -0.00565685425 0.00692820323 -0.004 0.00772740661 -0.00207055236 0.008 -1.95943488e-18 0.004 -9.79717439e-19 0.00386370331 -0.00103527618 0.00346410162 -0.002 0.00282842712 -0.00282842712 0.002 -0.00346410162 0.00103527618 -0.00386370331 -7.34788079e-19 -0.004 -0.00103527618 -0.00386370331 -0.002 -0.00346410162 -0.00282842712 -0.00282842712 -0.00346410162 -0.002 -0.00386370331 -0.00103527618 -0.004 4.8985872e-19) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+   ] ]
+   # FlexibleGasTubing; established
+   [ T(2 0.76 0) Object(id(DemoFlexibleGasTubing) class(FlexibleGasTubing) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0.04 0 0.14) normal(0.707106781 0 0.707106781) tangent(0.707106781 0 -0.707106781) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.008 0 0.00772740661 0.00207055236 0.00692820323 0.004 0.00565685425 0.00565685425 0.004 0.00692820323 0.00207055236 0.00772740661 4.8985872e-19 0.008 -0.00207055236 0.00772740661 -0.004 0.00692820323 -0.00565685425 0.00565685425 -0.00692820323 0.004 -0.00772740661 0.00207055236 -0.008 9.79717439e-19 -0.004 4.8985872e-19 -0.00386370331 0.00103527618 -0.00346410162 0.002 -0.00282842712 0.00282842712 -0.002 0.00346410162 -0.00103527618 0.00386370331 2.4492936e-19 0.004 0.00103527618 0.00386370331 0.002 0.00346410162 0.00282842712 0.00282842712 0.00346410162 0.002 0.00386370331 0.00103527618 0.004 0) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.008 9.79717439e-19 -0.00772740661 -0.00207055236 -0.00692820323 -0.004 -0.00565685425 -0.00565685425 -0.004 -0.00692820323 -0.00207055236 -0.00772740661 -1.46957616e-18 -0.008 0.00207055236 -0.00772740661 0.004 -0.00692820323 0.00565685425 -0.00565685425 0.00692820323 -0.004 0.00772740661 -0.00207055236 0.008 -1.95943488e-18 0.004 -9.79717439e-19 0.00386370331 -0.00103527618 0.00346410162 -0.002 0.00282842712 -0.00282842712 0.002 -0.00346410162 0.00103527618 -0.00386370331 -7.34788079e-19 -0.004 -0.00103527618 -0.00386370331 -0.002 -0.00346410162 -0.00282842712 -0.00282842712 -0.00346410162 -0.002 -0.00386370331 -0.00103527618 -0.004 4.8985872e-19) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+   ] ]
+   # GasValve; established
+   [ T(0 0.95 0) Object(id(DemoGasValve) class(GasValve) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # GasClosedValve; established
+   [ T(0.25 0.95 0) Object(id(DemoGasClosedValve) class(GasClosedValve) taxonomy(Engineering Energy Blocked) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # GasPressureRegulator; established
+   [ T(0.5 0.95 0) Object(id(DemoGasPressureRegulator) class(GasPressureRegulator) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # FluidPressureLine; established
+   [ T(0.75 0.95 0) Object(id(DemoFluidPressureLine) class(FluidPressureLine) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0.04 0 0.14) normal(0.707106781 0 0.707106781) tangent(0.707106781 0 -0.707106781) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.008 0 0.00772740661 0.00207055236 0.00692820323 0.004 0.00565685425 0.00565685425 0.004 0.00692820323 0.00207055236 0.00772740661 4.8985872e-19 0.008 -0.00207055236 0.00772740661 -0.004 0.00692820323 -0.00565685425 0.00565685425 -0.00692820323 0.004 -0.00772740661 0.00207055236 -0.008 9.79717439e-19 -0.004 4.8985872e-19 -0.00386370331 0.00103527618 -0.00346410162 0.002 -0.00282842712 0.00282842712 -0.002 0.00346410162 -0.00103527618 0.00386370331 2.4492936e-19 0.004 0.00103527618 0.00386370331 0.002 0.00346410162 0.00282842712 0.00282842712 0.00346410162 0.002 0.00386370331 0.00103527618 0.004 0) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.008 9.79717439e-19 -0.00772740661 -0.00207055236 -0.00692820323 -0.004 -0.00565685425 -0.00565685425 -0.004 -0.00692820323 -0.00207055236 -0.00772740661 -1.46957616e-18 -0.008 0.00207055236 -0.00772740661 0.004 -0.00692820323 0.00565685425 -0.00565685425 0.00692820323 -0.004 0.00772740661 -0.00207055236 0.008 -1.95943488e-18 0.004 -9.79717439e-19 0.00386370331 -0.00103527618 0.00346410162 -0.002 0.00282842712 -0.00282842712 0.002 -0.00346410162 0.00103527618 -0.00386370331 -7.34788079e-19 -0.004 -0.00103527618 -0.00386370331 -0.002 -0.00346410162 -0.00282842712 -0.00282842712 -0.00346410162 -0.002 -0.00386370331 -0.00103527618 -0.004 4.8985872e-19) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+   ] ]
+   # FlexibleFluidTubing; established
+   [ T(1 0.95 0) Object(id(DemoFlexibleFluidTubing) class(FlexibleFluidTubing) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0.04 0 0.14) normal(0.707106781 0 0.707106781) tangent(0.707106781 0 -0.707106781) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.008 0 0.00772740661 0.00207055236 0.00692820323 0.004 0.00565685425 0.00565685425 0.004 0.00692820323 0.00207055236 0.00772740661 4.8985872e-19 0.008 -0.00207055236 0.00772740661 -0.004 0.00692820323 -0.00565685425 0.00565685425 -0.00692820323 0.004 -0.00772740661 0.00207055236 -0.008 9.79717439e-19 -0.004 4.8985872e-19 -0.00386370331 0.00103527618 -0.00346410162 0.002 -0.00282842712 0.00282842712 -0.002 0.00346410162 -0.00103527618 0.00386370331 2.4492936e-19 0.004 0.00103527618 0.00386370331 0.002 0.00346410162 0.00282842712 0.00282842712 0.00346410162 0.002 0.00386370331 0.00103527618 0.004 0) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.008 9.79717439e-19 -0.00772740661 -0.00207055236 -0.00692820323 -0.004 -0.00565685425 -0.00565685425 -0.004 -0.00692820323 -0.00207055236 -0.00772740661 -1.46957616e-18 -0.008 0.00207055236 -0.00772740661 0.004 -0.00692820323 0.00565685425 -0.00565685425 0.00692820323 -0.004 0.00772740661 -0.00207055236 0.008 -1.95943488e-18 0.004 -9.79717439e-19 0.00386370331 -0.00103527618 0.00346410162 -0.002 0.00282842712 -0.00282842712 0.002 -0.00346410162 0.00103527618 -0.00386370331 -7.34788079e-19 -0.004 -0.00103527618 -0.00386370331 -0.002 -0.00346410162 -0.00282842712 -0.00282842712 -0.00346410162 -0.002 -0.00386370331 -0.00103527618 -0.004 4.8985872e-19) path(0 0 0 0 0 0.1 0.04 0 0.14) cap(all)) material(tealmattemetal) 1 1) ]
+   ] ]
+   # FluidValve; established
+   [ T(1.25 0.95 0) Object(id(DemoFluidValve) class(FluidValve) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # FluidClosedValve; established
+   [ T(1.5 0.95 0) Object(id(DemoFluidClosedValve) class(FluidClosedValve) taxonomy(Engineering Energy Blocked) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(ControlIn) type(ControlPort) origin(0 0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # FluidPressureRegulator; established
+   [ T(1.75 0.95 0) Object(id(DemoFluidPressureRegulator) class(FluidPressureRegulator) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+   # CentrifugalPressureRegulator; established
+   [ T(2 0.95 0) Object(id(DemoCentrifugalPressureRegulator) class(CentrifugalPressureRegulator) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(PipePort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # CentrifugalPump; established
+   [ T(0 1.14 0) Object(id(DemoCentrifugalPump) class(CentrifugalPump) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(ShaftIn) type(Shaft) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(FluidIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(FluidOut) type(PipePort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # GasCompressor; established
+   [ T(0.25 1.14 0) Object(id(DemoGasCompressor) class(GasCompressor) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(ShaftIn) type(Shaft) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(GasIn) type(PipePort) origin(0 0 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(GasOut) type(PipePort) origin(0 0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # RotationalPowerShaft; established
+   [ T(0.5 1.14 0) Object(id(DemoRotationalPowerShaft) class(RotationalPowerShaft) taxonomy(Engineering Energy Transfer) layer(Equipment)) [
+      Interface(id(In) type(Shaft) origin(0 0 0) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(Out) type(Shaft) origin(0 0 0.2) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 0 0 0 0.2) radius(0.012) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # Generator; established
+   [ T(0.75 1.14 0) Object(id(DemoGenerator) class(Generator) taxonomy(Engineering Energy Converter) layer(Equipment)) [
+      Interface(id(ShaftIn) type(Shaft) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(PowerOut) type(ElectricalPort) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # Motor; established
+   [ T(1 1.14 0) Object(id(DemoMotor) class(Motor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # ElectricMotor; established
+   [ T(1.25 1.14 0) Object(id(DemoElectricMotor) class(ElectricMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # StepperMotor; established
+   [ T(1.5 1.14 0) Object(id(DemoStepperMotor) class(StepperMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # ServoMotor; established
+   [ T(1.75 1.14 0) Object(id(DemoServoMotor) class(ServoMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # DCMotor; established
+   [ T(2 1.14 0) Object(id(DemoDCMotor) class(DCMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # ACMotor; established
+   [ T(0 1.33 0) Object(id(DemoACMotor) class(ACMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # BLDCMotor; established
+   [ T(0.25 1.33 0) Object(id(DemoBLDCMotor) class(BLDCMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # PneumaticMotor; established
+   [ T(0.5 1.33 0) Object(id(DemoPneumaticMotor) class(PneumaticMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(GasIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # HydraulicMotor; established
+   [ T(0.75 1.33 0) Object(id(DemoHydraulicMotor) class(HydraulicMotor) taxonomy(Engineering Energy Motor) layer(Equipment)) [
+      Interface(id(FluidIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      Interface(id(ShaftOut) type(Shaft) origin(0 0 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ !I(SweepDisk(path(0 0 -0.04 0 0 0.04) radius(0.04) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # MagneticBearing; established
+   [ T(1 1.33 0) Object(id(DemoMagneticBearing) class(MagneticBearing) taxonomy(Engineering Energy Support) layer(Equipment)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.035 0 0.0338074039 0.00905866658 0.0303108891 0.0175 0.0247487373 0.0247487373 0.0175 0.0303108891 0.00905866658 0.0338074039 2.1431319e-18 0.035 -0.00905866658 0.0338074039 -0.0175 0.0303108891 -0.0247487373 0.0247487373 -0.0303108891 0.0175 -0.0338074039 0.00905866658 -0.035 4.2862638e-18 -0.016 1.95943488e-18 -0.0154548132 0.00414110472 -0.0138564065 0.008 -0.0113137085 0.0113137085 -0.008 0.0138564065 -0.00414110472 0.0154548132 9.79717439e-19 0.016 0.00414110472 0.0154548132 0.008 0.0138564065 0.0113137085 0.0113137085 0.0138564065 0.008 0.0154548132 0.00414110472 0.016 0) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.035 4.2862638e-18 -0.0338074039 -0.00905866658 -0.0303108891 -0.0175 -0.0247487373 -0.0247487373 -0.0175 -0.0303108891 -0.00905866658 -0.0338074039 -6.4293957e-18 -0.035 0.00905866658 -0.0338074039 0.0175 -0.0303108891 0.0247487373 -0.0247487373 0.0303108891 -0.0175 0.0338074039 -0.00905866658 0.035 -8.57252759e-18 0.016 -3.91886976e-18 0.0154548132 -0.00414110472 0.0138564065 -0.008 0.0113137085 -0.0113137085 0.008 -0.0138564065 0.00414110472 -0.0154548132 -2.93915232e-18 -0.016 -0.00414110472 -0.0154548132 -0.008 -0.0138564065 -0.0113137085 -0.0113137085 -0.0138564065 -0.008 -0.0154548132 -0.00414110472 -0.016 1.95943488e-18) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # PneumaticBearing; established
+   [ T(1.25 1.33 0) Object(id(DemoPneumaticBearing) class(PneumaticBearing) taxonomy(Engineering Energy Support) layer(Equipment)) [
+      Interface(id(GasIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.035 0 0.0338074039 0.00905866658 0.0303108891 0.0175 0.0247487373 0.0247487373 0.0175 0.0303108891 0.00905866658 0.0338074039 2.1431319e-18 0.035 -0.00905866658 0.0338074039 -0.0175 0.0303108891 -0.0247487373 0.0247487373 -0.0303108891 0.0175 -0.0338074039 0.00905866658 -0.035 4.2862638e-18 -0.016 1.95943488e-18 -0.0154548132 0.00414110472 -0.0138564065 0.008 -0.0113137085 0.0113137085 -0.008 0.0138564065 -0.00414110472 0.0154548132 9.79717439e-19 0.016 0.00414110472 0.0154548132 0.008 0.0138564065 0.0113137085 0.0113137085 0.0138564065 0.008 0.0154548132 0.00414110472 0.016 0) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.035 4.2862638e-18 -0.0338074039 -0.00905866658 -0.0303108891 -0.0175 -0.0247487373 -0.0247487373 -0.0175 -0.0303108891 -0.00905866658 -0.0338074039 -6.4293957e-18 -0.035 0.00905866658 -0.0338074039 0.0175 -0.0303108891 0.0247487373 -0.0247487373 0.0303108891 -0.0175 0.0338074039 -0.00905866658 0.035 -8.57252759e-18 0.016 -3.91886976e-18 0.0154548132 -0.00414110472 0.0138564065 -0.008 0.0113137085 -0.0113137085 0.008 -0.0138564065 0.00414110472 -0.0154548132 -2.93915232e-18 -0.016 -0.00414110472 -0.0154548132 -0.008 -0.0138564065 -0.0113137085 -0.0113137085 -0.0138564065 -0.008 -0.0154548132 -0.00414110472 -0.016 1.95943488e-18) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # OilPressureFrictionBearing; established
+   [ T(1.5 1.33 0) Object(id(DemoOilPressureFrictionBearing) class(OilPressureFrictionBearing) taxonomy(Engineering Energy Support) layer(Equipment)) [
+      Interface(id(FluidIn) type(PipePort) origin(0 -0.012 -0.04) normal(0 0 -1) tangent(1 0 0) region(Point))
+      [ !I(SweepProfile(profile(Polygon 0.035 0 0.0338074039 0.00905866658 0.0303108891 0.0175 0.0247487373 0.0247487373 0.0175 0.0303108891 0.00905866658 0.0338074039 2.1431319e-18 0.035 -0.00905866658 0.0338074039 -0.0175 0.0303108891 -0.0247487373 0.0247487373 -0.0303108891 0.0175 -0.0338074039 0.00905866658 -0.035 4.2862638e-18 -0.016 1.95943488e-18 -0.0154548132 0.00414110472 -0.0138564065 0.008 -0.0113137085 0.0113137085 -0.008 0.0138564065 -0.00414110472 0.0154548132 9.79717439e-19 0.016 0.00414110472 0.0154548132 0.008 0.0138564065 0.0113137085 0.0113137085 0.0138564065 0.008 0.0154548132 0.00414110472 0.016 0) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.035 4.2862638e-18 -0.0338074039 -0.00905866658 -0.0303108891 -0.0175 -0.0247487373 -0.0247487373 -0.0175 -0.0303108891 -0.00905866658 -0.0338074039 -6.4293957e-18 -0.035 0.00905866658 -0.0338074039 0.0175 -0.0303108891 0.0247487373 -0.0247487373 0.0303108891 -0.0175 0.0338074039 -0.00905866658 0.035 -8.57252759e-18 0.016 -3.91886976e-18 0.0154548132 -0.00414110472 0.0138564065 -0.008 0.0113137085 -0.0113137085 0.008 -0.0138564065 0.00414110472 -0.0154548132 -2.93915232e-18 -0.016 -0.00414110472 -0.0154548132 -0.008 -0.0138564065 -0.0113137085 -0.0113137085 -0.0138564065 -0.008 -0.0154548132 -0.00414110472 -0.016 1.95943488e-18) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # BallBearing; established
+   [ T(1.75 1.33 0) Object(id(DemoBallBearing) class(BallBearing) taxonomy(Engineering Energy Support) layer(Equipment)) [
+      [ !I(SweepProfile(profile(Polygon 0.035 0 0.0338074039 0.00905866658 0.0303108891 0.0175 0.0247487373 0.0247487373 0.0175 0.0303108891 0.00905866658 0.0338074039 2.1431319e-18 0.035 -0.00905866658 0.0338074039 -0.0175 0.0303108891 -0.0247487373 0.0247487373 -0.0303108891 0.0175 -0.0338074039 0.00905866658 -0.035 4.2862638e-18 -0.016 1.95943488e-18 -0.0154548132 0.00414110472 -0.0138564065 0.008 -0.0113137085 0.0113137085 -0.008 0.0138564065 -0.00414110472 0.0154548132 9.79717439e-19 0.016 0.00414110472 0.0154548132 0.008 0.0138564065 0.0113137085 0.0113137085 0.0138564065 0.008 0.0154548132 0.00414110472 0.016 0) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ !I(SweepProfile(profile(Polygon -0.035 4.2862638e-18 -0.0338074039 -0.00905866658 -0.0303108891 -0.0175 -0.0247487373 -0.0247487373 -0.0175 -0.0303108891 -0.00905866658 -0.0338074039 -6.4293957e-18 -0.035 0.00905866658 -0.0338074039 0.0175 -0.0303108891 0.0247487373 -0.0247487373 0.0303108891 -0.0175 0.0338074039 -0.00905866658 0.035 -8.57252759e-18 0.016 -3.91886976e-18 0.0154548132 -0.00414110472 0.0138564065 -0.008 0.0113137085 -0.0113137085 0.008 -0.0138564065 0.00414110472 -0.0154548132 -2.93915232e-18 -0.016 -0.00414110472 -0.0154548132 -0.008 -0.0138564065 -0.0113137085 -0.0113137085 -0.0138564065 -0.008 -0.0154548132 -0.00414110472 -0.016 1.95943488e-18) path(0 0 0 0 0 0.025) cap(all)) material(silverbrushedmetal) 1 1) ]
+   ] ]
+   # SwitchInput; established
+   [ T(2 1.33 0) Object(id(DemoSwitchInput) class(SwitchInput) taxonomy(Engineering Energy Source) layer(Equipment)) [
+      Interface(id(SignalOut) type(ControlPort) origin(0 -0.012 0.04) normal(0 0 1) tangent(1 0 0) region(Point))
+      EPGBox(0.09 0.06 0.08)
+   ] ]
+ ] ]
+
+EPGBox(w h d) -> [ S(w h d) !I(Cube material(silverbrushedmetal) 1 1) ]

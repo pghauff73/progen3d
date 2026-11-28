@@ -1,0 +1,30 @@
+PASS face contact passes
+PASS unit cubes exact 16.6667% ratio
+PASS opposed outward normals
+PASS isolated unassigned warning
+PASS assigned isolated solid exempt
+PASS assigned open mesh fatal
+PASS exact 2% threshold inclusive
+PASS below 2% warns
+PASS edge-only contact warns
+PASS point-only contact warns
+PASS separated parallel faces warn
+PASS coincident identical solids not contact
+PASS 0.4% plane slope accepted
+PASS 0.6% plane slope rejected
+PASS normal difference above 1% rejected
+PASS tessellation independence
+PASS globally reversed winding normalized
+PASS inconsistent winding error
+PASS duplicate face error
+PASS nonmanifold edge error
+PASS invalid index error
+PASS nonfinite vertex error
+PASS triangle soup welded within instance
+PASS unequal total area denominator
+PASS translation invariance
+PASS scale invariance
+PASS budget exhaustion not false warning
+PASS 300 analytic offset-box cases
+max_ratio_error=2.77556e-17
+28 test groups passed

@@ -1,0 +1,2 @@
+# Expected SIC004: contact ratio 1%.
+Start -> [ T(0 0 0) !I(Cube material(silverbrushedmetal) 1 1) ] [ T(1 0.94 0) !I(Cube material(silverbrushedmetal) 1 1) ]

@@ -2,6 +2,7 @@
 
 #include "Scope.h"
 #include "Mesh.h"
+#include "geometry/service/SolidIntegrity.h"
 #include "geometry/model/AxisAlignedBounds.h"
 #include "geometry/model/ResolvedPrimitiveGeometry.h"
 #include "physics/model/CollisionGeometry.h"
@@ -170,6 +171,7 @@ public:
 	                         std::string *diagnostic);
 	bool endSpatialObject(std::string *diagnostic);
 	bool finalizeSpatialBuildingModel(std::string *diagnostic);
+	sic::Report validateSolidIntegrity() const;
 	bool hasActiveSpatialObject() const;
 	std::string currentSpatialObjectId() const;
 	const std::shared_ptr<const SpatialBuildingModel> &spatialBuildingModel() const;

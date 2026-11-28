@@ -22,6 +22,8 @@
 
 #include "PLYWriter.h"
 #include "Context.h"
+#include "spatial/energy/SpatialEnergyWarnings.h"
+#include <iostream>
 #include "Scope.h"
 #include "grammar.h"
 #include "GrammarRuntime.h"
@@ -5216,6 +5218,7 @@ void GrammarDocument::clearParsedState()
 {
 	error_lines.clear();
 	error_details.clear();
+	warning_details.clear();
 
 	for(Token *token : tokens_new){
 		delete token;
@@ -6161,6 +6164,7 @@ void GrammarDocument::addContext(){
 
 void GrammarDocument::generateGeometry()
 {
+	warning_details.clear();
 	if(context == NULL){
 		GrammarDiagnostic diagnostic;
 		diagnostic.message = "Scene generation was requested without a context.";
@@ -6314,7 +6318,35 @@ void GrammarDocument::generateGeometry()
 		GrammarDiagnostic diagnostic;
 		diagnostic.message = "Spatial building model failed: " + spatial_diagnostic;
 		report_grammar_issue(this, diagnostic);
+		return;
 	}
+    // Solid topology and unassigned planar-contact validation.
+    const auto solid_report = context->validateSolidIntegrity();
+    for (const auto &issue : solid_report.diagnostics) {
+        GrammarDiagnostic diagnostic;
+        diagnostic.line = issue.line;
+        diagnostic.start_column = issue.column;
+        diagnostic.end_column = std::max(issue.column + 1, issue.end_column);
+        diagnostic.message = issue.code + ": " + issue.id + ": " + issue.message;
+        if (issue.error) {
+            report_grammar_issue(this, diagnostic);
+        } else {
+            warning_details.push_back(diagnostic);
+            if (!grammarEvaluationDiagnosticsQuiet(this))
+                std::clog << "WARNING " << diagnostic.message << '\n';
+        }
+    }
+    // Energy connectivity is a separate, nonfatal semantic check.
+    const auto &spatial_model = context->spatialBuildingModel();
+    if (spatial_model) {
+        for (const auto &warning : epg::check_spatial_model(*spatial_model).warnings) {
+            GrammarDiagnostic diagnostic;
+            diagnostic.message = warning.code + ": " + warning.object + ": " + warning.message;
+            warning_details.push_back(diagnostic);
+            if (!grammarEvaluationDiagnosticsQuiet(this))
+                std::clog << "WARNING " << diagnostic.message << '\n';
+        }
+    }
 }
 
 

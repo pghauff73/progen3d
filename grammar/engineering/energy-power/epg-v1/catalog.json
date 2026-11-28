@@ -1,0 +1,1675 @@
+{
+  "version": "EPG1",
+  "components": {
+    "Battery": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "chemistry",
+        "voltage_V",
+        "capacity_Ah",
+        "soc",
+        "internal_resistance_ohm",
+        "max_discharge_A",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "BatteryPack": {
+      "role": "source",
+      "ports": {
+        "Output": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "chemistry",
+        "voltage_V",
+        "capacity_Ah",
+        "soc",
+        "internal_resistance_ohm",
+        "max_discharge_A",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "Supercapacitor": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "capacitance_F",
+        "voltage_V",
+        "min_voltage_V",
+        "esr_ohm",
+        "max_discharge_A",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "E=0.5*C*V^2; terminal power depends on current and ESR",
+      "shape": "box"
+    },
+    "GridSupply": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "voltage_V",
+        "rated_power_W",
+        "frequency_Hz"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "SolarIrradiance": {
+      "role": "source",
+      "ports": {
+        "RadiantOut": {
+          "domain": "radiant",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "irradiance_W_m2",
+        "spectrum"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "HeatSource": {
+      "role": "source",
+      "ports": {
+        "HeatOut": {
+          "domain": "thermal",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "temperature_K",
+        "thermal_power_W"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "FuelTank": {
+      "role": "source",
+      "ports": {
+        "FuelOut": {
+          "domain": "chemical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "mass_kg",
+        "specific_energy_J_kg"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "OxidantSupply": {
+      "role": "source",
+      "ports": {
+        "OxidantOut": {
+          "domain": "chemical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "oxidant",
+        "mass_kg"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "LaserBeam": {
+      "role": "source",
+      "ports": {
+        "RadiantOut": {
+          "domain": "radiant",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "incident_power_W",
+        "wavelength_m"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "MicrowaveBeam": {
+      "role": "source",
+      "ports": {
+        "MicrowaveOut": {
+          "domain": "microwave",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "incident_power_W",
+        "frequency_Hz"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "SolarPanel": {
+      "role": "converter",
+      "ports": {
+        "RadiantIn": {
+          "domain": "radiant",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "area_m2",
+        "efficiency",
+        "rated_power_W",
+        "temperature_coefficient_per_K",
+        "irradiance_W_m2"
+      ],
+      "status": "established",
+      "note": "P=G*A*eta; needs illumination",
+      "shape": "box"
+    },
+    "SolarThermalSteamGenerator": {
+      "role": "converter",
+      "ports": {
+        "RadiantIn": {
+          "domain": "radiant",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "collector_area_m2",
+        "optical_efficiency",
+        "cycle_efficiency",
+        "rated_power_W"
+      ],
+      "status": "established",
+      "note": "Integrated collector/steam cycle/generator abstraction",
+      "shape": "box"
+    },
+    "GasTurbineGenerator": {
+      "role": "converter",
+      "ports": {
+        "FuelIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "OxidantIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "oxidant",
+        "efficiency",
+        "rated_power_W",
+        "fuel_flow_kg_s"
+      ],
+      "status": "established",
+      "note": "Integrated conversion; fuel and oxidant inputs required",
+      "shape": "box"
+    },
+    "BiodieselGenerator": {
+      "role": "converter",
+      "ports": {
+        "FuelIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "OxidantIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "oxidant",
+        "efficiency",
+        "rated_power_W",
+        "fuel_flow_kg_s"
+      ],
+      "status": "established",
+      "note": "Integrated conversion; fuel and oxidant inputs required",
+      "shape": "box"
+    },
+    "HydrogenTurbineGenerator": {
+      "role": "converter",
+      "ports": {
+        "FuelIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "OxidantIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "oxidant",
+        "efficiency",
+        "rated_power_W",
+        "fuel_flow_kg_s"
+      ],
+      "status": "established",
+      "note": "Integrated conversion; fuel and oxidant inputs required",
+      "shape": "box"
+    },
+    "MethaneTurbineGenerator": {
+      "role": "converter",
+      "ports": {
+        "FuelIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "OxidantIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "oxidant",
+        "efficiency",
+        "rated_power_W",
+        "fuel_flow_kg_s"
+      ],
+      "status": "established",
+      "note": "Integrated conversion; fuel and oxidant inputs required",
+      "shape": "box"
+    },
+    "HydrogenMethaneTurbineGenerator": {
+      "role": "converter",
+      "ports": {
+        "FuelIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "OxidantIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "oxidant",
+        "efficiency",
+        "rated_power_W",
+        "fuel_flow_kg_s"
+      ],
+      "status": "established",
+      "note": "Integrated conversion; fuel and oxidant inputs required",
+      "shape": "box"
+    },
+    "FuelCell": {
+      "role": "converter",
+      "ports": {
+        "FuelIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "OxidantIn": {
+          "domain": "chemical",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fuel",
+        "oxidant",
+        "efficiency",
+        "rated_power_W",
+        "fuel_flow_kg_s"
+      ],
+      "status": "established",
+      "note": "Integrated conversion; fuel and oxidant inputs required",
+      "shape": "box"
+    },
+    "ThermalLaserAbsorptionGenerator": {
+      "role": "converter",
+      "ports": {
+        "RadiantIn": {
+          "domain": "radiant",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "absorptivity",
+        "thermal_efficiency",
+        "rated_power_W",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "Laser-to-heat-to-electricity converter; external energy required",
+      "shape": "box"
+    },
+    "MicrowavePowerReceiver": {
+      "role": "converter",
+      "ports": {
+        "MicrowaveIn": {
+          "domain": "microwave",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "frequency_Hz",
+        "capture_area_m2",
+        "efficiency",
+        "rated_power_W"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "Helium3DeuteriumFusion": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "research",
+      "note": "D-He3 fusion research; no demonstrated commercial net-electric source",
+      "shape": "box"
+    },
+    "ThermonuclearFusionPlant": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "research",
+      "note": "Controlled fusion plant concept; no weapon modelling",
+      "shape": "box"
+    },
+    "ThoriumPowerPlant": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "research",
+      "note": "Thorium fuel-cycle reactor concept; not a qualified design",
+      "shape": "box"
+    },
+    "HafniumPowerPlant": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Hafnium power-source mechanism unspecified; conventional hafnium is not fuel",
+      "shape": "box"
+    },
+    "ThoriumHafniumPowerPlant": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Combined mechanism unspecified; no assumed power output",
+      "shape": "box"
+    },
+    "MatterAntimatterReactor": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Annihilation physics established; usable power system hypothetical",
+      "shape": "box"
+    },
+    "EntangledWirelessPowerSource": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Entanglement alone is not a demonstrated energy supply",
+      "shape": "box"
+    },
+    "TimeFieldBetaDecayAmplifier": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Hypothetical mechanism; no validated physical model",
+      "shape": "box"
+    },
+    "CyclicStateGasPlasmaEngine": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Unspecified energy input and cycle; no validated model",
+      "shape": "box"
+    },
+    "ChemicalReductiveProtonReactor": {
+      "role": "source",
+      "ports": {
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "model_reference",
+        "evidence",
+        "rated_power_W"
+      ],
+      "status": "speculative",
+      "note": "Unspecified reaction and energy balance; no validated model",
+      "shape": "box"
+    },
+    "PressurisedGasCylinder": {
+      "role": "source",
+      "ports": {
+        "GasOut": {
+          "domain": "gas",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "gas",
+        "pressure_Pa",
+        "volume_m3",
+        "temperature_K",
+        "max_flow_m3_s"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "PressurisedFluidAccumulator": {
+      "role": "source",
+      "ports": {
+        "FluidOut": {
+          "domain": "hydraulic",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "fluid",
+        "pressure_Pa",
+        "volume_m3",
+        "temperature_K",
+        "max_flow_m3_s"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "FlywheelStorage": {
+      "role": "source",
+      "ports": {
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "inertia_kg_m2",
+        "omega_rad_s",
+        "max_omega_rad_s",
+        "loss_torque_Nm"
+      ],
+      "status": "established",
+      "note": "E=0.5*J*w^2; L=J*w; stored energy, not perpetual generation",
+      "shape": "cylinder"
+    },
+    "InsulatedConductor": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency",
+        "conductor_radius_m",
+        "outer_radius_m",
+        "resistivity_ohm_m",
+        "insulation_material",
+        "path_m",
+        "min_bend_radius_m",
+        "young_modulus_Pa",
+        "max_strain"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "line"
+    },
+    "ElectricalCable": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency",
+        "conductor_radius_m",
+        "outer_radius_m",
+        "resistivity_ohm_m",
+        "insulation_material",
+        "path_m",
+        "min_bend_radius_m",
+        "young_modulus_Pa",
+        "max_strain"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "line"
+    },
+    "PowerBus": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "ConductionBushing": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency",
+        "max_omega_rad_s",
+        "contact_resistance_ohm",
+        "channel_count",
+        "bore_radius_m",
+        "outer_radius_m",
+        "length_m"
+      ],
+      "status": "established",
+      "note": "Rotating electrical transfer; not a torque source",
+      "shape": "rotary_contact"
+    },
+    "SlipRing": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency",
+        "max_omega_rad_s",
+        "contact_resistance_ohm",
+        "channel_count",
+        "bore_radius_m",
+        "outer_radius_m",
+        "length_m"
+      ],
+      "status": "established",
+      "note": "Rotating electrical transfer; not a torque source",
+      "shape": "rotary_contact"
+    },
+    "ClosedSwitch": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        },
+        "ControlIn": {
+          "domain": "control",
+          "direction": "in",
+          "optional": true
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "OpenSwitch": {
+      "role": "blocked",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        },
+        "ControlIn": {
+          "domain": "control",
+          "direction": "in",
+          "optional": true
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "No internal energy transfer in open state",
+      "shape": "box"
+    },
+    "PowerRegulator": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "VoltageRegulator": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "VoltageTransformer": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_voltage_V",
+        "rated_current_A",
+        "resistance_ohm",
+        "efficiency",
+        "turns_ratio",
+        "frequency_Hz"
+      ],
+      "status": "established",
+      "note": "AC transformer; DC requires switched conversion",
+      "shape": "box"
+    },
+    "GasPressureLine": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "gas",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K",
+        "inner_radius_m",
+        "outer_radius_m",
+        "young_modulus_Pa",
+        "max_strain",
+        "min_bend_radius_m",
+        "path_m",
+        "roughness_m"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "line"
+    },
+    "FlexibleGasTubing": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "gas",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K",
+        "inner_radius_m",
+        "outer_radius_m",
+        "young_modulus_Pa",
+        "max_strain",
+        "min_bend_radius_m",
+        "path_m",
+        "roughness_m"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "line"
+    },
+    "GasValve": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "gas",
+          "direction": "out"
+        },
+        "ControlIn": {
+          "domain": "control",
+          "direction": "in",
+          "optional": true
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "GasClosedValve": {
+      "role": "blocked",
+      "ports": {
+        "In": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "gas",
+          "direction": "out"
+        },
+        "ControlIn": {
+          "domain": "control",
+          "direction": "in",
+          "optional": true
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "GasPressureRegulator": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "gas",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "FluidPressureLine": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "hydraulic",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K",
+        "inner_radius_m",
+        "outer_radius_m",
+        "young_modulus_Pa",
+        "max_strain",
+        "min_bend_radius_m",
+        "path_m",
+        "roughness_m"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "line"
+    },
+    "FlexibleFluidTubing": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "hydraulic",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K",
+        "inner_radius_m",
+        "outer_radius_m",
+        "young_modulus_Pa",
+        "max_strain",
+        "min_bend_radius_m",
+        "path_m",
+        "roughness_m"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "line"
+    },
+    "FluidValve": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "hydraulic",
+          "direction": "out"
+        },
+        "ControlIn": {
+          "domain": "control",
+          "direction": "in",
+          "optional": true
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "FluidClosedValve": {
+      "role": "blocked",
+      "ports": {
+        "In": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "hydraulic",
+          "direction": "out"
+        },
+        "ControlIn": {
+          "domain": "control",
+          "direction": "in",
+          "optional": true
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "FluidPressureRegulator": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "hydraulic",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "medium",
+        "rated_pressure_Pa",
+        "pressure_drop_Pa",
+        "flow_m3_s",
+        "temperature_K"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "box"
+    },
+    "CentrifugalPressureRegulator": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "hydraulic",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_pressure_Pa",
+        "set_pressure_Pa",
+        "flow_m3_s",
+        "omega_rad_s"
+      ],
+      "status": "established",
+      "note": "Centrifugal regulator concept; curve and mechanism must be specified",
+      "shape": "cylinder"
+    },
+    "CentrifugalPump": {
+      "role": "converter",
+      "ports": {
+        "ShaftIn": {
+          "domain": "shaft",
+          "direction": "in"
+        },
+        "FluidIn": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "FluidOut": {
+          "domain": "hydraulic",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "flow_m3_s",
+        "pressure_rise_Pa",
+        "efficiency",
+        "omega_rad_s",
+        "npsh_required_m"
+      ],
+      "status": "established",
+      "note": "Requires shaft energy and fluid supply; no head-flow curve implied",
+      "shape": "cylinder"
+    },
+    "GasCompressor": {
+      "role": "converter",
+      "ports": {
+        "ShaftIn": {
+          "domain": "shaft",
+          "direction": "in"
+        },
+        "GasIn": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "GasOut": {
+          "domain": "gas",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "pressure_ratio",
+        "mass_flow_kg_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "RotationalPowerShaft": {
+      "role": "transfer",
+      "ports": {
+        "In": {
+          "domain": "shaft",
+          "direction": "in"
+        },
+        "Out": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "radius_m",
+        "length_m",
+        "max_torque_Nm",
+        "max_omega_rad_s",
+        "shear_modulus_Pa",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "shaft"
+    },
+    "Generator": {
+      "role": "converter",
+      "ports": {
+        "ShaftIn": {
+          "domain": "shaft",
+          "direction": "in"
+        },
+        "PowerOut": {
+          "domain": "electrical",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "efficiency",
+        "rated_power_W"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "Motor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "ElectricMotor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "StepperMotor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "ServoMotor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "DCMotor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "ACMotor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "BLDCMotor": {
+      "role": "motor",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "PneumaticMotor": {
+      "role": "motor",
+      "ports": {
+        "GasIn": {
+          "domain": "gas",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "HydraulicMotor": {
+      "role": "motor",
+      "ports": {
+        "FluidIn": {
+          "domain": "hydraulic",
+          "direction": "in"
+        },
+        "ShaftOut": {
+          "domain": "shaft",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "rated_power_W",
+        "rated_torque_Nm",
+        "rated_speed_rad_s",
+        "efficiency"
+      ],
+      "status": "established",
+      "note": "",
+      "shape": "cylinder"
+    },
+    "MagneticBearing": {
+      "role": "support",
+      "ports": {
+        "PowerIn": {
+          "domain": "electrical",
+          "direction": "in"
+        }
+      },
+      "parameters": [
+        "bore_radius_m",
+        "outer_radius_m",
+        "length_m",
+        "max_radial_load_N",
+        "max_omega_rad_s",
+        "friction_torque_Nm"
+      ],
+      "status": "established",
+      "note": "Supports rotation, does not supply shaft power",
+      "shape": "bearing"
+    },
+    "PneumaticBearing": {
+      "role": "support",
+      "ports": {
+        "GasIn": {
+          "domain": "gas",
+          "direction": "in"
+        }
+      },
+      "parameters": [
+        "bore_radius_m",
+        "outer_radius_m",
+        "length_m",
+        "max_radial_load_N",
+        "max_omega_rad_s",
+        "friction_torque_Nm"
+      ],
+      "status": "established",
+      "note": "Supports rotation, does not supply shaft power",
+      "shape": "bearing"
+    },
+    "OilPressureFrictionBearing": {
+      "role": "support",
+      "ports": {
+        "FluidIn": {
+          "domain": "hydraulic",
+          "direction": "in"
+        }
+      },
+      "parameters": [
+        "bore_radius_m",
+        "outer_radius_m",
+        "length_m",
+        "max_radial_load_N",
+        "max_omega_rad_s",
+        "friction_torque_Nm"
+      ],
+      "status": "established",
+      "note": "Supports rotation, does not supply shaft power",
+      "shape": "bearing"
+    },
+    "BallBearing": {
+      "role": "support",
+      "ports": {},
+      "parameters": [
+        "bore_radius_m",
+        "outer_radius_m",
+        "length_m",
+        "max_radial_load_N",
+        "max_omega_rad_s",
+        "friction_torque_Nm"
+      ],
+      "status": "established",
+      "note": "Supports rotation, does not supply shaft power",
+      "shape": "bearing"
+    },
+    "SwitchInput": {
+      "role": "source",
+      "ports": {
+        "SignalOut": {
+          "domain": "control",
+          "direction": "out"
+        }
+      },
+      "parameters": [
+        "signal_type",
+        "state"
+      ],
+      "status": "established",
+      "note": "Control signal only; not an energy source",
+      "shape": "box"
+    }
+  },
+  "battery_chemistries": {
+    "LFP": {
+      "positive": "LiFePO4 (lithiated cathode)",
+      "negative": "C (graphite; Li_xC6 when lithiated)",
+      "electrolyte": "e.g. LiPF6 in organic carbonates"
+    },
+    "NMC": {
+      "positive": "LiNi_xMn_yCo_zO2; x+y+z=1",
+      "negative": "C (graphite)",
+      "electrolyte": "e.g. LiPF6 in EC/EMC carbonate mixture"
+    },
+    "NCA": {
+      "positive": "LiNi_xCo_yAl_zO2; x+y+z=1",
+      "negative": "C (graphite)",
+      "electrolyte": "e.g. LiPF6 in organic carbonates"
+    },
+    "LCO": {
+      "positive": "LiCoO2",
+      "negative": "C (graphite)",
+      "electrolyte": "e.g. LiPF6 in carbonate solvents"
+    },
+    "LMO": {
+      "positive": "LiMn2O4",
+      "negative": "C (graphite)",
+      "electrolyte": "e.g. LiPF6 in carbonate solvents"
+    },
+    "LTO": {
+      "positive": "cell-specific, e.g. LiMn2O4",
+      "negative": "Li4Ti5O12",
+      "electrolyte": "cell-specific lithium salt/organic solvent"
+    },
+    "LeadAcid": {
+      "positive": "PbO2",
+      "negative": "Pb",
+      "electrolyte": "H2SO4(aq); both electrodes form PbSO4 on discharge"
+    },
+    "NiMH": {
+      "positive": "NiOOH/Ni(OH)2",
+      "negative": "metal hydride MH/M; alloy composition varies",
+      "electrolyte": "KOH(aq)"
+    },
+    "NiCd": {
+      "positive": "NiOOH/Ni(OH)2",
+      "negative": "Cd/Cd(OH)2",
+      "electrolyte": "KOH(aq)"
+    },
+    "Alkaline": {
+      "positive": "MnO2",
+      "negative": "Zn",
+      "electrolyte": "KOH(aq)"
+    },
+    "SodiumIon": {
+      "positive": "e.g. Na_xMO2 (M varies)",
+      "negative": "hard carbon C",
+      "electrolyte": "e.g. NaPF6 in carbonate solvents"
+    },
+    "LithiumSulfur": {
+      "positive": "S8 / Li2S (state dependent)",
+      "negative": "Li",
+      "electrolyte": "cell-specific lithium salt in ether solvents"
+    },
+    "VanadiumRedoxFlow": {
+      "positive": "VO2+ / VO^2+ (V(V)/V(IV))",
+      "negative": "V^3+ / V^2+",
+      "electrolyte": "acidic aqueous vanadium solutions"
+    },
+    "ZincAir": {
+      "positive": "O2 (air cathode)",
+      "negative": "Zn",
+      "electrolyte": "typically KOH(aq)"
+    }
+  }
+}

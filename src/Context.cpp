@@ -3119,6 +3119,53 @@ const CollisionGeometry &SceneGenerationContext::getInstanceCollisionGeometry(co
 	return collision_geometry_for_instance(instance);
 }
 
+// SIC v1: validate actual resolved mesh geometry, not collision proxies.
+sic::Report SceneGenerationContext::validateSolidIntegrity() const
+{
+    std::vector<sic::Mesh> meshes;
+    const auto &model = spatialBuildingModel();
+    std::map<std::size_t, std::string> owners;
+    if (model) {
+        for (const auto &binding : model->geometryBindings()) {
+            owners.emplace(binding.primitiveInstanceIndex(), binding.objectId().value());
+        }
+    }
+    for (std::size_t i = 0; i < primitive_instances.size(); ++i) {
+        const auto &instance = primitive_instances[i];
+        if (instance.removed) continue;
+        sic::Mesh mesh;
+        const auto owner = owners.find(i);
+        mesh.assigned = owner != owners.end();
+        mesh.id = (mesh.assigned ? owner->second : instance.type) + "#" + std::to_string(i);
+        mesh.line = instance.source_start_line;
+        mesh.column = instance.source_start_column;
+        mesh.end_column = instance.source_end_line == instance.source_start_line
+            ? instance.source_end_column : instance.source_start_column + 1;
+        if (instance.resolved_geometry && instance.resolved_geometry->hasTriangleMesh()) {
+            const auto &src = instance.resolved_geometry->triangleMesh();
+            const glm::dmat4 transform(instance.primary_transform);
+            for (const auto &p : src.vertices) {
+                const glm::dvec4 w = transform * glm::dvec4(p, 1.0);
+                mesh.vertices.push_back({w.x, w.y, w.z});
+            }
+            for (const auto &f : src.faces) mesh.faces.push_back({f.x, f.y, f.z});
+        } else if (instance.resolved_geometry && instance.resolved_geometry->usesCubeVertexTemplate()) {
+            const std::array<glm::vec3,8> corners = {{
+                {0.5f,0,0.5f},{0.5f,1,0.5f},{-0.5f,0,0.5f},{-0.5f,1,0.5f},
+                {0.5f,0,-0.5f},{0.5f,1,-0.5f},{-0.5f,0,-0.5f},{-0.5f,1,-0.5f}}};
+            const auto cache = build_transform_cache(instance, false);
+            for (const auto &p : corners) {
+                const auto w = transform_world_vertex(cache, p);
+                mesh.vertices.push_back({w.x,w.y,w.z});
+            }
+            mesh.faces = {{0,3,2},{0,1,3},{5,4,7},{4,6,7},{4,0,6},{0,2,6},
+                          {5,3,1},{5,7,3},{4,1,0},{5,1,4},{2,3,6},{6,3,7}};
+        }
+        meshes.push_back(std::move(mesh));
+    }
+    return sic::validate(meshes);
+}
+
 PrimitiveBounds SceneGenerationContext::getSceneBounds() const
 {
 	PrimitiveBounds scene_bounds;
