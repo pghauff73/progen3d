@@ -1,0 +1,232 @@
+# Electrical power sources and energy storage reference scene.
+# Quantities use SI units. Examples show interfaces, ratings and simplified display geometry.
+# Battery composition comments list positive electrode, negative electrode and electrolyte.
+# Electrode compounds are material examples, and blended electrolytes and alloys vary by design.
+# Catalog entries on the purple row have no simulated supply or electrical output port.
+# Receivers and generators need an external energy or fuel input in an operating installation.
+
+Start ->
+    [ Object(id(PowerCatalog) class(PowerSourceCatalog) taxonomy(Electrical Power Catalog)) [
+      CatalogLayout
+    ] ]
+    Connect(id(PVTelemetryPower) source(CatalogSolarPV DCOut) target(CatalogTelemetry PowerIn) type(Powers))
+
+CatalogLayout ->
+    [ T(-1.36 0 0) LFP ]
+    [ T(-0.68 0 0) NMC811 ]
+    [ T(0.00 0 0) SodiumIon ]
+    [ T(0.68 0 0) NiMH ]
+    [ T(1.36 0 0) LeadAcid ]
+    [ T(-2.04 0 0.8) SolarThermal ]
+    [ T(-1.36 0 0.8) GasTurbine ]
+    [ T(-0.68 0 0.8) Biodiesel ]
+    [ T(0.00 0 0.8) FuelCell ]
+    [ T(0.68 0 0.8) HydrogenMethaneTurbine ]
+    [ T(1.36 0 0.8) LaserAbsorption ]
+    [ T(2.04 0 0.8) MicrowaveReceiver ]
+    [ T(-1.36 0 1.6) DeuteriumHelium3Fusion ]
+    [ T(-0.68 0 1.6) Thermonuclear ]
+    [ T(0.00 0 1.6) Thorium ]
+    [ T(0.68 0 1.6) Hafnium ]
+    [ T(1.36 0 1.6) EntangledWireless ]
+    [ T(-1.02 0 2.4) Antimatter ]
+    [ T(-0.34 0 2.4) TimeFieldBetaDecay ]
+    [ T(0.34 0 2.4) CyclicStatePlasma ]
+    [ T(1.02 0 2.4) ChemicalReductiveProton ]
+    [ T(-1.5 0 -1.18) SolarPV ]
+    [ T(0.15 0 -1.18) Supercapacitor ]
+    [ T(1.25 0 -1.18) CatalogTelemetry ]
+    [ T(-0.8 0 3.25) CompressedGasStorage ]
+    [ T(0 0 3.25) StoredFluidAccumulator ]
+    [ T(0.8 0 3.25) FlywheelMechanicalStorage ]
+
+# LithiumIronPhosphate composition: LiFePO4 | graphite C | LiPF6 in organic carbonates
+LFP ->
+    [ Object(id(CatalogLFP) class(PowerSource) taxonomy(Electrical Battery LithiumIronPhosphate)) [
+      BatteryCase SourcePort
+    ] ]
+
+# LithiumNickelManganeseCobalt composition: LiNi0.8Mn0.1Co0.1O2 | graphite C | LiPF6 in organic carbonates
+NMC811 ->
+    [ Object(id(CatalogNMC811) class(PowerSource) taxonomy(Electrical Battery NMC811)) [
+      BatteryCase SourcePort
+    ] ]
+
+# SodiumIonPrussianWhite composition: Na_xM[Fe(CN)6] | hard carbon C | NaPF6 electrolyte; M is a framework metal.
+SodiumIon ->
+    [ Object(id(CatalogSodiumIon) class(PowerSource) taxonomy(Electrical Battery SodiumIonPrussianWhite)) [
+      BatteryCase SourcePort
+    ] ]
+
+# NickelMetalHydride composition: NiOOH / Ni(OH)2 | alloy hydride MH / M | aqueous KOH
+NiMH ->
+    [ Object(id(CatalogNiMH) class(PowerSource) taxonomy(Electrical Battery NickelMetalHydride)) [
+      BatteryCase SourcePort
+    ] ]
+
+# LeadAcid composition: PbO2 | Pb | aqueous H2SO4; discharge produces PbSO4 and H2O.
+LeadAcid ->
+    [ Object(id(CatalogLeadAcid) class(PowerSource) taxonomy(Electrical Battery LeadAcid)) [
+      BatteryCase SourcePort
+    ] ]
+
+SolarThermal ->
+    [ Object(id(CatalogSolarThermal) class(PowerSource) taxonomy(Electrical Thermal SolarThermalSteamGenerator)) [
+      GeneratorCase SourcePort
+    ] ]
+
+GasTurbine ->
+    [ Object(id(CatalogGasTurbine) class(PowerSource) taxonomy(Electrical Fuel GasTurbineGenerator)) [
+      GeneratorCase SourcePort
+    ] ]
+
+Biodiesel ->
+    [ Object(id(CatalogBiodiesel) class(PowerSource) taxonomy(Electrical Fuel BiodieselGenerator)) [
+      GeneratorCase SourcePort
+    ] ]
+
+FuelCell ->
+    [ Object(id(CatalogFuelCell) class(PowerSource) taxonomy(Electrical Electrochemical HydrogenFuelCell)) [
+      GeneratorCase SourcePort
+    ] ]
+
+HydrogenMethaneTurbine ->
+    [ Object(id(CatalogHydrogenMethaneTurbine) class(PowerSource) taxonomy(Electrical Fuel HydrogenMethaneTurbineGenerator)) [
+      GeneratorCase SourcePort
+    ] ]
+
+LaserAbsorption ->
+    [ Object(id(CatalogLaserAbsorption) class(PowerSource) taxonomy(Electrical ExternalEnergyReceiver ThermalLaserAbsorptionGenerator)) [
+      GeneratorCase SourcePort
+    ] ]
+
+MicrowaveReceiver ->
+    [ Object(id(CatalogMicrowaveReceiver) class(PowerSource) taxonomy(Electrical ExternalEnergyReceiver MicrowavePowerReceiver)) [
+      GeneratorCase SourcePort
+    ] ]
+
+DeuteriumHelium3Fusion ->
+    [ Object(id(CatalogDeuteriumHelium3Fusion) class(PowerSourceCatalogEntry) taxonomy(Electrical SpeculativeFusion DeuteriumHelium3Fusion)) [
+      ConceptCase
+    ] ]
+
+Thermonuclear ->
+    [ Object(id(CatalogThermonuclear) class(PowerSourceCatalogEntry) taxonomy(Electrical ConceptualFusion ThermonuclearPowerPlant)) [
+      ConceptCase
+    ] ]
+
+Thorium ->
+    [ Object(id(CatalogThorium) class(PowerSourceCatalogEntry) taxonomy(Electrical ConceptualNuclear ThoriumPowerPlant)) [
+      ConceptCase
+    ] ]
+
+Hafnium ->
+    [ Object(id(CatalogHafnium) class(PowerSourceCatalogEntry) taxonomy(Electrical Speculative HafniumPowerPlant)) [
+      ConceptCase
+    ] ]
+
+EntangledWireless ->
+    [ Object(id(CatalogEntangledWireless) class(PowerSourceCatalogEntry) taxonomy(Electrical Fictional EntangledWirelessPowerSource)) [
+      ConceptCase
+    ] ]
+
+Antimatter ->
+    [ Object(id(CatalogAntimatter) class(PowerSourceCatalogEntry) taxonomy(Electrical Speculative AntimatterMatterReactor)) [
+      ConceptCase
+    ] ]
+
+TimeFieldBetaDecay ->
+    [ Object(id(CatalogTimeFieldBetaDecay) class(PowerSourceCatalogEntry) taxonomy(Electrical Fictional TimeFieldBetaDecayAmplifier)) [
+      ConceptCase
+    ] ]
+
+CyclicStatePlasma ->
+    [ Object(id(CatalogCyclicStatePlasma) class(PowerSourceCatalogEntry) taxonomy(Electrical Speculative CyclicStateGasPlasmaEngine)) [
+      ConceptCase
+    ] ]
+
+ChemicalReductiveProton ->
+    [ Object(id(CatalogChemicalReductiveProton) class(PowerSourceCatalogEntry) taxonomy(Electrical Fictional ChemicalReductiveProtonReactor)) [
+      ConceptCase
+    ] ]
+
+SourcePort ->
+    Interface(id(DCOut) type(ElectricalPort) origin(0 0.15 -0.15) normal(0 0 -1) tangent(1 0 0) region(Point))
+
+BatteryCase ->
+    [ S(0.42 0.24 0.30) P(1350) !I(Cube material(charcoalmattemetal) 1 1) ]
+    [ T(0.035 0.17 -0.152) S(0.30 0.06 0.018) M(0.03) !I(Cube material(orangeglosspaint) 1 1) ]
+
+GeneratorCase ->
+    [ S(0.44 0.29 0.34) P(2700) !I(Cube material(silverbrushedmetal) 1 1) ]
+    [ T(0.035 0.105 -0.173) S(0.30 0.07 0.018) M(0.03) !I(Cube material(blueglosspaint) 1 1) ]
+
+ConceptCase ->
+    [ S(0.42 0.24 0.30) P(1350) !I(Cube material(charcoalmattemetal) 1 1) ]
+    [ T(0.035 0.105 -0.152) S(0.30 0.07 0.018) M(0.03) !I(Cube material(violet) 1 1) ]
+
+# Terrestrial STC: 1000 W/m², 25 °C cell temperature, AM1.5 global spectrum.
+# Nominal example: 0.21 x 1.2 m² x 1000 W/m² = 252 W DC.
+# The meter uses 500 W per metre. Replace irradiance with the actual scene input if known.
+SolarPV ->
+    [ Object(id(CatalogSolarPV) class(PowerSource) taxonomy(Electrical SolarPV MonocrystallineSilicon)) [
+      Interface(id(DCOut) type(ElectricalPort) origin(0.60 0.08 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      [ S(1.2 0.05 1.0) M(18) !I(Cube material(blueglosspaint) 1 1) ]
+      [ T(0 0.12 0) PVRating(0.21 1.2 1000) ]
+    ] ]
+
+PVRating(efficiency activeArea irradiance) ->
+    [ S(efficiency*activeArea*irradiance/500 0.055 0.085) M(0) !I(Cube material(greenemissivepaint) 1 1) ]
+
+CatalogTelemetry ->
+    [ Object(id(CatalogTelemetry) class(TelemetryLoad) taxonomy(Electrical Meter)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(-0.22 0.15 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+      GeneratorCase
+    ] ]
+
+# Low-voltage lumped model. Constant current 20 A, 120 F, 24 V initial, 0.012 ohm ESR.
+# Cutoff occurs at Vterminal = 18 V after 34.56 s. Initial Pout = 475.2 W; E = 34560 J.
+# Ideal matched-load peak V²/(4*ESR) ignores actual terminal current and thermal ratings.
+# Clock runs at eight simulation seconds per display second for the meter.
+Supercapacitor ->
+    [ Object(id(CatalogSupercapacitor) class(PowerSource) taxonomy(Electrical Storage Supercapacitor)) [
+      BatteryCase SourcePort
+      CapacitorPulse(120 24 0.012 20 18 8*t)
+    ] ]
+
+CapacitorPulse(capacitance initialV seriesR loadI cutoffV elapsed) ->
+    CapacitorClock(capacitance initialV seriesR loadI cutoffV max(elapsed,0)
+        capacitance*(initialV-loadI*seriesR-cutoffV)/loadI)
+
+CapacitorClock(capacitance initialV seriesR loadI cutoffV elapsed stopTime) ->
+    CapacitorMeters(capacitance initialV-loadI*min(elapsed,stopTime)/capacitance
+        seriesR loadI cutoffV elapsed stopTime)
+
+CapacitorMeters(capacitance internalV seriesR loadI cutoffV elapsed stopTime) ->
+    [ T(0 0.35 0) S((internalV-loadI*seriesR)/50 0.04 0.055) M(0) !I(Cube material(blueemissivepaint) 1 1) ]
+    [ T(0 0.41 0) S(0.5*capacitance*internalV^2/80000 0.04 0.055) M(0) !I(Cube material(orangeglosspaint) 1 1) ]
+    ?(elapsed<stopTime) [
+        [ T(0 0.47 0) S(loadI*max(cutoffV,internalV-loadI*seriesR)/1000 0.04 0.055) M(0) !I(Cube material(greenemissivepaint) 1 1) ]
+    ] : []
+
+# The three storage types below deliver other energy domains. An electrical motor
+# still needs a converter with an actual electrical output in its circuit.
+CompressedGasStorage ->
+    [ Object(id(CatalogCompressedGas) class(CompressedGasStorage) taxonomy(Pneumatic Storage Nitrogen)) [
+      Interface(id(GasOut) type(PipePort) origin(0 0.39 0) normal(0 1 0) tangent(1 0 0) region(Point))
+      [ S(0.25 0.39 0.25) M(4) !I(Cylinder material(silverbrushedmetal) 1 1) ]
+    ] ]
+
+StoredFluidAccumulator ->
+    [ Object(id(CatalogStoredFluid) class(PressurizedFluidAccumulator) taxonomy(Hydraulic Storage)) [
+      Interface(id(FluidOut) type(PipePort) origin(0 0.39 0) normal(0 1 0) tangent(1 0 0) region(Point))
+      [ S(0.25 0.39 0.25) M(4) !I(Cylinder material(blueglosspaint) 1 1) ]
+    ] ]
+
+# Flywheel examples use angular momentum L = Iω and energy E = 1/2 Iω².
+# The shaft transfers P = τω. Changing angular momentum requires net torque.
+FlywheelMechanicalStorage ->
+    [ Object(id(CatalogFlywheel) class(FlywheelMechanicalStorage) taxonomy(Mechanical Storage Rotor)) [
+      Interface(id(DriveShaft) type(Shaft) origin(0 0 0.16) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ A(90 0) S(0.30 0.14 0.30) M(8) !I(Cylinder material(silverbrushedmetal) 1 1) ]
+    ] ]

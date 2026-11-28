@@ -93,6 +93,7 @@
 #include "editor/service/LocalFileDialogService.h"
 #include "editor/service/NativeLocalFileDialogService.h"
 #include "editor/service/PreviewFramebufferCaptureService.h"
+#include "editor/service/RenderRowExecutor.h"
 #include "editor/service/SceneRegenerationCoordinator.h"
 #include "editor/service/SpatialDeclarationCompletionService.h"
 #include "editor/service/SpatialObjectInspectionService.h"
@@ -2093,7 +2094,7 @@ PreviewMaterial generate_procedural_material(const std::string &material_name)
 		return glm::smoothstep(0.0f, feather, x) * (1.0f - glm::smoothstep(inner, width, x));
 	};
 
-	for (int y = 0; y < texture_size; ++y) {
+	const auto generate_row = [&](int y) {
 		for (int x = 0; x < texture_size; ++x) {
 			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
 			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
@@ -2314,7 +2315,12 @@ PreviewMaterial generate_procedural_material(const std::string &material_name)
 			write_scalar_pixel(&height_pixels, pixel_index, height_value);
 			write_swatch_pixel(&emissive_pixels, pixel_index, emissive);
 		}
-	}
+	};
+	// Workers own disjoint rows. The preview thread uploads the finished textures.
+	static thread_local RenderRowExecutor material_rows;
+	material_rows.run(texture_size, texture_size, [&](int first_row, int end_row) {
+		for (int row = first_row; row < end_row; ++row) generate_row(row);
+	});
 
 	PreviewMaterial material;
 	float default_mapping_scale = 0.82f;

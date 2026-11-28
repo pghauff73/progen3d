@@ -554,3 +554,19 @@ build/airflow-test: tests/airflow_test.cpp $(FORM_STUDY_OBJS)
 airflow-check: build/airflow-test
 	./build/airflow-test
 	python3 tests/airflow_faces_test.py
+
+.PHONY: solid-integrity-check
+solid-integrity-check: build/solid-integrity-test
+	./build/solid-integrity-test
+
+build/solid-integrity-test: tests/solid_integrity_harness.cpp include/geometry/service/SolidIntegrity.h
+	@mkdir -p build
+	$(CXX) -std=c++17 -Wall -Wextra -Wpedantic -Iinclude $< -o $@
+
+.PHONY: spatial-energy-check
+spatial-energy-check: build/spatial-energy-test
+	./build/spatial-energy-test
+
+build/spatial-energy-test: tests/spatial_energy_warnings_harness.cpp $(SRC_DIR)/spatial/graph/SpatialObjectRegistry.cpp include/spatial/energy/SpatialEnergyWarnings.h include/spatial/energy/EnergyGraph.h include/spatial/energy/EnergyCatalog.h
+	@mkdir -p build
+	$(CXX) -std=c++17 -Wall -Wextra -Wpedantic -Iinclude $< $(SRC_DIR)/spatial/graph/SpatialObjectRegistry.cpp -o $@

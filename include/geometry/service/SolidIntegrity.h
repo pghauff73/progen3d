@@ -47,7 +47,15 @@ inline Solid prepare(const Mesh& m,const Settings& s,Report& r){
  if(deg)diag(r,m,"SIC003",true,std::to_string(deg)+" invalid, duplicate or degenerate faces");
  std::size_t open=0,nonmanifold=0,winding=0;std::vector<std::vector<int>> adj(o.f.size());
  for(const auto& e:edges){const auto& f=e.second;if(f.size()==1)open++;else if(f.size()!=2)nonmanifold++;else{if(f[0].second==f[1].second)winding++;adj[f[0].first].push_back(f[1].first);adj[f[1].first].push_back(f[0].first);}}
- if(open)diag(r,m,"SIC001",true,std::to_string(open)+" boundary edges: open mesh");
+ if (open != 0) {
+     const std::string boundary_count = std::to_string(open) +
+         (open == 1 ? " boundary edge" : " boundary edges");
+     diag(r, m, "SIC001", false, "Mesh is open. Found " + boundary_count +
+          " with a single incident triangle after vertex welding. "
+          "This can be intentional for a sheet or uncapped surface. "
+          "If a closed mesh was intended, check for missing caps or faces and "
+          "for gaps or mismatched vertices along seams.");
+ }
  if(nonmanifold)diag(r,m,"SIC002",true,std::to_string(nonmanifold)+" non-manifold edges");
  if(winding)diag(r,m,"SIC003",true,std::to_string(winding)+" inconsistent-winding edges");
  if(deg||open||nonmanifold||winding||o.f.empty())return o;

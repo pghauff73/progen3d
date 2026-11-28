@@ -1,2 +1,2 @@
-# Expected SIC001 if uncapped sweep generates open geometry.
+# This intentionally uncapped sweep compiles with a SIC001 boundary warning.
 Start -> [ !I(SweepDisk(path(0 0 0 0 1 0) radius(0.1) segments(16) cap(none)) material(silverbrushedmetal) 1 1) ]

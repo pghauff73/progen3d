@@ -2498,7 +2498,7 @@ Primitive *primitive_for_type(Context *context, const std::string &type)
 	return nullptr;
 }
 
-float cube_like_instance_volume(const PrimitiveInstance &instance)
+double cube_like_instance_measure(const PrimitiveInstance &instance, bool surface_area)
 {
 	static const std::array<vec3, 8> kBaseCubeCorners = {
 		vec3(0.5f, 0.0f, 0.5f),
@@ -2522,41 +2522,67 @@ float cube_like_instance_volume(const PrimitiveInstance &instance)
 	for (std::size_t index = 0; index < kBaseCubeCorners.size(); ++index) {
 		transformed_vertices[index] = glm::dvec3(transform_world_vertex(cache, kBaseCubeCorners[index]));
 	}
+	const glm::dvec3 origin = transformed_vertices.front();
 
-	double signed_volume = 0.0;
+	double measure = 0.0;
 	for (const glm::ivec3 &triangle : kCubeTriangles) {
-		const glm::dvec3 &a = transformed_vertices[static_cast<std::size_t>(triangle.x)];
-		const glm::dvec3 &b = transformed_vertices[static_cast<std::size_t>(triangle.y)];
-		const glm::dvec3 &c = transformed_vertices[static_cast<std::size_t>(triangle.z)];
-		signed_volume += glm::dot(a, glm::cross(b, c)) / 6.0;
+		const glm::dvec3 a = transformed_vertices[static_cast<std::size_t>(triangle.x)] - origin;
+		const glm::dvec3 b = transformed_vertices[static_cast<std::size_t>(triangle.y)] - origin;
+		const glm::dvec3 c = transformed_vertices[static_cast<std::size_t>(triangle.z)] - origin;
+		measure += surface_area ? glm::length(glm::cross(b - a, c - a)) / 2.0
+		                        : glm::dot(a, glm::cross(b, c)) / 6.0;
 	}
 
-	return static_cast<float>(std::fabs(signed_volume));
+	return std::fabs(measure);
+}
+
+double instance_surface_area(const PrimitiveInstance &instance)
+{
+	if (is_cube_like(instance.type)) {
+		return cube_like_instance_measure(instance, true);
+	}
+	if (!instance.resolved_geometry || !instance.resolved_geometry->hasTriangleMesh()) {
+		return 0.0;
+	}
+	const Mesh &mesh = instance.resolved_geometry->triangleMesh();
+	const glm::dmat3 linear_transform(instance.primary_transform);
+	double area = 0.0;
+	for (const glm::ivec3 &face : mesh.faces) {
+		const glm::dvec3 a(mesh.vertices[static_cast<std::size_t>(face.x)]);
+		const glm::dvec3 b(mesh.vertices[static_cast<std::size_t>(face.y)]);
+		const glm::dvec3 c(mesh.vertices[static_cast<std::size_t>(face.z)]);
+		area += glm::length(glm::cross(linear_transform * (b - a),
+		                              linear_transform * (c - a))) / 2.0;
+	}
+	return area;
 }
 
 bool resolve_instance_mass(const PrimitiveInstance &instance,
                            float pending_mass,
-                           float pending_density,
-                           bool has_pending_density,
+                           std::optional<float> pending_density,
+                           std::optional<float> shell_thickness,
                            float *resolved_mass,
                            std::string *diagnostic)
 {
 	if(resolved_mass == nullptr)return false;
-	*resolved_mass = std::max(pending_mass, kMinimumMass);
-	if (!has_pending_density) {
+	*resolved_mass = pending_mass;
+	if (!pending_density) {
 		return true;
 	}
 
-	float volume = 0.0f;
-	if (is_cube_like(instance.type)) {
-		volume = cube_like_instance_volume(instance);
+	double volume = 0.0;
+	if (shell_thickness) {
+		volume = instance_surface_area(instance) * *shell_thickness;
+	}
+	else if (is_cube_like(instance.type)) {
+		volume = cube_like_instance_measure(instance, false);
 	}
 	else if (instance.resolved_geometry &&
 	         instance.resolved_geometry->volumeEvidence().hasVolume()) {
-		const float local_volume =
+		const double local_volume =
 			instance.resolved_geometry->volumeEvidence().localVolume();
-		const float transform_volume_scale =
-			std::fabs(glm::determinant(glm::mat3(instance.primary_transform)));
+		const double transform_volume_scale =
+			std::fabs(glm::determinant(glm::dmat3(instance.primary_transform)));
 		volume = local_volume * transform_volume_scale;
 	}
 	else {
@@ -2565,14 +2591,21 @@ bool resolve_instance_mass(const PrimitiveInstance &instance,
 		}
 		return false;
 	}
-	if (volume <= kMinDelta) {
+	if (!std::isfinite(volume) || volume <= 0.0) {
 		if(diagnostic != nullptr){
-			*diagnostic = "Density-derived mass requires a finite nonzero transformed volume.";
+			*diagnostic = shell_thickness
+				? "Shell mass requires a finite, positive transformed surface area."
+				: "Density-derived mass requires a finite nonzero transformed volume.";
 		}
 		return false;
 	}
 
-	*resolved_mass = std::max(pending_density * volume, kMinimumMass);
+	const double mass = *pending_density * volume;
+	if (!std::isfinite(mass) || mass > std::numeric_limits<float>::max()) {
+		if (diagnostic != nullptr) *diagnostic = "Density-derived mass exceeds the supported mass range.";
+		return false;
+	}
+	*resolved_mass = static_cast<float>(mass);
 	return true;
 }
 
@@ -2710,15 +2743,17 @@ void SceneGenerationContext::addPrimitive(std::string type,
 	if(!resolve_instance_mass(instance,
 	                          pending_mass_,
 	                          pending_density_,
-	                          has_pending_density_,
+	                          pending_shell_thickness_,
 	                          &resolved_mass,
 	                          &mass_diagnostic)){
 		errorout("Grammar execution error: " + mass_diagnostic);
 		clearPendingPrimitiveState();
 		return;
 	}
-	instance.mass = immovable ? kDefaultMass : resolved_mass;
+	instance.mass = immovable ? resolved_mass : std::max(resolved_mass, kMinimumMass);
 	instance.initial_mass = instance.mass;
+	instance.material_density_kg_m3 = pending_density_;
+	instance.has_authored_mass = has_pending_mass_ || pending_density_.has_value();
 	instance.airflow = pending_airflow_;
 	instance.source_start_line = source_start_line;
 	instance.source_start_column = source_start_column;
@@ -3437,7 +3472,8 @@ void SceneGenerationContext::setPendingRotationalVelocity(const glm::vec3 &rotat
 
 void SceneGenerationContext::setPendingMass(float mass)
 {
-	pending_mass_ = std::max(mass, kMinimumMass);
+	pending_mass_ = std::max(mass, 0.0f);
+	has_pending_mass_ = true;
 }
 
 AirflowResult SceneGenerationContext::inspectAirflow(const ScenePrimitiveInstance &instance,
@@ -3453,10 +3489,10 @@ void SceneGenerationContext::setPendingAirflow(std::shared_ptr<const BodyAirflow
 	pending_airflow_ = std::move(definition);
 }
 
-void SceneGenerationContext::setPendingDensity(float density)
+void SceneGenerationContext::setPendingDensity(float density, std::optional<float> shell_thickness)
 {
 	pending_density_ = std::max(density, 0.0f);
-	has_pending_density_ = true;
+	pending_shell_thickness_ = shell_thickness;
 }
 
 void SceneGenerationContext::setGravity(float magnitude, const glm::vec3 &direction)
@@ -3603,8 +3639,9 @@ void SceneGenerationContext::clearPendingPrimitiveState()
 	pending_velocity_ = glm::vec3(0.0f);
 	pending_rotational_velocity_ = glm::vec3(0.0f);
 	pending_mass_ = kDefaultMass;
-	pending_density_ = 0.0f;
-	has_pending_density_ = false;
+	has_pending_mass_ = false;
+	pending_density_.reset();
+	pending_shell_thickness_.reset();
 }
 
 void SceneGenerationContext::resetSimulation()
