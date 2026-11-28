@@ -22,6 +22,12 @@ ApplicationLaunchOptions ApplicationLaunchOptions::parse(int argument_count, cha
 		           "--visual-test") {
 			options.smoke_test_requested_ = true;
 			options.visual_test_requested_ = true;
+		} else if (std::string_view(argument_values[argument_index]) == "--basic-render") {
+			options.basic_render_requested_ = true;
+		} else if (std::string_view(argument_values[argument_index]) == "--benchmark-preview") {
+			options.smoke_test_requested_ = true;
+			options.visual_test_requested_ = true;
+			options.preview_benchmark_requested_ = true;
 		} else if (std::string_view(argument_values[argument_index]) ==
 		           "--spatial-overlays") {
 			options.spatial_overlays_requested_ = true;

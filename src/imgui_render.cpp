@@ -1,10 +1,15 @@
 #include "imgui_render.h"
+#include "editor/service/PreviewOcclusionDepth.h"
 #include "lighting/rendering/PreviewLightBuffer.h"
 #include "lighting/service/PreviewLightingFrameFactory.h"
 
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -35,6 +40,56 @@ public:
 	GLuint dynamic_cube_shadow_program = 0;
 };
 
+enum class PreviewVisibilityMaterial {
+	Skipped,
+	Opaque,
+	Solid
+};
+
+struct PreviewOpaqueDrawGroup {
+	bool cull_back = false;
+	std::vector<GLint> starts;
+	std::vector<GLsizei> counts;
+};
+
+struct PreviewOpaqueMaterialDraw {
+	bool use_ranges = false;
+	std::vector<PreviewOpaqueDrawGroup> groups;
+
+	void append(const PreviewOpaqueDrawRange &range, bool cull_back)
+	{
+		if (groups.empty() || groups.back().cull_back != cull_back) {
+			groups.push_back({cull_back, {}, {}});
+		}
+		auto &group = groups.back();
+		if (!group.starts.empty() && group.starts.back() + group.counts.back() == range.first_vertex) {
+			group.counts.back() += range.vertex_count;
+			return;
+		}
+		group.starts.push_back(range.first_vertex);
+		group.counts.push_back(range.vertex_count);
+	}
+};
+
+struct PreviewVisibilityKey {
+	mat4 view;
+	mat4 projection;
+	float scene_scale;
+	int width;
+	int height;
+	bool single_sample;
+	bool experimental_back_faces;
+	std::vector<PreviewVisibilityMaterial> materials;
+
+	bool operator==(const PreviewVisibilityKey &other) const
+	{
+		return view == other.view && projection == other.projection &&
+		       scene_scale == other.scene_scale && width == other.width && height == other.height &&
+		       single_sample == other.single_sample &&
+		       experimental_back_faces == other.experimental_back_faces && materials == other.materials;
+	}
+};
+
 class PreviewGeometryRepository {
 public:
 	GLuint base_vao = 0;
@@ -42,6 +97,9 @@ public:
 	std::vector<GLuint> opaque_vaos;
 	std::vector<GLuint> opaque_buffers;
 	std::vector<int> opaque_render_counts;
+	std::vector<std::vector<PreviewOpaqueDrawRange>> opaque_draw_ranges;
+	std::optional<PreviewVisibilityKey> visibility_key;
+	std::vector<PreviewOpaqueMaterialDraw> visible_opaque_ranges;
 	std::vector<PreviewDynamicCubeDraw> dynamic_cube_draws;
 	std::vector<GLuint> transparent_vaos;
 	std::vector<GLuint> transparent_buffers;
@@ -59,13 +117,13 @@ public:
 	std::vector<GLuint> outline_buffers;
 	std::vector<GLsizei> outline_counts;
 	std::vector<vec4> outline_colors;
-	std::vector<float> outline_widths;
 };
 
 class PreviewRenderTargetRepository {
 public:
 	GLuint shadow_fbo = 0;
 	GLuint shadow_depth_texture = 0;
+	std::optional<glm::mat4> shadow_view_projection;
 	GLuint preview_fbo = 0;
 	GLuint preview_resolve_fbo = 0;
 	GLuint preview_color_ms = 0;
@@ -73,6 +131,8 @@ public:
 	GLuint preview_depth = 0;
 	int preview_width = 0;
 	int preview_height = 0;
+	bool preview_mipmaps = true;
+	bool preview_multisampled = true;
 };
 
 class PreviewRenderRuntimeEnvironment {
@@ -141,6 +201,7 @@ const GLchar *FRAGMENT_SOURCE =
 "    PreviewLightRecord preview_lights[];\n"
 "};\n"
 "uniform uint preview_light_count;\n"
+"uniform int basic_render;\n"
 "uniform int shadows_enabled;\n"
 "uniform vec3 camera_position;\n"
 "uniform float shinyness ;\n"
@@ -397,7 +458,65 @@ const GLchar *FRAGMENT_SOURCE =
 "    float remaining = 1.0 - transition;\n"
 "    return remaining * remaining;\n"
 "}\n"
+"void render_basic_surface(){\n"
+"    vec3 normal = safe_normalize(v_world_normal, vec3(0.0, 1.0, 0.0));\n"
+"    vec3 uv_debug = uv_debug_color(v_tex_coord);\n"
+"    vec3 checker_debug = checker_color(v_tex_coord);\n"
+"    vec3 weights = vec3(0.0);\n"
+"    mat3 basis;\n"
+"    if (mapping_mode == 1 || debug_view == 3) {\n"
+"        basis = build_projection_basis();\n"
+"        weights = compute_triplanar_weights(basis, v_world_normal);\n"
+"    }\n"
+"    vec4 texel;\n"
+"    float alpha_sample;\n"
+"    if (mapping_mode == 1) {\n"
+"        vec2 uv_x, uv_y, uv_z;\n"
+"        compute_triplanar_projection(basis, weights, uv_x, uv_y, uv_z, uv_debug, checker_debug);\n"
+"        texel = sample_triplanar_map(texture1, uv_x, uv_y, uv_z, weights);\n"
+"        alpha_sample = sample_triplanar_scalar(alpha_texture, uv_x, uv_y, uv_z, weights);\n"
+"    } else {\n"
+"        texel = texture(texture1, v_tex_coord);\n"
+"        alpha_sample = texture(alpha_texture, v_tex_coord).r;\n"
+"    }\n"
+"    float surface_alpha = clamp(texel.a * alpha * alpha_sample, 0.0, 1.0);\n"
+"    if (surface_alpha < 0.02) discard;\n"
+"    if (debug_view == 1) { fragColor = vec4(uv_debug * surface_alpha, surface_alpha); return; }\n"
+"    if (debug_view == 2) { fragColor = vec4(checker_debug * surface_alpha, surface_alpha); return; }\n"
+"    if (debug_view == 3) { fragColor = vec4(weights * surface_alpha, surface_alpha); return; }\n"
+"    vec3 illumination = vec3(0.24);\n"
+"    uint count = min(preview_light_count, 32u);\n"
+"    for (uint index = 0u; index < count; ++index) {\n"
+"        PreviewLightRecord light = preview_lights[index];\n"
+"        if ((light.metadata.x & 1u) == 0u) continue;\n"
+"        uint type = uint(round(light.position_and_type.w));\n"
+"        vec3 direction = safe_normalize(-light.direction_and_range.xyz, vec3(0.0, 1.0, 0.0));\n"
+"        float attenuation = 1.0;\n"
+"        if (type != 0u) {\n"
+"            vec3 to_light = light.position_and_type.xyz - v_world_pos;\n"
+"            float distance_to_light = max(length(to_light), 0.001);\n"
+"            vec3 emission_direction = -direction;\n"
+"            direction = to_light / distance_to_light;\n"
+"            attenuation = smooth_range_attenuation(distance_to_light, light.direction_and_range.w)\n"
+"                        / max(distance_to_light * distance_to_light, 0.01);\n"
+"            if (type == 2u) {\n"
+"                attenuation *= smoothstep(light.cone_and_area.y, light.cone_and_area.x,\n"
+"                                          dot(emission_direction, -direction));\n"
+"            } else if (type == 3u) {\n"
+"                float facing = dot(emission_direction, -direction);\n"
+"                if ((light.metadata.x & 4u) != 0u) facing = abs(facing);\n"
+"                attenuation *= max(facing, 0.0) * max(light.cone_and_area.z * light.cone_and_area.w, 0.0001);\n"
+"            }\n"
+"        }\n"
+"        illumination += light.color_and_intensity.rgb * light.color_and_intensity.w *\n"
+"                        (max(dot(normal, direction), 0.0) * attenuation / 3.14159265);\n"
+"    }\n"
+"    vec3 color = max(texel.rgb * illumination * 1.14, vec3(0.0));\n"
+"    color = pow(color / (color + vec3(1.0)), vec3(1.0 / 2.2));\n"
+"    fragColor = vec4(color * surface_alpha, surface_alpha);\n"
+"}\n"
 "void main(){\n"
+"    if (basic_render != 0) { render_basic_surface(); return; }\n"
 "    mat3 projection_basis = build_projection_basis();\n"
 "    vec3 triplanar_weights = compute_triplanar_weights(projection_basis, v_world_normal);\n"
 "    vec3 base_normal = normalize(v_world_normal);\n"
@@ -870,23 +989,32 @@ const GLchar *OUTLINE_VERTEX_SOURCE =
 "uniform mat4 projection;\n"
 "uniform mat4 view;\n"
 "uniform mat4 scene_model;\n"
-"uniform float outline_width;\n"
+"out vec3 view_position;\n"
+"out vec3 view_normal;\n"
 "void main(){\n"
-"    vec4 scaled_world = scene_model * vec4(position, 1.0);\n"
-"    vec3 world_normal = normalize(mat3(scene_model) * normal);\n"
-"    vec3 extruded = scaled_world.xyz + world_normal * outline_width;\n"
-"    gl_Position = projection * view * vec4(extruded, 1.0);\n"
+"    vec4 world_position = scene_model * vec4(position, 1.0);\n"
+"    view_position = (view * world_position).xyz;\n"
+"    view_normal = mat3(view) * normal;\n"
+"    gl_Position = projection * view * world_position;\n"
 "}\n";
 
 const GLchar *OUTLINE_FRAGMENT_SOURCE =
 "#version 460 core\n"
+"in vec3 view_position;\n"
+"in vec3 view_normal;\n"
 "uniform vec4 outline_color;\n"
+"uniform bool orthographic;\n"
 "out vec4 fragColor;\n"
+"vec3 direction(vec3 value){\n"
+"    return value * inversesqrt(max(dot(value, value), 1e-8));\n"
+"}\n"
 "void main(){\n"
-"    fragColor = outline_color;\n"
+"    vec3 to_camera = orthographic ? vec3(0.0, 0.0, 1.0) : direction(-view_position);\n"
+"    float facing = clamp(abs(dot(direction(view_normal), to_camera)), 0.0, 1.0);\n"
+"    float rim = pow(1.0 - facing, 2.4);\n"
+"    vec3 color = mix(outline_color.rgb, vec3(1.0), 0.28 * rim);\n"
+"    fragColor = vec4(color, outline_color.a * (1.0 + 1.1 * rim));\n"
 "}\n";
-
-
 
 const GLfloat kVertexData[] = {
   1.0, -1.0, -1.0, 0.0, -1.0, 0.0, 1.0,-1.0,
@@ -1182,7 +1310,6 @@ void ensure_outline_capacity(std::size_t batch_capacity)
 	geometry_repository.outline_buffers.resize(batch_capacity, 0);
 	geometry_repository.outline_counts.resize(batch_capacity, 0);
 	geometry_repository.outline_colors.resize(batch_capacity, vec4(1.0f));
-	geometry_repository.outline_widths.resize(batch_capacity, 0.03f);
 
 	for (std::size_t index = current_capacity; index < batch_capacity; ++index) {
 		glGenVertexArrays(1, &geometry_repository.outline_vaos[index]);
@@ -1225,6 +1352,7 @@ void destroy_preview_target()
 void destroy_shadow_target()
 {
 	PreviewRenderTargetRepository &render_targets = preview_runtime_environment().render_targets;
+	render_targets.shadow_view_projection.reset();
 	if (render_targets.shadow_depth_texture != 0) {
 		glDeleteTextures(1, &render_targets.shadow_depth_texture);
 		render_targets.shadow_depth_texture = 0;
@@ -1235,14 +1363,20 @@ void destroy_shadow_target()
 	}
 }
 
-bool ensure_preview_target(int width, int height)
+bool ensure_preview_target(int width, int height, bool generate_mipmaps, bool multisampled)
 {
 	PreviewRenderTargetRepository &render_targets = preview_runtime_environment().render_targets;
 	width = std::max(width, 1);
 	height = std::max(height, 1);
 	if (width == render_targets.preview_width &&
 	    height == render_targets.preview_height &&
+	    render_targets.preview_multisampled == multisampled &&
 	    render_targets.preview_fbo != 0) {
+		if (render_targets.preview_mipmaps != generate_mipmaps) {
+			glTextureParameteri(render_targets.preview_color, GL_TEXTURE_MIN_FILTER,
+			                    generate_mipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR);
+			render_targets.preview_mipmaps = generate_mipmaps;
+		}
 		return true;
 	}
 
@@ -1251,29 +1385,35 @@ bool ensure_preview_target(int width, int height)
 	glGenFramebuffers(1, &render_targets.preview_fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, render_targets.preview_fbo);
 
-	glGenRenderbuffers(1, &render_targets.preview_color_ms);
-	glBindRenderbuffer(GL_RENDERBUFFER, render_targets.preview_color_ms);
-	glRenderbufferStorageMultisample(GL_RENDERBUFFER, kPreviewMsaaSamples, GL_RGBA8, width, height);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-	                          GL_COLOR_ATTACHMENT0,
-	                          GL_RENDERBUFFER,
-	                          render_targets.preview_color_ms);
+	if (multisampled) {
+		glGenRenderbuffers(1, &render_targets.preview_color_ms);
+		glBindRenderbuffer(GL_RENDERBUFFER, render_targets.preview_color_ms);
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, kPreviewMsaaSamples, GL_RGBA8, width, height);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER,
+		                          render_targets.preview_color_ms);
+	}
 
 	glGenRenderbuffers(1, &render_targets.preview_depth);
 	glBindRenderbuffer(GL_RENDERBUFFER, render_targets.preview_depth);
-	glRenderbufferStorageMultisample(GL_RENDERBUFFER, kPreviewMsaaSamples, GL_DEPTH24_STENCIL8, width, height);
+	if (multisampled) {
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, kPreviewMsaaSamples, GL_DEPTH24_STENCIL8, width, height);
+	} else {
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+	}
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER,
 	                          GL_DEPTH_STENCIL_ATTACHMENT,
 	                          GL_RENDERBUFFER,
 	                          render_targets.preview_depth);
-	const GLenum draw_status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-
-	glGenFramebuffers(1, &render_targets.preview_resolve_fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, render_targets.preview_resolve_fbo);
+	const GLenum draw_status = multisampled ? glCheckFramebufferStatus(GL_FRAMEBUFFER) : GL_FRAMEBUFFER_COMPLETE;
+	if (multisampled) {
+		glGenFramebuffers(1, &render_targets.preview_resolve_fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, render_targets.preview_resolve_fbo);
+	}
 	glGenTextures(1, &render_targets.preview_color);
 	glBindTexture(GL_TEXTURE_2D, render_targets.preview_color);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+	                generate_mipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -1282,7 +1422,6 @@ bool ensure_preview_target(int width, int height)
 	                       GL_TEXTURE_2D,
 	                       render_targets.preview_color,
 	                       0);
-	glGenerateMipmap(GL_TEXTURE_2D);
 	const GLenum resolve_status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -1295,6 +1434,8 @@ bool ensure_preview_target(int width, int height)
 
 	render_targets.preview_width = width;
 	render_targets.preview_height = height;
+	render_targets.preview_mipmaps = generate_mipmaps;
+	render_targets.preview_multisampled = multisampled;
 	return true;
 }
 
@@ -1375,6 +1516,7 @@ void set_common_uniforms(GLuint program,
 			shadows_enabled_location,
 			settings.shadows && lighting_frame.primary_shadow_available ? 1 : 0);
 	}
+	glUniform1i(glGetUniformLocation(program, "basic_render"), settings.mode == PreviewRenderMode::Basic);
 	glUniform3fv(glGetUniformLocation(program, "camera_position"), 1, &camera.position[0]);
 	const GLint preview_time_location = glGetUniformLocation(program, "preview_time");
 	if (preview_time_location >= 0) {
@@ -1520,57 +1662,39 @@ void draw_outline_batches(const PreviewCameraMatrices &camera, float scale_globa
 {
 	PreviewShaderProgramLibrary &shader_programs = preview_runtime_environment().shader_programs;
 	PreviewGeometryRepository &geometry_repository = preview_runtime_environment().geometry_repository;
-	if (shader_programs.outline_program == 0 || geometry_repository.outline_vaos.empty()) {
+	const GLuint program = shader_programs.outline_program;
+	if (program == 0 || geometry_repository.outline_vaos.empty()) {
 		return;
 	}
 
-	mat4 scene_model(1.0f);
-	scene_model = scale(scene_model, vec3(scale_global, scale_global, scale_global));
+	const mat4 scene_model = scale(mat4(1.0f), vec3(scale_global));
+	glUseProgram(program);
+	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, &camera.view[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, &camera.projection[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(program, "scene_model"), 1, GL_FALSE, &scene_model[0][0]);
+	glUniform1i(glGetUniformLocation(program, "orthographic"), camera.projection[3][3] != 0.0f);
+	const GLint color_uniform = glGetUniformLocation(program, "outline_color");
 
-	glUseProgram(shader_programs.outline_program);
-	glUniformMatrix4fv(glGetUniformLocation(shader_programs.outline_program, "view"), 1, GL_FALSE, &camera.view[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(shader_programs.outline_program, "projection"), 1, GL_FALSE, &camera.projection[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(shader_programs.outline_program, "scene_model"), 1, GL_FALSE, &scene_model[0][0]);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDepthMask(GL_FALSE);
-	auto scaled_outline_color = [](const glm::vec4 &color, float alpha_scale) {
-		return glm::vec4(color.r, color.g, color.b, std::clamp(color.a * alpha_scale, 0.0f, 1.0f));
-	};
-
-	glDisable(GL_DEPTH_TEST);
-	for (std::size_t index = 0; index < geometry_repository.outline_vaos.size(); ++index) {
-		if (geometry_repository.outline_counts[index] <= 0) {
-			continue;
-		}
-		const glm::vec4 halo_color = scaled_outline_color(geometry_repository.outline_colors[index], 0.34f);
-		glUniform4fv(glGetUniformLocation(shader_programs.outline_program, "outline_color"), 1, &halo_color[0]);
-		glUniform1f(glGetUniformLocation(shader_programs.outline_program, "outline_width"),
-		            geometry_repository.outline_widths[index] * 1.55f);
-		glBindVertexArray(geometry_repository.outline_vaos[index]);
-		glDrawArrays(GL_TRIANGLES, 0, geometry_repository.outline_counts[index]);
-	}
-
+	// Blend on the visible surfaces of the picked mesh and keep the scene depth intact.
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+	glDepthMask(GL_FALSE);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(0.0f, -1.0f);
+	glEnable(GL_BLEND);
+	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE);
+
 	for (std::size_t index = 0; index < geometry_repository.outline_vaos.size(); ++index) {
 		if (geometry_repository.outline_counts[index] <= 0) {
 			continue;
 		}
-		glUniform4fv(glGetUniformLocation(shader_programs.outline_program,
-		                                  "outline_color"),
-		             1,
-		             &geometry_repository.outline_colors[index][0]);
-		glUniform1f(glGetUniformLocation(shader_programs.outline_program, "outline_width"),
-		            geometry_repository.outline_widths[index]);
+		glUniform4fv(color_uniform, 1, &geometry_repository.outline_colors[index][0]);
 		glBindVertexArray(geometry_repository.outline_vaos[index]);
 		glDrawArrays(GL_TRIANGLES, 0, geometry_repository.outline_counts[index]);
 	}
 
+	glDisable(GL_POLYGON_OFFSET_FILL);
 	glDepthMask(GL_TRUE);
-	glDisable(GL_CULL_FACE);
 	glDepthFunc(GL_LESS);
 }
 
@@ -1710,7 +1834,8 @@ void draw_vertex_array(GLuint program,
 
 void draw_buffer(std::size_t index,
                  const std::vector<PreviewMaterial> &materials,
-                 int mapping_mode_override = -1)
+                 int mapping_mode_override,
+                 const PreviewOpaqueMaterialDraw *visible_ranges)
 {
 	PreviewGeometryRepository &geometry_repository = preview_runtime_environment().geometry_repository;
 	PreviewShaderProgramLibrary &shader_programs = preview_runtime_environment().shader_programs;
@@ -1721,11 +1846,33 @@ void draw_buffer(std::size_t index,
 		return;
 	}
 
-	draw_vertex_array(shader_programs.opaque_program,
-	                 geometry_repository.opaque_vaos[index],
-	                 static_cast<GLsizei>(geometry_repository.opaque_render_counts[index]),
-	                 materials[index],
-	                 mapping_mode_override);
+	if (visible_ranges == nullptr || !visible_ranges->use_ranges) {
+		draw_vertex_array(shader_programs.opaque_program,
+		                 geometry_repository.opaque_vaos[index],
+		                 static_cast<GLsizei>(geometry_repository.opaque_render_counts[index]),
+		                 materials[index],
+		                 mapping_mode_override);
+		return;
+	}
+	if (visible_ranges->groups.empty()) return;
+
+	glUseProgram(shader_programs.opaque_program);
+	apply_material_uniforms(shader_programs.opaque_program, materials[index], mapping_mode_override);
+	glBindVertexArray(geometry_repository.opaque_vaos[index]);
+	for (const auto &group : visible_ranges->groups) {
+		if (group.cull_back) {
+			glFrontFace(GL_CCW);
+			glCullFace(GL_BACK);
+			glEnable(GL_CULL_FACE);
+		}
+		if (group.starts.size() == 1) {
+			glDrawArrays(GL_TRIANGLES, group.starts.front(), group.counts.front());
+		} else {
+			glMultiDrawArrays(GL_TRIANGLES, group.starts.data(), group.counts.data(),
+			                  static_cast<GLsizei>(group.starts.size()));
+		}
+		if (group.cull_back) glDisable(GL_CULL_FACE);
+	}
 }
 
 void set_dynamic_cube_uniforms(GLuint program,
@@ -2298,6 +2445,9 @@ void shutdown_renderer()
 	geometry_repository.opaque_buffers.clear();
 	geometry_repository.opaque_vaos.clear();
 	geometry_repository.opaque_render_counts.clear();
+	geometry_repository.opaque_draw_ranges.clear();
+	geometry_repository.visibility_key.reset();
+	geometry_repository.visible_opaque_ranges.clear();
 	for (std::size_t i = 0; i < geometry_repository.transparent_vaos.size(); ++i) {
 		if (geometry_repository.transparent_buffers[i] != 0) {
 			glDeleteBuffers(1, &geometry_repository.transparent_buffers[i]);
@@ -2323,7 +2473,6 @@ void shutdown_renderer()
 	geometry_repository.outline_vaos.clear();
 	geometry_repository.outline_counts.clear();
 	geometry_repository.outline_colors.clear();
-	geometry_repository.outline_widths.clear();
 
 	if (geometry_repository.base_buffer != 0) {
 		glDeleteBuffers(1, &geometry_repository.base_buffer);
@@ -2392,16 +2541,34 @@ void shutdown_renderer()
 
 void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
                            const std::vector<int> &counts,
-                           std::size_t material_capacity)
+                           std::size_t material_capacity,
+                           const std::vector<std::vector<PreviewOpaqueDrawRange>> &opaque_ranges)
 {
+	preview_runtime_environment().render_targets.shadow_view_projection.reset();
 	PreviewGeometryRepository &geometry_repository = preview_runtime_environment().geometry_repository;
 	ensure_geometry_capacity(material_capacity);
 	geometry_repository.opaque_render_counts.assign(material_capacity, 0);
+	geometry_repository.opaque_draw_ranges = opaque_ranges;
+	geometry_repository.opaque_draw_ranges.resize(material_capacity);
+	geometry_repository.visibility_key.reset();
 
 	for (std::size_t i = 0; i < material_capacity; ++i) {
 		if (i < counts.size()) {
 			geometry_repository.opaque_render_counts[i] = counts[i];
 		}
+		auto &ranges = geometry_repository.opaque_draw_ranges[i];
+		GLint covered_vertices = 0;
+		for (const auto &range : ranges) {
+			if (range.first_vertex != covered_vertices || range.vertex_count <= 0 ||
+			    range.vertex_count % 3 != 0 ||
+			    range.vertex_count > geometry_repository.opaque_render_counts[i] - covered_vertices) {
+				covered_vertices = 0;
+				break;
+			}
+			covered_vertices += range.vertex_count;
+		}
+		if (covered_vertices != geometry_repository.opaque_render_counts[i]) ranges.clear();
+
 		if (i < buffers.size() && !buffers[i].empty()) {
 			glBindVertexArray(geometry_repository.opaque_vaos[i]);
 			glBindBuffer(GL_ARRAY_BUFFER, geometry_repository.opaque_buffers[i]);
@@ -2445,6 +2612,7 @@ void upload_transparent_render_batches(const std::vector<PreviewTransparentBatch
 
 void upload_dynamic_cube_draws(const std::vector<PreviewDynamicCubeDraw> &draws)
 {
+	preview_runtime_environment().render_targets.shadow_view_projection.reset();
 	preview_runtime_environment().geometry_repository.dynamic_cube_draws = draws;
 }
 
@@ -2477,9 +2645,6 @@ void upload_outline_batches(const std::vector<PreviewOutlineBatch> &batches)
 	if (geometry_repository.outline_colors.size() < batches.size()) {
 		geometry_repository.outline_colors.resize(batches.size(), vec4(1.0f));
 	}
-	if (geometry_repository.outline_widths.size() < batches.size()) {
-		geometry_repository.outline_widths.resize(batches.size(), 0.03f);
-	}
 
 	for (std::size_t index = 0; index < geometry_repository.outline_counts.size(); ++index) {
 		geometry_repository.outline_counts[index] = 0;
@@ -2488,7 +2653,6 @@ void upload_outline_batches(const std::vector<PreviewOutlineBatch> &batches)
 		geometry_repository.outline_counts[index] =
 			static_cast<GLsizei>(batches[index].vertices.size() / 8u);
 		geometry_repository.outline_colors[index] = batches[index].color;
-		geometry_repository.outline_widths[index] = batches[index].width;
 		glBindVertexArray(geometry_repository.outline_vaos[index]);
 		glBindBuffer(GL_ARRAY_BUFFER, geometry_repository.outline_buffers[index]);
 		glBufferData(GL_ARRAY_BUFFER,
@@ -2502,6 +2666,115 @@ void upload_outline_batches(const std::vector<PreviewOutlineBatch> &batches)
 	log_gl_errors("upload_outline_batches");
 }
 
+
+bool preview_visibility_flag(const char *name)
+{
+	const char *value = std::getenv(name);
+	return value != nullptr && std::strcmp(value, "1") == 0;
+}
+
+PreviewVisibilityMaterial preview_visibility_material(const PreviewMaterial &material)
+{
+	if (!(material.opacity >= 0.999f)) return PreviewVisibilityMaterial::Skipped;
+
+	const bool solid = material.opacity == 1.0f && material.transmission == 0.0f &&
+	                   material.texture != 0 && material.texture == material.opaque_base_texture &&
+	                   material.alpha_texture != 0 && material.alpha_texture == material.opaque_alpha_texture;
+	return solid ? PreviewVisibilityMaterial::Solid : PreviewVisibilityMaterial::Opaque;
+}
+
+void update_preview_visibility(PreviewGeometryRepository &geometry,
+                               const PreviewCameraMatrices &camera,
+                               PreviewVisibilityKey key)
+{
+	if (geometry.visibility_key == key) return;
+
+	const mat4 model = scale(mat4(1.0f), vec3(key.scene_scale));
+	const PreviewVisibilityBoundsProjection projection(key.projection, key.view, model, key.width, key.height);
+	std::optional<PreviewOcclusionDepth> occlusion;
+	if (key.single_sample && !key.experimental_back_faces) {
+		// Only a few large boxes can profitably seed the coarse depth buffer.
+		int remaining_boxes = 48;
+		const double minimum_box_area = (double(key.width) * key.height) / 256.0;
+		for (std::size_t index = 0; index < key.materials.size() && remaining_boxes > 0; ++index) {
+			if (key.materials[index] != PreviewVisibilityMaterial::Solid) continue;
+			for (const auto &range : geometry.opaque_draw_ranges[index]) {
+				if (!range.axis_aligned_cube || !range.bounds_valid) continue;
+
+				const PreviewVisibilityBounds bounds{range.minimum, range.maximum, true};
+				const auto projected = projection.project(bounds);
+				if (!projected.depth_test_safe || !projected.screen_bounds) continue;
+
+				const auto extent = projected.screen_bounds->maximum - projected.screen_bounds->minimum;
+				if (extent.x * extent.y < minimum_box_area) continue;
+
+				if (!occlusion) occlusion.emplace(key.width, key.height);
+				occlusion->addOpaqueBox(bounds, projection);
+				if (--remaining_boxes == 0) break;
+			}
+		}
+		if (occlusion) occlusion->finish();
+	}
+
+	std::uint64_t submitted_triangles = 0;
+	std::uint64_t frustum_triangles = 0;
+	std::uint64_t subpixel_triangles = 0;
+	std::uint64_t occluded_triangles = 0;
+	std::uint64_t back_face_candidates = 0;
+	const glm::vec3 eye = camera.position / key.scene_scale;
+	geometry.visible_opaque_ranges.assign(key.materials.size(), {});
+	for (std::size_t index = 0; index < key.materials.size(); ++index) {
+		const auto material = key.materials[index];
+		if (material == PreviewVisibilityMaterial::Skipped) continue;
+
+		const auto &ranges = geometry.opaque_draw_ranges[index];
+		if (ranges.empty()) {
+			submitted_triangles += geometry.opaque_render_counts[index] / 3;
+			continue;
+		}
+
+		auto &draw = geometry.visible_opaque_ranges[index];
+		draw.use_ranges = true;
+		for (const auto &range : ranges) {
+			const auto projected = projection.project({range.minimum, range.maximum, range.bounds_valid});
+			const auto triangles = static_cast<std::uint64_t>(range.vertex_count / 3);
+			if (projected.outside_frustum) {
+				frustum_triangles += triangles;
+				continue;
+			}
+			if (key.single_sample && projected.depth_test_safe && projected.screen_bounds) {
+				if (projection.missesSingleSampleGrid(*projected.screen_bounds)) {
+					subpixel_triangles += triangles;
+					continue;
+				}
+				// Keep certified occluders in the original draw order.
+				if (occlusion && !(range.axis_aligned_cube && material == PreviewVisibilityMaterial::Solid) &&
+				    occlusion->hides(*projected.screen_bounds)) {
+					occluded_triangles += triangles;
+					continue;
+				}
+			}
+			const bool cull_back = key.experimental_back_faces && projected.depth_test_safe &&
+			                       material == PreviewVisibilityMaterial::Solid &&
+			                       range.outward_wound_opaque_cube &&
+			                       (glm::any(glm::lessThan(eye, range.minimum)) ||
+			                        glm::any(glm::greaterThan(eye, range.maximum)));
+			if (cull_back) back_face_candidates += triangles;
+			submitted_triangles += triangles;
+			draw.append(range, cull_back);
+		}
+	}
+	geometry.visibility_key = std::move(key);
+	static const bool report_visibility = preview_visibility_flag("PROGEN3D_VISIBILITY_STATS");
+	if (report_visibility) {
+		std::fprintf(stderr, "visibility: opaque_triangles=%llu frustum=%llu subpixel=%llu occluded=%llu back_face_candidates=%llu\n",
+		             static_cast<unsigned long long>(submitted_triangles),
+		             static_cast<unsigned long long>(frustum_triangles),
+		             static_cast<unsigned long long>(subpixel_triangles),
+		             static_cast<unsigned long long>(occluded_triangles),
+		             static_cast<unsigned long long>(back_face_candidates));
+	}
+}
 
 void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
                                const PreviewCameraMatrices &camera,
@@ -2517,11 +2790,8 @@ void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
 	glViewport(0, 0, render_targets.preview_width, render_targets.preview_height);
 
 	// Apply anti-aliasing settings
-	if (settings.anti_aliasing >= 2) { // MSAA modes
+	if (render_targets.preview_multisampled && settings.anti_aliasing >= 2) {
 		glEnable(GL_MULTISAMPLE);
-	} else if (settings.anti_aliasing == 1) { // FXAA mode
-		glDisable(GL_MULTISAMPLE);
-		// FXAA would be applied in post-processing
 	} else {
 		glDisable(GL_MULTISAMPLE);
 	}
@@ -2578,9 +2848,27 @@ void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
 
 	glDepthMask(GL_TRUE);
 	glDisable(GL_BLEND);
-	for (std::size_t i = 0; i < geometry_repository.opaque_render_counts.size() && i < materials.size(); ++i) {
+	const std::size_t material_count = std::min(geometry_repository.opaque_render_counts.size(), materials.size());
+	static const bool disable_culling = preview_visibility_flag("PROGEN3D_DISABLE_VISIBILITY_CULLING");
+	static const bool experimental_back_faces = preview_visibility_flag("PROGEN3D_EXPERIMENTAL_BACKFACE_CULLING");
+	const bool use_visibility = !disable_culling && settings.enable_visibility_culling &&
+	                            std::isfinite(scale_global) && scale_global > 0.0f &&
+	                            material_count != 0;
+	if (use_visibility) {
+		PreviewVisibilityKey key{camera.view, camera.projection, scale_global,
+		                         render_targets.preview_width, render_targets.preview_height,
+		                         !render_targets.preview_multisampled, experimental_back_faces, {}};
+		key.materials.reserve(material_count);
+		for (std::size_t index = 0; index < material_count; ++index) {
+			key.materials.push_back(preview_visibility_material(materials[index]));
+		}
+		update_preview_visibility(geometry_repository, camera, std::move(key));
+	}
+
+	for (std::size_t i = 0; i < material_count; ++i) {
 		if (materials[i].opacity >= 0.999f) {
-			draw_buffer(i, materials, settings.mapping_mode_override);
+			draw_buffer(i, materials, settings.mapping_mode_override,
+			            use_visibility ? &geometry_repository.visible_opaque_ranges[i] : nullptr);
 		}
 	}
 	draw_dynamic_cube_opaque(settings.simulation_alpha, materials, settings.mapping_mode_override);
@@ -2601,18 +2889,6 @@ void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glUseProgram(0);
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, render_targets.preview_fbo);
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, render_targets.preview_resolve_fbo);
-	glBlitFramebuffer(0,
-	                  0,
-	                  render_targets.preview_width,
-	                  render_targets.preview_height,
-	                  0,
-	                  0,
-	                  render_targets.preview_width,
-	                  render_targets.preview_height,
-	                  GL_COLOR_BUFFER_BIT,
-	                  GL_NEAREST);
 
 	// Clean up cubemap binding after use
 	if (settings.cubemap_enabled && settings.cubemap_texture != 0) {
@@ -2625,11 +2901,17 @@ void PreviewScenePass::execute(PreviewRenderRuntimeEnvironment &runtime,
 void PreviewResolvePass::execute(PreviewRenderRuntimeEnvironment &runtime) const
 {
 	PreviewRenderTargetRepository &render_targets = runtime.render_targets;
+	if (render_targets.preview_multisampled) {
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, render_targets.preview_fbo);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, render_targets.preview_resolve_fbo);
+		const int width = render_targets.preview_width;
+		const int height = render_targets.preview_height;
+		glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glBindTexture(GL_TEXTURE_2D, render_targets.preview_color);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	if (render_targets.preview_mipmaps) {
+		glGenerateTextureMipmap(render_targets.preview_color);
+	}
 }
 
 void render_scene_to_preview(const PreviewFrameRequest &frame_request)
@@ -2637,11 +2919,22 @@ void render_scene_to_preview(const PreviewFrameRequest &frame_request)
 	PreviewRenderRuntimeEnvironment &runtime = preview_runtime_environment();
 	PreviewShaderProgramLibrary &shader_programs = runtime.shader_programs;
 	PreviewRenderTargetRepository &render_targets = runtime.render_targets;
+	PreviewRenderSettings settings = frame_request.settings;
+	const bool basic = settings.mode == PreviewRenderMode::Basic;
+	if (basic) {
+		settings.shadows = false;
+		settings.generate_mipmaps = false;
+		settings.cubemap_enabled = false;
+		settings.bloom_enabled = false;
+		settings.lens_flare = false;
+		settings.ambient_occlusion = false;
+	}
 	if (frame_request.materials == nullptr ||
 	    frame_request.lights == nullptr ||
 	    shader_programs.opaque_program == 0 ||
-	    !ensure_preview_target(frame_request.camera.width, frame_request.camera.height) ||
-	    !ensure_shadow_target()) {
+	    !ensure_preview_target(frame_request.camera.width, frame_request.camera.height,
+	                           settings.generate_mipmaps, !basic) ||
+	    (settings.shadows && !ensure_shadow_target())) {
 		return;
 	}
 
@@ -2655,17 +2948,20 @@ void render_scene_to_preview(const PreviewFrameRequest &frame_request)
 	static const PreviewScenePass preview_scene_pass;
 	static const PreviewResolvePass preview_resolve_pass;
 
-	if (frame_request.settings.shadows) {
-		shadow_map_pass.execute(runtime,
-		                        lighting_frame,
-		                        frame_request.camera.scale_global,
-		                        frame_request.settings.simulation_alpha,
-		                        *frame_request.materials);
+	if (settings.shadows && lighting_frame.primary_shadow_available) {
+		const auto &projection = lighting_frame.primary_shadow_view_projection;
+		if (!settings.reuse_shadow_map || render_targets.shadow_view_projection != projection) {
+			shadow_map_pass.execute(runtime, lighting_frame, frame_request.camera.scale_global,
+			                        settings.simulation_alpha, *frame_request.materials);
+			render_targets.shadow_view_projection = projection;
+		}
+	} else {
+		render_targets.shadow_view_projection.reset();
 	}
 	preview_scene_pass.execute(runtime,
 	                           camera,
 	                           lighting_frame,
-	                           frame_request.settings,
+	                           settings,
 	                           frame_request.camera.scale_global,
 	                           *frame_request.materials);
 	preview_resolve_pass.execute(runtime);
@@ -3172,14 +3468,52 @@ public:
 
 	void uploadOpaqueBatches(const std::vector<std::vector<GLfloat>> &buffers,
 	                         const std::vector<int> &counts,
-	                         std::size_t material_capacity) override
+	                         std::size_t material_capacity,
+	                         const std::vector<std::vector<PreviewOpaqueDrawRange>> &opaque_ranges) override
 	{
-		imgui_render_internal::upload_render_buffers(buffers, counts, material_capacity);
+		imgui_render_internal::upload_render_buffers(buffers, counts, material_capacity, opaque_ranges);
 	}
 
 	void uploadTransparentBatches(const std::vector<PreviewTransparentBatch> &batches) override
 	{
 		imgui_render_internal::upload_transparent_render_batches(batches);
+	}
+
+	void updateOpaqueBatch(std::size_t material_index, std::size_t float_offset,
+	                       const std::vector<GLfloat> &vertices,
+	                       const PreviewOpaqueDrawRange &range) override
+	{
+		auto &runtime = imgui_render_internal::preview_runtime_environment();
+		runtime.render_targets.shadow_view_projection.reset();
+		auto &geometry = runtime.geometry_repository;
+		geometry.visibility_key.reset();
+		auto &ranges = geometry.opaque_draw_ranges.at(material_index);
+		if (!ranges.empty()) {
+			const auto match = std::lower_bound(ranges.begin(), ranges.end(), float_offset / 8u,
+				[](const PreviewOpaqueDrawRange &current, std::size_t first_vertex) {
+					return static_cast<std::size_t>(current.first_vertex) < first_vertex;
+				});
+			if (match != ranges.end() && float_offset % 8u == 0 && vertices.size() % 8u == 0 &&
+			    static_cast<std::size_t>(match->first_vertex) == float_offset / 8u &&
+			    static_cast<std::size_t>(match->vertex_count) == vertices.size() / 8u &&
+			    match->first_vertex == range.first_vertex && match->vertex_count == range.vertex_count) {
+				*match = range;
+			} else {
+				ranges.clear();
+			}
+		}
+		glNamedBufferSubData(runtime.geometry_repository.opaque_buffers.at(material_index),
+		                     static_cast<GLintptr>(float_offset * sizeof(GLfloat)),
+		                     static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), vertices.data());
+	}
+
+	void updateTransparentBatch(std::size_t batch_index, const glm::vec3 &center,
+	                            const std::vector<GLfloat> &vertices) override
+	{
+		auto &geometry = imgui_render_internal::preview_runtime_environment().geometry_repository;
+		geometry.transparent_centers.at(batch_index) = center;
+		glNamedBufferSubData(geometry.transparent_buffers.at(batch_index), 0,
+		                     static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), vertices.data());
 	}
 
 	void uploadDynamicCubeDraws(const std::vector<PreviewDynamicCubeDraw> &draws) override
@@ -3253,9 +3587,10 @@ void shutdown_renderer()
 
 void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
                            const std::vector<int> &counts,
-                           std::size_t material_capacity)
+                           std::size_t material_capacity,
+                           const std::vector<std::vector<PreviewOpaqueDrawRange>> &opaque_ranges)
 {
-	preview_renderer().uploadOpaqueBatches(buffers, counts, material_capacity);
+	preview_renderer().uploadOpaqueBatches(buffers, counts, material_capacity, opaque_ranges);
 }
 
 void upload_transparent_render_batches(const std::vector<PreviewTransparentBatch> &batches)

@@ -1,8 +1,11 @@
 #pragma once
 
+#include "editor/model/PreviewRenderMode.h"
+
 class RenderConfiguration
 {
 public:
+	PreviewRenderMode mode = PreviewRenderMode::Full;
 	bool lens_flare_enabled = false;
 	bool shadows_enabled = true;
 	int anti_aliasing_level = 0;

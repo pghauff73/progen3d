@@ -93,27 +93,44 @@ std::ofstream open_layer(const fs::path &path)
 	return output;
 }
 
-void write_checksums(const PendingFrameDirectory &pending, const Json::Value &files)
+class FrameArtifactWriter
 {
-	Json::Value record;
-	record["schema_version"] = 1;
-	auto &hashes = record["sha256"];
-	const auto add = [&](const std::string &name) {
-		const auto path = pending.stage(name.c_str());
-		render_files::flush_file(path);
-		hashes[name] = render_files::sha256_file(path);
-	};
-	add(manifest_name);
-	for (const auto &file : files) add(file.asString());
+public:
+	FrameArtifactWriter(const PendingFrameDirectory &pending, bool checksummed)
+		: pending_(pending), checksummed_(checksummed) {}
 
-	const auto path = pending.stage(checksums_name);
-	auto output = open_layer(path);
-	Json::StreamWriterBuilder writer;
-	writer["indentation"] = "  ";
-	output << Json::writeString(writer, record) << '\n';
-	output.close();
-	render_files::flush_file(path);
-}
+	void write(const char *name, const std::function<void(std::ostream &)> &encode)
+	{
+		const auto path = pending_.stage(name);
+		if (checksummed_) {
+			hashes_[name] = render_files::write_checksummed_file(path, encode);
+		} else {
+			auto output = open_layer(path);
+			encode(output);
+			output.close();
+		}
+	}
+
+	void finishChecksums()
+	{
+		if (!checksummed_) return;
+		Json::Value record;
+		record["schema_version"] = 1;
+		record["sha256"] = std::move(hashes_);
+		const auto path = pending_.stage(checksums_name);
+		auto output = open_layer(path);
+		Json::StreamWriterBuilder writer;
+		writer["indentation"] = "  ";
+		output << Json::writeString(writer, record) << '\n';
+		output.close();
+		render_files::flush_file(path);
+	}
+
+private:
+	const PendingFrameDirectory &pending_;
+	bool checksummed_;
+	Json::Value hashes_{Json::objectValue};
+};
 
 std::string pfm_header(int width, int height, int channels)
 {
@@ -121,23 +138,24 @@ std::string pfm_header(int width, int height, int channels)
 	return format + std::to_string(width) + ' ' + std::to_string(height) + "\n-1.0\n";
 }
 
-void write_float_image(const fs::path &path, const std::vector<float> &pixels, int width, int height, int channels)
+void write_float_image(FrameArtifactWriter &artifacts, const char *name, const std::vector<float> &pixels,
+                       int width, int height, int channels)
 {
 	static_assert(sizeof(float) == 4 && std::numeric_limits<float>::is_iec559,
 	              "PFM requires 32-bit IEEE floats.");
 	const auto row_size = static_cast<std::size_t>(width) * channels;
 	if (pixels.size() != row_size * height) {
-		throw std::runtime_error("Float layer dimensions do not match the frame: " + path.u8string());
+		throw std::runtime_error(std::string("Float layer dimensions do not match the frame: ") + name);
 	}
-	auto output = open_layer(path);
-	// PFM uses a negative scale for little-endian data and rows ordered bottom to top.
-	output << pfm_header(width, height, channels);
-	for (int row = height - 1; row >= 0; --row) {
-		const auto *first_pixel = pixels.data() + static_cast<std::size_t>(row) * row_size;
-		output.write(reinterpret_cast<const char *>(first_pixel),
-		             static_cast<std::streamsize>(row_size * sizeof(float)));
-	}
-	output.close();
+	artifacts.write(name, [&](std::ostream &output) {
+		// PFM uses a negative scale for little-endian data and rows ordered bottom to top.
+		output << pfm_header(width, height, channels);
+		for (int row = height - 1; row >= 0; --row) {
+			const auto *first_pixel = pixels.data() + static_cast<std::size_t>(row) * row_size;
+			output.write(reinterpret_cast<const char *>(first_pixel),
+			             static_cast<std::streamsize>(row_size * sizeof(float)));
+		}
+	});
 }
 
 bool has_emission_dimensions(const fs::path &path, int width, int height)
@@ -155,7 +173,7 @@ bool is_effect_record(const Json::Value &records)
 	return records.isObject() || records.isArray();
 }
 
-void write_overlay(const PendingFrameDirectory &pending, const RenderFrameOverlay &overlay, int width, int height)
+void write_overlay(FrameArtifactWriter &artifacts, const RenderFrameOverlay &overlay, int width, int height)
 {
 	if (!is_effect_record(overlay.records)) {
 		throw std::runtime_error("An emission layer requires a JSON object or array of effect records.");
@@ -164,32 +182,31 @@ void write_overlay(const PendingFrameDirectory &pending, const RenderFrameOverla
 	                 [](float channel) { return std::isfinite(channel); })) {
 		throw std::runtime_error("Emission layer contains a non-finite channel.");
 	}
-	write_float_image(pending.stage(frame_emission_name), overlay.emission_rgb, width, height, 3);
-	auto output = open_layer(pending.stage(frame_effects_name));
-	Json::StreamWriterBuilder writer;
-	writer["indentation"] = "  ";
-	output << Json::writeString(writer, overlay.records) << '\n';
-	output.close();
+	write_float_image(artifacts, frame_emission_name, overlay.emission_rgb, width, height, 3);
+	artifacts.write(frame_effects_name, [&](std::ostream &output) {
+		Json::StreamWriterBuilder writer;
+		writer["indentation"] = "  ";
+		output << Json::writeString(writer, overlay.records) << '\n';
+	});
 }
 
-void write_coverage(const fs::path &path, const std::vector<std::uint8_t> &coverage, int width, int height)
+void write_coverage(FrameArtifactWriter &artifacts, const std::vector<std::uint8_t> &coverage, int width, int height)
 {
-	auto output = open_layer(path);
-	output << "P5\n" << width << ' ' << height << "\n255\n";
-	output.write(reinterpret_cast<const char *>(coverage.data()), static_cast<std::streamsize>(coverage.size()));
-	output.close();
+	artifacts.write(coverage_name, [&](std::ostream &output) {
+		output << "P5\n" << width << ' ' << height << "\n255\n";
+		output.write(reinterpret_cast<const char *>(coverage.data()), static_cast<std::streamsize>(coverage.size()));
+	});
 }
 
-std::uint64_t write_preview(const fs::path &path, const PreviewImage &image)
+void write_preview(FrameArtifactWriter &artifacts, const char *name, const PreviewImage &image)
 {
-	const auto evidence = PreviewFramebufferCaptureService().writePreview(image, path);
-	if (!evidence.succeeded()) {
-		throw std::runtime_error(evidence.message());
-	}
-	return evidence.pixelHash();
+	artifacts.write(name, [&](std::ostream &output) {
+		PreviewFramebufferCaptureService::writePpm(image, output);
+	});
 }
 
-Json::Value write_object_masks(const fs::path &path, const RenderFrameLayers &layers, int width, int height)
+Json::Value write_object_masks(FrameArtifactWriter &artifacts, const RenderFrameLayers &layers,
+                               int width, int height)
 {
 	const auto &ids = layers.geometry.object_ids;
 	std::vector<std::uint8_t> pixels(ids.size() * 3);
@@ -201,7 +218,7 @@ Json::Value write_object_masks(const fs::path &path, const RenderFrameLayers &la
 		pixels[index * 3 + 1] = static_cast<std::uint8_t>((label >> 8) & 255u);
 		pixels[index * 3 + 2] = static_cast<std::uint8_t>(label & 255u);
 	}
-	write_preview(path, PreviewImage(width, height, std::move(pixels)));
+	write_preview(artifacts, objects_name, PreviewImage(width, height, std::move(pixels)));
 	Json::Value legend(Json::arrayValue);
 	for (std::size_t index = 0; index < layers.labels.size(); ++index) {
 		const auto &label = layers.labels[index];
@@ -230,7 +247,10 @@ PublishedFrame write_frame_directory(const fs::path &root, const fs::path &desti
 	const int width = frame.color.width();
 	const int height = frame.color.height();
 	PendingFrameDirectory pending(root, destination);
-	const auto hash = write_preview(pending.stage(preview_name), frame.color);
+	const bool checksummed = !destination.empty() || frame.overlay.has_value();
+	FrameArtifactWriter artifacts(pending, checksummed);
+	write_preview(artifacts, preview_name, frame.color);
+	const auto hash = PreviewFramebufferCaptureService::pixelHash(frame.color);
 	manifest["schema_version"] = 1;
 	manifest["width"] = width;
 	manifest["height"] = height;
@@ -244,25 +264,25 @@ PublishedFrame write_frame_directory(const fs::path &root, const fs::path &desti
 	add_file("preview", preview_name);
 	if (frame.layers) {
 		const auto &layers = *frame.layers;
-		write_preview(pending.stage(sharp_name), layers.sharp_color);
-		write_float_image(pending.stage(depth_name), layers.geometry.linear_depth, width, height, 1);
-		write_coverage(pending.stage(coverage_name), layers.foreground_coverage, width, height);
-		manifest["object_ids"] = write_object_masks(pending.stage(objects_name), layers, width, height);
+		write_preview(artifacts, sharp_name, layers.sharp_color);
+		write_float_image(artifacts, depth_name, layers.geometry.linear_depth, width, height, 1);
+		write_coverage(artifacts, layers.foreground_coverage, width, height);
+		manifest["object_ids"] = write_object_masks(artifacts, layers, width, height);
 		for (const auto &artifact : layer_artifacts) add_file(artifact.key, artifact.name);
 	}
 	if (frame.overlay) {
-		write_overlay(pending, *frame.overlay, width, height);
+		write_overlay(artifacts, *frame.overlay, width, height);
 		for (const auto &artifact : overlay_artifacts) add_file(artifact.key, artifact.name);
 	}
 	paths["manifest"] = pending.output(manifest_name).u8string();
 
-	auto output = open_layer(pending.stage(manifest_name));
-	Json::StreamWriterBuilder writer;
-	writer["indentation"] = "  ";
-	output << Json::writeString(writer, manifest) << '\n';
-	output.close();
-	if (!destination.empty() || frame.overlay) {
-		write_checksums(pending, manifest["files"]);
+	artifacts.write(manifest_name, [&](std::ostream &output) {
+		Json::StreamWriterBuilder writer;
+		writer["indentation"] = "  ";
+		output << Json::writeString(writer, manifest) << '\n';
+	});
+	if (checksummed) {
+		artifacts.finishChecksums();
 		paths["checksums"] = pending.output(checksums_name).u8string();
 	}
 	pending.publish();

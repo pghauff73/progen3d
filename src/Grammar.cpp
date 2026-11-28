@@ -3997,24 +3997,12 @@ void GrammarActionToken::performAction(SceneGenerationContext *context){
 		context->setPendingRotationalVelocity(rotational_velocity);
 	}
 	else if(token_name=="M"){
-		float mass=1.0f;
-		if(var_names[0]!=""){
-			mass=MathF2(var_names[0]);
-		}
-		else if(!arguments.empty()){
-			mass=arguments[0];
-		}
-		context->setPendingMass(mass);
+		context->setPendingMass(arguments[0]);
 	}
 	else if(token_name=="P"){
-		float density=0.0f;
-		if(var_names[0]!=""){
-			density=MathF2(var_names[0]);
-		}
-		else if(!arguments.empty()){
-			density=arguments[0];
-		}
-		context->setPendingDensity(density);
+		const std::optional<float> thickness = arguments.size() == 2
+			? std::optional<float>(arguments[1]) : std::nullopt;
+		context->setPendingDensity(arguments[0], thickness);
 	}
 	else if(token_name=="G"){
 		float magnitude=0.0f;
@@ -4464,17 +4452,18 @@ static void parse_tokens_into(Grammar *grammar,
 				throw(1);
 			}
 			++(*index);
-			const std::string argument_expression =
-				parse_expression_argument(raw_tokens, index, ")");
-			if(!isnumber(argument_expression)){
-				token->var_names[0]=argument_expression;
-				value=0.0f;
+			const std::size_t max_arguments = token_str == "P" ? 2 : 1;
+			for (std::size_t argument = 0; argument < max_arguments; ++argument) {
+				const std::string expression = parse_expression_argument(raw_tokens, index, ")");
+				const double literal = atof(expression.c_str());
+				if (isnumber(expression) && value_fits_finite_float(literal)) {
+					token->addArgument(static_cast<float>(literal));
+				} else {
+					token->var_names[argument] = expression;
+					token->addArgument(0.0f);
+				}
+				if (*index >= raw_tokens.size() || raw_tokens[*index] == ")") break;
 			}
-			else {
-				token->var_names[0]="";
-				value=atof(argument_expression.c_str());
-			}
-			token->addArgument(value);
 			if(*index >= raw_tokens.size() || raw_tokens[*index] != ")"){
 				throw(1);
 			}
@@ -5492,9 +5481,29 @@ void GrammarDocument::update_token(Token *check_token){
 				std::clamp(check_token->arguments[0], lower_bound, upper_bound);
 		}
 	}
-	else if(check_token->token_name=="I" ||
-	        check_token->token_name=="M" ||
-	        check_token->token_name=="P"){
+	else if (check_token->token_name == "M") {
+		if (!resolve_argument(0, 0, "primitive mass")) return;
+		const float mass = check_token->arguments[0];
+		if (!std::isfinite(mass) || mass < 0.0f) {
+			abort_expansion(this, check_token, "Primitive mass must be finite and nonnegative.");
+		}
+	}
+	else if (check_token->token_name == "P") {
+		if (!resolve_argument(0, 0, "material density")) return;
+		const float density = check_token->arguments[0];
+		if (!std::isfinite(density) || density < 0.0f) {
+			abort_expansion(this, check_token, "Material density must be finite and nonnegative.");
+			return;
+		}
+		if (check_token->arguments.size() == 2) {
+			if (!resolve_argument(1, 1, "shell thickness")) return;
+			const float thickness = check_token->arguments[1];
+			if (!std::isfinite(thickness) || thickness <= 0.0f) {
+				abort_expansion(this, check_token, "Shell thickness must be finite and positive.");
+			}
+		}
+	}
+	else if(check_token->token_name=="I"){
 		if(check_token->token_name=="I" && check_token->shape_descriptor_syntax){
 			ShapeSpecificationEvaluator specification_evaluator;
 			const ShapeSpecificationEvaluationResult result =

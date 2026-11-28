@@ -11,6 +11,8 @@
 #include "lighting/model/PreviewLightCollection.h"
 #include <glm/glm.hpp>
 
+#include "editor/model/PreviewRenderMode.h"
+
 class PreviewRenderData {
 public:
 	virtual ~PreviewRenderData() = default;
@@ -22,6 +24,8 @@ public:
 	GLuint height_texture = 0;
 	GLuint emissive_texture = 0;
 	GLuint alpha_texture = 0;
+	GLuint opaque_base_texture = 0;
+	GLuint opaque_alpha_texture = 0;
 	GLuint glow_texture = 0;
 	GLuint normal_texture = 0;
 	GLuint roughness_texture = 0;
@@ -108,7 +112,16 @@ public:
 class PreviewOutlineBatch : public PreviewVertexBatch {
 public:
 	glm::vec4 color{1.0f};
-	float width = 0.03f;
+};
+
+struct PreviewOpaqueDrawRange {
+	GLint first_vertex = 0;
+	GLsizei vertex_count = 0;
+	glm::vec3 minimum{0.0f};
+	glm::vec3 maximum{0.0f};
+	bool bounds_valid = false;
+	bool outward_wound_opaque_cube = false;
+	bool axis_aligned_cube = false;
 };
 
 enum class PreviewDynamicCubeMode : int {
@@ -162,12 +175,17 @@ PreviewCameraMatrices preview_camera_matrices(const PreviewCameraState &camera);
 
 class PreviewRenderSettings : public PreviewRenderData {
 public:
+	PreviewRenderMode mode = PreviewRenderMode::Full;
 	float simulation_alpha = 1.0f;
 	float preview_time = 0.0f;
 	PreviewTextureDebugView debug_view = PreviewTextureDebugView::Shaded;
 	int mapping_mode_override = -1;
 	bool lens_flare = false;
 	bool shadows = true;
+	// A follow-up pass may reuse shadows when only the camera clipping changes.
+	bool reuse_shadow_map = false;
+	bool enable_visibility_culling = true;
+	bool generate_mipmaps = true;
 	bool show_grid = true;
 	int anti_aliasing = 0;
 	bool cubemap_enabled = false;
@@ -195,8 +213,14 @@ public:
 	virtual void shutdown() = 0;
 	virtual void uploadOpaqueBatches(const std::vector<std::vector<GLfloat>> &buffers,
 	                                 const std::vector<int> &counts,
-	                                 std::size_t material_capacity) = 0;
+	                                 std::size_t material_capacity,
+	                                 const std::vector<std::vector<PreviewOpaqueDrawRange>> &opaque_ranges = {}) = 0;
 	virtual void uploadTransparentBatches(const std::vector<PreviewTransparentBatch> &batches) = 0;
+	virtual void updateOpaqueBatch(std::size_t material_index, std::size_t float_offset,
+	                               const std::vector<GLfloat> &vertices,
+	                               const PreviewOpaqueDrawRange &range = {}) = 0;
+	virtual void updateTransparentBatch(std::size_t batch_index, const glm::vec3 &center,
+	                                    const std::vector<GLfloat> &vertices) = 0;
 	virtual void uploadDynamicCubeDraws(const std::vector<PreviewDynamicCubeDraw> &draws) = 0;
 	virtual void uploadOverlayLines(const std::vector<PreviewOverlayVertex> &vertices) = 0;
 	virtual void uploadOutlineBatches(const std::vector<PreviewOutlineBatch> &batches) = 0;
@@ -215,7 +239,8 @@ bool initialize_renderer();
 void shutdown_renderer();
 void upload_render_buffers(const std::vector<std::vector<GLfloat>> &buffers,
                            const std::vector<int> &counts,
-                           std::size_t material_capacity);
+                           std::size_t material_capacity,
+                           const std::vector<std::vector<PreviewOpaqueDrawRange>> &opaque_ranges = {});
 void upload_transparent_render_batches(const std::vector<PreviewTransparentBatch> &batches);
 void upload_dynamic_cube_draws(const std::vector<PreviewDynamicCubeDraw> &draws);
 void upload_overlay_lines(const std::vector<PreviewOverlayVertex> &vertices);

@@ -1,4 +1,5 @@
 #include "editor/service/PreviewMaterialLibrary.h"
+#include "editor/service/RenderRowExecutor.h"
 
 #include <algorithm>
 #include <cctype>
@@ -647,13 +648,15 @@ GLuint upload_rgba_texture(const unsigned char *pixels,
 	return texture;
 }
 
-PreviewMaterial generate_procedural_material(const std::string &material_name, int resolution)
+PreviewMaterial generate_procedural_material(const std::string &material_name, int resolution,
+                                             RenderRowExecutor *rows, PreviewRenderMode mode)
 {
 	const ParsedMaterialSpec spec = parse_material_name(material_name);
 	const int texture_size = std::clamp(resolution, 256, 2048);
+	const bool full_material = mode == PreviewRenderMode::Full;
 	std::vector<unsigned char> pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-	std::vector<unsigned char> height_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
-	std::vector<unsigned char> emissive_pixels(static_cast<std::size_t>(texture_size * texture_size * 4), 255);
+	std::vector<unsigned char> height_pixels(full_material ? pixels.size() : 0, 255);
+	std::vector<unsigned char> emissive_pixels(full_material ? pixels.size() : 0, 255);
 	const MaterialSwatch primary = spec.palette.front();
 	const MaterialSwatch secondary = spec.palette.size() > 1
 	                                     ? spec.palette[1]
@@ -687,7 +690,7 @@ PreviewMaterial generate_procedural_material(const std::string &material_name, i
 		return glm::smoothstep(0.0f, feather, x) * (1.0f - glm::smoothstep(inner, width, x));
 	};
 
-	for (int y = 0; y < texture_size; ++y) {
+	const auto generate_row = [&](int y) {
 		for (int x = 0; x < texture_size; ++x) {
 			const float u = static_cast<float>(x) / static_cast<float>(texture_size - 1);
 			const float v = static_cast<float>(y) / static_cast<float>(texture_size - 1);
@@ -905,9 +908,19 @@ PreviewMaterial generate_procedural_material(const std::string &material_name, i
 
 			const std::size_t pixel_index = static_cast<std::size_t>((y * texture_size + x) * 4);
 			write_swatch_pixel(&pixels, pixel_index, color);
-			write_scalar_pixel(&height_pixels, pixel_index, height_value);
-			write_swatch_pixel(&emissive_pixels, pixel_index, emissive);
+			if (full_material) {
+				write_scalar_pixel(&height_pixels, pixel_index, height_value);
+				write_swatch_pixel(&emissive_pixels, pixel_index, emissive);
+			}
 		}
+	};
+	const auto generate_rows = [&](int first_row, int end_row) {
+		for (int row = first_row; row < end_row; ++row) generate_row(row);
+	};
+	if (rows) {
+		rows->run(texture_size, texture_size, generate_rows);
+	} else {
+		generate_rows(0, texture_size);
 	}
 
 	PreviewMaterial material;
@@ -932,8 +945,11 @@ PreviewMaterial generate_procedural_material(const std::string &material_name, i
 		default_mapping_scale = 0.88f;
 	}
 	material.texture = upload_rgba_texture(pixels.data(), texture_size, texture_size, true);
-	material.height_texture = upload_rgba_texture(height_pixels.data(), texture_size, texture_size);
-	material.emissive_texture = upload_rgba_texture(emissive_pixels.data(), texture_size, texture_size, true);
+	material.opaque_base_texture = material.texture;
+	if (full_material) {
+		material.height_texture = upload_rgba_texture(height_pixels.data(), texture_size, texture_size);
+		material.emissive_texture = upload_rgba_texture(emissive_pixels.data(), texture_size, texture_size, true);
+	}
 	material.name = spec.name;
 	material.family = spec.family;
 	material.description = spec.description;
@@ -1002,7 +1018,7 @@ PreviewMaterial generate_procedural_material(const std::string &material_name, i
 		glm::vec3(secondary.r, secondary.g, secondary.b),
 		glm::vec3(accent.r, accent.g, accent.b)};
 	// Auto-generate any missing texture maps
-	auto_generate_missing_texture_maps(&material);
+	auto_generate_missing_texture_maps(&material, mode);
 
 	return material;
 }
@@ -1140,7 +1156,7 @@ GLuint generate_default_ao_map(int texture_size = 64)
 }
 
 // Auto-generate all missing texture maps for a material
-void auto_generate_missing_texture_maps(PreviewMaterial *material)
+void auto_generate_missing_texture_maps(PreviewMaterial *material, PreviewRenderMode mode)
 {
 	if (material == nullptr) {
 		return;
@@ -1151,7 +1167,9 @@ void auto_generate_missing_texture_maps(PreviewMaterial *material)
 	// Generate alpha map if missing
 	if (material->alpha_texture == 0) {
 		material->alpha_texture = generate_default_alpha_map(auxiliary_texture_resolution);
+		material->opaque_alpha_texture = material->alpha_texture;
 	}
+	if (mode == PreviewRenderMode::Basic) return;
 
 	// Generate glow map if missing
 	if (material->glow_texture == 0) {

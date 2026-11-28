@@ -129,6 +129,14 @@ GLuint attach_layer(GLuint framebuffer, GLenum attachment, GLenum format, int wi
 	return buffer;
 }
 
+void append_layer_vertices(std::vector<LayerVertex> &layers, const std::vector<GLfloat> &vertices,
+                           std::uint32_t object_id)
+{
+	for (std::size_t vertex = 0; vertex < vertices.size(); vertex += 8) {
+		layers.push_back({vertices[vertex], vertices[vertex + 1], vertices[vertex + 2], object_id});
+	}
+}
+
 template <typename Pixel>
 void flip_rows(std::vector<Pixel> &pixels, int width, int height)
 {
@@ -153,7 +161,8 @@ SceneLayerCapture::~SceneLayerCapture()
 }
 
 void SceneLayerCapture::initialize(const SceneGenerationContext &scene,
-                                   const std::vector<PreviewMaterial> &materials, int width, int height)
+                                   const std::vector<PreviewMaterial> &materials, int width, int height,
+                                   bool track_movable)
 {
 	if (program_ != 0 && (width != width_ || height != height_)) {
 		throw std::runtime_error("Layer capture dimensions changed after initialization.");
@@ -165,8 +174,12 @@ void SceneLayerCapture::initialize(const SceneGenerationContext &scene,
 	const auto cube_vertices = build_base_vertex_data();
 	std::vector<LayerVertex> layer_vertices;
 	std::vector<GLfloat> instance_vertices;
+	removed_instances_.clear();
+	movable_ranges_.clear();
+	if (track_movable) removed_instances_.reserve(scene.primitive_instances.size());
 	for (std::size_t index = 0; index < scene.primitive_instances.size(); ++index) {
 		const PrimitiveInstance &instance = scene.primitive_instances[index];
+		if (track_movable) removed_instances_.push_back(instance.removed);
 		if (instance.removed || instance.material_index < 0 ||
 		    static_cast<std::size_t>(instance.material_index) >= materials.size() ||
 		    materials[instance.material_index].opacity < 0.02f) {
@@ -182,10 +195,10 @@ void SceneLayerCapture::initialize(const SceneGenerationContext &scene,
 			id = static_cast<std::uint32_t>(labels_.size());
 			labels_.push_back({"", index});
 		}
-		for (std::size_t vertex = 0; vertex < instance_vertices.size(); vertex += 8) {
-			layer_vertices.push_back({instance_vertices[vertex], instance_vertices[vertex + 1],
-			                          instance_vertices[vertex + 2], id});
+		if (track_movable && !instance.immovable) {
+			movable_ranges_.push_back({index, layer_vertices.size(), instance_vertices.size() / 8, id});
 		}
+		append_layer_vertices(layer_vertices, instance_vertices, id);
 	}
 	if (layer_vertices.size() > static_cast<std::size_t>(std::numeric_limits<GLsizei>::max())) {
 		throw std::runtime_error("The scene has too many vertices for the layer pass.");
@@ -219,6 +232,33 @@ void SceneLayerCapture::initialize(const SceneGenerationContext &scene,
 	if (glGetError() != GL_NO_ERROR) {
 		throw std::runtime_error("Cannot upload geometry for depth and object ID capture.");
 	}
+	has_physics_layout_ = track_movable;
+}
+
+bool SceneLayerCapture::updatePhysics(const SceneGenerationContext &scene)
+{
+	const auto &instances = scene.primitive_instances;
+	if (!has_physics_layout_ || instances.size() != removed_instances_.size()) return false;
+	for (std::size_t index = 0; index < instances.size(); ++index) {
+		if (instances[index].removed != removed_instances_[index]) return false;
+	}
+	const auto cube_vertices = build_base_vertex_data();
+	std::vector<GLfloat> instance_vertices;
+	std::vector<LayerVertex> layer_vertices;
+	for (const MovableVertexRange &range : movable_ranges_) {
+		instance_vertices.clear();
+		scene.buildInstanceBuffer(instances[range.instance_index], cube_vertices.data(), &instance_vertices);
+		if (instance_vertices.size() != range.vertex_count * 8) return false;
+		layer_vertices.clear();
+		append_layer_vertices(layer_vertices, instance_vertices, range.object_id);
+		glNamedBufferSubData(vertex_buffer_, static_cast<GLintptr>(range.vertex_offset * sizeof(LayerVertex)),
+		                     static_cast<GLsizeiptr>(layer_vertices.size() * sizeof(LayerVertex)),
+		                     layer_vertices.data());
+	}
+	if (glGetError() != GL_NO_ERROR) {
+		throw std::runtime_error("Cannot update moving geometry for depth and object ID capture.");
+	}
+	return true;
 }
 
 CapturedSceneLayers SceneLayerCapture::capture(const PreviewCameraState &camera, bool include_object_ids) const

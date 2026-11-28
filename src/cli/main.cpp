@@ -29,9 +29,12 @@
 #include "editor/service/PreviewFramebufferCaptureService.h"
 #include "editor/service/PreviewGeometryUploadService.h"
 #include "editor/service/PreviewMaterialLibrary.h"
+#include "editor/service/RenderRowExecutor.h"
 #include "electrical/service/LightingStateEvaluator.h"
 #include "lighting/model/LightingSceneDefinition.h"
 #include "physics/model/SimulationStep.h"
+#include "spatial/model/SpatialBuildingModel.h"
+#include "vehicle/model/VehicleJointGraph.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -133,9 +136,17 @@ public:
 			if (field != "schema_version" && field != "grammar" && field != "seed" &&
 			    field != "width" && field != "height" && field != "output_dir" && field != "strict" &&
 			    field != "camera" && field != "orthographic" && field != "layers" && field != "timeline" &&
-			    field != "overlays" && field != "overlay_manifest" && field != "input_sha256") {
+			    field != "overlays" && field != "overlay_manifest" && field != "input_sha256" &&
+			    field != "render_mode") {
 				throw std::runtime_error("Unknown job field: " + field);
 			}
+		}
+		if (job.isMember("render_mode")) {
+			const auto &value = job["render_mode"];
+			if (!value.isString() || (value.asString() != "full" && value.asString() != "basic")) {
+				throw std::runtime_error("render_mode must be 'full' or 'basic'.");
+			}
+			if (value.asString() == "basic") render_mode = PreviewRenderMode::Basic;
 		}
 		resolve_render_effect_inputs(job, manifest.parent_path());
 		if (job.isMember("overlays")) overlay = FlowOverlay::parse(job["overlays"]);
@@ -172,6 +183,7 @@ public:
 		}
 		if (job.isMember("timeline")) {
 			timeline = TimelineSettings::parse(job["timeline"]);
+			if (render_mode == PreviewRenderMode::Basic) timeline->shutter.reset();
 		}
 		snapshot_ = job;
 		snapshot_["grammar"] = grammar.u8string();
@@ -189,6 +201,7 @@ public:
 	int height = 0;
 	bool strict = true;
 	bool export_layers = false;
+	PreviewRenderMode render_mode = PreviewRenderMode::Full;
 	std::optional<ShotCamera> camera;
 	std::optional<FlowOverlay> overlay;
 	std::optional<CalibratedCamera> orthographic;
@@ -280,7 +293,8 @@ public:
 		}
 	}
 
-	const std::vector<PreviewMaterial> &load(const std::vector<std::string> &names, Json::Value &warnings)
+	const std::vector<PreviewMaterial> &load(const std::vector<std::string> &names, Json::Value &warnings,
+	                                         RenderRowExecutor &rows, PreviewRenderMode mode)
 	{
 		for (auto entry = cache_.begin(); entry != cache_.end();) {
 			if (std::find(names.begin(), names.end(), entry->first) == names.end()) {
@@ -302,7 +316,7 @@ public:
 					                              " because user texture slots require the editor.");
 				}
 				auto generated = preview_materials::generate_procedural_material(
-					user_texture ? "softwhitematteplaster" : name, defaults.material_texture_resolution);
+					user_texture ? "softwhitematteplaster" : name, defaults.material_texture_resolution, &rows, mode);
 				material = cache_.emplace(name, std::move(generated)).first;
 			}
 			materials_.push_back(material->second);
@@ -530,7 +544,10 @@ DepthOfFieldResult composite_shot(const DepthOfField &lens, PreviewRenderer &ren
 	// behind softened silhouettes. A projection near plane keeps the framing fixed.
 	PreviewCameraState far_camera = camera;
 	far_camera.near_clip = cutoff;
-	renderer.render(far_camera, settings, materials, lights);
+	PreviewRenderSettings far_settings = settings;
+	far_settings.reuse_shadow_map = true;
+	far_settings.enable_visibility_culling = false;
+	renderer.render(far_camera, far_settings, materials, lights);
 	PreviewImage far_plate = read_preview(far_camera);
 	auto far_layers = layer_capture.capture(far_camera, false);
 	if (overlay) {
@@ -541,10 +558,14 @@ DepthOfFieldResult composite_shot(const DepthOfField &lens, PreviewRenderer &ren
 	return lens.composite(sharp, sharp_depth, far_plate, far_layers.linear_depth);
 }
 
+enum class FrameColorUsage { Final, ShutterReference, ShutterSample };
+
 class OffscreenFrameRenderer
 {
 public:
-	OffscreenFrameRenderer(int width, int height, Json::Value &report) : width_(width), height_(height)
+	OffscreenFrameRenderer(int width, int height, Json::Value &report,
+	                       PreviewRenderMode mode = PreviewRenderMode::Full)
+		: mode_(mode), width_(width), height_(height)
 	{
 		context_.initialize(report);
 		GLint max_texture = 0;
@@ -559,16 +580,22 @@ public:
 	RenderedFrame render(const SceneGenerationContext &scene, const std::optional<ShotCameraSample> &shot,
 	                     bool export_layers, double sample_time, Json::Value &report,
 	                     const PreviewCameraState *sequence_camera = nullptr, bool suppress_grid = false,
-	                     const FlowOverlay *overlay = nullptr, bool static_geometry = false);
+	                     const FlowOverlay *overlay = nullptr,
+	                     TimelineGeometryMotion geometry_motion = TimelineGeometryMotion::GrammarDriven,
+	                     FrameColorUsage color_usage = FrameColorUsage::Final);
+	RenderRowExecutor &rowExecutor() { return rows_; }
 
 private:
 	OffscreenRenderContext context_;
+	RenderRowExecutor rows_;
 	OffscreenPreviewMaterials materials_;
+	PreviewGeometryUploadService geometry_upload_;
 	SceneLayerCapture layer_capture_;
 	std::optional<PreviewImage> background_;
-	bool background_has_grid_ = false;
+	std::optional<PreviewCameraMatrices> background_grid_camera_;
 	bool has_geometry_ = false;
 	bool has_layer_geometry_ = false;
+	const PreviewRenderMode mode_;
 	int width_;
 	int height_;
 };
@@ -577,8 +604,12 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
                                              const std::optional<ShotCameraSample> &shot,
                                              bool export_layers, double sample_time, Json::Value &report,
                                              const PreviewCameraState *sequence_camera, bool suppress_grid,
-                                             const FlowOverlay *overlay, bool static_geometry)
+	                                             const FlowOverlay *overlay, TimelineGeometryMotion geometry_motion,
+	                                             FrameColorUsage color_usage)
 {
+	const bool shutter_reference = color_usage == FrameColorUsage::ShutterReference;
+	const bool static_geometry = geometry_motion == TimelineGeometryMotion::Static;
+	const bool physics_only = geometry_motion == TimelineGeometryMotion::PhysicsOnly;
 	const PrimitiveBounds bounds = scene.getSceneBounds();
 	if (!bounds.valid && sequence_camera == nullptr) {
 		throw std::runtime_error("The grammar generated no drawable scene bounds.");
@@ -588,6 +619,8 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
 		? frame_scene(bounds, width_, height_) : *sequence_camera;
 	const PreviewCameraState camera = shot ? frame_shot(*shot, bounds, width_, height_) : fitted;
 	PreviewRenderSettings settings;
+	settings.mode = mode_;
+	settings.generate_mipmaps = false;
 	settings.show_grid = !shot && !export_layers && !suppress_grid;
 	settings.preview_time = static_cast<float>(sample_time);
 	PreviewLightCollection lights;
@@ -597,15 +630,24 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
 	LightingStateEvaluator().apply(lighting.electricalControlGraph(), &lights);
 
 	PreviewRenderer &renderer = preview_renderer();
-	// The studio background is screen-space. The grid uses this sample's camera.
-	if (!background_ || settings.show_grid || background_has_grid_) {
-		renderer.render(camera, settings, {}, lights);
+	// The background gradient is screen-space. The grid depends on view and projection.
+	const auto grid_camera = settings.show_grid
+		? std::optional<PreviewCameraMatrices>(preview_camera_matrices(camera)) : std::nullopt;
+	const bool grid_changed = grid_camera.has_value() != background_grid_camera_.has_value() ||
+		(grid_camera && (grid_camera->view != background_grid_camera_->view ||
+		                 grid_camera->projection != background_grid_camera_->projection));
+	if (!background_ || grid_changed) {
+		PreviewRenderSettings background_settings = settings;
+		background_settings.shadows = false;
+		renderer.render(camera, background_settings, {}, lights);
 		background_ = read_preview(camera);
-		background_has_grid_ = settings.show_grid;
+		background_grid_camera_ = grid_camera;
 	}
 	const PreviewImage &background = *background_;
-	const auto &materials = materials_.load(scene.getMaterialNames(), report["warnings"]);
-	if (!static_geometry || !has_geometry_) {
+	const auto &materials = materials_.load(scene.getMaterialNames(), report["warnings"], rows_, mode_);
+	if (physics_only) {
+		geometry_upload_.uploadPhysics(scene, materials);
+	} else if (!static_geometry || !has_geometry_) {
 		PreviewGeometryUploadService::uploadStatic(&scene, materials);
 		PreviewGeometryUploadService::uploadDynamic(&scene, materials.size());
 		has_geometry_ = true;
@@ -613,13 +655,15 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
 	renderer.render(camera, settings, materials, lights);
 
 	PreviewImage sharp = read_preview(camera);
-	const std::size_t changed_pixels = count_changed_pixels(background, sharp);
-	report["pixels_different_from_background"] = static_cast<Json::UInt64>(changed_pixels);
-	if (changed_pixels == 0 && sequence_camera == nullptr) {
-		throw std::runtime_error("The preview is blank. No pixels differ from the background-only frame.");
+	if (color_usage != FrameColorUsage::ShutterSample) {
+		const std::size_t changed_pixels = count_changed_pixels(background, sharp);
+		report["pixels_different_from_background"] = static_cast<Json::UInt64>(changed_pixels);
+		if (changed_pixels == 0 && sequence_camera == nullptr) {
+			throw std::runtime_error("The preview is blank. No pixels differ from the background-only frame.");
+		}
 	}
-	const auto lens = shot ? std::optional<DepthOfField>(std::in_place, *shot, height_) : std::nullopt;
-	const bool blur = lens && lens->enabled();
+	const auto lens = shot ? std::optional<DepthOfField>(std::in_place, *shot, height_, rows_) : std::nullopt;
+	const bool blur = (!shutter_reference || export_layers) && lens && lens->enabled();
 	const bool active_overlay = overlay && overlay->active(sample_time);
 	std::optional<RenderFrameOverlay> evidence;
 	if (overlay) {
@@ -631,11 +675,13 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
 		evidence->emission_rgb.resize(static_cast<std::size_t>(width_) * height_ * 3);
 	}
 	if (!blur && !export_layers && !active_overlay) {
+		if (shutter_reference) return {{}, std::nullopt, std::move(evidence)};
 		return {std::move(sharp), std::nullopt, std::move(evidence)};
 	}
 
-	if (!static_geometry || !has_layer_geometry_) {
-		layer_capture_.initialize(scene, materials, width_, height_);
+	if ((physics_only && !layer_capture_.updatePhysics(scene)) ||
+	    (!physics_only && (!static_geometry || !has_layer_geometry_))) {
+		layer_capture_.initialize(scene, materials, width_, height_, physics_only);
 		has_layer_geometry_ = true;
 	}
 	auto layers = layer_capture_.capture(camera, export_layers);
@@ -649,11 +695,13 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
 	std::vector<float> effects_depth;
 	if (active_overlay) {
 		auto effects = overlay->render(scene, camera, sample_time, layers.linear_depth);
-		effects_plate = effects.composite(sharp);
 		evidence->records["effects"] = std::move(effects.effects);
-		for (std::size_t pixel = 0; pixel < effects.emission.size(); ++pixel) {
-			for (int channel = 0; channel < 3; ++channel) {
-				evidence->emission_rgb[pixel * 3 + channel] = effects.emission[pixel][channel];
+		if (!shutter_reference) {
+			effects_plate = effects.composite(sharp);
+			for (std::size_t pixel = 0; pixel < effects.emission.size(); ++pixel) {
+				for (int channel = 0; channel < 3; ++channel) {
+					evidence->emission_rgb[pixel * 3 + channel] = effects.emission[pixel][channel];
+				}
 			}
 		}
 		if (blur) {
@@ -664,6 +712,13 @@ RenderedFrame OffscreenFrameRenderer::render(const SceneGenerationContext &scene
 
 	const PreviewImage &plate = active_overlay ? effects_plate : sharp;
 	const auto &plate_depth = active_overlay && blur ? effects_depth : layers.linear_depth;
+	if (shutter_reference) {
+		if (!export_layers) return {{}, std::nullopt, std::move(evidence)};
+		auto coverage = blur ? lens->foregroundCoverage(width_, height_, plate_depth)
+		                      : std::vector<std::uint8_t>(plate_depth.size(), 0);
+		return {{}, RenderFrameLayers{std::move(sharp), std::move(layers), layer_capture_.labels(),
+		                              std::move(coverage)}, std::move(evidence)};
+	}
 	DepthOfFieldResult result = blur
 		? composite_shot(*lens, renderer, layer_capture_, camera, settings, materials, lights,
 		                 plate, plate_depth, background, active_overlay ? overlay : nullptr, scene, sample_time)
@@ -683,7 +738,9 @@ std::optional<ShotCameraSample> sample_shot(const RenderJobManifest &job,
 		return std::nullopt;
 	}
 	try {
-		return job.camera->sample(scene, time_seconds);
+		auto shot = job.camera->sample(scene, time_seconds);
+		if (job.render_mode == PreviewRenderMode::Basic) shot.lens.aperture_radius = 0.0f;
+		return shot;
 	} catch (const std::exception &error) {
 		throw JobFailure(ExitCode::invalid_job, error.what());
 	}
@@ -708,7 +765,8 @@ PreviewImage render_shutter_exposure(const RenderJobManifest &job, RenderSceneTi
 		const auto shot = sample_shot(job, sample.scene, time);
 		auto rendered = renderer.render(sample.scene, shot, false, time, report, &fitted,
 		                               job.export_layers || job.orthographic.has_value(),
-		                               job.overlay ? &*job.overlay : nullptr, timeline.hasStaticGeometry());
+		                               job.overlay ? &*job.overlay : nullptr, timeline.geometryMotion(),
+		                               FrameColorUsage::ShutterSample);
 		exposure.addSample(rendered.color);
 		sample_times.append(time);
 		const auto pose = shot ? frame_shot(*shot, sample.scene.getSceneBounds(), job.width, job.height) : fitted;
@@ -726,7 +784,7 @@ PreviewImage render_shutter_exposure(const RenderJobManifest &job, RenderSceneTi
 	metadata["shutter"]["sample_times_seconds"] = std::move(sample_times);
 	metadata["shutter"]["sample_cameras"] = std::move(sample_cameras);
 	if (overlay) overlay->records["shutter_samples"] = std::move(effect_samples);
-	return exposure.finish();
+	return exposure.finish(renderer.rowExecutor());
 }
 
 void report_progress(const RenderExecution &execution, const RenderProgress &progress, Json::Value &report)
@@ -750,10 +808,28 @@ ExitCode run_sequence(const RenderJobManifest &job, SceneGenerationRequest &requ
 	const TimelineSettings &settings = *job.timeline;
 	const PreviewCameraState fitted = job.orthographic ? job.orthographic->preview() :
 		frame_scene(initial_scene->generationContext()->getSceneBounds(), job.width, job.height);
+	std::unique_ptr<SequenceOutput> output;
+	RenderProgress progress;
+	const auto complete_frame = [&] {
+		if (!output || !output->pendingFrame()) return;
+		const auto frame_in_progress = report.get("failed_frame", Json::Value());
+		report["failed_frame"] = *output->pendingFrame();
+		try {
+			output->completeFrame();
+		} catch (const std::exception &error) {
+			throw JobFailure(ExitCode::output_failure, error.what());
+		}
+		++progress.rendered_frames;
+		report_progress(execution, progress, report);
+		if (frame_in_progress.isNull()) {
+			report.removeMember("failed_frame");
+		} else {
+			report["failed_frame"] = frame_in_progress;
+		}
+	};
 	try {
 		std::optional<OffscreenFrameRenderer> renderer;
-		if (checkpoint == nullptr) renderer.emplace(job.width, job.height, report);
-		std::unique_ptr<SequenceOutput> output;
+		if (checkpoint == nullptr) renderer.emplace(job.width, job.height, report, job.render_mode);
 		try {
 			output = std::make_unique<SequenceOutput>(job.output_directory, settings, report,
 			                                          checkpoint ? checkpoint->directory() : fs::path{});
@@ -761,7 +837,6 @@ ExitCode run_sequence(const RenderJobManifest &job, SceneGenerationRequest &requ
 			return fail(report, ExitCode::output_failure, error.what());
 		}
 		report["sequence_directory"] = output->directory().u8string();
-		RenderProgress progress;
 		report_progress(execution, progress, report);
 		const auto rebuild = [&](double time_seconds) {
 			request.evaluation_time = time_seconds;
@@ -796,6 +871,7 @@ ExitCode run_sequence(const RenderJobManifest &job, SceneGenerationRequest &requ
 		const auto first_observed_frame = audio_cues.observesFrames() ? 0u : settings.start_frame;
 		const bool observe_reused_pose = settings.physics || audio_cues.observesFrames();
 		const auto reuse_frame = [&](std::uint32_t number, const Json::Value &saved) {
+			complete_frame();
 			output->reuseFrame(number, job.overlay.has_value());
 			report["pixels_different_from_background"] = saved["pixels_different_from_background"];
 			++progress.reused_frames;
@@ -803,6 +879,7 @@ ExitCode run_sequence(const RenderJobManifest &job, SceneGenerationRequest &requ
 			report.removeMember("failed_frame");
 		};
 		for (std::uint32_t frame_number = first_observed_frame; frame_number < settings.end_frame; ++frame_number) {
+			if (output->frameReady()) complete_frame();
 			execution.checkCancellation();
 			report["failed_frame"] = frame_number;
 			std::optional<Json::Value> saved;
@@ -851,25 +928,28 @@ ExitCode run_sequence(const RenderJobManifest &job, SceneGenerationRequest &requ
 			} else if (job.orthographic) {
 				metadata["camera"] = job.orthographic->metadata();
 			}
-			if (!renderer) renderer.emplace(job.width, job.height, report);
+			if (!renderer) renderer.emplace(job.width, job.height, report, job.render_mode);
+			const bool use_shutter = settings.shutter && settings.shutter->frame_fraction > 0.0;
 			auto frame = renderer->render(sample.scene, shot, job.export_layers, time_seconds, report, &fitted,
 			                              job.orthographic.has_value(), job.overlay ? &*job.overlay : nullptr,
-			                              timeline.hasStaticGeometry());
+			                              timeline.geometryMotion(),
+			                              use_shutter ? FrameColorUsage::ShutterReference : FrameColorUsage::Final);
 			metadata["pixels_different_from_background"] = report["pixels_different_from_background"];
-			if (settings.shutter && settings.shutter->frame_fraction > 0.0) {
+			if (use_shutter) {
 				frame.color = render_shutter_exposure(job, timeline, *renderer, fitted, time_seconds, metadata, report,
 				                                      execution, frame.overlay ? &*frame.overlay : nullptr);
 				report["pixels_different_from_background"] = metadata["pixels_different_from_background"];
 			}
+			complete_frame();
+			execution.checkCancellation();
 			try {
-				output->publishFrame(frame_number, frame, std::move(metadata));
+				output->submitFrame(frame_number, std::move(frame), std::move(metadata));
 			} catch (const std::exception &error) {
 				throw JobFailure(ExitCode::output_failure, error.what());
 			}
-			++progress.rendered_frames;
-			report_progress(execution, progress, report);
 			report.removeMember("failed_frame");
 		}
+		complete_frame();
 		const double end_seconds = settings.frameTime(settings.end_frame);
 		const auto last_cue_tick = (static_cast<std::uint64_t>(settings.end_frame) *
 		                            kSceneSimulationTicksPerSecond - 1) / settings.frames_per_second;
@@ -884,13 +964,23 @@ ExitCode run_sequence(const RenderJobManifest &job, SceneGenerationRequest &requ
 		} catch (const std::exception &error) {
 			return fail(report, ExitCode::output_failure, error.what());
 		}
-	} catch (const RenderCancelled &error) {
-		report.removeMember("failed_frame");
-		return fail(report, ExitCode::cancelled, error.what());
-	} catch (const JobFailure &error) {
-		return fail(report, error.code(), error.what());
-	} catch (const std::exception &error) {
-		return fail(report, ExitCode::render_failure, error.what());
+	} catch (...) {
+		auto failure = std::current_exception();
+		try {
+			complete_frame();
+		} catch (...) {
+			failure = std::current_exception();
+		}
+		try {
+			std::rethrow_exception(failure);
+		} catch (const RenderCancelled &error) {
+			report.removeMember("failed_frame");
+			return fail(report, ExitCode::cancelled, error.what());
+		} catch (const JobFailure &error) {
+			return fail(report, error.code(), error.what());
+		} catch (const std::exception &error) {
+			return fail(report, ExitCode::render_failure, error.what());
+		}
 	}
 	return ExitCode::success;
 }
@@ -991,6 +1081,7 @@ ExitCode run_job(const RenderJobManifest &job, bool render, Json::Value &report,
 	report["grammar"] = job.grammar.u8string();
 	report["seed"] = static_cast<Json::UInt64>(job.seed);
 	report["strict"] = job.strict;
+	if (job.render_mode == PreviewRenderMode::Basic) report["render_mode"] = "basic";
 	report["width"] = job.width;
 	report["height"] = job.height;
 	report["warnings"] = Json::Value(Json::arrayValue);
@@ -1022,6 +1113,35 @@ ExitCode run_job(const RenderJobManifest &job, bool render, Json::Value &report,
 	report["primitive_count"] = static_cast<Json::UInt64>(std::count_if(
 		scene.primitive_instances.begin(), scene.primitive_instances.end(),
 		[](const PrimitiveInstance &instance) { return !instance.removed; }));
+	if (!render) {
+		Json::UInt64 authored_count = 0;
+		Json::UInt64 density_count = 0;
+		double mass_kg = 0.0;
+		for (const auto &instance : scene.primitive_instances) {
+			if (!instance.removed && instance.has_authored_mass) {
+				++authored_count;
+				if (instance.material_density_kg_m3) ++density_count;
+				mass_kg += instance.mass;
+			}
+		}
+		if (authored_count != 0) {
+			const auto &spatial = scene.spatialBuildingModel();
+			std::set<std::size_t> attached_indices;
+			if (spatial) {
+				for (const auto &binding : spatial->geometryBindings()) {
+					const auto index = binding.primitiveInstanceIndex();
+					const auto &instance = scene.primitive_instances.at(index);
+					if (!instance.removed && instance.has_authored_mass) attached_indices.insert(index);
+				}
+			}
+			auto &physical = report["physical_mass"];
+			physical["authored_primitive_count"] = authored_count;
+			physical["density_derived_primitive_count"] = density_count;
+			physical["attached_primitive_count"] = static_cast<Json::UInt64>(attached_indices.size());
+			physical["effective_mass_kg"] = mass_kg;
+			physical["joint_count"] = static_cast<Json::UInt64>(scene.vehicleJointGraph().joints().size());
+		}
+	}
 	std::unique_ptr<RenderCheckpoint> checkpoint;
 	if (render && !execution.checkpoint_directory.empty()) {
 		try {
@@ -1084,7 +1204,7 @@ ExitCode run_job(const RenderJobManifest &job, bool render, Json::Value &report,
 	RenderedFrame frame;
 	try {
 		execution.checkCancellation();
-		OffscreenFrameRenderer renderer(job.width, job.height, report);
+		OffscreenFrameRenderer renderer(job.width, job.height, report, job.render_mode);
 		const auto calibrated = job.orthographic ? std::optional<PreviewCameraState>(job.orthographic->preview()) : std::nullopt;
 		frame = renderer.render(scene, shot, job.export_layers, shot ? shot->time_seconds : 0.0, report,
 		                        calibrated ? &*calibrated : nullptr,
@@ -1105,6 +1225,7 @@ ExitCode run_job(const RenderJobManifest &job, bool render, Json::Value &report,
 			metadata["frame"] = 0;
 			for (const char *key : {"seed", "grammar", "pixels_different_from_background"}) metadata[key] = report[key];
 			if (report.isMember("camera")) metadata["camera"] = report["camera"];
+			if (report.isMember("render_mode")) metadata["render_mode"] = report["render_mode"];
 			const auto manifest = publish_sequence_frame(checkpoint->directory(), 0, frame, std::move(metadata));
 			report_still_checkpoint(manifest.parent_path(), manifest_input::read_json(manifest), report);
 			report_progress(execution, {1, 0}, report);

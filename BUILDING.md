@@ -114,6 +114,39 @@ Run the Windows regression checks from the repository root.
 powershell -ExecutionPolicy Bypass -File .\tests\run_windows_headless_checks.ps1 -CliPath .\build\ucrt64\headless\progen3d-cli.exe
 ```
 
+### Basic rendering mode
+
+Set the optional job field `"render_mode": "basic"` for a headless draft render.
+In the editor, choose **Basic** under **Render Settings → Render mode** or
+start the editor with `--basic-render`. **Full** is the default. Basic renders
+into a single-sample framebuffer using base textures, opacity, and diffuse
+lighting. It skips shadow maps, advanced material shading, environment
+reflections, and fog. In headless jobs it also bypasses depth of field and
+shutter sampling. Camera framing, simulation, and requested depth and object
+ID layers are available in both modes.
+
+Add `--benchmark-preview` to an editor `--capture-preview` run to time 60
+forced editor redraws and 60 viewport-only renders after warm-up. The editor
+disables vertical sync and hover outlines during the benchmark and writes the
+capture and a sibling `.benchmark.json` file. Include `--basic-render` in the
+Basic run and use the same grammar and camera for both runs.
+
+### Visibility culling
+
+The shared CLI and editor color renderer skips static opaque draw ranges outside
+the camera frustum. In Basic mode it can also skip ranges that miss every pixel
+sample and ranges proven hidden behind verified opaque boxes. The depth test
+uses conservative CPU tiles. It avoids GPU readback and keeps the original draw
+order. Separate shadow, depth and object ID passes, plus the depth-of-field
+far plate, keep their existing geometry.
+
+Set `PROGEN3D_DISABLE_VISIBILITY_CULLING=1` to benchmark the original draw path.
+Set `PROGEN3D_VISIBILITY_STATS=1` to log static opaque submitted and rejected
+triangle counts when visibility is recomputed. Clear it for timing runs.
+`PROGEN3D_EXPERIMENTAL_BACKFACE_CULLING=1` enables the separate back-face experiment
+for verified opaque cube geometry viewed from outside with the near plane clear.
+The experiment is off by default and runs without opaque occlusion.
+
 ### Camera tracks and render layers
 
 The Windows CLI samples one camera time per render. Run the courtyard

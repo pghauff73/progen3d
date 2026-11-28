@@ -66,6 +66,45 @@ private:
 	std::unique_ptr<EVP_MD_CTX, decltype(&EVP_MD_CTX_free)> digest_{EVP_MD_CTX_new(), EVP_MD_CTX_free};
 };
 
+class ChecksumFileBuffer : public std::streambuf
+{
+public:
+	explicit ChecksumFileBuffer(const fs::path &path)
+	{
+		if (!file_.open(path, std::ios::out | std::ios::binary)) {
+			throw std::runtime_error("Cannot open output " + path.u8string());
+		}
+	}
+
+	std::string finish(const fs::path &path)
+	{
+		if (!file_.close()) throw std::runtime_error("Cannot close output " + path.u8string());
+		flush_file(path);
+		return digest_.finish();
+	}
+
+protected:
+	std::streamsize xsputn(const char *bytes, std::streamsize count) override
+	{
+		const auto written = file_.sputn(bytes, count);
+		if (written > 0) digest_.add({bytes, static_cast<std::size_t>(written)});
+		return written;
+	}
+
+	int_type overflow(int_type value) override
+	{
+		if (traits_type::eq_int_type(value, traits_type::eof())) return traits_type::not_eof(value);
+		const char byte = traits_type::to_char_type(value);
+		return xsputn(&byte, 1) == 1 ? value : traits_type::eof();
+	}
+
+	int sync() override { return file_.pubsync(); }
+
+private:
+	std::filebuf file_;
+	Sha256Digest digest_;
+};
+
 }
 
 FileLease::FileLease(const fs::path &path, LockWait wait)
@@ -180,6 +219,16 @@ void write_json(const fs::path &path, const Json::Value &value)
 	Json::StreamWriterBuilder writer;
 	writer["indentation"] = "  ";
 	write_text(path, Json::writeString(writer, value) + "\n");
+}
+
+std::string write_checksummed_file(const fs::path &path,
+                                   const std::function<void(std::ostream &)> &write)
+{
+	ChecksumFileBuffer buffer(path);
+	std::ostream output(&buffer);
+	output.exceptions(std::ios::failbit | std::ios::badbit);
+	write(output);
+	return buffer.finish(path);
 }
 
 std::string sha256_text(std::string_view text)

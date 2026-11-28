@@ -30,6 +30,8 @@ struct TimelineRenderSample {
 	double simulation_fraction = 0.0;
 };
 
+enum class TimelineGeometryMotion { Static, PhysicsOnly, GrammarDriven };
+
 class RenderSceneTimeline
 {
 public:
@@ -44,7 +46,11 @@ public:
 
 	TimelineRenderSample sample(double time_seconds);
 	std::uint64_t solvedTick() const { return solved_tick_; }
-	bool hasStaticGeometry() const { return !physics_ && !grammar_uses_time_; }
+	TimelineGeometryMotion geometryMotion() const
+	{
+		if (grammar_uses_time_) return TimelineGeometryMotion::GrammarDriven;
+		return physics_ ? TimelineGeometryMotion::PhysicsOnly : TimelineGeometryMotion::Static;
+	}
 
 private:
 	void step();

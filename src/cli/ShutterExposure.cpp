@@ -1,6 +1,7 @@
 #include "ShutterExposure.h"
 
 #include "PreviewColor.h"
+#include "editor/service/RenderRowExecutor.h"
 
 #include <stdexcept>
 
@@ -20,15 +21,18 @@ void ShutterExposure::addSample(const PreviewImage &image)
 	++samples_;
 }
 
-PreviewImage ShutterExposure::finish() const
+PreviewImage ShutterExposure::finish(RenderRowExecutor &rows) const
 {
 	if (samples_ == 0) {
 		throw std::logic_error("A shutter exposure needs at least one sample.");
 	}
 	std::vector<std::uint8_t> pixels(linear_sum_.size() * 3);
 	const float weight = 1.0f / static_cast<float>(samples_);
-	for (std::size_t pixel = 0; pixel < linear_sum_.size(); ++pixel) {
-		preview_color::encode_pixel(linear_sum_[pixel] * weight, pixel, pixels);
-	}
+	rows.run(width_, height_, [&](int first_row, int end_row) {
+		const auto end = static_cast<std::size_t>(end_row) * width_;
+		for (auto pixel = static_cast<std::size_t>(first_row) * width_; pixel < end; ++pixel) {
+			preview_color::encode_pixel(linear_sum_[pixel] * weight, pixel, pixels);
+		}
+	});
 	return PreviewImage(width_, height_, std::move(pixels));
 }

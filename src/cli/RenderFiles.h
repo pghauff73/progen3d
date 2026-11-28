@@ -4,6 +4,8 @@
 #include <windows.h>
 
 #include <filesystem>
+#include <functional>
+#include <iosfwd>
 #include <string>
 #include <string_view>
 
@@ -47,6 +49,8 @@ void discard_abandoned_writes(const std::filesystem::path &destination);
 std::string read_text(const std::filesystem::path &path);
 void write_text(const std::filesystem::path &path, std::string_view text);
 void write_json(const std::filesystem::path &path, const Json::Value &value);
+std::string write_checksummed_file(const std::filesystem::path &path,
+                                   const std::function<void(std::ostream &)> &write);
 
 std::string sha256_text(std::string_view text);
 std::string sha256_file(const std::filesystem::path &path);

@@ -6,11 +6,10 @@
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
+#include <stdexcept>
 #include <vector>
 
-namespace {
-
-std::uint64_t calculate_pixel_hash(const PreviewImage &image)
+std::uint64_t PreviewFramebufferCaptureService::pixelHash(const PreviewImage &image)
 {
 	constexpr std::uint64_t kFnvOffsetBasis = 14695981039346656037ULL;
 	constexpr std::uint64_t kFnvPrime = 1099511628211ULL;
@@ -20,8 +19,6 @@ std::uint64_t calculate_pixel_hash(const PreviewImage &image)
 		hash *= kFnvPrime;
 	}
 	return hash;
-}
-
 }
 
 PreviewCaptureEvidence PreviewFramebufferCaptureService::captureCurrentPreview(
@@ -70,9 +67,7 @@ PreviewCaptureEvidence PreviewFramebufferCaptureService::writePreview(
 		return PreviewCaptureEvidence::createFailure(
 			"The preview capture file could not be opened: " + output_path);
 	}
-	output << "P6\n" << image.width() << ' ' << image.height() << "\n255\n";
-	output.write(reinterpret_cast<const char *>(image.rgbPixels().data()),
-	             static_cast<std::streamsize>(image.rgbPixels().size()));
+	writePpm(image, output);
 	output.close();
 	if (!output) {
 		return PreviewCaptureEvidence::createFailure(
@@ -80,5 +75,13 @@ PreviewCaptureEvidence PreviewFramebufferCaptureService::writePreview(
 	}
 
 	return PreviewCaptureEvidence::createSuccess(
-		output_path, image.width(), image.height(), calculate_pixel_hash(image));
+		output_path, image.width(), image.height(), pixelHash(image));
+}
+
+void PreviewFramebufferCaptureService::writePpm(const PreviewImage &image, std::ostream &output)
+{
+	if (!image.isValid()) throw std::invalid_argument("The preview framebuffer returned invalid pixel dimensions.");
+	output << "P6\n" << image.width() << ' ' << image.height() << "\n255\n";
+	output.write(reinterpret_cast<const char *>(image.rgbPixels().data()),
+	             static_cast<std::streamsize>(image.rgbPixels().size()));
 }

@@ -4,13 +4,15 @@
 
 #include <glm/glm.hpp>
 
+class RenderRowExecutor;
+
 class ShutterExposure
 {
 public:
 	ShutterExposure(int width, int height);
 
 	void addSample(const PreviewImage &image);
-	PreviewImage finish() const;
+	PreviewImage finish(RenderRowExecutor &rows) const;
 
 private:
 	int width_;

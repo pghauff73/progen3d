@@ -29,12 +29,20 @@ public:
 	~SceneLayerCapture();
 
 	void initialize(const SceneGenerationContext &scene, const std::vector<PreviewMaterial> &materials,
-	                int width, int height);
+	                int width, int height, bool track_movable = false);
+	bool updatePhysics(const SceneGenerationContext &scene);
 	CapturedSceneLayers capture(const PreviewCameraState &camera, bool include_object_ids) const;
 	const std::vector<SceneMaskLabel> &labels() const { return labels_; }
 	std::vector<SceneMaskLabel> takeLabels();
 
 private:
+	struct MovableVertexRange {
+		std::size_t instance_index;
+		std::size_t vertex_offset;
+		std::size_t vertex_count;
+		std::uint32_t object_id;
+	};
+
 	int width_ = 0;
 	int height_ = 0;
 	GLuint framebuffer_ = 0;
@@ -46,4 +54,7 @@ private:
 	GLuint vertex_buffer_ = 0;
 	GLsizei vertex_count_ = 0;
 	std::vector<SceneMaskLabel> labels_;
+	bool has_physics_layout_ = false;
+	std::vector<bool> removed_instances_;
+	std::vector<MovableVertexRange> movable_ranges_;
 };

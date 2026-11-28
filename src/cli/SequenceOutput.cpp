@@ -3,6 +3,7 @@
 #include "Context.h"
 #include "physics/model/SimulationStep.h"
 
+#include <chrono>
 #include <stdexcept>
 #include <utility>
 
@@ -100,6 +101,7 @@ SequenceOutput::SequenceOutput(const fs::path &root, const TimelineSettings &tim
 	manifest_["seed"] = job_report["seed"];
 	manifest_["width"] = job_report["width"];
 	manifest_["height"] = job_report["height"];
+	if (job_report.isMember("render_mode")) manifest_["render_mode"] = job_report["render_mode"];
 	manifest_["contacts"] = "contacts.jsonl";
 	manifest_["frames"] = Json::Value(Json::arrayValue);
 }
@@ -120,13 +122,35 @@ void SequenceOutput::recordContacts(std::uint64_t tick, const std::vector<Timeli
 	}
 }
 
-void SequenceOutput::publishFrame(std::uint32_t frame_number, const RenderedFrame &frame, Json::Value metadata)
+void SequenceOutput::submitFrame(std::uint32_t frame_number, RenderedFrame frame, Json::Value metadata)
 {
+	if (pending_frame_) throw std::logic_error("Complete the previous frame before submitting another one.");
 	contact_stream_.flush();
 	metadata["seed"] = manifest_["seed"];
 	metadata["grammar"] = manifest_["grammar"];
-	const auto path = publish_sequence_frame(directory_, frame_number, frame, std::move(metadata));
-	indexFrame(frame_number, path, frame.overlay.has_value());
+	if (manifest_.isMember("render_mode")) metadata["render_mode"] = manifest_["render_mode"];
+	const bool overlay = frame.overlay.has_value();
+	// Only the immutable frame and its metadata cross to the writer. The render thread owns the sequence index.
+	frame_publication_ = std::async(std::launch::async | std::launch::deferred,
+		[directory = directory_, frame_number, frame = std::move(frame), metadata = std::move(metadata)]() mutable {
+			return publish_sequence_frame(directory, frame_number, frame, std::move(metadata));
+		});
+	pending_frame_ = frame_number;
+	pending_overlay_ = overlay;
+}
+
+bool SequenceOutput::frameReady() const
+{
+	return frame_publication_.valid() &&
+	       frame_publication_.wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+}
+
+void SequenceOutput::completeFrame()
+{
+	if (!pending_frame_) return;
+	const auto number = *std::exchange(pending_frame_, std::nullopt);
+	const auto path = frame_publication_.get();
+	indexFrame(number, path, pending_overlay_);
 }
 
 void SequenceOutput::reuseFrame(std::uint32_t frame_number, bool overlay)

@@ -26,6 +26,7 @@
 #include <string>
 #include <string_view>
 #include <thread>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -111,6 +112,7 @@
 #include "lighting/service/LightGizmoOverlayService.h"
 #include "lighting/service/LightGizmoPickingService.h"
 #include "lighting/service/LightingScenePersistenceService.h"
+#include "lighting/service/PreviewLightingFrameFactory.h"
 #include "electrical/service/LightingStateEvaluator.h"
 #include "geometry/model/BotanicalBladeShapeSpecification.h"
 #include "geometry/model/TaperedSweepShapeSpecification.h"
@@ -420,6 +422,7 @@ uint64_t grammar_session_seed = 0;
 
 
 std::vector<PreviewMaterial> active_materials;
+std::uint64_t preview_geometry_revision = 0;
 std::unordered_map<std::string, PreviewMaterial> material_cache;
 
 PreviewTimelineController preview_timeline_controller;
@@ -3214,13 +3217,12 @@ std::vector<PreviewOutlineBatch> build_preview_outline_batches(Context *context,
 	}
 
 	const auto base_vertices = build_base_vertex_data();
-	const auto append_batch = [&](int index, const glm::vec4 &color, float width) {
+	const auto append_batch = [&](int index, const glm::vec4 &color) {
 		if (!is_valid_preview_instance_index(context, index)) {
 			return;
 		}
 		PreviewOutlineBatch batch;
 		batch.color = color;
-		batch.width = width;
 		context->buildInstanceBuffer(context->primitive_instances[static_cast<std::size_t>(index)],
 		                             base_vertices.data(),
 		                             &batch.vertices);
@@ -3229,20 +3231,11 @@ std::vector<PreviewOutlineBatch> build_preview_outline_batches(Context *context,
 		}
 	};
 
-	const float hovered_width = std::max(0.022f, preview_camera_distance_value() * 0.0056f);
-	const float selected_width = std::max(0.032f, preview_camera_distance_value() * 0.0078f);
-	append_batch(current_preview_session().selection.hovered_instance_index,
-	             glm::vec4(0.31f, 0.70f, 1.00f, 0.92f),
-	             hovered_width);
-	if (current_preview_session().selection.selected_instance_index !=
-	    current_preview_session().selection.hovered_instance_index) {
-		append_batch(current_preview_session().selection.selected_instance_index,
-		             glm::vec4(1.00f, 0.66f, 0.28f, 0.98f),
-		             selected_width);
-	} else if (!batches.empty()) {
-		batches.front().color = glm::vec4(1.00f, 0.72f, 0.34f, 0.98f);
-		batches.front().width = selected_width;
+	const auto &selection = app_state->preview.selection;
+	if (selection.hovered_instance_index != selection.selected_instance_index) {
+		append_batch(selection.hovered_instance_index, glm::vec4(0.30f, 0.80f, 1.00f, 0.12f));
 	}
+	append_batch(selection.selected_instance_index, glm::vec4(1.00f, 0.71f, 0.27f, 0.29f));
 	return batches;
 }
 
@@ -3421,11 +3414,13 @@ void upload_static_preview_buffers(EditorWorkspaceSession *app_state, Context *c
 		sync_active_materials(app_state, context->getMaterialNames());
 	}
 	PreviewGeometryUploadService::uploadStatic(context, active_materials);
+	++preview_geometry_revision;
 }
 
 void upload_dynamic_preview_buffers(Context *context)
 {
 	PreviewGeometryUploadService::uploadDynamic(context, active_materials.size());
+	++preview_geometry_revision;
 }
 
 void upload_context_preview_buffers(EditorWorkspaceSession *app_state, Context *context)
@@ -8222,6 +8217,15 @@ void RenderSettingsPanel::draw(EditorWorkspaceSession &workspace_session) const
 		ImGui::PopFont();
 	}
 
+	int render_mode = configuration.mode == PreviewRenderMode::Basic ? 1 : 0;
+	if (ImGui::Combo("Render mode", &render_mode, "Full\0Basic\0")) {
+		configuration.mode = render_mode == 1 ? PreviewRenderMode::Basic : PreviewRenderMode::Full;
+		configuration.changed = true;
+	}
+	const bool basic = configuration.mode == PreviewRenderMode::Basic;
+	if (basic) ImGui::TextWrapped("Basic uses diffuse lighting, base textures, and material opacity.");
+
+	ImGui::BeginDisabled(basic);
 	// Anti-Aliasing Section
 		if (ImGui::CollapsingHeader("Anti-Aliasing", ImGuiTreeNodeFlags_DefaultOpen)) {
 		ImGui::PushStyleColor(ImGuiCol_Text, color_from_hex(0x667788));
@@ -8251,6 +8255,7 @@ void RenderSettingsPanel::draw(EditorWorkspaceSession &workspace_session) const
 			draw_divider();
 		}
 
+	ImGui::EndDisabled();
 		if (ImGui::CollapsingHeader("Material Quality", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGui::PushStyleColor(ImGuiCol_Text, color_from_hex(0x667788));
 			ImGui::TextWrapped("Procedural materials use physically based map sets with mipmaps and anisotropic filtering.");
@@ -8274,6 +8279,7 @@ void RenderSettingsPanel::draw(EditorWorkspaceSession &workspace_session) const
 			draw_divider();
 		}
 
+	ImGui::BeginDisabled(basic);
 		// Shadows Section
 	if (ImGui::CollapsingHeader("Shadows", ImGuiTreeNodeFlags_DefaultOpen)) {
 		ImGui::PushStyleColor(ImGuiCol_Text, color_from_hex(0x667788));
@@ -8461,6 +8467,7 @@ void RenderSettingsPanel::draw(EditorWorkspaceSession &workspace_session) const
 		draw_divider();
 	}
 
+	ImGui::EndDisabled();
 	// Performance Stats
 	ImGui::PushStyleColor(ImGuiCol_Text, color_from_hex(0x667788));
 	ImGui::TextUnformatted("Performance Note:");
@@ -8479,39 +8486,91 @@ void draw_console()
 
 }
 
+namespace {
+
+bool same_preview_lighting(const PreviewLightingFrame &left, const PreviewLightingFrame &right)
+{
+	return left.primary_shadow_available == right.primary_shadow_available &&
+	       left.primary_shadow_view_projection == right.primary_shadow_view_projection &&
+	       std::equal(left.gpu_light_records.begin(), left.gpu_light_records.end(),
+	                  right.gpu_light_records.begin(), right.gpu_light_records.end(),
+	                  [](const GpuLightRecord &a, const GpuLightRecord &b) {
+	                      return a.position_and_type == b.position_and_type &&
+	                             a.direction_and_range == b.direction_and_range &&
+	                             a.color_and_intensity == b.color_and_intensity &&
+	                             a.cone_and_area == b.cone_and_area && a.metadata == b.metadata;
+	                  });
+}
+
+bool same_overlay_lines(const std::vector<PreviewOverlayVertex> &left,
+                        const std::vector<PreviewOverlayVertex> &right)
+{
+	return std::equal(left.begin(), left.end(), right.begin(), right.end(),
+	                  [](const PreviewOverlayVertex &a, const PreviewOverlayVertex &b) {
+	                      return std::tie(a.x, a.y, a.z, a.r, a.g, a.b, a.a) ==
+	                             std::tie(b.x, b.y, b.z, b.r, b.g, b.b, b.a);
+	                  });
+}
+
+bool update_preview_overlays(Context *context, EditorWorkspaceSession &workspace,
+                             const PreviewInteractionCameraState &camera)
+{
+	const ScenePreviewSession &preview = workspace.preview;
+	const SceneOverlayConfiguration &overlays = preview.overlays;
+	const auto visibility = std::array{
+		overlays.connection_overlay_visible, overlays.connection_axes_visible,
+		overlays.connection_surfaces_visible, overlays.connection_features_visible,
+		overlays.connection_bounds_visible, overlays.axial_profile_overlay_visible,
+		overlays.spatial_overlay_visible, overlays.spatial_object_frames_visible,
+		overlays.spatial_interfaces_visible, overlays.spatial_connections_visible,
+		overlays.spatial_constraints_visible, overlays.spatial_contacts_visible,
+		overlays.spatial_clearances_visible, overlays.spatial_bounds_visible,
+		overlays.building_function_allocations_visible, overlays.building_service_flows_visible,
+		overlays.building_requirement_status_visible, overlays.building_pending_evidence_visible};
+	auto scene_key = std::make_tuple(context, preview_geometry_revision, visibility,
+	                                 preview.selection.selected_spatial_object_id);
+	static std::optional<decltype(scene_key)> last_scene_key;
+	static std::vector<PreviewOverlayVertex> scene_lines;
+	const bool scene_changed = last_scene_key != scene_key;
+	if (scene_changed) {
+		scene_lines = build_connection_overlay_vertices(context);
+		append_axial_profile_overlay_vertices(&scene_lines, context);
+		append_spatial_overlay_vertices(&scene_lines, context);
+		append_collision_particle_overlay_vertices(&scene_lines, context);
+		last_scene_key = std::move(scene_key);
+	}
+
+	static std::vector<PreviewOverlayVertex> last_gizmo_lines;
+	std::vector<PreviewOverlayVertex> gizmo_lines;
+	append_light_gizmo_overlay_vertices(&gizmo_lines, camera);
+	const bool lines_changed = scene_changed || !same_overlay_lines(last_gizmo_lines, gizmo_lines);
+	if (lines_changed) {
+		std::vector<PreviewOverlayVertex> lines = scene_lines;
+		lines.insert(lines.end(), gizmo_lines.begin(), gizmo_lines.end());
+		upload_overlay_lines(lines);
+		last_gizmo_lines = std::move(gizmo_lines);
+	}
+
+	auto outline_key = std::make_tuple(context, preview_geometry_revision,
+	                                   preview.interaction_settings.picking_and_highlighting_enabled,
+	                                   preview.selection.hovered_instance_index,
+	                                   preview.selection.selected_instance_index);
+	static std::optional<decltype(outline_key)> last_outline_key;
+	const bool outlines_changed = last_outline_key != outline_key;
+	if (outlines_changed) {
+		upload_outline_batches(build_preview_outline_batches(context, &workspace));
+		last_outline_key = outline_key;
+	}
+	return lines_changed || outlines_changed;
+}
+
+} // namespace
+
 void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 	                         float delta_seconds) const
 {
 	EditorWorkspaceSession *app_state = &workspace_session;
 	RenderConfiguration &render_configuration = app_state->preview.render_configuration;
-
-	// Check if render settings changed and trigger immediate preview update
-	// This ensures all render settings apply immediately without requiring regeneration
-	static int last_frame_settings_hash = 0;
-	int current_settings_hash = 0;
-
-	// Create a hash of all render settings to detect changes
-	current_settings_hash ^= static_cast<int>(render_configuration.anti_aliasing_level) * 0x100;
-	current_settings_hash ^= static_cast<int>(render_configuration.shadows_enabled) * 0x200;
-	current_settings_hash ^= static_cast<int>(render_configuration.bloom_enabled) * 0x400;
-	current_settings_hash ^= static_cast<int>(render_configuration.lens_flare_enabled) * 0x800;
-	current_settings_hash ^= static_cast<int>(render_configuration.ambient_occlusion_enabled) * 0x1000;
-	current_settings_hash ^= static_cast<int>(render_configuration.cubemap_enabled) * 0x2000;
-	current_settings_hash ^=
-		(render_configuration.material_texture_resolution / 256) * 0x4000;
-	current_settings_hash ^= static_cast<int>(render_configuration.exposure * 10.0f);
-	current_settings_hash ^= static_cast<int>(render_configuration.gamma * 10.0f);
-
-	// Check if any render setting changed
-	if (current_settings_hash != last_frame_settings_hash || render_configuration.changed) {
-		// Force preview refresh with new settings
-		render_configuration.changed = false;
-		last_frame_settings_hash = current_settings_hash;
-
-		// Mark that preview needs update with new settings
-		// The render_scene_to_preview function will use the new settings immediately
-		// No regeneration needed - render settings apply to existing geometry
-	}
 
 	const bool grammar_time_driven = grammar != nullptr && grammarUsesTime(grammar);
 	const PreviewTimelineAdvance timeline_advance = preview_timeline_controller.advance(
@@ -8554,55 +8613,83 @@ void ScenePreviewPanel::draw(EditorWorkspaceSession &workspace_session,
 		camera.position / preview.camera.scaleFactor(), fit_camera || preview.audio_camera_rebase));
 	preview.audio_camera_rebase = false;
 
-	std::vector<PreviewOverlayVertex> overlay_vertices;
-	if (context != nullptr) {
-		if (connection_overlay_visible()) {
-			overlay_vertices = build_connection_overlay_vertices(context);
-		}
-		append_axial_profile_overlay_vertices(&overlay_vertices, context);
-		append_spatial_overlay_vertices(&overlay_vertices, context);
-		append_collision_particle_overlay_vertices(&overlay_vertices, context);
-	}
-	append_light_gizmo_overlay_vertices(&overlay_vertices, camera);
-			// Clear any pending OpenGL errors before upload_overlay_lines
-			while (glGetError() != GL_NO_ERROR) {}
-	upload_overlay_lines(overlay_vertices);
-	upload_outline_batches(build_preview_outline_batches(context, app_state));
+	const bool overlays_changed = update_preview_overlays(context, workspace_session, camera);
 
-	const auto render_started_at = std::chrono::steady_clock::now();
-	render_scene_to_preview(static_cast<int>(available.x),
-	                        static_cast<int>(available.y),
-	                        active_materials,
-	                        current_preview_session().lighting.lights,
-	                        preview_playback_active() ? preview_simulation_interpolation_alpha() : 1.0f,
-	                        preview_material_time,
-	                        preview_scale_factor(),
-		                        preview_camera_distance_value(),
-		                        preview_azimuth_degrees(),
-		                        preview_elevation_degrees(),
-		                        preview_roll_degrees(),
-		                        preview_target_x_coordinate(),
-	                        preview_target_y_coordinate(),
-	                        preview_target_z_coordinate(),
-	                        current_preview_session().projection.verticalFieldOfViewRadians(),
-	                        preview_texture_debug_view,
-								preview_mapping_mode_override,
-										        render_configuration.lens_flare_enabled,
-										        render_configuration.shadows_enabled,
-										        render_configuration.anti_aliasing_level,
-										        render_configuration.cubemap_enabled,
-										        render_configuration.cubemap_texture,
-										        render_configuration.cubemap_intensity,
-										        render_configuration.bloom_enabled,
-										        render_configuration.bloom_threshold,
-										        render_configuration.bloom_intensity,
-										        render_configuration.ambient_occlusion_enabled,
-										        render_configuration.exposure,
-										        render_configuration.gamma);
-	current_preview_session().statistics.render_milliseconds =
-		std::chrono::duration<double, std::milli>(
-			std::chrono::steady_clock::now() - render_started_at)
-			.count();
+	PreviewCameraState render_camera;
+	render_camera.width = static_cast<int>(available.x);
+	render_camera.height = static_cast<int>(available.y);
+	render_camera.scale_global = preview_scale_factor();
+	render_camera.camera_distance = preview_camera_distance_value();
+	render_camera.angle_view = preview_azimuth_degrees();
+	render_camera.elevation_view = preview_elevation_degrees();
+	render_camera.roll_view = preview_roll_degrees();
+	render_camera.target = {preview_target_x_coordinate(), preview_target_y_coordinate(),
+	                        preview_target_z_coordinate()};
+	render_camera.vertical_field_of_view_radians = preview.projection.verticalFieldOfViewRadians();
+
+	PreviewRenderSettings settings;
+	settings.mode = render_configuration.mode;
+	settings.simulation_alpha = preview_playback_active() ? preview_simulation_interpolation_alpha() : 1.0f;
+	settings.preview_time = preview_material_time;
+	settings.debug_view = preview_texture_debug_view;
+	settings.mapping_mode_override = preview_mapping_mode_override;
+	settings.lens_flare = render_configuration.lens_flare_enabled;
+	settings.shadows = render_configuration.shadows_enabled;
+	settings.anti_aliasing = render_configuration.anti_aliasing_level;
+	settings.cubemap_enabled = render_configuration.cubemap_enabled;
+	settings.cubemap_texture = render_configuration.cubemap_texture;
+	settings.cubemap_intensity = render_configuration.cubemap_intensity;
+	settings.bloom_enabled = render_configuration.bloom_enabled;
+	settings.bloom_threshold = render_configuration.bloom_threshold;
+	settings.bloom_intensity = render_configuration.bloom_intensity;
+	settings.ambient_occlusion = render_configuration.ambient_occlusion_enabled;
+	settings.exposure = render_configuration.exposure;
+	settings.gamma = render_configuration.gamma;
+
+	auto frame_key = std::make_tuple(
+		preview_geometry_revision, render_camera.width, render_camera.height, render_camera.scale_global,
+		render_camera.camera_distance, render_camera.angle_view, render_camera.elevation_view, render_camera.roll_view,
+		render_camera.target, render_camera.vertical_field_of_view_radians,
+		settings.mode, settings.simulation_alpha, settings.debug_view, settings.mapping_mode_override,
+		settings.lens_flare, settings.shadows, settings.anti_aliasing, settings.cubemap_enabled,
+		settings.cubemap_texture, settings.cubemap_intensity, settings.bloom_enabled,
+		settings.bloom_threshold, settings.bloom_intensity, settings.ambient_occlusion,
+		settings.exposure, settings.gamma);
+	static std::optional<decltype(frame_key)> last_frame_key;
+
+	auto lighting = PreviewLightingFrameFactory().build(preview.lighting.lights,
+	                                                    build_preview_light_camera_context(camera));
+	static PreviewLightingFrame last_lighting;
+	const bool lighting_changed = !same_preview_lighting(last_lighting, lighting);
+	const bool animated_materials = settings.mode == PreviewRenderMode::Full &&
+		std::any_of(active_materials.begin(), active_materials.end(),
+		[](const PreviewMaterial &material) {
+			return std::abs(material.uv_rotation_speed) > 1e-4f ||
+			       material.uv_activity > 1e-4f || material.pulse_strength != 0.0f;
+		});
+
+	if (last_frame_key != frame_key || overlays_changed || lighting_changed ||
+	    render_configuration.changed || animated_materials || preview_playback_active() ||
+	    preview_texture_id() == 0) {
+		const auto start = std::chrono::steady_clock::now();
+		preview_renderer().render(render_camera, settings, active_materials, preview.lighting.lights);
+		preview.statistics.render_milliseconds =
+			std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count();
+		last_frame_key = frame_key;
+		last_lighting = std::move(lighting);
+		render_configuration.changed = false;
+	}
+	if (preview.statistics.benchmark_redraws > 0) {
+		glFinish();
+		const auto start = std::chrono::steady_clock::now();
+		for (int frame = 0; frame < preview.statistics.benchmark_redraws; ++frame) {
+			preview_renderer().render(render_camera, settings, active_materials, preview.lighting.lights);
+		}
+		glFinish();
+		preview.statistics.benchmark_viewport_milliseconds =
+			std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count();
+		preview.statistics.benchmark_redraws = 0;
+	}
 
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
 	ImGui::PushStyleColor(ImGuiCol_Border, color_from_hex(0xe0d8d1));
@@ -9880,7 +9967,7 @@ bool draw_preview_timeline_content(EditorWorkspaceSession &workspace_session,
 		workspace_session.preview.selection.pointer_selection_armed = false;
 	}
 	if (ImGui::IsItemHovered()) {
-		ImGui::SetTooltip("Enable canvas picking and hovered/selected outlines.");
+		ImGui::SetTooltip("Enable canvas picking and highlights on visible hovered or selected surfaces.");
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Overlay Options")) {
@@ -10447,6 +10534,7 @@ int Progen3dEditorApplication::run()
 		                .string());
 
 	EditorWorkspaceSession &app_state = workspace_session_;
+	if (launch_options_.basicRenderRequested()) app_state.preview.render_configuration.mode = PreviewRenderMode::Basic;
 	running_workspace_session = &app_state;
 	app_state.preview.overlays.spatial_overlay_visible =
 		launch_options_.spatialOverlaysRequested() ||
@@ -10838,6 +10926,26 @@ int Progen3dEditorApplication::run()
 					"PROGEN3D_GUI_VISUAL_TEST_FAILED: --visual-test requires --capture-preview <path>");
 				application_exit_code = 4;
 			} else {
+				constexpr int benchmark_frames = 60;
+				double benchmark_ms = 0.0;
+				if (launch_options_.previewBenchmarkRequested()) {
+					app_state.preview.interaction_settings.picking_and_highlighting_enabled = false;
+					glfwSwapInterval(0);
+					const auto redraw = [&] {
+						app_state.preview.render_configuration.changed = true;
+						render_editor_frame(0.0f);
+					};
+					for (int frame = 0; frame < 4; ++frame) redraw();
+					glFinish();
+					const auto start = std::chrono::steady_clock::now();
+					for (int frame = 0; frame < benchmark_frames; ++frame) redraw();
+					glFinish();
+					benchmark_ms = std::chrono::duration<double, std::milli>(
+						std::chrono::steady_clock::now() - start).count();
+					app_state.preview.statistics.benchmark_redraws = benchmark_frames;
+					redraw();
+					glfwSwapInterval(1);
+				}
 				const PreviewCaptureEvidence capture_evidence =
 					PreviewFramebufferCaptureService().captureCurrentPreview(
 						launch_options_.previewCapturePath());
@@ -10853,6 +10961,21 @@ int Progen3dEditorApplication::run()
 					        << " height=" << capture_evidence.height()
 					        << " pixel_hash=" << capture_evidence.pixelHash();
 					debugout(message.str());
+					if (launch_options_.previewBenchmarkRequested()) {
+						auto path = std::filesystem::path(launch_options_.previewCapturePath());
+						path += ".benchmark.json";
+						std::ofstream results(path);
+						results << "{\"frames\":" << benchmark_frames << ",\"elapsed_ms\":" << benchmark_ms
+						        << ",\"viewport_elapsed_ms\":"
+						        << app_state.preview.statistics.benchmark_viewport_milliseconds
+						        << ",\"width\":" << capture_evidence.width() << ",\"height\":"
+						        << capture_evidence.height() << "}\n";
+						results.close();
+						if (!results) {
+							errorout("PROGEN3D_GUI_BENCHMARK_FAILED: could not write timing results");
+							application_exit_code = 4;
+						}
+					}
 				}
 			}
 		}

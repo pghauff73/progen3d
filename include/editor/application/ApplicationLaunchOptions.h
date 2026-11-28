@@ -22,6 +22,8 @@ public:
 	bool smokeTestRequested() const;
 	bool temporalSmokeTestRequested() const;
 	bool visualTestRequested() const;
+	bool basicRenderRequested() const { return basic_render_requested_; }
+	bool previewBenchmarkRequested() const { return preview_benchmark_requested_; }
 	bool spatialOverlaysRequested() const;
 	bool buildingKnowledgeOverlaysRequested() const;
 	bool previewIsometricRequested() const;
@@ -37,6 +39,8 @@ private:
 	bool smoke_test_requested_ = false;
 	bool temporal_smoke_test_requested_ = false;
 	bool visual_test_requested_ = false;
+	bool basic_render_requested_ = false;
+	bool preview_benchmark_requested_ = false;
 	bool spatial_overlays_requested_ = false;
 	bool building_knowledge_overlays_requested_ = false;
 	bool preview_fit_extents_requested_ = false;
