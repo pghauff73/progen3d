@@ -11,6 +11,7 @@
 #include <cstddef>
 #include <fstream>
 #include <memory>
+#include <optional>
 #include <stack>
 #include <string>
 #include <vector>
@@ -109,6 +110,8 @@ public:
 	std::array<glm::vec3, 3> initial_dual_translations{glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(0.0f)};
 	glm::vec3 rotation_degrees{0.0f};
 	glm::vec3 initial_rotation_degrees{0.0f};
+	std::optional<float> material_density_kg_m3;
+	bool has_authored_mass = false;
 	std::shared_ptr<const ResolvedPrimitiveGeometry> resolved_geometry;
 	std::shared_ptr<const ShapeSpecification> shape_specification;
 	mutable CollisionGeometry collision_geometry_cache;
@@ -193,7 +196,7 @@ public:
 	AirflowResult inspectAirflow(const ScenePrimitiveInstance &instance,
 	                            std::vector<AirLoadVector> *vectors = nullptr) const;
 	AirEnvironment air_environment;
-	void setPendingDensity(float density);
+	void setPendingDensity(float density, std::optional<float> shell_thickness = {});
 	void setGravity(float magnitude, const glm::vec3 &direction);
 	const glm::vec3 &getGravity() const;
 	const std::vector<CollisionParticle> &getCollisionParticles() const;
@@ -227,8 +230,9 @@ private:
 	glm::vec3 pending_rotational_velocity_{0.0f};
 	float pending_mass_ = 1.0f;
 	std::shared_ptr<const BodyAirflow> pending_airflow_;
-	float pending_density_ = 0.0f;
-	bool has_pending_density_ = false;
+	bool has_pending_mass_ = false;
+	std::optional<float> pending_density_;
+	std::optional<float> pending_shell_thickness_;
 	glm::vec3 gravity_acceleration_{0.0f};
 	std::vector<std::string> material_names_;
 	std::vector<CollisionParticle> collision_particles_;

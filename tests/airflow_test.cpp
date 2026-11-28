@@ -2,6 +2,7 @@
 #include "GrammarRuntime.h"
 #include "grammar.h"
 
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -78,6 +79,45 @@ void checkMechanics() {
     require(bad->error_details.front().line>=0,"source diagnostic");
     fixture(inertia+"PropSample(0 1 1)"+cube,false);
     fixture(inertia+"BodyForce(1 0 0)",false);
+}
+
+void checkMassGrammar() {
+    auto mass_scene = fixture(
+        "[ P(2)" + cube + " ] " +
+        "[ T(10 0 0) S(2 3 4) P(2 0.02) BodyInertia(1 1 1) BodyForce(2.08 0 0)" + cube + " ] " +
+        "[ T(20 0 0) M(0) !I(Cube material(tealmatteceramic) 1 1) ] " +
+        "[ T(30 0 0)" + cube + " ]");
+    auto &context = *mass_scene->context;
+    const auto &bodies = context.primitive_instances;
+    require(bodies.size() == 4, "mass fixture primitive count");
+    near(bodies[0].mass, 2.f, 1e-6f, "density and closed cube volume");
+    near(bodies[1].mass, 2.08f, 1e-6f, "density and transformed cube sheet area");
+    require(bodies[1].material_density_kg_m3 == 2.f && bodies[1].has_authored_mass,
+            "primitive retains its authored density and mass flag");
+    require(bodies[2].immovable && bodies[2].has_authored_mass, "static mass annotation");
+    near(bodies[2].mass, 0.f, 0.f, "static zero mass");
+    require(!bodies[3].material_density_kg_m3 && !bodies[3].has_authored_mass &&
+            !bodies[3].airflow, "mass and airflow state reset at the next primitive");
+    near(bodies[3].mass, 1.f, 0.f, "default mass");
+    constexpr float time_step = 0.01f;
+    context.stepSimulation(time_step);
+    near(bodies[1].velocity.x / time_step, 1.f, 1e-5f, "sheet mass used by rigid-body loads");
+    fixture("P(2 0)" + cube, false);
+}
+
+void checkOpenMeshWarning() {
+    const std::string path = "grammar/engineering/solid-integrity/sic-v1/OpenMeshWarning.p3d";
+    std::ifstream input(path);
+    require(bool(input), "missing " + path);
+    const auto grammar = scene(input, path);
+    require(grammar->context->primitive_instances.size() == 1, "The open sweep remains visible.");
+    const auto &warnings = grammar->warning_details;
+    const auto warning = std::find_if(warnings.begin(), warnings.end(), [](const auto &diagnostic) {
+        return diagnostic.message.rfind("SIC001:", 0) == 0;
+    });
+    require(warning != warnings.end() && warning->line == 1 &&
+            warning->message.find("32 boundary edges") != std::string::npos,
+            "The compiler publishes the open sweep warning at its source line.");
 }
 
 void checkReplayAndFreeRotation() {
@@ -178,7 +218,8 @@ int main(int argc, char **argv) {
             return 0;
         }
         require(argc==1, "usage: airflow-test [--trace FILE TICKS]");
-        checkMechanics(); checkAir(); checkReplayAndFreeRotation(); checkPropellerAndDuct();
+        checkMechanics(); checkMassGrammar(); checkOpenMeshWarning();
+        checkAir(); checkReplayAndFreeRotation(); checkPropellerAndDuct();
         std::cout<<"Native airflow grammar, rigid-body, propeller, duct and plate checks passed.\n";
     } catch(const std::exception &e) {std::cerr<<e.what()<<'\n';return 1;}
 }

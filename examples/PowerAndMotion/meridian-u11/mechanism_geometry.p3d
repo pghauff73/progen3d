@@ -1,0 +1,262 @@
+# Meridian U11 inspectable drive train. Geometry and physical mass are in SI units.
+# Joint coordinates use radians (revolute) and metres (prismatic).
+# `A()` uses degrees. The wrist placements match the default U11 folded pose.
+# Masses on new parts are density times authored solid volume. Ferritic/electrical
+# steel 7650, hardened steel 7850, Cu 8960, NdFeB 7500, Al 2700, graphite 2200
+# and reinforced polyurethane 1280 kg/m3 are nominal design densities.
+# The translucent flux volumes mark the air gap. The graphite shims are
+# weakly diamagnetic passive hardware, with no torque attributed to them.
+
+U11DriveGeometry(rotorDeg layshaftDeg socketDeg screwDeg jawOffset beltTravel beltStretch iqSocket iqScrew) ->
+    [ Object(id(MeridianRobot) class(OrbitalServiceRobot) taxonomy(Robot Meridian ServiceRobot) layer(Equipment))
+      [ RobotAssemblyDrive(1 socketDeg 0.06-2*jawOffset) ]
+      [ T(-0.76 2.35 -0.45) A(180 2) A(180 0) U11SocketDrive(rotorDeg layshaftDeg socketDeg beltTravel beltStretch iqSocket) ]
+      [ T(0.76 2.35 -0.45) A(180 2) A(180 0) T(0 -0.08 0)
+        U11GuideDrive(screwDeg jawOffset iqScrew) ]
+    ]
+
+U11SocketDrive(rotorDeg layshaftDeg socketDeg beltTravel beltStretch current) ->
+    [ Object(id(U11SocketDriveHousing) class(DriveHousing) taxonomy(Mechanical Rigid Aluminium) container(RobotSocketWrist)) [
+      Interface(id(WristMount) type(Mate) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ T(0.082 -0.025 0.055) M(2700*0.217*0.014*0.087) !I(Loft(section(-0.0435 Rect 0.217 0.014) section(0.0435 Rect 0.217 0.014) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ T(0.197 -0.071 0.04) M(2700*0.014*0.092*0.090) !I(Loft(section(-0.045 Rect 0.014 0.092) section(0.045 Rect 0.014 0.092) cap(all)) material(silverbrushedmetal) 1 1) ]
+      ] ]
+    [ T(0.144 -0.07 -0.008) Object(id(U11SocketStator) class(PermanentMagnetMotorStator) taxonomy(Electrical Rigid Copper ElectricalSteel Graphite) container(U11SocketDriveHousing)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.045 -0.010) normal(0 -1 0) tangent(1 0 0) region(Point))
+      Interface(id(RotorAxis) type(Hinge) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11MotorStator
+      ] ]
+    [ T(0.144 -0.07 -0.008) A(rotorDeg 2) Object(id(U11SocketRotor) class(PermanentMagnetMotorRotor) taxonomy(Electrical Rigid NdFeB Steel) container(U11SocketStator)) [
+      Interface(id(ShaftAxis) type(Shaft) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11MotorRotor
+      [ M(7850*3.14159265*0.008*0.008*0.135) !I(SweepDisk(path(0 0 -0.012 0 0 0.123) radius(0.008) segments(20) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ T(0 0 0.116) U11SpurPinion ]
+      [ Object(id(U11SocketAirGapFlux) class(MagneticFluxVisualization) taxonomy(Visualization AirGap NonPhysical) container(U11SocketRotor)) [ U11FluxRing(0 current) ] ]
+      ] ]
+    [ T(0.072 -0.07 0.108) Object(id(U11LayshaftBearing) class(LocatingRollingBearing) taxonomy(Mechanical Rigid Bearing Steel) container(U11SocketDriveHousing)) [
+      Interface(id(Axis) type(Hinge) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11BearingRace(0 0.018)
+      ] ]
+    [ T(0.072 -0.07 0.108) A(layshaftDeg 2) Object(id(U11SocketLayshaft) class(GearedTransmissionShaft) taxonomy(Mechanical Rigid Gear Pulley Steel) container(U11LayshaftBearing)) [
+      Interface(id(Axis) type(Shaft) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      [ A(3.333333 2) U11SpurGear ]
+      [ T(0 0 -0.028) U11BeltPinion ]
+      ] ]
+    [ T(0 -0.07 0.017) Object(id(U11SocketOutputBearing) class(LocatingRollingBearing) taxonomy(Mechanical Rigid Bearing Steel) container(U11SocketDriveHousing)) [
+      Interface(id(Axis) type(Hinge) origin(0 0 0.103) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11BearingRace(0 0.025)
+      ] ]
+    [ T(0 -0.07 0.08) A(socketDeg 2) Object(id(U11SocketDrivenPulley) class(SynchronousPulley) taxonomy(Mechanical Rigid Pulley Aluminium) container(RobotSocketDriver)) [
+      U11BeltDrivenPulley ] ]
+    [ T(0 -0.07 0.08) Object(id(U11SocketSynchronousBelt) class(ElasticTimingBelt) taxonomy(Mechanical Elastic ReinforcedPolyurethane) container(U11SocketDriveHousing)) [
+      U11BeltPhysical(beltStretch)
+      U11BeltMarkerAt(-beltTravel beltStretch)
+      U11BeltMarkerAt(0.057-beltTravel beltStretch)
+      U11BeltMarkerAt(0.114-beltTravel beltStretch)
+      U11BeltMarkerAt(0.171-beltTravel beltStretch)
+      ] ]
+    Joint(id(U11SocketHousingMount) type(Fixed) source(RobotSocketWrist DriveHousingMount) target(U11SocketDriveHousing WristMount) axis(0 0 1) limits(0 0) state(0))
+    Joint(id(U11SocketMotorJoint) type(Revolute) source(U11SocketStator RotorAxis) target(U11SocketRotor ShaftAxis) axis(0 0 1) limits(-100000000 100000000) state(rotorDeg*0.01745329252))
+    Joint(id(U11SocketLayshaftJoint) type(Revolute) source(U11LayshaftBearing Axis) target(U11SocketLayshaft Axis) axis(0 0 1) limits(-100000000 100000000) state(layshaftDeg*0.01745329252))
+    Joint(id(U11SocketOutputJoint) type(Revolute) source(U11SocketOutputBearing Axis) target(RobotSocketDriver Spindle) axis(0 0 1) limits(-100000000 100000000) state(socketDeg*0.01745329252))
+    [ T(0.192 -0.05 0.02) Object(id(U11SocketMotorInverter) class(MotorInverter) taxonomy(Power Transfer MotorInverter) container(U11SocketDriveHousing)) [
+      U11MotorInverterPorts
+    ] ]
+    Connect(id(U11SocketDriveFeed) source(VehiclePowerBus SocketDriveOut) target(U11SocketMotorInverter DcIn) type(Powers))
+    Connect(id(U11SocketMotorFeed) source(U11SocketMotorInverter PhaseOut) target(U11SocketStator PowerIn) type(Powers))
+
+U11GuideDrive(screwDeg jawOffset current) ->
+    [ Object(id(U11GuideBed) class(LinearRailBed) taxonomy(Mechanical Rigid Aluminium) container(RobotGuideWrist)) [
+      Interface(id(WristMount) type(Mate) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      Interface(id(NegativeTravel) type(Slide) origin(-0.139 0 0.145) normal(1 0 0) tangent(0 1 0) region(Point))
+      Interface(id(PositiveTravel) type(Slide) origin(0.139 0 0.145) normal(-1 0 0) tangent(0 1 0) region(Point))
+      [ T(0 0 0.129) M(2700*0.324*0.105*0.013) !I(Loft(section(-0.0065 Rect 0.324 0.105) section(0.0065 Rect 0.324 0.105) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ T(0 -0.042 0.150) U11GuideRail ]
+      [ T(0 0.042 0.150) U11GuideRail ]
+      ] ]
+    [ T(-0.226 0 0.152) A(90 1) Object(id(U11GuideStator) class(PermanentMagnetMotorStator) taxonomy(Electrical Rigid Copper ElectricalSteel Graphite) container(U11GuideBed)) [
+      Interface(id(PowerIn) type(ElectricalPort) origin(0 -0.045 -0.010) normal(0 -1 0) tangent(1 0 0) region(Point))
+      Interface(id(RotorAxis) type(Hinge) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11MotorStator
+      ] ]
+    [ T(-0.226 0 0.152) A(90 1) A(screwDeg 2) Object(id(U11GuideRotor) class(PermanentMagnetMotorRotor) taxonomy(Electrical Rigid NdFeB Steel) container(U11GuideStator)) [
+      Interface(id(ShaftAxis) type(Shaft) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11MotorRotor
+      [ M(7850*3.14159265*0.007*0.007*0.085) !I(SweepDisk(path(0 0 -0.009 0 0 0.076) radius(0.007) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ Object(id(U11GuideAirGapFlux) class(MagneticFluxVisualization) taxonomy(Visualization AirGap NonPhysical) container(U11GuideRotor)) [ U11FluxRing(0 current) ] ]
+      ] ]
+    [ T(-0.16 0 0.152) A(90 1) Object(id(U11GuideScrewLocatingBearing) class(LocatingRollingBearing) taxonomy(Mechanical Rigid Bearing Steel) container(U11GuideBed)) [
+      Interface(id(Axis) type(Hinge) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11BearingRace(0 0.018)
+      ] ]
+    [ T(0.16 0 0.152) A(90 1) Object(id(U11GuideScrewFloatingBearing) class(FloatingRollingBearing) taxonomy(Mechanical Rigid Bearing Steel) container(U11GuideBed)) [
+      Interface(id(Axis) type(Slide) origin(0 0 0) normal(0 0 1) tangent(1 0 0) region(Point))
+      U11BearingRace(0 0.018)
+      ] ]
+    [ T(0 0 0.152) A(screwDeg 0) Object(id(U11GuideLeadScrew) class(OpposedLeadScrew) taxonomy(Mechanical Rigid Steel) container(U11GuideScrewLocatingBearing)) [
+      Interface(id(LocatingEnd) type(Shaft) origin(-0.16 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      [ M(7850*3.14159265*0.0075*0.0075*0.346) !I(SweepDisk(path(-0.173 0 0 0.173 0 0) radius(0.0075) segments(16) cap(all)) material(charcoalmattemetal) 1 1) ]
+      U11GuideThreads
+      ] ]
+    [ T(-0.139+jawOffset 0 0.152) Object(id(U11NegativeJawCarriage) class(LinearBearingCarriage) taxonomy(Mechanical Rigid Steel) container(RobotGuideJawNegative)) [ U11GuideCarriage ] ]
+    [ T(0.139-jawOffset 0 0.152) Object(id(U11PositiveJawCarriage) class(LinearBearingCarriage) taxonomy(Mechanical Rigid Steel) container(RobotGuideJawPositive)) [ U11GuideCarriage ] ]
+    Joint(id(U11GuideBedMount) type(Fixed) source(RobotGuideWrist DriveHousingMount) target(U11GuideBed WristMount) axis(1 0 0) limits(0 0) state(0))
+    Joint(id(U11GuideMotorJoint) type(Revolute) source(U11GuideStator RotorAxis) target(U11GuideRotor ShaftAxis) axis(0 0 1) limits(-100000000 100000000) state(screwDeg*0.01745329252))
+    Joint(id(U11GuideScrewJoint) type(Revolute) source(U11GuideScrewLocatingBearing Axis) target(U11GuideLeadScrew LocatingEnd) axis(0 0 1) limits(-100000000 100000000) state(screwDeg*0.01745329252))
+    Joint(id(U11GuideNegativeJawSlide) type(Prismatic) source(U11GuideBed NegativeTravel) target(RobotGuideJawNegative MotionGuide) axis(1 0 0) limits(0 0.03) state(jawOffset))
+    Joint(id(U11GuidePositiveJawSlide) type(Prismatic) source(U11GuideBed PositiveTravel) target(RobotGuideJawPositive MotionGuide) axis(-1 0 0) limits(0 0.03) state(jawOffset))
+    [ T(-0.192 -0.05 0.14) Object(id(U11GuideMotorInverter) class(MotorInverter) taxonomy(Power Transfer MotorInverter) container(U11GuideBed)) [
+      U11MotorInverterPorts
+    ] ]
+    Connect(id(U11GuideDriveFeed) source(VehiclePowerBus GuideDriveOut) target(U11GuideMotorInverter DcIn) type(Powers))
+    Connect(id(U11GuideMotorFeed) source(U11GuideMotorInverter PhaseOut) target(U11GuideStator PowerIn) type(Powers))
+
+U11MotorInverterPorts ->
+    Interface(id(DcIn) type(ElectricalPort) origin(-0.017 0 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+    Interface(id(PhaseOut) type(ElectricalPort) origin(0.017 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+
+U11MotorStator ->
+    U11StatorSlots(0)
+    [ T(0 -0.041 0.043) M(2200*0.021*0.010*0.012) !I(Loft(section(-0.006 Rect 0.021 0.010) section(0.006 Rect 0.021 0.010) cap(all)) material(charcoalmattemetal) 1 1) ]
+    [ T(0 0.041 0.043) M(2200*0.021*0.010*0.012) !I(Loft(section(-0.006 Rect 0.021 0.010) section(0.006 Rect 0.021 0.010) cap(all)) material(charcoalmattemetal) 1 1) ]
+
+U11StatorSlots(slotIndex) ->
+    ?(slotIndex<12) [
+      [ A(30*slotIndex 2) U11StatorSlot ]
+      U11StatorSlots(slotIndex+1)
+    ] : []
+
+U11StatorSlot ->
+    [ T(0.043 0 0.013) M(7650*0.014*0.020*0.061) !I(Loft(section(-0.0305 Rect 0.014 0.020) section(0.0305 Rect 0.014 0.020) cap(all)) material(charcoalmattemetal) 1 1) ]
+    [ M(8960*3.14159265*0.0028*0.0028*0.160) !I(SweepDisk(path(0.033 -0.009 -0.019 0.033 -0.009 0.047 0.033 0.009 0.047 0.033 0.009 -0.015 0.033 -0.005 -0.015) radius(0.0028) segments(8) cap(all)) material(copperpolishedmetal) 1 1) ]
+
+U11MotorRotor ->
+    [ M(7850*3.14159265*0.024*0.024*0.05) !I(SweepDisk(path(0 0 -0.013 0 0 0.037) radius(0.024) segments(28) cap(all)) material(silverbrushedmetal) 1 1) ]
+    U11RotorPoles(0)
+
+U11RotorPoles(poleIndex) ->
+    ?(poleIndex<4) [
+      [ A(90*poleIndex 2) T(0.026 0 0.012) M(7500*0.008*0.016*0.053) !I(Loft(section(-0.0265 Rect 0.008 0.016) section(0.0265 Rect 0.008 0.016) cap(all)) material(blueglosspaint) 1 1) ]
+      [ A(90*poleIndex+45 2) T(0.026 0 0.012) M(7500*0.008*0.016*0.053) !I(Loft(section(-0.0265 Rect 0.008 0.016) section(0.0265 Rect 0.008 0.016) cap(all)) material(redglosspaint) 1 1) ]
+      U11RotorPoles(poleIndex+1)
+    ] : []
+
+U11FluxRing(fluxIndex current) ->
+    ?(fluxIndex<4) [
+      [ A(90*fluxIndex 2) T(0.032 0 0.01) M(0) !I(Loft(section(-0.022 Rect 0.005 0.016) section(0.022 Rect 0.005 0.016) cap(all)) material(greenemissivepaint) min(0.52,0.16+0.25*abs(current)) 1) ]
+      [ A(90*fluxIndex+45 2) T(0.032 0 0.01) M(0) !I(Loft(section(-0.022 Rect 0.005 0.016) section(0.022 Rect 0.005 0.016) cap(all)) material(blueemissivepaint) min(0.52,0.16+0.25*abs(current)) 1) ]
+      U11FluxRing(fluxIndex+1 current)
+    ] : []
+
+U11BearingRace(ballIndex radius) ->
+    ?(ballIndex<12) [
+      [ A(30*ballIndex 2) T(radius 0 0) M(7850*0.010*0.009*0.013) !I(Loft(section(-0.0065 Rect 0.010 0.009) section(0.0065 Rect 0.010 0.009) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ A(30*ballIndex 2) T(radius-0.006 0 0) M(7850*0.5235987756*0.006*0.006*0.006) !I(Sphere(radial(0 0.006) segments(10 8)) material(silverbrushedmetal) 1 1) ]
+      U11BearingRace(ballIndex+1 radius)
+    ] : []
+
+U11SpurPinion ->
+    [ M(7850*3.14159265*0.0155*0.0155*0.011) !I(SweepDisk(path(0 0 -0.0055 0 0 0.0055) radius(0.0155) segments(24) cap(all)) material(silverbrushedmetal) 1 1) ]
+    U11SpurTeeth(0 18 0.018)
+    [ T(0.010 0 0.0065) M(2700*0.005*0.002*0.002) !I(Loft(section(-0.001 Rect 0.005 0.002) section(0.001 Rect 0.005 0.002) cap(all)) material(orangeglosspaint) 1 1) ]
+
+U11SpurGear ->
+    [ M(7850*3.14159265*0.0515*0.0515*0.011) !I(SweepDisk(path(0 0 -0.0055 0 0 0.0055) radius(0.0515) segments(56) cap(all)) material(silverbrushedmetal) 1 1) ]
+    U11SpurTeeth(0 54 0.054)
+    [ T(0.034 0 0.0065) M(2700*0.017*0.003*0.002) !I(Loft(section(-0.001 Rect 0.017 0.003) section(0.001 Rect 0.017 0.003) cap(all)) material(orangeglosspaint) 1 1) ]
+
+U11SpurTeeth(toothIndex count pitchRadius) ->
+    ?(toothIndex<count) [
+      [ A(360*toothIndex/count 2) T(pitchRadius-0.0003 0 0) M(7850*0.0043*0.0027*0.011) !I(Loft(section(-0.0055 Rect 0.0043 0.0027) section(0.0055 Rect 0.0043 0.0027) cap(all)) material(silverbrushedmetal) 1 1) ]
+      U11SpurTeeth(toothIndex+1 count pitchRadius)
+    ] : []
+
+U11BeltPinion ->
+    [ M(2700*3.14159265*0.0147*0.0147*0.015) !I(SweepDisk(path(0 0 -0.0075 0 0 0.0075) radius(0.0147) segments(24) cap(all)) material(goldbrushedmetal) 1 1) ]
+    U11PulleyTeeth(0 20 0.0159154943)
+
+U11BeltDrivenPulley ->
+    [ M(2700*3.14159265*0.0307*0.0307*0.015) !I(SweepDisk(path(0 0 -0.0075 0 0 0.0075) radius(0.0307) segments(42) cap(all)) material(goldbrushedmetal) 1 1) ]
+    U11PulleyTeeth(0 40 0.0318309886)
+    [ T(0.021 0 0.0085) M(2700*0.009*0.002*0.002) !I(Loft(section(-0.001 Rect 0.009 0.002) section(0.001 Rect 0.009 0.002) cap(all)) material(orangeglosspaint) 1 1) ]
+
+U11PulleyTeeth(toothIndex count pitchRadius) ->
+    ?(toothIndex<count) [
+      [ A(360*toothIndex/count 2) T(pitchRadius-0.0004 0 0) M(2700*0.0021*0.0022*0.015) !I(Loft(section(-0.0075 Rect 0.0021 0.0022) section(0.0075 Rect 0.0021 0.0022) cap(all)) material(goldbrushedmetal) 1 1) ]
+      U11PulleyTeeth(toothIndex+1 count pitchRadius)
+    ] : []
+
+U11GuideRail ->
+    [ M(7850*0.328*0.011*0.014) !I(Loft(section(-0.007 Rect 0.328 0.011) section(0.007 Rect 0.328 0.011) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+# The offset lower bed clears the legacy housing. A rigid nut bracket
+# brings the load line back to each original jaw without changing the axis.
+U11GuideCarriage ->
+    [ T(0 0.028 0.006) M(7850*0.024*0.054*0.016) !I(Loft(section(-0.008 Rect 0.024 0.054) section(0.008 Rect 0.024 0.054) cap(all)) material(charcoalmattemetal) 1 1) ]
+    [ T(0 0 -0.0095) M(7850*0.029*0.052*0.009) !I(Loft(section(-0.0045 Rect 0.029 0.052) section(0.0045 Rect 0.029 0.052) cap(all)) material(goldbrushedmetal) 1 1) ]
+    [ T(0 -0.042 0) M(7850*0.030*0.024*0.023) !I(Loft(section(-0.0115 Rect 0.030 0.024) section(0.0115 Rect 0.030 0.024) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ T(0 0.042 0) M(7850*0.030*0.024*0.023) !I(Loft(section(-0.0115 Rect 0.030 0.024) section(0.0115 Rect 0.030 0.024) cap(all)) material(silverbrushedmetal) 1 1) ]
+
+# The elastic belt follows tangent spans and both pitch circles. The signed
+# travel advances belt markers continuously with wraparound. Extra length from
+# the calibrated differential span displacement is displayed in the loaded span.
+U11BeltPhysical(stretch) ->
+    U11BeltSegments(0 stretch)
+
+U11BeltSegments(beltIndex stretch) ->
+    ?(beltIndex<50) [
+      [ U11BeltPath(0.0059506527*beltIndex stretch 0) ]
+      U11BeltSegments(beltIndex+1 stretch)
+    ] : []
+
+U11BeltMarkerAt(distance stretch) ->
+    U11BeltPath(distance-0.2975326366*floor(distance/0.2975326366) stretch 1)
+
+U11BeltPath(distance stretch marker) ->
+    ?(distance<0.0702189222) [
+      U11BeltUpper(distance/0.0702189222 stretch marker)
+    ] : [
+      U11BeltAfterUpper(distance-0.0702189222 stretch marker)
+    ]
+
+U11BeltAfterUpper(distance stretch marker) ->
+    ?(distance<0.0429052079) [
+      U11BeltRightArc(1.3479068593-distance/0.0159154943 marker)
+    ] : [
+      U11BeltAfterRight(distance-0.0429052079 marker)
+    ]
+
+U11BeltAfterRight(distance marker) ->
+    ?(distance<0.0702189222) [
+      U11BeltLower(distance/0.0702189222 marker)
+    ] : [
+      U11BeltLeftArc(0-1.3479068593-(distance-0.0702189222)/0.0318309886 marker)
+    ]
+
+U11BeltUpper(fraction stretch marker) ->
+    T(0.0070361933+0.0684819033*fraction 0.0310435794-0.0155217897*fraction+4*fraction*(1-fraction)*stretch 0)
+    A(-12.7706257829 2) U11BeltElement(marker)
+
+U11BeltRightArc(angle marker) ->
+    T(0.072+0.0159154943*cos(angle) 0.0159154943*sin(angle) 0)
+    A(angle*57.2957795131-90 2) U11BeltElement(marker)
+
+U11BeltLower(fraction marker) ->
+    T(0.0755180967-0.0684819033*fraction 0-0.0155217897-0.0155217897*fraction 0)
+    A(-167.2293742171 2) U11BeltElement(marker)
+
+U11BeltLeftArc(angle marker) ->
+    T(0.0318309886*cos(angle) 0.0318309886*sin(angle) 0)
+    A(angle*57.2957795131-90 2) U11BeltElement(marker)
+
+U11BeltElement(marker) ->
+    ?(marker==0) [
+      [ M(1280*0.0061806527*0.0025*0.014) !I(Loft(section(-0.007 Rect 0.0061806527 0.0025) section(0.007 Rect 0.0061806527 0.0025) cap(all)) material(charcoalmattemetal) 1 1) ]
+    ] : [
+      [ T(0 0 0.008) M(0) !I(Loft(section(-0.001 Rect 0.007 0.003) section(0.001 Rect 0.007 0.003) cap(all)) material(orangeemissivepaint) 1 1) ]
+    ]
+
+# Left- and right-hand 12 mm lead ridges on the shared shaft.
+U11GuideThreads ->
+    [ M(7850*3.14159265*0.0013*0.0013*0.5623376667) !I(SweepDisk(path(-0.01 0.008 0 -0.011 0.0069282 0.004 -0.012 0.004 0.0069282 -0.013 0 0.008 -0.014 -0.004 0.0069282 -0.015 -0.0069282 0.004 -0.016 -0.008 0 -0.017 -0.0069282 -0.004 -0.018 -0.004 -0.0069282 -0.019 0 -0.008 -0.02 0.004 -0.0069282 -0.021 0.0069282 -0.004 -0.022 0.008 0 -0.023 0.0069282 0.004 -0.024 0.004 0.0069282 -0.025 0 0.008 -0.026 -0.004 0.0069282 -0.027 -0.0069282 0.004 -0.028 -0.008 0 -0.029 -0.0069282 -0.004 -0.03 -0.004 -0.0069282 -0.031 0 -0.008 -0.032 0.004 -0.0069282 -0.033 0.0069282 -0.004 -0.034 0.008 0 -0.035 0.0069282 0.004 -0.036 0.004 0.0069282 -0.037 0 0.008 -0.038 -0.004 0.0069282 -0.039 -0.0069282 0.004 -0.04 -0.008 0 -0.041 -0.0069282 -0.004 -0.042 -0.004 -0.0069282 -0.043 0 -0.008 -0.044 0.004 -0.0069282 -0.045 0.0069282 -0.004 -0.046 0.008 0 -0.047 0.0069282 0.004 -0.048 0.004 0.0069282 -0.049 0 0.008 -0.05 -0.004 0.0069282 -0.051 -0.0069282 0.004 -0.052 -0.008 0 -0.053 -0.0069282 -0.004 -0.054 -0.004 -0.0069282 -0.055 0 -0.008 -0.056 0.004 -0.0069282 -0.057 0.0069282 -0.004 -0.058 0.008 0 -0.059 0.0069282 0.004 -0.06 0.004 0.0069282 -0.061 0 0.008 -0.062 -0.004 0.0069282 -0.063 -0.0069282 0.004 -0.064 -0.008 0 -0.065 -0.0069282 -0.004 -0.066 -0.004 -0.0069282 -0.067 0 -0.008 -0.068 0.004 -0.0069282 -0.069 0.0069282 -0.004 -0.07 0.008 0 -0.071 0.0069282 0.004 -0.072 0.004 0.0069282 -0.073 0 0.008 -0.074 -0.004 0.0069282 -0.075 -0.0069282 0.004 -0.076 -0.008 0 -0.077 -0.0069282 -0.004 -0.078 -0.004 -0.0069282 -0.079 0 -0.008 -0.08 0.004 -0.0069282 -0.081 0.0069282 -0.004 -0.082 0.008 0 -0.083 0.0069282 0.004 -0.084 0.004 0.0069282 -0.085 0 0.008 -0.086 -0.004 0.0069282 -0.087 -0.0069282 0.004 -0.088 -0.008 0 -0.089 -0.0069282 -0.004 -0.09 -0.004 -0.0069282 -0.091 0 -0.008 -0.092 0.004 -0.0069282 -0.093 0.0069282 -0.004 -0.094 0.008 0 -0.095 0.0069282 0.004 -0.096 0.004 0.0069282 -0.097 0 0.008 -0.098 -0.004 0.0069282 -0.099 -0.0069282 0.004 -0.1 -0.008 0 -0.101 -0.0069282 -0.004 -0.102 -0.004 -0.0069282 -0.103 0 -0.008 -0.104 0.004 -0.0069282 -0.105 0.0069282 -0.004 -0.106 0.008 0 -0.107 0.0069282 0.004 -0.108 0.004 0.0069282 -0.109 0 0.008 -0.11 -0.004 0.0069282 -0.111 -0.0069282 0.004 -0.112 -0.008 0 -0.113 -0.0069282 -0.004 -0.114 -0.004 -0.0069282 -0.115 0 -0.008 -0.116 0.004 -0.0069282 -0.117 0.0069282 -0.004 -0.118 0.008 0 -0.119 0.0069282 0.004 -0.12 0.004 0.0069282 -0.121 0 0.008 -0.122 -0.004 0.0069282 -0.123 -0.0069282 0.004 -0.124 -0.008 0 -0.125 -0.0069282 -0.004 -0.126 -0.004 -0.0069282 -0.127 0 -0.008 -0.128 0.004 -0.0069282 -0.129 0.0069282 -0.004 -0.13 0.008 0 -0.131 0.0069282 0.004 -0.132 0.004 0.0069282 -0.133 0 0.008 -0.134 -0.004 0.0069282 -0.135 -0.0069282 0.004 -0.136 -0.008 0 -0.137 -0.0069282 -0.004 -0.138 -0.004 -0.0069282 -0.139 0 -0.008 -0.14 0.004 -0.0069282 -0.141 0.0069282 -0.004 -0.142 0.008 0) radius(0.0013) segments(6) cap(all)) material(silverbrushedmetal) 1 1) ]
+    [ M(7850*3.14159265*0.0013*0.0013*0.5623376667) !I(SweepDisk(path(0.01 0.008 0 0.011 0.0069282 0.004 0.012 0.004 0.0069282 0.013 0 0.008 0.014 -0.004 0.0069282 0.015 -0.0069282 0.004 0.016 -0.008 0 0.017 -0.0069282 -0.004 0.018 -0.004 -0.0069282 0.019 0 -0.008 0.02 0.004 -0.0069282 0.021 0.0069282 -0.004 0.022 0.008 0 0.023 0.0069282 0.004 0.024 0.004 0.0069282 0.025 0 0.008 0.026 -0.004 0.0069282 0.027 -0.0069282 0.004 0.028 -0.008 0 0.029 -0.0069282 -0.004 0.03 -0.004 -0.0069282 0.031 0 -0.008 0.032 0.004 -0.0069282 0.033 0.0069282 -0.004 0.034 0.008 0 0.035 0.0069282 0.004 0.036 0.004 0.0069282 0.037 0 0.008 0.038 -0.004 0.0069282 0.039 -0.0069282 0.004 0.04 -0.008 0 0.041 -0.0069282 -0.004 0.042 -0.004 -0.0069282 0.043 0 -0.008 0.044 0.004 -0.0069282 0.045 0.0069282 -0.004 0.046 0.008 0 0.047 0.0069282 0.004 0.048 0.004 0.0069282 0.049 0 0.008 0.05 -0.004 0.0069282 0.051 -0.0069282 0.004 0.052 -0.008 0 0.053 -0.0069282 -0.004 0.054 -0.004 -0.0069282 0.055 0 -0.008 0.056 0.004 -0.0069282 0.057 0.0069282 -0.004 0.058 0.008 0 0.059 0.0069282 0.004 0.06 0.004 0.0069282 0.061 0 0.008 0.062 -0.004 0.0069282 0.063 -0.0069282 0.004 0.064 -0.008 0 0.065 -0.0069282 -0.004 0.066 -0.004 -0.0069282 0.067 0 -0.008 0.068 0.004 -0.0069282 0.069 0.0069282 -0.004 0.07 0.008 0 0.071 0.0069282 0.004 0.072 0.004 0.0069282 0.073 0 0.008 0.074 -0.004 0.0069282 0.075 -0.0069282 0.004 0.076 -0.008 0 0.077 -0.0069282 -0.004 0.078 -0.004 -0.0069282 0.079 0 -0.008 0.08 0.004 -0.0069282 0.081 0.0069282 -0.004 0.082 0.008 0 0.083 0.0069282 0.004 0.084 0.004 0.0069282 0.085 0 0.008 0.086 -0.004 0.0069282 0.087 -0.0069282 0.004 0.088 -0.008 0 0.089 -0.0069282 -0.004 0.09 -0.004 -0.0069282 0.091 0 -0.008 0.092 0.004 -0.0069282 0.093 0.0069282 -0.004 0.094 0.008 0 0.095 0.0069282 0.004 0.096 0.004 0.0069282 0.097 0 0.008 0.098 -0.004 0.0069282 0.099 -0.0069282 0.004 0.1 -0.008 0 0.101 -0.0069282 -0.004 0.102 -0.004 -0.0069282 0.103 0 -0.008 0.104 0.004 -0.0069282 0.105 0.0069282 -0.004 0.106 0.008 0 0.107 0.0069282 0.004 0.108 0.004 0.0069282 0.109 0 0.008 0.11 -0.004 0.0069282 0.111 -0.0069282 0.004 0.112 -0.008 0 0.113 -0.0069282 -0.004 0.114 -0.004 -0.0069282 0.115 0 -0.008 0.116 0.004 -0.0069282 0.117 0.0069282 -0.004 0.118 0.008 0 0.119 0.0069282 0.004 0.12 0.004 0.0069282 0.121 0 0.008 0.122 -0.004 0.0069282 0.123 -0.0069282 0.004 0.124 -0.008 0 0.125 -0.0069282 -0.004 0.126 -0.004 -0.0069282 0.127 0 -0.008 0.128 0.004 -0.0069282 0.129 0.0069282 -0.004 0.13 0.008 0 0.131 0.0069282 0.004 0.132 0.004 0.0069282 0.133 0 0.008 0.134 -0.004 0.0069282 0.135 -0.0069282 0.004 0.136 -0.008 0 0.137 -0.0069282 -0.004 0.138 -0.004 -0.0069282 0.139 0 -0.008 0.14 0.004 -0.0069282 0.141 0.0069282 -0.004 0.142 0.008 0) radius(0.0013) segments(6) cap(all)) material(silverbrushedmetal) 1 1) ]

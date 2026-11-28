@@ -1,0 +1,227 @@
+# Utility bench with electrical, pneumatic, water and mechanical circuits.
+# SI units. 1 closes the main switch, 0 opens it. The valve opening is 0..1.
+# Choose Start -> Bench(0 0.65) to test the unpowered-motor compiler warning.
+# The displayed equations are lumped estimates. Connection arrows describe transfer direction.
+# The transformer model assumes 24 V AC and a 120/240 secondary/primary turns ratio.
+# The ideal rectifying regulator lands on 12 V DC for a 6 ohm equivalent motor load.
+# The example pump head varies with squared shaft speed. The water regulator clips its
+# pressure rise to the 30 kPa gauge set point. This is a visualization operating point.
+Start -> Bench(1 0.65)
+
+Bench(switchClosed valveOpening) ->
+    BenchOperatingPoint(switchClosed clamp(valveOpening,0,1) 24*120/240 6 240/0.002)
+
+BenchOperatingPoint(switchClosed valveOpening regulatedVoltage motorResistance gasPressure) ->
+    BenchCircuits(switchClosed valveOpening regulatedVoltage motorResistance gasPressure 18*switchClosed)
+
+BenchCircuits(switchClosed valveOpening regulatedVoltage motorResistance gasPressure shaftOmega) ->
+    [ Object(id(UtilityBench) class(UtilityAssembly) layer(Equipment) taxonomy(Engineering UtilityBench)) [
+      BenchPower(switchClosed)
+      BenchMechanical(shaftOmega)
+      BenchPneumatic(valveOpening gasPressure)
+      BenchLiquid(shaftOmega min(30000,54000*(shaftOmega/18)^2))
+      [ T(0 -1.16 -0.05) BenchMetrics(motorResistance regulatedVoltage/motorResistance*switchClosed gasPressure
+        0.002 1.5*switchClosed shaftOmega 0.20 min(30000,54000*(shaftOmega/18)^2) 0.00008*shaftOmega/18) ]
+    ] ]
+
+PortIn -> Interface(id(In) type(ElectricalPort) origin(-0.11 0 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+PortOut -> Interface(id(Out) type(ElectricalPort) origin(0.11 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+PipeIn -> Interface(id(In) type(PipePort) origin(-0.11 0 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+PipeOut -> Interface(id(Out) type(PipePort) origin(0.11 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+ShaftIn -> Interface(id(DriveIn) type(Shaft) origin(-0.11 0 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+ShaftOut -> Interface(id(DriveOut) type(Shaft) origin(0.11 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+
+BenchPower(closed) ->
+    [ T(-1.64 0.92 0) Object(id(AcSource) class(PowerSource) layer(Electrical) taxonomy(Power Source LowVoltageAC)) [
+      PortOut
+      [ S(0.25 0.24 0.21) P(2700) !I(Cube material(bluegreymattepaint) 1 1) ]
+    ] ]
+    [ T(-1.13 0.92 0) BenchSwitch(closed) ]
+    [ T(-0.65 0.92 0) Object(id(Transformer) class(VoltageTransformer) layer(Electrical) taxonomy(Power Transfer ACTransformer)) [
+      PortIn PortOut
+      [ S(0.22 0.23 0.22) P(7850) !I(Cube material(charcoalmattemetal) 1 1) ]
+      [ T(0 0.06 0.12) S(0.17 0.12 0.018) P(8960) !I(Cube material(goldpolishedmetal) 1 1) ]
+    ] ]
+    [ T(-0.19 0.92 0) Object(id(Regulator) class(PowerRegulator) layer(Electrical) taxonomy(Power Transfer Rectifier Regulator)) [
+      PortIn PortOut
+      [ S(0.25 0.19 0.23) P(2700) !I(Cube material(silverbrushedmetal) 1 1) ]
+      [ T(0 0.05 0.13) S(0.08 0.08 0.01) P(1200) !I(Cube material(greenemissivepaint) 1 1) ]
+    ] ]
+    [ T(0.32 0.92 0) Object(id(FlexibleCable) class(InsulatedConductor) layer(Electrical) taxonomy(Power Transfer Cable Copper ElasticInsulation)) [
+      Interface(id(In) type(ElectricalPort) origin(-0.38 0 0) normal(-1 0 0) tangent(0 1 0) region(Point))
+      Interface(id(Out) type(ElectricalPort) origin(0.38 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      CableCrossSection(0.05*sin(2*t))
+    ] ]
+    [ T(0.82 0.92 0) Object(id(SlipRing) class(RotaryElectricalBrush) layer(Electrical) taxonomy(Power Transfer GraphiteBrush CollectorRing)) [
+      PortIn PortOut
+      [ P(8500) !I(SweepDisk(path(-0.06 0 0 0.06 0 0) radius(0.073) segments(18) cap(all)) material(goldbrushedmetal) 1 1) ]
+      [ T(0 0.075 0) S(0.11 0.07 0.14) P(1800) !I(Cube material(charcoalmattemetal) 1 1) ]
+      [ A(degrees(18*closed*t) 0) T(0.07 0.049 0) S(0.018 0.017 0.024)
+        M(0) !I(Cube material(orangeglosspaint) 1 1) ]
+    ] ]
+    [ T(1.30 0.92 0) Object(id(BenchMotor) class(ElectricMotor) layer(Equipment) taxonomy(Motion Electric Motor)) [
+      PortIn ShaftOut
+      [ P(2700) !I(SweepDisk(path(-0.14 0 0 0.14 0 0) radius(0.12) segments(22) cap(all)) material(orangeglosspaint) 1 1) ]
+      [ P(7850) !I(SweepDisk(path(0.10 0 0 0.25 0 0) radius(0.026) segments(14) cap(all)) material(silverbrushedmetal) 1 1) ]
+    ] ]
+    Connect(id(SourceToSwitch) source(AcSource Out) target(MainSwitch In) type(Powers))
+    Connect(id(SwitchToTransformer) source(MainSwitch Out) target(Transformer In) type(Powers))
+    Connect(id(TransformerToRegulator) source(Transformer Out) target(Regulator In) type(Powers))
+    Connect(id(RegulatorToCable) source(Regulator Out) target(FlexibleCable In) type(Powers))
+    Connect(id(CableToSlipRing) source(FlexibleCable Out) target(SlipRing In) type(Powers))
+    Connect(id(SlipRingToMotor) source(SlipRing Out) target(BenchMotor In) type(Powers))
+
+BenchSwitch(closed) ->
+    ?(closed==1) [
+      Object(id(MainSwitch) class(ElectricalSwitch) layer(Electrical) taxonomy(Power Transfer Switch Closed))
+      [ PortIn PortOut BenchSwitchShape(closed) ]
+    ] : [
+      Object(id(MainSwitch) class(ElectricalSwitch) layer(Electrical) taxonomy(Power Switch Open))
+      [ PortIn PortOut BenchSwitchShape(closed) ]
+    ]
+
+BenchSwitchShape(closed) ->
+    [ S(0.21 0.12 0.20) P(1550) !I(Cube material(charcoalmattemetal) 1 1) ]
+    [ T(0 0.13 0) A((1-closed)*28 2) S(0.13 0.06 0.06)
+      P(7850) !I(Cube material(orangeglosspaint) 1 1) ]
+
+CableCrossSection(bend) ->
+    [ P(8960) !I(SweepDisk(path(-0.38 0 0 -0.18 0.17 0 0.02 0.22+bend 0 0.38 0 0)
+      radius(0.017) segments(12) cap(all)) material(goldbrushedmetal) 1 1) ]
+    [ P(1430 0.006) !I(SweepDisk(path(-0.32 0.04 0 -0.18 0.17 0 0.02 0.22+bend 0 0.32 0.04 0)
+      radius(0.025) segments(14) cap(none)) material(blueglosspaint) 0.68 1) ]
+
+BenchMechanical(omega) ->
+    [ T(1.76 0.92 0) Object(id(MainShaft) class(RotationalTransferShaft) layer(Equipment) taxonomy(Motion Shaft Rigid)) [
+      ShaftIn ShaftOut
+      Interface(id(BearingSeat) type(Support) origin(0.39 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      Interface(id(BearingRotation) type(Shaft) origin(0.39 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      [ P(7850) !I(SweepDisk(path(-0.26 0 0 0.34 0 0) radius(0.027) segments(16) cap(all)) material(silverbrushedmetal) 1 1) ]
+      [ A(degrees(omega*t) 0) T(0 0.032 0) S(0.25 0.014 0.014)
+        P(2700) !I(Cube material(orangeglosspaint) 1 1) ]
+    ] ]
+    [ T(1.87 0.92 0) Object(id(Flywheel) class(MechanicalEnergyStorage) layer(Equipment) taxonomy(Energy Storage Flywheel)) [
+      ShaftIn
+      [ A(degrees(omega*t) 0) P(7850) !I(SweepDisk(path(-0.035 0 0 0.035 0 0)
+        radius(0.18) segments(28) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ A(degrees(omega*t) 0) T(0.04 0.13 0) S(0.023 0.036 0.041)
+        P(2700) !I(Cube material(orangeglosspaint) 1 1) ]
+    ] ]
+    [ T(2.15 0.92 0) Object(id(BallBearing) class(BallBearing) layer(Equipment) taxonomy(Motion Bearing RollingElement)) [
+      BearingPort
+      Interface(id(Rotation) type(Hinge) origin(0 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      BearingHousing
+      [ T(0 0 0.062) S(0.07 0.04 0.044) P(7850) !I(Cube material(goldbrushedmetal) 1 1) ]
+    ] ]
+    [ T(1.28 -0.80 0.03) Object(id(MagneticBearing) class(MagneticBearing) layer(Equipment) taxonomy(Motion Bearing Magnetic)) [
+      BearingPort BearingHousing
+      [ T(0 0 0.06) S(0.075 0.04 0.046) P(7650) !I(Cube material(blueglosspaint) 1 1) ]
+    ] ]
+    [ T(1.58 -0.80 0.03) Object(id(PneumaticBearing) class(PneumaticBearing) layer(Equipment) taxonomy(Motion Bearing GasFilm)) [
+      BearingPort PipeIn BearingHousing
+      [ T(0 0 0.06) S(0.075 0.04 0.046) P(2700) !I(Cube material(bluegreymattepaint) 1 1) ]
+    ] ]
+    [ T(1.88 -0.80 0.03) Object(id(OilFilmBearing) class(OilPressureBearing) layer(Equipment) taxonomy(Motion Bearing Hydrostatic OilFilm)) [
+      BearingPort PipeIn BearingHousing
+      [ T(0 0 0.06) S(0.075 0.04 0.046) P(8500) !I(Cube material(goldbrushedmetal) 1 1) ]
+    ] ]
+    Connect(id(MotorToMainShaft) source(BenchMotor DriveOut) target(MainShaft DriveIn) type(ConnectedTo))
+    Connect(id(MainShaftToFlywheel) source(MainShaft DriveOut) target(Flywheel DriveIn) type(ConnectedTo))
+    Connect(id(ShaftBallBearing) source(MainShaft BearingSeat) target(BallBearing Axis) type(SupportedBy))
+    Joint(id(MainShaftRotation) type(Revolute) source(BallBearing Rotation) target(MainShaft BearingRotation)
+      axis(1 0 0) limits(-1000000 1000000) state(omega*t))
+
+BearingPort -> Interface(id(Axis) type(Bearing) origin(0 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+BearingHousing ->
+    [ T(0 -0.08 0) S(0.125 0.16 0.18) P(2700) !I(Cube material(charcoalmattemetal) 1 1) ]
+
+BenchPneumatic(opening pressure) ->
+    [ T(-1.65 0.26 0) Object(id(AirCylinder) class(PressurizedGasCylinder) layer(Equipment) taxonomy(Energy Storage Pneumatic Air)) [
+      PipeOut
+      [ P(2700) !I(SweepDisk(path(-0.21 0 0 0.16 0 0) radius(0.098) segments(22) cap(all)) material(silverbrushedmetal) 1 1) ]
+    ] ]
+    [ T(-1.15 0.26 0) Object(id(AirPressureRegulator) class(PressureRegulator) layer(Equipment) taxonomy(Fluid Pneumatic Regulator)) [
+      PipeIn PipeOut
+      [ S(0.21 0.15 0.17) P(2700) !I(Cube material(blueglosspaint) 1 1) ]
+    ] ]
+    [ T(-0.69 0.26 0) Object(id(PressureSwitch) class(PressureSwitch) layer(Equipment) taxonomy(Control Pneumatic Switch)) [
+      PipeIn
+      Interface(id(Output) type(ControlPort) origin(0.12 0 0) normal(1 0 0) tangent(0 1 0) region(Point))
+      [ S(0.20 0.14 0.19) P(1550) !I(Cube material(greenemissivepaint) 1 1) ]
+    ] ]
+    [ T(-0.19 0.26 0) Object(id(AirValve) class(PneumaticControlValve) layer(Equipment) taxonomy(Fluid Pneumatic Valve)) [
+      PipeIn PipeOut
+      Interface(id(Input) type(ControlPort) origin(0 0.08 0) normal(0 1 0) tangent(1 0 0) region(Point))
+      [ S(0.22 0.13 0.17) P(2700) !I(Cube material(silverbrushedmetal) 1 1) ]
+      [ T(0 0.13 0) A(45*opening 2) S(0.15 0.07 0.05) P(1350) !I(Cube material(orangeglosspaint) 1 1) ]
+    ] ]
+    [ T(0.29 0.26 0) Object(id(GasHose) class(FlexibleGasTube) layer(Equipment) taxonomy(Fluid Pneumatic Elastic Tube)) [
+      PipeIn PipeOut
+      [ P(1250 0.005) !I(SweepDisk(path(-0.35 0 0 -0.16 0.12 0 0.05 0.14+0.03*opening 0 0.35 0 0)
+        radius(0.019*(1+0.00000020*pressure)) segments(14) cap(none)) material(orangeglosspaint) 1 1) ]
+    ] ]
+    [ T(1.04 0.26 0) Object(id(PneumaticActuator) class(PneumaticCylinder) layer(Equipment) taxonomy(Motion Actuator Pneumatic)) [
+      PipeIn
+      [ P(2700) !I(SweepDisk(path(-0.18 0 0 0.10 0 0) radius(0.084) segments(18) cap(all)) material(charcoalmattemetal) 1 1) ]
+      [ P(7850) !I(SweepDisk(path(0.07 0 0 0.14+0.13*opening 0 0)
+        radius(0.022) segments(12) cap(all)) material(silverbrushedmetal) 1 1) ]
+    ] ]
+    Connect(id(AirSupply) source(AirCylinder Out) target(AirPressureRegulator In) type(ConnectedTo))
+    Connect(id(AirRegulated) source(AirPressureRegulator Out) target(AirValve In) type(ConnectedTo))
+    Connect(id(SenseAirPressure) source(AirPressureRegulator Out) target(PressureSwitch In) type(ConnectedTo))
+    Connect(id(PressureSwitchInput) source(PressureSwitch Output) target(AirValve Input) type(ConnectedTo))
+    Connect(id(ValveToHose) source(AirValve Out) target(GasHose In) type(ConnectedTo))
+    Connect(id(HoseToAirActuator) source(GasHose Out) target(PneumaticActuator In) type(ConnectedTo))
+    Connect(id(RegulatedBearingAir) source(AirPressureRegulator Out) target(PneumaticBearing In) type(ConnectedTo))
+
+BenchLiquid(omega outletPressure) ->
+    [ T(-1.65 -0.43 0) Object(id(WaterAccumulator) class(PressurizedFluidStorage) layer(Equipment) taxonomy(Energy Storage Water Accumulator)) [
+      PipeIn PipeOut
+      [ S(0.35 0.22 0.24) P(2700) !I(Cube material(blueglosspaint) 1 1) ]
+    ] ]
+    [ T(-1.07 -0.43 0) Object(id(Pump) class(CentrifugalPump) layer(Equipment) taxonomy(Fluid Pump Centrifugal)) [
+      PipeIn PipeOut ShaftIn
+      [ P(2700) !I(SweepDisk(path(0 0 -0.11 0 0 0.11) radius(0.14) segments(24) cap(all))
+        material(silverbrushedmetal) 1 1) ]
+      [ P(7850) !I(SweepDisk(path(0 0 0.11 0 0 0.16) radius(0.057) segments(16) cap(all))
+        material(goldbrushedmetal) 1 1) ]
+      [ A(degrees(omega*t) 2) T(0.008 0.033 0.16) S(0.020 0.019 0.020)
+        M(0) !I(Cube material(orangeglosspaint) 1 1) ]
+    ] ]
+    [ T(-0.48 -0.43 0) Object(id(CentrifugalRegulator) class(CentrifugalPressureRegulator) layer(Equipment) taxonomy(Fluid Regulator Centrifugal)) [
+      PipeIn PipeOut
+      [ P(2700) !I(SweepDisk(path(-0.14 0 0 0.14 0 0) radius(0.08) segments(20) cap(all))
+        material(goldbrushedmetal) 1 1) ]
+      [ T(outletPressure/1500000 0.062 0) S(0.093 0.034 0.058)
+        P(7850) !I(Cube material(silverbrushedmetal) 1 1) ]
+    ] ]
+    [ T(0.12 -0.43 0) Object(id(ReturnWaterHose) class(FlexibleFluidTube) layer(Equipment) taxonomy(Fluid Water Elastic Tube)) [
+      PipeIn PipeOut
+      [ P(1200 0.005) !I(SweepDisk(path(-0.42 0 0 -0.15 0.12 0 0.12 0.18 0 0.38 0 0)
+        radius(0.026) segments(14) cap(none)) material(blueglosspaint) 1 1) ]
+    ] ]
+    Connect(id(WaterSupply) source(WaterAccumulator Out) target(Pump In) type(ConnectedTo))
+    Connect(id(PumpDischarge) source(Pump Out) target(CentrifugalRegulator In) type(ConnectedTo))
+    Connect(id(RegulatedWater) source(CentrifugalRegulator Out) target(ReturnWaterHose In) type(ConnectedTo))
+    Connect(id(WaterReturn) source(ReturnWaterHose Out) target(WaterAccumulator In) type(ConnectedTo))
+    Connect(id(PumpDrive) source(MainShaft DriveOut) target(Pump DriveIn) type(ConnectedTo))
+
+# Metric order left to right: resistance, electric power, piston force, shaft power,
+# angular momentum, flywheel energy and hydraulic power. Bar scales are illustrative.
+# V = I R, p = F/A, electrical P = VI, shaft P = torque*omega, hydraulic P = deltaP*Q.
+# Angular momentum I*omega is conserved for the isolated flywheel. Shaft acceleration
+# or a load changes it by the applied net torque. Stored kinetic energy is I*omega^2/2.
+BenchMetrics(resistance current gasPressure area torque omega inertia waterPressure volumeFlow) ->
+    BenchBars(resistance current*resistance*current gasPressure*area torque*omega inertia*omega
+      0.5*inertia*omega^2 waterPressure*volumeFlow)
+
+BenchBars(resistance electricPower pistonForce shaftPower angularMomentum storedEnergy hydraulicPower) ->
+    [ T(-1.65 0 0) BenchBar(resistance/30) ]
+    [ T(-1.15 0 0) BenchBar(electricPower/120) ]
+    [ T(-0.65 0 0) BenchBar(pistonForce/1200) ]
+    [ T(-0.15 0 0) BenchBar(shaftPower/135) ]
+    [ T(0.35 0 0) BenchBar(angularMomentum/18) ]
+    [ T(0.85 0 0) BenchBar(storedEnergy/162) ]
+    [ T(1.35 0 0) BenchBar(hydraulicPower/48) ]
+
+BenchBar(height) -> ?(height>0) [ S(0.14 height 0.10) M(0) !I(Cube material(greenemissivepaint) 1 1) ] : []
